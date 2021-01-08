@@ -9,6 +9,8 @@ enum {
     BRIDGE_TYPE_POND_HIGH,
 };
 
+#include "constants/metatile_behaviors.h"
+
 bool8 MetatileBehavior_IsATile(u8 metatileBehavior);
 bool8 MetatileBehavior_IsEncounterTile(u8 metatileBehavior);
 bool8 MetatileBehavior_IsJumpEast(u8 metatileBehavior);
@@ -165,5 +167,6 @@ bool8 MetatileBehavior_IsSidewaysStairsLeftSideBottom(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior);
 bool8 MetatileBehavior_IsRockClimbable(u8 metatileBehavior);
+bool32 MetatileBehavior_IsDeoxysFormChangeTile(enum MetatileBehaviors metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR_H

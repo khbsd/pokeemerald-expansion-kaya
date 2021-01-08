@@ -964,7 +964,6 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         AutoUseRockSmash();
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
         AutoUseSurf();
-
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
         AutoUseStrength(GetObjectEventIdByXY(x, y), direction);
 

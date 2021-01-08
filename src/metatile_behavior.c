@@ -1598,3 +1598,11 @@ bool8 MetatileBehavior_IsRockClimbable(u8 metatileBehavior)
     else
         return FALSE;
 }
+
+bool32 MetatileBehavior_IsDeoxysFormChangeTile(enum MetatileBehaviors metatileBehavior)
+{
+    return (metatileBehavior == MB_DEOXYS_FORM_CHANGE_ATTACK
+            || metatileBehavior == MB_DEOXYS_FORM_CHANGE_DEFENSE
+            || metatileBehavior == MB_DEOXYS_FORM_CHANGE_NORMAL
+            || metatileBehavior == MB_DEOXYS_FORM_CHANGE_SPEED);
+}

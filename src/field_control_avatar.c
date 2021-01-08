@@ -567,6 +567,11 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     }
     if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive())
         return EventScript_UseRockClimb;
+    if (MetatileBehavior_IsDeoxysFormChangeTile(metatileBehavior))
+    {
+        TryChangeDeoxysFormMetatileBehavior(metatileBehavior);
+        return NULL;
+    }
 
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))

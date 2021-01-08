@@ -5,6 +5,8 @@ extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 extern u16 gScrollableMultichoice_ScrollOffset;
 
+#include "constants/metatile_behaviors.h"
+
 u8 GetLeadMonIndex(void);
 bool8 IsDestinationBoxFull(void);
 u16 GetPCBoxToSendMon(void);
@@ -36,5 +38,7 @@ void PreparePartyForSkyBattle(void);
 void GetObjectPosition(u16*, u16*, u32, u32);
 bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(u32);
+void TryChangeDeoxysForm(void);
+void TryChangeDeoxysFormMetatileBehavior(enum MetatileBehaviors metatileBehavior);
 
 #endif // GUARD_FIELD_SPECIALS_H

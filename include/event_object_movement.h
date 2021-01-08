@@ -58,6 +58,7 @@ enum FollowerTransformTypes
     TRANSFORM_TYPE_PERMANENT,
     TRANSFORM_TYPE_RANDOM_WILD,
     TRANSFORM_TYPE_WEATHER,
+    TRANSFORM_TYPE_INTERACT,
 };
 
 #define FIGURE_8_LENGTH 72
@@ -500,6 +501,7 @@ void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum);
 bool32 IsVirtualObjectAnimating(u8 virtualObjId);
 u8 GetObjectEventIdByLocalId(u8 localId);
 bool32 IsFollowerVisible(void);
+bool8 UpdateFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 
 // run slow
 u8 GetPlayerRunSlowMovementAction(u32);

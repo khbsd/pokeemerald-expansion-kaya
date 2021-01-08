@@ -5539,10 +5539,18 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
         PlaySE(SE_M_MINIMIZE);
         return TRUE;
     }
+
+    if ((sprite->data[7] >> 8) == TRANSFORM_TYPE_INTERACT)
+    {
+        PlayCry_NormalNoDucking(sprite->data[5], 0, 100, CRY_PRIORITY_NORMAL);
+        PlaySE(SE_M_MINIMIZE);
+        return TRUE;
+    }
+
     return FALSE;
 }
 
-static bool8 UpdateFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 UpdateFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u8 type = sprite->data[7] >> 8;
     u8 frames = sprite->data[7] & 0xFF;
@@ -5587,6 +5595,17 @@ static bool8 UpdateFollowerTransformEffect(struct ObjectEvent *objectEvent, stru
             objectEvent->graphicsId += OBJ_EVENT_MON;
             RefreshFollowerGraphics(objectEvent);
             objectEvent->graphicsId = multi;
+            break;
+        case TRANSFORM_TYPE_INTERACT:
+            multi = objectEvent->graphicsId;
+            objectEvent->graphicsId = sprite->data[6];
+            if (!objectEvent->graphicsId)
+            {
+                objectEvent->graphicsId = multi;
+                break;
+            }
+            objectEvent->graphicsId += OBJ_EVENT_MON;
+            RefreshFollowerGraphics(objectEvent);
             break;
         }
     }

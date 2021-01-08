@@ -18,6 +18,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "fldeff.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -65,6 +66,7 @@
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/mystery_gift.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -4661,4 +4663,89 @@ void SetAbility(void)
 {
     u32 ability = gSpecialVar_Result;
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ABILITY_NUM, &ability);
+}
+
+// Changes a Deoxys' form if the following conditions are met:
+// -gSpecialVar_0x8004 is currently hosting a Deoxys form.
+// -The metatile behavior of the tile in front of the Player is MB_UNUSED_2C, MB_UNUSED_2D, MB_UNUSED_2E or MB_UNUSED_2F.
+// If these conditions aren't met, gSpecialVar_Result is set to FALSE meaning Deoxys' form didn't change.
+void TryChangeDeoxysForm(void)
+{
+        enum MetatileBehaviors metatileBehavior;
+
+        GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+        metatileBehavior = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y);
+
+        TryChangeDeoxysFormMetatileBehavior(metatileBehavior);
+}
+
+void TryChangeDeoxysFormMetatileBehavior(enum MetatileBehaviors metatileBehavior)
+{
+    u32 baseSpecies = SPECIES_NONE,
+        targetSpecies = SPECIES_NONE,
+        slot;
+    bool32 isDeoxysInParty = FALSE;
+
+    CalculatePlayerPartyCount();
+    for (slot = 0; slot < gPlayerPartyCount; slot++)
+    {
+        baseSpecies = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES);
+        if (baseSpecies == SPECIES_DEOXYS
+            || baseSpecies == SPECIES_DEOXYS_ATTACK
+            || baseSpecies == SPECIES_DEOXYS_DEFENSE
+            || baseSpecies == SPECIES_DEOXYS_SPEED)
+        {
+            isDeoxysInParty = TRUE;
+            break;
+        }
+    }
+
+    if (!isDeoxysInParty)
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    switch (metatileBehavior)
+    {
+    case MB_DEOXYS_FORM_CHANGE_NORMAL:
+        targetSpecies = SPECIES_DEOXYS;
+        break;
+    case MB_DEOXYS_FORM_CHANGE_DEFENSE:
+        targetSpecies = SPECIES_DEOXYS_ATTACK;
+        break;
+    case MB_DEOXYS_FORM_CHANGE_ATTACK:
+        targetSpecies = SPECIES_DEOXYS_DEFENSE;
+        break;
+    case MB_DEOXYS_FORM_CHANGE_SPEED:
+        targetSpecies = SPECIES_DEOXYS_SPEED;
+        break;
+    default:
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    if (baseSpecies == targetSpecies)
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    SetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, &targetSpecies);
+    CalculateMonStats(&gPlayerParty[slot]);
+
+    if (slot == 0)
+    {
+        struct ObjectEvent *followerObject = GetFollowerObject();
+
+        gSprites[followerObject->spriteId].data[7] = TRANSFORM_TYPE_INTERACT << 8;
+        gSprites[followerObject->spriteId].data[6] = targetSpecies;
+        gSprites[followerObject->spriteId].data[5] = SPECIES_DEOXYS;
+
+        PlayCry_NormalNoDucking(SPECIES_DEOXYS, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
+        UpdateFollowerTransformEffect(followerObject, &gSprites[followerObject->spriteId]);
+    }
+
+    gSpecialVar_Result = TRUE;
+    return;
 }
