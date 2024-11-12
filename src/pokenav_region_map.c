@@ -479,14 +479,14 @@ static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
         if (IsPaletteFadeActive())
             return LT_PAUSE;
 
-        SetLeftHeaderSpritesInvisibility();
-        SlideMenuHeaderDown();
+        // SetLeftHeaderSpritesInvisibility();
+        // SlideMenuHeaderDown();
         return LT_INC_AND_PAUSE;
     case 2:
         if (MainMenuLoopedTaskIsBusy())
             return LT_PAUSE;
 
-        CB_ExitFlyMap();
+        CB2_ReturnToField();
         return LT_INC_AND_PAUSE;
     }
 
