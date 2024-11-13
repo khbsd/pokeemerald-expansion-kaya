@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
+#include "region_map.h"
+
 extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
 extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
 extern const struct OamData gNewGameBirchOamAttributes;
@@ -66,7 +68,7 @@ void SpriteCB_FlyDestIcon(struct Sprite* sprite);
 void CB_FadeInFlyMap(void);
 void CB_HandleFlyMapInput(void);
 u8 FldEff_UseFly(void);
-u8 FilterFlyDestination(struct RegionMap *regionMap);
-void SetFlyDestination(struct RegionMap *regionMap);
+u8 FilterFlyDestination(struct RegionMap regionMap);
+void SetFlyDestination(struct RegionMap regionMap);
 
 #endif // GUARD_FIELD_EFFECTS_H
