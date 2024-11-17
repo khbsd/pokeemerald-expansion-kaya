@@ -1,6 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "field_effect.h"
 #include "landmark.h"
 #include "main.h"
@@ -226,7 +227,7 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
         state->callback = GetExitRegionMapMenuId;
         return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
-        if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && OW_FLAG_AUTO_USE_FLY)
+        if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && OW_FLAG_AUTO_USE_FLY && CanAutoUseFieldMove(MOVE_FLY))
             return POKENAV_MAP_FUNC_FLY;
     }
     return POKENAV_MAP_FUNC_NONE;
@@ -477,10 +478,12 @@ static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
     switch (taskState)
     {
     case 0:
-        PlaySE(SE_SELECT);
         struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
         SetFlyDestination(regionMap);
-        FlagSet(FLAG_FLYING_FROM_POKENAV);
+        FlagSet(SKIP_SHOWMON_ANIM);
+
+        if (FlagGet(SKIP_SHOWMON_ANIM))
+            PlaySE(SE_SELECT);
         ReturnToFieldFromFlyMapSelect();
 
         return LT_FINISH;

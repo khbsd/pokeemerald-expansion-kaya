@@ -26,6 +26,8 @@
 
 #define SKIP_OBJECT_EVENT_LOAD  1
 
+#define SKIP_SHOWMON_ANIM 0
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;

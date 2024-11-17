@@ -69,7 +69,7 @@ void SpriteCB_FlyDestIcon(struct Sprite* sprite);
 void CB_FadeInFlyMap(void);
 void CB_HandleFlyMapInput(void);
 u8 FldEff_UseFly(void);
-u8 FilterFlyDestination(struct RegionMap *regionMap);
+u32 FilterFlyDestination(struct RegionMap *regionMap);
 void SetFlyDestination(struct RegionMap *regionMap);
 
 #endif // GUARD_FIELD_EFFECTS_H

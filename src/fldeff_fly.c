@@ -35,7 +35,7 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
-u8 FilterFlyDestination(RegionMap *regionMap)
+u32 FilterFlyDestination(RegionMap *regionMap)
 {
     switch (regionMap->mapSecId)
     {
