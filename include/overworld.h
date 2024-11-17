@@ -26,7 +26,7 @@
 
 #define SKIP_OBJECT_EVENT_LOAD  1
 
-#define SKIP_SHOWMON_ANIM 0
+#define SKIP_SHOWMON_ANIM 0x1F
 
 struct InitialPlayerAvatarState
 {
