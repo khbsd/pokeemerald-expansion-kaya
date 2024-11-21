@@ -1389,20 +1389,21 @@
 
 #define FLAG_UNUSED_0x881                           (SYSTEM_FLAGS + 0x21) // Unused Flag
 #define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
-#define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
-#define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
-#define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
-#define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
-#define FLAG_UNUSED_0x887                           (SYSTEM_FLAGS + 0x27) // Unused Flag
 
-#define FLAG_SYS_USE_FLASH                          (SYSTEM_FLAGS + 0x28)
-#define FLAG_SYS_USE_STRENGTH                       (SYSTEM_FLAGS + 0x29)
+#define FLAG_SYS_USE_CUT                            (SYSTEM_FLAGS + 0x23) // 0x883
+#define FLAG_SYS_USE_FLASH                          (SYSTEM_FLAGS + 0x24) // 0x884
+#define FLAG_SYS_USE_ROCK_SMASH                     (SYSTEM_FLAGS + 0x25) // 0x885
+#define FLAG_SYS_USE_STRENGTH                       (SYSTEM_FLAGS + 0x26) // 0x886
+#define FLAG_SYS_USE_SURF                           (SYSTEM_FLAGS + 0x27) // 0x887
+#define FLAG_SYS_USE_WATERFALL                      (SYSTEM_FLAGS + 0x28) // 0x888
+#define FLAG_SYS_USE_DIVE						    (SYSTEM_FLAGS + 0x29) // 0x889
+
 #define FLAG_SYS_WEATHER_CTRL                       (SYSTEM_FLAGS + 0x2A)
 #define FLAG_SYS_CYCLING_ROAD                       (SYSTEM_FLAGS + 0x2B)
 #define FLAG_SYS_SAFARI_MODE                        (SYSTEM_FLAGS + 0x2C)
 #define FLAG_SYS_CRUISE_MODE                        (SYSTEM_FLAGS + 0x2D)
 
-#define FLAG_SYS_USE_SURF                           (SYSTEM_FLAGS + 0x2E) // 0x88E
+#define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
 #define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
 
 #define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30)
