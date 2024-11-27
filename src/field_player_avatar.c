@@ -746,13 +746,9 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) && OW_FLAG_AUTO_USE_ROCK_SMASH)
         AutoUseRockSmash();
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
-    {
         AutoUseSurf();
-    }
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
-    {
         AutoUseStrength();
-    }
 
     return collision;
 }
@@ -780,9 +776,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
         return TRUE;
     }
     else
-    {
         return FALSE;
-    }
 }
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
@@ -1367,6 +1361,19 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
     if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
      && PlayerGetElevation() == 3
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsPlayerFacingClimbableWaterfall(void)
+{
+    struct ObjectEvent* playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    MoveCoords(playerObjEvent->facingDirection, &x, &y);
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else
         return FALSE;
