@@ -750,6 +750,8 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
         AutoUseStrength();
 
+    IsPlayerFacingClimbableWaterfall();
+
     return collision;
 }
 
@@ -1374,7 +1376,11 @@ bool8 IsPlayerFacingClimbableWaterfall(void)
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        PlaySE(SE_M_REVERSAL);
         return TRUE;
+    }
+        
     else
         return FALSE;
 }
