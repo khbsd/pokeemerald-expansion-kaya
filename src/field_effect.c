@@ -704,14 +704,19 @@ u32 FieldEffectStart(u8 id)
     u8 *script;
     u32 val;
 
-    FieldEffectActiveListAdd(id);
+    if (gSkipShowMonAnim && id == FLDEFF_FIELD_MOVE_SHOW_MON_INIT)
+        return 0;
+    else
+    {
+        FieldEffectActiveListAdd(id);
 
-    script = gFieldEffectScriptPointers[id];
+        script = gFieldEffectScriptPointers[id];
 
-    while (gFieldEffectScriptFuncs[*script](&script, &val))
-        ;
-
-    return val;
+        while (gFieldEffectScriptFuncs[*script](&script, &val))
+            ;
+        return val;
+    }
+    
 }
 
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
@@ -3049,7 +3054,7 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     {
         SetPlayerAvatarFieldMove();
 
-        if (!FlagGet(FLAG_SYS_USE_SURF))
+        if (!gSkipShowMonAnim)
             ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
     }
@@ -3062,9 +3067,7 @@ static void SurfFieldEffect_ShowMon(struct Task *task)
     if (ObjectEventCheckHeldMovementStatus(objectEvent))
     {
         gFieldEffectArguments[0] = task->tMonId | SHOW_MON_CRY_NO_DUCKING;
-
-        if (!FlagGet(FLAG_SYS_USE_SURF))
-            FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->tState++;
     }
 }
@@ -3102,6 +3105,8 @@ static void SurfFieldEffect_End(struct Task *task)
         UnlockPlayerFieldControls();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(Task_SurfFieldEffect));
+
+        // gSkipShowMonAnim = FALSE;
     }
 }
 
@@ -3237,9 +3242,7 @@ static void FlyOutFieldEffect_ShowMon(struct Task *task)
     {
         task->tState++;
         gFieldEffectArguments[0] = task->tMonId;
-
-        if (!gSkipShowMonAnim)
-            FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     }
 }
 

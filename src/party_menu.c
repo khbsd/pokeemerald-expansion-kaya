@@ -4104,10 +4104,7 @@ static void FieldCallback_Waterfall(void)
 
 static bool8 SetUpFieldMove_Waterfall(void)
 {
-    s16 x, y;
-
-    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE && IsPlayerSurfingNorth() == TRUE)
+    if (IsPlayerFacingClimbableWaterfall() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = FieldCallback_Waterfall;

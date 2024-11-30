@@ -1148,10 +1148,16 @@ void AutoUseSurf(void)
 {
     if (CanAutoUseFieldMove(MOVE_SURF) && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (FlagGet(FLAG_SYS_USE_SURF))
-            ScriptContext_SetupScript(EventScript_AutoUseConsecutiveSurf);
-        else
+        gSkipShowMonAnim = TRUE;
+        if (!FlagGet(FLAG_SYS_USE_SURF))
+        {
+            FlagSet(FLAG_SYS_USE_SURF);
             ScriptContext_SetupScript(EventScript_AutoUseSurf);
+        }
+        else
+            ScriptContext_SetupScript(EventScript_AutoUseConsecutiveSurf);
+
+        gSkipShowMonAnim = FALSE;
     }
 }
 
@@ -1171,6 +1177,17 @@ void AutoUseWaterfall(void)
 {
     if (CanAutoUseFieldMove(MOVE_WATERFALL) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
+        gSkipShowMonAnim = TRUE;
+
+        if (!FlagGet(FLAG_SYS_USE_WATERFALL))
+        {
+            FlagSet(FLAG_SYS_USE_WATERFALL);
+            ScriptContext_SetupScript(EventScript_AutoUseWaterfall);
+        }
+        else
+            ScriptContext_SetupScript(EventScript_AutoUseConsecutiveWaterfall);
+
+        gSkipShowMonAnim = FALSE;
     }
 }
 

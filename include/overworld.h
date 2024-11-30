@@ -107,6 +107,7 @@ void AutoUseStrength(void);
 void AutoUseSurf(void);
 void AutoUseDive(void);
 void AutoUseDiveEmerge(void);
+void AutoUseWaterfall(void);
 void SetFlashLevel(s32 flashLevel);
 u8 GetFlashLevel(void);
 void SetCurrentMapLayout(u16 mapLayoutId);
