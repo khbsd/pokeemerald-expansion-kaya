@@ -4286,11 +4286,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_ARON] =
     {
         .baseHP        = 50,
-        .baseAttack    = 70,
+        .baseAttack    = 75,
         .baseDefense   = 100,
-        .baseSpeed     = 30,
+        .baseSpeed     = 40,
         .baseSpAttack  = 40,
-        .baseSpDefense = 40,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
         .catchRate = 180,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 66 : 96,
@@ -4301,7 +4301,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),
-        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+        .abilities = { ABILITY_STURDY, ABILITY_IRON_BARBS, ABILITY_HEAVY_METAL },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Aron"),
         .cryId = CRY_ARON,
@@ -4350,11 +4350,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_LAIRON] =
     {
         .baseHP        = 60,
-        .baseAttack    = 90,
+        .baseAttack    = 100,
         .baseDefense   = 140,
-        .baseSpeed     = 40,
+        .baseSpeed     = 60,
         .baseSpAttack  = 50,
-        .baseSpDefense = 50,
+        .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
         .catchRate = 90,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 151 : 152,
@@ -4365,7 +4365,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),
-        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+        .abilities = { ABILITY_STURDY, ABILITY_IRON_BARBS, ABILITY_HEAVY_METAL },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Lairon"),
         .cryId = CRY_LAIRON,
@@ -4413,11 +4413,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_AGGRON] =
     {
         .baseHP        = 70,
-        .baseAttack    = 110,
+        .baseAttack    = 130,
         .baseDefense   = 180,
-        .baseSpeed     = 50,
+        .baseSpeed     = 80,
         .baseSpAttack  = 60,
-        .baseSpDefense = 60,
+        .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
@@ -4434,7 +4434,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),
-        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+        .abilities = { ABILITY_STURDY, ABILITY_IRON_BARBS, ABILITY_HEAVY_METAL },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Aggron"),
         .cryId = CRY_AGGRON,
@@ -4753,13 +4753,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_FAMILY_ELECTRIKE
     [SPECIES_ELECTRIKE] =
     {
-        .baseHP        = 40,
-        .baseAttack    = 45,
+        .baseHP        = 45,
+        .baseAttack    = 70,
         .baseDefense   = 40,
-        .baseSpeed     = 65,
+        .baseSpeed     = 70,
         .baseSpAttack  = 65,
         .baseSpDefense = 40,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_GRASS),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 59 : 104,
         .evYield_Speed = 1,
@@ -4816,13 +4816,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 
     [SPECIES_MANECTRIC] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 75,
+        .baseHP        = 85,
+        .baseAttack    = 100,
         .baseDefense   = 60,
-        .baseSpeed     = 105,
-        .baseSpAttack  = 105,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 115,
         .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_GRASS),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 166 : 168,
         .evYield_Speed = 2,

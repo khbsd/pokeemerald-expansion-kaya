@@ -6942,11 +6942,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     {
         .baseHP        = 55,
         .baseAttack    = 70,
-        .baseDefense   = 45,
+        .baseDefense   = 50,
         .baseSpeed     = 60,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 50,
-        .types = MON_TYPES(TYPE_FIRE),
+        .baseSpAttack  = 75,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_ELECTRIC),
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 70 : 91,
         .evYield_Attack = 1,
@@ -6955,7 +6955,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_JUSTIFIED },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_VOLT_ABSORB },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Growlithe"),
         .cryId = CRY_GROWLITHE,
@@ -7005,13 +7005,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_ARCANINE] =
     {
-        .baseHP        = 90,
+        .baseHP        = 95,
         .baseAttack    = 110,
-        .baseDefense   = 80,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_FIRE),
+        .baseDefense   = 90,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 90,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 194 : 213,
         .evYield_Attack = 2,
@@ -7020,7 +7020,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_JUSTIFIED },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_VOLT_ABSORB },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Arcanine"),
         .cryId = CRY_ARCANINE,
@@ -7031,8 +7031,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .description = COMPOUND_STRING(
             "This fleet-footed Pokémon is said to run\n"
             "over 6,200 miles in a single day and night.\n"
-            "The fire that blazes wildly within its body\n"
-            "is its source of power."),
+            "Its heart is the biological equivalent of\n"
+            "an induction heater."),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 312,
@@ -11959,13 +11959,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_FAMILY_CUBONE
     [SPECIES_CUBONE] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 50,
+        .baseHP        = 60,
+        .baseAttack    = 70,
         .baseDefense   = 95,
-        .baseSpeed     = 35,
+        .baseSpeed     = 55,
         .baseSpAttack  = 40,
         .baseSpDefense = 50,
-        .types = MON_TYPES(TYPE_GROUND),
+        .types = MON_TYPES(TYPE_GROUND, TYPE_GHOST),
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 64 : 87,
         .evYield_Defense = 1,
@@ -12026,13 +12026,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_MAROWAK] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 80,
+        .baseHP        = 80,
+        .baseAttack    = 120,
         .baseDefense   = 110,
-        .baseSpeed     = 45,
+        .baseSpeed     = 85,
         .baseSpAttack  = 50,
         .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_GROUND),
+        .types = MON_TYPES(TYPE_GROUND, TYPE_GHOST),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 149 : 124,
         .evYield_Defense = 2,
@@ -12090,11 +12090,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_ALOLAN_FORMS
     [SPECIES_MAROWAK_ALOLA] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 80,
-        .baseDefense   = 110,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 50,
+        .baseHP =        80,
+        .baseAttack =    120,
+        .baseDefense =   110,
+        .baseSpeed =     85,
+        .baseSpAttack =  50,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_FIRE, TYPE_GHOST),
         .catchRate = 75,
