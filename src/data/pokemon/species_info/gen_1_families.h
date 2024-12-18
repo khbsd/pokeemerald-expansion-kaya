@@ -210,9 +210,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sVenusaurTeachableLearnset,
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
         .formChangeTable = sVenusaurFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_VENUSAURITE, SPECIES_VENUSAUR_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_VENUSAUR_MEGA] =
     {
         .baseHP        = 80,
@@ -268,7 +271,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
         .formChangeTable = sVenusaurFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 
 #if P_GIGANTAMAX_FORMS
     [SPECIES_VENUSAUR_GMAX] =
@@ -524,9 +527,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sCharizardTeachableLearnset,
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
         .formChangeTable = sCharizardFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+                .evolutions = EVOLUTION({EVO_ITEM, ITEM_CHARIZARDITE_X, SPECIES_CHARIZARD_MEGA_X},
+                                        {EVO_ITEM, ITEM_CHARIZARDITE_Y, SPECIES_CHARIZARD_MEGA_Y}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_CHARIZARD_MEGA_X] =
     {
         .baseHP        = 78,
@@ -637,7 +644,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
         .formChangeTable = sCharizardFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 
 #if P_GIGANTAMAX_FORMS
     [SPECIES_CHARIZARD_GMAX] =
@@ -893,9 +900,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sBlastoiseTeachableLearnset,
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
         .formChangeTable = sBlastoiseFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_BLASTOISINITE, SPECIES_BLASTOISE_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_BLASTOISE_MEGA] =
     {
         .baseHP        = 79,
@@ -951,7 +961,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
         .formChangeTable = sBlastoiseFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 
 #if P_GIGANTAMAX_FORMS
     [SPECIES_BLASTOISE_GMAX] =
@@ -1492,9 +1502,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sBeedrillTeachableLearnset,
         .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,
         .formChangeTable = sBeedrillFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_BEEDRILLITE, SPECIES_BEEDRILL_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
+        
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_BEEDRILL_MEGA] =
     {
         .baseHP        = 65,
@@ -1553,7 +1567,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,
         .formChangeTable = sBeedrillFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_WEEDLE
 
 #if P_FAMILY_PIDGEY
@@ -1768,9 +1782,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sPidgeotTeachableLearnset,
         .formSpeciesIdTable = sPidgeotFormSpeciesIdTable,
         .formChangeTable = sPidgeotFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_PIDGEOTITE, SPECIES_PIDGEOT_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
+        
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_PIDGEOT_MEGA] =
     {
         .baseHP        = 83,
@@ -7716,9 +7734,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sAlakazamTeachableLearnset,
         .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,
         .formChangeTable = sAlakazamFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ALAKAZITE, SPECIES_ALAKAZAM_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
+         
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_ALAKAZAM_MEGA] =
     {
         .baseHP        = 55,
@@ -7775,7 +7797,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,
         .formChangeTable = sAlakazamFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_ABRA
 
 #if P_FAMILY_MACHOP
@@ -9192,6 +9214,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSlowbroTeachableLearnset,
         .formSpeciesIdTable = sSlowbroFormSpeciesIdTable,
         .formChangeTable = sSlowbroFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_SLOWBRONITE, SPECIES_SLOWBRO_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
+
     },
 
 #if P_GEN_2_CROSS_EVOS
@@ -9256,10 +9282,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sSlowkingLevelUpLearnset,
         .teachableLearnset = sSlowkingTeachableLearnset,
         .formSpeciesIdTable = sSlowkingFormSpeciesIdTable,
+
     },
 #endif //P_GEN_2_CROSS_EVOS
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_SLOWBRO_MEGA] =
     {
         .baseHP        = 95,
@@ -9316,7 +9343,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sSlowbroFormSpeciesIdTable,
         .formChangeTable = sSlowbroFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 
 #if P_GALARIAN_FORMS
     [SPECIES_SLOWPOKE_GALAR] =
@@ -10826,9 +10853,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGengarTeachableLearnset,
         .formSpeciesIdTable = sGengarFormSpeciesIdTable,
         .formChangeTable = sGengarFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_GENGARITE, SPECIES_GENGAR_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_GENGAR_MEGA] =
     {
         .baseHP        = 60,
@@ -10884,7 +10914,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sGengarFormSpeciesIdTable,
         .formChangeTable = sGengarFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 
 #if P_GIGANTAMAX_FORMS
     [SPECIES_GENGAR_GMAX] =
@@ -11086,9 +11116,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSteelixTeachableLearnset,
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_STEELIXITE, SPECIES_STEELIX_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_STEELIX_MEGA] =
     {
         .baseHP        = 75,
@@ -11145,7 +11178,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_ONIX
 
@@ -13456,9 +13489,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sKangaskhanEggMoveLearnset,
         .formSpeciesIdTable = sKangaskhanFormSpeciesIdTable,
         .formChangeTable = sKangaskhanFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_KANGASKHANITE, SPECIES_KANGASKHAN_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_KANGASKHAN_MEGA] =
     {
         .baseHP        = 105,
@@ -13515,7 +13551,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sKangaskhanFormSpeciesIdTable,
         .formChangeTable = sKangaskhanFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_KANGASKHAN
 
 #if P_FAMILY_HORSEA
@@ -14443,9 +14479,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sScizorTeachableLearnset,
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
         .formChangeTable = sScizorFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_SCIZORITE, SPECIES_SCIZOR_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_SCIZOR_MEGA] =
     {
         .baseHP        = 70,
@@ -14501,7 +14540,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
         .formChangeTable = sScizorFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_GEN_2_CROSS_EVOS
 
 #if P_GEN_8_CROSS_EVOS
@@ -15180,9 +15219,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPinsirEggMoveLearnset,
         .formSpeciesIdTable = sPinsirFormSpeciesIdTable,
         .formChangeTable = sPinsirFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_PINSIRITE, SPECIES_PINSIR_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_PINSIR_MEGA] =
     {
         .baseHP        = 65,
@@ -15240,7 +15282,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sPinsirFormSpeciesIdTable,
         .formChangeTable = sPinsirFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_PINSIR
 
 #if P_FAMILY_TAUROS
@@ -15656,9 +15698,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGyaradosTeachableLearnset,
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
         .formChangeTable = sGyaradosFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_GYARADOSITE, SPECIES_GYARADOS_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_GYARADOS_MEGA] =
     {
         .baseHP        = 95,
@@ -15715,7 +15760,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
         .formChangeTable = sGyaradosFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_MAGIKARP
 
 #if P_FAMILY_LAPRAS
@@ -17169,9 +17214,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sAerodactylEggMoveLearnset,
         .formSpeciesIdTable = sAerodactylFormSpeciesIdTable,
         .formChangeTable = sAerodactylFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_AERODACTYLITE, SPECIES_AERODACTYL_MEGA}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_AERODACTYL_MEGA] =
     {
         .baseHP        = 80,
@@ -17228,7 +17276,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sAerodactylFormSpeciesIdTable,
         .formChangeTable = sAerodactylFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_AERODACTYL
 
 #if P_FAMILY_SNORLAX
@@ -18121,9 +18169,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
         .formChangeTable = sMewtwoFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_MEWTWONITE_X, SPECIES_MEWTWO_MEGA_X},
+                                    {EVO_ITEM, ITEM_MEWTWONITE_Y, SPECIES_MEWTWO_MEGA_Y}),
+    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_MEWTWO_MEGA_X] =
     {
         .baseHP        = 106,
@@ -18242,7 +18294,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
         .formChangeTable = sMewtwoFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_MEWTWO
 
 #if P_FAMILY_MEW

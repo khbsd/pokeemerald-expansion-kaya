@@ -84,9 +84,17 @@ static const u8 sCharizarditeDesc[]   = _("This stone enables\n"
                                           "Charizard to Mega\n"
                                           "Evolve in battle.");
 
+static const u8 sCharizarditeStoneDesc[] = _("This stone enables\n"
+                                             "Charizard to Mega\n"
+                                             "Evolve.");
+
 static const u8 sMewtwoniteDesc[]     = _("This stone enables\n"
                                           "Mewtwo to Mega\n"
                                           "Evolve in battle.");
+
+static const u8 sMewtwoniteStoneDesc[] = _("This stone enables\n"
+                                           "Mewtwo to Mega\n"
+                                           "Evolve.");
 
 static const u8 sSeaIncenseDesc[]     = _("A hold item that\n"
                                           "slightly boosts\n"
@@ -5262,14 +5270,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Venusaurite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Venusaur to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Venusaur to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Venusaurite,
         .iconPalette = gItemIconPalette_Venusaurite,
@@ -5280,11 +5296,15 @@ const struct Item gItemsInfo[] =
         .name = _("Charizardite X"),
         .pluralName = _("Charizardites X"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
-        .description = sCharizarditeDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = sCharizarditeStoneDesc,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = sCharizarditeDesc,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_CharizarditeX,
         .iconPalette = gItemIconPalette_CharizarditeX,
@@ -5295,11 +5315,15 @@ const struct Item gItemsInfo[] =
         .name = _("Charizardite Y"),
         .pluralName = _("Charizardites Y"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
-        .description = sCharizarditeDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = sCharizarditeStoneDesc,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = sCharizarditeDesc,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_CharizarditeY,
         .iconPalette = gItemIconPalette_CharizarditeY,
@@ -5309,14 +5333,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Blastoisinite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Blastoise to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Blastoise to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Blastoisinite,
         .iconPalette = gItemIconPalette_Blastoisinite,
@@ -5326,14 +5358,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Beedrillite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Beedrill to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Beedrill to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Beedrillite,
         .iconPalette = gItemIconPalette_Beedrillite,
@@ -5343,14 +5383,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Pidgeotite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Pidgeot to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Pidgeot to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Pidgeotite,
         .iconPalette = gItemIconPalette_Pidgeotite,
@@ -5360,14 +5408,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Alakazite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Alakazam to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Alakazam to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Alakazite,
         .iconPalette = gItemIconPalette_Alakazite,
@@ -5377,14 +5433,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Slowbronite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Slowbro to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Slowbro to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Slowbronite,
         .iconPalette = gItemIconPalette_Slowbronite,
@@ -5394,14 +5458,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Gengarite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Gengar to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Gengar to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Gengarite,
         .iconPalette = gItemIconPalette_Gengarite,
@@ -5411,14 +5483,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Kangaskhanite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Kangaskhan to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Kangaskhan to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Kangaskhanite,
         .iconPalette = gItemIconPalette_Kangaskhanite,
@@ -5428,14 +5508,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Pinsirite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Pinsir to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Pinsir to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Pinsirite,
         .iconPalette = gItemIconPalette_Pinsirite,
@@ -5445,14 +5533,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Gyaradosite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Gyarados to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Gyarados to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Gyaradosite,
         .iconPalette = gItemIconPalette_Gyaradosite,
@@ -5462,14 +5558,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Aerodactylite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Aerodactyl to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Aerodactyl to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Aerodactylite,
         .iconPalette = gItemIconPalette_Aerodactylite,
@@ -5480,11 +5584,16 @@ const struct Item gItemsInfo[] =
         .name = _("Mewtwonite X"),
         .pluralName = _("Mewtwonites X"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
-        .description = sMewtwoniteDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = sMewtwoniteStoneDesc,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = sMewtwoniteDesc,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_MewtwoniteX,
         .iconPalette = gItemIconPalette_MewtwoniteX,
@@ -5495,11 +5604,16 @@ const struct Item gItemsInfo[] =
         .name = _("Mewtwonite Y"),
         .pluralName = _("Mewtwonites Y"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
-        .description = sMewtwoniteDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = sMewtwoniteStoneDesc,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = sMewtwoniteDesc,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_MewtwoniteY,
         .iconPalette = gItemIconPalette_MewtwoniteY,
@@ -5509,14 +5623,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Ampharosite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Ampharos to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Ampharos to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Ampharosite,
         .iconPalette = gItemIconPalette_Ampharosite,
@@ -5526,14 +5648,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Steelixite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Steelix to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Steelix to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Steelixite,
         .iconPalette = gItemIconPalette_Steelixite,
@@ -5543,14 +5673,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Scizorite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Scizor to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Scizor to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Scizorite,
         .iconPalette = gItemIconPalette_Scizorite,
@@ -5560,14 +5698,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Heracronite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Heracross to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Heracross to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Heracronite,
         .iconPalette = gItemIconPalette_Heracronite,
@@ -5575,16 +5721,23 @@ const struct Item gItemsInfo[] =
 
     [ITEM_HOUNDOOMINITE] =
     {
-        .name = _("Houndoominite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
-        .description = COMPOUND_STRING(
-            "This stone enables\n"
-            "Houndoom to Mega\n"
-            "Evolve in battle."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Aerodactyl to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Aerodactyl to Mega\n"
+            "Evolve in battle."),
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Houndoominite,
         .iconPalette = gItemIconPalette_Houndoominite,
@@ -5594,14 +5747,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Tyranitarite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Tyranitar to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Tyranitar to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Tyranitarite,
         .iconPalette = gItemIconPalette_Tyranitarite,
@@ -5611,14 +5772,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Sceptilite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Sceptile to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Sceptile to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Sceptilite,
         .iconPalette = gItemIconPalette_Sceptilite,
@@ -5628,14 +5797,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Blazikenite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Blaziken to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Blaziken to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Blazikenite,
         .iconPalette = gItemIconPalette_Blazikenite,
@@ -5645,14 +5822,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Swampertite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Swampert to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Swampert to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Swampertite,
         .iconPalette = gItemIconPalette_Swampertite,
@@ -5662,14 +5847,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Gardevoirite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Gardevoir to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Gardevoir to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Gardevoirite,
         .iconPalette = gItemIconPalette_Gardevoirite,
@@ -5679,14 +5872,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Sablenite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Sableye to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Sableye to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Sablenite,
         .iconPalette = gItemIconPalette_Sablenite,
@@ -5696,14 +5897,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Mawilite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Mawile to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Mawile to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Mawilite,
         .iconPalette = gItemIconPalette_Mawilite,
@@ -5713,14 +5922,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Aggronite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Aggron to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Aerodactyl to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Aggronite,
         .iconPalette = gItemIconPalette_Aggronite,
@@ -5730,14 +5947,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Medichamite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Medicham to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Medicham to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Medichamite,
         .iconPalette = gItemIconPalette_Medichamite,
@@ -5747,14 +5972,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Manectite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Manectric to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Manectric to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Manectite,
         .iconPalette = gItemIconPalette_Manectite,
@@ -5764,14 +5997,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Sharpedonite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Sharpedo to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Sharpedo to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Sharpedonite,
         .iconPalette = gItemIconPalette_Sharpedonite,
@@ -5781,14 +6022,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Cameruptite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Camerupt to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Camerupt to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Cameruptite,
         .iconPalette = gItemIconPalette_Cameruptite,
@@ -5798,14 +6047,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Altarianite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Altaria to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Altaria to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Altarianite,
         .iconPalette = gItemIconPalette_Altarianite,
@@ -5815,14 +6072,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Banettite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Banette to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Banette to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Banettite,
         .iconPalette = gItemIconPalette_Banettite,
@@ -5832,14 +6097,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Absolite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Absol to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Absol to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Absolite,
         .iconPalette = gItemIconPalette_Absolite,
@@ -5849,14 +6122,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Glalitite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Glalie to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Glalie to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Glalitite,
         .iconPalette = gItemIconPalette_Glalitite,
@@ -5866,14 +6147,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Salamencite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Salamence to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Salamence to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Salamencite,
         .iconPalette = gItemIconPalette_Salamencite,
@@ -5883,14 +6172,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Metagrossite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Metagross to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Metagross to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Metagrossite,
         .iconPalette = gItemIconPalette_Metagrossite,
@@ -5900,14 +6197,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Latiasite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Latias to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Latias to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Latiasite,
         .iconPalette = gItemIconPalette_Latiasite,
@@ -5917,14 +6222,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Latiosite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Latios to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Latios to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Latiosite,
         .iconPalette = gItemIconPalette_Latiosite,
@@ -5934,14 +6247,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Lopunnite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Lopunny to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Lopunny to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Lopunnite,
         .iconPalette = gItemIconPalette_Lopunnite,
@@ -5951,14 +6272,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Garchompite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Garchomp to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Garchomp to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Garchompite,
         .iconPalette = gItemIconPalette_Garchompite,
@@ -5968,14 +6297,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Lucarionite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Lucario to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Lucario to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Lucarionite,
         .iconPalette = gItemIconPalette_Lucarionite,
@@ -5985,14 +6322,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Abomasite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Abomasnow to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Abomasnow to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Abomasite,
         .iconPalette = gItemIconPalette_Abomasite,
@@ -6002,14 +6347,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Galladite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Gallade to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Gallade to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Galladite,
         .iconPalette = gItemIconPalette_Galladite,
@@ -6019,14 +6372,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Audinite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Audino to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Audino to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Audinite,
         .iconPalette = gItemIconPalette_Audinite,
@@ -6036,14 +6397,22 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Diancite"),
         .price = 0,
-        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .description = COMPOUND_STRING(
+            "This stone enables\n"
+            "Diancie to Mega\n"
+            "Evolve."),
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    #else
         .description = COMPOUND_STRING(
             "This stone enables\n"
             "Diancie to Mega\n"
             "Evolve in battle."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .flingPower = 80,
         .iconPic = gItemIcon_Diancite,
         .iconPalette = gItemIconPalette_Diancite,
