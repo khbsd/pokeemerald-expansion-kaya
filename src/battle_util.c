@@ -1486,7 +1486,7 @@ u32 GetBattlerAffectionHearts(u32 battler)
 
     if (side != B_SIDE_PLAYER)
         return AFFECTION_NO_HEARTS;
-    else if (gSpeciesInfo[species].isMegaEvolution
+    else if ((gSpeciesInfo[species].isMegaEvolution && !B_MEGAS_GET_AFFECTION)
           || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
                                 | BATTLE_TYPE_FRONTIER
                                 | BATTLE_TYPE_LINK
