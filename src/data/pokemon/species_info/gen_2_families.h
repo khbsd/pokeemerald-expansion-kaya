@@ -1086,12 +1086,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_SPINARAK
     [SPECIES_SPINARAK] =
     {
-        .baseHP        = 40,
+        .baseHP        = 50,
         .baseAttack    = 60,
         .baseDefense   = 40,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 40,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 255,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 50 : 54,
@@ -1101,7 +1101,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SWARM, ABILITY_INSOMNIA, ABILITY_SNIPER },
+        .abilities = { ABILITY_MERCILESS, ABILITY_SUPER_LUCK, ABILITY_SPEED_BOOST },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Spinarak"),
         .cryId = CRY_SPINARAK,
@@ -1144,17 +1144,17 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sSpinarakLevelUpLearnset,
         .teachableLearnset = sSpinarakTeachableLearnset,
         .eggMoveLearnset = sSpinarakEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_ARIADOS}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_ARIADOS}),
     },
 
     [SPECIES_ARIADOS] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 90,
-        .baseDefense   = 70,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 60,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_7 ? 70 : 60,
+        .baseHP        = 85,
+        .baseAttack    = 110,
+        .baseDefense   = 80,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = P_UPDATED_STATS >= GEN_7 ? 90 : 80,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 90,
     #if P_UPDATED_EXP_YIELDS >= GEN_7
@@ -1170,7 +1170,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SWARM, ABILITY_INSOMNIA, ABILITY_SNIPER },
+        .abilities = { ABILITY_MERCILESS, ABILITY_SUPER_LUCK, ABILITY_SPEED_BOOST },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Ariados"),
         .cryId = CRY_ARIADOS,
@@ -1218,9 +1218,9 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_CHINCHOU
     [SPECIES_CHINCHOU] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 38,
-        .baseDefense   = 38,
+        .baseHP        = 95,
+        .baseAttack    = 43,
+        .baseDefense   = 43,
         .baseSpeed     = 67,
         .baseSpAttack  = 56,
         .baseSpDefense = 56,
@@ -1282,12 +1282,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_LANTURN] =
     {
-        .baseHP        = 125,
-        .baseAttack    = 58,
-        .baseDefense   = 58,
-        .baseSpeed     = 67,
-        .baseSpAttack  = 76,
-        .baseSpDefense = 76,
+        .baseHP        = 135,
+        .baseAttack    = 88,
+        .baseDefense   = 98,
+        .baseSpeed     = 77,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 96,
         .types = MON_TYPES(TYPE_WATER, TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 161 : 156,
