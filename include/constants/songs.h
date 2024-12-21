@@ -276,7 +276,13 @@
 #define SE_PIKE_CURTAIN_CLOSE       267 // SE_CURTAIN
 #define SE_PIKE_CURTAIN_OPEN        268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE          269 // SE_USSOKI
-#define END_SE                      SE_SUDOWOODO_SHAKE
+
+// Alternate low health beeps
+#define SE_LOW_HEALTH_THREE			270
+#define SE_LOW_HEALTH_FOUR			271
+#define SE_LOW_HEALTH_FIVE			272
+
+#define END_SE                      SE_LOW_HEALTH_FIVE
 
 // Music
 #define START_MUS                   350

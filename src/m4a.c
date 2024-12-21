@@ -1,6 +1,7 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
 #include "global.h"
+#include "constants/songs.h"
 
 extern const u8 gCgb3Vol[];
 
@@ -100,6 +101,27 @@ void m4aSoundInit(void)
     }
 }
 
+u16 checkLowHealthBeeps(u16 song)
+{
+    if (song == SE_LOW_HEALTH)
+    {
+        switch (B_LOW_HEALTH_BEEPS)
+        {
+        case LOOPED_BEEPS:
+            return song;
+        case THREE_BEEPS:
+            return SE_LOW_HEALTH_THREE;
+        case FOUR_BEEPS:
+            return SE_LOW_HEALTH_FOUR;
+        case FIVE_BEEPS:
+            return SE_LOW_HEALTH_FIVE;
+        }
+    }
+    else
+        return song;
+        
+}
+
 void m4aSoundMain(void)
 {
     SoundMain();
@@ -107,6 +129,8 @@ void m4aSoundMain(void)
 
 void m4aSongNumStart(u16 n)
 {
+    n = checkLowHealthBeeps(n);
+
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
     const struct Song *song = &songTable[n];
@@ -153,6 +177,8 @@ void m4aSongNumStartOrContinue(u16 n)
 
 void m4aSongNumStop(u16 n)
 {
+    n = checkLowHealthBeeps(n);
+
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
     const struct Song *song = &songTable[n];

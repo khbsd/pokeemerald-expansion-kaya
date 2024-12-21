@@ -12570,7 +12570,6 @@ const struct Item gItemsInfo[] =
     },
 
 // Battle Mechanic Key Items
-
     [ITEM_MEGA_RING] =
     {
         .name = _("Mega Ring"),
@@ -12617,7 +12616,6 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_DynamaxBand,
         .iconPalette = gItemIconPalette_DynamaxBand,
     },
-
 // Misc. Key Items
 
     [ITEM_BICYCLE] =

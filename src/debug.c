@@ -4965,6 +4965,9 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_ARENA_TIMEUP2) \
     X(SE_PIKE_CURTAIN_CLOSE) \
     X(SE_PIKE_CURTAIN_OPEN) \
+    X(SE_LOW_HEALTH_THREE) \
+    X(SE_LOW_HEALTH_FOUR) \
+    X(SE_LOW_HEALTH_FIVE) \
     X(SE_SUDOWOODO_SHAKE) \
 
 // Create BGM list

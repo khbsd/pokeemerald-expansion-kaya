@@ -270,10 +270,10 @@ gSongTable::
 	song se_arena_timeup2, 1, 1
 	song se_pike_curtain_close, 1, 1
 	song se_pike_curtain_open, 1, 1
+	song se_low_health_3, 3, 3
+	song se_low_health_4, 3, 3
+	song se_low_health_5, 3, 3
 	song se_sudowoodo_shake, 1, 1
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
