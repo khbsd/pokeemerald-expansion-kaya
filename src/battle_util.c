@@ -9568,7 +9568,6 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
 
         if (IS_BATTLER_OF_TYPE(battlerAtk, moveType))
         {
-            PLAYSE(SE_M_REVERSAL);
             if (IS_MOVE_PHYSICAL(move) && spAtk > atk)
             {
                 atkStat = gBattleMons[battlerAtk].spAttack;
