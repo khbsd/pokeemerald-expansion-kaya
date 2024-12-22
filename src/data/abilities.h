@@ -2408,4 +2408,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_SYNERGETIC] =
+    {
+        .name = _("Synergetic"),
+        .description = COMPOUND_STRING("Adapts to strongest stat."),
+        .aiRating = 5,
+    },
 };

@@ -9558,6 +9558,25 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
     // attacker's abilities
     switch (atkAbility)
     {
+    case ABILITY_SYNERGETIC:
+        u16 spAtk = gBattleMons[battlerAtk].spAttack;
+        u16 atk = gBattleMons[battlerAtk].attack;
+
+        if (IS_BATTLER_OF_TYPE(battlerAtk, moveType))
+        {
+            PLAYSE(SE_M_REVERSAL);
+            if (IS_MOVE_PHYSICAL(move) && spAtk > atk)
+            {
+                atkStat = gBattleMons[battlerAtk].spAttack;
+                atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
+            }
+            else if (IS_MOVE_SPECIAL(move) && atk > spAtk)
+            {
+                atkStat = gBattleMons[battlerDef].attack;
+                atkStage = gBattleMons[battlerDef].statStages[STAT_ATK];
+            }
+        }
+        break;
     case ABILITY_HUGE_POWER:
     case ABILITY_PURE_POWER:
         if (IS_MOVE_PHYSICAL(move))
