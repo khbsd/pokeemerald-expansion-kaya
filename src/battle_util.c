@@ -9570,12 +9570,12 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         {
             if (IS_MOVE_PHYSICAL(move) && (spAtk > atkStat))
             {
-                atkStat = gBattleMons[battlerAtk].spAttack;
+                atkStat = spAtk;
                 atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
             }
             else if (IS_MOVE_SPECIAL(move) && (atk > atkStat))
             {
-                atkStat = gBattleMons[battlerAtk].attack;
+                atkStat = atk;
                 atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
             }
         }
