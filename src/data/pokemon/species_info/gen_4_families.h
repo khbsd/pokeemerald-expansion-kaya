@@ -3014,11 +3014,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #if P_FAMILY_BUNEARY
     [SPECIES_BUNEARY] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 66,
+        .baseHP        = 60,
+        .baseAttack    = 76,
         .baseDefense   = 44,
         .baseSpeed     = 85,
-        .baseSpAttack  = 44,
+        .baseSpAttack  = 54,
         .baseSpDefense = 56,
         .types = MON_TYPES(TYPE_NORMAL),
         .catchRate = 190,
@@ -3141,12 +3141,12 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_LOPUNNY_MEGA] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 136,
-        .baseDefense   = 94,
-        .baseSpeed     = 135,
-        .baseSpAttack  = 54,
-        .baseSpDefense = 96,
+        .baseHP        = 70,
+        .baseAttack    = 125,
+        .baseDefense   = 105,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_NORMAL, TYPE_FIGHTING),
         .catchRate = 60,
         .expYield = 203,
@@ -3167,8 +3167,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .description = COMPOUND_STRING(
             "Mega Evolution awakens its combative\n"
             "instincts. It has shed any fur that got in\n"
-            "the way of its attacks.\n"
-            "crescent."),
+            "the way of its attacks."),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -3972,7 +3971,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
-        .abilities = { ABILITY_SAND_FORCE, ABILITY_SAND_FORCE, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_SAND_FORCE, ABILITY_NONE, ABILITY_ROUGH_SKIN },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Garchomp"),
         .cryId = CRY_GARCHOMP_MEGA,
