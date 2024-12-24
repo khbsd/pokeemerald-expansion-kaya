@@ -5839,6 +5839,25 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
             }
             break;
+        case ABILITY_KLUTZ:
+            if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 25) : RandomChance(RNG_KLUTZ, 1, 4))
+            {
+                if (MoveResultHasEffect(gBattlerTarget)
+                    && IsBattlerAlive(gBattlerAttacker)
+                    && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                    && IsBattlerTurnDamaged(gBattlerTarget)
+                    && gBattleMons[gBattlerTarget].item != ITEM_NONE
+                    && CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerTarget].item)
+                    && IsMoveMakingContact(move, gBattlerAttacker))
+                {
+                    gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_KNOCK_OFF;
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_KnockedOff;
+                    effect++;
+                }
+            }
+            break;
         case ABILITY_FLAME_BODY:
             if (MoveResultHasEffect(gBattlerTarget)
              && IsBattlerAlive(gBattlerAttacker)
