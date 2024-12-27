@@ -3479,13 +3479,13 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 
     [SPECIES_TSAREENA] =
     {
-        .baseHP        = 72,
+        .baseHP        = 80,
         .baseAttack    = 120,
-        .baseDefense   = 98,
-        .baseSpeed     = 72,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 98,
-        .types = MON_TYPES(TYPE_GRASS),
+        .baseDefense   = 100,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_STEEL),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 255 : 230,
         .evYield_Attack = 3,

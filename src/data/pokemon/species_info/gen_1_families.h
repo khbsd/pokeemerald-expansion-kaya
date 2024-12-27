@@ -220,9 +220,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     {
         .baseHP        = 80,
         .baseAttack    = 100,
-        .baseDefense   = 123,
+        .baseDefense   = 120,
         .baseSpeed     = 80,
-        .baseSpAttack  = 122,
+        .baseSpAttack  = 110,
         .baseSpDefense = 120,
         .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
         .catchRate = 45,
@@ -234,7 +234,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),
-        .abilities = { ABILITY_THICK_FAT, ABILITY_THICK_FAT, ABILITY_THICK_FAT },
+        .abilities = { ABILITY_OVERGROW, ABILITY_THICK_FAT, ABILITY_CHLOROPHYLL },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Venusaur"),
         .cryId = CRY_VENUSAUR_MEGA,
@@ -552,11 +552,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_CHARIZARD_MEGA_X] =
     {
-        .baseHP        = 78,
-        .baseAttack    = 130,
-        .baseDefense   = 111,
+        .baseHP        = 80,
+        .baseAttack    = 120,
+        .baseDefense   = 100,
         .baseSpeed     = 100,
-        .baseSpAttack  = 130,
+        .baseSpAttack  = 120,
         .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_FIRE, TYPE_DRAGON),
         .catchRate = 45,
@@ -617,12 +617,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_CHARIZARD_MEGA_Y] =
     {
-        .baseHP        = 78,
-        .baseAttack    = 104,
-        .baseDefense   = 78,
+        .baseHP        = 90,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
         .baseSpeed     = 100,
-        .baseSpAttack  = 159,
-        .baseSpDefense = 115,
+        .baseSpAttack  = 140,
+        .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_FIRE, TYPE_FLYING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 317 : 285,
@@ -870,10 +870,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_BLASTOISE] =
     {
-        .baseHP        = 79,
-        .baseAttack    = 83,
+        .baseHP        = 80,
+        .baseAttack    = 90,
         .baseDefense   = 100,
-        .baseSpeed     = 78,
+        .baseSpeed     = 85,
         .baseSpAttack  = 85,
         .baseSpDefense = 105,
         .types = MON_TYPES(TYPE_WATER),
@@ -944,12 +944,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_BLASTOISE_MEGA] =
     {
-        .baseHP        = 79,
-        .baseAttack    = 103,
+        .baseHP        = 80,
+        .baseAttack    = 100,
         .baseDefense   = 120,
-        .baseSpeed     = 78,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 115,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 130,
+        .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_WATER),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 315 : 284,
@@ -1557,12 +1557,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_BEEDRILL_MEGA] =
     {
-        .baseHP        = 65,
-        .baseAttack    = BEEDRILL_ATTACK + 60,
-        .baseDefense   = 40,
-        .baseSpeed     = 145,
+        .baseHP        = 70,
+        .baseAttack    = BEEDRILL_ATTACK + 50,
+        .baseDefense   = 80,
+        .baseSpeed     = 135,
         .baseSpAttack  = 15,
-        .baseSpDefense = 80,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 248 : 223,
@@ -1847,9 +1847,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_PIDGEOT_MEGA] =
     {
-        .baseHP        = 83,
-        .baseAttack    = 80,
-        .baseDefense   = 80,
+        .baseHP        = 85,
+        .baseAttack    = 120,
+        .baseDefense   = 85,
         .baseSpeed     = PIDGEOT_SPEED + 20,
         .baseSpAttack  = 135,
         .baseSpDefense = 80,
@@ -7809,9 +7809,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_ALAKAZAM_MEGA] =
     {
-        .baseHP        = 55,
+        .baseHP        = 75,
         .baseAttack    = 50,
-        .baseDefense   = 65,
+        .baseDefense   = 75,
         .baseSpeed     = 150,
         .baseSpAttack  = 175,
         .baseSpDefense = ALAKAZAM_SP_DEF + 10,
@@ -9371,11 +9371,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_SLOWBRO_MEGA] =
     {
-        .baseHP        = 95,
+        .baseHP        = 105,
         .baseAttack    = 75,
-        .baseDefense   = 180,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 130,
+        .baseDefense   = 170,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 120,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_WATER, TYPE_PSYCHIC),
         .catchRate = 75,
@@ -10612,7 +10612,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 45,
         .baseSpDefense = 25,
-        .types = MON_TYPES(TYPE_WATER),
+        .types = MON_TYPES(TYPE_ICE, TYPE_POISON),
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 61 : 97,
         .evYield_Defense = 1,
@@ -10682,7 +10682,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 85,
         .baseSpDefense = 45,
-        .types = MON_TYPES(TYPE_WATER, TYPE_ICE),
+        .types = MON_TYPES(TYPE_ICE, TYPE_POISON),
         .catchRate = 60,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 184 : 203,
         .evYield_Defense = 2,
@@ -10953,7 +10953,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_GENGAR_MEGA] =
     {
-        .baseHP        = 60,
+        .baseHP        = 65,
         .baseAttack    = 65,
         .baseDefense   = 80,
         .baseSpeed     = 130,
@@ -13615,10 +13615,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_KANGASKHAN_MEGA] =
     {
-        .baseHP        = 105,
-        .baseAttack    = 125,
+        .baseHP        = 100,
+        .baseAttack    = 120,
         .baseDefense   = 100,
-        .baseSpeed     = 100,
+        .baseSpeed     = 95,
         .baseSpAttack  = 60,
         .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_NORMAL),
@@ -14618,7 +14618,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseHP        = 70,
         .baseAttack    = 150,
         .baseDefense   = 140,
-        .baseSpeed     = 75,
+        .baseSpeed     = 95,
         .baseSpAttack  = 65,
         .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_BUG, TYPE_STEEL),
@@ -17395,9 +17395,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_AERODACTYL_MEGA] =
     {
         .baseHP        = 80,
-        .baseAttack    = 135,
+        .baseAttack    = 125,
         .baseDefense   = 85,
-        .baseSpeed     = 150,
+        .baseSpeed     = 135,
         .baseSpAttack  = 70,
         .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_ROCK, TYPE_FLYING),

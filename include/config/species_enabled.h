@@ -446,7 +446,7 @@
 #define P_FAMILY_MORELULL                P_GEN_7_POKEMON
 #define P_FAMILY_SALANDIT                P_GEN_7_POKEMON
 #define P_FAMILY_STUFFUL                 P_GEN_7_POKEMON
-#define P_FAMILY_BOUNSWEET               P_GEN_7_POKEMON
+// #define P_FAMILY_BOUNSWEET            P_GEN_7_POKEMON
 #define P_FAMILY_COMFEY                  P_GEN_7_POKEMON
 #define P_FAMILY_ORANGURU                P_GEN_7_POKEMON
 #define P_FAMILY_PASSIMIAN               P_GEN_7_POKEMON
@@ -662,6 +662,7 @@
 #define P_FAMILY_POPPLIO                 TRUE
 #define P_FAMILY_ROCKRUFF                TRUE
 #define P_FAMILY_FOMANTIS                TRUE
+#define P_FAMILY_BOUNSWEET				 TRUE
 #define P_FAMILY_SANDYGAST               TRUE
 #define P_FAMILY_DEWPIDER                TRUE
 #define P_FAMILY_WIMPOD                  TRUE

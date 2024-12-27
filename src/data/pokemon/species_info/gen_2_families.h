@@ -1813,9 +1813,9 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_AMPHAROS] =
     {
-        .baseHP        = 90,
+        .baseHP        = 80,
         .baseAttack    = 90,
-        .baseDefense   = AMPHAROS_DEFENSE + 5,
+        .baseDefense   = AMPHAROS_DEFENSE,
         .baseSpeed     = 60,
         .baseSpAttack  = 125,
         .baseSpDefense = 95,
@@ -1889,7 +1889,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_AMPHAROS_MEGA] =
     {
-        .baseHP        = 90,
+        .baseHP        = 100,
         .baseAttack    = 95,
         .baseDefense   = AMPHAROS_DEFENSE + 20,
         .baseSpeed     = 45,
@@ -4756,12 +4756,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_HERACROSS
     [SPECIES_HERACROSS] =
     {
-        .baseHP        = 80,
+        .baseHP        = 85,
         .baseAttack    = 125,
-        .baseDefense   = 75,
+        .baseDefense   = 85,
         .baseSpeed     = 85,
         .baseSpAttack  = 40,
-        .baseSpDefense = 95,
+        .baseSpDefense = 105,
         .types = MON_TYPES(TYPE_BUG, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 175 : 200,
@@ -4836,12 +4836,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_HERACROSS_MEGA] =
     {
-        .baseHP        = 80,
-        .baseAttack    = 185,
+        .baseHP        = 90,
+        .baseAttack    = 155,
         .baseDefense   = 115,
-        .baseSpeed     = 75,
+        .baseSpeed     = 95,
         .baseSpAttack  = 40,
-        .baseSpDefense = 105,
+        .baseSpDefense = 115,
         .types = MON_TYPES(TYPE_BUG, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = 210,
@@ -4851,7 +4851,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SKILL_LINK, ABILITY_SKILL_LINK, ABILITY_SKILL_LINK },
+        .abilities = { ABILITY_SWARM, ABILITY_GUTS, ABILITY_MOXIE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Heracross"),
         .cryId = CRY_HERACROSS_MEGA,
@@ -6602,8 +6602,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseHP        = 75,
         .baseAttack    = 90,
         .baseDefense   = 90,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 140,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 130,
         .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_DARK, TYPE_FIRE),
         .catchRate = 45,
@@ -7510,12 +7510,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_TYRANITAR_MEGA] =
     {
-        .baseHP        = 100,
-        .baseAttack    = 164,
+        .baseHP        = 105,
+        .baseAttack    = 150,
         .baseDefense   = 150,
-        .baseSpeed     = 71,
+        .baseSpeed     = 75,
         .baseSpAttack  = 95,
-        .baseSpDefense = 120,
+        .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_ROCK, TYPE_DARK),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 350 : 315,
