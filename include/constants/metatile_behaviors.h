@@ -45,10 +45,10 @@
 #define MB_LAVARIDGE_GYM_B1F_WARP 0x29
 #define MB_SEAWEED_NO_SURFACING 0x2A
 #define MB_REFLECTION_UNDER_BRIDGE 0x2B
-#define MB_UNUSED_2C 0x2C
-#define MB_UNUSED_2D 0x2D
-#define MB_UNUSED_2E 0x2E
-#define MB_UNUSED_2F 0x2F
+#define MB_UNUSED_2C 0x2C // Deoxys form change
+#define MB_UNUSED_2D 0x2D // Deoxys form change
+#define MB_UNUSED_2E 0x2E // Deoxys form change
+#define MB_UNUSED_2F 0x2F // Deoxys form change
 #define MB_IMPASSABLE_EAST 0x30
 #define MB_IMPASSABLE_WEST 0x31
 #define MB_IMPASSABLE_NORTH 0x32
@@ -85,18 +85,18 @@
 #define MB_WESTWARD_CURRENT 0x51
 #define MB_NORTHWARD_CURRENT 0x52
 #define MB_SOUTHWARD_CURRENT 0x53
-#define MB_UNUSED_54 0x54
-#define MB_UNUSED_55 0x55
-#define MB_UNUSED_56 0x56
-#define MB_UNUSED_57 0x57
-#define MB_UNUSED_58 0x58
-#define MB_UNUSED_59 0x59
-#define MB_UNUSED_5A 0x5A
-#define MB_UNUSED_5B 0x5B
-#define MB_UNUSED_5C 0x5C
-#define MB_UNUSED_5D 0x5D
-#define MB_UNUSED_5E 0x5E
-#define MB_UNUSED_5F 0x5F
+#define MB_TALL_GRASS_2 0x54
+#define MB_TALL_GRASS_3 0x55
+#define MB_INDOOR_ENCOUNTER_2 0x56
+#define MB_INDOOR_ENCOUNTER_3 0x57
+#define MB_CAVE_2 0x58
+#define MB_CAVE_3 0x59
+#define MB_PUDDLE_2 0x5A
+#define MB_PUDDLE_3 0x5B
+#define MB_POND_WATER_2 0x5C
+#define MB_POND_WATER_3 0x5D
+#define MB_OCEAN_WATER_2 0x5E
+#define MB_OCEAN_WATER_3 0x5F
 #define MB_NON_ANIMATED_DOOR 0x60
 #define MB_LADDER 0x61
 #define MB_EAST_ARROW_WARP 0x62
@@ -130,8 +130,8 @@
 #define MB_UNUSED_BRIDGE 0x7E
 #define MB_BIKE_BRIDGE_OVER_BARRIER 0x7F
 #define MB_COUNTER 0x80
-#define MB_UNUSED_81 0x81
-#define MB_UNUSED_82 0x82
+#define MB_SEAWEED_NO_SURFACING_2 0x81
+#define MB_SEAWEED_NO_SURFACING_3 0x82
 #define MB_PC 0x83
 #define MB_CABLE_BOX_RESULTS_1 0x84
 #define MB_REGION_MAP 0x85
@@ -162,10 +162,10 @@
 #define MB_UNUSED_9E 0x9E
 #define MB_UNUSED_9F 0x9F
 #define MB_BERRY_TREE_SOIL 0xA0
-#define MB_UNUSED_A1 0xA1
-#define MB_UNUSED_A2 0xA2
-#define MB_UNUSED_A3 0xA3
-#define MB_UNUSED_A4 0xA4
+#define MB_SEAWEED_2 0xA1
+#define MB_SEAWEED_3 0xA2
+#define MB_LONG_GRASS_2 0xA3
+#define MB_LONG_GRASS_3 0xA4
 #define MB_UNUSED_A5 0xA5
 #define MB_UNUSED_A6 0xA6
 #define MB_UNUSED_A7 0xA7
@@ -242,8 +242,8 @@
 #define MB_DOWN_LEFT_STAIR_WARP 0xEE
 #define MB_UNUSED_EF 0xEF
 
-#define NUM_METATILE_BEHAVIORS 0xF0
+#define NUM_METATILE_BEHAVIORS 0x1FF
 
-#define MB_INVALID   0xFF
+#define MB_INVALID   0x2FF
 
 #endif // GUARD_METATILE_BEHAVIORS_H

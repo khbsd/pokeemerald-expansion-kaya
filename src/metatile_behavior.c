@@ -10,25 +10,39 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
 {
     [MB_NORMAL]                             = TILE_FLAG_UNUSED,
     [MB_TALL_GRASS]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_TALL_GRASS_2]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_TALL_GRASS_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_LONG_GRASS]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_LONG_GRASS_2]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_LONG_GRASS_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_UNUSED_05]                          = TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_SAND]                          = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SHORT_GRASS]                        = TILE_FLAG_UNUSED,
     [MB_CAVE]                               = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_CAVE_2]                             = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_CAVE_3]                             = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_LONG_GRASS_SOUTH_EDGE]              = TILE_FLAG_UNUSED,
     [MB_NO_RUNNING]                         = TILE_FLAG_UNUSED,
     [MB_INDOOR_ENCOUNTER]                   = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_INDOOR_ENCOUNTER_2]                 = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_INDOOR_ENCOUNTER_3]                 = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_MOUNTAIN_TOP]                       = TILE_FLAG_UNUSED,
     [MB_BATTLE_PYRAMID_WARP]                = TILE_FLAG_UNUSED,
     [MB_MOSSDEEP_GYM_WARP]                  = TILE_FLAG_UNUSED,
     [MB_MT_PYRE_HOLE]                       = TILE_FLAG_UNUSED,
     [MB_POND_WATER]                         = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_POND_WATER_2]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_POND_WATER_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_INTERIOR_DEEP_WATER]                = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_WATER]                         = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_WATERFALL]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_SOOTOPOLIS_DEEP_WATER]              = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_OCEAN_WATER]                        = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_OCEAN_WATER_2]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_OCEAN_WATER_3]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_PUDDLE]                             = TILE_FLAG_UNUSED,
+    [MB_PUDDLE_2]                           = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_PUDDLE_3]                           = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SHALLOW_WATER]                      = TILE_FLAG_UNUSED,
     [MB_NO_SURFACING]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_STAIRS_OUTSIDE_ABANDONED_SHIP]      = TILE_FLAG_UNUSED,
@@ -36,6 +50,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_ICE]                                = TILE_FLAG_UNUSED,
     [MB_SAND]                               = TILE_FLAG_UNUSED,
     [MB_SEAWEED]                            = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SEAWEED_2]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SEAWEED_3]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_UNUSED_23]                          = TILE_FLAG_UNUSED,
     [MB_ASHGRASS]                           = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_FOOTPRINTS]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
@@ -44,6 +60,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_HOT_SPRINGS]                        = TILE_FLAG_UNUSED,
     [MB_LAVARIDGE_GYM_B1F_WARP]             = TILE_FLAG_UNUSED,
     [MB_SEAWEED_NO_SURFACING]               = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SEAWEED_NO_SURFACING_2]             = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SEAWEED_NO_SURFACING_3]             = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_REFLECTION_UNDER_BRIDGE]            = TILE_FLAG_UNUSED,
     [MB_IMPASSABLE_EAST]                    = TILE_FLAG_UNUSED,
     [MB_IMPASSABLE_WEST]                    = TILE_FLAG_UNUSED,
@@ -206,8 +224,8 @@ bool8 MetatileBehavior_IsDeepSand(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_POND_WATER
-     || metatileBehavior == MB_PUDDLE
+    if (((metatileBehavior == MB_POND_WATER) || (metatileBehavior == MB_POND_WATER_2) || (metatileBehavior == MB_POND_WATER_3))
+     || ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3))
      || metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER_2
      || metatileBehavior == MB_ICE
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
@@ -718,8 +736,8 @@ bool8 MetatileBehavior_IsPlayerRoomPCOn(u8 metatileBehavior)
 
 bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_POND_WATER
-     || metatileBehavior == MB_PUDDLE
+    if (((metatileBehavior == MB_POND_WATER) || (metatileBehavior == MB_POND_WATER_2) || (metatileBehavior == MB_POND_WATER_3))
+     || ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3))
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
@@ -728,7 +746,7 @@ bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsPuddle(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_PUDDLE)
+    if ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3))
         return TRUE;
     else
         return FALSE;
@@ -736,7 +754,7 @@ bool8 MetatileBehavior_IsPuddle(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsTallGrass(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_TALL_GRASS)
+    if ((metatileBehavior == MB_TALL_GRASS) || (metatileBehavior == MB_TALL_GRASS_2) || (metatileBehavior == MB_TALL_GRASS_3))
         return TRUE;
     else
         return FALSE;
@@ -744,7 +762,7 @@ bool8 MetatileBehavior_IsTallGrass(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsLongGrass(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_LONG_GRASS)
+    if ((metatileBehavior == MB_LONG_GRASS) || (metatileBehavior == MB_LONG_GRASS_2) || (metatileBehavior == MB_LONG_GRASS_3))
         return TRUE;
     else
         return FALSE;
@@ -1257,7 +1275,8 @@ bool8 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SEAWEED || metatileBehavior == MB_SEAWEED_NO_SURFACING)
+    if ((metatileBehavior == MB_SEAWEED || metatileBehavior == MB_SEAWEED_2 || metatileBehavior == MB_SEAWEED_3)
+     || (metatileBehavior == MB_SEAWEED_NO_SURFACING || metatileBehavior == MB_SEAWEED_NO_SURFACING_2 || metatileBehavior == MB_SEAWEED_NO_SURFACING_3))
         return TRUE;
     else
         return FALSE;
@@ -1266,7 +1285,7 @@ bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NO_RUNNING
-     || metatileBehavior == MB_LONG_GRASS
+     || ((metatileBehavior == MB_LONG_GRASS) || (metatileBehavior == MB_LONG_GRASS_2) || (metatileBehavior == MB_LONG_GRASS_3))
      || metatileBehavior == MB_HOT_SPRINGS
      || MetatileBehavior_IsPacifidlogLog(metatileBehavior) != FALSE)
         return TRUE;
@@ -1276,8 +1295,8 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_TALL_GRASS
-     || metatileBehavior == MB_LONG_GRASS
+    if (((metatileBehavior == MB_TALL_GRASS) || (metatileBehavior == MB_TALL_GRASS_2) || (metatileBehavior == MB_TALL_GRASS_3))
+     || ((metatileBehavior == MB_LONG_GRASS) || (metatileBehavior == MB_LONG_GRASS_2) || (metatileBehavior == MB_LONG_GRASS_3))
      || metatileBehavior == MB_ASHGRASS
      || metatileBehavior == MB_LONG_GRASS_SOUTH_EDGE)
         return TRUE;

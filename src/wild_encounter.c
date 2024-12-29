@@ -4,6 +4,7 @@
 #include "metatile_behavior.h"
 #include "fieldmap.h"
 #include "random.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 #include "safari_zone.h"
@@ -11,6 +12,7 @@
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
+#include "sound.h"
 #include "tv.h"
 #include "link.h"
 #include "script.h"
@@ -22,6 +24,8 @@
 #include "constants/item.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/metatile_behaviors.h"
+#include "constants/songs.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_SprayWoreOff[];
@@ -357,13 +361,13 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIn
 static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
+    u32 altHeaderId = GetHeaderIdForMetatileBehavior();
 
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
         if (wildHeader->mapGroup == MAP_GROUP(UNDEFINED))
             break;
-
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
             gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
         {
@@ -376,12 +380,49 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
                 i += alteringCaveId;
             }
+            else
+                i += altHeaderId;
 
             return i;
         }
     }
 
     return HEADER_NONE;
+}
+
+u32 GetHeaderIdForMetatileBehavior(void)
+{
+    // not sure why GetPlayerCurMetatileBehavior needs an arg but we feed it one anyways
+    int num = 0;
+    u16 curMetatileBehavior = GetPlayerCurMetatileBehavior(num);
+
+    switch (curMetatileBehavior)
+    {
+    case MB_TALL_GRASS_2:
+    case MB_INDOOR_ENCOUNTER_2:
+    case MB_CAVE_2:
+    case MB_PUDDLE_2:
+    case MB_POND_WATER_2:
+    case MB_OCEAN_WATER_2:
+    case MB_SEAWEED_NO_SURFACING_2:
+    case MB_SEAWEED_2:
+    case MB_LONG_GRASS_2:
+        return 1;
+
+    case MB_TALL_GRASS_3:
+    case MB_INDOOR_ENCOUNTER_3:
+    case MB_CAVE_3:
+    case MB_PUDDLE_3:
+    case MB_POND_WATER_3:
+    case MB_OCEAN_WATER_3:
+    case MB_SEAWEED_NO_SURFACING_3:
+    case MB_SEAWEED_3:
+    case MB_LONG_GRASS_3:
+        return 2;
+
+    default:
+        return 0;
+    }
 }
 
 u8 PickWildMonNature(void)

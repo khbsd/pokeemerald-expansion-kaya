@@ -35,6 +35,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
 const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void ClearPoisonStepCounter(void);
 void CancelSignPostMessageBox(struct FieldInput *input);
+u16 GetPlayerCurMetatileBehavior(int);
 
 #define NOT_SIGNPOST 0
 #define WALK_AWAY_SIGNPOST_FRAMES 6
