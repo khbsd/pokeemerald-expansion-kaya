@@ -274,7 +274,7 @@
 #define P_FAMILY_BURMY                   P_GEN_4_POKEMON
 #define P_FAMILY_COMBEE                  P_GEN_4_POKEMON
 #define P_FAMILY_PACHIRISU               P_GEN_4_POKEMON
-#define P_FAMILY_BUIZEL                  P_GEN_4_POKEMON
+// #define P_FAMILY_BUIZEL               P_GEN_4_POKEMON
 #define P_FAMILY_CHERUBI                 P_GEN_4_POKEMON
 #define P_FAMILY_SHELLOS                 P_GEN_4_POKEMON
 // #define P_FAMILY_DRIFLOON             P_GEN_4_POKEMON
@@ -613,6 +613,7 @@
 #define P_FAMILY_PIPLUP                  TRUE
 #define P_FAMILY_SHINX			   	     TRUE
 #define P_FAMILY_DRIFLOON				 TRUE
+#define P_FAMILY_BUIZEL                  TRUE
 #define P_FAMILY_BUNEARY                 TRUE
 #define P_FAMILY_STUNKY                  TRUE
 #define P_FAMILY_GIBLE                   TRUE
