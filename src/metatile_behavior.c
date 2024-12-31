@@ -17,6 +17,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_LONG_GRASS_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_UNUSED_05]                          = TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_SAND]                          = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_DEEP_SAND_2]                        = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_DEEP_SAND_3]                        = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SHORT_GRASS]                        = TILE_FLAG_UNUSED,
     [MB_CAVE]                               = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_CAVE_2]                             = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
@@ -35,6 +37,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_POND_WATER_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_INTERIOR_DEEP_WATER]                = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_WATER]                         = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_DEEP_WATER_2]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_DEEP_WATER_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_WATERFALL]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_SOOTOPOLIS_DEEP_WATER]              = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_OCEAN_WATER]                        = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
@@ -54,6 +58,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_SEAWEED_3]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_UNUSED_23]                          = TILE_FLAG_UNUSED,
     [MB_ASHGRASS]                           = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_ASHGRASS_2]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_ASHGRASS_3]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_FOOTPRINTS]                         = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_THIN_ICE]                           = TILE_FLAG_UNUSED,
     [MB_CRACKED_ICE]                        = TILE_FLAG_UNUSED,
@@ -208,7 +214,7 @@ bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SAND || metatileBehavior == MB_DEEP_SAND)
+    if (metatileBehavior == MB_SAND || metatileBehavior == MB_DEEP_SAND || metatileBehavior == MB_DEEP_SAND_2 || metatileBehavior == MB_DEEP_SAND_3)
         return TRUE;
     else
         return FALSE;
@@ -216,7 +222,7 @@ bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsDeepSand(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_DEEP_SAND)
+    if (metatileBehavior == MB_DEEP_SAND || metatileBehavior == MB_DEEP_SAND_2 || metatileBehavior == MB_DEEP_SAND_3)
         return TRUE;
     else
         return FALSE;
@@ -778,7 +784,7 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsAshGrass(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_ASHGRASS)
+    if (metatileBehavior == MB_ASHGRASS || metatileBehavior == MB_ASHGRASS_2 || metatileBehavior == MB_ASHGRASS_3)
         return TRUE;
     else
         return FALSE;
@@ -879,7 +885,7 @@ bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
 bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_INTERIOR_DEEP_WATER
-     || metatileBehavior == MB_DEEP_WATER
+     || (metatileBehavior == MB_DEEP_WATER || metatileBehavior == MB_DEEP_WATER_2 || metatileBehavior == MB_DEEP_WATER_3)
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
@@ -892,7 +898,7 @@ bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
     // Also the narrower underwater door in the underwater tileset has the wrong metatile behavior. This causes the dive glitch.
     // To fix change the metatile behavior of the narrower water door with porymap's tileset editor.
     if (metatileBehavior == MB_NO_SURFACING
-     || metatileBehavior == MB_SEAWEED_NO_SURFACING
+     || (metatileBehavior == MB_SEAWEED_NO_SURFACING || MB_SEAWEED_NO_SURFACING_2 || MB_SEAWEED_NO_SURFACING_3)
      #ifdef BUGFIX
      || metatileBehavior == MB_WATER_DOOR
      #endif
@@ -930,9 +936,9 @@ bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_OCEAN_WATER
+    if ((metatileBehavior == MB_OCEAN_WATER || metatileBehavior == MB_OCEAN_WATER_2 || metatileBehavior == MB_OCEAN_WATER_3)
      || metatileBehavior == MB_INTERIOR_DEEP_WATER
-     || metatileBehavior == MB_DEEP_WATER)
+     || (metatileBehavior == MB_DEEP_WATER || metatileBehavior == MB_DEEP_WATER_2 || metatileBehavior == MB_DEEP_WATER_3))
         return TRUE;
     else
         return FALSE;
@@ -1295,9 +1301,9 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
 {
-    if (((metatileBehavior == MB_TALL_GRASS) || (metatileBehavior == MB_TALL_GRASS_2) || (metatileBehavior == MB_TALL_GRASS_3))
-     || ((metatileBehavior == MB_LONG_GRASS) || (metatileBehavior == MB_LONG_GRASS_2) || (metatileBehavior == MB_LONG_GRASS_3))
-     || metatileBehavior == MB_ASHGRASS
+    if ((metatileBehavior == MB_TALL_GRASS || metatileBehavior == MB_TALL_GRASS_2 || metatileBehavior == MB_TALL_GRASS_3)
+     || (metatileBehavior == MB_LONG_GRASS || metatileBehavior == MB_LONG_GRASS_2 || metatileBehavior == MB_LONG_GRASS_3)
+     || (metatileBehavior == MB_ASHGRASS || metatileBehavior == MB_ASHGRASS_2 || metatileBehavior == MB_ASHGRASS_3)
      || metatileBehavior == MB_LONG_GRASS_SOUTH_EDGE)
         return TRUE;
     else

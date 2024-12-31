@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_NEW_MAUVILLE_OLD_REACTOR",
+      "name": "NewMauville_OldReactor_Layout",
+      "width": 17,
+      "height": 33,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_BikeShop",
+      "border_filepath": "data/layouts/NewMauville_OldReactor/border.bin",
+      "blockdata_filepath": "data/layouts/NewMauville_OldReactor/map.bin"
+    },
+    {
+      "id": "LAYOUT_VOLCARONA_HIVE",
+      "name": "VolcaronaHive_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/VolcaronaHive/border.bin",
+      "blockdata_filepath": "data/layouts/VolcaronaHive/map.bin"
     }
   ]
 }

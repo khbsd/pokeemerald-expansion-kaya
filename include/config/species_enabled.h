@@ -299,7 +299,7 @@
 #define P_FAMILY_DIALGA                  P_GEN_4_POKEMON
 #define P_FAMILY_PALKIA                  P_GEN_4_POKEMON
 #define P_FAMILY_HEATRAN                 P_GEN_4_POKEMON
-#define P_FAMILY_REGIGIGAS               P_GEN_4_POKEMON
+// #define P_FAMILY_REGIGIGAS            P_GEN_4_POKEMON
 #define P_FAMILY_GIRATINA                P_GEN_4_POKEMON
 #define P_FAMILY_CRESSELIA               P_GEN_4_POKEMON
 #define P_FAMILY_MANAPHY                 P_GEN_4_POKEMON
@@ -622,6 +622,7 @@
 #define P_FAMILY_CROAGUNK                TRUE
 #define P_FAMILY_SNOVER                  TRUE
 #define P_FAMILY_ROTOM					 TRUE
+#define P_FAMILY_REGIGIGAS				 TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_4_POKEMON
 
 #if P_KAYAS_CHOICE || P_GEN_5_POKEMON

@@ -407,6 +407,9 @@ u32 GetHeaderIdForMetatileBehavior(void)
     case MB_SEAWEED_NO_SURFACING_2:
     case MB_SEAWEED_2:
     case MB_LONG_GRASS_2:
+    case MB_DEEP_SAND_2:
+    case MB_ASHGRASS_2:
+    case MB_DEEP_WATER_2:
         return 1;
 
     case MB_TALL_GRASS_3:
@@ -418,6 +421,9 @@ u32 GetHeaderIdForMetatileBehavior(void)
     case MB_SEAWEED_NO_SURFACING_3:
     case MB_SEAWEED_3:
     case MB_LONG_GRASS_3:
+    case MB_DEEP_SAND_3:
+    case MB_ASHGRASS_3:
+    case MB_DEEP_WATER_3:
         return 2;
 
     default:
