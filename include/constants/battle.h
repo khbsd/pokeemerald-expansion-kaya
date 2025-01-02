@@ -417,7 +417,7 @@
 #define MOVE_EFFECT_SALT_CURE           87
 #define MOVE_EFFECT_EERIE_SPELL         88
 
-#define NUM_MOVE_EFFECTS                88
+#define NUM_MOVE_EFFECTS                89
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
@@ -520,7 +520,7 @@
 #define MOVE_TARGET_ALLY                (1 << 7)
 #define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER) // No functionality for status moves
 
-// For the second argument of GetMoveTarget, when no target override is needed
+// For the second argument of GetBattleMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
 
 // Constants for Parental Bond
