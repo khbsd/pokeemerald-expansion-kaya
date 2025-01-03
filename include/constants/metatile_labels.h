@@ -174,6 +174,8 @@
 // gTileset_Fallarbor
 #define METATILE_Fallarbor_AshField                  0x218
 #define METATILE_Fallarbor_AshGrass                  0x20A
+#define METATILE_Fallarbor_AshGrass_2                0x358
+#define METATILE_Fallarbor_AshGrass_3                0x359
 #define METATILE_Fallarbor_BrownCaveEntrance_Bottom  0x261
 #define METATILE_Fallarbor_BrownCaveEntrance_Top     0x259
 #define METATILE_Fallarbor_BrownCaveIndent           0x208
@@ -183,6 +185,8 @@
 #define METATILE_Fallarbor_Door_DarkRoof             0x2F7
 #define METATILE_Fallarbor_Door_LightRoof            0x2A5
 #define METATILE_Fallarbor_NormalGrass               0x212
+#define METATILE_Fallarbor_NormalGrass_2             0x200
+#define METATILE_Fallarbor_NormalGrass_3             0x231
 #define METATILE_Fallarbor_RedCaveEntrance_Bottom    0x34F
 #define METATILE_Fallarbor_RedCaveEntrance_Top       0x347
 #define METATILE_Fallarbor_RedRockWall               0x269

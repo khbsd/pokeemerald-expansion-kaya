@@ -473,7 +473,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
 };
 
 static const struct MenuAction sMenuActions_Gender[] = {
-    {COMPOUND_STRING("BOY"), {NULL}},
+    {COMPOUND_STRING("'BOY'"), {NULL}},
     {COMPOUND_STRING("GIRL"), {NULL}}
 };
 
@@ -1526,7 +1526,7 @@ static void Task_NewGameBirchSpeech_ChooseGender(u8 taskId)
     {
         case MALE:
             PlaySE(SE_SELECT);
-            gSaveBlock2Ptr->playerGender = gender;
+            gSaveBlock2Ptr->playerGender = FEMALE;
             NewGameBirchSpeech_ClearGenderWindow(1, 1);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
             break;
@@ -1560,7 +1560,7 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
         if (gTasks[taskId].tPlayerGender != MALE)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
-            spriteId = gTasks[taskId].tBrendanSpriteId;
+            spriteId = gTasks[taskId].tMaySpriteId;
         gSprites[spriteId].x = DISPLAY_WIDTH;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -1734,7 +1734,7 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         if (gSaveBlock2Ptr->playerGender != MALE)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
-            spriteId = gTasks[taskId].tBrendanSpriteId;
+            spriteId = gTasks[taskId].tMaySpriteId;
         gSprites[spriteId].x = 120;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -1850,7 +1850,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     else
     {
         gTasks[taskId].tPlayerGender = MALE;
-        spriteId = gTasks[taskId].tBrendanSpriteId;
+        spriteId = gTasks[taskId].tMaySpriteId;
     }
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
