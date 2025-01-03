@@ -1,6 +1,8 @@
 #ifndef GUARD_CONFIG_GENERAL_H
 #define GUARD_CONFIG_GENERAL_H
 
+#include "constants/species.h"
+
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
 // still has them in the ROM. This is because the developers forgot
@@ -74,6 +76,7 @@
 #define COMPETITIVE_PARTY_SYNTAX     TRUE    // If TRUE, parties are defined in "competitive syntax".
 #define AUTO_SCROLL_TEXT             FALSE   // If TRUE, text will automatically scroll to the next line after NUM_FRAMES_AUTO_SCROLL_DELAY. Players can still press A_BUTTON or B_BUTTON to scroll on their own.
 #define NUM_FRAMES_AUTO_SCROLL_DELAY 49
+#define CRY_AFTER_TITLE				 SPECIES_RAYQUAZA // If set to something other than SPECIES_NONE, will attempt to play the set species' cry after the title.
 
 // Low health beep amounts
 #define LOOPED_BEEPS				 0		 // When your mon's health becomes red, the game will loop the low health beeps

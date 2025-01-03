@@ -9744,12 +9744,12 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
 
         if (IS_BATTLER_OF_TYPE(battlerAtk, moveType))
         {
-            if (IS_MOVE_PHYSICAL(move) && (spAtk > atkStat))
+            if (IsBattleMovePhysical(move) && (spAtk > atkStat))
             {
                 atkStat = spAtk;
                 atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
             }
-            else if (IS_MOVE_SPECIAL(move) && (atk > atkStat))
+            else if (IsBattleMoveSpecial(move) && (atk > atkStat))
             {
                 atkStat = atk;
                 atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
