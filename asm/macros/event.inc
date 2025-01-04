@@ -2437,7 +2437,6 @@
 	.2byte \dest
 	.endm
 
-
 	@ 
 	.macro infectmonwithpokerus slot:req, days:req
 	callnative InfectMonWithPokerus 
@@ -2448,6 +2447,7 @@
 	.macro checkifplayeriskaya 
 	callnative CheckIfPlayerIsKaya
 	.endm 
+
 	.macro increasedifficulty
 	callnative Script_IncreaseDifficulty
 	.endm
