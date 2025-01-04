@@ -2448,3 +2448,19 @@
 	.macro checkifplayeriskaya 
 	callnative CheckIfPlayerIsKaya
 	.endm 
+	.macro increasedifficulty
+	callnative Script_IncreaseDifficulty
+	.endm
+
+	.macro decreasedifficulty
+	callnative Script_DecreaseDifficulty
+	.endm
+
+	.macro getdifficulty var:req
+	callnative Script_GetDifficulty
+	.endm
+
+	.macro setdifficulty difficulty:req
+	callnative Script_SetDifficulty
+	.byte \difficulty
+	.endm
