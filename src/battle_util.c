@@ -4327,8 +4327,10 @@ u32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, u32 abilityDef, u32 mov
         if (IsWindMove(move) && !(GetBattlerMoveTargetType(battlerAtk, move) & MOVE_TARGET_USER))
             effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
         break;
-
-        // make steam engine do this and lower speed stat change from 6 > 1
+    case ABILITY_STEAM_ENGINE:
+        if ((moveType == TYPE_FIRE || moveType == TYPE_WATER) && GetMoveTarget(move) != MOVE_TARGET_ALL_BATTLERS)
+            effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
+        break;
     case ABILITY_FLASH_FIRE:
         if (moveType == TYPE_FIRE && (B_FLASH_FIRE_FROZEN >= GEN_5 || !(gBattleMons[battlerDef].status1 & STATUS1_FREEZE)))
             effect = MOVE_ABSORBED_BY_BOOST_FLASH_FIRE;
@@ -5527,6 +5529,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 switch(gLastUsedAbility)
                 {
                 case ABILITY_MOTOR_DRIVE:
+                case ABILITY_STEAM_ENGINE:
                     statId = STAT_SPEED;
                     break;
                 case ABILITY_LIGHTNING_ROD:
@@ -5588,7 +5591,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                         PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
                 }
                 break;
-            case MOVE_ABSORBED_BY_BOOST_STEAM_ENGINE:
+
             case MOVE_ABSORBED_BY_BOOST_FLASH_FIRE:
                 gBattleStruct->pledgeMove = FALSE;
                 if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
@@ -6069,7 +6072,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && (moveType == TYPE_FIRE || moveType == TYPE_WATER))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_SPEED, 6, FALSE);
+                SET_STATCHANGER(STAT_SPEED, 2, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -10830,17 +10833,19 @@ uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, u8 moveType)
         if (type2 != type1)
             MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type2, 0, FALSE);
 
-        if ((modifier <= UQ_4_12(1.0)  &&  abilityDef == ABILITY_WONDER_GUARD)
-         || (moveType == TYPE_FIRE     &&  abilityDef == ABILITY_FLASH_FIRE)
-         || (moveType == TYPE_GRASS    &&  abilityDef == ABILITY_SAP_SIPPER)
+        if ((modifier <= UQ_4_12(1.0)  && abilityDef == ABILITY_WONDER_GUARD)
+         || (moveType == TYPE_FIRE     && (abilityDef == ABILITY_FLASH_FIRE
+                                       ||  abilityDef == ABILITY_STEAM_ENGINE))
+         || (moveType == TYPE_GRASS    && abilityDef == ABILITY_SAP_SIPPER)
          || (moveType == TYPE_GROUND   && (abilityDef == ABILITY_LEVITATE
                                        ||  abilityDef == ABILITY_EARTH_EATER))
          || (moveType == TYPE_WATER    && (abilityDef == ABILITY_WATER_ABSORB
-                                       || abilityDef == ABILITY_DRY_SKIN
-                                       || abilityDef == ABILITY_STORM_DRAIN))
+                                       ||  abilityDef == ABILITY_DRY_SKIN
+                                       ||  abilityDef == ABILITY_STORM_DRAIN))
          || (moveType == TYPE_ELECTRIC && (abilityDef == ABILITY_LIGHTNING_ROD // TODO: Add Gen 3/4 config check
-                                       || abilityDef == ABILITY_VOLT_ABSORB
-                                       || abilityDef == ABILITY_MOTOR_DRIVE)))
+                                       ||  abilityDef == ABILITY_VOLT_ABSORB
+                                       ||  abilityDef == ABILITY_MOTOR_DRIVE
+                                       ||  abilityDef == ABILITY_STEAM_ENGINE)))
         {
             modifier = UQ_4_12(0.0);
         }

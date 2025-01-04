@@ -462,7 +462,7 @@
 #define P_FAMILY_BRUXISH                 P_GEN_7_POKEMON
 #define P_FAMILY_DRAMPA                  P_GEN_7_POKEMON
 #define P_FAMILY_DHELMISE                P_GEN_7_POKEMON
-#define P_FAMILY_JANGMO_O                P_GEN_7_POKEMON
+// #define P_FAMILY_JANGMO_O             P_GEN_7_POKEMON
 #define P_FAMILY_TAPU_KOKO               P_GEN_7_POKEMON
 #define P_FAMILY_TAPU_LELE               P_GEN_7_POKEMON
 #define P_FAMILY_TAPU_BULU               P_GEN_7_POKEMON
@@ -669,6 +669,7 @@
 #define P_FAMILY_DEWPIDER                TRUE
 #define P_FAMILY_WIMPOD                  TRUE
 #define P_FAMILY_TOGEDEMARU              TRUE
+#define P_FAMILY_JANGMO_O				 TRUE
 #define P_FAMILY_COSMOG                  TRUE
 #define P_FAMILY_MELTAN                  TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_7_POKEMON
