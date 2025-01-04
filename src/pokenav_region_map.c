@@ -4,6 +4,8 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "landmark.h"
+#include "event_data.h"
+#include "field_effect.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -382,7 +384,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
         else
             menuGfxId = POKENAV_GFX_MAP_MENU_ZOOMED_IN;
 
-        UpdateHelpBarText();
+        UpdateRegionMapHelpBarText();
         LoadLeftHeaderGfxForIndex(menuGfxId);
         ShowLeftHeaderGfx(menuGfxId, TRUE, TRUE);
         PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
@@ -403,8 +405,7 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
     {
     case 0:
         UpdateMapSecInfoWindow(state);
-        UpdateHelpBarText();
-
+        UpdateRegionMapHelpBarText();
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy_(state))
@@ -428,7 +429,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
 
-        UpdateHelpBarText();
+        UpdateRegionMapHelpBarText();
         return LT_INC_AND_PAUSE;
     case 2:
         if (WaitForHelpBar())
@@ -461,7 +462,7 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
 
-        UpdateHelpBarText();
+        UpdateRegionMapHelpBarText();
         return LT_INC_AND_PAUSE;
     case 3:
         if (WaitForHelpBar())
@@ -469,23 +470,6 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
 
         UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_IN);
         break;
-    }
-
-    return LT_FINISH;
-}
-
-static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
-{
-    switch (taskState)
-    {
-    case 0:
-        struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
-        SetFlyDestination(regionMap);
-        gSkipShowMonAnim = TRUE;
-        PlaySE(SE_SELECT);
-        ReturnToFieldFromFlyMapSelect();
-
-        return LT_FINISH;
     }
 
     return LT_FINISH;
@@ -518,26 +502,21 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
 
     return LT_FINISH;
 }
-
-void UpdateHelpBarText(void)
+static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
 {
-    struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
+    switch (taskState)
+    {
+    case 0:
+        struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
+        SetFlyDestination(regionMap);
+        gSkipShowMonAnim = TRUE;
+        PlaySE(SE_SELECT);
+        ReturnToFieldFromFlyMapSelect();
 
-    if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && OW_FLAG_AUTO_USE_FLY && 
-        CanAutoUseFieldMove(MOVE_FLY) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
-    {
-        if (IsRegionMapZoomed())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN_CANFLY);
-        else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT_CANFLY);
+        return LT_FINISH;
     }
-    else
-    {
-        if (IsRegionMapZoomed())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
-        else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
-    }
+
+    return LT_FINISH;
 }
 
 static void LoadCityZoomViewGfx(void)
@@ -797,4 +776,25 @@ static void SetCityZoomTextInvisibility(bool32 invisible)
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
         state->cityZoomTextSprites[i]->invisible = invisible;
+}
+
+void UpdateRegionMapHelpBarText(void)
+{
+    struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
+
+    if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER) 
+        && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+    {
+        if (IsRegionMapZoomed())
+            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN_CANFLY);
+        else
+            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT_CANFLY);
+    }
+    else
+    {
+        if (IsRegionMapZoomed())
+            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
+        else
+            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
+    }
 }

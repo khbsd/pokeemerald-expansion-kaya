@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "event_data.h"
 #include "field_camera.h"
@@ -3247,7 +3248,8 @@ static void FlyOutFieldEffect_ShowMon(struct Task *task)
     {
         task->tState++;
         gFieldEffectArguments[0] = task->tMonId;
-        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        if (!gSkipShowMonAnim)
+            FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     }
 }
 
@@ -3496,7 +3498,7 @@ static void StartFlyBirdReturnToBall(u8 spriteId)
 u8 FldEff_FlyIn(void)
 {
     CreateTask(Task_FlyIn, 254);
-    gSkipShowMonAnim = FALSE;
+    gSkipShowMonAnim = FALSE; // Clears this variable so flying via the party menu keeps the show mon animation
     return 0;
 }
 
