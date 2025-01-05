@@ -1100,24 +1100,28 @@ void DEBUG_SetAllBadges(void)
 }
 
 bool32 CanAutoUseFieldMove(u16 move) {
-    if (move == MOVE_CUT)
+    switch (move)
+    {
+    case MOVE_CUT:
         return FlagGet(FLAG_RECEIVED_HM_CUT) && FlagGet(FLAG_BADGE01_GET);
-    else if (move == MOVE_FLASH)
+    case MOVE_FLASH:
         return FlagGet(FLAG_RECEIVED_HM_FLASH) && FlagGet(FLAG_BADGE02_GET);
-    else if (move == MOVE_ROCK_SMASH)
+    case MOVE_ROCK_SMASH:
         return FlagGet(FLAG_RECEIVED_HM_ROCK_SMASH) && FlagGet(FLAG_BADGE03_GET);
-    else if (move == MOVE_STRENGTH)
+    case MOVE_STRENGTH:
         return FlagGet(FLAG_RECEIVED_HM_STRENGTH) && FlagGet(FLAG_BADGE04_GET);
-    else if (move == MOVE_SURF)
+    case MOVE_SURF:
         return FlagGet(FLAG_RECEIVED_HM_SURF) && FlagGet(FLAG_BADGE05_GET) && IsPlayerFacingSurfableFishableWater();
-    else if (move == MOVE_FLY)
+    case MOVE_FLY:
         return FlagGet(FLAG_RECEIVED_HM_FLY) && FlagGet(FLAG_BADGE06_GET);
-    else if (move == MOVE_DIVE)
+    case MOVE_DIVE:
         return FlagGet(FLAG_RECEIVED_HM_DIVE) && FlagGet(FLAG_BADGE07_GET);
-    else if (move == MOVE_WATERFALL)
+    case MOVE_WATERFALL:
         return FlagGet(FLAG_RECEIVED_HM_WATERFALL) && FlagGet(FLAG_BADGE08_GET);
+    default:
+        return FALSE;
+    }
     
-    return FALSE;
 }
 
 void AutoUseCut(void)
