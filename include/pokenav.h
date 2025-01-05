@@ -441,6 +441,7 @@ void CreateRegionMapLoopedTask(s32);
 bool32 IsRegionMapLoopedTaskActive(void);
 void FreeRegionMapSubstruct1(void);
 void FreeRegionMapSubstruct2(void);
+void UpdateRegionMapHelpBarText(void);
 
 // pokenav_conditions.c
 u32 PokenavCallback_Init_ConditionGraph_Party(void);
