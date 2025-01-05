@@ -130,6 +130,14 @@ Route115_EventScript_Marlene::
 	end
 
 Route115_Text_NeverKnowWhenCavePokemonWillAppear:
+	.string "You may notice this Hoenn region\n"
+	.string "is more flowery and lush than you\l"
+	.string "remember it being.\p"
+	.string "This is because Game Freak are cowards\n"
+	.string "who are afraid of environmentalism.\p"
+	.string "Anyways, back to what this NPC was\n"
+	.string "supposed to say:\p"
+	.string "\p"
 	.string "Exploring a cave isn't like walking\n"
 	.string "on a road.\p"
 	.string "You never know when wild POKéMON will\n"
