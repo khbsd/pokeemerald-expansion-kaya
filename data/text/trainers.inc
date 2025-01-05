@@ -2471,12 +2471,12 @@ Route117_Text_DerekPostBattle:
 	.string "a BUG MANIAC.$"
 
 Route117_Text_AnnaIntro:
-	.string "ANNA: I'm with my pretty junior student\n"
+	.string "ANNA: I'm with my pretty girlfriend\n"
 	.string "partner. I have to do good!$"
 
 Route117_Text_AnnaDefeat:
-	.string "ANNA: I'm with my pretty junior student\n"
-	.string "partner! Let me win!$"
+	.string "ANNA: I'm with my pretty girlfriend!\n"
+	.string "Let me win!$"
 
 Route117_Text_AnnaPostBattle:
 	.string "ANNA: Your POKéMON have some good\n"
@@ -2493,7 +2493,7 @@ Route117_Text_AnnaNotEnoughMons:
 
 Route117_Text_MegIntro:
 	.string "MEG: I'm going to tag up with my super\n"
-	.string "senior student partner and beat you!$"
+	.string "cutie-patootie girlfriend and beat you!$"
 
 Route117_Text_MegDefeat:
 	.string "MEG: Oh, no!\n"
@@ -2510,7 +2510,7 @@ Route117_Text_MegNotEnoughMons:
 
 Route117_Text_AnnaRematchIntro:
 	.string "ANNA: I can't keep losing in front of\n"
-	.string "my junior partner, right?$"
+	.string "my girlfriend, right?$"
 
 Route117_Text_AnnaRematchDefeat:
 	.string "ANNA: I couldn't get into the groove.$"
@@ -2526,14 +2526,15 @@ Route117_Text_AnnaRematchNotEnoughMons:
 
 Route117_Text_MegRematchIntro:
 	.string "MEG: I'm going to tag up with my\n"
-	.string "senior partner and win this time!$"
+	.string "cutie-patootie girlfriend and\p"
+	.string "win this time!$"
 
 Route117_Text_MegRematchDefeat:
 	.string "MEG: Too strong!$"
 
 Route117_Text_MegPostRematch:
 	.string "MEG: I battled together with my\n"
-	.string "senior partner, but we lost…\p"
+	.string "girlfriend, but we lost…\p"
 	.string "That's so discouraging…$"
 
 Route117_Text_MegRematchNotEnoughMons:
@@ -2542,15 +2543,17 @@ Route117_Text_MegRematchNotEnoughMons:
 	.string "We want to have a 2-on-2 battle.$"
 
 Route117_Text_MelinaIntro:
-	.string "Isn't it nice? To battle while looking\n"
-	.string "at pretty flowers?$"
+	.string "Isn't it nice? To train while looking\n"
+	.string "at pretty flowers (both of my wives?)$"
 
 Route117_Text_MelinaDefeat:
-	.string "Oh, that's quite impressive!$"
+	.string "Oh, that's quite impressive!\n"
+	.string "Still not as impressive as my wives\p"
+	.string "though.$"
 
 Route117_Text_MelinaPostBattle:
 	.string "It feels wonderful to go for a jog\n"
-	.string "while looking at flowers.$"
+	.string "while looking at my flowers.$"
 
 Route117_Text_BrandiIntro:
 	.string "Let me demonstrate the power\n"
