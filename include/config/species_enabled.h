@@ -1,4 +1,4 @@
-#ifndef GUARD_CONFIG_SPECIES_ENABLED_H
+ #ifndef GUARD_CONFIG_SPECIES_ENABLED_H
 #define GUARD_CONFIG_SPECIES_ENABLED_H
 
 // WARNING: For some reason, using 1/0 instead of TRUE/FALSE causes cry IDs to be shifted.
