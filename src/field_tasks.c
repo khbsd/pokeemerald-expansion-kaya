@@ -776,9 +776,14 @@ static void AshGrassPerStepCallback(u8 taskId)
             StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass_2, 4);
         else if (MapGridGetMetatileIdAt(x, y) == METATILE_Fallarbor_AshGrass_3)
             StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass_3, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass_2)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass_2, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass_3)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass_3, 4);
         else
             StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
-
         // Try to gather ash
         if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
         {
