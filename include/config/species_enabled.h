@@ -325,7 +325,7 @@
 #define P_FAMILY_DRILBUR                 P_GEN_5_POKEMON
 #define P_FAMILY_AUDINO                  P_GEN_5_POKEMON
 // #define P_FAMILY_TIMBURR              P_GEN_5_POKEMON
-#define P_FAMILY_TYMPOLE                 P_GEN_5_POKEMON
+// #define P_FAMILY_TYMPOLE              P_GEN_5_POKEMON
 #define P_FAMILY_THROH                   P_GEN_5_POKEMON
 #define P_FAMILY_SAWK                    P_GEN_5_POKEMON
 #define P_FAMILY_SEWADDLE                P_GEN_5_POKEMON
@@ -355,12 +355,12 @@
 #define P_FAMILY_FOONGUS                 P_GEN_5_POKEMON
 #define P_FAMILY_FRILLISH                P_GEN_5_POKEMON
 #define P_FAMILY_ALOMOMOLA               P_GEN_5_POKEMON
-#define P_FAMILY_JOLTIK                  P_GEN_5_POKEMON
+// #define P_FAMILY_JOLTIK               P_GEN_5_POKEMON
 #define P_FAMILY_FERROSEED               P_GEN_5_POKEMON
 #define P_FAMILY_KLINK                   P_GEN_5_POKEMON
 // #define P_FAMILY_TYNAMO               P_GEN_5_POKEMON
 #define P_FAMILY_ELGYEM                  P_GEN_5_POKEMON
-#define P_FAMILY_LITWICK                 P_GEN_5_POKEMON
+// #define P_FAMILY_LITWICK              P_GEN_5_POKEMON
 // #define P_FAMILY_AXEW                 P_GEN_5_POKEMON
 // #define P_FAMILY_CUBCHOO              P_GEN_5_POKEMON
 #define P_FAMILY_CRYOGONAL               P_GEN_5_POKEMON
@@ -433,7 +433,7 @@
 // #define P_FAMILY_POPPLIO              P_GEN_7_POKEMON
 #define P_FAMILY_PIKIPEK                 P_GEN_7_POKEMON
 #define P_FAMILY_YUNGOOS                 P_GEN_7_POKEMON
-#define P_FAMILY_GRUBBIN                 P_GEN_7_POKEMON
+// #define P_FAMILY_GRUBBIN              P_GEN_7_POKEMON
 #define P_FAMILY_CRABRAWLER              P_GEN_7_POKEMON
 #define P_FAMILY_ORICORIO                P_GEN_7_POKEMON
 #define P_FAMILY_CUTIEFLY                P_GEN_7_POKEMON
@@ -631,9 +631,12 @@
 #define P_FAMILY_OSHAWOTT                TRUE
 #define P_FAMILY_ROGGENROLA              TRUE
 #define P_FAMILY_TIMBURR                 TRUE
+#define P_FAMILY_TYMPOLE                 TRUE
+#define P_FAMILY_LITWICK                 TRUE
 #define P_FAMILY_VENIPEDE                TRUE
 #define P_FAMILY_COTTONEE                TRUE
 #define P_FAMILY_SCRAGGY                 TRUE
+#define P_FAMILY_JOLTIK                  TRUE
 #define P_FAMILY_TYNAMO                  TRUE
 #define P_FAMILY_AXEW                    TRUE
 #define P_FAMILY_CUBCHOO                 TRUE
@@ -662,6 +665,7 @@
 #define P_FAMILY_ROWLET                  TRUE
 #define P_FAMILY_LITTEN                  TRUE
 #define P_FAMILY_POPPLIO                 TRUE
+#define P_FAMILY_GRUBBIN                 TRUE
 #define P_FAMILY_ROCKRUFF                TRUE
 #define P_FAMILY_FOMANTIS                TRUE
 #define P_FAMILY_BOUNSWEET				 TRUE
