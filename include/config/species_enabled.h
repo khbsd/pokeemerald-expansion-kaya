@@ -341,7 +341,7 @@
 #define P_FAMILY_SIGILYPH                P_GEN_5_POKEMON
 #define P_FAMILY_YAMASK                  P_GEN_5_POKEMON
 #define P_FAMILY_TIRTOUGA                P_GEN_5_POKEMON
-#define P_FAMILY_ARCHEN                  P_GEN_5_POKEMON
+// #define P_FAMILY_ARCHEN               P_GEN_5_POKEMON
 #define P_FAMILY_TRUBBISH                P_GEN_5_POKEMON
 #define P_FAMILY_ZORUA                   P_GEN_5_POKEMON
 #define P_FAMILY_MINCCINO                P_GEN_5_POKEMON
@@ -636,6 +636,7 @@
 #define P_FAMILY_VENIPEDE                TRUE
 #define P_FAMILY_COTTONEE                TRUE
 #define P_FAMILY_SCRAGGY                 TRUE
+#define P_FAMILY_ARCHEN                  TRUE
 #define P_FAMILY_JOLTIK                  TRUE
 #define P_FAMILY_TYNAMO                  TRUE
 #define P_FAMILY_AXEW                    TRUE

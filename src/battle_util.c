@@ -6180,6 +6180,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_BLOOD_FEATHER:
         case ABILITY_ANGER_SHELL:
             if (MoveResultHasEffect(gBattlerTarget)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg

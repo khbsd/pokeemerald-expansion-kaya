@@ -2415,4 +2415,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Adapts to strongest stat."),
         .aiRating = 5,
     },
+
+    [ABILITY_BLOOD_FEATHER] =
+    {
+        .name = _("Blood Feather"),
+        .description = COMPOUND_STRING("Gets angry at half HP."),
+        .aiRating = 3,
+    },
 };
