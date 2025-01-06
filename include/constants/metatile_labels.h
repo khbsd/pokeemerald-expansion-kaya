@@ -236,6 +236,10 @@
 #define METATILE_General_MuddySlope_Frame1      0x0E9
 #define METATILE_General_MuddySlope_Frame2      0x0EA
 #define METATILE_General_MuddySlope_Frame3      0x0EB
+#define METATILE_General_Pine_BottomLeft        0x026
+#define METATILE_General_Pine_BottomRight       0x027
+#define METATILE_General_Pine_VineLeft          0x036
+#define METATILE_General_Pine_VineRight         0x037
 #define METATILE_General_RedCaveIndent          0x1A0
 #define METATILE_General_RedCaveOpen            0x1A1
 #define METATILE_General_ReflectiveWater        0x0A1
@@ -245,10 +249,6 @@
 #define METATILE_General_RoughDeepWater         0x14F
 #define METATILE_General_RoughWater             0x14E
 #define METATILE_General_SandPit_Center         0x121
-#define METATILE_General_SecretBase_TreeLeft    0x026
-#define METATILE_General_SecretBase_TreeRight   0x027
-#define METATILE_General_SecretBase_VineLeft    0x036
-#define METATILE_General_SecretBase_VineRight   0x037
 #define METATILE_General_TallGrass              0x00D
 #define METATILE_General_TallGrass_2            0x05C
 #define METATILE_General_TallGrass_2_TreeLeft   0x1A2

@@ -2,7 +2,7 @@
   "id": "MAP_VOLCARONA_HIVE",
   "name": "VolcaronaHive",
   "layout": "LAYOUT_VOLCARONA_HIVE",
-  "music": "MUS_ROUTE113",
+  "music": "MUS_RG_OAK",
   "region_map_section": "MAPSEC_MT_EMBER",
   "requires_flash": false,
   "weather": "WEATHER_VOLCANIC_ASH",
