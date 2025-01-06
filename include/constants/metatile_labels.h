@@ -727,6 +727,12 @@
 #define METATILE_SecretBase_YellowBrick_Bottom          0x22E
 #define METATILE_SecretBase_YellowBrick_Top             0x226
 
+// unused in this hack but still need defining
+#define METATILE_General_SecretBase_TreeLeft            0x37A
+#define METATILE_General_SecretBase_TreeRight           0x37B
+#define METATILE_General_SecretBase_VineLeft            0x37C
+#define METATILE_General_SecretBase_VineRight           0x37D
+
 // gTileset_Shop
 #define METATILE_Shop_Door_Elevator   0x285
 #define METATILE_Shop_Laptop1_Flash   0x258
