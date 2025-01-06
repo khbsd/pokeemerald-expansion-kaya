@@ -249,6 +249,10 @@
 #define METATILE_General_RoughDeepWater         0x14F
 #define METATILE_General_RoughWater             0x14E
 #define METATILE_General_SandPit_Center         0x121
+#define METATILE_General_SecretBase_TreeLeft    0x37A
+#define METATILE_General_SecretBase_TreeRight   0x37B
+#define METATILE_General_SecretBase_VineLeft    0x37C
+#define METATILE_General_SecretBase_VineRight   0x37D
 #define METATILE_General_TallGrass              0x00D
 #define METATILE_General_TallGrass_2            0x05C
 #define METATILE_General_TallGrass_2_TreeLeft   0x1A2
@@ -726,12 +730,6 @@
 #define METATILE_SecretBase_YellowBalloon               0x340
 #define METATILE_SecretBase_YellowBrick_Bottom          0x22E
 #define METATILE_SecretBase_YellowBrick_Top             0x226
-
-// unused in this hack but still need defining
-#define METATILE_General_SecretBase_TreeLeft            0x37A
-#define METATILE_General_SecretBase_TreeRight           0x37B
-#define METATILE_General_SecretBase_VineLeft            0x37C
-#define METATILE_General_SecretBase_VineRight           0x37D
 
 // gTileset_Shop
 #define METATILE_Shop_Door_Elevator   0x285

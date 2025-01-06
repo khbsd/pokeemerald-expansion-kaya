@@ -39,7 +39,7 @@ gText_Birch_AndYouAre::
 
 gText_Birch_BoyOrGirl::
 	.string "Are you a girl?\n"
-	.string "Or a 'boy'?$"
+	.string "Or do you not know it yet?$"
 
 gText_Birch_WhatsYourName::
 	.string "All right.\n"

@@ -393,7 +393,7 @@
 // #define P_FAMILY_CHESPIN              P_GEN_6_POKEMON
 // #define P_FAMILY_FENNEKIN             P_GEN_6_POKEMON
 // #define P_FAMILY_FROAKIE              P_GEN_6_POKEMON
-#define P_FAMILY_BUNNELBY                P_GEN_6_POKEMON
+// #define P_FAMILY_BUNNELBY             P_GEN_6_POKEMON
 // #define P_FAMILY_FLETCHLING           P_GEN_6_POKEMON
 // #define P_FAMILY_SCATTERBUG           P_GEN_6_POKEMON
 #define P_FAMILY_LITLEO                  P_GEN_6_POKEMON
@@ -650,6 +650,7 @@
 #define P_FAMILY_CHESPIN                 TRUE
 #define P_FAMILY_FENNEKIN                TRUE
 #define P_FAMILY_FROAKIE                 TRUE
+#define P_FAMILY_BUNNELBY                TRUE
 #define P_FAMILY_FLETCHLING              TRUE
 #define P_FAMILY_SCATTERBUG              TRUE
 #define P_FAMILY_BINACLE                 TRUE
