@@ -252,6 +252,8 @@
 #define METATILE_General_SecretBase_TreeRight   0x37B
 #define METATILE_General_SecretBase_VineLeft    0x37C
 #define METATILE_General_SecretBase_VineRight   0x37D
+#define METATILE_General_RedCaveOpen            0x37E
+#define METATILE_General_YellowCaveOpen         0x37F
 #define METATILE_General_TallGrass              0x00D
 #define METATILE_General_TallGrass_2            0x05C
 #define METATILE_General_TallGrass_2_TreeLeft   0x1A2
