@@ -217,7 +217,7 @@
 // gTileset_General
 #define METATILE_General_BlueCaveIndent         0x1B0
 #define METATILE_General_BlueCaveOpen           0x1B1
-#define METATILE_General_CalmWater              0x170
+#define METATILE_General_CalmWater              0x1A1
 #define METATILE_General_CaveEntrance_Bottom    0x0A7
 #define METATILE_General_CaveEntrance_Top       0x09F
 #define METATILE_General_Door                   0x021
@@ -241,7 +241,6 @@
 #define METATILE_General_Pine_VineLeft          0x036
 #define METATILE_General_Pine_VineRight         0x037
 #define METATILE_General_RedCaveIndent          0x1A0
-#define METATILE_General_RedCaveOpen            0x1A1
 #define METATILE_General_ReflectiveWater        0x0A1
 #define METATILE_General_RockWall_GrassBase     0x079
 #define METATILE_General_RockWall_RockBase      0x07C
@@ -262,7 +261,6 @@
 #define METATILE_General_TallGrass_TreeRight    0x1C7
 #define METATILE_General_TallGrass_TreeUp       0x025
 #define METATILE_General_YellowCaveIndent       0x1A8
-#define METATILE_General_YellowCaveOpen         0x1A9
 
 // gTileset_GenericBuilding
 #define METATILE_GenericBuilding_TableEdge               0x2F1
