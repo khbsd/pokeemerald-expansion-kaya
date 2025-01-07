@@ -7820,17 +7820,17 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_SWABLU"
+                "species": "SPECIES_PAWMI"
               },
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_TAILLOW"
+                "species": "SPECIES_PAWMI"
               },
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SWABLU"
+                "species": "SPECIES_PAWMI"
               },
               {
                 "min_level": 24,
@@ -7850,22 +7850,22 @@
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_JIGGLYPUFF"
+                "species": "SPECIES_BUNNELBY"
               },
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_JIGGLYPUFF"
+                "species": "SPECIES_BUNNELBY"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_BUNNELBY"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_DIGGERSBY"
               },
               {
                 "min_level": 26,
@@ -7974,47 +7974,47 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_SWABLU"
+                "species": "SPECIES_WATTREL"
               },
               {
                 "min_level": 23,
                 "max_level": 23,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
                 "species": "SPECIES_TAILLOW"
               },
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SWABLU"
+                "species": "SPECIES_FOMANTIS"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_TAILLOW"
+                "species": "SPECIES_FOMANTIS"
               },
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_TAILLOW"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_SWELLOW"
+                "species": "SPECIES_FOMANTIS"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_JIGGLYPUFF"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_JIGGLYPUFF"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_FOMANTIS"
               },
               {
                 "min_level": 24,
@@ -9582,7 +9582,7 @@
               {
                 "min_level": 28,
                 "max_level": 28,
-                "species": "SPECIES_MISDREAVUS"
+                "species": "SPECIES_DEWPIDER"
               },
               {
                 "min_level": 28,
@@ -9592,7 +9592,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_MISDREAVUS"
+                "species": "SPECIES_DEWPIDER"
               },
               {
                 "min_level": 28,
