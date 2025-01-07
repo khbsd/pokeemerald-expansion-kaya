@@ -6,10 +6,16 @@ gText_Birch_Welcome::
 	.string " \p"
 	.string " \p"
 	.string " \p"
+	.string "By the way, this version uses\n"
+	.string "subtle differences between encounter\p"
+	.string "tiles to show which areas contain\n"
+	.string "new POKéMON. Pay very close attention\p"
+	.string "to where you're searching!\p"
 	.string "$"
 
 gText_Birch_Pokemon::
-	.string "This is what we call a “Threenis.” \n"
+	.string "Anyways,\n"
+	.string "this is what we call a “Threenis.” \p"
 	.string "\p"
 	.string "\p"
 	.string "\p"

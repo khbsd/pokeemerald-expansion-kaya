@@ -8573,7 +8573,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 50,
         .baseSpAttack  = 63,
         .baseSpDefense = 43,
-        .types = MON_TYPES(TYPE_GHOST, TYPE_FAIRY),
+        .types = MON_TYPES(TYPE_GHOST, TYPE_ELECTRIC),
         .catchRate = 225,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 59 : 97,
         .evYield_Attack = 1,
@@ -8584,7 +8584,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
     #if P_UPDATED_ABILITIES >= GEN_4
-        .abilities = { ABILITY_INSOMNIA, ABILITY_FRISK, ABILITY_CURSED_BODY },
+        .abilities = { ABILITY_PRANKSTER, ABILITY_FRISK, ABILITY_CURSED_BODY },
     #else
         .abilities = { ABILITY_INSOMNIA, ABILITY_NONE, ABILITY_CURSED_BODY },
     #endif
@@ -8597,9 +8597,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 23,
         .description = COMPOUND_STRING(
             "This Pokémon roams about deep in the\n"
-            "night seeking such negative emotions as\n"
-            "grudges and envy. It retreats to its nest\n"
-            "when the sun begins to rise."),
+            "night seeking such dark emotions as if\n"
+            "floating down a negative electrical current.\n"
+            "It returns to its nest when the sun rises."),
         .pokemonScale = 440,
         .pokemonOffset = 20,
         .trainerScale = 256,
@@ -8642,7 +8642,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 75,
         .baseSpAttack  = 95,
         .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_GHOST, TYPE_FAIRY),
+        .types = MON_TYPES(TYPE_GHOST, TYPE_ELECTRIC),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 159 : 179,
         .evYield_Attack = 2,
@@ -8653,7 +8653,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
     #if P_UPDATED_ABILITIES >= GEN_4
-        .abilities = { ABILITY_INSOMNIA, ABILITY_FRISK, ABILITY_CURSED_BODY },
+        .abilities = { ABILITY_PRANKSTER, ABILITY_FRISK, ABILITY_CURSED_BODY },
     #else
         .abilities = { ABILITY_INSOMNIA, ABILITY_NONE, ABILITY_CURSED_BODY },
     #endif
@@ -8665,7 +8665,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 11,
         .weight = 125,
         .description = COMPOUND_STRING(
-            "An abandoned plush doll became this\n"
+            "An abandoned animated plush doll became this\n"
             "Pokémon. They are said to live in garbage\n"
             "dumps and wander about in search of the\n"
             "children that threw them away."),
@@ -8715,7 +8715,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 110,
         .baseSpDefense = 105,
-        .types = MON_TYPES(TYPE_GHOST, TYPE_FAIRY),
+        .types = MON_TYPES(TYPE_GHOST, TYPE_ELECTRIC),
         .catchRate = 45,
         .expYield = 194,
         .evYield_Attack = 2,
@@ -8735,7 +8735,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 130,
         .description = COMPOUND_STRING(
             "Extraordinary energy amplifies its\n"
-            "cursing power to such an extent that it\n"
+            "cursing magnet fields to such an extent that it\n"
             "can't help but curse its own Trainer."),
         .pokemonScale = 262,
         .pokemonOffset = 9,
