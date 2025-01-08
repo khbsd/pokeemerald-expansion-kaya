@@ -130,8 +130,8 @@ static s32 Factorial(s32);
 
 // in-battle evos
 static void PlayerTryEvolution(void);
-static void BeginLeftEvoluionAfterFade(void);
-static void BeginRightEvoluionAfterFade(void);
+// static void BeginLeftEvoluionAfterFade(void);
+// static void BeginRightEvoluionAfterFade(void);
 static void WaitForEvolutionThenTryAnother(void);
 static void CB2_SetUpReshowBattleScreenAfterEvolution(void);
 
@@ -4094,10 +4094,10 @@ void BattleTurnPassed(void)
     SetShellSideArmCategory();
     SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
 
-    if (!B_EVOLUTION_DURING_BATTLE)
-        gBattleMainFunc = HandleTurnActionSelectionState;
-    else
+    if (B_EVOLUTION_DURING_BATTLE == TRUE)
         gBattleMainFunc = PlayerTryEvolution;
+    else
+        gBattleMainFunc = HandleTurnActionSelectionState;
 
     if (gSideTimers[B_SIDE_PLAYER].retaliateTimer > 0)
         gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
@@ -4270,9 +4270,9 @@ static void PlayerTryEvolution(void)
 
     u16 species;
     u8 taskId;
-    if (gLeveledUpInBattle & (1u << LEFT_PKMN) && !gPlayerDoesNotWantToEvolveLeft)
+    if ((gLeveledUpInBattle & (1u << LEFT_PKMN)) && !gPlayerDoesNotWantToEvolveLeft)
     {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE);
+        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL);
         if (species != SPECIES_NONE)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
@@ -4283,9 +4283,9 @@ static void PlayerTryEvolution(void)
             return;
         }
     }
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gLeveledUpInBattle & (1u << RIGHT_PKMN) && !gPlayerDoesNotWantToEvolveRight)
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && (gLeveledUpInBattle & (1u << RIGHT_PKMN)) && !gPlayerDoesNotWantToEvolveRight)
     {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE);
+        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL);
         if (species != SPECIES_NONE)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
