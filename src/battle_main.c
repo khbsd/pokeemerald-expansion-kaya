@@ -43,6 +43,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "recorded_battle.h"
+#include "reshow_battle_screen.h"
 #include "roamer.h"
 #include "safari_zone.h"
 #include "scanline_effect.h"
@@ -126,6 +127,18 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
 static s32 Factorial(s32);
+
+// in-battle evos
+static void PlayerTryEvolution(void);
+static void BeginLeftEvoluionAfterFade(void);
+static void BeginRightEvoluionAfterFade(void);
+static void WaitForEvolutionThenTryAnother(void);
+static void CB2_SetUpReshowBattleScreenAfterEvolution(void);
+
+EWRAM_DATA bool8 gPlayerDoesNotWantToEvolveLeft = FALSE;
+EWRAM_DATA bool8 gPlayerDoesNotWantToEvolveRight = FALSE;
+EWRAM_DATA u8 gBattleTerrainBackup = 0;
+
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -573,6 +586,8 @@ static void CB2_InitBattleInternal(void)
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
+    gPlayerDoesNotWantToEvolveLeft = FALSE;
+    gPlayerDoesNotWantToEvolveRight = FALSE;
 }
 
 #define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)                      \
@@ -4078,7 +4093,11 @@ void BattleTurnPassed(void)
     AssignUsableGimmicks();
     SetShellSideArmCategory();
     SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
-    gBattleMainFunc = HandleTurnActionSelectionState;
+
+    if (!B_EVOLUTION_DURING_BATTLE)
+        gBattleMainFunc = HandleTurnActionSelectionState;
+    else
+        gBattleMainFunc = PlayerTryEvolution;
 
     if (gSideTimers[B_SIDE_PLAYER].retaliateTimer > 0)
         gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
@@ -4217,6 +4236,78 @@ enum
     STATE_WAIT_SET_BEFORE_ACTION,
     STATE_SELECTION_SCRIPT_MAY_RUN
 };
+
+static void CB2_SetUpReshowBattleScreenAfterEvolution(void)
+{
+    gBattleTerrain = gBattleTerrainBackup;
+    SetMainCallback2(ReshowBattleScreenAfterMenu);
+}
+
+#define tSpeciesToEvolveInto data[0]
+#define tBattlerPosition     data[1]
+
+static void Task_BeginBattleEvolutionScene(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        u8 battlerPosition;
+        u16 SpeciesToEvolveInto;
+        FreeAllWindowBuffers();
+        gCB2_AfterEvolution = CB2_SetUpReshowBattleScreenAfterEvolution;
+        gBattleTerrainBackup = gBattleTerrain; // Store the battle terrain to be reloaded later
+
+        battlerPosition = gTasks[taskId].tBattlerPosition;
+        SpeciesToEvolveInto = gTasks[taskId].tSpeciesToEvolveInto;
+        DestroyTask(taskId);
+        EvolutionScene(&gPlayerParty[battlerPosition], SpeciesToEvolveInto, TRUE, battlerPosition);
+    }
+}
+
+static void PlayerTryEvolution(void)
+{
+    u32 LEFT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
+    u32 RIGHT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
+
+    u16 species;
+    u8 taskId;
+    if (gLeveledUpInBattle & (1u << LEFT_PKMN) && !gPlayerDoesNotWantToEvolveLeft)
+    {
+        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE);
+        if (species != SPECIES_NONE)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            gBattleMainFunc = WaitForEvolutionThenTryAnother;
+            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
+            gTasks[taskId].tSpeciesToEvolveInto = species;
+            gTasks[taskId].tBattlerPosition = LEFT_PKMN;
+            return;
+        }
+    }
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gLeveledUpInBattle & (1u << RIGHT_PKMN) && !gPlayerDoesNotWantToEvolveRight)
+    {
+        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE);
+        if (species != SPECIES_NONE)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            gBattleMainFunc = WaitForEvolutionThenTryAnother;
+            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
+            gTasks[taskId].tSpeciesToEvolveInto = species;
+            gTasks[taskId].tBattlerPosition = RIGHT_PKMN;
+            return;
+        }
+    }
+
+    gBattleMainFunc = HandleTurnActionSelectionState;
+
+}
+
+static void WaitForEvolutionThenTryAnother(void)
+{
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    {
+        gBattleMainFunc = PlayerTryEvolution;
+    }
+}
 
 static void HandleTurnActionSelectionState(void)
 {
