@@ -8,7 +8,7 @@
 #define FLAG_SYS_DEXNAV_SEARCH          1 // Searching for mon
 #define FLAG_SYS_DEXNAV_GET             0 // DexNav shows in start menu
 #define FLAG_SYS_DETECTOR_MODE          1 // Allow player to find hidden mons
-#define VAR_DEXNAV_SPECIES              600 // Registered DexNav species
+#define VAR_DEXNAV_SPECIES              630 // Registered DexNav species
 #define VAR_DEXNAV_STEP_COUNTER         HIDDEN_MON_STEP_COUNT // Steps for finding hidden pokemon
 
 // Search parameters
