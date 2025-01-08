@@ -12636,12 +12636,20 @@ const struct Item gItemsInfo[] =
 
     [ITEM_MACH_BIKE] =
     {
-        .name = _("Mach Bike"),
         .price = 0,
+        #if DUAL_USE_BIKE
+        .name = _("Bike"),
+        .description = COMPOUND_STRING(
+            "A folding bicycle\n"
+            "that has two modes and\n"
+            "two wheels. :)"),
+        #else
+        .name = _("Mach Bike"),
         .description = COMPOUND_STRING(
             "A folding bicycle\n"
             "that doubles your\n"
             "speed or better."),
+        #endif // DUAL_USE_BIKE
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
@@ -12653,12 +12661,20 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ACRO_BIKE] =
     {
-        .name = _("Acro Bike"),
         .price = 0,
+        #if DUAL_USE_BIKE
+        .name = _("Bike"),
+        .description = COMPOUND_STRING(
+            "A folding bicycle\n"
+            "that has two modes and\n"
+            "two wheels. :)"),
+        #else
+        .name = _("Acro Bike"),
         .description = COMPOUND_STRING(
             "A folding bicycle\n"
             "capable of jumps\n"
             "and wheelies."),
+        #endif // DUAL_USE_BIKE
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

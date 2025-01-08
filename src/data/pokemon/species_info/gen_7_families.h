@@ -2534,11 +2534,11 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 #if P_FAMILY_DEWPIDER
     [SPECIES_DEWPIDER] =
     {
-        .baseHP        = 38,
-        .baseAttack    = 40,
-        .baseDefense   = 52,
-        .baseSpeed     = 27,
-        .baseSpAttack  = 40,
+        .baseHP        = 48,
+        .baseAttack    = 50,
+        .baseDefense   = 62,
+        .baseSpeed     = 47,
+        .baseSpAttack  = 60,
         .baseSpDefense = 72,
         .types = MON_TYPES(TYPE_WATER, TYPE_BUG),
         .catchRate = 200,
@@ -2599,12 +2599,12 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 
     [SPECIES_ARAQUANID] =
     {
-        .baseHP        = 68,
-        .baseAttack    = 70,
-        .baseDefense   = 92,
-        .baseSpeed     = 42,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 132,
+        .baseHP        = 80,
+        .baseAttack    = 90,
+        .baseDefense   = 120,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 130,
         .types = MON_TYPES(TYPE_WATER, TYPE_BUG),
         .catchRate = 100,
         .expYield = 159,
