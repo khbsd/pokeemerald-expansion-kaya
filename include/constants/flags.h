@@ -655,6 +655,7 @@
 #define FLAG_HIDDEN_ITEM_NAVEL_ROCK_TOP_SACRED_ASH           (FLAG_HIDDEN_ITEMS_START + 0x6D)
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
+#define FLAG_HIDDEN_ITEMS_END								 FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL
 
 #define FLAG_UNUSED_0x264  0x264 // Unused Flag
 #define FLAG_UNUSED_0x265  0x265 // Unused Flag
@@ -1050,6 +1051,7 @@
 #define FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT                0x3E7
 
 // Item Ball Flags
+#define FLAG_ITEM_BALLS_START										0x3E8 // needs to be the same as the first item listed here
 #define FLAG_ITEM_ROUTE_102_POTION                                  0x3E8
 #define FLAG_ITEM_ROUTE_116_X_SPECIAL                               0x3E9
 #define FLAG_ITEM_ROUTE_104_PP_UP                                   0x3EA
@@ -1221,6 +1223,7 @@
 #define FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE                       0x490
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
+#define FLAG_ITEM_BALLS_END											FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL  
 
 #define FLAG_UNUSED_0x493                                           0x493 // Unused Flag
 #define FLAG_UNUSED_0x494                                           0x494 // Unused Flag

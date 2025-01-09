@@ -77,6 +77,7 @@
 #define AUTO_SCROLL_TEXT             FALSE   // If TRUE, text will automatically scroll to the next line after NUM_FRAMES_AUTO_SCROLL_DELAY. Players can still press A_BUTTON or B_BUTTON to scroll on their own.
 #define NUM_FRAMES_AUTO_SCROLL_DELAY 49
 #define CRY_AFTER_TITLE				 SPECIES_RAYQUAZA // If set to something other than SPECIES_NONE, will attempt to play the set species' cry after the title.
+#define INTRO_GENDER_MATCH_SAVE		 TRUE
 
 // Low health beep amounts
 #define LOOPED_BEEPS				 0		 // When your mon's health becomes red, the game will loop the low health beeps
