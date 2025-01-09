@@ -6,6 +6,8 @@
 #define OW_RUNNING_INDOORS          GEN_LATEST  // In Gen4+, players are allowed to run indoors.
 #define SLOW_MOVEMENT_ON_STAIRS     FALSE       // If enabled, the player will move slower up/down stairs like in FR
 #define DUAL_USE_BIKE               TRUE
+#define B_TOGGLES_RUN               TRUE        // If enabled, lets player press 'B' to toggle running.
+#define SURF_RUNNING                TRUE        // If enabled, lets player press 'B' to move faster while surfing.
 
 // Other settings
 #define OW_POISON_DAMAGE                GEN_LATEST // In Gen4, Pokémon no longer faint from Poison in the overworld. In Gen5+, they no longer take damage at all.

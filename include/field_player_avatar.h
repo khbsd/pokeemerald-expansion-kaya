@@ -27,6 +27,7 @@ void PlayerMovingHoppingWheelie(u8 direction);
 void PlayerLedgeHoppingWheelie(u8 direction);
 void PlayerAcroTurnJump(u8 direction);
 void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement);
+void PlayerSurfFaster(u8 direction);
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction);
 void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction);
 u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
@@ -69,5 +70,7 @@ bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction);
 //sideways stairs
 u8 GetRightSideStairsDirection(u8 direction);
 u8 GetLeftSideStairsDirection(u8 direction);
+// toggle run
+extern bool8 gRunToggled;
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

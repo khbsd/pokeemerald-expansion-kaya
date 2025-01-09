@@ -108,7 +108,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
-        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
+        if ((GetPlayerSpeed() != PLAYER_SPEED_FASTEST) || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
         {
             if (newKeys & START_BUTTON)
                 input->pressedStartButton = TRUE;
@@ -120,8 +120,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & R_BUTTON && !FlagGet(FLAG_SYS_DEXNAV_SEARCH))
                 input->pressedRButton = TRUE;
-            if (newKeys & L_BUTTON)
-                input->pressedLButton = TRUE;
+            // if (newKeys & L_BUTTON)
+                // input->pressedLButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -180,6 +180,14 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
+    if (input->pressedBButton && B_TOGGLES_RUN
+        && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING)))
+    {
+        if (gRunToggled)
+            gRunToggled = FALSE;
+        else
+            gRunToggled = TRUE;
+    }
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);

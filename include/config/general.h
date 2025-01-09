@@ -78,7 +78,6 @@
 #define NUM_FRAMES_AUTO_SCROLL_DELAY 49
 #define CRY_AFTER_TITLE				 SPECIES_RAYQUAZA // If set to something other than SPECIES_NONE, will attempt to play the set species' cry after the title.
 #define INTRO_GENDER_MATCH_SAVE		 TRUE
-
 // Low health beep amounts
 #define LOOPED_BEEPS				 0		 // When your mon's health becomes red, the game will loop the low health beeps
 #define THREE_BEEPS					 1		 // When your mon's health becomes red, the game will play 3 low health beeps
