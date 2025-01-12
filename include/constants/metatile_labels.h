@@ -241,6 +241,7 @@
 #define METATILE_General_Pine_VineLeft          0x036
 #define METATILE_General_Pine_VineRight         0x037
 #define METATILE_General_RedCaveIndent          0x1A0
+#define METATILE_General_RedCaveOpen            0x37E
 #define METATILE_General_ReflectiveWater        0x0A1
 #define METATILE_General_RockWall_GrassBase     0x079
 #define METATILE_General_RockWall_RockBase      0x07C
@@ -252,8 +253,6 @@
 #define METATILE_General_SecretBase_TreeRight   0x37B
 #define METATILE_General_SecretBase_VineLeft    0x37C
 #define METATILE_General_SecretBase_VineRight   0x37D
-#define METATILE_General_RedCaveOpen            0x37E
-#define METATILE_General_YellowCaveOpen         0x37F
 #define METATILE_General_TallGrass              0x00D
 #define METATILE_General_TallGrass_2            0x05C
 #define METATILE_General_TallGrass_2_TreeLeft   0x1A2
@@ -263,6 +262,7 @@
 #define METATILE_General_TallGrass_TreeRight    0x1C7
 #define METATILE_General_TallGrass_TreeUp       0x025
 #define METATILE_General_YellowCaveIndent       0x1A8
+#define METATILE_General_YellowCaveOpen         0x37F
 
 // gTileset_GenericBuilding
 #define METATILE_GenericBuilding_TableEdge               0x2F1
