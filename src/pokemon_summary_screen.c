@@ -202,6 +202,7 @@ EWRAM_DATA MainCallback gInitialSummaryScreenCallback = NULL; // stores callback
 void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId);
 void PrintTextOnWindowWithFont(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId, u32 fontId);
 u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId);
+static void WriteToStatsTilemapBuffer(u32 length, u32 block);
 static void ClearRelearnPrompt(void);
 static void ShowRelearnPrompt(void);
 static u8 IncrementSkillsStatsMode(u8 mode);
@@ -1619,35 +1620,39 @@ static void CloseSummaryScreen(u8 taskId)
 // Update skills page tilemap
 static void ChangeStatLabel(s16 mode)
 {
-    u32 STATS_CORD_X = 44;
-    u32 STATS_CORD_Y = 102;
+    u32 STATS_BLOCK = 169;
+    u32 EVS_BLOCK = 218;
+    u32 IVS_BLOCK = 221;
 
-    u32 STATS_STATS_BLOCK = 169;
-    u32 EVS_STATS_BLOCK = 218;
-    u32 IVS_STATS_BLOCK = (EVS_STATS_BLOCK + 3);
+    u32 statsLength = 3;
+    u32 ivEvLength = 2;
 
     ClearStatLabel();
 
     switch (mode)
     {
     case SUMMARY_MODE_SKILLS_STATS:
-        FillBgTilemapBufferRect(1, STATS_STATS_BLOCK, STATS_CORD_X, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, STATS_STATS_BLOCK + 1, STATS_CORD_X + 1, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, STATS_STATS_BLOCK + 2, STATS_CORD_X + 2, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, STATS_STATS_BLOCK + 3, STATS_CORD_X + 3, STATS_CORD_Y, 1, 1, 2);
+        WriteToStatsTilemapBuffer(statsLength, STATS_BLOCK);
         break;
     case SUMMARY_MODE_SKILLS_IVS:
-        FillBgTilemapBufferRect(1, IVS_STATS_BLOCK, STATS_CORD_X, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, IVS_STATS_BLOCK + 1, STATS_CORD_X + 1, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, IVS_STATS_BLOCK + 2, STATS_CORD_X + 2, STATS_CORD_Y, 1, 1, 2);
+        WriteToStatsTilemapBuffer(ivEvLength, IVS_BLOCK);
         break;
     case SUMMARY_MODE_SKILLS_EVS:
-        FillBgTilemapBufferRect(1, EVS_STATS_BLOCK, STATS_CORD_X, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, EVS_STATS_BLOCK + 1, STATS_CORD_X + 1, STATS_CORD_Y, 1, 1, 2);
-        FillBgTilemapBufferRect(1, EVS_STATS_BLOCK + 2, STATS_CORD_X + 2, STATS_CORD_Y, 1, 1, 2);
+        WriteToStatsTilemapBuffer(ivEvLength, EVS_BLOCK);
         break;
     }
     CopyBgTilemapBufferToVram(1);
+}
+
+static void WriteToStatsTilemapBuffer(u32 length, u32 block)
+{
+    u32 STATS_COORD_X = 44;
+    u32 STATS_COORD_Y = 102;
+    u32 i;
+
+    for (i = 0; i <= length; i++)
+        FillBgTilemapBufferRect(1, block + i, STATS_COORD_X + i, STATS_COORD_Y, 1, 1, 2);
+        
 }
 
 static void ClearStatLabel(void)
@@ -2133,6 +2138,9 @@ static void PssScrollRightEnd(u8 taskId) // display right
 static void PssScrollLeft(u8 taskId) // Scroll left
 {
     s16 *data = gTasks[taskId].data;
+    // to fix a specific lag in writing to that spot
+    if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+        ChangeStatLabel(SUMMARY_MODE_SKILLS_STATS);
     if (data[0] == 0)
     {
         if (sMonSummaryScreen->bgDisplayOrder == 0)
