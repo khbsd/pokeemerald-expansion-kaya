@@ -1960,6 +1960,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         if (P_SUMMARY_SCREEN_IV_INFO && sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
         {   
             FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_UTILITY, PIXEL_FILL(0));
+            sMonSummaryScreen->mode = SUMMARY_MODE_SKILLS_STATS;
             ShowCancelOrUtilityPrompt(SUMMARY_MODE_SKILLS_STATS);
             ChangeStatLabel(SUMMARY_MODE_SKILLS_STATS);
             PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_UTILITY);
