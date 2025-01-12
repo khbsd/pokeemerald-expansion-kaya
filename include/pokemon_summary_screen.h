@@ -29,6 +29,9 @@ enum PokemonSummaryScreenMode
     SUMMARY_MODE_SELECT_MOVE,
     SUMMARY_MODE_RELEARNER_BATTLE, // returning from move relearner initiated from battle moves page
     SUMMARY_MODE_RELEARNER_CONTEST, // returning from move relearner initiated from contest moves page
+    SUMMARY_MODE_SKILLS_STATS,
+    SUMMARY_MODE_SKILLS_IVS,
+    SUMMARY_MODE_SKILLS_EVS,
 };
 
 enum PokemonSummaryScreenPage
