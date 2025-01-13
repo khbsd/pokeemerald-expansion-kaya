@@ -2422,4 +2422,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Gets angry at half HP."),
         .aiRating = 3,
     },
+
+    [ABILITY_OBSCURATE] =
+    {
+        .name = _("Obscurate"),
+        .description = COMPOUND_STRING("Normal moves become Dark."),
+        .aiRating = 8,
+    },
 };
