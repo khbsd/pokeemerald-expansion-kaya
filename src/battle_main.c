@@ -3781,7 +3781,8 @@ static void DoBattleIntro(void)
                                           | BATTLE_TYPE_FRONTIER
                                           | BATTLE_TYPE_LINK
                                           | BATTLE_TYPE_RECORDED_LINK
-                                          | BATTLE_TYPE_TRAINER_HILL)))
+                                          | BATTLE_TYPE_TRAINER_HILL))
+                 && (B_SHOW_TYPES != SHOW_TYPES_SEEN))
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
                 }
@@ -5681,6 +5682,11 @@ static void HandleEndTurn_FinishBattle(void)
                         gBattleResults.playerMon2Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
                         GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_NICKNAME, gBattleResults.playerMon2Name);
                     }
+                }
+                else if (GetBattlerSide(battler) == B_SIDE_OPPONENT 
+                         && B_SHOW_TYPES == SHOW_TYPES_SEEN)
+                {
+                    HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
                 }
             }
             TryPutPokemonTodayOnAir();
