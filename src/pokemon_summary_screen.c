@@ -1845,7 +1845,6 @@ void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum)
 void ExtractMonSkillIvData(struct Pokemon *mon, struct PokeSummary *sum)
 {
     sum->currentHP = GetMonData(mon, MON_DATA_HP_IV);
-    sum->maxHP = 0;
     sum->atk = GetMonData(mon, MON_DATA_ATK_IV);
     sum->def = GetMonData(mon, MON_DATA_DEF_IV);
     sum->spatk = GetMonData(mon, MON_DATA_SPATK_IV);
@@ -1857,7 +1856,6 @@ void ExtractMonSkillEvData(struct Pokemon *mon, struct PokeSummary *sum)
 {
     if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->handleDeoxys == TRUE)
     sum->currentHP = GetMonData(mon, MON_DATA_HP_EV);
-    sum->maxHP = 0;
     sum->atk = GetMonData(mon, MON_DATA_ATK_EV);
     sum->def = GetMonData(mon, MON_DATA_DEF_EV);
     sum->spatk = GetMonData(mon, MON_DATA_SPATK_EV);
