@@ -68,8 +68,8 @@
 #define P_SUMMARY_SCREEN_RENAME          TRUE               // If TRUE, an option to change Pokémon nicknames replaces the cancel prompt on the summary screen info page.
 #define P_SUMMARY_SCREEN_IV_EV_INFO      P_FLAG_IV_EV_INFO  // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page.
 #define P_SUMMARY_SCREEN_IV_EV_BOX_ONLY  FALSE              // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page, but only in the PC storage box.
-#define P_SUMMARY_SCREEN_IV_EV_TILESET   FALSE              // If TRUE, loads an alternate tileset to allow changing the "STATS" label in the summary screen skills page. Note: if it's still loading the alternate tileset after changing this and recompiling, you may need a `make clean` before compilation.
-#define P_SUMMARY_SCREEN_IV_EV_VALUES    FALSE              // If TRUE, will show the actual IV value instead of the letter grade.      
+#define P_SUMMARY_SCREEN_IV_EV_TILESET   TRUE               // If TRUE, loads an alternate tileset to allow changing the "STATS" label in the summary screen skills page. Note: if it's still loading the alternate tileset after changing this and recompiling, you may need a `make clean` before compilation.
+#define P_SUMMARY_SCREEN_IV_EV_VALUES    TRUE               // If TRUE, will show the actual IV value instead of the letter grade.      
 
 // Learnset helper toggles
 #define P_LEARNSET_HELPER_TEACHABLE TRUE        // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.
@@ -77,9 +77,9 @@
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define P_FLAG_FORCE_SHINY               FLAG_FORCE_SHINY           // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
-#define P_FLAG_FORCE_NO_SHINY            FLAG_FORCE_NO_SHINY        // If this flag is set, all wild and gift Pokémon will be forced into NOT being Shiny.
-#define P_FLAG_FORCE_POKERUS             FLAG_FORCE_POKERUS         // If this flag is set, all wild and gift Pokémon will be forced into having Pokérus.
+#define P_FLAG_FORCE_SHINY               FLAG_FORCE_SHINY               // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
+#define P_FLAG_FORCE_NO_SHINY            FLAG_FORCE_NO_SHINY            // If this flag is set, all wild and gift Pokémon will be forced into NOT being Shiny.
+#define P_FLAG_FORCE_POKERUS             FLAG_FORCE_POKERUS             // If this flag is set, all wild and gift Pokémon will be forced into having Pokérus.
 #define P_FLAG_INFECT_RANDOM_MON_POKERUS FLAG_INFECT_RANDOM_MON_POKERUS // If this flag is set, the special InfectMonWithPokerus will infect a random mon in your party and ignore the var in var0.
 #define P_FLAG_IV_EV_INFO                1                              // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page.
 
