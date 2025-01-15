@@ -1767,7 +1767,7 @@ static u8 IncrementSkillsStatsMode(u8 mode)
         sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_IVS;
         return SUMMARY_SKILLS_MODE_IVS;
     case SUMMARY_SKILLS_MODE_IVS:
-    sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
+        sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
         return SUMMARY_SKILLS_MODE_EVS;
     case SUMMARY_SKILLS_MODE_EVS:
     default:
