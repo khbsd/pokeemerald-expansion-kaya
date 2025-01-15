@@ -453,7 +453,7 @@
 // #define P_FAMILY_WIMPOD               P_GEN_7_POKEMON
 // #define P_FAMILY_SANDYGAST            P_GEN_7_POKEMON
 #define P_FAMILY_PYUKUMUKU               P_GEN_7_POKEMON
-#define P_FAMILY_TYPE_NULL               P_GEN_7_POKEMON
+// #define P_FAMILY_TYPE_NULL            P_GEN_7_POKEMON
 #define P_FAMILY_MINIOR                  P_GEN_7_POKEMON
 #define P_FAMILY_KOMALA                  P_GEN_7_POKEMON
 // #define P_FAMILY_TURTONATOR           P_GEN_7_POKEMON
@@ -682,6 +682,7 @@
 #define P_FAMILY_DEWPIDER                TRUE
 #define P_FAMILY_WIMPOD                  TRUE
 #define P_FAMILY_TOGEDEMARU              TRUE
+#define P_FAMILY_TYPE_NULL               TRUE
 #define P_FAMILY_TURTONATOR              TRUE
 #define P_FAMILY_DHELMISE                TRUE
 #define P_FAMILY_JANGMO_O				 TRUE
