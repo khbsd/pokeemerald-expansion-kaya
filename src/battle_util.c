@@ -10708,27 +10708,27 @@ static inline void TryNoticeIllusionInTypeEffectiveness(u32 move, u32 moveType, 
         RecordAbilityBattle(battlerDef, ABILITY_ILLUSION);
 }
 
-static void UpdateMoveResultFlags(uq4_12_t modifier, u32 battler)
+void UpdateMoveResultFlags(uq4_12_t modifier, u16 *resultFlags)
 {
     if (modifier == UQ_4_12(0.0))
     {
-        gBattleStruct->moveResultFlags[battler] |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        gBattleStruct->moveResultFlags[battler] &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE);
+        *resultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+        *resultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE);
         gBattleStruct->blunderPolicy = FALSE; // Don't activate if missed
     }
     else if (modifier == UQ_4_12(1.0))
     {
-        gBattleStruct->moveResultFlags[battler] &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        *resultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
     else if (modifier > UQ_4_12(1.0))
     {
-        gBattleStruct->moveResultFlags[battler] |= MOVE_RESULT_SUPER_EFFECTIVE;
-        gBattleStruct->moveResultFlags[battler] &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        *resultFlags |= MOVE_RESULT_SUPER_EFFECTIVE;
+        *resultFlags &= ~(MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
     else //if (modifier < UQ_4_12(1.0))
     {
-        gBattleStruct->moveResultFlags[battler] |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        gBattleStruct->moveResultFlags[battler] &= ~(MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        *resultFlags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
+        *resultFlags &= ~(MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
 }
 
@@ -10814,7 +10814,7 @@ uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk,
     }
 
     if (recordAbilities)
-        UpdateMoveResultFlags(modifier, battlerDef);
+        UpdateMoveResultFlags(modifier, &gBattleStruct->moveResultFlags[battlerDef]);
     return modifier;
 }
 
@@ -10835,7 +10835,6 @@ uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 a
             modifier = UQ_4_12(0.0);
     }
 
-    UpdateMoveResultFlags(modifier, speciesDef);
     return modifier;
 }
 
