@@ -81,7 +81,7 @@
 #define P_FLAG_FORCE_NO_SHINY            FLAG_FORCE_NO_SHINY            // If this flag is set, all wild and gift Pokémon will be forced into NOT being Shiny.
 #define P_FLAG_FORCE_POKERUS             FLAG_FORCE_POKERUS             // If this flag is set, all wild and gift Pokémon will be forced into having Pokérus.
 #define P_FLAG_INFECT_RANDOM_MON_POKERUS FLAG_INFECT_RANDOM_MON_POKERUS // If this flag is set, the special InfectMonWithPokerus will infect a random mon in your party and ignore the var in var0.
-#define P_FLAG_IV_EV_INFO                1                              // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page.
+#define P_FLAG_IV_EV_INFO                1                              // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is set to true, this flag does nothing.
 
 // Go here if you want to disable specific families of Pokémon.
 #include "config/species_enabled.h"
