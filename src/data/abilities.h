@@ -2429,4 +2429,10 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Normal moves become Dark."),
         .aiRating = 8,
     },
+    [ABILITY_OBSCURATE] =
+    {
+        .name = _("Capillarate"),
+        .description = COMPOUND_STRING("Normal moves become Fighting."),
+        .aiRating = 8,
+    },
 };

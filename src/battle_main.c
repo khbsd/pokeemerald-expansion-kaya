@@ -5942,6 +5942,9 @@ bool32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
     case ABILITY_OBSCURATE:
         ateType = TYPE_DARK;
         break;
+    case ABILITY_CAPILLARATE:
+        ateType = TYPE_FIGHTING;
+        break;
     default:
         ateType = TYPE_NONE;
         break;
