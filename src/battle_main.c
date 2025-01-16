@@ -4221,75 +4221,27 @@ enum
     STATE_SELECTION_SCRIPT_MAY_RUN
 };
 
-static void CB2_SetUpReshowBattleScreenAfterEvolution(void)
+void SetupAISwitchingData(u32 battler, bool32 isAiRisky)
 {
-    gBattleTerrain = gBattleTerrainBackup;
-    SetMainCallback2(ReshowBattleScreenAfterMenu);
-}
+    s32 opposingBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler)));
+    
+    // AI's data
+    AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, isAiRisky);
+    if (ShouldSwitch(battler))
+        AI_DATA->shouldSwitch |= (1u << battler);
 
-#define tSpeciesToEvolveInto data[0]
-#define tBattlerPosition     data[1]
-
-static void Task_BeginBattleEvolutionScene(u8 taskId)
-{
-    if (!gPaletteFade.active)
+    // AI's predicting data
+    if ((AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_PREDICT_SWITCH))
     {
-        u8 battlerPosition;
-        u16 SpeciesToEvolveInto;
-        FreeAllWindowBuffers();
-        gCB2_AfterEvolution = CB2_SetUpReshowBattleScreenAfterEvolution;
-        gBattleTerrainBackup = gBattleTerrain; // Store the battle terrain to be reloaded later
-
-        battlerPosition = gTasks[taskId].tBattlerPosition;
-        SpeciesToEvolveInto = gTasks[taskId].tSpeciesToEvolveInto;
-        DestroyTask(taskId);
-        EvolutionScene(&gPlayerParty[battlerPosition], SpeciesToEvolveInto, TRUE, battlerPosition);
-    }
-}
-
-static void PlayerTryEvolution(void)
-{
-    u32 LEFT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
-    u32 RIGHT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
-
-    u16 species;
-    u8 taskId;
-    if ((gLeveledUpInBattle & (1u << LEFT_PKMN)) && !gPlayerDoesNotWantToEvolveLeft)
-    {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL);
-        if (species != SPECIES_NONE)
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gBattleMainFunc = WaitForEvolutionThenTryAnother;
-            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
-            gTasks[taskId].tSpeciesToEvolveInto = species;
-            gTasks[taskId].tBattlerPosition = LEFT_PKMN;
-            return;
-        }
-    }
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && (gLeveledUpInBattle & (1u << RIGHT_PKMN)) && !gPlayerDoesNotWantToEvolveRight)
-    {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL);
-        if (species != SPECIES_NONE)
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gBattleMainFunc = WaitForEvolutionThenTryAnother;
-            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
-            gTasks[taskId].tSpeciesToEvolveInto = species;
-            gTasks[taskId].tBattlerPosition = RIGHT_PKMN;
-            return;
-        }
-    }
-
-    gBattleMainFunc = HandleTurnActionSelectionState;
-
-}
-
-static void WaitForEvolutionThenTryAnother(void)
-{
-    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
-    {
-        gBattleMainFunc = PlayerTryEvolution;
+        AI_DATA->aiSwitchPredictionInProgress = TRUE;
+        AI_DATA->battlerDoingPrediction = battler;
+        AI_DATA->mostSuitableMonId[opposingBattler] = GetMostSuitableMonToSwitchInto(opposingBattler, isAiRisky);
+        if (ShouldSwitch(opposingBattler))
+            AI_DATA->shouldSwitch |= (1u << opposingBattler);
+        AI_DATA->aiSwitchPredictionInProgress = FALSE;
+        
+        // Determine whether AI will use predictions this turn
+        AI_DATA->predictingSwitch = RandomPercentage(RNG_AI_PREDICT_SWITCH, 50);
     }
 }
 
@@ -4317,11 +4269,7 @@ static void HandleTurnActionSelectionState(void)
                 // Setup battler data
                 sBattler_AI = battler;
                 BattleAI_SetupAIData(0xF, sBattler_AI);
-
-                // Setup switching data
-                AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, isAiRisky);
-                if (ShouldSwitch(battler))
-                    AI_DATA->shouldSwitch |= (1u << battler);
+                SetupAISwitchingData(battler, isAiRisky);
 
                 // Do scoring
                 gBattleStruct->aiMoveOrAction[battler] = BattleAI_ChooseMoveOrAction();

@@ -331,6 +331,7 @@ void ExtractMonSkillIvData(struct Pokemon *mon, struct PokeSummary *sum);
 void ExtractMonSkillEvData(struct Pokemon *mon, struct PokeSummary *sum);
 static void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId);
 static void PrintTextOnWindowWithFont(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId, u32 fontId);
+static const u8 *GetLetterGrade(u32 stat);
 static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId);
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
@@ -1768,11 +1769,28 @@ static u8 IncrementSkillsStatsMode(u8 mode)
     switch (mode)
     {
     case SUMMARY_SKILLS_MODE_STATS:
-        sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_IVS;
-        return SUMMARY_SKILLS_MODE_IVS;
+        if (P_SUMMARY_SCREEN_EV_ONLY == TRUE)
+        {
+            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
+            return SUMMARY_SKILLS_MODE_EVS;
+        }
+        else 
+        {
+            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_IVS;
+            return SUMMARY_SKILLS_MODE_IVS;
+        }
+
     case SUMMARY_SKILLS_MODE_IVS:
-        sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
-        return SUMMARY_SKILLS_MODE_EVS;
+        if (P_SUMMARY_SCREEN_IV_ONLY == TRUE)
+        {
+            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_STATS;
+            return SUMMARY_SKILLS_MODE_STATS;
+        }
+        else
+        {
+            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
+            return SUMMARY_SKILLS_MODE_EVS;
+        }
     case SUMMARY_SKILLS_MODE_EVS:
     default:
         sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_STATS;
@@ -1809,7 +1827,6 @@ static void ShowMonSkillsInfo(u8 taskId, s16 mode)
     {
         ExtractMonSkillEvData(mon, sum);
         BufferLeftColumnIvEvStats();
-        gTasks[taskId].data[0] = -1; // we increment this in Task_HandleInput
     }
 
     PrintLeftColumnStats();
@@ -1937,6 +1954,13 @@ static void Task_ChangeSummaryMon(u8 taskId)
         sMonSummaryScreen->switchCounter = 0;
         break;
     case 4:
+        if (P_SUMMARY_SCREEN_RENAME && sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
+            ShowUtilityPrompt(SUMMARY_MODE_NORMAL);
+        if (ShouldShowIvEvPrompt() && sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+        {   
+            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_STATS;
+            ChangeStatLabel(SUMMARY_SKILLS_MODE_STATS);
+        }
         if (ExtractMonDataToSummaryStruct(&sMonSummaryScreen->currentMon) == FALSE)
             return;
         else
@@ -1980,13 +2004,6 @@ static void Task_ChangeSummaryMon(u8 taskId)
     case 11:
         PrintPageSpecificText(sMonSummaryScreen->currPageIndex);
         LimitEggSummaryPageDisplay();
-        if (P_SUMMARY_SCREEN_RENAME && sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
-            ShowUtilityPrompt(SUMMARY_MODE_NORMAL);
-        if (ShouldShowIvEvPrompt() && sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
-        {   
-            sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_STATS;
-            ChangeStatLabel(SUMMARY_SKILLS_MODE_STATS);
-        }
         break;
     case 12:
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[2] = 0;
@@ -3753,7 +3770,12 @@ static void BufferStat(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n)
     else
         txtPtr = StringCopy(dst, sTextNatureNeutral);
 
-    ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
+    if (P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE 
+        && sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS)
+        StringAppend(dst, GetLetterGrade(stat));
+    else 
+        ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
+
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
 }
 
@@ -3780,25 +3802,6 @@ static const u8 *GetLetterGrade(u32 stat)
         return gText_GradeF;
 }
 
-static void BufferLetterGrade(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n)
-{
-    static const u8 sTextNatureDown[] = _("{COLOR}{08}");
-    static const u8 sTextNatureUp[] = _("{COLOR}{05}");
-    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
-
-    if (statIndex == 0 || !SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
-        StringCopy(dst, sTextNatureNeutral);
-    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp)
-        StringCopy(dst, sTextNatureUp);
-    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
-        StringCopy(dst, sTextNatureDown);
-    else
-        StringCopy(dst, sTextNatureNeutral);
-
-    StringAppend(dst, GetLetterGrade(stat));
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
-}
-
 static void BufferLeftColumnStats(void)
 {
     u8 *currentHPString = Alloc(20);
@@ -3808,8 +3811,8 @@ static void BufferLeftColumnStats(void)
 
     DynamicPlaceholderTextUtil_Reset();
 
-    BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
-    BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
+    BufferStat(currentHPString, STAT_HP, sMonSummaryScreen->summary.currentHP, 0, 3);
+    BufferStat(maxHPString, STAT_HP, sMonSummaryScreen->summary.maxHP, 1, 3);
     BufferStat(attackString, STAT_ATK, sMonSummaryScreen->summary.atk, 2, 7);
     BufferStat(defenseString, STAT_DEF, sMonSummaryScreen->summary.def, 3, 7);
 
@@ -3829,18 +3832,9 @@ static void BufferLeftColumnIvEvStats(void)
     
     DynamicPlaceholderTextUtil_Reset();
 
-    if (P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE && sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS)
-    {
-        BufferLetterGrade(hpIvEvString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
-        BufferLetterGrade(attackIvEvString, STAT_ATK, sMonSummaryScreen->summary.atk, 1, 7);
-        BufferLetterGrade(defenseIvEvString, STAT_DEF, sMonSummaryScreen->summary.def, 2, 7);
-    }
-    else
-    {
-        BufferStat(hpIvEvString, STAT_HP, sMonSummaryScreen->summary.currentHP, 0, 7);
-        BufferStat(attackIvEvString, STAT_ATK, sMonSummaryScreen->summary.atk, 1, 7);
-        BufferStat(defenseIvEvString, STAT_DEF, sMonSummaryScreen->summary.def, 2, 7);
-    }
+    BufferStat(hpIvEvString, STAT_HP, sMonSummaryScreen->summary.currentHP, 0, 7);
+    BufferStat(attackIvEvString, STAT_ATK, sMonSummaryScreen->summary.atk, 1, 7);
+    BufferStat(defenseIvEvString, STAT_DEF, sMonSummaryScreen->summary.def, 2, 7);
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftIVEVColumnLayout);
 
@@ -3865,19 +3859,10 @@ static void BufferRightColumnStats(void)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    if (P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE && sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS)
-    {
-        BufferLetterGrade(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
-        BufferLetterGrade(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
-        BufferLetterGrade(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
-    }
-    else
-    {
-        BufferStat(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
-        BufferStat(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
-        BufferStat(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
-    }
-    
+    BufferStat(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
+    BufferStat(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
+    BufferStat(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
+
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
 }
 
@@ -4715,9 +4700,19 @@ static inline void ShowUtilityPrompt(s16 mode)
         if (ShouldShowIvEvPrompt())
         {
             if (mode == SUMMARY_SKILLS_MODE_STATS)
-                promptText = gText_SkillPageIvs;
+            {
+                if (P_SUMMARY_SCREEN_EV_ONLY == TRUE)
+                    promptText = gText_SkillPageEvs;
+                else
+                    promptText = gText_SkillPageIvs;
+            }
             else if (mode == SUMMARY_SKILLS_MODE_IVS)
-                promptText = gText_SkillPageEvs;
+            {
+                if (P_SUMMARY_SCREEN_IV_ONLY == TRUE)
+                    promptText = gText_SkillPageStats;
+                else
+                    promptText = gText_SkillPageEvs;
+            }
             else if (mode == SUMMARY_SKILLS_MODE_EVS)
                 promptText = gText_SkillPageStats;
         }
