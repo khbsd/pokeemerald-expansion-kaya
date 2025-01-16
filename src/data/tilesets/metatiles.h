@@ -207,3 +207,12 @@ const u16 gMetatileAttributes_MysteryEventsHouse[] = INCBIN_U16("data/tilesets/s
 
 const u16 gMetatiles_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatiles.bin");
 const u16 gMetatileAttributes_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatile_attributes.bin");
+
+const u16 gMetatiles_UnderwaterPrimary[] = INCBIN_U16("data/tilesets/primary/underwater_primary/metatiles.bin");
+const u16 gMetatileAttributes_UnderwaterPrimary[] = INCBIN_U16("data/tilesets/primary/underwater_primary/metatile_attributes.bin");
+
+const u16 gMetatiles_UnderwaterRuins[] = INCBIN_U16("data/tilesets/secondary/underwater_ruins/metatiles.bin");
+const u16 gMetatileAttributes_UnderwaterRuins[] = INCBIN_U16("data/tilesets/secondary/underwater_ruins/metatile_attributes.bin");
+
+const u16 gMetatiles_UnderwaterReef[] = INCBIN_U16("data/tilesets/secondary/underwater_reef/metatiles.bin");
+const u16 gMetatileAttributes_UnderwaterReef[] = INCBIN_U16("data/tilesets/secondary/underwater_reef/metatile_attributes.bin");

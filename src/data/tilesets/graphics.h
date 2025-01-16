@@ -1634,3 +1634,69 @@ const u16 gTilesetPalettes_UnionRoom[][16] =
 };
 
 const u32 gTilesetTiles_UnionRoom[] = INCBIN_U32("data/tilesets/secondary/union_room/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_UnderwaterPrimary[][16] =
+{
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/primary/underwater_primary/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_UnderwaterPrimary[] = INCBIN_U32("data/tilesets/primary/underwater_primary/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_UnderwaterRuins[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_ruins/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_UnderwaterRuins[] = INCBIN_U32("data/tilesets/secondary/underwater_ruins/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_UnderwaterReef[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/underwater_reef/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_UnderwaterReef[] = INCBIN_U32("data/tilesets/secondary/underwater_reef/tiles.4bpp.lz");
