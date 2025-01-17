@@ -70,6 +70,16 @@
 #define P_SUMMARY_SCREEN_IV_EV_BOX_ONLY  FALSE              // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page, but only in the PC storage box.
 #define P_SUMMARY_SCREEN_IV_EV_TILESET   TRUE              // If TRUE, loads an alternate tileset to allow changing the "STATS" label in the summary screen skills page. Note: if it's still loading the alternate tileset after changing this and recompiling, you may need a `make clean` before compilation.
 #define P_SUMMARY_SCREEN_IV_EV_VALUES    TRUE              // If TRUE, will show the actual IV value instead of the letter grade.
+/* 
+LETTER GRADE GUIDE:
+    F = 0
+    D = 1 - 15
+    C = 16 - 25
+    B = 26 - 29
+    A = 30
+    S = 31
+Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
+*/
 #define P_SUMMARY_SCREEN_IV_ONLY         FALSE              // If TRUE, will only show IV info in the summary screen.
 #define P_SUMMARY_SCREEN_EV_ONLY         FALSE              // If TRUE, will only show EV info in the summary screen.
 
@@ -83,7 +93,7 @@
 #define P_FLAG_FORCE_NO_SHINY            FLAG_FORCE_NO_SHINY            // If this flag is set, all wild and gift Pokémon will be forced into NOT being Shiny.
 #define P_FLAG_FORCE_POKERUS             FLAG_FORCE_POKERUS             // If this flag is set, all wild and gift Pokémon will be forced into having Pokérus.
 #define P_FLAG_INFECT_RANDOM_MON_POKERUS FLAG_INFECT_RANDOM_MON_POKERUS // If this flag is set, the special InfectMonWithPokerus will infect a random mon in your party and ignore the var in var0.
-#define P_FLAG_IV_EV_INFO                1                              // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is set to true, this flag does nothing.
+#define P_FLAG_IV_EV_INFO                0                              // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is set to true, this flag does nothing.
 
 // Go here if you want to disable specific families of Pokémon.
 #include "config/species_enabled.h"
