@@ -506,8 +506,8 @@
       "name": "Underwater_Route126_Layout",
       "width": 80,
       "height": 80,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Underwater",
+      "primary_tileset": "gTileset_UnderwaterPrimary",
+      "secondary_tileset": "gTileset_UnderwaterReef",
       "border_filepath": "data/layouts/Underwater_Route126/border.bin",
       "blockdata_filepath": "data/layouts/Underwater_Route126/map.bin"
     },
