@@ -42,6 +42,15 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
+struct __attribute__((packed)) TimeBlendSettings
+{
+    u16 weight:9;
+    u16 finalTimeOfDay:3;
+    u16 initialTimeOfDay:3;
+    u16 unused:1;
+    u16 altWeight;
+};
+
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
@@ -55,6 +64,10 @@ extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 extern bool8 gExitStairsMovementDisabled;
 extern bool8 gSkipShowMonAnim;
+extern u8 gTimeOfDay;
+extern u16 gTimeUpdateCounter;
+
+extern struct TimeBlendSettings currentTimeBlend;
 
 extern const struct UCoords32 gDirectionToVectors[];
 
@@ -141,6 +154,10 @@ void CleanupOverworldWindowsAndTilemaps(void);
 bool32 IsOverworldLinkActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
+void UpdateTimeOfDay(void);
+bool8 MapHasNaturalLight(u8 mapType);
+void UpdateAltBgPalettes(u16 palettes);
+void UpdatePalettesWithTime(u32);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
 void SetUnusedCallback(void *func);
