@@ -4663,13 +4663,12 @@ static inline bool32 ShouldShowIvEvPrompt(void)
 {
     if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY == TRUE)
     {
-        return ((P_SUMMARY_SCREEN_IV_EV_INFO == TRUE || FlagGet(P_FLAG_IV_EV_INFO))
+        return (P_SUMMARY_SCREEN_IV_EV_INFO == TRUE || FlagGet(P_FLAG_IV_EV_INFO))
             && (sMonSummaryScreen->mode == SUMMARY_MODE_BOX
-                || sMonSummaryScreen->mode == SUMMARY_MODE_BOX_CURSOR));
+                || sMonSummaryScreen->mode == SUMMARY_MODE_BOX_CURSOR);
     }
-    else if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY == FALSE) {
+    else if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY == FALSE)
         return (P_SUMMARY_SCREEN_IV_EV_INFO == TRUE || FlagGet(P_FLAG_IV_EV_INFO));
-    }
     else
         return FALSE;
 }
