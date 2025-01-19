@@ -19430,6 +19430,74 @@
           }
         },
         {
+          "map": "MAP_UNDERWATER_ROUTE124",
+          "base_label": "gUnderwater_Route124_1",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_CHINCHOU"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_LUVDISC"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_TIRTOUGA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_CHEWTLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_UNDERWATER_ROUTE124",
+          "base_label": "gUnderwater_Route124_2",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_CHINCHOU"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_LILEEP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_ANORITH"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
           "base_label": "gShoalCave_LowTideIceRoom",
           "land_mons": {

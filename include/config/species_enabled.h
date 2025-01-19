@@ -501,7 +501,7 @@
 #define P_FAMILY_CRAMORANT               P_GEN_8_POKEMON
 // #define P_FAMILY_ARROKUDA             P_GEN_8_POKEMON
 #define P_FAMILY_TOXEL                   P_GEN_8_POKEMON
-#define P_FAMILY_SIZZLIPEDE              P_GEN_8_POKEMON
+// #define P_FAMILY_SIZZLIPEDE           P_GEN_8_POKEMON
 // #define P_FAMILY_CLOBBOPUS            P_GEN_8_POKEMON
 #define P_FAMILY_SINISTEA                P_GEN_8_POKEMON
 #define P_FAMILY_HATENNA                 P_GEN_8_POKEMON
@@ -699,6 +699,7 @@
 #define P_FAMILY_ROLYCOLY                TRUE
 #define P_FAMILY_APPLIN                  TRUE
 #define P_FAMILY_ARROKUDA                TRUE
+#define P_FAMILY_SIZZLIPEDE              TRUE
 #define P_FAMILY_CLOBBOPUS               TRUE
 #define P_FAMILY_SNOM                    TRUE
 #define P_FAMILY_DREEPY                  TRUE
