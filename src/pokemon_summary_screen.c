@@ -323,7 +323,6 @@ static void BufferLeftColumnIvEvStats(void);
 static void CB2_ReturnToSummaryScreenFromNamingScreen(void);
 static void CB2_PssChangePokemonNickname(void);
 static void ShowUtilityPrompt(s16 mode);
-static void ClearUtilityPrompt(void);
 static void ShowMonSkillsInfo(u8 taskId, s16 mode);
 static void WriteToStatsTilemapBuffer(u32 length, u32 block, u32 statsCoordX, u32 statsCoordY);
 void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum);
@@ -1769,7 +1768,7 @@ static u8 IncrementSkillsStatsMode(u8 mode)
     switch (mode)
     {
     case SUMMARY_SKILLS_MODE_STATS:
-        if (P_SUMMARY_SCREEN_EV_ONLY == TRUE)
+        if (P_SUMMARY_SCREEN_EV_ONLY)
         {
             sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_EVS;
             return SUMMARY_SKILLS_MODE_EVS;
@@ -1781,7 +1780,7 @@ static u8 IncrementSkillsStatsMode(u8 mode)
         }
 
     case SUMMARY_SKILLS_MODE_IVS:
-        if (P_SUMMARY_SCREEN_IV_ONLY == TRUE)
+        if (P_SUMMARY_SCREEN_IV_ONLY)
         {
             sMonSummaryScreen->skillsPageMode = SUMMARY_SKILLS_MODE_STATS;
             return SUMMARY_SKILLS_MODE_STATS;
@@ -1962,7 +1961,9 @@ static void Task_ChangeSummaryMon(u8 taskId)
             ChangeStatLabel(SUMMARY_SKILLS_MODE_STATS);
         }
         if (ExtractMonDataToSummaryStruct(&sMonSummaryScreen->currentMon) == FALSE)
+        {
             return;
+        }
         else
         {
             if (P_SUMMARY_SCREEN_MOVE_RELEARNER
@@ -2121,8 +2122,9 @@ static void ChangePage(u8 taskId, s8 delta)
         BufferRightColumnStats();
     }
     else
+    {
         ShowUtilityPrompt(SUMMARY_MODE_NORMAL);
-
+    }
 }
 
 static void PssScrollRight(u8 taskId) // Scroll right
@@ -2246,7 +2248,9 @@ static void SwitchToMoveSelection(u8 taskId)
         ShowUtilityPrompt(SUMMARY_MODE_SELECT_MOVE);
     }
     else
+    {
         ShowUtilityPrompt(SUMMARY_MODE_NORMAL);
+    }
 
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0], 3, FALSE);
     TilemapFiveMovesDisplay(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, FALSE);
@@ -3770,7 +3774,7 @@ static void BufferStat(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n)
     else
         txtPtr = StringCopy(dst, sTextNatureNeutral);
 
-    if (P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE 
+    if (!P_SUMMARY_SCREEN_IV_EV_VALUES 
         && sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS)
         StringAppend(dst, GetLetterGrade(stat));
     else 
@@ -3847,7 +3851,7 @@ static void PrintLeftColumnStats(void)
 {
     int x;
     
-    if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS && P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE)
+    if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS && !P_SUMMARY_SCREEN_IV_EV_VALUES)
         x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 46);
     else
         x = 4;
@@ -3870,7 +3874,7 @@ static void PrintRightColumnStats(void)
 {
     int x;
     
-    if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS && P_SUMMARY_SCREEN_IV_EV_VALUES == FALSE)
+    if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_IVS && !P_SUMMARY_SCREEN_IV_EV_VALUES)
         x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 20);
     else
         x = 2;
@@ -4661,24 +4665,17 @@ static inline bool32 ShouldShowRename(void)
 
 static inline bool32 ShouldShowIvEvPrompt(void)
 {
-    if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY == TRUE)
+    if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY)
     {
-        return (P_SUMMARY_SCREEN_IV_EV_INFO == TRUE || FlagGet(P_FLAG_IV_EV_INFO))
-            && (sMonSummaryScreen->mode == SUMMARY_MODE_BOX
-                || sMonSummaryScreen->mode == SUMMARY_MODE_BOX_CURSOR);
+        return (P_SUMMARY_SCREEN_IV_EV_INFO || FlagGet(P_FLAG_SUMMARY_SCREEN_IV_EV_INFO))
+            && (sMonSummaryScreen->mode == SUMMARY_MODE_BOX|| sMonSummaryScreen->mode == SUMMARY_MODE_BOX_CURSOR);
     }
-    else if (P_SUMMARY_SCREEN_IV_EV_BOX_ONLY == FALSE)
-        return (P_SUMMARY_SCREEN_IV_EV_INFO == TRUE || FlagGet(P_FLAG_IV_EV_INFO));
-    else
-        return FALSE;
+    else if (!P_SUMMARY_SCREEN_IV_EV_BOX_ONLY)
+    {
+        return (P_SUMMARY_SCREEN_IV_EV_INFO || FlagGet(P_FLAG_SUMMARY_SCREEN_IV_EV_INFO));
+    }
+    return FALSE;
 }
-
-static inline void ClearUtilityPrompt(void)
-{
-    ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_UTILITY);
-    FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_UTILITY, PIXEL_FILL(0));
-}
-
 
 static inline void ShowUtilityPrompt(s16 mode)
 {
@@ -4700,20 +4697,22 @@ static inline void ShowUtilityPrompt(s16 mode)
         {
             if (mode == SUMMARY_SKILLS_MODE_STATS)
             {
-                if (P_SUMMARY_SCREEN_EV_ONLY == TRUE)
+                if (P_SUMMARY_SCREEN_EV_ONLY)
                     promptText = gText_SkillPageEvs;
                 else
                     promptText = gText_SkillPageIvs;
             }
             else if (mode == SUMMARY_SKILLS_MODE_IVS)
             {
-                if (P_SUMMARY_SCREEN_IV_ONLY == TRUE)
+                if (P_SUMMARY_SCREEN_IV_ONLY)
                     promptText = gText_SkillPageStats;
                 else
                     promptText = gText_SkillPageEvs;
             }
             else if (mode == SUMMARY_SKILLS_MODE_EVS)
+            {
                 promptText = gText_SkillPageStats;
+            }
         }
     }
     else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
@@ -4727,7 +4726,8 @@ static inline void ShowUtilityPrompt(s16 mode)
 
     if (promptText == NULL)
     {
-        ClearUtilityPrompt();
+        ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_UTILITY);
+        FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_UTILITY, PIXEL_FILL(0));
         return;
     }
 

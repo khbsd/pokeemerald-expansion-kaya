@@ -2,6 +2,7 @@
 #define GUARD_POKEMON_SUMMARY_SCREEN_H
 
 #include "main.h"
+#include "config/summary_screen.h"
 
 extern u8 gLastViewedMonIndex;
 
