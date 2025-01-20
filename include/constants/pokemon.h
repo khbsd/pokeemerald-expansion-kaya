@@ -168,7 +168,7 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_MOVE_END  0xFFFF
 
-#define MAX_LEVEL_UP_MOVES       20
+#define MAX_LEVEL_UP_MOVES       35
 #define MAX_RELEARNER_MOVES      max(MAX_LEVEL_UP_MOVES, 35)
 
 #define MON_MALE       0x00
