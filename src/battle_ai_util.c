@@ -2417,6 +2417,18 @@ bool32 IsSwitchOutEffect(u32 effect)
     }
 }
 
+bool32 IsChaseEffect(u32 effect)
+{
+    // Effects that hit switching out mons like Pursuit
+    switch (effect)
+    {
+    case EFFECT_PURSUIT:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 static inline bool32 IsMoveSleepClauseTrigger(u32 move)
 {
     u32 i, effect = GetMoveEffect(move);
