@@ -6405,14 +6405,6 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Diancie)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Diancie,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Diancie,
-            gShinyOverworldPalette_Diancie
-        )
     #endif // P_MEGA_STONES_AS_EVO_STONES
         .isMythical = TRUE,
         .isMegaEvolution = TRUE,

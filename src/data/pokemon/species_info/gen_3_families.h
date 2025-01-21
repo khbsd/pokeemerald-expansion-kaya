@@ -271,14 +271,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 11, SHADOW_SIZE_L)
         FOOTPRINT(Sceptile)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Sceptile,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Sceptile,
-            gShinyOverworldPalette_Sceptile
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSceptileLevelUpLearnset,
@@ -597,20 +589,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Blaziken)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Blaziken,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Blaziken,
-            gShinyOverworldPalette_Blaziken
-        )
-        OVERWORLD_FEMALE(
-            sPicTable_BlazikenF,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlazikenLevelUpLearnset,
@@ -895,14 +873,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(6, 8, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Swampert)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Swampert,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Swampert,
-            gShinyOverworldPalette_Swampert
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSwampertLevelUpLearnset,
@@ -2909,14 +2879,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 14, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Gardevoir)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Gardevoir,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Gardevoir,
-            gShinyOverworldPalette_Gardevoir
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGardevoirLevelUpLearnset,
@@ -3058,14 +3020,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-2, 13, SHADOW_SIZE_L)
         FOOTPRINT(Gallade)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Gallade,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Gallade,
-            gShinyOverworldPalette_Gallade
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGalladeLevelUpLearnset,
@@ -4633,14 +4587,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 7, SHADOW_SIZE_S)
         FOOTPRINT(Sableye)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Sableye,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Sableye,
-            gShinyOverworldPalette_Sableye
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSableyeLevelUpLearnset,
@@ -4789,14 +4735,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(0, 9, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Mawile)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Mawile,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Mawile,
-            gShinyOverworldPalette_Mawile
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMawileLevelUpLearnset,
@@ -5080,14 +5018,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Aggron)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Aggron,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Aggron,
-            gShinyOverworldPalette_Aggron
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAggronLevelUpLearnset,
@@ -5319,20 +5249,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-2, 13, SHADOW_SIZE_S)
         FOOTPRINT(Medicham)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Medicham,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Medicham,
-            gShinyOverworldPalette_Medicham
-        )
-        OVERWORLD_FEMALE(
-            sPicTable_MedichamF,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMedichamLevelUpLearnset,
@@ -5537,14 +5453,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 10, SHADOW_SIZE_L)
         FOOTPRINT(Manectric)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Manectric,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Manectric,
-            gShinyOverworldPalette_Manectric
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sManectricLevelUpLearnset,
@@ -6490,14 +6398,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-2, 14, SHADOW_SIZE_M)
         FOOTPRINT(Sharpedo)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Sharpedo,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            gOverworldPalette_Sharpedo,
-            gShinyOverworldPalette_Sharpedo
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSharpedoLevelUpLearnset,
@@ -6882,20 +6782,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 6, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Camerupt)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Camerupt,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Camerupt,
-            gShinyOverworldPalette_Camerupt
-        )
-        OVERWORLD_FEMALE(
-            sPicTable_CameruptF,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sCameruptLevelUpLearnset,
@@ -7800,14 +7686,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-2, 17, SHADOW_SIZE_L)
         FOOTPRINT(Altaria)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Altaria,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            gOverworldPalette_Altaria,
-            gShinyOverworldPalette_Altaria
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAltariaLevelUpLearnset,
@@ -9647,14 +9525,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(0, 16, SHADOW_SIZE_M)
         FOOTPRINT(Banette)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Banette,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Banette,
-            gShinyOverworldPalette_Banette
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBanetteLevelUpLearnset,
@@ -10277,14 +10147,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 7, SHADOW_SIZE_L)
         FOOTPRINT(Absol)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Absol,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Absol,
-            gShinyOverworldPalette_Absol
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAbsolLevelUpLearnset,
@@ -10503,14 +10365,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 18, SHADOW_SIZE_L)
         FOOTPRINT(Glalie)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Glalie,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Glalie,
-            gShinyOverworldPalette_Glalie
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGlalieLevelUpLearnset,
@@ -11470,14 +11324,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 8, SHADOW_SIZE_L)
         FOOTPRINT(Salamence)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Salamence,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Salamence,
-            gShinyOverworldPalette_Salamence
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSalamenceLevelUpLearnset,
@@ -11763,14 +11609,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(1, 15, SHADOW_SIZE_L)
         FOOTPRINT(Metagross)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Metagross,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_Metagross,
-            gShinyOverworldPalette_Metagross
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMetagrossLevelUpLearnset,
@@ -12081,15 +11919,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 15, SHADOW_SIZE_M)
         FOOTPRINT(Latias)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            gObjectEventPic_Latias,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_Latias,
-            gShinyOverworldPalette_Latias
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
@@ -12154,14 +11983,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-1, 19, SHADOW_SIZE_L)
         FOOTPRINT(Latias)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Latias,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            gOverworldPalette_Latias,
-            gShinyOverworldPalette_Latias
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
@@ -12309,14 +12130,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(-1, 19, SHADOW_SIZE_L)
         FOOTPRINT(Latios)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Latios,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            gOverworldPalette_Latios,
-            gShinyOverworldPalette_Latios
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
@@ -12752,14 +12565,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(0, 15, SHADOW_SIZE_L)
         FOOTPRINT(Rayquaza)
     #if P_MEGA_STONES_AS_EVO_STONES
-        OVERWORLD(
-            sPicTable_Rayquaza,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            gOverworldPalette_Rayquaza,
-            gShinyOverworldPalette_Rayquaza
-        )
     #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
