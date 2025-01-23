@@ -156,6 +156,7 @@ struct DamageCalculationData
     u32 updateFlags:1;
     u32 padding:2;
 };
+STATIC_ASSERT(sizeof(struct DamageCalculationData) <= 4, StructExceedsFourBytes);
 
 enum SleepClauseBlock
 {

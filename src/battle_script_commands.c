@@ -56,6 +56,7 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/item_effects.h"
+#include "constants/map_types.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
@@ -296,11 +297,6 @@ static const u16 sTrappingMoves[NUM_TRAPPING_MOVES] =
     MOVE_INFESTATION,
     MOVE_SNAP_TRAP,
     MOVE_THUNDER_CAGE
-};
-
-static const u16 sBadgeFlags[8] = {
-    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
-    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
 };
 
 static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 };
@@ -3795,10 +3791,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattlescriptCurrInstr = BattleScript_AllStatsUp;
                 }
                 break;
-            case MOVE_EFFECT_RAPID_SPIN:
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_RapidSpinAway;
-                break;
             case MOVE_EFFECT_ATK_DEF_DOWN: // SuperPower
                 if (!NoAliveMonsForEitherParty())
                 {
@@ -6138,6 +6130,17 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         }
+        case MOVEEND_RAPID_SPIN:
+            if (gMovesInfo[gCurrentMove].effect == EFFECT_RAPID_SPIN
+             && !(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
+             && IsBattlerTurnDamaged(gBattlerTarget))
+            {
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_RapidSpinAway;
+                effect = TRUE;
+            }
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_ITEM_EFFECTS_ATTACKER:
             if (ItemBattleEffects(ITEMEFFECT_MOVE_END, gBattlerAttacker, FALSE))
                 effect = TRUE;
@@ -8318,9 +8321,9 @@ static void Cmd_getmoneyreward(void)
                     sPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
             }
         }
-        for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
+        for (count = 0, i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
         {
-            if (FlagGet(sBadgeFlags[i]) == TRUE)
+            if (FlagGet(gBadgeFlags[i]) == TRUE)
                 ++count;
         }
         money = sWhiteOutBadgeMoney[count] * sPartyLevel;
@@ -14416,7 +14419,6 @@ static void Cmd_setcharge(void)
         gDisableStructs[battler].chargeTimer = 2;
     else
         gDisableStructs[battler].chargeTimer = 0;
-    gBattlescriptCurrInstr++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

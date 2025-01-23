@@ -364,94 +364,91 @@ enum BattleWeather
 #define MOVE_EFFECT_PREVENT_ESCAPE      33
 #define MOVE_EFFECT_NIGHTMARE           34
 #define MOVE_EFFECT_ALL_STATS_UP        35
-#define MOVE_EFFECT_RAPID_SPIN          36
-#define MOVE_EFFECT_REMOVE_STATUS       37
-#define MOVE_EFFECT_ATK_DEF_DOWN        38
-#define MOVE_EFFECT_ATK_PLUS_2          39
-#define MOVE_EFFECT_DEF_PLUS_2          40
-#define MOVE_EFFECT_SPD_PLUS_2          41
-#define MOVE_EFFECT_SP_ATK_PLUS_2       42
-#define MOVE_EFFECT_SP_DEF_PLUS_2       43
-#define MOVE_EFFECT_ACC_PLUS_2          44
-#define MOVE_EFFECT_EVS_PLUS_2          45
-#define MOVE_EFFECT_ATK_MINUS_2         46
-#define MOVE_EFFECT_DEF_MINUS_2         47
-#define MOVE_EFFECT_SPD_MINUS_2         48
-#define MOVE_EFFECT_SP_ATK_MINUS_2      49
-#define MOVE_EFFECT_SP_DEF_MINUS_2      50
-#define MOVE_EFFECT_ACC_MINUS_2         51
-#define MOVE_EFFECT_EVS_MINUS_2         52
-#define MOVE_EFFECT_SCALE_SHOT          53
-#define MOVE_EFFECT_THRASH              54
-#define MOVE_EFFECT_KNOCK_OFF           55
-#define MOVE_EFFECT_DEF_SPDEF_DOWN      56
-#define MOVE_EFFECT_CLEAR_SMOG          57
-#define MOVE_EFFECT_SMACK_DOWN          58
-#define MOVE_EFFECT_FLAME_BURST         59
-#define MOVE_EFFECT_FEINT               60
-#define MOVE_EFFECT_SPECTRAL_THIEF      61
-#define MOVE_EFFECT_V_CREATE            62
-#define MOVE_EFFECT_HAPPY_HOUR          63
-#define MOVE_EFFECT_CORE_ENFORCER       64
-#define MOVE_EFFECT_THROAT_CHOP         65
-#define MOVE_EFFECT_INCINERATE          66
-#define MOVE_EFFECT_BUG_BITE            67
-#define MOVE_EFFECT_RECOIL_HP_25        68
-#define MOVE_EFFECT_TRAP_BOTH           69
-#define MOVE_EFFECT_ROUND               70
-#define MOVE_EFFECT_STOCKPILE_WORE_OFF  71
-#define MOVE_EFFECT_DIRE_CLAW           72
-#define MOVE_EFFECT_STEALTH_ROCK        73
-#define MOVE_EFFECT_SPIKES              74
-#define MOVE_EFFECT_SYRUP_BOMB          75
-#define MOVE_EFFECT_FLORAL_HEALING      76
-#define MOVE_EFFECT_SECRET_POWER        77
-#define MOVE_EFFECT_PSYCHIC_NOISE       78
-#define MOVE_EFFECT_TERA_BLAST          79
-#define MOVE_EFFECT_ORDER_UP            80
-#define MOVE_EFFECT_ION_DELUGE          81
-#define MOVE_EFFECT_AROMATHERAPY        82 // No functionality yet
-#define MOVE_EFFECT_HAZE                83
-#define MOVE_EFFECT_LEECH_SEED          84
-#define MOVE_EFFECT_REFLECT             85
-#define MOVE_EFFECT_LIGHT_SCREEN        86
-#define MOVE_EFFECT_SALT_CURE           87
-#define MOVE_EFFECT_EERIE_SPELL         88
+#define MOVE_EFFECT_REMOVE_STATUS       36
+#define MOVE_EFFECT_ATK_DEF_DOWN        37
+#define MOVE_EFFECT_ATK_PLUS_2          38
+#define MOVE_EFFECT_DEF_PLUS_2          39
+#define MOVE_EFFECT_SPD_PLUS_2          40
+#define MOVE_EFFECT_SP_ATK_PLUS_2       41
+#define MOVE_EFFECT_SP_DEF_PLUS_2       42
+#define MOVE_EFFECT_ACC_PLUS_2          43
+#define MOVE_EFFECT_EVS_PLUS_2          44
+#define MOVE_EFFECT_ATK_MINUS_2         45
+#define MOVE_EFFECT_DEF_MINUS_2         46
+#define MOVE_EFFECT_SPD_MINUS_2         47
+#define MOVE_EFFECT_SP_ATK_MINUS_2      48
+#define MOVE_EFFECT_SP_DEF_MINUS_2      49
+#define MOVE_EFFECT_ACC_MINUS_2         50
+#define MOVE_EFFECT_EVS_MINUS_2         51
+#define MOVE_EFFECT_SCALE_SHOT          52
+#define MOVE_EFFECT_THRASH              53
+#define MOVE_EFFECT_KNOCK_OFF           54
+#define MOVE_EFFECT_DEF_SPDEF_DOWN      55
+#define MOVE_EFFECT_CLEAR_SMOG          56
+#define MOVE_EFFECT_SMACK_DOWN          57
+#define MOVE_EFFECT_FLAME_BURST         58
+#define MOVE_EFFECT_FEINT               59
+#define MOVE_EFFECT_SPECTRAL_THIEF      60
+#define MOVE_EFFECT_V_CREATE            61
+#define MOVE_EFFECT_HAPPY_HOUR          62
+#define MOVE_EFFECT_CORE_ENFORCER       63
+#define MOVE_EFFECT_THROAT_CHOP         64
+#define MOVE_EFFECT_INCINERATE          65
+#define MOVE_EFFECT_BUG_BITE            66
+#define MOVE_EFFECT_RECOIL_HP_25        67
+#define MOVE_EFFECT_TRAP_BOTH           68
+#define MOVE_EFFECT_ROUND               69
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  70
+#define MOVE_EFFECT_DIRE_CLAW           71
+#define MOVE_EFFECT_STEALTH_ROCK        72
+#define MOVE_EFFECT_SPIKES              73
+#define MOVE_EFFECT_SYRUP_BOMB          74
+#define MOVE_EFFECT_FLORAL_HEALING      75
+#define MOVE_EFFECT_SECRET_POWER        76
+#define MOVE_EFFECT_PSYCHIC_NOISE       77
+#define MOVE_EFFECT_TERA_BLAST          78
+#define MOVE_EFFECT_ORDER_UP            79
+#define MOVE_EFFECT_ION_DELUGE          80
+#define MOVE_EFFECT_AROMATHERAPY        81 // No functionality yet
+#define MOVE_EFFECT_HAZE                82
+#define MOVE_EFFECT_LEECH_SEED          83
+#define MOVE_EFFECT_REFLECT             84
+#define MOVE_EFFECT_LIGHT_SCREEN        85
+#define MOVE_EFFECT_SALT_CURE           86
+#define MOVE_EFFECT_EERIE_SPELL         87
 
-#define NUM_MOVE_EFFECTS                89
+#define NUM_MOVE_EFFECTS                88
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
 #define MOVE_EFFECT_CONTINUE            0x8000
 
 // Battle terrain defines for gBattleTerrain.
-enum BattleTerrain
-{
-    BATTLE_TERRAIN_GRASS,
-    BATTLE_TERRAIN_LONG_GRASS,
-    BATTLE_TERRAIN_SAND,
-    BATTLE_TERRAIN_UNDERWATER,
-    BATTLE_TERRAIN_WATER,
-    BATTLE_TERRAIN_POND,
-    BATTLE_TERRAIN_MOUNTAIN,
-    BATTLE_TERRAIN_CAVE,
-    BATTLE_TERRAIN_BUILDING,
-    BATTLE_TERRAIN_PLAIN,
-    // New battle terrains are used for Secret Power but not fully implemented.
-    BATTLE_TERRAIN_SOARING,
-    BATTLE_TERRAIN_SKY_PILLAR,
-    BATTLE_TERRAIN_BURIAL_GROUND,
-    BATTLE_TERRAIN_PUDDLE,
-    BATTLE_TERRAIN_MARSH,
-    BATTLE_TERRAIN_SWAMP,
-    BATTLE_TERRAIN_SNOW,
-    BATTLE_TERRAIN_ICE,
-    BATTLE_TERRAIN_VOLCANO,
-    BATTLE_TERRAIN_DISTORTION_WORLD,
-    BATTLE_TERRAIN_SPACE,
-    BATTLE_TERRAIN_ULTRA_SPACE,
-    BATTLE_TERRAIN_COUNT,
-};
+#define BATTLE_TERRAIN_GRASS            0
+#define BATTLE_TERRAIN_LONG_GRASS       1
+#define BATTLE_TERRAIN_SAND             2
+#define BATTLE_TERRAIN_UNDERWATER       3
+#define BATTLE_TERRAIN_WATER            4
+#define BATTLE_TERRAIN_POND             5
+#define BATTLE_TERRAIN_MOUNTAIN         6
+#define BATTLE_TERRAIN_CAVE             7
+#define BATTLE_TERRAIN_BUILDING         8
+#define BATTLE_TERRAIN_PLAIN            9
+// New battle terrains are used for Secret Power but not fully implemented.
+#define BATTLE_TERRAIN_SOARING          10
+#define BATTLE_TERRAIN_SKY_PILLAR       11
+#define BATTLE_TERRAIN_BURIAL_GROUND    12
+#define BATTLE_TERRAIN_PUDDLE           13
+#define BATTLE_TERRAIN_MARSH            14
+#define BATTLE_TERRAIN_SWAMP            15
+#define BATTLE_TERRAIN_SNOW             16
+#define BATTLE_TERRAIN_ICE              17
+#define BATTLE_TERRAIN_VOLCANO          18
+#define BATTLE_TERRAIN_DISTORTION_WORLD 19
+#define BATTLE_TERRAIN_SPACE            20
+#define BATTLE_TERRAIN_ULTRA_SPACE      21
+
+#define BATTLE_TERRAIN_COUNT            22
 
 #define B_WAIT_TIME_LONG        (B_WAIT_TIME_MULTIPLIER * 4)
 #define B_WAIT_TIME_MED         (B_WAIT_TIME_MULTIPLIER * 3)
