@@ -1823,7 +1823,7 @@
 	.4byte \text
 	.endm
 
-	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out
+	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to an allocated buffer on the fade out
 	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
 	@ If nowait set, does not wait for the fade to complete
 	.macro fadescreenswapbuffers mode:req, nowait=0
