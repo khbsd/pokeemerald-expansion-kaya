@@ -562,4 +562,6 @@ gSpecials::
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
 	def_special UseBlankMessageToCancelPokemonPic
+	def_special EnterCode
+	def_special GetCodeFeedback
 	def_special CheckIfPlayerIsKaya
