@@ -13833,6 +13833,7 @@ static const struct LevelUpMove sTynamoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_THUNDER_WAVE),
     LEVEL_UP_MOVE( 1, MOVE_SPARK),
     LEVEL_UP_MOVE( 1, MOVE_CHARGE_BEAM),
+    LEVEL_UP_MOVE( 1, MOVE_MAGNET_RISE),
     LEVEL_UP_END
 };
 

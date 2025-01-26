@@ -3131,11 +3131,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
     [SPECIES_DRIFLOON] =
     {
         .baseHP        = 90,
-        .baseAttack    = 50,
-        .baseDefense   = 34,
+        .baseAttack    = 60,
+        .baseDefense   = 44,
         .baseSpeed     = 70,
         .baseSpAttack  = 60,
-        .baseSpDefense = 44,
+        .baseSpDefense = 54,
         .types = MON_TYPES(TYPE_GHOST, TYPE_FLYING),
         .catchRate = 125,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 70 : 127,
@@ -3195,17 +3195,17 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .levelUpLearnset = sDrifloonLevelUpLearnset,
         .teachableLearnset = sDrifloonTeachableLearnset,
         .eggMoveLearnset = sDrifloonEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_DRIFBLIM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DRIFBLIM}),
     },
 
     [SPECIES_DRIFBLIM] =
     {
         .baseHP        = 150,
         .baseAttack    = 80,
-        .baseDefense   = 44,
+        .baseDefense   = 74,
         .baseSpeed     = 80,
         .baseSpAttack  = 90,
-        .baseSpDefense = 54,
+        .baseSpDefense = 74,
         .types = MON_TYPES(TYPE_GHOST, TYPE_FLYING),
         .catchRate = 60,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 174 : 204,
