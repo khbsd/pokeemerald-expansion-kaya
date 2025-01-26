@@ -9,6 +9,7 @@ struct HealLocation
     u16 y;
 };
 
+
 u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum);
 u32 GetHealLocationIndexByWarpData(struct WarpData *warp);
 const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum);

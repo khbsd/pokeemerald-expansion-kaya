@@ -3,6 +3,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "event_data.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
@@ -26,6 +27,7 @@
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
@@ -704,14 +706,19 @@ u32 FieldEffectStart(u8 id)
     u8 *script;
     u32 val;
 
-    FieldEffectActiveListAdd(id);
+    if (gSkipShowMonAnim && id == FLDEFF_FIELD_MOVE_SHOW_MON_INIT)
+        return 0;
+    else
+    {
+        FieldEffectActiveListAdd(id);
 
-    script = gFieldEffectScriptPointers[id];
+        script = gFieldEffectScriptPointers[id];
 
-    while (gFieldEffectScriptFuncs[*script](&script, &val))
-        ;
-
-    return val;
+        while (gFieldEffectScriptFuncs[*script](&script, &val))
+            ;
+        return val;
+    }
+    
 }
 
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
@@ -1935,18 +1942,21 @@ static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct Ob
     return FALSE;
 }
 
-#undef tState
-#undef tMonId
-
 bool8 FldEff_UseDive(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseDive, 0xff);
+    if (OW_FLAG_AUTO_USE_DIVE)
+        gTasks[taskId].tMonId = 1;
+
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     gTasks[taskId].data[14] = gFieldEffectArguments[1];
     Task_UseDive(taskId);
     return FALSE;
 }
+
+#undef tState
+#undef tMonId
 
 void Task_UseDive(u8 taskId)
 {
@@ -3048,7 +3058,7 @@ static void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
 static void Task_SurfFieldEffect(u8 taskId)
 {
     sSurfFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId]);
-}
+}   
 
 static void SurfFieldEffect_Init(struct Task *task)
 {
@@ -3070,7 +3080,9 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         SetPlayerAvatarFieldMove();
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+
+        if (!gSkipShowMonAnim)
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->tState++;
     }
 }
@@ -3120,6 +3132,8 @@ static void SurfFieldEffect_End(struct Task *task)
         UnlockPlayerFieldControls();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(Task_SurfFieldEffect));
+
+        // gSkipShowMonAnim = FALSE;
     }
 }
 
@@ -3230,7 +3244,7 @@ static void (*const sFlyOutFieldEffectFuncs[])(struct Task *) = {
 };
 
 static void Task_FlyOut(u8 taskId)
-{
+{   
     sFlyOutFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId]);
 }
 
@@ -3498,7 +3512,7 @@ static void SpriteCB_FlyBirdReturnToBall(struct Sprite *sprite)
 
 static void StartFlyBirdReturnToBall(u8 spriteId)
 {
-    StartFlyBirdSwoopDown(spriteId); // Set up is the same, but overrwrites the callback below
+    StartFlyBirdSwoopDown(spriteId); // Set up is the same, but overwrites the callback below
     gSprites[spriteId].callback = SpriteCB_FlyBirdReturnToBall;
 }
 

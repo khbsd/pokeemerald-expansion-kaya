@@ -3387,11 +3387,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_SKRELP
     [SPECIES_SKRELP] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 60,
+        .baseHP        = 60,
+        .baseAttack    = 70,
         .baseDefense   = 60,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 60,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 70,
         .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_POISON, TYPE_WATER),
         .catchRate = 225,
@@ -3402,7 +3402,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
-        .abilities = { ABILITY_POISON_POINT, ABILITY_POISON_TOUCH, ABILITY_ADAPTABILITY },
+        .abilities = {  ABILITY_CORROSION, ABILITY_MERCILESS, ABILITY_ADAPTABILITY  },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Skrelp"),
         .cryId = CRY_SKRELP,
@@ -3455,17 +3455,17 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .levelUpLearnset = sSkrelpLevelUpLearnset,
         .teachableLearnset = sSkrelpTeachableLearnset,
         .eggMoveLearnset = sSkrelpEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_DRAGALGE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAGALGE}),
     },
 
     [SPECIES_DRAGALGE] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 75,
-        .baseDefense   = 90,
-        .baseSpeed     = 44,
-        .baseSpAttack  = 97,
-        .baseSpDefense = 123,
+        .baseHP        = 95,
+        .baseAttack    = 90,
+        .baseDefense   = 110,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 125,
         .types = MON_TYPES(TYPE_POISON, TYPE_DRAGON),
         .catchRate = 55,
         .expYield = 173,
@@ -3475,7 +3475,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
-        .abilities = { ABILITY_POISON_POINT, ABILITY_POISON_TOUCH, ABILITY_ADAPTABILITY },
+        .abilities = { ABILITY_CORROSION, ABILITY_MERCILESS, ABILITY_ADAPTABILITY },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Dragalge"),
         .cryId = CRY_DRAGALGE,
@@ -4302,6 +4302,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         )
         .levelUpLearnset = sCarbinkLevelUpLearnset,
         .teachableLearnset = sCarbinkTeachableLearnset,
+                .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_DIANCIE}),
     },
 #endif //P_FAMILY_CARBINK
 
@@ -6347,9 +6348,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .teachableLearnset = sDiancieTeachableLearnset,
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
         .formChangeTable = sDiancieFormChangeTable,
+    #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DIANCITE, SPECIES_DIANCIE_MEGA}),
+    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
-#if P_MEGA_EVOLUTIONS
+#if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_DIANCIE_MEGA] =
     {
         .baseHP        = 50,
@@ -6400,6 +6404,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconPalIndex = 0,
         SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Diancie)
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif // P_MEGA_STONES_AS_EVO_STONES
         .isMythical = TRUE,
         .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
@@ -6409,7 +6415,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
         .formChangeTable = sDiancieFormChangeTable,
     },
-#endif //P_MEGA_EVOLUTIONS
+#endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_DIANCIE
 
 #if P_FAMILY_HOOPA

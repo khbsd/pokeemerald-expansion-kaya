@@ -6,6 +6,7 @@ bool8 SetUpFieldMove_Cut(void);
 bool8 FldEff_UseCutOnGrass(void);
 bool8 FldEff_UseCutOnTree(void);
 bool8 FldEff_CutGrass(void);
+void FieldCallback_CutTree(void);
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y);
 void FixLongGrassMetatilesWindowBottom(s16 x, s16 y);
 
@@ -27,10 +28,12 @@ bool8 SetUpFieldMove_Flash(void);
 void CB2_DoChangeMap(void);
 bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType);
 bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType);
+void FldEff_UseFlash(void);
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
 bool8 FldEff_UseStrength(void);
+void FieldCallback_Strength(void);
 
 // sweet scent
 bool8 SetUpFieldMove_SweetScent(void);
@@ -50,5 +53,6 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId);
 u8 CreateFieldMoveTask(void);
 bool8 SetUpFieldMove_RockSmash(void);
 bool8 FldEff_UseRockSmash(void);
+void FieldCallback_RockSmash(void);
 
 #endif // GUARD_FLDEFF_H

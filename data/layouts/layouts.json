@@ -506,8 +506,8 @@
       "name": "Underwater_Route126_Layout",
       "width": 80,
       "height": 80,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Underwater",
+      "primary_tileset": "gTileset_UnderwaterPrimary",
+      "secondary_tileset": "gTileset_UnderwaterReef",
       "border_filepath": "data/layouts/Underwater_Route126/border.bin",
       "blockdata_filepath": "data/layouts/Underwater_Route126/map.bin"
     },
@@ -2417,7 +2417,7 @@
       "width": 58,
       "height": 26,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "0",
+      "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/UnusedOutdoorArea/border.bin",
       "blockdata_filepath": "data/layouts/UnusedOutdoorArea/map.bin"
     },
@@ -2736,8 +2736,8 @@
       "name": "Underwater_Route124_Layout",
       "width": 80,
       "height": 80,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Underwater",
+      "primary_tileset": "gTileset_UnderwaterPrimary",
+      "secondary_tileset": "gTileset_UnderwaterReef",
       "border_filepath": "data/layouts/Underwater_Route124/border.bin",
       "blockdata_filepath": "data/layouts/Underwater_Route124/map.bin"
     },
@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_NEW_MAUVILLE_OLD_REACTOR",
+      "name": "NewMauville_OldReactor_Layout",
+      "width": 17,
+      "height": 33,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_BikeShop",
+      "border_filepath": "data/layouts/NewMauville_OldReactor/border.bin",
+      "blockdata_filepath": "data/layouts/NewMauville_OldReactor/map.bin"
+    },
+    {
+      "id": "LAYOUT_VOLCARONA_HIVE",
+      "name": "VolcaronaHive_Layout",
+      "width": 31,
+      "height": 31,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/VolcaronaHive/border.bin",
+      "blockdata_filepath": "data/layouts/VolcaronaHive/map.bin"
     }
   ]
 }

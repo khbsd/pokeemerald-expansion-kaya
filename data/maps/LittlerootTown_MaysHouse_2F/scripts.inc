@@ -6,6 +6,8 @@ LittlerootTown_MaysHouse_2F_MapScripts::
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_OnTransition:
+	checkifplayeriskaya
+	call_if_set FLAG_IS_KAYA, LittlerootTown_MaysHouse_1F_CheckIsKaya_ShowDoll
 	call_if_lt VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay
 	call_if_ge VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
@@ -310,6 +312,150 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	releaseall
 	end
 
+PlayersHouse_2F_EventScript_GameCube::
+	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
+	goto_if_set FLAG_IS_KAYA, PlayersHouse_2F_EventScript_KayasGameCube_CheckFindBoxLink
+	releaseall
+	end
+
+PlayersHouse_2F_EventScript_KayasGameCube_CheckFindBoxLink::
+	goto_if_unset FLAG_KAYA_BOXLINK_FOUND, PlayersHouse_2F_EventScript_KayasGameCube
+	closemessage
+	releaseall
+	end
+
+PlayersHouse_2F_EventScript_KayasGameCube::
+	msgbox PlayersHouse_Text_2F_EventScript_KayasGameCube, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PlayersHouse_2F_EventScript_KayasGameCube_FindBoxLink
+	releaseall
+	end
+
+PlayersHouse_2F_EventScript_KayasGameCube_FindBoxLink::
+	setflag FLAG_KAYA_BOXLINK_FOUND
+	giveitem ITEM_POKEMON_BOX_LINK
+	closemessage
+	releaseall
+	return
+
+LittlerootTown_PlayersHouse_Porygon2DollInteract::
+	goto_if_set FLAG_IS_KAYA, LittlerootTown_PlayersHouse_Porygon2DollInteract_Kaya
+	goto_if_unset FLAG_IS_KAYA, LittlerootTown_PlayersHouse_Porygon2DollInteract_NotKaya
+	releaseall
+	end
+
+LittlerootTown_PlayersHouse_Porygon2DollInteract_Kaya::
+	msgbox LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_Kaya, MSGBOX_DEFAULT
+	goto_if_unset FLAG_KAYA_EXPSHARE_FOUND, LittlerootTown_PlayersHouse_Porygon2DollInteract_Kaya_FindExpShare
+	closemessage
+	releaseall
+	return
+
+LittlerootTown_PlayersHouse_Porygon2DollInteract_Kaya_FindExpShare::
+	msgbox LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_Kaya_GetExpShare, MSGBOX_DEFAULT
+	giveitem ITEM_EXP_SHARE
+	setflag FLAG_KAYA_EXPSHARE_FOUND
+	closemessage
+	releaseall
+	return
+
+LittlerootTown_PlayersHouse_Porygon2DollInteract_NotKaya::
+	msgbox LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_NotKaya, MSGBOX_DEFAULT
+	releaseall
+	return
+
+LittlerootTown_PlayersHouse_IsNameKaya::
+	goto_if_set FLAG_KAYA_TERMINAL_FOUND, PlayersHouse_LoggingIn_IsNameKaya
+	goto_if_set FLAG_IS_KAYA, LittlerootTown_DoRecognize_IsNameKaya
+	goto_if_unset FLAG_IS_KAYA, LittlerootTown_DontRecognize_IsNameKaya
+	end
+
+LittlerootTown_DontRecognize_IsNameKaya::
+	msgbox PlayersHouse_Text_DontRecognize_IsNameKaya, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LittlerootTown_DoRecognize_IsNameKaya::
+	msgbox PlayersHouse_Text_DoRecognize_IsNameKaya, MSGBOX_DEFAULT
+	setflag FLAG_KAYA_TERMINAL_FOUND
+	goto PlayersHouse_LoggingIn_IsNameKaya
+	releaseall
+	end
+
+PlayersHouse_LoggingIn_IsNameKaya::
+	playse SE_PC_ON
+	msgbox PlayersHouse_Text_LoggingIn_IsNameKaya, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LittlerootTown_PlayersHouse_KayaTeam
+	goto_if_eq VAR_RESULT, NO, PlayersHouse_LoggingOut_IsNameKaya
+	end
+
+PlayersHouse_LoggingOut_IsNameKaya::
+	playse SE_PC_OFF
+	msgbox PlayersHouse_Text_LoggingOut_IsNameKaya, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LittlerootTown_PlayersHouse_KayaTeam::
+	setflag P_FLAG_FORCE_POKERUS
+
+	givemon SPECIES_BELDUM, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_EXTRASENSORY, move2=MOVE_TAKE_DOWN, move3=MOVE_METAL_CLAW, isShiny=TRUE
+	givemon SPECIES_BAGON, 5, ball=ITEM_CHERISH_BALL, nature=NATURE_ADAMANT, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SPIRIT_BREAK, move2=MOVE_DRAINING_KISS, move3=MOVE_DRAGON_CLAW, isShiny=TRUE
+	givemon SPECIES_CHARMANDER, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_MODEST, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_DRAGON_CLAW, move2=MOVE_FLAMETHROWER, isShiny=TRUE
+	givemon SPECIES_VULPIX, 5, item=ITEM_FIRE_STONE, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=1, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITTER_MALICE, move2=MOVE_FLAMETHROWER, isShiny=TRUE
+	givemon SPECIES_MUDKIP, 5, ball=ITEM_DIVE_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_MUD_SHOT, move2=MOVE_BRINE, isShiny=TRUE
+	givemon SPECIES_TREECKO, 5, ball=ITEM_SAFARI_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_ABSORB, move2=MOVE_DRAGON_CLAW, isShiny=TRUE
+	givemon SPECIES_GASTLY, 5, item=ITEM_LINKING_CORD, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SLUDGE_BOMB, move2=MOVE_LICK, move3=MOVE_HEX, isShiny=TRUE
+	givemon SPECIES_DRATINI, 5, ball=ITEM_LUXURY_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_THUNDERSHOCK, move2=MOVE_WRAP, move3=MOVE_TWISTER, isShiny=TRUE
+	givemon SPECIES_GRIMER_ALOLA, 5, item=ITEM_LEFTOVERS ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITE, move2=MOVE_DIRE_CLAW, isShiny=TRUE
+
+	clearflag P_FLAG_FORCE_POKERUS
+	goto PlayersHouse_LoggingOut_IsNameKaya
+	end
+
+PlayersHouse_Text_2F_EventScript_KayasGameCube::
+	.string "Woah, is that your {PKMN} Box Link?\p"
+	.string "How is it plugged into your\n"
+	.string "GameCube?\p"
+	.string "Pull it out?$"
+
+LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_Kaya::
+	.string "The Porygon2 doll you got for \n"
+	.string "working on your dad's website!$"
+
+LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_Kaya_GetExpShare::
+	.string "There's something around its foot...\p$"
+
+LittlerootTown_Text_PlayersHouse_Porygon2DollInteract_NotKaya::
+	.string "A slightly dated Porygon2 doll.\p"
+	.string "...\p"
+	.string "You don't recognize it.\p"
+	.string "Was this left on the moving van\n"
+	.string "by someone else?$"
+
+PlayersHouse_Text_DontRecognize_IsNameKaya::
+	.string "An old computer terminal login prompt\n"
+	.string "glows gently on the curved glass\p"
+	.string "screen.\p"
+	.string "You don't recognize it.\p"
+	.string "Maybe it was left in the moving van\n"
+	.string "by someone else?$"
+
+PlayersHouse_Text_DoRecognize_IsNameKaya::
+	.string "Your old computer terminal!\n"
+	.string "The login prompt glows gently\p"
+	.string "against the curved glass.\n"
+	.string "You type in your name.\p"
+	.string "...$"
+
+PlayersHouse_Text_LoggingOut_IsNameKaya::
+	.string "Logging out...\n"
+	.string "Bye-ya, {PLAYER}!$"
+
+PlayersHouse_Text_LoggingIn_IsNameKaya::
+	.string "Logging in...\n"
+	.string "Hi-ya, {PLAYER}!\p"
+	.string "Would you like to transfer\n"
+	.string "your team?$"
+
 RivalsHouse_2F_Text_MayWhoAreYou:
 	.string "Huh?\n"
 	.string "Who… Who are you?\p"
@@ -345,17 +491,17 @@ RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
 	.string "I didn't know that you're a girl.\p"
-	.string "Dad, PROF. BIRCH, said that our new\n"
-	.string "next-door neighbor is a GYM LEADER's\l"
-	.string "kid, so I assumed you'd be a guy.\p"
+	.string "I want to be a girl too.\n"
+	.string "My dad only gives me POKéMON eggs.\l"
+	.string "What does that mean?\p"
 	.string "My name's BRENDAN.\n"
 	.string "So, hi, neighbor!\p"
 	.string "Huh? Hey, {PLAYER}, don't you have\n"
 	.string "a POKéMON?\p"
 	.string "Do you want me to go catch you one?\p"
 	.string "Aw, darn, I forgot…\p"
-	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKéMON.\p"
+	.string "You've been catching POKéMON longer\n"
+	.string "than I've been alive. Oopies!\p"
 	.string "Some other time, okay?$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:

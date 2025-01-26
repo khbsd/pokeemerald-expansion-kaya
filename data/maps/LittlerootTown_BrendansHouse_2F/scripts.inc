@@ -268,7 +268,7 @@ PlayersHouse_2F_EventScript_Notebook::
 	msgbox PlayersHouse_2F_Text_Notebook, MSGBOX_SIGN
 	end
 
-PlayersHouse_2F_EventScript_GameCube::
+PlayersHouse_2F_EventScript_GameCube_NoBoxLink::
 	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end
 

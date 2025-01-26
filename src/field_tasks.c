@@ -20,6 +20,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
+#include "string_util.h"
 
 /*  This file handles some persistent tasks that run in the overworld.
  *  - Task_RunTimeBasedEvents: Periodically updates local time and RTC events. Also triggers ambient cries.
@@ -134,6 +135,14 @@ static const u16 sSootopolisGymIceRowVars[] =
 };
 
 #define tCallbackId data[0]
+
+void CheckIfPlayerIsKaya(void)
+{
+    const u8 *kayaName = COMPOUND_STRING("Kaya");
+  
+    if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0)
+        FlagSet(FLAG_IS_KAYA);       
+}
 
 static void Task_RunPerStepCallback(u8 taskId)
 {
@@ -763,9 +772,18 @@ static void AshGrassPerStepCallback(u8 taskId)
         // Remove ash from grass
         if (MapGridGetMetatileIdAt(x, y) == METATILE_Fallarbor_AshGrass)
             StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Fallarbor_AshGrass_2)
+            StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass_2, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Fallarbor_AshGrass_3)
+            StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass_3, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass_2)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass_2, 4);
+        else if (MapGridGetMetatileIdAt(x, y) == METATILE_Lavaridge_AshGrass_3)
+            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass_3, 4);
         else
             StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
-
         // Try to gather ash
         if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
         {

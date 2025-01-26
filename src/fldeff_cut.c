@@ -47,7 +47,6 @@ struct HyperCutterUnk
 };
 
 // this file's functions
-static void FieldCallback_CutTree(void);
 static void FieldCallback_CutGrass(void);
 static void StartCutTreeFieldEffect(void);
 static void StartCutGrassFieldEffect(void);
@@ -291,7 +290,7 @@ bool8 FldEff_UseCutOnGrass(void)
     return FALSE;
 }
 
-static void FieldCallback_CutTree(void)
+void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext_SetupScript(EventScript_UseCut);

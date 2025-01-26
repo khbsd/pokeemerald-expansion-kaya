@@ -14,6 +14,7 @@
 #include "event_data.h"
 #include "field_door.h"
 #include "field_effect.h"
+#include "gpu_regs.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -843,11 +844,17 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
             REG_OFFSET_BLDALPHA,
             BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB)
         );
+        // Restore last weather blend before fading in,
+        // since BLDALPHA was modified by fade-out
+        SetGpuReg(
+            REG_OFFSET_BLDALPHA,
+            BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB)
+        );
         break;
     }
 
     FadeScreenHardware(mode, 0);
-
+    
     if (nowait)
         return FALSE;
     SetupNativeScript(ctx, IsPaletteNotActive);
@@ -2388,7 +2395,8 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_TRAINERBATTLE);
-
+    
+    TrainerBattleLoadArgs(ctx->scriptPtr);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
 }

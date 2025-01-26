@@ -168,8 +168,8 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_MOVE_END  0xFFFF
 
-#define MAX_LEVEL_UP_MOVES       20
-#define MAX_RELEARNER_MOVES      max(MAX_LEVEL_UP_MOVES, 25)
+#define MAX_LEVEL_UP_MOVES       35
+#define MAX_RELEARNER_MOVES      max(MAX_LEVEL_UP_MOVES, 35)
 
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
@@ -273,6 +273,7 @@ enum EvolutionMethods {
     EVO_MOVE,                            // Pokémon levels up, knows specified move
     EVO_FRIENDSHIP_MOVE_TYPE,            // Pokémon levels up with friendship ≥ 220, knows move with specified type
     EVO_MAPSEC,                          // Pokémon levels up on specified mapsec
+    EVO_MAPSEC_LEVEL,                    // Pokémon levels up on specified mapsec at the level specified in the previous EVO_LEVEL
     EVO_ITEM_MALE,                       // specified item is used on a male Pokémon
     EVO_ITEM_FEMALE,                     // specified item is used on a female Pokémon
     EVO_LEVEL_RAIN,                      // Pokémon reaches the specified level during rain in the overworld
@@ -280,6 +281,7 @@ enum EvolutionMethods {
     EVO_LEVEL_DARK_TYPE_MON_IN_PARTY,    // Pokémon reaches the specified level with a Dark Type Pokémon in party
     EVO_TRADE_SPECIFIC_MON,              // Pokémon is traded for a specified Pokémon
     EVO_SPECIFIC_MAP,                    // Pokémon levels up on specified map
+    EVO_SPECIFIC_MAP_LEVEL,
     EVO_LEVEL_NATURE_AMPED,              // Pokémon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
     EVO_LEVEL_NATURE_LOW_KEY,            // Pokémon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
     EVO_CRITICAL_HITS,                   // Pokémon performs specified number of critical hits in one battle
@@ -338,7 +340,7 @@ enum EvolutionMode {
 #define NUM_ABILITY_PERSONALITY 0xFF
 
 #if P_LEGENDARY_PERFECT_IVS >= GEN_6
-#define LEGENDARY_PERFECT_IV_COUNT 3
+#define LEGENDARY_PERFECT_IV_COUNT 6
 #else
 #define LEGENDARY_PERFECT_IV_COUNT 0
 #endif

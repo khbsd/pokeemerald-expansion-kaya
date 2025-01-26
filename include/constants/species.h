@@ -1018,6 +1018,8 @@
 #define SPECIES_RAYQUAZA_MEGA                           953
 #define SPECIES_KYOGRE_PRIMAL                           954
 #define SPECIES_GROUDON_PRIMAL                          955
+
+//Alolan Forms
 #define SPECIES_RATTATA_ALOLA                           956
 #define SPECIES_RATICATE_ALOLA                          957
 #define SPECIES_RAICHU_ALOLA                            958
@@ -1036,6 +1038,8 @@
 #define SPECIES_MUK_ALOLA                               971
 #define SPECIES_EXEGGUTOR_ALOLA                         972
 #define SPECIES_MAROWAK_ALOLA                           973
+
+//Galarian Forms
 #define SPECIES_MEOWTH_GALAR                            974
 #define SPECIES_PONYTA_GALAR                            975
 #define SPECIES_RAPIDASH_GALAR                          976
@@ -1638,7 +1642,11 @@
 #define SPECIES_MIMIKYU_BUSTED_TOTEM                    1523
 #define SPECIES_MIMIKYU_TOTEM_BUSTED                    SPECIES_MIMIKYU_BUSTED_TOTEM
 
-#define SPECIES_EGG                                     (SPECIES_MIMIKYU_BUSTED_TOTEM + 1)
+//Whale Fall Forms
+#define SPECIES_WAILMER_WHALEFALL						1524
+#define SPECIES_WAILORD_WHALEFALL						1525
+
+#define SPECIES_EGG                                     (SPECIES_WAILORD_WHALEFALL + 1)
 
 #define NUM_SPECIES SPECIES_EGG
 

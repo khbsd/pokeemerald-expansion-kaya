@@ -26,6 +26,18 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	@ 4: Defeated rival on Route 103
 	@ 5: Received pokedex
 
+LittlerootTown_ProfessorBirchsLab_EventScript_GotGoopedIdiot::
+	bufferlivemonnickname 0
+	msgbox LittlerootTown_ProfessorBirchsLab_gText_GotGoopedIdiot, MSGBOX_DEFAULT
+	closemessage
+	infectmonwithpokerus 1, 7
+	end
+
+LittlerootTown_ProfessorBirchsLab_gText_GotGoopedIdiot::
+	.string "Oops! You got purple goop all \n"
+	.string "over yourself and {STR_VAR_1}...\p\p"
+	.string "ya got gooped, idiot!$"
+
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation

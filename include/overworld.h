@@ -31,6 +31,8 @@
 // don't update currentTimeBlend
 #define HOURS_FREEZE_BLEND 26
 
+#define SKIP_SHOWMON_ANIM 0x1F
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
@@ -108,6 +110,15 @@ void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
 bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
+bool32 CanAutoUseFieldMove(u16 move);
+void AutoUseCut(void);
+void AutoUseFlash(void);
+void AutoUseRockSmash(void);
+void AutoUseStrength(void);
+void AutoUseSurf(void);
+void AutoUseDive(void);
+void AutoUseDiveEmerge(void);
+void AutoUseWaterfall(void);
 void SetFlashLevel(s32 flashLevel);
 u8 GetFlashLevel(void);
 void SetCurrentMapLayout(u16 mapLayoutId);
@@ -160,6 +171,8 @@ void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
 void ResetAllMultiplayerState(void);
+void DEBUG_SetAllHMFlags(void);
+void DEBUG_SetAllBadges(void);
 u32 GetCableClubPartnersReady(void);
 u16 SetInCableClubSeat(void);
 u16 SetLinkWaitingForScript(void);

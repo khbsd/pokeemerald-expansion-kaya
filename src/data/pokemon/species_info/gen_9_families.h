@@ -3591,10 +3591,10 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_TINKATINK
     [SPECIES_TINKATINK] =
     {
-        .baseHP        = 50,
+        .baseHP        = 60,
         .baseAttack    = 45,
-        .baseDefense   = 45,
-        .baseSpeed     = 58,
+        .baseDefense   = 55,
+        .baseSpeed     = 68,
         .baseSpAttack  = 35,
         .baseSpDefense = 64,
         .types = MON_TYPES(TYPE_FAIRY, TYPE_STEEL),
@@ -3606,7 +3606,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET },
+        .abilities = { ABILITY_PICKPOCKET, ABILITY_OWN_TEMPO, ABILITY_STEELWORKER },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Tinkatink"),
         .cryId = CRY_TINKATINK,
@@ -3670,7 +3670,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET },
+        .abilities = { ABILITY_PICKPOCKET, ABILITY_OWN_TEMPO, ABILITY_STEELWORKER },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Tinkatuff"),
         .cryId = CRY_TINKATUFF,
@@ -3713,15 +3713,15 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         )
         .levelUpLearnset = sTinkatuffLevelUpLearnset,
         .teachableLearnset = sTinkatuffTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_TINKATON}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TINKATON}),
     },
 
     [SPECIES_TINKATON] =
     {
-        .baseHP        = 85,
-        .baseAttack    = 75,
-        .baseDefense   = 77,
-        .baseSpeed     = 94,
+        .baseHP        = 90,
+        .baseAttack    = 115,
+        .baseDefense   = 90,
+        .baseSpeed     = 95,
         .baseSpAttack  = 70,
         .baseSpDefense = 105,
         .types = MON_TYPES(TYPE_FAIRY, TYPE_STEEL),
@@ -3733,7 +3733,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_MOLD_BREAKER, ABILITY_OWN_TEMPO, ABILITY_PICKPOCKET },
+        .abilities = { ABILITY_PICKPOCKET, ABILITY_OWN_TEMPO, ABILITY_STEELWORKER },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Tinkaton"),
         .cryId = CRY_TINKATON,

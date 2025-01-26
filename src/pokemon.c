@@ -3697,12 +3697,22 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->status2 = 0;
 }
 
-void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex)
+void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex, bool32 resetStats)
 {
     u32 side = GetBattlerSide(battlerId);
     struct Pokemon *party = GetSideParty(side);
     PokemonToBattleMon(&party[partyIndex], &gBattleMons[battlerId]);
     gBattleStruct->hpOnSwitchout[side] = gBattleMons[battlerId].hp;
+
+    if (resetStats)
+    {
+        u8 i;
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            gBattleMons[battlerId].statStages[i] = DEFAULT_STAT_STAGE;
+
+        gBattleMons[battlerId].status2 = 0;
+    }
+
     UpdateSentPokesToOpponentValue(battlerId);
     ClearTemporarySpeciesSpriteData(battlerId, FALSE, FALSE);
 }
@@ -4013,6 +4023,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                         dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
+
+                                    if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT)
+                                        CopyPartyMonToBattleData(battlerId, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battlerId]), TRUE);
                                     retVal = FALSE;
                                 }
                             }
@@ -5181,7 +5194,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     {
         u8 friendshipLevel = 0;
         s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
-        u32 opponentTrainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
+        u32 opponentTrainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
         if (friendship > 99)
             friendshipLevel++;
@@ -5492,6 +5505,55 @@ void PartySpreadPokerus(struct Pokemon *party)
     }
 }
 
+void InfectMonWithPokerus(u8 slot, u8 days)
+{
+    struct Pokemon* mon;
+
+    if (days < -1)
+    {
+        u8 rnd2;
+
+        do
+        {
+            rnd2 = Random();
+        } while ((rnd2 & 0x7) == 0);
+
+        if (rnd2 & 0xF0)
+            rnd2 &= 0x7;
+
+        rnd2 |= (rnd2 << 4);
+        rnd2 &= 0xF3;
+        rnd2++;
+
+        days = rnd2;
+    }
+
+    if (P_FLAG_INFECT_RANDOM_MON_POKERUS != 0 && FlagGet(P_FLAG_INFECT_RANDOM_MON_POKERUS))
+    {
+        u8 rnd;
+
+        do
+        {
+            rnd = Random() % PARTY_SIZE;
+            mon = &gPlayerParty[rnd];
+        } while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
+
+        if (!(CheckPartyHasHadPokerus(&gPlayerParty[rnd], rnd)))
+        {
+            SetMonData(&gPlayerParty[rnd], MON_DATA_POKERUS, &days);
+        }
+    }
+    else
+    {
+        mon = &gPlayerParty[slot];
+
+        if (GetMonData(mon, MON_DATA_SPECIES, 0) || !GetMonData(mon, MON_DATA_IS_EGG, 0))
+        {
+            SetMonData(mon, MON_DATA_POKERUS, &days);
+        }
+    }
+}
+
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
@@ -5748,11 +5810,11 @@ u16 GetBattleBGM(void)
         u8 trainerClass;
 
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-            trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
+            trainerClass = GetFrontierOpponentClass(TRAINER_BATTLE_PARAM.opponentA);
         else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
             trainerClass = TRAINER_CLASS_EXPERT;
         else
-            trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
+            trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
         switch (trainerClass)
         {
@@ -5771,7 +5833,7 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_VS_RIVAL;
-            if (!StringCompare(GetTrainerNameFromId(gTrainerBattleOpponent_A), gText_BattleWallyName))
+            if (!StringCompare(GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentA), gText_BattleWallyName))
                 return MUS_VS_TRAINER;
             return MUS_VS_RIVAL;
         case TRAINER_CLASS_ELITE_FOUR:

@@ -5,9 +5,12 @@ extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
 extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
 extern const struct OamData gNewGameBirchOamAttributes;
 
+extern bool8 gSkipShowMonAnim;
 extern s32 gFieldEffectArguments[8];
 extern void (*gPostMenuFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
+
+#include "region_map.h"
 
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
@@ -50,5 +53,26 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
 void FieldEff_CaveDust(void);
+
+// surf
+u8 FldEff_UseSurf(void);
+
+// dive
+bool8 FldEff_UseDive(void);
+
+// fly
+void VBlankCB_FlyMap(void);
+void CB2_FlyMap(void);
+void SetFlyMapCallback(void callback(void));
+void DrawFlyDestTextWindow(void);
+void LoadFlyDestIcons(void);
+void CreateFlyDestIcons(void);
+void TryCreateRedOutlineFlyDestIcons(void);
+void SpriteCB_FlyDestIcon(struct Sprite* sprite);
+void CB_FadeInFlyMap(void);
+void CB_HandleFlyMapInput(void);
+u8 FldEff_UseFly(void);
+u32 FilterFlyDestination(struct RegionMap *regionMap);
+void SetFlyDestination(struct RegionMap *regionMap);
 
 #endif // GUARD_FIELD_EFFECTS_H

@@ -26,7 +26,6 @@ struct FlashStruct
 };
 
 static void FieldCallback_Flash(void);
-static void FldEff_UseFlash(void);
 static bool8 TryDoMapTransition(void);
 static void DoExitCaveTransition(void);
 static void Task_ExitCaveTransition1(u8 taskId);
@@ -98,7 +97,7 @@ static void FieldCallback_Flash(void)
     gTasks[taskId].data[9] = (uintptr_t)FldEff_UseFlash;
 }
 
-static void FldEff_UseFlash(void)
+void FldEff_UseFlash(void)
 {
     PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);

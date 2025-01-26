@@ -104,17 +104,6 @@ static void UnhideRegionMapPlayerIcon(void);
 static void SpriteCB_PlayerIconMapZoomed(struct Sprite *sprite);
 static void SpriteCB_PlayerIconMapFull(struct Sprite *sprite);
 static void SpriteCB_PlayerIcon(struct Sprite *sprite);
-static void VBlankCB_FlyMap(void);
-static void CB2_FlyMap(void);
-static void SetFlyMapCallback(void callback(void));
-static void DrawFlyDestTextWindow(void);
-static void LoadFlyDestIcons(void);
-static void CreateFlyDestIcons(void);
-static void TryCreateRedOutlineFlyDestIcons(void);
-static void SpriteCB_FlyDestIcon(struct Sprite *sprite);
-static void CB_FadeInFlyMap(void);
-static void CB_HandleFlyMapInput(void);
-static void CB_ExitFlyMap(void);
 
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/pokenav/region_map/cursor.gbapal");
 static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/cursor_small.4bpp.lz");
@@ -286,7 +275,7 @@ static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("graphics/pokenav/regio
 static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/region_map/fly_target_icons.gbapal");
 static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/fly_target_icons.4bpp.lz");
 
-static const u8 sMapHealLocations[][3] =
+const u8 sMapHealLocations[][3] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
     [MAPSEC_OLDALE_TOWN] = {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
@@ -676,7 +665,7 @@ static u8 ProcessRegionMapInput_Full(void)
     {
         input = MAP_INPUT_A_BUTTON;
     }
-    else if (JOY_NEW(B_BUTTON))
+    if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
     }
@@ -759,7 +748,7 @@ static u8 ProcessRegionMapInput_Zoomed(void)
     {
         input = MAP_INPUT_A_BUTTON;
     }
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
     }
@@ -1744,14 +1733,14 @@ void CB2_OpenFlyMap(void)
     }
 }
 
-static void VBlankCB_FlyMap(void)
+void VBlankCB_FlyMap(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void CB2_FlyMap(void)
+void CB2_FlyMap(void)
 {
     sFlyMap->callback();
     AnimateSprites();
@@ -1759,13 +1748,13 @@ static void CB2_FlyMap(void)
     DoScheduledBgTilemapCopiesToVram();
 }
 
-static void SetFlyMapCallback(void callback(void))
+void SetFlyMapCallback(void callback(void))
 {
     sFlyMap->callback = callback;
     sFlyMap->state = 0;
 }
 
-static void DrawFlyDestTextWindow(void)
+void DrawFlyDestTextWindow(void)
 {
     u16 i;
     bool32 namePrinted;
@@ -1826,7 +1815,7 @@ static void DrawFlyDestTextWindow(void)
 }
 
 
-static void LoadFlyDestIcons(void)
+void LoadFlyDestIcons(void)
 {
     struct SpriteSheet sheet;
 
@@ -1844,7 +1833,7 @@ static void LoadFlyDestIcons(void)
 #define sIconMapSec   data[0]
 #define sFlickerTimer data[1]
 
-static void CreateFlyDestIcons(void)
+void CreateFlyDestIcons(void)
 {
     u16 canFlyFlag;
     u16 mapSecId;
@@ -1888,7 +1877,7 @@ static void CreateFlyDestIcons(void)
 
 // Draw a red outline box on the mapsec if its corresponding flag has been set
 // Only used for Battle Frontier, but set up to handle more
-static void TryCreateRedOutlineFlyDestIcons(void)
+void TryCreateRedOutlineFlyDestIcons(void)
 {
     u16 i;
     u16 x;
@@ -1919,7 +1908,7 @@ static void TryCreateRedOutlineFlyDestIcons(void)
 }
 
 // Flickers fly destination icon color (by hiding the fly icon sprite) if the cursor is currently on it
-static void SpriteCB_FlyDestIcon(struct Sprite *sprite)
+void SpriteCB_FlyDestIcon(struct Sprite *sprite)
 {
     if (sFlyMap->regionMap.mapSecId == sprite->sIconMapSec)
     {
@@ -1939,7 +1928,7 @@ static void SpriteCB_FlyDestIcon(struct Sprite *sprite)
 #undef sIconMapSec
 #undef sFlickerTimer
 
-static void CB_FadeInFlyMap(void)
+void CB_FadeInFlyMap(void)
 {
     switch (sFlyMap->state)
     {
@@ -1956,7 +1945,7 @@ static void CB_FadeInFlyMap(void)
     }
 }
 
-static void CB_HandleFlyMapInput(void)
+void CB_HandleFlyMapInput(void)
 {
     if (sFlyMap->state == 0)
     {
@@ -1986,7 +1975,7 @@ static void CB_HandleFlyMapInput(void)
     }
 }
 
-static void CB_ExitFlyMap(void)
+void CB_ExitFlyMap(void)
 {
     switch (sFlyMap->state)
     {
@@ -2014,34 +2003,4 @@ static void CB_ExitFlyMap(void)
         }
         break;
     }
-}
-
-u32 FilterFlyDestination(struct RegionMap* regionMap)
-{
-    switch (regionMap->mapSecId)
-    {
-    case MAPSEC_SOUTHERN_ISLAND:
-        return HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR;
-    case MAPSEC_BATTLE_FRONTIER:
-        return HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST;
-    case MAPSEC_LITTLEROOT_TOWN:
-        return (gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
-    case MAPSEC_EVER_GRANDE_CITY:
-        return (FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
-    default:
-        if (sMapHealLocations[regionMap->mapSecId][2] != HEAL_LOCATION_NONE)
-            return sMapHealLocations[regionMap->mapSecId][2];
-        else
-            return WARP_ID_NONE;
-    }
-}
-
-void SetFlyDestination(struct RegionMap* regionMap)
-{
-    u32 flyDestination = FilterFlyDestination(regionMap);
-
-    if (flyDestination != WARP_ID_NONE)
-        SetWarpDestinationToHealLocation(flyDestination);
-    else
-        SetWarpDestinationToMapWarp(sMapHealLocations[regionMap->mapSecId][0], sMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
 }

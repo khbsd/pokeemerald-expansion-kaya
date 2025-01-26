@@ -24,6 +24,7 @@
 #include "util.h"
 #include "title_screen.h"
 #include "expansion_intro.h"
+#include "config/general.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
 
@@ -1178,7 +1179,11 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
 void Task_Scene1_Load(u8 taskId)
 {
     SetVBlankCallback(NULL);
-    sIntroCharacterGender = MOD(Random(), GENDER_COUNT);
+    if (INTRO_GENDER_MATCH_SAVE)
+        sIntroCharacterGender = gSaveBlock2Ptr->playerGender;
+    else
+        sIntroCharacterGender = MOD(Random(), GENDER_COUNT);
+
     IntroResetGpuRegs();
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 80);
