@@ -2408,4 +2408,32 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_SYNERGETIC] =
+    {
+        .name = _("Synergetic"),
+        .description = COMPOUND_STRING("Adapts to strongest stat."),
+        .aiRating = 5,
+    },
+
+    [ABILITY_BLOOD_FEATHER] =
+    {
+        .name = _("Blood Feather"),
+        .description = COMPOUND_STRING("Gets angry at half HP."),
+        .aiRating = 3,
+    },
+
+    [ABILITY_OBSCURATE] =
+    {
+        .name = _("Obscurate"),
+        .description = COMPOUND_STRING("Normal moves become Dark."),
+        .aiRating = 8,
+    },
+    
+    [ABILITY_CAPILLARATE] =
+    {
+        .name = _("Capillarate"),
+        .description = COMPOUND_STRING("Normal moves become Fighting."),
+        .aiRating = 8,
+    },
 };

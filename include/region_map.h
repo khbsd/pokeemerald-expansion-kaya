@@ -2,6 +2,13 @@
 #define GUARD_REGION_MAP_H
 
 #include "bg.h"
+#include "event_data.h"
+#include "constants/heal_locations.h"
+#include "constants/maps.h"
+#include "constants/map_groups.h"
+#include "constants/region_map_sections.h"
+
+extern const u8 sMapHealLocations[][3];
 
 // Exported type declarations
 #define MAP_NAME_LENGTH 16
@@ -26,7 +33,7 @@ enum {
     NUM_MAPSEC_TYPES
 };
 
-struct RegionMap {
+typedef struct RegionMap {
     /*0x000*/ u16 mapSecId;
     /*0x002*/ u8 mapSecType;
     /*0x003*/ u8 posWithinMapSec;
@@ -79,7 +86,7 @@ struct RegionMap {
     /*0x084*/ u8 filler_084[0x100];
     /*0x184*/ u8 cursorSmallImage[0x100];
     /*0x284*/ u8 cursorLargeImage[0x600];
-}; // size = 0x884
+} RegionMap; // size = 0x884
 
 struct RegionMapLocation
 {
@@ -111,14 +118,12 @@ u16 CorrectSpecialMapSecId(u16 mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
+void SetFlyMapCallback(void callback(void));
+void CB_ExitFlyMap(void);
 bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
-
-//Pokenav Fly funcs
-u32 FilterFlyDestination(struct RegionMap* regionMap);
-void SetFlyDestination(struct RegionMap* regionMap);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
 

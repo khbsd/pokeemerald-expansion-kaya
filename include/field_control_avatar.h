@@ -12,6 +12,7 @@ struct FieldInput
     bool8 tookStep:1;
     bool8 pressedBButton:1;
     bool8 pressedRButton:1;
+    bool8 pressedLButton:1;
     bool8 input_field_1_1:1;
     bool8 input_field_1_2:1;
     bool8 input_field_1_3:1;
@@ -35,6 +36,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
 const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void ClearPoisonStepCounter(void);
 void CancelSignPostMessageBox(struct FieldInput *input);
+u16 GetPlayerCurMetatileBehavior(int);
 
 #define NOT_SIGNPOST 0
 #define WALK_AWAY_SIGNPOST_FRAMES 6

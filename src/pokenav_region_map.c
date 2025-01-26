@@ -1,12 +1,16 @@
 #include "global.h"
 #include "bg.h"
 #include "decompress.h"
+#include "event_data.h"
+#include "field_effect.h"
 #include "landmark.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "main.h"
+#include "malloc.h"
 #include "menu.h"
 #include "overworld.h"
+#include "party_menu.h"
 #include "palette.h"
 #include "pokenav.h"
 #include "region_map.h"
@@ -16,9 +20,11 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
+#include "constants/heal_locations.h"
+#include "constants/moves.h"
+#include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/region_map_sections.h"
 
 #define GFXTAG_CITY_ZOOM 6
 #define PALTAG_CITY_ZOOM 11
@@ -124,7 +130,7 @@ static const LoopedTask sRegionMapLoopTaskFuncs[] =
     [POKENAV_MAP_FUNC_ZOOM_OUT]     = LoopedTask_RegionMapZoomOut,
     [POKENAV_MAP_FUNC_ZOOM_IN]      = LoopedTask_RegionMapZoomIn,
     [POKENAV_MAP_FUNC_EXIT]         = LoopedTask_ExitRegionMap,
-    [POKENAV_MAP_FUNC_FLY]          = LoopedTask_TreatAsPokeNavFlyMap,
+    [POKENAV_MAP_FUNC_FLY]          = LoopedTask_TreatAsPokeNavFlyMap
 };
 
 static const struct CompressedSpriteSheet sCityZoomTextSpriteSheet[1] =
@@ -223,11 +229,10 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
         state->callback = GetExitRegionMapMenuId;
         return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
-        if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER) 
-        && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && OW_FLAG_AUTO_USE_FLY && 
+            CanAutoUseFieldMove(MOVE_FLY) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
             return POKENAV_MAP_FUNC_FLY;
     }
-
     return POKENAV_MAP_FUNC_NONE;
 }
 
@@ -316,6 +321,9 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
     int menuGfxId;
     struct RegionMap *regionMap;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
+
+    // UpdateHelpBarText();
+
     switch (taskState)
     {
     case 0:
@@ -427,7 +435,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
         if (WaitForHelpBar())
             return LT_PAUSE;
 
-        UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_OUT);
+        UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_OUT); // 
         break;
     }
 
@@ -494,16 +502,15 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
 
     return LT_FINISH;
 }
-
 static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
 {
     switch (taskState)
     {
     case 0:
-        PlaySE(SE_SELECT);
         struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
         SetFlyDestination(regionMap);
         gSkipShowMonAnim = TRUE;
+        PlaySE(SE_SELECT);
         ReturnToFieldFromFlyMapSelect();
 
         return LT_FINISH;
@@ -775,7 +782,7 @@ void UpdateRegionMapHelpBarText(void)
 {
     struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
 
-    if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER) 
+    if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && OW_FLAG_AUTO_USE_FLY
         && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
         if (IsRegionMapZoomed())

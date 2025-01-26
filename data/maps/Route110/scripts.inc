@@ -744,12 +744,12 @@ Route110_Movement_BirchExit4:
 	step_end
 
 Route110_Text_WeCantTalkAboutAquaActivities:
-	.string "TEAM AQUA's activities…\n"
+	.string "TEAM AQUA's snacktivities…\n"
 	.string "We can't talk about them yet.$"
 
 Route110_Text_KickUpARuckus:
 	.string "I want to get going to SLATEPORT and\n"
-	.string "kick up a ruckus!$"
+	.string "kick up a fuckus!$"
 
 Route110_Text_MyFirstJobInAqua:
 	.string "This is my first job after joining\n"
@@ -774,7 +774,7 @@ Route110_Text_MayTakeThis:
 	.string "MAY: {PLAYER}{KUN}, you've been busy\n"
 	.string "training, too, haven't you?\p"
 	.string "I think you deserve a reward!\n"
-	.string "This is from me!$"
+	.string "Go check the main stage.$"
 
 Route110_Text_MayExplainItemfinder:
 	.string "MAY: That's an ITEMFINDER.\p"

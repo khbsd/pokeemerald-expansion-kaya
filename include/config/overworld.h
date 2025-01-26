@@ -1,15 +1,20 @@
 #ifndef GUARD_CONFIG_OVERWORLD_H
 #define GUARD_CONFIG_OVERWORLD_H
+#include "constants/flags.h"
 
 // Movement config
 #define OW_RUNNING_INDOORS          GEN_LATEST  // In Gen4+, players are allowed to run indoors.
 #define SLOW_MOVEMENT_ON_STAIRS     FALSE       // If enabled, the player will move slower up/down stairs like in FR
+#define DUAL_USE_BIKE               TRUE
+#define B_TOGGLES_RUN               TRUE        // If enabled, lets player press 'B' to toggle running.
+#define SURF_RUNNING                TRUE        // If enabled, lets player press 'B' to move faster while surfing.
 
 // Other settings
 #define OW_POISON_DAMAGE                GEN_LATEST // In Gen4, Pokémon no longer faint from Poison in the overworld. In Gen5+, they no longer take damage at all.
 #define OW_DOUBLE_APPROACH_WITH_ONE_MON FALSE      // If enabled, you can be spotted by two trainers at the same time even if you only have one eligible Pokémon in your party.
 #define OW_HIDE_REPEAT_MAP_POPUP        FALSE      // If enabled, map popups will not appear if entering a map with the same Map Section Id as the last.
 #define OW_FRLG_WHITEOUT                FALSE      // If enabled, shows an additional whiteout message and post whiteout event script with healing NPC.
+#define OW_MATCH_CALL_ONLY_FOR_REMATCH  TRUE
 
 // Item Obtain Description Box
 #define OW_ITEM_DESCRIPTIONS_OFF        0   // never show descriptions
@@ -54,11 +59,11 @@
                                                   // 16x32, 32x32, 64x64 etc are fine
 #define OW_MON_WANDER_WALK             TRUE       // If true, OW pokemon with MOVEMENT_TYPE_WANDER will walk-in-place in between steps.
 // Follower Pokémon
-#define OW_FOLLOWERS_ENABLED           FALSE      // Enables follower Pokémon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
-#define OW_FOLLOWERS_BOBBING           TRUE       // If TRUE, follower Pokémon will bob up and down during their idle & walking animations
-#define OW_FOLLOWERS_POKEBALLS         TRUE       // If TRUE, follower Pokémon will emerge from the Poké Ball they are stored in, instead of a normal Poké Ball
+#define OW_FOLLOWERS_ENABLED           TRUE      // Enables follower Pokémon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
+#define OW_FOLLOWERS_BOBBING           TRUE       // If true, follower pokemon will bob up and down during their idle & walking animations
+#define OW_FOLLOWERS_POKEBALLS         TRUE       // Followers will emerge from the pokeball they are stored in, instead of a normal pokeball
 #define OW_FOLLOWERS_WEATHER_FORMS     FALSE      // If TRUE, Castform and Cherrim gain FORM_CHANGE_OVERWORLD_WEATHER, which will make them transform in the overworld based on the weather.
-#define OW_FOLLOWERS_COPY_WILD_PKMN    FALSE      // If TRUE, follower Pokémon that know Transform or have Illusion/Imposter will copy wild Pokémon at random.
+#define OW_FOLLOWERS_COPY_WILD_PKMN    TRUE       // If TRUE, follower Pokémon that know Transform or have Illusion/Imposter will copy wild Pokémon at random.
 
 // New/old handling for followers during scripts;
 // TRUE: Script collisions hide follower, FLAG_SAFE_FOLLOWER_MOVEMENT on by default
@@ -103,7 +108,7 @@
 
 // Time
 #define OW_TIMES_OF_DAY                 GEN_LATEST // Different generations have the times of day change at different times.
-#define OW_USE_FAKE_RTC                 FALSE      // When TRUE, seconds on the in-game clock will only advance once every 60 playTimeVBlanks (every 60 frames).
+#define OW_USE_FAKE_RTC                 TRUE     // When TRUE, seconds on the in-game clock will only advance once every 60 playTimeVBlanks (every 60 frames).
 #define OW_ALTERED_TIME_RATIO           GEN_LATEST // In GEN_8_PLA, the time in game moves forward 60 seconds for every second in the RTC. In GEN_9, it is 20 seconds. This has no effect if OW_USE_FAKE_RTC is FALSE.
 
 // Lighting
@@ -114,15 +119,25 @@
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define OW_FLAG_PAUSE_TIME          0  // If this flag is set and OW_USE_FAKE_RTC is enabled, seconds on the in-game clock will not advance.
-#define OW_FLAG_NO_ENCOUNTER        0  // If this flag is set, wild encounters will be disabled.
+#define OW_FLAG_NO_ENCOUNTER        0x20  // If this flag is set, wild encounters will be disabled.
 #define OW_FLAG_NO_TRAINER_SEE      0  // If this flag is set, trainers will not battle the player unless they're talked to.
-#define OW_FLAG_NO_COLLISION        0  // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
-#define OW_FLAG_POKE_RIDER          0  // If this flag is set, the player will be able to use fly from the Pokenav Region Map and the Town Map key item by pressing 'R' on a city/location they are able to fly to.
+#define OW_FLAG_NO_COLLISION        FLAG_UNUSED_0x95E  // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
+
+// Auto HM flags
+#define OW_FLAG_AUTO_HMS                   TRUE             // If this flag is set, the game will attempt to use HMs when they are contextually relevant; ie, facing a cuttable tree or in dark caves.
+#define OW_FLAG_AUTO_USE_CUT               OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 1 and the HM Cut, the game will attempt to auto-use Cut when facing cuttable trees.
+#define OW_FLAG_AUTO_USE_FLASH             OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 2 and the HM Flash, the game will attempt to auto-use Flash in dark caves.
+#define OW_FLAG_AUTO_USE_ROCK_SMASH        OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 3 and the HM Rock Smash, the game will attempt to auto-use Rock Smash when facing breakable rocks.
+#define OW_FLAG_AUTO_USE_STRENGTH          OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 4 and the HM Strength, the game will attempt to auto-use Strength when facing pushable rocks.
+#define OW_FLAG_AUTO_USE_SURF              OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 5 and the HM Surf, the game will attempt to auto-use Surf when facing surfable water.
+#define OW_FLAG_AUTO_USE_FLY               OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 6 and the HM Fly, the player can use Fly from the PokeNav Map directly. // will need testing
+#define OW_FLAG_AUTO_USE_WATERFALL         OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 7 and the HM Waterfall, the game will attempt to auto-use Waterfall when facing a climbable waterfall.
+#define OW_FLAG_AUTO_USE_DIVE              OW_FLAG_AUTO_HMS // If this flag is set, if the player has Badge 8 and the HM Dive, the game will attempt to auto-use Dive when A or B is pressed on or in deeper water.
 
 #define BATTLE_PYRAMID_RANDOM_ENCOUNTERS    FALSE    // If set to TRUE, battle pyramid Pokemon will be generated randomly based on the round's challenge instead of hardcoded in src/data/battle_frontier/battle_pyramid_level_50_wild_mons.h (or open_level_wild_mons.h)
 
 // Map pop-up config
-#define OW_POPUP_GENERATION        GEN_3    // Different generations display location names in overworld pop-ups differently.
+#define OW_POPUP_GENERATION        GEN_5    // Different generations display location names in overworld pop-ups differently.
                                             // Only choices are currently GEN_3 and GEN_5, all others will default to Gen3 pop-ups.
 
 // Gen5 map pop-up config
@@ -136,8 +151,8 @@
 
 // Configuration
 #define OW_POPUP_BW_COLOR          OW_POPUP_BW_COLOR_BLACK  // B2W2 use different colors for their map pop-ups.
-#define OW_POPUP_BW_TIME_MODE      OW_POPUP_BW_TIME_NONE    // Determines what type of time is shown.
-#define OW_POPUP_BW_ALPHA_BLEND    FALSE                    // Enables alpha blending/transparency for the pop-ups. Mainly intended to be used with the black color option.
+#define OW_POPUP_BW_TIME_MODE      OW_POPUP_BW_TIME_24_HR   // Determines what type of time is shown.
+#define OW_POPUP_BW_ALPHA_BLEND    TRUE                     // Enables alpha blending/transparency for the pop-ups. Mainly intended to be used with the black color option.
 
 // Pokémon Center
 #define OW_IGNORE_EGGS_ON_HEAL           GEN_LATEST         // In Gen 4+, the nurse in the Pokémon Center does not heal Eggs on healing machine.

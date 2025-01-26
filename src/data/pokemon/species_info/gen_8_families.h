@@ -3795,13 +3795,13 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_CLOBBOPUS
     [SPECIES_CLOBBOPUS] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 68,
+        .baseHP        = 60,
+        .baseAttack    = 78,
         .baseDefense   = 60,
-        .baseSpeed     = 32,
+        .baseSpeed     = 40,
         .baseSpAttack  = 50,
-        .baseSpDefense = 50,
-        .types = MON_TYPES(TYPE_FIGHTING),
+        .baseSpDefense = 60,
+        .types = MON_TYPES(TYPE_FIGHTING, TYPE_WATER),
         .catchRate = 180,
         .expYield = 62,
         .evYield_Attack = 1,
@@ -3860,12 +3860,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     [SPECIES_GRAPPLOCT] =
     {
         .baseHP        = 80,
-        .baseAttack    = 118,
-        .baseDefense   = 90,
-        .baseSpeed     = 42,
+        .baseAttack    = 120,
+        .baseDefense   = 100,
+        .baseSpeed     = 70,
         .baseSpAttack  = 70,
         .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_FIGHTING),
+        .types = MON_TYPES(TYPE_FIGHTING, TYPE_WATER),
         .catchRate = 45,
         .expYield = 168,
         .evYield_Attack = 2,

@@ -296,8 +296,27 @@ EventScript_UseWaterfall::
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
 
-EventScript_CannotUseWaterfall::
+EventScript_AutoUseWaterfall::
+	bufferpartymonnick STR_VAR_1, 0
+	setfieldeffectargument 0, 0
+	msgbox Text_WantToWaterfall, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
+	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_WATERFALL
+	releaseall
+	end
+
+EventScript_AutoUseConsecutiveWaterfall::
+	bufferpartymonnick STR_VAR_1, 0
+	setfieldeffectargument 0, 0
 	lockall
+	dofieldeffect FLDEFF_USE_WATERFALL
+	end
+
+EventScript_CannotUseWaterfall::
+	releaseall
+	end
 
 EventScript_CantWaterfall::
 	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
@@ -331,6 +350,18 @@ EventScript_UseDive::
 	goto EventScript_EndDive
 	end
 
+EventScript_AutoUseDive::
+	bufferpartymonnick STR_VAR_1, 0
+	setfieldeffectargument 0, 0
+	setfieldeffectargument 1, 0
+	msgbox Text_WantToDive, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_DIVE
+	goto EventScript_EndDive
+	end
+
+
 EventScript_CantDive::
 	msgbox Text_CantDive, MSGBOX_DEFAULT
 	releaseall
@@ -344,9 +375,21 @@ EventScript_UseDiveUnderwater::
 	lockall
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, 0
 	setfieldeffectargument 0, VAR_RESULT
-	setfieldeffectargument 1, 1
+	setfieldeffectargument 1, 0
+	msgbox Text_WantToSurface, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_DIVE
+	goto EventScript_EndSurface
+	end
+
+EventScript_AutoUseDiveUnderwater::
+	lockall
+	bufferpartymonnick STR_VAR_1, 0
+	setfieldeffectargument 0, 0
+	setfieldeffectargument 1, 0
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT

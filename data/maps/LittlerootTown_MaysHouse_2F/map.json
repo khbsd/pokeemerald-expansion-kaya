@@ -12,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
@@ -197,17 +197,17 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_PICHU_DOLL",
-      "x": 3,
-      "y": 4,
+      "graphics_id": "OBJ_EVENT_GFX_UNUSED_PORYGON2_DOLL",
+      "x": 8,
+      "y": 6,
       "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL"
+      "script": "LittlerootTown_PlayersHouse_Porygon2DollInteract",
+      "flag": "FLAG_KAYA_DOLL_APPEAR"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -232,7 +232,9 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
@@ -248,7 +250,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PlayersHouse_2F_EventScript_Notebook"
+      "script": "LittlerootTown_PlayersHouse_IsNameKaya"
     },
     {
       "type": "sign",

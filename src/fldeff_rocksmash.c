@@ -23,8 +23,6 @@ static void Task_DoFieldMove_Init(u8 taskId);
 static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId);
 static void Task_DoFieldMove_WaitForMon(u8 taskId);
 static void Task_DoFieldMove_RunFunc(u8 taskId);
-
-static void FieldCallback_RockSmash(void);
 static void FieldMove_RockSmash(void);
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
@@ -143,7 +141,7 @@ bool8 SetUpFieldMove_RockSmash(void)
     }
 }
 
-static void FieldCallback_RockSmash(void)
+void FieldCallback_RockSmash(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext_SetupScript(EventScript_UseRockSmash);

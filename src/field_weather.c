@@ -904,7 +904,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
             gPlttBufferUnfaded + OBJ_PLTT_ID(spritePaletteIndex),
             gDecompressionBuffer + 2 * OBJ_PLTT_ID(spritePaletteIndex),
             PLTT_SIZE_4BPP
-        );
+        ); 
     */
 }
 

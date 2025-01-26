@@ -9,6 +9,7 @@
 #include "field_screen_effect.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "fldeff.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -37,6 +38,8 @@
 static EWRAM_DATA u8 sSpinStartFacingDir = 0;
 EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
+
+EWRAM_DATA bool8 gRunToggled = FALSE;
 
 // static declarations
 
@@ -674,6 +677,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             gPlayerAvatar.creeping = TRUE;
             PlayerWalkSlow(direction);
         }
+        else if (((heldKeys & B_BUTTON) || gRunToggled) && SURF_RUNNING)
+            PlayerWalkFaster(direction);
         else
         {
             // speed 2 is fast, same speed as running
@@ -682,8 +687,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
-     && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
+    if (((heldKeys & B_BUTTON) || (gRunToggled)) && FlagGet(FLAG_SYS_B_DASH)
+        && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
             PlayerRunSlow(direction);
@@ -754,6 +759,17 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         CheckAcroBikeCollision(x, y, metatileBehavior, &collision);
     }
 
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) && OW_FLAG_AUTO_USE_CUT)
+        AutoUseCut();
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) && OW_FLAG_AUTO_USE_ROCK_SMASH)
+        AutoUseRockSmash();
+    if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
+        AutoUseSurf();
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
+        AutoUseStrength();
+    if (IsPlayerFacingClimbableWaterfall())
+        AutoUseWaterfall();
+
     return collision;
 }
 
@@ -780,9 +796,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
         return TRUE;
     }
     else
-    {
         return FALSE;
-    }
 }
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
@@ -805,13 +819,14 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
             y = gObjectEvents[objectEventId].currentCoords.y;
             MoveCoords(direction, &x, &y);
             if (GetCollisionAtCoords(&gObjectEvents[objectEventId], x, y, direction) == COLLISION_NONE
-             && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y)) == FALSE)
+                && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y)) == FALSE)
             {
                 StartStrengthAnim(objectEventId, direction);
                 return TRUE;
             }
         }
     }
+
     return FALSE;
 }
 
@@ -1019,11 +1034,11 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
 // slow
 static void PlayerWalkSlow(u8 direction)
 {
-    PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), COPY_MOVE_WALK);
 }
 static void PlayerRunSlow(u8 direction)
 {
-    PlayerSetAnimId(GetPlayerRunSlowMovementAction(direction), 2);
+    PlayerSetAnimId(GetPlayerRunSlowMovementAction(direction), COPY_MOVE_WALK);
 }
 
 // normal speed (1 speed)
@@ -1048,6 +1063,11 @@ void PlayerWalkFaster(u8 direction)
 }
 
 static void PlayerRun(u8 direction)
+{
+    PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
+}
+
+void PlayerSurfFaster(u8 direction)
 {
     PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
 }
@@ -1369,6 +1389,23 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
      && PlayerGetElevation() == 3
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsPlayerFacingClimbableWaterfall(void)
+{
+    struct ObjectEvent* playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    MoveCoords(playerObjEvent->facingDirection, &x, &y);
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        PlaySE(SE_M_REVERSAL);
+        return TRUE;
+    }
+        
     else
         return FALSE;
 }

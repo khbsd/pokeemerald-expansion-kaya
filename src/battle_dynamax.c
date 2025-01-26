@@ -75,49 +75,52 @@ bool32 CanDynamax(u32 battler)
 {
     u16 species = gBattleMons[battler].species;
     u16 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Prevents Zigzagoon from dynamaxing in vanilla.
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        return FALSE;
-
-    // Check if Player has a Dynamax Band.
-    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
+    if (B_DYNAMAX_BAND)
     {
-        if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
+        // Prevents Zigzagoon from dynamaxing in vanilla.
+        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
             return FALSE;
-        if (B_FLAG_DYNAMAX_BATTLE == 0 || (B_FLAG_DYNAMAX_BATTLE != 0 && !FlagGet(B_FLAG_DYNAMAX_BATTLE)))
+
+        // Check if Player has a Dynamax Band.
+        if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
+            || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
+        {
+            if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
+                return FALSE;
+            if (B_FLAG_DYNAMAX_BATTLE == 0 || (B_FLAG_DYNAMAX_BATTLE != 0 && !FlagGet(B_FLAG_DYNAMAX_BATTLE)))
+                return FALSE;
+        }
+
+        // Check if species isn't allowed to Dynamax.
+        if (GET_BASE_SPECIES_ID(species) == SPECIES_ZACIAN
+            || GET_BASE_SPECIES_ID(species) == SPECIES_ZAMAZENTA
+            || GET_BASE_SPECIES_ID(species) == SPECIES_ETERNATUS)
             return FALSE;
+
+        // Check if Trainer has already Dynamaxed.
+        if (HasTrainerUsedGimmick(battler, GIMMICK_DYNAMAX))
+            return FALSE;
+
+        // Check if AI battler is intended to Dynamaxed.
+        if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_DYNAMAX))
+            return FALSE;
+
+        // Check if battler has another gimmick active.
+        if (GetActiveGimmick(battler) != GIMMICK_NONE)
+            return FALSE;
+
+        // Check if battler is holding a Z-Crystal or Mega Stone.
+        if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE))  // tests make this check already
+            return FALSE;
+
+        // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
+        // if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battler)
+        //    return FALSE;
+
+        // No checks failed, all set!
+        return TRUE;
     }
-
-    // Check if species isn't allowed to Dynamax.
-    if (GET_BASE_SPECIES_ID(species) == SPECIES_ZACIAN
-        || GET_BASE_SPECIES_ID(species) == SPECIES_ZAMAZENTA
-        || GET_BASE_SPECIES_ID(species) == SPECIES_ETERNATUS)
-        return FALSE;
-
-    // Check if Trainer has already Dynamaxed.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_DYNAMAX))
-        return FALSE;
-
-    // Check if AI battler is intended to Dynamaxed.
-    if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_DYNAMAX))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE)
-        return FALSE;
-
-    // Check if battler is holding a Z-Crystal or Mega Stone.
-    if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE))  // tests make this check already
-        return FALSE;
-
-    // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
-    // if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battler)
-    //    return FALSE;
-
-    // No checks failed, all set!
-    return TRUE;
+    return FALSE;
 }
 
 // Returns whether a battler is transformed into a Gigantamax form.
@@ -646,9 +649,9 @@ void BS_SetMaxMoveEffect(void)
                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
                 gFieldStatuses |= statusFlag;
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-                    gFieldTimers.terrainTimer = 8;
+                    gFieldTimers.terrainTimer = gBattleTurnCounter + 8;
                 else
-                    gFieldTimers.terrainTimer = 5;
+                    gFieldTimers.terrainTimer = gBattleTurnCounter + 5;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
                 effect++;
@@ -665,7 +668,7 @@ void BS_SetMaxMoveEffect(void)
             {
                 u32 moveType = GetMoveType(gCurrentMove);
                 gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-                gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
+                gSideTimers[side].damageNonTypesTimer = gBattleTurnCounter + 5; // damage is dealt for 4 turns, ends on 5th
                 gSideTimers[side].damageNonTypesType = moveType;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 ChooseDamageNonTypesString(moveType);
@@ -708,9 +711,9 @@ void BS_SetMaxMoveEffect(void)
             {
                 gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
-                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 8;
+                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 8;
                 else
-                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
+                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = gBattleTurnCounter + 5;
                 gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -722,7 +725,7 @@ void BS_SetMaxMoveEffect(void)
             if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
             {
                 gFieldStatuses |= STATUS_FIELD_GRAVITY;
-                gFieldTimers.gravityTimer = 5;
+                gFieldTimers.gravityTimer = gBattleTurnCounter + 5;
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
                 effect++;
