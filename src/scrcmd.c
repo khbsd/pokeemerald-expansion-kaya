@@ -14,6 +14,7 @@
 #include "event_data.h"
 #include "field_door.h"
 #include "field_effect.h"
+#include "gpu_regs.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -836,27 +837,19 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 
     switch (mode)
     {
-    case FADE_TO_BLACK:
-    case FADE_TO_WHITE:
-    default:
-        if (sPalBuffer == NULL)
-        {
-            sPalBuffer = Alloc(PLTT_SIZE);
-            CpuCopy32(gPlttBufferUnfaded, sPalBuffer, PLTT_SIZE);
-            FadeScreen(mode, 0);
-        }
-        break;
     case FADE_FROM_BLACK:
     case FADE_FROM_WHITE:
-        if (sPalBuffer != NULL)
-        {
-            CpuCopy32(sPalBuffer, gPlttBufferUnfaded, PLTT_SIZE);
-            FadeScreen(mode, 0);
-            FREE_AND_SET_NULL(sPalBuffer);
-        }
+        // Restore last weather blend before fading in,
+        // since BLDALPHA was modified by fade-out
+        SetGpuReg(
+            REG_OFFSET_BLDALPHA,
+            BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB)
+        );
         break;
     }
 
+    FadeScreenHardware(mode, 0);
+    
     if (nowait)
         return FALSE;
     SetupNativeScript(ctx, IsPaletteNotActive);

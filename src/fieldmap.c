@@ -890,9 +890,13 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         {
             // LoadPalette(&black, destOffset, 2);
             if (skipFaded)
-                CpuFastCopy(tileset->palettes, &gPlttBufferUnfaded[destOffset], size);
+            {
+                CpuFastCopy(tileset->palettes, &gPlttBufferUnfaded[destOffset], size); // always word-aligned
+            }
             else
+            {
                 LoadPaletteFast(tileset->palettes, destOffset, size);
+            }
             gPlttBufferFaded[destOffset] = gPlttBufferUnfaded[destOffset] = RGB_BLACK; // why does it have to be black?
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
             low = 0;
@@ -900,12 +904,16 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         }
         else if (tileset->isSecondary == TRUE)
         {
-            // (void*) is to silence 'source potentially unaligned' error
-            // All 'gTilesetPalettes_' arrays should have ALIGNED(4) in them
+            // All 'gTilesetPalettes_' arrays should have ALIGNED(4) in them,
+            // but we use SmartCopy here just in case they don't
             if (skipFaded)
-                CpuFastCopy((void*)tileset->palettes[NUM_PALS_IN_PRIMARY], &gPlttBufferUnfaded[destOffset], size);
+            {
+                CpuCopy16(tileset->palettes[NUM_PALS_IN_PRIMARY], &gPlttBufferUnfaded[destOffset], size);
+            }
             else
+            {
                 LoadPaletteFast(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
+            }
             low = NUM_PALS_IN_PRIMARY;
             high = NUM_PALS_TOTAL;
         }
