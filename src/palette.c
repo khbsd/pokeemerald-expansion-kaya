@@ -2,6 +2,7 @@
 #include "palette.h"
 #include "util.h"
 #include "decompress.h"
+#include "field_weather.h"
 #include "malloc.h"
 #include "menu.h"
 #include "gpu_regs.h"

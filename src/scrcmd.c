@@ -844,12 +844,6 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
             REG_OFFSET_BLDALPHA,
             BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB)
         );
-        // Restore last weather blend before fading in,
-        // since BLDALPHA was modified by fade-out
-        SetGpuReg(
-            REG_OFFSET_BLDALPHA,
-            BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB)
-        );
         break;
     }
 
