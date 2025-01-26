@@ -10034,6 +10034,10 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
         usesDefStat = FALSE;
     }
 
+    // if defender is poisoned and their def stage isn't already at the lowest it can be, poison lowers def stage by 1
+    if (gBattleMons[battlerDef].status1 & STATUS1_POISON && defStage > MIN_STAT_STAGE)
+        defStage -= 1;
+
     // Self-destruct / Explosion cut defense in half
     if (B_EXPLOSION_DEFENSE < GEN_5 && moveEffect == EFFECT_EXPLOSION)
         defStat /= 2;
