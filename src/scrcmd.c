@@ -827,7 +827,7 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
     return TRUE;
 }
 
-static EWRAM_DATA u32 *sPalBuffer = NULL;
+// static EWRAM_DATA u32 *sPalBuffer = NULL;
 
 bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 {

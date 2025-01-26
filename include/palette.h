@@ -46,11 +46,13 @@ struct BlendSettings
     u32 unused:2;
 };
 
-struct __attribute__((packed)) TimeBlendSettings {
-  struct BlendSettings bld0;
-  struct BlendSettings bld1;
-  u16 weight;
-  u16 altWeight;
+// struct __attribute__((packed)) TimeBlendSettings {
+struct TimeBlendSettings 
+{
+    struct BlendSettings bld0;
+    struct BlendSettings bld1;
+    u16 weight;
+    u16 altWeight;
 };
 
 struct PaletteFadeControl
