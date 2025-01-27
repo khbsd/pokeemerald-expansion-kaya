@@ -511,8 +511,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_OSHAWOTT
     [SPECIES_OSHAWOTT] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 55,
+        .baseHP        = 60,
+        .baseAttack    = 60,
         .baseDefense   = 45,
         .baseSpeed     = 45,
         .baseSpAttack  = 63,
@@ -526,7 +526,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+        .abilities = { ABILITY_TORRENT, ABILITY_SHARPNESS, ABILITY_SHELL_ARMOR },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Oshawott"),
         .cryId = CRY_OSHAWOTT,
@@ -583,13 +583,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_DEWOTT] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 75,
+        .baseHP        = 85,
+        .baseAttack    = 85,
         .baseDefense   = 60,
-        .baseSpeed     = 60,
+        .baseSpeed     = 70,
         .baseSpAttack  = 83,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_WATER),
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_WATER, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = 145,
         .evYield_SpAttack = 2,
@@ -598,7 +598,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+        .abilities = { ABILITY_TORRENT, ABILITY_SHARPNESS, ABILITY_SHELL_ARMOR },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Dewott"),
         .cryId = CRY_DEWOTT,
@@ -653,13 +653,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_SAMUROTT] =
     {
-        .baseHP        = 95,
-        .baseAttack    = 100,
+        .baseHP        = 105,
+        .baseAttack    = 110,
         .baseDefense   = 85,
-        .baseSpeed     = 70,
+        .baseSpeed     = 90,
         .baseSpAttack  = 108,
         .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_WATER),
+        .types = MON_TYPES(TYPE_WATER, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 264 : 238,
         .evYield_SpAttack = 3,
@@ -668,7 +668,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+        .abilities = { ABILITY_TORRENT, ABILITY_SHARPNESS, ABILITY_SHELL_ARMOR },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Samurott"),
         .cryId = CRY_SAMUROTT,
@@ -720,10 +720,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_HISUIAN_FORMS
     [SPECIES_SAMUROTT_HISUI] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 108,
+        .baseHP        = 100,
+        .baseAttack    = 118,
         .baseDefense   = 80,
-        .baseSpeed     = 85,
+        .baseSpeed     = 95,
         .baseSpAttack  = 100,
         .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_WATER, TYPE_DARK),
