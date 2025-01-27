@@ -75,8 +75,12 @@ struct SpeciesItem
 
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
+
+#if BOX_ENCRYPTION == TRUE
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DecryptBoxMon(struct BoxPokemon *boxMon);
+#endif // BOX_ENCRYPTION
+
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static bool8 ShouldSkipFriendshipChange(void);
 void TrySpecialOverworldEvo();
@@ -1180,7 +1184,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     checksum = CalculateBoxMonChecksum(boxMon);
     SetBoxMonData(boxMon, MON_DATA_CHECKSUM, &checksum);
-    #if BOX_ENCRYPTION
+    #if BOX_ENCRYPTION == TRUE
         EncryptBoxMon(boxMon);
     #endif // BOX_ENCRYPTION
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
@@ -2235,30 +2239,27 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
     gMultiuseSpriteTemplate.anims = gAnims_Trainer;
 }
-
+#if BOX_ENCRYPTION == TRUE
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
 {
-    #if BOX_ENCRYPTION
-        u32 i;
-        for (i = 0; i < ARRAY_COUNT(boxMon->secure.raw); i++)
-        {
-            boxMon->secure.raw[i] ^= boxMon->personality;
-            boxMon->secure.raw[i] ^= boxMon->otId;
-        }
-    #endif // BOX_ENCRYPTION
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(boxMon->secure.raw); i++)
+    {
+        boxMon->secure.raw[i] ^= boxMon->personality;
+        boxMon->secure.raw[i] ^= boxMon->otId;
+    }
 }
 
 static void DecryptBoxMon(struct BoxPokemon *boxMon)
 {
-    #if BOX_ENCRYPTION
-        u32 i;
-        for (i = 0; i < ARRAY_COUNT(boxMon->secure.raw); i++)
-        {
-            boxMon->secure.raw[i] ^= boxMon->otId;
-            boxMon->secure.raw[i] ^= boxMon->personality;
-        }
-    #endif // BOX_ENCRYPTION
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(boxMon->secure.raw); i++)
+    {
+        boxMon->secure.raw[i] ^= boxMon->otId;
+        boxMon->secure.raw[i] ^= boxMon->personality;
+    }
 }
+#endif // BOX_ENCRYPTION
 
 #define SUBSTRUCT_CASE(n, v1, v2, v3, v4)                               \
 case n:                                                                 \
@@ -2420,7 +2421,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
         substruct3 = &(GetSubstruct(boxMon, boxMon->personality, 3)->type3);
 
-        #if BOX_ENCRYPTION
+        #if BOX_ENCRYPTION == TRUE
             DecryptBoxMon(boxMon);
         #endif // BOX_ENCRYPTION
 
@@ -2871,10 +2872,12 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         }
     }
 
-    if (field > MON_DATA_ENCRYPT_SEPARATOR)
-        #if BOX_ENCRYPTION
-            EncryptBoxMon(boxMon);
-        #endif // BOX_ENCRYPTION
+        if (field > MON_DATA_ENCRYPT_SEPARATOR)
+        {
+            #if BOX_ENCRYPTION == TRUE
+                EncryptBoxMon(boxMon);
+            #endif // BOX_ENCRYPTION
+        }
 
     return retVal;
 }
@@ -2962,7 +2965,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
         substruct3 = &(GetSubstruct(boxMon, boxMon->personality, 3)->type3);
 
-        #if BOX_ENCRYPTION
+        #if BOX_ENCRYPTION == TRUE
             DecryptBoxMon(boxMon);
         #endif // BOX_ENCRYPTION
         
@@ -2971,7 +2974,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             boxMon->isBadEgg = TRUE;
             boxMon->isEgg = TRUE;
             substruct3->isEgg = TRUE;
-            #if BOX_ENCRYPTION
+            #if BOX_ENCRYPTION == TRUE
                 EncryptBoxMon(boxMon);
             #endif // BOX_ENCRYPTION
             return;
@@ -3306,7 +3309,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
         boxMon->checksum = CalculateBoxMonChecksum(boxMon);
-        #if BOX_ENCRYPTION
+        #if BOX_ENCRYPTION == TRUE
             EncryptBoxMon(boxMon);
         #endif // BOX_ENCRYPTION
     }
@@ -6948,14 +6951,16 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
     new2 = &(GetSubstruct(boxMon, personality, 2)->type2);
     new3 = &(GetSubstruct(boxMon, personality, 3)->type3);
 
-    DecryptBoxMon(&old);
+    #if BOX_ENCRYPTION == TRUE
+        DecryptBoxMon(&old);
+    #endif // BOX_ENCRYPTION
     boxMon->personality = personality;
     *new0 = *old0;
     *new1 = *old1;
     *new2 = *old2;
     *new3 = *old3;
     boxMon->checksum = CalculateBoxMonChecksum(boxMon);
-    #if BOX_ENCRYPTION
+    #if BOX_ENCRYPTION == TRUE
         EncryptBoxMon(boxMon);
     #endif // BOX_ENCRYPTION
 
