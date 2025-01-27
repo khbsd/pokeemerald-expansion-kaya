@@ -1134,7 +1134,7 @@ void PrepareStringBattle(u16 stringId, u32 battler)
     }
 
     if ((stringId == STRINGID_ITDOESNTAFFECT || stringId == STRINGID_PKMNWASNTAFFECTED || stringId == STRINGID_PKMNUNAFFECTED))
-        TryInitalizeTrainerSlideEnemyMonUnaffected(gBattlerTarget);
+        TryInitializeTrainerSlideEnemyMonUnaffected(gBattlerTarget);
 
     BtlController_EmitPrintString(battler, BUFFER_A, stringId);
     MarkBattlerForControllerExec(battler);
@@ -3135,6 +3135,20 @@ static inline bool32 TryFormChangeBeforeMove(void)
     return TRUE;
 }
 
+static inline bool32 TryActivatePowderStatus(u32 move)
+{
+    u32 partnerMove = gBattleMons[BATTLE_PARTNER(gBattlerAttacker)].moves[gBattleStruct->chosenMovePositions[BATTLE_PARTNER(gBattlerAttacker)]];
+    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER))
+        return FALSE;
+    if (GetBattleMoveType(move) == TYPE_FIRE && !gBattleStruct->pledgeMove)
+        return TRUE;
+    if (move == MOVE_FIRE_PLEDGE && partnerMove == MOVE_GRASS_PLEDGE)
+        return TRUE;
+    if (move == MOVE_GRASS_PLEDGE && partnerMove == MOVE_FIRE_PLEDGE && gBattleStruct->pledgeMove)
+        return TRUE;
+    return FALSE;
+}
+
 void SetAtkCancellerForCalledMove(void)
 {
     gBattleStruct->atkCancellerTracker = CANCELLER_HEAL_BLOCKED;
@@ -3550,7 +3564,7 @@ static void CancellerWeatherPrimal(u32 *effect)
     if (HasWeatherEffect() && GetMovePower(gCurrentMove) > 0)
     {
         u32 moveType = GetBattleMoveType(gCurrentMove);
-        if (moveType == TYPE_FIRE && (gBattleWeather & B_WEATHER_RAIN_PRIMAL))
+        if (moveType == TYPE_FIRE && (gBattleWeather & B_WEATHER_RAIN_PRIMAL) && (B_POWDER_RAIN >= GEN_7 || !TryActivatePowderStatus(gCurrentMove)))
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN;
             *effect = 1;
@@ -3604,24 +3618,17 @@ static void CancellerPowderMove(u32 *effect)
 
 static void CancellerPowderStatus(u32 *effect)
 {
-    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
+    if (TryActivatePowderStatus(gCurrentMove))
     {
-        u32 partnerMove = gBattleMons[BATTLE_PARTNER(gBattlerAttacker)].moves[gBattleStruct->chosenMovePositions[BATTLE_PARTNER(gBattlerAttacker)]];
-        if ((GetBattleMoveType(gCurrentMove) == TYPE_FIRE && !gBattleStruct->pledgeMove)
-         || (gCurrentMove == MOVE_FIRE_PLEDGE && partnerMove == MOVE_GRASS_PLEDGE)
-         || (gCurrentMove == MOVE_GRASS_PLEDGE && partnerMove == MOVE_FIRE_PLEDGE && gBattleStruct->pledgeMove))
-        {
-            gProtectStructs[gBattlerAttacker].powderSelfDmg = TRUE;
-            if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
-             && (B_POWDER_RAIN < GEN_7 || !IsBattlerWeatherAffected(gBattlerAttacker, B_WEATHER_RAIN_PRIMAL)))
-                gBattleStruct->moveDamage[gBattlerAttacker] = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+        gProtectStructs[gBattlerAttacker].powderSelfDmg = TRUE;
+        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+            gBattleStruct->moveDamage[gBattlerAttacker] = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
 
-            if (GetActiveGimmick(gBattlerAttacker) != GIMMICK_Z_MOVE
-             || HasTrainerUsedGimmick(gBattlerAttacker, GIMMICK_Z_MOVE))
-                gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
-            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-            *effect = 1;
-        }
+        if (GetActiveGimmick(gBattlerAttacker) != GIMMICK_Z_MOVE
+         || HasTrainerUsedGimmick(gBattlerAttacker, GIMMICK_Z_MOVE))
+            gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
+        gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+        *effect = 1;
     }
 }
 
@@ -4058,9 +4065,9 @@ static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u16 *timer)
         gDisableStructs[battler].terrainAbilityDone = FALSE;
 
         if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-            *timer = 8;
+            *timer = gBattleTurnCounter + 8;
         else
-            *timer = 5;
+            *timer = gBattleTurnCounter + 5;
 
         gBattleScripting.battler = battler;
         return TRUE;
@@ -7164,6 +7171,7 @@ static enum ItemEffect TryEjectPack(u32 battler, enum ItemCaseId caseID)
     {
         gProtectStructs[battler].statFell = FALSE;
         gBattleScripting.battler = battler;
+        AI_DATA->ejectPackSwitch = TRUE;
         if (caseID == ITEMEFFECT_ON_SWITCH_IN_FIRST_TURN)
         {
             BattleScriptExecute(BattleScript_EjectPackActivate_End2);
@@ -9273,7 +9281,7 @@ static inline u32 CalcMoveBasePower(struct DamageCalculationData *damageCalcData
             basePower *= 2;
         break;
     case EFFECT_EXPLOSION:
-        if (move == MOVE_MISTY_EXPLOSION && gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && IsBattlerGrounded(battlerAtk))
+        if (move == MOVE_MISTY_EXPLOSION && IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_MISTY_TERRAIN))
             basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
         break;
     case EFFECT_DYNAMAX_DOUBLE_DMG:
@@ -9300,8 +9308,7 @@ static inline u32 CalcMoveBasePower(struct DamageCalculationData *damageCalcData
             basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
         break;
     case EFFECT_TERRAIN_PULSE:
-        if ((gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-            && IsBattlerGrounded(battlerAtk))
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_TERRAIN_ANY))
             basePower *= 2;
         break;
     case EFFECT_EXPANDING_FORCE:
@@ -9317,7 +9324,7 @@ static inline u32 CalcMoveBasePower(struct DamageCalculationData *damageCalcData
             basePower = CalcBeatUpPower();
         break;
     case EFFECT_PSYBLADE:
-        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN))
+        if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
             basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
         break;
     case EFFECT_MAX_MOVE:
@@ -10794,7 +10801,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(u32 move, u32 mov
     }
 
     if (recordAbilities)
-        TryInitalizeFirstSTABMoveTrainerSlide(battlerDef, battlerAtk, moveType);
+        TryInitializeFirstSTABMoveTrainerSlide(battlerDef, battlerAtk, moveType);
 
     return modifier;
 }
@@ -11796,7 +11803,7 @@ bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
 {
     if (gBattleWeather & weatherFlags && HasWeatherEffect())
     {
-        // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
+        // given weather is active -> check if its sun, rain against utility umbrella (since only 1 weather can be active at once)
         if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
             return FALSE; // utility umbrella blocks sun, rain effects
 
