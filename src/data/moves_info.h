@@ -4668,18 +4668,23 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Mach Punch"),
         .description = COMPOUND_STRING(
-            "A punch is thrown at wicked\n"
-            "speed to strike first."),
+            "A punch with increasin speed to\n"
+            "strike first and never miss."),
         .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_FIGHTING,
-        .accuracy = 100,
+        .accuracy = 0,
         .pp = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 1,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
+            .self = TRUE,
+            .chance = 10,
+        }),
         .contestEffect = CONTEST_EFFECT_NEXT_APPEAL_EARLIER,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
