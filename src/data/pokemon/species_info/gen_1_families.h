@@ -15627,10 +15627,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_SCIZOR_MEGA] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 150,
+        .baseHP        = 100,
+        .baseAttack    = 140,
         .baseDefense   = 140,
-        .baseSpeed     = 105,
+        .baseSpeed     = 115,
         .baseSpAttack  = 65,
         .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_BUG, TYPE_STEEL),
