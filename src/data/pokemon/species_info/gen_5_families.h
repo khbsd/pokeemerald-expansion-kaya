@@ -2362,7 +2362,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 45,
         .baseSpAttack  = 65,
         //.baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
-        .baseSpDefense = 95
+        .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_ROCK, TYPE_GRASS),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
