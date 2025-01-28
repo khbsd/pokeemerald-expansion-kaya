@@ -398,8 +398,8 @@
 // #define P_FAMILY_SCATTERBUG           P_GEN_6_POKEMON
 #define P_FAMILY_LITLEO                  P_GEN_6_POKEMON
 // #define P_FAMILY_FLABEBE              P_GEN_6_POKEMON
-// #define P_FAMILY_SKIDDO                  P_GEN_6_POKEMON
-// #define P_FAMILY_PANCHAM                 P_GEN_6_POKEMON
+// #define P_FAMILY_SKIDDO               P_GEN_6_POKEMON
+// #define P_FAMILY_PANCHAM              P_GEN_6_POKEMON
 #define P_FAMILY_FURFROU                 P_GEN_6_POKEMON
 #define P_FAMILY_ESPURR                  P_GEN_6_POKEMON
 #define P_FAMILY_HONEDGE                 P_GEN_6_POKEMON
