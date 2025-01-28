@@ -1243,7 +1243,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sSpinarakLevelUpLearnset,
         .teachableLearnset = sSpinarakTeachableLearnset,
         .eggMoveLearnset = sSpinarakEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_ARIADOS}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ARIADOS}),
     },
 
     [SPECIES_ARIADOS] =
@@ -5873,21 +5873,22 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sUrsalunaLevelUpLearnset,
         .teachableLearnset = sUrsalunaTeachableLearnset,
         .formSpeciesIdTable = sUrsalunaFormSpeciesIdTable,
+        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 60, SPECIES_URSARING}),
     },
 
     [SPECIES_URSALUNA_BLOODMOON] =
     {
-        .baseHP        = 113,
-        .baseAttack    = 70,
+        .baseHP        = 115,
+        .baseAttack    = 80,
         .baseDefense   = 120,
-        .baseSpeed     = 52,
+        .baseSpeed     = 80,
         .baseSpAttack  = 135,
-        .baseSpDefense = 65,
-        .types = MON_TYPES(TYPE_GROUND, TYPE_NORMAL),
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_GROUND, TYPE_PSYCHIC),
         .catchRate = 5,
         .expYield = 275,
         .evYield_SpAttack = 3,
-        .genderRatio = MON_MALE,
+        .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
