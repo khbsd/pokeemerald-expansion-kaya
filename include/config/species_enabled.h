@@ -477,7 +477,7 @@
 #define P_FAMILY_GUZZLORD                P_GEN_7_POKEMON
 #define P_FAMILY_NECROZMA                P_GEN_7_POKEMON
 #define P_FAMILY_MAGEARNA                P_GEN_7_POKEMON
-#define P_FAMILY_MARSHADOW               P_GEN_7_POKEMON
+// #define P_FAMILY_MARSHADOW            P_GEN_7_POKEMON
 #define P_FAMILY_POIPOLE                 P_GEN_7_POKEMON
 #define P_FAMILY_STAKATAKA               P_GEN_7_POKEMON
 #define P_FAMILY_BLACEPHALON             P_GEN_7_POKEMON
@@ -691,6 +691,7 @@
 #define P_FAMILY_JANGMO_O				 TRUE
 #define P_FAMILY_COSMOG                  TRUE
 #define P_FAMILY_MELTAN                  TRUE
+#define P_FAMILY_MARSHADOW               TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_7_POKEMON
 
 #if P_KAYAS_CHOICE || P_GEN_8_POKEMON
