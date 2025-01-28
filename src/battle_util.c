@@ -10006,6 +10006,11 @@ static bool32 CanEvolve(u32 species)
     return FALSE;
 }
 
+static inline u32 IsMonPoisoned(u32 battler)
+{
+    return !(gBattleMons[battler].status1 & STATUS1_POISON) || !(gBattleMons[battler].status1 & STATUS1_TOXIC_POISON);
+}
+
 static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, u32 atkAbility, u32 defAbility, u32 holdEffectDef, u32 weather)
 {
     bool32 usesDefStat;
@@ -10042,7 +10047,7 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
     }
 
     // if defender is poisoned and their def stage isn't already at the lowest it can be, poison lowers def stage by 1
-    if (gBattleMons[battlerDef].status1 & STATUS1_POISON && defStage > MIN_STAT_STAGE)
+    if (IsMonPoisoned(battlerDef) && defStage > MIN_STAT_STAGE)
         defStage -= 1;
 
     // Self-destruct / Explosion cut defense in half
@@ -11670,7 +11675,9 @@ bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind)
 
     // Because this command is used as a way of checking if a stat can be lowered/raised,
     // we need to do some modification at run-time.
-    if (GetBattlerAbility(battler) == ABILITY_CONTRARY)
+    // Poison defense stage drop ignores Contrary
+    if (GetBattlerAbility(battler) == ABILITY_CONTRARY 
+        && (!IsMonPoisoned(battler) || (statId != STAT_DEF && statId != STAT_SPDEF)))
     {
         if (cmpKind == CMP_GREATER_THAN)
             cmpKind = CMP_LESS_THAN;
