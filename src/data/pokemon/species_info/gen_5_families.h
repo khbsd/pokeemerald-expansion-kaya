@@ -2207,10 +2207,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseHP        = 55,
         .baseAttack    = 75,
         .baseDefense   = 85,
-        .baseSpeed     = 15,
+        .baseSpeed     = 25,
         .baseSpAttack  = 25,
-        .baseSpDefense = 25,
-        .types = MON_TYPES(TYPE_ROCK),
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_GRASS),
         .catchRate = 255,
         .expYield = 56,
         .evYield_Defense = 1,
@@ -2222,7 +2222,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
     #if P_UPDATED_ABILITIES >= GEN_7
-        .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_STURDY, ABILITY_ROLLING_STONE, ABILITY_SAND_FORCE },
     #else
         .abilities = { ABILITY_STURDY, ABILITY_NONE, ABILITY_SAND_FORCE },
     #endif
@@ -2281,10 +2281,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseHP        = 70,
         .baseAttack    = 105,
         .baseDefense   = 105,
-        .baseSpeed     = 20,
+        .baseSpeed     = 40,
         .baseSpAttack  = 50,
-        .baseSpDefense = 40,
-        .types = MON_TYPES(TYPE_ROCK),
+        .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_GRASS),
         .catchRate = 120,
         .expYield = 137,
         .evYield_Attack = 1,
@@ -2297,7 +2297,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
     #if P_UPDATED_ABILITIES >= GEN_7
-        .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_STURDY, ABILITY_ROLLING_STONE, ABILITY_SAND_FORCE },
     #else
         .abilities = { ABILITY_STURDY, ABILITY_NONE, ABILITY_SAND_FORCE },
     #endif
@@ -2356,13 +2356,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_GIGALITH] =
     {
-        .baseHP        = 85,
+        .baseHP        = 95,
         .baseAttack    = 135,
         .baseDefense   = 130,
-        .baseSpeed     = 25,
-        .baseSpAttack  = 60,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
-        .types = MON_TYPES(TYPE_ROCK),
+        .baseSpeed     = 45,
+        .baseSpAttack  = 65,
+        //.baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
+        .baseSpDefense = 95
+        .types = MON_TYPES(TYPE_ROCK, TYPE_GRASS),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 258,
@@ -2380,7 +2381,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
     #if P_UPDATED_ABILITIES >= GEN_7
-        .abilities = { ABILITY_STURDY, ABILITY_SAND_STREAM, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_STURDY, ABILITY_ROLLING_STONE, ABILITY_SAND_FORCE },
     #else
         .abilities = { ABILITY_STURDY, ABILITY_NONE, ABILITY_SAND_FORCE },
     #endif

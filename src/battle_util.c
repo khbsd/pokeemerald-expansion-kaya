@@ -4322,6 +4322,7 @@ u32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, u32 abilityDef, u32 mov
             effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
         break;
     case ABILITY_SAP_SIPPER:
+    case ABILITY_ROLLING_STONE:
         if (moveType == TYPE_GRASS)
             effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
         break;
@@ -4918,6 +4919,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_ROLLING_STONE:
         case ABILITY_DROUGHT:
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_SUN, TRUE))
             {
@@ -5544,6 +5546,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     break;
                 case ABILITY_SAP_SIPPER:
                 case ABILITY_WIND_RIDER:
+                case ABILITY_ROLLING_STONE:
                     statId = STAT_ATK;
                     break;
                 case ABILITY_WELL_BAKED_BODY:
@@ -10879,7 +10882,8 @@ uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, u8 moveType)
         if ((modifier <= UQ_4_12(1.0)  && abilityDef == ABILITY_WONDER_GUARD)
          || (moveType == TYPE_FIRE     && (abilityDef == ABILITY_FLASH_FIRE
                                        ||  abilityDef == ABILITY_STEAM_ENGINE))
-         || (moveType == TYPE_GRASS    && abilityDef == ABILITY_SAP_SIPPER)
+         || (moveType == TYPE_GRASS    && (abilityDef == ABILITY_SAP_SIPPER
+                                       ||  abilityDef == ABILITY_ROLLING_STONE))
          || (moveType == TYPE_GROUND   && (abilityDef == ABILITY_LEVITATE
                                        ||  abilityDef == ABILITY_EARTH_EATER))
          || (moveType == TYPE_WATER    && (abilityDef == ABILITY_WATER_ABSORB

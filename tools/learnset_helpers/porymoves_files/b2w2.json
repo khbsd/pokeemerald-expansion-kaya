@@ -64220,7 +64220,8 @@
       "MOVE_SUBSTITUTE",
       "MOVE_FLASH_CANNON",
       "MOVE_ROCK_SMASH",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_SOLAR_BEAM"
     ],
     "EggMoves": [
       "MOVE_AUTOTOMIZE",
@@ -64338,7 +64339,8 @@
       "MOVE_SUBSTITUTE",
       "MOVE_FLASH_CANNON",
       "MOVE_ROCK_SMASH",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_SOLAR_BEAM"
     ],
     "EggMoves": [
       "MOVE_AUTOTOMIZE",
@@ -64459,7 +64461,8 @@
       "MOVE_SUBSTITUTE",
       "MOVE_FLASH_CANNON",
       "MOVE_ROCK_SMASH",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_SOLAR_BEAM"
     ],
     "EggMoves": [
       "MOVE_AUTOTOMIZE",

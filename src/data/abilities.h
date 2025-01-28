@@ -2436,4 +2436,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Normal moves become Fighting."),
         .aiRating = 8,
     },
+
+    [ABILITY_ROLLING_STONE] =
+    {
+        .name = _("Rolling Stone"),
+        .description = COMPOUND_STRING("Grass increases Attack."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };
