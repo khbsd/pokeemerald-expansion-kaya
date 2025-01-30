@@ -895,6 +895,13 @@ static inline bool32 IsBattleMoveRecoil(u32 move)
     gBattleMons[battlerId].types[2] = TYPE_MYSTERY;    \
 }
 
+#define SET_BATTLER_TYPE_FAIRY(battlerId, type)              \
+{                                                      \
+    gBattleMons[battlerId].types[0] = type;            \
+    gBattleMons[battlerId].types[1] = TYPE_FAIRY;            \
+    gBattleMons[battlerId].types[2] = TYPE_MYSTERY;    \
+}
+
 #define RESTORE_BATTLER_TYPE(battlerId)                                                        \
 {                                                                                              \
     gBattleMons[battlerId].types[0] = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
