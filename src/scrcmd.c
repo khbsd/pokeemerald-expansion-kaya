@@ -837,6 +837,8 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
     switch (mode)
     {
     case FADE_FROM_BLACK:
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0));
+        break;
     case FADE_FROM_WHITE:
         // Restore last weather blend before fading in,
         // since BLDALPHA was modified by fade-out
@@ -1257,7 +1259,8 @@ bool8 ScrCmd_fadeinbgm(struct ScriptContext *ctx)
     return FALSE;
 }
 
-struct ObjectEvent * ScriptHideFollower(void) {
+struct ObjectEvent * ScriptHideFollower(void)
+{
     struct ObjectEvent *obj = GetFollowerObject();
 
     if (obj == NULL || obj->invisible)
@@ -3119,11 +3122,13 @@ void Script_EndTrainerCanSeeIf(struct ScriptContext *ctx)
         StopScript(ctx);
 }
 
-bool8 ScrFunc_hidefollower(struct ScriptContext *ctx) {
+bool8 ScrFunc_hidefollower(struct ScriptContext *ctx)
+{
     bool16 wait = VarGet(ScriptReadHalfword(ctx));
     struct ObjectEvent *obj;
 
-    if ((obj = ScriptHideFollower()) != NULL && wait) {
+    if ((obj = ScriptHideFollower()) != NULL && wait)
+    {
         sMovingNpcId = obj->localId;
         sMovingNpcMapGroup = obj->mapGroup;
         sMovingNpcMapNum = obj->mapNum;
