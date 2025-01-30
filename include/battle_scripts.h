@@ -170,6 +170,7 @@ extern const u8 BattleScript_RainDishActivates[];
 extern const u8 BattleScript_SandstreamActivates[];
 extern const u8 BattleScript_ShedSkinActivates[];
 extern const u8 BattleScript_IntimidateActivates[];
+extern const u8 BattleScript_TerrifierActivates[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];

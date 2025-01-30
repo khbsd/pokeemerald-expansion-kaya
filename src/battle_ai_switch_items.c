@@ -1750,7 +1750,8 @@ static inline bool32 IsFreeSwitch(bool32 isSwitchAfterKO, u32 battlerSwitchingOu
         {
             u32 opposingAbility = AI_GetBattlerAbility(opposingBattler);
             // If faster, not a free switch; likely lowered own stats
-            if (!movedSecond && opposingAbility != ABILITY_INTIMIDATE && opposingAbility != ABILITY_SUPERSWEET_SYRUP) // Intimidate triggers switches before turn starts
+            if (!movedSecond && opposingAbility != ABILITY_INTIMIDATE && opposingAbility != ABILITY_SUPERSWEET_SYRUP
+                && opposingAbility != ABILITY_TERRIFIER) // Intimidate triggers switches before turn starts
                 return FALSE;
             // Otherwise, free switch
             return TRUE;

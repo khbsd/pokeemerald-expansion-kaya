@@ -405,7 +405,7 @@
 #define P_FAMILY_HONEDGE                 P_GEN_6_POKEMON
 #define P_FAMILY_SPRITZEE                P_GEN_6_POKEMON
 #define P_FAMILY_SWIRLIX                 P_GEN_6_POKEMON
-#define P_FAMILY_INKAY                   P_GEN_6_POKEMON
+// #define P_FAMILY_INKAY                P_GEN_6_POKEMON
 // #define P_FAMILY_BINACLE              P_GEN_6_POKEMON
 // #define P_FAMILY_SKRELP               P_GEN_6_POKEMON
 #define P_FAMILY_CLAUNCHER               P_GEN_6_POKEMON
@@ -661,6 +661,7 @@
 #define P_FAMILY_FLABEBE                 TRUE
 #define P_FAMILY_PANCHAM                 TRUE
 #define P_FAMILY_SKIDDO                  TRUE
+#define P_FAMILY_INKAY                   TRUE
 #define P_FAMILY_BINACLE                 TRUE
 #define P_FAMILY_SKRELP                  TRUE
 #define P_FAMILY_AMAURA                  TRUE

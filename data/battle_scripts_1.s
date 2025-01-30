@@ -7805,6 +7805,69 @@ BattleScript_IntimidateInReverse:
 	call BattleScript_TryIntimidateHoldEffects
 	goto BattleScript_IntimidateLoopIncrement
 
+BattleScript_TerrifierActivates::
+	savetarget
+.if B_ABILITY_POP_UP == TRUE
+	showabilitypopup BS_ATTACKER
+	pause B_WAIT_TIME_LONG
+	destroyabilitypopup
+.endif
+	setbyte gBattlerTarget, 0
+BattleScript_TerriferLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_TerrifierLoopIncrement
+	jumpiftargetally BattleScript_TerrifierLoopIncrement
+	jumpifabsent BS_TARGET, BattleScript_TerrifierLoopIncrement
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_TerrifierLoopIncrement
+.if B_UPDATED_INTIMIDATE >= GEN_8 @These abilties specifically prevent just intimidate, without blocking stat decreases
+	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_SCRAPPY, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
+.endif
+	jumpifability BS_TARGET, ABILITY_GUARD_DOG, BattleScript_TerrifierInReverse
+BattleScript_TerrifierEffect:
+	copybyte sBATTLER, gBattlerAttacker
+	setstatchanger STAT_ATK, 1, TRUE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_TerrifierLoopIncrement
+	setgraphicalstatchangevalues
+	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_IntimidateContrary
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_IntimidateWontDecrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSATTACKWITH
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPEED, 0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_TerrifierTrySpeed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_TerrifierTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TerrifierTrySpeed::
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_DragonDanceEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_DragonDanceEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TerrifierEffect_WaitString:
+	waitmessage B_WAIT_TIME_LONG
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_TryIntimidateHoldEffects
+BattleScript_TerrifierLoopIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TerriferLoop
+	copybyte sBATTLER, gBattlerAttacker
+	destroyabilitypopup
+	restoretarget
+	pause B_WAIT_TIME_MED
+	end3
+
+BattleScript_TerrifierInReverse:
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_AbilityPopUpTarget
+	pause B_WAIT_TIME_SHORT
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_TerrifierLoopIncrement, ANIM_ON
+	call BattleScript_TryIntimidateHoldEffects
+	goto BattleScript_TerrifierLoopIncrement
+
 BattleScript_SupersweetSyrupActivates::
  	savetarget
 .if B_ABILITY_POP_UP == TRUE

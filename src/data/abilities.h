@@ -2440,8 +2440,15 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ROLLING_STONE] =
     {
         .name = _("Rolling Stone"),
-        .description = COMPOUND_STRING("Sunny. Grass increases Attack."),
+        .description = COMPOUND_STRING("Sunny. Grass ups Attack."),
         .aiRating = 7,
         .breakable = TRUE,
+    },
+
+    [ABILITY_TERRIFIER] =
+    {
+        .name = _("Terrifier"),
+        .description = COMPOUND_STRING("Intimidates and raises Speed."),
+        .aiRating = 7,
     },
 };

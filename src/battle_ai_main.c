@@ -3052,7 +3052,8 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     {
                         ADJUST_SCORE(10);
                     }
-                    else if (aiData->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_INTIMIDATE)
+                    else if (aiData->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_INTIMIDATE 
+                             || aiData->abilities[BATTLE_PARTNER(battlerAtk)] == ABILITY_TERRIFIER)
                     {
                         ADJUST_SCORE(DECENT_EFFECT);
                     }
