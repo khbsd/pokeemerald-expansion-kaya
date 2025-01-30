@@ -11,7 +11,3 @@
 2. Ekat (https://www.deviantart.com/ekat99)
 3. Vurtax (FRLG Rips)
 4. Heartlessdragoon (RSE Rips)
-## Mega Evolution Overworld Sprite Credits:
-- [princess-phoenix](https://www.deviantart.com/princess-phoenix)
-- [larryturbo](https://www.deviantart.com/larryturbo)
-- [kidkatt](https://www.deviantart.com/kidkatt)

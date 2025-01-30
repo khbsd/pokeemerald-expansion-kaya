@@ -270,17 +270,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 1,
         SHADOW(3, 11, SHADOW_SIZE_L)
         FOOTPRINT(Sceptile)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_SceptileMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_SceptileMega,
-            gShinyOverworldPalette_SceptileMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSceptileLevelUpLearnset,
         .teachableLearnset = sSceptileTeachableLearnset,
@@ -597,17 +588,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Blaziken)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_BlazikenMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_BlazikenMega,
-            gShinyOverworldPalette_BlazikenMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlazikenLevelUpLearnset,
         .teachableLearnset = sBlazikenTeachableLearnset,
@@ -890,17 +872,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(6, 8, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Swampert)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_SwampertMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_SwampertMega,
-            gShinyOverworldPalette_SwampertMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSwampertLevelUpLearnset,
         .teachableLearnset = sSwampertTeachableLearnset,
@@ -2905,17 +2878,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 1,
         SHADOW(1, 14, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Gardevoir)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_GardevoirMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_GardevoirMega,
-            gShinyOverworldPalette_GardevoirMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGardevoirLevelUpLearnset,
         .teachableLearnset = sGardevoirTeachableLearnset,
@@ -3055,17 +3019,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 1,
         SHADOW(-2, 13, SHADOW_SIZE_L)
         FOOTPRINT(Gallade)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_GalladeMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_GalladeMega,
-            gShinyOverworldPalette_GalladeMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGalladeLevelUpLearnset,
         .teachableLearnset = sGalladeTeachableLearnset,
@@ -4631,17 +4586,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 2,
         SHADOW(3, 7, SHADOW_SIZE_S)
         FOOTPRINT(Sableye)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_SableyeMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_SableyeMega,
-            gShinyOverworldPalette_SableyeMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSableyeLevelUpLearnset,
         .teachableLearnset = sSableyeTeachableLearnset,
@@ -4788,17 +4734,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(0, 9, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Mawile)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_MawileMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_MawileMega,
-            gShinyOverworldPalette_MawileMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMawileLevelUpLearnset,
         .teachableLearnset = sMawileTeachableLearnset,
@@ -5080,17 +5017,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 2,
         SHADOW(1, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Aggron)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_AggronMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_AggronMega,
-            gShinyOverworldPalette_AggronMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAggronLevelUpLearnset,
         .teachableLearnset = sAggronTeachableLearnset,
@@ -5320,17 +5248,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(-2, 13, SHADOW_SIZE_S)
         FOOTPRINT(Medicham)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_MedichamMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_MedichamMega,
-            gShinyOverworldPalette_MedichamMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMedichamLevelUpLearnset,
         .teachableLearnset = sMedichamTeachableLearnset,
@@ -5533,17 +5452,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(1, 10, SHADOW_SIZE_L)
         FOOTPRINT(Manectric)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_ManectricMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_ManectricMega,
-            gShinyOverworldPalette_ManectricMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sManectricLevelUpLearnset,
         .teachableLearnset = sManectricTeachableLearnset,
@@ -6487,17 +6397,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(-2, 14, SHADOW_SIZE_M)
         FOOTPRINT(Sharpedo)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_SharpedoMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_SharpedoMega,
-            gShinyOverworldPalette_SharpedoMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSharpedoLevelUpLearnset,
         .teachableLearnset = sSharpedoTeachableLearnset,
@@ -6880,17 +6781,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(1, 6, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Camerupt)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_CameruptMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_CameruptMega,
-            gShinyOverworldPalette_CameruptMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sCameruptLevelUpLearnset,
         .teachableLearnset = sCameruptTeachableLearnset,
@@ -7793,17 +7685,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(-2, 17, SHADOW_SIZE_L)
         FOOTPRINT(Altaria)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_AltariaMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_AltariaMega,
-            gShinyOverworldPalette_AltariaMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAltariaLevelUpLearnset,
         .teachableLearnset = sAltariaTeachableLearnset,
@@ -9641,17 +9524,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(0, 16, SHADOW_SIZE_M)
         FOOTPRINT(Banette)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_BanetteMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_BanetteMega,
-            gShinyOverworldPalette_BanetteMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBanetteLevelUpLearnset,
         .teachableLearnset = sBanetteTeachableLearnset,
@@ -10272,17 +10146,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(1, 7, SHADOW_SIZE_L)
         FOOTPRINT(Absol)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_AbsolMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_AbsolMega,
-            gShinyOverworldPalette_AbsolMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAbsolLevelUpLearnset,
         .teachableLearnset = sAbsolTeachableLearnset,
@@ -10499,17 +10364,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(3, 18, SHADOW_SIZE_L)
         FOOTPRINT(Glalie)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_GlalieMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_GlalieMega,
-            gShinyOverworldPalette_GlalieMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGlalieLevelUpLearnset,
         .teachableLearnset = sGlalieTeachableLearnset,
@@ -11467,17 +11323,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(3, 8, SHADOW_SIZE_L)
         FOOTPRINT(Salamence)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_SalamenceMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_SalamenceMega,
-            gShinyOverworldPalette_SalamenceMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSalamenceLevelUpLearnset,
         .teachableLearnset = sSalamenceTeachableLearnset,
@@ -11761,17 +11608,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(1, 15, SHADOW_SIZE_L)
         FOOTPRINT(Metagross)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_MetagrossMega,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_MetagrossMega,
-            gShinyOverworldPalette_MetagrossMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMetagrossLevelUpLearnset,
         .teachableLearnset = sMetagrossTeachableLearnset,
@@ -12144,17 +11982,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 2,
         SHADOW(-1, 19, SHADOW_SIZE_L)
         FOOTPRINT(Latias)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_LatiasMega,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_LatiasMega,
-            gShinyOverworldPalette_LatiasMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
@@ -12300,17 +12129,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 2,
         SHADOW(-1, 19, SHADOW_SIZE_L)
         FOOTPRINT(Latios)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_LatiosMega,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_LatiosMega,
-            gShinyOverworldPalette_LatiosMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
@@ -12452,17 +12272,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(-1, 11, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Kyogre)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_KyogrePrimal,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_KyogrePrimal,
-            gShinyOverworldPalette_KyogrePrimal
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
         .isPrimalReversion = TRUE,
         .isFrontierBanned = TRUE,
@@ -12605,17 +12414,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 0,
         SHADOW(2, 11, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Groudon)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_GroudonPrimal,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_GroudonPrimal,
-            gShinyOverworldPalette_GroudonPrimal
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
         .isPrimalReversion = TRUE,
         .isFrontierBanned = TRUE,
@@ -12766,17 +12564,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .iconPalIndex = 1,
         SHADOW(0, 15, SHADOW_SIZE_L)
         FOOTPRINT(Rayquaza)
-    #if OW_BATTLE_ONLY_FORMS
-        OVERWORLD(
-            gObjectEventPic_RayquazaMega,
-            SIZE_64x64,
-            SHADOW_SIZE_M,
-            TRACKS_NONE,
-            sAnimTable_Following,
-            gOverworldPalette_RayquazaMega,
-            gShinyOverworldPalette_RayquazaMega
-        )
-    #endif //OW_BATTLE_ONLY_FORMS
+    #if P_MEGA_STONES_AS_EVO_STONES
+    #endif //P_MEGA_STONES_AS_EVO_STONES
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
