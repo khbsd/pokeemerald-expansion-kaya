@@ -192,7 +192,9 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_ByTheWayRunningShoes, MSGBOX_DEFAULT
 	closemessage
+	call LittlerootTown_EventScript_GiveRunningShoesAfterBroadcast
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatFemale
 	waitmovement 0

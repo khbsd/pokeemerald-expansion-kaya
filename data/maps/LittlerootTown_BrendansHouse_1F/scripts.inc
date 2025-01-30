@@ -168,7 +168,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setvar VAR_LITTLEROOT_TOWN_STATE, 1
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -329,6 +329,11 @@ PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "PROF. BIRCH is his name.\p"
 	.string "He lives right next door, so you should\n"
 	.string "go over and introduce yourself.$"
+
+PlayersHouse_1F_Text_ByTheWayRunningShoes:
+	.string "Oh, by the way.\n"
+	.string "Before you leave, take these.\p"
+	.string "I have a feeling you might need them.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "MOM: See you, honey!$"

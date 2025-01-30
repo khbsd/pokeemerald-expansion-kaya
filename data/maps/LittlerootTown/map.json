@@ -155,7 +155,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "0",
+      "var_value": "1",
       "script": "LittlerootTown_EventScript_NeedPokemonTriggerLeft"
     },
     {
@@ -173,7 +173,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "1",
+      "var_value": "2",
       "script": "LittlerootTown_EventScript_GoSaveBirchTrigger"
     },
     {
@@ -182,8 +182,8 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger4"
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger4"
     },
     {
       "type": "trigger",
@@ -191,8 +191,8 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger5"
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger5"
     },
     {
       "type": "trigger",
@@ -200,8 +200,8 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger2"
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger2"
     },
     {
       "type": "trigger",
@@ -209,17 +209,8 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger3"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 2,
-      "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger0"
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger3"
     },
     {
       "type": "trigger",
@@ -227,8 +218,17 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger1"
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger1"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var_value": "4",
+      "script": "LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger0"
     }
   ],
   "bg_events": [
