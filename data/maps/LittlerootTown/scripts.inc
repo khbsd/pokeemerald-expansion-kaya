@@ -604,6 +604,7 @@ LittlerootTown_EventScript_MomReturnHomeMale::
 	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomReturnHomeMale3
 	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomReturnHomeMale4
 	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomReturnHomeMale5
+	removeobject LOCALID_MOM
 	return
 
 LittlerootTown_EventScript_MomReturnHomeFemale::
@@ -613,6 +614,7 @@ LittlerootTown_EventScript_MomReturnHomeFemale::
 	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomReturnHomeFemale3
 	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomReturnHomeFemale4
 	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomReturnHomeFemale5
+	removeobject LOCALID_MOM
 	return
 
 LittlerootTown_EventScript_MomReturnHome0::
