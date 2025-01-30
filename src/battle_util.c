@@ -6007,7 +6007,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_KLUTZ:
             if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 30) : RandomChance(RNG_KLUTZ, 1, 3))
             {
-                if (MoveResultHasEffect(gBattlerTarget)
+                if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
                     && IsBattlerAlive(gBattlerAttacker)
                     && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                     && IsBattlerTurnDamaged(gBattlerTarget)
