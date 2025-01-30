@@ -1132,9 +1132,10 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
          && move != MOVE_STRUGGLE
          && GetActiveGimmick(battler) != GIMMICK_TERA)
     {
-        if (gBattleMons[battler].species == SPECIES_RABOOT
+        if ((gBattleMons[battler].species == SPECIES_RABOOT
             || gBattleMons[battler].species == SPECIES_CINDERACE
             || gBattleMons[battler].species == SPECIES_CINDERACE_GMAX)
+            && ability == ABILITY_LIBERO)
         {
             SET_BATTLER_TYPE_FAIRY(battler, moveType);
             return TRUE;
