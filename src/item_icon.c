@@ -6,7 +6,9 @@
 #include "item_icon.h"
 #include "malloc.h"
 #include "move.h"
+#include "palette.h"
 #include "sprite.h"
+#include "window.h"
 #include "constants/items.h"
 
 // EWRAM vars
@@ -121,6 +123,34 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 
         return spriteId;
     }
+}
+
+u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDest) 
+{
+    if (!AllocItemIconTemporaryBuffers())
+        return 16;
+
+    void * paletteBuffer = Alloc(PLTT_SIZE_4BPP);
+
+    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    BlitBitmapToWindow(windowId, gItemIcon4x4Buffer, x, y, 32, 32);
+
+    // if paletteDest is nonzero, copies the decompressed palette directly into it
+    // otherwise, loads the compressed palette into the windowId's BG palette ID
+    if (paletteDest) 
+    {
+        LZDecompressWram(GetItemIconPalette(itemId), paletteBuffer);
+        CpuCopy16(paletteBuffer, paletteDest, PLTT_SIZE_4BPP);
+    } 
+    else 
+    {
+        LoadCompressedPalette(GetItemIconPalette(itemId), BG_PLTT_ID(gWindows[windowId].window.paletteNum), PLTT_SIZE_4BPP);
+    }
+
+    FreeItemIconTemporaryBuffers();
+    Free(paletteBuffer);
+    return 0;
 }
 
 u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, u16 itemId)
