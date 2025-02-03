@@ -2451,4 +2451,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Intimidates and raises Speed."),
         .aiRating = 7,
     },
+    
+    [ABILITY_ENVENOMATE] =
+    {
+        .name = _("Envenomate"),
+        .description = COMPOUND_STRING("Poison or paralyze on contact."),
+        .aiRating = 4,
+    },
 };

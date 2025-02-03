@@ -4984,12 +4984,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_PINCURCHIN
     [SPECIES_PINCURCHIN] =
     {
-        .baseHP        = 48,
-        .baseAttack    = 101,
-        .baseDefense   = 95,
-        .baseSpeed     = 15,
-        .baseSpAttack  = 91,
-        .baseSpDefense = 85,
+        .baseHP        = 50,
+        .baseAttack    = 90,
+        .baseDefense   = 85,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_POISON, TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = 152,
@@ -4999,7 +4999,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LIGHTNING_ROD, ABILITY_NONE, ABILITY_ELECTRIC_SURGE },
+        .abilities = { ABILITY_ENVENOMATE, ABILITY_NONE, ABILITY_ELECTRIC_SURGE },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Pincurchin"),
         .cryId = CRY_PINCURCHIN,
