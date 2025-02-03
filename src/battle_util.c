@@ -6272,7 +6272,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             if (RandomPercentage(RNG_ENVENOMATE_PARALYSIS, 20)
-                && CanBeParalyzed(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
+                && CanBeParalyzed(gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
