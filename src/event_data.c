@@ -68,14 +68,14 @@ void ClearItemFlags(void)
 {
     u32 i;
 
-#ifdef OW_CLEAR_HIDDEN_ITEMS
+#if OW_CLEAR_HIDDEN_ITEMS
     for (i = FLAG_HIDDEN_ITEMS_START; i <= FLAG_HIDDEN_ITEMS_END; i++)
     {
         FlagClear(i);
     }
 #endif // OW_CLEAR_HIDDEN_ITEMS
 
-#ifdef OW_CLEAR_ITEM_BALLS
+#if OW_CLEAR_ITEM_BALLS
     for (i = FLAG_ITEM_BALLS_START; i <= FLAG_ITEM_BALLS_END; i++)
     {
         FlagClear(i);
