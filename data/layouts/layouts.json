@@ -4096,8 +4096,8 @@
       "name": "Underwater_Route105_Layout",
       "width": 40,
       "height": 80,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Underwater",
+      "primary_tileset": "gTileset_UnderwaterPrimary",
+      "secondary_tileset": "gTileset_UnderwaterRuins",
       "border_filepath": "data/layouts/Underwater_Route105/border.bin",
       "blockdata_filepath": "data/layouts/Underwater_Route105/map.bin"
     },

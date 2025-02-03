@@ -637,7 +637,7 @@
 #define P_FAMILY_COTTONEE                TRUE
 #define P_FAMILY_SCRAGGY                 TRUE
 #define P_FAMILY_YAMASK                  TRUE
-#define P_FAMILY_TIRTOUGA                TRUE
+#define P_FAMILY_TIRTOUGA                TRUE   
 #define P_FAMILY_ARCHEN                  TRUE
 #define P_FAMILY_ZORUA                   TRUE
 #define P_FAMILY_FRILLISH                TRUE
