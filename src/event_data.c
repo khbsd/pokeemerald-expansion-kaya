@@ -66,8 +66,8 @@ void ClearDailyFlags(void)
 
 void ClearItemFlags(void)
 {
-    u32 i = 0;
-    
+    u32 i;
+
     if  (OW_CLEAR_HIDDEN_ITEMS)
     {
         for (i = FLAG_HIDDEN_ITEMS_START; i <= FLAG_HIDDEN_ITEMS_END; i++)

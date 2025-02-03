@@ -3641,6 +3641,13 @@ bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
         return TRUE;
     }
 #endif
+
+#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_IN_BAG
+    if (CheckBagHasItem(item))
+        return TRUE;
+    else
+        return FALSE;
+#endif
     return FALSE;
 }
 
