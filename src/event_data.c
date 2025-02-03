@@ -66,21 +66,20 @@ void ClearDailyFlags(void)
 
 void ClearItemFlags(void)
 {
-    u32 i;
-
-#if OW_CLEAR_HIDDEN_ITEMS
-    for (i = FLAG_HIDDEN_ITEMS_START; i <= FLAG_HIDDEN_ITEMS_END; i++)
+    u32 i = 0;
+    
+    if  (OW_CLEAR_HIDDEN_ITEMS)
     {
-        FlagClear(i);
+        for (i = FLAG_HIDDEN_ITEMS_START; i <= FLAG_HIDDEN_ITEMS_END; i++)
+            FlagClear(i);
     }
-#endif // OW_CLEAR_HIDDEN_ITEMS
 
-#if OW_CLEAR_ITEM_BALLS
-    for (i = FLAG_ITEM_BALLS_START; i <= FLAG_ITEM_BALLS_END; i++)
+    if (OW_CLEAR_ITEM_BALLS)
     {
-        FlagClear(i);
+
+        for (i = FLAG_ITEM_BALLS_START; i <= FLAG_ITEM_BALLS_END; i++)
+            FlagClear(i);
     }
-#endif // OW_CLEAR_ITEM_BALLS
 }
 
 void DisableNationalPokedex(void)
