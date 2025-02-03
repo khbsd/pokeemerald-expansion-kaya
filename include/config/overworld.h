@@ -16,11 +16,16 @@
 #define OW_FRLG_WHITEOUT                FALSE      // If enabled, shows an additional whiteout message and post whiteout event script with healing NPC.
 #define OW_MATCH_CALL_ONLY_FOR_REMATCH  TRUE
 
+// Overworld item reset settings
+#define OW_CLEAR_ITEMS_DAILY            TRUE       // Clear items every day
+#define OW_CLEAR_HIDDEN_ITEMS           OW_CLEAR_ITEMS_DAILY
+#define OW_CLEAR_ITEM_BALLS             OW_CLEAR_ITEMS_DAILY
+
 // Item Obtain Description Box
 #define OW_ITEM_DESCRIPTIONS_OFF        0   // never show descriptions
 #define OW_ITEM_DESCRIPTIONS_FIRST_TIME 1   // show first time (** SAVE-BREAKING - see struct SaveBlock3 **)
 #define OW_ITEM_DESCRIPTIONS_ALWAYS     2   // always show description
-#define OW_SHOW_ITEM_DESCRIPTIONS       OW_ITEM_DESCRIPTIONS_OFF    // If enabled, item descriptions/images will be shown when finding items.
+#define OW_SHOW_ITEM_DESCRIPTIONS       OW_ITEM_DESCRIPTIONS_FIRST_TIME   // If enabled, item descriptions/images will be shown when finding items.
 
 // These generational defines only make a distinction for Berries and the OW_PC_MOVE_ORDER
 #define GEN_6_XY GEN_6

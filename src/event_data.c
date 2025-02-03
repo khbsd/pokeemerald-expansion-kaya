@@ -64,24 +64,23 @@ void ClearDailyFlags(void)
     memset(&gSaveBlock1Ptr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
 }
 
-void ClearHiddenItemFlags(void)
+void ClearItemFlags(void)
 {
-    u32 i = 0;
+    u32 i;
 
+#ifdef OW_CLEAR_HIDDEN_ITEMS
     for (i = FLAG_HIDDEN_ITEMS_START; i <= FLAG_HIDDEN_ITEMS_END; i++)
     {
         FlagClear(i);
     }
-}
+#endif // OW_CLEAR_HIDDEN_ITEMS
 
-void ClearItemBallFlags(void)
-{
-    u32 i = 0;
-
+#ifdef OW_CLEAR_ITEM_BALLS
     for (i = FLAG_ITEM_BALLS_START; i <= FLAG_ITEM_BALLS_END; i++)
     {
         FlagClear(i);
     }
+#endif // OW_CLEAR_ITEM_BALLS
 }
 
 void DisableNationalPokedex(void)
