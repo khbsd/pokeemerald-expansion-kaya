@@ -402,6 +402,7 @@ u32 GetHeaderIdForMetatileBehavior(void)
     case MB_INDOOR_ENCOUNTER_2:
     case MB_CAVE_2:
     case MB_PUDDLE_2:
+    case MB_SAND_2:
     case MB_POND_WATER_2:
     case MB_OCEAN_WATER_2:
     case MB_SEAWEED_NO_SURFACING_2:
@@ -416,6 +417,7 @@ u32 GetHeaderIdForMetatileBehavior(void)
     case MB_INDOOR_ENCOUNTER_3:
     case MB_CAVE_3:
     case MB_PUDDLE_3:
+    case MB_SAND_3:
     case MB_POND_WATER_3:
     case MB_OCEAN_WATER_3:
     case MB_SEAWEED_NO_SURFACING_3:

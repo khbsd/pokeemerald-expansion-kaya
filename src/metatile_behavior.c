@@ -53,6 +53,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_SHOAL_CAVE_ENTRANCE]                = TILE_FLAG_UNUSED,
     [MB_ICE]                                = TILE_FLAG_UNUSED,
     [MB_SAND]                               = TILE_FLAG_UNUSED,
+    [MB_SAND_2]                             = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SAND_3]                             = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SEAWEED]                            = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SEAWEED_2]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SEAWEED_3]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
@@ -218,7 +220,8 @@ bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SAND || metatileBehavior == MB_DEEP_SAND || metatileBehavior == MB_DEEP_SAND_2 || metatileBehavior == MB_DEEP_SAND_3)
+    if (metatileBehavior == MB_SAND || metatileBehavior == MB_SAND_2 || metatileBehavior == MB_SAND_3
+        || MetatileBehavior_IsDeepSand(metatileBehavior))
         return TRUE;
     else
         return FALSE;

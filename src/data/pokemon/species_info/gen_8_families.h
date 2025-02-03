@@ -4990,7 +4990,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpeed     = 15,
         .baseSpAttack  = 91,
         .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_POISON, TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = 152,
         .evYield_Attack = 2,
@@ -5042,6 +5042,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sPincurchinLevelUpLearnset,
         .teachableLearnset = sPincurchinTeachableLearnset,
         .eggMoveLearnset = sPincurchinEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_QWILFISH_HISUI}),
     },
 #endif //P_FAMILY_PINCURCHIN
 

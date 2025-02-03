@@ -242,7 +242,7 @@
 #define METATILE_General_Pine_VineRight         0x037
 #define METATILE_General_RedCaveIndent          0x1A0
 #define METATILE_General_RedCaveOpen            0x37E
-#define METATILE_General_ReflectiveWater        0x0A1
+#define METATILE_General_ReflectiveWater        0x0C8
 #define METATILE_General_RockWall_GrassBase     0x079
 #define METATILE_General_RockWall_RockBase      0x07C
 #define METATILE_General_RockWall_SandBase      0x091

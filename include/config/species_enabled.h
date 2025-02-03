@@ -333,10 +333,10 @@
 // #define P_FAMILY_COTTONEE             P_GEN_5_POKEMON
 #define P_FAMILY_PETILIL                 P_GEN_5_POKEMON
 #define P_FAMILY_BASCULIN                P_GEN_5_POKEMON
-#define P_FAMILY_SANDILE                 P_GEN_5_POKEMON
+// #define P_FAMILY_SANDILE              P_GEN_5_POKEMON
 #define P_FAMILY_DARUMAKA                P_GEN_5_POKEMON
 #define P_FAMILY_MARACTUS                P_GEN_5_POKEMON
-#define P_FAMILY_DWEBBLE                 P_GEN_5_POKEMON
+// #define P_FAMILY_DWEBBLE              P_GEN_5_POKEMON
 // #define P_FAMILY_SCRAGGY              P_GEN_5_POKEMON
 #define P_FAMILY_SIGILYPH                P_GEN_5_POKEMON
 // #define P_FAMILY_YAMASK               P_GEN_5_POKEMON
@@ -444,7 +444,7 @@
 // #define P_FAMILY_DEWPIDER             P_GEN_7_POKEMON
 // #define P_FAMILY_FOMANTIS             P_GEN_7_POKEMON
 #define P_FAMILY_MORELULL                P_GEN_7_POKEMON
-#define P_FAMILY_SALANDIT                P_GEN_7_POKEMON
+// #define P_FAMILY_SALANDIT                P_GEN_7_POKEMON
 #define P_FAMILY_STUFFUL                 P_GEN_7_POKEMON
 // #define P_FAMILY_BOUNSWEET            P_GEN_7_POKEMON
 #define P_FAMILY_COMFEY                  P_GEN_7_POKEMON
@@ -508,7 +508,7 @@
 #define P_FAMILY_IMPIDIMP                P_GEN_8_POKEMON
 #define P_FAMILY_MILCERY                 P_GEN_8_POKEMON
 #define P_FAMILY_FALINKS                 P_GEN_8_POKEMON
-#define P_FAMILY_PINCURCHIN              P_GEN_8_POKEMON
+// #define P_FAMILY_PINCURCHIN           P_GEN_8_POKEMON
 // #define P_FAMILY_SNOM                 P_GEN_8_POKEMON
 #define P_FAMILY_STONJOURNER             P_GEN_8_POKEMON
 #define P_FAMILY_EISCUE                  P_GEN_8_POKEMON
@@ -635,6 +635,8 @@
 #define P_FAMILY_LITWICK                 TRUE
 #define P_FAMILY_VENIPEDE                TRUE
 #define P_FAMILY_COTTONEE                TRUE
+#define P_FAMILY_SANDILE                 TRUE
+#define P_FAMILY_DWEBBLE                 TRUE
 #define P_FAMILY_SCRAGGY                 TRUE
 #define P_FAMILY_YAMASK                  TRUE
 #define P_FAMILY_TIRTOUGA                TRUE   
@@ -680,6 +682,7 @@
 #define P_FAMILY_GRUBBIN                 TRUE
 #define P_FAMILY_ROCKRUFF                TRUE
 #define P_FAMILY_FOMANTIS                TRUE
+#define P_FAMILY_SALANDIT                TRUE
 #define P_FAMILY_BOUNSWEET				 TRUE
 #define P_FAMILY_SANDYGAST               TRUE
 #define P_FAMILY_MAREANIE                TRUE
@@ -706,6 +709,7 @@
 #define P_FAMILY_ARROKUDA                TRUE
 #define P_FAMILY_SIZZLIPEDE              TRUE
 #define P_FAMILY_CLOBBOPUS               TRUE
+#define P_FAMILY_PINCURCHIN              TRUE
 #define P_FAMILY_SNOM                    TRUE
 #define P_FAMILY_DREEPY                  TRUE
 #define P_FAMILY_REGIELEKI               TRUE

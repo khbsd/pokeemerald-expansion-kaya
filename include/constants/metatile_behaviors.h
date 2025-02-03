@@ -172,8 +172,8 @@
 #define MB_ASHGRASS_3 0xA8
 #define MB_DEEP_WATER_2 0xA9
 #define MB_DEEP_WATER_3 0xAA
-#define MB_UNUSED_AB 0xAB
-#define MB_UNUSED_AC 0xAC
+#define MB_SAND_2 0xAB
+#define MB_SAND_3 0xAC
 #define MB_UNUSED_AD 0xAD
 #define MB_UNUSED_AE 0xAE
 #define MB_UNUSED_AF 0xAF
