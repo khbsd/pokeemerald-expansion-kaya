@@ -30,7 +30,7 @@ u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
 
 //daily item refresh
-void ClearItemFlags(void);
+void ClearOverworldItemFlags(void);
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
