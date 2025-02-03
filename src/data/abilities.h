@@ -2448,14 +2448,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TERRIFIER] =
     {
         .name = _("Terrifier"),
-        .description = COMPOUND_STRING("Intimidates and raises Speed."),
+        .description = COMPOUND_STRING("Stronger against prey."),
         .aiRating = 7,
     },
     
     [ABILITY_ENVENOMATE] =
     {
         .name = _("Envenomate"),
-        .description = COMPOUND_STRING("Poison or paralyze on contact."),
+        .description = COMPOUND_STRING("Poison/paralyze on contact."),
         .aiRating = 4,
     },
 };

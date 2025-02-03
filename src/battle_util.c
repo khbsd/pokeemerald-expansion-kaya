@@ -6261,7 +6261,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsMoveMakingContact(move, gBattlerAttacker)
              && IsBattlerTurnDamaged(gBattlerTarget)) // Need to actually hit the target
         {
-            if (RandomPercentage(RNG_ENVENOMATE_POISON, 20)
+            if (RandomPercentage(RNG_ENVENOMATE_POISON, 30)
                 && CanBePoisoned(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
@@ -6271,7 +6271,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
                 effect++;
             }
-            if (RandomPercentage(RNG_ENVENOMATE_PARALYSIS, 20)
+            else if (RandomPercentage(RNG_ENVENOMATE_PARALYSIS, 30)
                 && CanBeParalyzed(gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
