@@ -198,6 +198,10 @@ EWRAM_DATA MainCallback gInitialSummaryScreenCallback = NULL; // stores callback
 
 // forward declarations
 void ScrollHorizontalChars(const u8 text[], u32 windowId);
+void Task_ScrollingHorizontalText(u8 taskId);
+u32 IncremementScrollingText(u32 charIndex, struct TextPrinter *textPrinter);
+u32 GetWindowWidthInChars(u32 windowWidth);
+u32 CountStringChars(const u8 text[]);
 static bool8 LoadGraphics(void);
 static void CB2_InitSummaryScreen(void);
 static void InitBGs(void);
@@ -3471,6 +3475,11 @@ static void PrintMonAbilityName(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
 }
 
+u32 GetWindowWidthInChars(u32 windowWidth)
+{
+    return windowWidth + (windowWidth / 3);
+}
+
 u32 CountStringChars(const u8 text[])
 {
     u32 i = 0;
@@ -3493,19 +3502,58 @@ void PrintMonAbilityDescription(void)
 void ScrollHorizontalChars(const u8 text[], u32 windowId)
 {
     u32 numChars = CountStringChars(text);
-    u32 winWidth = sPageInfoTemplate[windowId].width;
+    u32 windowWidth = sPageInfoTemplate[windowId].width;
 
     struct TextPrinter *textPrinter;
     
-    if (winWidth + (winWidth / 3) < numChars)
+    if (GetWindowWidthInChars(windowWidth) < numChars)
     {
-        if (TextPrinterWaitAutoMode(struct TextPrinter *textPrinter))
-        {
-            
-        }
+        return;
     }
 
     // return text;
+}
+
+u32 IncremementScrollingText(u32 charIndex, struct TextPrinter *textPrinter)
+{
+    if (TextPrinterWaitAutoMode(textPrinter))
+    {
+        return charIndex++;
+    }
+}
+
+enum ScrollingTextTaskData
+{
+    SCROLLING_TASK_TEXT,
+    SCROLLING_TASK_NUMCHARS,
+    SCROLLING_TASK_WINDOW_WIDTH,
+    SCROLLING_TASK_NUM_OVERFLOW_CHARS,
+    SCROLLING_TASK_FIRSTCHAR,
+    SCROLLING_TASK_LASTCHAR,
+};
+
+u8 CreateScrollingTextTask(const u8 text[], u32 windowId)
+{
+    u8 taskId = CreateTask(Task_ScrollingHorizontalText, 5);
+
+    s16 *data = gTasks[taskId].data;
+    data[SCROLLING_TASK_TEXT] = *text;
+    data[SCROLLING_TASK_NUMCHARS] = CountStringChars(text);
+    data[SCROLLING_TASK_WINDOW_WIDTH] = GetWindowWidthInChars(sPageInfoTemplate[windowId].width);
+    data[SCROLLING_TASK_NUM_OVERFLOW_CHARS] = data[SCROLLING_TASK_NUMCHARS] - data[SCROLLING_TASK_WINDOW_WIDTH];
+    data[SCROLLING_TASK_FIRSTCHAR] = data[SCROLLING_TASK_TEXT][0];
+    data[SCROLLING_TASK_LASTCHAR] = data[SCROLLING_TASK_TEXT][SCROLLING_TASK_WINDOW_WIDTH];
+
+    return taskId;
+}
+
+void Task_ScrollingHorizontalText(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    u8 *text = &data[0];
+    u32 textPos1 = data[1];
+
 }
 
 static void BufferMonTrainerMemo(void)
