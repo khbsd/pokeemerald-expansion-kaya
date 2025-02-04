@@ -197,6 +197,7 @@ ALIGNED(4) static EWRAM_DATA u8 sAnimDelayTaskId = 0;
 EWRAM_DATA MainCallback gInitialSummaryScreenCallback = NULL; // stores callback from the first time the screen is opened from the party or PC menu
 
 // forward declarations
+void ScrollHorizontalChars(const u8 text[], u32 windowId);
 static bool8 LoadGraphics(void);
 static void CB2_InitSummaryScreen(void);
 static void InitBGs(void);
@@ -3470,10 +3471,41 @@ static void PrintMonAbilityName(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
 }
 
-static void PrintMonAbilityDescription(void)
+u32 CountStringChars(const u8 text[])
 {
-    u16 ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].description, 0, 17, 0, 0);
+    u32 i = 0;
+    while (text[i] != EOS)
+        i++;
+
+    return i;
+}
+
+void PrintMonAbilityDescription(void)
+{
+    u8 testText[] = _("testtesttesttesttesttest");
+    // u16 ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
+
+    ScrollHorizontalChars(testText, PSS_DATA_WINDOW_INFO_ABILITY);
+
+    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), testText, 0, 17, 0, 0);
+}
+
+void ScrollHorizontalChars(const u8 text[], u32 windowId)
+{
+    u32 numChars = CountStringChars(text);
+    u32 winWidth = sPageInfoTemplate[windowId].width;
+
+    struct TextPrinter *textPrinter;
+    
+    if (winWidth + (winWidth / 3) < numChars)
+    {
+        if (TextPrinterWaitAutoMode(struct TextPrinter *textPrinter))
+        {
+            
+        }
+    }
+
+    // return text;
 }
 
 static void BufferMonTrainerMemo(void)
