@@ -4377,7 +4377,7 @@ bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, u32 abilityDef, u32 
         if ((moveType == TYPE_FIRE || moveType == TYPE_WATER) && GetMoveTarget(move) != MOVE_TARGET_ALL_BATTLERS)
         {
             effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
-            statId = STAT_SPD;
+            statId = STAT_SPEED;
         }
         break;
     case ABILITY_FLASH_FIRE:
