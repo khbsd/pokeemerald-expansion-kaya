@@ -114,7 +114,7 @@ bool32 CanAutoUseFieldMove(u16 move);
 void AutoUseCut(void);
 void AutoUseFlash(void);
 void AutoUseRockSmash(void);
-void AutoUseStrength(void);
+void AutoUseStrength(u8 objectEventId, u8 direction);
 void AutoUseSurf(void);
 void AutoUseDive(void);
 void AutoUseDiveEmerge(void);

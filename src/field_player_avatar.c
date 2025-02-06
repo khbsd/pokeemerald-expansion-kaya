@@ -79,7 +79,6 @@ static u8 CheckForPlayerAvatarStaticCollision(u8);
 static u8 CheckForObjectEventStaticCollision(struct ObjectEvent *, s16, s16, u8, u8);
 static bool8 CanStopSurfing(s16, s16, u8);
 static bool8 ShouldJumpLedge(s16, s16, u8);
-static bool8 TryPushBoulder(s16, s16, u8);
 static void CheckAcroBikeCollision(s16, s16, u8, u8 *);
 
 static void DoPlayerAvatarTransition(void);
@@ -106,7 +105,6 @@ static void PlayCollisionSoundIfNotFacingWarp(u8);
 
 static void HideShowWarpArrow(struct ObjectEvent *);
 
-static void StartStrengthAnim(u8, u8);
 static void Task_PushBoulder(u8);
 static bool8 PushBoulder_Start(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
 static bool8 PushBoulder_Move(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
@@ -766,8 +764,11 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
         AutoUseSurf();
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
-        AutoUseStrength();
-    if (IsPlayerFacingClimbableWaterfall())
+    {
+        AutoUseStrength(GetObjectEventIdByXY(x, y), direction);
+    }
+        
+    if (IsPlayerFacingClimbableWaterfall() && IsPlayerSurfingNorth())
         AutoUseWaterfall();
 
     return collision;
@@ -807,7 +808,7 @@ static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
         return FALSE;
 }
 
-static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
+bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
 {
     if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
@@ -1400,14 +1401,9 @@ bool8 IsPlayerFacingClimbableWaterfall(void)
     s16 y = playerObjEvent->currentCoords.y;
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)))
-    {
-        PlaySE(SE_M_REVERSAL);
-        return TRUE;
-    }
-        
-    else
-        return FALSE;
+    return (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) 
+        && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y))
+        && IsPlayerSurfingNorth());
 }
 
 void ClearPlayerAvatarInfo(void)
@@ -1546,7 +1542,7 @@ static void HideShowWarpArrow(struct ObjectEvent *objectEvent)
 #define tBoulderObjId data[1]
 #define tDirection    data[2]
 
-static void StartStrengthAnim(u8 objectEventId, u8 direction)
+void StartStrengthAnim(u8 objectEventId, u8 direction)
 {
     u8 taskId = CreateTask(Task_PushBoulder, 0xFF);
 

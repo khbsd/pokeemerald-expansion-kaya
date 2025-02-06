@@ -16,7 +16,6 @@ EventScript_AutoUseSurf::
 	lockall
 	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_ReleaseUseSurf
-	setflag FLAG_SYS_USE_SURF
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SURF

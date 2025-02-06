@@ -72,5 +72,8 @@ u8 GetRightSideStairsDirection(u8 direction);
 u8 GetLeftSideStairsDirection(u8 direction);
 // toggle run
 extern bool8 gRunToggled;
+// auto field moves
+bool8 TryPushBoulder(s16, s16, u8);
+void StartStrengthAnim(u8 objectEventId, u8 direction);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

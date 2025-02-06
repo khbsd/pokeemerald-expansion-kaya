@@ -106,4 +106,8 @@ void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 
+void FieldCallback_Surf(void);
+void FieldCallback_Waterfall(void);
+void FieldCallback_Dive(void);
+
 #endif // GUARD_PARTY_MENU_H

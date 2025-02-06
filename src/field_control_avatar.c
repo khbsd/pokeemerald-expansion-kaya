@@ -570,7 +570,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
-        if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerFacingClimbableWaterfall() == TRUE)
+        if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerFacingClimbableWaterfall() == TRUE && OW_FLAG_AUTO_USE_WATERFALL)
             return EventScript_UseWaterfall;
         else
             return EventScript_CannotUseWaterfall;

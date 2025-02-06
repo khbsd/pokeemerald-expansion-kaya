@@ -43,6 +43,7 @@
 #include "money.h"
 #include "new_game.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "play_time.h"
 #include "random.h"
 #include "roamer.h"
@@ -1111,21 +1112,21 @@ bool32 CanAutoUseFieldMove(u16 move) {
     switch (move)
     {
     case MOVE_CUT:
-        return FlagGet(FLAG_RECEIVED_HM_CUT) && FlagGet(FLAG_BADGE01_GET);
+        return FlagGet(FLAG_RECEIVED_HM_CUT) && FlagGet(FLAG_BADGE01_GET) && OW_FLAG_AUTO_USE_CUT;
     case MOVE_FLASH:
-        return FlagGet(FLAG_RECEIVED_HM_FLASH) && FlagGet(FLAG_BADGE02_GET);
+        return FlagGet(FLAG_RECEIVED_HM_FLASH) && FlagGet(FLAG_BADGE02_GET) && OW_FLAG_AUTO_USE_FLASH;
     case MOVE_ROCK_SMASH:
-        return FlagGet(FLAG_RECEIVED_HM_ROCK_SMASH) && FlagGet(FLAG_BADGE03_GET);
+        return FlagGet(FLAG_RECEIVED_HM_ROCK_SMASH) && FlagGet(FLAG_BADGE03_GET) && OW_FLAG_AUTO_USE_ROCK_SMASH;
     case MOVE_STRENGTH:
-        return FlagGet(FLAG_RECEIVED_HM_STRENGTH) && FlagGet(FLAG_BADGE04_GET);
+        return FlagGet(FLAG_RECEIVED_HM_STRENGTH) && FlagGet(FLAG_BADGE04_GET) && OW_FLAG_AUTO_USE_STRENGTH;
     case MOVE_SURF:
-        return FlagGet(FLAG_RECEIVED_HM_SURF) && FlagGet(FLAG_BADGE05_GET) && IsPlayerFacingSurfableFishableWater();
+        return FlagGet(FLAG_RECEIVED_HM_SURF) && FlagGet(FLAG_BADGE05_GET) && IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF;
     case MOVE_FLY:
-        return FlagGet(FLAG_RECEIVED_HM_FLY) && FlagGet(FLAG_BADGE06_GET);
+        return FlagGet(FLAG_RECEIVED_HM_FLY) && FlagGet(FLAG_BADGE06_GET) && OW_FLAG_AUTO_USE_FLY;
     case MOVE_DIVE:
-        return FlagGet(FLAG_RECEIVED_HM_DIVE) && FlagGet(FLAG_BADGE07_GET);
+        return FlagGet(FLAG_RECEIVED_HM_DIVE) && FlagGet(FLAG_BADGE07_GET) && OW_FLAG_AUTO_USE_DIVE;
     case MOVE_WATERFALL:
-        return FlagGet(FLAG_RECEIVED_HM_WATERFALL) && FlagGet(FLAG_BADGE08_GET);
+        return FlagGet(FLAG_RECEIVED_HM_WATERFALL) && FlagGet(FLAG_BADGE08_GET) && IsPlayerFacingClimbableWaterfall() && OW_FLAG_AUTO_USE_WATERFALL;
     default:
         return FALSE;
     }
@@ -1148,14 +1149,20 @@ void AutoUseFlash(void)
 void AutoUseRockSmash(void)
 {
     if (CanAutoUseFieldMove(MOVE_ROCK_SMASH))
+    {
+        gSkipShowMonAnim = TRUE;
         FieldCallback_RockSmash();
+        gSkipShowMonAnim = FALSE;
+    }
 }
-void AutoUseStrength(void)
+void AutoUseStrength(u8 objectEventId, u8 direction)
 {
     if (CanAutoUseFieldMove(MOVE_STRENGTH) && !FlagGet(FLAG_SYS_USE_STRENGTH))
     {
+        gSkipShowMonAnim = TRUE;
         FlagSet(FLAG_SYS_USE_STRENGTH);
-        FieldCallback_Strength();
+        StartStrengthAnim(objectEventId, direction);
+        gSkipShowMonAnim = FALSE;
     }
 }
 
@@ -1163,16 +1170,17 @@ void AutoUseSurf(void)
 {
     if (CanAutoUseFieldMove(MOVE_SURF) && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        gSkipShowMonAnim = TRUE;
         if (!FlagGet(FLAG_SYS_USE_SURF))
         {
             FlagSet(FLAG_SYS_USE_SURF);
-            ScriptContext_SetupScript(EventScript_AutoUseSurf);
+            gSkipShowMonAnim = FALSE;
         }
         else
-            ScriptContext_SetupScript(EventScript_AutoUseConsecutiveSurf);
+        {
+            gSkipShowMonAnim = TRUE;
+        }
 
-        gSkipShowMonAnim = FALSE;
+        FieldCallback_Surf();
     }
 }
 
@@ -1192,17 +1200,15 @@ void AutoUseWaterfall(void)
 {
     if (CanAutoUseFieldMove(MOVE_WATERFALL) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        gSkipShowMonAnim = TRUE;
-
         if (!FlagGet(FLAG_SYS_USE_WATERFALL))
         {
             FlagSet(FLAG_SYS_USE_WATERFALL);
-            ScriptContext_SetupScript(EventScript_AutoUseWaterfall);
+            gSkipShowMonAnim = TRUE;
         }
         else
-            ScriptContext_SetupScript(EventScript_AutoUseConsecutiveWaterfall);
+            gSkipShowMonAnim = FALSE;
 
-        gSkipShowMonAnim = FALSE;
+        FieldCallback_Waterfall();
     }
 }
 
