@@ -2412,8 +2412,8 @@ static inline bool32 IsMoveSleepClauseTrigger(u32 move)
         switch (additionalEffect->moveEffect)
         {
         // Skip MOVE_EFFECT_SLEEP as moves with a secondary chance of applying sleep are allowed by Smogon's rules (ie. Relic Song)
-        case MAX_EFFECT_EFFECT_SPORE_FOES:
-        case MAX_EFFECT_YAWN_FOE:
+        case MOVE_EFFECT_EFFECT_SPORE_SIDE:
+        case MOVE_EFFECT_YAWN_FOE:
             return TRUE;
         }
     }
@@ -3177,9 +3177,11 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     if (IsDoubleBattle())
     {
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battlerId)))];
+        battlerOnField2 = gBattlerPartyIndexes[GetPartnerBattler(battlerId)];
         // Check partner's status
-        if ((B_HEAL_BELL_SOUNDPROOF == GEN_5 || AI_DATA->abilities[BATTLE_PARTNER(battlerId)] != ABILITY_SOUNDPROOF || !checkSoundproof)
+        if ((GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) == GEN_5
+            || AI_DATA->abilities[BATTLE_PARTNER(battlerId)] != ABILITY_SOUNDPROOF
+            || !checkSoundproof)
          && GetMonData(&party[battlerOnField2], MON_DATA_STATUS) != STATUS1_NONE)
             return TRUE;
     }
@@ -3190,7 +3192,8 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     }
 
     // Check attacker's status
-    if ((B_HEAL_BELL_SOUNDPROOF == GEN_5 || B_HEAL_BELL_SOUNDPROOF >= GEN_8
+    if ((GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) == GEN_5
+      || GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) >= GEN_8
       || AI_DATA->abilities[battlerId] != ABILITY_SOUNDPROOF || !checkSoundproof)
      && GetMonData(&party[battlerOnField1], MON_DATA_STATUS) != STATUS1_NONE)
         return TRUE;
@@ -3200,7 +3203,9 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     {
         if (i == battlerOnField1 || i == battlerOnField2)
             continue;
-        if (B_HEAL_BELL_SOUNDPROOF < GEN_5 && checkSoundproof && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
+        if (GetGenConfig(GEN_CONFIG_HEAL_BELL_SOUNDPROOF) < GEN_5
+         && checkSoundproof
+         && GetMonAbility(&party[i]) == ABILITY_SOUNDPROOF)
             continue;
         if (GetMonData(&party[i], MON_DATA_STATUS) != STATUS1_NONE)
             return TRUE;
@@ -3601,7 +3606,7 @@ s32 CountUsablePartyMons(u32 battlerId)
     if (IsDoubleBattle())
     {
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battlerId)))];
+        battlerOnField2 = gBattlerPartyIndexes[GetPartnerBattler(battlerId)];
     }
     else // In singles there's only one battlerId by side.
     {
@@ -3942,7 +3947,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
 void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 {
-    if (((AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0) && gMovesInfo[GetBestDmgMoveFromBattler(battlerAtk, battlerDef)].effect != EFFECT_FOCUS_PUNCH)
+    if (((AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_TRY_TO_FAINT) && CanAIFaintTarget(battlerAtk, battlerDef, 0) && GetMoveEffect(GetBestDmgMoveFromBattler(battlerAtk, battlerDef)) != EFFECT_FOCUS_PUNCH)
             || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_SLP || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
