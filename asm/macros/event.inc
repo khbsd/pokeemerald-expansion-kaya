@@ -2524,11 +2524,3 @@
 	compare \a, \b
 	cant_see_if 5
 	.endm
-
-		@ hide any follower pokemon if present,
-	@ putting them into their pokeball;
-	@ by default waits for their movement to finish
-	.macro hidefollower wait=1
-	callnative ScrFunc_hidefollower
-	.2byte \wait
-	.endm
