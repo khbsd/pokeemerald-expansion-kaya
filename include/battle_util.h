@@ -24,8 +24,8 @@
 
 enum AbilityEffectOptions
 {
-  ABILITY_CHECK_TRIGGER,
-  ABILITY_RUN_SCRIPT,
+    ABILITY_CHECK_TRIGGER,
+    ABILITY_RUN_SCRIPT,
 };
 
 enum MoveAbsorbed
@@ -173,6 +173,7 @@ enum SleepClauseBlock
 
 void HandleAction_ThrowBall(void);
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
+bool32 HandleMoveTargetRedirection(void);
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
@@ -242,7 +243,6 @@ u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 check
 u32 GetBattlerHoldEffectParam(u32 battler);
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
 bool32 IsBattlerGrounded(u32 battler);
-bool32 IsBattlerAlive(u32 battler);
 u32 GetMoveSlot(u16 *moves, u32 move);
 u32 GetBattlerWeight(u32 battler);
 u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer);
