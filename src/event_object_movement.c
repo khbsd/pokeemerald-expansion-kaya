@@ -2092,11 +2092,11 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u32 species, bool3
         sprite->inUse = FALSE;
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
-        sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
+        sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
     }
     else if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
     {
-        UpdateSpritePaletteWithWeather(gSprites[objEvent->spriteId].oam.paletteNum);
+        UpdateSpritePaletteWithWeather(gSprites[objEvent->spriteId].oam.paletteNum, FALSE);
     }
 }
 

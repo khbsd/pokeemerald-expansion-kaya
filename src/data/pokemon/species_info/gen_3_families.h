@@ -12081,7 +12081,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         SHADOW(3, 15, SHADOW_SIZE_M)
         FOOTPRINT(Latias)
         OVERWORLD(
-            gObjectEventPic_Latias,
+            sPicTable_Latias,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
