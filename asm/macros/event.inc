@@ -2425,6 +2425,17 @@
 	.2byte \dest
 	.endm
 
+	@ 
+	.macro infectmonwithpokerus slot:req, days:req
+	callnative InfectMonWithPokerus 
+	.2byte \slot
+	.2byte \days
+	.endm
+
+	.macro checkifplayeriskaya 
+	callnative CheckIfPlayerIsKaya
+	.endm 
+
 	@ Hides any follower Pokémon if present, putting them into their Poké Ball; by default waits for their movement to finish.
 	.macro hidefollower wait=1
 	callnative ScrFunc_hidefollower
