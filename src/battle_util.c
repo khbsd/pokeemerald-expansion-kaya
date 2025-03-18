@@ -312,7 +312,7 @@ void HandleAction_UseMove(void)
     u32 i;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-    if (gBattleStruct->battlerState[gBattlerAttacker].absentBattlerFlags
+    if (gBattleStruct->battlerState[gBattlerAttacker].absent
      || gBattleStruct->battlerState[gBattlerAttacker].commandingDondozo
      || !IsBattlerAlive(gBattlerAttacker))
     {
@@ -811,6 +811,8 @@ void HandleAction_ActionFinished(void)
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->bouncedMoveIsUsed = FALSE;
+    gBattleStruct->snatchedMoveIsUsed = FALSE;
     gBattleScripting.moveendState = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
@@ -6733,8 +6735,11 @@ bool32 IsMoldBreakerTypeAbility(u32 battler, u32 ability)
         || (ability == ABILITY_MYCELIUM_MIGHT && IsBattleMoveStatus(gCurrentMove)));
 }
 
-static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, u32 ability)
+static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, u32 ability, u32 hasAbilityShield)
 {
+    if (hasAbilityShield || gBattleStruct->bypassMoldBreakerChecks)
+        return FALSE;
+
     return ((IsMoldBreakerTypeAbility(battlerAtk, ability) || MoveIgnoresTargetAbility(gCurrentMove))
          && battlerDef != battlerAtk
          && gAbilitiesInfo[gBattleMons[battlerDef].ability].breakable
@@ -6745,7 +6750,7 @@ static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, u32 
 
 u32 GetBattlerAbility(u32 battler)
 {
-    bool32 noAbilityShield = GetBattlerHoldEffectIgnoreAbility(battler, TRUE) != HOLD_EFFECT_ABILITY_SHIELD;
+    bool32 hasAbilityShield = GetBattlerHoldEffectIgnoreAbility(battler, TRUE) == HOLD_EFFECT_ABILITY_SHIELD;
     bool32 abilityCantBeSuppressed = gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed;
 
     if (abilityCantBeSuppressed)
@@ -6756,9 +6761,7 @@ u32 GetBattlerAbility(u32 battler)
             && gBattleMons[battler].ability == ABILITY_COMATOSE)
                 return ABILITY_NONE;
 
-        if (!gBattleStruct->bypassMoldBreakerChecks
-         && noAbilityShield
-         && CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability))
+        if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield))
             return ABILITY_NONE;
 
         return gBattleMons[battler].ability;
@@ -6767,14 +6770,12 @@ u32 GetBattlerAbility(u32 battler)
     if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
         return ABILITY_NONE;
 
-    if (IsNeutralizingGasOnField()
-     && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS
-     && noAbilityShield)
+    if (!hasAbilityShield
+     && IsNeutralizingGasOnField()
+     && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS)
         return ABILITY_NONE;
 
-    if (!gBattleStruct->bypassMoldBreakerChecks
-     && noAbilityShield
-     && CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability))
+    if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield))
         return ABILITY_NONE;
 
     return gBattleMons[battler].ability;
@@ -8289,7 +8290,6 @@ u32 ItemBattleEffects(enum ItemCaseId caseID, u32 battler, bool32 moveTurn)
         case HOLD_EFFECT_LIFE_ORB:
             if (IsBattlerAlive(gBattlerAttacker)
                 && (IsBattlerTurnDamaged(gBattlerTarget) || gBattleStruct->moveDamage[gBattlerTarget]) // Needs the second check in case of Substitute
-                && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
                 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                 && !gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage)
@@ -10567,9 +10567,24 @@ static inline s32 DoMoveDamageCalcVars(struct DamageCalculationData *damageCalcD
         dmg *= DMG_ROLL_PERCENT_HI - RandomUniform(RNG_DAMAGE_MODIFIER, 0, DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO);
         dmg /= 100;
     }
+    else // Apply rest of modifiers in the ai function
+    {
+        if (dmg == 0)
+            dmg = 1;
+        return dmg;
+    }
 
-    if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
-        DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, damageCalcData->moveType));
+    dmg = ApplyModifiersAfterDmgRoll(dmg, damageCalcData, typeEffectivenessModifier, abilityAtk, abilityDef, holdEffectAtk, holdEffectDef);
+
+    if (dmg == 0)
+        dmg = 1;
+    return dmg;
+}
+
+s32 ApplyModifiersAfterDmgRoll(s32 dmg, struct DamageCalculationData *damageCalcData, uq4_12_t typeEffectivenessModifier, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk, u32 holdEffectDef)
+{
+    if (GetActiveGimmick(damageCalcData->battlerAtk) == GIMMICK_TERA)
+        DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(damageCalcData->battlerAtk, damageCalcData->moveType));
     else
         DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(damageCalcData, abilityAtk));
     DAMAGE_APPLY_MODIFIER(typeEffectivenessModifier);
@@ -10577,8 +10592,6 @@ static inline s32 DoMoveDamageCalcVars(struct DamageCalculationData *damageCalcD
     DAMAGE_APPLY_MODIFIER(GetZMaxMoveAgainstProtectionModifier(damageCalcData));
     DAMAGE_APPLY_MODIFIER(GetOtherModifiers(damageCalcData, typeEffectivenessModifier, abilityAtk, abilityDef, holdEffectAtk, holdEffectDef));
 
-    if (dmg == 0)
-        dmg = 1;
     return dmg;
 }
 

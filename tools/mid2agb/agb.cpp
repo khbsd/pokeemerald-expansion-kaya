@@ -528,7 +528,7 @@ void PrintAgbTrack(std::vector<Event>& events)
     PrintByte("FINE");
 }
 
-void PrintAgbTrackLoop(std::vector<Event>& events)
+void PrintAgbTrackLoop(std::vector<Event>& events, int trackLoops)
 {
     std::fprintf(g_outputFile, "\n@**************** Track %u (Midi-Chn.%u) ****************@\n\n", g_agbTrack, g_midiChan + 1);
     std::fprintf(g_outputFile, "%s_%u:\n", g_asmLabel.c_str(), g_agbTrack);
@@ -554,10 +554,10 @@ void PrintAgbTrackLoop(std::vector<Event>& events)
         PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
 
     PrintWait(g_initialWait);
-    if (B_NUM_LOW_HEALTH_BEEPS > 0)
+    if (trackLoops > 0)
         PrintByte("KEYSH , %s_key%+d", g_asmLabel.c_str(), 0);
 
-    for (int k = 0; k < B_NUM_LOW_HEALTH_BEEPS; k++)
+    for (int k = 0; k < trackLoops; k++)
     {
         for (unsigned i = 0; events[i].type != EventType::EndOfTrack; i++)
         {

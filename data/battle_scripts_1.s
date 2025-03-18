@@ -272,7 +272,11 @@ BattleScript_EffectChillyReception::
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_EffectChillyReceptionBlockedByPrimalRain
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_EffectChillyReceptionBlockedByStrongWinds
 	call BattleScript_EffectChillyReceptionPlayAnimation
+    #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
+	setfieldweather BATTLE_WEATHER_HAIL
+    #else
 	setfieldweather BATTLE_WEATHER_SNOW
+    #endif
 	call BattleScript_MoveWeatherChangeRet
 	goto BattleScript_MoveSwitch
 BattleScript_EffectChillyReceptionPlayAnimation:
@@ -6045,6 +6049,8 @@ BattleScript_RoarSuccessSwitch::
 BattleScript_RoarSuccessSwitch_Ret:
 	swapattackerwithtarget  @ continuation of RedCardActivates
 	restoretarget
+	restoreattacker
+	restoresavedmove
 	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
 	return
 
@@ -9582,6 +9588,8 @@ BattleScript_RedCardActivationNoSwitch::
 	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
 	restoretarget
+	restoreattacker
+	restoresavedmove
 	return
 
 BattleScript_RedCardActivates::
@@ -9600,22 +9608,17 @@ BattleScript_RedCardEnd:
 	return
 BattleScript_RedCardIngrain:
 	printstring STRINGID_PKMNANCHOREDITSELF
+BattleScript_RedCardIngrainContinue:
 	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
 	restoretarget
 	return
 BattleScript_RedCardSuctionCups:
-	printstring STRINGID_PKMNANCHORSITSELFWITH
-	waitmessage B_WAIT_TIME_LONG
-	removeitem BS_SCRIPTING
-	restoretarget
-	return
+    printstring STRINGID_PKMNANCHORSITSELFWITH
+    goto BattleScript_RedCardIngrainContinue
 BattleScript_RedCardDynamaxed:
 	printstring STRINGID_MOVEBLOCKEDBYDYNAMAX
-	waitmessage B_WAIT_TIME_LONG
-	removeitem BS_SCRIPTING
-	restoretarget
-	return
+    goto BattleScript_RedCardIngrainContinue
 
 BattleScript_EjectButtonActivates::
 	makevisible BS_ATTACKER
@@ -10066,6 +10069,14 @@ BattleScript_EffectSteelsurge::
 BattleScript_DynamaxBegins::
 	flushtextbox
 	trytrainerslidedynamaxmsg
+	jumpifcangigantamax BS_ATTACKER, BattleScript_DynamaxBegins_GigantamaxString_01
+	printstring STRINGID_TIMETODYNAMAX
+	waitmessage B_WAIT_TIME_MED
+	goto BattleScript_DynamaxBegins_SwitchIn
+BattleScript_DynamaxBegins_GigantamaxString_01:
+	printstring STRINGID_TIMETOGIGANTAMAX
+	waitmessage B_WAIT_TIME_MED
+BattleScript_DynamaxBegins_SwitchIn:
 	returnatktoball
 	pause B_WAIT_TIME_SHORT
 	returntoball BS_SCRIPTING, TRUE
@@ -10073,6 +10084,15 @@ BattleScript_DynamaxBegins::
 	updatedynamax
 	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
 	waitanimation
+	jumpifbyteequal B_SHOW_DYNAMAX_MESSAGE, FALSE, BattleScript_DynamaxBegins_End3
+	jumpifcangigantamax BS_ATTACKER, BattleScript_DynamaxBegins_GigantamaxString_02
+	printstring STRINGID_PKMNDYNAMAXED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DynamaxBegins_End3
+BattleScript_DynamaxBegins_GigantamaxString_02:
+	printstring STRINGID_PKMNGIGANTAMAXED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DynamaxBegins_End3:
 	end3
 
 BattleScript_DynamaxEnds::

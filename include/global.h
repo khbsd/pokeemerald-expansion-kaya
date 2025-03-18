@@ -1137,4 +1137,8 @@ struct MapPosition
     s8 elevation;
 };
 
+#if T_SHOULD_RUN_MOVE_ANIM
+extern bool32 gLoadFail;
+#endif // T_SHOULD_RUN_MOVE_ANIM
+
 #endif // GUARD_GLOBAL_H
