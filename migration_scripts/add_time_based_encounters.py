@@ -11,10 +11,7 @@ ENCOUNTER_GROUP_SUFFIX = [
 
 
 def GetWildEncounterFile():
-    print("hello")
-    print("finding wild_encounter.json...")
-
-    wFile = open("../src/data/wild_encounters_original.json")
+    wFile = open("../src/data/wild_encounters.json")
     wData = json.load(wFile)
 
     true = True
