@@ -1,7 +1,7 @@
 #ifndef GUARD_CONFIG_GENERAL_H
 #define GUARD_CONFIG_GENERAL_H
 
-#include "constants/species.h"
+#include "../../include/constants/species.h"
 
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
