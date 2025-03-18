@@ -78,7 +78,11 @@
       "encounters": [
         {
           "map": "MAP_ROUTE101",
-          "base_label": "gRoute101",
+          "base_label": "gRoute101_Morning"
+        },
+        {
+          "map": "MAP_ROUTE101",
+          "base_label": "gRoute101_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -315,7 +319,11 @@
         },
         {
           "map": "MAP_ROUTE102",
-          "base_label": "gRoute102",
+          "base_label": "gRoute102_Morning"
+        },
+        {
+          "map": "MAP_ROUTE102",
+          "base_label": "gRoute102_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -777,7 +785,11 @@
         },
         {
           "map": "MAP_ROUTE103",
-          "base_label": "gRoute103",
+          "base_label": "gRoute103_Morning"
+        },
+        {
+          "map": "MAP_ROUTE103",
+          "base_label": "gRoute103_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1239,7 +1251,11 @@
         },
         {
           "map": "MAP_ROUTE104",
-          "base_label": "gRoute104",
+          "base_label": "gRoute104_Morning"
+        },
+        {
+          "map": "MAP_ROUTE104",
+          "base_label": "gRoute104_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1701,7 +1717,11 @@
         },
         {
           "map": "MAP_ROUTE105",
-          "base_label": "gRoute105",
+          "base_label": "gRoute105_Morning"
+        },
+        {
+          "map": "MAP_ROUTE105",
+          "base_label": "gRoute105_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -1789,8 +1809,20 @@
           }
         },
         {
+          "map": "MAP_ROUTE105",
+          "base_label": "gRoute105_Evening"
+        },
+        {
+          "map": "MAP_ROUTE105",
+          "base_label": "gRoute105_Night"
+        },
+        {
           "map": "MAP_ROUTE110",
-          "base_label": "gRoute110",
+          "base_label": "gRoute110_Morning"
+        },
+        {
+          "map": "MAP_ROUTE110",
+          "base_label": "gRoute110_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -2252,7 +2284,11 @@
         },
         {
           "map": "MAP_ROUTE111",
-          "base_label": "gRoute111",
+          "base_label": "gRoute111_Morning"
+        },
+        {
+          "map": "MAP_ROUTE111",
+          "base_label": "gRoute111_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -2804,7 +2840,11 @@
         },
         {
           "map": "MAP_ROUTE112",
-          "base_label": "gRoute112",
+          "base_label": "gRoute112_Morning"
+        },
+        {
+          "map": "MAP_ROUTE112",
+          "base_label": "gRoute112_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3011,72 +3051,11 @@
         },
         {
           "map": "MAP_ROUTE113",
-          "base_label": "gRoute113",
-          "land_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 15,
-                "max_level": 15,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 15,
-                "max_level": 15,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 15,
-                "max_level": 15,
-                "species": "SPECIES_SLUGMA"
-              },
-              {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_SLUGMA"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SLUGMA"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SKARMORY"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SPINDA"
-              },
-              {
-                "min_level": 16,
-                "max_level": 16,
-                "species": "SPECIES_SKARMORY"
-              }
-            ]
-          }
+          "base_label": "gRoute113_Evening"
+        },
+        {
+          "map": "MAP_ROUTE113",
+          "base_label": "gRoute113_Night"
         },
         {
           "map": "MAP_ROUTE113",
@@ -3218,7 +3197,11 @@
         },
         {
           "map": "MAP_ROUTE114",
-          "base_label": "gRoute114",
+          "base_label": "gRoute114_Morning"
+        },
+        {
+          "map": "MAP_ROUTE114",
+          "base_label": "gRoute114_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3770,7 +3753,11 @@
         },
         {
           "map": "MAP_ROUTE116",
-          "base_label": "gRoute116",
+          "base_label": "gRoute116_Morning"
+        },
+        {
+          "map": "MAP_ROUTE116",
+          "base_label": "gRoute116_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4066,8 +4053,20 @@
           }
         },
         {
+          "map": "MAP_ROUTE116",
+          "base_label": "gRoute116_Evening"
+        },
+        {
+          "map": "MAP_ROUTE116",
+          "base_label": "gRoute116_Night"
+        },
+        {
           "map": "MAP_ROUTE117",
-          "base_label": "gRoute117",
+          "base_label": "gRoute117_Morning"
+        },
+        {
+          "map": "MAP_ROUTE117",
+          "base_label": "gRoute117_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4529,7 +4528,11 @@
         },
         {
           "map": "MAP_ROUTE118",
-          "base_label": "gRoute118",
+          "base_label": "gRoute118_Morning"
+        },
+        {
+          "map": "MAP_ROUTE118",
+          "base_label": "gRoute118_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4991,7 +4994,11 @@
         },
         {
           "map": "MAP_ROUTE124",
-          "base_label": "gRoute124",
+          "base_label": "gRoute124_Morning"
+        },
+        {
+          "map": "MAP_ROUTE124",
+          "base_label": "gRoute124_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -5258,7 +5265,11 @@
         },
         {
           "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods",
+          "base_label": "gPetalburgWoods_Morning"
+        },
+        {
+          "map": "MAP_PETALBURG_WOODS",
+          "base_label": "gPetalburgWoods_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -5495,7 +5506,11 @@
         },
         {
           "map": "MAP_RUSTURF_TUNNEL",
-          "base_label": "gRusturfTunnel",
+          "base_label": "gRusturfTunnel_Morning"
+        },
+        {
+          "map": "MAP_RUSTURF_TUNNEL",
+          "base_label": "gRusturfTunnel_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -5563,8 +5578,20 @@
           }
         },
         {
+          "map": "MAP_RUSTURF_TUNNEL",
+          "base_label": "gRusturfTunnel_Evening"
+        },
+        {
+          "map": "MAP_RUSTURF_TUNNEL",
+          "base_label": "gRusturfTunnel_Night"
+        },
+        {
           "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F",
+          "base_label": "gGraniteCave_1F_Morning"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_1F",
+          "base_label": "gGraniteCave_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -5627,6 +5654,87 @@
                 "min_level": 9,
                 "max_level": 9,
                 "species": "SPECIES_GEODUDE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_1F",
+          "base_label": "gGraniteCave_1F_Evening"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_1F",
+          "base_label": "gGraniteCave_1F_Night"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_B1F",
+          "base_label": "gGraniteCave_B1F_Morning"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_B1F",
+          "base_label": "gGraniteCave_B1F_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ARON"
+              },
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_ARON"
+              },
+              {
+                "min_level": 11,
+                "max_level": 11,
+                "species": "SPECIES_ARON"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_ABRA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 11,
+                "max_level": 11,
+                "species": "SPECIES_MAKUHITA"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 9,
+                "max_level": 9,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 11,
+                "max_level": 11,
+                "species": "SPECIES_SABLEYE"
               }
             ]
           }
@@ -5771,72 +5879,11 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 9,
-                "max_level": 9,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 10,
-                "max_level": 10,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 9,
-                "max_level": 9,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 11,
-                "max_level": 11,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 10,
-                "max_level": 10,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 9,
-                "max_level": 9,
-                "species": "SPECIES_ABRA"
-              },
-              {
-                "min_level": 10,
-                "max_level": 10,
-                "species": "SPECIES_MAKUHITA"
-              },
-              {
-                "min_level": 11,
-                "max_level": 11,
-                "species": "SPECIES_MAKUHITA"
-              },
-              {
-                "min_level": 10,
-                "max_level": 10,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 10,
-                "max_level": 10,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 9,
-                "max_level": 9,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 11,
-                "max_level": 11,
-                "species": "SPECIES_SABLEYE"
-              }
-            ]
-          }
+          "base_label": "gGraniteCave_B1F_Evening"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_B1F",
+          "base_label": "gGraniteCave_B1F_Night"
         },
         {
           "map": "MAP_GRANITE_CAVE_B1F",
@@ -5978,7 +6025,11 @@
         },
         {
           "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F",
+          "base_label": "gMtPyre_1F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_1F",
+          "base_label": "gMtPyre_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6185,7 +6236,11 @@
         },
         {
           "map": "MAP_VICTORY_ROAD_1F",
-          "base_label": "gVictoryRoad_1F",
+          "base_label": "gVictoryRoad_1F_Morning"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6253,8 +6308,20 @@
           }
         },
         {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_Night"
+        },
+        {
           "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South",
+          "base_label": "gSafariZone_South_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_SOUTH",
+          "base_label": "gSafariZone_South_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -6461,7 +6528,11 @@
         },
         {
           "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126",
+          "base_label": "gUnderwater_Route126_Morning"
+        },
+        {
+          "map": "MAP_UNDERWATER_ROUTE126",
+          "base_label": "gUnderwater_Route126_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -6563,7 +6634,11 @@
         },
         {
           "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
-          "base_label": "gAbandonedShip_Rooms_B1F",
+          "base_label": "gAbandonedShip_Rooms_B1F_Morning"
+        },
+        {
+          "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+          "base_label": "gAbandonedShip_Rooms_B1F_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -6651,8 +6726,20 @@
           }
         },
         {
+          "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+          "base_label": "gAbandonedShip_Rooms_B1F_Evening"
+        },
+        {
+          "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+          "base_label": "gAbandonedShip_Rooms_B1F_Night"
+        },
+        {
           "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F",
+          "base_label": "gGraniteCave_B2F_Morning"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_B2F",
+          "base_label": "gGraniteCave_B2F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6949,7 +7036,11 @@
         },
         {
           "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath",
+          "base_label": "gFieryPath_Morning"
+        },
+        {
+          "map": "MAP_FIERY_PATH",
+          "base_label": "gFieryPath_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7156,7 +7247,11 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R",
+          "base_label": "gMeteorFalls_B1F_2R_Morning"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_B1F_2R",
+          "base_label": "gMeteorFalls_B1F_2R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7618,7 +7713,11 @@
         },
         {
           "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass",
+          "base_label": "gJaggedPass_Morning"
+        },
+        {
+          "map": "MAP_JAGGED_PASS",
+          "base_label": "gJaggedPass_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -7825,7 +7924,112 @@
         },
         {
           "map": "MAP_ROUTE106",
-          "base_label": "gRoute106",
+          "base_label": "gRoute106_Morning"
+        },
+        {
+          "map": "MAP_ROUTE106",
+          "base_label": "gRoute106_Day",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE106",
+          "base_label": "gRoute106_Evening"
+        },
+        {
+          "map": "MAP_ROUTE106",
+          "base_label": "gRoute106_Night"
+        },
+        {
+          "map": "MAP_ROUTE107",
+          "base_label": "gRoute107_Morning"
+        },
+        {
+          "map": "MAP_ROUTE107",
+          "base_label": "gRoute107_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -7914,7 +8118,19 @@
         },
         {
           "map": "MAP_ROUTE107",
-          "base_label": "gRoute107",
+          "base_label": "gRoute107_Evening"
+        },
+        {
+          "map": "MAP_ROUTE107",
+          "base_label": "gRoute107_Night"
+        },
+        {
+          "map": "MAP_ROUTE108",
+          "base_label": "gRoute108_Morning"
+        },
+        {
+          "map": "MAP_ROUTE108",
+          "base_label": "gRoute108_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -8003,7 +8219,19 @@
         },
         {
           "map": "MAP_ROUTE108",
-          "base_label": "gRoute108",
+          "base_label": "gRoute108_Evening"
+        },
+        {
+          "map": "MAP_ROUTE108",
+          "base_label": "gRoute108_Night"
+        },
+        {
+          "map": "MAP_ROUTE109",
+          "base_label": "gRoute109_Morning"
+        },
+        {
+          "map": "MAP_ROUTE109",
+          "base_label": "gRoute109_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -8092,96 +8320,19 @@
         },
         {
           "map": "MAP_ROUTE109",
-          "base_label": "gRoute109",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 20,
-                "max_level": 25,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
+          "base_label": "gRoute109_Evening"
+        },
+        {
+          "map": "MAP_ROUTE109",
+          "base_label": "gRoute109_Night"
         },
         {
           "map": "MAP_ROUTE115",
-          "base_label": "gRoute115",
+          "base_label": "gRoute115_Morning"
+        },
+        {
+          "map": "MAP_ROUTE115",
+          "base_label": "gRoute115_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -8643,7 +8794,11 @@
         },
         {
           "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside",
+          "base_label": "gNewMauville_Inside_Morning"
+        },
+        {
+          "map": "MAP_NEW_MAUVILLE_INSIDE",
+          "base_label": "gNewMauville_Inside_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -8850,7 +9005,11 @@
         },
         {
           "map": "MAP_ROUTE119",
-          "base_label": "gRoute119",
+          "base_label": "gRoute119_Morning"
+        },
+        {
+          "map": "MAP_ROUTE119",
+          "base_label": "gRoute119_Day",
           "land_mons": {
             "encounter_rate": 15,
             "mons": [
@@ -9312,7 +9471,11 @@
         },
         {
           "map": "MAP_ROUTE120",
-          "base_label": "gRoute120",
+          "base_label": "gRoute120_Morning"
+        },
+        {
+          "map": "MAP_ROUTE120",
+          "base_label": "gRoute120_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -9774,7 +9937,11 @@
         },
         {
           "map": "MAP_ROUTE121",
-          "base_label": "gRoute121",
+          "base_label": "gRoute121_Morning"
+        },
+        {
+          "map": "MAP_ROUTE121",
+          "base_label": "gRoute121_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -10236,7 +10403,11 @@
         },
         {
           "map": "MAP_ROUTE122",
-          "base_label": "gRoute122",
+          "base_label": "gRoute122_Morning"
+        },
+        {
+          "map": "MAP_ROUTE122",
+          "base_label": "gRoute122_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -10324,8 +10495,20 @@
           }
         },
         {
+          "map": "MAP_ROUTE122",
+          "base_label": "gRoute122_Evening"
+        },
+        {
+          "map": "MAP_ROUTE122",
+          "base_label": "gRoute122_Night"
+        },
+        {
           "map": "MAP_ROUTE123",
-          "base_label": "gRoute123",
+          "base_label": "gRoute123_Morning"
+        },
+        {
+          "map": "MAP_ROUTE123",
+          "base_label": "gRoute123_Day",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -10787,7 +10970,92 @@
         },
         {
           "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F",
+          "base_label": "gMtPyre_2F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_2F",
+          "base_label": "gMtPyre_2F_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 23,
+                "max_level": 23,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_SHUPPET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_MT_PYRE_2F",
+          "base_label": "gMtPyre_2F_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_2F",
+          "base_label": "gMtPyre_2F_Night"
+        },
+        {
+          "map": "MAP_MT_PYRE_3F",
+          "base_label": "gMtPyre_3F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_3F",
+          "base_label": "gMtPyre_3F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -10994,7 +11262,19 @@
         },
         {
           "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F",
+          "base_label": "gMtPyre_3F_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_3F",
+          "base_label": "gMtPyre_3F_Night"
+        },
+        {
+          "map": "MAP_MT_PYRE_4F",
+          "base_label": "gMtPyre_4F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_4F",
+          "base_label": "gMtPyre_4F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11039,24 +11319,24 @@
                 "species": "SPECIES_SHUPPET"
               },
               {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
                 "min_level": 29,
                 "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
+                "species": "SPECIES_DUSKULL"
               }
             ]
           }
@@ -11201,7 +11481,19 @@
         },
         {
           "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F",
+          "base_label": "gMtPyre_4F_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_4F",
+          "base_label": "gMtPyre_4F_Night"
+        },
+        {
+          "map": "MAP_MT_PYRE_5F",
+          "base_label": "gMtPyre_5F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_5F",
+          "base_label": "gMtPyre_5F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11408,7 +11700,19 @@
         },
         {
           "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F",
+          "base_label": "gMtPyre_5F_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_5F",
+          "base_label": "gMtPyre_5F_Night"
+        },
+        {
+          "map": "MAP_MT_PYRE_6F",
+          "base_label": "gMtPyre_6F_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_6F",
+          "base_label": "gMtPyre_6F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11615,10 +11919,27 @@
         },
         {
           "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F",
+          "base_label": "gMtPyre_6F_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_6F",
+          "base_label": "gMtPyre_6F_Night"
+        },
+        {
+          "map": "MAP_MT_PYRE_EXTERIOR",
+          "base_label": "gMtPyre_Exterior_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_EXTERIOR",
+          "base_label": "gMtPyre_Exterior_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
               {
                 "min_level": 27,
                 "max_level": 27,
@@ -11630,54 +11951,49 @@
                 "species": "SPECIES_SHUPPET"
               },
               {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_WINGULL"
+              },
+              {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_SHUPPET"
+                "species": "SPECIES_WINGULL"
               },
               {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 23,
-                "max_level": 23,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 22,
-                "max_level": 22,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_DUSKULL"
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_WINGULL"
               }
             ]
           }
@@ -11822,72 +12138,11 @@
         },
         {
           "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_VULPIX"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_VULPIX"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_VULPIX"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_VULPIX"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_WINGULL"
-              }
-            ]
-          }
+          "base_label": "gMtPyre_Exterior_Evening"
+        },
+        {
+          "map": "MAP_MT_PYRE_EXTERIOR",
+          "base_label": "gMtPyre_Exterior_Night"
         },
         {
           "map": "MAP_MT_PYRE_EXTERIOR",
@@ -12029,7 +12284,11 @@
         },
         {
           "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit",
+          "base_label": "gMtPyre_Summit_Morning"
+        },
+        {
+          "map": "MAP_MT_PYRE_SUMMIT",
+          "base_label": "gMtPyre_Summit_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12236,7 +12495,11 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom",
+          "base_label": "gGraniteCave_StevensRoom_Morning"
+        },
+        {
+          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
+          "base_label": "gGraniteCave_StevensRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12374,7 +12637,112 @@
         },
         {
           "map": "MAP_ROUTE125",
-          "base_label": "gRoute125",
+          "base_label": "gRoute125_Morning"
+        },
+        {
+          "map": "MAP_ROUTE125",
+          "base_label": "gRoute125_Day",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_SHARPEDO"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE125",
+          "base_label": "gRoute125_Evening"
+        },
+        {
+          "map": "MAP_ROUTE125",
+          "base_label": "gRoute125_Night"
+        },
+        {
+          "map": "MAP_ROUTE126",
+          "base_label": "gRoute126_Morning"
+        },
+        {
+          "map": "MAP_ROUTE126",
+          "base_label": "gRoute126_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -12641,7 +13009,19 @@
         },
         {
           "map": "MAP_ROUTE126",
-          "base_label": "gRoute126",
+          "base_label": "gRoute126_Evening"
+        },
+        {
+          "map": "MAP_ROUTE126",
+          "base_label": "gRoute126_Night"
+        },
+        {
+          "map": "MAP_ROUTE127",
+          "base_label": "gRoute127_Morning"
+        },
+        {
+          "map": "MAP_ROUTE127",
+          "base_label": "gRoute127_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -12908,92 +13288,11 @@
         },
         {
           "map": "MAP_ROUTE127",
-          "base_label": "gRoute127",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_SHARPEDO"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
+          "base_label": "gRoute127_Evening"
+        },
+        {
+          "map": "MAP_ROUTE127",
+          "base_label": "gRoute127_Night"
         },
         {
           "map": "MAP_ROUTE127",
@@ -13175,7 +13474,11 @@
         },
         {
           "map": "MAP_ROUTE128",
-          "base_label": "gRoute128",
+          "base_label": "gRoute128_Morning"
+        },
+        {
+          "map": "MAP_ROUTE128",
+          "base_label": "gRoute128_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13442,7 +13745,11 @@
         },
         {
           "map": "MAP_ROUTE129",
-          "base_label": "gRoute129",
+          "base_label": "gRoute129_Morning"
+        },
+        {
+          "map": "MAP_ROUTE129",
+          "base_label": "gRoute129_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13862,6 +14169,14 @@
           }
         },
         {
+          "map": "MAP_ROUTE129",
+          "base_label": "gRoute129_Evening"
+        },
+        {
+          "map": "MAP_ROUTE129",
+          "base_label": "gRoute129_Night"
+        },
+        {
           "map": "MAP_ROUTE130",
           "base_label": "gRoute130_1",
           "land_mons": {
@@ -14170,8 +14485,20 @@
           }
         },
         {
+          "map": "MAP_ROUTE130",
+          "base_label": "gRoute130_Evening"
+        },
+        {
+          "map": "MAP_ROUTE130",
+          "base_label": "gRoute130_Night"
+        },
+        {
           "map": "MAP_ROUTE131",
-          "base_label": "gRoute131",
+          "base_label": "gRoute131_Morning"
+        },
+        {
+          "map": "MAP_ROUTE131",
+          "base_label": "gRoute131_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14438,7 +14765,112 @@
         },
         {
           "map": "MAP_ROUTE132",
-          "base_label": "gRoute132",
+          "base_label": "gRoute132_Morning"
+        },
+        {
+          "map": "MAP_ROUTE132",
+          "base_label": "gRoute132_Day",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_SHARPEDO"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_HORSEA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE132",
+          "base_label": "gRoute132_Evening"
+        },
+        {
+          "map": "MAP_ROUTE132",
+          "base_label": "gRoute132_Night"
+        },
+        {
+          "map": "MAP_ROUTE133",
+          "base_label": "gRoute133_Morning"
+        },
+        {
+          "map": "MAP_ROUTE133",
+          "base_label": "gRoute133_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14705,7 +15137,19 @@
         },
         {
           "map": "MAP_ROUTE133",
-          "base_label": "gRoute133",
+          "base_label": "gRoute133_Evening"
+        },
+        {
+          "map": "MAP_ROUTE133",
+          "base_label": "gRoute133_Night"
+        },
+        {
+          "map": "MAP_ROUTE134",
+          "base_label": "gRoute134_Morning"
+        },
+        {
+          "map": "MAP_ROUTE134",
+          "base_label": "gRoute134_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14972,92 +15416,11 @@
         },
         {
           "map": "MAP_ROUTE134",
-          "base_label": "gRoute134",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_SHARPEDO"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_HORSEA"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
+          "base_label": "gRoute134_Evening"
+        },
+        {
+          "map": "MAP_ROUTE134",
+          "base_label": "gRoute134_Night"
         },
         {
           "map": "MAP_ROUTE134",
@@ -15239,7 +15602,11 @@
         },
         {
           "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-          "base_label": "gAbandonedShip_HiddenFloorCorridors",
+          "base_label": "gAbandonedShip_HiddenFloorCorridors_Morning"
+        },
+        {
+          "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+          "base_label": "gAbandonedShip_HiddenFloorCorridors_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15327,8 +15694,101 @@
           }
         },
         {
+          "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+          "base_label": "gAbandonedShip_HiddenFloorCorridors_Evening"
+        },
+        {
+          "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+          "base_label": "gAbandonedShip_HiddenFloorCorridors_Night"
+        },
+        {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
-          "base_label": "gSeafloorCavern_Room1",
+          "base_label": "gSeafloorCavern_Room1_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+          "base_label": "gSeafloorCavern_Room1_Day",
+          "land_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GOLBAT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+          "base_label": "gSeafloorCavern_Room1_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+          "base_label": "gSeafloorCavern_Room1_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM2",
+          "base_label": "gSeafloorCavern_Room2_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM2",
+          "base_label": "gSeafloorCavern_Room2_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15397,7 +15857,19 @@
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM2",
-          "base_label": "gSeafloorCavern_Room2",
+          "base_label": "gSeafloorCavern_Room2_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM2",
+          "base_label": "gSeafloorCavern_Room2_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+          "base_label": "gSeafloorCavern_Room3_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+          "base_label": "gSeafloorCavern_Room3_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15466,7 +15938,19 @@
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
-          "base_label": "gSeafloorCavern_Room3",
+          "base_label": "gSeafloorCavern_Room3_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+          "base_label": "gSeafloorCavern_Room3_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM4",
+          "base_label": "gSeafloorCavern_Room4_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM4",
+          "base_label": "gSeafloorCavern_Room4_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15535,7 +16019,19 @@
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM4",
-          "base_label": "gSeafloorCavern_Room4",
+          "base_label": "gSeafloorCavern_Room4_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM4",
+          "base_label": "gSeafloorCavern_Room4_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+          "base_label": "gSeafloorCavern_Room5_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+          "base_label": "gSeafloorCavern_Room5_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15604,7 +16100,19 @@
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
-          "base_label": "gSeafloorCavern_Room5",
+          "base_label": "gSeafloorCavern_Room5_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+          "base_label": "gSeafloorCavern_Room5_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+          "base_label": "gSeafloorCavern_Room6_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+          "base_label": "gSeafloorCavern_Room6_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15669,11 +16177,108 @@
                 "species": "SPECIES_GOLBAT"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
           }
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
-          "base_label": "gSeafloorCavern_Room6",
+          "base_label": "gSeafloorCavern_Room6_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+          "base_label": "gSeafloorCavern_Room6_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+          "base_label": "gSeafloorCavern_Room7_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+          "base_label": "gSeafloorCavern_Room7_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15827,7 +16432,19 @@
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
-          "base_label": "gSeafloorCavern_Room7",
+          "base_label": "gSeafloorCavern_Room7_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+          "base_label": "gSeafloorCavern_Room7_Night"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+          "base_label": "gSeafloorCavern_Room8_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+          "base_label": "gSeafloorCavern_Room8_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15890,167 +16507,25 @@
                 "min_level": 36,
                 "max_level": 36,
                 "species": "SPECIES_GOLBAT"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 20,
-                "max_level": 25,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
               }
             ]
           }
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
-          "base_label": "gSeafloorCavern_Room8",
-          "land_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 31,
-                "max_level": 31,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_GOLBAT"
-              }
-            ]
-          }
+          "base_label": "gSeafloorCavern_Room8_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+          "base_label": "gSeafloorCavern_Room8_Night"
         },
         {
           "map": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
-          "base_label": "gSeafloorCavern_Entrance",
+          "base_label": "gSeafloorCavern_Entrance_Morning"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+          "base_label": "gSeafloorCavern_Entrance_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16138,8 +16613,20 @@
           }
         },
         {
+          "map": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+          "base_label": "gSeafloorCavern_Entrance_Evening"
+        },
+        {
+          "map": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+          "base_label": "gSeafloorCavern_Entrance_Night"
+        },
+        {
           "map": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
-          "base_label": "gCaveOfOrigin_Entrance",
+          "base_label": "gCaveOfOrigin_Entrance_Morning"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
+          "base_label": "gCaveOfOrigin_Entrance_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16181,6 +16668,87 @@
               {
                 "min_level": 35,
                 "max_level": 35,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GOLBAT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
+          "base_label": "gCaveOfOrigin_Entrance_Evening"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
+          "base_label": "gCaveOfOrigin_Entrance_Night"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_1F",
+          "base_label": "gCaveOfOrigin_1F_Morning"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_1F",
+          "base_label": "gCaveOfOrigin_1F_Day",
+          "land_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
                 "species": "SPECIES_ZUBAT"
               },
               {
@@ -16208,7 +16776,19 @@
         },
         {
           "map": "MAP_CAVE_OF_ORIGIN_1F",
-          "base_label": "gCaveOfOrigin_1F",
+          "base_label": "gCaveOfOrigin_1F_Evening"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_1F",
+          "base_label": "gCaveOfOrigin_1F_Night"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap1_Morning"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap1_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16277,7 +16857,19 @@
         },
         {
           "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
-          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap1",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap1_Evening"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap1_Night"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap2_Morning"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap2_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16346,7 +16938,19 @@
         },
         {
           "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
-          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap2",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap2_Evening"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap2_Night"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap3_Morning"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap3_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16415,80 +17019,31 @@
         },
         {
           "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
-          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap3",
-          "land_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 31,
-                "max_level": 31,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_GOLBAT"
-              }
-            ]
-          }
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap3_Evening"
+        },
+        {
+          "map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
+          "base_label": "gCaveOfOrigin_UnusedRubySapphireMap3_Night"
         },
         {
           "map": "MAP_NEW_MAUVILLE_ENTRANCE",
           "base_label": "gNewMauville_Entrance"
         },
         {
+          "map": "MAP_NEW_MAUVILLE_ENTRANCE",
+          "base_label": "gNewMauville_Entrance_Evening"
+        },
+        {
+          "map": "MAP_NEW_MAUVILLE_ENTRANCE",
+          "base_label": "gNewMauville_Entrance_Night"
+        },
+        {
           "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest",
+          "base_label": "gSafariZone_Southwest_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
+          "base_label": "gSafariZone_Southwest_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -16950,7 +17505,11 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North",
+          "base_label": "gSafariZone_North_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_NORTH",
+          "base_label": "gSafariZone_North_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -17247,7 +17806,11 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest",
+          "base_label": "gSafariZone_Northwest_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_NORTHWEST",
+          "base_label": "gSafariZone_Northwest_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -17709,7 +18272,11 @@
         },
         {
           "map": "MAP_VICTORY_ROAD_B1F",
-          "base_label": "gVictoryRoad_B1F",
+          "base_label": "gVictoryRoad_B1F_Morning"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -17807,8 +18374,20 @@
           }
         },
         {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_Night"
+        },
+        {
           "map": "MAP_VICTORY_ROAD_B2F",
-          "base_label": "gVictoryRoad_B2F",
+          "base_label": "gVictoryRoad_B2F_Morning"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -17961,8 +18540,20 @@
           }
         },
         {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_Night"
+        },
+        {
           "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R",
+          "base_label": "gMeteorFalls_1F_1R_Morning"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_1F_1R",
+          "base_label": "gMeteorFalls_1F_1R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -18424,7 +19015,177 @@
         },
         {
           "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R",
+          "base_label": "gMeteorFalls_1F_2R_Morning"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_1F_2R",
+          "base_label": "gMeteorFalls_1F_2R_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 40,
+                "max_level": 40,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 40,
+                "max_level": 40,
+                "species": "SPECIES_GOLBAT"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 25,
+                "max_level": 35,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 15,
+                "species": "SPECIES_SOLROCK"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_GOLDEEN"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_GOLDEEN"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_BARBOACH"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_BARBOACH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_BARBOACH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WHISCASH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_METEOR_FALLS_1F_2R",
+          "base_label": "gMeteorFalls_1F_2R_Evening"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_1F_2R",
+          "base_label": "gMeteorFalls_1F_2R_Night"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_B1F_1R",
+          "base_label": "gMeteorFalls_B1F_1R_Morning"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_B1F_1R",
+          "base_label": "gMeteorFalls_B1F_1R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -18886,154 +19647,81 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R",
+          "base_label": "gMeteorFalls_B1F_1R_Evening"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_B1F_1R",
+          "base_label": "gMeteorFalls_B1F_1R_Night"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+          "base_label": "gShoalCave_LowTideStairsRoom_Morning"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+          "base_label": "gShoalCave_LowTideStairsRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
+                "min_level": 26,
+                "max_level": 26,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
+                "min_level": 26,
+                "max_level": 26,
+                "species": "SPECIES_SPHEAL"
               },
               {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_ZUBAT"
               },
               {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 37,
-                "max_level": 37,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_SPHEAL"
               },
               {
                 "min_level": 30,
-                "max_level": 35,
+                "max_level": 30,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
                 "species": "SPECIES_GOLBAT"
               },
               {
-                "min_level": 25,
-                "max_level": 35,
-                "species": "SPECIES_SOLROCK"
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_SPHEAL"
               },
               {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_SOLROCK"
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_GOLBAT"
               },
               {
-                "min_level": 5,
-                "max_level": 15,
-                "species": "SPECIES_SOLROCK"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WHISCASH"
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_SPHEAL"
               }
             ]
           }
@@ -19348,7 +20036,19 @@
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
-          "base_label": "gShoalCave_LowTideStairsRoom",
+          "base_label": "gShoalCave_LowTideStairsRoom_Evening"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+          "base_label": "gShoalCave_LowTideStairsRoom_Night"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+          "base_label": "gShoalCave_LowTideLowerRoom_Morning"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+          "base_label": "gShoalCave_LowTideLowerRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -19417,7 +20117,19 @@
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
-          "base_label": "gShoalCave_LowTideLowerRoom",
+          "base_label": "gShoalCave_LowTideLowerRoom_Evening"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+          "base_label": "gShoalCave_LowTideLowerRoom_Night"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+          "base_label": "gShoalCave_LowTideInnerRoom_Morning"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+          "base_label": "gShoalCave_LowTideInnerRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -19482,11 +20194,108 @@
                 "species": "SPECIES_SPHEAL"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 35,
+                "species": "SPECIES_SPHEAL"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
           }
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
-          "base_label": "gShoalCave_LowTideInnerRoom",
+          "base_label": "gShoalCave_LowTideInnerRoom_Evening"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+          "base_label": "gShoalCave_LowTideInnerRoom_Night"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+          "base_label": "gShoalCave_LowTideEntranceRoom_Morning"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+          "base_label": "gShoalCave_LowTideEntranceRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -19640,161 +20449,19 @@
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
-          "base_label": "gShoalCave_LowTideEntranceRoom",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_SPHEAL"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_SPHEAL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 35,
-                "species": "SPECIES_SPHEAL"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 20,
-                "max_level": 25,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
+          "base_label": "gShoalCave_LowTideEntranceRoom_Evening"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+          "base_label": "gShoalCave_LowTideEntranceRoom_Night"
         },
         {
           "map": "MAP_LILYCOVE_CITY",
-          "base_label": "gLilycoveCity",
+          "base_label": "gLilycoveCity_Morning"
+        },
+        {
+          "map": "MAP_LILYCOVE_CITY",
+          "base_label": "gLilycoveCity_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -19882,8 +20549,121 @@
           }
         },
         {
+          "map": "MAP_LILYCOVE_CITY",
+          "base_label": "gLilycoveCity_Evening"
+        },
+        {
+          "map": "MAP_LILYCOVE_CITY",
+          "base_label": "gLilycoveCity_Night"
+        },
+        {
           "map": "MAP_DEWFORD_TOWN",
-          "base_label": "gDewfordTown",
+          "base_label": "gDewfordTown_Morning"
+        },
+        {
+          "map": "MAP_DEWFORD_TOWN",
+          "base_label": "gDewfordTown_Day",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 35,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_WINGULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_PELIPPER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 5,
+                "max_level": 10,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_MAGIKARP"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_WAILMER"
+              },
+              {
+                "min_level": 40,
+                "max_level": 45,
+                "species": "SPECIES_WAILMER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_DEWFORD_TOWN",
+          "base_label": "gDewfordTown_Evening"
+        },
+        {
+          "map": "MAP_DEWFORD_TOWN",
+          "base_label": "gDewfordTown_Night"
+        },
+        {
+          "map": "MAP_SLATEPORT_CITY",
+          "base_label": "gSlateportCity_Morning"
+        },
+        {
+          "map": "MAP_SLATEPORT_CITY",
+          "base_label": "gSlateportCity_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -19972,7 +20752,19 @@
         },
         {
           "map": "MAP_SLATEPORT_CITY",
-          "base_label": "gSlateportCity",
+          "base_label": "gSlateportCity_Evening"
+        },
+        {
+          "map": "MAP_SLATEPORT_CITY",
+          "base_label": "gSlateportCity_Night"
+        },
+        {
+          "map": "MAP_MOSSDEEP_CITY",
+          "base_label": "gMossdeepCity_Morning"
+        },
+        {
+          "map": "MAP_MOSSDEEP_CITY",
+          "base_label": "gMossdeepCity_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -20032,9 +20824,9 @@
                 "species": "SPECIES_WAILMER"
               },
               {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
+                "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_SHARPEDO"
               },
               {
                 "min_level": 30,
@@ -20042,8 +20834,8 @@
                 "species": "SPECIES_WAILMER"
               },
               {
-                "min_level": 20,
-                "max_level": 25,
+                "min_level": 25,
+                "max_level": 30,
                 "species": "SPECIES_WAILMER"
               },
               {
@@ -20061,7 +20853,19 @@
         },
         {
           "map": "MAP_MOSSDEEP_CITY",
-          "base_label": "gMossdeepCity",
+          "base_label": "gMossdeepCity_Evening"
+        },
+        {
+          "map": "MAP_MOSSDEEP_CITY",
+          "base_label": "gMossdeepCity_Night"
+        },
+        {
+          "map": "MAP_PACIFIDLOG_TOWN",
+          "base_label": "gPacifidlogTown_Morning"
+        },
+        {
+          "map": "MAP_PACIFIDLOG_TOWN",
+          "base_label": "gPacifidlogTown_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -20150,96 +20954,19 @@
         },
         {
           "map": "MAP_PACIFIDLOG_TOWN",
-          "base_label": "gPacifidlogTown",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_SHARPEDO"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
+          "base_label": "gPacifidlogTown_Evening"
+        },
+        {
+          "map": "MAP_PACIFIDLOG_TOWN",
+          "base_label": "gPacifidlogTown_Night"
         },
         {
           "map": "MAP_EVER_GRANDE_CITY",
-          "base_label": "gEverGrandeCity",
+          "base_label": "gEverGrandeCity_Morning"
+        },
+        {
+          "map": "MAP_EVER_GRANDE_CITY",
+          "base_label": "gEverGrandeCity_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -20327,8 +21054,20 @@
           }
         },
         {
+          "map": "MAP_EVER_GRANDE_CITY",
+          "base_label": "gEverGrandeCity_Evening"
+        },
+        {
+          "map": "MAP_EVER_GRANDE_CITY",
+          "base_label": "gEverGrandeCity_Night"
+        },
+        {
           "map": "MAP_PETALBURG_CITY",
-          "base_label": "gPetalburgCity",
+          "base_label": "gPetalburgCity_Morning"
+        },
+        {
+          "map": "MAP_PETALBURG_CITY",
+          "base_label": "gPetalburgCity_Day",
           "water_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -20416,8 +21155,20 @@
           }
         },
         {
+          "map": "MAP_PETALBURG_CITY",
+          "base_label": "gPetalburgCity_Evening"
+        },
+        {
+          "map": "MAP_PETALBURG_CITY",
+          "base_label": "gPetalburgCity_Night"
+        },
+        {
           "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124",
+          "base_label": "gUnderwater_Route124_Morning"
+        },
+        {
+          "map": "MAP_UNDERWATER_ROUTE124",
+          "base_label": "gUnderwater_Route124_Day",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -20519,7 +21270,11 @@
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
-          "base_label": "gShoalCave_LowTideIceRoom",
+          "base_label": "gShoalCave_LowTideIceRoom_Morning"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+          "base_label": "gShoalCave_LowTideIceRoom_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20587,8 +21342,20 @@
           }
         },
         {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+          "base_label": "gShoalCave_LowTideIceRoom_Evening"
+        },
+        {
+          "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+          "base_label": "gShoalCave_LowTideIceRoom_Night"
+        },
+        {
           "map": "MAP_SKY_PILLAR_1F",
-          "base_label": "gSkyPillar_1F",
+          "base_label": "gSkyPillar_1F_Morning"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_1F",
+          "base_label": "gSkyPillar_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20656,8 +21423,20 @@
           }
         },
         {
+          "map": "MAP_SKY_PILLAR_1F",
+          "base_label": "gSkyPillar_1F_Evening"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_1F",
+          "base_label": "gSkyPillar_1F_Night"
+        },
+        {
           "map": "MAP_SOOTOPOLIS_CITY",
-          "base_label": "gSootopolisCity",
+          "base_label": "gSootopolisCity_Morning"
+        },
+        {
+          "map": "MAP_SOOTOPOLIS_CITY",
+          "base_label": "gSootopolisCity_Day",
           "water_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -20745,8 +21524,20 @@
           }
         },
         {
+          "map": "MAP_SOOTOPOLIS_CITY",
+          "base_label": "gSootopolisCity_Evening"
+        },
+        {
+          "map": "MAP_SOOTOPOLIS_CITY",
+          "base_label": "gSootopolisCity_Night"
+        },
+        {
           "map": "MAP_SKY_PILLAR_3F",
-          "base_label": "gSkyPillar_3F",
+          "base_label": "gSkyPillar_3F_Morning"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_3F",
+          "base_label": "gSkyPillar_3F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20809,82 +21600,106 @@
                 "min_level": 38,
                 "max_level": 38,
                 "species": "SPECIES_CLAYDOL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SKY_PILLAR_3F",
+          "base_label": "gSkyPillar_3F_Evening"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_3F",
+          "base_label": "gSkyPillar_3F_Night"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_5F",
+          "base_label": "gSkyPillar_5F_Morning"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_5F",
+          "base_label": "gSkyPillar_5F_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_ALTARIA"
               }
             ]
           }
         },
         {
           "map": "MAP_SKY_PILLAR_5F",
-          "base_label": "gSkyPillar_5F",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_CLAYDOL"
-              },
-              {
-                "min_level": 37,
-                "max_level": 37,
-                "species": "SPECIES_BANETTE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_BANETTE"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_CLAYDOL"
-              },
-              {
-                "min_level": 37,
-                "max_level": 37,
-                "species": "SPECIES_CLAYDOL"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_ALTARIA"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_ALTARIA"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_ALTARIA"
-              }
-            ]
-          }
+          "base_label": "gSkyPillar_5F_Evening"
+        },
+        {
+          "map": "MAP_SKY_PILLAR_5F",
+          "base_label": "gSkyPillar_5F_Night"
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast",
+          "base_label": "gSafariZone_Southeast_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
+          "base_label": "gSafariZone_Southeast_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -21345,8 +22160,20 @@
           }
         },
         {
+          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
+          "base_label": "gSafariZone_Southeast_Evening"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
+          "base_label": "gSafariZone_Southeast_Night"
+        },
+        {
           "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast",
+          "base_label": "gSafariZone_Northeast_Morning"
+        },
+        {
+          "map": "MAP_SAFARI_ZONE_NORTHEAST",
+          "base_label": "gSafariZone_Northeast_Day",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -21643,7 +22470,92 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_1F",
-          "base_label": "gMagmaHideout_1F",
+          "base_label": "gMagmaHideout_1F_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_1F",
+          "base_label": "gMagmaHideout_1F_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_TORKOAL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_TORKOAL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 29,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_GRAVELER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_1F",
+          "base_label": "gMagmaHideout_1F_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_1F",
+          "base_label": "gMagmaHideout_1F_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_1R",
+          "base_label": "gMagmaHideout_2F_1R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_1R",
+          "base_label": "gMagmaHideout_2F_1R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21712,7 +22624,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_2F_1R",
-          "base_label": "gMagmaHideout_2F_1R",
+          "base_label": "gMagmaHideout_2F_1R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_1R",
+          "base_label": "gMagmaHideout_2F_1R_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_2R",
+          "base_label": "gMagmaHideout_2F_2R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_2R",
+          "base_label": "gMagmaHideout_2F_2R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21781,7 +22705,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_2F_2R",
-          "base_label": "gMagmaHideout_2F_2R",
+          "base_label": "gMagmaHideout_2F_2R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_2R",
+          "base_label": "gMagmaHideout_2F_2R_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_1R",
+          "base_label": "gMagmaHideout_3F_1R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_1R",
+          "base_label": "gMagmaHideout_3F_1R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21850,7 +22786,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_3F_1R",
-          "base_label": "gMagmaHideout_3F_1R",
+          "base_label": "gMagmaHideout_3F_1R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_1R",
+          "base_label": "gMagmaHideout_3F_1R_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_2R",
+          "base_label": "gMagmaHideout_3F_2R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_2R",
+          "base_label": "gMagmaHideout_3F_2R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21919,7 +22867,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_3F_2R",
-          "base_label": "gMagmaHideout_3F_2R",
+          "base_label": "gMagmaHideout_3F_2R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_2R",
+          "base_label": "gMagmaHideout_3F_2R_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_4F",
+          "base_label": "gMagmaHideout_4F_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_4F",
+          "base_label": "gMagmaHideout_4F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21988,7 +22948,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_4F",
-          "base_label": "gMagmaHideout_4F",
+          "base_label": "gMagmaHideout_4F_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_4F",
+          "base_label": "gMagmaHideout_4F_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_3R",
+          "base_label": "gMagmaHideout_3F_3R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_3R",
+          "base_label": "gMagmaHideout_3F_3R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22057,7 +23029,19 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_3F_3R",
-          "base_label": "gMagmaHideout_3F_3R",
+          "base_label": "gMagmaHideout_3F_3R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_3F_3R",
+          "base_label": "gMagmaHideout_3F_3R_Night"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_3R",
+          "base_label": "gMagmaHideout_2F_3R_Morning"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_3R",
+          "base_label": "gMagmaHideout_2F_3R_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22126,76 +23110,100 @@
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_2F_3R",
-          "base_label": "gMagmaHideout_2F_3R",
+          "base_label": "gMagmaHideout_2F_3R_Evening"
+        },
+        {
+          "map": "MAP_MAGMA_HIDEOUT_2F_3R",
+          "base_label": "gMagmaHideout_2F_3R_Night"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_1F",
+          "base_label": "gMirageTower_1F_Morning"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_1F",
+          "base_label": "gMirageTower_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_TORKOAL"
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_TRAPINCH"
               },
               {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_TORKOAL"
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_TRAPINCH"
               },
               {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_TRAPINCH"
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_GRAVELER"
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_TRAPINCH"
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_GRAVELER"
+                "min_level": 23,
+                "max_level": 23,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 31,
-                "max_level": 31,
-                "species": "SPECIES_GRAVELER"
+                "min_level": 23,
+                "max_level": 23,
+                "species": "SPECIES_TRAPINCH"
               },
               {
-                "min_level": 32,
-                "max_level": 32,
-                "species": "SPECIES_GRAVELER"
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_SANDSHREW"
               },
               {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GRAVELER"
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_TRAPINCH"
               }
             ]
           }
         },
         {
           "map": "MAP_MIRAGE_TOWER_1F",
-          "base_label": "gMirageTower_1F",
+          "base_label": "gMirageTower_1F_Evening"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_1F",
+          "base_label": "gMirageTower_1F_Night"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_2F",
+          "base_label": "gMirageTower_2F_Morning"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_2F",
+          "base_label": "gMirageTower_2F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22264,7 +23272,19 @@
         },
         {
           "map": "MAP_MIRAGE_TOWER_2F",
-          "base_label": "gMirageTower_2F",
+          "base_label": "gMirageTower_2F_Evening"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_2F",
+          "base_label": "gMirageTower_2F_Night"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_3F",
+          "base_label": "gMirageTower_3F_Morning"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_3F",
+          "base_label": "gMirageTower_3F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22333,7 +23353,19 @@
         },
         {
           "map": "MAP_MIRAGE_TOWER_3F",
-          "base_label": "gMirageTower_3F",
+          "base_label": "gMirageTower_3F_Evening"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_3F",
+          "base_label": "gMirageTower_3F_Night"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_4F",
+          "base_label": "gMirageTower_4F_Morning"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_4F",
+          "base_label": "gMirageTower_4F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22402,76 +23434,19 @@
         },
         {
           "map": "MAP_MIRAGE_TOWER_4F",
-          "base_label": "gMirageTower_4F",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 21,
-                "max_level": 21,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 21,
-                "max_level": 21,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 20,
-                "max_level": 20,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 20,
-                "max_level": 20,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 20,
-                "max_level": 20,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 20,
-                "max_level": 20,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 22,
-                "max_level": 22,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 22,
-                "max_level": 22,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 23,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 23,
-                "max_level": 23,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SANDSHREW"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_TRAPINCH"
-              }
-            ]
-          }
+          "base_label": "gMirageTower_4F_Evening"
+        },
+        {
+          "map": "MAP_MIRAGE_TOWER_4F",
+          "base_label": "gMirageTower_4F_Night"
         },
         {
           "map": "MAP_DESERT_UNDERPASS",
-          "base_label": "gDesertUnderpass",
+          "base_label": "gDesertUnderpass_Morning"
+        },
+        {
+          "map": "MAP_DESERT_UNDERPASS",
+          "base_label": "gDesertUnderpass_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22539,8 +23514,101 @@
           }
         },
         {
+          "map": "MAP_DESERT_UNDERPASS",
+          "base_label": "gDesertUnderpass_Evening"
+        },
+        {
+          "map": "MAP_DESERT_UNDERPASS",
+          "base_label": "gDesertUnderpass_Night"
+        },
+        {
           "map": "MAP_ARTISAN_CAVE_B1F",
-          "base_label": "gArtisanCave_B1F",
+          "base_label": "gArtisanCave_B1F_Morning"
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_B1F",
+          "base_label": "gArtisanCave_B1F_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 40,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 41,
+                "max_level": 41,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 43,
+                "max_level": 43,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 44,
+                "max_level": 44,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 45,
+                "max_level": 45,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_SMEARGLE"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_SMEARGLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_B1F",
+          "base_label": "gArtisanCave_B1F_Evening"
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_B1F",
+          "base_label": "gArtisanCave_B1F_Night"
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_1F",
+          "base_label": "gArtisanCave_1F_Morning"
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_1F",
+          "base_label": "gArtisanCave_1F_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -22609,76 +23677,19 @@
         },
         {
           "map": "MAP_ARTISAN_CAVE_1F",
-          "base_label": "gArtisanCave_1F",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 41,
-                "max_level": 41,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 43,
-                "max_level": 43,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 44,
-                "max_level": 44,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 45,
-                "max_level": 45,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 46,
-                "max_level": 46,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 47,
-                "max_level": 47,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 48,
-                "max_level": 48,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 49,
-                "max_level": 49,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 50,
-                "max_level": 50,
-                "species": "SPECIES_SMEARGLE"
-              },
-              {
-                "min_level": 50,
-                "max_level": 50,
-                "species": "SPECIES_SMEARGLE"
-              }
-            ]
-          }
+          "base_label": "gArtisanCave_1F_Evening"
+        },
+        {
+          "map": "MAP_ARTISAN_CAVE_1F",
+          "base_label": "gArtisanCave_1F_Night"
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave1",
+          "base_label": "gAlteringCave1_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave1_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -22747,7 +23758,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave2",
+          "base_label": "gAlteringCave1_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave1_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave2_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave2_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -22816,7 +23839,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave3",
+          "base_label": "gAlteringCave2_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave2_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave3_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave3_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -22885,7 +23920,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave4",
+          "base_label": "gAlteringCave3_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave3_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave4_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave4_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -22954,7 +24001,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave5",
+          "base_label": "gAlteringCave4_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave4_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave5_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave5_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -23023,7 +24082,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave6",
+          "base_label": "gAlteringCave5_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave5_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave6_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave6_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -23092,7 +24163,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave7",
+          "base_label": "gAlteringCave6_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave6_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave7_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave7_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -23161,7 +24244,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave8",
+          "base_label": "gAlteringCave7_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave7_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave8_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave8_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -23230,7 +24325,19 @@
         },
         {
           "map": "MAP_ALTERING_CAVE",
-          "base_label": "gAlteringCave9",
+          "base_label": "gAlteringCave8_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave8_Night"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave9_Morning"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave9_Day",
           "land_mons": {
             "encounter_rate": 7,
             "mons": [
@@ -23296,10 +24403,22 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave9_Evening"
+        },
+        {
+          "map": "MAP_ALTERING_CAVE",
+          "base_label": "gAlteringCave9_Night"
         },
         {
           "map": "MAP_METEOR_FALLS_STEVENS_CAVE",
-          "base_label": "gMeteorFalls_StevensCave",
+          "base_label": "gMeteorFalls_StevensCave_Morning"
+        },
+        {
+          "map": "MAP_METEOR_FALLS_STEVENS_CAVE",
+          "base_label": "gMeteorFalls_StevensCave_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -23506,7 +24625,10 @@
       "for_maps": false,
       "encounters": [
         {
-          "base_label": "gBattlePyramid_1",
+          "base_label": "gBattlePyramid_1_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_1_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23574,7 +24696,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_2",
+          "base_label": "gBattlePyramid_1_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_1_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_2_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_2_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23642,7 +24773,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_3",
+          "base_label": "gBattlePyramid_2_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_2_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_3_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_3_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23710,7 +24850,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_4",
+          "base_label": "gBattlePyramid_3_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_3_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_4_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_4_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23778,7 +24927,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_5",
+          "base_label": "gBattlePyramid_4_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_4_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_5_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_5_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23846,7 +25004,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_6",
+          "base_label": "gBattlePyramid_5_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_5_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_6_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_6_Day",
           "land_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -23914,7 +25081,16 @@
           }
         },
         {
-          "base_label": "gBattlePyramid_7",
+          "base_label": "gBattlePyramid_6_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_6_Night"
+        },
+        {
+          "base_label": "gBattlePyramid_7_Morning"
+        },
+        {
+          "base_label": "gBattlePyramid_7_Day",
           "land_mons": {
             "encounter_rate": 8,
             "mons": [
@@ -23980,6 +25156,12 @@
               }
             ]
           }
+        },
+        {
+          "base_label": "gBattlePyramid_7_Evening"
+        },
+        {
+          "base_label": "gBattlePyramid_7_Night"
         }
       ]
     },
@@ -23988,7 +25170,10 @@
       "for_maps": false,
       "encounters": [
         {
-          "base_label": "gBattlePike_1",
+          "base_label": "gBattlePike_1_Morning"
+        },
+        {
+          "base_label": "gBattlePike_1_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24056,7 +25241,16 @@
           }
         },
         {
-          "base_label": "gBattlePike_2",
+          "base_label": "gBattlePike_1_Evening"
+        },
+        {
+          "base_label": "gBattlePike_1_Night"
+        },
+        {
+          "base_label": "gBattlePike_2_Morning"
+        },
+        {
+          "base_label": "gBattlePike_2_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24124,7 +25318,16 @@
           }
         },
         {
-          "base_label": "gBattlePike_3",
+          "base_label": "gBattlePike_2_Evening"
+        },
+        {
+          "base_label": "gBattlePike_2_Night"
+        },
+        {
+          "base_label": "gBattlePike_3_Morning"
+        },
+        {
+          "base_label": "gBattlePike_3_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24192,7 +25395,16 @@
           }
         },
         {
-          "base_label": "gBattlePike_4",
+          "base_label": "gBattlePike_3_Evening"
+        },
+        {
+          "base_label": "gBattlePike_3_Night"
+        },
+        {
+          "base_label": "gBattlePike_4_Morning"
+        },
+        {
+          "base_label": "gBattlePike_4_Day",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24258,6 +25470,12 @@
               }
             ]
           }
+        },
+        {
+          "base_label": "gBattlePike_4_Evening"
+        },
+        {
+          "base_label": "gBattlePike_4_Night"
         }
       ]
     }

@@ -1,9 +1,14 @@
 #include "global.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "rtc.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
 #include "fake_rtc.h"
+#include "sound.h"
+#include "wild_encounter.h"
+#include "constants/songs.h"
 #include "overworld.h"
 
 // iwram bss
@@ -326,10 +331,15 @@ bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
         return hours >= begin && hours < end;
 }
 
-u8 GetTimeOfDay(void)
+u32 GetTimeOfDay(void)
 {
     UpdateTimeOfDay();
     return gTimeOfDay;
+}
+
+u32 GetTimeOfDayForDex(void)
+{
+    return OW_TIME_OF_DAY_ENCOUNTERS ? GetTimeOfDay() : TIME_DAY;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
@@ -412,4 +422,14 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24
 
     *txtPtr++ = EOS;
     *txtPtr = EOS;
+}
+
+u32 TryIncrementTimeOfDay(u32 timeOfDay)
+{
+    return timeOfDay == TIME_NIGHT ? TIME_MORNING : timeOfDay + 1;
+}
+
+u32 TryDecrementTimeOfDay(u32 timeOfDay)
+{
+    return timeOfDay == TIME_MORNING ? TIME_NIGHT : timeOfDay - 1;
 }

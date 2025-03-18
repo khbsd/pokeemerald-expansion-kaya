@@ -28,6 +28,7 @@
 #include "region_map.h"
 #include "pokemon.h"
 #include "reset_rtc_screen.h"
+#include "rtc.h"
 #include "scanline_effect.h"
 #include "shop.h"
 #include "sound.h"
@@ -526,7 +527,7 @@ static void Task_HandleInfoScreenInput(u8);
 static void Task_SwitchScreensFromInfoScreen(u8);
 static void Task_LoadInfoScreenWaitForFade(u8);
 static void Task_ExitInfoScreen(u8);
-static void Task_LoadAreaScreen(u8);
+static void Task_LoadAreaScreen(u8 taskId);
 static void Task_WaitForAreaScreenInput(u8 taskId);
 static void Task_SwitchScreensFromAreaScreen(u8);
 static void Task_LoadCryScreen(u8);
@@ -3736,6 +3737,7 @@ static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
     u8 taskId;
 
     sPokedexListItem = item;
+    gAreaTimeOfDay = GetTimeOfDayForDex();
     taskId = CreateTask(Task_LoadInfoScreen, 0);
     gTasks[taskId].tScrolling = FALSE;
     gTasks[taskId].tMonSpriteDone = TRUE; // Already has sprite from list view
@@ -3751,6 +3753,7 @@ static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
     SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
     InitWindows(sInfoScreen_WindowTemplates);
     DeactivateAllTextPrinters();
+    
 
     return taskId;
 }
@@ -3994,7 +3997,7 @@ static void Task_LoadAreaScreen(u8 taskId)
         gMain.state++;
         break;
     case 2:
-        ShowPokedexAreaScreen(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), &sPokedexView->screenSwitchState);
+        ShowPokedexAreaScreen(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), &sPokedexView->screenSwitchState, gAreaTimeOfDay);
         SetVBlankCallback(gPokedexVBlankCB);
         sPokedexView->screenSwitchState = 0;
         gMain.state = 0;
@@ -4025,6 +4028,9 @@ static void Task_SwitchScreensFromAreaScreen(u8 taskId)
                 PlaySE(SE_FAILURE);
             else
                 gTasks[taskId].func = Task_LoadStatsScreen;
+            break;
+        case 3:
+            gTasks[taskId].func = Task_LoadAreaScreen;
             break;
         }
     }

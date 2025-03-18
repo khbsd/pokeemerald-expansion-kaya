@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -12,11 +13,15 @@
 #include "pokedex_area_screen.h"
 #include "region_map.h"
 #include "roamer.h"
+#include "rtc.h"
 #include "sound.h"
 #include "string_util.h"
+#include "text.h"
+#include "text_window.h"
 #include "trig.h"
 #include "pokedex_area_region_map.h"
 #include "wild_encounter.h"
+#include "window.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -90,14 +95,18 @@ struct
     /*0xF70*/ u8 charBuffer[64];
     /*0xFB0*/ struct Sprite * areaUnknownSprites[3];
     /*0xFBC*/ u8 areaUnknownGraphicsBuffer[0x600];
+    /*0xFC0*/ u32 infoWindowId;
+    /*0xFC4*/ u32 unknownWindowId;
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
+
+EWRAM_DATA u32 gAreaTimeOfDay = 0;
 
 static void FindMapsWithMon(u16);
 static void BuildAreaGlowTilemap(void);
 static void SetAreaHasMon(u16, u16);
 static void SetSpecialMapHasMon(u16, u16);
 static u16 GetRegionMapSectionId(u8, u8);
-static bool8 MapHasSpecies(const struct WildPokemonHeader *, u16);
+static bool8 MapHasSpecies(const struct WildEncounterTypes *, u16);
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
 static void DoAreaGlow(void);
 static void Task_ShowPokedexAreaScreen(u8);
@@ -107,11 +116,19 @@ static void CreateAreaUnknownSprites(void);
 static void Task_HandlePokedexAreaScreenInput(u8);
 static void ResetPokedexAreaMapBg(void);
 static void DestroyAreaScreenSprites(void);
-static void LoadHGSSScreenSelectBarSubmenu(void);
+static void ShowEncounterInfoLabel(void);
+static void ShowAreaUnknownLabel(void);
+static void ClearEncounterInfoLabel(void);
+static void ClearAreaUnknownLabel(void);
+bool32 ShouldShowAreaUnknownLabel(void);
 
 static const u32 sAreaGlow_Pal[] = INCBIN_U32("graphics/pokedex/area_glow.gbapal");
 static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.lz");
+
+#if POKEDEX_PLUS_HGSS
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/SelectBar.bin.lz");
+static void LoadHGSSScreenSelectBarSubmenu(void);
+#endif 
 
 static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 
@@ -205,6 +222,29 @@ static const struct SpriteTemplate sAreaUnknownSpriteTemplate =
     .callback = SpriteCallbackDummy
 };
 
+static const u8 sFontColor_AreaInfo[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, 5};
+static const struct WindowTemplate sTimeOfDayWindowTemplate =
+{
+    .bg = 1,
+    .tilemapLeft = 22,
+    .tilemapTop = 18,
+    .width = 8,
+    .height = 2,
+    .paletteNum = 0,
+    .baseBlock = 0x16C
+};
+
+static const struct WindowTemplate sAreaUnknownWindowTemplate =
+{
+    .bg = 1,
+    .tilemapLeft = 12,
+    .tilemapTop = 18,
+    .width = 10,
+    .height = 2,
+    .paletteNum = 0,
+    .baseBlock = 0x240
+};
+
 static void ResetDrawAreaGlowState(void)
 {
     sPokedexAreaScreen->drawAreaGlowState = 0;
@@ -287,7 +327,7 @@ static void FindMapsWithMon(u16 species)
     // Add regular species to the area map
     for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
     {
-        if (MapHasSpecies(&gWildMonHeaders[i], species))
+        if (MapHasSpecies(&gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay], species))
         {
             switch (gWildMonHeaders[i].mapGroup)
             {
@@ -373,10 +413,13 @@ static u16 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
 
-static bool8 MapHasSpecies(const struct WildPokemonHeader *info, u16 species)
+static bool8 MapHasSpecies(const struct WildEncounterTypes *info, u16 species)
 {
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+    u8 currentMapGroup = gWildMonHeaders[headerId].mapGroup;
+    u8 currentMapNum = gWildMonHeaders[headerId].mapNum;
     // If this is a header for Altering Cave, skip it if it's not the current Altering Cave encounter set
-    if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE)
+    if (GetRegionMapSectionId(currentMapGroup, currentMapNum) == MAPSEC_ALTERING_CAVE)
     {
         sPokedexAreaScreen->alteringCaveCounter++;
         if (sPokedexAreaScreen->alteringCaveCounter != sPokedexAreaScreen->alteringCaveId + 1)
@@ -576,15 +619,85 @@ static void DoAreaGlow(void)
     }
 }
 
+static const u8 *GetTimeOfDayTextWithButton(u32 gAreaTimeOfDay)
+{
+    static const u8 gText_Morning[] = _("{DPAD_UPDOWN} MORNING");
+    static const u8 gText_Day[] = _("{DPAD_UPDOWN} DAY");
+    static const u8 gText_Evening[] = _("{DPAD_UPDOWN} EVENING");
+    static const u8 gText_Night[] = _("{DPAD_UPDOWN} NIGHT");
+
+    switch (gAreaTimeOfDay)
+    {
+        case TIME_MORNING:
+            return gText_Morning;
+        case TIME_EVENING:
+            return gText_Evening;
+        case TIME_NIGHT:
+            return gText_Night;
+        case TIME_DAY:
+        default:
+            return gText_Day;
+    }
+}
+
+static void ShowEncounterInfoLabel(void)
+{
+    const u8 *gText_TimeOfDay = GetTimeOfDayTextWithButton(gAreaTimeOfDay);
+    int stringXPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeOfDay, 64);
+
+    sPokedexAreaScreen->infoWindowId = AddWindow(&sTimeOfDayWindowTemplate);
+    DrawTextBorderInner(sPokedexAreaScreen->infoWindowId, 0x242, 12);
+    FillWindowPixelBuffer(sPokedexAreaScreen->infoWindowId, PIXEL_FILL(7));
+    PutWindowTilemap(sPokedexAreaScreen->infoWindowId);
+    AddTextPrinterParameterized4(sPokedexAreaScreen->infoWindowId, FONT_NORMAL, stringXPos, 0, 0, 0, sFontColor_AreaInfo, TEXT_SKIP_DRAW, gText_TimeOfDay);
+    CopyWindowToVram(sPokedexAreaScreen->infoWindowId, COPYWIN_FULL);
+}
+
+static void ShowAreaUnknownLabel(void)
+{
+    static const u8 gText_AreaUnknown[] = _("AREA UNKNOWN");
+    int stringXPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_AreaUnknown, 80);
+
+    sPokedexAreaScreen->unknownWindowId = AddWindow(&sAreaUnknownWindowTemplate);
+    DrawTextBorderInner(sPokedexAreaScreen->unknownWindowId, 0x242, 12);
+    FillWindowPixelBuffer(sPokedexAreaScreen->unknownWindowId, PIXEL_FILL(7));
+    PutWindowTilemap(sPokedexAreaScreen->unknownWindowId);
+    AddTextPrinterParameterized4(sPokedexAreaScreen->unknownWindowId, FONT_NORMAL, stringXPos, 0, 0, 0, sFontColor_AreaInfo, TEXT_SKIP_DRAW, gText_AreaUnknown);
+    CopyWindowToVram(sPokedexAreaScreen->unknownWindowId, COPYWIN_FULL);
+}
+
+static void ClearEncounterInfoLabel(void)
+{
+    FillWindowPixelBuffer(sPokedexAreaScreen->infoWindowId, PIXEL_FILL(0));
+    ClearWindowTilemap(sPokedexAreaScreen->infoWindowId);
+    RemoveWindow(sPokedexAreaScreen->infoWindowId);
+    // sPokedexAreaScreen->infoWindowId = NULL;
+}
+
+static void ClearAreaUnknownLabel(void)
+{
+    FillWindowPixelBuffer(sPokedexAreaScreen->unknownWindowId, PIXEL_FILL(0));
+    ClearWindowTilemap(sPokedexAreaScreen->unknownWindowId);
+    RemoveWindow(sPokedexAreaScreen->unknownWindowId);
+    // sPokedexAreaScreen->unknownWindowId = NULL;
+}
+
+bool32 ShouldShowAreaUnknownLabel(void)
+{
+    return !sPokedexAreaScreen->numOverworldAreas && !sPokedexAreaScreen->numSpecialAreas;
+    // return FALSE;
+}
+
 #define tState data[0]
 
-void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState)
+void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState, u32 timeOfDay)
 {
     u8 taskId;
 
     sPokedexAreaScreen = AllocZeroed(sizeof(*sPokedexAreaScreen));
     sPokedexAreaScreen->species = species;
     sPokedexAreaScreen->screenSwitchState = screenSwitchState;
+    gAreaTimeOfDay = timeOfDay;
     screenSwitchState[0] = 0;
     taskId = CreateTask(Task_ShowPokedexAreaScreen, 0);
     gTasks[taskId].tState = 0;
@@ -599,6 +712,8 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
         FreeAllSpritePalettes();
         HideBg(3);
         HideBg(2);
+        if (POKEDEX_PLUS_HGSS)
+            HideBg(1);
         HideBg(0);
         break;
     case 1:
@@ -627,20 +742,31 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
         CreateAreaMarkerSprites();
         break;
     case 7:
-        LoadAreaUnknownGraphics();
+        if(!OW_TIME_OF_DAY_ENCOUNTERS)
+            LoadAreaUnknownGraphics();
         break;
     case 8:
-        CreateAreaUnknownSprites();
+        if(!OW_TIME_OF_DAY_ENCOUNTERS)
+            CreateAreaUnknownSprites();
         break;
     case 9:
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB_BLACK);
         break;
     case 10:
-        if (POKEDEX_PLUS_HGSS)
-            LoadHGSSScreenSelectBarSubmenu();
-
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
         StartAreaGlow();
+        if (OW_TIME_OF_DAY_ENCOUNTERS)
+        {
+            ShowEncounterInfoLabel();
+            if (ShouldShowAreaUnknownLabel())
+            {
+                ShowAreaUnknownLabel();
+            }
+        }
+    #if POKEDEX_PLUS_HGSS
+            LoadHGSSScreenSelectBarSubmenu();
+            ShowBg(1);
+    #endif
         ShowBg(2);
         ShowBg(3); // TryShowPokedexAreaMap will have done this already
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
@@ -687,6 +813,18 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             gTasks[taskId].data[1] = 2;
             PlaySE(SE_DEX_PAGE);
         }
+        else if (JOY_NEW(DPAD_UP) && OW_TIME_OF_DAY_ENCOUNTERS == TRUE)
+        {
+            gTasks[taskId].data[1] = 3;
+            gAreaTimeOfDay = TryIncrementTimeOfDay(gAreaTimeOfDay);
+            PlaySE(SE_DEX_PAGE);
+        }
+        else if (JOY_NEW(DPAD_DOWN) && OW_TIME_OF_DAY_ENCOUNTERS == TRUE)
+        {
+            gTasks[taskId].data[1] = 3;
+            gAreaTimeOfDay = TryDecrementTimeOfDay(gAreaTimeOfDay);
+            PlaySE(SE_DEX_PAGE);
+        }
         else
             return;
         break;
@@ -697,11 +835,16 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         if (gPaletteFade.active)
             return;
         DestroyAreaScreenSprites();
+        if (OW_TIME_OF_DAY_ENCOUNTERS)
+            ClearEncounterInfoLabel();
+        if (ShouldShowAreaUnknownLabel())
+            ClearAreaUnknownLabel();
         sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];
         ResetPokedexAreaMapBg();
         DestroyTask(taskId);
         FreePokedexAreaMapBgNum();
         FREE_AND_SET_NULL(sPokedexAreaScreen);
+        // PlaySE(SE_M_REVERSAL);
         return;
     }
 
@@ -807,8 +950,10 @@ static void CreateAreaUnknownSprites(void)
     }
 }
 
+#if POKEDEX_PLUS_HGSS
 static void LoadHGSSScreenSelectBarSubmenu(void)
 {
     CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
+#endif
