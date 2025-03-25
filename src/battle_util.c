@@ -274,7 +274,7 @@ bool32 HandleMoveTargetRedirection(void)
         for (battler = 0; battler < gBattlersCount; battler++)
         {
             ability = GetBattlerAbility(battler);
-            if ((B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsAlly(gBattlerAttacker, battler))
+            if ((B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(gBattlerAttacker, battler))
                 && battler != gBattlerAttacker
                 && gBattleStruct->moveTarget[gBattlerAttacker] != battler
                 && ((ability == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
@@ -494,8 +494,6 @@ void HandleAction_Switch(void)
     if (gBattleResults.playerSwitchesCounter < 255)
         gBattleResults.playerSwitchesCounter++;
 
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_DYNAMAX)
-        UndoDynamax(gBattlerAttacker); // this is better performed here instead of SwitchInClearSetData
     TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_SWITCH);
 }
 
@@ -3590,28 +3588,6 @@ static void CancellerDynamaxBlocked(u32 *effect)
     }
 }
 
-static void CancellerPowderMove(u32 *effect)
-{
-    if (IsPowderMove(gCurrentMove) && (gBattlerAttacker != gBattlerTarget))
-    {
-        if (B_POWDER_GRASS >= GEN_6
-            && (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GRASS) || GetBattlerAbility(gBattlerTarget) == ABILITY_OVERCOAT))
-        {
-            gBattlerAbility = gBattlerTarget;
-            *effect = 1;
-        }
-        else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_SAFETY_GOGGLES)
-        {
-            RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_SAFETY_GOGGLES);
-            gLastUsedItem = gBattleMons[gBattlerTarget].item;
-            *effect = 1;
-        }
-
-        if (*effect != 0)
-            gBattlescriptCurrInstr = BattleScript_PowderMoveNoEffect;
-    }
-}
-
 static void CancellerPowderStatus(u32 *effect)
 {
     if (TryActivatePowderStatus(gCurrentMove))
@@ -3844,7 +3820,6 @@ static const MoveSuccessOrderCancellers sMoveSuccessOrderCancellers[] =
     [CANCELLER_STANCE_CHANGE_2] = CancellerStanceChangeTwo,
     [CANCELLER_WEATHER_PRIMAL] = CancellerWeatherPrimal,
     [CANCELLER_DYNAMAX_BLOCKED] = CancellerDynamaxBlocked,
-    [CANCELLER_POWDER_MOVE] = CancellerPowderMove,
     [CANCELLER_POWDER_STATUS] = CancellerPowderStatus,
     [CANCELLER_PROTEAN] = CancellerProtean,
     [CANCELLER_PSYCHIC_TERRAIN] = CancellerPsychicTerrain,
@@ -4243,7 +4218,7 @@ static void ChooseStatBoostAnimation(u32 battler)
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 abilityDef, enum AbilityEffectOptions option)
 {
     const u8 *battleScriptBlocksMove = NULL;
-    u32 atkPriority = AI_DATA->aiCalcInProgress ? GetBattleMovePriority(battlerAtk, move) : GetChosenMovePriority(battlerAtk);
+    s32 atkPriority = AI_DATA->aiCalcInProgress ? GetBattleMovePriority(battlerAtk, move) : GetChosenMovePriority(battlerAtk);
     u32 moveTarget = GetBattlerMoveTargetType(battlerAtk, move);
     u32 battlerAbility = battlerDef;
 
@@ -6672,7 +6647,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gDisableStructs[battler].terrainAbilityDone = TRUE;
                 ChangeTypeBasedOnTerrain(battler);
                 gBattlerAbility = gBattleScripting.battler = battler;
-                BattleScriptPushCursorAndCallback(BattleScript_MimicryActivates_End3);
+                BattleScriptPushCursorAndCallback(BattleScript_MimicryActivates);
                 effect++;
             }
             break;
@@ -6824,16 +6799,25 @@ u32 IsAbilityOnFieldExcept(u32 battler, u32 ability)
 
 u32 IsAbilityPreventingEscape(u32 battler)
 {
-    u32 id;
     if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return 0;
-    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_SHADOW_TAG))
-        && (B_SHADOW_TAG_ESCAPE >= GEN_4 && GetBattlerAbility(battler) != ABILITY_SHADOW_TAG))
-        return id;
-    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_ARENA_TRAP)) && IsBattlerGrounded(battler))
-        return id;
-    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_MAGNET_PULL)) && IS_BATTLER_OF_TYPE(battler, TYPE_STEEL))
-        return id;
+
+    for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+    {
+        if (battler == battlerDef || IsBattlerAlly(battler, battlerDef))
+            continue;
+
+        u32 ability = GetBattlerAbility(battlerDef);
+
+        if (ability == ABILITY_SHADOW_TAG && (B_SHADOW_TAG_ESCAPE <= GEN_3 || GetBattlerAbility(battler) != ABILITY_SHADOW_TAG))
+            return battlerDef + 1;
+
+        if (ability == ABILITY_ARENA_TRAP && IsBattlerGrounded(battler))
+            return battlerDef + 1;
+
+        if (ability == ABILITY_MAGNET_PULL && IS_BATTLER_OF_TYPE(battler, TYPE_STEEL))
+            return battlerDef + 1;
+    }
 
     return 0;
 }
@@ -11012,11 +10996,11 @@ s32 GetStealthHazardDamageByTypesAndHP(enum TypeSideHazard hazardType, u8 type1,
 
 s32 GetStealthHazardDamage(enum TypeSideHazard hazardType, u32 battler)
 {
-    u8 type1 = gBattleMons[battler].types[0];
-    u8 type2 = gBattleMons[battler].types[1];
+    u32 types[3];
+    GetBattlerTypes(battler, FALSE, types);
     u32 maxHp = gBattleMons[battler].maxHP;
 
-    return GetStealthHazardDamageByTypesAndHP(hazardType, type1, type2, maxHp);
+    return GetStealthHazardDamageByTypesAndHP(hazardType, types[0], types[1], maxHp);
 }
 
 bool32 IsPartnerMonFromSameTrainer(u32 battler)
@@ -11501,18 +11485,52 @@ static u32 SwapMoveDamageCategory(u32 move)
     return DAMAGE_CATEGORY_PHYSICAL;
 }
 
-u8 GetBattleMoveCategory(u32 moveId)
+/*
+    The Global States gBattleStruct->categoryOverride and gBattleStruct->swapDamageCategory
+    can be removed but a lot of function arguments (battlerAtk and battlerDef) have to be added for this, about 50+.
+    This is potentially a good change because it is less likely to cause bugs in the future.
+*/
+u32 GetBattleMoveCategory(u32 move)
 {
-    if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky, Tera Blast
-        return SwapMoveDamageCategory(moveId);
-    if (gBattleStruct != NULL && (IsZMove(moveId) || IsMaxMove(moveId))) // TODO: Might be buggy depending on when this is called.
-        return gBattleStruct->categoryOverride;
-    if (B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
-        return GetMoveCategory(moveId);
+    if (gMain.inBattle)
+    {
+        if (gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky, Tera Blast
+            return SwapMoveDamageCategory(move);
+        if (IsZMove(move) || IsMaxMove(move)) // TODO: Might be buggy depending on when this is called.
+            return gBattleStruct->categoryOverride;
+        if (IsBattleMoveStatus(move))
+            return DAMAGE_CATEGORY_STATUS;
+    }
 
-    if (IsBattleMoveStatus(moveId))
-        return DAMAGE_CATEGORY_STATUS;
-    return gTypesInfo[GetBattleMoveType(moveId)].damageCategory;
+    if (B_PHYSICAL_SPECIAL_SPLIT <= GEN_4)
+        return gTypesInfo[GetBattleMoveType(move)].damageCategory;
+
+    return GetMoveCategory(move);
+}
+
+void SetDynamicMoveCategory(u32 battlerAtk, u32 battlerDef, u32 move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_PHOTON_GEYSER:
+        gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL);
+        break;
+    case EFFECT_SHELL_SIDE_ARM:
+        if (gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL)
+            gBattleStruct->swapDamageCategory = TRUE;
+        break;
+    case EFFECT_TERA_BLAST:
+        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
+            gBattleStruct->swapDamageCategory = GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL;
+        break;
+    case EFFECT_TERA_STARSTORM:
+        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA && GET_BASE_SPECIES_ID(GetMonData(GetPartyBattlerData(battlerAtk), MON_DATA_SPECIES)) == SPECIES_TERAPAGOS)
+            gBattleStruct->swapDamageCategory = GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL;
+        break;
+    default:
+        gBattleStruct->swapDamageCategory = FALSE;
+        break;
+    }
 }
 
 static bool32 TryRemoveScreens(u32 battler)
@@ -11540,10 +11558,24 @@ static bool32 TryRemoveScreens(u32 battler)
 
 static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler)
 {
-    if (IsAbilityOnOpposingSide(battler, ABILITY_UNNERVE)
-      || IsAbilityOnOpposingSide(battler, ABILITY_AS_ONE_ICE_RIDER)
-      || IsAbilityOnOpposingSide(battler, ABILITY_AS_ONE_SHADOW_RIDER))
-        return TRUE;
+    for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+    {
+        if (battler == battlerDef || IsBattlerAlly(battler, battlerDef))
+            continue;
+
+        if (!IsBattlerAlive(battlerDef))
+            continue;
+
+        u32 ability = GetBattlerAbility(battlerDef);
+        switch (ability)
+        {
+        case ABILITY_UNNERVE:
+        case ABILITY_AS_ONE_ICE_RIDER:
+        case ABILITY_AS_ONE_SHADOW_RIDER:
+            return TRUE;
+        }
+    }
+
     return FALSE;
 }
 
@@ -12426,7 +12458,46 @@ void ClearPursuitValuesIfSet(u32 battler)
 
 bool32 HasWeatherEffect(void)
 {
-    if (IsAbilityOnField(ABILITY_CLOUD_NINE) || IsAbilityOnField(ABILITY_AIR_LOCK))
-        return FALSE;
+    for (u32 battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (!IsBattlerAlive(battler))
+            continue;
+
+        u32 ability = GetBattlerAbility(battler);
+        switch (ability)
+        {
+        case ABILITY_CLOUD_NINE:
+        case ABILITY_AIR_LOCK:
+            return FALSE;
+        }
+    }
+
     return TRUE;
+}
+
+bool32 IsMovePowderBlocked(u32 battlerAtk, u32 battlerDef, u32 move)
+{
+    bool32 effect = FALSE;
+
+    if (IsPowderMove(move) && (battlerAtk != battlerDef))
+    {
+        if (B_POWDER_GRASS >= GEN_6
+         && (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS) || GetBattlerAbility(battlerDef) == ABILITY_OVERCOAT))
+        {
+            gBattlerAbility = battlerDef;
+            RecordAbilityBattle(gBattlerTarget, ABILITY_OVERCOAT);
+            effect = TRUE;
+        }
+        else if (GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_SAFETY_GOGGLES)
+        {
+            RecordItemEffectBattle(battlerDef, HOLD_EFFECT_SAFETY_GOGGLES);
+            gLastUsedItem = gBattleMons[battlerDef].item;
+            effect = TRUE;
+        }
+
+        if (effect)
+            gBattlescriptCurrInstr = BattleScript_PowderMoveNoEffect;
+    }
+
+    return effect;
 }

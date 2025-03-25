@@ -1763,7 +1763,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
     int numSpecies;
     u8 slot;
     int i = 0;
-    u32 timeOfDay = GetTimeOfDay();
+    u32 timeOfDay;
 
     if (gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED)) // ??? This check is nonsense.
     {
@@ -1778,6 +1778,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 
         if (gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED))
         {
+            timeOfDay = GetTimeOfDayForEncounters(i, WILD_AREA_LAND);
             numSpecies = 0;
             if (gWildMonHeaders[i].encounterTypes[timeOfDay].landMonsInfo)
             {
@@ -1786,6 +1787,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
                 numSpecies++;
             }
 
+            timeOfDay = GetTimeOfDayForEncounters(i, WILD_AREA_WATER);
             if (gWildMonHeaders[i].encounterTypes[timeOfDay].waterMonsInfo)
             {
                 slot = GetWaterEncounterSlot();

@@ -3,12 +3,12 @@
 
 extern u32 gAreaTimeOfDay;
 
-enum ChangeTimeOfDay 
+enum PokedexAreaScreenState
 {
-    DEX_AREA_INC_TIME_OF_DAY,
-    DEX_AREA_DEC_TIME_OF_DAY
+    DEX_SHOW_AREA_SCREEN,
+    DEX_UPDATE_AREA_SCREEN
 };
 
-void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState, u32 timeOfDay);
+void DisplayPokedexAreaScreen(u16 species, u8 *screenSwitchState, u32 timeOfDay, u32 areaState);
 
 #endif // GUARD_POKEDEX_AREA_SCREEN_H

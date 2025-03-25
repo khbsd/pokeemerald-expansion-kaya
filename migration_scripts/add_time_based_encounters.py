@@ -1,7 +1,7 @@
 import json
+import sys
 
 # you can change these if you're adding seasons/days of the week, etc
-
 ENCOUNTER_GROUP_SUFFIX = [
     "Morning",
     "Day",
@@ -10,36 +10,64 @@ ENCOUNTER_GROUP_SUFFIX = [
 ]
 
 
+ARGS = [
+    "--copy",
+]
+
+
 def GetWildEncounterFile():
     wFile = open("../src/data/wild_encounters.json")
     wData = json.load(wFile)
 
-    true = True
-    false = False
+    wBackupData = json.dumps(wData, indent=2)
+    wBackupFile = open("../src/data/wild_encounters.json.bak", mode="w", encoding="utf-8")
+
+    wBackupFile.write(wBackupData)
+
+    global COPY_FULL_ENCOUNTER
+    COPY_FULL_ENCOUNTER = False
+
+    for arg in ARGS:
+        if len(sys.argv) > 1:
+            if arg in sys.argv[1:3]:
+                if arg == ARGS[0]:
+                    COPY_FULL_ENCOUNTER = True
 
     j = 0
     for group in wData["wild_encounter_groups"]:
         wEncounters = wData["wild_encounter_groups"][j]["encounters"]
+        editMap = True
 
         wEncounters_New = list()
         for map in wEncounters:
-            k = 0
             for suffix in ENCOUNTER_GROUP_SUFFIX:
-                # dont need to copy the whole map here, just the base label and "map" if it exists
-                tempLabel = map["base_label"] + "_" + suffix
-                tempMapLabel = ""
-                if k == 1:
-                    tempDict = map.copy()
-                else:
-                    tempDict = dict()
-                
-                if "map" in map:
-                    tempMapLabel = map["map"]
-                    tempDict["map"] = tempMapLabel
+                tempSuffix = "_" + suffix
+                if tempSuffix in map["base_label"]:
+                    editMap = False
+                    break
+                else: 
+                    editMap = True
 
-                tempDict["base_label"] = tempLabel
-                wEncounters_New.append(tempDict)
-                k += 1
+            if editMap:
+                k = 0
+                for suffix in ENCOUNTER_GROUP_SUFFIX:
+                    tempLabel = map["base_label"] + "_" + suffix
+                    tempMapLabel = ""
+                    if k == 1 or COPY_FULL_ENCOUNTER:
+                        tempDict = map.copy()
+                    else:
+                        tempDict = dict()
+                    
+                    if "map" in map:
+                        tempMapLabel = map["map"]
+                        tempDict["map"] = tempMapLabel
+
+                    tempDict["base_label"] = tempLabel
+                    wEncounters_New.append(tempDict)
+                    print(tempLabel + " added")
+                    k += 1
+            else:
+                wEncounters_New.append(map.copy())
 
         wData["wild_encounter_groups"][j]["encounters"] = wEncounters_New
         j += 1
@@ -70,35 +98,3 @@ def IsMonTable(monTable):
 
 
 GetWildEncounterFile()
-""" !!! EXAMPLE TEXT !!!
-const struct WildPokemon gRoute101_LandMons_Day[] =
-{
-    { 2, 2, SPECIES_WURMPLE },
-    { 2, 2, SPECIES_POOCHYENA },
-    { 2, 2, SPECIES_WURMPLE },
-    { 3, 3, SPECIES_WURMPLE },
-    { 3, 3, SPECIES_POOCHYENA },
-    { 3, 3, SPECIES_POOCHYENA },
-    { 3, 3, SPECIES_WURMPLE },
-    { 3, 3, SPECIES_POOCHYENA },
-    { 2, 2, SPECIES_ZIGZAGOON },
-    { 2, 2, SPECIES_ZIGZAGOON },
-    { 3, 3, SPECIES_ZIGZAGOON },
-    { 3, 3, SPECIES_ZIGZAGOON },
-};
-
-const struct WildPokemonInfo gRoute101_LandMonsInfo_Day= { 20, gRoute101_LandMons_Day};
-const struct WildPokemonHeader gWildMonHeaders[] =
-{
-    {
-        .mapGroup = MAP_GROUP(ROUTE101),
-        .mapNum = MAP_NUM(ROUTE101),
-        .encounterTypes[0] = 
-            .landMonsInfo = &gRoute101_LandMonsInfo_Day,
-            .waterMonsInfo = NULL,
-            .rockSmashMonsInfo = NULL,
-            .fishingMonsInfo = NULL,
-            .hiddenMonsInfo = NULL,
-    },
-}
-"""

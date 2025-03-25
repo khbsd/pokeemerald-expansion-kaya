@@ -1614,6 +1614,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro undodynamax battler:req
+	callnative BS_UndoDynamax
+	.byte \battler
+	.endm
+
 	.macro trytrainerslidezmovemsg
 	callnative BS_TryTrainerSlideZMoveMsg
 	.endm
@@ -1639,10 +1644,6 @@
 
 	.macro trytriggerstatusform
 	callnative BS_TryTriggerStatusForm
-	.endm
-
-	.macro setdynamicmovecategory
-	callnative BS_SetDynamicMoveCategory
 	.endm
 
 	.macro tryupperhand failInstr:req
@@ -2382,7 +2383,7 @@
 	callnative BS_SwapStats
 	.byte \stat
 	.endm
-    
+
 	.macro restoresavedmove
 	callnative BS_RestoreSavedMove
 	.endm

@@ -3017,26 +3017,22 @@ static const struct SpriteFrameImage sPicTable_LatiosMega[] = {
 static const struct SpriteFrameImage sPicTable_Kyogre[] = {
     overworld_ascending_frames(gObjectEventPic_Kyogre, 8, 8),
 };
-
 #if P_PRIMAL_REVERSIONS
 static const struct SpriteFrameImage sPicTable_KyogrePrimal[] = {
     overworld_ascending_frames(gObjectEventPic_KyogrePrimal, 4, 4),
 };
 #endif // P_PRIMAL_REVERSIONS
-
 #endif //P_FAMILY_KYOGRE
 
 #if P_FAMILY_GROUDON
 static const struct SpriteFrameImage sPicTable_Groudon[] = {
     overworld_ascending_frames(gObjectEventPic_Groudon, 8, 8),
 };
-
 #if P_PRIMAL_REVERSIONS
 static const struct SpriteFrameImage sPicTable_GroudonPrimal[] = {
     overworld_ascending_frames(gObjectEventPic_GroudonPrimal, 4, 4),
 };
 #endif // P_PRIMAL_REVERSIONS
-
 #endif //P_FAMILY_GROUDON
 
 #if P_FAMILY_RAYQUAZA
@@ -5519,7 +5515,6 @@ static const struct SpriteFrameImage sPicTable_NecrozmaUltra[] = {
     overworld_ascending_frames(gObjectEventPic_NecrozmaUltra, 4, 4),
 };
 #endif // P_ULTRA_BURST_FORMS
-
 #endif //P_FUSION_FORMS
 #endif //P_FAMILY_NECROZMA
 
