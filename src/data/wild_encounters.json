@@ -24,24 +24,54 @@
         {
           "type": "water_mons",
           "encounter_rates": [
-            60, 30, 5, 4, 1
+            60,
+            30,
+            5,
+            4,
+            1
           ]
         },
         {
           "type": "rock_smash_mons",
           "encounter_rates": [
-            60, 30, 5, 4, 1
+            60,
+            30,
+            5,
+            4,
+            1
           ]
         },
         {
           "type": "fishing_mons",
           "encounter_rates": [
-            70, 30, 60, 20, 20, 40, 40, 15, 4, 1
+            70,
+            30,
+            60,
+            20,
+            20,
+            40,
+            40,
+            15,
+            4,
+            1
           ],
           "groups": {
-            "old_rod": [0, 1],
-            "good_rod": [2, 3, 4],
-            "super_rod": [5, 6, 7, 8, 9]
+            "old_rod": [
+              0,
+              1
+            ],
+            "good_rod": [
+              2,
+              3,
+              4
+            ],
+            "super_rod": [
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
           }
         }
       ],
@@ -117,19 +147,7 @@
         },
         {
           "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_Evening"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_Night"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_1_Day",
+          "base_label": "gRoute101_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -228,19 +246,7 @@
         },
         {
           "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_2_Day",
+          "base_label": "gRoute101_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -306,14 +312,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE101",
-          "base_label": "gRoute101_2_Night"
         },
         {
           "map": "MAP_ROUTE102",
@@ -471,19 +469,7 @@
         },
         {
           "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_Evening"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_Night"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_1_Day",
+          "base_label": "gRoute102_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -637,19 +623,7 @@
         },
         {
           "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_2_Day",
+          "base_label": "gRoute102_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -800,14 +774,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE102",
-          "base_label": "gRoute102_2_Night"
         },
         {
           "map": "MAP_ROUTE103",
@@ -965,19 +931,7 @@
         },
         {
           "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_Evening"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_Night"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_1_Day",
+          "base_label": "gRoute103_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1131,19 +1085,7 @@
         },
         {
           "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_2_Day",
+          "base_label": "gRoute103_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1294,14 +1236,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE103",
-          "base_label": "gRoute103_2_Night"
         },
         {
           "map": "MAP_ROUTE104",
@@ -1459,19 +1393,7 @@
         },
         {
           "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_Evening"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_Night"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_1_Day",
+          "base_label": "gRoute104_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1625,19 +1547,7 @@
         },
         {
           "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_2_Day",
+          "base_label": "gRoute104_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -1788,14 +1698,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE104",
-          "base_label": "gRoute104_2_Night"
         },
         {
           "map": "MAP_ROUTE105",
@@ -2042,19 +1944,7 @@
         },
         {
           "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_Evening"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_Night"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_1_Day",
+          "base_label": "gRoute110_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -2208,19 +2098,7 @@
         },
         {
           "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_2_Day",
+          "base_label": "gRoute110_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -2371,14 +2249,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE110",
-          "base_label": "gRoute110_2_Night"
         },
         {
           "map": "MAP_ROUTE111",
@@ -2566,19 +2436,7 @@
         },
         {
           "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_Evening"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_Night"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_1_Day",
+          "base_label": "gRoute111_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -2762,19 +2620,7 @@
         },
         {
           "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_2_Day",
+          "base_label": "gRoute111_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -2957,14 +2803,6 @@
           }
         },
         {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE111",
-          "base_label": "gRoute111_2_Night"
-        },
-        {
           "map": "MAP_ROUTE112",
           "base_label": "gRoute112",
           "land_mons": {
@@ -3035,19 +2873,7 @@
         },
         {
           "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_Evening"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_Night"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_1_Day",
+          "base_label": "gRoute112_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3116,19 +2942,7 @@
         },
         {
           "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_2_Day",
+          "base_label": "gRoute112_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3194,14 +3008,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE112",
-          "base_label": "gRoute112_2_Night"
         },
         {
           "map": "MAP_ROUTE113",
@@ -3274,19 +3080,7 @@
         },
         {
           "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_Evening"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_Night"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_1_Day",
+          "base_label": "gRoute113_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3355,19 +3149,7 @@
         },
         {
           "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_2_Day",
+          "base_label": "gRoute113_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3433,14 +3215,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE113",
-          "base_label": "gRoute113_2_Night"
         },
         {
           "map": "MAP_ROUTE114",
@@ -3628,19 +3402,7 @@
         },
         {
           "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_Evening"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_Night"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_1_Day",
+          "base_label": "gRoute114_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -3824,19 +3586,7 @@
         },
         {
           "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_2_Day",
+          "base_label": "gRoute114_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4019,14 +3769,6 @@
           }
         },
         {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE114",
-          "base_label": "gRoute114_2_Night"
-        },
-        {
           "map": "MAP_ROUTE116",
           "base_label": "gRoute116",
           "land_mons": {
@@ -4127,19 +3869,7 @@
         },
         {
           "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_Evening"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_Night"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_1_Day",
+          "base_label": "gRoute116_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4238,19 +3968,7 @@
         },
         {
           "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_2_Day",
+          "base_label": "gRoute116_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4346,14 +4064,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE116",
-          "base_label": "gRoute116_2_Night"
         },
         {
           "map": "MAP_ROUTE117",
@@ -4511,19 +4221,7 @@
         },
         {
           "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_Evening"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_Night"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_1_Day",
+          "base_label": "gRoute117_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4677,19 +4375,7 @@
         },
         {
           "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_2_Day",
+          "base_label": "gRoute117_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -4840,14 +4526,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE117",
-          "base_label": "gRoute117_2_Night"
         },
         {
           "map": "MAP_ROUTE118",
@@ -5005,19 +4683,7 @@
         },
         {
           "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_Evening"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_Night"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_1_Day",
+          "base_label": "gRoute118_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -5171,19 +4837,7 @@
         },
         {
           "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_2_Day",
+          "base_label": "gRoute118_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -5336,14 +4990,6 @@
           }
         },
         {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE118",
-          "base_label": "gRoute118_2_Night"
-        },
-        {
           "map": "MAP_ROUTE124",
           "base_label": "gRoute124",
           "water_mons": {
@@ -5434,19 +5080,7 @@
         },
         {
           "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_Evening"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_Night"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_1_Day",
+          "base_label": "gRoute124_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -5535,19 +5169,7 @@
         },
         {
           "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_2_Day",
+          "base_label": "gRoute124_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -5635,14 +5257,6 @@
           }
         },
         {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE124",
-          "base_label": "gRoute124_2_Night"
-        },
-        {
           "map": "MAP_PETALBURG_WOODS",
           "base_label": "gPetalburgWoods",
           "land_mons": {
@@ -5713,19 +5327,7 @@
         },
         {
           "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_Evening"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_Night"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_1_Morning"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_1_Day",
+          "base_label": "gPetalburgWoods_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -5824,19 +5426,7 @@
         },
         {
           "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_1_Evening"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_1_Night"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_2_Morning"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_2_Day",
+          "base_label": "gPetalburgWoods_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -5902,14 +5492,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_2_Evening"
-        },
-        {
-          "map": "MAP_PETALBURG_WOODS",
-          "base_label": "gPetalburgWoods_2_Night"
         },
         {
           "map": "MAP_RUSTURF_TUNNEL",
@@ -6051,19 +5633,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_1_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_1_Day",
+          "base_label": "gGraniteCave_1F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6132,19 +5702,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_1_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_1_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_2_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_2_Day",
+          "base_label": "gGraniteCave_1F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6210,14 +5768,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_2_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_1F",
-          "base_label": "gGraniteCave_1F_2_Night"
         },
         {
           "map": "MAP_GRANITE_CAVE_B1F",
@@ -6290,19 +5840,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_1_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_1_Day",
+          "base_label": "gGraniteCave_B1F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6371,19 +5909,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_1_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_1_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_2_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_2_Day",
+          "base_label": "gGraniteCave_B1F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6449,14 +5975,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_2_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B1F",
-          "base_label": "gGraniteCave_B1F_2_Night"
         },
         {
           "map": "MAP_MT_PYRE_1F",
@@ -6529,19 +6047,7 @@
         },
         {
           "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_1_Day",
+          "base_label": "gMtPyre_1F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6610,19 +6116,7 @@
         },
         {
           "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_2_Day",
+          "base_label": "gMtPyre_1F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -6688,14 +6182,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_1F",
-          "base_label": "gMtPyre_1F_2_Night"
         },
         {
           "map": "MAP_VICTORY_ROAD_1F",
@@ -6837,19 +6323,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_1_Day",
+          "base_label": "gSafariZone_South_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -6918,19 +6392,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_2_Day",
+          "base_label": "gSafariZone_South_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -6998,14 +6460,6 @@
           }
         },
         {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTH",
-          "base_label": "gSafariZone_South_2_Night"
-        },
-        {
           "map": "MAP_UNDERWATER_ROUTE126",
           "base_label": "gUnderwater_Route126",
           "water_mons": {
@@ -7041,19 +6495,7 @@
         },
         {
           "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_Night"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_1_Morning"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_1_Day",
+          "base_label": "gUnderwater_Route126_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -7087,19 +6529,7 @@
         },
         {
           "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_1_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_1_Night"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_2_Morning"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_2_Day",
+          "base_label": "gUnderwater_Route126_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -7130,14 +6560,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_2_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE126",
-          "base_label": "gUnderwater_Route126_2_Night"
         },
         {
           "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
@@ -7329,19 +6751,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_1_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_1_Day",
+          "base_label": "gGraniteCave_B2F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7440,19 +6850,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_1_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_1_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_2_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_2_Day",
+          "base_label": "gGraniteCave_B2F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7548,14 +6946,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_2_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_B2F",
-          "base_label": "gGraniteCave_B2F_2_Night"
         },
         {
           "map": "MAP_FIERY_PATH",
@@ -7628,19 +7018,7 @@
         },
         {
           "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_Evening"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_Night"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_1_Morning"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_1_Day",
+          "base_label": "gFieryPath_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7709,19 +7087,7 @@
         },
         {
           "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_1_Evening"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_1_Night"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_2_Morning"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_2_Day",
+          "base_label": "gFieryPath_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -7787,14 +7153,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_2_Evening"
-        },
-        {
-          "map": "MAP_FIERY_PATH",
-          "base_label": "gFieryPath_2_Night"
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_2R",
@@ -7952,19 +7310,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_1_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_1_Day",
+          "base_label": "gMeteorFalls_B1F_2R_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -8118,19 +7464,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_1_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_1_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_2_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_2_Day",
+          "base_label": "gMeteorFalls_B1F_2R_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -8283,14 +7617,6 @@
           }
         },
         {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_2_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_2R",
-          "base_label": "gMeteorFalls_B1F_2R_2_Night"
-        },
-        {
           "map": "MAP_JAGGED_PASS",
           "base_label": "gJaggedPass",
           "land_mons": {
@@ -8361,19 +7687,7 @@
         },
         {
           "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_Evening"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_Night"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_1_Morning"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_1_Day",
+          "base_label": "gJaggedPass_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -8442,19 +7756,7 @@
         },
         {
           "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_1_Evening"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_1_Night"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_2_Morning"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_2_Day",
+          "base_label": "gJaggedPass_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -8520,14 +7822,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_2_Evening"
-        },
-        {
-          "map": "MAP_JAGGED_PASS",
-          "base_label": "gJaggedPass_2_Night"
         },
         {
           "map": "MAP_ROUTE106",
@@ -9041,19 +8335,7 @@
         },
         {
           "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_Evening"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_Night"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_1_Day",
+          "base_label": "gRoute115_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -9207,19 +8489,7 @@
         },
         {
           "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_2_Day",
+          "base_label": "gRoute115_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -9372,14 +8642,6 @@
           }
         },
         {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE115",
-          "base_label": "gRoute115_2_Night"
-        },
-        {
           "map": "MAP_NEW_MAUVILLE_INSIDE",
           "base_label": "gNewMauville_Inside",
           "land_mons": {
@@ -9450,19 +8712,7 @@
         },
         {
           "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_Evening"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_Night"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_1_Morning"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_1_Day",
+          "base_label": "gNewMauville_Inside_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -9531,19 +8781,7 @@
         },
         {
           "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_1_Evening"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_1_Night"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_2_Morning"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_2_Day",
+          "base_label": "gNewMauville_Inside_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -9609,14 +8847,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_2_Evening"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_INSIDE",
-          "base_label": "gNewMauville_Inside_2_Night"
         },
         {
           "map": "MAP_ROUTE119",
@@ -9774,19 +9004,7 @@
         },
         {
           "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_Evening"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_Night"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_1_Day",
+          "base_label": "gRoute119_1",
           "land_mons": {
             "encounter_rate": 15,
             "mons": [
@@ -9940,19 +9158,7 @@
         },
         {
           "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_2_Day",
+          "base_label": "gRoute119_2",
           "land_mons": {
             "encounter_rate": 15,
             "mons": [
@@ -10103,14 +9309,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE119",
-          "base_label": "gRoute119_2_Night"
         },
         {
           "map": "MAP_ROUTE120",
@@ -10268,19 +9466,7 @@
         },
         {
           "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_Evening"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_Night"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_1_Day",
+          "base_label": "gRoute120_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -10434,19 +9620,7 @@
         },
         {
           "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_2_Day",
+          "base_label": "gRoute120_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -10597,14 +9771,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE120",
-          "base_label": "gRoute120_2_Night"
         },
         {
           "map": "MAP_ROUTE121",
@@ -10762,19 +9928,7 @@
         },
         {
           "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_Evening"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_Night"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_1_Day",
+          "base_label": "gRoute121_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -10928,19 +10082,7 @@
         },
         {
           "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_2_Day",
+          "base_label": "gRoute121_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -11091,14 +10233,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE121",
-          "base_label": "gRoute121_2_Night"
         },
         {
           "map": "MAP_ROUTE122",
@@ -11345,19 +10479,7 @@
         },
         {
           "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_Evening"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_Night"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_1_Day",
+          "base_label": "gRoute123_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -11511,19 +10633,7 @@
         },
         {
           "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_2_Day",
+          "base_label": "gRoute123_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -11676,20 +10786,8 @@
           }
         },
         {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE123",
-          "base_label": "gRoute123_2_Night"
-        },
-        {
           "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_Day",
+          "base_label": "gMtPyre_2F",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11758,19 +10856,7 @@
         },
         {
           "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_1_Day",
+          "base_label": "gMtPyre_2F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11839,19 +10925,7 @@
         },
         {
           "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_2_Day",
+          "base_label": "gMtPyre_2F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11919,20 +10993,8 @@
           }
         },
         {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_2F",
-          "base_label": "gMtPyre_2F_2_Night"
-        },
-        {
           "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_Day",
+          "base_label": "gMtPyre_3F",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12001,19 +11063,7 @@
         },
         {
           "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_1_Day",
+          "base_label": "gMtPyre_3F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12082,19 +11132,7 @@
         },
         {
           "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_2_Day",
+          "base_label": "gMtPyre_3F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12162,20 +11200,8 @@
           }
         },
         {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_3F",
-          "base_label": "gMtPyre_3F_2_Night"
-        },
-        {
           "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_Day",
+          "base_label": "gMtPyre_4F",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12220,43 +11246,31 @@
                 "species": "SPECIES_SHUPPET"
               },
               {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 27,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
                 "min_level": 29,
                 "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
+                "species": "SPECIES_DUSKULL"
               }
             ]
           }
         },
         {
           "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_1_Day",
+          "base_label": "gMtPyre_4F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12325,19 +11339,7 @@
         },
         {
           "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_2_Day",
+          "base_label": "gMtPyre_4F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12405,20 +11407,8 @@
           }
         },
         {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_4F",
-          "base_label": "gMtPyre_4F_2_Night"
-        },
-        {
           "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_Day",
+          "base_label": "gMtPyre_5F",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12487,19 +11477,7 @@
         },
         {
           "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_1_Day",
+          "base_label": "gMtPyre_5F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12568,19 +11546,7 @@
         },
         {
           "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_2_Day",
+          "base_label": "gMtPyre_5F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12643,87 +11609,6 @@
                 "min_level": 29,
                 "max_level": 29,
                 "species": "SPECIES_VULPIX"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_5F",
-          "base_label": "gMtPyre_5F_2_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_Day",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 28,
-                "max_level": 28,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 23,
-                "max_level": 23,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 22,
-                "max_level": 22,
-                "species": "SPECIES_SHUPPET"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 27,
-                "max_level": 27,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 25,
-                "species": "SPECIES_DUSKULL"
-              },
-              {
-                "min_level": 29,
-                "max_level": 29,
-                "species": "SPECIES_DUSKULL"
               }
             ]
           }
@@ -12799,11 +11684,7 @@
         },
         {
           "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_1_Day",
+          "base_label": "gMtPyre_6F_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12872,19 +11753,7 @@
         },
         {
           "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_2_Day",
+          "base_label": "gMtPyre_6F_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -12950,14 +11819,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_6F",
-          "base_label": "gMtPyre_6F_2_Night"
         },
         {
           "map": "MAP_MT_PYRE_EXTERIOR",
@@ -13030,19 +11891,7 @@
         },
         {
           "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_1_Day",
+          "base_label": "gMtPyre_Exterior_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -13111,19 +11960,7 @@
         },
         {
           "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_2_Day",
+          "base_label": "gMtPyre_Exterior_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -13189,14 +12026,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_EXTERIOR",
-          "base_label": "gMtPyre_Exterior_2_Night"
         },
         {
           "map": "MAP_MT_PYRE_SUMMIT",
@@ -13269,19 +12098,7 @@
         },
         {
           "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_1_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_1_Day",
+          "base_label": "gMtPyre_Summit_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -13350,19 +12167,7 @@
         },
         {
           "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_1_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_1_Night"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_2_Morning"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_2_Day",
+          "base_label": "gMtPyre_Summit_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -13428,14 +12233,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_2_Evening"
-        },
-        {
-          "map": "MAP_MT_PYRE_SUMMIT",
-          "base_label": "gMtPyre_Summit_2_Night"
         },
         {
           "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
@@ -13508,19 +12305,7 @@
         },
         {
           "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom_Night"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom1_Morning"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom1_Day",
+          "base_label": "gGraniteCave_StevensRoom1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -13588,20 +12373,8 @@
           }
         },
         {
-          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom1_Evening"
-        },
-        {
-          "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-          "base_label": "gGraniteCave_StevensRoom1_Night"
-        },
-        {
           "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_Morning"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_Day",
+          "base_label": "gRoute125",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13690,19 +12463,7 @@
         },
         {
           "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_Evening"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_Night"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_1_Day",
+          "base_label": "gRoute125_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13791,19 +12552,7 @@
         },
         {
           "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_2_Day",
+          "base_label": "gRoute125_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13891,20 +12640,8 @@
           }
         },
         {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE125",
-          "base_label": "gRoute125_2_Night"
-        },
-        {
           "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_Morning"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_Day",
+          "base_label": "gRoute126",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -13993,19 +12730,7 @@
         },
         {
           "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_Evening"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_Night"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_1_Day",
+          "base_label": "gRoute126_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14094,19 +12819,7 @@
         },
         {
           "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_2_Day",
+          "base_label": "gRoute126_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14179,107 +12892,6 @@
                 "min_level": 25,
                 "max_level": 30,
                 "species": "SPECIES_CLOBBOPUS"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE126",
-          "base_label": "gRoute126_2_Night"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_Morning"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_Day",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_SHARPEDO"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
               },
               {
                 "min_level": 35,
@@ -14385,11 +12997,7 @@
         },
         {
           "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_1_Day",
+          "base_label": "gRoute127_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14478,19 +13086,7 @@
         },
         {
           "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_2_Day",
+          "base_label": "gRoute127_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14576,14 +13172,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE127",
-          "base_label": "gRoute127_2_Night"
         },
         {
           "map": "MAP_ROUTE128",
@@ -14676,19 +13264,7 @@
         },
         {
           "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_Evening"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_Night"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_1_Day",
+          "base_label": "gRoute128_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14777,19 +13353,7 @@
         },
         {
           "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_2_Day",
+          "base_label": "gRoute128_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -14875,14 +13439,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE128",
-          "base_label": "gRoute128_2_Night"
         },
         {
           "map": "MAP_ROUTE129",
@@ -14975,19 +13531,7 @@
         },
         {
           "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_Evening"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_Night"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_1_Day",
+          "base_label": "gRoute129_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15076,19 +13620,7 @@
         },
         {
           "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_2_Day",
+          "base_label": "gRoute129_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15174,14 +13706,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE129",
-          "base_label": "gRoute129_2_Night"
         },
         {
           "map": "MAP_ROUTE130",
@@ -15339,19 +13863,7 @@
         },
         {
           "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_Evening"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_Night"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_1_Day",
+          "base_label": "gRoute130_1",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -15505,19 +14017,7 @@
         },
         {
           "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_2_Day",
+          "base_label": "gRoute130_2",
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -15668,14 +14168,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE130",
-          "base_label": "gRoute130_2_Night"
         },
         {
           "map": "MAP_ROUTE131",
@@ -15768,19 +14260,7 @@
         },
         {
           "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_Evening"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_Night"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_1_Day",
+          "base_label": "gRoute131_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15869,19 +14349,7 @@
         },
         {
           "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_2_Day",
+          "base_label": "gRoute131_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -15969,20 +14437,8 @@
           }
         },
         {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE131",
-          "base_label": "gRoute131_2_Night"
-        },
-        {
           "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_Morning"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_Day",
+          "base_label": "gRoute132",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16071,19 +14527,7 @@
         },
         {
           "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_Evening"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_Night"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_1_Day",
+          "base_label": "gRoute132_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16172,19 +14616,7 @@
         },
         {
           "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_2_Day",
+          "base_label": "gRoute132_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16272,20 +14704,8 @@
           }
         },
         {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE132",
-          "base_label": "gRoute132_2_Night"
-        },
-        {
           "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_Morning"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_Day",
+          "base_label": "gRoute133",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16374,19 +14794,7 @@
         },
         {
           "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_Evening"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_Night"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_1_Day",
+          "base_label": "gRoute133_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16475,19 +14883,7 @@
         },
         {
           "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_2_Day",
+          "base_label": "gRoute133_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16570,107 +14966,6 @@
                 "min_level": 40,
                 "max_level": 45,
                 "species": "SPECIES_CLOYSTER"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE133",
-          "base_label": "gRoute133_2_Night"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_Morning"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_Day",
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_WINGULL"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_PELIPPER"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_TENTACOOL"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_SHARPEDO"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_HORSEA"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WAILMER"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WAILMER"
               }
             ]
           }
@@ -16766,11 +15061,7 @@
         },
         {
           "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_1_Morning"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_1_Day",
+          "base_label": "gRoute134_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16859,19 +15150,7 @@
         },
         {
           "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_1_Evening"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_1_Night"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_2_Morning"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_2_Day",
+          "base_label": "gRoute134_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -16957,14 +15236,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_2_Evening"
-        },
-        {
-          "map": "MAP_ROUTE134",
-          "base_label": "gRoute134_2_Night"
         },
         {
           "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
@@ -18213,11 +16484,7 @@
         },
         {
           "map": "MAP_NEW_MAUVILLE_ENTRANCE",
-          "base_label": "gNewMauville_Entrance_Morning"
-        },
-        {
-          "map": "MAP_NEW_MAUVILLE_ENTRANCE",
-          "base_label": "gNewMauville_Entrance_Day"
+          "base_label": "gNewMauville_Entrance"
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHWEST",
@@ -18375,19 +16642,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_1_Day",
+          "base_label": "gSafariZone_Southwest_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -18541,19 +16796,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_2_Day",
+          "base_label": "gSafariZone_Southwest_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -18704,14 +16947,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHWEST",
-          "base_label": "gSafariZone_Southwest_2_Night"
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTH",
@@ -18814,19 +17049,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_1_Day",
+          "base_label": "gSafariZone_North_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -18925,19 +17148,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_2_Day",
+          "base_label": "gSafariZone_North_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -19033,14 +17244,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTH",
-          "base_label": "gSafariZone_North_2_Night"
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHWEST",
@@ -19198,19 +17401,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_1_Day",
+          "base_label": "gSafariZone_Northwest_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -19364,19 +17555,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_2_Day",
+          "base_label": "gSafariZone_Northwest_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -19527,14 +17706,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHWEST",
-          "base_label": "gSafariZone_Northwest_2_Night"
         },
         {
           "map": "MAP_VICTORY_ROAD_B1F",
@@ -19945,19 +18116,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_1_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_1_Day",
+          "base_label": "gMeteorFalls_1F_1R_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20111,19 +18270,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_1_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_1_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_2_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_2_Day",
+          "base_label": "gMeteorFalls_1F_1R_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20276,20 +18423,8 @@
           }
         },
         {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_2_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_1R",
-          "base_label": "gMeteorFalls_1F_1R_2_Night"
-        },
-        {
           "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_Day",
+          "base_label": "gMeteorFalls_1F_2R",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20443,19 +18578,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_1_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_1_Day",
+          "base_label": "gMeteorFalls_1F_2R_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20609,19 +18732,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_1_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_1_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_2_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_2_Day",
+          "base_label": "gMeteorFalls_1F_2R_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20774,20 +18885,8 @@
           }
         },
         {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_2_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_1F_2R",
-          "base_label": "gMeteorFalls_1F_2R_2_Night"
-        },
-        {
           "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_Day",
+          "base_label": "gMeteorFalls_B1F_1R",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -20941,19 +19040,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_1_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_1_Day",
+          "base_label": "gMeteorFalls_B1F_1R_1",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21107,19 +19194,7 @@
         },
         {
           "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_1_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_1_Night"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_2_Morning"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_2_Day",
+          "base_label": "gMeteorFalls_B1F_1R_2",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -21182,172 +19257,6 @@
                 "min_level": 40,
                 "max_level": 40,
                 "species": "SPECIES_NOIBAT"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 25,
-                "max_level": 35,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 15,
-                "max_level": 25,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 5,
-                "max_level": 15,
-                "species": "SPECIES_SOLROCK"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WHISCASH"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_2_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_B1F_1R",
-          "base_label": "gMeteorFalls_B1F_1R_2_Night"
-        },
-        {
-          "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
-          "base_label": "gShoalCave_LowTideStairsRoom_Morning"
-        },
-        {
-          "map": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
-          "base_label": "gShoalCave_LowTideStairsRoom_Day",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 33,
-                "max_level": 33,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 37,
-                "max_level": 37,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_SOLROCK"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
               }
             ]
           },
@@ -22542,19 +20451,7 @@
         },
         {
           "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_Night"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_1_Morning"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_1_Day",
+          "base_label": "gUnderwater_Route124_1",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -22588,19 +20485,7 @@
         },
         {
           "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_1_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_1_Night"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_2_Morning"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_2_Day",
+          "base_label": "gUnderwater_Route124_2",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -22631,14 +20516,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_2_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE124",
-          "base_label": "gUnderwater_Route124_2_Night"
         },
         {
           "map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
@@ -23161,19 +21038,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_1_Day",
+          "base_label": "gSafariZone_Southeast_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -23327,19 +21192,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_2_Day",
+          "base_label": "gSafariZone_Southeast_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -23492,14 +21345,6 @@
           }
         },
         {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_SOUTHEAST",
-          "base_label": "gSafariZone_Southeast_2_Night"
-        },
-        {
           "map": "MAP_SAFARI_ZONE_NORTHEAST",
           "base_label": "gSafariZone_Northeast",
           "land_mons": {
@@ -23600,19 +21445,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_1_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_1_Day",
+          "base_label": "gSafariZone_Northeast_1",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -23711,19 +21544,7 @@
         },
         {
           "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_1_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_1_Night"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_2_Morning"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_2_Day",
+          "base_label": "gSafariZone_Northeast_2",
           "land_mons": {
             "encounter_rate": 25,
             "mons": [
@@ -23819,14 +21640,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_2_Evening"
-        },
-        {
-          "map": "MAP_SAFARI_ZONE_NORTHEAST",
-          "base_label": "gSafariZone_Northeast_2_Night"
         },
         {
           "map": "MAP_MAGMA_HIDEOUT_1F",
@@ -25554,20 +23367,8 @@
           }
         },
         {
-          "map": "MAP_METEOR_FALLS_STEVENS_CAVE",
-          "base_label": "gMeteorFalls_StevensCave_Evening"
-        },
-        {
-          "map": "MAP_METEOR_FALLS_STEVENS_CAVE",
-          "base_label": "gMeteorFalls_StevensCave_Night"
-        },
-        {
           "map": "MAP_VOLCARONA_HIVE",
-          "base_label": "gVolcaronaHive_Morning"
-        },
-        {
-          "map": "MAP_VOLCARONA_HIVE",
-          "base_label": "gVolcaronaHive_Day",
+          "base_label": "gVolcaronaHive",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -25665,20 +23466,8 @@
           }
         },
         {
-          "map": "MAP_VOLCARONA_HIVE",
-          "base_label": "gVolcaronaHive_Evening"
-        },
-        {
-          "map": "MAP_VOLCARONA_HIVE",
-          "base_label": "gVolcaronaHive_Night"
-        },
-        {
           "map": "MAP_UNDERWATER_ROUTE105",
-          "base_label": "gUnderwater_Route105_Morning"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE105",
-          "base_label": "gUnderwater_Route105_Day",
+          "base_label": "gUnderwater_Route105",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -25709,14 +23498,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE105",
-          "base_label": "gUnderwater_Route105_Evening"
-        },
-        {
-          "map": "MAP_UNDERWATER_ROUTE105",
-          "base_label": "gUnderwater_Route105_Night"
         }
       ]
     },
