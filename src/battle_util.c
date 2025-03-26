@@ -6048,7 +6048,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsBattlerAlive(gBattlerTarget)
              && (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
              && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
-             && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget)
+             && AreBattlersOfSameGender(gBattlerAttacker, gBattlerTarget)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker)
@@ -9499,10 +9499,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_RIVALRY:
-        if (AreBattlersOfSameGender(battlerAtk, battlerDef))
+        if (IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].types[0])
+            || IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].types[1]))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
-        else if (AreBattlersOfOppositeGender(battlerAtk, battlerDef))
-            modifier = uq4_12_multiply(modifier, UQ_4_12(0.75));
         break;
     case ABILITY_ANALYTIC:
         if (GetBattlerTurnOrderNum(battlerAtk) == gBattlersCount - 1 && move != MOVE_FUTURE_SIGHT && move != MOVE_DOOM_DESIRE)

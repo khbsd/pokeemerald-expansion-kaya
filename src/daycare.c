@@ -1325,10 +1325,6 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     // neither parent is Ditto
     else
     {
-        if (genders[0] == genders[1])
-            return PARENTS_INCOMPATIBLE;
-        if (genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
-            return PARENTS_INCOMPATIBLE;
         if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
             return PARENTS_INCOMPATIBLE;
 
