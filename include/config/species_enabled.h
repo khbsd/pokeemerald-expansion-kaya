@@ -494,7 +494,7 @@
 #define P_FAMILY_GOSSIFLEUR              P_GEN_8_POKEMON
 #define P_FAMILY_WOOLOO                  P_GEN_8_POKEMON
 // #define P_FAMILY_CHEWTLE              P_GEN_8_POKEMON
-#define P_FAMILY_YAMPER                  P_GEN_8_POKEMON
+// #define P_FAMILY_YAMPER               P_GEN_8_POKEMON
 // #define P_FAMILY_ROLYCOLY             P_GEN_8_POKEMON
 // #define P_FAMILY_APPLIN               P_GEN_8_POKEMON
 #define P_FAMILY_SILICOBRA               P_GEN_8_POKEMON
@@ -704,6 +704,7 @@
 #define P_FAMILY_SOBBLE                  TRUE
 #define P_FAMILY_ROOKIDEE                TRUE
 #define P_FAMILY_CHEWTLE                 TRUE
+#define P_FAMILY_YAMPER                  TRUE
 #define P_FAMILY_ROLYCOLY                TRUE
 #define P_FAMILY_APPLIN                  TRUE
 #define P_FAMILY_ARROKUDA                TRUE
