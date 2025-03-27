@@ -1293,7 +1293,6 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];
     u16 species[DAYCARE_MON_COUNT];
     u32 trainerIds[DAYCARE_MON_COUNT];
-    u32 genders[DAYCARE_MON_COUNT];
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
