@@ -1296,8 +1296,6 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        u32 personality;
-
         species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
         trainerIds[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_OT_ID);
         eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroups[0];
