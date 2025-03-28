@@ -17,9 +17,9 @@ void RegisterRamReset(u32 resetFlags);
 
 void VBlankIntrWait(void);
 
-u16 Sqrt(u32 num);
+u32 Sqrt(u32 num);
 
-u16 ArcTan2(s16 x, s16 y);
+u32 ArcTan2(s16 x, s16 y);
 
 #define CPU_SET_SRC_FIXED 0x01000000
 #define CPU_SET_16BIT     0x00000000

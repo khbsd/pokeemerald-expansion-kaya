@@ -47,25 +47,25 @@ extern const struct MapLayout *const gMapLayouts[];
 struct PyramidWildMon
 {
     u16 species;
-    u8 lvl;
-    u8 abilityNum;
+    u32 lvl;
+    u32 abilityNum;
     u16 moves[MAX_MON_MOVES];
 };
 
 struct PyramidFloorTemplate
 {
-    u8 numItems;
-    u8 numTrainers;
-    u8 itemPositions;
-    u8 trainerPositions;
-    u8 runMultiplier;
-    u8 layoutOffsets[NUM_LAYOUT_OFFSETS];
+    u32 numItems;
+    u32 numTrainers;
+    u32 itemPositions;
+    u32 trainerPositions;
+    u32 runMultiplier;
+    u32 layoutOffsets[NUM_LAYOUT_OFFSETS];
 };
 
 struct PyramidTrainerEncounterMusic
 {
-    u8 trainerClass;
-    u8 trainerEncounterMusic;
+    u32 trainerClass;
+    u32 trainerEncounterMusic;
 };
 
 // This file's functions.
@@ -87,18 +87,18 @@ static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
 static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
-static void InitPyramidBagItems(u8);
-static u8 GetPyramidFloorTemplateId(void);
-static u8 GetPostBattleDirectionHintTextIndex(int *, u8, u8);
-static void Task_SetPyramidFloorPalette(u8);
+static void InitPyramidBagItems(u32);
+static u32 GetPyramidFloorTemplateId(void);
+static u32 GetPostBattleDirectionHintTextIndex(int *, u32, u32);
+static void Task_SetPyramidFloorPalette(u32);
 static void MarkPyramidTrainerAsBattled(u16);
-static void GetPyramidFloorLayoutOffsets(u8 *);
-static void GetPyramidEntranceAndExitSquareIds(u8 *, u8 *);
-static void SetPyramidObjectPositionsUniformly(u8);
-static bool8 SetPyramidObjectPositionsInAndNearSquare(u8, u8);
-static bool8 SetPyramidObjectPositionsNearSquare(u8, u8);
-static bool8 TrySetPyramidObjectEventPositionInSquare(u8, u8 *, u8, u8);
-static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u8);
+static void GetPyramidFloorLayoutOffsets(u32 *);
+static void GetPyramidEntranceAndExitSquareIds(u32 *, u32 *);
+static void SetPyramidObjectPositionsUniformly(u32);
+static bool8 SetPyramidObjectPositionsInAndNearSquare(u32, u32);
+static bool8 SetPyramidObjectPositionsNearSquare(u32, u32);
+static bool8 TrySetPyramidObjectEventPositionInSquare(u32, u32 *, u32, u32);
+static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u32, u32, u32 *, u32, u32);
 
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.
@@ -243,7 +243,7 @@ static const struct PyramidFloorTemplate sPyramidFloorTemplates[] =
     }
 };
 
-static const u8 sPyramidFloorTemplateOptions[][2] =
+static const u32 sPyramidFloorTemplateOptions[][2] =
 {
     // Floor 0
     {40,  0},
@@ -288,7 +288,7 @@ static const u8 sPyramidFloorTemplateOptions[][2] =
     {100, 15}
 };
 
-static const u8 sFloorTemplateOffsets[FRONTIER_STAGES_PER_CHALLENGE] =
+static const u32 sFloorTemplateOffsets[FRONTIER_STAGES_PER_CHALLENGE] =
 {
     0, 4, 9, 14, 19, 24, 29
 };
@@ -341,7 +341,7 @@ static const u16 sPickupItemsLvlOpen[TOTAL_PYRAMID_ROUNDS][PICKUP_ITEMS_PER_ROUN
     {ITEM_HYPER_POTION, ITEM_X_DEFENSE, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
 };
 
-static const u8 sPickupItemSlots[][2] =
+static const u32 sPickupItemSlots[][2] =
 {
     // Floor 0
     { 31, 0},
@@ -415,7 +415,7 @@ static const u8 sPickupItemSlots[][2] =
     {100, 9},
 };
 
-static const u8 sPickupItemOffsets[FRONTIER_STAGES_PER_CHALLENGE] = {0, 9, 18, 27, 36, 45, 54};
+static const u32 sPickupItemOffsets[FRONTIER_STAGES_PER_CHALLENGE] = {0, 9, 18, 27, 36, 45, 54};
 
 static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54] =
 {
@@ -475,7 +475,7 @@ static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54]
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const u8 sTrainerTextGroups[50][2] =
+static const u32 sTrainerTextGroups[50][2] =
 {
     {FACILITY_CLASS_AROMA_LADY, 3},
     {FACILITY_CLASS_RUIN_MANIAC, 4},
@@ -529,7 +529,7 @@ static const u8 sTrainerTextGroups[50][2] =
     {FACILITY_CLASS_HIKER, 4},
 };
 
-static const u8 *const sExitDirectionHintTexts1[] =
+static const u32 *const sExitDirectionHintTexts1[] =
 {
     BattlePyramid_Text_ExitHintUp1,
     BattlePyramid_Text_ExitHintLeft1,
@@ -537,7 +537,7 @@ static const u8 *const sExitDirectionHintTexts1[] =
     BattlePyramid_Text_ExitHintDown1,
 };
 
-static const u8 *const sRemainingItemsHintTexts1[] =
+static const u32 *const sRemainingItemsHintTexts1[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining1,
     BattlePyramid_Text_OneItemRemaining1,
@@ -550,7 +550,7 @@ static const u8 *const sRemainingItemsHintTexts1[] =
     BattlePyramid_Text_EightItemsRemaining1,
 };
 
-static const u8 *const sRemainingTrainersHintTexts1[] =
+static const u32 *const sRemainingTrainersHintTexts1[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining1,
     BattlePyramid_Text_OneTrainersRemaining1,
@@ -562,7 +562,7 @@ static const u8 *const sRemainingTrainersHintTexts1[] =
     BattlePyramid_Text_SevenTrainersRemaining1,
 };
 
-static const u8 *const sExitDirectionHintTexts2[] =
+static const u32 *const sExitDirectionHintTexts2[] =
 {
     BattlePyramid_Text_ExitHintUp2,
     BattlePyramid_Text_ExitHintLeft2,
@@ -570,7 +570,7 @@ static const u8 *const sExitDirectionHintTexts2[] =
     BattlePyramid_Text_ExitHintDown2,
 };
 
-static const u8 *const sRemainingItemsHintTexts2[] =
+static const u32 *const sRemainingItemsHintTexts2[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining2,
     BattlePyramid_Text_OneItemRemaining2,
@@ -583,7 +583,7 @@ static const u8 *const sRemainingItemsHintTexts2[] =
     BattlePyramid_Text_EightItemsRemaining2,
 };
 
-static const u8 *const sRemainingTrainersHintTexts2[] =
+static const u32 *const sRemainingTrainersHintTexts2[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining2,
     BattlePyramid_Text_OneTrainersRemaining2,
@@ -595,7 +595,7 @@ static const u8 *const sRemainingTrainersHintTexts2[] =
     BattlePyramid_Text_SevenTrainersRemaining2,
 };
 
-static const u8 *const sExitDirectionHintTexts3[] =
+static const u32 *const sExitDirectionHintTexts3[] =
 {
     BattlePyramid_Text_ExitHintUp3,
     BattlePyramid_Text_ExitHintLeft3,
@@ -603,7 +603,7 @@ static const u8 *const sExitDirectionHintTexts3[] =
     BattlePyramid_Text_ExitHintDown3,
 };
 
-static const u8 *const sRemainingItemsHintTexts3[] =
+static const u32 *const sRemainingItemsHintTexts3[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining3,
     BattlePyramid_Text_OneItemRemaining3,
@@ -616,7 +616,7 @@ static const u8 *const sRemainingItemsHintTexts3[] =
     BattlePyramid_Text_EightItemsRemaining3,
 };
 
-static const u8 *const sRemainingTrainersHintTexts3[] =
+static const u32 *const sRemainingTrainersHintTexts3[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining3,
     BattlePyramid_Text_OneTrainersRemaining3,
@@ -628,7 +628,7 @@ static const u8 *const sRemainingTrainersHintTexts3[] =
     BattlePyramid_Text_SevenTrainersRemaining3,
 };
 
-static const u8 *const sExitDirectionHintTexts4[] =
+static const u32 *const sExitDirectionHintTexts4[] =
 {
     BattlePyramid_Text_ExitHintUp4,
     BattlePyramid_Text_ExitHintLeft4,
@@ -636,7 +636,7 @@ static const u8 *const sExitDirectionHintTexts4[] =
     BattlePyramid_Text_ExitHintDown4,
 };
 
-static const u8 *const sRemainingItemsHintTexts4[] =
+static const u32 *const sRemainingItemsHintTexts4[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining4,
     BattlePyramid_Text_OneItemRemaining4,
@@ -649,7 +649,7 @@ static const u8 *const sRemainingItemsHintTexts4[] =
     BattlePyramid_Text_EightItemsRemaining4,
 };
 
-static const u8 *const sRemainingTrainersHintTexts4[] =
+static const u32 *const sRemainingTrainersHintTexts4[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining4,
     BattlePyramid_Text_OneTrainersRemaining4,
@@ -661,7 +661,7 @@ static const u8 *const sRemainingTrainersHintTexts4[] =
     BattlePyramid_Text_SevenTrainersRemaining4,
 };
 
-static const u8 *const sExitDirectionHintTexts5[] =
+static const u32 *const sExitDirectionHintTexts5[] =
 {
     BattlePyramid_Text_ExitHintUp5,
     BattlePyramid_Text_ExitHintLeft5,
@@ -669,7 +669,7 @@ static const u8 *const sExitDirectionHintTexts5[] =
     BattlePyramid_Text_ExitHintDown5,
 };
 
-static const u8 *const sRemainingItemsHintTexts5[] =
+static const u32 *const sRemainingItemsHintTexts5[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining5,
     BattlePyramid_Text_OneItemRemaining5,
@@ -682,7 +682,7 @@ static const u8 *const sRemainingItemsHintTexts5[] =
     BattlePyramid_Text_EightItemsRemaining5,
 };
 
-static const u8 *const sRemainingTrainersHintTexts5[] =
+static const u32 *const sRemainingTrainersHintTexts5[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining5,
     BattlePyramid_Text_OneTrainersRemaining5,
@@ -694,7 +694,7 @@ static const u8 *const sRemainingTrainersHintTexts5[] =
     BattlePyramid_Text_SevenTrainersRemaining5,
 };
 
-static const u8 *const sExitDirectionHintTexts6[] =
+static const u32 *const sExitDirectionHintTexts6[] =
 {
     BattlePyramid_Text_ExitHintUp6,
     BattlePyramid_Text_ExitHintLeft6,
@@ -702,7 +702,7 @@ static const u8 *const sExitDirectionHintTexts6[] =
     BattlePyramid_Text_ExitHintDown6,
 };
 
-static const u8 *const sRemainingItemsHintTexts6[] =
+static const u32 *const sRemainingItemsHintTexts6[] =
 {
     BattlePyramid_Text_ZeroItemsRemaining6,
     BattlePyramid_Text_OneItemRemaining6,
@@ -715,7 +715,7 @@ static const u8 *const sRemainingItemsHintTexts6[] =
     BattlePyramid_Text_EightItemsRemaining6,
 };
 
-static const u8 *const sRemainingTrainersHintTexts6[] =
+static const u32 *const sRemainingTrainersHintTexts6[] =
 {
     BattlePyramid_Text_ZeroTrainersRemaining6,
     BattlePyramid_Text_OneTrainersRemaining6,
@@ -727,49 +727,49 @@ static const u8 *const sRemainingTrainersHintTexts6[] =
     BattlePyramid_Text_SevenTrainersRemaining6,
 };
 
-static const u8 *const *const sPostBattleHintTexts1[] =
+static const u32 *const *const sPostBattleHintTexts1[] =
 {
     sExitDirectionHintTexts1,
     sRemainingItemsHintTexts1,
     sRemainingTrainersHintTexts1,
 };
 
-static const u8 *const *const sPostBattleHintTexts2[] =
+static const u32 *const *const sPostBattleHintTexts2[] =
 {
     sExitDirectionHintTexts2,
     sRemainingItemsHintTexts2,
     sRemainingTrainersHintTexts2,
 };
 
-static const u8 *const *const sPostBattleHintTexts3[] =
+static const u32 *const *const sPostBattleHintTexts3[] =
 {
     sExitDirectionHintTexts3,
     sRemainingItemsHintTexts3,
     sRemainingTrainersHintTexts3,
 };
 
-static const u8 *const *const sPostBattleHintTexts4[] =
+static const u32 *const *const sPostBattleHintTexts4[] =
 {
     sExitDirectionHintTexts4,
     sRemainingItemsHintTexts4,
     sRemainingTrainersHintTexts4,
 };
 
-static const u8 *const *const sPostBattleHintTexts5[] =
+static const u32 *const *const sPostBattleHintTexts5[] =
 {
     sExitDirectionHintTexts5,
     sRemainingItemsHintTexts5,
     sRemainingTrainersHintTexts5,
 };
 
-static const u8 *const *const sPostBattleHintTexts6[] =
+static const u32 *const *const sPostBattleHintTexts6[] =
 {
     sExitDirectionHintTexts6,
     sRemainingItemsHintTexts6,
     sRemainingTrainersHintTexts6,
 };
 
-static const u8 *const *const *const sPostBattleTexts[] =
+static const u32 *const *const *const sPostBattleTexts[] =
 {
     sPostBattleHintTexts1,
     sPostBattleHintTexts2,
@@ -779,7 +779,7 @@ static const u8 *const *const *const sPostBattleTexts[] =
     sPostBattleHintTexts6,
 };
 
-static const u8 sHintTextTypes[] =
+static const u32 sHintTextTypes[] =
 {
     HINT_EXIT_SHORT_REMAINING_TRAINERS,
     HINT_EXIT_SHORT_REMAINING_ITEMS,
@@ -816,7 +816,7 @@ static void (* const sBattlePyramidFunctions[])(void) =
 static const u16 sShortStreakRewardItems[] = {ITEM_HP_UP, ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_CARBOS, ITEM_ZINC};
 static const u16 sLongStreakRewardItems[] = {ITEM_BRIGHT_POWDER, ITEM_WHITE_HERB, ITEM_QUICK_CLAW, ITEM_LEFTOVERS, ITEM_MENTAL_HERB, ITEM_KINGS_ROCK, ITEM_FOCUS_BAND, ITEM_SCOPE_LENS, ITEM_CHOICE_BAND};
 
-static const u8 sBorderedSquareIds[][4] =
+static const u32 sBorderedSquareIds[][4] =
 {
     {1,   4, -1, -1},
     {0,   2,  5, -1},
@@ -836,7 +836,7 @@ static const u8 sBorderedSquareIds[][4] =
     {11, 14, -1, -1},
 };
 
-static const u8 sPickupPercentages[PICKUP_ITEMS_PER_ROUND] = {30, 40, 50, 60, 70, 80, 85, 90, 95, 100};
+static const u32 sPickupPercentages[PICKUP_ITEMS_PER_ROUND] = {30, 40, 50, 60, 70, 80, 85, 90, 95, 100};
 
 // code
 void CallBattlePyramidFunction(void)
@@ -985,7 +985,7 @@ static void SetPickupItem(void)
     int itemIndex;
     int randVal;
     u32 randSeedIndex, randSeed;
-    u8 id;
+    u32 id;
     rng_value_t rand;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 floor = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
@@ -1051,7 +1051,7 @@ static void ShowPostBattleHintText(void)
 {
     int i;
     int hintType;
-    u8 id;
+    u32 id;
     int textGroup = 0;
     int textIndex = 0;
     struct ObjectEventTemplate *events = gSaveBlock1Ptr->objectEventTemplates;
@@ -1197,7 +1197,7 @@ static void SetPyramidFloorPalette(void)
     CreateTask(Task_SetPyramidFloorPalette, 0);
 }
 
-static void Task_SetPyramidFloorPalette(u8 taskId)
+static void Task_SetPyramidFloorPalette(u32 taskId)
 {
     if (gPaletteFade.active)
     {
@@ -1244,10 +1244,10 @@ static void RestorePyramidPlayerParty(void)
         gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
 }
 
-static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForExitHint, u8 defaultHintType)
+static u32 GetPostBattleDirectionHintTextIndex(int *hintType, u32 minDistanceForExitHint, u32 defaultHintType)
 {
     int x, y;
-    u8 textIndex = 0;
+    u32 textIndex = 0;
     u16 *map = gBackupMapLayout.map;
     map += gBackupMapLayout.width * 7 + MAP_OFFSET;
 
@@ -1318,12 +1318,12 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     return textIndex;
 }
 
-u16 LocalIdToPyramidTrainerId(u8 localId)
+u16 LocalIdToPyramidTrainerId(u32 localId)
 {
     return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
-bool8 GetBattlePyramidTrainerFlag(u8 eventId)
+bool8 GetBattlePyramidTrainerFlag(u32 eventId)
 {
     return gSaveBlock2Ptr->frontier.pyramidTrainerFlags & ((1u << gObjectEvents[eventId].localId) - 1);
 }
@@ -1357,7 +1357,7 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
 #if BATTLE_PYRAMID_RANDOM_ENCOUNTERS == TRUE
 // check if given species evolved from a specific evolutionary stone
 // if nItems is passed as 0, it will check for any EVO_ITEM case
-static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems, u8 nItems)
+static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems, u32 nItems)
 {
     u32 i, j, k;
     for (i = 0; i < NUM_SPECIES; i++)
@@ -1395,7 +1395,7 @@ static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems,
 extern u32 GetTotalBaseStat(u32 species);
 void GenerateBattlePyramidWildMon(void)
 {
-    u8 name[POKEMON_NAME_LENGTH + 1];
+    u32 name[POKEMON_NAME_LENGTH + 1];
     int i, j;
     u32 id;
     u32 lvl = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1567,7 +1567,7 @@ void GenerateBattlePyramidWildMon(void)
 #else
 void GenerateBattlePyramidWildMon(void)
 {
-    u8 name[POKEMON_NAME_LENGTH + 1];
+    u32 name[POKEMON_NAME_LENGTH + 1];
     int i;
     const struct PyramidWildMon *wildMons;
     u32 id;
@@ -1639,13 +1639,13 @@ void GenerateBattlePyramidWildMon(void)
 }
 #endif
 
-u8 GetPyramidRunMultiplier(void)
+u32 GetPyramidRunMultiplier(void)
 {
-    u8 id = GetPyramidFloorTemplateId();
+    u32 id = GetPyramidFloorTemplateId();
     return sPyramidFloorTemplates[id].runMultiplier;
 }
 
-u8 InBattlePyramid(void)
+u32 InBattlePyramid(void)
 {
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         return 1;
@@ -1693,7 +1693,7 @@ void CopyPyramidTrainerLoseSpeech(u16 trainerId)
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
 }
 
-u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
+u32 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 {
     int i;
 
@@ -1710,7 +1710,7 @@ static void UNUSED BattlePyramidRetireChallenge(void)
     ScriptContext_SetupScript(BattlePyramid_Retire);
 }
 
-static u16 GetUniqueTrainerId(u8 objectEventId)
+static u16 GetUniqueTrainerId(u32 objectEventId)
 {
     int i;
     u16 trainerId;
@@ -1749,8 +1749,8 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
 {
     int y, x;
     int i;
-    u8 entranceSquareId, exitSquareId;
-    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
+    u32 entranceSquareId, exitSquareId;
+    u32 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     GetPyramidEntranceAndExitSquareIds(&entranceSquareId, &exitSquareId);
@@ -1801,8 +1801,8 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
 void LoadBattlePyramidObjectEventTemplates(void)
 {
     int i;
-    u8 id;
-    u8 entranceSquareId, exitSquareId;
+    u32 id;
+    u32 entranceSquareId, exitSquareId;
 
     for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
@@ -1812,7 +1812,7 @@ void LoadBattlePyramidObjectEventTemplates(void)
     CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
     for (i = 0; i < 2; i++)
     {
-        u8 objectPositionsType;
+        u32 objectPositionsType;
 
         if (i == OBJ_TRAINERS)
             objectPositionsType = sPyramidFloorTemplates[id].trainerPositions;
@@ -1858,7 +1858,7 @@ void LoadBattlePyramidFloorObjectEventScripts(void)
     }
 }
 
-static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSquareId)
+static void GetPyramidEntranceAndExitSquareIds(u32 *entranceSquareId, u32 *exitSquareId)
 {
     *entranceSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % NUM_PYRAMID_FLOOR_SQUARES;
     *exitSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[0] % NUM_PYRAMID_FLOOR_SQUARES;
@@ -1870,15 +1870,15 @@ static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSqu
     }
 }
 
-static void SetPyramidObjectPositionsUniformly(u8 objType)
+static void SetPyramidObjectPositionsUniformly(u32 objType)
 {
     int i;
     int numObjects;
     int objectStartIndex;
     int squareId;
     u32 bits = 0;
-    u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
+    u32 id = GetPyramidFloorTemplateId();
+    u32 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     squareId = gSaveBlock2Ptr->frontier.pyramidRandoms[2] % NUM_PYRAMID_FLOOR_SQUARES;
@@ -1927,7 +1927,7 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
     Free(floorLayoutOffsets);
 }
 
-static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
+static bool8 SetPyramidObjectPositionsInAndNearSquare(u32 objType, u32 squareId)
 {
     int i;
     int objectStartIndex;
@@ -1935,8 +1935,8 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
     int r7 = 0;
     int numPlacedObjects = 0;
     int numObjects;
-    u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
+    u32 id = GetPyramidFloorTemplateId();
+    u32 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -1993,7 +1993,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
     return (numObjects / 2) > numPlacedObjects;
 }
 
-static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
+static bool8 SetPyramidObjectPositionsNearSquare(u32 objType, u32 squareId)
 {
     int i;
     int objectStartIndex;
@@ -2001,8 +2001,8 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
     int numPlacedObjects = 0;
     int r8 = 0;
     int numObjects;
-    u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
+    u32 id = GetPyramidFloorTemplateId();
+    u32 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -2047,7 +2047,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
     return (numObjects / 2) > numPlacedObjects;
 }
 
-static bool8 TrySetPyramidObjectEventPositionInSquare(u8 objType, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId)
+static bool8 TrySetPyramidObjectEventPositionInSquare(u32 objType, u32 *floorLayoutOffsets, u32 squareId, u32 objectEventId)
 {
     int x, y;
 
@@ -2077,7 +2077,7 @@ static bool8 TrySetPyramidObjectEventPositionInSquare(u8 objType, u8 *floorLayou
     return TRUE;
 }
 
-static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId)
+static bool8 TrySetPyramidObjectEventPositionAtCoords(u32 objType, u32 x, u32 y, u32 *floorLayoutOffsets, u32 squareId, u32 objectEventId)
 {
     int i, j;
     const struct MapHeader *mapHeader;
@@ -2121,11 +2121,11 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8
     return TRUE;
 }
 
-static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
+static void GetPyramidFloorLayoutOffsets(u32 *layoutOffsets)
 {
     int i;
     int rand = (gSaveBlock2Ptr->frontier.pyramidRandoms[0]) | (gSaveBlock2Ptr->frontier.pyramidRandoms[1] << 16);
-    u8 id = GetPyramidFloorTemplateId();
+    u32 id = GetPyramidFloorTemplateId();
 
     for (i = 0; i < NUM_PYRAMID_FLOOR_SQUARES; i++)
     {
@@ -2139,7 +2139,7 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
     }
 }
 
-static u8 GetPyramidFloorTemplateId(void)
+static u32 GetPyramidFloorTemplateId(void)
 {
     int i;
     int rand = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % 100;
@@ -2153,9 +2153,9 @@ static u8 GetPyramidFloorTemplateId(void)
     return 0;
 }
 
-u8 GetNumBattlePyramidObjectEvents(void)
+u32 GetNumBattlePyramidObjectEvents(void)
 {
-    u8 i;
+    u32 i;
     struct ObjectEventTemplate *events = gSaveBlock1Ptr->objectEventTemplates;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -2167,7 +2167,7 @@ u8 GetNumBattlePyramidObjectEvents(void)
     return i;
 }
 
-static void InitPyramidBagItems(u8 lvlMode)
+static void InitPyramidBagItems(u32 lvlMode)
 {
     int i;
 

@@ -30,26 +30,26 @@ enum {
 
 struct MailLineLayout
 {
-    u8 numEasyChatWords:2;
-    u8 xOffset:6;
-    u8 height;
+    u32 numEasyChatWords:2;
+    u32 xOffset:6;
+    u32 height;
 };
 
 struct MailLayout
 {
-    u8 numLines;
-    u8 signatureYPos;
-    u8 signatureWidth;
-    u8 wordsYPos;
-    u8 wordsXPos;
+    u32 numLines;
+    u32 signatureYPos;
+    u32 signatureWidth;
+    u32 wordsYPos;
+    u32 wordsXPos;
     const struct MailLineLayout *lines;
 };
 
 struct MailGraphics
 {
     const u16 *palette;
-    const u8 *tiles;
-    const u8 *tileMap;
+    const u32 *tiles;
+    const u32 *tileMap;
     u32 unused;
     u16 textColor;
     u16 textShadow;
@@ -57,23 +57,23 @@ struct MailGraphics
 
 struct MailRead
 {
-    /*0x0000*/ u8 message[8][64];
-    /*0x0200*/ u8 playerName[12];
+    /*0x0000*/ u32 message[8][64];
+    /*0x0200*/ u32 playerName[12];
     /*0x020C*/ MainCallback exitCallback;
     /*0x0210*/ MainCallback callback;
     /*0x0214*/ struct Mail *mail;
     /*0x0218*/ bool8 hasText;
-    /*0x0219*/ u8 signatureWidth;
-    /*0x021a*/ u8 mailType;
-    /*0x021b*/ u8 iconType;
-    /*0x021c*/ u8 monIconSpriteId;
-    /*0x021d*/ u8 language;
+    /*0x0219*/ u32 signatureWidth;
+    /*0x021a*/ u32 mailType;
+    /*0x021b*/ u32 iconType;
+    /*0x021c*/ u32 monIconSpriteId;
+    /*0x021d*/ u32 language;
     /*0x021e*/ bool8 international;
-    /*0x0220*/ u8 *(*parserSingle)(u8 *dest, u16 word);
-    /*0x0224*/ u8 *(*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
+    /*0x0220*/ u32 *(*parserSingle)(u32 *dest, u16 word);
+    /*0x0224*/ u32 *(*parserMultiple)(u32 *dest, const u16 *src, u16 length1, u16 length2);
     /*0x0228*/ const struct MailLayout *layout;
-    /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
-    /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
+    /*0x022c*/ u32 bg1TilemapBuffer[0x1000];
+    /*0x122c*/ u32 bg2TilemapBuffer[0x1000];
 };
 
 static EWRAM_DATA struct MailRead *sMailRead = NULL;
@@ -119,7 +119,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sTextColors[] = {
+static const u32 sTextColors[] = {
     TEXT_COLOR_TRANSPARENT,
     TEXT_DYNAMIC_COLOR_1,
     TEXT_DYNAMIC_COLOR_2
@@ -640,8 +640,8 @@ static void CB2_InitMailRead(void)
 static void BufferMailText(void)
 {
     u16 i;
-    u8 numWords;
-    u8 *ptr;
+    u32 numWords;
+    u32 *ptr;
 
     // Convert the easy chat words to strings line by line and buffer them to message
     numWords = 0;
@@ -669,9 +669,9 @@ static void BufferMailText(void)
 static void PrintMailText(void)
 {
     u16 i;
-    u8 signature[32];
-    u8 y;
-    u8 *bufptr;
+    u32 signature[32];
+    u32 y;
+    u32 *bufptr;
     s32 box_x;
     s32 box_y;
 

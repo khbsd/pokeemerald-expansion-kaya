@@ -8,7 +8,7 @@
 #define OAM_MATRIX_COUNT 32
 
 EWRAM_DATA static u16 sSpritePriorities[MAX_SPRITES] = {0};
-EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};
+EWRAM_DATA static u32 sSpriteOrder[MAX_SPRITES] = {0};
 
 static void Old_BuildOamBuffer(void);
 
@@ -127,7 +127,7 @@ TEST("BuildOamBuffer faster with mix of sprites")
 
 static void UpdateOamCoords(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
@@ -160,10 +160,10 @@ static void BuildSpritePriorities(void)
 
 static void SortSprites(void)
 {
-    u8 i;
+    u32 i;
     for (i = 1; i < MAX_SPRITES; i++)
     {
-        u8 j = i;
+        u32 j = i;
         struct Sprite *sprite1 = &gSprites[sSpriteOrder[i - 1]];
         struct Sprite *sprite2 = &gSprites[sSpriteOrder[i]];
         u16 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
@@ -203,7 +203,7 @@ static void SortSprites(void)
             && ((sprite1Priority > sprite2Priority)
              || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
-            u8 temp = sSpriteOrder[j];
+            u32 temp = sSpriteOrder[j];
             sSpriteOrder[j] = sSpriteOrder[j - 1];
             sSpriteOrder[j - 1] = temp;
 
@@ -257,7 +257,7 @@ static void SortSprites(void)
 
 static void CopyMatricesToOamBuffer(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < OAM_MATRIX_COUNT; i++)
     {
         u32 base = 4 * i;
@@ -270,8 +270,8 @@ static void CopyMatricesToOamBuffer(void)
 
 static void AddSpritesToOamBuffer(void)
 {
-    u8 i = 0;
-    u8 oamIndex = 0;
+    u32 i = 0;
+    u32 oamIndex = 0;
 
     while (i < MAX_SPRITES)
     {
@@ -290,7 +290,7 @@ static void AddSpritesToOamBuffer(void)
 
 static void Old_BuildOamBuffer(void)
 {
-    u8 temp;
+    u32 temp;
     UpdateOamCoords();
     BuildSpritePriorities();
     SortSprites();

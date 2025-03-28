@@ -40,23 +40,23 @@
 #include "trainer_hill.h"
 #include "fldeff.h"
 
-static void Task_ExitNonAnimDoor(u8);
-static void Task_ExitNonDoor(u8);
-static void Task_DoContestHallWarp(u8);
+static void Task_ExitNonAnimDoor(u32);
+static void Task_ExitNonDoor(u32);
+static void Task_DoContestHallWarp(u32);
 static void FillPalBufferWhite(void);
-static void Task_ExitDoor(u8);
+static void Task_ExitDoor(u32);
 static bool32 WaitForWeatherFadeIn(void);
-static void Task_SpinEnterWarp(u8 taskId);
-static void Task_WarpAndLoadMap(u8 taskId);
-static void Task_DoDoorWarp(u8 taskId);
-static void Task_EnableScriptAfterMusicFade(u8 taskId);
+static void Task_SpinEnterWarp(u32 taskId);
+static void Task_WarpAndLoadMap(u32 taskId);
+static void Task_DoDoorWarp(u32 taskId);
+static void Task_EnableScriptAfterMusicFade(u32 taskId);
 
 static void ExitStairsMovement(s16*, s16*, s16*, s16*, s16*);
 static void GetStairsMovementDirection(u32, s16*, s16*);
-static void Task_ExitStairs(u8);
+static void Task_ExitStairs(u32);
 static bool8 WaitStairExitMovementFinished(s16*, s16*, s16*, s16*, s16*);
 static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
-static void Task_StairWarp(u8);
+static void Task_StairWarp(u32);
 static void ForceStairsMovement(u32, s16*, s16*);
 
 // data[0] is used universally by tasks in this file as a state for switches
@@ -86,7 +86,7 @@ static void FillPalBufferBlack(void)
 
 void WarpFadeInScreen(void)
 {
-    u8 previousMapType = GetLastUsedWarpMapType();
+    u32 previousMapType = GetLastUsedWarpMapType();
     switch (GetMapPairFadeFromType(previousMapType, GetCurrentMapType()))
     {
     case 0:
@@ -113,7 +113,7 @@ void FadeInFromBlack(void)
 
 void WarpFadeOutScreen(void)
 {
-    u8 currentMapType = GetCurrentMapType();
+    u32 currentMapType = GetCurrentMapType();
     switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
     case 0:
@@ -129,7 +129,7 @@ static void SetPlayerVisibility(bool8 visible)
     SetPlayerInvisibility(!visible);
 }
 
-static void Task_WaitForUnionRoomFade(u8 taskId)
+static void Task_WaitForUnionRoomFade(u32 taskId)
 {
     if (WaitForWeatherFadeIn() == TRUE)
         DestroyTask(taskId);
@@ -143,7 +143,7 @@ void FieldCB_ContinueScriptUnionRoom(void)
     CreateTask(Task_WaitForUnionRoomFade, 10);
 }
 
-static void Task_WaitForFadeAndEnableScriptCtx(u8 taskID)
+static void Task_WaitForFadeAndEnableScriptCtx(u32 taskID)
 {
     if (WaitForWeatherFadeIn() == TRUE)
     {
@@ -167,7 +167,7 @@ void FieldCB_ContinueScript(void)
     CreateTask(Task_WaitForFadeAndEnableScriptCtx, 10);
 }
 
-static void Task_ReturnToFieldCableLink(u8 taskId)
+static void Task_ReturnToFieldCableLink(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -202,7 +202,7 @@ void FieldCB_ReturnToFieldCableLink(void)
     CreateTask(Task_ReturnToFieldCableLink, 10);
 }
 
-static void Task_ReturnToFieldWirelessLink(u8 taskId)
+static void Task_ReturnToFieldWirelessLink(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -235,7 +235,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
     }
 }
 
-void Task_ReturnToFieldRecordMixing(u8 taskId)
+void Task_ReturnToFieldRecordMixing(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -269,7 +269,7 @@ void FieldCB_ReturnToFieldWirelessLink(void)
 static void SetUpWarpExitTask(void)
 {
     s16 x, y;
-    u8 behavior;
+    u32 behavior;
     TaskFunc func;
 
     PlayerGetDestCoords(&x, &y);
@@ -331,7 +331,7 @@ static void FieldCB_MossdeepGymWarpExit(void)
     SetObjectEventLoadFlag((~SKIP_OBJECT_EVENT_LOAD) & 0xF);
 }
 
-static void Task_ExitDoor(u8 taskId)
+static void Task_ExitDoor(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -349,7 +349,7 @@ static void Task_ExitDoor(u8 taskId)
     case 1:
         if (WaitForWeatherFadeIn())
         {
-            u8 objEventId;
+            u32 objEventId;
             SetPlayerVisibility(TRUE);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
@@ -359,7 +359,7 @@ static void Task_ExitDoor(u8 taskId)
     case 2:
         if (IsPlayerStandingStill())
         {
-            u8 objEventId;
+            u32 objEventId;
             task->data[1] = FieldAnimateDoorClose(*x, *y);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
@@ -380,7 +380,7 @@ static void Task_ExitDoor(u8 taskId)
     }
 }
 
-static void Task_ExitNonAnimDoor(u8 taskId)
+static void Task_ExitNonAnimDoor(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -397,7 +397,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
     case 1:
         if (WaitForWeatherFadeIn())
         {
-            u8 objEventId;
+            u32 objEventId;
             SetPlayerVisibility(TRUE);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
@@ -418,7 +418,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
     }
 }
 
-static void Task_ExitNonDoor(u8 taskId)
+static void Task_ExitNonDoor(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -438,7 +438,7 @@ static void Task_ExitNonDoor(u8 taskId)
     }
 }
 
-static void Task_WaitForFadeShowStartMenu(u8 taskId)
+static void Task_WaitForFadeShowStartMenu(u32 taskId)
 {
     if (WaitForWeatherFadeIn() == TRUE)
     {
@@ -460,7 +460,7 @@ bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
     return FALSE;
 }
 
-static void Task_ReturnToFieldNoScript(u8 taskId)
+static void Task_ReturnToFieldNoScript(u32 taskId)
 {
     if (WaitForWeatherFadeIn() == 1)
     {
@@ -542,7 +542,7 @@ void DoFallWarp(void)
     gFieldCallback = FieldCB_FallWarpExit;
 }
 
-void DoEscalatorWarp(u8 metatileBehavior)
+void DoEscalatorWarp(u32 metatileBehavior)
 {
     LockPlayerFieldControls();
     StartEscalatorWarp(metatileBehavior, 10);
@@ -593,7 +593,7 @@ void DoPortholeWarp(void)
     gFieldCallback = FieldCB_ShowPortholeView;
 }
 
-static void Task_DoCableClubWarp(u8 taskId)
+static void Task_DoCableClubWarp(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -624,7 +624,7 @@ void DoCableClubWarp(void)
     CreateTask(Task_DoCableClubWarp, 10);
 }
 
-static void Task_ReturnToWorldFromLinkRoom(u8 taskId)
+static void Task_ReturnToWorldFromLinkRoom(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -660,7 +660,7 @@ void ReturnFromLinkRoom(void)
     CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
 }
 
-static void Task_WarpAndLoadMap(u8 taskId)
+static void Task_WarpAndLoadMap(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -691,7 +691,7 @@ static void Task_WarpAndLoadMap(u8 taskId)
     }
 }
 
-static void Task_DoDoorWarp(u8 taskId)
+static void Task_DoDoorWarp(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -716,7 +716,7 @@ static void Task_DoDoorWarp(u8 taskId)
     case 1:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            u8 objEventId;
+            u32 objEventId;
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[objEventId]);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
@@ -727,7 +727,7 @@ static void Task_DoDoorWarp(u8 taskId)
     case 2:
         if (IsPlayerStandingStill())
         {
-            u8 objEventId;
+            u32 objEventId;
             task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
             objEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]);
@@ -751,7 +751,7 @@ static void Task_DoDoorWarp(u8 taskId)
     }
 }
 
-static void Task_DoContestHallWarp(u8 taskId)
+static void Task_DoContestHallWarp(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -868,7 +868,7 @@ static void SetOrbFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s3
 #define tFlashRadiusDelta    data[5]
 #define tClearScanlineEffect data[6]
 
-static void UpdateFlashLevelEffect(u8 taskId)
+static void UpdateFlashLevelEffect(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -902,7 +902,7 @@ static void UpdateFlashLevelEffect(u8 taskId)
     }
 }
 
-static void UpdateOrbFlashEffect(u8 taskId)
+static void UpdateOrbFlashEffect(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -936,7 +936,7 @@ static void UpdateOrbFlashEffect(u8 taskId)
     }
 }
 
-static void Task_WaitForFlashUpdate(u8 taskId)
+static void Task_WaitForFlashUpdate(u32 taskId)
 {
     if (!FuncIsActiveTask(UpdateFlashLevelEffect))
     {
@@ -951,9 +951,9 @@ static void StartWaitForFlashUpdate(void)
         CreateTask(Task_WaitForFlashUpdate, 80);
 }
 
-static u8 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u32 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u32 delta)
 {
-    u8 taskId = CreateTask(UpdateFlashLevelEffect, 80);
+    u32 taskId = CreateTask(UpdateFlashLevelEffect, 80);
     s16 *data = gTasks[taskId].data;
 
     tCurFlashRadius = initialFlashRadius;
@@ -970,9 +970,9 @@ static u8 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlash
     return taskId;
 }
 
-static u8 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u32 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u32 delta)
 {
-    u8 taskId = CreateTask(UpdateOrbFlashEffect, 80);
+    u32 taskId = CreateTask(UpdateOrbFlashEffect, 80);
     s16 *data = gTasks[taskId].data;
 
     tCurFlashRadius = initialFlashRadius;
@@ -995,9 +995,9 @@ static u8 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRa
 #undef tClearScanlineEffect
 
 // A higher flash level is a smaller flash radius (more darkness). 0 is full brightness
-void AnimateFlash(u8 newFlashLevel)
+void AnimateFlash(u32 newFlashLevel)
 {
-    u8 curFlashLevel = GetFlashLevel();
+    u32 curFlashLevel = GetFlashLevel();
     bool8 fullBrightness = FALSE;
     if (newFlashLevel == 0)
         fullBrightness = TRUE;
@@ -1006,7 +1006,7 @@ void AnimateFlash(u8 newFlashLevel)
     LockPlayerFieldControls();
 }
 
-void WriteFlashScanlineEffectBuffer(u8 flashLevel)
+void WriteFlashScanlineEffectBuffer(u32 flashLevel)
 {
     if (flashLevel)
     {
@@ -1021,7 +1021,7 @@ void WriteBattlePyramidViewScanlineEffectBuffer(void)
     CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
 }
 
-static void Task_SpinEnterWarp(u8 taskId)
+static void Task_SpinEnterWarp(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -1042,7 +1042,7 @@ static void Task_SpinEnterWarp(u8 taskId)
     }
 }
 
-static void Task_SpinExitWarp(u8 taskId)
+static void Task_SpinExitWarp(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1108,8 +1108,8 @@ static void LoadOrbEffectPalette(bool8 blueOrb)
 
 static bool8 UpdateOrbEffectBlend(u16 shakeDir)
 {
-    u8 lo = REG_BLDALPHA & 0xFF;
-    u8 hi = REG_BLDALPHA >> 8;
+    u32 lo = REG_BLDALPHA & 0xFF;
+    u32 hi = REG_BLDALPHA >> 8;
 
     if (shakeDir != 0)
     {
@@ -1141,7 +1141,7 @@ static bool8 UpdateOrbEffectBlend(u16 shakeDir)
 #define tWinIn       data[9]
 #define tWinOut      data[10]
 
-static void Task_OrbEffect(u8 taskId)
+static void Task_OrbEffect(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1235,7 +1235,7 @@ void DoOrbEffect(void)
 {
     u8 taskId = CreateTask(Task_OrbEffect, 80);
     s16 *data = gTasks[taskId].data;
-
+u32
     if (gSpecialVar_Result == 0)
     {
         tBlueOrb = FALSE;
@@ -1264,7 +1264,7 @@ void FadeOutOrbEffect(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_OrbEffect);
     gTasks[taskId].tState = 6;
-}
+}u32
 
 #undef tBlueOrb
 #undef tCenterX
@@ -1285,7 +1285,7 @@ void Script_FadeOutMapMusic(void)
 
 static void Task_EnableScriptAfterMusicFade(u8 taskId)
 {
-    if (BGMusicStopped() == TRUE)
+    if (BGMusicStopped() == TRUE)u32
     {
         DestroyTask(taskId);
         ScriptContext_Enable();
@@ -1305,14 +1305,14 @@ static const struct WindowTemplate sWindowTemplate_WhiteoutText =
 
 static const u8 sWhiteoutTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
-#define tState         data[0]
+#define tStatu32        data[0]
 #define tWindowId      data[1]
 #define tPrintState    data[2]
 #define tIsPlayerHouse data[3]
 
 static bool32 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u32 x, u32 y)
 {
-    u32 windowId = gTasks[taskId].tWindowId;
+    u32 windowId = gTasks[taskId].tWindowIdu32u32
 
     switch (gTasks[taskId].tPrintState)
     {
@@ -1344,7 +1344,7 @@ enum {
 
 static void Task_RushInjuredPokemonToCenter(u8 taskId)
 {
-    u32 windowId;
+    u32 windowId;u32
 
     switch (gTasks[taskId].tState)
     {
@@ -1363,7 +1363,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
     {
         const u8 *recoveryMessage = gTasks[taskId].tIsPlayerHouse == TRUE ? gText_PlayerScurriedBackHome : gText_PlayerScurriedToCenter;
         if (PrintWhiteOutRecoveryMessage(taskId, recoveryMessage, 2, 8))
-        {
+        {u32
             ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
             gTasks[taskId].tState = FRLG_WHITEOUT_LEAVE_MSG_SCREEN;
         }
@@ -1394,7 +1394,7 @@ void FieldCB_RushInjuredPokemonToCenter(void)
 {
     u8 taskId;
 
-    LockPlayerFieldControls();
+    u32ckPlayerFieldControls();
     FillPalBufferBlack();
     taskId = CreateTask(Task_RushInjuredPokemonToCenter, 10);
     gTasks[taskId].tState = FRLG_WHITEOUT_ENTER_MSG_SCREEN;
@@ -1484,7 +1484,7 @@ static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offs
 
 static void Task_ExitStairs(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 * data = gTasks[tasku32].data;
     switch (tState)
     {
     default:
@@ -1546,7 +1546,7 @@ static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offs
 
 static void Task_StairWarp(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 * data = gTasks[tasu32d].data;
     struct ObjectEvent *playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *playerSprite = &gSprites[gPlayerAvatar.spriteId];
 
@@ -1603,7 +1603,7 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
 {
     u8 taskId = CreateTask(Task_StairWarp, 10);
     gTasks[taskId].tMetatileBehavior = metatileBehavior;
-    gTasks[taskId].tDelay = delay;
+    u32asks[taskId].tDelay = delay;
     Task_StairWarp(taskId);
 }
 
@@ -1617,7 +1617,7 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
 
 bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection)
 {
-    if (playerDirection == DIR_WEST)
+    if (playerDirection == DIR_WEST)u32
     {
         if (MetatileBehavior_IsDirectionalUpLeftStairWarp(metatileBehavior))
             return TRUE;

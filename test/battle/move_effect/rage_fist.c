@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased by a confusion hit")
 
 DOUBLE_BATTLE_TEST("Rage Fist maximum base power is 350")
 {
-    u16 turns;
+    u32 turns;
     s16 timesGotHit[2];
 
     GIVEN {
@@ -252,7 +252,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
 SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks")
 {
     s16 timesGotHit[2];
-    u16 species = SPECIES_NONE;
+    u32 species = SPECIES_NONE;
 
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }

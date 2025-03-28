@@ -15,7 +15,7 @@ struct PartyMenu
     s8 slotId;
     s8 slotId2;
     u8 action;
-    u16 bagItem;
+    u32 bagItem;
     s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
     s16 learnMoveState;  // data2, used only as a learn move state
 };
@@ -28,7 +28,7 @@ extern u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
 
 extern const struct SpriteSheet gSpriteSheet_HeldItem;
-extern const u16 gHeldItemPalette[];
+extern const u32 gHeldItemPalette[];
 
 extern void (*gItemUseCB)(u8, TaskFunc);
 extern const struct SpriteTemplate gSpriteTemplate_StatusIcons;
@@ -62,9 +62,9 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task);
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task);
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task);
-u16 ItemIdToBattleMoveId(u16 item);
-bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
-bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, u16 move);
+u32 ItemIdToBattleMoveId(u32 item);
+bool8 MonKnowsMove(struct Pokemon *mon, u32 move);
+bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, u32 move);
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task);
@@ -75,7 +75,7 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task);
 void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task);
 void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task);
 void ItemUseCB_Fusion(u8 taskId, TaskFunc task);
-u8 GetItemEffectType(u16 item);
+u8 GetItemEffectType(u32 item);
 void CB2_PartyMenuFromStartMenu(void);
 void CB2_ChooseMonToGiveItem(void);
 void ChooseMonToGiveMailFromMailbox(void);

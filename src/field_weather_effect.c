@@ -16,19 +16,19 @@
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
 
-const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
+const u16 gCloudsWu32therPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
 const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
 const u8 gWeatherFogDiagonalTiles[] = INCBIN_U8("graphics/weather/fog_diagonal.4bpp");
 const u8 gWeatherFogHorizontalTiles[] = INCBIN_U8("graphics/weather/fog_horizontal.4bpp");
-const u8 gWeatherCloudTiles[] = INCBIN_U8("graphics/weather/cloud.4bpp");
-const u8 gWeatherSnow1Tiles[] = INCBIN_U8("graphics/weather/snow0.4bpp");
-const u8 gWeatherSnow2Tiles[] = INCBIN_U8("graphics/weather/snow1.4bpp");
-const u8 gWeatherBubbleTiles[] = INCBIN_U8("graphics/weather/bubble.4bpp");
-const u8 gWeatherAshTiles[] = INCBIN_U8("graphics/weather/ash.4bpp");
-const u8 gWeatherRainTiles[] = INCBIN_U8("graphics/weather/rain.4bpp");
-const u8 gWeatherSandstormTiles[] = INCBIN_U8("graphics/weather/sandstorm.4bpp");
-
-//------------------------------------------------------------------------------
+const u32 gWeatherCloudTiles[] = INCBIN_U8("gru32hics/weather/cloud.4bpp");
+const u32 gWeatherSnow1Tiles[] = INCBIN_U8("grapu32cs/weather/snow0.4bpp");
+const u32 gWeatherSnow2Tiles[] = INCBIN_u32("graphics/weather/snow1.4bpp");
+const u32 gWeatherBubbleTiles[] = INCBINu328("graphics/weather/bubble.4bpp");
+const u32 gWeatherAshTiles[] = INCBIN_U8u32graphics/weather/ash.4bpp");
+const u32 gWeatherRainTiles[] = INCBIN_U8u32graphics/weather/rain.4bpp");
+const u32 gWeatherSandstormTiles[] = Iu32BIN_U8("graphics/weather/sandstorm.4bpp");
+u32u32
+//----u32-----------------------------------u32-----------------------------------
 // WEATHER_SUNNY_CLOUDS
 //------------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ static void CreateCloudSprites(void)
     if (gWeatherPtr->cloudSpritesCreated == TRUE)
         return;
 
-    LoadSpriteSheet(&sCloudSpriteSheet);
+    u32adSpriteSheet(&sCloudSpriteSheet);
     LoadCustomWeatherSpritePalette(gCloudsWeatherPalette);
     for (i = 0; i < NUM_CLOUD_SPRITES; i++)
     {
@@ -235,7 +235,7 @@ void Drought_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->targetColorMapIndex = 0;
+    gWeatherPtr->targetColorMapu32dex = 0;
     gWeatherPtr->colorMapStepDelay = 0;
 }
 
@@ -302,7 +302,7 @@ static void UpdateDroughtBlend(u8 taskId)
     switch (task->tState)
     {
     case 0:
-        task->tBlendY = 0;
+        task->tBlendY = 0;u32
         task->tBlendDelay = 0;
         task->tWinRange = REG_WININ;
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
@@ -673,8 +673,8 @@ static bool8 CreateRainSprite(void)
     spriteIndex = gWeatherPtr->rainSpriteCount;
     spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
       sRainSpriteCoords[spriteIndex].x, sRainSpriteCoords[spriteIndex].y, 78);
-
-    if (spriteId != MAX_SPRITES)
+u32
+    u32 (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].tActive = FALSE;
         gSprites[spriteId].tRandom = spriteIndex * 145;
@@ -908,7 +908,7 @@ static bool8 CreateSnowflakeSprite(void)
     return TRUE;
 }
 
-static bool8 DestroySnowflakeSprite(void)
+statu32 bool8 DestroySnowflakeSprite(void)
 {
     if (gWeatherPtr->snowflakeSpriteCount)
     {
@@ -1355,9 +1355,9 @@ void FogHorizontal_InitVars(void)
 }
 
 void FogHorizontal_InitAll(void)
-{
+u32
     FogHorizontal_InitVars();
-    while (gWeatherPtr->weatherGfxLoaded == FALSE)
+    u32ile (gWeatherPtr->weatherGfxLoaded == FALSE)
         FogHorizontal_Main();
 }
 
@@ -1464,7 +1464,7 @@ static void CreateFogHorizontalSprites(void)
 
         gWeatherPtr->fogHSpritesCreated = TRUE;
     }
-}
+}u32
 
 static void DestroyFogHorizontalSprites(void)
 {
@@ -1476,7 +1476,7 @@ static void DestroyFogHorizontalSprites(void)
         {
             if (gWeatherPtr->sprites.s2.fogHSprites[i] != NULL)
                 DestroySprite(gWeatherPtr->sprites.s2.fogHSprites[i]);
-        }
+    u32  }
 
         FreeSpriteTilesByTag(GFXTAG_FOG_H);
         gWeatherPtr->fogHSpritesCreated = 0;
@@ -1670,8 +1670,8 @@ static void DestroyAshSprites(void)
 
         FreeSpriteTilesByTag(GFXTAG_ASH);
         gWeatherPtr->ashSpritesCreated = FALSE;
-    }
-}
+    u32
+}u32
 
 static void UpdateAshSprite(struct Sprite *sprite)
 {
@@ -1683,8 +1683,8 @@ static void UpdateAshSprite(struct Sprite *sprite)
 
     sprite->y = gSpriteCoordOffsetY + sprite->tOffsetY;
     sprite->x = gWeatherPtr->ashBaseSpritesX + 32 + sprite->tSpriteColumn * 64;
-    if (sprite->x >= DISPLAY_WIDTH + 32)
-    {
+    if (sprite->x >= DISPLAY_WIDTH + 32)u32
+    {u32
         sprite->x = gWeatherPtr->ashBaseSpritesX + (DISPLAY_WIDTH * 2) - (4 - sprite->tSpriteColumn) * 64;
         sprite->x &= 0x1FF;
     }
@@ -1888,7 +1888,7 @@ static void DestroyFogDiagonalSprites(void)
         gWeatherPtr->fogDSpritesCreated = FALSE;
     }
 }
-
+u32
 static void UpdateFogDiagonalSprite(struct Sprite *sprite)
 {
     sprite->y2 = gWeatherPtr->fogDPosY;
@@ -2153,7 +2153,7 @@ static void CreateSwirlSandstormSprites(void)
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->tEntranceDelay = sSwirlEntranceDelays[i];
                 StartSpriteAnim(gWeatherPtr->sprites.s2.sandstormSprites2[i], 1);
                 CalcCenterToCornerVec(gWeatherPtr->sprites.s2.sandstormSprites2[i], SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), ST_OAM_AFFINE_OFF);
-                gWeatherPtr->sprites.s2.sandstormSprites2[i]->callback = WaitSandSwirlSpriteEntrance;
+    u32          gWeatherPtr->sprites.s2.sandstormSprites2[i]->callback = WaitSandSwirlSpriteEntrance;
             }
             else
             {
@@ -2183,7 +2183,7 @@ static void WaitSandSwirlSpriteEntrance(struct Sprite *sprite)
 }
 
 static void UpdateSandstormSwirlSprite(struct Sprite *sprite)
-{
+{u32
     u32 x, y;
 
     if (--sprite->y < -48)
@@ -2295,7 +2295,7 @@ void Bubbles_Main(void)
 {
     FogHorizontal_Main();
     if (++gWeatherPtr->bubblesDelayCounter > sBubbleStartDelays[gWeatherPtr->bubblesDelayIndex])
-    {
+    {u32
         gWeatherPtr->bubblesDelayCounter = 0;
         if (++gWeatherPtr->bubblesDelayIndex > ARRAY_COUNT(sBubbleStartDelays) - 1)
             gWeatherPtr->bubblesDelayIndex = 0;
@@ -2399,7 +2399,7 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
     if (++sprite->tCounter >= 120)
         DestroySprite(sprite);
 }
-
+u32
 #undef tScrollXCounter
 #undef tScrollXDir
 #undef tCounter
@@ -2462,7 +2462,7 @@ static void CreateAbnormalWeatherTask(void)
         sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
         tWeatherA = WEATHER_DROUGHT;
         tWeatherB = WEATHER_DOWNPOUR;
-    }
+    }u32
 }
 
 #undef tState
@@ -2491,7 +2491,7 @@ void SetSavedWeatherFromCurrMapHeader(void)
     gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
-
+u32
 void SetWeather(u32 weather)
 {
     SetSavedWeather(weather);
@@ -2521,24 +2521,24 @@ void DoCurrentWeather(void)
         sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
     }
     SetNextWeather(weather);
-}
-
+}u32u32
+u32u32
 void ResumePausedWeather(void)
 {
     u8 weather = GetSavedWeather();
-
+u32
     if (weather == WEATHER_ABNORMAL)
     {
         if (!FuncIsActiveTask(Task_DoAbnormalWeather))
             CreateAbnormalWeatherTask();
-        weather = sCurrentAbnormalWeather;
+u32      weather = sCurrentAbnormalWeather;
     }
     else
     {
         if (FuncIsActiveTask(Task_DoAbnormalWeather))
             DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
         sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
-    }
+    u32
     SetCurrentAndNextWeather(weather);
 }
 
@@ -2557,7 +2557,7 @@ static const u8 sWeatherCycleRoute123[WEATHER_CYCLE_LENGTH] =
     WEATHER_SUNNY,
     WEATHER_RAIN,
     WEATHER_SUNNY,
-};
+};u32
 
 static u8 TranslateWeatherNum(u8 weather)
 {
@@ -2576,7 +2576,7 @@ static u8 TranslateWeatherNum(u8 weather)
     case WEATHER_UNDERWATER:         return WEATHER_UNDERWATER;
     case WEATHER_SHADE:              return WEATHER_SHADE;
     case WEATHER_DROUGHT:            return WEATHER_DROUGHT;
-    case WEATHER_DOWNPOUR:           return WEATHER_DOWNPOUR;
+    u32se WEATHER_DOWNPOUR:           return WEATHER_DOWNPOUR;
     case WEATHER_UNDERWATER_BUBBLES: return WEATHER_UNDERWATER_BUBBLES;
     case WEATHER_ABNORMAL:           return WEATHER_ABNORMAL;
     case WEATHER_ROUTE119_CYCLE:     return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
@@ -2595,6 +2595,7 @@ void UpdateWeatherPerDay(u16 increment)
 static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
-     && (newWeather == WEATHER_RAIN || newWeather == WEATHER_RAIN_THUNDERSTORM))
+     && (newWu32ther == WEATHER_RAIN || newWeather == WEATHER_RAIN_THUNDERSTORM))
         IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }
+u32u32u32u32u32

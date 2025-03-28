@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Innards Out deal dmg on fainting equal to the amount of dmg inflicted on the Innards Out mon")
 {
-    u16 hp = 0;
+    u32 hp = 0;
     PARAMETRIZE { hp = 5; }
     PARAMETRIZE { hp = 15; }
     PARAMETRIZE { hp = 50; }

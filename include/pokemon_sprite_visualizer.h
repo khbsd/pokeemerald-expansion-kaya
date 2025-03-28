@@ -8,8 +8,8 @@
 struct PokemonSpriteVisualizerModifyArrows
 {
     u8 arrowSpriteId[2];
-    u16 minValue;
-    u16 maxValue;
+    u32 minValue;
+    u32 maxValue;
     int currValue;
     u8 currentDigit;
     u8 maxDigits;
@@ -57,7 +57,7 @@ struct PokemonShadowSettings
 
 struct PokemonSpriteVisualizer
 {
-    u16 currentmonId;
+    u32 currentmonId;
     u8 currentmonWindowId;
     u8 InstructionsWindowId;
     u8 frontspriteId;

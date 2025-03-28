@@ -119,7 +119,7 @@ static void CopyValue32Bit(void)
 #define tRegOffset            data[6]
 #define tApplyBattleBgOffsets data[7]
 
-static void TaskFunc_UpdateWavePerFrame(u8 taskId)
+static void TaskFunc_UpdateWavePerFrame(u32 taskId)
 {
     int value = 0;
     int i;
@@ -190,10 +190,10 @@ static void TaskFunc_UpdateWavePerFrame(u8 taskId)
     }
 }
 
-static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
+static void GenerateWave(u16 *buffer, u32 frequency, u32 amplitude, u32 unused)
 {
     u16 i = 0;
-    u8 theta = 0;
+    u32 theta = 0;
 
     while (i < 256)
     {
@@ -207,12 +207,12 @@ static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
 // 'frequency' and 'amplitude' control the frequency and amplitude of the wave.
 // 'delayInterval' controls how fast the wave travels up the screen. The wave will shift upwards one scanline every 'delayInterval'+1 frames.
 // 'regOffset' is the offset of the video register to modify.
-u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude, u8 delayInterval, u8 regOffset, bool8 applyBattleBgOffsets)
+u32 ScanlineEffect_InitWave(u32 startLine, u32 endLine, u32 frequency, u32 amplitude, u32 delayInterval, u32 regOffset, bool8 applyBattleBgOffsets)
 {
     int i;
     int offset;
     struct ScanlineEffectParams params;
-    u8 taskId;
+    u32 taskId;
 
     ScanlineEffect_Clear();
 

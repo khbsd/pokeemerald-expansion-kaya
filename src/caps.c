@@ -85,7 +85,7 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
 u32 GetCurrentEVCap(void)
 {
 
-    static const u16 sEvCapFlagMap[][2] = {
+    static const u32 sEvCapFlagMap[][2] = {
         // Define EV caps for each milestone
         {FLAG_BADGE01_GET, 30},
         {FLAG_BADGE02_GET, 90},

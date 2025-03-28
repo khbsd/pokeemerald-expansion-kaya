@@ -10,7 +10,7 @@ s16 MathUtil_Mul16(s16 x, s16 y)
     return result;
 }
 
-s16 MathUtil_Mul16Shift(u8 s, s16 x, s16 y)
+s16 MathUtil_Mul16Shift(u32 s, s16 x, s16 y)
 {
     s32 result;
 
@@ -39,7 +39,7 @@ s16 MathUtil_Div16(s16 x, s16 y)
     return (x << 8) / y;
 }
 
-s16 MathUtil_Div16Shift(u8 s, s16 x, s16 y)
+s16 MathUtil_Div16Shift(u32 s, s16 x, s16 y)
 {
     if (y == 0)
     {
@@ -69,7 +69,7 @@ s16 MathUtil_Inv16(s16 y)
     return x / y;
 }
 
-s16 MathUtil_Inv16Shift(u8 s, s16 y)
+s16 MathUtil_Inv16Shift(u32 s, s16 y)
 {
     s32 x;
 

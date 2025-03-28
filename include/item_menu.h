@@ -51,9 +51,9 @@ struct BagPosition
     void (*exitCallback)(void);
     u8 location;
     u8 pocket;
-    u16 pocketSwitchArrowPos;
-    u16 cursorPosition[POCKETS_COUNT];
-    u16 scrollPosition[POCKETS_COUNT];
+    u32 pocketSwitchArrowPos;
+    u32 cursorPosition[POCKETS_COUNT];
+    u32 scrollPosition[POCKETS_COUNT];
 };
 
 extern struct BagPosition gBagPosition;
@@ -84,7 +84,7 @@ struct BagMenu
 };
 
 extern struct BagMenu *gBagMenu;
-extern u16 gSpecialVar_ItemId;
+extern u32 gSpecialVar_ItemId;
 
 void CB2_GoToItemDepositMenu(void);
 void FavorLadyOpenBagMenu(void);

@@ -92,7 +92,7 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect the target of Snipe Shot")
 
 DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by pokemon with Stalwart and Propeller Tail")
 {
-    u16 ability;
+    u32 ability;
     PARAMETRIZE { ability = ABILITY_STALWART; }
     PARAMETRIZE { ability = ABILITY_PROPELLER_TAIL; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; }
@@ -117,7 +117,7 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by pokemon with Sta
 
 DOUBLE_BATTLE_TEST("Ally Switch has no effect on partner's chosen move")
 {
-    u16 chosenMove;
+    u32 chosenMove;
     struct BattlePokemon *chosenTarget = NULL;
 
     PARAMETRIZE { chosenMove = MOVE_TACKLE; chosenTarget = opponentLeft; }

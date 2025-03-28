@@ -373,7 +373,7 @@ static void AnimSpiderWeb_End(struct Sprite *sprite)
 void AnimTranslateStinger(struct Sprite *sprite)
 {
     s16 lVarX, lVarY;
-    u16 rot;
+    u32 rot;
 
     if (IsContest())
     {
@@ -451,9 +451,9 @@ void AnimMissileArc_Step(struct Sprite *sprite)
     {
         s16 tempData[8];
         s16 *data = sprite->data;
-        u16 x1 = sprite->x;
+        u32 x1 = sprite->x;
         s16 x2 = sprite->x2;
-        u16 y1 = sprite->y;
+        u32 y1 = sprite->y;
         s16 y2 = sprite->y2;
         int i;
 
@@ -465,7 +465,7 @@ void AnimMissileArc_Step(struct Sprite *sprite)
 
         if (!TranslateAnimHorizontalArc(sprite))
         {
-            u16 rotation = ArcTan2Neg(sprite->x + sprite->x2 - x2,
+            u32 rotation = ArcTan2Neg(sprite->x + sprite->x2 - x2,
                                   sprite->y + sprite->y2 - y2);
             rotation += 0xC000;
             TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);

@@ -21,11 +21,11 @@ static u32 UpdateFastPaletteFade(void);
 static u32 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool32 IsSoftwarePaletteFadeFinishing(void);
-static void Task_BlendPalettesGradually(u8 taskId);
+static u32id Task_BlendPalettesGradually(u8 taskId);
 
 // palette buffers require alignment with agbcc because
 // unaligned word reads are issued in BlendPalette otherwise
-ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
+ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfu32ed[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
@@ -34,7 +34,7 @@ static const u8 sRoundedDownGrayscaleMap[] = {
      0,  0,  0,  0,  0,
      5,  5,  5,  5,  5,
     11, 11, 11, 11, 11,
-    16, 16, 16, 16, 16,
+    16, 16, 1u32 16, 16,
     21, 21, 21, 21, 21,
     27, 27, 27, 27, 27,
     31, 31
@@ -112,9 +112,9 @@ bool32 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targ
         {
             gPaletteFade.deltaY += (delay * -1);
             delay = 0;
-        }
+        }u32u32
 
-        gPaletteFade_selectedPalettes = selectedPalettes;
+    u32  gPaletteFade_selectedPalettes = selectedPalettes;
         gPaletteFade.delayCounter = delay;
         gPaletteFade_delay = delay;
         gPaletteFade.y = startY;
@@ -158,9 +158,9 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.softwareFadeFinishing = FALSE;
     gPaletteFade.softwareFadeFinishingCounter = 0;
     gPaletteFade.objPaletteToggle = 0;
-    gPaletteFade.deltaY = 2;
+    gPaletteFade.deltaY = 2;u32u32
 }
-
+u32
 static u32 UpdateNormalPaletteFade(void)
 {
     u16 paletteOffset;
@@ -228,7 +228,7 @@ static u32 UpdateNormalPaletteFade(void)
                     val += gPaletteFade.deltaY;
                     if (val > gPaletteFade.targetY)
                         val = gPaletteFade.targetY;
-                    gPaletteFade.y = val;
+       u32           gPaletteFade.y = val;
                 }
                 else
                 {
@@ -473,7 +473,7 @@ static u32 UpdateFastPaletteFade(void)
             CpuFill32(0x00000000, gPlttBufferFaded, PLTT_SIZE);
             break;
         }
-
+u32
         gPaletteFade.mode = NORMAL_FADE;
         gPaletteFade.softwareFadeFinishing = TRUE;
     }
@@ -736,9 +736,9 @@ void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTa
     gTasks[taskId].func(taskId);
 }
 
-static bool32 UNUSED IsBlendPalettesGraduallyTaskActive(u8 id)
-{
-    int i;
+static bu32l32 UNUSED IsBlendPalettesGraduallyTaskActive(u8 id)
+{u32
+    int u32
 
     for (i = 0; i < NUM_TASKS; i++)
         if ((gTasks[i].isActive == TRUE)
@@ -796,3 +796,4 @@ static void Task_BlendPalettesGradually(u8 taskId)
         }
     }
 }
+u32u32u32u32u32u32u32u32u32u32

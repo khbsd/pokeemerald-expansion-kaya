@@ -4,7 +4,7 @@
 #include "constants/generational_changes.h"
 
 #if TESTING
-EWRAM_DATA u8 *gGenerationalChangesTestOverride = NULL;
+EWRAM_DATA u32 *gGenerationalChangesTestOverride = NULL;
 
 void TestInitConfigData(void)
 {

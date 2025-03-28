@@ -37,8 +37,8 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 
 // static const rom data
 static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
-static const u8 sRotatingBall_Gfx[] = INCBIN_U8("graphics/bag/rotating_ball.4bpp");
-static const u8 sCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
+static const u32 sRotatingBall_Gfx[] = INCBIN_u32("graphics/bag/rotating_ball.4bpp");
+static const u32 sCherryUnused[] = INCBIN_u32("graphics/unused/cherry.4bpp");
 static const u16 sCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sBagOamData =
@@ -444,9 +444,9 @@ static const struct SpriteTemplate sBerryCheckCircleSpriteTemplate =
 };
 
 // code
-void RemoveBagSprite(u8 id)
+void RemoveBagSprite(u32 id)
 {
-    u8 *spriteId = &gBagMenu->spriteIds[id];
+    u32 *spriteId = &gBagMenu->spriteIds[id];
     if (*spriteId != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(id + TAG_BAG_GFX);
@@ -457,16 +457,16 @@ void RemoveBagSprite(u8 id)
     }
 }
 
-void AddBagVisualSprite(u8 bagPocketId)
+void AddBagVisualSprite(u32 bagPocketId)
 {
-    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BAG];
+    u32 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BAG];
     *spriteId = CreateSprite(&sBagSpriteTemplate, 68, 66, 0);
     SetBagVisualPocketId(bagPocketId, FALSE);
 }
 
 #define sPocketId data[0]
 
-void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)
+void SetBagVisualPocketId(u32 bagPocketId, bool8 isSwitchingPockets)
 {
     struct Sprite *sprite = &gSprites[gBagMenu->spriteIds[ITEMMENUSPRITE_BAG]];
     if (isSwitchingPockets)
@@ -519,7 +519,7 @@ static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
 
 void AddSwitchPocketRotatingBallSprite(s16 rotationDirection)
 {
-    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BALL];
+    u32 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BALL];
     LoadSpriteSheet(&sRotatingBallTable);
     LoadSpritePalette(&sRotatingBallPaletteTable);
     *spriteId = CreateSprite(&sRotatingBallSpriteTemplate, 16, 16, 0);
@@ -555,12 +555,12 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
         RemoveBagSprite(ITEMMENUSPRITE_BALL);
 }
 
-void AddBagItemIconSprite(u16 itemId, u8 id)
+void AddBagItemIconSprite(u16 itemId, u32 id)
 {
-    u8 *spriteId = &gBagMenu->spriteIds[id + ITEMMENUSPRITE_ITEM];
+    u32 *spriteId = &gBagMenu->spriteIds[id + ITEMMENUSPRITE_ITEM];
     if (*spriteId == SPRITE_NONE)
     {
-        u8 iconSpriteId;
+        u32 iconSpriteId;
 
         // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
         FreeSpriteTilesByTag(id + TAG_ITEM_ICON);
@@ -575,12 +575,12 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
     }
 }
 
-void RemoveBagItemIconSprite(u8 id)
+void RemoveBagItemIconSprite(u32 id)
 {
 // BUG: For one frame, the item you scroll to in the Bag menu
 // will have an incorrect palette and may be seen as a flicker.
 #ifdef BUGFIX
-    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
+    u32 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
 
     if (spriteId[id ^ 1] != SPRITE_NONE)
         gSprites[spriteId[id ^ 1]].invisible = TRUE;
@@ -605,14 +605,14 @@ void SetItemMenuSwapLineInvisibility(bool8 invisible)
     SetSwapLineSpritesInvisibility(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, invisible);
 }
 
-void UpdateItemMenuSwapLinePos(u8 y)
+void UpdateItemMenuSwapLinePos(u32 y)
 {
     UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }
 
 static void ArrangeBerryGfx(void *src, void *dest)
 {
-    u8 i, j;
+    u32 i, j;
 
     memset(dest, 0, 0x800);
 
@@ -642,11 +642,11 @@ static void ArrangeBerryGfx(void *src, void *dest)
 
 struct BerryDynamicGfx
 {
-    ALIGNED(4) u8 gfx[BERRY_SPRITE_SIZE];
+    ALIGNED(4) u32 gfx[BERRY_SPRITE_SIZE];
     struct SpriteFrameImage images[1];
 };
 
-static struct BerryDynamicGfx *LoadBerryGfx(u8 berryId)
+static struct BerryDynamicGfx *LoadBerryGfx(u32 berryId)
 {
     struct CompressedSpritePalette pal;
 
@@ -715,7 +715,7 @@ void FreeBerryIconSpritePalette(u32 berryId)
     FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL + berryId);
 }
 
-u8 CreateBerryFlavorCircleSprite(s16 x)
+u32 CreateBerryFlavorCircleSprite(s16 x)
 {
     return CreateSprite(&sBerryCheckCircleSpriteTemplate, x, 116, 0);
 }

@@ -24,8 +24,8 @@
 struct PlayerInfo
 {
     u32 trainerId;
-    u8 name[PLAYER_NAME_LENGTH + 1];
-    u8 gender;
+    u32 name[PLAYER_NAME_LENGTH + 1];
+    u32 gender;
     u16 battlerId;
     u16 language;
 };
@@ -35,19 +35,19 @@ STATIC_ASSERT(sizeof(struct RecordedBattleSave) <= SECTOR_COUNTER_OFFSET, Record
 
 EWRAM_DATA rng_value_t gRecordedBattleRngSeed = RNG_VALUE_EMPTY;
 EWRAM_DATA rng_value_t gBattlePalaceMoveSelectionRngValue = RNG_VALUE_EMPTY;
-EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};
+EWRAM_DATA static u32 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};
 EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u8 sRecordMode = 0;
-EWRAM_DATA static u8 sLvlMode = 0;
-EWRAM_DATA static u8 sFrontierFacility = 0;
-EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
+EWRAM_DATA static u32 sRecordMode = 0;
+EWRAM_DATA static u32 sLvlMode = 0;
+EWRAM_DATA static u32 sFrontierFacility = 0;
+EWRAM_DATA static u32 sFrontierBrainSymbol = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
-EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
-EWRAM_DATA static u8 sFrontierPassFlag = 0;
-EWRAM_DATA static u8 sBattleScene = 0;
-EWRAM_DATA static u8 sTextSpeed = 0;
+EWRAM_DATA u32 gRecordedBattleMultiplayerId = 0;
+EWRAM_DATA static u32 sFrontierPassFlag = 0;
+EWRAM_DATA static u32 sBattleScene = 0;
+EWRAM_DATA static u32 sTextSpeed = 0;
 EWRAM_DATA static u32 sBattleFlags = 0;
 EWRAM_DATA static u32 sAI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
@@ -55,21 +55,21 @@ EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA static u16 sPlayerMonMoves[MAX_BATTLERS_COUNT / 2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_LINK_PLAYERS] = {0};
 EWRAM_DATA static bool8 sIsPlaybackFinished = 0;
-EWRAM_DATA static u8 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
-EWRAM_DATA static u8 sRecordMixFriendClass = 0;
-EWRAM_DATA static u8 sApprenticeId = 0;
+EWRAM_DATA static u32 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
+EWRAM_DATA static u32 sRecordMixFriendClass = 0;
+EWRAM_DATA static u32 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
-EWRAM_DATA static u8 sBattleOutcome = 0;
+EWRAM_DATA static u32 sBattleOutcome = 0;
 
-static u8 sRecordMixFriendLanguage;
-static u8 sApprenticeLanguage;
+static u32 sRecordMixFriendLanguage;
+static u32 sApprenticeLanguage;
 
-static u8 GetNextRecordedDataByte(u8 *, u8 *, u8 *);
+static u32 GetNextRecordedDataByte(u32 *, u32 *, u32 *);
 static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *);
 static void RecordedBattle_RestoreSavedParties(void);
 static void CB2_RecordedBattle(void);
 
-void RecordedBattle_Init(u8 mode)
+void RecordedBattle_Init(u32 mode)
 {
     s32 i, j;
 
@@ -110,8 +110,8 @@ void RecordedBattle_SetTrainerInfo(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         // Link recorded battle, record info for all trainers
-        u8 linkPlayersCount;
-        u8 text[30];
+        u32 linkPlayersCount;
+        u32 text[30];
 
         gRecordedBattleMultiplayerId = GetMultiplayerId();
         linkPlayersCount = GetLinkPlayerCount();
@@ -154,13 +154,13 @@ void RecordedBattle_SetTrainerInfo(void)
     }
 }
 
-void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action)
+void RecordedBattle_SetBattlerAction(u32 battlerId, u32 action)
 {
     if (sBattlerRecordSizes[battlerId] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
         sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]++] = action;
 }
 
-void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
+void RecordedBattle_ClearBattlerAction(u32 battlerId, u32 bytesToClear)
 {
     s32 i;
 
@@ -173,7 +173,7 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
     }
 }
 
-u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId)
+u32 RecordedBattle_GetBattlerAction(u32 actionType, u32 battlerId)
 {
     if (gTestRunnerEnabled)
         TestRunner_Battle_CheckBattleRecordActionType(battlerId, sBattlerRecordSizes[battlerId], actionType);
@@ -193,15 +193,15 @@ u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId)
     }
 }
 
-static u8 UNUSED GetRecordedBattleMode(void)
+static u32 UNUSED GetRecordedBattleMode(void)
 {
     return sRecordMode;
 }
 
-u8 RecordedBattle_BufferNewBattlerData(u8 *dst)
+u32 RecordedBattle_BufferNewBattlerData(u32 *dst)
 {
-    u8 i, j;
-    u8 idx = 0;
+    u32 i, j;
+    u32 idx = 0;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -220,11 +220,11 @@ u8 RecordedBattle_BufferNewBattlerData(u8 *dst)
     return idx;
 }
 
-void RecordedBattle_RecordAllBattlerData(u8 *src)
+void RecordedBattle_RecordAllBattlerData(u32 *src)
 {
     s32 i;
-    u8 idx = 2;
-    u8 size;
+    u32 idx = 2;
+    u32 size;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
         return;
@@ -239,8 +239,8 @@ void RecordedBattle_RecordAllBattlerData(u8 *src)
     {
         for (size = *src; size != 0;)
         {
-            u8 battlerId = GetNextRecordedDataByte(src, &idx, &size);
-            u8 numActions = GetNextRecordedDataByte(src, &idx, &size);
+            u32 battlerId = GetNextRecordedDataByte(src, &idx, &size);
+            u32 numActions = GetNextRecordedDataByte(src, &idx, &size);
 
             for (i = 0; i < numActions; i++)
                 sBattleRecords[battlerId][sBattlerSavedRecordSizes[battlerId]++] = GetNextRecordedDataByte(src, &idx, &size);
@@ -248,7 +248,7 @@ void RecordedBattle_RecordAllBattlerData(u8 *src)
     }
 }
 
-static u8 GetNextRecordedDataByte(u8 *data, u8 *idx, u8 *size)
+static u32 GetNextRecordedDataByte(u32 *data, u32 *idx, u32 *size)
 {
     (*size)--;
     return data[(*idx)++];
@@ -292,7 +292,7 @@ bool32 MoveRecordedBattleToSaveData(void)
     s32 i, j;
     bool32 ret;
     struct RecordedBattleSave *battleSave, *savSection;
-    u8 saveAttempts;
+    u32 saveAttempts;
 
     saveAttempts = 0;
     battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
@@ -482,7 +482,7 @@ static void CB2_RecordedBattleEnd(void)
 
 #define tFramesToWait data[0]
 
-static void Task_StartAfterCountdown(u8 taskId)
+static void Task_StartAfterCountdown(u32 taskId)
 {
     if (--gTasks[taskId].tFramesToWait == 0)
     {
@@ -564,7 +564,7 @@ void PlayRecordedBattle(void (*CB2_After)(void))
     struct RecordedBattleSave *battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     if (CopyRecordedBattleFromSave(battleSave) == TRUE)
     {
-        u8 taskId;
+        u32 taskId;
 
         RecordedBattle_SaveParties();
         SetVariablesForRecordedBattle(battleSave);
@@ -588,12 +588,12 @@ static void CB2_RecordedBattle(void)
     RunTasks();
 }
 
-u8 GetRecordedBattleFrontierFacility(void)
+u32 GetRecordedBattleFrontierFacility(void)
 {
     return sFrontierFacility;
 }
 
-u8 GetRecordedBattleFronterBrainSymbol(void)
+u32 GetRecordedBattleFronterBrainSymbol(void)
 {
     return sFrontierBrainSymbol;
 }
@@ -620,7 +620,7 @@ static void RecordedBattle_RestoreSavedParties(void)
     }
 }
 
-u8 GetBattlerLinkPlayerGender(u32 battler)
+u32 GetBattlerLinkPlayerGender(u32 battler)
 {
     s32 i;
 
@@ -647,17 +647,17 @@ void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags)
     sFrontierPassFlag |= (flags & (1 << 15)) >> 15;
 }
 
-u8 RecordedBattle_GetFrontierPassFlag(void)
+u32 RecordedBattle_GetFrontierPassFlag(void)
 {
     return sFrontierPassFlag;
 }
 
-u8 GetBattleSceneInRecordedBattle(void)
+u32 GetBattleSceneInRecordedBattle(void)
 {
     return sBattleScene;
 }
 
-u8 GetTextSpeedInRecordedBattle(void)
+u32 GetTextSpeedInRecordedBattle(void)
 {
     return sTextSpeed;
 }
@@ -681,7 +681,7 @@ void RecordedBattle_CopyBattlerMoves(u32 battler)
 // It shares a value with B_ACTION_SAFARI_POKEBLOCK, which can never occur in a recorded battle.
 #define ACTION_MOVE_CHANGE 6
 
-void RecordedBattle_CheckMovesetChanges(u8 mode)
+void RecordedBattle_CheckMovesetChanges(u32 mode)
 {
     s32 battlerId, j, k;
 
@@ -722,11 +722,11 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
             {
                 if (sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == ACTION_MOVE_CHANGE)
                 {
-                    u8 ppBonuses[MAX_MON_MOVES];
-                    u8 moveSlots[MAX_MON_MOVES];
-                    u8 mimickedMoveSlots[MAX_MON_MOVES];
+                    u32 ppBonuses[MAX_MON_MOVES];
+                    u32 moveSlots[MAX_MON_MOVES];
+                    u32 mimickedMoveSlots[MAX_MON_MOVES];
                     struct ChooseMoveStruct movePp;
-                    u8 ppBonusSet;
+                    u32 ppBonusSet;
 
                     // We know the current action is ACTION_MOVE_CHANGE, retrieve
                     // it without saving it to move on to the next action.
@@ -801,7 +801,7 @@ bool8 RecordedBattle_CanStopPlayback(void)
     return (sIsPlaybackFinished == FALSE);
 }
 
-void GetRecordedBattleRecordMixFriendName(u8 *dst)
+void GetRecordedBattleRecordMixFriendName(u32 *dst)
 {
     s32 i;
 
@@ -811,22 +811,22 @@ void GetRecordedBattleRecordMixFriendName(u8 *dst)
     ConvertInternationalString(dst, sRecordMixFriendLanguage);
 }
 
-u8 GetRecordedBattleRecordMixFriendClass(void)
+u32 GetRecordedBattleRecordMixFriendClass(void)
 {
     return sRecordMixFriendClass;
 }
 
-u8 GetRecordedBattleApprenticeId(void)
+u32 GetRecordedBattleApprenticeId(void)
 {
     return sApprenticeId;
 }
 
-u8 GetRecordedBattleRecordMixFriendLanguage(void)
+u32 GetRecordedBattleRecordMixFriendLanguage(void)
 {
     return sRecordMixFriendLanguage;
 }
 
-u8 GetRecordedBattleApprenticeLanguage(void)
+u32 GetRecordedBattleApprenticeLanguage(void)
 {
     return sApprenticeLanguage;
 }

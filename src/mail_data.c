@@ -10,7 +10,7 @@
 
 void ClearAllMail(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < MAIL_COUNT; i++)
         ClearMail(&gSaveBlock1Ptr->mail[i]);
@@ -42,10 +42,10 @@ bool8 MonHasMail(struct Pokemon *mon)
         return FALSE;
 }
 
-u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
+u32 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
 {
-    u8 heldItem[2];
-    u8 id, i;
+    u32 heldItem[2];
+    u32 id, i;
     u16 species;
     u32 personality;
 
@@ -108,11 +108,11 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
     return result;
 }
 
-u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
+u32 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
 {
-    u8 heldItem[2];
+    u32 heldItem[2];
     u16 itemId = mail->itemId;
-    u8 mailId = GiveMailToMonByItemId(mon, itemId);
+    u32 mailId = GiveMailToMonByItemId(mon, itemId);
 
     if (mailId == MAIL_NONE)
         return MAIL_NONE;
@@ -136,8 +136,8 @@ static bool32 UNUSED DummyMailFunc(void)
 
 void TakeMailFromMon(struct Pokemon *mon)
 {
-    u8 heldItem[2];
-    u8 mailId;
+    u32 heldItem[2];
+    u32 mailId;
 
     if (MonHasMail(mon))
     {
@@ -151,16 +151,16 @@ void TakeMailFromMon(struct Pokemon *mon)
     }
 }
 
-void ClearMailItemId(u8 mailId)
+void ClearMailItemId(u32 mailId)
 {
     gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
 }
 
-u8 TakeMailFromMonAndSave(struct Pokemon *mon)
+u32 TakeMailFromMonAndSave(struct Pokemon *mon)
 {
-    u8 i;
-    u8 newHeldItem[2];
-    u8 newMailId;
+    u32 i;
+    u32 newHeldItem[2];
+    u32 newMailId;
 
     newHeldItem[0] = ITEM_NONE;
     newHeldItem[1] = ITEM_NONE << 8;

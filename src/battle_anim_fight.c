@@ -537,7 +537,7 @@ void AnimBasicFistOrFoot(struct Sprite *sprite)
 
 static void AnimFistOrFootRandomPos(struct Sprite *sprite)
 {
-    u8 battler;
+    u32 battler;
     s16 xMod, yMod;
     s16 x, y;
 
@@ -967,7 +967,7 @@ static void AnimSuperpowerRock_Step2(struct Sprite *sprite)
 
 void AnimSuperpowerFireball(struct Sprite *sprite)
 {
-    u8 battler;
+    u32 battler;
 
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
@@ -1008,7 +1008,7 @@ static void AnimArmThrustHit_Step(struct Sprite *sprite)
 
 static void AnimArmThrustHit(struct Sprite *sprite)
 {
-    u8 turn;
+    u32 turn;
 
     sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
@@ -1065,7 +1065,7 @@ static void AnimFocusPunchFist(struct Sprite *sprite)
     }
 }
 
-void AnimTask_MoveSkyUppercutBg(u8 taskId)
+void AnimTask_MoveSkyUppercutBg(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

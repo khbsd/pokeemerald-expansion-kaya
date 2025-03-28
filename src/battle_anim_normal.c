@@ -371,7 +371,7 @@ static void AnimConfusionDuck_Step(struct Sprite *sprite)
     sprite->x2 = Cos(sprite->data[0], 30);
     sprite->y2 = Sin(sprite->data[0], 10);
 
-    if ((u16)sprite->data[0] < 128)
+    if ((u32)sprite->data[0] < 128)
         sprite->oam.priority = 1;
     else
         sprite->oam.priority = 3;
@@ -621,7 +621,7 @@ void AnimTask_BlendColorCycleExclude(u8 taskId)
 
 static void BlendColorCycleExclude(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u32 selectedPalettes = ((u16)gTasks[taskId].tPalSelectorHi << 16) | (u16)gTasks[taskId].tPalSelectorLo;
+    u32 selectedPalettes = ((u32)gTasks[taskId].tPalSelectorHi << 16) | (u32)gTasks[taskId].tPalSelectorLo;
     BeginNormalPaletteFade(
         selectedPalettes,
         gTasks[taskId].tDelay,
@@ -901,7 +901,7 @@ void AnimTask_TintPalettes(u8 taskId)
 
 static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
 {
-    u16 var0;
+    u32 var0;
 
     sprite->invisible = TRUE;
     sprite->data[0] = -gBattleAnimArgs[0];
@@ -925,7 +925,7 @@ static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
         break;
     }
 
-    sprite->data[4] = *(u16 *)(sprite->data[6] | (sprite->data[7] << 16));
+    sprite->data[4] = *(u32 *)(sprite->data[6] | (sprite->data[7] << 16));
     sprite->data[5] = gBattleAnimArgs[3];
     var0 = sprite->data[5] - 2;
     if (var0 < 2)
@@ -937,7 +937,7 @@ static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
 static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *sprite)
 {
     u8 i;
-    u16 var0;
+    u32 var0;
 
     if (sprite->data[3] > 0)
     {
@@ -949,13 +949,13 @@ static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *sprite)
         else
         {
             sprite->data[1] = sprite->data[2];
-            *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) += sprite->data[0];
+            *(u32 *)(sprite->data[6] | (sprite->data[7] << 16)) += sprite->data[0];
             sprite->data[0] = -sprite->data[0];
         }
     }
     else
     {
-        *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) = sprite->data[4];
+        *(u32 *)(sprite->data[6] | (sprite->data[7] << 16)) = sprite->data[4];
         var0 = sprite->data[5] - 2;
         if (var0 < 2)
         {

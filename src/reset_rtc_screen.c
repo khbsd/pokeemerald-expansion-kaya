@@ -56,17 +56,17 @@ enum {
 
 struct ResetRtcInputMap
 {
-    /*0x0*/ u8 dataIndex;
+    /*0x0*/ u32 dataIndex;
     /*0x2*/ u16 minVal;
     /*0x4*/ u16 maxVal;
-    /*0x6*/ u8 left;
-    /*0x7*/ u8 right;
-    /*0x8*/ u8 unk; // never read
+    /*0x6*/ u32 left;
+    /*0x7*/ u32 right;
+    /*0x8*/ u32 unk; // never read
 };
 
 static void CB2_ResetRtcScreen(void);
 static void VBlankCB(void);
-static void Task_ResetRtcScreen(u8 taskId);
+static void Task_ResetRtcScreen(u32 taskId);
 static void InitResetRtcScreenBgAndWindows(void);
 
 static const struct BgTemplate sBgTemplates[] =
@@ -176,8 +176,8 @@ static const struct OamData sOamData_Arrow =
     .affineParam = 0,
 };
 
-static const u8 sArrowDown_Gfx[] = INCBIN_U8("graphics/reset_rtc_screen/arrow_down.4bpp");
-static const u8 sArrowRight_Gfx[] = INCBIN_U8("graphics/reset_rtc_screen/arrow_right.4bpp");
+static const u32 sArrowDown_Gfx[] = INCBIN_u32("graphics/reset_rtc_screen/arrow_down.4bpp");
+static const u32 sArrowRight_Gfx[] = INCBIN_u32("graphics/reset_rtc_screen/arrow_right.4bpp");
 static const u16 sArrow_Pal[] = INCBIN_U16("graphics/reset_rtc_screen/arrow.gbapal");
 
 static const struct SpriteFrameImage sPicTable_Arrow[] =
@@ -334,7 +334,7 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
     }
 }
 
-static void CreateCursor(u8 taskId)
+static void CreateCursor(u32 taskId)
 {
     u32 spriteId;
 
@@ -356,16 +356,16 @@ static void FreeCursorPalette(void)
     FreeSpritePaletteByTag(gSpritePalette_Arrow.tag);
 }
 
-static void HideChooseTimeWindow(u8 windowId)
+static void HideChooseTimeWindow(u32 windowId)
 {
     ClearStdWindowAndFrameToTransparent(windowId, FALSE);
     RemoveWindow(windowId);
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u8 seconds)
+static void PrintTime(u32 windowId, u32 x, u32 y, u16 days, u32 hours, u32 minutes, u32 seconds)
 {
-    u8 *dest = gStringVar4;
+    u32 *dest = gStringVar4;
 
     // Print days
     ConvertIntToDecimalStringN(gStringVar1, days, STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -389,7 +389,7 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8 seconds)
+static void ShowChooseTimeWindow(u32 windowId, u16 days, u32 hours, u32 minutes, u32 seconds)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
@@ -431,12 +431,12 @@ static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
     return TRUE;
 }
 
-static void Task_ResetRtc_SetFinished(u8 taskId)
+static void Task_ResetRtc_SetFinished(u32 taskId)
 {
     gTasks[taskId].tFinished = TRUE;
 }
 
-static void Task_ResetRtc_Exit(u8 taskId)
+static void Task_ResetRtc_Exit(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -445,10 +445,10 @@ static void Task_ResetRtc_Exit(u8 taskId)
     gTasks[taskId].func = Task_ResetRtc_SetFinished;
 }
 
-static void Task_ResetRtc_HandleInput(u8 taskId)
+static void Task_ResetRtc_HandleInput(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u8 selection = tSelection;
+    u32 selection = tSelection;
     const struct ResetRtcInputMap *selectionInfo = &sInputMap[selection - 1];
 
     if (JOY_NEW(B_BUTTON))
@@ -502,7 +502,7 @@ static void Task_ResetRtc_HandleInput(u8 taskId)
     }
 }
 
-static void Task_ResetRtc_Init(u8 taskId)
+static void Task_ResetRtc_Init(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     tFinished = FALSE;
@@ -522,7 +522,7 @@ void CB2_InitResetRtcScreen(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetVBlankCallback(NULL);
     DmaClear16(3, PLTT, PLTT_SIZE);
-    DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000);
+    DmaFillLarge16(3, 0, (u32 *)VRAM, VRAM_SIZE, 0x1000);
     ResetOamRange(0, 128);
     LoadOam();
     ScanlineEffect_Stop();
@@ -565,7 +565,7 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-static void ShowMessage(const u8 *str)
+static void ShowMessage(const u32 *str)
 {
     DrawDialogFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x200, 0xF);
     AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, str, 0, 1, 0, NULL);
@@ -574,7 +574,7 @@ static void ShowMessage(const u8 *str)
 
 #define tState data[0]
 
-static void Task_ShowResetRtcPrompt(u8 taskId)
+static void Task_ShowResetRtcPrompt(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -640,7 +640,7 @@ enum {
 #define tState data[0]
 #define tSubTaskId data[1]
 
-static void Task_ResetRtcScreen(u8 taskId)
+static void Task_ResetRtcScreen(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

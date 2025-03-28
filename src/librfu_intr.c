@@ -4,7 +4,7 @@
 static void sio32intr_clock_master(void);
 static void sio32intr_clock_slave(void);
 static u16 handshake_wait(u16 slot);
-static void STWI_set_timer_in_RAM(u8 count);
+static void STWI_set_timer_in_RAM(u32 count);
 static void STWI_stop_timer_in_RAM(void);
 static void STWI_init_slave(void);
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)());
@@ -334,7 +334,7 @@ static u16 handshake_wait(u16 slot)
     return 0;
 }
 
-static void STWI_set_timer_in_RAM(u8 count)
+static void STWI_set_timer_in_RAM(u32 count)
 {
     vu16 *regTMCNTL = &REG_TMCNT_L(gSTWIStatus->timerSelect);
     vu16 *regTMCNTH = &REG_TMCNT_H(gSTWIStatus->timerSelect);

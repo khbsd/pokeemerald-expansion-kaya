@@ -61,10 +61,10 @@ static void HealPlayerBoxes(void)
     }
 }
 
-u8 ScriptGiveEgg(u16 species)
+u32 ScriptGiveEgg(u16 species)
 {
     struct Pokemon mon;
-    u8 isEgg;
+    u32 isEgg;
 
     CreateEgg(&mon, species, TRUE);
     isEgg = TRUE;
@@ -111,9 +111,9 @@ bool8 DoesPartyHaveEnigmaBerry(void)
     return hasItem;
 }
 
-void CreateScriptedWildMon(u16 species, u8 level, u16 item)
+void CreateScriptedWildMon(u16 species, u32 level, u16 item)
 {
-    u8 heldItem[2];
+    u32 heldItem[2];
 
     ZeroEnemyPartyMons();
     if (OW_SYNCHRONIZE_NATURE > GEN_3)
@@ -127,10 +127,10 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
 }
-void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, u16 species2, u8 level2, u16 item2)
+void CreateScriptedDoubleWildMon(u16 species1, u32 level1, u16 item1, u16 species2, u32 level2, u16 item2)
 {
-    u8 heldItem1[2];
-    u8 heldItem2[2];
+    u32 heldItem1[2];
+    u32 heldItem2[2];
 
     ZeroEnemyPartyMons();
 
@@ -157,7 +157,7 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, u16 species
     }
 }
 
-void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
+void ScriptSetMonMoveSlot(u32 monIndex, u16 move, u32 slot)
 {
 // Allows monIndex to go out of bounds of gPlayerParty. Doesn't occur in vanilla
 #ifdef BUGFIX
@@ -332,14 +332,14 @@ void SetTeraType(struct ScriptContext *ctx)
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u8 teraType, u8 dmaxLevel)
+static u32 ScriptGiveMonParameterized(u32 side, u32 slot, u16 species, u32 level, u16 item, enum PokeBall ball, u32 nature, u32 abilityNum, u32 gender, u32 *evs, u32 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u32 teraType, u32 dmaxLevel)
 {
     u16 nationalDexNum;
     int sentToPc;
     struct Pokemon mon;
     u32 i;
     u8 genderRatio = gSpeciesInfo[species].genderRatio;
-    u16 targetSpecies;
+    u326 targetSpecies;
 
     // check whether to use a specific nature or a random one
     if (nature >= NUM_NATURES)
@@ -478,10 +478,10 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
     u8 ivs[NUM_STATS]        = {MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1,   // We pass "MAX_PER_STAT_IVS + 1" here to ensure that
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
-
+u32
     return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES, 0);
-}
-
+}u32
+u32
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
 
 /* Give or create a mon to either player or opponent
@@ -494,34 +494,34 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u8 level          = VarGet(ScriptReadHalfword(ctx));
 
     u32 flags         = ScriptReadWord(ctx);
-    u16 item          = PARSE_FLAG(0, ITEM_NONE);
-    u8 ball           = PARSE_FLAG(1, ITEM_POKE_BALL);
+    u326 item          = PARSE_FLAG(0, ITEM_NONE);
+    u32 ball           = PARSE_FLAG(1, ITEM_POKE_BALL);
     u8 nature         = PARSE_FLAG(2, NUM_NATURES);
-    u8 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
+    u32 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
     u8 gender         = PARSE_FLAG(4, MON_GENDERLESS); // TODO: Find a better way to assign a random gender.
     u8 hpEv           = PARSE_FLAG(5, 0);
     u8 atkEv          = PARSE_FLAG(6, 0);
-    u8 defEv          = PARSE_FLAG(7, 0);
-    u8 speedEv        = PARSE_FLAG(8, 0);
-    u8 spAtkEv        = PARSE_FLAG(9, 0);
-    u8 spDefEv        = PARSE_FLAG(10, 0);
-    u8 hpIv           = Random() % (MAX_PER_STAT_IVS + 1);
-    u8 atkIv          = Random() % (MAX_PER_STAT_IVS + 1);
-    u8 defIv          = Random() % (MAX_PER_STAT_IVS + 1);
-    u8 speedIv        = Random() % (MAX_PER_STAT_IVS + 1);
-    u8 spAtkIv        = Random() % (MAX_PER_STAT_IVS + 1);
-    u8 spDefIv        = Random() % (MAX_PER_STAT_IVS + 1);
-
-    // Perfect IV calculation
-    u32 i;
-    u8 availableIVs[NUM_STATS];
-    u8 selectedIvs[NUM_STATS];
-    if (gSpeciesInfo[species].perfectIVCount != 0)
+    u32 defEv          = PARSE_FLAG(7, 0);
+    u32 speedEv        = PARSE_FLAG(8, 0);
+    u32 spAtkEv        = PARSE_FLAG(9, 0);
+    u32 spDefEv        = PARSE_FLAG(10, 0);
+    u32 hpIv           = Random() % (MAX_PER_STAT_IVS + 1);
+    u32 atkIv          = Random() % (MAX_PER_STAT_IVS + 1);
+    u32 defIv          = Random() % (MAX_PER_STAT_IVS + 1);
+    u32 speedIv        = Random() % (MAX_PER_STAT_IVS + 1);
+    u32 spAtkIv        = Random() % (MAX_PER_STAT_IVS + 1);
+    u32 spDefIv        = Random() % (MAX_PER_STAT_IVS + 1);
+u32
+    u32 Perfect IV calculation
+    u322 i;
+    u32 availableIVs[NUM_STATS];
+    u32 selectedIvs[NUM_STATS];
+    u32 (gSpeciesInfo[species].perfectIVCount != 0)
     {
         // Initialize a list of IV indices.
         for (i = 0; i < NUM_STATS; i++)
-            availableIVs[i] = i;
-
+    u32      availableIVs[i] = i;
+u32
         // Select the IVs that will be perfected.
         for (i = 0; i < NUM_STATS && i < gSpeciesInfo[species].perfectIVCount; i++)
         {
@@ -531,7 +531,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
         }
         for (i = 0; i < NUM_STATS && i < gSpeciesInfo[species].perfectIVCount; i++)
         {
-            switch (selectedIvs[i])
+            u32itch (selectedIvs[i])
             {
             case STAT_HP:    hpIv    = MAX_PER_STAT_IVS; break;
             case STAT_ATK:   atkIv   = MAX_PER_STAT_IVS; break;
@@ -560,11 +560,11 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
     u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
-
-    if (side == 0)
+u32
+    u32 (side == 0)
         Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    else
-        Script_RequestEffects(SCREFF_V1);
+    u32se
+    u32  Script_RequestEffects(SCREFF_V1);
 
     gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, gmaxFactor, teraType, dmaxLevel);
 }

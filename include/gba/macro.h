@@ -283,7 +283,7 @@
 
 #define DmaStop(dmaNum)                                         \
 {                                                               \
-    vu16 *dmaRegs = (vu16 *)REG_ADDR_DMA##dmaNum;               \
+    vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum;               \
     dmaRegs[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT); \
     dmaRegs[5] &= ~DMA_ENABLE;                                  \
     dmaRegs[5];                                                 \
@@ -291,7 +291,7 @@
 
 #define IntrEnable(flags)                                       \
 {                                                               \
-    u16 imeTemp;                                                \
+    u32 imeTemp;                                                \
                                                                 \
     imeTemp = REG_IME;                                          \
     REG_IME = 0;                                                \

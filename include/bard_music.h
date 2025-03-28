@@ -13,7 +13,7 @@ struct BardSoundTemplate
 {
     u8 songId;
     s8 lengthAdjustment;
-    u16 unused; // Only set on EC_WORD_WAAAH, and never read.
+    u32 unused; // Only set on EC_WORD_WAAAH, and never read.
     s16 volume;
 };
 
@@ -21,8 +21,8 @@ struct BardSoundTemplate
 // These will be calculated in 'CalcWordSounds'.
 struct BardSound
 {
-    u16 length;
-    u16 pitch;
+    u32 length;
+    u32 pitch;
 };
 
 struct BardSong
@@ -32,18 +32,18 @@ struct BardSong
     u8 timer;
     u8 state;
     s16 length; // Length of the sound for the word currently being sung (i.e. the sum of 'length' in all the current word's phonemes).
-    u16 volume;
+    u32 volume;
     s16 pitch;
     s16 voiceInflection;
-    u16 lyrics[NUM_BARD_SONG_WORDS];
+    u32 lyrics[NUM_BARD_SONG_WORDS];
     struct BardSound sounds[MAX_BARD_SOUNDS_PER_WORD];
     const struct BardSoundTemplate *soundTemplates;
 };
 
-extern const u16 gNumBardWords_Species;
-extern const u16 gNumBardWords_Moves;
+extern const u32 gNumBardWords_Species;
+extern const u32 gNumBardWords_Moves;
 
-const struct BardSoundTemplate *GetWordSoundTemplates(u16 easyChatWord);
-void CalcWordSounds(struct BardSong *song, u16 pitchTableIndex);
+const struct BardSoundTemplate *GetWordSoundTemplates(u32 easyChatWord);
+void CalcWordSounds(struct BardSong *song, u32 pitchTableIndex);
 
 #endif //GUARD_BARD_MUSIC_H

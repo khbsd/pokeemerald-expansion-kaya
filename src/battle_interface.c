@@ -196,7 +196,7 @@ static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *);
 static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *);
 
 static u8 GetStatusIconForBattlerId(u8, u8);
-static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
+static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u32);
 static u8 GetScaledExpFraction(s32, s32, s32, u8);
 static void MoveBattleBarGraphically(u8, u8);
 static u8 CalcBarFilledPixels(s32, s32, s32, s32 *, u8 *, u8);
@@ -595,7 +595,7 @@ enum
     PAL_STATUS_BRN
 };
 
-static const u16 sStatusIconColors[] =
+static const u32 sStatusIconColors[] =
 {
     [PAL_STATUS_PSN] = RGB(24, 12, 24),
     [PAL_STATUS_PAR] = RGB(23, 23, 3),
@@ -1634,7 +1634,7 @@ static void SpriteCB_StatusSummaryBar_Exit(struct Sprite *sprite)
 static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *sprite)
 {
     u8 var1;
-    u16 var2;
+    u32 var2;
     s8 pan;
 
     if (sprite->data[1] > 0)
@@ -1679,7 +1679,7 @@ static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *sprite)
 static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *sprite)
 {
     u8 var1;
-    u16 var2;
+    u32 var2;
 
     if (sprite->data[1] > 0)
     {
@@ -1863,7 +1863,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     pltAdder += battlerId + 12;
 
     FillPalette(sStatusIconColors[statusPalId], OBJ_PLTT_OFFSET + pltAdder, PLTT_SIZEOF(1));
-    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + pltAdder], (u16 *)OBJ_PLTT + pltAdder, PLTT_SIZEOF(1));
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + pltAdder], (u32 *)OBJ_PLTT + pltAdder, PLTT_SIZEOF(1));
     CpuCopy32(statusGfxPtr, (void *)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * TILE_SIZE_4BPP), 96);
     if (WhichBattleCoords(battlerId) == 1 || GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
@@ -2004,7 +2004,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 
         if (!isDoubles && (elementId == HEALTHBOX_EXP_BAR || elementId == HEALTHBOX_ALL))
         {
-            u16 species;
+            u32 species;
             u32 exp, currLevelExp;
             s32 currExpBarValue, maxExpBarValue;
             u8 level;
@@ -2063,7 +2063,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 
     if (whichBar == HEALTH_BAR) // health bar
     {
-        u16 hpFraction = B_FAST_HP_DRAIN == FALSE ? 1 : max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
+        u32 hpFraction = B_FAST_HP_DRAIN == FALSE ? 1 : max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
         currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
@@ -2072,7 +2072,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
     }
     else // exp bar
     {
-        u16 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+        u32 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].maxValue, 8);
         if (expFraction == 0)
@@ -2154,7 +2154,7 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
     }
 }
 
-static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 scale, u16 toAdd)
+static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 scale, u32 toAdd)
 {
     s32 ret, newValue;
     scale *= 8;
@@ -2337,7 +2337,7 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
 
 static u8 *AddTextPrinterAndCreateWindowOnHealthboxWithFont(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId, u32 fontId)
 {
-    u16 winId;
+    u32 winId;
     u8 color[3];
     struct WindowTemplate winTemplate = sHealthboxWindowTemplate;
 
@@ -2416,7 +2416,7 @@ static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 wi
 #define tSpriteId2      data[7]
 
 static const u8 ALIGNED(4) sAbilityPopUpGfx[] = INCBIN_U8("graphics/battle_interface/ability_pop_up.4bpp");
-static const u16 sAbilityPopUpPalette[] = INCBIN_U16("graphics/battle_interface/ability_pop_up.gbapal");
+static const u32 sAbilityPopUpPalette[] = INCBIN_u32("graphics/battle_interface/ability_pop_up.gbapal");
 
 static const struct SpriteSheet sSpriteSheet_AbilityPopUp =
 {
@@ -2504,7 +2504,7 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
 {
     u32 windowId;
     u8 *windowTileData;
-    u16 width;
+    u32 width;
 
     windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(str, x1, y, color1, color2, color3, &windowId);
     TextIntoAbilityPopUp(spriteTileData1, windowTileData, 8, (y == 0));
@@ -2594,7 +2594,7 @@ static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
 /*Add pixels by X*/                                \
 + ((((x) - ((x / 8) * 8)) / 2)))
 
-static const u16 sOverwrittenPixelsTable[][2] =
+static const u32 sOverwrittenPixelsTable[][2] =
 {
     {PIXEL_COORDS_TO_OFFSET(0, 0), 5},
     {PIXEL_COORDS_TO_OFFSET(0, 1), 5},
@@ -2792,7 +2792,7 @@ void UpdateAbilityPopup(u8 battlerId)
 {
     u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battlerId][0];
     u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
-    u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
+    u32 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
 
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
@@ -2982,7 +2982,7 @@ void TryAddLastUsedBallItemSprites(void)
       || (gLastThrownBall != 0 && !CheckBagHasItem(gLastThrownBall, 1)))
     {
         // we're out of the last used ball, so just set it to the first ball in the bag
-        u16 firstBall;
+        u32 firstBall;
 
         // we have to compact the bag first bc it is typically only compacted when you open it
         CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
@@ -3251,7 +3251,7 @@ void SwapBallToDisplay(bool32 sameBall)
 void ArrowsChangeColorLastBallCycle(bool32 showArrows)
 {
 #if B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
-    u16 paletteNum = 16 + gSprites[gBattleStruct->ballSpriteIds[1]].oam.paletteNum;
+    u32 paletteNum = 16 + gSprites[gBattleStruct->ballSpriteIds[1]].oam.paletteNum;
     struct PlttData *defaultPlttArrow;
     struct PlttData *defaultPlttOutline;
     struct PlttData *pltArrow;

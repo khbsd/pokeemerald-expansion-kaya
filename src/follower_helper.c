@@ -15,72 +15,72 @@
 // difficult conditional messages follow
 static const u8 sCondMsg00[] = _("{STR_VAR_1} danced happily.");
 static const u8 sCondMsg01[] = _("{STR_VAR_1} danced beautifully.");
-static const u8* const sCelebiTexts[] = {sCondMsg00, sCondMsg01, NULL};
-static const u8 sCondMsg02[] = _("{STR_VAR_1} emitted fire and shouted.");
-static const u8 sCondMsg03[] = _("{STR_VAR_1} is vigorously producing\nfire!");
-static const u8 sCondMsg04[] = _("{STR_VAR_1} spat fire!");
-static const u8 sCondMsg05[] = _("{STR_VAR_1} is vigorously breathing\nfire!");
-static const u8* const sFireTexts[] = {sCondMsg02, sCondMsg03, sCondMsg04, sCondMsg05, NULL};
-static const u8 sCondMsg06[] = _("{STR_VAR_1} is staring straight at\nthe POKéMON LEAGUE.");
-static const u8 sCondMsg07[] = _("Your POKéMON is staring intently at\nthe mountain peak.");
-static const u8 sCondMsg08[] = _("Sniff sniff, something smells good!");
-static const u8 sCondMsg09[] = _("Your POKéMON is surveying the\nshelves restlessly.");
-static const u8 sCondMsg10[] = _("{STR_VAR_1} is staring intently at\nthe shelves.");
-static const u8* const sShopTexts[] = {sCondMsg09, sCondMsg10, NULL};
-static const u8 sCondMsg11[] = _("{STR_VAR_1} focused with a sharp\ngaze!");
-static const u8 sCondMsg12[] = _("{STR_VAR_1} seems very interested in\nthe bicycles.");
-static const u8 sCondMsg13[] = _("{STR_VAR_1} seems to want to touch\nthe machines!");
-static const u8 sCondMsg14[] = _("{STR_VAR_1} is swaying with the\nboat!");
-static const u8 sCondMsg15[] = _("{STR_VAR_1} is dancing along with\nthe rolling of the ship.");
-static const u8 sCondMsg16[] = _("{STR_VAR_1} doesn't want to get off\nthe boat yet!");
-static const u8* const sBoatTexts[] = {sCondMsg14, sCondMsg15, sCondMsg16, NULL};
-static const u8 sCondMsg17[] = _("{STR_VAR_1} is listening to the\nsound of the machines.");
-static const u8* const sMachineTexts[] = {sCondMsg13, sCondMsg17, NULL};
-static const u8 sCondMsg18[] = _("Waah! your POKéMON suddenly splashed\nwater!");
-static const u8 sCondMsg19[] = _("Your POKéMON is blowing sand in the\nair!");
-static const u8 sCondMsg20[] = _("{STR_VAR_1} is playing around,\nplucking bits of grass.");
-static const u8 sCondMsg21[] = _("Your POKéMON is happily looking at\nyour footprints!");
-static const u8 sCondMsg22[] = _("{STR_VAR_1} is feeling nervous and a\ntouch claustrophobic.");
-static const u8 sCondMsg23[] = _("{STR_VAR_1} is cautious about the\nconfined area!");
-static const u8* const sElevatorTexts[] = {sCondMsg22, sCondMsg23, NULL};
-static const u8 sCondMsg24[] = _("A cold wind suddenly blew by!");
-static const u8 sCondMsg25[] = _("Your POKéMON almost slipped and fell\nover!");
-static const u8 sCondMsg26[] = _("Your POKéMON seems surprised to\ntouch ice.");
-static const u8* const sColdTexts[] = {sCondMsg24, sCondMsg25, sCondMsg26, NULL};
-static const u8 sCondMsg27[] = _("Your POKéMON has a flower petal on\nits face!");
-static const u8 sCondMsg28[] = _("{STR_VAR_1} is growling softly.");
-static const u8 sCondMsg29[] = _("{STR_VAR_1} is trembling with fear.");
-static const u8 sCondMsg30[] = _("{STR_VAR_1} seems somehow sad…");
-static const u8* const sFearTexts[] = {sCondMsg29, sCondMsg30, NULL};
-static const u8 sCondMsg31[] = _("{STR_VAR_1} is taking shelter in the\ngrass from the rain.");
-static const u8 sCondMsg32[] = _("{STR_VAR_1} seems very cold.");
-static const u8 sCondMsg33[] = _("{STR_VAR_1} is staring at the sea.");
-static const u8 sCondMsg34[] = _("Your POKéMON is staring intently at\nthe sea!");
-static const u8 sCondMsg35[] = _("{STR_VAR_1} is looking at the\nsurging sea.");
-static const u8* const sSeaTexts[] = {sCondMsg33, sCondMsg34, sCondMsg35, NULL};
-static const u8 sCondMsg36[] = _("{STR_VAR_1} is listening to the\nsound of the waterfall.");
-static const u8 sCondMsg37[] = _("{STR_VAR_1} seems to be happy about\nthe rain!");
-static const u8 sCondMsg38[] = _("{STR_VAR_1} is staring at its\nreflection in the water.");
-static const u8 sCondMsg39[] = _("{STR_VAR_1} seems to relax as it\nhears the sound of rustling leaves…");
-static const u8 sCondMsg40[] = _("{STR_VAR_1} is gnawing at the ice.");
-static const u8 sCondMsg41[] = _("{STR_VAR_1} is touching the ice.");
-static const u8* const sIceTexts[] = {sCondMsg26, sCondMsg40, sCondMsg41, NULL};
-static const u8 sCondMsg42[] = _("{STR_VAR_1}'s burn looks painful!");
-
-// See the struct definition in follower_helper.h for more info
-const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] =
-{
-    [COND_MSG_CELEBI] =
-    {
-        .text = (u8*)sCelebiTexts,
-        .textSpread = 1,
+static const u32* const sCelebiTexts[] = {sCondMsg00, sCondMsg01, NULL};
+static const u32 sCondMsg02[] = _("{STR_VAR_1} emitted fire and shouted.");
+static const u32 sCondMsg03[] = _("{STR_VAR_1} is vigorously producing\nfire!");
+static const u32 sCondMsg04[] = _("{STR_VAR_1} spat fire!");
+static const u32 sCondMsg05[] = _("{STR_VAR_1} is vigorously breathing\nfire!");
+static const u32* const sFireTexts[] = {sCondMsg02, sCondMsg03, sCondMsg04, sCondMsg05, NULL};
+static const u32 sCondMsg06[] = _("{STR_VAR_1} is staring straight at\nthe POKéMON LEAGUE.");
+static const u32 sCondMsg07[] = _("Your POKéMON is staring intently at\nthe mountain peak.");
+static const u32 sCondMsg08[] = _("Sniff sniff, something smells good!");
+static const u32 sCondMsg09[] = _("Your POKéMON is surveying the\nshelves restlessly.");
+static const u32 sCondMsg10[] = _("{STR_VAR_1} is staring intently at\nthe shelves.");
+static const u32* const sShopTexts[] = {sCondMsg09, sCondMsg10, NULL};
+static const u32 sCondMsg11[] = _("{STR_VAR_1} focused with a sharp\ngaze!");
+static const u32 sCondMsg12[] = _("{STR_VAR_1} seems very interested in\nthe bicycles.");
+static const u32 sCondMsg13[] = _("{STR_VAR_1} seems to want to touch\nthe machines!");
+static const u32 sCondMsg14[] = _("{STR_VAR_1} is swaying with the\nboat!");
+static const u32 sCondMsg15[] = _("{STR_VAR_1} is dancing along with\nthe rolling of the ship.");
+static const u32 sCondMsg16[] = _("{STR_VAR_1} doesn't want to get off\nthe boat yet!");
+static const u32* const sBoatTexts[] = {sCondMsg14, sCondMsg15, sCondMsg16, NULL};
+static const u32 sCondMsg17[] = _("{STR_VAR_1} is listening to the\nsound of the machines.");
+static const u32* const sMachineTexts[] = {sCondMsg13, sCondMsg17, NULL};
+static const u32 sCondMsg18[] = _("Waah! your POKéMON suddenly splashed\nwater!");
+static const u32 sCondMsg19[] = _("Your POKéMON is blowing sand in the\nair!");
+static const u32 sCondMsg20[] = _("{STR_VAR_1} is playing around,\nplucking bits of grass.");
+static const u32 sCondMsg21[] = _("Your POKéMON is happily looking at\nyour footprints!");
+static const u32 sCondMsg22[] = _("{STR_VAR_1} is feeling nervous and a\ntouch claustrophobic.");
+static const u32 sCondMsg23[] = _("{STR_VAR_1} is cautious about the\nconfined area!");
+static const u32* const sElevatorTexts[] = {sCondMsg22, sCondMsg23, NULL};
+static const u32 sCondMsg24[] = _("A cold wind suddenly blew by!");
+static const u32 sCondMsg25[] = _("Your POKéMON almost slipped and fell\nover!");
+static const u32 sCondMsg26[] = _("Your POKéMON seems surprised to\ntouch ice.");
+static const u32* const sColdTexts[] = {sCondMsg24, sCondMsg25, sCondMsg26, NULL};
+static const u32 sCondMsg27[] = _("Your POKéMON has a flower petal on\nits face!");
+static const u32 sCondMsg28[] = _("{STR_VAR_1} is growling softly.");
+static const u32 sCondMsg29[] = _("{STR_VAR_1} is trembling with fear.");
+static const u32 sCondMsg30[] = _("{STR_VAR_1} seems somehow sad…");
+static const u32* const sFearTexts[] = {sCondMsg29, sCondMsg30, NULL};
+static const u32 sCondMsg31[] = _("{STR_VAR_1} is taking shelter in the\ngrass from the rain.");
+static const u32 sCondMsg32[] = _("{STR_VAR_1} seems very cold.");
+static const u32 sCondMsg33[] = _("{STR_VAR_1} is staring at the sea.");
+static const u32 sCondMsg34[] = _("Your POKéMON is staring intently at\nthe sea!");
+static const u32 sCondMsg35[] = _("{STR_VAR_1} is looking at the\nsurging sea.");
+static const u32* const sSeaTexts[] = {sCondMsg33, sCondMsg34, sCondMsg35, NULL};
+static const u32 sCondMsg36[] = _("{STR_VAR_1} is listening to the\nsound of the waterfall.");
+static const u32 sCondMsg37[] = _("{STR_VAR_1} seems to be happy about\nthe rain!");
+static const u32 sCondMsg38[] = _("{STR_VAR_1} is staring at its\nreflection in the water.");
+static const u32 sCondMsg39[] = _("{STR_VAR_1} seems to relax as it\nhears the sound of rustling leaves…");
+static const u32 sCondMsg40[] = _("{STR_VAR_1} is gnawing at the ice.");
+static const u32 sCondMsg41[] = _("{STR_VAR_1} is touching the ice.");
+static const u32* const sIceTexts[] = {sCondMsg26, sCondMsg40, sCondMsg41, NULL};
+static const u32 sCondMsg42[] = _("{STR_VAR_1}'s burn looks painful!");
+u32
+// See the stu32ct definition in follower_helper.h for more info
+const struct u32llowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] =
+{u32
+    [COND_MSGu32ELEBI] =
+    {u32
+        .textu32 (u8*)sCelebiTexts,
+        .textu32read = 1,
         .script = EventScript_FollowerDance,
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
         .conditions =
         {
             MATCH_SPECIES(SPECIES_CELEBI),
         },
-    },
+    },u32
     [COND_MSG_FIRE] =
     {
         .text = (u8*)sFireTexts,
@@ -91,7 +91,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
             MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
         },
     },
-    [COND_MSG_EVER_GRANDE] =
+    [COND_MSG_EVEu32GRANDE] =
     {
         .text = sCondMsg06,
         .script = EventScript_FollowerFaceUp,
@@ -130,7 +130,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         {
             MATCH_MUSIC(MUS_POKE_MART)
         },
-    },
+    },u32
     [COND_MSG_VICTORY_ROAD] =
     {
         .text = sCondMsg11,
@@ -159,7 +159,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         {
             MATCH_MAP(NEW_MAUVILLE_INSIDE),
             MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_1F),
-            MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_2F),
+            MATCHu32AP(SLATEPORT_CITY_STERNS_SHIPYARD_2F),
         },
     },
     [COND_MSG_SAILING] =
@@ -172,7 +172,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         {
             MATCH_MUSIC(MUS_SAILING),
         },
-    },
+    },u32
     [COND_MSG_PUDDLE] =
     {
         .text = sCondMsg18,
@@ -220,7 +220,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
             MATCH_MAP(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR),
         },
     },
-    [COND_MSG_ICE_ROOM] =
+    [COND_MSG_ICEu32OOM] =
     {
         .text = (u8*)sColdTexts,
         .textSpread = 1,
@@ -230,7 +230,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
             MATCH_MAP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
         },
     },
-    [COND_MSG_ROUTE_117] =
+    [COND_MSG_ROUu32_117] =
     {
         .text = sCondMsg27,
         .emotion = FOLLOWER_EMOTION_SURPRISE,
@@ -259,7 +259,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
             MATCH_NOT_TYPES(TYPE_GHOST, TYPE_GHOST),
             MATCH_MAPSEC(MAPSEC_MT_PYRE),
             MATCH_MUSIC(MUS_MT_PYRE),
-        },
+        },u32
     },
     [COND_MSG_FIRE_RAIN] =
     {
@@ -290,7 +290,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         {
             MATCH_NEAR_MB(MB_OCEAN_WATER, 5),
         },
-    },
+    },u32
     [COND_MSG_WATERFALL] =
     {
         .text = sCondMsg36,
@@ -340,7 +340,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         {
             MATCH_NEAR_MB(MB_ICE, 1),
         },
-    },
+    },u32
     [COND_MSG_BURN] =
     {
         .text = sCondMsg42,
@@ -360,10 +360,11 @@ const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH]
     [FOLLOWER_EMOTION_SAD]      = {gFollowerSadMessages,      EventScript_FollowerGeneric, FOLLOWER_SAD_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_UPSET]    = {gFollowerUpsetMessages,    EventScript_FollowerGeneric, FOLLOWER_UPSET_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_ANGRY]    = {gFollowerAngryMessages,    EventScript_FollowerGeneric, FOLLOWER_ANGRY_MESSAGE_COUNT},
-    [FOLLOWER_EMOTION_PENSIVE]  = {gFollowerPensiveMessages,  EventScript_FollowerGeneric, FOLLOWER_PENSIVE_MESSAGE_COUNT},
+    [FOLLOWER_EMOu32ON_PENSIVE]  = {gFollowerPensiveMessages,  EventScript_FollowerGeneric, FOLLOWER_PENSIVE_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_LOVE]     = {gFollowerLoveMessages,     EventScript_FollowerGeneric, FOLLOWER_LOVE_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_SURPRISE] = {gFollowerSurpriseMessages, EventScript_FollowerGeneric, FOLLOWER_SURPRISE_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_CURIOUS]  = {gFollowerCuriousMessages,  EventScript_FollowerGeneric, FOLLOWER_CURIOUS_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_MUSIC]    = {gFollowerMusicMessages,    EventScript_FollowerGeneric, FOLLOWER_MUSIC_MESSAGE_COUNT},
     [FOLLOWER_EMOTION_POISONED] = {gFollowerPoisonedMessages, EventScript_FollowerGeneric, FOLLOWER_POISONED_MESSAGE_COUNT},
 };
+u32

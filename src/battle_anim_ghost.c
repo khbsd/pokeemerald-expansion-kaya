@@ -18,20 +18,20 @@ static void AnimConfuseRayBallBounce_Step2(struct Sprite *);
 static void UpdateConfuseRayBallBlend(struct Sprite *);
 static void AnimConfuseRayBallSpiral(struct Sprite *);
 static void AnimConfuseRayBallSpiral_Step(struct Sprite *);
-static void AnimTask_NightShadeClone_Step1(u8 taskId);
-static void AnimTask_NightShadeClone_Step2(u8 taskId);
+static void AnimTask_NightShadeClone_Step1(u32 taskId);
+static void AnimTask_NightShadeClone_Step2(u32 taskId);
 static void AnimShadowBall_Step(struct Sprite *);
 static void AnimLick(struct Sprite *);
 static void AnimLick_Step(struct Sprite *);
-static void AnimTask_NightmareClone_Step(u8 taskId);
-static void AnimTask_SpiteTargetShadow_Step1(u8 taskId);
-static void AnimTask_SpiteTargetShadow_Step2(u8 taskId);
-static void AnimTask_SpiteTargetShadow_Step3(u8 taskId);
+static void AnimTask_NightmareClone_Step(u32 taskId);
+static void AnimTask_SpiteTargetShadow_Step1(u32 taskId);
+static void AnimTask_SpiteTargetShadow_Step2(u32 taskId);
+static void AnimTask_SpiteTargetShadow_Step3(u32 taskId);
 static void AnimDestinyBondWhiteShadow(struct Sprite *);
 static void AnimDestinyBondWhiteShadow_Step(struct Sprite *);
-static void AnimTask_DestinyBondWhiteShadow_Step(u8 taskId);
-static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId);
-static void AnimTask_CurseStretchingBlackBg_Step2(u8 taskId);
+static void AnimTask_DestinyBondWhiteShadow_Step(u32 taskId);
+static void AnimTask_CurseStretchingBlackBg_Step1(u32 taskId);
+static void AnimTask_CurseStretchingBlackBg_Step2(u32 taskId);
 static void AnimCurseNail(struct Sprite *);
 static void AnimCurseNail_Step1(struct Sprite *);
 static void AnimCurseNail_Step2(struct Sprite *);
@@ -402,9 +402,9 @@ static void AnimConfuseRayBallSpiral_Step(struct Sprite *sprite)
 }
 
 // Creates a large transparent clone of the attacker centered on their position which shrinks to original size
-void AnimTask_NightShadeClone(u8 taskId)
+void AnimTask_NightShadeClone(u32 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
@@ -418,7 +418,7 @@ void AnimTask_NightShadeClone(u8 taskId)
     gTasks[taskId].func = AnimTask_NightShadeClone_Step1;
 }
 
-static void AnimTask_NightShadeClone_Step1(u8 taskId)
+static void AnimTask_NightShadeClone_Step1(u32 taskId)
 {
     gTasks[taskId].data[10] += 1;
     if (gTasks[taskId].data[10] == 3)
@@ -434,9 +434,9 @@ static void AnimTask_NightShadeClone_Step1(u8 taskId)
     }
 }
 
-static void AnimTask_NightShadeClone_Step2(u8 taskId)
+static void AnimTask_NightShadeClone_Step2(u32 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
     if (gTasks[taskId].data[1] > 0)
     {
         gTasks[taskId].data[1] -= 1;
@@ -579,7 +579,7 @@ static void AnimLick_Step(struct Sprite *sprite)
 }
 
 // Creates a transparent clone of the target which drifts up and away to the side
-void AnimTask_NightmareClone(u8 taskId)
+void AnimTask_NightmareClone(u32 taskId)
 {
     struct Task *task;
 
@@ -614,7 +614,7 @@ void AnimTask_NightmareClone(u8 taskId)
     task->func = AnimTask_NightmareClone_Step;
 }
 
-static void AnimTask_NightmareClone_Step(u8 taskId)
+static void AnimTask_NightmareClone_Step(u32 taskId)
 {
     struct Task *task;
 
@@ -652,7 +652,7 @@ static void AnimTask_NightmareClone_Step(u8 taskId)
 }
 
 // Creates a blended copy of the target that wavers in front of them
-void AnimTask_SpiteTargetShadow(u8 taskId)
+void AnimTask_SpiteTargetShadow(u32 taskId)
 {
     struct Task *task;
 
@@ -662,11 +662,11 @@ void AnimTask_SpiteTargetShadow(u8 taskId)
     task->func(taskId);
 }
 
-static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
+static void AnimTask_SpiteTargetShadow_Step1(u32 taskId)
 {
     s16 startLine;
     struct Task *task = &gTasks[taskId];
-    u8 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+    u32 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
     switch (task->data[15])
     {
@@ -753,7 +753,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
     }
 }
 
-static void AnimTask_SpiteTargetShadow_Step2(u8 taskId)
+static void AnimTask_SpiteTargetShadow_Step2(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     task->data[1]++;
@@ -773,10 +773,10 @@ static void AnimTask_SpiteTargetShadow_Step2(u8 taskId)
     }
 }
 
-static void AnimTask_SpiteTargetShadow_Step3(u8 taskId)
+static void AnimTask_SpiteTargetShadow_Step3(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 rank = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+    u32 rank = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
     switch (task->data[15])
     {
@@ -859,11 +859,11 @@ static void AnimDestinyBondWhiteShadow_Step(struct Sprite *sprite)
     }
 }
 
-void AnimTask_DestinyBondWhiteShadow(u8 taskId)
+void AnimTask_DestinyBondWhiteShadow(u32 taskId)
 {
     struct Task *task;
     s16 battler;
-    u8 spriteId;
+    u32 spriteId;
     s16 baseX, baseY;
     s16 x, y;
 
@@ -940,7 +940,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
     task->func = AnimTask_DestinyBondWhiteShadow_Step;
 }
 
-static void AnimTask_DestinyBondWhiteShadow_Step(u8 taskId)
+static void AnimTask_DestinyBondWhiteShadow_Step(u32 taskId)
 {
     u16 i;
     struct Task *task = &gTasks[taskId];
@@ -1017,7 +1017,7 @@ static void AnimTask_DestinyBondWhiteShadow_Step(u8 taskId)
     }
 }
 
-void AnimTask_CurseStretchingBlackBg(u8 taskId)
+void AnimTask_CurseStretchingBlackBg(u32 taskId)
 {
     s16 startX, startY;
     s16 leftDistance, topDistance, bottomDistance, rightDistance;
@@ -1053,7 +1053,7 @@ void AnimTask_CurseStretchingBlackBg(u8 taskId)
     gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step1;
 }
 
-static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
+static void AnimTask_CurseStretchingBlackBg_Step1(u32 taskId)
 {
     s16 step;
     s16 leftDistance, rightDistance, topDistance, bottomDistance;
@@ -1092,7 +1092,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
     gBattle_WIN0V = WIN_RANGE(top, bottom);
 }
 
-static void AnimTask_CurseStretchingBlackBg_Step2(u8 taskId)
+static void AnimTask_CurseStretchingBlackBg_Step2(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1248,7 +1248,7 @@ static void AnimGhostStatusSprite_Step(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void AnimTask_GrudgeFlames(u8 taskId)
+void AnimTask_GrudgeFlames(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1268,10 +1268,10 @@ void AnimTask_GrudgeFlames(u8 taskId)
     task->func = AnimTask_GrudgeFlames_Step;
 }
 
-void AnimTask_GrudgeFlames_Step(u8 taskId)
+void AnimTask_GrudgeFlames_Step(u32 taskId)
 {
     u16 i;
-    u8 spriteId;
+    u32 spriteId;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -1414,11 +1414,11 @@ static void AnimMonMoveCircular_Step(struct Sprite *sprite)
     }
 }
 
-void AnimTask_PoltergeistItem(u8 taskId)
+void AnimTask_PoltergeistItem(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
-    u8 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + (GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 2);
+    u32 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    u32 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + (GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 2);
 
     task->data[0] = AddItemIconSprite(ANIM_TAG_ITEM_BAG, ANIM_TAG_ITEM_BAG, gLastUsedItem);
     gSprites[task->data[0]].x = x + 4;
@@ -1448,10 +1448,10 @@ static void AnimPoltergeistItem(struct Sprite *sprite)
 }
 
 //pulverizing pancake - destiny bond shadow from attacker to target
-void AnimTask_PulverizingPancakeWhiteShadow(u8 taskId)
+void AnimTask_PulverizingPancakeWhiteShadow(u32 taskId)
 {
     struct Task *task;
-    u8 spriteId;
+    u32 spriteId;
     s16 baseX, baseY;
     s16 x, y;
 

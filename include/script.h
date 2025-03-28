@@ -30,7 +30,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx);
 void ScriptJump(struct ScriptContext *ctx, const u8 *ptr);
 void ScriptCall(struct ScriptContext *ctx, const u8 *ptr);
 void ScriptReturn(struct ScriptContext *ctx);
-u16 ScriptReadHalfword(struct ScriptContext *ctx);
+u32 ScriptReadHalfword(struct ScriptContext *ctx);
 u32 ScriptReadWord(struct ScriptContext *ctx);
 u32 ScriptPeekWord(struct ScriptContext *ctx);
 void LockPlayerFieldControls(void);
@@ -56,14 +56,14 @@ bool8 TryRunOnFrameMapScript(void);
 void TryRunOnWarpIntoMapScript(void);
 u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
-bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
+bool8 InitRamScript(const u8 *script, u32 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 const u8 *GetRamScript(u8 objectId, const u8 *script);
 bool32 ValidateSavedRamScript(void);
 u8 *GetSavedRamScriptIfValid(void);
-void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize);
+void InitRamScript_NoObjectEvent(u8 *script, u32 scriptSize);
 
 // srccmd.h
-void SetMovingNpcId(u16 npcId);
+void SetMovingNpcId(u32 npcId);
 
 extern u8 gMsgIsSignPost;
 extern u8 gMsgBoxIsCancelable;
@@ -153,7 +153,7 @@ static inline bool32 Script_IsAnalyzingEffects(void)
 
 static inline void Script_CheckEffectInstrumentedSpecial(u32 specialId)
 {
-    typedef u16 (*SpecialFunc)(void);
+    typedef u32 (*SpecialFunc)(void);
     extern const SpecialFunc gSpecials[];
     // In ROM mirror 1.
     if (Script_IsAnalyzingEffects() && (((uintptr_t)gSpecials[specialId]) & 0xE000000) != 0xA000000)

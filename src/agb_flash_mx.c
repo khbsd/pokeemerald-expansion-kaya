@@ -1,7 +1,7 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-const u16 mxMaxTime[] =
+const u32 mxMaxTime[] =
 {
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
@@ -51,10 +51,10 @@ const struct FlashSetupInfo DefaultFlash =
     }
 };
 
-u16 EraseFlashChip_MX(void)
+u32 EraseFlashChip_MX(void)
 {
-    u16 result;
-    u16 readFlash1Buffer[0x20];
+    u32 result;
+    u32 readFlash1Buffer[0x20];
 
     REG_WAITCNT = (REG_WAITCNT & ~WAITCNT_SRAM_MASK) | gFlash->wait[0];
 
@@ -74,12 +74,12 @@ u16 EraseFlashChip_MX(void)
     return result;
 }
 
-u16 EraseFlashSector_MX(u16 sectorNum)
+u32 EraseFlashSector_MX(u32 sectorNum)
 {
-    u16 numTries;
-    u16 result;
+    u32 numTries;
+    u32 result;
     u8 *addr;
-    u16 readFlash1Buffer[0x20];
+    u32 readFlash1Buffer[0x20];
 
     if (sectorNum >= gFlash->sector.count)
         return 0x80FF;
@@ -118,10 +118,10 @@ done:
     return result;
 }
 
-u16 ProgramFlashByte_MX(u16 sectorNum, u32 offset, u8 data)
+u32 ProgramFlashByte_MX(u32 sectorNum, u32 offset, u8 data)
 {
     u8 *addr;
-    u16 readFlash1Buffer[0x20];
+    u32 readFlash1Buffer[0x20];
 
     if (offset >= gFlash->sector.size)
         return 0x8000;
@@ -143,7 +143,7 @@ u16 ProgramFlashByte_MX(u16 sectorNum, u32 offset, u8 data)
     return WaitForFlashWrite(1, addr, data);
 }
 
-static u16 ProgramByte(u8 *src, u8 *dest)
+static u32 ProgramByte(u8 *src, u8 *dest)
 {
     FLASH_WRITE(0x5555, 0xAA);
     FLASH_WRITE(0x2AAA, 0x55);
@@ -153,11 +153,11 @@ static u16 ProgramByte(u8 *src, u8 *dest)
     return WaitForFlashWrite(1, dest, *src);
 }
 
-u16 ProgramFlashSector_MX(u16 sectorNum, u8 *src)
+u32 ProgramFlashSector_MX(u32 sectorNum, u8 *src)
 {
-    u16 result;
+    u32 result;
     u8 *dest;
-    u16 readFlash1Buffer[0x20];
+    u32 readFlash1Buffer[0x20];
 
     if (sectorNum >= gFlash->sector.count)
         return 0x80FF;

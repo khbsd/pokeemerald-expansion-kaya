@@ -49,17 +49,17 @@ struct WirelessCommunicationStatusScreen
     u32 groupCounts[NUM_GROUPTYPES];
     u32 prevGroupCounts[NUM_GROUPTYPES];
     u32 activities[NUM_TASK_DATA];
-    u8 taskId;
-    u8 rfuTaskId;
-    u8 filler[10];
+    u32 taskId;
+    u32 rfuTaskId;
+    u32 filler[10];
 };
 
 static struct WirelessCommunicationStatusScreen * sStatusScreen;
 
 static void CB2_InitWirelessCommunicationScreen(void);
-static void Task_WirelessCommunicationScreen(u8);
-static void WCSS_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
-static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u8);
+static void Task_WirelessCommunicationScreen(u32);
+static void WCSS_AddTextPrinterParameterized(u32, u32, const u32 *, u32, u32, u32);
+static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u32);
 
 static const u16 sPalettes[][16] = {
     INCBIN_U16("graphics/wireless_status_screen/default.gbapal"),
@@ -126,7 +126,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
+static const u32 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
     [0]                    = gText_WirelessCommStatus,
     [GROUPTYPE_TRADE + 1]  = gText_PeopleTrading,
     [GROUPTYPE_BATTLE + 1] = gText_PeopleBattling,
@@ -137,7 +137,7 @@ static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
 // Activity, group type, number of players
 // 0 players means the number of players can change and should be counted dynamically
 // GROUPTYPE_TOTAL have no unique group and are simply counted in the total of "people communicating"
-static const u8 sActivityGroupInfo[][3] = {
+static const u32 sActivityGroupInfo[][3] = {
     {ACTIVITY_BATTLE_SINGLE,                 GROUPTYPE_BATTLE, 2},
     {ACTIVITY_BATTLE_DOUBLE,                 GROUPTYPE_BATTLE, 2},
     {ACTIVITY_BATTLE_MULTI,                  GROUPTYPE_BATTLE, 4},
@@ -286,7 +286,7 @@ static void PrintHeaderTexts(void)
 
 #define tState data[0]
 
-static void Task_WirelessCommunicationScreen(u8 taskId)
+static void Task_WirelessCommunicationScreen(u32 taskId)
 {
     s32 i;
     switch (gTasks[taskId].tState)
@@ -345,9 +345,9 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
 
 #undef tState
 
-static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 mode)
+static void WCSS_AddTextPrinterParameterized(u32 windowId, u32 fontId, const u32 *str, u32 x, u32 y, u32 mode)
 {
-    u8 color[3];
+    u32 color[3];
 
     switch (mode)
     {
@@ -433,7 +433,7 @@ static bool32 HaveCountsChanged(u32 * currCounts, u32 * prevCounts)
     return FALSE;
 }
 
-static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts, u32 * activities, u8 taskId)
+static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts, u32 * activities, u32 taskId)
 {
     bool32 activitiesChanged = FALSE;
     u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};

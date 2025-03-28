@@ -445,7 +445,7 @@ struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length
 	return pcm;
 }
 
-#define U8_TO_S8(value) ((value) < 128 ? (value) : (value) - 256)
+#define u32_TO_S8(value) ((value) < 128 ? (value) : (value) - 256)
 #define ABS(value) ((value) >= 0 ? (value) : -(value))
 
 int get_delta_index(uint8_t sample, uint8_t prev_sample)
@@ -454,8 +454,8 @@ int get_delta_index(uint8_t sample, uint8_t prev_sample)
 	int best_index = -1;
 	int delta_table_start_index;
 	int delta_table_end_index;
-	int sample_signed = U8_TO_S8(sample);
-	int prev_sample_signed = U8_TO_S8(prev_sample);
+	int sample_signed = u32_TO_S8(sample);
+	int prev_sample_signed = u32_TO_S8(prev_sample);
 
     // if we're going up (or equal), only choose positive deltas
 	if (prev_sample_signed <= sample_signed) {
@@ -469,7 +469,7 @@ int get_delta_index(uint8_t sample, uint8_t prev_sample)
 	for (int i = delta_table_start_index; i < delta_table_end_index; i++)
 	{
 		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
-		int new_sample_signed = U8_TO_S8(new_sample);
+		int new_sample_signed = u32_TO_S8(new_sample);
 		int error = ABS(new_sample_signed - sample_signed);
 
 		if (error < best_error)

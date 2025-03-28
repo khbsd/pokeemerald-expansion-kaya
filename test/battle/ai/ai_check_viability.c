@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")
 {
-    u16 status1, expectedMove;
+    u32 status1, expectedMove;
 
     PARAMETRIZE { status1 = STATUS1_NONE; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { status1 = STATUS1_BURN; expectedMove = MOVE_FACADE; }
@@ -29,7 +29,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Smelling Salt")
 {
-    u16 status1, expectedMove;
+    u32 status1, expectedMove;
 
     PARAMETRIZE { status1 = STATUS1_NONE; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { status1 = STATUS1_PARALYSIS; expectedMove = MOVE_SMELLING_SALTS; }
@@ -51,7 +51,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Smelling Salt")
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 {
-    u16 status1, expectedMove;
+    u32 status1, expectedMove;
 
     PARAMETRIZE { status1 = STATUS1_NONE; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { status1 = STATUS1_SLEEP; expectedMove = MOVE_WAKE_UP_SLAP; }
@@ -74,7 +74,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
 {
     u32 movePlayer;
-    u16 expectedMove;
+    u32 expectedMove;
 
     PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_DRUM_BEATING; }
     PARAMETRIZE { movePlayer = MOVE_GRAVITY; expectedMove = MOVE_GRAV_APPLE; }
@@ -97,7 +97,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Flail")
 {
-    u16 hp, expectedMove;
+    u32 hp, expectedMove;
 
     PARAMETRIZE { hp = 490; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { hp = 5; expectedMove = MOVE_FLAIL; }
@@ -114,7 +114,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Flail")
 
 AI_SINGLE_BATTLE_TEST("AI will only use Dream Eater if target is asleep")
 {
-    u16 status1, expectedMove;
+    u32 status1, expectedMove;
 
     PARAMETRIZE { status1 = STATUS1_NONE; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { status1 = STATUS1_SLEEP; expectedMove = MOVE_DREAM_EATER; }
@@ -149,7 +149,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Spit Up")
 
 AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted move split is correct and user doesn't faint")
 {
-    u16 playerMove = MOVE_NONE, opponentMove = MOVE_NONE;
+    u32 playerMove = MOVE_NONE, opponentMove = MOVE_NONE;
 
     PARAMETRIZE { playerMove = MOVE_STRENGTH; opponentMove = MOVE_COUNTER; }
     PARAMETRIZE { playerMove = MOVE_POWER_GEM; opponentMove = MOVE_MIRROR_COAT; }
@@ -173,7 +173,7 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
 
 AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger")
 {
-    u16 ability;
+    u32 ability;
 
     PARAMETRIZE { ability = ABILITY_NONE; }
     PARAMETRIZE { ability = ABILITY_SERENE_GRACE; }

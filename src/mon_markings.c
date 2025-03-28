@@ -23,7 +23,7 @@ static void SpriteCB_Cursor(struct Sprite *);
 static struct Sprite *CreateMarkingComboSprite(u16, u16, const u16 *, u16);
 
 static const u16 sMonMarkings_Pal[] = INCBIN_U16("graphics/interface/mon_markings.gbapal");
-static const u8 sMonMarkings_Gfx[] = INCBIN_U8("graphics/interface/mon_markings.4bpp");
+static const u32 sMonMarkings_Gfx[] = INCBIN_u32("graphics/interface/mon_markings.4bpp");
 
 static const struct OamData sOamData_MenuWindow =
 {
@@ -304,7 +304,7 @@ static void BufferMenuWindowTiles(void)
 static bool8 BufferMenuFrameTiles(void)
 {
     u16 i;
-    u8 *dest = sMenu->windowSpriteTiles + sMenu->tileLoadState * 0x100;
+    u32 *dest = sMenu->windowSpriteTiles + sMenu->tileLoadState * 0x100;
 
     switch (sMenu->tileLoadState)
     {
@@ -345,7 +345,7 @@ void BufferMonMarkingsMenuTiles(void)
     while (BufferMenuFrameTiles());
 }
 
-void OpenMonMarkingsMenu(u8 markings, s16 x, s16 y)
+void OpenMonMarkingsMenu(u32 markings, s16 x, s16 y)
 {
     u16 i;
     sMenu->cursorPos = 0;
@@ -444,7 +444,7 @@ bool8 HandleMonMarkingsMenuInput(void)
 static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
 {
     u16 i;
-    u8 spriteId;
+    u32 spriteId;
 
     struct SpriteSheet sheets[] =
     {
@@ -584,7 +584,7 @@ struct Sprite *CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u1
 
 static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette, u16 size)
 {
-    u8 spriteId;
+    u32 spriteId;
     struct SpriteTemplate template;
     struct SpriteSheet sheet = { sMonMarkings_Gfx, 0x80, tileTag };
     struct SpritePalette sprPalette = { palette, paletteTag };
@@ -610,7 +610,7 @@ static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, cons
 }
 
 // Update what combination is shown, used for sprites created with CreateMonMarkingComboSprite
-void UpdateMonMarkingTiles(u8 markings, void *dest)
+void UpdateMonMarkingTiles(u32 markings, void *dest)
 {
     RequestDma3Copy(&sMonMarkings_Gfx[markings * 0x80], dest, 0x80, 0x10);
 }

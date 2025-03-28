@@ -15,7 +15,7 @@
 #include "task.h"
 #include "script_menu.h"
 
-static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
+static const u32 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
 {
     gText_Tristan,
     gText_Philip,
@@ -23,7 +23,7 @@ static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
     gText_Roberto,
 };
 
-static const u8 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
+static const u32 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
 {
     DECOR_DUSKULL_DOLL,
     DECOR_BALL_CUSHION,
@@ -33,7 +33,7 @@ static const u8 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
 
 void TraderSetup(void)
 {
-    u8 i;
+    u32 i;
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
 
     trader->id = MAUVILLE_MAN_TRADER;
@@ -55,9 +55,9 @@ void Trader_ResetFlag(void)
 
 #define tWindowId data[3]
 
-void CreateAvailableDecorationsMenu(u8 taskId)
+void CreateAvailableDecorationsMenu(u32 taskId)
 {
-    u8 i;
+    u32 i;
     s16 * data = gTasks[taskId].data;
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     struct WindowTemplate windowTemplate = {
@@ -96,7 +96,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
+void Task_BufferDecorSelectionAndCloseWindow(u32 taskId, u32 decorationId)
 {
     s16 * data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
@@ -112,7 +112,7 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
     ScriptContext_Enable();
 }
 
-void Task_HandleGetDecorationMenuInput(u8 taskId)
+void Task_HandleGetDecorationMenuInput(u32 taskId)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     s8 input = Menu_ProcessInput();
@@ -144,7 +144,7 @@ void GetTraderTradedFlag(void)
 
 void DoesPlayerHaveNoDecorations(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < DECORCAT_COUNT; i++)
     {
@@ -173,7 +173,7 @@ void TraderShowDecorationMenu(void)
     CreateTask(ShowDecorationCategoriesWindow, 0);
 }
 
-void DecorationItemsMenuAction_Trade(u8 taskId)
+void DecorationItemsMenuAction_Trade(u32 taskId)
 {
     if (IsSelectedDecorInThePC() == TRUE)
     {
@@ -189,7 +189,7 @@ void DecorationItemsMenuAction_Trade(u8 taskId)
     ScriptContext_Enable();
 }
 
-void ExitTraderMenu(u8 taskId)
+void ExitTraderMenu(u32 taskId)
 {
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);
@@ -210,6 +210,6 @@ void TraderDoDecorationTrade(void)
 
 void TraderMenuGetDecoration(void)
 {
-    u8 taskId = CreateTask(Task_HandleGetDecorationMenuInput, 0);
+    u32 taskId = CreateTask(Task_HandleGetDecorationMenuInput, 0);
     CreateAvailableDecorationsMenu(taskId);
 }

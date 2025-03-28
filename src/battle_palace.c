@@ -165,8 +165,8 @@ static void BufferOpponentIntroSpeech(void)
 
 static void IncrementPalaceStreak(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] < MAX_STREAK)
     {

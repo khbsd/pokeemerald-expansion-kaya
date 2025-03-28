@@ -4,12 +4,12 @@
 #include "battle_setup.h"
 #include "gym_leader_rematch.h"
 
-static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 maxRematch);
+static void UpdateGymLeaderRematchFromArray(const u32 *data, size_t size, u32 maxRematch);
 #if FREE_MATCH_CALL == FALSE
 static s32 GetRematchIndex(u32 trainerIdx);
 #endif //FREE_MATCH_CALL
 
-static const u16 GymLeaderRematches_AfterNewMauville[] = {
+static const u32 GymLeaderRematches_AfterNewMauville[] = {
     REMATCH_ROXANNE,
     REMATCH_BRAWLY,
     REMATCH_WATTSON,
@@ -20,7 +20,7 @@ static const u16 GymLeaderRematches_AfterNewMauville[] = {
     REMATCH_JUAN
 };
 
-static const u16 GymLeaderRematches_BeforeNewMauville[] = {
+static const u32 GymLeaderRematches_BeforeNewMauville[] = {
     REMATCH_ROXANNE,
     REMATCH_BRAWLY,
     // Wattson isn't available at this time
@@ -42,7 +42,7 @@ void UpdateGymLeaderRematch(void)
     }
 }
 
-static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 maxRematch)
+static void UpdateGymLeaderRematchFromArray(const u32 *data, size_t size, u32 maxRematch)
 {
 #if FREE_MATCH_CALL == FALSE
     s32 whichLeader = 0;

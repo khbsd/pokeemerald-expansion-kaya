@@ -38,11 +38,11 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange);
-static u8 GetMoveBattleStyle(u16 move);
+static u16 GetFactoryMonId(u32 lvlMode, u32 challengeNum, bool8 useBetterRange);
+static u32 GetMoveBattleStyle(u16 move);
 
 // Number of moves needed on the team to be considered using a certain battle style
-static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
+static const u32 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
     [FACTORY_STYLE_PREPARATION - 1]   = 3,
     [FACTORY_STYLE_SLOW_STEADY - 1]   = 3,
     [FACTORY_STYLE_ENDURANCE - 1]     = 3,
@@ -154,7 +154,7 @@ static const u32 sWinStreakMasks[][2] =
     {~(STREAK_FACTORY_DOUBLES_50), ~(STREAK_FACTORY_DOUBLES_OPEN)},
 };
 
-static const u8 sFixedIVTable[][2] =
+static const u32 sFixedIVTable[][2] =
 {
     {3, 6},
     {6, 9},
@@ -197,7 +197,7 @@ void CallBattleFactoryFunction(void)
 
 static void InitFactoryChallenge(void)
 {
-    u8 i;
+    u32 i;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -384,7 +384,7 @@ static void SetOpponentGfxVar(void)
 
 static void SetRentalsToOpponentParty(void)
 {
-    u8 i;
+    u32 i;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         gFacilityTrainerMons = gBattleFrontierMons;
@@ -404,9 +404,9 @@ static void SetRentalsToOpponentParty(void)
 static void SetPlayerAndOpponentParties(void)
 {
     int i;
-    u8 monLevel;
+    u32 monLevel;
     u16 monId;
-    u8 ivs;
+    u32 ivs;
 
     if (gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_TENT)
     {
@@ -451,13 +451,13 @@ static void SetPlayerAndOpponentParties(void)
 static void GenerateInitialRentalMons(void)
 {
     int i, j;
-    u8 firstMonId;
-    u8 battleMode;
-    u8 lvlMode;
-    u8 challengeNum;
-    u8 factoryLvlMode;
-    u8 factoryBattleMode;
-    u8 rentalRank;
+    u32 firstMonId;
+    u32 battleMode;
+    u32 lvlMode;
+    u32 challengeNum;
+    u32 factoryLvlMode;
+    u32 factoryBattleMode;
+    u32 rentalRank;
     u16 monId;
     u16 currSpecies;
     u16 species[PARTY_SIZE];
@@ -548,9 +548,9 @@ static void GenerateInitialRentalMons(void)
 // and NUMBER_OF_MON_TYPES is the result.
 static void GetOpponentMostCommonMonType(void)
 {
-    u8 i;
-    u8 typeCounts[NUMBER_OF_MON_TYPES];
-    u8 mostCommonTypes[2];
+    u32 i;
+    u32 typeCounts[NUMBER_OF_MON_TYPES];
+    u32 mostCommonTypes[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
 
@@ -598,8 +598,8 @@ static void GetOpponentMostCommonMonType(void)
 
 static void GetOpponentBattleStyle(void)
 {
-    u8 i, j, count;
-    u8 stylePoints[FACTORY_NUM_STYLES];
+    u32 i, j, count;
+    u32 stylePoints[FACTORY_NUM_STYLES];
 
     count = 0;
     gFacilityTrainerMons = gBattleFrontierMons;
@@ -611,7 +611,7 @@ static void GetOpponentBattleStyle(void)
         u16 monId = gFrontierTempParty[i];
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            u8 battleStyle = GetMoveBattleStyle(gFacilityTrainerMons[monId].moves[j]);
+            u32 battleStyle = GetMoveBattleStyle(gFacilityTrainerMons[monId].moves[j]);
             stylePoints[battleStyle]++;
         }
     }
@@ -631,10 +631,10 @@ static void GetOpponentBattleStyle(void)
         gSpecialVar_Result = FACTORY_NUM_STYLES;
 }
 
-static u8 GetMoveBattleStyle(u16 move)
+static u32 GetMoveBattleStyle(u16 move)
 {
     const u16 *moves;
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < ARRAY_COUNT(sMoveStyles); i++)
     {
@@ -655,7 +655,7 @@ bool8 InBattleFactory(void)
 
 static void RestorePlayerPartyHeldItems(void)
 {
-    u8 i;
+    u32 i;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         gFacilityTrainerMons = gBattleFrontierMons;
@@ -678,9 +678,9 @@ static void RestorePlayerPartyHeldItems(void)
 // Due to a mistake in FillFactoryFrontierTrainerParty, the
 // challenge number used to determine the IVs for regular trainers
 // is Battle Tower's instead of Battle Factory's.
-u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
+u32 GetFactoryMonFixedIV(u32 challengeNum, bool8 isLastBattle)
 {
-    u8 ivSet;
+    u32 ivSet;
     bool8 useHigherIV = isLastBattle ? TRUE : FALSE;
 
 // The Factory has an out-of-bounds access when generating the rental draft for round 9 (challengeNum==8),
@@ -704,12 +704,12 @@ void FillFactoryBrainParty(void)
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
     int monLevel;
-    u8 fixedIV;
+    u32 fixedIV;
     u32 otId;
 
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     fixedIV = GetFactoryMonFixedIV(challengeNum + 2, FALSE);
     monLevel = SetFacilityPtrsGetLevel();
     i = 0;
@@ -757,7 +757,7 @@ void FillFactoryBrainParty(void)
     }
 }
 
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)
+static u16 GetFactoryMonId(u32 lvlMode, u32 challengeNum, bool8 useBetterRange)
 {
     u16 numMons, monId;
     u16 adder; // Used to skip past early mons for open level
@@ -796,10 +796,10 @@ static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)
     return monId;
 }
 
-u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)
+u32 GetNumPastRentalsRank(u32 battleMode, u32 lvlMode)
 {
-    u8 ret;
-    u8 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
+    u32 ret;
+    u32 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
 
     if (rents < 15)
         ret = 0;
@@ -841,7 +841,7 @@ u32 GetAiScriptsInBattleFactory(void)
     }
 }
 
-void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 moveArg, u8 moveSlot)
+void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 moveArg, u32 moveSlot)
 {
     u16 move = moveArg;
     if (moveArg == MOVE_RETURN)

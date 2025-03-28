@@ -79,10 +79,10 @@ struct ConditionGraph
     /*0x014*/ struct UCoords16 savedPositions[CONDITION_GRAPH_LOAD_MAX][CONDITION_COUNT];
     /*0x064*/ struct UCoords16 newPositions[CONDITION_GRAPH_UPDATE_STEPS][CONDITION_COUNT];
     /*0x12C*/ struct UCoords16 curPositions[CONDITION_COUNT];
-    /*0x140*/ u16 scanlineRight[CONDITION_GRAPH_HEIGHT][2];
-    /*0x248*/ u16 scanlineLeft[CONDITION_GRAPH_HEIGHT][2];
-    /*0x350*/ u16 bottom;
-    /*0x352*/ u16 updateCounter;
+    /*0x140*/ u32 scanlineRight[CONDITION_GRAPH_HEIGHT][2];
+    /*0x248*/ u32 scanlineLeft[CONDITION_GRAPH_HEIGHT][2];
+    /*0x350*/ u32 bottom;
+    /*0x352*/ u32 updateCounter;
     /*0x354*/ bool8 needsDraw;
     /*0x355*/ u8 scanlineResetState;
 };
@@ -111,12 +111,12 @@ bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x);
 bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x);
 bool8 MoveConditionMonOnscreen(s16 *x);
 bool8 MoveConditionMonOffscreen(s16 *x);
-void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel);
-void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
+void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool8 excludesCancel);
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u32 boxId, u32 monId, u32 partyId, u32 id, u32 numMons, bool8 excludesCancel);
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool8 excludesCancel);
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
-s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
+s32 GetBoxOrPartyMonData(u32 boxId, u32 monId, s32 request, u8 *dst);
 
 // Condition sparkles
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal);
@@ -129,12 +129,12 @@ void FreeConditionSparkles(struct Sprite **sprites);
 void MoveRelearnerPrintMessage(u8 *str);
 bool16 MoveRelearnerRunTextPrinters(void);
 void MoveRelearnerCreateYesNoMenu(void);
-u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
+u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u32 numChoices);
 void InitMoveRelearnerWindows(bool8 useContestWindow);
 
 // Level up window
-void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
-void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats);
+void DrawLevelUpWindowPg1(u32 windowId, u32 *statsBefore, u32 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
+void DrawLevelUpWindowPg2(u32 windowId, u32 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u32 *currStats);
 
 #endif // GUARD_MENU_SPECIALIZED_H

@@ -17,7 +17,7 @@ EWRAM_DATA static volatile bool8 sRngLoopUnlocked;
 
 // A variant of SFC32 that lets you change the stream.
 // stream can be any odd number.
-static inline u32 _SFC32_Next_Stream(struct Sfc32State *state, const u8 stream)
+static inline u32 _SFC32_Next_Stream(struct Sfc32State *state, const u32 stream)
 {
     const u32 result = state->a + state->b + state->ctr;
     state->ctr += stream;
@@ -27,7 +27,7 @@ static inline u32 _SFC32_Next_Stream(struct Sfc32State *state, const u8 stream)
     return result;
 }
 
-static void SFC32_Seed(struct Sfc32State *state, u32 seed, u8 stream)
+static void SFC32_Seed(struct Sfc32State *state, u32 seed, u32 stream)
 {
     u32 i;
     state->a = state->b = 0;
@@ -125,7 +125,7 @@ void AdvanceRandom(void)
 
 void Shuffle8(void *data_, size_t n)
 {
-    u8 *data = data_;
+    u32 *data = data_;
     SHUFFLE_IMPL;
 }
 
@@ -150,9 +150,9 @@ void ShuffleN(void *data, size_t n, size_t size)
     while (n > 1)
     {
         int j = (LOOP_RANDOM * (n+1)) >> 16;
-        memcpy(tmp, (u8 *)data + n*size, size); // tmp = data[n];
-        memcpy((u8 *)data + n*size, (u8 *)data + j*size, size); // data[n] = data[j];
-        memcpy((u8 *)data + j*size, tmp, size); // data[j] = tmp;
+        memcpy(tmp, (u32 *)data + n*size, size); // tmp = data[n];
+        memcpy((u32 *)data + n*size, (u32 *)data + j*size, size); // data[n] = data[j];
+        memcpy((u32 *)data + j*size, tmp, size); // data[j] = tmp;
         --n;
     }
 
@@ -166,7 +166,7 @@ __attribute__((weak, alias("RandomUniformExceptDefault")))
 u32 RandomUniformExcept(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 
 __attribute__((weak, alias("RandomWeightedArrayDefault")))
-u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights);
+u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u32 *weights);
 
 __attribute__((weak, alias("RandomElementArrayDefault")))
 const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count);
@@ -188,7 +188,7 @@ u32 RandomUniformExceptDefault(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reje
     LOOP_RANDOM_END;
 }
 
-u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
+u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u32 *weights)
 {
     s32 i, targetSum;
     targetSum = (sum * Random()) >> 16;
@@ -203,11 +203,11 @@ u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u8 *wei
 
 const void *RandomElementArrayDefault(enum RandomTag tag, const void *array, size_t size, size_t count)
 {
-    return (const u8 *)array + size * RandomUniformDefault(tag, 0, count - 1);
+    return (const u32 *)array + size * RandomUniformDefault(tag, 0, count - 1);
 }
 
 // Returns a random index according to a list of weights
-u8 RandomWeightedIndex(u8 *weights, u8 length)
+u32 RandomWeightedIndex(u32 *weights, u32 length)
 {
     u32 i;
     u16 randomValue;

@@ -5,7 +5,7 @@
 
 struct CoordEventWeather
 {
-    u8 coordEventWeather;
+    u32 coordEventWeather;
     void (*func)(void);
 };
 
@@ -105,9 +105,9 @@ static void CoordEventWeather_Route123Cycle(void)
     SetWeather(WEATHER_ROUTE123_CYCLE);
 }
 
-void DoCoordEventWeather(u8 coordEventWeather)
+void DoCoordEventWeather(u32 coordEventWeather)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < ARRAY_COUNT(sCoordEventWeatherFuncs); i++)
     {
         if (sCoordEventWeatherFuncs[i].coordEventWeather == coordEventWeather)

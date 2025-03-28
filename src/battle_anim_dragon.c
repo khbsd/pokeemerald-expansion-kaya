@@ -452,8 +452,8 @@ void AnimDragonFireToTarget(struct Sprite *sprite)
 
 void AnimDragonDanceOrb(struct Sprite *sprite)
 {
-    u16 r5;
-    u16 r0;
+    u32 r5;
+    u32 r0;
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[4] = 0;
@@ -514,7 +514,7 @@ void AnimTask_DragonDanceWaver(u8 taskId)
 {
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
-    u16 i;
+    u32 i;
     u8 y;
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
@@ -586,8 +586,8 @@ static void AnimTask_DragonDanceWaver_Step(u8 taskId)
 
 static void UpdateDragonDanceScanlineEffect(struct Task *task)
 {
-    u16 sineIndex = task->data[5];
-    u16 i;
+    u32 sineIndex = task->data[5];
+    u32 i;
     for (i = task->data[3]; i <= task->data[4]; i++)
     {
         gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = ((gSineTable[sineIndex] * task->data[6]) >> 7) + task->data[2];

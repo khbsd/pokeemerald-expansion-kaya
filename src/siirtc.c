@@ -28,7 +28,7 @@
 #define OFFSET_ALARM_HOUR   offsetof(struct SiiRtcInfo, alarmHour)
 #define OFFSET_ALARM_MINUTE offsetof(struct SiiRtcInfo, alarmMinute)
 
-#define INFO_BUF(info, index) (*((u8 *)(info) + (index)))
+#define INFO_BUF(info, index) (*((u32 *)(info) + (index)))
 
 #define DATETIME_BUF(info, index) INFO_BUF(info, OFFSET_YEAR + index)
 #define DATETIME_BUF_LEN (OFFSET_SECOND - OFFSET_YEAR + 1)
@@ -68,9 +68,9 @@ extern vu16 GPIOPortDirection;
 
 static bool8 sLocked;
 
-static int WriteCommand(u8 value);
-static int WriteData(u8 value);
-static u8 ReadData();
+static int WriteCommand(u32 value);
+static int WriteData(u32 value);
+static u32 ReadData();
 
 static void EnableGpioPortRead();
 static void DisableGpioPortRead();
@@ -89,9 +89,9 @@ void SiiRtcProtect(void)
     sLocked = TRUE;
 }
 
-u8 SiiRtcProbe(void)
+u32 SiiRtcProbe(void)
 {
-    u8 errorCode;
+    u32 errorCode;
     struct SiiRtcInfo rtc;
 
     if (!SiiRtcGetStatus(&rtc))
@@ -165,7 +165,7 @@ bool8 SiiRtcReset(void)
 
 bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 {
-    u8 statusData;
+    u32 statusData;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -198,7 +198,7 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 {
-    u8 statusData;
+    u32 statusData;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -229,7 +229,7 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 {
-    u8 i;
+    u32 i;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -260,7 +260,7 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 {
-    u8 i;
+    u32 i;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -287,7 +287,7 @@ bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 {
-    u8 i;
+    u32 i;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -318,7 +318,7 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 {
-    u8 i;
+    u32 i;
 
     if (sLocked == TRUE)
         return FALSE;
@@ -345,8 +345,8 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 
 bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 {
-    u8 i;
-    u8 alarmData[2];
+    u32 i;
+    u32 alarmData[2];
 
     if (sLocked == TRUE)
         return FALSE;
@@ -383,10 +383,10 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-static int WriteCommand(u8 value)
+static int WriteCommand(u32 value)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
 
     for (i = 0; i < 8; i++)
     {
@@ -404,10 +404,10 @@ static int WriteCommand(u8 value)
 #endif
 }
 
-static int WriteData(u8 value)
+static int WriteData(u32 value)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
 
     for (i = 0; i < 8; i++)
     {
@@ -425,11 +425,11 @@ static int WriteData(u8 value)
 #endif
 }
 
-static u8 ReadData()
+static u32 ReadData()
 {
-    u8 i;
-    u8 temp;
-    u8 value;
+    u32 i;
+    u32 temp;
+    u32 value;
 
 #ifdef UBFIX
     value = 0;

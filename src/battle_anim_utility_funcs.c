@@ -18,7 +18,7 @@ struct AnimStatsChangeData
     u8 battler2;
     bool8 hidBattler2;
     s16 data[8];
-    u16 species;
+    u32 species;
 };
 
 static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = {0};
@@ -33,12 +33,12 @@ static void StatsChangeAnimation_Step1(u8);
 static void StatsChangeAnimation_Step2(u8);
 static void StatsChangeAnimation_Step3(u8);
 static void AnimTask_Flash_Step(u8);
-static void SetPalettesToColor(u32, u16);
+static void SetPalettesToColor(u32, u32);
 static void AnimTask_UpdateSlidingBg(u8);
 static void UpdateMonScrollingBgMask(u8);
 static void AnimTask_WaitAndRestoreVisibility(u8);
 
-static const u16 sCurseLinesPalette[] = { RGB_WHITE };
+static const u32 sCurseLinesPalette[] = { RGB_WHITE };
 
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
@@ -165,7 +165,7 @@ void StartBlendAnimSpriteColor(u8 taskId, u32 selectedPalettes)
 static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
 {
     u32 selectedPalettes;
-    u16 singlePaletteOffset = 0;
+    u32 singlePaletteOffset = 0;
 
     if (gTasks[taskId].data[9] == gTasks[taskId].data[2])
     {
@@ -273,9 +273,9 @@ static void AnimMonTrace(struct Sprite *sprite)
 // Only used by Curse for non-Ghost mons
 void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 {
-    u16 species;
+    u32 species;
     int spriteId, newSpriteId;
-    u16 var0;
+    u32 var0;
     u32 bg1Cnt;
     struct BattleAnimBgData animBgData;
 
@@ -645,7 +645,7 @@ void AnimTask_Flash(u8 taskId)
 
 static void AnimTask_Flash_Step(u8 taskId)
 {
-    u16 i;
+    u32 i;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -683,16 +683,16 @@ static void AnimTask_Flash_Step(u8 taskId)
     }
 }
 
-static void SetPalettesToColor(u32 selectedPalettes, u16 color)
+static void SetPalettesToColor(u32 selectedPalettes, u32 color)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < 32; i++)
     {
         if (selectedPalettes & 1)
         {
-            u16 curOffset = PLTT_ID(i);
-            u16 paletteOffset = curOffset;
+            u32 curOffset = PLTT_ID(i);
+            u32 paletteOffset = curOffset;
             while (curOffset < paletteOffset + 16)
             {
                 gPlttBufferFaded[curOffset] = color;
@@ -780,7 +780,7 @@ void AnimTask_GetTargetIsAttackerPartner(u8 taskId)
 // For hiding or subsequently revealing all other battlers
 void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
 {
-    u16 battler;
+    u32 battler;
 
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
@@ -791,9 +791,9 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u32 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
-    u16 species;
+    u32 species;
     u8 spriteId, spriteId2;
     u32 bg1Cnt;
     struct BattleAnimBgData animBgData;

@@ -128,7 +128,7 @@ static void PlayerPartnerBufferRunCommand(u32 battler)
 
 static void Intro_DelayAndEnd(u32 battler)
 {
-    if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u8)-1)
+    if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u32)-1)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
         BattleControllerComplete(battler);
@@ -263,7 +263,7 @@ static void PlayerPartnerBufferExecCompleted(u32 battler)
     gBattlerControllerFuncs[battler] = PlayerPartnerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        u8 playerId = GetMultiplayerId();
+        u32 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
         gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
@@ -346,7 +346,7 @@ static void PlayerPartnerHandleChooseAction(u32 battler)
 
 static void PlayerPartnerHandleChooseMove(u32 battler)
 {
-    u8 chosenMoveId;
+    u32 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     chosenMoveId = gAiBattleData->moveOrAction[battler];

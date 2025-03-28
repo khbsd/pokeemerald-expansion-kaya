@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Roost fails if the user is under the effects of Heal Block")
 
 SINGLE_BATTLE_TEST("Roost recovers 50% of the user's Max HP")
 {
-    u16 hp;
+    u32 hp;
 
     KNOWN_FAILING; // All healing is currently rounded down
     GIVEN {

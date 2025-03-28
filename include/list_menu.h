@@ -61,8 +61,8 @@ struct ListMenuTemplate
 struct ListMenu
 {
     struct ListMenuTemplate template;
-    u16 scrollOffset;
-    u16 selectedRow;
+    u32 scrollOffset;
+    u32 selectedRow;
     u8 unk_1C;
     u8 unk_1D;
     u8 taskId;
@@ -86,10 +86,10 @@ struct ScrollArrowsTemplate
     u8 secondArrowType;
     u8 secondX;
     u8 secondY;
-    u16 fullyUpThreshold;
-    u16 fullyDownThreshold;
-    u16 tileTag;
-    u16 palTag;
+    u32 fullyUpThreshold;
+    u32 fullyDownThreshold;
+    u32 tileTag;
+    u32 palTag;
     u8 palNum;
 };
 
@@ -97,34 +97,34 @@ struct CursorStruct
 {
     u8 left;
     u8 top;
-    u16 rowWidth;
-    u16 rowHeight;
-    u16 tileTag;
-    u16 palTag;
+    u32 rowWidth;
+    u32 rowHeight;
+    u32 tileTag;
+    u32 palTag;
     u8 palNum;
 };
 
 extern struct ScrollArrowsTemplate gTempScrollArrowTemplate;
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
-s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palNum);
-u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16 selectedRow);
-u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u16 scrollOffset, u16 selectedRow);
+s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u32 tileNum, u32 palNum);
+u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u32 scrollOffset, u32 selectedRow);
+u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u32 scrollOffset, u32 selectedRow);
 s32 ListMenu_ProcessInput(u8 listTaskId);
-void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow);
+void DestroyListMenuTask(u8 listTaskId, u32 *scrollOffset, u32 *selectedRow);
 void RedrawListMenu(u8 listTaskId);
 void ChangeListMenuPals(u8 listTaskId, u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ChangeListMenuCoords(u8 listTaskId, u8 x, u8 y);
-s32 ListMenuTestInput(struct ListMenuTemplate *template, u32 scrollOffset, u32 selectedRow, u16 keys, u16 *newScrollOffset, u16 *newSelectedRow);
-void ListMenuGetCurrentItemArrayId(u8 listTaskId, u16 *arrayId);
-void ListMenuGetScrollAndRow(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow);
-u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
+s32 ListMenuTestInput(struct ListMenuTemplate *template, u32 scrollOffset, u32 selectedRow, u32 keys, u32 *newScrollOffset, u32 *newSelectedRow);
+void ListMenuGetCurrentItemArrayId(u8 listTaskId, u32 *arrayId);
+void ListMenuGetScrollAndRow(u8 listTaskId, u32 *scrollOffset, u32 *selectedRow);
+u32 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, u8 onInit, struct ListMenu *list);
 s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field);
 void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value);
-u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16 *scrollOffset);
-u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *currItemPtr);
+u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u32 *scrollOffset);
+u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u32 *currItemPtr);
 void RemoveScrollIndicatorArrowPair(u8 taskId);
 void Task_ScrollIndicatorArrowPairOnMainMenu(u8 taskId);
 bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAndCallCallback, u8 count, bool8 movingDown);

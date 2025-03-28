@@ -187,7 +187,7 @@ void RecordKnownMove(u32 battlerId, u32 move)
 
 void RecordAllMoves(u32 battler)
 {
-    memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
+    memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u32));
 }
 
 void RecordAbilityBattle(u32 battlerId, u32 abilityId)
@@ -415,7 +415,7 @@ bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category)
 {
     s32 i, moveType;
     u32 usable = 0;
-    u16 *moves = GetMovesArray(attacker);
+    u32 *moves = GetMovesArray(attacker);
     u32 moveLimitations = AI_DATA->moveLimitations[attacker];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -567,13 +567,13 @@ static inline void AI_RestoreBattlerTypes(u32 battlerAtk, u32 *types)
     gBattleMons[battlerAtk].types[2] = types[2];
 }
 
-static inline void CalcDynamicMoveDamage(struct DamageCalculationData *damageCalcData, u16 *medianDamage, u16 *minimumDamage, u16 *maximumDamage, u32 holdEffectAtk, u32 abilityAtk)
+static inline void CalcDynamicMoveDamage(struct DamageCalculationData *damageCalcData, u32 *medianDamage, u32 *minimumDamage, u32 *maximumDamage, u32 holdEffectAtk, u32 abilityAtk)
 {
     u32 move = damageCalcData->move;
     u32 effect = GetMoveEffect(move);
-    u16 median = *medianDamage;
-    u16 minimum = *minimumDamage;
-    u16 maximum = *maximumDamage;
+    u32 median = *medianDamage;
+    u32 minimum = *minimumDamage;
+    u32 maximum = *maximumDamage;
 
     switch (effect)
     {
@@ -1211,7 +1211,7 @@ bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk)
 {
     struct AiLogicData *aiData = AI_DATA;
     s32 moveIndex;
-    u16 *moves = GetMovesArray(battlerDef);
+    u32 *moves = GetMovesArray(battlerDef);
     u32 moveLimitations = aiData->moveLimitations[battlerDef];
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1251,7 +1251,7 @@ u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef, enum DamageCalcCon
     u32 moveIndex;
     u32 move = 0;
     u32 bestDmg = 0;
-    u16 *moves = GetMovesArray(battlerAtk);
+    u32 *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1273,7 +1273,7 @@ u32 GetBestDmgFromBattler(u32 battler, u32 battlerTarget, enum DamageCalcContext
     struct AiLogicData *aiData = AI_DATA;
     u32 moveIndex;
     u32 bestDmg = 0;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
     u32 moveLimitations = aiData->moveLimitations[battler];
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1295,7 +1295,7 @@ bool32 CanAIFaintTarget(u32 battlerAtk, u32 battlerDef, u32 numHits)
 {
     struct AiLogicData *aiData = AI_DATA;
     s32 moveIndex, dmg;
-    u16 *moves = gBattleMons[battlerAtk].moves;
+    u32 *moves = gBattleMons[battlerAtk].moves;
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1338,7 +1338,7 @@ bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dm
     struct AiLogicData *aiData = AI_DATA;
     u32 moveIndex;
     s32 dmg;
-    u16 *moves = GetMovesArray(battlerDef);
+    u32 *moves = GetMovesArray(battlerDef);
     u32 hpCheck = gBattleMons[battlerAtk].hp + hpMod;
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
@@ -2065,7 +2065,7 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 bool32 CanIndexMoveFaintTarget(u32 battlerAtk, u32 battlerDef, u32 moveIndex, enum DamageCalcContext calcContext)
 {
     s32 dmg;
-    u16 *moves = gBattleMons[battlerAtk].moves;
+    u32 *moves = gBattleMons[battlerAtk].moves;
 
     if (IsDoubleBattle() && battlerDef == BATTLE_PARTNER(battlerAtk))
         dmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum; // Attacking partner, be careful
@@ -2080,7 +2080,7 @@ bool32 CanIndexMoveFaintTarget(u32 battlerAtk, u32 battlerDef, u32 moveIndex, en
 bool32 CanIndexMoveGuaranteeFaintTarget(u32 battlerAtk, u32 battlerDef, u32 moveIndex)
 {
     s32 dmg;
-    u16 *moves = gBattleMons[battlerAtk].moves;
+    u32 *moves = gBattleMons[battlerAtk].moves;
 
     dmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum; // Explictly care about guaranteed KOs universally
 
@@ -2089,7 +2089,7 @@ bool32 CanIndexMoveGuaranteeFaintTarget(u32 battlerAtk, u32 battlerDef, u32 move
     return FALSE;
 }
 
-u16 *GetMovesArray(u32 battler)
+u32 *GetMovesArray(u32 battler)
 {
     if (IsAiBattlerAware(battler) || IsAiBattlerAware(BATTLE_PARTNER(battler)))
         return gBattleMons[battler].moves;
@@ -2100,7 +2100,7 @@ u16 *GetMovesArray(u32 battler)
 bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensive)
 {
     u32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2116,7 +2116,7 @@ bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensiv
 bool32 HasMoveWithCategory(u32 battler, u32 category)
 {
     u32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2129,7 +2129,7 @@ bool32 HasMoveWithCategory(u32 battler, u32 category)
 bool32 HasMoveWithType(u32 battler, u32 type)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2143,7 +2143,7 @@ bool32 HasMoveWithType(u32 battler, u32 type)
 bool32 HasMoveEffect(u32 battlerId, u32 effect)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2158,7 +2158,7 @@ bool32 HasMoveEffect(u32 battlerId, u32 effect)
 bool32 IsPowerBasedOnStatus(u32 battlerId, u32 effect, u32 argument)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2174,7 +2174,7 @@ bool32 IsPowerBasedOnStatus(u32 battlerId, u32 effect, u32 argument)
 bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2189,7 +2189,7 @@ bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect)
 bool32 HasMoveWithCriticalHitChance(u32 battlerId)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2204,7 +2204,7 @@ bool32 HasMoveWithCriticalHitChance(u32 battlerId)
 bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2220,7 +2220,7 @@ bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception)
 bool32 HasMove(u32 battlerId, u32 move)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2234,7 +2234,7 @@ bool32 HasMove(u32 battlerId, u32 move)
 bool32 HasAnyKnownMove(u32 battlerId)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2249,7 +2249,7 @@ bool32 HasMoveThatLowersOwnStats(u32 battlerId)
 {
     s32 i, j;
     u32 aiMove;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         aiMove = moves[i];
@@ -2270,7 +2270,7 @@ bool32 HasMoveThatLowersOwnStats(u32 battlerId)
 bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerAtk);
+    u32 *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = AI_DATA->moveLimitations[battlerAtk];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -2294,7 +2294,7 @@ bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool
 bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef)
 {
     u32 i;
-    u16 *moves = GetMovesArray(battlerAtk);
+    u32 *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = AI_DATA->moveLimitations[battlerAtk];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -2311,7 +2311,7 @@ bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef)
 bool32 HasHealingEffect(u32 battlerId)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2339,7 +2339,7 @@ bool32 IsTrappingMove(u32 move)
 bool32 HasTrappingMoveEffect(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2353,7 +2353,7 @@ bool32 HasTrappingMoveEffect(u32 battler)
 bool32 HasThawingMove(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveThawsUser(moves[i]))
@@ -2569,7 +2569,7 @@ static inline bool32 IsMoveSleepClauseTrigger(u32 move)
 bool32 HasDamagingMove(u32 battlerId)
 {
     u32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2583,7 +2583,7 @@ bool32 HasDamagingMove(u32 battlerId)
 bool32 HasDamagingMoveOfType(u32 battlerId, u32 type)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u32 *moves = GetMovesArray(battlerId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2598,7 +2598,7 @@ bool32 HasDamagingMoveOfType(u32 battlerId, u32 type)
 bool32 HasSubstituteIgnoringMove(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveIgnoresSubstitute(moves[i]))
@@ -2610,7 +2610,7 @@ bool32 HasSubstituteIgnoringMove(u32 battler)
 bool32 HasHighCritRatioMove(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2624,7 +2624,7 @@ bool32 HasHighCritRatioMove(u32 battler)
 bool32 HasMagicCoatAffectedMove(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveCanBeBouncedBack(moves[i]))
@@ -2636,7 +2636,7 @@ bool32 HasMagicCoatAffectedMove(u32 battler)
 bool32 HasSnatchAffectedMove(u32 battler)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battler);
+    u32 *moves = GetMovesArray(battler);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveCanBeSnatched(moves[i]))
@@ -3846,7 +3846,7 @@ bool32 IsAbilityOfRating(u32 ability, s8 rating)
     return FALSE;
 }
 
-static const u16 sRecycleEncouragedItems[] =
+static const u32 sRecycleEncouragedItems[] =
 {
     ITEM_CHESTO_BERRY,
     ITEM_LUM_BERRY,

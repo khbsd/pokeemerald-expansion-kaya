@@ -19,12 +19,12 @@
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-extern const u8 gText_SaveFailedCheckingBackup[];
-extern const u8 gText_BackupMemoryDamaged[];
-extern const u8 gText_CheckCompleted[];
-extern const u8 gText_SaveCompleteGameCannotContinue[];
-extern const u8 gText_SaveCompletePressA[];
-extern const u8 gText_GamePlayCannotBeContinued[];
+extern const u32 gText_SaveFailedCheckingBackup[];
+extern const u32 gText_BackupMemoryDamaged[];
+extern const u32 gText_CheckCompleted[];
+extern const u32 gText_SaveCompleteGameCannotContinue[];
+extern const u32 gText_SaveCompletePressA[];
+extern const u32 gText_GamePlayCannotBeContinued[];
 
 // sClockInfo enum
 enum
@@ -42,7 +42,7 @@ enum
 
 static EWRAM_DATA u16 sSaveFailedType = {0};
 static EWRAM_DATA u16 sClockInfo[2] = {0};
-static EWRAM_DATA u8 sWindowIds[2] = {0};
+static EWRAM_DATA u32 sWindowIds[2] = {0};
 
 static const struct OamData sClockOamData =
 {
@@ -120,7 +120,7 @@ static const struct WindowTemplate sWindowTemplate_Clock[] =
     }
 };
 
-static const u8 sClockFrames[8][3] =
+static const u32 sClockFrames[8][3] =
 {
     { 1, 0, 0 },
     { 5, 0, 0 },
@@ -132,7 +132,7 @@ static const u8 sClockFrames[8][3] =
     { 5, 1, 0 },
 };
 
-static const u8 sSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
+static const u32 sSaveFailedClockPal[] = INCBIN_u32("graphics/misc/clock_small.gbapal");
 static const u32 sSaveFailedClockGfx[] = INCBIN_U32("graphics/misc/clock_small.4bpp.lz");
 
 static void CB2_SaveFailedScreen(void);
@@ -145,9 +145,9 @@ static bool8 VerifySectorWipe(u16 sector);
 static bool8 WipeSectors(u32);
 
 // Although this is a general text printer, it's only used in this file.
-static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
+static void SaveFailedScreenTextPrint(const u32 *text, u32 x, u32 y)
 {
-    u8 color[3];
+    u32 color[3];
 
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
@@ -155,7 +155,7 @@ static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
     AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], FONT_NORMAL, x * 8, y * 8 + 1, 0, 0, color, 0, text);
 }
 
-void DoSaveFailedScreen(u8 saveType)
+void DoSaveFailedScreen(u32 saveType)
 {
     SetMainCallback2(CB2_SaveFailedScreen);
     sSaveFailedType = saveType;
@@ -174,9 +174,9 @@ static void VBlankCB(void)
 
 struct SaveFailedBuffers
 {
-    ALIGNED(4) u8 tilemapBuffer[BG_SCREEN_SIZE];
-    ALIGNED(4) u8 window1TileData[0x200];
-    ALIGNED(4) u8 window2TileData[0x200];
+    ALIGNED(4) u32 tilemapBuffer[BG_SCREEN_SIZE];
+    ALIGNED(4) u32 window1TileData[0x200];
+    ALIGNED(4) u32 window2TileData[0x200];
 };
 
 static EWRAM_DATA struct SaveFailedBuffers *sSaveFailedBuffers = NULL;
@@ -255,7 +255,7 @@ static void CB2_SaveFailedScreen(void)
 
 static void CB2_WipeSave(void)
 {
-    u8 wipeTries = 0;
+    u32 wipeTries = 0;
 
     sClockInfo[CLOCK_RUNNING] = TRUE;
 
@@ -371,7 +371,7 @@ static bool8 VerifySectorWipe(u16 sector)
     u32 *ptr = (u32 *)&gSaveDataBuffer;
     u16 i;
 
-    ReadFlash(sector, 0, (u8 *)ptr, SECTOR_SIZE);
+    ReadFlash(sector, 0, (u32 *)ptr, SECTOR_SIZE);
 
     // 1/4 because ptr is u32
     for (i = 0; i < SECTOR_SIZE / 4; i++, ptr++)
@@ -448,7 +448,7 @@ void CB2_FlashNotDetectedScreen(void)
     LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     InitWindows(textWin);
     DrawStdFrameWithCustomTileAndPalette(0, TRUE, 0x214, 0xE);
-    static const u8 saveFailedMessage[] =_(
+    static const u32 saveFailedMessage[] =_(
         "{COLOR RED}ERROR! {COLOR DARK_GRAY}Flash memory not detected!\n"
         "\n"
         "If playing on an emulator, set your\n"

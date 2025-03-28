@@ -9,7 +9,7 @@
 
 #include "data/battle_pool_rules.h"
 
-static void HasRequiredTag(const struct Trainer *trainer, u8* poolIndexArray, struct PoolRules *rules, u32 *arrayIndex, bool32 *foundRequiredTag, u32 currIndex)
+static void HasRequiredTag(const struct Trainer *trainer, u32* poolIndexArray, struct PoolRules *rules, u32 *arrayIndex, bool32 *foundRequiredTag, u32 currIndex)
 {
     //  Start from index 2, since lead and ace has special handling
     for (u32 currTag = 2; currTag < POOL_NUM_TAGS; currTag++)
@@ -24,7 +24,7 @@ static void HasRequiredTag(const struct Trainer *trainer, u8* poolIndexArray, st
     }
 }
 
-static u32 DefaultLeadPickFunction(const struct Trainer *trainer, u8 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
+static u32 DefaultLeadPickFunction(const struct Trainer *trainer, u32 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
 {
     u32 arrayIndex = 0;
     u32 monIndex = POOL_SLOT_DISABLED;
@@ -63,7 +63,7 @@ static u32 DefaultLeadPickFunction(const struct Trainer *trainer, u8 *poolIndexA
     return monIndex;
 }
 
-static u32 DefaultAcePickFunction(const struct Trainer *trainer, u8 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
+static u32 DefaultAcePickFunction(const struct Trainer *trainer, u32 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
 {
     u32 arrayIndex = 0;
     u32 monIndex = POOL_SLOT_DISABLED;
@@ -101,7 +101,7 @@ static u32 DefaultAcePickFunction(const struct Trainer *trainer, u8 *poolIndexAr
     return monIndex;
 }
 
-static u32 DefaultOtherPickFunction(const struct Trainer *trainer, u8 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
+static u32 DefaultOtherPickFunction(const struct Trainer *trainer, u32 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
 {
     u32 arrayIndex = 0;
     u32 monIndex = POOL_SLOT_DISABLED;
@@ -136,7 +136,7 @@ static u32 DefaultOtherPickFunction(const struct Trainer *trainer, u8 *poolIndex
     return monIndex;
 }
 
-static u32 PickLowest(const struct Trainer *trainer, u8 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
+static u32 PickLowest(const struct Trainer *trainer, u32 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules)
 {
     u32 monIndex = POOL_SLOT_DISABLED;
     u32 lowestIndex = POOL_SLOT_DISABLED;
@@ -154,7 +154,7 @@ static u32 PickLowest(const struct Trainer *trainer, u8 *poolIndexArray, u32 par
     return monIndex;
 }
 
-static u32 PickMonFromPool(const struct Trainer *trainer, u8 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules, struct PickFunctions pickFunctions)
+static u32 PickMonFromPool(const struct Trainer *trainer, u32 *poolIndexArray, u32 partyIndex, u32 monsCount, u32 battleTypeFlags, struct PoolRules *rules, struct PickFunctions pickFunctions)
 {
     u32 monIndex = POOL_SLOT_DISABLED;
     //  Pick Lead
@@ -243,7 +243,7 @@ static u32 GetPoolSeed(const struct Trainer *trainer)
     return seed;
 }
 
-static void RandomizePoolIndices(const struct Trainer *trainer, u8 *poolIndexArray)
+static void RandomizePoolIndices(const struct Trainer *trainer, u32 *poolIndexArray)
 {
     //  Basically the modern (Durstenfield's) Fisher-Yates shuffle
     //  Reducing the amount of calls to random needed by only using as many bits as needed per shuffle
@@ -323,7 +323,7 @@ static struct PickFunctions GetPickFunctions(const struct Trainer *trainer)
     return pickFunctions;
 }
 
-static void TestPrune(const struct Trainer *trainer, u8 *poolIndexArray, const struct PoolRules *rules)
+static void TestPrune(const struct Trainer *trainer, u32 *poolIndexArray, const struct PoolRules *rules)
 {
     //  Test function to demonstrate pruning
     for (u32 i = 0; i < trainer->poolSize; i++)
@@ -331,7 +331,7 @@ static void TestPrune(const struct Trainer *trainer, u8 *poolIndexArray, const s
             poolIndexArray[i] = POOL_SLOT_DISABLED;
 }
 
-static void RandomTagPrune(const struct Trainer *trainer, u8 *poolIndexArray, const struct PoolRules *rules)
+static void RandomTagPrune(const struct Trainer *trainer, u32 *poolIndexArray, const struct PoolRules *rules)
 {
     u32 tagToUse = trainer->party[poolIndexArray[0]].tags;
     for (u32 i = 0; i < trainer->poolSize; i++)
@@ -339,7 +339,7 @@ static void RandomTagPrune(const struct Trainer *trainer, u8 *poolIndexArray, co
             poolIndexArray[i] = POOL_SLOT_DISABLED;
 }
 
-static void PrunePool(const struct Trainer *trainer, u8 *poolIndexArray, const struct PoolRules *rules)
+static void PrunePool(const struct Trainer *trainer, u32 *poolIndexArray, const struct PoolRules *rules)
 {
     //  Use defined pruning functions go here
     switch (trainer->poolPruneIndex)
@@ -357,7 +357,7 @@ static void PrunePool(const struct Trainer *trainer, u8 *poolIndexArray, const s
     }
 }
 
-void DoTrainerPartyPool(const struct Trainer *trainer, u32 *monIndices, u8 monsCount, u32 battleTypeFlags)
+void DoTrainerPartyPool(const struct Trainer *trainer, u32 *monIndices, u32 monsCount, u32 battleTypeFlags)
 {
         bool32 usingPool = FALSE;
         struct PoolRules rules = defaultPoolRules;
@@ -365,7 +365,7 @@ void DoTrainerPartyPool(const struct Trainer *trainer, u32 *monIndices, u8 monsC
         {
             usingPool = TRUE;
             rules = gPoolRulesetsList[trainer->poolRuleIndex];
-            u8 *poolIndexArray = Alloc(trainer->poolSize);
+            u32 *poolIndexArray = Alloc(trainer->poolSize);
             RandomizePoolIndices(trainer, poolIndexArray);
 
             struct PickFunctions pickFunctions = GetPickFunctions(trainer);

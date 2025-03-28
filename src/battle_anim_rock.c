@@ -9,19 +9,19 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-static void AnimTask_Rollout_Step(u8 taskId);
+static void AnimTask_Rollout_Step(u32 taskId);
 static void AnimRolloutParticle(struct Sprite *);
 static void AnimRockTomb(struct Sprite *);
 static void AnimRockTomb_Step(struct Sprite *sprite);
 static void AnimRockScatter(struct Sprite *);
 static void AnimRockScatter_Step(struct Sprite *sprite);
 static void AnimParticleInVortex_Step(struct Sprite *sprite);
-static void AnimTask_LoadSandstormBackground_Step(u8 taskId);
+static void AnimTask_LoadSandstormBackground_Step(u32 taskId);
 static void CreateRolloutDirtSprite(struct Task *task);
 static void AnimStealthRockStep2(struct Sprite *sprite);
 static void AnimStealthRockStep(struct Sprite *sprite);
 static void AnimStealthRock(struct Sprite *sprite);
-static u8 GetRolloutCounter(void);
+static u32 GetRolloutCounter(void);
 
 static const union AnimCmd sAnim_FlyingRock_0[] =
 {
@@ -508,7 +508,7 @@ static void AnimParticleInVortex_Step(struct Sprite *sprite)
     }
 }
 
-void AnimTask_LoadSandstormBackground(u8 taskId)
+void AnimTask_LoadSandstormBackground(u32 taskId)
 {
     int var0;
     struct BattleAnimBgData animBg;
@@ -539,7 +539,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     gTasks[taskId].func = AnimTask_LoadSandstormBackground_Step;
 }
 
-static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
+static void AnimTask_LoadSandstormBackground_Step(u32 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -674,10 +674,10 @@ void AnimRaiseSprite(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void AnimTask_Rollout(u8 taskId)
+void AnimTask_Rollout(u32 taskId)
 {
     u16 var0, var1, var2, var3;
-    u8 rolloutCounter;
+    u32 rolloutCounter;
     s16 pan1, pan2;
     struct Task *task;
 
@@ -720,13 +720,13 @@ void AnimTask_Rollout(u8 taskId)
     task->func = AnimTask_Rollout_Step;
 }
 
-void AnimTask_TectonicRageRollout(u8 taskId)
+void AnimTask_TectonicRageRollout(u32 taskId)
 {
     u16 var0, var1, var2, var3;
     int var5;
     s16 pan1, pan2;
     struct Task *task;
-    u8 rolloutCounter = 1;
+    u32 rolloutCounter = 1;
 
     task = &gTasks[taskId];
 
@@ -768,7 +768,7 @@ void AnimTask_TectonicRageRollout(u8 taskId)
     task->func = AnimTask_Rollout_Step;
 }
 
-static void AnimTask_Rollout_Step(u8 taskId)
+static void AnimTask_Rollout_Step(u32 taskId)
 {
     struct Task *task;
 
@@ -838,7 +838,7 @@ static void CreateRolloutDirtSprite(struct Task *task)
     const struct SpriteTemplate *spriteTemplate;
     int tileOffset;
     u16 x, y;
-    u8 spriteId;
+    u32 spriteId;
 
     switch (task->data[1])
     {
@@ -887,7 +887,7 @@ static void AnimRolloutParticle(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
-        u8 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
+        u32 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
         if (taskId != TASK_NONE)
             gTasks[taskId].data[11]--;
 
@@ -895,10 +895,10 @@ static void AnimRolloutParticle(struct Sprite *sprite)
     }
 }
 
-static u8 GetRolloutCounter(void)
+static u32 GetRolloutCounter(void)
 {
-    u8 retVal = gAnimDisableStructPtr->rolloutTimerStartValue - gAnimDisableStructPtr->rolloutTimer;
-    u8 var0 = retVal - 1;
+    u32 retVal = gAnimDisableStructPtr->rolloutTimerStartValue - gAnimDisableStructPtr->rolloutTimer;
+    u32 var0 = retVal - 1;
     if (var0 > 4)
         retVal = 1;
 
@@ -974,7 +974,7 @@ static void AnimRockScatter_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimTask_GetSeismicTossDamageLevel(u8 taskId)
+void AnimTask_GetSeismicTossDamageLevel(u32 taskId)
 {
     if (gAnimMoveDmg < 33)
         gBattleAnimArgs[ARG_RET_ID] = 0;
@@ -986,7 +986,7 @@ void AnimTask_GetSeismicTossDamageLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_MoveSeismicTossBg(u8 taskId)
+void AnimTask_MoveSeismicTossBg(u32 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -1006,7 +1006,7 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
     gTasks[taskId].data[0]++;
 }
 
-void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
+void AnimTask_SeismicTossBgAccelerateDownAtEnd(u32 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {

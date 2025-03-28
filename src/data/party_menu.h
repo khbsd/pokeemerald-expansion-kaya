@@ -680,7 +680,7 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_DONT_HAVE]  = gText_DontHave,
 };
 
-static const u16 sUnusedData[] =
+static const u32 sUnusedData[] =
 {
     0x0108, 0x0151, 0x0160, 0x015b, 0x002e, 0x005c, 0x0102, 0x0153, 0x014b, 0x00ed, 0x00f1, 0x010d, 0x003a, 0x003b, 0x003f, 0x0071,
     0x00b6, 0x00f0, 0x00ca, 0x00db, 0x00da, 0x004c, 0x00e7, 0x0055, 0x0057, 0x0059, 0x00d8, 0x005b, 0x005e, 0x00f7, 0x0118, 0x0068,
@@ -783,7 +783,7 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_ZYGARDE_CUBE]  = ARRAY_COUNT(sPartyMenuAction_ZygardeCube),
 };
 
-static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =
+static const u32 sFieldMoves[FIELD_MOVES_COUNT + 1] =
 {
     [FIELD_MOVE_CUT]          = MOVE_CUT,
     [FIELD_MOVE_FLASH]        = MOVE_FLASH,
@@ -840,7 +840,7 @@ static const u8 *const sUnionRoomTradeMessages[] =
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
-const u16 gHeldItemPalette[] = INCBIN_U16("graphics/party_menu/hold_icons.gbapal");
+const u32 gHeldItemPalette[] = INCBIN_u32("graphics/party_menu/hold_icons.gbapal");
 
 static const struct OamData sOamData_HeldItem =
 {
@@ -1151,7 +1151,7 @@ static const u8 *const sUnused_StatStrings[] =
 #define ROTOM_FAN_MOVE   MOVE_AIR_SLASH
 #define ROTOM_MOW_MOVE   MOVE_LEAF_STORM
 
-static const u16 sRotomFormChangeMoves[5] =
+static const u32 sRotomFormChangeMoves[5] =
 {
     ROTOM_HEAT_MOVE,
     ROTOM_WASH_MOVE,

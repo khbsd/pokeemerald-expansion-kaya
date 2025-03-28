@@ -32,7 +32,7 @@ static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu *);
 static void SetMenuInputHandler(struct Pokenav_Menu *);
 
 // Number of entries - 1 for that menu type
-static const u8 sLastCursorPositions[] =
+static const u32 sLastCursorPositions[] =
 {
     [POKENAV_MENU_TYPE_DEFAULT]           = 2,
     [POKENAV_MENU_TYPE_UNLOCK_MC]         = 3,
@@ -41,7 +41,7 @@ static const u8 sLastCursorPositions[] =
     [POKENAV_MENU_TYPE_CONDITION_SEARCH]  = 5
 };
 
-static const u8 sMenuItems[][MAX_POKENAV_MENUITEMS] =
+static const u32 sMenuItems[][MAX_POKENAV_MENUITEMS] =
 {
     [POKENAV_MENU_TYPE_DEFAULT] =
     {
@@ -82,9 +82,9 @@ static const u8 sMenuItems[][MAX_POKENAV_MENUITEMS] =
     },
 };
 
-static u8 GetPokenavMainMenuType(void)
+static u32 GetPokenavMainMenuType(void)
 {
-    u8 menuType = POKENAV_MENU_TYPE_DEFAULT;
+    u32 menuType = POKENAV_MENU_TYPE_DEFAULT;
 
     if (FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV))
     {
@@ -389,7 +389,7 @@ static u32 HandleConditionSearchMenuInput(struct Pokenav_Menu *menu)
 
     if (JOY_NEW(A_BUTTON))
     {
-        u8 menuItem = sMenuItems[menu->menuType][menu->cursorPos];
+        u32 menuItem = sMenuItems[menu->menuType][menu->cursorPos];
         if (menuItem != POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL)
         {
             SetSelectedConditionSearch(menuItem - POKENAV_MENUITEM_CONDITION_SEARCH_COOL);

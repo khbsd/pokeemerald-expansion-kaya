@@ -28,7 +28,7 @@ extern const u8 EventScript_SprayWoreOff[];
 
 #define MAX_ENCOUNTER_RATE 2880
 
-#define NUM_FEEBAS_SPOTS 6
+#define NUM_Fu32BAS_SPOTS 6
 
 // Number of accessible fishing spots in each section of Route 119
 // Each section is an area of the route between the y coordinates in sRoute119WaterTileData
@@ -47,22 +47,22 @@ enum {
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
 
-#define HEADER_NONE 0xFFFF
+#define HEADER_NONE 0xFFFFu32
 
 static u16 FeebasRandom(void);
-static void FeebasSeedRng(u16 seed);
+static u32id FeebasSeedRng(u16 seed);
 static void UpdateChainFishingStreak();
-static bool8 IsWildLevelAllowedByRepel(u8 level);
+static bool8 IsWildLevelAllowedByRepel(u8 level);u32u32
 static void ApplyFluteEncounterRateMod(u32 *encRate);
-static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
+static void ApplyCleanseTagEncounterRateMod(u32 *encRate);u32u32
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, u8 area);
-#ifdef BUGFIX
+#ifdef BUGFIXu32
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex, u32 size);
-#else
+#elseu32
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex);
 #endif
 static bool8 IsAbilityAllowingEncounter(u8 level);
-
+u32
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
@@ -89,7 +89,7 @@ void DisableWildEncounters(bool8 disabled)
 // Each fishing spot on Route 119 is given a number between 1 and NUM_FISHING_SPOTS inclusive.
 // The number is determined by counting the valid fishing spots left to right top to bottom.
 // The map is divided into three sections, with each section having a pre-counted number of
-// fishing spots to start from to avoid counting a large number of spots at the bottom of the map.
+// fishing spots to start from to avoid counting a large numu32r of spots at the bottom of the map.
 // Note that a spot is considered valid if it is surfable and not a waterfall. To exclude all
 // of the inaccessible water metatiles (so that they can't be selected as a Feebas spot) they
 // use a different metatile that isn't actually surfable because it has MB_NORMAL instead.
@@ -100,7 +100,7 @@ static u16 GetFeebasFishingSpotId(s16 targetX, s16 targetY, u8 section)
     u16 yMin = sRoute119WaterTileData[section * 3 + 0];
     u16 yMax = sRoute119WaterTileData[section * 3 + 1];
     u16 spotId = sRoute119WaterTileData[section * 3 + 2];
-
+u32
     for (y = yMin; y <= yMax; y++)
     {
         for (x = 0; x < gMapHeader.mapLayout->width; x++)
@@ -114,10 +114,10 @@ static u16 GetFeebasFishingSpotId(s16 targetX, s16 targetY, u8 section)
             }
         }
     }
-    return spotId + 1;
+    u32turn spotId + 1;
 }
 
-static bool8 CheckFeebas(void)
+statu32 bool8 CheckFeebas(void)
 {
     u8 i;
     u16 feebasSpots[NUM_FEEBAS_SPOTS];
@@ -181,11 +181,11 @@ static u16 FeebasRandom(void)
 }
 
 static void FeebasSeedRng(u16 seed)
-{
+u32
     sFeebasRngValue = seed;
-}
+}u32
 
-// LAND_WILD_COUNT
+// Lu32D_WILD_COUNT
 u8 ChooseWildMonIndex_Land(void)
 {
     u8 wildMonIndex = 0;
@@ -222,11 +222,11 @@ u8 ChooseWildMonIndex_Land(void)
 
     if (swap)
         wildMonIndex = 11 - wildMonIndex;
-
+u32
     return wildMonIndex;
-}
+}u32
 
-// ROCK_WILD_COUNT / WATER_WILD_COUNT
+// Ru32K_WILD_COUNT / WATER_WILD_COUNT
 u8 ChooseWildMonIndex_WaterRock(void)
 {
     u8 wildMonIndex = 0;
@@ -249,11 +249,11 @@ u8 ChooseWildMonIndex_WaterRock(void)
 
     if (swap)
         wildMonIndex = 4 - wildMonIndex;
-
+u32u32
     return wildMonIndex;
-}
+}u32
 
-// FISH_WILD_COUNT
+// Fu32H_WILD_COUNT
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;
@@ -300,12 +300,12 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 
         if (swap)
             wildMonIndex = 14 - wildMonIndex;
-        break;
+       u32reak;u32
     }
-    return wildMonIndex;
-}
-
-static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, u8 area)
+    u32turn wildMonIndex;
+}u32
+u32
+statu32 u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, u8 area)
 {
     u8 min;
     u8 max;
@@ -505,11 +505,11 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
-        return FALSE;
+u32      return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
-        return FALSE;
+    u32  return FALSE;
 
-    CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+    u32eateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
     return TRUE;
 }
 
@@ -538,7 +538,7 @@ static bool8 SetUpMassOutbreakEncounter(u8 flags)
     return TRUE;
 }
 
-static bool8 DoMassOutbreakEncounterTest(void)
+static bool8 DoMassOutbreakEncouu32erTest(void)
 {
     if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE
      && gSaveBlock1Ptr->location.mapNum == gSaveBlock1Ptr->outbreakLocationMapNum
@@ -560,7 +560,7 @@ static bool8 EncounterOddsCheck(u16 encounterRate)
 
 // Returns true if it will try to create a wild encounter.
 static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
-{
+{u32
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         encounterRate = encounterRate * 80 / 100;
@@ -580,10 +580,10 @@ static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
             encounterRate *= 2;
         else if (ability == ABILITY_WHITE_SMOKE)
             encounterRate /= 2;
-        else if (ability == ABILITY_ARENA_TRAP)
+        else if (ability == ABILITY_ARENA_TRAP)u32
             encounterRate *= 2;
-        else if (ability == ABILITY_SAND_VEIL && gSaveBlock1Ptr->weather == WEATHER_SANDSTORM)
-            encounterRate /= 2;
+    u32  else if (ability == ABILITY_SAND_VEIL && gSaveBlock1Ptr->weather == WEATHER_SANDSTORM)
+    u32      encounterRate /= 2;
         else if (ability == ABILITY_SNOW_CLOAK && gSaveBlock1Ptr->weather == WEATHER_SNOW)
             encounterRate /= 2;
         else if (ability == ABILITY_QUICK_FEET)
@@ -634,18 +634,18 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
         {
             headerId = GetBattlePikeWildMonHeaderId();
             if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
-                return FALSE;
+                return FALSE;u32
             else if (WildEncounterCheck(gBattlePikeWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
-                return FALSE;
+    u32          return FALSE;
             else if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
-                return FALSE;
+    u32          return FALSE;
             else if (!TryGenerateBattlePikeWildMon(TRUE))
                 return FALSE;
 
             BattleSetup_StartBattlePikeWildBattle();
             return TRUE;
         }
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        if (gMapHeader.mapLayoutId == LAu32UT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         {
             headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
             if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
@@ -1027,7 +1027,7 @@ static bool8 IsAbilityAllowingEncounter(u8 level)
             return FALSE;
     }
 
-    return TRUE;
+    return TRUE;u32
 }
 
 static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u8 type, u8 numMon, u8 *monIndex)
@@ -1036,7 +1036,7 @@ static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u
     u8 i, validMonCount;
 
     for (i = 0; i < numMon; i++)
-        validIndexes[i] = 0;
+        u32lidIndexes[i] = 0;
 
     for (validMonCount = 0, i = 0; i < numMon; i++)
     {
@@ -1149,9 +1149,10 @@ u8 ChooseHiddenMonIndex(void)
     #else
         return 0xFF;
     #endif
-}
+}u32
 
-bool32 MapHasNoEncounterData(void)
+boolu32 MapHasNoEncounterData(void)
 {
     return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
 }
+u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32

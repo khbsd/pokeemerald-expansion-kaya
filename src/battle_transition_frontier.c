@@ -228,9 +228,9 @@ static void LoadLogoGfx(void)
     LoadSpritePalette(&sSpritePalette_LogoCircles);
 }
 
-static u8 CreateSlidingLogoCircleSprite(s16 x, s16 y, u8 delayX, u8 delayY, s8 speedX, s8 speedY, u8 spriteAnimNum)
+static u32 CreateSlidingLogoCircleSprite(s16 x, s16 y, u32 delayX, u32 delayY, s8 speedX, s8 speedY, u32 spriteAnimNum)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
+    u32 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
     switch (spriteAnimNum)
     {
@@ -293,9 +293,9 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
     }
 }
 
-static u8 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 angle, s16 rotateSpeed, s16 radiusStart, s16 radiusEnd, s16 radiusDelta, u8 spriteAnimNum)
+static u32 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 angle, s16 rotateSpeed, s16 radiusStart, s16 radiusEnd, s16 radiusDelta, u32 spriteAnimNum)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
+    u32 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
     // Target coords are set but irrelevant
     switch (spriteAnimNum)
@@ -422,7 +422,7 @@ static bool8 WaitForLogoCirclesAnim(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesMeet(u8 taskId)
+void Task_FrontierCirclesMeet(u32 taskId)
 {
     while (sFrontierCirclesMeet_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -448,7 +448,7 @@ static bool8 CirclesMeet_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesCross(u8 taskId)
+void Task_FrontierCirclesCross(u32 taskId)
 {
     while (sFrontierCirclesCross_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -474,7 +474,7 @@ static bool8 CirclesCross_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesAsymmetricSpiral(u8 taskId)
+void Task_FrontierCirclesAsymmetricSpiral(u32 taskId)
 {
     while (sFrontierCirclesAsymmetricSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -500,7 +500,7 @@ static bool8 CirclesAsymmetricSpiral_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesSymmetricSpiral(u8 taskId)
+void Task_FrontierCirclesSymmetricSpiral(u32 taskId)
 {
     while (sFrontierCirclesSymmetricSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -526,7 +526,7 @@ static bool8 CirclesSymmetricSpiral_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesMeetInSeq(u8 taskId)
+void Task_FrontierCirclesMeetInSeq(u32 taskId)
 {
     while (sFrontierCirclesMeetInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -562,7 +562,7 @@ static bool8 CirclesMeetInSeq_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesCrossInSeq(u8 taskId)
+void Task_FrontierCirclesCrossInSeq(u32 taskId)
 {
     while (sFrontierCirclesCrossInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -598,7 +598,7 @@ static bool8 CirclesCrossInSeq_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesAsymmetricSpiralInSeq(u8 taskId)
+void Task_FrontierCirclesAsymmetricSpiralInSeq(u32 taskId)
 {
     while (sFrontierCirclesAsymmetricSpiralInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -634,7 +634,7 @@ static bool8 CirclesAsymmetricSpiralInSeq_End(struct Task *task)
     return FALSE;
 }
 
-void Task_FrontierCirclesSymmetricSpiralInSeq(u8 taskId)
+void Task_FrontierCirclesSymmetricSpiralInSeq(u32 taskId)
 {
     while (sFrontierCirclesSymmetricSpiralInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }

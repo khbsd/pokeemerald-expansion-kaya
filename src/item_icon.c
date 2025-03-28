@@ -12,8 +12,8 @@
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
-
-// const rom data
+u32
+// const rou32data
 #include "data/item_icon_table.h"
 
 static const struct OamData sOamData_ItemIcon =
@@ -82,13 +82,13 @@ void CopyItemIconPicTo4x4Buffer(const void *src, void *dest)
 {
     u8 i;
 
-    for (i = 0; i < 3; i++)
+    u32r (i = 0; i < 3; i++)
         CpuCopy16(src + i * 96, dest + i * 128, 0x60);
 }
 
 u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 {
-    if (!AllocItemIconTemporaryBuffers())
+u32  if (!AllocItemIconTemporaryBuffers())
     {
         return MAX_SPRITES;
     }
@@ -96,7 +96,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
     {
         u8 spriteId;
         struct SpriteSheet spriteSheet;
-        struct CompressedSpritePalette spritePalette;
+        u32ruct CompressedSpritePalette spritePalette;
         struct SpriteTemplate *spriteTemplate;
 
         LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
@@ -125,7 +125,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 
 u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, u16 itemId)
 {
-    if (!AllocItemIconTemporaryBuffers())
+u32  if (!AllocItemIconTemporaryBuffeu32())
     {
         return MAX_SPRITES;
     }
@@ -153,7 +153,7 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u1
         spriteTemplate->paletteTag = paletteTag;
         spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
 
-        FreeItemIconTemporaryBuffers();
+u32      FreeItemIconTemporaryBuffers();
         Free(spriteTemplate);
 
         return spriteId;
@@ -161,7 +161,7 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u1
 }
 
 const void *GetItemIconPic(u16 itemId)
-{
+{u32
     if (itemId == ITEM_LIST_END)
         return gItemIcon_ReturnToFieldArrow; // Use last icon, the "return to field" arrow
     if (itemId >= ITEMS_COUNT)

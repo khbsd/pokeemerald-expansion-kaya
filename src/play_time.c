@@ -9,7 +9,7 @@ enum
     MAXED_OUT
 };
 
-static u8 sPlayTimeCounterState;
+static u32 sPlayTimeCounterState;
 
 void PlayTimeCounter_Reset(void)
 {

@@ -25,17 +25,17 @@
 
 static void InitGiddyTaleList(void);
 static void StartBardSong(bool8 useNewSongLyrics);
-static void Task_BardSong(u8 taskId);
+static void Task_BardSong(u32 taskId);
 static void StorytellerSetup(void);
 static void Storyteller_ResetFlag(void);
 
-static u8 sSelectedStory;
+static u32 sSelectedStory;
 
 COMMON_DATA struct BardSong gBardSong = {0};
 
 static EWRAM_DATA u16 sUnusedPitchTableIndex = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
-static EWRAM_DATA u8 sStorytellerWindowId = 0;
+static EWRAM_DATA u32 sStorytellerWindowId = 0;
 
 static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
     EC_WORD_SHAKE,
@@ -46,7 +46,7 @@ static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
     EC_WORD_DANCE
 };
 
-static const u8 *const sGiddyAdjectives[] = {
+static const u32 *const sGiddyAdjectives[] = {
     GiddyText_SoPretty,
     GiddyText_SoDarling,
     GiddyText_SoRelaxed,
@@ -60,7 +60,7 @@ static const u8 *const sGiddyAdjectives[] = {
 // Non-random lines Giddy can say. Not all are strictly
 // questions, but most are, and the player will receive
 // a Yes/No prompt afterwards regardless.
-static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+static const u32 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_ISoWantToGoOnAVacation,
     GiddyText_IBoughtCrayonsWith120Colors,
     GiddyText_WouldntItBeNiceIfWeCouldFloat,
@@ -138,7 +138,7 @@ void SetMauvilleOldMan(void)
     SetMauvilleOldManObjEventGfx();
 }
 
-u8 GetCurrentMauvilleOldMan(void)
+u32 GetCurrentMauvilleOldMan(void)
 {
     return gSaveBlock1Ptr->oldMan.common.id;
 }
@@ -177,8 +177,8 @@ static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
     u16 * lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
-    u8 *wordEnd = gStringVar4;
-    u8 *str = wordEnd;
+    u32 *wordEnd = gStringVar4;
+    u32 *str = wordEnd;
     u16 paragraphNum;
 
     // Easy chat "words" aren't strictly single words, e.g. EC_WORD_MATCH_UP is the string "MATCH UP".
@@ -291,7 +291,7 @@ void GenerateGiddyLine(void)
     // or one of the texts in sGiddyQuestions.
     if (giddy->randomWords[giddy->taleCounter] != EC_EMPTY_WORD)
     {
-        u8 *stringPtr;
+        u32 *stringPtr;
         u32 adjective = Random();
         adjective %= ARRAY_COUNT(sGiddyAdjectives);
 
@@ -440,7 +440,7 @@ enum {
 
 static void StartBardSong(bool8 useNewSongLyrics)
 {
-    u8 taskId = CreateTask(Task_BardSong, 80);
+    u32 taskId = CreateTask(Task_BardSong, 80);
 
     gTasks[taskId].tUseNewSongLyrics = useNewSongLyrics;
 }
@@ -455,7 +455,7 @@ static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 render
     gDisableTextPrinters = TRUE;
 }
 
-static void DrawSongTextWindow(const u8 *str)
+static void DrawSongTextWindow(const u32 *str)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
@@ -531,7 +531,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
                 // The division then multiplication by 3 below is rounding any value from one of these triplets to a PH_*_HELD.
                 // This means the actual song files for any phoneme other than PH_*_HELD won't be played here, and the only difference
                 // when specifying a PH_*_BLEND or PH_*_SOLO in the songId will be the length of the sound, determined by 'sPhonemeLengths'.
-                u8 phonemeTripletId = template->songId / 3;
+                u32 phonemeTripletId = template->songId / 3;
                 m4aSongNumStart((FIRST_PHONEME_SONG + 1) + phonemeTripletId * 3);
             }
             song->state = SOUND_STATE_SET_BASE;
@@ -597,7 +597,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
     }
 }
 
-static void Task_BardSong(u8 taskId)
+static void Task_BardSong(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -622,7 +622,7 @@ static void Task_BardSong(u8 taskId)
     case BARD_STATE_GET_WORD:
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-        u8 *str = &gStringVar4[task->tCharIndex];
+        u32 *str = &gStringVar4[task->tCharIndex];
         u16 wordLen = 0;
 
         // Read letters until delimiter
@@ -749,7 +749,7 @@ void SetMauvilleOldManObjEventGfx(void)
 void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 {
     s32 i;
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
+    u32 playerName[PLAYER_NAME_LENGTH + 1];
 
     switch (oldMan->common.id)
     {
@@ -853,7 +853,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
+    u32 playerName[PLAYER_NAME_LENGTH + 1];
     s32 i;
     if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
@@ -889,7 +889,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
         {
             for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
-                u8 *str = trader->playerNames[i];
+                u32 *str = trader->playerNames[i];
                 if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
                 {
                     StripExtCtrlCodes(str);
@@ -964,11 +964,11 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
 
 struct Story
 {
-    u8 stat;
-    u8 minVal;
-    const u8 *title;
-    const u8 *action;
-    const u8 *fullText;
+    u32 stat;
+    u32 minVal;
+    const u32 *title;
+    const u32 *action;
+    const u32 *fullText;
 };
 
 static const struct Story sStorytellerStories[] = {
@@ -1216,7 +1216,7 @@ static void Storyteller_ResetFlag(void)
     sStorytellerPtr->alreadyRecorded = FALSE;
 }
 
-static u32 StorytellerGetGameStat(u8 stat)
+static u32 StorytellerGetGameStat(u32 stat)
 {
     if (stat == 50)
         stat = GAME_STAT_SAVED_GAME;
@@ -1235,24 +1235,24 @@ static const struct Story *GetStoryByStat(u32 stat)
     return &sStorytellerStories[sNumStories - 1];
 }
 
-static const u8 *GetStoryTitleByStat(u32 stat)
+static const u32 *GetStoryTitleByStat(u32 stat)
 {
     return GetStoryByStat(stat)->title;
 }
 
-static const u8 *GetStoryTextByStat(u32 stat)
+static const u32 *GetStoryTextByStat(u32 stat)
 {
     return GetStoryByStat(stat)->fullText;
 }
 
-static const u8 *GetStoryActionByStat(u32 stat)
+static const u32 *GetStoryActionByStat(u32 stat)
 {
     return GetStoryByStat(stat)->action;
 }
 
-static u8 GetFreeStorySlot(void)
+static u32 GetFreeStorySlot(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
@@ -1264,14 +1264,14 @@ static u8 GetFreeStorySlot(void)
 
 static u32 StorytellerGetRecordedTrainerStat(u32 trainer)
 {
-    u8 *ptr = sStorytellerPtr->statValues[trainer];
+    u32 *ptr = sStorytellerPtr->statValues[trainer];
 
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
 static void StorytellerSetRecordedTrainerStat(u32 trainer, u32 val)
 {
-    u8 *ptr = sStorytellerPtr->statValues[trainer];
+    u32 *ptr = sStorytellerPtr->statValues[trainer];
 
     ptr[0] = val;
     ptr[1] = val >> 8;
@@ -1289,15 +1289,15 @@ static bool32 HasTrainerStatIncreased(u32 trainer)
 
 static void GetStoryByStattellerPlayerName(u32 player, void *dst)
 {
-    u8 *name = sStorytellerPtr->trainerNames[player];
+    u32 *name = sStorytellerPtr->trainerNames[player];
 
     memset(dst, EOS, PLAYER_NAME_LENGTH + 1);
     memcpy(dst, name, PLAYER_NAME_LENGTH);
 }
 
-static void StorytellerSetPlayerName(u32 player, const u8 *src)
+static void StorytellerSetPlayerName(u32 player, const u32 *src)
 {
-    u8 *name = sStorytellerPtr->trainerNames[player];
+    u32 *name = sStorytellerPtr->trainerNames[player];
     memset(name, EOS, PLAYER_NAME_LENGTH);
     memcpy(name, src, PLAYER_NAME_LENGTH);
 }
@@ -1315,14 +1315,14 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
 
 static bool8 StorytellerInitializeRandomStat(void)
 {
-    u8 storyIds[sNumStories];
+    u32 storyIds[sNumStories];
     s32 i, j;
 
     Shuffle(storyIds, sNumStories, sizeof(storyIds[0]));
     for (i = 0; i < sNumStories; i++)
     {
-        u8 stat = sStorytellerStories[storyIds[i]].stat;
-        u8 minVal = sStorytellerStories[storyIds[i]].minVal;
+        u32 stat = sStorytellerStories[storyIds[i]].stat;
+        u32 minVal = sStorytellerStories[storyIds[i]].minVal;
 
         for (j = 0; j < NUM_STORYTELLER_TALES; j++)
         {
@@ -1344,7 +1344,7 @@ static bool8 StorytellerInitializeRandomStat(void)
 
 static void StorytellerDisplayStory(u32 player)
 {
-    u8 stat = sStorytellerPtr->gameStatIDs[player];
+    u32 stat = sStorytellerPtr->gameStatIDs[player];
 
     ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), STR_CONV_MODE_LEFT_ALIGN, 10);
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
@@ -1382,7 +1382,7 @@ static void PrintStoryList(void)
     CopyWindowToVram(sStorytellerWindowId, COPYWIN_FULL);
 }
 
-static void Task_StoryListMenu(u8 taskId)
+static void Task_StoryListMenu(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 selection;
@@ -1424,7 +1424,7 @@ void Script_StorytellerDisplayStory(void)
     StorytellerDisplayStory(sSelectedStory);
 }
 
-u8 StorytellerGetFreeStorySlot(void)
+u32 StorytellerGetFreeStorySlot(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return GetFreeStorySlot();
@@ -1433,7 +1433,7 @@ u8 StorytellerGetFreeStorySlot(void)
 // Returns TRUE if stat has increased
 bool8 StorytellerUpdateStat(void)
 {
-    u8 stat;
+    u32 stat;
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     stat = sStorytellerPtr->gameStatIDs[sSelectedStory];
 

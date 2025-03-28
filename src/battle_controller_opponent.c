@@ -559,7 +559,7 @@ static void OpponentHandleChooseMove(u32 battler)
                 break;
             default:
                 {
-                    u16 chosenMove = moveInfo->moves[chosenMoveId];
+                    u32 chosenMove = moveInfo->moves[chosenMoveId];
                     if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_USER)
                         gBattlerTarget = battler;
                     if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
@@ -587,7 +587,7 @@ static void OpponentHandleChooseMove(u32 battler)
     }
     else // Wild pokemon - use random move
     {
-        u16 move;
+        u32 move;
         u8 target;
         do
         {
@@ -606,8 +606,8 @@ static void OpponentHandleChooseMove(u32 battler)
             // Don't bother to loop through table if the move can't attack ally
             if (B_WILD_NATURAL_ENEMIES == TRUE && !(GetBattlerMoveTargetType(battler, move) & MOVE_TARGET_BOTH))
             {
-                u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
-                static const u16 naturalEnemies[][2] =
+                u32 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
+                static const u32 naturalEnemies[][2] =
                 {
                     // Attacker         Target
                     {SPECIES_ZANGOOSE,  SPECIES_SEVIPER},
@@ -726,7 +726,7 @@ static void OpponentHandleChoosePokemon(u32 battler)
 
 static u8 CountAIAliveNonEggMonsExcept(u8 slotToIgnore)
 {
-    u16 i, count;
+    u32 i, count;
 
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {

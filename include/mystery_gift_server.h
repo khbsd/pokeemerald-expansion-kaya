@@ -95,6 +95,6 @@ struct MysteryGiftServer
 
 void MysterGiftServer_CreateForCard();
 void MysterGiftServer_CreateForNews();
-u32 MysterGiftServer_Run(u16 * endVal);
+u32 MysterGiftServer_Run(u32 * endVal);
 
 #endif //GUARD_MYSTERY_GIFT_SERVER_H

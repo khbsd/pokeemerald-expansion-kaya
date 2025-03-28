@@ -120,11 +120,11 @@ typedef struct InitializeParametersTag {
     // rfu_REQ_configSystem argument
     u8 maxMFrame;                            // Maximum number of times to re-transmit of RFU level
     u8 MC_TimerCount;                        // MC_Timer count (x16.7ms)
-    u16 availSlot_flag;                      // Use RFU-API constant "AVAIL_SLOT1-4" to specify the maximum number of child devices (1 - 4) that can be connected to a parent device.
+    u32 availSlot_flag;                      // Use RFU-API constant "AVAIL_SLOT1-4" to specify the maximum number of child devices (1 - 4) that can be connected to a parent device.
 
     // rfu_REQB_configGameData argument
     u8 mboot_flag;                           // Multiplayer boot flag
-    u16 serialNo;                            // Game serial number
+    u32 serialNo;                            // Game serial number
     u8 *gameName;                            // Game name
     u8 *userName;                            // User name
 
@@ -133,18 +133,18 @@ typedef struct InitializeParametersTag {
 
     // Link recovery settings
     u8 linkRecovery_enable;                  // Determines whether or not to execute the link recovery process when a link cut occurs
-    u16 linkRecovery_period;                 // Time to spend on the link recovery process (x 16.7 ms)  Note: Runs for unlimited time when specifying 0.
+    u32 linkRecovery_period;                 // Time to spend on the link recovery process (x 16.7 ms)  Note: Runs for unlimited time when specifying 0.
 
     // Setting for NI-type data transmit/receive period
-    u16 NI_failCounter_limit;                //  Limit for failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0.
+    u32 NI_failCounter_limit;                //  Limit for failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0.
 }INIT_PARAM;
 
 
 // Timer that counts with the V-Blank cycle
 typedef struct VblankTimerTag {
     u8 active;                               // Timer ON/OFF (bits 0 - 3 indicate ON/OFF for each connected slot)
-    u16 count_max;                           // Maximum count value (x16.7ms)
-    u16 count[RFU_CHILD_MAX];                // Current count value (x 16.7 ms) for each connected slot
+    u32 count_max;                           // Maximum count value (x16.7ms)
+    u32 count[RFU_CHILD_MAX];                // Current count value (x 16.7 ms) for each connected slot
 }VBL_TIMER;
 
 typedef struct linkManagerTag
@@ -167,22 +167,22 @@ typedef struct linkManagerTag
     u8 msc_exe_flag;                                // MSC callback executing flag (internally used by the API)
     u8 child_slot;                                  // Slot number where child device connected (internally used by the API)
     u8 state_bak[2];                                // Backup of link manager state (internally used by the API)
-    u16 param[2];                                   // Region where parameters returned when LMAN callback occurs are stored.
-    u16 NI_failCounter_limit;                       // Period of failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0
-    u16 connect_period;                             // Count for the period to execute a connection process (x 16.7 ms). Note: Runs for unlimited time when specifying 0.
-    u16 pcswitch_period_bak;                        // Backup for No. 3 SC period during parent-child switching search.
-    u16 work;                                       // Work region used by the link manager.
-    u16 *acceptable_serialNo_list;                  // List of game serial numbers that can accept connections. (See Note below)
+    u32 param[2];                                   // Region where parameters returned when LMAN callback occurs are stored.
+    u32 NI_failCounter_limit;                       // Period of failCounter during NI type data transmit/receive (x 16.7 ms) Note: Runs for unlimited time when specifying 0
+    u32 connect_period;                             // Count for the period to execute a connection process (x 16.7 ms). Note: Runs for unlimited time when specifying 0.
+    u32 pcswitch_period_bak;                        // Backup for No. 3 SC period during parent-child switching search.
+    u32 work;                                       // Work region used by the link manager.
+    u32 *acceptable_serialNo_list;                  // List of game serial numbers that can accept connections. (See Note below)
     VBL_TIMER nameAcceptTimer;                      // Timer for period to receive game names from child device.
     VBL_TIMER linkRecoveryTimer;                    // Timer for the link recovery process period for both parent and child. Note: Runs for unlimited time when specifying 0.
     INIT_PARAM *init_param;                         // Pointer to parameter when executing initial setting process.
     void (*LMAN_callback)(u8 msg,u8 param_count);   // Pointer to user-defined LMAN callback routine generated by link manager operation.
-    void (*MSC_callback)(u16 REQ_commandID);        // User-defined MSC callback function. (When defining the link manager, defines the MSC callback using rfu_LMAN_initializeManager or rfu_LMAN_setMSCCallback without using rfu_setMSCCallback.)
+    void (*MSC_callback)(u32 REQ_commandID);        // User-defined MSC callback function. (When defining the link manager, defines the MSC callback using rfu_LMAN_initializeManager or rfu_LMAN_setMSCCallback without using rfu_setMSCCallback.)
 } LINK_MANAGER;
 
 /*  Note: The acceptable_serialNo_list uses the following format to specify a list of game serial numbers that the parent device can accept connections from and terminates with 0xffff. (maximum 16 devices)
 
-    u16 acceptable_serialNo_list[]={0x0001, 0x0002, 0x0003, 0xffff};
+    u32 acceptable_serialNo_list[]={0x0001, 0x0002, 0x0003, 0xffff};
 */
 
 extern struct linkManagerTag lman;
@@ -190,16 +190,16 @@ extern struct linkManagerTag lman;
 u32 rfu_LMAN_REQBN_softReset_and_checkID(void);
 void rfu_LMAN_requestChangeAgbClockMaster(void);
 void rfu_LMAN_initializeRFU(INIT_PARAM *init_params);
-u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list);
+u8 rfu_LMAN_establishConnection(u8 parent_child, u32 connect_period, u32 name_accept_period, u32 *acceptable_serialNo_list);
 void rfu_LMAN_stopManager(bool8 forced_stop_and_RFU_reset_flag);
-void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u16));
+void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u32));
 void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag);
 void rfu_LMAN_powerDownRFU(void);
-u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 connect_period);
-u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period);
+u8 rfu_LMAN_CHILD_connectParent(u32 parentId, u32 connect_period);
+u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u32 recovery_period);
 void rfu_LMAN_manager_entity(u32 rand);
 void rfu_LMAN_syncVBlank(void);
-u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u16));
+u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u32));
 void rfu_LMAN_forceChangeSP(void);
 
 #endif //GUARD_LINKMANAGER_H

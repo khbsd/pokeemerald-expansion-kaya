@@ -81,7 +81,7 @@ static void SoundTask_FireBlast_Step2(u8 taskId)
 
 void SoundTask_LoopSEAdjustPanning(u8 taskId)
 {
-    u16 songId = gBattleAnimArgs[0];
+    u32 songId = gBattleAnimArgs[0];
     s8 targetPan = gBattleAnimArgs[2];
     s8 panIncrement = gBattleAnimArgs[3];
     u8 r10 = gBattleAnimArgs[4];
@@ -122,7 +122,7 @@ static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[5])
     {
-        u16 dPan, oldPan;
+        u32 dPan, oldPan;
         gTasks[taskId].data[10] = 0;
         dPan = gTasks[taskId].data[3];
         oldPan = gTasks[taskId].data[11];
@@ -133,7 +133,7 @@ static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
 
 void SoundTask_PlayCryHighPitch(u8 taskId)
 {
-    u16 species = 0;
+    u32 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
@@ -178,7 +178,7 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
 
 void SoundTask_PlayDoubleCry(u8 taskId)
 {
-    u16 species = 0;
+    u32 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
@@ -236,7 +236,7 @@ void SoundTask_PlayDoubleCry(u8 taskId)
 
 static void SoundTask_PlayDoubleCry_Step(u8 taskId)
 {
-    u16 species = gTasks[taskId].data[1];
+    u32 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
 
     if (gTasks[taskId].data[9] < 2)
@@ -279,7 +279,7 @@ void SoundTask_WaitForCry(u8 taskId)
 
 void SoundTask_PlayNormalCry(u8 taskId)
 {
-    u16 species = (GetIllusionMonSpecies(gBattleAnimAttacker) != SPECIES_NONE) ? GetIllusionMonSpecies(gBattleAnimAttacker) : gAnimBattlerSpecies[gBattleAnimAttacker];
+    u32 species = (GetIllusionMonSpecies(gBattleAnimAttacker) != SPECIES_NONE) ? GetIllusionMonSpecies(gBattleAnimAttacker) : gAnimBattlerSpecies[gBattleAnimAttacker];
     PlayCry_ByMode(species, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER), CRY_MODE_NORMAL);
     gTasks[taskId].func = SoundTask_WaitForCry;
 }
@@ -291,7 +291,7 @@ void SoundTask_PlayNormalCry(u8 taskId)
 
 void SoundTask_PlayCryWithEcho(u8 taskId)
 {
-    u16 species;
+    u32 species;
     s8 pan;
 
     gTasks[taskId].tLastCry = gBattleAnimArgs[0];
@@ -313,7 +313,7 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
 
 static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
-    u16 species = gTasks[taskId].tSpecies;
+    u32 species = gTasks[taskId].tSpecies;
     s8 pan = gTasks[taskId].tPan;
 
     // Note the cases are not in order of execution
@@ -353,7 +353,7 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 
 void SoundTask_PlaySE1WithPanning(u8 taskId)
 {
-    u16 songId = gBattleAnimArgs[0];
+    u32 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
 
     PlaySE1WithPanning(songId, pan);
@@ -362,7 +362,7 @@ void SoundTask_PlaySE1WithPanning(u8 taskId)
 
 void SoundTask_PlaySE2WithPanning(u8 taskId)
 {
-    u16 songId = gBattleAnimArgs[0];
+    u32 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
 
     PlaySE2WithPanning(songId, pan);
@@ -375,7 +375,7 @@ void SoundTask_AdjustPanningVar(u8 taskId)
 {
     s8 targetPan = gBattleAnimArgs[1];
     s8 panIncrement = gBattleAnimArgs[2];
-    u16 r9 = gBattleAnimArgs[3];
+    u32 r9 = gBattleAnimArgs[3];
     s8 sourcePan = BattleAnimAdjustPanning(gBattleAnimArgs[0]);
 
     targetPan = BattleAnimAdjustPanning(targetPan);
@@ -394,11 +394,11 @@ void SoundTask_AdjustPanningVar(u8 taskId)
 
 static void SoundTask_AdjustPanningVar_Step(u8 taskId)
 {
-    u16 panIncrement = gTasks[taskId].data[3];
+    u32 panIncrement = gTasks[taskId].data[3];
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[5])
     {
-        u16 oldPan;
+        u32 oldPan;
         gTasks[taskId].data[10] = 0;
         oldPan = gTasks[taskId].data[11];
         gTasks[taskId].data[11] = panIncrement + oldPan;

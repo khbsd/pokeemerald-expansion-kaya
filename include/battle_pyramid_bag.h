@@ -51,8 +51,8 @@ struct PyramidBagMenuState
 {
     void (*exitCallback)(void);
     u8 location;
-    u16 cursorPosition;
-    u16 scrollPosition;
+    u32 cursorPosition;
+    u32 scrollPosition;
 };
 
 extern struct PyramidBagMenu *gPyramidBagMenu;

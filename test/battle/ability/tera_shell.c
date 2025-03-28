@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Tera Shell makes all moves against Terapagos not very effective when at full HP")
 {
-    u16 hp;
+    u32 hp;
     PARAMETRIZE { hp = 100; }
     PARAMETRIZE { hp = 99; }
     GIVEN {

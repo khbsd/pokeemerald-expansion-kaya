@@ -48,7 +48,7 @@ struct PokemonAnimData
 struct YellowFlashData
 {
     bool8 isYellow;
-    u8 time;
+    u32 time;
 };
 
 static void Anim_VerticalSquishBounce(struct Sprite *sprite);
@@ -209,11 +209,11 @@ static void Anim_ShakeGlowPurple_Slow(struct Sprite *sprite);
 static void WaitAnimEnd(struct Sprite *sprite);
 
 static struct PokemonAnimData sAnims[MAX_BATTLERS_COUNT];
-static u8 sAnimIdx;
+static u32 sAnimIdx;
 static bool32 sIsSummaryAnim;
 
 // Equivalent to struct YellowFlashData, but doesn't match as a struct
-static const u8 sYellowFlashData[][2] =
+static const u32 sYellowFlashData[][2] =
 {
     {FALSE,  5},
     { TRUE,  1},
@@ -231,7 +231,7 @@ static const u8 sYellowFlashData[][2] =
     {FALSE, -1}
 };
 
-static const u8 sVerticalShakeData[][2] =
+static const u32 sVerticalShakeData[][2] =
 {
     { 6,  30},
     {-2,  15},
@@ -400,7 +400,7 @@ static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
 // Each back anim set has 3 possible animations depending on nature
 // Each of the 3 animations is a slight variation of the others
 // BACK_ANIM_NONE is skipped below. GetSpeciesBackAnimSet subtracts 1 from the back anim id
-static const u8 sBackAnimationIds[] =
+static const u32 sBackAnimationIds[] =
 {
     [(BACK_ANIM_H_VIBRATE - 1) * 3]               = ANIM_H_VIBRATE_FASTEST, ANIM_H_VIBRATE_FAST, ANIM_H_VIBRATE,
     [(BACK_ANIM_H_SLIDE - 1) * 3]                 = ANIM_H_SLIDE_FAST, ANIM_H_SLIDE, ANIM_H_SLIDE_SLOW,
@@ -468,7 +468,7 @@ static void SetPosForRotation(struct Sprite *sprite, u16 index, s16 amplitudeX, 
     sprite->y2 = yAdder + amplitudeY;
 }
 
-u8 GetSpeciesBackAnimSet(u16 species)
+u32 GetSpeciesBackAnimSet(u16 species)
 {
     if (gSpeciesInfo[species].backAnimId != BACK_ANIM_NONE)
         return gSpeciesInfo[species].backAnimId - 1;
@@ -494,7 +494,7 @@ u8 GetSpeciesBackAnimSet(u16 species)
 #define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | (gTasks[taskId].tPtrLo)))
 #endif //MODERN || BUGFIX
 
-static void Task_HandleMonAnimation(u8 taskId)
+static void Task_HandleMonAnimation(u32 taskId)
 {
     u32 i;
     struct Sprite *sprite = ANIM_SPRITE(taskId);
@@ -527,24 +527,24 @@ static void Task_HandleMonAnimation(u8 taskId)
     }
 }
 
-void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, u8 frontAnimId)
+void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, u32 frontAnimId)
 {
-    u8 taskId = CreateTask(Task_HandleMonAnimation, 128);
+    u32 taskId = CreateTask(Task_HandleMonAnimation, 128);
     gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
     gTasks[taskId].tPtrLo = (u32)(sprite);
     gTasks[taskId].tAnimId = frontAnimId;
 }
 
-void StartMonSummaryAnimation(struct Sprite *sprite, u8 frontAnimId)
+void StartMonSummaryAnimation(struct Sprite *sprite, u32 frontAnimId)
 {
     // sDontFlip is expected to still be FALSE here, not explicitly cleared
     sIsSummaryAnim = TRUE;
     sprite->callback = sMonAnimFunctions[frontAnimId];
 }
 
-void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
+void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u32 backAnimSet)
 {
-    u8 nature, taskId, animId, battlerId;
+    u32 nature, taskId, animId, battlerId;
 
     taskId = CreateTask(Task_HandleMonAnimation, 128);
     gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
@@ -572,7 +572,7 @@ void SetSpriteCB_MonAnimDummy(struct Sprite *sprite)
 
 static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rotation)
 {
-    u8 matrixNum;
+    u32 matrixNum;
     struct ObjAffineSrcData affineSrcData;
     struct OamMatrix dest;
 
@@ -623,7 +623,7 @@ static void TryFlipX(struct Sprite *sprite)
         sprite->x2 *= -1;
 }
 
-static bool32 InitAnimData(u8 id)
+static bool32 InitAnimData(u32 id)
 {
     if (id >= MAX_BATTLERS_COUNT)
     {
@@ -640,7 +640,7 @@ static bool32 InitAnimData(u8 id)
     }
 }
 
-static u8 AddNewAnim(void)
+static u32 AddNewAnim(void)
 {
     sAnimIdx = (sAnimIdx + 1) % MAX_BATTLERS_COUNT;
     InitAnimData(sAnimIdx);
@@ -1050,7 +1050,7 @@ static void Twist(struct Sprite *sprite)
 
 static void Anim_Twist(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 512;
     sAnims[id].delay = 0;
@@ -1060,7 +1060,7 @@ static void Anim_Twist(struct Sprite *sprite)
 
 static void Spin(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0];
+    u32 id = sprite->data[0];
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1082,7 +1082,7 @@ static void Spin(struct Sprite *sprite)
 
 static void Anim_Spin_Long(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].delay = 60;
     sAnims[id].data = 20;
@@ -1092,7 +1092,7 @@ static void Anim_Spin_Long(struct Sprite *sprite)
 
 static void CircleCounterclockwise(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0];
+    u32 id = sprite->data[0];
 
     TryFlipX(sprite);
 
@@ -1116,7 +1116,7 @@ static void CircleCounterclockwise(struct Sprite *sprite)
 
 static void Anim_CircleCounterclockwise(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 512;
     sAnims[id].data = 6;
@@ -1226,18 +1226,18 @@ static void Anim_VerticalStretch(struct Sprite *sprite)
 
 static void VerticalShakeTwice(struct Sprite *sprite)
 {
-    u8 index = sprite->data[2];
-    u8 var7 = sprite->data[6];
-    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
-    u8 var6 = sVerticalShakeData[sprite->data[5]][1];
-    u8 amplitude = 0;
+    u32 index = sprite->data[2];
+    u32 var7 = sprite->data[6];
+    u32 var5 = sVerticalShakeData[sprite->data[5]][0];
+    u32 var6 = sVerticalShakeData[sprite->data[5]][1];
+    u32 amplitude = 0;
 
-    if (var5 != (u8)-2)
+    if (var5 != (u32)-2)
         amplitude = (var6 - var7) * var5 / var6;
     else
         amplitude = 0;
 
-    if (var5 == (u8)-1)
+    if (var5 == (u32)-1)
     {
         sprite->callback = WaitAnimEnd;
         sprite->y2 = 0;
@@ -1268,7 +1268,7 @@ static void Anim_VerticalShakeTwice(struct Sprite *sprite)
 
 static void Anim_TipMoveForward(struct Sprite *sprite)
 {
-    u8 counter = 0;
+    u32 counter = 0;
 
     TryFlipX(sprite);
     counter = sprite->data[2];
@@ -1528,7 +1528,7 @@ static const s8 sBounceRotateToSidesData[][8][3] =
 static void BounceRotateToSides(struct Sprite *sprite)
 {
     s16 var;
-    u8 structId;
+    u32 structId;
     s8 r9;
     s16 r10;
     s16 r7;
@@ -1582,7 +1582,7 @@ static void BounceRotateToSides(struct Sprite *sprite)
 
 static void Anim_BounceRotateToSides(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].rotation = 4096;
     sAnims[id].data = sprite->data[6];
     BounceRotateToSides(sprite);
@@ -1647,7 +1647,7 @@ static void BackAndLunge_1(struct Sprite *sprite)
     if (sprite->x2 <= 0)
     {
         s16 subResult;
-        u8 var = sprite->data[7];
+        u32 var = sprite->data[7];
         sprite->data[6] = 0;
         subResult = sprite->x2;
 
@@ -1668,7 +1668,7 @@ static void BackAndLunge_1(struct Sprite *sprite)
 
 static void BackAndLunge_2(struct Sprite *sprite)
 {
-    u8 rotation;
+    u32 rotation;
 
     TryFlipX(sprite);
     sprite->x2 -= sprite->data[7];
@@ -1956,7 +1956,7 @@ static void TumblingFrontFlip(struct Sprite *sprite);
 
 static void Anim_TumblingFrontFlip(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].speed = 2;
     TumblingFrontFlip(sprite);
     sprite->callback = TumblingFrontFlip;
@@ -2069,7 +2069,7 @@ static void Anim_FlashYellow(struct Sprite *sprite)
         sprite->data[4] = 0;
     }
 
-    if (sYellowFlashData[sprite->data[6]][1] == (u8)-1)
+    if (sYellowFlashData[sprite->data[6]][1] == (u32)-1)
     {
         sprite->callback = WaitAnimEnd;
     }
@@ -2132,7 +2132,7 @@ static void SwingConcave(struct Sprite *sprite)
 
 static void Anim_SwingConcave_FastShort(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].data = 50;
     SwingConcave(sprite);
     sprite->callback = SwingConcave;
@@ -2172,7 +2172,7 @@ static void SwingConvex(struct Sprite *sprite)
 
 static void Anim_SwingConvex_FastShort(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].data = 50;
     SwingConvex(sprite);
     sprite->callback = SwingConvex;
@@ -2300,7 +2300,7 @@ static void DeepVerticalSquishBounce(struct Sprite *sprite)
 
 static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].rotation = 4;
     DeepVerticalSquishBounce(sprite);
     sprite->callback = DeepVerticalSquishBounce;
@@ -2347,7 +2347,7 @@ static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite);
 
 static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].data = -1;
     HandleStartAffineAnim(sprite);
     sprite->data[3] = 0;
@@ -2498,7 +2498,7 @@ static void RotateToSides(struct Sprite *sprite)
 
 static void Anim_RotateToSides_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
     sAnims[id].rotation = 4;
     RotateToSides(sprite);
     sprite->callback = RotateToSides;
@@ -3267,7 +3267,7 @@ static void Anim_VerticalSlide_Slow(struct Sprite *sprite)
 
 static void Anim_BounceRotateToSides_Small(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 2048;
     sAnims[id].data = sprite->data[6];
@@ -3320,7 +3320,7 @@ static void Anim_VertialShake_Slow(struct Sprite *sprite)
 
 static void Anim_Twist_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 1024;
     sAnims[id].delay = 0;
@@ -3331,7 +3331,7 @@ static void Anim_Twist_Twice(struct Sprite *sprite)
 
 static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 512;
     sAnims[id].data = 3;
@@ -3363,7 +3363,7 @@ static void Anim_VerticalJumps_Small(struct Sprite *sprite)
 
 static void Anim_Spin(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].delay = 60;
     sAnims[id].data = 30;
@@ -3373,7 +3373,7 @@ static void Anim_Spin(struct Sprite *sprite)
 
 static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].speed = 1;
     sAnims[id].runs = 2;
@@ -3383,7 +3383,7 @@ static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite)
 
 static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 4;
     sAnims[id].runs = 2;
@@ -3393,7 +3393,7 @@ static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite)
 
 static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].data = 1;
     sAnims[id].runs = 2;
@@ -3405,7 +3405,7 @@ static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
 
 static void Anim_RotateToSides(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 2;
     RotateToSides(sprite);
@@ -3414,7 +3414,7 @@ static void Anim_RotateToSides(struct Sprite *sprite)
 
 static void Anim_RotateToSides_Twice(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 4;
     sAnims[id].runs = 2;
@@ -3424,7 +3424,7 @@ static void Anim_RotateToSides_Twice(struct Sprite *sprite)
 
 static void Anim_SwingConcave(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].data = 100;
     SwingConcave(sprite);
@@ -3433,7 +3433,7 @@ static void Anim_SwingConcave(struct Sprite *sprite)
 
 static void Anim_SwingConcave_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].data = 50;
     sAnims[id].runs = 2;
@@ -3443,7 +3443,7 @@ static void Anim_SwingConcave_Fast(struct Sprite *sprite)
 
 static void Anim_SwingConvex(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].data = 100;
     SwingConvex(sprite);
@@ -3452,7 +3452,7 @@ static void Anim_SwingConvex(struct Sprite *sprite)
 
 static void Anim_SwingConvex_Fast(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].data = 50;
     sAnims[id].runs = 2;
@@ -3549,7 +3549,7 @@ static void VerticalStretchBothEnds(struct Sprite *sprite)
     }
     else
     {
-        u8 amplitude, cmpVal1, cmpVal2;
+        u32 amplitude, cmpVal1, cmpVal2;
         s16 xScale, yScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
@@ -3610,7 +3610,7 @@ static void HorizontalStretchFar(struct Sprite *sprite)
     }
     else
     {
-        u8 amplitude, cmpVal1, cmpVal2;
+        u32 amplitude, cmpVal1, cmpVal2;
         s16 xScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
@@ -3652,21 +3652,21 @@ static void Anim_HorizontalStretchFar_Slow(struct Sprite *sprite)
 
 static void VerticalShakeLowTwice(struct Sprite *sprite)
 {
-    u8 var6, var7;
-    u8 var8 = sprite->data[2];
-    u8 var9 = sprite->data[6];
-    u8 var5 = sVerticalShakeData[sprite->data[5]][0];
-    if (var5 != (u8)-1)
+    u32 var6, var7;
+    u32 var8 = sprite->data[2];
+    u32 var9 = sprite->data[6];
+    u32 var5 = sVerticalShakeData[sprite->data[5]][0];
+    if (var5 != (u32)-1)
         var5 = sprite->data[7];
 
     var6 = sVerticalShakeData[sprite->data[5]][1];
     var7 = 0;
-    if (sVerticalShakeData[sprite->data[5]][0] != (u8)-2)
+    if (sVerticalShakeData[sprite->data[5]][0] != (u32)-2)
         var7 = (var6 - var9) * var5 / var6;
     else
         var7 = 0;
 
-    if (var5 == (u8)-1)
+    if (var5 == (u32)-1)
     {
         sprite->callback = WaitAnimEnd;
         sprite->y2 = 0;
@@ -3779,7 +3779,7 @@ static void Anim_VerticalShakeLowTwice_Fast(struct Sprite *sprite)
 
 static void Anim_CircleCounterclockwise_Long(struct Sprite *sprite)
 {
-    u8 id = sprite->data[0] = AddNewAnim();
+    u32 id = sprite->data[0] = AddNewAnim();
 
     sAnims[id].rotation = 1024;
     sAnims[id].data = 6;
@@ -3809,7 +3809,7 @@ static void GrowStutter(struct Sprite *sprite)
     }
     else
     {
-        u8 amplitude, cmpVal1, cmpVal2;
+        u32 amplitude, cmpVal1, cmpVal2;
         s16 xScale, yScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
@@ -4813,7 +4813,7 @@ static void ShakeFlashYellow(struct Sprite *sprite)
 {
     const struct YellowFlashData *array = sShakeYellowFlashData[sprite->data[3]];
     SetShakeFlashYellowPos(sprite);
-    if (array[sprite->data[6]].time == (u8)-1)
+    if (array[sprite->data[6]].time == (u32)-1)
     {
         sprite->x2 = 0;
         sprite->callback = WaitAnimEnd;

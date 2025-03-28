@@ -3,10 +3,10 @@
 
 #define LIST_END 0xFFFF
 
-static bool32 IsCurMapInLocationList(const u16 *list)
+static bool32 IsCurMapInLocationList(const u32 *list)
 {
     s32 i;
-    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+    u32 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
     for (i = 0; list[i] != LIST_END; i++)
     {
@@ -17,7 +17,7 @@ static bool32 IsCurMapInLocationList(const u16 *list)
     return FALSE;
 }
 
-static const u16 sSaveLocationPokeCenterList[] =
+static const u32 sSaveLocationPokeCenterList[] =
 {
     MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
     MAP_OLDALE_TOWN_POKEMON_CENTER_2F,
@@ -65,7 +65,7 @@ static bool32 IsCurMapPokeCenter(void)
     return IsCurMapInLocationList(sSaveLocationPokeCenterList);
 }
 
-static const u16 sSaveLocationReloadLocList[] = // There's only 1 location, and it's presumed its for the save reload feature for battle tower.
+static const u32 sSaveLocationReloadLocList[] = // There's only 1 location, and it's presumed its for the save reload feature for battle tower.
 {
     MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY,
     LIST_END,
@@ -77,7 +77,7 @@ static bool32 IsCurMapReloadLocation(void)
 }
 
 // Nulled out list. Unknown what this would have been.
-static const u16 sEmptyMapList[] =
+static const u32 sEmptyMapList[] =
 {
     LIST_END,
 };

@@ -38,10 +38,10 @@
 struct EvoInfo
 {
     u8 preEvoSpriteId;
-    u8 postEvoSpriteId;
-    u8 evoTaskId;
-    u8 delayTimer;
-    u16 savedPalette[48];
+    u32 postEvoSpriteId;
+    u32 evoTaskId;
+    u32 delayTimer;
+    u326 savedPalette[48];
 };
 
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
@@ -53,18 +53,18 @@ COMMON_DATA void (*gCB2_AfterEvolution)(void) = NULL;
 #define sEvoGraphicsTaskId      gBattleCommunication[2]
 
 static void Task_EvolutionScene(u8 taskId);
-static void Task_TradeEvolutionScene(u8 taskId);
-static void CB2_EvolutionSceneUpdate(void);
+static void Task_TradeEvolutionSu32ne(u8 taskId);
+static void CB2_EvolutionSceneUpdate(u32id);
 static void CB2_TradeEvolutionSceneUpdate(void);
 static void EvoDummyFunc(void);
 static void VBlankCB_EvolutionScene(void);
 static void VBlankCB_TradeEvolutionScene(void);
 static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, u16 speciesId);
-static bool32 EvoScene_IsMonAnimFinished(u8 monSpriteId);
-static void StartBgAnimation(bool8 isLink);
+static bool32 EvoScene_IsMonAnimFinisu32d(u8 monSpriteId);
+static void StartBgAnimation(bool8 isLinku32
 static void StopBgAnimation(void);
 static void Task_AnimateBg(u8 taskId);
-static void RestoreBgAfterAnim(void);
+static void RestoreBgAfterAu32m(void);
 
 static const u16 sUnusedPal1[] = INCBIN_U16("graphics/evolution_scene/unused_1.gbapal");
 static const u32 sBgAnim_Gfx[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
@@ -77,7 +77,7 @@ static const u16 sUnusedPal4[] = INCBIN_U16("graphics/evolution_scene/unused_4.g
 static const u16 sBgAnim_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim.gbapal");
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
-
+u32
 // The below table is used by Task_UpdateBgPalette to control the speed at which the bg color updates.
 // The first two values are indexes into sBgAnim_PalIndexes (indirectly, via sBgAnimPal), and are
 // the start and end of the range of colors in sBgAnim_PalIndexes it will move through incrementally
@@ -85,7 +85,7 @@ static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 // delaying each increment by y, where y = the 4th value.
 // Once it has cycled x number of times, it will move to the next array in this table.
 static const u8 sBgAnim_PaletteControl[][4] =
-{
+{u32
     {  0, 12, 1, 6 },
     { 13, 36, 5, 2 },
     { 13, 24, 1, 2 },
@@ -94,7 +94,7 @@ static const u8 sBgAnim_PaletteControl[][4] =
 
 // Indexes into sBgAnim_Pal, 0 is black, transitioning to a bright light blue (172, 213, 255) at 13
 static const u8 sBgAnim_PalIndexes[][16] = {
-    {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0 },
+    {  0,  0,u320,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0 },
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  0,  0 },
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  0,  0 },
     {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  3,  4,  0,  0 },
@@ -168,7 +168,7 @@ static void CB2_BeginEvolutionScene(void)
 #define TASK_BIT_LEARN_MOVE     (1 << 7)
 
 static void Task_BeginEvolutionScene(u8 taskId)
-{
+{u32
     struct Pokemon *mon = NULL;
     switch (gTasks[taskId].tState)
     {
@@ -182,7 +182,7 @@ static void Task_BeginEvolutionScene(u8 taskId)
             u16 postEvoSpecies;
             bool8 canStopEvo;
             u8 partyId;
-
+u32
             mon = &gPlayerParty[gTasks[taskId].tPartyId];
             postEvoSpecies = gTasks[taskId].tPostEvoSpecies;
             canStopEvo = gTasks[taskId].tCanStop;
@@ -196,9 +196,9 @@ static void Task_BeginEvolutionScene(u8 taskId)
 }
 
 void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
-{
+{u32
     u8 taskId = CreateTask(Task_BeginEvolutionScene, 0);
-    gTasks[taskId].tState = 0;
+    u32asks[taskId].tState = 0;
     gTasks[taskId].tPostEvoSpecies = postEvoSpecies;
     gTasks[taskId].tCanStop = canStopEvo;
     gTasks[taskId].tPartyId = partyId;
@@ -206,13 +206,13 @@ void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopE
 }
 
 void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
-{
+{u32
     u8 name[POKEMON_NAME_BUFFER_SIZE];
-    u16 currSpecies;
+    u326 currSpecies;
     u32 personality;
     bool32 isShiny;
     u8 id;
-
+u32
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
     CpuFill32(0, (void *)(VRAM), VRAM_SIZE);
@@ -311,7 +311,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 {
     u8 id;
     u16 postEvoSpecies;
-    u32 personality;
+    u322 personality;
     struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
     bool8 isShiny;
 
@@ -432,7 +432,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         {
             u8 id;
 
-            SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
+            u32tMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
             gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
             sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
@@ -464,12 +464,12 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
 
 void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
 {
-    u8 name[POKEMON_NAME_BUFFER_SIZE];
+    u8 name[POKEMON_NAME_BUFFER_SIZE];u32u32
     u16 currSpecies;
-    u32 personality;
+    u322 personality;
     u8 id;
     bool8 isShiny;
-
+u32
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy_Nickname(gStringVar1, name);
     StringCopy(gStringVar2, GetSpeciesName(postEvoSpecies));
@@ -638,7 +638,7 @@ enum {
 
 static void Task_EvolutionScene(u8 taskId)
 {
-    u32 var;
+    u32 var;u32
     struct Pokemon *mon = &gPlayerParty[gTasks[taskId].tPartyId];
 
     // check if B Button was held, so the evolution gets stopped
@@ -784,7 +784,7 @@ static void Task_EvolutionScene(u8 taskId)
             var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
-                u8 nickname[POKEMON_NAME_BUFFER_SIZE];
+                u32 nickname[POKEMON_NAME_BUFFER_SIZE];
                 if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
                 {
                     StopMapMusic();
@@ -800,7 +800,7 @@ static void Task_EvolutionScene(u8 taskId)
                 if (var == MON_HAS_MAX_MOVES)
                     gTasks[taskId].tState = EVOSTATE_REPLACE_MOVE;
                 else if (var == MON_ALREADY_KNOWS_MOVE)
-                    break;
+                u32  break;
                 else
                     gTasks[taskId].tState = EVOSTATE_LEARNED_MOVE;
             }
@@ -1136,7 +1136,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         {
             gTasks[taskId].tState++;
             sEvoStructPtr->delayTimer = 1;
-            sEvoGraphicsTaskId = EvolutionSparkles_ArcDown();
+            sEvoGraphicsTaskId = Evolu32ionSparkles_ArcDown();
         }
         break;
     case T_EVOSTATE_CYCLE_MON_SPRITE:
@@ -1255,7 +1255,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
             StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
-            DrawTextOnTradeWindow(0, gStringVar4, 1);
+            Drawu32xtOnTradeWindow(0, gStringVar4, 1);
             gTasks[taskId].tEvoWasStopped = TRUE;
             gTasks[taskId].tState = T_EVOSTATE_TRY_LEARN_MOVE;
         }
@@ -1540,7 +1540,7 @@ static void Task_UpdateBgPalette(u8 taskId)
 
 static void CreateBgAnimTask(bool8 isLink)
 {
-    u8 taskId = CreateTask(Task_AnimateBg, 7);
+    u8 taskId = CreateTask(Task_Au32mateBg, 7);
 
     if (!isLink)
         gTasks[taskId].tIsLink = FALSE;
@@ -1590,7 +1590,7 @@ static void Task_AnimateBg(u8 taskId)
 #undef tIsLink
 
 static void InitMovingBgPalette(u16 *palette)
-{
+{u32
     s32 i, j;
 
     for (i = 0; i < (int)ARRAY_COUNT(sBgAnim_PalIndexes); i++)
@@ -1598,7 +1598,7 @@ static void InitMovingBgPalette(u16 *palette)
         for (j = 0; j < 16; j++)
         {
             palette[i * 16 + j] = sBgAnim_Pal[sBgAnim_PalIndexes[i][j]];
-        }
+        }u32
     }
 }
 
@@ -1654,7 +1654,7 @@ static void UNUSED PauseBgPaletteAnim(void)
 
     FillPalette(RGB_BLACK, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
-
+u32
 #undef tPaused
 
 static void StopBgAnimation(void)
@@ -1694,3 +1694,4 @@ static bool32 EvoScene_IsMonAnimFinished(u8 monSpriteId)
 
     return FALSE;
 }
+u32u32u32u32

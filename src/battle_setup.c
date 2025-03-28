@@ -78,18 +78,18 @@ static u16 GetRematchTrainerId(u16 trainerId);
 #endif //FREE_MATCH_CALL
 static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
-static const u8 *GetIntroSpeechOfApproachingTrainer(void);
-static const u8 *GetTrainerCantBattleSpeech(void);
+static const u32 *GetIntroSpeechOfApproachingTrainer(void);
+static const u32 *GetTrainerCantBattleSpeech(void);
 
 EWRAM_DATA TrainerBattleParameter gTrainerBattleParameter = {0};
 EWRAM_DATA u16 gPartnerTrainerId = 0;
-EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
+EWRAM_DATA static u32 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
-EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
+EWRAM_DATA static u32 sNoOfPossibleTrainerRetScripts = 0;
 
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
-static const u8 sBattleTransitionTable_Wild[][2] =
+static const u32 sBattleTransitionTable_Wild[][2] =
 {
     [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_SLICE,          B_TRANSITION_WHITE_BARS_FADE},
     [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_CLOCKWISE_WIPE, B_TRANSITION_GRID_SQUARES},
@@ -97,7 +97,7 @@ static const u8 sBattleTransitionTable_Wild[][2] =
     [TRANSITION_TYPE_WATER]  = {B_TRANSITION_WAVE,           B_TRANSITION_RIPPLE},
 };
 
-static const u8 sBattleTransitionTable_Trainer[][2] =
+static const u32 sBattleTransitionTable_Trainer[][2] =
 {
     [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_ANGLED_WIPES},
     [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_SHUFFLE,         B_TRANSITION_BIG_POKEBALL},
@@ -106,7 +106,7 @@ static const u8 sBattleTransitionTable_Trainer[][2] =
 };
 
 // Battle Frontier (excluding Pyramid and Dome, which have their own tables below)
-static const u8 sBattleTransitionTable_BattleFrontier[] =
+static const u32 sBattleTransitionTable_BattleFrontier[] =
 {
     B_TRANSITION_FRONTIER_LOGO_WIGGLE,
     B_TRANSITION_FRONTIER_LOGO_WAVE,
@@ -122,14 +122,14 @@ static const u8 sBattleTransitionTable_BattleFrontier[] =
     B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ
 };
 
-static const u8 sBattleTransitionTable_BattlePyramid[] =
+static const u32 sBattleTransitionTable_BattlePyramid[] =
 {
     B_TRANSITION_FRONTIER_SQUARES,
     B_TRANSITION_FRONTIER_SQUARES_SCROLL,
     B_TRANSITION_FRONTIER_SQUARES_SPIRAL
 };
 
-static const u8 sBattleTransitionTable_BattleDome[] =
+static const u32 sBattleTransitionTable_BattleDome[] =
 {
     B_TRANSITION_FRONTIER_LOGO_WIGGLE,
     B_TRANSITION_FRONTIER_SQUARES,
@@ -229,7 +229,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
 #define tState data[0]
 #define tTransition data[1]
 
-static void Task_BattleStart(u8 taskId)
+static void Task_BattleStart(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -256,15 +256,15 @@ static void Task_BattleStart(u8 taskId)
     }
 }
 
-static void CreateBattleStartTask(u8 transition, u16 song)
+static void CreateBattleStartTask(u32 transition, u16 song)
 {
-    u8 taskId = CreateTask(Task_BattleStart, 1);
+    u32 taskId = CreateTask(Task_BattleStart, 1);
 
     gTasks[taskId].tTransition = transition;
     PlayMapChosenOrBattleBGM(song);
 }
 
-static void Task_BattleStart_Debug(u8 taskId)
+static void Task_BattleStart_Debug(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -291,9 +291,9 @@ static void Task_BattleStart_Debug(u8 taskId)
     }
 }
 
-static void CreateBattleStartTask_Debug(u8 transition, u16 song)
+static void CreateBattleStartTask_Debug(u32 transition, u16 song)
 {
-    u8 taskId = CreateTask(Task_BattleStart_Debug, 1);
+    u32 taskId = CreateTask(Task_BattleStart_Debug, 1);
 
     gTasks[taskId].tTransition = transition;
     PlayMapChosenOrBattleBGM(song);
@@ -525,7 +525,7 @@ void StartGroudonKyogreBattle(void)
 
 void StartRegiBattle(void)
 {
-    u8 transitionId;
+    u32 transitionId;
     u16 species;
 
     LockPlayerFieldControls();
@@ -558,7 +558,7 @@ void StartRegiBattle(void)
 
 static void DowngradeBadPoison(void)
 {
-    u8 i;
+    u32 i;
     u32 status = STATUS1_POISON;
     if (B_TOXIC_REVERSAL < GEN_5)
         return;
@@ -605,7 +605,7 @@ static void CB2_EndScriptedWildBattle(void)
     }
 }
 
-u8 BattleSetup_GetTerrainId(void)
+u32 BattleSetup_GetTerrainId(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -669,7 +669,7 @@ u8 BattleSetup_GetTerrainId(void)
     return BATTLE_TERRAIN_PLAIN;
 }
 
-static u8 GetBattleTransitionTypeByMap(void)
+static u32 GetBattleTransitionTypeByMap(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -694,9 +694,9 @@ static u8 GetBattleTransitionTypeByMap(void)
     }
 }
 
-static u16 GetSumOfPlayerPartyLevel(u8 numMons)
+static u16 GetSumOfPlayerPartyLevel(u32 numMons)
 {
-    u8 sum = 0;
+    u32 sum = 0;
     int i;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -713,10 +713,10 @@ static u16 GetSumOfPlayerPartyLevel(u8 numMons)
     return sum;
 }
 
-static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
+static u32 GetSumOfEnemyPartyLevel(u16 opponentId, u32 numMons)
 {
-    u8 i;
-    u8 sum;
+    u32 i;
+    u32 sum;
     u32 count = numMons;
     const struct TrainerMon *party;
 
@@ -732,11 +732,11 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     return sum;
 }
 
-u8 GetWildBattleTransition(void)
+u32 GetWildBattleTransition(void)
 {
-    u8 transitionType = GetBattleTransitionTypeByMap();
-    u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
-    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
+    u32 transitionType = GetBattleTransitionTypeByMap();
+    u32 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u32 playerLevel = GetSumOfPlayerPartyLevel(1);
 
     if (enemyLevel < playerLevel)
     {
@@ -754,12 +754,12 @@ u8 GetWildBattleTransition(void)
     }
 }
 
-u8 GetTrainerBattleTransition(void)
+u32 GetTrainerBattleTransition(void)
 {
-    u8 minPartyCount;
-    u8 transitionType;
-    u8 enemyLevel;
-    u8 playerLevel;
+    u32 minPartyCount;
+    u32 transitionType;
+    u32 enemyLevel;
+    u32 playerLevel;
     u32 trainerId = SanitizeTrainerId(TRAINER_BATTLE_PARAM.opponentA);
     u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
@@ -792,11 +792,11 @@ u8 GetTrainerBattleTransition(void)
 }
 
 #define RANDOM_TRANSITION(table) (table[Random() % ARRAY_COUNT(table)])
-u8 GetSpecialBattleTransition(s32 id)
+u32 GetSpecialBattleTransition(s32 id)
 {
     u16 var;
-    u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
-    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
+    u32 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u32 playerLevel = GetSumOfPlayerPartyLevel(1);
 
     if (enemyLevel < playerLevel)
     {
@@ -937,14 +937,14 @@ static void InitTrainerBattleVariables(void)
     sTrainerBattleEndScript = NULL;
 }
 
-void TrainerBattleLoadArgs(const u8 *data)
+void TrainerBattleLoadArgs(const u32 *data)
 {
     InitTrainerBattleVariables();
     memcpy(gTrainerBattleParameter.data, data, sizeof(TrainerBattleParameter));
-    sTrainerBattleEndScript = (u8*)data + sizeof(TrainerBattleParameter);
+    sTrainerBattleEndScript = (u32*)data + sizeof(TrainerBattleParameter);
 }
 
-void TrainerBattleLoadArgsTrainerA(const u8 *data)
+void TrainerBattleLoadArgsTrainerA(const u32 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
 
@@ -956,7 +956,7 @@ void TrainerBattleLoadArgsTrainerA(const u8 *data)
     TRAINER_BATTLE_PARAM.battleScriptRetAddrA = temp->params.battleScriptRetAddrA;
 }
 
-void TrainerBattleLoadArgsTrainerB(const u8 *data)
+void TrainerBattleLoadArgsTrainerB(const u32 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
 
@@ -969,7 +969,7 @@ void TrainerBattleLoadArgsTrainerB(const u8 *data)
 }
 
 // loads trainer A parameter to trainer B. Used for second trainer in trainer_see.c
-void TrainerBattleLoadArgsSecondTrainer(const u8 *data)
+void TrainerBattleLoadArgsSecondTrainer(const u32 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
 
@@ -1000,7 +1000,7 @@ void SetMapVarsToTrainerB(void)
 }
 
 // expects parameters have been loaded correctly with TrainerBattleLoadArgs
-const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
+const u32 *BattleSetup_ConfigureTrainerBattle(const u32 *data)
 {
     switch (TRAINER_BATTLE_PARAM.mode)
     {
@@ -1069,7 +1069,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     }
 }
 
-void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerScript)
+void ConfigureAndSetUpOneTrainerBattle(u32 trainerObjEventId, const u32 *trainerScript)
 {
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
@@ -1079,7 +1079,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerSc
     LockPlayerFieldControls();
 }
 
-void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
+void ConfigureTwoTrainersBattle(u32 trainerObjEventId, const u32 *trainerScript)
 {
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
@@ -1099,7 +1099,7 @@ void SetUpTwoTrainersBattle(void)
 }
 
 #define OPCODE_OFFSET 1
-bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
+bool32 GetTrainerFlagFromScriptPointer(const u32 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)(data + OPCODE_OFFSET);
     return FlagGet(TRAINER_FLAGS_START + temp->params.opponentA);
@@ -1115,7 +1115,7 @@ void SetTrainerFacingDirection(void)
     SetTrainerMovementType(objectEvent, GetTrainerFacingDirectionMovementType(objectEvent->facingDirection));
 }
 
-u8 GetTrainerBattleMode(void)
+u32 GetTrainerBattleMode(void)
 {
     return TRAINER_BATTLE_PARAM.mode;
 }
@@ -1227,8 +1227,8 @@ void BattleSetup_StartTrainerBattle_Debug(void)
 
 static void SaveChangesToPlayerParty(void)
 {
-    u8 i = 0, j = 0;
-    u8 participatedPokemon = VarGet(B_VAR_SKY_BATTLE);
+    u32 i = 0, j = 0;
+    u32 participatedPokemon = VarGet(B_VAR_SKY_BATTLE);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if ((participatedPokemon >> i & 1) == 1)
@@ -1331,7 +1331,7 @@ void ShowTrainerIntroSpeech(void)
     }
 }
 
-const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
+const u32 *BattleSetup_GetScriptAddrAfterBattle(void)
 {
     if (sTrainerBattleEndScript != NULL)
         return sTrainerBattleEndScript;
@@ -1339,7 +1339,7 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
         return EventScript_TestSignpostMsg;
 }
 
-const u8 *BattleSetup_GetTrainerPostBattleScript(void)
+const u32 *BattleSetup_GetTrainerPostBattleScript(void)
 {
     if (sShouldCheckTrainerBScript)
     {
@@ -1428,7 +1428,7 @@ void PlayTrainerEncounterMusic(void)
     }
 }
 
-static const u8 *ReturnEmptyStringIfNull(const u8 *string)
+static const u32 *ReturnEmptyStringIfNull(const u32 *string)
 {
     if (string == NULL)
         return gText_EmptyString2;
@@ -1436,7 +1436,7 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
         return string;
 }
 
-static const u8 *GetIntroSpeechOfApproachingTrainer(void)
+static const u32 *GetIntroSpeechOfApproachingTrainer(void)
 {
     if (gApproachingTrainerId == 0)
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextA);
@@ -1444,9 +1444,9 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextB);
 }
 
-const u8 *GetTrainerALoseText(void)
+const u32 *GetTrainerALoseText(void)
 {
-    const u8 *string;
+    const u32 *string;
 
     if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
         string = GetSecretBaseTrainerLoseText();
@@ -1457,18 +1457,18 @@ const u8 *GetTrainerALoseText(void)
     return gStringVar4;
 }
 
-const u8 *GetTrainerBLoseText(void)
+const u32 *GetTrainerBLoseText(void)
 {
     StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.defeatTextB));
     return gStringVar4;
 }
 
-const u8 *GetTrainerWonSpeech(void)
+const u32 *GetTrainerWonSpeech(void)
 {
     return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.victoryText);
 }
 
-static const u8 *GetTrainerCantBattleSpeech(void)
+static const u32 *GetTrainerCantBattleSpeech(void)
 {
     return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.cannotBattleText);
 }

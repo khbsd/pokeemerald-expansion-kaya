@@ -730,7 +730,7 @@ static void AnimWaterBubbleProjectile_Step1(struct Sprite *sprite)
 {
     u8 otherSpriteId = sprite->data[5];
     u8 timer = gSprites[otherSpriteId].data[4];
-    u16 trigIndex = gSprites[otherSpriteId].data[3];
+    u32 trigIndex = gSprites[otherSpriteId].data[3];
 
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
@@ -784,7 +784,7 @@ static void AnimAuroraBeamRings(struct Sprite *sprite)
 
 static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
@@ -804,11 +804,11 @@ void AnimTask_RotateAuroraRingColors(u8 taskId)
 static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
     int i;
-    u16 palIndex;
+    u32 palIndex;
 
     if (++gTasks[taskId].data[10] == 3)
     {
-        u16 rgbBuffer;
+        u32 rgbBuffer;
         gTasks[taskId].data[10] = 0;
         palIndex = gTasks[taskId].data[2] + 1;
         rgbBuffer = gPlttBufferFaded[palIndex];
@@ -844,7 +844,7 @@ static void AnimFlyUpTarget_Step(struct Sprite *sprite)
 // For animating undulating beam attacks (e.g. Flamethrower, Hydro Pump, Signal Beam)
 static void AnimToTargetInSinWave(struct Sprite *sprite)
 {
-    u16 retArg;
+    u32 retArg;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;
@@ -999,8 +999,8 @@ void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
-    u16 *x;
-    u16 *y;
+    u32 *x;
+    u32 *y;
 
     x = &gBattle_BG1_X;
     y = &gBattle_BG1_Y;
@@ -1089,9 +1089,9 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 i;
-    u16 rgbBuffer;
-    u16 *BGptrX = &gBattle_BG1_X;
-    u16 *BGptrY = &gBattle_BG1_Y;
+    u32 rgbBuffer;
+    u32 *BGptrX = &gBattle_BG1_X;
+    u32 *BGptrY = &gBattle_BG1_Y;
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
@@ -1130,8 +1130,8 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 
 static void AnimTask_CreateSurfWave_Step2(u8 taskId)
 {
-    u16 *BGptrX = &gBattle_BG1_X;
-    u16 *BGptrY = &gBattle_BG1_Y;
+    u32 *BGptrX = &gBattle_BG1_X;
+    u32 *BGptrY = &gBattle_BG1_Y;
     if (gTasks[taskId].data[0] == 0)
     {
         ClearBattleAnimBg(1);
@@ -1347,8 +1347,8 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
 static u8 GetWaterSpoutPowerForAnim(void)
 {
     u8 i;
-    u16 hp;
-    u16 maxhp;
+    u32 hp;
+    u32 maxhp;
     struct Pokemon *slot = GetPartyBattlerData(gBattleAnimAttacker);
 
     maxhp = GetMonData(slot, MON_DATA_MAX_HP);
@@ -1483,7 +1483,7 @@ static void AnimTask_WaterSpoutRain_Step(u8 taskId)
 
 static void CreateWaterSpoutRainDroplet(struct Task *task, u8 taskId)
 {
-    u16 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
+    u32 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
     u8 spriteId = CreateSprite(&gSmallWaterOrbSpriteTemplate, task->data[7], 0, 0);
 
     if (spriteId != MAX_SPRITES)
@@ -1659,7 +1659,7 @@ static void AnimWaterSportDroplet(struct Sprite *sprite)
 
 static void AnimWaterSportDroplet_Step(struct Sprite *sprite)
 {
-    u16 i;
+    u32 i;
 
     if (TranslateAnimHorizontalArc(sprite))
     {

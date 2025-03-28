@@ -9,16 +9,16 @@ typedef u32 (*LoopedTask)(s32 state);
 
 struct PokenavMonListItem
 {
-    u8 boxId;
-    u8 monId;
-    u16 data;
+    u32 boxId;
+    u32 monId;
+    u32 data;
 };
 
 struct PokenavMatchCallEntry
 {
     bool8 isSpecialTrainer;
-    u8 mapSec;
-    u16 headerId;
+    u32 mapSec;
+    u32 headerId;
 };
 
 struct PokenavListItem
@@ -29,28 +29,28 @@ struct PokenavListItem
     } item;
 };
 
-typedef void (*PokenavListBufferItemFunc)(struct PokenavListItem *, u8 *);
+typedef void (*PokenavListBufferItemFunc)(struct PokenavListItem *, u32 *);
 
 struct PokenavListTemplate
 {
     struct PokenavListItem * list;
-    u16 count;
-    u16 startIndex;
-    u8 itemSize;
-    u8 item_X;
-    u8 windowWidth;
-    u8 listTop;
-    u8 maxShowed;
-    u8 fillValue;
-    u8 fontId;
+    u32 count;
+    u32 startIndex;
+    u32 itemSize;
+    u32 item_X;
+    u32 windowWidth;
+    u32 listTop;
+    u32 maxShowed;
+    u32 fillValue;
+    u32 fontId;
     PokenavListBufferItemFunc bufferItemFunc;
-    void (*iconDrawFunc)(u16 windowId, u32 listItemId, u32 baseTile);
+    void (*iconDrawFunc)(u32 windowId, u32 listItemId, u32 baseTile);
 };
 
 struct PokenavMonList
 {
-    u16 listCount;
-    u16 currIndex;
+    u32 listCount;
+    u32 currIndex;
     struct PokenavMonListItem monData[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
 };
 
@@ -320,7 +320,7 @@ void FreePokenavSubstruct(u32 index);
 void *AllocSubstruct(u32 index, u32 size);
 void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes);
 bool32 IsLoopedTaskActive(u32 taskId);
-void SetPokenavMode(u16 mode);
+void SetPokenavMode(u32 mode);
 u32 GetPokenavMode(void);
 bool32 CanViewRibbonsMenu(void);
 void SetPokenavVBlankCallback(void);
@@ -346,19 +346,19 @@ void PokenavList_ReshowListFromCheckPage(void);
 
 // pokenav_match_call_data.c
 bool32 MatchCall_HasCheckPage(u32 idx);
-u8 MatchCall_GetMapSec(u32 idx);
+u32 MatchCall_GetMapSec(u32 idx);
 bool32 MatchCall_HasRematchId(u32 idx);
 bool32 MatchCall_GetEnabled(u32 idx);
 u32 MatchCall_GetRematchTableIdx(u32 idx);
 u32 GetTrainerIdxByRematchIdx(u32 rematchIdx);
 int MatchCall_GetOverrideFacilityClass(u32 idx);
-void MatchCall_GetMessage(u32 idx, u8 *dest);
-const u8 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset);
-void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name);
+void MatchCall_GetMessage(u32 idx, u32 *dest);
+const u32 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset);
+void MatchCall_GetNameAndDesc(u32 idx, const u32 **desc, const u32 **name);
 
 // pokenav_main_menu.c
 bool32 InitPokenavMainMenu(void);
-void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size);
+void CopyPaletteIntoBufferUnfaded(const u32 *palette, u32 bufferOffset, u32 size);
 void RunMainMenuLoopedTask(u32 state);
 u32 IsActiveMenuLoopTaskActive(void);
 void LoadLeftHeaderGfxForIndex(u32 menuGfxId);
@@ -372,14 +372,14 @@ bool32 WaitForHelpBar(void);
 void SlideMenuHeaderDown(void);
 bool32 MainMenuLoopedTaskIsBusy(void);
 void SetLeftHeaderSpritesInvisibility(void);
-void PokenavCopyPalette(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
+void PokenavCopyPalette(const u32 *a0, const u32 *a1, int a2, int a3, int a4, u32 *palette);
 void FadeToBlackExceptPrimary(void);
 struct Sprite *GetSpinningPokenavSprite(void);
 void HideSpinningPokenavSprite(void);
 void UpdateRegionMapRightHeaderTiles(u32 menuGfxId);
 void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);
-void PokenavFillPalette(u32 palIndex, u16 fillValue);
+void PokenavFillPalette(u32 palIndex, u32 fillValue);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
 bool32 WaitForPokenavShutdownFade(void);
 void SetActiveMenuLoopTasks(void *func1, void *func2);
@@ -396,7 +396,7 @@ void FreeMenuHandlerSubstruct1(void);
 int GetPokenavMenuType(void);
 int GetPokenavCursorPos(void);
 int GetCurrentMenuItemId(void);
-u16 GetHelpBarTextId(void);
+u32 GetHelpBarTextId(void);
 
 // pokenav_menu_handler_gfx.c
 bool32 OpenPokenavMenuInitial(void);
@@ -413,16 +413,16 @@ void FreeMatchCallSubstruct1(void);
 int IsMatchCallListInitFinished(void);
 int GetNumberRegistered(void);
 struct PokenavMatchCallEntry *GetMatchCallList(void);
-u16 GetMatchCallMapSec(int);
+u32 GetMatchCallMapSec(int);
 bool32 ShouldDrawRematchPokeballIcon(int index);
-void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset);
+void ClearRematchPokeballIcon(u32 windowId, u32 tileOffset);
 int GetMatchCallTrainerPic(int index);
-const u8 *GetMatchCallFlavorText(int index, int textType);
-const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);
-u16 GetMatchCallOptionCursorPos(void);
-u16 GetMatchCallOptionId(int optionId);
-void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str);
-u8 GetMatchTableMapSectionId(int rematchIndex);
+const u32 *GetMatchCallFlavorText(int index, int textType);
+const u32 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);
+u32 GetMatchCallOptionCursorPos(void);
+u32 GetMatchCallOptionId(int optionId);
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u32 *str);
+u32 GetMatchTableMapSectionId(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
@@ -451,23 +451,23 @@ void FreeConditionGraphMenuSubstruct1(void);
 bool32 LoadConditionGraphMenuGfx(void);
 bool32 IsConditionMenuSearchMode(void);
 struct ConditionGraph *GetConditionGraphPtr(void);
-u16 GetConditionGraphCurrentListIndex(void);
-u16 GetMonListCount(void);
-u8 GetNumConditionMonSparkles(void);
-bool32 LoadNextConditionMenuMonData(u8 mode);
-u8 TryGetMonMarkId(void);
-u8 *GetConditionMonNameText(u8 id);
-u8 *GetConditionMonLocationText(u8 id);
-u16 GetConditionMonDataBuffer(void);
-void *GetConditionMonPicGfx(u8 id);
-void *GetConditionMonPal(u8 id);
+u32 GetConditionGraphCurrentListIndex(void);
+u32 GetMonListCount(void);
+u32 GetNumConditionMonSparkles(void);
+bool32 LoadNextConditionMenuMonData(u32 mode);
+u32 TryGetMonMarkId(void);
+u32 *GetConditionMonNameText(u32 id);
+u32 *GetConditionMonLocationText(u32 id);
+u32 GetConditionMonDataBuffer(void);
+void *GetConditionMonPicGfx(u32 id);
+void *GetConditionMonPal(u32 id);
 
 // pokenav_conditions_gfx.c
 bool32 OpenConditionGraphMenu(void);
 void CreateConditionGraphMenuLoopedTask(s32);
 u32 IsConditionGraphMenuLoopedTaskActive(void);
 void FreeConditionGraphMenuSubstruct2(void);
-u8 GetMonMarkingsData(void);
+u32 GetMonMarkingsData(void);
 
 // pokenav_conditions_search_results.c
 u32 PokenavCallback_Init_ConditionSearch(void);

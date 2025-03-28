@@ -5,7 +5,7 @@
 #include "gba/defines.h"
 
 typedef uint8_t   u8;
-typedef uint16_t u16;
+typedef uint16_t u32;
 typedef uint32_t u32;
 typedef uint64_t u64;
 typedef int8_t    s8;
@@ -14,7 +14,7 @@ typedef int32_t  s32;
 typedef int64_t  s64;
 
 typedef volatile u8   vu8;
-typedef volatile u16 vu16;
+typedef volatile u32 vu32;
 typedef volatile u32 vu32;
 typedef volatile u64 vu64;
 typedef volatile s8   vs8;
@@ -26,31 +26,31 @@ typedef float  f32;
 typedef double f64;
 
 typedef u8  bool8;
-typedef u16 bool16;
+typedef u32 bool16;
 typedef u32 bool32;
 typedef vu8  vbool8;
-typedef vu16 vbool16;
+typedef vu32 vbool16;
 typedef vu32 vbool32;
 
 struct BgCnt
 {
-    u16 priority:2;
-    u16 charBaseBlock:2;
-    u16 dsCharBaseBlock:2;
-    u16 mosaic:1;
-    u16 palettes:1;
-    u16 screenBaseBlock:5;
-    u16 areaOverflowMode:1;
-    u16 screenSize:2;
+    u32 priority:2;
+    u32 charBaseBlock:2;
+    u32 dsCharBaseBlock:2;
+    u32 mosaic:1;
+    u32 palettes:1;
+    u32 screenBaseBlock:5;
+    u32 areaOverflowMode:1;
+    u32 screenSize:2;
 } PACKED;
 typedef volatile struct BgCnt vBgCnt;
 
 struct PlttData
 {
-    u16 r:5; // red
-    u16 g:5; // green
-    u16 b:5; // blue
-    u16 unused_15:1;
+    u32 r:5; // red
+    u32 g:5; // green
+    u32 b:5; // blue
+    u32 unused_15:1;
 };
 
 struct OamData
@@ -66,10 +66,10 @@ struct OamData
              u32 matrixNum:5;   // bits 3/4 are h-flip/v-flip if not in affine mode
              u32 size:2;        // 0x4000, 0x8000 -> 0xC000
 
-    /*0x04*/ u16 tileNum:10;    // 0x3FF
-             u16 priority:2;    // 0x400, 0x800 -> 0xC00
-             u16 paletteNum:4;
-    /*0x06*/ u16 affineParam;
+    /*0x04*/ u32 tileNum:10;    // 0x3FF
+             u32 priority:2;    // 0x400, 0x800 -> 0xC00
+             u32 paletteNum:4;
+    /*0x06*/ u32 affineParam;
 };
 
 #define ST_OAM_HFLIP     0x08
@@ -126,7 +126,7 @@ struct BgAffineSrcData
     s16 scrY;
     s16 sx;
     s16 sy;
-    u16 alpha;
+    u32 alpha;
 };
 
 struct BgAffineDstData
@@ -143,23 +143,23 @@ struct ObjAffineSrcData
 {
     s16 xScale;
     s16 yScale;
-    u16 rotation;
+    u32 rotation;
 };
 
 // Multi-player SIO Control Structure
 struct SioMultiCnt
 {
-    u16 baudRate:2;    // baud rate
-    u16 si:1;          // SI terminal
-    u16 sd:1;          // SD terminal
-    u16 id:2;          // ID
-    u16 error:1;       // error flag
-    u16 enable:1;      // SIO enable
-    u16 unused_11_8:4;
-    u16 mode:2;        // communication mode (should equal 2)
-    u16 intrEnable:1;  // IRQ enable
-    u16 unused_15:1;
-    u16 data;          // data
+    u32 baudRate:2;    // baud rate
+    u32 si:1;          // SI terminal
+    u32 sd:1;          // SD terminal
+    u32 id:2;          // ID
+    u32 error:1;       // error flag
+    u32 enable:1;      // SIO enable
+    u32 unused_11_8:4;
+    u32 mode:2;        // communication mode (should equal 2)
+    u32 intrEnable:1;  // IRQ enable
+    u32 unused_15:1;
+    u32 data;          // data
 };
 
 #define ST_SIO_MULTI_MODE 2 // Multi-player communication mode

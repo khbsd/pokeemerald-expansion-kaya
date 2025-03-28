@@ -148,65 +148,65 @@ enum {
 #define DRAW_SELECTED_FINISH 5
 
 struct InGameTrade {
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u32 nickname[POKEMON_NAME_LENGTH + 1];
     u16 species;
-    u8 ivs[NUM_STATS];
-    u8 abilityNum;
+    u32 ivs[NUM_STATS];
+    u32 abilityNum;
     u32 otId;
-    u8 conditions[CONTEST_CATEGORIES_COUNT];
+    u32 conditions[CONTEST_CATEGORIES_COUNT];
     u32 personality;
     u16 heldItem;
-    u8 mailNum;
-    u8 otName[TRAINER_NAME_LENGTH + 1];
-    u8 otGender;
-    u8 sheen;
+    u32 mailNum;
+    u32 otName[TRAINER_NAME_LENGTH + 1];
+    u32 otGender;
+    u32 sheen;
     u16 requestedSpecies;
 };
 
-static EWRAM_DATA u8 *sMenuTextTileBuffer = NULL;
+static EWRAM_DATA u32 *sMenuTextTileBuffer = NULL;
 
 // Bytes 0-2 are used for the player's name text
 // Bytes 3-5 are used for the partner's name text
 // Bytes 6-7 are used for the Cancel text
 // Bytes 8-13 are used for the Choose a Pokémon text
 // See the corresponding GFXTAGs in src/data/trade.h
-static EWRAM_DATA u8 *sMenuTextTileBuffers[NUM_MENU_TEXT_SPRITES] = {NULL};
+static EWRAM_DATA u32 *sMenuTextTileBuffers[NUM_MENU_TEXT_SPRITES] = {NULL};
 
 EWRAM_DATA struct Mail gTradeMail[PARTY_SIZE] = {0};
-EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
+EWRAM_DATA u32 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct {
-    u8 bg2hofs;
-    u8 bg3hofs;
-    u8 filler_2[38];
-    u8 partySpriteIds[2][PARTY_SIZE];
-    u8 cursorSpriteId;
-    u8 cursorPosition;
-    u8 partyCounts[2];
+    u32 bg2hofs;
+    u32 bg3hofs;
+    u32 filler_2[38];
+    u32 partySpriteIds[2][PARTY_SIZE];
+    u32 cursorSpriteId;
+    u32 cursorPosition;
+    u32 partyCounts[2];
     bool8 optionsActive[PARTY_SIZE * 2 + 1];
     bool8 isLiveMon[2][PARTY_SIZE];
     bool8 isEgg[2][PARTY_SIZE];
-    u8 hpBarLevels[2][PARTY_SIZE];
-    u8 bufferPartyState;
-    u8 filler_6A[5];
-    u8 callbackId;
-    u8 neverRead_70;
+    u32 hpBarLevels[2][PARTY_SIZE];
+    u32 bufferPartyState;
+    u32 filler_6A[5];
+    u32 callbackId;
+    u32 neverRead_70;
     u16 bottomTextTileStart;
-    u8 drawSelectedMonState[2];
-    u8 selectedMonIdx[2];
-    u8 playerSelectStatus;
-    u8 partnerSelectStatus;
-    u8 playerConfirmStatus;
-    u8 partnerConfirmStatus;
-    u8 filler_7C[2];
-    u8 partnerCursorPosition;
+    u32 drawSelectedMonState[2];
+    u32 selectedMonIdx[2];
+    u32 playerSelectStatus;
+    u32 partnerSelectStatus;
+    u32 playerConfirmStatus;
+    u32 partnerConfirmStatus;
+    u32 filler_7C[2];
+    u32 partnerCursorPosition;
     u16 linkData[20];
-    u8 timer;
-    u8 giftRibbons[GIFT_RIBBONS_COUNT];
-    u8 filler_B4[0x81C];
+    u32 timer;
+    u32 giftRibbons[GIFT_RIBBONS_COUNT];
+    u32 filler_B4[0x81C];
     struct {
         bool8 active;
         u16 delay;
-        u8 actionId;
+        u32 actionId;
     } queuedActions[4];
     u16 tilemapBuffer[BG_SCREEN_SIZE / 2];
 } *sTradeMenu = NULL;
@@ -215,23 +215,23 @@ static EWRAM_DATA struct {
     struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
     u32 timer;
     u32 monPersonalities[2];
-    u8 filler_70[2];
-    u8 playerFinishStatus;
-    u8 partnerFinishStatus;
+    u32 filler_70[2];
+    u32 playerFinishStatus;
+    u32 partnerFinishStatus;
     u16 linkData[10];
-    u8 linkTimeoutZero1;
-    u8 linkTimeoutZero2;
+    u32 linkTimeoutZero1;
+    u32 linkTimeoutZero2;
     u16 linkTimeoutTimer;
     u16 neverRead_8C;
-    u8 monSpriteIds[2];
-    u8 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
-    u8 connectionSpriteId2;
-    u8 cableEndSpriteId;
-    u8 scheduleLinkTransfer;
+    u32 monSpriteIds[2];
+    u32 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
+    u32 connectionSpriteId2;
+    u32 cableEndSpriteId;
+    u32 scheduleLinkTransfer;
     u16 state;
-    u8 filler_96[0x3C];
-    u8 releasePokeballSpriteId;
-    u8 bouncingPokeballSpriteId;
+    u32 filler_96[0x3C];
+    u32 releasePokeballSpriteId;
+    u32 bouncingPokeballSpriteId;
     u16 texX;
     u16 texY;
     u16 neverRead_D8;
@@ -248,43 +248,43 @@ static EWRAM_DATA struct {
     bool8 isLinkTrade;
     u16 monSpecies[2];
     u16 cachedMapMusic;
-    u8 textColors[3];
-    u8 filler_F9;
+    u32 textColors[3];
+    u32 filler_F9;
     bool8 isCableTrade;
-    u8 wirelessWinLeft;
-    u8 wirelessWinTop;
-    u8 wirelessWinRight;
-    u8 wirelessWinBottom;
+    u32 wirelessWinLeft;
+    u32 wirelessWinTop;
+    u32 wirelessWinRight;
+    u32 wirelessWinBottom;
 } *sTradeAnim = NULL;
 
 static bool32 IsWirelessTrade(void);
 static void CB2_CreateTradeMenu(void);
 static void VBlankCB_TradeMenu(void);
 static void CB2_TradeMenu(void);
-static void LoadTradeBgGfx(u8);
+static void LoadTradeBgGfx(u32);
 static void SetActiveMenuOptions(void);
 static bool8 BufferTradeParties(void);
 static void CB1_UpdateLink(void);
 static void RunTradeMenuCallback(void);
-static void SetSelectedMon(u8);
-static void DrawSelectedMonScreen(u8);
-static u8 GetMonNicknameWidth(u8 *, u8, u8);
-static void BufferMovesString(u8 *, u8, u8);
-static void PrintPartyNicknames(u8);
-static void PrintLevelAndGender(u8, u8, u8, u8, u8, u8);
-static void PrintPartyLevelsAndGenders(u8);
+static void SetSelectedMon(u32);
+static void DrawSelectedMonScreen(u32);
+static u32 GetMonNicknameWidth(u32 *, u32, u32);
+static void BufferMovesString(u32 *, u32, u32);
+static void PrintPartyNicknames(u32);
+static void PrintLevelAndGender(u32, u32, u32, u32, u32, u32);
+static void PrintPartyLevelsAndGenders(u32);
 static void PrintTradePartnerPartyNicknames(void);
-static void RedrawPartyWindow(u8);
-static void Task_DrawSelectionSummary(u8);
-static void Task_DrawSelectionTrade(u8);
-static void QueueAction(u16, u8);
+static void RedrawPartyWindow(u32);
+static void Task_DrawSelectionSummary(u32);
+static void Task_DrawSelectionTrade(u32);
+static void QueueAction(u16, u32);
 static u32 GetNumQueuedActions(void);
 static void DoQueuedActions(void);
-static void PrintTradeMessage(u8);
+static void PrintTradeMessage(u32);
 static bool8 LoadUISpriteGfx(void);
-static void DrawBottomRowText(const u8 *, u8 *, u8);
-static void ComputePartyTradeableFlags(u8);
-static void ComputePartyHPBarLevels(u8);
+static void DrawBottomRowText(const u32 *, u32 *, u32);
+static void ComputePartyTradeableFlags(u32);
+static void ComputePartyHPBarLevels(u32);
 static void SetTradePartyHPBarSprites(void);
 static void SaveTradeGiftRibbons(void);
 static u32 CanTradeSelectedMon(struct Pokemon *, int, int);
@@ -295,7 +295,7 @@ static void SpriteCB_CableEndReceiving(struct Sprite *);
 static void SpriteCB_GbaScreen(struct Sprite *);
 static void TradeAnimInit_LoadGfx(void);
 static void CB2_InGameTrade(void);
-static void SetTradeSequenceBgGpuRegs(u8);
+static void SetTradeSequenceBgGpuRegs(u32);
 static void LoadTradeSequenceSpriteSheetsAndPalettes(void);
 static void BufferTradeSceneStrings(void);
 static bool8 DoTradeAnim(void);
@@ -311,11 +311,11 @@ static void CB2_UpdateLinkTrade(void);
 static void CB2_WaitTradeComplete(void);
 static void CB2_SaveAndEndTrade(void);
 static void CB2_FreeTradeAnim(void);
-static void Task_InGameTrade(u8);
+static void Task_InGameTrade(u32);
 static void CheckPartnersMonForRibbons(void);
-static void Task_AnimateWirelessSignal(u8);
-static void Task_OpenCenterWhiteColumn(u8);
-static void Task_CloseCenterWhiteColumn(u8);
+static void Task_AnimateWirelessSignal(u32);
+static void Task_OpenCenterWhiteColumn(u32);
+static void Task_CloseCenterWhiteColumn(u32);
 static void CB2_SaveAndEndWirelessTrade(void);
 
 #include "data/trade.h"
@@ -333,7 +333,7 @@ static bool8 SendLinkData(const void *linkData, u32 size)
     }
 }
 
-static void RequestLinkData(u8 type)
+static void RequestLinkData(u32 type)
 {
     SendBlockRequest(type);
 }
@@ -382,7 +382,7 @@ static bool32 IsWirelessTrade(void)
         return FALSE;
 }
 
-static void SetTradeLinkStandbyCallback(u8 unused)
+static void SetTradeLinkStandbyCallback(u32 unused)
 {
     SetLinkStandbyCallback();
 }
@@ -446,7 +446,7 @@ static void CB2_CreateTradeMenu(void)
 {
     int i;
     struct SpriteTemplate temp;
-    u8 id;
+    u32 id;
     u32 xPos;
 
     switch (gMain.state)
@@ -708,7 +708,7 @@ static void CB2_ReturnToTradeMenu(void)
 {
     int i;
     struct SpriteTemplate temp;
-    u8 id;
+    u32 id;
     u32 xPos;
 
     switch (gMain.state)
@@ -968,7 +968,7 @@ static void CB2_TradeMenu(void)
     UpdatePaletteFade();
 }
 
-static void LoadTradeBgGfx(u8 state)
+static void LoadTradeBgGfx(u32 state)
 {
     int i;
 
@@ -1036,8 +1036,8 @@ static void SetActiveMenuOptions(void)
 // why not just use memcpy?
 static void Trade_Memcpy(void *dest, const void *src, u32 size)
 {
-    u8 *_dest = dest;
-    const u8 *_src = src;
+    u32 *_dest = dest;
+    const u32 *_src = src;
     u32 i;
     for (i = 0; i < size; i++)
         _dest[i] = _src[i];
@@ -1045,7 +1045,7 @@ static void Trade_Memcpy(void *dest, const void *src, u32 size)
 
 static bool8 BufferTradeParties(void)
 {
-    u8 id = GetMultiplayerId();
+    u32 id = GetMultiplayerId();
     int i;
     struct Pokemon *mon;
 
@@ -1155,7 +1155,7 @@ static bool8 BufferTradeParties(void)
     case 21:
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
         {
-            u8 name[POKEMON_NAME_LENGTH + 1];
+            u32 name[POKEMON_NAME_LENGTH + 1];
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
             if (species != SPECIES_NONE)
@@ -1192,7 +1192,7 @@ static void PrintIsThisTradeOkay(void)
     DrawBottomRowText(sText_IsThisTradeOkay, (void *)(OBJ_VRAM0 + (sTradeMenu->bottomTextTileStart * 32)), 24);
 }
 
-static void Leader_ReadLinkBuffer(u8 mpId, u8 status)
+static void Leader_ReadLinkBuffer(u32 mpId, u32 status)
 {
     if (status & 1)
     {
@@ -1236,7 +1236,7 @@ static void Leader_ReadLinkBuffer(u8 mpId, u8 status)
     }
 }
 
-static void Follower_ReadLinkBuffer(u8 mpId, u8 status)
+static void Follower_ReadLinkBuffer(u32 mpId, u32 status)
 {
     if (status & 1)
     {
@@ -1372,8 +1372,8 @@ static void SetLinkData(u16 linkCmd, u16 cursorPosition)
 
 static void CB1_UpdateLink(void)
 {
-    u8 mpId = GetMultiplayerId();
-    u8 status;
+    u32 mpId = GetMultiplayerId();
+    u32 status;
 
     if ((status = _GetBlockReceivedStatus()))
     {
@@ -1387,10 +1387,10 @@ static void CB1_UpdateLink(void)
         Leader_HandleCommunication();
 }
 
-static u8 GetNewCursorPosition(u8 oldPosition, u8 direction)
+static u32 GetNewCursorPosition(u32 oldPosition, u32 direction)
 {
     int i;
-    u8 newPosition = 0;
+    u32 newPosition = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -1404,9 +1404,9 @@ static u8 GetNewCursorPosition(u8 oldPosition, u8 direction)
     return newPosition;
 }
 
-static void TradeMenuMoveCursor(u8 *cursorPosition, u8 direction)
+static void TradeMenuMoveCursor(u32 *cursorPosition, u32 direction)
 {
-    u8 newPosition = GetNewCursorPosition(*cursorPosition, direction);
+    u32 newPosition = GetNewCursorPosition(*cursorPosition, direction);
 
     if (newPosition == (PARTY_SIZE * 2)) // CANCEL
     {
@@ -1555,11 +1555,11 @@ static void CB_ShowTradeMonSummaryScreen(void)
     }
 }
 
-static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 playerMonIdx, u8 partnerMonIdx)
+static u32 CheckValidityOfTradeMons(u32 *aliveMons, u32 playerPartyCount, u32 playerMonIdx, u32 partnerMonIdx)
 {
     int i;
     u16 partnerSpecies;
-    u8 hasLiveMon = 0;
+    u32 hasLiveMon = 0;
 
     // Make sure mon to be traded isn't player's last alive mon
     for (i = 0; i < playerPartyCount; i++)
@@ -1591,7 +1591,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
 static bool32 CheckMonsBeforeTrade(void)
 {
     int i;
-    u8 aliveMons[PARTY_SIZE * 2];
+    u32 aliveMons[PARTY_SIZE * 2];
 
     for (i = 0; i < sTradeMenu->partyCounts[TRADE_PLAYER]; i++)
         aliveMons[i] = sTradeMenu->isLiveMon[TRADE_PLAYER][i];
@@ -1840,10 +1840,10 @@ static void RunTradeMenuCallback(void)
     }
 }
 
-static void SetSelectedMon(u8 cursorPosition)
+static void SetSelectedMon(u32 cursorPosition)
 {
     //cursorPosition 0-5 are the player's mons, 6-11 are the partner's
-    u8 whichParty = cursorPosition / PARTY_SIZE;
+    u32 whichParty = cursorPosition / PARTY_SIZE;
 
     if (sTradeMenu->drawSelectedMonState[whichParty] == 0)
     {
@@ -1854,15 +1854,15 @@ static void SetSelectedMon(u8 cursorPosition)
     }
 }
 
-static void DrawSelectedMonScreen(u8 whichParty)
+static void DrawSelectedMonScreen(u32 whichParty)
 {
     s8 nameStringWidth;
-    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
-    u8 movesString[56];
-    u8 i;
-    u8 partyIdx;
-    u8 selectedMonParty;
-    u8 selectedMonIdx = sTradeMenu->selectedMonIdx[whichParty];
+    u32 nickname[POKEMON_NAME_BUFFER_SIZE];
+    u32 movesString[56];
+    u32 i;
+    u32 partyIdx;
+    u32 selectedMonParty;
+    u32 selectedMonIdx = sTradeMenu->selectedMonIdx[whichParty];
 
     selectedMonParty = TRADE_PARTNER;
     if (sTradeMenu->selectedMonIdx[whichParty] < PARTY_SIZE)
@@ -1941,9 +1941,9 @@ static void DrawSelectedMonScreen(u8 whichParty)
     }
 }
 
-static u8 GetMonNicknameWidth(u8 *str, u8 whichParty, u8 partyIdx)
+static u32 GetMonNicknameWidth(u32 *str, u32 whichParty, u32 partyIdx)
 {
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u32 nickname[POKEMON_NAME_LENGTH + 1];
 
     if (whichParty == TRADE_PLAYER)
         GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
@@ -1954,7 +1954,7 @@ static u8 GetMonNicknameWidth(u8 *str, u8 whichParty, u8 partyIdx)
     return GetStringWidth(FONT_SMALL, str, GetFontAttribute(FONT_SMALL, FONTATTR_LETTER_SPACING));
 }
 
-static void BufferMovesString(u8 *str, u8 whichParty, u8 partyIdx)
+static void BufferMovesString(u32 *str, u32 whichParty, u32 partyIdx)
 {
     u16 moves[MAX_MON_MOVES];
     u16 i;
@@ -1986,9 +1986,9 @@ static void BufferMovesString(u8 *str, u8 whichParty, u8 partyIdx)
     }
 }
 
-static void PrintPartyMonNickname(u8 whichParty, u8 windowId, u8 *nickname)
+static void PrintPartyMonNickname(u32 whichParty, u32 windowId, u32 *nickname)
 {
-    u8 xPos;
+    u32 xPos;
     windowId += (whichParty * PARTY_SIZE) + 2;
     xPos = GetStringCenterAlignXOffset(FONT_SMALL, nickname, 64);
     AddTextPrinterParameterized3(windowId, FONT_SMALL, xPos, 4, sTradeTextColors, 0, nickname);
@@ -1996,11 +1996,11 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, u8 *nickname)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void PrintPartyNicknames(u8 whichParty)
+static void PrintPartyNicknames(u32 whichParty)
 {
-    u8 i;
-    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
-    u8 str[max(32, POKEMON_NAME_BUFFER_SIZE)];
+    u32 i;
+    u32 nickname[POKEMON_NAME_BUFFER_SIZE];
+    u32 str[max(32, POKEMON_NAME_BUFFER_SIZE)];
     struct Pokemon *party = (whichParty == TRADE_PLAYER) ? gPlayerParty : gEnemyParty;
 
     for (i = 0; i < sTradeMenu->partyCounts[whichParty]; i++)
@@ -2011,12 +2011,12 @@ static void PrintPartyNicknames(u8 whichParty)
     }
 }
 
-static void PrintLevelAndGender(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 width, u8 height)
+static void PrintLevelAndGender(u32 whichParty, u32 monIdx, u32 x, u32 y, u32 width, u32 height)
 {
-    u8 level;
+    u32 level;
     u32 symbolTile;
-    u8 gender;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u32 gender;
+    u32 nickname[POKEMON_NAME_LENGTH + 1];
 
     CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenuMonBox_Tilemap, width, height, 6, 3, 0);
     CopyBgTilemapBufferToVram(1);
@@ -2072,7 +2072,7 @@ static void PrintLevelAndGender(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 width, 
     sTradeMenu->tilemapBuffer[(y - 1) * 32 + x + 1] = symbolTile;
 }
 
-static void PrintPartyLevelsAndGenders(u8 whichParty)
+static void PrintPartyLevelsAndGenders(u32 whichParty)
 {
     s32 i;
     for (i = 0; i < sTradeMenu->partyCounts[whichParty]; i++)
@@ -2089,7 +2089,7 @@ static void PrintPartyLevelsAndGenders(u8 whichParty)
     }
 }
 
-static void ShowTradePartyMonIcons(u8 whichParty)
+static void ShowTradePartyMonIcons(u32 whichParty)
 {
     int i;
 
@@ -2111,7 +2111,7 @@ static void PrintTradePartnerPartyNicknames(void)
 }
 
 // Returning to the party selection screen from the "is this trade ok?" screen
-static void RedrawPartyWindow(u8 whichParty)
+static void RedrawPartyWindow(u32 whichParty)
 {
     CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, whichParty * 15, 0, 15, 17, 0);
     CopyBgTilemapBufferToVram(1);
@@ -2122,19 +2122,19 @@ static void RedrawPartyWindow(u8 whichParty)
     sTradeMenu->drawSelectedMonState[whichParty] = 0;
 }
 
-static void Task_DrawSelectionSummary(u8 taskId)
+static void Task_DrawSelectionSummary(u32 taskId)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
-static void Task_DrawSelectionTrade(u8 taskId)
+static void Task_DrawSelectionTrade(u32 taskId)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyBgTilemapBufferToVram(0);
 }
 
-static void QueueAction(u16 delay, u8 actionId)
+static void QueueAction(u16 delay, u32 actionId)
 {
     int i;
 
@@ -2210,7 +2210,7 @@ static void DoQueuedActions(void)
     }
 }
 
-static void PrintTradeMessage(u8 messageId)
+static void PrintTradeMessage(u32 messageId)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, FONT_NORMAL, sMessages[messageId], 0, 1, TEXT_SKIP_DRAW, NULL);
@@ -2275,12 +2275,12 @@ static bool8 LoadUISpriteGfx(void)
     return FALSE;
 }
 
-static void DrawBottomRowText(const u8 *str, u8 *dest, u8 unused)
+static void DrawBottomRowText(const u32 *str, u32 *dest, u32 unused)
 {
     DrawTextWindowAndBufferTiles(str, dest, 0, 0, 6);
 }
 
-static void ComputePartyTradeableFlags(u8 whichParty)
+static void ComputePartyTradeableFlags(u32 whichParty)
 {
     int i;
 
@@ -2329,7 +2329,7 @@ static void ComputePartyTradeableFlags(u8 whichParty)
     }
 }
 
-static void ComputePartyHPBarLevels(u8 whichParty)
+static void ComputePartyHPBarLevels(u32 whichParty)
 {
     u16 i, curHp, maxHp;
 
@@ -2482,13 +2482,13 @@ s32 GetGameProgressForLinkTrade(void)
     return TRADE_BOTH_PLAYERS_READY;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u32 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerCanLinkNationally = player.canLinkNationally;
     bool8 partnerHasNationalDex = partner.hasNationalDex;
     bool8 partnerCanLinkNationally = partner.canLinkNationally;
-    u8 partnerVersion = partner.version;
+    u32 partnerVersion = partner.version;
 
     // If partner is not using Emerald, both players must have progressed the story
     // to a certain point (becoming champion in RSE, finishing the Sevii islands in FRLG)
@@ -2763,7 +2763,7 @@ static u32 TradeGetMultiplayerId(void)
     return 0;
 }
 
-static void LoadTradeMonPic(u8 whichParty, u8 state)
+static void LoadTradeMonPic(u32 whichParty, u32 state)
 {
     int pos = 0;
     struct Pokemon *mon = NULL;
@@ -2968,7 +2968,7 @@ static void TradeAnimInit_LoadGfx(void)
 
 static void CB2_InitInGameTrade(void)
 {
-    u8 otName[11];
+    u32 otName[11];
 
     switch (gMain.state)
     {
@@ -3049,7 +3049,7 @@ static void CB2_InitInGameTrade(void)
     UpdatePaletteFade();
 }
 
-static void UpdatePokedexForReceivedMon(u8 partyIdx)
+static void UpdatePokedexForReceivedMon(u32 partyIdx)
 {
     struct Pokemon *mon = &gPlayerParty[partyIdx];
 
@@ -3066,15 +3066,15 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 // Functionally nop after commented code
 static void TryEnableNationalDexFromLinkPartner(void)
 {
-    u8 UNUSED mpId = GetMultiplayerId();
+    u32 UNUSED mpId = GetMultiplayerId();
     // Originally in Ruby but commented out
     /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
         EnableNationalPokedex();*/
 }
 
-static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
+static void TradeMons(u32 playerPartyIdx, u32 partnerPartyIdx)
 {
-    u8 friendship;
+    u32 friendship;
 
     struct Pokemon *playerMon = &gPlayerParty[playerPartyIdx];
     u16 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
@@ -3129,7 +3129,7 @@ static void CB2_InGameTrade(void)
     UpdatePaletteFade();
 }
 
-static void SetTradeSequenceBgGpuRegs(u8 state)
+static void SetTradeSequenceBgGpuRegs(u32 state)
 {
     switch (state)
     {
@@ -3302,8 +3302,8 @@ static void LoadTradeSequenceSpriteSheetsAndPalettes(void)
 // Buffers "[Pokemon] will be sent to [Trainer]" strings
 static void BufferTradeSceneStrings(void)
 {
-    u8 mpId;
-    u8 name[POKEMON_NAME_BUFFER_SIZE];
+    u32 mpId;
+    u32 name[POKEMON_NAME_BUFFER_SIZE];
     const struct InGameTrade *ingameTrade;
 
     if (sTradeAnim->isLinkTrade)
@@ -4173,7 +4173,7 @@ static bool8 DoTradeAnim_Wireless(void)
         sTradeAnim->bg2vofs += 3;
         if (++sTradeAnim->timer == 10)
         {
-            u8 taskId = CreateTask(Task_AnimateWirelessSignal, 5);
+            u32 taskId = CreateTask(Task_AnimateWirelessSignal, 5);
             gTasks[taskId].tSignalComingBack = TRUE;
         }
         if (sTradeAnim->bg1vofs > 316)
@@ -4405,7 +4405,7 @@ static void CB2_TryLinkTradeEvolution(void)
 
 static void HandleLinkDataReceive(void)
 {
-    u8 recvStatus;
+    u32 recvStatus;
     TradeGetMultiplayerId(); // no effect call, ret val ignored
     recvStatus = GetBlockReceivedStatus();
     if (recvStatus & (1 << 0))
@@ -4512,21 +4512,21 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void BufferInGameTradeMonName(void)
 {
-    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
+    u32 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
 
-static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTrade)
+static void CreateInGameTradePokemonInternal(u32 whichPlayerMon, u32 whichInGameTrade)
 {
     const struct InGameTrade *inGameTrade = &sIngameTrades[whichInGameTrade];
-    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
+    u32 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
 
     struct Mail mail;
-    u8 metLocation = METLOC_IN_GAME_TRADE;
-    u8 mailNum;
+    u32 metLocation = METLOC_IN_GAME_TRADE;
+    u32 mailNum;
     struct Pokemon *pokemon = &gEnemyParty[0];
 
     CreateMon(pokemon, inGameTrade->species, level, USE_RANDOM_IVS, TRUE, inGameTrade->personality, OT_ID_PRESET, inGameTrade->otId);
@@ -4622,7 +4622,7 @@ static void CB2_UpdateLinkTrade(void)
 
 static void CB2_WaitTradeComplete(void)
 {
-    u8 mpId = TradeGetMultiplayerId();
+    u32 mpId = TradeGetMultiplayerId();
     if (IsWirelessTrade())
     {
         SetMainCallback2(CB2_TryLinkTradeEvolution);
@@ -4822,7 +4822,7 @@ void DoInGameTradeScene(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
-static void Task_InGameTrade(u8 taskId)
+static void Task_InGameTrade(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -4834,8 +4834,8 @@ static void Task_InGameTrade(u8 taskId)
 
 static void CheckPartnersMonForRibbons(void)
 {
-    u8 i;
-    u8 numRibbons = 0;
+    u32 i;
+    u32 numRibbons = 0;
     for (i = 0; i < (MON_DATA_WORLD_RIBBON - MON_DATA_CHAMPION_RIBBON + 1); i++)
         numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
 
@@ -4848,7 +4848,7 @@ void LoadTradeAnimGfx(void)
     TradeAnimInit_LoadGfx();
 }
 
-void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed)
+void DrawTextOnTradeWindow(u32 windowId, const u32 *str, u32 speed)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     sTradeAnim->textColors[0] = TEXT_DYNAMIC_COLOR_6;
@@ -4858,7 +4858,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void Task_AnimateWirelessSignal(u8 taskId)
+static void Task_AnimateWirelessSignal(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -4901,7 +4901,7 @@ static void Task_AnimateWirelessSignal(u8 taskId)
 #undef tCounter
 #undef tSignalComingBack
 
-static void Task_OpenCenterWhiteColumn(u8 taskId)
+static void Task_OpenCenterWhiteColumn(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -4928,7 +4928,7 @@ static void Task_OpenCenterWhiteColumn(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void Task_CloseCenterWhiteColumn(u8 taskId)
+static void Task_CloseCenterWhiteColumn(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

@@ -15,15 +15,15 @@
 struct MemBlock
 {
     // Whether this block is currently allocated.
-    u16 allocated:1;
+    u32 allocated:1;
 
-    u16 unused_00:4;
+    u32 unused_00:4;
 
     // High 11 bits of location pointer.
-    u16 locationHi:11;
+    u32 locationHi:11;
 
     // Magic number used for error checking. Should equal MALLOC_SYSTEM_ID.
-    u16 magic;
+    u32 magic;
 
     // Size of the block (not including this header struct).
     u32 size:18;

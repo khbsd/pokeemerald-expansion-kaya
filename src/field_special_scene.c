@@ -44,19 +44,19 @@ enum
 
 static const s8 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
-static const u8 sSSTidalSailEastMovementScript[] =
+static const u32 sSSTidalSailEastMovementScript[] =
 {
     MOVEMENT_ACTION_WALK_FAST_RIGHT,
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 sSSTidalSailWestMovementScript[] =
+static const u32 sSSTidalSailWestMovementScript[] =
 {
     MOVEMENT_ACTION_WALK_FAST_LEFT,
     MOVEMENT_ACTION_STEP_END
 };
 
-static void Task_Truck3(u8);
+static void Task_Truck3(u32);
 
 static s16 GetTruckCameraBobbingY(int time)
 {
@@ -86,7 +86,7 @@ static s16 GetTruckBoxYMovement(int time)
 
 #define tTimer data[0]
 
-static void Task_Truck1(u8 taskId)
+static void Task_Truck1(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 cameraXpan = 0, cameraYpan = 0;
@@ -113,7 +113,7 @@ static void Task_Truck1(u8 taskId)
 #define tMoveStep        data[1]
 #define tTimerVertical   data[2]
 
-static void Task_Truck2(u8 taskId)
+static void Task_Truck2(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 cameraYpan, cameraXpan;
@@ -149,7 +149,7 @@ static void Task_Truck2(u8 taskId)
     }
 }
 
-static void Task_Truck3(u8 taskId)
+static void Task_Truck3(u32 taskId)
 {
    s16 *data = gTasks[taskId].data;
    s16 cameraXpan, cameraYpan;
@@ -186,7 +186,7 @@ static void Task_Truck3(u8 taskId)
 #define tTaskId1 data[2]
 #define tTaskId2 data[3]
 
-static void Task_HandleTruckSequence(u8 taskId)
+static void Task_HandleTruckSequence(u32 taskId)
 {
    s16 *data = gTasks[taskId].data;
 
@@ -268,7 +268,7 @@ void ExecuteTruckSequence(void)
     CreateTask(Task_HandleTruckSequence, 0xA);
 }
 
-void EndTruckSequence(u8 taskId)
+void EndTruckSequence(u32 taskId)
 {
     if (!FuncIsActiveTask(Task_HandleTruckSequence))
     {
@@ -294,7 +294,7 @@ bool8 TrySetPortholeWarpDestination(void)
     }
 }
 
-void Task_HandlePorthole(u8 taskId)
+void Task_HandlePorthole(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *cruiseState = GetVarPointer(VAR_SS_TIDAL_STATE);
@@ -355,7 +355,7 @@ void Task_HandlePorthole(u8 taskId)
 
 static void ShowSSTidalWhileSailing(void)
 {
-    u8 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SS_TIDAL, SpriteCallbackDummy, 112, 80, 0);
+    u32 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SS_TIDAL, SpriteCallbackDummy, 112, 80, 0);
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 

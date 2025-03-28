@@ -1,8 +1,8 @@
 #ifndef GUARD_FLDEFF_MISC_H
 #define GUARD_FLDEFF_MISC_H
 
-void ComputerScreenOpenEffect(u16 increment, u16 unused, u8 priority);
-void ComputerScreenCloseEffect(u16 increment, u16 unused, u8 priority);
+void ComputerScreenOpenEffect(u32 increment, u32 unused, u8 priority);
+void ComputerScreenCloseEffect(u32 increment, u32 unused, u8 priority);
 bool8 IsComputerScreenOpenEffectActive(void);
 bool8 IsComputerScreenCloseEffectActive(void);
 bool8 SetUpFieldMove_SecretPower(void);
@@ -22,7 +22,7 @@ void PlaySecretBaseMusicNoteMatSound(s16 metatileId);
 void DoSecretBaseGlitterMatSparkle(void);
 bool8 FldEff_SandPillar(void);
 void InteractWithShieldOrTVDecoration(void);
-bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase);
+bool8 IsLargeBreakableDecoration(u32 metatileId, bool8 checkBase);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);
 void DoWateringBerryTreeAnim(void);
@@ -32,6 +32,6 @@ void DestroyRecordMixingLights(void);
 extern const struct SpritePalette gSpritePalette_SecretPower_Cave;
 extern const struct SpritePalette gSpritePalette_SecretPower_Plant;
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo9;
-extern const u16 gTilesetPalettes_SecretBase[][16];
+extern const u32 gTilesetPalettes_SecretBase[][16];
 
 #endif //GUARD_FLDEFF_MISC_H

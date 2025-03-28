@@ -13,6 +13,6 @@ void InitMysteryEventScriptContext(u8 *script);
 bool32 RunMysteryEventScriptContextCommand(u32 *status);
 u32 RunMysteryEventScript(u8 *script);
 void SetMysteryEventScriptStatus(u32 val);
-u16 GetRecordMixingGift(void);
+u32 GetRecordMixingGift(void);
 
 #endif // GUARD_MYSTERY_EVENT_SCRIPT_H

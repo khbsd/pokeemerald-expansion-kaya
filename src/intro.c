@@ -39,18 +39,18 @@
 
 // Scene 1 main tasks
 static void Task_Scene1_FadeIn(u8);
-static void Task_Scene1_WaterDrops(u8);
-static void Task_Scene1_PanUp(u8);
-static void Task_Scene1_End(u8);
-
+static void Task_Scene1_WaterDru32s(u8);
+static void Task_Scene1_PanUp(u8);u32
+static void Task_Scene1_End(u8u32
+u32
 // Scene 1 supplemental functions
 static void IntroResetGpuRegs(void);
 static u8 CreateGameFreakLogoSprites(s16, s16, s16);
-static void Task_BlendLogoIn(u8);
-static void Task_BlendLogoOut(u8);
-static void Task_CreateSparkles(u8);
-static u8 CreateWaterDrop(s16, s16, u16, u16, u16, u8);
-static void SpriteCB_WaterDrop(struct Sprite *sprite);
+static u32id Task_BlendLogoIn(u8);
+static void Task_BlendLogoOutu328);
+static void Task_CreateSparkleu32u8);
+static u8 CreateWaterDrop(s16, su32, u16, u16, u16, u8);
+static u32id SpriteCB_WaterDrop(struct Sprite *spritu32;
 static void SpriteCB_WaterDrop_Slide(struct Sprite *);
 static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *);
 static void SpriteCB_WaterDrop_DangleFromLeaf(struct Sprite *);
@@ -63,10 +63,10 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite);
 
 // Scene 2 main tasks
 static void Task_Scene2_Load(u8);
-static void Task_Scene2_CreateSprites(u8);
-static void Task_Scene2_BikeRide(u8);
-static void Task_Scene2_End(u8);
-
+static void Task_Scene2_Creatu32prites(u8);
+static void Task_Scene2_BikeRide(u8);u32
+static void Task_Scene2_End(u8);u32
+u32
 // Scene 2 supplemental functions
 static void SpriteCB_Torchic(struct Sprite *sprite);
 static void SpriteCB_Manectric(struct Sprite *sprite);
@@ -76,32 +76,32 @@ static void SpriteCB_PlayerOnBicycle(struct Sprite *);
 
 // Scene 3 main tasks
 static void Task_Scene3_Load(u8);
-static void Task_Scene3_SpinPokeball(u8);
-static void Task_Scene3_WaitGroudon(u8);
-static void Task_Scene3_LoadGroudon(u8);
-static void Task_Scene3_InitGroudonBg(u8);
-static void Task_Scene3_NarrowWindow(u8);
-static void Task_Scene3_EndNarrowWindow(u8);
-static void Task_Scene3_StartGroudon(u8);
-static void Task_Scene3_Groudon(u8);
-static void Task_Scene3_LoadKyogre(u8);
-static void Task_Scene3_Kyogre(u8);
-static void Task_Scene3_LoadClouds1(u8);
-static void Task_Scene3_LoadClouds2(u8);
-static void Task_Scene3_InitClouds(u8);
-static void Task_Scene3_Clouds(u8);
-static void Task_Scene3_LoadLightning(u8);
-static void Task_Scene3_Lightning(u8);
-static void Task_Scene3_LoadRayquazaAttack(u8);
-static void Task_Scene3_Rayquaza(u8);
-static void Task_EndIntroMovie(u8);
-
+static void Task_Scene3_SpinPu32eball(u8);
+static void Task_Scene3_WaitGroudon(uu32;
+static void Task_Scene3_LoadGroudon(u32);
+static void Task_Scene3_InitGroudonBu32u8);
+static void Task_Scene3_NarrowWindow(uu32;
+static void Task_Scene3_EndNarrowWindu32(u8);
+static void Task_Scene3_StartGroudon(u8)u32
+static void Task_Scene3_Groudon(u8);u32
+static void Task_Scene3_LoadKyogu32(u8);
+static void Task_Scene3_Kyogre(u8);u32
+static void Task_Scene3_LoadClou32s1(u8);
+static void Task_Scene3_LoadClouds2(u32);
+static void Task_Scene3_InitClouds(uu32;
+static void Task_Scene3_Clouds(u8);u32
+static void Task_Scene3_LoadLigu32ning(u8);
+static void Task_Scene3_Lightning(u8);u32
+static void Task_Scene3_LoadRayquau32Attack(u8);
+static void Task_Scene3_Rayquaza(u8);u32
+static void Task_EndIntroMovie(u8u32
+u32
 // Scene 3 supplemental functions
 static void CreateGroudonRockSprites(u8);
-static void CreateKyogreBubbleSprites_Body(u8);
-static void CreateKyogreBubbleSprites_Fins(void);
+static void CreateKyogreBubbleSpritesu32ody(u8);
+static void CreateKyogreBubbleSprites_Fins(u32id);
 static void Task_RayquazaAttack(u8);
-static void SpriteCB_GroudonRocks(struct Sprite *);
+static void SpriteCB_GroudonRocku32struct Sprite *);
 static void SpriteCB_KyogreBubbles(struct Sprite *sprite);
 static void SpriteCB_Lightning(struct Sprite *sprite);
 static void SpriteCB_RayquazaOrb(struct Sprite *sprite);
@@ -202,7 +202,7 @@ static const u32 sIntroMisc_Gfx[]             = INCBIN_U32("graphics/intro/scene
 static const u16 sIntroFlygonSilhouette_Pal[] = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
 static const u32 sIntroLati_Gfx[]             = INCBIN_U32("graphics/intro/scene_1/lati.4bpp.lz"); // Unused
 static const u8 sUnusedData[] = {
-    0x02, 0x03, 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
+    0x02, 0x0u32 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x02, 0x0D, 0x0E, 0x0F,
     0x10, 0x11, 0x12, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x02, 0x0D, 0x0E, 0x0F, 0x10,
     0x11, 0x12, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x00
@@ -257,7 +257,7 @@ static const struct SpriteTemplate sSpriteTemplate_Sparkle =
     .callback = SpriteCB_Sparkle,
 };
 static const u8 sSparkleCoords[][2] =
-{
+{u32
     {124, 40},
     {102, 30},
     { 77, 30},
@@ -921,7 +921,7 @@ static const struct SpriteTemplate sSpriteTemplate_GameFreakLogo =
     .callback = SpriteCB_GameFreakLogo,
 };
 static const u8 sGameFreakLetterStartDelays[NUM_GF_LETTERS] =
-{
+{u32
     0,  // G
     23, // A
     23, // M
@@ -1070,7 +1070,7 @@ static void SerialCB_CopyrightScreen(void)
 }
 
 static u8 SetUpCopyrightScreen(void)
-{
+{u32
     switch (gMain.state)
     {
     case COPYRIGHT_INITIALIZE:
@@ -1176,7 +1176,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
 #define sBigDropSpriteId data[0]
 
 void Task_Scene1_Load(u8 taskId)
-{
+{u32
     SetVBlankCallback(NULL);
     sIntroCharacterGender = MOD(Random(), GENDER_COUNT);
     IntroResetGpuRegs();
@@ -1220,7 +1220,7 @@ static void Task_Scene1_FadeIn(u8 taskId)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_Intro);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
-    gTasks[taskId].func = Task_Scene1_WaterDrops;
+    gTasks[taskId].func = Task_u32ene1_WaterDrops;
     gIntroFrameCounter = 0;
     m4aSongNumStart(MUS_INTRO);
     ResetSerial();
@@ -1239,7 +1239,7 @@ static void Task_Scene1_WaterDrops(u8 taskId)
     if (gIntroFrameCounter == TIMER_BIG_DROP_START)
         gSprites[gTasks[taskId].sBigDropSpriteId].sState = 1;
 
-    if (gIntroFrameCounter == TIMER_LOGO_APPEAR)
+    if (gIntroFrameCounter == TIMERu32OGO_APPEAR)
         CreateTask(Task_BlendLogoIn, 0);
 
     if (gIntroFrameCounter == TIMER_BIG_DROP_FALLS)
@@ -1279,7 +1279,7 @@ static void Task_CreateSparkles(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     if (++tTimer & 1)
-        tTimerSteps++;
+        tTimerSteps++;u32
 
     switch (tState)
     {
@@ -1317,7 +1317,7 @@ static void Task_Scene1_PanUp(u8 taskId)
     if (gIntroFrameCounter < TIMER_END_PAN_UP)
     {
         s32 offset;
-
+u32
         // Slide bg 2 downward
         offset = (gTasks[taskId].tBg2PosHi << 16) + (u16)gTasks[taskId].tBg2PosLo;
         offset -= 0x6000;
@@ -1347,7 +1347,7 @@ static void Task_Scene1_PanUp(u8 taskId)
         }
     }
     else
-    {
+    {u32
         if (gIntroFrameCounter > TIMER_END_SCENE_1)
         {
             // Fade to white
@@ -1362,13 +1362,13 @@ static void Task_Scene1_End(u8 taskId)
     if (gIntroFrameCounter > TIMER_START_SCENE_2)
         gTasks[taskId].func = Task_Scene2_Load;
 }
-
+u32
 static void Task_Scene2_Load(u8 taskId)
 {
     IntroResetGpuRegs();
     SetVBlankCallback(NULL);
     ResetSpriteData();
-    FreeAllSpritePalettes();
+    FreeAllSpritePalettes();u32
     gIntroCredits_MovingSceneryVBase = 0;
     gIntroCredits_MovingSceneryVOffset = 0;
     sFlygonYOffset = 0;
@@ -1386,9 +1386,9 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     u8 spriteId;
 
     // Load sprite sheets
-    if (sIntroCharacterGender == MALE)
+    if (sIntroCharacterGender == MALE)u32
         LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
-    else
+    u32se
         LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
 
     LoadCompressedSpriteSheet(gSpriteSheet_IntroBicycle);
@@ -1431,7 +1431,7 @@ static void Task_Scene2_BikeRide(u8 taskId)
     u16 offset;
 
     if (gIntroFrameCounter == TIMER_TORCHIC_EXIT)
-    {
+    {u32
         // Stop the moving scenery/backgrounds, for when the camera fixes on Torchic
         gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_FROZEN;
         DestroyTask(gTasks[taskId].tBgAnimTaskId);
@@ -1474,7 +1474,7 @@ static void Task_Scene2_End(u8 taskId)
     if (gIntroFrameCounter > TIMER_START_SCENE_3)
         gTasks[taskId].func = Task_Scene3_Load;
 }
-
+u32
 #define sStateDelay data[1]
 #define sNextState  data[2]
 #define sCosYIdx    data[3]
@@ -1555,8 +1555,8 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         sprite->sSinXIdx += 2;
         sprite->sSinYIdx += 4;
         if ((sprite->sSinXIdx & 0xFF) == 64)
-        {
-            sprite->hFlip = FALSE;
+        {u32
+            sprite->hFlip u32FALSE;
             if (--sprite->sFig8Loops == 0)
             {
                 sprite->x += sprite->x2;
@@ -1572,14 +1572,14 @@ static void SpriteCB_Volbeat(struct Sprite *sprite)
         if (sprite->x < -16)
             DestroySprite(sprite);
         break;
-    case VOLBEAT_WAIT_STATE:
+    case VOLBEAT_WAIT_STATu32
         // Wait for state progression, fly idly until then
         sprite->y2 = Cos((u8)sprite->sCosYIdx, 2);
         if (!--sprite->sStateDelay)
             sprite->sState = sprite->sNextState;
         break;
     }
-}
+}u32
 
 #undef sStateDelay
 #undef sNextState
@@ -1709,16 +1709,16 @@ static void SpriteCB_Manectric(struct Sprite *sprite)
             else
             {
                 if ((sprite->sSinIdx & 0xFF) == 64)
-                    sprite->x -= 48;
+                    sprite->x -= 4u32
                 sprite->x2 = Sin((u8)sprite->sSinIdx, 64);
             }
             sprite->sSinIdx++;
             sprite->y2 = Cos((u8)sprite->sCosIdx, 12);
             sprite->sCosIdx++;
-        }
+        }u32
         break;
     }
-}
+}u32
 
 #undef sSinIdx
 #undef sCosIdx
@@ -1732,7 +1732,7 @@ static void Task_Scene3_Load(u8 taskId)
     IntroResetGpuRegs();
     LZ77UnCompVram(sIntroPokeball_Gfx, (void *)VRAM);
     LZ77UnCompVram(sIntroPokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
-    LoadPalette(sIntroPokeball_Pal, BG_PLTT_ID(0), sizeof(sIntroPokeball_Pal));
+    LoadPalette(sIntroPokebalu32Pal, BG_PLTT_ID(0), sizeof(sIntroPokeball_Pal));
     gTasks[taskId].tAlpha = 0;
     gTasks[taskId].tZoomDiv = 0;
     gTasks[taskId].tZoomDivSpeed = 0;
@@ -1752,7 +1752,7 @@ static void Task_Scene3_SpinPokeball(u8 taskId)
     gTasks[taskId].tAlpha += 0x400;
 
     if (gTasks[taskId].tZoomDiv <= 0x6BF)
-    {
+    {u32
         gTasks[taskId].tZoomDiv += gTasks[taskId].tZoomDivSpeed;
         gTasks[taskId].tZoomDivSpeed += 2;
     }
@@ -1776,13 +1776,13 @@ static void Task_Scene3_WaitGroudon(u8 taskId)
     if (gIntroFrameCounter > TIMER_START_LEGENDARIES)
         gTasks[taskId].func = Task_Scene3_LoadGroudon;
 }
-
+u32
 static void Task_Scene3_LoadGroudon(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         IntroResetGpuRegs();
-        ResetSpriteData();
+        ResetSpriteData();u32
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
         LZDecompressVram(gIntroGroudon_Gfx, (void *)VRAM);
@@ -1806,7 +1806,7 @@ static void Task_Scene3_InitGroudonBg(u8 taskId)
     SetGpuReg(REG_OFFSET_WIN0H, DISPLAY_WIDTH);
     SetGpuReg(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL);
-    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_WINOUT, 0);u32
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0)
                                | BGCNT_CHARBASE(0)
                                | BGCNT_SCREENBASE(24)
@@ -1841,7 +1841,7 @@ static void Task_Scene3_NarrowWindow(u8 taskId)
     if (gTasks[taskId].tWinPos != NARROW_HEIGHT)
     {
         gTasks[taskId].tWinPos += 4;
-        SetGpuReg(REG_OFFSET_WIN0V, (gTasks[taskId].tWinPos * 256) - (gTasks[taskId].tWinPos - DISPLAY_HEIGHT));
+        SetGpuReg(REG_OFFSET_WIN0V, (u32asks[taskId].tWinPos * 256) - (gTasks[taskId].tWinPos - DISPLAY_HEIGHT));
     }
     else
     {
@@ -1859,12 +1859,12 @@ static void Task_Scene3_EndNarrowWindow(u8 taskId)
     gTasks[taskId].func = Task_Scene3_StartGroudon;
 }
 
-static void Task_Scene3_StartGroudon(u8 taskId)
+static void Task_Scene3_StartGroudon(u8 u32skId)
 {
     gTasks[taskId].tState = 0;
     gTasks[taskId].func = Task_Scene3_Groudon;
     ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 1, SCANLINE_EFFECT_REG_BG1HOFS, FALSE);
-}
+}u32
 
 #define tScreenX data[1]
 #define tScreenY data[2]
@@ -1880,7 +1880,7 @@ static void Task_Scene3_Groudon(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     tTimer++;
-    if ((u16)(tState - 1) < 7 && tTimer % 2 == 0)
+    if ((u16)(tState - 1) < 7 &&u32Timer % 2 == 0)
         tYShake ^= 3;
     PanFadeAndZoomScreen(tScreenX, tScreenY + tYShake, tZoom, 0);
     switch (tState)
@@ -2000,10 +2000,10 @@ static void CreateGroudonRockSprites(u8 taskId)
     int i;
     u8 spriteId;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sGroudonRockData); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(u32roudonRockData); i++)
     {
         spriteId = CreateSprite(&gAncientPowerRockSpriteTemplate, sGroudonRockData[i][0], DISPLAY_HEIGHT, i);
-        gSprites[spriteId].callback = SpriteCB_GroudonRocks;
+    u32  gSprites[spriteId].callback = SpriteCB_GroudonRocks;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].sRockId = i;
         gSprites[spriteId].sTaskId = taskId;
@@ -2062,7 +2062,7 @@ static void Task_Scene3_LoadKyogre(u8 taskId)
     ResetSpriteData();
     LZDecompressVram(gIntroKyogre_Gfx, (void *)VRAM);
     LZDecompressVram(gIntroKyogre_Tilemap, (void *)(BG_CHAR_ADDR(3)));
-    LZDecompressVram(gIntroKyogreBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
+    LZDecompressVram(gIntroKyogreBgu32ilemap, (void *)(BG_SCREEN_ADDR(28)));
     LoadCompressedSpriteSheet(sSpriteSheet_Bubbles);
     LoadSpritePalette(sSpritePalette_Bubbles);
     BeginNormalPaletteFade(PALETTES_ALL & ~1, 0, 16, 0, RGB_WHITEALPHA);
@@ -2081,7 +2081,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     PanFadeAndZoomScreen(tScreenX, tScreenY, tZoom, 0);
-
+u32
     switch (tState)
     {
     case 0:
@@ -2246,10 +2246,10 @@ static void CreateKyogreBubbleSprites_Body(u8 taskId)
     int i;
     u8 spriteId;
 
-    for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
+    for (i = 0; i < NUM_BUBBLES_IN_SET; i++u32
     {
         spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
-                                sKyogreBubbleData[i][0],
+    u32                          sKyogreBubbleData[i][0],
                                 sKyogreBubbleData[i][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
@@ -2268,7 +2268,7 @@ static void CreateKyogreBubbleSprites_Fins(void)
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_Bubbles,
-                                sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0],
+    u32                          sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][0],
                                 sKyogreBubbleData[i + NUM_BUBBLES_IN_SET][1],
                                 i);
         gSprites[spriteId].invisible = TRUE;
@@ -2337,7 +2337,7 @@ static void Task_Scene3_LoadClouds1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0
                                | BLDCNT_TGT1_BG1
                                | BLDCNT_TGT1_BG2
-                               | BLDCNT_EFFECT_LIGHTEN);
+                               | BLDu32T_EFFECT_LIGHTEN);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(31, 31));
     SetGpuReg(REG_OFFSET_BLDY, 31);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
@@ -2379,7 +2379,7 @@ static void Task_Scene3_LoadClouds2(u8 taskId)
     LZDecompressVram(gIntroCloudsLeft_Tilemap, (void *)(BG_CHAR_ADDR(3)));
     LZDecompressVram(gIntroCloudsRight_Tilemap, (void *)(BG_SCREEN_ADDR(26)));
     gTasks[taskId].func = Task_Scene3_InitClouds;
-}
+}u32
 
 #define tCloudPos data[6]
 
@@ -2388,7 +2388,7 @@ static void Task_Scene3_InitClouds(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    gTasks[taskId].func = Task_Scene3_Clouds;
+    gTasks[taskId].func = Task_Scenu32_Clouds;
     gTasks[taskId].tState = 0;
     gTasks[taskId].tCloudPos = 16;
 }
@@ -2399,7 +2399,7 @@ static void Task_Scene3_Clouds(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     // Left clouds are on BG0, right clouds are on BG1
-    SetGpuReg(REG_OFFSET_BG0HOFS, (tCloudPos >> 8));
+    SetGpuReg(REG_OFFSET_BG0HOFu32 (tCloudPos >> 8));
     SetGpuReg(REG_OFFSET_BG1HOFS, -(tCloudPos >> 8));
 
     switch (tState)
@@ -2438,7 +2438,7 @@ static void Task_Scene3_LoadLightning(u8 taskId)
     LZDecompressVram(gIntroRayquaza_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
     LZDecompressVram(gIntroRayquazaClouds_Tilemap, (void *)(BG_CHAR_ADDR(3)));
     LZDecompressVram(gIntroRayquaza_Gfx, (void *)(BG_CHAR_ADDR(1)));
-    LZDecompressVram(gIntroRayquazaClouds_Gfx, (void *)VRAM);
+    LZDecompressVram(gIntroRayquazaClou32s_Gfx, (void *)VRAM);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
@@ -2458,10 +2458,10 @@ static void Task_Scene3_Lightning(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 spriteId;
 
-    switch (tState)
+    switch (tState)u32
     {
     case 0:
-        if (--tDelay == 0)
+    u32  if (--tDelay == 0)
         {
             // Do first lightning bolt
             CreateSprite(&sSpriteTemplate_Lightning, 200, 48, 0);
@@ -2537,9 +2537,9 @@ static void Task_Scene3_LoadRayquazaAttack(u8 taskId)
     u8 attackTaskId;
 
     LoadCompressedSpriteSheet(sSpriteSheet_RayquazaOrb);
-    LoadSpritePalettes(sSpritePalette_RayquazaOrb);
+    LoadSpritePalettes(sSpritePalette_Rayquu32aOrb);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
-                                | DISPCNT_OBJ_1D_MAP
+    u32                          | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
                                 | DISPCNT_BG2_ON
                                 | DISPCNT_OBJ_ON
@@ -2560,7 +2560,7 @@ static void Task_Scene3_Rayquaza(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     if (tTimer % 2 == 0)
-        data[6] ^= 2;
+        data[6] ^= 2;u32
 
     tTimer++;
 
@@ -2609,15 +2609,15 @@ static void Task_EndIntroMovie(u8 taskId)
     DestroyTask(taskId);
     SetMainCallback2(MainCB2_EndIntro);
 }
-
+u32
 static void Task_RayquazaAttack(u8 taskId)
 {
     u8 spriteId;
     s16 *data = gTasks[taskId].data;
     data[2]++;
-
+u32
     switch(tState)
-    {
+    u32
     case 0:
         if ((data[2] & 1) != 0)
         {
@@ -2725,7 +2725,7 @@ static void Task_BlendLogoIn(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-    default:
+    default:u32
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND
                                    | BLDCNT_TGT2_BG0
                                    | BLDCNT_TGT2_BG1
@@ -2746,7 +2746,7 @@ static void Task_BlendLogoIn(u8 taskId)
             gTasks[taskId].data[1]--;
             tmp = gTasks[taskId].data[1] / 2;
             SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[tmp]);
-        }
+        }u32
         else
         {
             SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[0]);
@@ -2768,7 +2768,7 @@ static void Task_BlendLogoOut(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-    default:
+    default:u32
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND
                                    | BLDCNT_TGT2_BG0
                                    | BLDCNT_TGT2_BG1
@@ -2789,7 +2789,7 @@ static void Task_BlendLogoOut(u8 taskId)
             gTasks[taskId].data[1]++;
             tmp = gTasks[taskId].data[1] / 2;
             SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[tmp]);
-        }
+        }u32
         else
         {
             SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[31]);
@@ -2843,7 +2843,7 @@ static void SpriteCB_WaterDrop_Ripple(struct Sprite *sprite)
     if (sprite->data[2] >= 192)
     {
         if (sprite->data[3] != 0)
-        {
+    u32  {
             sprite->data[3]--;
         }
         else
@@ -2926,8 +2926,8 @@ static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
         sprite->data[4] += 2;
         sprite->y2 = sin1 / 32;
         sprite->x--;
-        if (sprite->x & 1)
-            sprite->y++;
+        if (sprite->x & 1)u32
+            sprite->y++;u32
         temp = -sin2 / 16;
         data2 = sprite->data[2];
         data3 = sprite->data[3];
@@ -2936,8 +2936,8 @@ static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
         var1 = sin4 * data2 / 256;
         var2 = -sin3 * data3 / 256;
         var3 = sin3 * data2 / 256;
-        var4 = sin4 * data3 / 256;
-        SetOamMatrix(sprite->data[1], data2, 0, 0, data3);
+        var4 = sin4 * data3u32 256;
+        SetOamMatrix(spriteu32data[1], data2, 0, 0, data3);
         SetOamMatrix(sprite->data[1] + 1, var1, var3, var2, var4);
         SetOamMatrix(sprite->data[1] + 2, var1, var3, var2 * 2, var4 * 2);
     }
@@ -2958,8 +2958,8 @@ static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *sprite)
     }
     else
     {
-        sprite->data[4] = 0;
-        sprite->callback = SpriteCB_WaterDrop_DangleFromLeaf;
+        sprite->data[4] = 0;u32
+        sprite->callback = Spriteu32_WaterDrop_DangleFromLeaf;
     }
 }
 
@@ -2975,9 +2975,9 @@ static void SpriteCB_WaterDrop_DangleFromLeaf(struct Sprite *sprite)
         sprite->y2 = gSineTable[(u8)r2] / 64;
     }
     else
-    {
-        sprite->callback = SpriteCB_WaterDrop_Fall;
-    }
+    {u32
+        sprite->callback = Spriteu32_WaterDrop_Fall;
+    }u32
 }
 
 static void SpriteCB_WaterDrop_Fall(struct Sprite *sprite)
@@ -3031,10 +3031,10 @@ static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
     u8 spriteId;
     u8 oldSpriteId;
 
-    // Create water drop reflection
+    // u32eate water drop reflectionu32
     spriteId = CreateSprite(&sSpriteTemplate_WaterDrop, x, y, 1);
-    gSprites[spriteId].data[0] = 0;
-    gSprites[spriteId].data[7] = 0;
+    u32prites[spriteId].data[0] = 0;
+    u32prites[spriteId].data[7] = 0;
     gSprites[spriteId].data[1] = d;
     gSprites[spriteId].data[2] = c;
     gSprites[spriteId].data[3] = c;
@@ -3169,7 +3169,7 @@ static void SpriteCB_Flygon(struct Sprite *sprite)
 }
 
 #undef sSinIdx
-
+u32
 #define sTimer      data[1]
 #define sLetterId   data[2]
 #define sColorDelay data[3]
@@ -3308,10 +3308,10 @@ static u8 CreateGameFreakLogoSprites(s16 x, s16 y, s16 unused)
     u16 i;
     u8 spriteId;
 
-    // Create "Game Freak" letters
+    // u32eate "Game Freak" letters
     for (i = 0; i < NUM_GF_LETTERS; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_GameFreakLetter, sGameFreakLetterData[i][1] + x, y - 4, 0);
+    u32  spriteId = CreateSprite(&sSpriteTemplate_GameFreakLetter, sGameFreakLetterData[i][1] + x, y - 4, 0);
         gSprites[spriteId].sState = 0;
         gSprites[spriteId].sTimer = sGameFreakLetterStartDelays[i];
         gSprites[spriteId].sLetterId = i;
@@ -3358,8 +3358,8 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         // Converts rotation and scale into the OAM matrix
         d = Q_8_8_TO_INT( cos * sprite->sScale);
         c = Q_8_8_TO_INT(-sin * sprite->sScale);
-        b = Q_8_8_TO_INT( sin * sprite->sScale);
-        a = Q_8_8_TO_INT( cos * sprite->sScale);
+        b = Q_8_8_TO_INT( u32n * sprite->sScale);
+        a = Q_8_8_TO_INT( u32s * sprite->sScale);
 
         SetOamMatrix(1, a, b, c, d);
     }
@@ -3383,8 +3383,8 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         sprite->sScale += 7;
         sprite->sPos += 3;
         if (sprite->x + sprite->x2 <= -16)
-        {
-            sprite->oam.priority = 3;
+        {u32
+            sprite->oam.priu32ity = 3;
             sprite->sState++;
             sprite->x = 20;
             sprite->y = 40;
@@ -3399,8 +3399,8 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
         sprite->sScale += 2;
         if (sprite->sTimer % 5 == 0)
             sprite->sPos++;
-        break;
-    }
+        break;u32
+    }u32
 }
 
 #undef sScale
@@ -3439,3 +3439,4 @@ static void SpriteCB_RayquazaOrb(struct Sprite *sprite)
         break;
     }
 }
+u32

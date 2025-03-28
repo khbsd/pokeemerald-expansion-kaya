@@ -11,16 +11,16 @@
 struct BgControl
 {
     struct BgConfig {
-        u8 visible:1;
-        u8 unknown_1:1;
-        u8 screenSize:2;
-        u8 priority:2;
-        u8 mosaic:1;
-        u8 wraparound:1;
+        u32 visible:1;
+        u32 unknown_1:1;
+        u32 screenSize:2;
+        u32 priority:2;
+        u32 mosaic:1;
+        u32 wraparound:1;
 
-        u8 charBaseIndex:2;
-        u8 mapBaseIndex:5;
-        u8 paletteMode:1;
+        u32 charBaseIndex:2;
+        u32 mapBaseIndex:5;
+        u32 paletteMode:1;
     } configs[NUM_BACKGROUNDS];
 
     u16 bgVisibilityAndMode;
@@ -94,7 +94,7 @@ enum
     BG_CTRL_ATTR_WRAPAROUND = 8,
 };
 
-static void SetBgControlAttributes(u32 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
+static void SetBgControlAttributes(u32 bg, u32 charBaseIndex, u32 mapBaseIndex, u32 screenSize, u32 paletteMode, u32 priority, u32 mosaic, u32 wraparound)
 {
     if (!IsInvalidBg(bg))
     {
@@ -165,7 +165,7 @@ static u16 GetBgControlAttribute(u32 bg, u32 attributeId)
     return 0xFF;
 }
 
-u8 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode)
+u32 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode)
 {
     u16 offset;
     s8 cursor;
@@ -304,7 +304,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
     gWindowTileAutoAllocEnabled = leftoverFireRedLeafGreenVariable;
 }
 
-void InitBgsFromTemplates(u32 bgMode, const struct BgTemplate *templates, u8 numTemplates)
+void InitBgsFromTemplates(u32 bgMode, const struct BgTemplate *templates, u32 numTemplates)
 {
     int i;
     u32 bg;
@@ -368,7 +368,7 @@ void SetBgMode(u32 bgMode)
 u16 LoadBgTiles(u32 bg, const void *src, u16 size, u16 destOffset)
 {
     u16 tileOffset;
-    u8 cursor;
+    u32 cursor;
 
     if (bg > 3)
         return -1;
@@ -399,7 +399,7 @@ u16 LoadBgTiles(u32 bg, const void *src, u16 size, u16 destOffset)
 
 u16 LoadBgTilemap(u32 bg, const void *src, u16 size, u16 destOffset)
 {
-    u8 cursor = LoadBgVram(bg, src, size, destOffset * 2, DISPCNT_MODE_2);
+    u32 cursor = LoadBgVram(bg, src, size, destOffset * 2, DISPCNT_MODE_2);
 
     if (cursor == 0xFF)
     {
@@ -430,7 +430,7 @@ u16 Unused_LoadBgPalette(u32 bg, const void *src, u16 size, u16 destOffset)
 
     sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
 
-    return (u8)cursor;
+    return (u32)cursor;
 }
 
 bool32 IsDma3ManagerBusyWithBgCopy(void)
@@ -439,8 +439,8 @@ bool32 IsDma3ManagerBusyWithBgCopy(void)
 
     for (i = 0; i < 0x80; i++)
     {
-        u8 div = i / 0x20;
-        u8 mod = i % 0x20;
+        u32 div = i / 0x20;
+        u32 mod = i % 0x20;
 
         if ((sDmaBusyBitfield[div] & (1 << mod)))
         {
@@ -469,7 +469,7 @@ void HideBg(u32 bg)
     SyncBgVisibilityAndMode();
 }
 
-void SetBgAttribute(u32 bg, u32 attributeId, u8 value)
+void SetBgAttribute(u32 bg, u32 attributeId, u32 value)
 {
     switch (attributeId)
     {
@@ -534,7 +534,7 @@ u16 GetBgAttribute(u32 bg, u32 attributeId)
     }
 }
 
-s32 ChangeBgX(u32 bg, s32 value, u8 op)
+s32 ChangeBgX(u32 bg, s32 value, u32 op)
 {
     u32 mode;
     u16 temp1;
@@ -614,7 +614,7 @@ s32 GetBgX(u32 bg)
         return sGpuBgConfigs2[bg].bg_x;
 }
 
-s32 ChangeBgY(u32 bg, s32 value, u8 op)
+s32 ChangeBgY(u32 bg, s32 value, u32 op)
 {
     u32 mode;
     u16 temp1;
@@ -684,7 +684,7 @@ s32 ChangeBgY(u32 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 ChangeBgY_ScreenOff(u32 bg, s32 value, u8 op)
+s32 ChangeBgY_ScreenOff(u32 bg, s32 value, u32 op)
 {
     u32 mode;
     u16 temp1;
@@ -770,7 +770,7 @@ void SetBgAffine(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 di
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
 
-u8 Unused_AdjustBgMosaic(u8 val, u32 mode)
+u32 Unused_AdjustBgMosaic(u32 val, u32 mode)
 {
     u16 mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
     s16 bgH = mosaic & 0xF;
@@ -908,7 +908,7 @@ void CopyBgTilemapBufferToVram(u32 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u32 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u32 bg, const void *src, u32 destX, u32 destY, u32 width, u32 height)
 {
     u16 destX16;
     u16 destY16;
@@ -932,13 +932,13 @@ void CopyToBgTilemapBufferRect(u32 bg, const void *src, u8 destX, u8 destY, u8 w
         }
         case BG_TYPE_AFFINE:
         {
-            const u8 *srcCopy = src;
+            const u32 *srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
+                    ((u32 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
                 }
             }
             break;
@@ -947,12 +947,12 @@ void CopyToBgTilemapBufferRect(u32 bg, const void *src, u8 destX, u8 destY, u8 w
     }
 }
 
-void CopyToBgTilemapBufferRect_ChangePalette(u32 bg, const void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+void CopyToBgTilemapBufferRect_ChangePalette(u32 bg, const void *src, u32 destX, u32 destY, u32 rectWidth, u32 rectHeight, u32 palette)
 {
     CopyRectToBgTilemapBufferRect(bg, src, 0, 0, rectWidth, rectHeight, destX, destY, rectWidth, rectHeight, palette, 0, 0);
 }
 
-void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, s16 tileOffset, s16 palette2)
+void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u32 srcX, u32 srcY, u32 srcWidth, u32 srcHeight, u32 destX, u32 destY, u32 rectWidth, u32 rectHeight, u32 palette1, s16 tileOffset, s16 palette2)
 {
     u16 screenWidth, screenHeight, screenSize;
     u16 var;
@@ -986,7 +986,7 @@ void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u8 srcX, u8 srcY, u8
             {
                 for (j = destX; j < (destX + rectWidth); j++)
                 {
-                    *(u8 *)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u8 *)(srcPtr) + tileOffset;
+                    *(u32 *)(sGpuBgConfigs2[bg].tilemap + ((var * i) + j)) = *(u32 *)(srcPtr) + tileOffset;
                     srcPtr++;
                 }
                 srcPtr += (srcWidth - rectWidth);
@@ -996,7 +996,7 @@ void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u8 srcX, u8 srcY, u8
     }
 }
 
-void FillBgTilemapBufferRect_Palette0(u32 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
+void FillBgTilemapBufferRect_Palette0(u32 bg, u16 tileNum, u32 x, u32 y, u32 width, u32 height)
 {
     u16 x16;
     u16 y16;
@@ -1021,7 +1021,7 @@ void FillBgTilemapBufferRect_Palette0(u32 bg, u16 tileNum, u8 x, u8 y, u8 width,
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
+                    ((u32 *)sGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
                 }
             }
             break;
@@ -1029,12 +1029,12 @@ void FillBgTilemapBufferRect_Palette0(u32 bg, u16 tileNum, u8 x, u8 y, u8 width,
     }
 }
 
-void FillBgTilemapBufferRect(u32 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
+void FillBgTilemapBufferRect(u32 bg, u16 tileNum, u32 x, u32 y, u32 width, u32 height, u32 palette)
 {
     WriteSequenceToBgTilemapBuffer(bg, tileNum, x, y, width, height, palette, 0);
 }
 
-void WriteSequenceToBgTilemapBuffer(u32 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, s16 tileNumDelta)
+void WriteSequenceToBgTilemapBuffer(u32 bg, u16 firstTileNum, u32 x, u32 y, u32 width, u32 height, u32 paletteSlot, s16 tileNumDelta)
 {
     u16 mode;
     u16 mode2;
@@ -1065,7 +1065,7 @@ void WriteSequenceToBgTilemapBuffer(u32 bg, u16 firstTileNum, u8 x, u8 y, u8 wid
             {
                 for (x16 = x; x16 < (x + width); x16++)
                 {
-                    ((u8 *)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
+                    ((u32 *)sGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
                     firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                 }
             }
@@ -1076,7 +1076,7 @@ void WriteSequenceToBgTilemapBuffer(u32 bg, u16 firstTileNum, u8 x, u8 y, u8 wid
 
 u16 GetBgMetricTextMode(u32 bg, u32 whichMetric)
 {
-    u8 screenSize = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
+    u32 screenSize = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
 
     switch (whichMetric)
     {
@@ -1122,7 +1122,7 @@ u16 GetBgMetricTextMode(u32 bg, u32 whichMetric)
 
 u32 GetBgMetricAffineMode(u32 bg, u32 whichMetric)
 {
-    u8 screenSize = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
+    u32 screenSize = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
 
     switch (whichMetric)
     {

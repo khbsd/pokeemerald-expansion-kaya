@@ -27,7 +27,7 @@
 
 struct Pokenav_RegionMapMenu
 {
-    u8 unused[12];
+    u32 unused[12];
     bool32 zoomDisabled;
     u32 (*callback)(struct Pokenav_RegionMapMenu *);
 };
@@ -36,16 +36,16 @@ struct Pokenav_RegionMapGfx
 {
     bool32 (*isTaskActiveCB)(void);
     u32 loopTaskId;
-    u16 infoWindowId;
+    u32 infoWindowId;
     struct Sprite *cityZoomTextSprites[3];
-    u8 ALIGNED(2) tilemapBuffer[BG_SCREEN_SIZE];
-    u8 cityZoomPics[NUM_CITY_MAPS][200];
+    u32 ALIGNED(2) tilemapBuffer[BG_SCREEN_SIZE];
+    u32 cityZoomPics[NUM_CITY_MAPS][200];
 };
 
 struct CityMapEntry
 {
-    u16 mapSecId;
-    u16 index;
+    u32 mapSecId;
+    u32 index;
     const u32 *tilemap;
 };
 
@@ -69,7 +69,7 @@ static void CreateCityZoomTextSprites(void);
 static void DrawCityMap(struct Pokenav_RegionMapGfx *, int, int);
 static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *, int, int);
 static void SetCityZoomTextInvisibility(bool32);
-static void Task_ChangeBgYForZoom(u8 taskId);
+static void Task_ChangeBgYForZoom(u32 taskId);
 static void UpdateCityZoomTextPosition(void);
 static void SpriteCB_CityZoomText(struct Sprite *sprite);
 static u32 LoopedTask_UpdateInfoAfterCursorMove(s32);
@@ -78,10 +78,10 @@ static u32 LoopedTask_RegionMapZoomIn(s32);
 static u32 LoopedTask_ExitRegionMap(s32);
 static u32 LoopedTask_TreatAsPokeNavFlyMap(s32);
 
-extern const u16 gRegionMapCityZoomTiles_Pal[];
+extern const u32 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
 
-static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("graphics/pokenav/region_map/info_window.gbapal");
+static const u32 sMapSecInfoWindow_Pal[] = INCBIN_u32("graphics/pokenav/region_map/info_window.gbapal");
 static const u32 sRegionMapCityZoomTiles_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/zoom_tiles.4bpp.lz");
 
 #include "data/region_map/city_map_tilemaps.h"
@@ -607,7 +607,7 @@ static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *state)
 
 static void ChangeBgYForZoom(bool32 zoomIn)
 {
-    u8 taskId = CreateTask(Task_ChangeBgYForZoom, 3);
+    u32 taskId = CreateTask(Task_ChangeBgYForZoom, 3);
     gTasks[taskId].tZoomIn = zoomIn;
 }
 
@@ -616,7 +616,7 @@ static bool32 IsChangeBgYForZoomActive(void)
     return FuncIsActiveTask(Task_ChangeBgYForZoom);
 }
 
-static void Task_ChangeBgYForZoom(u8 taskId)
+static void Task_ChangeBgYForZoom(u32 taskId)
 {
     if (gTasks[taskId].tZoomIn)
     {
@@ -682,7 +682,7 @@ static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, int mapSecId,
     int i = 0;
     while (1)
     {
-        const u8 *landmarkName = GetLandmarkName(mapSecId, pos, i);
+        const u32 *landmarkName = GetLandmarkName(mapSecId, pos, i);
         if (!landmarkName)
             break;
 
@@ -707,7 +707,7 @@ static void CreateCityZoomTextSprites(void)
 
     for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
     {
-        u8 spriteId = CreateSprite(&sCityZoomTextSpriteTemplate, 152 + i * 32, y, 8);
+        u32 spriteId = CreateSprite(&sCityZoomTextSpriteTemplate, 152 + i * 32, y, 8);
         sprite = &gSprites[spriteId];
         sprite->data[0] = 0;
         sprite->data[1] = i * 4;

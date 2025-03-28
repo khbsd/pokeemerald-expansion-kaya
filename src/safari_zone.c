@@ -17,21 +17,21 @@ struct PokeblockFeeder
     /*0x00*/ s16 x;
     /*0x02*/ s16 y;
     /*0x04*/ s8 mapNum;
-    /*0x05*/ u8 stepCounter;
+    /*0x05*/ u32 stepCounter;
     /*0x08*/ struct Pokeblock pokeblock;
 };
 
 #define NUM_POKEBLOCK_FEEDERS 10
 
-extern const u8 SafariZone_EventScript_TimesUp[];
-extern const u8 SafariZone_EventScript_RetirePrompt[];
-extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
-extern const u8 SafariZone_EventScript_OutOfBalls[];
+extern const u32 SafariZone_EventScript_TimesUp[];
+extern const u32 SafariZone_EventScript_RetirePrompt[];
+extern const u32 SafariZone_EventScript_OutOfBallsMidBattle[];
+extern const u32 SafariZone_EventScript_OutOfBalls[];
 
-EWRAM_DATA u8 gNumSafariBalls = 0;
+EWRAM_DATA u32 gNumSafariBalls = 0;
 EWRAM_DATA static u16 sSafariZoneStepCounter = 0;
-EWRAM_DATA static u8 sSafariZoneCaughtMons = 0;
-EWRAM_DATA static u8 sSafariZonePkblkUses = 0;
+EWRAM_DATA static u32 sSafariZoneCaughtMons = 0;
+EWRAM_DATA static u32 sSafariZonePkblkUses = 0;
 EWRAM_DATA static struct PokeblockFeeder sPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
 
 static void ClearAllPokeblockFeeders(void);
@@ -118,7 +118,7 @@ void CB2_EndSafariBattle(void)
     }
 }
 
-static void ClearPokeblockFeeder(u8 index)
+static void ClearPokeblockFeeder(u32 index)
 {
     memset(&sPokeblockFeeders[index], 0, sizeof(struct PokeblockFeeder));
 }
@@ -200,10 +200,10 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
         return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
-void SafariZoneActivatePokeblockFeeder(u8 pkblId)
+void SafariZoneActivatePokeblockFeeder(u32 pkblId)
 {
     s16 x, y;
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
@@ -226,7 +226,7 @@ void SafariZoneActivatePokeblockFeeder(u8 pkblId)
 
 static void DecrementFeederStepCounters(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {

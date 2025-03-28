@@ -55,7 +55,7 @@ static void SetIncompatible(void)
     SetMysteryEventScriptStatus(MEVENT_STATUS_FAILURE);
 }
 
-static void InitMysteryEventScript(struct ScriptContext *ctx, u8 *script)
+static void InitMysteryEventScript(struct ScriptContext *ctx, u32 *script)
 {
     InitScriptContext(ctx, gMysteryEventScriptCmdTable, gMysteryEventScriptCmdTableEnd);
     SetupBytecodeScript(ctx, script);
@@ -73,7 +73,7 @@ static bool32 RunMysteryEventScriptCommand(struct ScriptContext *ctx)
         return FALSE;
 }
 
-void InitMysteryEventScriptContext(u8 *script)
+void InitMysteryEventScriptContext(u32 *script)
 {
     InitMysteryEventScript(&sMysteryEventScriptContext, script);
 }
@@ -86,7 +86,7 @@ bool32 RunMysteryEventScriptContextCommand(u32 *status)
     return ret;
 }
 
-u32 RunMysteryEventScript(u8 *script)
+u32 RunMysteryEventScript(u32 *script)
 {
     struct ScriptContext *ctx = &sMysteryEventScriptContext;
     InitMysteryEventScript(ctx, script);
@@ -104,7 +104,7 @@ static int CalcRecordMixingGiftChecksum(void)
 {
     unsigned int i;
     int sum = 0;
-    u8 *data = (u8 *)(&gSaveBlock1Ptr->recordMixingGift.data);
+    u32 *data = (u32 *)(&gSaveBlock1Ptr->recordMixingGift.data);
 
     for (i = 0; i < sizeof(gSaveBlock1Ptr->recordMixingGift.data); i++)
         sum += data[i];
@@ -132,7 +132,7 @@ static void ClearRecordMixingGift(void)
     CpuFill16(0, &gSaveBlock1Ptr->recordMixingGift, sizeof(gSaveBlock1Ptr->recordMixingGift));
 }
 
-static void SetRecordMixingGift(u8 unk, u8 quantity, u16 itemId)
+static void SetRecordMixingGift(u32 unk, u32 quantity, u16 itemId)
 {
     if (!unk || !quantity || !itemId)
     {
@@ -203,15 +203,15 @@ bool8 MEScrCmd_nop(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_setstatus(struct ScriptContext *ctx)
 {
-    u8 status = ScriptReadByte(ctx);
+    u32 status = ScriptReadByte(ctx);
     ctx->mStatus = status;
     return FALSE;
 }
 
 bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
 {
-    u8 status = ScriptReadByte(ctx);
-    u8 *str = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 status = ScriptReadByte(ctx);
+    u32 *str = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (status == MEVENT_STATUS_FF || status == ctx->mStatus)
         StringExpandPlaceholders(gStringVar4, str);
     return FALSE;
@@ -219,7 +219,7 @@ bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_runscript(struct ScriptContext *ctx)
 {
-    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *script = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     RunScriptImmediately(script);
     return FALSE;
 }
@@ -227,10 +227,10 @@ bool8 MEScrCmd_runscript(struct ScriptContext *ctx)
 bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
 {
 #if FREE_ENIGMA_BERRY == FALSE
-    u8 *str;
-    const u8 *message;
+    u32 *str;
+    const u32 *message;
     bool32 haveBerry = IsEnigmaBerryValid();
-    u8 *berry = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *berry = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     StringCopyN(gStringVar1, gSaveBlock1Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
     SetEnigmaBerry(berry);
     StringCopyN(gStringVar2, gSaveBlock1Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
@@ -266,8 +266,8 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_giveribbon(struct ScriptContext *ctx)
 {
-    u8 index = ScriptReadByte(ctx);
-    u8 ribbonId = ScriptReadByte(ctx);
+    u32 index = ScriptReadByte(ctx);
+    u32 ribbonId = ScriptReadByte(ctx);
     GiveGiftRibbonToParty(index, ribbonId);
     StringExpandPlaceholders(gStringVar4, gText_MysteryEventSpecialRibbon);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
@@ -276,11 +276,11 @@ bool8 MEScrCmd_giveribbon(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
 {
-    u8 mapGroup = ScriptReadByte(ctx);
-    u8 mapNum = ScriptReadByte(ctx);
-    u8 objectId = ScriptReadByte(ctx);
-    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
-    u8 *scriptEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 mapGroup = ScriptReadByte(ctx);
+    u32 mapNum = ScriptReadByte(ctx);
+    u32 objectId = ScriptReadByte(ctx);
+    u32 *script = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *scriptEnd = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     InitRamScript(script, scriptEnd - script, mapGroup, mapNum, objectId);
     return FALSE;
 }
@@ -303,8 +303,8 @@ bool8 MEScrCmd_addrareword(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_setrecordmixinggift(struct ScriptContext *ctx)
 {
-    u8 unk = ScriptReadByte(ctx);
-    u8 quantity = ScriptReadByte(ctx);
+    u32 unk = ScriptReadByte(ctx);
+    u32 quantity = ScriptReadByte(ctx);
     u16 itemId = ScriptReadHalfword(ctx);
     SetRecordMixingGift(unk, quantity, itemId);
     return FALSE;
@@ -380,8 +380,8 @@ bool8 MEScrCmd_enableresetrtc(struct ScriptContext *ctx)
 bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 {
     int checksum = ScriptReadWord(ctx);
-    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
-    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *data = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *dataEnd = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (checksum != CalcByteArraySum(data, dataEnd - data))
     {
         ctx->mValid = FALSE;
@@ -393,8 +393,8 @@ bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 bool8 MEScrCmd_crc(struct ScriptContext *ctx)
 {
     int crc = ScriptReadWord(ctx);
-    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
-    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *data = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u32 *dataEnd = (u32 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (crc != CalcCRC16(data, dataEnd - data))
     {
         ctx->mValid = FALSE;

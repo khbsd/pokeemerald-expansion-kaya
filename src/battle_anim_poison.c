@@ -429,7 +429,7 @@ static void AnimGunkShotImpact(struct Sprite *sprite)
 
 static void AnimGunkShotParticles(struct Sprite *sprite)
 {
-    u16 retArg;
+    u32 retArg;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;

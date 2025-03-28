@@ -48,26 +48,26 @@
 
 struct EggHatchData
 {
-    u8 eggSpriteId;
-    u8 monSpriteId;
-    u8 state;
-    u8 delayTimer;
-    u8 eggPartyId;
-    u8 unused_5;
-    u8 unused_6;
-    u8 eggShardVelocityId;
-    u8 windowId;
-    u8 unused_9;
-    u8 unused_A;
+    u32 eggSpriteId;
+    u32 monSpriteId;
+    u32 state;
+    u32 delayTimer;
+    u32 eggPartyId;
+    u32 unused_5;
+    u32 unused_6;
+    u32 eggShardVelocityId;
+    u32 windowId;
+    u32 unused_9;
+    u32 unused_A;
     u16 species;
-    u8 textColor[3];
+    u32 textColor[3];
 };
 
 extern const u32 gTradePlatform_Tilemap[];
-extern const u8 gText_HatchedFromEgg[];
-extern const u8 gText_NicknameHatchPrompt[];
+extern const u32 gText_HatchedFromEgg[];
+extern const u32 gText_NicknameHatchPrompt[];
 
-static void Task_EggHatch(u8);
+static void Task_EggHatch(u32);
 static void CB2_LoadEggHatch(void);
 static void CB2_EggHatch(void);
 static void SpriteCB_Egg_Shake1(struct Sprite *);
@@ -77,15 +77,15 @@ static void SpriteCB_Egg_WaitHatch(struct Sprite *);
 static void SpriteCB_Egg_Hatch(struct Sprite *);
 static void SpriteCB_Egg_Reveal(struct Sprite *);
 static void SpriteCB_EggShard(struct Sprite *);
-static void EggHatchPrintMessage(u8, u8 *, u8, u8, u8);
+static void EggHatchPrintMessage(u32, u32 *, u32, u32, u32);
 static void CreateRandomEggShardSprite(void);
-static void CreateEggShardSprite(u8, u8, s16, s16, s16, u8);
+static void CreateEggShardSprite(u32, u32, s16, s16, s16, u32);
 
 static struct EggHatchData *sEggHatchData;
 
 static const u16 sEggPalette[]  = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
-static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/pokemon/egg/hatch.4bpp");
-static const u8 sEggShardTiles[] = INCBIN_U8("graphics/pokemon/egg/shard.4bpp");
+static const u32 sEggHatchTiles[] = INCBIN_u32("graphics/pokemon/egg/hatch.4bpp");
+static const u32 sEggShardTiles[] = INCBIN_u32("graphics/pokemon/egg/shard.4bpp");
 
 static const struct OamData sOamData_Egg =
 {
@@ -315,7 +315,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u16 species;
     u32 personality, pokerus;
     enum PokeBall ball;
-    u8 i, friendship, language, gameMet, markings, isModernFatefulEncounter;
+    u32 i, friendship, language, gameMet, markings, isModernFatefulEncounter;
     u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
@@ -359,13 +359,13 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     *egg = *temp;
 }
 
-static void AddHatchedMonToParty(u8 id)
+static void AddHatchedMonToParty(u32 id)
 {
-    u8 isEgg = 0x46; // ?
+    u32 isEgg = 0x46; // ?
     u16 species;
-    u8 name[POKEMON_NAME_LENGTH + 1];
+    u32 name[POKEMON_NAME_LENGTH + 1];
     u16 metLevel;
-    u8 metLocation;
+    u32 metLocation;
     struct Pokemon *mon = &gPlayerParty[id];
 
     CreateHatchedMon(mon, &gEnemyParty[0]);
@@ -397,9 +397,9 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
+static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u32 daycareId)
 {
-    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
+    u32 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     GetBoxMonNickname(&daycareMon->mon, nickname);
@@ -420,10 +420,10 @@ bool8 CheckDaycareMonReceivedMail(void)
     return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
-static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesLoc)
+static u32 EggHatchCreateMonSprite(u32 useAlt, u32 state, u32 partyId, u16 *speciesLoc)
 {
-    u8 position = 0;
-    u8 spriteId = 0;
+    u32 position = 0;
+    u32 spriteId = 0;
     struct Pokemon *mon = NULL;
     u16 species = SPECIES_NONE;
 
@@ -477,7 +477,7 @@ void EggHatch(void)
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
-static void Task_EggHatch(u8 taskId)
+static void Task_EggHatch(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -585,7 +585,7 @@ static void EggHatchSetMonNickname(void)
 
 #define tTimer data[0]
 
-static void Task_EggHatchPlayBGM(u8 taskId)
+static void Task_EggHatchPlayBGM(u32 taskId)
 {
     if (gTasks[taskId].tTimer == 0)
     {
@@ -607,7 +607,7 @@ static void Task_EggHatchPlayBGM(u8 taskId)
 static void CB2_EggHatch(void)
 {
     u16 species;
-    u8 gender;
+    u32 gender;
     u32 personality;
 
     switch (sEggHatchData->state)
@@ -906,16 +906,16 @@ static void CreateRandomEggShardSprite(void)
     CreateEggShardSprite(EGG_X, EGG_Y - 15, velocityX, velocityY, 100, spriteAnimIndex);
 }
 
-static void CreateEggShardSprite(u8 x, u8 y, s16 velocityX, s16 velocityY, s16 acceleration, u8 spriteAnimIndex)
+static void CreateEggShardSprite(u32 x, u32 y, s16 velocityX, s16 velocityY, s16 acceleration, u32 spriteAnimIndex)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
+    u32 spriteId = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
     gSprites[spriteId].sVelocX = velocityX;
     gSprites[spriteId].sVelocY = velocityY;
     gSprites[spriteId].sAccelY = acceleration;
     StartSpriteAnim(&gSprites[spriteId], spriteAnimIndex);
 }
 
-static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed)
+static void EggHatchPrintMessage(u32 windowId, u32 *string, u32 x, u32 y, u32 speed)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     sEggHatchData->textColor[0] = 0;
@@ -924,9 +924,9 @@ static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed)
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, 0, sEggHatchData->textColor, speed, string);
 }
 
-u8 GetEggCyclesToSubtract(void)
+u32 GetEggCyclesToSubtract(void)
 {
-    u8 count, i;
+    u32 count, i;
     for (count = CalculatePlayerPartyCount(), i = 0; i < count; i++)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))

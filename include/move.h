@@ -9,12 +9,12 @@
 struct __attribute__((packed, aligned(2))) BattleMoveEffect
 {
     const u8 *battleScript;
-    u16 battleTvScore:3;
-    u16 encourageEncore:1;
-    u16 twoTurnEffect:1;
-    u16 semiInvulnerableEffect:1;
-    u16 usesProtectCounter:1;
-    u16 padding:9;
+    u32 battleTvScore:3;
+    u32 encourageEncore:1;
+    u32 twoTurnEffect:1;
+    u32 semiInvulnerableEffect:1;
+    u32 usesProtectCounter:1;
+    u32 padding:9;
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
@@ -29,7 +29,7 @@ enum SheerForceBoost
 
 struct AdditionalEffect
 {
-    u16 moveEffect;
+    u32 moveEffect;
     u8 self:1;
     u8 onlyIfTargetRaisedStats:1;
     u8 onChargeTurnOnly:1;
@@ -42,13 +42,13 @@ struct MoveInfo
 {
     const u8 *name;
     const u8 *description;
-    u16 effect;
-    u16 type:5;     // Up to 32
-    u16 category:2;
-    u16 power:9;    // up to 511
+    u32 effect;
+    u32 type:5;     // Up to 32
+    u32 category:2;
+    u32 power:9;    // up to 511
     // end of word
-    u16 accuracy:7;
-    u16 target:9;
+    u32 accuracy:7;
+    u32 target:9;
     u8 pp;
     union {
         u8 effect;
@@ -110,12 +110,12 @@ struct MoveInfo
 
     union {
         struct {
-            u16 stringId;
-            u16 status;
+            u32 stringId;
+            u32 status;
         } twoTurnAttack;
         struct {
-            u16 side;
-            u16 property; // can be used to remove the hardcoded values
+            u32 side;
+            u32 property; // can be used to remove the hardcoded values
         } protect;
         u32 status;
         u32 moveProperty;

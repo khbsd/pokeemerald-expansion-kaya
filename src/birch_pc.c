@@ -51,7 +51,7 @@ static const u8 *const sBirchDexRatingTexts[BIRCH_DEX_STRINGS] =
 const u8 *GetPokedexRatingText(u32 count)
 {
     u32 i, j;
-    u16 maxDex = HOENN_DEX_COUNT - 1;
+    u32 maxDex = HOENN_DEX_COUNT - 1;
     // doesNotCountForRegionalPokedex
     for(i = 0; i < HOENN_DEX_COUNT; i++)
     {

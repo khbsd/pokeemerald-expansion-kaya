@@ -28,7 +28,7 @@ static u32 GetMaxPowerTier(u32 move);
 struct GMaxMove
 {
     u16 species;
-    u8 moveType;
+    u32 moveType;
     u16 gmaxMove;
 };
 
@@ -452,7 +452,7 @@ bool32 IsMaxMove(u32 move)
 void ChooseDamageNonTypesString(u8 type)
 {
     switch (type)
-    {
+    {u32
         case TYPE_GRASS:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRAPPED_WITH_VINES;
             break;
@@ -488,7 +488,7 @@ void BS_JumpIfDynamaxed(void)
     NATIVE_ARGS(const u8 *jumpInstr);
     if ((GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX))
         gBattlescriptCurrInstr = cmd->jumpInstr;
-    else
+    elseu32
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -497,7 +497,7 @@ void BS_UndoDynamax(void)
     NATIVE_ARGS(u8 battler);
     u32 battler = GetBattlerForBattleScript(cmd->battler);
 
-    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
+    if (GetActivu32immick(battler) == GIMMICK_DYNAMAX)
     {
         BattleScriptPushCursor();
         UndoDynamax(battler);

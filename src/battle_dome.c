@@ -60,7 +60,7 @@ struct TourneyTreeLineSection
 {
     u8 x;
     u8 y;
-    u16 tile;
+    u32 tile;
 };
 
 #define DOME_TRAINERS gSaveBlock2Ptr->frontier.domeTrainers
@@ -105,20 +105,20 @@ enum {
     NUM_INFO_CARD_WINDOWS
 };
 
-static u8 GetDomeTrainerMonIvs(u16);
-static void SwapDomeTrainers(int, int, u16 *);
+static u8 GetDomeTrainerMonIvs(u32);
+static void SwapDomeTrainers(int, int, u32 *);
 static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
-static void CreateDomeOpponentMons(u16);
-static int SelectOpponentMons_Good(u16, bool8);
-static int SelectOpponentMons_Bad(u16, bool8);
+static void CreateDomeOpponentMons(u32);
+static int SelectOpponentMons_Good(u32, bool8);
+static int SelectOpponentMons_Bad(u32, bool8);
 static int GetTypeEffectivenessPoints(int, int, int);
 static int SelectOpponentMonsFromParty(int *, bool8);
 static void Task_ShowTourneyInfoCard(u8);
 static void Task_HandleInfoCardInput(u8);
 static u8 Task_GetInfoCardInput(u8);
 static void SetFacilityTrainerAndMonPtrs(void);
-static int TrainerIdToTournamentId(u16);
-static u16 TrainerIdOfPlayerOpponent(void);
+static int TrainerIdToTournamentId(u32);
+static u32 TrainerIdOfPlayerOpponent(void);
 static void Task_ShowTourneyTree(u8);
 static void Task_HandleStaticTourneyTreeInput(u8);
 static void CB2_TourneyTree(void);
@@ -126,7 +126,7 @@ static void VblankCb_TourneyInfoCard(void);
 static void DisplayMatchInfoOnCard(u8, u8);
 static void DisplayTrainerInfoOnCard(u8, u8);
 static int BufferDomeWinString(u8, u8 *);
-static void CopyDomeTrainerName(u8 *, u16);
+static void CopyDomeTrainerName(u8 *, u32);
 static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
 static u8 UpdateTourneyTreeCursor(u8);
@@ -1927,14 +1927,14 @@ static void InitDomeTrainers(void)
     int monTypesBits, monTypesCount;
     int trainerId;
     int monId;
-    u16 *rankingScores;
+    u32 *rankingScores;
     int *statValues;
     u8 ivs = 0;
 
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
-    rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    rankingScores = AllocZeroed(sizeof(u32) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
 
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
@@ -2162,10 +2162,10 @@ static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, i
     CALC_STAT(baseSpDefense, STAT_SPDEF);
 }
 
-static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
+static void SwapDomeTrainers(int id1, int id2, u32 *statsArray)
 {
     int i;
-    u16 temp;
+    u32 temp;
 
     SWAP(statsArray[id1], statsArray[id2], temp);
     SWAP(DOME_TRAINERS[id1].trainerId, DOME_TRAINERS[id2].trainerId, temp);
@@ -2191,7 +2191,7 @@ static void InitDomeOpponentParty(void)
     CreateDomeOpponentMons(TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA));
 }
 
-static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
+static void CreateDomeOpponentMon(u8 monPartyId, u32 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
     #ifdef BUGFIX
     u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
@@ -2204,7 +2204,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
                       level, fixedIv, otId, 0, &gEnemyParty[monPartyId]);
 }
 
-static void CreateDomeOpponentMons(u16 tournamentTrainerId)
+static void CreateDomeOpponentMons(u32 tournamentTrainerId)
 {
     u8 monsCount = 0;
     u32 otId = 0;
@@ -2249,7 +2249,7 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
 // In the good mode movesets are preferred which are more effective against the
 // player, and in the bad mode the opposite is true. If all 3 Pokémon tie, the
 // other mode will be tried. If they tie again, the Pokémon selection is random.
-int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
+int GetDomeTrainerSelectedMons(u32 tournamentTrainerId)
 {
     int selectedMonBits;
     if (Random() & 1)
@@ -2268,7 +2268,7 @@ int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
     return selectedMonBits;
 }
 
-static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
+static int SelectOpponentMons_Good(u32 tournamentTrainerId, bool8 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2297,7 +2297,7 @@ static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
 }
 
 // Identical to function above, but uses EFFECTIVENESS_MODE_BAD
-static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
+static int SelectOpponentMons_Bad(u32 tournamentTrainerId, bool8 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2511,7 +2511,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
 // Duplicate of GetFrontierTrainerFixedIvs
 // NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
 //       To fix, see CreateDomeOpponentMon
-static u8 GetDomeTrainerMonIvs(u16 trainerId)
+static u8 GetDomeTrainerMonIvs(u32 trainerId)
 {
     u8 fixedIv;
 
@@ -2581,7 +2581,7 @@ static void SetDomeOpponentId(void)
 }
 
 // While not an issue in-game, this will overflow if called after the player's opponent for the current round has been eliminated
-static u16 TrainerIdOfPlayerOpponent(void)
+static u32 TrainerIdOfPlayerOpponent(void)
 {
     return DOME_TRAINERS[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER)].trainerId;
 }
@@ -3770,7 +3770,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     int taskId2 = gTasks[taskId].data[4];
     int position = gTasks[taskId2].data[1];
     u8 tourneyId = sTourneyTreeTrainerIds[position];
-    u16 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+    u32 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
     if (JOY_NEW(A_BUTTON | B_BUTTON))
         input = INFOCARD_INPUT_AB;
@@ -4025,8 +4025,8 @@ static bool32 IsDomeStatusMoveEffect(u32 move)
 
 static bool32 IsDomeRareMove(u32 move)
 {
-    u16 i, j;
-    u16 species = 0;
+    u32 i, j;
+    u32 species = 0;
     for(i = 0; i < NUM_SPECIES; i++)
     {
         const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(i);
@@ -5087,13 +5087,13 @@ static void ResolveDomeRoundWinners(void)
 }
 
 // Decides the winning move of an NPC vs NPC match
-static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roundId)
+static u32 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roundId)
 {
     int i, j, k;
     int moveScores[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
-    u16 moveIds[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
-    u16 bestScore = 0;
-    u16 bestId = 0;
+    u32 moveIds[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
+    u32 bestScore = 0;
+    u32 bestId = 0;
     int movePower = 0;
     SetFacilityPtrsGetLevel();
 
@@ -5557,7 +5557,7 @@ static void VblankCb_TourneyInfoCard(void)
 
 static void HblankCb_TourneyTree(void)
 {
-    u16 vCount = REG_VCOUNT;
+    u32 vCount = REG_VCOUNT;
 
     if (vCount < 42)
     {
@@ -5680,7 +5680,7 @@ static void RestoreDomePlayerPartyHeldItems(void)
     for (i = 0; i < DOME_BATTLE_PARTY_SIZE; i++)
     {
         int playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
-        u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
+        u32 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
     }
 }
@@ -5724,7 +5724,7 @@ static void InitRandomTourneyTreeResults(void)
     int zero1;
     int zero2;
     u8 lvlMode;
-    u16 *statSums;
+    u32 *statSums;
     int *statValues;
     u8 ivs = 0;
 
@@ -5734,7 +5734,7 @@ static void InitRandomTourneyTreeResults(void)
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
-    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statSums = AllocZeroed(sizeof(u32) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
@@ -5844,7 +5844,7 @@ static void InitRandomTourneyTreeResults(void)
     gSaveBlock2Ptr->frontier.lvlMode = lvlMode;
 }
 
-static int TrainerIdToTournamentId(u16 trainerId)
+static int TrainerIdToTournamentId(u32 trainerId)
 {
     int i;
 
@@ -5858,7 +5858,7 @@ static int TrainerIdToTournamentId(u16 trainerId)
 }
 
 // The same as the above one, but has global scope.
-int TrainerIdToDomeTournamentId(u16 trainerId)
+int TrainerIdToDomeTournamentId(u32 trainerId)
 {
     int i;
 
@@ -5996,7 +5996,7 @@ static void DecideRoundWinners(u8 roundId)
     }
 }
 
-static void CopyDomeTrainerName(u8 *str, u16 trainerId)
+static void CopyDomeTrainerName(u8 *str, u32 trainerId)
 {
     int i = 0;
     SetFacilityPtrsGetLevel();

@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Headbutt flinches the target if attacker is faster")
 {
     bool8 isFaster;
-    u16 spdPlayer, spdOpponent;
+    u32 spdPlayer, spdOpponent;
 
     PARAMETRIZE { isFaster = TRUE; spdPlayer = 10; spdOpponent = 5; }
     PARAMETRIZE { isFaster = FALSE; spdPlayer = 5; spdOpponent = 10; }

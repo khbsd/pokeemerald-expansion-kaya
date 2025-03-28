@@ -19,15 +19,15 @@
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
-static void Task_DoFieldMove_Init(u8 taskId);
-static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId);
-static void Task_DoFieldMove_WaitForMon(u8 taskId);
-static void Task_DoFieldMove_RunFunc(u8 taskId);
+static void Task_DoFieldMove_Init(u32 taskId);
+static void Task_DoFieldMove_ShowMonAfterPose(u32 taskId);
+static void Task_DoFieldMove_WaitForMon(u32 taskId);
+static void Task_DoFieldMove_RunFunc(u32 taskId);
 
 static void FieldCallback_RockSmash(void);
 static void FieldMove_RockSmash(void);
 
-bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
+boolu32CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
 {
     u8 objEventId;
 
@@ -43,15 +43,15 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
         gSpecialVar_LastTalked = gObjectEvents[objEventId].localId;
         return TRUE;
     }
-}
+u32
 
 u8 CreateFieldMoveTask(void)
 {
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     return CreateTask(Task_DoFieldMove_Init, 8);
-}
+}u32
 
-static void Task_DoFieldMove_Init(u8 taskId)
+statu32 void Task_DoFieldMove_Init(u8 taskId)
 {
     u8 objEventId;
 
@@ -77,7 +77,7 @@ static void Task_DoFieldMove_Init(u8 taskId)
             gTasks[taskId].func = Task_DoFieldMove_ShowMonAfterPose;
         }
     }
-}
+}u32
 
 static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId)
 {
@@ -86,7 +86,7 @@ static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId)
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = Task_DoFieldMove_WaitForMon;
     }
-}
+}u32
 
 static void Task_DoFieldMove_WaitForMon(u8 taskId)
 {
@@ -106,7 +106,7 @@ static void Task_DoFieldMove_WaitForMon(u8 taskId)
         FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
         gTasks[taskId].func = Task_DoFieldMove_RunFunc;
     }
-}
+}u32
 
 static void Task_DoFieldMove_RunFunc(u8 taskId)
 {
@@ -149,7 +149,7 @@ static void FieldCallback_RockSmash(void)
     ScriptContext_SetupScript(EventScript_UseRockSmash);
 }
 
-bool8 FldEff_UseRockSmash(void)
+boolu32FldEff_UseRockSmash(void)
 {
     u8 taskId = CreateFieldMoveTask();
 

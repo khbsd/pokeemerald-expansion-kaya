@@ -65,46 +65,46 @@ enum {
 
 COMMON_DATA s8 sCurTVShowSlot = 0;
 COMMON_DATA u16 sTV_SecretBaseVisitMovesTemp[8] = {0};
-COMMON_DATA u8 sTV_DecorationsBuffer[DECOR_MAX_SECRET_BASE] = {0};
+COMMON_DATA u32 sTV_DecorationsBuffer[DECOR_MAX_SECRET_BASE] = {0};
 COMMON_DATA struct {
-    u8 level;
+    u32 level;
     u16 species;
     u16 move;
 } sTV_SecretBaseVisitMonsTemp[10] = {0};
 
-static u8 sTVShowMixingNumPlayers;
-static u8 sTVShowNewsMixingNumPlayers;
+static u32 sTVShowMixingNumPlayers;
+static u32 sTVShowNewsMixingNumPlayers;
 static s8 sTVShowMixingCurSlot;
 
 static EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 static EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
 static EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
-static EWRAM_DATA u8 sFindThatGamerWhichGame = SLOT_MACHINE;
-static EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
-static EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
-static EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
+static EWRAM_DATA u32 sFindThatGamerWhichGame = SLOT_MACHINE;
+static EWRAM_DATA ALIGNED(4) u32 sRecordMixingPartnersWithoutShowsToShare = 0;
+static EWRAM_DATA ALIGNED(4) u32 sTVShowState = 0;
+static EWRAM_DATA u32 sTVSecretBaseSecretsRandomValues[3] = {};
 
 static void ClearPokeNews(void);
-static u8 GetTVGroupByShowId(u8);
-static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
+static u32 GetTVGroupByShowId(u32);
+static u32 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
 static void SetTVMetatilesOnMap(int, int, u16);
-static u8 FindAnyPokeNewsOnTheAir(void);
+static u32 FindAnyPokeNewsOnTheAir(void);
 static void TakeGabbyAndTyOffTheAir(void);
 static bool8 BernoulliTrial(u16 ratio);
 static s8 FindFirstEmptyRecordMixTVShowSlot(TVShow *);
-static bool8 IsRecordMixShowAlreadySpawned(u8, bool8);
+static bool8 IsRecordMixShowAlreadySpawned(u32, bool8);
 static void StorePlayerIdInRecordMixShow(TVShow *);
-static void DeleteTVShowInArrayByIdx(TVShow *, u8);
+static void DeleteTVShowInArrayByIdx(TVShow *, u32);
 static s8 FindFirstEmptyNormalTVShowSlot(TVShow *);
-static void TryReplaceOldTVShowOfKind(u8);
+static void TryReplaceOldTVShowOfKind(u32);
 static void InterviewBefore_BravoTrainerPkmnProfile(void);
 static void InterviewBefore_NameRater(void);
 static u16 GetRandomDifferentSpeciesSeenByPlayer(u16);
 static void Script_FindFirstEmptyNormalTVShowSlot(void);
 static void CompactTVShowArray(TVShow *);
 static s8 GetFirstEmptyPokeNewsSlot(PokeNews *);
-static bool8 IsAddingPokeNewsDisallowed(u8);
-static void ClearPokeNewsBySlot(u8);
+static bool8 IsAddingPokeNewsDisallowed(u32);
+static void ClearPokeNewsBySlot(u32);
 static void TranslateRubyShows(TVShow *);
 static void TranslateJapaneseEmeraldShows(TVShow *);
 static void SetMixedTVShows(TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT]);
@@ -112,16 +112,16 @@ static void DeleteExcessMixedShows(void);
 static void DeactivateShowsWithUnseenSpecies(void);
 static void DeactivateGameCompleteShowsIfNotUnlocked(void);
 static s8 FindInactiveShowInArray(TVShow *);
-static bool8 TryMixTVShow(TVShow *[TV_SHOWS_COUNT], TVShow *[TV_SHOWS_COUNT], u8);
-static bool8 TryMixNormalTVShow(TVShow *, TVShow *, u8);
-static bool8 TryMixRecordMixTVShow(TVShow *, TVShow *, u8);
-static bool8 TryMixOutbreakTVShow(TVShow *, TVShow *, u8);
-static void DeactivateShow(u8 showIdx);
-static void DeactivateShowIfNotSeenSpecies(u16, u8);
+static bool8 TryMixTVShow(TVShow *[TV_SHOWS_COUNT], TVShow *[TV_SHOWS_COUNT], u32);
+static bool8 TryMixNormalTVShow(TVShow *, TVShow *, u32);
+static bool8 TryMixRecordMixTVShow(TVShow *, TVShow *, u32);
+static bool8 TryMixOutbreakTVShow(TVShow *, TVShow *, u32);
+static void DeactivateShow(u32 showIdx);
+static void DeactivateShowIfNotSeenSpecies(u16, u32);
 static void SetMixedPokeNews(PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT]);
 static void ClearInvalidPokeNews(void);
 static void ClearPokeNewsIfGameNotComplete(void);
-static s8 GetPokeNewsSlotIfActive(PokeNews *, u8);
+static s8 GetPokeNewsSlotIfActive(PokeNews *, u32);
 static void InitTryMixPokeNewsShow(PokeNews *[POKE_NEWS_COUNT], PokeNews *[POKE_NEWS_COUNT]);
 static bool8 TryMixPokeNewsShow(PokeNews *, PokeNews *, s8);
 static void TVShowDone(void);
@@ -142,9 +142,9 @@ static void UpdatePokeNewsCountdown(u16);
 static void ResolveWorldOfMastersShow(u16);
 static void ResolveNumberOneShow(u16);
 static void TryPutFishingAdviceOnAir(void);
-static u8 MonDataIdxToRibbon(u8);
-static void TryPutNumberOneOnAir(u8);
-static bool8 ShouldApplyPokeNewsEffect(u8);
+static u32 MonDataIdxToRibbon(u32);
+static void TryPutNumberOneOnAir(u32);
+static bool8 ShouldApplyPokeNewsEffect(u32);
 static void TryPutWorldOfMastersOnAir(void);
 static void InterviewBefore_FanClubLetter(void);
 static void InterviewBefore_RecentHappenings(void);
@@ -191,8 +191,8 @@ static void DoTVShowLilycoveContestLady(void);
 static const struct {
     u16 species;
     u16 moves[MAX_MON_MOVES];
-    u8 level;
-    u8 location;
+    u32 level;
+    u32 location;
 } sPokeOutbreakSpeciesList[] = {
     {
         .species = SPECIES_SEEDOT,
@@ -256,7 +256,7 @@ static const u16 sNumberOneVarsAndThresholds[][2] = {
     {VAR_DAILY_BP,  30}
 };
 
-static const u8 *const sPokeNewsTextGroup_Upcoming[NUM_POKENEWS_TYPES + 1] = {
+static const u32 *const sPokeNewsTextGroup_Upcoming[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_NONE]        = NULL,
     [POKENEWS_SLATEPORT]   = gPokeNewsTextSlateport_Upcoming,
     [POKENEWS_GAME_CORNER] = gPokeNewsTextGameCorner_Upcoming,
@@ -264,7 +264,7 @@ static const u8 *const sPokeNewsTextGroup_Upcoming[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_BLENDMASTER] = gPokeNewsTextBlendMaster_Upcoming
 };
 
-static const u8 *const sPokeNewsTextGroup_Ongoing[NUM_POKENEWS_TYPES + 1] = {
+static const u32 *const sPokeNewsTextGroup_Ongoing[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_NONE]        = NULL,
     [POKENEWS_SLATEPORT]   = gPokeNewsTextSlateport_Ongoing,
     [POKENEWS_GAME_CORNER] = gPokeNewsTextGameCorner_Ongoing,
@@ -272,7 +272,7 @@ static const u8 *const sPokeNewsTextGroup_Ongoing[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_BLENDMASTER] = gPokeNewsTextBlendMaster_Ongoing
 };
 
-static const u8 *const sPokeNewsTextGroup_Ending[NUM_POKENEWS_TYPES + 1] = {
+static const u32 *const sPokeNewsTextGroup_Ending[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_NONE]        = NULL,
     [POKENEWS_SLATEPORT]   = gPokeNewsTextSlateport_Ending,
     [POKENEWS_GAME_CORNER] = gPokeNewsTextGameCorner_Ending,
@@ -280,13 +280,13 @@ static const u8 *const sPokeNewsTextGroup_Ending[NUM_POKENEWS_TYPES + 1] = {
     [POKENEWS_BLENDMASTER] = gPokeNewsTextBlendMaster_Ending
 };
 
-u8 *const gTVStringVarPtrs[] = {
+u32 *const gTVStringVarPtrs[] = {
     gStringVar1,
     gStringVar2,
     gStringVar3
 };
 
-static const u8 *const sTVFanClubTextGroup[] = {
+static const u32 *const sTVFanClubTextGroup[] = {
     gTVFanClubText00,
     gTVFanClubText01,
     gTVFanClubText02,
@@ -297,7 +297,7 @@ static const u8 *const sTVFanClubTextGroup[] = {
     gTVFanClubText07
 };
 
-static const u8 *const sTVRecentHappeninssTextGroup[] = {
+static const u32 *const sTVRecentHappeninssTextGroup[] = {
     gTVRecentHappeningsText00,
     gTVRecentHappeningsText01,
     gTVRecentHappeningsText02,
@@ -306,7 +306,7 @@ static const u8 *const sTVRecentHappeninssTextGroup[] = {
     gTVRecentHappeningsText05
 };
 
-static const u8 *const sTVFanClubOpinionsTextGroup[] = {
+static const u32 *const sTVFanClubOpinionsTextGroup[] = {
     gTVFanClubOpinionsText00,
     gTVFanClubOpinionsText01,
     gTVFanClubOpinionsText02,
@@ -314,11 +314,11 @@ static const u8 *const sTVFanClubOpinionsTextGroup[] = {
     gTVFanClubOpinionsText04
 };
 
-static const u8 *const sTVMassOutbreakTextGroup[] = {
+static const u32 *const sTVMassOutbreakTextGroup[] = {
     gTVMassOutbreakText00
 };
 
-static const u8 *const sTVPokemonTodaySuccessfulTextGroup[] = {
+static const u32 *const sTVPokemonTodaySuccessfulTextGroup[] = {
     gTVPokemonTodaySuccessfulText00,
     gTVPokemonTodaySuccessfulText01,
     gTVPokemonTodaySuccessfulText02,
@@ -333,7 +333,7 @@ static const u8 *const sTVPokemonTodaySuccessfulTextGroup[] = {
     gTVPokemonTodaySuccessfulText11
 };
 
-static const u8 *const sTVTodaysSmartShopperTextGroup[] = {
+static const u32 *const sTVTodaysSmartShopperTextGroup[] = {
     [SMARTSHOPPER_STATE_INTRO]          = SmartShopper_Text_Intro,
     [SMARTSHOPPER_STATE_CLERK_NORMAL]   = SmartShopper_Text_ClerkNormal,
     [SMARTSHOPPER_STATE_RAND_COMMENT_1] = SmartShopper_Text_RandomComment1,
@@ -349,7 +349,7 @@ static const u8 *const sTVTodaysSmartShopperTextGroup[] = {
     [SMARTSHOPPER_STATE_OUTRO_MAX]      = SmartShopper_Text_OutroMax
 };
 
-static const u8 *const sTVBravoTrainerTextGroup[] = {
+static const u32 *const sTVBravoTrainerTextGroup[] = {
     gTVBravoTrainerText00,
     gTVBravoTrainerText01,
     gTVBravoTrainerText02,
@@ -361,7 +361,7 @@ static const u8 *const sTVBravoTrainerTextGroup[] = {
     gTVBravoTrainerText08
 };
 
-static const u8 *const sTV3CheersForPokeblocksTextGroup[] = {
+static const u32 *const sTV3CheersForPokeblocksTextGroup[] = {
     gTV3CheersForPokeblocksText00,
     gTV3CheersForPokeblocksText01,
     gTV3CheersForPokeblocksText02,
@@ -370,7 +370,7 @@ static const u8 *const sTV3CheersForPokeblocksTextGroup[] = {
     gTV3CheersForPokeblocksText05
 };
 
-static const u8 *const sTVBravoTrainerBattleTowerTextGroup[] = {
+static const u32 *const sTVBravoTrainerBattleTowerTextGroup[] = {
     [BRAVOTOWER_STATE_INTRO]                = BravoTrainerBattleTower_Text_Intro,
     [BRAVOTOWER_STATE_NEW_RECORD]           = BravoTrainerBattleTower_Text_NewRecord,
     [BRAVOTOWER_STATE_LOST]                 = BravoTrainerBattleTower_Text_Lost,
@@ -388,7 +388,7 @@ static const u8 *const sTVBravoTrainerBattleTowerTextGroup[] = {
     [BRAVOTOWER_STATE_OUTRO]                = BravoTrainerBattleTower_Text_Outro
 };
 
-static const u8 *const sTVContestLiveUpdatesTextGroup[] = {
+static const u32 *const sTVContestLiveUpdatesTextGroup[] = {
     [CONTESTLIVE_STATE_INTRO]                 = ContestLiveUpdates_Text_Intro,
     [CONTESTLIVE_STATE_WON_BOTH_ROUNDS]       = ContestLiveUpdates_Text_WonBothRounds,
     [CONTESTLIVE_STATE_BETTER_ROUND2]         = ContestLiveUpdates_Text_BetterRound2,
@@ -424,7 +424,7 @@ static const u8 *const sTVContestLiveUpdatesTextGroup[] = {
     [CONTESTLIVE_STATE_OUTRO]                 = ContestLiveUpdates_Text_Outro
 };
 
-static const u8 *const sTVPokemonBattleUpdateTextGroup[] = {
+static const u32 *const sTVPokemonBattleUpdateTextGroup[] = {
     gTVPokemonBattleUpdateText00,
     gTVPokemonBattleUpdateText01,
     gTVPokemonBattleUpdateText02,
@@ -435,7 +435,7 @@ static const u8 *const sTVPokemonBattleUpdateTextGroup[] = {
     gTVPokemonBattleUpdateText07
 };
 
-static const u8 *const sTVTrainerFanClubSpecialTextGroup[] = {
+static const u32 *const sTVTrainerFanClubSpecialTextGroup[] = {
     gTVTrainerFanClubSpecialText00,
     gTVTrainerFanClubSpecialText01,
     gTVTrainerFanClubSpecialText02,
@@ -444,7 +444,7 @@ static const u8 *const sTVTrainerFanClubSpecialTextGroup[] = {
     gTVTrainerFanClubSpecialText05
 };
 
-static const u8 *const sTVNameRaterTextGroup[] = {
+static const u32 *const sTVNameRaterTextGroup[] = {
     gTVNameRaterText00,
     gTVNameRaterText01,
     gTVNameRaterText02,
@@ -466,14 +466,14 @@ static const u8 *const sTVNameRaterTextGroup[] = {
     gTVNameRaterText18
 };
 
-static const u8 *const sTVLilycoveContestLadyTextGroup[] = {
+static const u32 *const sTVLilycoveContestLadyTextGroup[] = {
     [CONTESTLADYLIVE_STATE_INTRO]      = ContestLadyShow_Text_Intro,
     [CONTESTLADYLIVE_STATE_WON]        = ContestLadyShow_Text_Won,
     [CONTESTLADYLIVE_STATE_LOST]       = ContestLadyShow_Text_Lost,
     [CONTESTLADYLIVE_STATE_LOST_BADLY] = ContestLadyShow_Text_LostBadly
 };
 
-static const u8 *const sTVPokemonTodayFailedTextGroup[] = {
+static const u32 *const sTVPokemonTodayFailedTextGroup[] = {
     gTVPokemonTodayFailedText00,
     gTVPokemonTodayFailedText01,
     gTVPokemonTodayFailedText02,
@@ -483,18 +483,18 @@ static const u8 *const sTVPokemonTodayFailedTextGroup[] = {
     gTVPokemonTodayFailedText06
 };
 
-static const u8 *const sTVPokemonAnglerTextGroup[] = {
+static const u32 *const sTVPokemonAnglerTextGroup[] = {
     gTVPokemonAnglerText00,
     gTVPokemonAnglerText01
 };
 
-static const u8 *const sTVWorldOfMastersTextGroup[] = {
+static const u32 *const sTVWorldOfMastersTextGroup[] = {
     gTVWorldOfMastersText00,
     gTVWorldOfMastersText01,
     gTVWorldOfMastersText02
 };
 
-static const u8 *const sTVTodaysRivalTrainerTextGroup[] = {
+static const u32 *const sTVTodaysRivalTrainerTextGroup[] = {
     gTVTodaysRivalTrainerText00,
     gTVTodaysRivalTrainerText01,
     gTVTodaysRivalTrainerText02,
@@ -508,7 +508,7 @@ static const u8 *const sTVTodaysRivalTrainerTextGroup[] = {
     gTVTodaysRivalTrainerText10
 };
 
-static const u8 *const sTVDewfordTrendWatcherNetworkTextGroup[] = {
+static const u32 *const sTVDewfordTrendWatcherNetworkTextGroup[] = {
     [TRENDWATCHER_STATE_INTRO]           = TrendWatcher_Text_Intro,
     [TRENDWATCHER_STATE_TAUGHT_MALE]     = TrendWatcher_Text_MaleTaughtMePhrase,
     [TRENDWATCHER_STATE_TAUGHT_FEMALE]   = TrendWatcher_Text_FemaleTaughtMePhrase,
@@ -518,20 +518,20 @@ static const u8 *const sTVDewfordTrendWatcherNetworkTextGroup[] = {
     [TRENDWATCHER_STATE_OUTRO]           = TrendWatcher_Text_Outro
 };
 
-static const u8 *const sTVHoennTreasureInvestisatorsTextGroup[] = {
+static const u32 *const sTVHoennTreasureInvestisatorsTextGroup[] = {
     gTVHoennTreasureInvestigatorsText00,
     gTVHoennTreasureInvestigatorsText01,
     gTVHoennTreasureInvestigatorsText02
 };
 
-static const u8 *const sTVFindThatGamerTextGroup[] = {
+static const u32 *const sTVFindThatGamerTextGroup[] = {
     gTVFindThatGamerText00,
     gTVFindThatGamerText01,
     gTVFindThatGamerText02,
     gTVFindThatGamerText03
 };
 
-static const u8 *const sTVBreakingNewsTextGroup[] = {
+static const u32 *const sTVBreakingNewsTextGroup[] = {
     gTVBreakingNewsText00,
     gTVBreakingNewsText01,
     gTVBreakingNewsText02,
@@ -547,7 +547,7 @@ static const u8 *const sTVBreakingNewsTextGroup[] = {
     gTVBreakingNewsText12
 };
 
-static const u8 *const sTVSecretBaseVisitTextGroup[] = {
+static const u32 *const sTVSecretBaseVisitTextGroup[] = {
     gTVSecretBaseVisitText00,
     gTVSecretBaseVisitText01,
     gTVSecretBaseVisitText02,
@@ -564,11 +564,11 @@ static const u8 *const sTVSecretBaseVisitTextGroup[] = {
     gTVSecretBaseVisitText13
 };
 
-static const u8 *const sTVPokemonLotteryWinnerFlashReportTextGroup[] = {
+static const u32 *const sTVPokemonLotteryWinnerFlashReportTextGroup[] = {
     gTVPokemonLotteryWinnerFlashReportText00
 };
 
-static const u8 *const sTVThePokemonBattleSeminarTextGroup[] = {
+static const u32 *const sTVThePokemonBattleSeminarTextGroup[] = {
     gTVThePokemonBattleSeminarText00,
     gTVThePokemonBattleSeminarText01,
     gTVThePokemonBattleSeminarText02,
@@ -578,7 +578,7 @@ static const u8 *const sTVThePokemonBattleSeminarTextGroup[] = {
     gTVThePokemonBattleSeminarText06
 };
 
-static const u8 *const sTVTrainerFanClubTextGroup[] = {
+static const u32 *const sTVTrainerFanClubTextGroup[] = {
     gTVTrainerFanClubText00,
     gTVTrainerFanClubText01,
     gTVTrainerFanClubText02,
@@ -593,7 +593,7 @@ static const u8 *const sTVTrainerFanClubTextGroup[] = {
     gTVTrainerFanClubText11
 };
 
-static const u8 *const sTVCutiesTextGroup[] = {
+static const u32 *const sTVCutiesTextGroup[] = {
     [SPOTCUTIES_STATE_INTRO]           = TVSpotTheCuties_Text_Intro,
     [SPOTCUTIES_STATE_RIBBONS_LOW]     = TVSpotTheCuties_Text_RibbonsLow,
     [SPOTCUTIES_STATE_RIBBONS_MID]     = TVSpotTheCuties_Text_RibbonsMid,
@@ -612,7 +612,7 @@ static const u8 *const sTVCutiesTextGroup[] = {
     [SPOTCUTIES_STATE_OUTRO]           = TVSpotTheCuties_Text_Outro
 };
 
-static const u8 *const sTVPokemonNewsBattleFrontierTextGroup[] = {
+static const u32 *const sTVPokemonNewsBattleFrontierTextGroup[] = {
     gTVPokemonNewsBattleFrontierText00,
     gTVPokemonNewsBattleFrontierText01,
     gTVPokemonNewsBattleFrontierText02,
@@ -634,7 +634,7 @@ static const u8 *const sTVPokemonNewsBattleFrontierTextGroup[] = {
     gTVPokemonNewsBattleFrontierText18
 };
 
-static const u8 *const sTVWhatsNo1InHoennTodayTextGroup[] = {
+static const u32 *const sTVWhatsNo1InHoennTodayTextGroup[] = {
     gTVWhatsNo1InHoennTodayText00,
     gTVWhatsNo1InHoennTodayText01,
     gTVWhatsNo1InHoennTodayText02,
@@ -646,7 +646,7 @@ static const u8 *const sTVWhatsNo1InHoennTodayTextGroup[] = {
     gTVWhatsNo1InHoennTodayText08
 };
 
-static const u8 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] =
+static const u32 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] =
 {
     [SBSECRETS_STATE_INTRO]               = TVSecretBaseSecrets_Text_Intro,
     [SBSECRETS_STATE_DO_NEXT1]            = TVSecretBaseSecrets_Text_WhatWillPlayerDoNext1,
@@ -693,7 +693,7 @@ static const u8 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] =
     [SBSECRETS_STATE_USED_JUMP_MAT]       = TVSecretBaseSecrets_Text_UsedJumpMat
 };
 
-static const u8 *const sTVSafariFanClubTextGroup[] = {
+static const u32 *const sTVSafariFanClubTextGroup[] = {
     gTVSafariFanClubText00,
     gTVSafariFanClubText01,
     gTVSafariFanClubText02,
@@ -707,7 +707,7 @@ static const u8 *const sTVSafariFanClubTextGroup[] = {
     gTVSafariFanClubText10
 };
 
-static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
+static const u32 *const sTVInSearchOfTrainersTextGroup[] = {
     gTVInSearchOfTrainersText00,
     gTVInSearchOfTrainersText01,
     gTVInSearchOfTrainersText02,
@@ -721,7 +721,7 @@ static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
 
 // Secret Base Secrets TV Show states for actions that can be taken in a secret base
 // The flags that determine whether or not the action was taken are commented
-static const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
+static const u32 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
 {
     SBSECRETS_STATE_USED_CHAIR,             // SECRET_BASE_USED_CHAIR
     SBSECRETS_STATE_USED_BALLOON,           // SECRET_BASE_USED_BALLOON
@@ -759,7 +759,7 @@ static const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
 
 void ClearTVShowData(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows); i++)
     {
@@ -771,11 +771,11 @@ void ClearTVShowData(void)
     ClearPokeNews();
 }
 
-u8 GetRandomActiveShowIdx(void)
+u32 GetRandomActiveShowIdx(void)
 {
-    u8 i;
-    u8 j;
-    u8 selIdx;
+    u32 i;
+    u32 j;
+    u32 selIdx;
     TVShow *show;
 
     // Include all normal TV shows, and up through any present Record Mix shows
@@ -809,9 +809,9 @@ u8 GetRandomActiveShowIdx(void)
     return 0xFF;
 }
 
-u8 FindAnyTVShowOnTheAir(void)
+u32 FindAnyTVShowOnTheAir(void)
 {
-    u8 slot = GetRandomActiveShowIdx();
+    u32 slot = GetRandomActiveShowIdx();
     if (slot == 0xFF)
         return 0xFF;
 
@@ -878,14 +878,14 @@ void TurnOnTVScreen(void)
 }
 
 // gSpecialVar_0x8004 here is set from GetRandomActiveShowIdx in EventScript_TryDoTVShow
-u8 GetSelectedTVShow(void)
+u32 GetSelectedTVShow(void)
 {
     return gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind;
 }
 
-static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
+static u32 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i++)
     {
@@ -897,7 +897,7 @@ static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
     return 0xFF;
 }
 
-u8 GetNextActiveShowIfMassOutbreak(void)
+u32 GetNextActiveShowIfMassOutbreak(void)
 {
     TVShow *tvShow;
 
@@ -933,7 +933,7 @@ void ResetGabbyAndTy(void)
 
 void GabbyAndTyBeforeInterview(void)
 {
-    u8 i;
+    u32 i;
 
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
@@ -983,7 +983,7 @@ static void TakeGabbyAndTyOffTheAir(void)
     gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
 }
 
-u8 GabbyAndTyGetBattleNum(void)
+u32 GabbyAndTyGetBattleNum(void)
 {
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 5)
         return (gSaveBlock1Ptr->gabbyAndTyData.battleNum % 3) + 6;
@@ -1007,7 +1007,7 @@ bool8 GabbyAndTyGetLastQuote(void)
     return TRUE;
 }
 
-u8 GabbyAndTyGetLastBattleTrivia(void)
+u32 GabbyAndTyGetLastBattleTrivia(void)
 {
     if (!gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2)
         return 1;
@@ -1092,7 +1092,7 @@ void InterviewAfter(void)
 
 void TryPutPokemonTodayOnAir(void)
 {
-    u8 i;
+    u32 i;
     u16 ballsUsed;
     TVShow *show;
     u32 language2;
@@ -1165,7 +1165,7 @@ static void InitWorldOfMastersShowAttempt(void)
 static void TryPutPokemonTodayFailedOnTheAir(void)
 {
     u16 ballsUsed;
-    u8 i;
+    u32 i;
     TVShow *show;
 
     if (!rbernoulli(1, 1))
@@ -1244,10 +1244,10 @@ static void InterviewAfter_ContestLiveUpdates(void)
     }
 }
 
-void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent)
+void PutBattleUpdateOnTheAir(u32 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent)
 {
     TVShow *show;
-    u8 name[32];
+    u32 name[32];
 
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
@@ -1283,10 +1283,10 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language)
+bool8 Put3CheersForPokeblocksOnTheAir(const u32 *partnersName, u32 flavor, u32 color, u32 sheen, u32 language)
 {
     TVShow *show;
-    u8 name[32];
+    u32 name[32];
 
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot == -1)
@@ -1318,7 +1318,7 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 colo
 void PutFanClubSpecialOnTheAir(void)
 {
     TVShow *show;
-    u8 name[32];
+    u32 name[32];
     u32 id;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8006];
@@ -1345,7 +1345,7 @@ void PutFanClubSpecialOnTheAir(void)
 #endif //FREE_LINK_BATTLE_RECORDS
 }
 
-void ContestLiveUpdates_Init(u8 round1Placing)
+void ContestLiveUpdates_Init(u32 round1Placing)
 {
     TVShow *show;
 
@@ -1359,7 +1359,7 @@ void ContestLiveUpdates_Init(u8 round1Placing)
     }
 }
 
-void ContestLiveUpdates_SetRound2Placing(u8 round2Placing)
+void ContestLiveUpdates_SetRound2Placing(u32 round2Placing)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1367,7 +1367,7 @@ void ContestLiveUpdates_SetRound2Placing(u8 round2Placing)
         show->contestLiveUpdates.round2Placing = round2Placing;
 }
 
-void ContestLiveUpdates_SetWinnerAppealFlag(u8 flag)
+void ContestLiveUpdates_SetWinnerAppealFlag(u32 flag)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1383,7 +1383,7 @@ void ContestLiveUpdates_SetWinnerMoveUsed(u16 move)
         show->contestLiveUpdates.move = move;
 }
 
-void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser)
+void ContestLiveUpdates_SetLoserData(u32 flag, u32 loser)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1445,7 +1445,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 move)
     }
 }
 
-void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
+void BravoTrainerPokemonProfile_BeforeInterview2(u32 contestStandingPlace)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1488,7 +1488,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 void TryPutSmartShopperOnAir(void)
 {
     TVShow *show;
-    u8 i;
+    u32 i;
 
     if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
      && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_MART) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_MART))
@@ -1625,7 +1625,7 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
 
 static void TryStartRandomMassOutbreak(void)
 {
-    u8 i;
+    u32 i;
     u16 outbreakIdx;
     TVShow *show;
 
@@ -1695,7 +1695,7 @@ void UpdateTVShowsPerDay(u16 days)
 
 static void UpdateMassOutbreakTimeLeft(u16 days)
 {
-    u8 i;
+    u32 i;
     TVShow *show;
 
     if (gSaveBlock1Ptr->outbreakPokemonSpecies == SPECIES_NONE)
@@ -1737,7 +1737,7 @@ void RecordFishingAttemptForTV(bool8 caughtFish)
     }
     else
     {
-        if ((u8)sPokemonAnglerAttemptCounters > 4)
+        if ((u32)sPokemonAnglerAttemptCounters > 4)
             TryPutFishingAdviceOnAir();
 
         sPokemonAnglerAttemptCounters &= 0xFF00;
@@ -1817,7 +1817,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
 {
     TVShow *show;
     u32 i;
-    u8 nBadges;
+    u32 nBadges;
 
     IsRecordMixShowAlreadySpawned(TVSHOW_TODAYS_RIVAL_TRAINER, TRUE); // Delete old version of show
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1960,9 +1960,9 @@ void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 
 static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
 {
-    u8 i, j;
-    u8 n;
-    u8 decoration;
+    u32 i, j;
+    u32 n;
+    u32 decoration;
 
     for (i = 0; i < DECOR_MAX_SECRET_BASE; i++)
         sTV_DecorationsBuffer[i] = DECOR_NONE;
@@ -2017,11 +2017,11 @@ static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
 
 static void SecretBaseVisit_CalculatePartyData(TVShow *show)
 {
-    u8 i;
+    u32 i;
     u16 move;
     u16 j;
-    u8 numMoves;
-    u8 numPokemon;
+    u32 numMoves;
+    u32 numPokemon;
     u16 sum;
 
     for (i = 0, numPokemon = 0; i < PARTY_SIZE; i++)
@@ -2095,7 +2095,7 @@ void TryPutSecretBaseVisitOnAir(void)
 void TryPutBreakingNewsOnAir(void)
 {
     TVShow *show;
-    u8 i;
+    u32 i;
     u16 balls;
 
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -2169,11 +2169,11 @@ void TryPutLotteryWinnerReportOnAir(void)
     }
 }
 
-void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove)
+void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u32 moveIdx, const u16 *movePtr, u16 betterMove)
 {
     TVShow *show;
-    u8 i;
-    u8 j;
+    u32 i;
+    u32 j;
 
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_BATTLE_SEMINAR, FALSE) != TRUE)
@@ -2200,7 +2200,7 @@ void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16
     }
 }
 
-void TryPutSafariFanClubOnAir(u8 monsCaught, u8 pokeblocksUsed)
+void TryPutSafariFanClubOnAir(u32 monsCaught, u32 pokeblocksUsed)
 {
     TVShow *show;
 
@@ -2218,7 +2218,7 @@ void TryPutSafariFanClubOnAir(u8 monsCaught, u8 pokeblocksUsed)
     }
 }
 
-void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
+void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u32 ribbonMonDataIdx)
 {
     TVShow *show;
 
@@ -2242,9 +2242,9 @@ void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
     }
 }
 
-u8 GetRibbonCount(struct Pokemon *pokemon)
+u32 GetRibbonCount(struct Pokemon *pokemon)
 {
-    u8 nRibbons;
+    u32 nRibbons;
 
     nRibbons = 0;
     nRibbons += GetMonData(pokemon, MON_DATA_COOL_RIBBON);
@@ -2267,7 +2267,7 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     return nRibbons;
 }
 
-static u8 MonDataIdxToRibbon(u8 monDataIdx)
+static u32 MonDataIdxToRibbon(u32 monDataIdx)
 {
     if (monDataIdx == MON_DATA_CHAMPION_RIBBON) return CHAMPION_RIBBON;
     if (monDataIdx == MON_DATA_COOL_RIBBON)     return COOL_RIBBON_NORMAL;
@@ -2328,7 +2328,7 @@ bool8 ShouldHideFanClubInterviewer(void)
 bool8 ShouldAirFrontierTVShow(void)
 {
     u32 playerId;
-    u8 showIdx;
+    u32 showIdx;
     TVShow *shows;
 
     if (IsRecordMixShowAlreadySpawned(TVSHOW_FRONTIER, FALSE) == TRUE)
@@ -2352,7 +2352,7 @@ bool8 ShouldAirFrontierTVShow(void)
     return TRUE;
 }
 
-void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
+void TryPutFrontierTVShowOnAir(u16 winStreak, u32 facilityAndMode)
 {
     TVShow *show;
 
@@ -2404,7 +2404,7 @@ void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
 void TryPutSecretBaseSecretsOnAir(void)
 {
     TVShow *show;
-    u8 strbuf[32];
+    u32 strbuf[32];
 
     if (IsRecordMixShowAlreadySpawned(TVSHOW_SECRET_BASE_SECRETS, FALSE) != TRUE)
     {
@@ -2436,7 +2436,7 @@ void TryPutSecretBaseSecretsOnAir(void)
 // The vars are reset afterwards regardless
 static void ResolveNumberOneShow(u16 days)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sNumberOneVarsAndThresholds); i++)
     {
@@ -2451,7 +2451,7 @@ static void ResolveNumberOneShow(u16 days)
         VarSet(sNumberOneVarsAndThresholds[i][0], 0);
 }
 
-static void TryPutNumberOneOnAir(u8 actionIdx)
+static void TryPutNumberOneOnAir(u32 actionIdx)
 {
     TVShow *show;
 
@@ -2514,7 +2514,7 @@ static void TryPutRandomPokeNewsOnAir(void)
         sCurTVShowSlot = GetFirstEmptyPokeNewsSlot(gSaveBlock1Ptr->pokeNews);
         if (sCurTVShowSlot != -1 && rbernoulli(1, 100) != TRUE)
         {
-            u8 newsKind = (Random() % NUM_POKENEWS_TYPES) + 1; // +1 to skip over POKENEWS_NONE
+            u32 newsKind = (Random() % NUM_POKENEWS_TYPES) + 1; // +1 to skip over POKENEWS_NONE
             if (IsAddingPokeNewsDisallowed(newsKind) != TRUE)
             {
                 gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].kind = newsKind;
@@ -2539,13 +2539,13 @@ static s8 GetFirstEmptyPokeNewsSlot(PokeNews *pokeNews)
 
 static void ClearPokeNews(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
         ClearPokeNewsBySlot(i);
 }
 
-static void ClearPokeNewsBySlot(u8 i)
+static void ClearPokeNewsBySlot(u32 i)
 {
     gSaveBlock1Ptr->pokeNews[i].kind = POKENEWS_NONE;
     gSaveBlock1Ptr->pokeNews[i].state = POKENEWS_STATE_INACTIVE;
@@ -2554,8 +2554,8 @@ static void ClearPokeNewsBySlot(u8 i)
 
 static void CompactPokeNews(void)
 {
-    u8 i;
-    u8 j;
+    u32 i;
+    u32 j;
 
     for (i = 0; i < POKE_NEWS_COUNT - 1; i++)
     {
@@ -2574,9 +2574,9 @@ static void CompactPokeNews(void)
     }
 }
 
-static u8 FindAnyPokeNewsOnTheAir(void)
+static u32 FindAnyPokeNewsOnTheAir(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
     {
@@ -2590,7 +2590,7 @@ static u8 FindAnyPokeNewsOnTheAir(void)
 
 void DoPokeNews(void)
 {
-    u8 i = FindAnyPokeNewsOnTheAir();
+    u32 i = FindAnyPokeNewsOnTheAir();
     if (i == 0xFF)
     {
         gSpecialVar_Result = FALSE;
@@ -2621,9 +2621,9 @@ void DoPokeNews(void)
     }
 }
 
-bool8 IsPokeNewsActive(u8 newsKind)
+bool8 IsPokeNewsActive(u32 newsKind)
 {
-    u8 i;
+    u32 i;
 
     if (newsKind == POKENEWS_NONE)
         return FALSE;
@@ -2645,7 +2645,7 @@ bool8 IsPokeNewsActive(u8 newsKind)
 // For POKENEWS_SLATEPORT / POKENEWS_LILYCOVE, only apply the effect if
 // the player is talking to the Energy Guru / at the Dept Store Rooftop.
 // For any other type of PokeNews this is always TRUE.
-static bool8 ShouldApplyPokeNewsEffect(u8 newsKind)
+static bool8 ShouldApplyPokeNewsEffect(u32 newsKind)
 {
     switch (newsKind)
     {
@@ -2664,9 +2664,9 @@ static bool8 ShouldApplyPokeNewsEffect(u8 newsKind)
     return TRUE;
 }
 
-static bool8 IsAddingPokeNewsDisallowed(u8 newsKind)
+static bool8 IsAddingPokeNewsDisallowed(u32 newsKind)
 {
-    u8 i;
+    u32 i;
     if (newsKind == POKENEWS_NONE)
         return TRUE;
 
@@ -2681,7 +2681,7 @@ static bool8 IsAddingPokeNewsDisallowed(u8 newsKind)
 
 static void UpdatePokeNewsCountdown(u16 days)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
     {
@@ -2705,7 +2705,7 @@ static void UpdatePokeNewsCountdown(u16 days)
     CompactPokeNews();
 }
 
-void CopyContestRankToStringVar(u8 varIdx, u8 rank)
+void CopyContestRankToStringVar(u32 varIdx, u32 rank)
 {
     switch (rank)
     {
@@ -2724,7 +2724,7 @@ void CopyContestRankToStringVar(u8 varIdx, u8 rank)
     }
 }
 
-void CopyContestCategoryToStringVar(u8 varIdx, u8 category)
+void CopyContestCategoryToStringVar(u32 varIdx, u32 category)
 {
     switch (category)
     {
@@ -2752,7 +2752,7 @@ void SetContestCategoryStringVarForInterview(void)
     CopyContestCategoryToStringVar(1, show->bravoTrainer.contestCategory);
 }
 
-void ConvertIntToDecimalString(u8 varIdx, int value)
+void ConvertIntToDecimalString(u32 varIdx, int value)
 {
     int nDigits = CountDigits(value);
     ConvertIntToDecimalStringN(gTVStringVarPtrs[varIdx], value, STR_CONV_MODE_LEFT_ALIGN, nDigits);
@@ -2770,9 +2770,9 @@ size_t CountDigits(int value)
     return count;
 }
 
-static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
+static void SmartShopper_BufferPurchaseTotal(u32 varIdx, TVShow *show)
 {
-    u8 i;
+    u32 i;
     int price = 0;
     for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
     {
@@ -2786,11 +2786,11 @@ static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
         ConvertIntToDecimalString(varIdx, price);
 }
 
-static bool8 IsRecordMixShowAlreadySpawned(u8 kind, bool8 delete)
+static bool8 IsRecordMixShowAlreadySpawned(u32 kind, bool8 delete)
 {
     u32 playerId;
     TVShow *shows;
-    u8 i;
+    u32 i;
 
     shows = gSaveBlock1Ptr->tvShows;
     playerId = GetPlayerIDAsU32();
@@ -2813,7 +2813,7 @@ static bool8 IsRecordMixShowAlreadySpawned(u8 kind, bool8 delete)
 
 static void SortPurchasesByQuantity(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < SMARTSHOPPER_NUM_ITEMS - 1; i++)
     {
@@ -2832,9 +2832,9 @@ static void SortPurchasesByQuantity(void)
     }
 }
 
-static void TryReplaceOldTVShowOfKind(u8 kind)
+static void TryReplaceOldTVShowOfKind(u32 kind)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < NUM_NORMAL_TVSHOW_SLOTS; i++)
     {
         if (gSaveBlock1Ptr->tvShows[i].common.kind == kind)
@@ -2975,10 +2975,10 @@ static void InterviewBefore_FanClubSpecial(void)
                         ARRAY_COUNT(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanClubSpecial.words));
 }
 
-static bool8 IsPartyMonNicknamedOrNotEnglish(u8 monIdx)
+static bool8 IsPartyMonNicknamedOrNotEnglish(u32 monIdx)
 {
     struct Pokemon *pokemon;
-    u8 language;
+    u32 language;
 
     pokemon = &gPlayerParty[monIdx];
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
@@ -2994,9 +2994,9 @@ bool8 IsLeadMonNicknamedOrNotEnglish(void)
     return IsPartyMonNicknamedOrNotEnglish(GetLeadMonIndex());
 }
 
-static void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
+static void DeleteTVShowInArrayByIdx(TVShow *shows, u32 idx)
 {
-    u8 i;
+    u32 i;
 
     shows[idx].commonInit.kind = TVSHOW_OFF_AIR;
     shows[idx].commonInit.active = FALSE;
@@ -3006,8 +3006,8 @@ static void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
 
 static void CompactTVShowArray(TVShow *shows)
 {
-    u8 i;
-    u8 j;
+    u32 i;
+    u32 j;
 
     // Compact normal TV shows
     for (i = 0; i < NUM_NORMAL_TVSHOW_SLOTS - 1; i++)
@@ -3044,7 +3044,7 @@ static void CompactTVShowArray(TVShow *shows)
     }
 }
 
-static u16 GetRandomDifferentSpeciesAndNameSeenByPlayer(u8 varIdx, u16 excludedSpecies)
+static u16 GetRandomDifferentSpeciesAndNameSeenByPlayer(u32 varIdx, u16 excludedSpecies)
 {
     u16 species = GetRandomDifferentSpeciesSeenByPlayer(excludedSpecies);
     StringCopy(gTVStringVarPtrs[varIdx], GetSpeciesName(species));
@@ -3085,7 +3085,7 @@ static void Script_FindFirstEmptyNormalTVShowSlot(void)
 
 static s8 FindFirstEmptyNormalTVShowSlot(TVShow *shows)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_NORMAL_TVSHOW_SLOTS; i++)
     {
@@ -3119,7 +3119,7 @@ static bool8 BernoulliTrial(u16 ratio)
 // Both are assumed to have the same struct layout
 static void GetRandomWordFromShow(TVShow *show)
 {
-    u8 i;
+    u32 i;
 
     i = Random() % ARRAY_COUNT(show->fanclubLetter.words);
 
@@ -3136,9 +3136,9 @@ static void GetRandomWordFromShow(TVShow *show)
     CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
 }
 
-static u8 GetRandomNameRaterStateFromName(TVShow *show)
+static u32 GetRandomNameRaterStateFromName(TVShow *show)
 {
-    u8 i;
+    u32 i;
     u16 nameSum;
 
     nameSum = 0;
@@ -3152,10 +3152,10 @@ static u8 GetRandomNameRaterStateFromName(TVShow *show)
     return nameSum & 7;
 }
 
-static void GetNicknameSubstring(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
+static void GetNicknameSubstring(u32 varIdx, u32 whichPosition, u32 charParam, u16 whichString, u16 species, TVShow *show)
 {
-    u8 buff[16];
-    u8 i;
+    u32 buff[16];
+    u32 i;
     u16 strlen;
 
     for (i = 0; i < 3; i++)
@@ -3235,7 +3235,7 @@ static void GetNicknameSubstring(u8 varIdx, u8 whichPosition, u8 charParam, u16 
 // Unused script special
 bool8 IsTVShowAlreadyInQueue(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_NORMAL_TVSHOW_SLOTS; i++)
     {
@@ -3302,7 +3302,7 @@ void IsMonOTIDNotPlayers(void)
         gSpecialVar_Result = TRUE;
 }
 
-static u8 GetTVGroupByShowId(u8 kind)
+static u32 GetTVGroupByShowId(u32 kind)
 {
     if (kind == TVSHOW_OFF_AIR)
         return TVGROUP_NONE;
@@ -3324,7 +3324,7 @@ u32 GetPlayerIDAsU32(void)
     return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
 }
 
-u8 CheckForPlayersHouseNews(void)
+u32 CheckForPlayersHouseNews(void)
 {
     // Check if not in Littleroot house map group
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
@@ -3414,9 +3414,9 @@ void HideBattleTowerReporter(void)
     FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
-void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
+void ReceiveTvShowsData(void *src, u32 size, u32 playersLinkId)
 {
-    u8 i;
+    u32 i;
     u16 version;
     TVShow (*rmBuffer2)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
     TVShow (*rmBuffer)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
@@ -3430,7 +3430,7 @@ void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
         rmBuffer = rmBuffer2;
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
-            version = (u8)gLinkPlayers[i].version;
+            version = (u32)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
                 TranslateRubyShows((*rmBuffer)[i]);
             else if (version == VERSION_EMERALD && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
@@ -3465,8 +3465,8 @@ void ReceiveTvShowsData(void *src, u32 size, u8 playersLinkId)
 
 static void SetMixedTVShows(TVShow player1[TV_SHOWS_COUNT], TVShow player2[TV_SHOWS_COUNT], TVShow player3[TV_SHOWS_COUNT], TVShow player4[TV_SHOWS_COUNT])
 {
-    u8 i;
-    u8 j;
+    u32 i;
+    u32 j;
     TVShow **tvShows[MAX_LINK_PLAYERS];
 
     tvShows[0] = &player1;
@@ -3504,10 +3504,10 @@ static void SetMixedTVShows(TVShow player1[TV_SHOWS_COUNT], TVShow player2[TV_SH
     }
 }
 
-static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COUNT], u8 idx)
+static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COUNT], u32 idx)
 {
     bool8 success;
-    u8 type;
+    u32 type;
     TVShow *tv1 = *dest;
     TVShow *tv2 = *src;
 
@@ -3535,7 +3535,7 @@ static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COU
     return FALSE;
 }
 
-static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u8 idx)
+static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3552,7 +3552,7 @@ static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u8 idx)
     return TRUE;
 }
 
-static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u8 idx)
+static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3573,7 +3573,7 @@ static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u8 idx)
     return TRUE;
 }
 
-static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u8 idx)
+static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3593,12 +3593,12 @@ static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u8 idx)
 
 static s8 FindInactiveShowInArray(TVShow *tvShows)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < LAST_TVSHOW_IDX; i++)
     {
         // Second check is to make sure its a valid show (not too high, not TVSHOW_OFF_AIR)
-        if (tvShows[i].common.active == FALSE && (u8)(tvShows[i].common.kind - 1) < TVGROUP_OUTBREAK_END)
+        if (tvShows[i].common.active == FALSE && (u32)(tvShows[i].common.kind - 1) < TVGROUP_OUTBREAK_END)
             return i;
     }
     return -1;
@@ -3748,12 +3748,12 @@ static void DeactivateShowsWithUnseenSpecies(void)
     }
 }
 
-static void DeactivateShow(u8 showIdx)
+static void DeactivateShow(u32 showIdx)
 {
     gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
 }
 
-static void DeactivateShowIfNotSeenSpecies(u16 species, u8 showIdx)
+static void DeactivateShowIfNotSeenSpecies(u16 species, u32 showIdx)
 {
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
         gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
@@ -3777,7 +3777,7 @@ static void DeactivateGameCompleteShowsIfNotUnlocked(void)
 
 void DeactivateAllNormalTVShows(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_NORMAL_TVSHOW_SLOTS; i++)
     {
@@ -3800,9 +3800,9 @@ static void DeleteExcessMixedShows(void)
         DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, i + NUM_NORMAL_TVSHOW_SLOTS);
 }
 
-void ReceivePokeNewsData(void *src, u32 size, u8 playersLinkId)
+void ReceivePokeNewsData(void *src, u32 size, u32 playersLinkId)
 {
-    u8 i;
+    u32 i;
     PokeNews (*rmBuffer2)[MAX_LINK_PLAYERS][POKE_NEWS_COUNT];
     PokeNews (*rmBuffer)[MAX_LINK_PLAYERS][POKE_NEWS_COUNT];
 
@@ -3838,7 +3838,7 @@ void ReceivePokeNewsData(void *src, u32 size, u8 playersLinkId)
 
 static void SetMixedPokeNews(PokeNews player1[POKE_NEWS_COUNT], PokeNews player2[POKE_NEWS_COUNT], PokeNews player3[POKE_NEWS_COUNT], PokeNews player4[POKE_NEWS_COUNT])
 {
-    u8 i, j, k;
+    u32 i, j, k;
     PokeNews **pokeNews[MAX_LINK_PLAYERS];
 
     pokeNews[0] = &player1;
@@ -3874,7 +3874,7 @@ static void InitTryMixPokeNewsShow(PokeNews *dest[POKE_NEWS_COUNT], PokeNews *sr
 
 static bool8 TryMixPokeNewsShow(PokeNews *dest, PokeNews *src, s8 slot)
 {
-    u8 i;
+    u32 i;
 
     if (src->kind == POKENEWS_NONE)
         return FALSE;
@@ -3890,7 +3890,7 @@ static bool8 TryMixPokeNewsShow(PokeNews *dest, PokeNews *src, s8 slot)
     return TRUE;
 }
 
-static s8 GetPokeNewsSlotIfActive(PokeNews *pokeNews, u8 idx)
+static s8 GetPokeNewsSlotIfActive(PokeNews *pokeNews, u32 idx)
 {
     if (pokeNews[idx].kind == POKENEWS_NONE)
         return -1;
@@ -3900,7 +3900,7 @@ static s8 GetPokeNewsSlotIfActive(PokeNews *pokeNews, u8 idx)
 
 static void ClearInvalidPokeNews(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
     {
@@ -3912,7 +3912,7 @@ static void ClearInvalidPokeNews(void)
 
 static void ClearPokeNewsIfGameNotComplete(void)
 {
-    u8 i;
+    u32 i;
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != TRUE)
     {
@@ -4028,7 +4028,7 @@ static void TranslateRubyShows(TVShow *shows)
     }
 }
 
-static u8 GetStringLanguage(u8 *str)
+static u32 GetStringLanguage(u32 *str)
 {
     return IsStringJapanese(str) ? LANGUAGE_JAPANESE : GAME_LANGUAGE;
 }
@@ -4272,7 +4272,7 @@ void DoTVShow(void)
 static void DoTVShowBravoTrainerPokemonProfile(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4347,7 +4347,7 @@ static void DoTVShowBravoTrainerPokemonProfile(void)
 static void DoTVShowBravoTrainerBattleTower(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4442,7 +4442,7 @@ static void DoTVShowBravoTrainerBattleTower(void)
 static void DoTVShowTodaysSmartShopper(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4538,7 +4538,7 @@ static void DoTVShowTodaysSmartShopper(void)
 static void DoTVShowTheNameRaterShow(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4624,7 +4624,7 @@ static void DoTVShowTheNameRaterShow(void)
 static void DoTVShowPokemonTodaySuccessfulCapture(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4694,7 +4694,7 @@ static void DoTVShowPokemonTodaySuccessfulCapture(void)
 static void DoTVShowPokemonTodayFailedCapture(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4739,7 +4739,7 @@ static void DoTVShowPokemonTodayFailedCapture(void)
 static void DoTVShowPokemonFanClubLetter(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
     u16 rval;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
@@ -4793,7 +4793,7 @@ static void DoTVShowPokemonFanClubLetter(void)
 static void DoTVShowRecentHappenings(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4828,7 +4828,7 @@ static void DoTVShowRecentHappenings(void)
 static void DoTVShowPokemonFanClubOpinions(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -4884,7 +4884,7 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
 static void DoTVShowPokemonContestLiveUpdates(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5226,7 +5226,7 @@ static void DoTVShowPokemonContestLiveUpdates(void)
 static void DoTVShowPokemonBattleUpdate(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5298,7 +5298,7 @@ static void DoTVShowPokemonBattleUpdate(void)
 static void DoTVShow3CheersForPokeblocks(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5394,7 +5394,7 @@ static void DoTVShow3CheersForPokeblocks(void)
 
 void DoTVShowInSearchOfTrainers(void)
 {
-    u8 state;
+    u32 state;
 
     gSpecialVar_Result = FALSE;
     state = sTVShowState;
@@ -5449,7 +5449,7 @@ void DoTVShowInSearchOfTrainers(void)
 static void DoTVShowPokemonAngler(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5479,7 +5479,7 @@ static void DoTVShowPokemonAngler(void)
 static void DoTVShowTheWorldOfMasters(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5509,7 +5509,7 @@ static void DoTVShowTheWorldOfMasters(void)
 static void DoTVShowTodaysRivalTrainer(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5628,7 +5628,7 @@ static void DoTVShowTodaysRivalTrainer(void)
 static void DoTVShowDewfordTrendWatcherNetwork(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5676,7 +5676,7 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
 static void DoTVShowHoennTreasureInvestigators(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5722,7 +5722,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
 static void DoTVShowFindThatGamer(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5792,7 +5792,7 @@ static void DoTVShowFindThatGamer(void)
 static void DoTVShowBreakingNewsTV(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5887,7 +5887,7 @@ static void DoTVShowBreakingNewsTV(void)
 static void DoTVShowSecretBaseVisit(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5967,7 +5967,7 @@ static void DoTVShowSecretBaseVisit(void)
 static void DoTVShowPokemonLotteryWinnerFlashReport(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -5989,7 +5989,7 @@ static void DoTVShowPokemonLotteryWinnerFlashReport(void)
 static void DoTVShowThePokemonBattleSeminar(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6053,7 +6053,7 @@ static void DoTVShowThePokemonBattleSeminar(void)
 static void DoTVShowTrainerFanClubSpecial(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6110,7 +6110,7 @@ static void DoTVShowTrainerFanClubSpecial(void)
 static void DoTVShowTrainerFanClub(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
     u32 playerId;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
@@ -6198,7 +6198,7 @@ static void DoTVShowTrainerFanClub(void)
 static void DoTVShowSpotTheCuties(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6304,7 +6304,7 @@ static void DoTVShowSpotTheCuties(void)
 static void DoTVShowPokemonNewsBattleFrontier(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6452,7 +6452,7 @@ static void DoTVShowPokemonNewsBattleFrontier(void)
 static void DoTVShowWhatsNo1InHoennToday(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6529,10 +6529,10 @@ static void DoTVShowWhatsNo1InHoennToday(void)
     ShowFieldMessage(sTVWhatsNo1InHoennTodayTextGroup[state]);
 }
 
-u8 SecretBaseSecrets_GetNumActionsTaken(TVShow *show)
+u32 SecretBaseSecrets_GetNumActionsTaken(TVShow *show)
 {
-    u8 i;
-    u8 flagsSet;
+    u32 i;
+    u32 flagsSet;
 
     for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i++)
     {
@@ -6542,10 +6542,10 @@ u8 SecretBaseSecrets_GetNumActionsTaken(TVShow *show)
     return flagsSet;
 }
 
-static u8 SecretBaseSecrets_GetStateByFlagNumber(TVShow *show, u8 flagId)
+static u32 SecretBaseSecrets_GetStateByFlagNumber(TVShow *show, u32 flagId)
 {
-    u8 i;
-    u8 flagsSet;
+    u32 i;
+    u32 flagsSet;
 
     for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i++)
     {
@@ -6563,8 +6563,8 @@ static u8 SecretBaseSecrets_GetStateByFlagNumber(TVShow *show, u8 flagId)
 static void DoTVShowSecretBaseSecrets(void)
 {
     TVShow *show;
-    u8 state;
-    u8 numActions;
+    u32 state;
+    u32 numActions;
     u16 i;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
@@ -6685,7 +6685,7 @@ static void DoTVShowSecretBaseSecrets(void)
 static void DoTVShowSafariFanClub(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6756,7 +6756,7 @@ static void DoTVShowSafariFanClub(void)
 static void DoTVShowLilycoveContestLady(void)
 {
     TVShow *show;
-    u8 state;
+    u32 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;

@@ -42,11 +42,11 @@ enum {
 
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;
 
-static void Task_StaticCountdown(u8 taskId);
-static void Task_StaticCountdown_Init(u8 taskId);
-static void Task_StaticCountdown_Free(u8 taskId);
-static void Task_StaticCountdown_Start(u8 taskId);
-static void Task_StaticCountdown_Run(u8 taskId);
+static void Task_StaticCountdown(u32 taskId);
+static void Task_StaticCountdown_Init(u32 taskId);
+static void Task_StaticCountdown_Free(u32 taskId);
+static void Task_StaticCountdown_Start(u32 taskId);
+static void Task_StaticCountdown_Run(u32 taskId);
 
 static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
 static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_static.4bpp.lz");
@@ -158,9 +158,9 @@ static const TaskFunc sStaticCountdownFuncs[][4] =
 #define sId             data[4] // Never read
 #define sNumberSpriteId data[5] // Never read
 
-static u32 UNUSED CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
+static u32 UNUSED CreateStaticCountdownTask(u32 funcSetId, u32 taskPriority)
 {
-    u8 taskId = CreateTask(Task_StaticCountdown, taskPriority);
+    u32 taskId = CreateTask(Task_StaticCountdown, taskPriority);
     struct Task *task = &gTasks[taskId];
 
     task->tState = STATE_IDLE;
@@ -171,7 +171,7 @@ static u32 UNUSED CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
 
 static bool32 UNUSED StartStaticCountdown(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_StaticCountdown);
+    u32 taskId = FindTaskIdByFunc(Task_StaticCountdown);
     if (taskId == TASK_NONE)
         return FALSE;
 
@@ -184,7 +184,7 @@ static bool32 UNUSED IsStaticCountdownRunning(void)
     return FuncIsActiveTask(Task_StaticCountdown);
 }
 
-static void Task_StaticCountdown(u8 taskId)
+static void Task_StaticCountdown(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -205,9 +205,9 @@ static void Task_StaticCountdown(u8 taskId)
     }
 }
 
-static void StaticCountdown_CreateSprites(u8 taskId, s16 *data)
+static void StaticCountdown_CreateSprites(u32 taskId, s16 *data)
 {
-    u8 i;
+    u32 i;
     struct Sprite *sprite;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_321Start_Static[tSpriteSheetId]);
@@ -226,7 +226,7 @@ static void StaticCountdown_CreateSprites(u8 taskId, s16 *data)
     }
 }
 
-static void Task_StaticCountdown_Init(u8 taskId)
+static void Task_StaticCountdown_Init(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     tSpriteTemplateId = 0;
@@ -247,9 +247,9 @@ static void Task_StaticCountdown_Init(u8 taskId)
     gSprites[tSpriteIds(2)].x2 = 32;
 }
 
-static void Task_StaticCountdown_Free(u8 taskId)
+static void Task_StaticCountdown_Free(u32 taskId)
 {
-    u8 i = 0;
+    u32 i = 0;
     s16 *data = gTasks[taskId].data;
 
     for (i = 0; i < tNumSprites; i++)
@@ -296,7 +296,7 @@ static void SpriteCB_StaticCountdown(struct Sprite *sprite)
     sprite->sAnimNum++;
 }
 
-static void Task_StaticCountdown_Start(u8 taskId)
+static void Task_StaticCountdown_Start(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     PlaySE(SE_BALL_BOUNCE_1);
@@ -309,7 +309,7 @@ static void Task_StaticCountdown_Start(u8 taskId)
 // If the player is the link leader, increment a
 // separate timer and send it to group members for
 // them to read and use.
-static void Task_StaticCountdown_Run(u8 taskId)
+static void Task_StaticCountdown_Run(u32 taskId)
 {
     u16 packet[RFU_PACKET_SIZE];
     s16 *data = gTasks[taskId].data;
@@ -364,13 +364,13 @@ static void Task_StaticCountdown_Run(u8 taskId)
     the wireless minigames starts here
 */
 
-static void Task_MinigameCountdown(u8 taskId);
-static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId);
-static bool32 IsStartGraphicAnimRunning(u8 spriteId);
+static void Task_MinigameCountdown(u32 taskId);
+static bool32 RunMinigameCountdownDigitsAnim(u32 spriteId);
+static bool32 IsStartGraphicAnimRunning(u32 spriteId);
 static void Load321StartGfx(u16 tileTag, u16 palTag);
-static u8 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority);
-static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 *spriteId1, s16 *spriteId2);
-static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
+static u32 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority);
+static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2);
+static void InitStartGraphic(u32 spriteId1, u32 spriteId2, u32 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
 static const u16 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
@@ -386,9 +386,9 @@ static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 #define tSpriteId2   data[8]
 #define tSpriteId3   data[9]
 
-void StartMinigameCountdown(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
+void StartMinigameCountdown(u16 tilesTag, u16 palTag, s16 x, s16 y, u32 subpriority)
 {
-    u8 taskId = CreateTask(Task_MinigameCountdown, 80);
+    u32 taskId = CreateTask(Task_MinigameCountdown, 80);
     gTasks[taskId].tTilesTag = tilesTag;
     gTasks[taskId].tPalTag = palTag;
     gTasks[taskId].tX = x;
@@ -401,7 +401,7 @@ bool32 IsMinigameCountdownRunning(void)
     return FuncIsActiveTask(Task_MinigameCountdown);
 }
 
-static void Task_MinigameCountdown(u8 taskId)
+static void Task_MinigameCountdown(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -439,7 +439,7 @@ static void Task_MinigameCountdown(u8 taskId)
 #define sTimer   data[2]
 #define sAnimNum data[4]
 
-static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
+static bool32 RunMinigameCountdownDigitsAnim(u32 spriteId)
 {
     struct Sprite *sprite = &gSprites[spriteId];
 
@@ -525,7 +525,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 #undef sAnimNum
 
 // First argument is unused.
-static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
+static void InitStartGraphic(u32 spriteId1, u32 spriteId2, u32 spriteId3)
 {
     gSprites[spriteId2].y2 = -40;
     gSprites[spriteId3].y2 = -40;
@@ -535,7 +535,7 @@ static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
     gSprites[spriteId3].callback = SpriteCB_Start;
 }
 
-static bool32 IsStartGraphicAnimRunning(u8 spriteId)
+static bool32 IsStartGraphicAnimRunning(u32 spriteId)
 {
     return gSprites[spriteId].callback == SpriteCB_Start;
 }
@@ -724,7 +724,7 @@ static const union AffineAnimCmd *const sAffineAnimTable_Numbers[] =
     sAffineAnim_Numbers_Land     // Land after the jump
 };
 
-static u8 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority)
+static u32 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority)
 {
     struct SpriteTemplate spriteTemplate =
     {
@@ -739,7 +739,7 @@ static u8 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriori
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 *spriteId1, s16 *spriteId2)
+static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2)
 {
     struct SpriteTemplate spriteTemplate =
     {

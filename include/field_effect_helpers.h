@@ -19,7 +19,7 @@ void SetSurfBlob_DontSyncAnim(u8 spriteId, bool8 dontSync);
 void SetSurfBlob_PlayerOffset(u8 spriteId, bool8 hasOffset, s16 offset);
 bool8 UpdateRevealDisguise(struct ObjectEvent *);
 void StartRevealDisguise(struct ObjectEvent *);
-void StartAshFieldEffect(s16, s16, u16, s16);
+void StartAshFieldEffect(s16, s16, u32, s16);
 void SetUpReflection(struct ObjectEvent *, struct Sprite *, u8);
 void SetUpShadow(struct ObjectEvent *, struct Sprite *);
 u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent *);

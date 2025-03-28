@@ -41,15 +41,15 @@ struct EasyChatScreen
     /*0x13*/ u8 unused; // Set to 0, never read
     /*0x14*/ u8 quizTitle[32];
     /*0x34*/ const u8 *titleText;
-    /*0x38*/ u16 *savedPhrase;
-    /*0x3C*/ u16 currentPhrase[9];
+    /*0x38*/ u32 *savedPhrase;
+    /*0x3C*/ u32 currentPhrase[9];
 };
 
 struct EasyChatScreenControl
 {
-    u16 funcState;
-    u16 windowId;
-    u16 currentFuncId;
+    u32 funcState;
+    u32 windowId;
+    u32 currentFuncId;
     u8 curWindowAnimState;
     u8 destWindowAnimState;
     s8 windowAnimStateDir;
@@ -57,7 +57,7 @@ struct EasyChatScreenControl
     bool8 fourFooterOptions; // Never read (template is used directly instead)
     u8 phrasePrintBuffer[193];
     u8 wordSelectPrintBuffer[514];
-    u16 scrollOffset;
+    u32 scrollOffset;
     int scrollDest;
     int scrollSpeed;
     struct Sprite *mainCursorSprite;
@@ -70,8 +70,8 @@ struct EasyChatScreenControl
     struct Sprite *scrollIndicatorDownSprite;
     struct Sprite *startButtonSprite;
     struct Sprite *selectButtonSprite;
-    u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
-    u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
+    u32 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
+    u32 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
 struct EasyChatPhraseFrameDimensions
@@ -92,46 +92,46 @@ struct EasyChatWordInfo
 
 typedef union
 {
-    const u16 *valueList;
+    const u32 *valueList;
     const struct EasyChatWordInfo *words;
 } EasyChatGroupWordData;
 
 struct EasyChatGroup
 {
     EasyChatGroupWordData wordData;
-    u16 numWords;
-    u16 numEnabledWords;
+    u32 numWords;
+    u32 numEnabledWords;
 };
 
 struct EasyChatScreenWordData
 {
-    u16 numUnlockedGroups;
-    u16 unlockedGroupIds[EC_NUM_GROUPS];
-    u16 numUnlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS];
-    u16 unlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS][EC_MAX_WORDS_IN_GROUP];
+    u32 numUnlockedGroups;
+    u32 unlockedGroupIds[EC_NUM_GROUPS];
+    u32 numUnlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS];
+    u32 unlockedAlphabetWords[EC_NUM_ALPHABET_GROUPS][EC_MAX_WORDS_IN_GROUP];
     u8 unused[44];
-    u16 selectedGroupWords[EC_MAX_WORDS_IN_GROUP];
-    u16 numSelectedGroupWords;
+    u32 selectedGroupWords[EC_MAX_WORDS_IN_GROUP];
+    u32 numSelectedGroupWords;
 }; /*size = 0x3BA4*/
 
 struct EasyChatWordsByLetter
 {
-    const u16 *words;
+    const u32 *words;
     int numWords;
 };
 
 void InitEasyChatPhrases(void);
 void ShowEasyChatScreen(void);
-u8 *CopyEasyChatWord(u8 *dest, u16 word);
+u8 *CopyEasyChatWord(u8 *dest, u32 word);
 bool32 IsEasyChatAnswerUnlocked(int word);
-void InitializeEasyChatWordArray(u16 *words, u16 length);
-u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-bool8 IsBardWordInvalid(u16 word);
-u16 GetRandomEasyChatWordFromGroup(u16 group);
-u16 UnlockRandomTrendySaying(void);
-u16 EasyChat_GetNumWordsInGroup(u8);
-u16 GetRandomEasyChatWordFromUnlockedGroup(u16);
-void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
+void InitializeEasyChatWordArray(u32 *words, u32 length);
+u8 *ConvertEasyChatWordsToString(u8 *dest, const u32 *src, u32 columns, u32 rows);
+bool8 IsBardWordInvalid(u32 word);
+u32 GetRandomEasyChatWordFromGroup(u32 group);
+u32 UnlockRandomTrendySaying(void);
+u32 EasyChat_GetNumWordsInGroup(u8);
+u32 GetRandomEasyChatWordFromUnlockedGroup(u32);
+void DoEasyChatScreen(u8 type, u32 *words, MainCallback callback, u8 displayedPersonType);
 void InitQuestionnaireWords(void);
 void UnlockTrendySaying(u8 wordIndex);
 

@@ -39,7 +39,7 @@ struct Pokenav_RibbonsMonMenu
     u32 loopedTaskId;
     u16 winid;
     bool32 fromSummary;
-    u8 buff[BG_SCREEN_SIZE];
+    u32 buff[BG_SCREEN_SIZE];
 };
 
 static u32 HandleRibbonsMonListInput_WaitListInit(struct Pokenav_RibbonsMonList *);
@@ -63,7 +63,7 @@ static void DrawListIndexNumber(s32, s32, s32);
 static void AddRibbonsMonListWindow(struct Pokenav_RibbonsMonMenu *);
 static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *);
 static void CreateRibbonMonsList(void);
-static void BufferRibbonMonInfoText(struct PokenavListItem *, u8 *);
+static void BufferRibbonMonInfoText(struct PokenavListItem *, u32 *);
 
 static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
 {
@@ -120,9 +120,9 @@ static const struct WindowTemplate sRibbonsMonListWindowTemplate =
     .baseBlock = 20
 };
 
-static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
+static const u32 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_MonRibbonList(void)
 {
@@ -665,10 +665,10 @@ static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *menu)
 
 static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
 {
-    u8 strbuf[16];
+    u32 strbuf[16];
     u32 x;
 
-    u8 *ptr = strbuf;
+    u32 *ptr = strbuf;
     ptr = ConvertIntToDecimalStringN(ptr, index, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -695,12 +695,12 @@ static void CreateRibbonMonsList(void)
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 *dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u32 *dest)
 {
-    u8 gender;
-    u8 level;
-    u8 *s, *end;
-    const u8 *genderStr;
+    u32 gender;
+    u32 level;
+    u32 *s, *end;
+    const u32 *genderStr;
     struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
     u32 fontId;
 

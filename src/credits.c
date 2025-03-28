@@ -76,9 +76,9 @@ struct CreditsData
 
 struct CreditsEntry
 {
-    u8 unk; // Never read
+    u32 unk; // Never read
     bool8 isTitle;
-    const u8 *text;
+    const u32 *text;
 };
 
 static EWRAM_DATA u16 sSavedTaskId = 0;
@@ -89,35 +89,35 @@ static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
 static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
-static void Task_WaitPaletteFade(u8);
-static void Task_CreditsMain(u8);
-static void Task_ReadyBikeScene(u8);
-static void Task_SetBikeScene(u8);
-static void Task_LoadShowMons(u8);
-static void Task_ReadyShowMons(u8);
-static void Task_CreditsTheEnd1(u8);
-static void Task_CreditsTheEnd2(u8);
-static void Task_CreditsTheEnd3(u8);
-static void Task_CreditsTheEnd4(u8);
-static void Task_CreditsTheEnd5(u8);
-static void Task_CreditsTheEnd6(u8);
-static void Task_CreditsSoftReset(u8);
+static void Task_WaitPaletteFade(u32);
+static void Task_CreditsMain(u32);
+static void Task_ReadyBikeScene(u32);
+static void Task_SetBikeScene(u32);
+static void Task_LoadShowMons(u32);
+static void Task_ReadyShowMons(u32);
+static void Task_CreditsTheEnd1(u32);
+static void Task_CreditsTheEnd2(u32);
+static void Task_CreditsTheEnd3(u32);
+static void Task_CreditsTheEnd4(u32);
+static void Task_CreditsTheEnd5(u32);
+static void Task_CreditsTheEnd6(u32);
+static void Task_CreditsSoftReset(u32);
 static void ResetGpuAndVram(void);
-static void Task_UpdatePage(u8);
-static u8 CheckChangeScene(u8, u8);
-static void Task_ShowMons(u8);
-static void Task_CycleSceneryPalette(u8);
-static void Task_BikeScene(u8);
-static bool8 LoadBikeScene(u8 data, u8);
-static void ResetCreditsTasks(u8);
+static void Task_UpdatePage(u32);
+static u32 CheckChangeScene(u32, u32);
+static void Task_ShowMons(u32);
+static void Task_CycleSceneryPalette(u32);
+static void Task_BikeScene(u32);
+static bool8 LoadBikeScene(u32 data, u32);
+static void ResetCreditsTasks(u32);
 static void LoadTheEndScreen(u16, u16, u16);
 static void DrawTheEnd(u16, u16);
 static void SpriteCB_Player(struct Sprite *);
 static void SpriteCB_Rival(struct Sprite *);
-static u8 CreateCreditsMonSprite(u16, s16, s16, u16);
+static u32 CreateCreditsMonSprite(u16, s16, s16, u16);
 static void DeterminePokemonToShow(void);
 
-static const u8 sTheEnd_LetterMap_T[] =
+static const u32 sTheEnd_LetterMap_T[] =
 {
     0,    1, 0,
     0xFF, 1, 0xFF,
@@ -126,7 +126,7 @@ static const u8 sTheEnd_LetterMap_T[] =
     0xFF, 1, 0xFF,
 };
 
-static const u8 sTheEnd_LetterMap_H[] =
+static const u32 sTheEnd_LetterMap_H[] =
 {
     1, 0xFF, 1,
     1, 0xFF, 1,
@@ -135,7 +135,7 @@ static const u8 sTheEnd_LetterMap_H[] =
     1, 0xFF, 1,
 };
 
-static const u8 sTheEnd_LetterMap_E[] =
+static const u32 sTheEnd_LetterMap_E[] =
 {
     1, 0, 0,
     1, 0xFF, 0xFF,
@@ -144,7 +144,7 @@ static const u8 sTheEnd_LetterMap_E[] =
     1, 0x80, 0x80,
 };
 
-static const u8 sTheEnd_LetterMap_N[] =
+static const u32 sTheEnd_LetterMap_N[] =
 {
     1, 3, 1,
     1, 4, 1,
@@ -153,7 +153,7 @@ static const u8 sTheEnd_LetterMap_N[] =
     1, 0xC3, 1,
 };
 
-static const u8 sTheEnd_LetterMap_D[] =
+static const u32 sTheEnd_LetterMap_D[] =
 {
     1, 6, 7,
     1, 8, 9,
@@ -189,7 +189,7 @@ static const struct WindowTemplate sWindowTemplates[] =
     },
     DUMMY_WIN_TEMPLATE,
 };
-static const u8 sMonSpritePos[][2] =
+static const u32 sMonSpritePos[][2] =
 {
     {104, 36},
     {120, 36},
@@ -370,10 +370,10 @@ static void FreeCreditsBgsAndWindows(void)
         Free(ptr);
 }
 
-static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
+static void PrintCreditsText(const u32 *string, u32 y, bool8 isTitle)
 {
-    u8 x;
-    u8 color[3];
+    u32 x;
+    u32 color[3];
 
     color[0] = TEXT_COLOR_TRANSPARENT;
 
@@ -396,9 +396,9 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
 
 void CB2_StartCreditsSequence(void)
 {
-    u8 taskId;
+    u32 taskId;
     s16 bikeTaskId;
-    u8 pageTaskId;
+    u32 pageTaskId;
 
     ResetGpuAndVram();
     SetVBlankCallback(NULL);
@@ -446,13 +446,13 @@ void CB2_StartCreditsSequence(void)
     sSavedTaskId = taskId;
 }
 
-static void Task_WaitPaletteFade(u8 taskId)
+static void Task_WaitPaletteFade(u32 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_CreditsMain;
 }
 
-static void Task_CreditsMain(u8 taskId)
+static void Task_CreditsMain(u32 taskId)
 {
     u16 mode;
 
@@ -486,7 +486,7 @@ static void Task_CreditsMain(u8 taskId)
     }
 }
 
-static void Task_ReadyBikeScene(u8 taskId)
+static void Task_ReadyBikeScene(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -496,7 +496,7 @@ static void Task_ReadyBikeScene(u8 taskId)
     }
 }
 
-static void Task_SetBikeScene(u8 taskId)
+static void Task_SetBikeScene(u32 taskId)
 {
     SetVBlankCallback(NULL);
 
@@ -509,7 +509,7 @@ static void Task_SetBikeScene(u8 taskId)
     }
 }
 
-static void Task_ReadyShowMons(u8 taskId)
+static void Task_ReadyShowMons(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -521,7 +521,7 @@ static void Task_ReadyShowMons(u8 taskId)
 
 #define MONBG_OFFSET (MON_PIC_SIZE * 3)
 
-static void Task_LoadShowMons(u8 taskId)
+static void Task_LoadShowMons(u32 taskId)
 {
     switch (gMain.state)
     {
@@ -530,7 +530,7 @@ static void Task_LoadShowMons(u8 taskId)
     {
         s32 i;
         u16 *temp;
-        u8 *buffer = Alloc(MONBG_OFFSET + PLTT_SIZEOF(16));
+        u32 *buffer = Alloc(MONBG_OFFSET + PLTT_SIZEOF(16));
         struct SpriteSheet bgSheet = { buffer, MONBG_OFFSET, TAG_MON_BG };
         struct SpritePalette bgPalette = { (u16 *) &buffer[MONBG_OFFSET], TAG_MON_BG };
 
@@ -590,7 +590,7 @@ static void Task_LoadShowMons(u8 taskId)
     }
 }
 
-static void Task_CreditsTheEnd1(u8 taskId)
+static void Task_CreditsTheEnd1(u32 taskId)
 {
     if (gTasks[taskId].tTheEndDelay)
     {
@@ -602,7 +602,7 @@ static void Task_CreditsTheEnd1(u8 taskId)
     gTasks[taskId].func = Task_CreditsTheEnd2;
 }
 
-static void Task_CreditsTheEnd2(u8 taskId)
+static void Task_CreditsTheEnd2(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -613,7 +613,7 @@ static void Task_CreditsTheEnd2(u8 taskId)
 
 #define tDelay data[0]
 
-static void Task_CreditsTheEnd3(u8 taskId)
+static void Task_CreditsTheEnd3(u32 taskId)
 {
     ResetGpuAndVram();
     ResetPaletteFade();
@@ -636,7 +636,7 @@ static void Task_CreditsTheEnd3(u8 taskId)
     gTasks[taskId].func = Task_CreditsTheEnd4;
 }
 
-static void Task_CreditsTheEnd4(u8 taskId)
+static void Task_CreditsTheEnd4(u32 taskId)
 {
     if (gTasks[taskId].tDelay)
     {
@@ -648,7 +648,7 @@ static void Task_CreditsTheEnd4(u8 taskId)
     gTasks[taskId].func = Task_CreditsTheEnd5;
 }
 
-static void Task_CreditsTheEnd5(u8 taskId)
+static void Task_CreditsTheEnd5(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -660,7 +660,7 @@ static void Task_CreditsTheEnd5(u8 taskId)
     }
 }
 
-static void Task_CreditsTheEnd6(u8 taskId)
+static void Task_CreditsTheEnd6(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -684,7 +684,7 @@ static void Task_CreditsTheEnd6(u8 taskId)
 
 #undef tDelay
 
-static void Task_CreditsSoftReset(u8 taskId)
+static void Task_CreditsSoftReset(u32 taskId)
 {
     if (!gPaletteFade.active)
         SoftReset(RESET_ALL);
@@ -715,7 +715,7 @@ static void ResetGpuAndVram(void)
 #define tCurrentPage data[2]
 #define tDelay       data[3]
 
-static void Task_UpdatePage(u8 taskId)
+static void Task_UpdatePage(u32 taskId)
 {
     int i;
 
@@ -787,7 +787,7 @@ static void Task_UpdatePage(u8 taskId)
             return;
         }
 
-        if (CheckChangeScene((u8)gTasks[taskId].tCurrentPage, (u8)gTasks[taskId].tMainTaskId))
+        if (CheckChangeScene((u32)gTasks[taskId].tCurrentPage, (u32)gTasks[taskId].tMainTaskId))
         {
             gTasks[taskId].tState++;
             return;
@@ -820,7 +820,7 @@ static void Task_UpdatePage(u8 taskId)
 
 #define PAGE_INTERVAL (PAGE_COUNT / 9) // 9 scenes (5 bike scenes, 4 Pokémon interludes)
 
-static u8 CheckChangeScene(u8 page, u8 taskId)
+static u32 CheckChangeScene(u32 page, u32 taskId)
 {
     // Starts with bike + ocean + morning (SCENE_OCEAN_MORNING)
 
@@ -887,9 +887,9 @@ static u8 CheckChangeScene(u8 page, u8 taskId)
 
 #define tDelay data[3]
 
-static void Task_ShowMons(u8 taskId)
+static void Task_ShowMons(u32 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     switch (gTasks[taskId].tState)
     {
@@ -944,7 +944,7 @@ static void Task_ShowMons(u8 taskId)
 #define tDelay  data[4]
 #define tSinIdx data[5]
 
-static void Task_BikeScene(u8 taskId)
+static void Task_BikeScene(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -1031,7 +1031,7 @@ static void Task_BikeScene(u8 taskId)
 #define tTimer      data[1]
 #define tMainTaskId data[2]
 
-static void Task_CycleSceneryPalette(u8 taskId)
+static void Task_CycleSceneryPalette(u32 taskId)
 {
     s16 bikeTaskId;
 
@@ -1088,7 +1088,7 @@ static void Task_CycleSceneryPalette(u8 taskId)
     }
 }
 
-static void SetBikeScene(u8 scene, u8 taskId)
+static void SetBikeScene(u32 scene, u32 taskId)
 {
     switch (scene)
     {
@@ -1171,9 +1171,9 @@ static void SetBikeScene(u8 scene, u8 taskId)
 #undef tRival
 #undef tPlayer
 
-static bool8 LoadBikeScene(u8 scene, u8 taskId)
+static bool8 LoadBikeScene(u32 scene, u32 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     switch (gMain.state)
     {
@@ -1244,7 +1244,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
     return FALSE;
 }
 
-static void ResetCreditsTasks(u8 taskId)
+static void ResetCreditsTasks(u32 taskId)
 {
     // Destroy Task_BicycleBgAnimation, if running
     if (gTasks[taskId].tTaskId_BgScenery != 0)
@@ -1291,7 +1291,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
         ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
 }
 
-static u16 GetLetterMapTile(u8 baseTiles)
+static u16 GetLetterMapTile(u32 baseTiles)
 {
     u16 out = (baseTiles & 0x3F) + 80;
 
@@ -1306,9 +1306,9 @@ static u16 GetLetterMapTile(u8 baseTiles)
     return out;
 }
 
-static void DrawLetterMapTiles(const u8 baseTiles[], u8 baseX, u8 baseY, u16 offset, u16 palette)
+static void DrawLetterMapTiles(const u32 baseTiles[], u32 baseX, u32 baseY, u16 offset, u16 palette)
 {
-    u8 y, x;
+    u32 y, x;
     const u16 tileOffset = (palette / 16) << 12;
 
     for (y = 0; y < 5; y++)
@@ -1502,10 +1502,10 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
 
 #define sMonSpriteId data[0]
 
-static u8 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
+static u32 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
 {
-    u8 monSpriteId;
-    u8 bgSpriteId;
+    u32 monSpriteId;
+    u32 bgSpriteId;
 
     monSpriteId = CreateMonSpriteFromNationalDexNumber(nationalDexNum, x, y, position);
     gSprites[monSpriteId].oam.priority = 1;

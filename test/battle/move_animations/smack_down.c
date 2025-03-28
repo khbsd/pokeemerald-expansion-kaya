@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Move Animation Test: Smack Down works when used 15 times in a row")
 {
-    u16 j, nTurns = 15;
+    u32 j, nTurns = 15;
     FORCE_MOVE_ANIM(TRUE);
 
     GIVEN {

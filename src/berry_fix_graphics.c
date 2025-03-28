@@ -5,7 +5,7 @@
 static const struct {
     const u32 *gfx;
     const u32 *tilemap;
-    const u16 *pltt;
+    const u32 *pltt;
 } sBerryFixGraphics[] = {
     {
         gBerryFixGbaConnect_Gfx,

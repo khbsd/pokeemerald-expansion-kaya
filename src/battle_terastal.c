@@ -177,7 +177,7 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
     }
 }
 
-u16 GetTeraTypeRGB(u32 type)
+u32 GetTeraTypeRGB(u32 type)
 {
     return gTypesInfo[type].teraTypeRGBValue;
 }

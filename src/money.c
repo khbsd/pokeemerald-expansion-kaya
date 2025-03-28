@@ -11,8 +11,8 @@
 #include "decompress.h"
 #include "tv.h"
 
-EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
-EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
+EWRAM_DATA static u32 sMoneyBoxWindowId = 0;
+EWRAM_DATA static u32 sMoneyLabelSpriteId = 0;
 
 #define MONEY_LABEL_TAG 0x2722
 
@@ -129,7 +129,7 @@ void SubtractMoneyFromVar0x8005(void)
     RemoveMoney(&gSaveBlock1Ptr->money, gSpecialVar_0x8005);
 }
 
-void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
+void PrintMoneyAmountInMoneyBox(u32 windowId, int amount, u32 speed)
 {
     PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(amount), 1, amount, speed);
 }
@@ -140,9 +140,9 @@ static u32 CalculateLeadingSpacesForMoney(u32 numDigits)
     return (numDigits > 8) ? leadingSpaces : leadingSpaces - 2;
 }
 
-void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
+void PrintMoneyAmount(u32 windowId, u32 x, u32 y, int amount, u32 speed)
 {
-    u8 *txtPtr = gStringVar4;
+    u32 *txtPtr = gStringVar4;
     u32 numDigits = CountDigits(amount);
     u32 maxDigits = (numDigits > 6) ? MAX_MONEY_DIGITS: 6;
     u32 leadingSpaces;
@@ -161,7 +161,7 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
-void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
+void PrintMoneyAmountInMoneyBoxWithBorder(u32 windowId, u16 tileStart, u32 pallete, int amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, pallete);
     PrintMoneyAmountInMoneyBox(windowId, amount, 0);
@@ -177,7 +177,7 @@ u32 CalculateMoneyTextHorizontalPosition(u32 amount)
     return (CountDigits(amount) > 8) ? 34 : 26;
 }
 
-void DrawMoneyBox(int amount, u8 x, u8 y)
+void DrawMoneyBox(int amount, u32 x, u32 y)
 {
     struct WindowTemplate template;
 

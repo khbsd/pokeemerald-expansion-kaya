@@ -18,10 +18,10 @@
 struct EReaderTaskData
 {
     u16 timer;
-    u8 state;
-    u8 textState;
-    u8 status;
-    u8 *buffer;
+    u32 state;
+    u32 textState;
+    u32 status;
+    u32 *buffer;
 };
 
 struct EReaderData
@@ -31,12 +31,12 @@ struct EReaderData
     u32 *data;
 };
 
-static void Task_EReader(u8);
+static void Task_EReader(u32);
 
 COMMON_DATA struct EReaderData gEReaderData = {0};
 
-extern const u8 gMultiBootProgram_EReader_Start[];
-extern const u8 gMultiBootProgram_EReader_End[];
+extern const u32 gMultiBootProgram_EReader_Start[];
+extern const u32 gMultiBootProgram_EReader_End[];
 
 static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 {
@@ -71,9 +71,9 @@ enum {
     TRANSFER_TIMEOUT,
 };
 
-static u8 EReader_Transfer(struct EReaderData *eReader)
+static u32 EReader_Transfer(struct EReaderData *eReader)
 {
-    u8 transferStatus = TRANSFER_ACTIVE;
+    u32 transferStatus = TRANSFER_ACTIVE;
     eReader->status = EReaderHandleTransfer(TRUE, eReader->size, eReader->data, NULL);
 
     if ((eReader->status & EREADER_XFER_MASK) == 0 && eReader->status & EREADER_CHECKSUM_OK_MASK)
@@ -145,7 +145,7 @@ enum {
     RECV_TIMEOUT,
 };
 
-static u32 TryReceiveCard(u8 *state, u16 *timer)
+static u32 TryReceiveCard(u32 *state, u16 *timer)
 {
     if (*state >= RECV_STATE_EXCHANGE
      && *state <= RECV_STATE_WAIT_DISCONNECT
@@ -239,7 +239,7 @@ static u32 TryReceiveCard(u8 *state, u16 *timer)
 void CreateEReaderTask(void)
 {
     struct EReaderTaskData *data;
-    u8 taskId = CreateTask(Task_EReader, 0);
+    u32 taskId = CreateTask(Task_EReader, 0);
     data = (struct EReaderTaskData *)gTasks[taskId].data;
     data->state = 0;
     data->textState = 0;
@@ -296,7 +296,7 @@ enum {
     ER_STATE_END,
 };
 
-static void Task_EReader(u8 taskId)
+static void Task_EReader(u32 taskId)
 {
     struct EReaderTaskData *data = (struct EReaderTaskData *)gTasks[taskId].data;
     switch (data->state)

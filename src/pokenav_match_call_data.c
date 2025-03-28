@@ -27,66 +27,66 @@ enum
 // Static type declarations
 
 typedef struct MatchCallTextDataStruct {
-    const u8 *text;
+    const u32 *text;
     u16 flag;
     u16 flag2;
 } match_call_text_data_t;
 
 struct MatchCallStructCommon {
-    u8 type;
-    u8 mapSec;
+    u32 type;
+    u32 mapSec;
     u16 flag;
 };
 
 struct MatchCallStructNPC {
-    u8 type;
-    u8 mapSec;
+    u32 type;
+    u32 mapSec;
     u16 flag;
-    const u8 *desc;
-    const u8 *name;
+    const u32 *desc;
+    const u32 *name;
     const match_call_text_data_t *textData;
 };
 
 // Shared by MC_TYPE_TRAINER and MC_TYPE_LEADER
 struct MatchCallStructTrainer {
-    u8 type;
-    u8 mapSec;
+    u32 type;
+    u32 mapSec;
     u16 flag;
     u16 rematchTableIdx;
-    const u8 *desc;
-    const u8 *name;
+    const u32 *desc;
+    const u32 *name;
     const match_call_text_data_t *textData;
 };
 
 struct MatchCallLocationOverride {
     u16 flag;
-    u8 mapSec;
+    u32 mapSec;
 };
 
 struct MatchCallWally {
-    u8 type;
-    u8 mapSec;
+    u32 type;
+    u32 mapSec;
     u16 flag;
     u16 rematchTableIdx;
-    const u8 *desc;
+    const u32 *desc;
     const match_call_text_data_t *textData;
     const struct MatchCallLocationOverride *locationData;
 };
 
 struct MatchCallBirch {
-    u8 type;
-    u8 mapSec;
+    u32 type;
+    u32 mapSec;
     u16 flag;
-    const u8 *desc;
-    const u8 *name;
+    const u32 *desc;
+    const u32 *name;
 };
 
 struct MatchCallRival {
-    u8 type;
-    u8 playerGender;
+    u32 type;
+    u32 playerGender;
     u16 flag;
-    const u8 *desc;
-    const u8 *name;
+    const u32 *desc;
+    const u32 *name;
     const match_call_text_data_t *textData;
 };
 
@@ -104,7 +104,7 @@ struct MatchCallCheckPageOverride {
     u16 idx;
     u16 facilityClass;
     u32 flag;
-    const u8 *flavorTexts[CHECK_PAGE_ENTRY_COUNT];
+    const u32 *flavorTexts[CHECK_PAGE_ENTRY_COUNT];
 };
 
 // Static RAM declarations
@@ -117,11 +117,11 @@ static bool32 MatchCall_GetEnabled_Wally(match_call_t);
 static bool32 MatchCall_GetEnabled_Birch(match_call_t);
 static bool32 MatchCall_GetEnabled_Rival(match_call_t);
 
-static u8 MatchCall_GetMapSec_NPC(match_call_t);
-static u8 MatchCall_GetMapSec_Trainer(match_call_t);
-static u8 MatchCall_GetMapSec_Wally(match_call_t);
-static u8 MatchCall_GetMapSec_Birch(match_call_t);
-static u8 MatchCall_GetMapSec_Rival(match_call_t);
+static u32 MatchCall_GetMapSec_NPC(match_call_t);
+static u32 MatchCall_GetMapSec_Trainer(match_call_t);
+static u32 MatchCall_GetMapSec_Wally(match_call_t);
+static u32 MatchCall_GetMapSec_Birch(match_call_t);
+static u32 MatchCall_GetMapSec_Rival(match_call_t);
 
 static bool32 MatchCall_IsRematchable_NPC(match_call_t);
 static bool32 MatchCall_IsRematchable_Trainer(match_call_t);
@@ -141,21 +141,21 @@ static u32 MatchCall_GetRematchTableIdx_Wally(match_call_t);
 static u32 MatchCall_GetRematchTableIdx_Birch(match_call_t);
 static u32 MatchCall_GetRematchTableIdx_Rival(match_call_t);
 
-static void MatchCall_GetMessage_NPC(match_call_t, u8 *);
-static void MatchCall_GetMessage_Trainer(match_call_t, u8 *);
-static void MatchCall_GetMessage_Wally(match_call_t, u8 *);
-static void MatchCall_GetMessage_Birch(match_call_t, u8 *);
-static void MatchCall_GetMessage_Rival(match_call_t, u8 *);
+static void MatchCall_GetMessage_NPC(match_call_t, u32 *);
+static void MatchCall_GetMessage_Trainer(match_call_t, u32 *);
+static void MatchCall_GetMessage_Wally(match_call_t, u32 *);
+static void MatchCall_GetMessage_Birch(match_call_t, u32 *);
+static void MatchCall_GetMessage_Rival(match_call_t, u32 *);
 
-static void MatchCall_GetNameAndDesc_NPC(match_call_t, const u8 **, const u8 **);
-static void MatchCall_GetNameAndDesc_Trainer(match_call_t, const u8 **, const u8 **);
-static void MatchCall_GetNameAndDesc_Wally(match_call_t, const u8 **, const u8 **);
-static void MatchCall_GetNameAndDesc_Birch(match_call_t, const u8 **, const u8 **);
-static void MatchCall_GetNameAndDesc_Rival(match_call_t, const u8 **, const u8 **);
+static void MatchCall_GetNameAndDesc_NPC(match_call_t, const u32 **, const u32 **);
+static void MatchCall_GetNameAndDesc_Trainer(match_call_t, const u32 **, const u32 **);
+static void MatchCall_GetNameAndDesc_Wally(match_call_t, const u32 **, const u32 **);
+static void MatchCall_GetNameAndDesc_Birch(match_call_t, const u32 **, const u32 **);
+static void MatchCall_GetNameAndDesc_Rival(match_call_t, const u32 **, const u32 **);
 
-static void MatchCall_BufferCallMessageText(const match_call_text_data_t *, u8 *);
-static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *, u16, u8 *);
-static void MatchCall_GetNameAndDescByRematchIdx(u32, const u8 **, const u8 **);
+static void MatchCall_BufferCallMessageText(const match_call_text_data_t *, u32 *);
+static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *, u16, u32 *);
+static void MatchCall_GetNameAndDescByRematchIdx(u32, const u32 **, const u32 **);
 
 // .rodata
 
@@ -255,7 +255,7 @@ static const struct MatchCallStructNPC sStevenMatchCallHeader =
     .textData = sStevenTextScripts
 };
 
-static const u8 gText_MayBrendanMatchCallDesc[] = _("RAD NEIGHBOR");
+static const u32 gText_MayBrendanMatchCallDesc[] = _("RAD NEIGHBOR");
 
 static const match_call_text_data_t sMayTextScripts[] = {
     { MatchCall_Text_May1,  0xFFFF,                              0xFFFF },
@@ -499,7 +499,7 @@ static const struct MatchCallStructTrainer sJuanMatchCallHeader =
     .textData = sJuanTextScripts
 };
 
-static const u8 gText_EliteFourMatchCallDesc[] = _("ELITE FOUR");
+static const u32 gText_EliteFourMatchCallDesc[] = _("ELITE FOUR");
 
 static const match_call_text_data_t sSidneyTextScripts[] = {
     { MatchCall_Text_Sidney, 0xFFFF, 0xFFFF },
@@ -613,7 +613,7 @@ static bool32 (*const sMatchCallGetEnabledFuncs[])(match_call_t) = {
     MatchCall_GetEnabled_Birch
 };
 
-static u8 (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
+static u32 (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
     MatchCall_GetMapSec_NPC,
     MatchCall_GetMapSec_Trainer,
     MatchCall_GetMapSec_Wally,
@@ -645,7 +645,7 @@ static u32 (*const sMatchCall_GetRematchTableIdxFunctions[])(match_call_t) = {
     MatchCall_GetRematchTableIdx_Birch
 };
 
-static void (*const sMatchCall_GetMessageFunctions[])(match_call_t, u8 *) = {
+static void (*const sMatchCall_GetMessageFunctions[])(match_call_t, u32 *) = {
     MatchCall_GetMessage_NPC,
     MatchCall_GetMessage_Trainer,
     MatchCall_GetMessage_Wally,
@@ -653,7 +653,7 @@ static void (*const sMatchCall_GetMessageFunctions[])(match_call_t, u8 *) = {
     MatchCall_GetMessage_Birch
 };
 
-static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8 **, const u8 **) = {
+static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u32 **, const u32 **) = {
     MatchCall_GetNameAndDesc_NPC,
     MatchCall_GetNameAndDesc_Trainer,
     MatchCall_GetNameAndDesc_Wally,
@@ -661,18 +661,18 @@ static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8
     MatchCall_GetNameAndDesc_Birch
 };
 
-static const u8 gText_MatchCallSteven_Strategy[] = _("Attack the weak points!");
-static const u8 gText_MatchCallSteven_Pokemon[] = _("Ultimate STEEL POKéMON.");
+static const u32 gText_MatchCallSteven_Strategy[] = _("Attack the weak points!");
+static const u32 gText_MatchCallSteven_Pokemon[] = _("Ultimate STEEL POKéMON.");
 
-static const u8 gText_MatchCallBrendan_Strategy[] = _("Battle with knowledge!");
-static const u8 gText_MatchCallBrendan_Pokemon[] = _("I will use various POKéMON.");
-static const u8 gText_MatchCallBrendan_Intro1[] = _("I'll be a better POKéMON");
-static const u8 gText_MatchCallBrendan_Intro2[] = _("prof than my father is!");
+static const u32 gText_MatchCallBrendan_Strategy[] = _("Battle with knowledge!");
+static const u32 gText_MatchCallBrendan_Pokemon[] = _("I will use various POKéMON.");
+static const u32 gText_MatchCallBrendan_Intro1[] = _("I'll be a better POKéMON");
+static const u32 gText_MatchCallBrendan_Intro2[] = _("prof than my father is!");
 
-static const u8 gText_MatchCallMay_Strategy[] = _("I'm not so good at battles.");
-static const u8 gText_MatchCallMay_Pokemon[] = _("I'll use any POKéMON!");
-static const u8 gText_MatchCallMay_Intro1[] = _("My POKéMON and I help");
-static const u8 gText_MatchCallMay_Intro2[] = _("my father's research.");
+static const u32 gText_MatchCallMay_Strategy[] = _("I'm not so good at battles.");
+static const u32 gText_MatchCallMay_Pokemon[] = _("I'll use any POKéMON!");
+static const u32 gText_MatchCallMay_Intro1[] = _("My POKéMON and I help");
+static const u32 gText_MatchCallMay_Intro2[] = _("my father's research.");
 
 static const struct MatchCallCheckPageOverride sCheckPageOverrides[] = {
     {
@@ -796,7 +796,7 @@ static bool32 MatchCall_GetEnabled_Birch(match_call_t matchCall)
     return FlagGet(matchCall.birch->flag);
 }
 
-u8 MatchCall_GetMapSec(u32 idx)
+u32 MatchCall_GetMapSec(u32 idx)
 {
     match_call_t matchCall;
     u32 i;
@@ -808,17 +808,17 @@ u8 MatchCall_GetMapSec(u32 idx)
     return sMatchCallGetMapSecFuncs[i](matchCall);
 }
 
-static u8 MatchCall_GetMapSec_NPC(match_call_t matchCall)
+static u32 MatchCall_GetMapSec_NPC(match_call_t matchCall)
 {
     return matchCall.npc->mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Trainer(match_call_t matchCall)
+static u32 MatchCall_GetMapSec_Trainer(match_call_t matchCall)
 {
     return matchCall.trainer->mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
+static u32 MatchCall_GetMapSec_Wally(match_call_t matchCall)
 {
     s32 i;
 
@@ -830,12 +830,12 @@ static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
     return matchCall.wally->locationData[i].mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Rival(match_call_t matchCall)
+static u32 MatchCall_GetMapSec_Rival(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
 
-static u8 MatchCall_GetMapSec_Birch(match_call_t matchCall)
+static u32 MatchCall_GetMapSec_Birch(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
@@ -968,7 +968,7 @@ static u32 MatchCall_GetRematchTableIdx_Birch(match_call_t matchCall)
     return REMATCH_TABLE_ENTRIES;
 }
 
-void MatchCall_GetMessage(u32 idx, u8 *dest)
+void MatchCall_GetMessage(u32 idx, u32 *dest)
 {
     match_call_t matchCall;
     u32 i;
@@ -980,13 +980,13 @@ void MatchCall_GetMessage(u32 idx, u8 *dest)
     sMatchCall_GetMessageFunctions[i](matchCall, dest);
 }
 
-static void MatchCall_GetMessage_NPC(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_NPC(match_call_t matchCall, u32 *dest)
 {
     MatchCall_BufferCallMessageText(matchCall.npc->textData, dest);
 }
 
 // This is the one functional difference between MC_TYPE_TRAINER and MC_TYPE_LEADER
-static void MatchCall_GetMessage_Trainer(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Trainer(match_call_t matchCall, u32 *dest)
 {
     if (matchCall.common->type != MC_TYPE_LEADER)
         MatchCall_BufferCallMessageText(matchCall.trainer->textData, dest);
@@ -994,22 +994,22 @@ static void MatchCall_GetMessage_Trainer(match_call_t matchCall, u8 *dest)
         MatchCall_BufferCallMessageTextByRematchTeam(matchCall.leader->textData, matchCall.leader->rematchTableIdx, dest);
 }
 
-static void MatchCall_GetMessage_Wally(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Wally(match_call_t matchCall, u32 *dest)
 {
     MatchCall_BufferCallMessageText(matchCall.wally->textData, dest);
 }
 
-static void MatchCall_GetMessage_Rival(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Rival(match_call_t matchCall, u32 *dest)
 {
     MatchCall_BufferCallMessageText(matchCall.rival->textData, dest);
 }
 
-static void MatchCall_GetMessage_Birch(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Birch(match_call_t matchCall, u32 *dest)
 {
     BufferPokedexRatingForMatchCall(dest);
 }
 
-static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textData, u8 *dest)
+static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textData, u32 *dest)
 {
     u32 i;
     for (i = 0; textData[i].text != NULL; i++)
@@ -1027,7 +1027,7 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
     StringExpandPlaceholders(dest, textData[i].text);
 }
 
-static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx, u8 *dest)
+static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx, u32 *dest)
 {
 #if FREE_MATCH_CALL == FALSE
     u32 i;
@@ -1066,7 +1066,7 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
 #endif //FREE_MATCH_CALL
 }
 
-void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name)
+void MatchCall_GetNameAndDesc(u32 idx, const u32 **desc, const u32 **name)
 {
     match_call_t matchCall;
     u32 i;
@@ -1078,13 +1078,13 @@ void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name)
     sMatchCall_GetNameAndDescFunctions[i](matchCall, desc, name);
 }
 
-static void MatchCall_GetNameAndDesc_NPC(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_NPC(match_call_t matchCall, const u32 **desc, const u32 **name)
 {
     *desc = matchCall.npc->desc;
     *name = matchCall.npc->name;
 }
 
-static void MatchCall_GetNameAndDesc_Trainer(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Trainer(match_call_t matchCall, const u32 **desc, const u32 **name)
 {
     match_call_t _matchCall = matchCall;
     if (_matchCall.trainer->name == NULL)
@@ -1094,32 +1094,32 @@ static void MatchCall_GetNameAndDesc_Trainer(match_call_t matchCall, const u8 **
     *desc = _matchCall.trainer->desc;
 }
 
-static void MatchCall_GetNameAndDesc_Wally(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Wally(match_call_t matchCall, const u32 **desc, const u32 **name)
 {
     MatchCall_GetNameAndDescByRematchIdx(matchCall.wally->rematchTableIdx, desc, name);
     *desc = matchCall.wally->desc;
 }
 
-static void MatchCall_GetNameAndDesc_Rival(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Rival(match_call_t matchCall, const u32 **desc, const u32 **name)
 {
     *desc = matchCall.rival->desc;
     *name = matchCall.rival->name;
 }
 
-static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u32 **desc, const u32 **name)
 {
     *desc = matchCall.birch->desc;
     *name = matchCall.birch->name;
 }
 
-static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u32 **desc, const u32 **name)
 {
     const struct Trainer *trainer = GetTrainerStructFromId(GetTrainerIdxByRematchIdx(idx));
     *desc = gTrainerClasses[trainer->trainerClass].name;
     *name = trainer->trainerName;
 }
 
-const u8 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset)
+const u32 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset)
 {
     u32 i;
 

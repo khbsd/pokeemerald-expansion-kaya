@@ -2,7 +2,7 @@
 
 #define DOUBLE_SPECIES_NAME EC_EMPTY_WORD, 2,
 
-const u16 gEasyChatWordsByLetter_Others[] = {
+const u32 gEasyChatWordsByLetter_Others[] = {
     EC_WORD_EXCL,
     EC_WORD_EXCL_EXCL,
     EC_WORD_DASH,
@@ -15,7 +15,7 @@ const u16 gEasyChatWordsByLetter_Others[] = {
     EC_WORD_QUES_EXCL,
 };
 
-const u16 gEasyChatWordsByLetter_A[] = {
+const u32 gEasyChatWordsByLetter_A[] = {
     EC_WORD_A,
     EC_WORD_A_LITTLE,
     EC_WORD_A_LOT,
@@ -121,7 +121,7 @@ const u16 gEasyChatWordsByLetter_A[] = {
     EC_POKEMON(AZURILL),
 };
 
-const u16 gEasyChatWordsByLetter_B[] = {
+const u32 gEasyChatWordsByLetter_B[] = {
     EC_WORD_BABE,
     EC_WORD_BABY,
     EC_WORD_BACK,
@@ -209,7 +209,7 @@ const u16 gEasyChatWordsByLetter_B[] = {
     EC_WORD_BYE_BYE,
 };
 
-const u16 gEasyChatWordsByLetter_C[] = {
+const u32 gEasyChatWordsByLetter_C[] = {
     EC_POKEMON(CACNEA),
     EC_POKEMON(CACTURNE),
     EC_MOVE2(CALM_MIND),
@@ -328,7 +328,7 @@ const u16 gEasyChatWordsByLetter_C[] = {
     EC_POKEMON_NATIONAL(CYNDAQUIL),
 };
 
-const u16 gEasyChatWordsByLetter_D[] = {
+const u32 gEasyChatWordsByLetter_D[] = {
     EC_WORD_DAILY,
     EC_WORD_DAMP,
     EC_WORD_DANCE,
@@ -422,7 +422,7 @@ const u16 gEasyChatWordsByLetter_D[] = {
     EC_MOVE2(DYNAMIC_PUNCH),
 };
 
-const u16 gEasyChatWordsByLetter_E[] = {
+const u32 gEasyChatWordsByLetter_E[] = {
     EC_WORD_EARLIER,
     EC_WORD_EARLY_BIRD,
     EC_MOVE(EARTHQUAKE),
@@ -483,7 +483,7 @@ const u16 gEasyChatWordsByLetter_E[] = {
     EC_MOVE(EXTREME_SPEED),
 };
 
-const u16 gEasyChatWordsByLetter_F[] = {
+const u32 gEasyChatWordsByLetter_F[] = {
     EC_WORD_FABULOUS,
     EC_MOVE(FACADE),
     EC_WORD_FAINT,
@@ -566,7 +566,7 @@ const u16 gEasyChatWordsByLetter_F[] = {
     EC_MOVE2(FUTURE_SIGHT),
 };
 
-const u16 gEasyChatWordsByLetter_G[] = {
+const u32 gEasyChatWordsByLetter_G[] = {
     EC_WORD_GAME,
     EC_POKEMON(GARDEVOIR),
     EC_POKEMON_NATIONAL(GASTLY),
@@ -657,7 +657,7 @@ const u16 gEasyChatWordsByLetter_G[] = {
     EC_POKEMON_NATIONAL(GYARADOS),
 };
 
-const u16 gEasyChatWordsByLetter_H[] = {
+const u32 gEasyChatWordsByLetter_H[] = {
     EC_WORD_HABIT,
     EC_WORD_HAH,
     EC_WORD_HAHAHA,
@@ -759,7 +759,7 @@ const u16 gEasyChatWordsByLetter_H[] = {
     EC_MOVE(HYPNOSIS),
 };
 
-const u16 gEasyChatWordsByLetter_I[] = {
+const u32 gEasyChatWordsByLetter_I[] = {
     EC_WORD_I,
     EC_WORD_I_AM,
     EC_WORD_I_CHOOSE_YOU,
@@ -809,7 +809,7 @@ const u16 gEasyChatWordsByLetter_I[] = {
     EC_POKEMON_NATIONAL(IVYSAUR),
 };
 
-const u16 gEasyChatWordsByLetter_J[] = {
+const u32 gEasyChatWordsByLetter_J[] = {
     DOUBLE_SPECIES_NAME
     EC_POKEMON(JIGGLYPUFF),
     EC_POKEMON_NATIONAL(JIGGLYPUFF),
@@ -824,7 +824,7 @@ const u16 gEasyChatWordsByLetter_J[] = {
     EC_POKEMON_NATIONAL(JYNX),
 };
 
-const u16 gEasyChatWordsByLetter_K[] = {
+const u32 gEasyChatWordsByLetter_K[] = {
     EC_POKEMON_NATIONAL(KABUTO),
     EC_POKEMON_NATIONAL(KABUTOPS),
     DOUBLE_SPECIES_NAME
@@ -857,7 +857,7 @@ const u16 gEasyChatWordsByLetter_K[] = {
     EC_POKEMON(KYOGRE),
 };
 
-const u16 gEasyChatWordsByLetter_L[] = {
+const u32 gEasyChatWordsByLetter_L[] = {
     EC_WORD_LACKING,
     EC_WORD_LACKS,
     EC_WORD_LADY,
@@ -941,7 +941,7 @@ const u16 gEasyChatWordsByLetter_L[] = {
     EC_POKEMON(LUVDISC),
 };
 
-const u16 gEasyChatWordsByLetter_M[] = {
+const u32 gEasyChatWordsByLetter_M[] = {
     EC_MOVE2(MACH_PUNCH),
     DOUBLE_SPECIES_NAME
     EC_POKEMON(MACHAMP),
@@ -1077,7 +1077,7 @@ const u16 gEasyChatWordsByLetter_M[] = {
     EC_WORD_MYSTERY,
 };
 
-const u16 gEasyChatWordsByLetter_N[] = {
+const u32 gEasyChatWordsByLetter_N[] = {
     EC_WORD_NAME,
     EC_WORD_NAP,
     DOUBLE_SPECIES_NAME
@@ -1132,7 +1132,7 @@ const u16 gEasyChatWordsByLetter_N[] = {
     EC_POKEMON(NUZLEAF),
 };
 
-const u16 gEasyChatWordsByLetter_O[] = {
+const u32 gEasyChatWordsByLetter_O[] = {
     EC_WORD_OBLIVIOUS,
     EC_MOVE(OCTAZOOKA),
     EC_POKEMON_NATIONAL(OCTILLERY),
@@ -1178,7 +1178,7 @@ const u16 gEasyChatWordsByLetter_O[] = {
     EC_WORD_OWN_TEMPO,
 };
 
-const u16 gEasyChatWordsByLetter_P[] = {
+const u32 gEasyChatWordsByLetter_P[] = {
     EC_MOVE(PAIN_SPLIT),
     EC_POKEMON_NATIONAL(PARAS),
     EC_POKEMON_NATIONAL(PARASECT),
@@ -1277,7 +1277,7 @@ const u16 gEasyChatWordsByLetter_P[] = {
     EC_WORD_PUSHOVER,
 };
 
-const u16 gEasyChatWordsByLetter_Q[] = {
+const u32 gEasyChatWordsByLetter_Q[] = {
     EC_POKEMON_NATIONAL(QUAGSIRE),
     EC_WORD_QUESTION,
     EC_MOVE2(QUICK_ATTACK),
@@ -1286,7 +1286,7 @@ const u16 gEasyChatWordsByLetter_Q[] = {
     EC_POKEMON_NATIONAL(QWILFISH),
 };
 
-const u16 gEasyChatWordsByLetter_R[] = {
+const u32 gEasyChatWordsByLetter_R[] = {
     EC_WORD_RADIO,
     EC_MOVE(RAGE),
     DOUBLE_SPECIES_NAME
@@ -1366,7 +1366,7 @@ const u16 gEasyChatWordsByLetter_R[] = {
     EC_WORD_RUNS,
 };
 
-const u16 gEasyChatWordsByLetter_S[] = {
+const u32 gEasyChatWordsByLetter_S[] = {
     EC_POKEMON(SABLEYE),
     EC_MOVE(SACRED_FIRE),
     EC_WORD_SAD,
@@ -1623,7 +1623,7 @@ const u16 gEasyChatWordsByLetter_S[] = {
     EC_WORD_SYSTEM,
 };
 
-const u16 gEasyChatWordsByLetter_T[] = {
+const u32 gEasyChatWordsByLetter_T[] = {
     EC_MOVE2(TACKLE),
     EC_MOVE2(TAIL_GLOW),
     EC_MOVE(TAIL_WHIP),
@@ -1757,7 +1757,7 @@ const u16 gEasyChatWordsByLetter_T[] = {
     EC_POKEMON_NATIONAL(TYROGUE),
 };
 
-const u16 gEasyChatWordsByLetter_U[] = {
+const u32 gEasyChatWordsByLetter_U[] = {
     EC_WORD_UGLY,
     EC_WORD_UH_HUH,
     EC_WORD_UH_OH,
@@ -1784,7 +1784,7 @@ const u16 gEasyChatWordsByLetter_U[] = {
     EC_WORD_USING,
 };
 
-const u16 gEasyChatWordsByLetter_V[] = {
+const u32 gEasyChatWordsByLetter_V[] = {
     EC_WORD_VACATION,
     EC_POKEMON_NATIONAL(VAPOREON),
     EC_POKEMON_NATIONAL(VENOMOTH),
@@ -1817,7 +1817,7 @@ const u16 gEasyChatWordsByLetter_V[] = {
     EC_POKEMON_NATIONAL(VULPIX),
 };
 
-const u16 gEasyChatWordsByLetter_W[] = {
+const u32 gEasyChatWordsByLetter_W[] = {
     EC_WORD_WAAAH,
     EC_WORD_WAHAHAHA,
     EC_POKEMON(WAILMER),
@@ -1928,13 +1928,13 @@ const u16 gEasyChatWordsByLetter_W[] = {
     EC_POKEMON(WYNAUT),
 };
 
-const u16 gEasyChatWordsByLetter_X[] = {
+const u32 gEasyChatWordsByLetter_X[] = {
     DOUBLE_SPECIES_NAME
     EC_POKEMON(XATU),
     EC_POKEMON_NATIONAL(XATU),
 };
 
-const u16 gEasyChatWordsByLetter_Y[] = {
+const u32 gEasyChatWordsByLetter_Y[] = {
     EC_WORD_YAHOO,
     EC_POKEMON_NATIONAL(YANMA),
     EC_MOVE(YAWN),
@@ -1956,7 +1956,7 @@ const u16 gEasyChatWordsByLetter_Y[] = {
     EC_WORD_YUP,
 };
 
-const u16 gEasyChatWordsByLetter_Z[] = {
+const u32 gEasyChatWordsByLetter_Z[] = {
     EC_POKEMON(ZANGOOSE),
     EC_MOVE2(ZAP_CANNON),
     EC_POKEMON_NATIONAL(ZAPDOS),
@@ -1966,7 +1966,7 @@ const u16 gEasyChatWordsByLetter_Z[] = {
     EC_POKEMON_NATIONAL(ZUBAT),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseHi[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseHi[] = {
     EC_POKEMON_NATIONAL(CLEFFA),
     EC_WORD_AIYEEH,
     EC_POKEMON_NATIONAL(WEEDLE),
@@ -2020,7 +2020,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseHi[] = {
     EC_POKEMON(FEEBAS),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseFu[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseFu[] = {
     EC_WORD_FIGHT,
     EC_POKEMON_NATIONAL(MOLTRES),
     EC_WORD_FASHION,
@@ -2090,7 +2090,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseFu[] = {
     EC_MOVE2(ERUPTION),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseHe[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseHe[] = {
     EC_WORD_HEY,
     EC_POKEMON(CORPHISH),
     EC_WORD_BABY,
@@ -2122,7 +2122,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseHe[] = {
     EC_MOVE2(TRANSFORM),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseHo[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseHo[] = {
     EC_MOVE2(POISON_TAIL),
     EC_WORD_POINTS,
     EC_POKEMON_NATIONAL(HO_OH),
@@ -2180,7 +2180,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseHo[] = {
     EC_WORD_REALLY,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseMa[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseMa[] = {
     EC_WORD_OH_DEAR,
     EC_WORD_IN,
     EC_WORD_GIVE_UP,
@@ -2251,7 +2251,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseMa[] = {
     EC_POKEMON_NATIONAL(MANTINE),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseMi[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseMi[] = {
     EC_WORD_PARTNER,
     EC_MOVE2(SUBSTITUTE),
     EC_WORD_RIGHT,
@@ -2291,7 +2291,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseMi[] = {
     EC_WORD_WE_RE,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseMu[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseMu[] = {
     EC_WORD_MOOD,
     EC_POKEMON_NATIONAL(MISDREAVUS),
     EC_WORD_OLDEN,
@@ -2306,7 +2306,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseMu[] = {
     EC_WORD_MMM,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseMe[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseMe[] = {
     EC_MOVE2(CALM_MIND),
     EC_WORD_MAIL,
     EC_MOVE2(MEGA_DRAIN),
@@ -2334,7 +2334,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseMe[] = {
     EC_WORD_IMMUNITY,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseMo[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseMo[] = {
     EC_WORD_ALMOST,
     EC_WORD_BLAZE,
     EC_WORD_NEARLY,
@@ -2357,7 +2357,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseMo[] = {
     EC_POKEMON_NATIONAL(TANGELA),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseYa[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseYa[] = {
     EC_WORD_HOO_HAH,
     EC_WORD_PROMISE,
     EC_WORD_KIND,
@@ -2384,7 +2384,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseYa[] = {
     EC_POKEMON_NATIONAL(YANMA),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseYu[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseYu[] = {
     EC_POKEMON(SNORUNT),
     EC_WORD_TAKE,
     EC_WORD_UNION,
@@ -2399,7 +2399,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseYu[] = {
     EC_POKEMON(KADABRA),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseYo[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseYo[] = {
     EC_WORD_WITHOUT,
     EC_WORD_YO,
     EC_MOVE2(ACID),
@@ -2430,7 +2430,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseYo[] = {
     EC_WORD_WEAKENED,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseRa[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseRa[] = {
     EC_POKEMON_NATIONAL(RAIKOU),
     EC_WORD_WEEK,
     DOUBLE_SPECIES_NAME
@@ -2466,7 +2466,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseRa[] = {
     EC_POKEMON(LANTURN),
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseRi[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseRi[] = {
     EC_WORD_LEADER,
     EC_MOVE2(LEAF_BLADE),
     EC_POKEMON_NATIONAL(CHARMELEON),
@@ -2486,7 +2486,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseRi[] = {
     EC_WORD_SHIELD_DUST,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseRu[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseRu[] = {
     EC_POKEMON_NATIONAL(JYNX),
     EC_WORD_ROOM,
     EC_WORD_RULE,
@@ -2500,7 +2500,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseRu[] = {
     EC_WORD_HAPPILY,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseRe[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseRe[] = {
     DOUBLE_SPECIES_NAME
     EC_POKEMON_NATIONAL(MAGNETON),
     EC_POKEMON(MAGNETON),
@@ -2520,7 +2520,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseRe[] = {
     EC_WORD_RENTAL,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseRo[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseRo[] = {
     EC_MOVE2(SKULL_BASH),
     DOUBLE_SPECIES_NAME
     EC_POKEMON_NATIONAL(VULPIX),
@@ -2532,7 +2532,7 @@ const u16 gEasyChatWordsByLetter_UnusedJapaneseRo[] = {
     EC_WORD_QUESTION,
 };
 
-const u16 gEasyChatWordsByLetter_UnusedJapaneseWa[] = {
+const u32 gEasyChatWordsByLetter_UnusedJapaneseWa[] = {
     EC_WORD_YAY,
     EC_WORD_WORLD,
     EC_WORD_AWW,

@@ -34,7 +34,7 @@ EWRAM_DATA u8 gRecordsWindowId = 0;
 EWRAM_DATA static u8 *sTilemapBuffer = NULL;
 
 static const u32 sTrainerHillWindowTileset[] = INCBIN_U32("graphics/trainer_hill/records_window.4bpp");
-static const u16 sTrainerHillWindowPalette[] = INCBIN_U16("graphics/trainer_hill/records_window.gbapal");
+static const u32 sTrainerHillWindowPalette[] = INCBIN_u32("graphics/trainer_hill/records_window.gbapal");
 static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/trainer_hill/records_window.bin");
 
 static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
@@ -116,7 +116,7 @@ static s32 GetLinkBattleRecordTotalBattles(struct LinkBattleRecord *record)
     return record->wins + record->losses + record->draws;
 }
 
-static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u16 trainerId)
+static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u32 trainerId)
 {
     s32 i;
 
@@ -202,7 +202,7 @@ static void UpdateLinkBattleGameStats(s32 battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battlerId)
+static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u32 trainerId, s32 battleOutcome, u8 battlerId)
 {
     s32 index;
 
@@ -232,7 +232,7 @@ void ClearPlayerLinkBattleRecords(void)
 #if FREE_LINK_BATTLE_RECORDS == FALSE
 static void IncTrainerCardWins(s32 battlerId)
 {
-    u16 *wins = &gTrainerCards[battlerId].linkBattleWins;
+    u32 *wins = &gTrainerCards[battlerId].linkBattleWins;
     (*wins)++;
     if (*wins > 9999)
         *wins = 9999;
@@ -240,7 +240,7 @@ static void IncTrainerCardWins(s32 battlerId)
 
 static void IncTrainerCardLosses(s32 battlerId)
 {
-    u16 *losses = &gTrainerCards[battlerId].linkBattleLosses;
+    u32 *losses = &gTrainerCards[battlerId].linkBattleLosses;
     (*losses)++;
     if (*losses > 9999)
         *losses = 9999;

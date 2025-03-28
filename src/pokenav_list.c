@@ -12,12 +12,12 @@
 #define PALTAG_ARROW 20
 
 struct PokenavListMenuWindow {
-    u8 bg;
-    u8 fillValue;
-    u8 x;
-    u8 y;
-    u8 width;
-    u8 fontId;
+    u32 bg;
+    u32 fillValue;
+    u32 x;
+    u32 y;
+    u32 width;
+    u32 fontId;
     u16 tileOffset;
     u16 windowId;
     u16 unkA;
@@ -54,13 +54,13 @@ struct PokenavListSub
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
     struct Sprite *downArrow;
-    u8 itemTextBuffer[64];
+    u32 itemTextBuffer[64];
 };
 
 struct PokenavList
 {
     struct PokenavListSub sub;
-    u8 tilemapBuffer[BG_SCREEN_SIZE];
+    u32 tilemapBuffer[BG_SCREEN_SIZE];
     struct PokenavListWindowState windowState;
     s32 eraseIndex;
     u32 loopedTaskId;
@@ -96,9 +96,9 @@ static u32 LoopedTask_PrintCheckPageInfo(s32);
 static const u16 sListArrow_Pal[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
 static const u32 sListArrow_Gfx[] = INCBIN_U32("graphics/pokenav/list_arrows.4bpp.lz");
 
-static const u8 gText_PokenavMatchCall_Strategy[] = _("STRATEGY");
-static const u8 gText_PokenavMatchCall_TrainerPokemon[] = _("TRAINER'S POKéMON");
-static const u8 gText_PokenavMatchCall_SelfIntroduction[] = _("SELF-INTRODUCTION");
+static const u32 gText_PokenavMatchCall_Strategy[] = _("STRATEGY");
+static const u32 gText_PokenavMatchCall_TrainerPokemon[] = _("TRAINER'S POKéMON");
+static const u32 gText_PokenavMatchCall_SelfIntroduction[] = _("SELF-INTRODUCTION");
 
 static EWRAM_DATA u32 sMoveWindowDownIndex = 0; // Read, but pointlessly
 
@@ -669,7 +669,7 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
 
 static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset, s32 entries)
 {
-    u8 *tileData = (u8 *)GetWindowAttribute(listWindow->windowId, WINDOW_TILE_DATA);
+    u32 *tileData = (u32 *)GetWindowAttribute(listWindow->windowId, WINDOW_TILE_DATA);
     u32 width = listWindow->width * 64;
 
     offset = (listWindow->unkA + offset) & 0xF;
@@ -713,7 +713,7 @@ static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 d
 // Print the trainer's name and title at the top of their check page
 static void PrintCheckPageTrainerName(struct PokenavListWindowState *state, struct PokenavListSub *list)
 {
-    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_RED};
+    u32 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_RED};
 
     list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
     list->iconDrawFunc(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
@@ -735,12 +735,12 @@ static void PrintMatchCallListTrainerName(struct PokenavListWindowState *state, 
 
 static void PrintMatchCallFieldNames(struct PokenavListSub *list, u32 fieldId)
 {
-    const u8 *fieldNames[] = {
+    const u32 *fieldNames[] = {
         gText_PokenavMatchCall_Strategy,
         gText_PokenavMatchCall_TrainerPokemon,
         gText_PokenavMatchCall_SelfIntroduction
     };
-    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
+    u32 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
     u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.width, 16);
@@ -751,7 +751,7 @@ static void PrintMatchCallFieldNames(struct PokenavListSub *list, u32 fieldId)
 static void PrintMatchCallFlavorText(struct PokenavListWindowState *windowState, struct PokenavListSub *list, u32 checkPageEntry)
 {
     // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = {
+    static const u32 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = {
         [CHECK_PAGE_STRATEGY] = 2,
         [CHECK_PAGE_POKEMON]  = 4,
         [CHECK_PAGE_INTRO_1]  = 6,
@@ -759,7 +759,7 @@ static void PrintMatchCallFlavorText(struct PokenavListWindowState *windowState,
     };
 
     u32 r6 = (list->listWindow.unkA + lineOffsets[checkPageEntry]) & 0xF;
-    const u8 *str = GetMatchCallFlavorText(windowState->windowTopIndex, checkPageEntry);
+    const u32 *str = GetMatchCallFlavorText(windowState->windowTopIndex, checkPageEntry);
 
     if (str != NULL)
     {

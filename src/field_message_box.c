@@ -8,10 +8,10 @@
 #include "text_window.h"
 #include "script.h"
 
-static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
-EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
+static EWRAM_DATA u32 sFieldMessageBoxMode = 0;
+EWRAM_DATA u32 gWalkAwayFromSignpostTimer = 0;
 
-static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
+static void ExpandStringAndStartDrawFieldMessage(const u32 *, bool32);
 static void StartDrawFieldMessage(void);
 
 void InitFieldMessageBox(void)
@@ -25,7 +25,7 @@ void InitFieldMessageBox(void)
 
 #define tState data[0]
 
-static void Task_DrawFieldMessage(u8 taskId)
+static void Task_DrawFieldMessage(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -60,12 +60,12 @@ static void CreateTask_DrawFieldMessage(void)
 
 static void DestroyTask_DrawFieldMessage(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_DrawFieldMessage);
+    u32 taskId = FindTaskIdByFunc(Task_DrawFieldMessage);
     if (taskId != TASK_NONE)
         DestroyTask(taskId);
 }
 
-bool8 ShowFieldMessage(const u8 *str)
+bool8 ShowFieldMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -74,7 +74,7 @@ bool8 ShowFieldMessage(const u8 *str)
     return TRUE;
 }
 
-static void Task_HidePokenavMessageWhenDone(u8 taskId)
+static void Task_HidePokenavMessageWhenDone(u32 taskId)
 {
     if (!IsMatchCallTaskActive())
     {
@@ -83,7 +83,7 @@ static void Task_HidePokenavMessageWhenDone(u8 taskId)
     }
 }
 
-bool8 ShowPokenavFieldMessage(const u8 *str)
+bool8 ShowPokenavFieldMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -94,7 +94,7 @@ bool8 ShowPokenavFieldMessage(const u8 *str)
     return TRUE;
 }
 
-bool8 ShowFieldAutoScrollMessage(const u8 *str)
+bool8 ShowFieldAutoScrollMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -103,7 +103,7 @@ bool8 ShowFieldAutoScrollMessage(const u8 *str)
     return TRUE;
 }
 
-static bool8 UNUSED ForceShowFieldAutoScrollMessage(const u8 *str)
+static bool8 UNUSED ForceShowFieldAutoScrollMessage(const u32 *str)
 {
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_AUTO_SCROLL;
     ExpandStringAndStartDrawFieldMessage(str, TRUE);
@@ -121,7 +121,7 @@ bool8 ShowFieldMessageFromBuffer(void)
     return TRUE;
 }
 
-static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
+static void ExpandStringAndStartDrawFieldMessage(const u32 *str, bool32 allowSkippingDelayWithButtonPress)
 {
     StringExpandPlaceholders(gStringVar4, str);
     AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
@@ -141,7 +141,7 @@ void HideFieldMessageBox(void)
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 
-u8 GetFieldMessageBoxMode(void)
+u32 GetFieldMessageBoxMode(void)
 {
     return sFieldMessageBoxMode;
 }

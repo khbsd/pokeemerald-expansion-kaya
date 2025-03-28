@@ -12,21 +12,21 @@
 struct SpriteSheet
 {
     const void *data;  // Raw uncompressed pixel data
-    u16 size;
-    u16 tag;
+    u32 size;
+    u32 tag;
 };
 
 struct CompressedSpriteSheet
 {
     const u32 *data;  // LZ77 compressed pixel data
-    u16 size;        // Uncompressed size of pixel data
-    u16 tag;
+    u32 size;        // Uncompressed size of pixel data
+    u32 tag;
 };
 
 struct SpriteFrameImage
 {
     const void *data;
-    u16 size;
+    u32 size;
     bool8 relativeFrames;
 };
 
@@ -37,14 +37,14 @@ struct SpriteFrameImage
 
 struct SpritePalette
 {
-    const u16 *data;  // Raw uncompressed palette data
-    u16 tag;
+    const u32 *data;  // Raw uncompressed palette data
+    u32 tag;
 };
 
 struct CompressedSpritePalette
 {
     const u32 *data;  // LZ77 compressed palette data
-    u16 tag;
+    u32 tag;
 };
 
 struct AnimFrameCmd
@@ -107,13 +107,13 @@ struct AffineAnimLoopCmd
 struct AffineAnimJumpCmd
 {
     s16 type;
-    u16 target;
+    u32 target;
 };
 
 struct AffineAnimEndCmdAlt
 {
     s16 type;
-    u16 val;
+    u32 val;
 };
 
 union AffineAnimCmd
@@ -148,7 +148,7 @@ struct AffineAnimState
     u8 loopCounter;
     s16 xScale;
     s16 yScale;
-    u16 rotation;
+    u32 rotation;
 };
 
 enum
@@ -160,12 +160,12 @@ enum
 
 struct Subsprite
 {
-    s8 x; // was u16 in R/S
-    s8 y; // was u16 in R/S
-    u16 shape:2;
-    u16 size:2;
-    u16 tileOffset:10;
-    u16 priority:2;
+    s8 x; // was u32 in R/S
+    s8 y; // was u32 in R/S
+    u32 shape:2;
+    u32 size:2;
+    u32 tileOffset:10;
+    u32 priority:2;
 };
 
 struct SubspriteTable
@@ -180,8 +180,8 @@ typedef void (*SpriteCallback)(struct Sprite *);
 
 struct SpriteTemplate
 {
-    u16 tileTag;
-    u16 paletteTag;
+    u32 tileTag;
+    u32 paletteTag;
     const struct OamData *oam;
     const union AnimCmd *const *anims;
     const struct SpriteFrameImage *images;
@@ -218,28 +218,28 @@ struct Sprite
     // general purpose data fields
     /*0x2E*/ s16 data[8];
 
-    /*0x3E*/ u16 inUse:1;                   //1
-             u16 coordOffsetEnabled:1;      //2
-             u16 invisible:1;               //4
-             u16 flags_3:1;                 //8
+    /*0x3E*/ u32 inUse:1;                   //1
+             u32 coordOffsetEnabled:1;      //2
+             u32 invisible:1;               //4
+             u32 flags_3:1;                 //8
              // if nonzero, tile offset for usingSheet sprites
              // is (offset + 1) << sheetSpan;
              // (This allows using frame-based anim tables for sheet sprites)
-             u16 sheetSpan:3;
-             //  u16 flags_4:1;             //0x10
-             //  u16 flags_5:1;             //0x20
-             //  u16 flags_6:1;             //0x40
-             u16 flags_7:1;                 //0x80
-    /*0x3F*/ u16 hFlip:1;                   //1
-             u16 vFlip:1;                   //2
-             u16 animBeginning:1;           //4
-             u16 affineAnimBeginning:1;     //8
-             u16 animEnded:1;               //0x10
-             u16 affineAnimEnded:1;         //0x20
-             u16 usingSheet:1;              //0x40
-             u16 anchored:1;                //0x80
+             u32 sheetSpan:3;
+             //  u32 flags_4:1;             //0x10
+             //  u32 flags_5:1;             //0x20
+             //  u32 flags_6:1;             //0x40
+             u32 flags_7:1;                 //0x80
+    /*0x3F*/ u32 hFlip:1;                   //1
+             u32 vFlip:1;                   //2
+             u32 animBeginning:1;           //4
+             u32 affineAnimBeginning:1;     //8
+             u32 animEnded:1;               //0x10
+             u32 affineAnimEnded:1;         //0x20
+             u32 usingSheet:1;              //0x40
+             u32 anchored:1;                //0x80
 
-    /*0x40*/ u16 sheetTileStart;
+    /*0x40*/ u32 sheetTileStart;
 
     /*0x42*/ u8 subspriteTableNum:6;
              u8 subspriteMode:2;
@@ -263,7 +263,7 @@ extern const struct SpriteTemplate gDummySpriteTemplate;
 extern u8 gReservedSpritePaletteCount;
 extern struct Sprite gSprites[MAX_SPRITES + 1];
 extern u8 gOamLimit;
-extern u16 gReservedSpriteTileCount;
+extern u32 gReservedSpriteTileCount;
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 extern struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
@@ -279,11 +279,11 @@ u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, 
 void DestroySprite(struct Sprite *sprite);
 void ResetOamRange(u32 start, u32 end);
 void LoadOam(void);
-void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
+void SetOamMatrix(u8 matrixNum, u32 a, u32 b, u32 c, u32 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);
 void SpriteCallbackDummy(struct Sprite *sprite);
 void ProcessSpriteCopyRequests(void);
-void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size);
+void RequestSpriteCopy(const u8 *src, u8 *dest, u32 size);
 void FreeSpriteTiles(struct Sprite *sprite);
 void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);
@@ -301,38 +301,38 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite);
 u8 AllocOamMatrix(void);
 void FreeOamMatrix(u8 matrixNum);
 void InitSpriteAffineAnim(struct Sprite *sprite);
-void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotation);
-u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
-u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
+void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u32 rotation);
+u32 LoadSpriteSheet(const struct SpriteSheet *sheet);
+u32 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
-s16 AllocSpriteTiles(u16 tileCount);
-u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
+s16 AllocSpriteTiles(u32 tileCount);
+u32 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
 void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);
 void LoadTilesForSpriteSheets(struct SpriteSheet *sheets);
-void FreeSpriteTilesByTag(u16 tag);
+void FreeSpriteTilesByTag(u32 tag);
 void FreeSpriteTileRanges(void);
-u16 GetSpriteTileStartByTag(u16 tag);
-u16 GetSpriteTileTagByTileStart(u16 start);
+u32 GetSpriteTileStartByTag(u32 tag);
+u32 GetSpriteTileTagByTileStart(u32 start);
 void RequestSpriteSheetCopy(const struct SpriteSheet *sheet);
-u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
+u32 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
 void FreeAllSpritePalettes(void);
 u32 LoadSpritePalette(const struct SpritePalette *palette);
 void LoadSpritePalettes(const struct SpritePalette *palettes);
-u32 AllocSpritePalette(u16 tag);
-u32 IndexOfSpritePaletteTag(u16 tag);
-u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum);
-void FreeSpritePaletteByTag(u16 tag);
+u32 AllocSpritePalette(u32 tag);
+u32 IndexOfSpritePaletteTag(u32 tag);
+u32 GetSpritePaletteTagByPaletteNum(u8 paletteNum);
+void FreeSpritePaletteByTag(u32 tag);
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables);
 bool8 AddSpriteToOamBuffer(struct Sprite *object, u8 *oamIndex);
 bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex);
 void CopyToSprites(u8 *src);
 void CopyFromSprites(u8 *dest);
-u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
+u8 SpriteTileAllocBitmapOp(u32 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
 u32 GetSpanPerImage(u32 shape, u32 size);
-void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
+void RequestSpriteFrameImageCopy(u32 index, u32 tileNum, const struct SpriteFrameImage *images);
 void SetSpriteOamFlipBits(struct Sprite *sprite, u8 hFlip, u8 vFlip);
 
 #endif //GUARD_SPRITE_H

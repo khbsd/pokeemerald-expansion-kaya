@@ -1,12 +1,12 @@
 #include "global.h"
 #include "blit.h"
 
-void BlitBitmapRect4BitWithoutColorKey(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
+void BlitBitmapRect4BitWithoutColorKey(const struct Bitmap *src, struct Bitmap *dst, u32 srcX, u32 srcY, u32 dstX, u32 dstY, u32 width, u32 height)
 {
     BlitBitmapRect4Bit(src, dst, srcX, srcY, dstX, dstY, width, height, 0xFF);
 }
 
-void BlitBitmapRect4Bit(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey)
+void BlitBitmapRect4Bit(const struct Bitmap *src, struct Bitmap *dst, u32 srcX, u32 srcY, u32 dstX, u32 dstY, u32 width, u32 height, u8 colorKey)
 {
     s32 xEnd;
     s32 yEnd;
@@ -70,7 +70,7 @@ void BlitBitmapRect4Bit(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
     }
 }
 
-void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+void FillBitmapRect4Bit(struct Bitmap *surface, u32 x, u32 y, u32 width, u32 height, u8 fillValue)
 {
     s32 xEnd;
     s32 yEnd;
@@ -103,7 +103,7 @@ void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 hei
     }
 }
 
-void BlitBitmapRect4BitTo8Bit(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
+void BlitBitmapRect4BitTo8Bit(const struct Bitmap *src, struct Bitmap *dst, u32 srcX, u32 srcY, u32 dstX, u32 dstY, u32 width, u32 height, u8 colorKey, u8 paletteOffset)
 {
     s32 palOffsetBits;
     s32 xEnd;
@@ -181,7 +181,7 @@ void BlitBitmapRect4BitTo8Bit(const struct Bitmap *src, struct Bitmap *dst, u16 
     }
 }
 
-void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+void FillBitmapRect8Bit(struct Bitmap *surface, u32 x, u32 y, u32 width, u32 height, u8 fillValue)
 {
     s32 xEnd;
     s32 yEnd;

@@ -17,12 +17,12 @@ struct Fanfare
 };
 
 EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
-EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
+EWRAM_DATA u32 gPokemonCryBGMDuckingCounter = 0;
 
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
-static u8 sMapMusicState;
-static u8 sMapMusicFadeInSpeed;
+static u32 sMapMusicState;
+static u32 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
 COMMON_DATA bool8 gDisableMusic = 0;
@@ -30,7 +30,7 @@ COMMON_DATA bool8 gDisableMusic = 0;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
 
-static void Task_Fanfare(u8 taskId);
+static void Task_Fanfare(u32 taskId);
 static void CreateFanfareTask(void);
 static void RestoreBGMVolumeAfterPokemonCry(void);
 
@@ -131,7 +131,7 @@ void StopMapMusic(void)
     sMapMusicState = 1;
 }
 
-void FadeOutMapMusic(u8 speed)
+void FadeOutMapMusic(u32 speed)
 {
     if (IsNotWaitingForBGMStop())
         FadeOutBGM(speed);
@@ -140,7 +140,7 @@ void FadeOutMapMusic(u8 speed)
     sMapMusicState = 5;
 }
 
-void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed)
+void FadeOutAndPlayNewMapMusic(u16 songNum, u32 speed)
 {
     FadeOutMapMusic(speed);
     sCurrentMapMusic = 0;
@@ -148,7 +148,7 @@ void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed)
     sMapMusicState = 6;
 }
 
-void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
+void FadeOutAndFadeInNewMapMusic(u16 songNum, u32 fadeOutSpeed, u32 fadeInSpeed)
 {
     FadeOutMapMusic(fadeOutSpeed);
     sCurrentMapMusic = 0;
@@ -157,7 +157,7 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
+static void UNUSED FadeInNewMapMusic(u16 songNum, u32 speed)
 {
     FadeInNewBGM(songNum, speed);
     sCurrentMapMusic = songNum;
@@ -177,7 +177,7 @@ bool8 IsNotWaitingForBGMStop(void)
     return TRUE;
 }
 
-void PlayFanfareByFanfareNum(u8 fanfareNum)
+void PlayFanfareByFanfareNum(u32 fanfareNum)
 {
     u16 songNum;
     m4aMPlayStop(&gMPlayInfo_BGM);
@@ -205,7 +205,7 @@ bool8 WaitFanfare(bool8 stop)
 }
 
 // Unused
-void StopFanfareByFanfareNum(u8 fanfareNum)
+void StopFanfareByFanfareNum(u32 fanfareNum)
 {
     m4aSongNumStop(sFanfares[fanfareNum].songNum);
 }
@@ -236,7 +236,7 @@ bool8 IsFanfareTaskInactive(void)
     return TRUE;
 }
 
-static void Task_Fanfare(u8 taskId)
+static void Task_Fanfare(u32 taskId)
 {
     if (gTestRunnerHeadless)
     {
@@ -262,7 +262,7 @@ static void CreateFanfareTask(void)
         CreateTask(Task_Fanfare, 80);
 }
 
-void FadeInNewBGM(u16 songNum, u8 speed)
+void FadeInNewBGM(u16 songNum, u32 speed)
 {
     if (gDisableMusic)
         songNum = 0;
@@ -275,7 +275,7 @@ void FadeInNewBGM(u16 songNum, u8 speed)
     m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
 }
 
-void FadeOutBGMTemporarily(u8 speed)
+void FadeOutBGMTemporarily(u32 speed)
 {
     m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, speed);
 }
@@ -289,12 +289,12 @@ bool8 IsBGMPausedOrStopped(void)
     return FALSE;
 }
 
-void FadeInBGM(u8 speed)
+void FadeInBGM(u32 speed)
 {
     m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
 }
 
-void FadeOutBGM(u8 speed)
+void FadeOutBGM(u32 speed)
 {
     m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
 }
@@ -314,13 +314,13 @@ void PlayCry_Normal(u16 species, s8 pan)
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-void PlayCry_NormalNoDucking(u16 species, s8 pan, s8 volume, u8 priority)
+void PlayCry_NormalNoDucking(u16 species, s8 pan, s8 volume, u32 priority)
 {
     PlayCryInternal(species, pan, volume, priority, CRY_MODE_NORMAL);
 }
 
 // Assuming it's not CRY_MODE_DOUBLES, this is equivalent to PlayCry_Normal except it allows other modes.
-void PlayCry_ByMode(u16 species, s8 pan, u8 mode)
+void PlayCry_ByMode(u16 species, s8 pan, u32 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
@@ -336,7 +336,7 @@ void PlayCry_ByMode(u16 species, s8 pan, u8 mode)
 }
 
 // Used when releasing multiple Pokémon at once in battle.
-void PlayCry_ReleaseDouble(u16 species, s8 pan, u8 mode)
+void PlayCry_ReleaseDouble(u16 species, s8 pan, u32 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
@@ -351,7 +351,7 @@ void PlayCry_ReleaseDouble(u16 species, s8 pan, u8 mode)
 }
 
 // Duck the BGM but don't restore it. Not present in R/S
-void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode)
+void PlayCry_DuckNoRestore(u16 species, s8 pan, u32 mode)
 {
     if (mode == CRY_MODE_DOUBLES)
     {
@@ -365,7 +365,7 @@ void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode)
     }
 }
 
-void PlayCry_Script(u16 species, u8 mode)
+void PlayCry_Script(u16 species, u32 mode)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
     PlayCryInternal(species, 0, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
@@ -373,7 +373,7 @@ void PlayCry_Script(u16 species, u8 mode)
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
+void PlayCryInternal(u16 species, s8 pan, s8 volume, u32 priority, u32 mode)
 {
     bool32 reverse;
     u32 release;
@@ -520,7 +520,7 @@ bool8 IsCryPlaying(void)
         return FALSE;
 }
 
-void Task_DuckBGMForPokemonCry(u8 taskId)
+void Task_DuckBGMForPokemonCry(u32 taskId)
 {
     if (gPokemonCryBGMDuckingCounter)
     {

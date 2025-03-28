@@ -34,7 +34,7 @@ void MysteryGiftClient_Create(bool32 isWonderNews)
     sClient->isWonderNews = isWonderNews;
 }
 
-u32 MysteryGiftClient_Run(u16 * endVal)
+u32 MysteryGiftClient_Run(u32 * endVal)
 {
     u32 result;
     if (sClient == NULL)

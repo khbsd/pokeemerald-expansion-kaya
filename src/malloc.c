@@ -7,7 +7,7 @@
 static void *sHeapStart;
 static u32 sHeapSize;
 
-ALIGNED(4) EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
+ALIGNED(4) EWRAM_DATA u32 gHeap[HEAP_SIZE] = {0};
 
 void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
 {
@@ -113,7 +113,7 @@ void FreeInternal(void *heapStart, void *pointer)
     if (pointer)
     {
         struct MemBlock *head = (struct MemBlock *)heapStart;
-        struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
+        struct MemBlock *block = (struct MemBlock *)((u32 *)pointer - sizeof(struct MemBlock));
         block->allocated = FALSE;
 
         // If the freed block isn't the last one, merge with the next block
@@ -166,7 +166,7 @@ void *AllocZeroedInternal(void *heapStart, u32 size, const char *location)
 bool32 CheckMemBlockInternal(void *heapStart, void *pointer)
 {
     struct MemBlock *head = (struct MemBlock *)heapStart;
-    struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
+    struct MemBlock *block = (struct MemBlock *)((u32 *)pointer - sizeof(struct MemBlock));
 
     if (block->magic != MALLOC_SYSTEM_ID)
         return FALSE;

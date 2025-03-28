@@ -95,15 +95,15 @@ static const struct SignatureZMove sSignatureZMoves[] =
     {SPECIES_SNORLAX,                 ITEM_SNORLIUM_Z,           MOVE_GIGA_IMPACT,         MOVE_PULVERIZING_PANCAKE},
 };
 
-static const u8 sText_ResetStats[] = _("Reset Lowered Stats");
-static const u8 sText_StatsPlus[] = _("+ All Stats");
-static const u8 sText_StatsPlus2[] = _("++ All Stats");
-static const u8 sText_CritHitsPlus[] = _("+ Critical Hit Chance");
-static const u8 sText_FollowMe[] = _("Follow Me");
-static const u8 sText_RecoverHP[] = _("Recover HP");
-static const u8 sText_HealAllyHP[] = _("Heal Replacement HP");
-static const u8 sText_PowerColon[] = _("Power: ");
-static const u8 sText_NoAdditionalEffect[] = _("No Additional Effect");
+static const u32 sText_ResetStats[] = _("Reset Lowered Stats");
+static const u32 sText_StatsPlus[] = _("+ All Stats");
+static const u32 sText_StatsPlus2[] = _("++ All Stats");
+static const u32 sText_CritHitsPlus[] = _("+ Critical Hit Chance");
+static const u32 sText_FollowMe[] = _("Follow Me");
+static const u32 sText_RecoverHP[] = _("Recover HP");
+static const u32 sText_HealAllyHP[] = _("Heal Replacement HP");
+static const u32 sText_PowerColon[] = _("Power: ");
+static const u32 sText_NoAdditionalEffect[] = _("No Additional Effect");
 
 // Functions
 bool32 IsZMove(u32 move)
@@ -287,7 +287,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
             {
                 if (moveInfo->monTypes[0] == TYPE_GHOST || moveInfo->monTypes[1] == TYPE_GHOST || moveInfo->monTypes[2] == TYPE_GHOST)
                     zEffect = Z_EFFECT_RECOVER_HP;
-                else
+            u32  else
                     zEffect = Z_EFFECT_ATK_UP_1;
             }
 
@@ -397,7 +397,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
 
     if (GetMoveCategory(move) != DAMAGE_CATEGORY_STATUS)
     {
-        txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
+    u32  txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
     }
@@ -413,7 +413,7 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
     SetPpNumbersPaletteInMoveSelection(battler);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
-    ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    u32nvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
@@ -427,7 +427,7 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
     *(txtPtr)++ = EXT_CTRL_CODE_FONT;
     *(txtPtr)++ = FONT_NORMAL;
 
-    end = StringCopy(txtPtr, gTypesInfo[zMoveType].name);
+    u32d = StringCopy(txtPtr, gTypesInfo[zMoveType].name);
     PrependFontIdToFit(txtPtr, end, FONT_NORMAL, WindowWidthPx(B_WIN_MOVE_TYPE) - 25);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }

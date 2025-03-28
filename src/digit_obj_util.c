@@ -9,15 +9,15 @@
 struct DigitPrinter
 {
     bool8 isActive;
-    u8 firstOamId;
-    u8 strConvMode;
-    u8 oamCount;
-    u8 palTagIndex;
-    u8 size;
-    u8 shape;
-    u8 priority;
-    u8 xDelta;
-    u8 tilesPerImage;
+    u32 firstOamId;
+    u32 strConvMode;
+    u32 oamCount;
+    u32 palTagIndex;
+    u32 size;
+    u32 shape;
+    u32 priority;
+    u32 xDelta;
+    u32 tilesPerImage;
     u16 tileStart;
     s16 x;
     s16 y;
@@ -34,7 +34,7 @@ struct DigitPrinterAlloc
 };
 
 // this file's functions
-static u8 GetFirstOamId(u8 oamCount);
+static u32 GetFirstOamId(u32 oamCount);
 static void CopyWorkToOam(struct DigitPrinter *objWork);
 static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, s32 num, bool32 sign);
 static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool32 sign);
@@ -366,7 +366,7 @@ void DigitObjUtil_HideOrShow(u32 id, bool32 hide)
     }
 }
 
-static u8 GetFirstOamId(u8 oamCount)
+static u32 GetFirstOamId(u32 oamCount)
 {
     u32 i;
     u16 firstOamId = 64;
@@ -422,7 +422,7 @@ static bool32 SharesPalWithAnyActive(u32 id)
     return FALSE;
 }
 
-u8 GetTilesPerImage(u32 shape, u32 size)
+u32 GetTilesPerImage(u32 shape, u32 size)
 {
     return 1 << GetSpanPerImage(shape, size);
 }

@@ -27,11 +27,11 @@ enum {
 };
 
 struct RegionMap {
-    /*0x000*/ u16 mapSecId;
-    /*0x002*/ u8 mapSecType;
-    /*0x003*/ u8 posWithinMapSec;
-    /*0x004*/ u8 mapSecName[20];
-    /*0x018*/ u8 (*inputCallback)(void);
+    /*0x000*/ u32 mapSecId;
+    /*0x002*/ u32 mapSecType;
+    /*0x003*/ u32 posWithinMapSec;
+    /*0x004*/ u32 mapSecName[20];
+    /*0x018*/ u32 (*inputCallback)(void);
     /*0x01c*/ struct Sprite *cursorSprite;
     /*0x020*/ struct Sprite *playerIconSprite;
     /*0x024*/ s32 bg2x;
@@ -46,48 +46,48 @@ struct RegionMap {
     /*0x048*/ s32 unk_048;
     /*0x04c*/ s32 unk_04c;
     /*0x050*/ s32 unk_050;
-    /*0x054*/ u16 cursorPosX;
-    /*0x056*/ u16 cursorPosY;
-    /*0x058*/ u16 cursorTileTag;
-    /*0x05a*/ u16 cursorPaletteTag;
+    /*0x054*/ u32 cursorPosX;
+    /*0x056*/ u32 cursorPosY;
+    /*0x058*/ u32 cursorTileTag;
+    /*0x05a*/ u32 cursorPaletteTag;
     /*0x05c*/ s16 scrollX;
     /*0x05e*/ s16 scrollY;
     /*0x060*/ s16 unk_060;
     /*0x062*/ s16 unk_062;
-    /*0x064*/ u16 zoomedCursorPosX;
-    /*0x066*/ u16 zoomedCursorPosY;
+    /*0x064*/ u32 zoomedCursorPosX;
+    /*0x066*/ u32 zoomedCursorPosY;
     /*0x068*/ s16 zoomedCursorDeltaY;
     /*0x06a*/ s16 zoomedCursorDeltaX;
-    /*0x06c*/ u16 zoomedCursorMovementFrameCounter;
-    /*0x06e*/ u16 unk_06e;
-    /*0x070*/ u16 playerIconTileTag;
-    /*0x072*/ u16 playerIconPaletteTag;
-    /*0x074*/ u16 playerIconSpritePosX;
-    /*0x076*/ u16 playerIconSpritePosY;
+    /*0x06c*/ u32 zoomedCursorMovementFrameCounter;
+    /*0x06e*/ u32 unk_06e;
+    /*0x070*/ u32 playerIconTileTag;
+    /*0x072*/ u32 playerIconPaletteTag;
+    /*0x074*/ u32 playerIconSpritePosX;
+    /*0x076*/ u32 playerIconSpritePosY;
     /*0x078*/ bool8 zoomed;
-    /*0x079*/ u8 initStep;
+    /*0x079*/ u32 initStep;
     /*0x07a*/ s8 cursorMovementFrameCounter;
     /*0x07b*/ s8 cursorDeltaX;
     /*0x07c*/ s8 cursorDeltaY;
     /*0x07d*/ bool8 needUpdateVideoRegs;
     /*0x07e*/ bool8 blinkPlayerIcon;
     /*0x07f*/ bool8 playerIsInCave;
-    /*0x080*/ u8 bgNum;
-    /*0x081*/ u8 charBaseIdx;
-    /*0x082*/ u8 mapBaseIdx;
+    /*0x080*/ u32 bgNum;
+    /*0x081*/ u32 charBaseIdx;
+    /*0x082*/ u32 mapBaseIdx;
     /*0x083*/ bool8 bgManaged;
-    /*0x084*/ u8 filler_084[0x100];
-    /*0x184*/ u8 cursorSmallImage[0x100];
-    /*0x284*/ u8 cursorLargeImage[0x600];
+    /*0x084*/ u32 filler_084[0x100];
+    /*0x184*/ u32 cursorSmallImage[0x100];
+    /*0x284*/ u32 cursorLargeImage[0x600];
 }; // size = 0x884
 
 struct RegionMapLocation
 {
-    u8 x;
-    u8 y;
-    u8 width;
-    u8 height;
-    const u8 *name;
+    u32 x;
+    u32 y;
+    u32 width;
+    u32 height;
+    const u32 *name;
 };
 
 // Exported RAM declarations
@@ -96,24 +96,24 @@ struct RegionMapLocation
 void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool8 zoomed);
 bool8 LoadRegionMapGfx(void);
 void UpdateRegionMapVideoRegs(void);
-void InitRegionMap(struct RegionMap *regionMap, u8 argument);
-u8 DoRegionMapInputCallback(void);
+void InitRegionMap(struct RegionMap *regionMap, u32 argument);
+u32 DoRegionMapInputCallback(void);
 bool8 UpdateRegionMapZoom(void);
 void FreeRegionMapIconResources(void);
-u16 GetRegionMapSecIdAt(u16 x, u16 y);
-void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag);
-void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
-bool32 IsEventIslandMapSecId(u8 mapSecId);
-u8 *GetMapName(u8 *, u16, u16);
-u8 *GetMapNameGeneric(u8 *dest, u16 mapSecId);
-u8 *GetMapNameHandleAquaHideout(u8 *dest, u16 mapSecId);
-u16 CorrectSpecialMapSecId(u16 mapSecId);
+u32 GetRegionMapSecIdAt(u32 x, u32 y);
+void CreateRegionMapPlayerIcon(u32 tileTag, u32 paletteTag);
+void CreateRegionMapCursor(u32 tileTag, u32 paletteTag);
+bool32 IsEventIslandMapSecId(u32 mapSecId);
+u32 *GetMapName(u32 *, u32, u32);
+u32 *GetMapNameGeneric(u32 *dest, u32 mapSecId);
+u32 *GetMapNameHandleAquaHideout(u32 *dest, u32 mapSecId);
+u32 CorrectSpecialMapSecId(u32 mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
 bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
-void BlendRegionMap(u16 color, u32 coeff);
+void BlendRegionMap(u32 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 
 //Pokenav Fly funcs

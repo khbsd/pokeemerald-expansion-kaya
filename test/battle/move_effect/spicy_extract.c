@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Spicy Extract raises target's Attack by 2 stages and lowers 
 
 SINGLE_BATTLE_TEST("Spicy Extract is prevented by target's ability if it's Attack stat is maxed out")
 {
-    u16 ability;
+    u32 ability;
 
     PARAMETRIZE { ability = ABILITY_CLEAR_BODY; }
     PARAMETRIZE { ability = ABILITY_LIGHT_METAL; }

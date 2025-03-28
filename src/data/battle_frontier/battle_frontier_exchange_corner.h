@@ -1,4 +1,4 @@
-static const u16 sFrontierExchangeCorner_Decor1[] =
+static const u32 sFrontierExchangeCorner_Decor1[] =
 {
     DECOR_KISS_POSTER,
     DECOR_KISS_CUSHION,
@@ -13,7 +13,7 @@ static const u16 sFrontierExchangeCorner_Decor1[] =
     ITEM_LIST_END
 };
 
-static const u16 sFrontierExchangeCorner_Decor2[] =
+static const u32 sFrontierExchangeCorner_Decor2[] =
 {
     DECOR_LAPRAS_DOLL,
     DECOR_SNORLAX_DOLL,
@@ -23,7 +23,7 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     ITEM_LIST_END
 };
 
-static const u16 sFrontierExchangeCorner_Vitamins[] =
+static const u32 sFrontierExchangeCorner_Vitamins[] =
 {
     ITEM_PROTEIN,
     ITEM_CALCIUM,
@@ -34,7 +34,7 @@ static const u16 sFrontierExchangeCorner_Vitamins[] =
     ITEM_LIST_END
 };
 
-static const u16 sFrontierExchangeCorner_HoldItems[] =
+static const u32 sFrontierExchangeCorner_HoldItems[] =
 {
     ITEM_LEFTOVERS,
     ITEM_WHITE_HERB,

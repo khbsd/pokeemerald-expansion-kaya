@@ -14,7 +14,7 @@
 extern u8 gInGameOpponentsNo;
 
 void DoBerryBlending(void);
-u16 GetBlenderArrowPosition(void);
+u32 GetBlenderArrowPosition(void);
 void ShowBerryBlenderRecordWindow(void);
 
 #endif // GUARD_BERRY_BLENDER_H

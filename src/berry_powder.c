@@ -13,7 +13,7 @@
 
 #define MAX_BERRY_POWDER 99999
 
-static EWRAM_DATA u8 sBerryPowderVendorWindowId = 0;
+static EWRAM_DATA u32 sBerryPowderVendorWindowId = 0;
 
 static const struct BgTemplate UNUSED sBerryPowderBgTemplates[] =
 {
@@ -201,13 +201,13 @@ u32 GetBerryPowder(void)
     return DecryptBerryPowder(powder);
 }
 
-static void PrintBerryPowderAmount(u8 windowId, int amount, u8 x, u8 y, u8 speed)
+static void PrintBerryPowderAmount(u32 windowId, int amount, u32 x, u32 y, u32 speed)
 {
     ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_RIGHT_ALIGN, 5);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, y, speed, NULL);
 }
 
-static void DrawPlayerPowderAmount(u8 windowId, u16 baseTileOffset, u8 paletteNum, u32 amount)
+static void DrawPlayerPowderAmount(u32 windowId, u16 baseTileOffset, u32 paletteNum, u32 amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, baseTileOffset, paletteNum);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Powder, 0, 1, TEXT_SKIP_DRAW, NULL);

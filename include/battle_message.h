@@ -234,20 +234,20 @@
 
 struct BattleMsgData
 {
-    u16 currentMove;
-    u16 originallyUsedMove;
-    u16 lastItem;
-    u16 lastAbility;
+    u32 currentMove;
+    u32 originallyUsedMove;
+    u32 lastItem;
+    u32 lastAbility;
     u8 scrActive;
     u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
-    u16 abilities[MAX_BATTLERS_COUNT];
+    u32 abilities[MAX_BATTLERS_COUNT];
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
-void BufferStringBattle(u16 stringID, u32 battler);
+void BufferStringBattle(u32 stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
@@ -331,7 +331,7 @@ extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];
 extern const u8 gText_BattleTourney[];
 
-extern const u16 gMissStringIds[];
-extern const u16 gStatUpStringIds[];
+extern const u32 gMissStringIds[];
+extern const u32 gStatUpStringIds[];
 
 #endif // GUARD_BATTLE_MESSAGE_H

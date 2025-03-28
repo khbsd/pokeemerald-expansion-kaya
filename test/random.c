@@ -6,7 +6,7 @@
 // Therefore the maximum error is 8*3584, or 28672.
 #define SHUFFLE_TEST_IMPL \
     u32 i, j, error; \
-    u16 indexSum[8]; \
+    u32 indexSum[8]; \
     memset(indexSum, 0, sizeof(indexSum)); \
     for (i = 0; i < 1024; i++) \
     { \
@@ -27,7 +27,7 @@ TEST("Shuffle randomizes the array [Shuffle8]")
 
 TEST("Shuffle randomizes the array [Shuffle16]")
 {
-    u16 array[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
+    u32 array[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
     SHUFFLE_TEST_IMPL;
 }
 
@@ -108,7 +108,7 @@ TEST("RandomElement generates an element")
 TEST("RandomUniform generates uniform distribution")
 {
     u32 i, error;
-    u16 distribution[4];
+    u32 distribution[4];
 
     memset(distribution, 0, sizeof(distribution));
     for (i = 0; i < 4096; i++)
@@ -128,7 +128,7 @@ TEST("RandomUniform generates uniform distribution")
 TEST("RandomUniformExcept generates uniform distribution")
 {
     u32 i, error;
-    u16 distribution[4];
+    u32 distribution[4];
 
     memset(distribution, 0, sizeof(distribution));
     for (i = 0; i < 4096; i++)
@@ -152,7 +152,7 @@ TEST("RandomWeighted generates distribution in proportion to the weights")
 {
     u32 i, sum, error;
     static const u8 ws[4] = { 1, 2, 2, 3 };
-    u16 distribution[ARRAY_COUNT(ws)];
+    u32 distribution[ARRAY_COUNT(ws)];
 
     for (i = 0, sum = 0; i < ARRAY_COUNT(ws); i++)
         sum += ws[i];
@@ -178,7 +178,7 @@ TEST("RandomElement generates a uniform distribution")
 {
     u32 i, error;
     static const u8 es[4] = { 1, 2, 4, 8 };
-    u16 distribution[9];
+    u32 distribution[9];
 
     memset(distribution, 0, sizeof(distribution));
     for (i = 0; i < 4096; i++)

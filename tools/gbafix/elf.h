@@ -3055,7 +3055,7 @@ enum
 
 #define R_NIOS2_NONE		0
 #define R_NIOS2_S16		1
-#define R_NIOS2_U16		2
+#define R_NIOS2_u32		2
 #define R_NIOS2_PCREL16		3
 #define R_NIOS2_CALL26		4
 #define R_NIOS2_IMM5		5

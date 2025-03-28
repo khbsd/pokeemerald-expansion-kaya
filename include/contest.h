@@ -87,7 +87,7 @@ enum {
 
 struct ContestPokemon
 {
-    u16 species;
+    u32 species;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u8 trainerGfxId;
@@ -98,7 +98,7 @@ struct ContestPokemon
     u8 aiPool_Cute:1;
     u8 aiPool_Smart:1;
     u8 aiPool_Tough:1;
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
     u8 cool;
     u8 beauty;
     u8 cute;
@@ -116,16 +116,16 @@ struct ContestPokemon
 
 struct ContestTempSave
 {
-    u16 cachedWindowPalettes[16][16]; // Saved palette data before a move happens?
-    u16 cachedPlttBufferUnfaded[PLTT_BUFFER_SIZE];
-    u16 cachedPlttBufferFaded[PLTT_BUFFER_SIZE];
+    u32 cachedWindowPalettes[16][16]; // Saved palette data before a move happens?
+    u32 cachedPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+    u32 cachedPlttBufferFaded[PLTT_BUFFER_SIZE];
     u8 savedJunk[0x800];
 };
 
 struct ContestMoveAnimData
 {
-    u16 species;
-    u16 targetSpecies;
+    u32 species;
+    u32 targetSpecies;
     bool8 hasTargetAnim:1;
     u8 isShiny:1;
     u8 targetIsShiny:1;
@@ -162,7 +162,7 @@ struct Contest
     s8 applauseLevel;
     u8 prevTurnOrder[CONTESTANT_COUNT];
     u32 unusedRng;
-    u16 moveHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
+    u32 moveHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 excitementHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 applauseMeterSpriteId;
     u8 contestSetupState;
@@ -174,8 +174,8 @@ struct ContestantStatus
     s16 baseAppeal;
     s16 appeal;
     s16 pointTotal;
-    u16 currMove;
-    u16 prevMove;
+    u32 currMove;
+    u32 prevMove;
     u8 moveCategory;
     u8 ranking:2;
     u8 unused1:2;
@@ -231,7 +231,7 @@ struct ContestAppealMoveResults
 struct ContestAIInfo
 {
     /*0x00*/ u8 aiState;
-    /*0x02*/ u16 nextMove;
+    /*0x02*/ u32 nextMove;
     /*0x04*/ u8 nextMoveIndex;
     /*0x05*/ u8 moveScores[MAX_MON_MOVES];
     /*0x09*/ u8 aiAction;
@@ -272,7 +272,7 @@ struct ContestFinalStandings
 
 struct ContestTV
 {
-    u16 appeals[CONTEST_NUM_APPEALS];
+    u32 appeals[CONTEST_NUM_APPEALS];
     s16 move;
     u8 winnerFlags;
     u8 loserFlags;
@@ -324,8 +324,8 @@ extern u8 gContestPlayerMonIndex;
 extern u8 gContestantTurnOrder[CONTESTANT_COUNT];
 extern u8 gLinkContestFlags;
 extern u8 gContestLinkLeaderIndex;
-extern u16 gSpecialVar_ContestCategory;
-extern u16 gSpecialVar_ContestRank;
+extern u32 gSpecialVar_ContestCategory;
+extern u32 gSpecialVar_ContestRank;
 extern u8 gNumLinkContestPlayers;
 extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
@@ -343,7 +343,7 @@ void SetContestants(u8 contestType, u8 rank);
 void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
 void CalculateRound1Points(u8 contestCategory);
-bool8 IsSpeciesNotUnown(u16 species);
+bool8 IsSpeciesNotUnown(u32 species);
 bool8 Contest_IsMonsTurnDisabled(u8 contestant);
 void SaveLinkContestResults(void);
 void SortContestants(bool8 useRanking);
@@ -351,7 +351,7 @@ void SetContestantEffectStringID(u8 contestant, u8 effectStringId);
 void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
-s8 Contest_GetMoveExcitement(u16 move);
+s8 Contest_GetMoveExcitement(u32 move);
 bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);

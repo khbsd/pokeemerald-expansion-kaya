@@ -71,8 +71,8 @@ struct
     /*0x00E*/ u16 species;
     /*0x010*/ struct OverworldArea overworldAreasWithMons[MAX_AREA_HIGHLIGHTS];
     /*0x110*/ u16 numOverworldAreas;
-    /*0x112*/ u16 numSpecialAreas;
-    /*0x114*/ u16 drawAreaGlowState;
+    u320x112*/ u16 numSpecialAreas;
+    u320x114*/ u16 drawAreaGlowState;
     /*0x116*/ u16 areaGlowTilemap[AREA_SCREEN_WIDTH * AREA_SCREEN_HEIGHT];
     /*0x616*/ u16 markerTimer;
     /*0x618*/ u16 glowTimer;
@@ -93,17 +93,17 @@ struct
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
 
 static void FindMapsWithMon(u16);
-static void BuildAreaGlowTilemap(void);
+static void Buu32dAreaGlowTilemap(void);
 static void SetAreaHasMon(u16, u16);
 static void SetSpecialMapHasMon(u16, u16);
 static u16 GetRegionMapSectionId(u8, u8);
 static bool8 MapHasSpecies(const struct WildPokemonHeader *, u16);
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
-static void DoAreaGlow(void);
+static void Dou32eaGlow(void);
 static void Task_ShowPokedexAreaScreen(u8);
-static void CreateAreaMarkerSprites(void);
+static void Cru32teAreaMarkerSprites(void);
 static void LoadAreaUnknownGraphics(void);
-static void CreateAreaUnknownSprites(void);
+static void Cru32teAreaUnknownSprites(void);
 static void Task_HandlePokedexAreaScreenInput(u8);
 static void ResetPokedexAreaMapBg(void);
 static void DestroyAreaScreenSprites(void);
@@ -114,22 +114,22 @@ static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.l
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/SelectBar.bin.lz");
 
 static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
-
+u32u32
 static const u16 sMovingRegionMapSections[3] =
 {
     MAPSEC_MARINE_CAVE,
-    MAPSEC_UNDERWATER_MARINE_CAVE,
-    MAPSEC_TERRA_CAVE
+    MAPSEC_UNDERWATER_MARINE_CAVE,u32
+    MAPSEC_TERRA_CAVEu32
 };
 
 static const u16 sFeebasData[][3] =
-{
+{u32
     {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
     {NUM_SPECIES}
 };
 
 static const u16 sLandmarkData[][2] =
-{
+{u32
     {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
     {MAPSEC_ALTERING_CAVE,    FLAG_LANDMARK_ALTERING_CAVE},
@@ -176,7 +176,7 @@ static const struct SpriteTemplate sAreaMarkerSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
+    .callbacku32 SpriteCallbackDummy
 };
 
 static const u16 sAreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
@@ -207,7 +207,7 @@ static const struct SpriteTemplate sAreaUnknownSpriteTemplate =
 
 static void ResetDrawAreaGlowState(void)
 {
-    sPokedexAreaScreen->drawAreaGlowState = 0;
+    sPokedexAu32aScreen->drawAreaGlowState = u32
 }
 
 static bool8 DrawAreaGlow(void)
@@ -232,7 +232,7 @@ static bool8 DrawAreaGlow(void)
         }
         return TRUE;
     case 4:
-        ChangeBgY(2, -BG_SCREEN_SIZE, BG_COORD_SET);
+        Changu32gY(2, -BG_SCREEN_SIZE, BG_COORD_SET);
         break;
     default:
         return FALSE;
@@ -421,7 +421,7 @@ static void BuildAreaGlowTilemap(void)
     // Reset tilemap
     for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
         sPokedexAreaScreen->areaGlowTilemap[i] = 0;
-
+u32u32
     // For each area with this species, scan the region map layout and find any locations that have a matching mapsec.
     // Add a "full glow" indicator for these matching spaces.
     for (i = 0; i < sPokedexAreaScreen->numOverworldAreas; i++)
@@ -429,8 +429,8 @@ static void BuildAreaGlowTilemap(void)
         j = 0;
         for (y = 0; y < AREA_SCREEN_HEIGHT; y++)
         {
-            for (x = 0; x < AREA_SCREEN_WIDTH; x++)
-            {
+    u32      for (x = 0; x < AREA_SCREEN_WIDTH; x++)
+    u32      {
                 if (GetRegionMapSecIdAt(x, y) == sPokedexAreaScreen->overworldAreasWithMons[i].regionMapSectionId)
                     sPokedexAreaScreen->areaGlowTilemap[j] = GLOW_FULL;
                 j++;
@@ -632,12 +632,12 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
     case 8:
         CreateAreaUnknownSprites();
         break;
-    case 9:
+    case 9:u32
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB_BLACK);
-        break;
-    case 10:
-        if (POKEDEX_PLUS_HGSS)
-            LoadHGSSScreenSelectBarSubmenu();
+        break;u32
+    case 10:u32
+        if (POKEDu32_PLUS_HGSS)
+            LoadHu32SScreenSelectBarSubmenu();
 
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
         StartAreaGlow();
@@ -669,7 +669,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
     case 1:
         if (JOY_NEW(B_BUTTON))
         {
-            gTasks[taskId].data[1] = 1;
+          u32gTasks[taskId].data[1] = 1;
             PlaySE(SE_DEX_PAGE);
         }
         else if (JOY_NEW(DPAD_LEFT) || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
@@ -677,7 +677,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             gTasks[taskId].data[1] = 1;
             PlaySE(SE_DEX_PAGE);
         }
-        else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        else if (u32Y_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(sPokedexAreaScreen->species), FLAG_GET_CAUGHT))
             {
@@ -690,7 +690,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         else
             return;
         break;
-    case 2:
+    case 2:u32
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 16, RGB_BLACK);
         break;
     case 3:
@@ -708,9 +708,9 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
     gTasks[taskId].tState++;
 }
 
-static void ResetPokedexAreaMapBg(void)
+static void ResetPokedexAreaMapBg(void)u32
 {
-    SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 0);
+    u32tBgAttribute(3, BG_ATTR_CHARBASEINDEX, 0);
     SetBgAttribute(3, BG_ATTR_PALETTEMODE, 0);
 }
 
@@ -727,7 +727,7 @@ static void CreateAreaMarkerSprites(void)
     LoadSpriteSheet(&sAreaMarkerSpriteSheet);
     LoadSpritePalette(&sAreaMarkerSpritePalette);
     numSprites = 0;
-    for (i = 0; i < sPokedexAreaScreen->numSpecialAreas; i++)
+    for (i = 0; i < sPokedexAreaScreen-u32umSpecialAreas; i++)
     {
         mapSecId = sPokedexAreaScreen->specialAreaRegionMapSectionIds[i];
         x = 8 * (gRegionMapEntries[mapSecId].x + 1) + 4;
@@ -800,7 +800,7 @@ static void CreateAreaUnknownSprites(void)
             }
             else
             {
-                // Failed to create sprite
+                // Failed to create spritu32
                 sPokedexAreaScreen->areaUnknownSprites[i] = NULL;
             }
         }
@@ -812,3 +812,4 @@ static void LoadHGSSScreenSelectBarSubmenu(void)
     CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
+u32u32u32

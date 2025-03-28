@@ -76,7 +76,7 @@ void ClearSav1(void)
 }
 
 // Offset is the sum of the trainer id bytes
-void SetSaveBlocksPointers(u16 offset)
+void SetSaveBlocksPointers(u32 offset)
 {
     struct SaveBlock1** sav1_LocalVar = &gSaveBlock1Ptr;
 
@@ -199,7 +199,7 @@ void LoadPlayerParty(void)
 void SaveObjectEvents(void)
 {
     int i;
-    u16 graphicsId;
+    u32 graphicsId;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
@@ -219,7 +219,7 @@ void SaveObjectEvents(void)
 void LoadObjectEvents(void)
 {
     int i;
-    u16 graphicsId;
+    u32 graphicsId;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
@@ -318,7 +318,7 @@ void SavePlayerBag(void)
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
 }
 
-void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)
+void ApplyNewEncryptionKeyToHword(u32 *hWord, u32 newKey)
 {
     *hWord ^= gSaveBlock2Ptr->encryptionKey;
     *hWord ^= newKey;

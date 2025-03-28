@@ -3,13 +3,13 @@
 #include "dynamic_placeholder_text_util.h"
 #include "string_util.h"
 
-static EWRAM_DATA const u8 *sStringPointers[8] = {};
+static EWRAM_DATA const u32 *sStringPointers[8] = {};
 
 void DynamicPlaceholderTextUtil_Reset(void)
 {
-    const u8 **ptr;
-    u8 *fillval;
-    const u8 **ptr2;
+    const u32 **ptr;
+    u32 *fillval;
+    const u32 **ptr2;
 
     ptr = sStringPointers;
     fillval = NULL;
@@ -20,7 +20,7 @@ void DynamicPlaceholderTextUtil_Reset(void)
     } while ((int)ptr2 >= (int)ptr);
 }
 
-void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)
+void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u32 idx, const u32 *ptr)
 {
     if (idx < ARRAY_COUNT(sStringPointers))
     {
@@ -28,7 +28,7 @@ void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)
     }
 }
 
-u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
+u32 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u32 *dest, const u32 *src)
 {
     while (*src != EOS)
     {
@@ -50,7 +50,7 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
     return dest;
 }
 
-const u8 *DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 idx)
+const u32 *DynamicPlaceholderTextUtil_GetPlaceholderPtr(u32 idx)
 {
     return sStringPointers[idx];
 }

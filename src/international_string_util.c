@@ -9,22 +9,22 @@
 #include "window.h"
 
 
-int GetStringCenterAlignXOffset(int fontId, const u8 *str, int totalWidth)
+int GetStringCenterAlignXOffset(int fontId, const u32 *str, int totalWidth)
 {
     return GetStringCenterAlignXOffsetWithLetterSpacing(fontId, str, totalWidth, 0);
 }
 
-int GetStringRightAlignXOffset(int fontId, const u8 *str, int totalWidth)
+int GetStringRightAlignXOffset(int fontId, const u32 *str, int totalWidth)
 {
     return GetStringWidthDifference(fontId, str, totalWidth, 0);
 }
 
-int GetStringCenterAlignXOffsetWithLetterSpacing(int fontId, const u8 *str, int totalWidth, int letterSpacing)
+int GetStringCenterAlignXOffsetWithLetterSpacing(int fontId, const u32 *str, int totalWidth, int letterSpacing)
 {
     return GetStringWidthDifference(fontId, str, totalWidth, letterSpacing) / 2;
 }
 
-int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int letterSpacing)
+int GetStringWidthDifference(int fontId, const u32 *str, int totalWidth, int letterSpacing)
 {
     int stringWidth = GetStringWidth(fontId, str, letterSpacing);
     if (totalWidth > stringWidth)
@@ -47,7 +47,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
     return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, int numActions)
+int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u32 *actionIds, int numActions)
 {
     int i, maxWidth;
 
@@ -82,16 +82,16 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
     return finalWidth;
 }
 
-void CopyMonCategoryText(u16 species, u8 *dest)
+void CopyMonCategoryText(u16 species, u32 *dest)
 {
-    u8 *str = StringCopy(dest, GetSpeciesCategory(species));
+    u32 *str = StringCopy(dest, GetSpeciesCategory(species));
     *str = CHAR_SPACE;
     StringCopy(str + 1, gText_Pokemon);
 }
 
-u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWidth)
+u32 *GetStringClearToWidth(u32 *dest, int fontId, const u32 *str, int totalStringWidth)
 {
-    u8 *buffer;
+    u32 *buffer;
     int width;
     int clearWidth;
 
@@ -118,9 +118,9 @@ u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWi
     return buffer;
 }
 
-void PadNameString(u8 *dest, u8 padChar)
+void PadNameString(u32 *dest, u32 padChar)
 {
-    u8 length;
+    u32 length;
 
     StripExtCtrlCodes(dest);
     length = StringLength(dest);
@@ -145,7 +145,7 @@ void PadNameString(u8 *dest, u8 padChar)
     dest[length] = EOS;
 }
 
-void ConvertInternationalPlayerName(u8 *str)
+void ConvertInternationalPlayerName(u32 *str)
 {
     if (StringLength(str) < PLAYER_NAME_LENGTH - 1)
         ConvertInternationalString(str, LANGUAGE_JAPANESE);
@@ -153,9 +153,9 @@ void ConvertInternationalPlayerName(u8 *str)
         StripExtCtrlCodes(str);
 }
 
-void ConvertInternationalPlayerNameStripChar(u8 *str, u8 removeChar)
+void ConvertInternationalPlayerNameStripChar(u32 *str, u32 removeChar)
 {
-    u8 *buffer;
+    u32 *buffer;
     if (StringLength(str) < PLAYER_NAME_LENGTH - 1)
     {
         ConvertInternationalString(str, LANGUAGE_JAPANESE);
@@ -178,7 +178,7 @@ void ConvertInternationalPlayerNameStripChar(u8 *str, u8 removeChar)
     }
 }
 
-void ConvertInternationalContestantName(u8 *str)
+void ConvertInternationalContestantName(u32 *str)
 {
     if (*str++ == EXT_CTRL_CODE_BEGIN && *str++ == EXT_CTRL_CODE_JPN)
     {
@@ -196,14 +196,14 @@ void ConvertInternationalContestantName(u8 *str)
     }
 }
 
-void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
+void TVShowConvertInternationalString(u32 *dest, const u32 *src, int language)
 {
     StringCopy(dest, src);
     ConvertInternationalString(dest, language);
 }
 
 // It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
-int GetNicknameLanguage(u8 *str)
+int GetNicknameLanguage(u32 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
@@ -214,7 +214,7 @@ int GetNicknameLanguage(u8 *str)
 // Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.
 void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows)
 {
-    u8 *windowTileData;
+    u32 *windowTileData;
     int fillSize, windowRowSize, i;
     struct Window *window = &gWindows[windowId];
 

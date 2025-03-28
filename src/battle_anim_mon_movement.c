@@ -941,7 +941,7 @@ static void AnimTask_SwayMonStep(u8 taskId)
     s16 sineValue;
     u8 spriteId;
     int waveIndex;
-    u16 sineIndex;
+    u32 sineIndex;
 
     spriteId = gTasks[taskId].data[4];
     sineIndex = gTasks[taskId].data[10] + gTasks[taskId].data[2];

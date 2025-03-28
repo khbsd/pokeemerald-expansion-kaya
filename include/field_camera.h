@@ -12,13 +12,13 @@ struct CameraObject
 };
 
 extern struct CameraObject gFieldCamera;
-extern u16 gTotalCameraPixelOffsetX;
-extern u16 gTotalCameraPixelOffsetY;
+extern u32 gTotalCameraPixelOffsetX;
+extern u32 gTotalCameraPixelOffsetY;
 
 void DrawWholeMapView(void);
 void CurrentMapDrawMetatileAt(int x, int y);
 void GetCameraOffsetWithPan(s16 *x, s16 *y);
-void DrawDoorMetatileAt(int x, int y, u16 *arr);
+void DrawDoorMetatileAt(int x, int y, u32 *arr);
 void ResetFieldCamera(void);
 void ResetCameraUpdateInfo(void);
 u32 InitCameraUpdateCallback(u8 trackedSpriteId);

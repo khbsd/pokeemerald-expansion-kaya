@@ -48,7 +48,7 @@ static inline u32 LocalRandom32(rng_value_t *val)
     return _SFC32_Next(val);
 }
 
-static inline u16 LocalRandom(rng_value_t *val)
+static inline u32 LocalRandom(rng_value_t *val)
 {
     return LocalRandom32(val) >> 16;
 }
@@ -56,7 +56,7 @@ static inline u16 LocalRandom(rng_value_t *val)
 u32 Random32(void);
 u32 Random2_32(void);
 
-static inline u16 Random(void)
+static inline u32 Random(void)
 {
     return Random32() >> 16;
 }
@@ -65,7 +65,7 @@ void SeedRng(u32 seed);
 void SeedRng2(u32 seed);
 rng_value_t LocalRandomSeed(u32 seed);
 
-static inline u16 Random2(void)
+static inline u32 Random2(void)
 {
     return Random2_32() >> 16;
 }

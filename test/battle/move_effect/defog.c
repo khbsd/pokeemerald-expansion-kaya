@@ -54,7 +54,7 @@ SINGLE_BATTLE_TEST("Defog does not lower evasiveness if target behind Substitute
 TO_DO_BATTLE_TEST("Defog doesn't remove Reflect or Light Screen from the user's side");
 DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", s16 damagePhysical, s16 damageSpecial)
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -88,7 +88,7 @@ DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", 
 TO_DO_BATTLE_TEST("Defog doesn't remove Mist or Safeguard from the user's side");
 DOUBLE_BATTLE_TEST("Defog removes Mist and Safeguard from target's side")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -134,7 +134,7 @@ TO_DO_BATTLE_TEST("Defog removes Stealth Rock and Sticky Web from target's side"
 TO_DO_BATTLE_TEST("Defog doesn't remove Stealth Rock or Sticky Web from user's side (Gen 4-5)");
 DOUBLE_BATTLE_TEST("Defog removes Stealth Rock and Sticky Web from user's side (Gen 6+)")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -182,7 +182,7 @@ TO_DO_BATTLE_TEST("Defog removes Spikes from target's side");
 TO_DO_BATTLE_TEST("Defog doesn't remove Spikes from user's side (Gen 4-5)");
 SINGLE_BATTLE_TEST("Defog removes Spikes from user's side (Gen 6+)")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -217,7 +217,7 @@ SINGLE_BATTLE_TEST("Defog removes Spikes from user's side (Gen 6+)")
 TO_DO_BATTLE_TEST("Defog doesn't remove terrain (Gen 4-7)");
 SINGLE_BATTLE_TEST("Defog removes terrain (Gen 8+)")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_PSYCHIC_TERRAIN; }
     PARAMETRIZE { move = MOVE_ELECTRIC_TERRAIN; }
@@ -261,7 +261,7 @@ TO_DO_BATTLE_TEST("Defog removes Toxic Spikes from target's side");
 TO_DO_BATTLE_TEST("Defog doesn't remove Toxic Spikes from user's side (Gen 4-5)");
 SINGLE_BATTLE_TEST("Defog removes Toxic Spikes from user's side (Gen 6+)")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -297,7 +297,7 @@ SINGLE_BATTLE_TEST("Defog removes Toxic Spikes from user's side (Gen 6+)")
 TO_DO_BATTLE_TEST("Defog doesn't remove Aurora Veil from the user's side");
 DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhysical, s16 damageSpecial)
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }

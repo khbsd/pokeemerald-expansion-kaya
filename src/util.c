@@ -15,7 +15,7 @@ static const struct SpriteTemplate sInvisibleSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-static const u8 sSpriteDimensions[3][4][2] =
+static const u32 sSpriteDimensions[3][4][2] =
 {
     // square
     {
@@ -78,11 +78,11 @@ static const u16 sCrc16Table[] =
     0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
-const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
+const u32 gMiscBlank_Gfx[] = INCBIN_u32("graphics/interface/blank.4bpp");
 
-u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
+u32 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
 {
-    u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, DISPLAY_WIDTH + 8, DISPLAY_HEIGHT + 8, 14);
+    u32 sprite = CreateSprite(&sInvisibleSpriteTemplate, DISPLAY_WIDTH + 8, DISPLAY_HEIGHT + 8, 14);
     gSprites[sprite].invisible = TRUE;
     gSprites[sprite].callback = callback;
     return sprite;
@@ -118,13 +118,13 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
     BgAffineSet(&src, dest, 1);
 }
 
-void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
+void CopySpriteTiles(u32 shape, u32 size, u32 *tiles, u16 *tilemap, u32 *output)
 {
-    u8 x, y;
+    u32 x, y;
     s8 i, j;
-    u8 ALIGNED(4) xflip[32];
-    u8 h = sSpriteDimensions[shape][size][1];
-    u8 w = sSpriteDimensions[shape][size][0];
+    u32 ALIGNED(4) xflip[32];
+    u32 h = sSpriteDimensions[shape][size][1];
+    u32 w = sSpriteDimensions[shape][size][0];
 
     for (y = 0; y < h; y++)
     {
@@ -147,7 +147,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
                 {
                     for (j = 0; j < 4; j++)
                     {
-                        u8 i2 = i * 4;
+                        u32 i2 = i * 4;
                         xflip[i2 + (3-j)] = (tiles[tile + i2 + j] & 0xf) << 4;
                         xflip[i2 + (3-j)] |= tiles[tile + i2 + j] >> 4;
                     }
@@ -171,7 +171,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 
 int CountTrailingZeroBits(u32 value)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < 32; i++)
     {
@@ -183,7 +183,7 @@ int CountTrailingZeroBits(u32 value)
     return 0;
 }
 
-u16 CalcCRC16(const u8 *data, s32 length)
+u16 CalcCRC16(const u32 *data, s32 length)
 {
     u16 i, j;
     u16 crc = 0x1121;
@@ -202,22 +202,22 @@ u16 CalcCRC16(const u8 *data, s32 length)
     return ~crc;
 }
 
-u16 CalcCRC16WithTable(const u8 *data, u32 length)
+u16 CalcCRC16WithTable(const u32 *data, u32 length)
 {
     u16 i;
     u16 crc = 0x1121;
-    u8 byte;
+    u32 byte;
 
     for (i = 0; i < length; i++)
     {
         byte = crc >> 8;
         crc ^= data[i];
-        crc = byte ^ sCrc16Table[(u8)crc];
+        crc = byte ^ sCrc16Table[(u32)crc];
     }
     return ~crc;
 }
 
-u32 CalcByteArraySum(const u8 *data, u32 length)
+u32 CalcByteArraySum(const u32 *data, u32 length)
 {
     u32 sum, i;
     for (sum = 0, i = 0; i < length; i++)
@@ -225,7 +225,7 @@ u32 CalcByteArraySum(const u8 *data, u32 length)
     return sum;
 }
 
-void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
+void BlendPalette(u16 palOffset, u16 numEntries, u32 coeff, u32 blendColor)
 {
     u16 i;
     for (i = 0; i < numEntries; i++)

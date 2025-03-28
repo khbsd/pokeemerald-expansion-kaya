@@ -18,7 +18,7 @@ struct Pokenav_MatchCallMenu
 {
     u16 optionCursorPos;
     u16 maxOptionId;
-    const u8 *matchCallOptions;
+    const u32 *matchCallOptions;
     u16 headerId;
     u16 numRegistered;
     u16 numSpecialTrainers;
@@ -36,17 +36,17 @@ static u32 CB2_HandleCallExitInput(struct Pokenav_MatchCallMenu *);
 static u32 LoopedTask_BuildMatchCallList(s32);
 static bool32 ShouldDoNearbyMessage(void);
 
-static const u8 gText_CallCantBeMadeHere[] = _("A call can't be made from here.");
+static const u32 gText_CallCantBeMadeHere[] = _("A call can't be made from here.");
 
 #include "data/text/match_call_messages.h"
 
-static const u8 sMatchCallOptionsNoCheckPage[] =
+static const u32 sMatchCallOptionsNoCheckPage[] =
 {
     MATCH_CALL_OPTION_CALL,
     MATCH_CALL_OPTION_CANCEL
 };
 
-static const u8 sMatchCallOptionsHasCheckPage[] =
+static const u32 sMatchCallOptionsHasCheckPage[] =
 {
     MATCH_CALL_OPTION_CALL,
     MATCH_CALL_OPTION_CHECK,
@@ -354,7 +354,7 @@ int GetMatchCallTrainerPic(int index)
     return gFacilityClassToPicIndex[index];
 }
 
-const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)
+const u32 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     *newRematchRequest = FALSE;
@@ -369,7 +369,7 @@ const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)
     return gStringVar4;
 }
 
-const u8 *GetMatchCallFlavorText(int index, int checkPageEntry)
+const u32 *GetMatchCallFlavorText(int index, int checkPageEntry)
 {
     int rematchId;
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
@@ -402,10 +402,10 @@ u16 GetMatchCallOptionId(int optionId)
     return state->matchCallOptions[optionId];
 }
 
-void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str)
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u32 *str)
 {
-    const u8 *trainerName;
-    const u8 *className;
+    const u32 *trainerName;
+    const u32 *className;
     if (!matchCallEntry->isSpecialTrainer)
     {
         int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
@@ -421,7 +421,7 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
 
     if (className && trainerName)
     {
-        u8 *str2 = GetStringClearToWidth(str, FONT_NARROW, className, 69);
+        u32 *str2 = GetStringClearToWidth(str, FONT_NARROW, className, 69);
         GetStringClearToWidth(str2, FONT_NARROW, trainerName, 51);
     }
     else
@@ -430,7 +430,7 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     }
 }
 
-u8 GetMatchTableMapSectionId(int rematchIndex)
+u32 GetMatchTableMapSectionId(int rematchIndex)
 {
     int mapGroup = gRematchTable[rematchIndex].mapGroup;
     int mapNum = gRematchTable[rematchIndex].mapNum;

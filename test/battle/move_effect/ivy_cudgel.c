@@ -8,9 +8,9 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Ivy Cudgel changes the move type depending on the form of Ogerpon")
 {
-    u16 species;
-    u16 ogerpon;
-    u16 item;
+    u32 species;
+    u32 ogerpon;
+    u32 item;
 
     PARAMETRIZE { species = SPECIES_BLASTOISE; ogerpon = SPECIES_OGERPON_TEAL; item = ITEM_NONE; }
     PARAMETRIZE { species = SPECIES_CHARIZARD; ogerpon = SPECIES_OGERPON_CORNERSTONE; item = ITEM_CORNERSTONE_MASK; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Ivy Cudgel changes the move type depending on the form of Og
 
 SINGLE_BATTLE_TEST("Ivy Cudgel does not change the move type if used by Pokémon other than Ogerpon")
 {
-    u16 item;
+    u32 item;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_CORNERSTONE_MASK; }

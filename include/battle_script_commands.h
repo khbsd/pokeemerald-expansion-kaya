@@ -18,7 +18,7 @@ struct StatFractions
 
 struct PickupItem
 {
-    u16 itemId;
+    u32 itemId;
     u8 percentage[10];
 };
 
@@ -58,7 +58,7 @@ u8 GetFirstFaintedPartyIndex(u8 battlerId);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 void SaveBattlerTarget(u32 battler);
 void SaveBattlerAttacker(u32 battler);
-bool32 CanBurnHitThaw(u16 move);
+bool32 CanBurnHitThaw(u32 move);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

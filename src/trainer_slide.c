@@ -52,21 +52,21 @@ static bool32 ShouldRunTrainerSlideLastLowHp(u32 firstId, u32 lastId, u32 battle
 static void SetTrainerSlideParamters(u32 battler, u32* firstId, u32* lastId, u32* trainerId, u32* retValue);
 static bool32 IsSlideInitalizedOrPlayed(enum TrainerSlideType slideId);
 
-static const u8* const sTrainerSlides[DIFFICULTY_COUNT][TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
+static const u32* const sTrainerSlides[DIFFICULTY_COUNT][TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
 {
     [DIFFICULTY_NORMAL] =
     {
     },
 };
 
-static const u8* const sFrontierTrainerSlides[DIFFICULTY_COUNT][FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
+static const u32* const sFrontierTrainerSlides[DIFFICULTY_COUNT][FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
 {
     [DIFFICULTY_NORMAL] =
     {
     },
 };
 
-static const u8* const sTestTrainerSlides[DIFFICULTY_COUNT][TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
+static const u32* const sTestTrainerSlides[DIFFICULTY_COUNT][TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
 {
 #include "../test/battle/trainer_slides.h"
 };
@@ -107,7 +107,7 @@ static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
     return count;
 }
 
-static const u8* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
+static const u32* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         return sFrontierTrainerSlides[difficulty][trainerId];
@@ -119,8 +119,8 @@ static const u8* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u3
 
 static bool32 DoesTrainerHaveSlideMessage(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
 {
-    const u8* const *trainerSlides = GetTrainerSlideArray(difficulty, trainerId, slideId);
-    const u8* const *trainerSlidesNormal = GetTrainerSlideArray(DIFFICULTY_NORMAL, trainerId, slideId);
+    const u32* const *trainerSlides = GetTrainerSlideArray(difficulty, trainerId, slideId);
+    const u32* const *trainerSlidesNormal = GetTrainerSlideArray(DIFFICULTY_NORMAL, trainerId, slideId);
 
     if (trainerSlides[slideId] == NULL)
         return (trainerSlidesNormal[slideId] != NULL);
@@ -130,8 +130,8 @@ static bool32 DoesTrainerHaveSlideMessage(enum DifficultyLevel difficulty, u32 t
 
 void SetTrainerSlideMessage(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
 {
-    const u8* const *trainerSlides = GetTrainerSlideArray(difficulty, trainerId, slideId);
-    const u8* const *trainerSlidesNormal = GetTrainerSlideArray(DIFFICULTY_NORMAL, trainerId, slideId);
+    const u32* const *trainerSlides = GetTrainerSlideArray(difficulty, trainerId, slideId);
+    const u32* const *trainerSlidesNormal = GetTrainerSlideArray(DIFFICULTY_NORMAL, trainerId, slideId);
 
     if (trainerSlides[slideId] != NULL)
         gBattleStruct->trainerSlideMsg = trainerSlides[slideId];

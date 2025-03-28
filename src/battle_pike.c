@@ -27,24 +27,24 @@
 struct PikeRoomNPC
 {
     u16 graphicsId;
-    u8 speechId1;
-    u8 speechId2;
-    u8 speechId3;
+    u32 speechId1;
+    u32 speechId2;
+    u32 speechId3;
 };
 
 struct PikeWildMon
 {
     u16 species;
-    u8 levelDelta;
+    u32 levelDelta;
     u16 moves[MAX_MON_MOVES];
 };
 
 // IWRAM bss
-static u8 sRoomType;
-static u8 sStatusMon;
+static u32 sRoomType;
+static u32 sStatusMon;
 static bool8 sInWildMonRoom;
 static u32 sStatusFlags;
-static u8 sNpcId;
+static u32 sNpcId;
 
 // This file's functions.
 static void SetRoomType(void);
@@ -76,16 +76,16 @@ static void IsPartyFullHealed(void);
 static void SaveMonHeldItems(void);
 static void RestoreMonHeldItems(void);
 static void InitPikeChallenge(void);
-static u8 GetNextRoomType(void);
+static u32 GetNextRoomType(void);
 static void PrepareOneTrainer(bool8 difficult);
 static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
-static void TryHealMons(u8 healCount);
-static void Task_DoStatusInflictionScreenFlash(u8 taskId);
+static void TryHealMons(u32 healCount);
+static void Task_DoStatusInflictionScreenFlash(u32 taskId);
 static bool8 AtLeastTwoAliveMons(void);
-static u8 SpeciesToPikeMonId(u16 species);
-static bool8 CanEncounterWildMon(u8 monLevel);
-static u8 GetPikeQueenFightType(u8);
+static u32 SpeciesToPikeMonId(u16 species);
+static bool8 CanEncounterWildMon(u32 monLevel);
+static u32 GetPikeQueenFightType(u32);
 static bool8 StatusInflictionFadeOut(struct Task *task);
 static bool8 StatusInflictionFadeIn(struct Task *task);
 
@@ -465,7 +465,7 @@ static const u16 sNPCSpeeches[][EASY_CHAT_BATTLE_WORDS_COUNT] =
 };
 
 // Table duplicated from frontier_util, only Battle Pike entry used
-static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
+static const u32 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
 {
     [FRONTIER_FACILITY_TOWER]   = {35,  70, 35, 1},
     [FRONTIER_FACILITY_DOME]    = { 4,   9,  5, 0},
@@ -509,7 +509,7 @@ static void (* const sBattlePikeFunctions[])(void) =
     [BATTLE_PIKE_FUNC_INIT]                    = InitPikeChallenge
 };
 
-static const u8 sRoomTypeHints[] = {
+static const u32 sRoomTypeHints[] = {
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_SINGLE_BATTLE
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_HEAL_FULL
     PIKE_HINT_WHISPERING, // PIKE_ROOM_NPC
@@ -521,7 +521,7 @@ static const u8 sRoomTypeHints[] = {
     PIKE_HINT_BRAIN,      // PIKE_ROOM_BRAIN
 };
 
-static const u8 sNumMonsToHealBeforePikeQueen[][3] =
+static const u32 sNumMonsToHealBeforePikeQueen[][3] =
 {
     {2, 1, 0},
     {2, 0, 1},
@@ -546,7 +546,7 @@ void CallBattlePikeFunction(void)
 
 static void SetRoomType(void)
 {
-    u8 roomType = GetNextRoomType();
+    u32 roomType = GetNextRoomType();
     sRoomType = roomType;
 }
 
@@ -573,7 +573,7 @@ static void SetupRoomObjectEvents(void)
         objGfx1 = OBJ_EVENT_GFX_LINK_RECEPTIONIST;
         break;
     case PIKE_ROOM_NPC:
-        objGfx1 = (u8)(GetNPCRoomGraphicsId());
+        objGfx1 = (u32)(GetNPCRoomGraphicsId());
         break;
     case PIKE_ROOM_STATUS:
         objGfx1 = OBJ_EVENT_GFX_GENTLEMAN;
@@ -781,10 +781,10 @@ static void StatusInflictionScreenFlash(void)
 
 static void HealMon(struct Pokemon *mon)
 {
-    u8 i;
+    u32 i;
     u16 hp;
-    u8 ppBonuses;
-    u8 data[4];
+    u32 ppBonuses;
+    u32 data[4];
 
     for (i = 0; i < 4; i++)
         data[i] = 0;
@@ -877,9 +877,9 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
 
 static bool8 TryInflictRandomStatus(void)
 {
-    u8 j, i;
-    u8 count;
-    u8 indices[FRONTIER_PARTY_SIZE];
+    u32 j, i;
+    u32 count;
+    u32 indices[FRONTIER_PARTY_SIZE];
     u32 status;
     u16 species;
     bool8 statusChosen;
@@ -900,7 +900,7 @@ static bool8 TryInflictRandomStatus(void)
     status = 0;
     do
     {
-        u8 rand;
+        u32 rand;
 
         statusChosen = FALSE;
         rand = Random() % 100;
@@ -983,9 +983,9 @@ static bool8 TryInflictRandomStatus(void)
 
 static bool8 AtLeastOneHealthyMon(void)
 {
-    u8 i;
-    u8 healthyMonsCount;
-    u8 count;
+    u32 i;
+    u32 healthyMonsCount;
+    u32 count;
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
@@ -1013,15 +1013,15 @@ static bool8 AtLeastOneHealthyMon(void)
         return TRUE;
 }
 
-static u8 GetNextRoomType(void)
+static u32 GetNextRoomType(void)
 {
     bool8 roomTypesDisabled[NUM_PIKE_ROOM_TYPES - 1]; // excludes Brain room, which cant be disabled
-    u8 i;
-    u8 nextRoomType;
-    u8 roomHint;
-    u8 numRoomCandidates;
-    u8 *roomCandidates;
-    u8 id;
+    u32 i;
+    u32 nextRoomType;
+    u32 roomHint;
+    u32 numRoomCandidates;
+    u32 *roomCandidates;
+    u32 id;
 
     if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_BRAIN)
         return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
@@ -1108,7 +1108,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 {
     s32 i;
     s32 monLevel;
-    u8 headerId = GetBattlePikeWildMonHeaderId();
+    u32 headerId = GetBattlePikeWildMonHeaderId();
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     const struct PikeWildMon *const *const wildMons = sWildMons[lvlMode];
     u32 abilityNum;
@@ -1153,10 +1153,10 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     return TRUE;
 }
 
-u8 GetBattlePikeWildMonHeaderId(void)
+u32 GetBattlePikeWildMonHeaderId(void)
 {
-    u8 headerId;
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 headerId;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
 
     if (winStreak <= 20 * NUM_PIKE_ROOMS)
@@ -1171,7 +1171,7 @@ u8 GetBattlePikeWildMonHeaderId(void)
     return headerId;
 }
 
-static void DoStatusInflictionScreenFlash(u8 taskId)
+static void DoStatusInflictionScreenFlash(u32 taskId)
 {
     while (sStatusInflictionScreenFlashFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
@@ -1223,7 +1223,7 @@ static bool8 StatusInflictionFadeIn(struct Task *task)
 
 static void StartStatusInflictionScreenFlash(s16 fadeOutDelay, s16 fadeInDelay, s16 numFades, s16 fadeOutSpeed, s16 fadeInSpped)
 {
-    u8 taskId = CreateTask(DoStatusInflictionScreenFlash, 3);
+    u32 taskId = CreateTask(DoStatusInflictionScreenFlash, 3);
 
     gTasks[taskId].data[1] = fadeOutDelay;
     gTasks[taskId].data[2] = fadeInDelay;
@@ -1241,7 +1241,7 @@ static bool8 IsStatusInflictionScreenFlashTaskFinished(void)
         return FALSE;
 }
 
-static void Task_DoStatusInflictionScreenFlash(u8 taskId)
+static void Task_DoStatusInflictionScreenFlash(u32 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -1258,10 +1258,10 @@ static void Task_DoStatusInflictionScreenFlash(u8 taskId)
     }
 }
 
-static void TryHealMons(u8 healCount)
+static void TryHealMons(u32 healCount)
 {
-    u8 j, i;
-    u8 indices[FRONTIER_PARTY_SIZE];
+    u32 j, i;
+    u32 indices[FRONTIER_PARTY_SIZE];
 
     if (healCount == 0)
         return;
@@ -1289,7 +1289,7 @@ static void TryHealMons(u8 healCount)
         }
         else
         {
-            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
@@ -1327,8 +1327,8 @@ bool8 InBattlePike(void)
 
 static void SetHintedRoom(void)
 {
-    u8 i, count, id;
-    u8 *roomCandidates;
+    u32 i, count, id;
+    u32 *roomCandidates;
 
     gSpecialVar_Result = FALSE;
     if (GetPikeQueenFightType(1))
@@ -1381,8 +1381,8 @@ static void GetRoomTypeHint(void)
 static void PrepareOneTrainer(bool8 difficult)
 {
     int i;
-    u8 lvlMode;
-    u8 battleNum;
+    u32 lvlMode;
+    u32 battleNum;
     u16 challengeNum;
     u16 trainerId;
 
@@ -1414,7 +1414,7 @@ static void PrepareTwoTrainers(void)
 {
     int i;
     u16 trainerId;
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
 
     gFacilityTrainers = gBattleFrontierTrainers;
@@ -1453,7 +1453,7 @@ static void PrepareTwoTrainers(void)
 
 static void ClearPikeTrainerIds(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < NUM_PIKE_ROOMS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
@@ -1476,7 +1476,7 @@ static void BufferTrainerIntro(void)
 static bool8 AtLeastTwoAliveMons(void)
 {
     struct Pokemon *mon;
-    u8 i, countDead;
+    u32 i, countDead;
 
     mon = &gPlayerParty[0];
     countDead = 0;
@@ -1492,13 +1492,13 @@ static bool8 AtLeastTwoAliveMons(void)
         return TRUE;
 }
 
-static u8 GetPikeQueenFightType(u8 nextRoom)
+static u32 GetPikeQueenFightType(u32 nextRoom)
 {
-    u8 numPikeSymbols;
+    u32 numPikeSymbols;
 
-    u8 facility = FRONTIER_FACILITY_PIKE;
-    u8 ret = FRONTIER_BRAIN_NOT_READY;
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 facility = FRONTIER_FACILITY_PIKE;
+    u32 ret = FRONTIER_BRAIN_NOT_READY;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     winStreak += nextRoom;
     numPikeSymbols = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
@@ -1531,7 +1531,7 @@ static void GetCurrentRoomPikeQueenFightType(void)
 
 static void HealSomeMonsBeforePikeQueen(void)
 {
-    u8 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_0x8007];
+    u32 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_0x8007];
 
     TryHealMons(toHealCount);
     gSpecialVar_Result = toHealCount;
@@ -1544,7 +1544,7 @@ static void SetHealingroomTypesDisabled(void)
 
 static void IsPartyFullHealed(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     gSpecialVar_Result = TRUE;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -1555,7 +1555,7 @@ static void IsPartyFullHealed(void)
         u16 max = GetMonData(mon, MON_DATA_MAX_HP);
         if (curr >= max && GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE)
         {
-            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
@@ -1583,7 +1583,7 @@ static void IsPartyFullHealed(void)
 
 static void SaveMonHeldItems(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
@@ -1595,7 +1595,7 @@ static void SaveMonHeldItems(void)
 
 static void RestoreMonHeldItems(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
@@ -1607,7 +1607,7 @@ static void RestoreMonHeldItems(void)
 
 static void InitPikeChallenge(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
@@ -1619,14 +1619,14 @@ static void InitPikeChallenge(void)
     gBattleOutcome = 0;
 }
 
-static bool8 CanEncounterWildMon(u8 enemyMonLevel)
+static bool8 CanEncounterWildMon(u32 enemyMonLevel)
 {
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u16 monAbility = GetMonAbility(&gPlayerParty[0]);
         if (monAbility == ABILITY_KEEN_EYE || monAbility == ABILITY_INTIMIDATE)
         {
-            u8 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
+            u32 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
             if (playerMonLevel > 5 && enemyMonLevel <= playerMonLevel - 5 && Random() % 2 == 0)
                 return FALSE;
         }
@@ -1635,9 +1635,9 @@ static bool8 CanEncounterWildMon(u8 enemyMonLevel)
     return TRUE;
 }
 
-static u8 SpeciesToPikeMonId(u16 species)
+static u32 SpeciesToPikeMonId(u16 species)
 {
-    u8 ret;
+    u32 ret;
 
     if (species == SPECIES_SEVIPER)
         ret = 0;

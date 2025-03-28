@@ -8,7 +8,7 @@
 #include "international_string_util.h"
 #include "constants/coins.h"
 
-static EWRAM_DATA u8 sCoinsWindowId = 0;
+static EWRAM_DATA u32 sCoinsWindowId = 0;
 
 void PrintCoinsString(u32 coinAmount)
 {
@@ -21,7 +21,7 @@ void PrintCoinsString(u32 coinAmount)
     AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar4, xAlign, 1, 0, NULL);
 }
 
-void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
+void ShowCoinsWindow(u32 coinAmount, u32 x, u32 y)
 {
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);

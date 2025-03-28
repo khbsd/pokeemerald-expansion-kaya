@@ -870,7 +870,7 @@ void LoadBattleTextboxAndBackground(void)
         DrawMainBattleBackground();
 }
 
-static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)
+static void DrawLinkBattleParticipantPokeballs(u32 taskId, u32 multiplayerId, u32 bgId, u32 destX, u32 destY)
 {
     s32 i;
     u16 pokeballStatuses = 0;
@@ -1017,10 +1017,10 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     }
 }
 
-void InitLinkBattleVsScreen(u8 taskId)
+void InitLinkBattleVsScreen(u32 taskId)
 {
     struct LinkPlayer *linkPlayer;
-    u8 *name;
+    u32 *name;
     s32 i, palId;
 
     switch (gTasks[taskId].data[0])
@@ -1056,9 +1056,9 @@ void InitLinkBattleVsScreen(u8 taskId)
         }
         else
         {
-            u8 playerId = gBattleScripting.multiplayerId;
-            u8 opponentId = playerId ^ BIT_SIDE;
-            u8 opponentId_copy = opponentId;
+            u32 playerId = gBattleScripting.multiplayerId;
+            u32 opponentId = playerId ^ BIT_SIDE;
+            u32 opponentId_copy = opponentId;
 
             if (gLinkPlayers[playerId].id != 0)
                 opponentId = playerId, playerId = opponentId_copy;
@@ -1217,7 +1217,7 @@ void DrawBattleEntryBackground(void)
     }
 }
 
-bool8 LoadChosenBattleElement(u8 caseId)
+bool8 LoadChosenBattleElement(u32 caseId)
 {
     bool8 ret = FALSE;
 

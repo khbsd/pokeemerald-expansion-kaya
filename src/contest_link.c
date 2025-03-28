@@ -8,8 +8,8 @@
 #include "task.h"
 #include "contest_link.h"
 
-static void Task_LinkContest_StartInitFlags(u8);
-static void Task_LinkContest_InitFlags(u8);
+static void Task_LinkContest_StartInitFlags(u32);
+static void Task_LinkContest_InitFlags(u32);
 
 #define tState         data[0]
 #define tDelayTimer    data[1]
@@ -27,9 +27,9 @@ bool32 LinkContest_SendBlock(void *src, u16 size)
         return FALSE;
 }
 
-bool8 LinkContest_GetBlockReceived(u8 flag)
+bool8 LinkContest_GetBlockReceived(u32 flag)
 {
-    u8 mask = (1 << flag);
+    u32 mask = (1 << flag);
     if (!(GetBlockReceivedStatus() & mask))
     {
         return FALSE;
@@ -54,9 +54,9 @@ bool8 LinkContest_GetBlockReceivedFromAllPlayers(void)
     }
 }
 
-void Task_LinkContest_Init(u8 taskId)
+void Task_LinkContest_Init(u32 taskId)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gBlockRecvBuffer[i][0] = 0xFF;
@@ -65,12 +65,12 @@ void Task_LinkContest_Init(u8 taskId)
     gTasks[taskId].func = Task_LinkContest_StartInitFlags;
 }
 
-static void Task_LinkContest_StartInitFlags(u8 taskId)
+static void Task_LinkContest_StartInitFlags(u32 taskId)
 {
     gTasks[taskId].func = Task_LinkContest_InitFlags;
 }
 
-static void Task_LinkContest_InitFlags(u8 taskId)
+static void Task_LinkContest_InitFlags(u32 taskId)
 {
     int i;
 
@@ -119,7 +119,7 @@ bool32 LinkContest_TryLinkStandby(s16 *state)
     }
 }
 
-void Task_LinkContest_CommunicateMonsRS(u8 taskId)
+void Task_LinkContest_CommunicateMonsRS(u32 taskId)
 {
     int i;
 
@@ -174,7 +174,7 @@ void Task_LinkContest_CommunicateMonsRS(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateRngRS(u8 taskId)
+void Task_LinkContest_CommunicateRngRS(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -204,7 +204,7 @@ void Task_LinkContest_CommunicateRngRS(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateCategoryRS(u8 taskId)
+void Task_LinkContest_CommunicateCategoryRS(u32 taskId)
 {
     int i;
 
@@ -250,7 +250,7 @@ void Task_LinkContest_CommunicateCategoryRS(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateMonIdxs(u8 taskId)
+void Task_LinkContest_CommunicateMonIdxs(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -272,7 +272,7 @@ void Task_LinkContest_CommunicateMonIdxs(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateMoveSelections(u8 taskId)
+void Task_LinkContest_CommunicateMoveSelections(u32 taskId)
 {
     int i;
 
@@ -303,7 +303,7 @@ void Task_LinkContest_CommunicateMoveSelections(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateFinalStandings(u8 taskId)
+void Task_LinkContest_CommunicateFinalStandings(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -380,7 +380,7 @@ void Task_LinkContest_CommunicateFinalStandings(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateAppealsState(u8 taskId)
+void Task_LinkContest_CommunicateAppealsState(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -457,7 +457,7 @@ void Task_LinkContest_CommunicateAppealsState(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateLeaderIdsRS(u8 taskId)
+void Task_LinkContest_CommunicateLeaderIdsRS(u32 taskId)
 {
     int i;
 
@@ -503,7 +503,7 @@ void Task_LinkContest_CommunicateLeaderIdsRS(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateRound1Points(u8 taskId)
+void Task_LinkContest_CommunicateRound1Points(u32 taskId)
 {
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;
@@ -532,7 +532,7 @@ void Task_LinkContest_CommunicateRound1Points(u8 taskId)
     }
 }
 
-void Task_LinkContest_CommunicateTurnOrder(u8 taskId)
+void Task_LinkContest_CommunicateTurnOrder(u32 taskId)
 {
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;

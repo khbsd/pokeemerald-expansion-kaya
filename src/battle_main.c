@@ -85,7 +85,7 @@ static void CB2_HandleStartMultiPartnerBattle(void);
 static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
-static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool8 firstTrainer);
 static void BattleMainCB1(void);
 static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
@@ -126,18 +126,18 @@ static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
 static s32 Factorial(s32);
 
-EWRAM_DATA u16 gBattle_BG0_X = 0;
-EWRAM_DATA u16 gBattle_BG0_Y = 0;
-EWRAM_DATA u16 gBattle_BG1_X = 0;
-EWRAM_DATA u16 gBattle_BG1_Y = 0;
-EWRAM_DATA u16 gBattle_BG2_X = 0;
-EWRAM_DATA u16 gBattle_BG2_Y = 0;
-EWRAM_DATA u16 gBattle_BG3_X = 0;
-EWRAM_DATA u16 gBattle_BG3_Y = 0;
-EWRAM_DATA u16 gBattle_WIN0H = 0;
-EWRAM_DATA u16 gBattle_WIN0V = 0;
-EWRAM_DATA u16 gBattle_WIN1H = 0;
-EWRAM_DATA u16 gBattle_WIN1V = 0;
+EWRAM_DATA u32 gBattle_BG0_X = 0;
+EWRAM_DATA u32 gBattle_BG0_Y = 0;
+EWRAM_DATA u32 gBattle_BG1_X = 0;
+EWRAM_DATA u32 gBattle_BG1_Y = 0;
+EWRAM_DATA u32 gBattle_BG2_X = 0;
+EWRAM_DATA u32 gBattle_BG2_Y = 0;
+EWRAM_DATA u32 gBattle_BG3_X = 0;
+EWRAM_DATA u32 gBattle_BG3_Y = 0;
+EWRAM_DATA u32 gBattle_WIN0H = 0;
+EWRAM_DATA u32 gBattle_WIN0V = 0;
+EWRAM_DATA u32 gBattle_WIN1H = 0;
+EWRAM_DATA u32 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[425] = {0}; // Increased in size to fit Juan's defeat text (SootopolisCity_Gym_1F_Text_JuanDefeat)
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
@@ -150,7 +150,7 @@ EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
 EWRAM_DATA u8 gBattlersCount = 0;
-EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerPositions[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT] = {0};
@@ -160,12 +160,12 @@ EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gCurrMovePos = 0;
 EWRAM_DATA u8 gChosenMovePos = 0;
-EWRAM_DATA u16 gCurrentMove = 0;
-EWRAM_DATA u16 gChosenMove = 0;
-EWRAM_DATA u16 gCalledMove = 0;
+EWRAM_DATA u32 gCurrentMove = 0;
+EWRAM_DATA u32 gChosenMove = 0;
+EWRAM_DATA u32 gCalledMove = 0;
 EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastUsedItem = 0;
-EWRAM_DATA u16 gLastUsedAbility = 0;
+EWRAM_DATA u32 gLastUsedItem = 0;
+EWRAM_DATA u32 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
 EWRAM_DATA u8 gBattlerFainted = 0;
@@ -177,16 +177,16 @@ EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
 EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
-EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastUsedMoveType[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastUsedMove = 0;
+EWRAM_DATA u32 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastUsedMoveType[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gLastUsedMove = 0;
 EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u32 gHitMarker = 0;
 EWRAM_DATA u8 gBideTarget[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u32 gSideStatuses[NUM_BATTLE_SIDES] = {0};
@@ -194,15 +194,15 @@ EWRAM_DATA struct SideTimer gSideTimers[NUM_BATTLE_SIDES] = {0};
 EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u32 gStatuses4[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gPauseCounterBattle = 0;
-EWRAM_DATA u16 gPaydayMoney = 0;
+EWRAM_DATA u32 gPauseCounterBattle = 0;
+EWRAM_DATA u32 gPaydayMoney = 0;
 EWRAM_DATA u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT] = {0};
 EWRAM_DATA u8 gBattleOutcome = 0;
 EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gBattleWeather = 0;
+EWRAM_DATA u32 gBattleWeather = 0;
 EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
-EWRAM_DATA u16 gIntroSlideFlags = 0;
+EWRAM_DATA u32 gIntroSlideFlags = 0;
 EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
@@ -221,17 +221,17 @@ EWRAM_DATA bool8 gTransformedShininess[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gPlayerDpadHoldFrames = 0;
 EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
 EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
-EWRAM_DATA u16 gBattleMovePower = 0;
-EWRAM_DATA u16 gMoveToLearn = 0;
+EWRAM_DATA u32 gBattleMovePower = 0;
+EWRAM_DATA u32 gMoveToLearn = 0;
 EWRAM_DATA u32 gFieldStatuses = 0;
 EWRAM_DATA struct FieldTimer gFieldTimers = {0};
-EWRAM_DATA u16 gBattleTurnCounter = 0;
+EWRAM_DATA u32 gBattleTurnCounter = 0;
 EWRAM_DATA u8 gBattlerAbility = 0;
 EWRAM_DATA struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
-EWRAM_DATA u16 gLastThrownBall = 0;
-EWRAM_DATA u16 gBallToDisplay = 0;
+EWRAM_DATA u32 gLastThrownBall = 0;
+EWRAM_DATA u32 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
@@ -573,8 +573,8 @@ static void CB2_InitBattleInternal(void)
 #define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)                      \
     for ((i) = 0; (i) < PARTY_SIZE; (i)++)                                  \
     {                                                                       \
-        u16 species = GetMonData(&(party)[(i)], MON_DATA_SPECIES_OR_EGG);   \
-        u16 hp = GetMonData(&(party)[(i)], MON_DATA_HP);                    \
+        u32 species = GetMonData(&(party)[(i)], MON_DATA_SPECIES_OR_EGG);   \
+        u32 hp = GetMonData(&(party)[(i)], MON_DATA_HP);                    \
         u32 status = GetMonData(&(party)[(i)], MON_DATA_STATUS);            \
                                                                             \
         if (species == SPECIES_NONE)                                        \
@@ -602,7 +602,7 @@ static void CB2_InitBattleInternal(void)
 // For Vs Screen at link battle start
 static void BufferPartyVsScreenHealth_AtStart(void)
 {
-    u16 flags = 0;
+    u32 flags = 0;
     s32 i;
 
     BUFFER_PARTY_VS_SCREEN_STATUS(gPlayerParty, flags, i);
@@ -1997,7 +1997,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     return trainer->partySize;
 }
 
-static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool8 firstTrainer)
 {
     u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
@@ -2662,7 +2662,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 {
     u8 battler = sprite->sBattler;
     u32 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
-    u16 species;
+    u32 species;
     u8 yOffset;
 
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies != 0)
@@ -4802,7 +4802,7 @@ u32 GetBattlerTotalSpeedStat(u32 battler)
 
 s8 GetChosenMovePriority(u32 battler)
 {
-    u16 move;
+    u32 move;
 
     gProtectStructs[battler].pranksterElevated = 0;
     if (gProtectStructs[battler].noValidMoves)
@@ -4813,10 +4813,10 @@ s8 GetChosenMovePriority(u32 battler)
     return GetBattleMovePriority(battler, move);
 }
 
-s8 GetBattleMovePriority(u32 battler, u16 move)
+s8 GetBattleMovePriority(u32 battler, u32 move)
 {
     s8 priority;
-    u16 ability = GetBattlerAbility(battler);
+    u32 ability = GetBattlerAbility(battler);
 
     if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE && !IsBattleMoveStatus(move))
         move = GetUsableZMove(battler, move);
@@ -5688,7 +5688,7 @@ static void TryEvolvePokemon(void)
     {
         if (!(sTriedEvolving & (1u << i)))
         {
-            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
+            u32 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
             bool32 evoModeNormal = TRUE;
             sTriedEvolving |= 1u << i;
 

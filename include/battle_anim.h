@@ -28,11 +28,11 @@ enum
 struct BattleAnimBgData
 {
     u8 *bgTiles;
-    u16 *bgTilemap;
+    u32 *bgTilemap;
     u8 paletteId;
     u8 bgId;
-    u16 tilesOffset;
-    u16 unused;
+    u32 tilesOffset;
+    u32 unused;
 };
 
 struct BattleAnimBackground
@@ -50,19 +50,19 @@ extern u8 gAnimVisualTaskCount;
 extern u8 gAnimSoundTaskCount;
 extern struct DisableStruct *gAnimDisableStructPtr;
 extern s32 gAnimMoveDmg;
-extern u16 gAnimMovePower;
+extern u32 gAnimMovePower;
 extern u8 gAnimFriendship;
-extern u16 gWeatherMoveAnim;
+extern u32 gWeatherMoveAnim;
 extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
 extern u8 gAnimMoveTurn;
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
-extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
+extern u32 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gAnimCustomPanning;
-extern u16 gAnimMoveIndex;
+extern u32 gAnimMoveIndex;
 
 void ClearBattleAnimationVars(void);
-void DoMoveAnim(u16 move);
+void DoMoveAnim(u32 move);
 void LaunchBattleAnimation(u32 animType, u32 animId);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
@@ -75,13 +75,13 @@ s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
 s16 KeepPanInRange(s16 panArg, int oldPan);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
-void RelocateBattleBgPal(u16 paletteNum, u16 *dest, u32 offset, bool8 largeScreen);
+void RelocateBattleBgPal(u32 paletteNum, u32 *dest, u32 offset, bool8 largeScreen);
 void ResetBattleAnimBg(bool8);
-void LoadMoveBg(u16 bgId);
+void LoadMoveBg(u32 bgId);
 
 // battle_intro.c
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset);
+void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u32 *tilemap, u32 tilesOffset);
 void HandleIntroSlide(u8 terrainId);
 int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
@@ -104,8 +104,8 @@ bool8 AnimTranslateLinear(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 attributeId);
 void InitAnimLinearTranslationWithSpeed(struct Sprite *sprite);
-u16 ArcTan2Neg(s16 x, s16 y);
-void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 xScale, s16 yScale, u16 rotation);
+u32 ArcTan2Neg(s16 x, s16 y);
+void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 xScale, s16 yScale, u32 rotation);
 void RunStoredCallbackWhenAffineAnimEnds(struct Sprite *sprite);
 void TranslateSpriteLinearAndFlicker(struct Sprite *sprite);
 void SetSpriteCoordsToAnimAttackerCoords(struct Sprite *sprite);
@@ -127,7 +127,7 @@ u8 GetBattlerSpriteSubpriority(u8 battlerId);
 bool8 TranslateAnimHorizontalArc(struct Sprite *sprite);
 void TranslateSpriteLinearByIdFixedPoint(struct Sprite *sprite);
 void ResetSpriteRotScale(u8 spriteId);
-void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
+void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u32 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
 void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
@@ -142,7 +142,7 @@ void AnimLoadCompressedBgGfx(u32, const u32 *, u32);
 void UpdateAnimBg3ScreenSize(bool8);
 void TranslateSpriteInGrowingCircle(struct Sprite *);
 void SetBattlerSpriteYOffsetFromYScale(u8 spriteId);
-void PrepareEruptAnimTaskData(struct Task *task, u8 spriteId, s16 xScaleStart, s16 yScaleStart, s16 xScaleEnd, s16 yScaleEnd, u16 duration);
+void PrepareEruptAnimTaskData(struct Task *task, u8 spriteId, s16 xScaleStart, s16 yScaleStart, s16 xScaleEnd, s16 yScaleEnd, u32 duration);
 u8 UpdateEruptAnimTask(struct Task *task);
 void DestroyAnimSpriteAndDisableBlend(struct Sprite *);
 void AnimLoadCompressedBgTilemap(u32 bgId, const void *src);
@@ -154,12 +154,12 @@ void TranslateSpriteLinear(struct Sprite *sprite);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite);
 void TranslateSpriteInCircle(struct Sprite *sprite);
-void SetGrayscaleOrOriginalPalette(u16 palNum, bool8 restoreOriginal);
+void SetGrayscaleOrOriginalPalette(u32 palNum, bool8 restoreOriginal);
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
 bool8 RunAffineAnimFromTaskData(struct Task *task);
 void AnimThrowProjectile(struct Sprite *sprite);
 void GetBgDataForTransform(struct BattleAnimBgData *dest, u8 battlerId);
-u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, bool8 isShiny, u32 battlerId);
+u8 CreateAdditionalMonSpriteForMoveAnim(u32 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, bool8 isShiny, u32 battlerId);
 void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite);
 void Trade_MoveSelectedMonToTarget(struct Sprite *sprite);
 void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
@@ -240,7 +240,7 @@ bool32 IsCriticalCapture(void);
 
 // battle_anim_utility_funcs.c
 void InitStatsChangeAnimation(u8);
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
+void StartMonScrollingBgMask(u8 taskId, int unused, u32 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
 
 // battle_anim_effects_1.c
 void AnimFalseSwipeSlice_Step3(struct Sprite *);
@@ -384,7 +384,7 @@ u8 SmokescreenImpact(s16 x, s16 y, bool8 persist);
 
 u32 UnpackSelectedBattlePalettes(s16);
 
-u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
+u8 GetBattlerSpriteFinal_Y(u8, u32, u8);
 
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x16;
 extern const struct OamData gOamData_AffineNormal_ObjBlend_16x16;

@@ -23,15 +23,15 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Protect, Detect, Spiky Shield, Baneful Bunker and Burning Bulwark protect from all moves")
 {
     u32 j;
-    static const u16 protectMoves[] = {
+    static const u32 protectMoves[] = {
         MOVE_PROTECT,
         MOVE_DETECT,
         MOVE_SPIKY_SHIELD,
         MOVE_BANEFUL_BUNKER,
         MOVE_BURNING_BULWARK,
     };
-    u16 protectMove = MOVE_NONE;
-    u16 usedMove = MOVE_NONE;
+    u32 protectMove = MOVE_NONE;
+    u32 usedMove = MOVE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(protectMoves); j++)
     {
@@ -62,15 +62,15 @@ SINGLE_BATTLE_TEST("Protect, Detect, Spiky Shield, Baneful Bunker and Burning Bu
 SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging moves and lower stats on contact")
 {
     u32 j;
-    static const u16 protectMoves[][3] =
+    static const u32 protectMoves[][3] =
     {   // Move             Stat      Stages
         {MOVE_KINGS_SHIELD, STAT_ATK,   (B_KINGS_SHIELD_LOWER_ATK >= GEN_8) ? 1 : 2},
         {MOVE_SILK_TRAP,    STAT_SPEED, 1},
         {MOVE_OBSTRUCT,     STAT_DEF,   2},
     };
-    u16 protectMove = MOVE_NONE;
-    u16 usedMove = MOVE_NONE;
-    u16 statId = 0, lowersBy = 0;
+    u32 protectMove = MOVE_NONE;
+    u32 usedMove = MOVE_NONE;
+    u32 statId = 0, lowersBy = 0;
 
     for (j = 0; j < ARRAY_COUNT(protectMoves); j++)
     {
@@ -127,8 +127,8 @@ SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging 
 
 SINGLE_BATTLE_TEST("Spiky Shield does 1/8 dmg of max hp of attackers making contact and may faint them")
 {
-    u16 usedMove = MOVE_NONE;
-    u16 hp = 400, maxHp = 400;
+    u32 usedMove = MOVE_NONE;
+    u32 hp = 400, maxHp = 400;
 
     PARAMETRIZE { usedMove = MOVE_TACKLE; hp = 1; }
     PARAMETRIZE { usedMove = MOVE_TACKLE; }
@@ -164,7 +164,7 @@ SINGLE_BATTLE_TEST("Spiky Shield does 1/8 dmg of max hp of attackers making cont
 
 SINGLE_BATTLE_TEST("Baneful Bunker poisons pokemon for moves making contact")
 {
-    u16 usedMove = MOVE_NONE;
+    u32 usedMove = MOVE_NONE;
 
     PARAMETRIZE {usedMove = MOVE_TACKLE; }
     PARAMETRIZE {usedMove = MOVE_LEER; }
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("Baneful Bunker poisons pokemon for moves making contact")
 
 SINGLE_BATTLE_TEST("Burning Bulwark burns pokemon for moves making contact")
 {
-    u16 usedMove = MOVE_NONE;
+    u32 usedMove = MOVE_NONE;
 
     PARAMETRIZE {usedMove = MOVE_TACKLE; }
     PARAMETRIZE {usedMove = MOVE_LEER; }
@@ -229,10 +229,10 @@ SINGLE_BATTLE_TEST("Burning Bulwark burns pokemon for moves making contact")
 SINGLE_BATTLE_TEST("Recoil damage is not applied if target was protected")
 {
     u32 j, k;
-    static const u16 protectMoves[] = { MOVE_PROTECT, MOVE_DETECT, MOVE_KINGS_SHIELD, MOVE_BANEFUL_BUNKER, MOVE_SILK_TRAP, MOVE_OBSTRUCT, MOVE_SPIKY_SHIELD };
-    static const u16 recoilMoves[] = { MOVE_VOLT_TACKLE, MOVE_HEAD_SMASH, MOVE_TAKE_DOWN, MOVE_DOUBLE_EDGE };
-    u16 protectMove = MOVE_NONE;
-    u16 recoilMove = MOVE_NONE;
+    static const u32 protectMoves[] = { MOVE_PROTECT, MOVE_DETECT, MOVE_KINGS_SHIELD, MOVE_BANEFUL_BUNKER, MOVE_SILK_TRAP, MOVE_OBSTRUCT, MOVE_SPIKY_SHIELD };
+    static const u32 recoilMoves[] = { MOVE_VOLT_TACKLE, MOVE_HEAD_SMASH, MOVE_TAKE_DOWN, MOVE_DOUBLE_EDGE };
+    u32 protectMove = MOVE_NONE;
+    u32 recoilMove = MOVE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(protectMoves); j++)
     {
@@ -271,7 +271,7 @@ SINGLE_BATTLE_TEST("Recoil damage is not applied if target was protected")
 
 SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only once")
 {
-    u16 move = MOVE_NONE;
+    u32 move = MOVE_NONE;
 
     PARAMETRIZE { move = MOVE_PROTECT; }
     PARAMETRIZE { move = MOVE_DETECT; }
@@ -318,7 +318,7 @@ SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only o
 
 DOUBLE_BATTLE_TEST("Wide Guard protects self and ally from multi-target moves")
 {
-    u16 move = MOVE_NONE;
+    u32 move = MOVE_NONE;
 
     PARAMETRIZE { move = MOVE_TACKLE; }      // Single target
     PARAMETRIZE { move = MOVE_SURF; }        // All targets
@@ -388,7 +388,7 @@ DOUBLE_BATTLE_TEST("Wide Guard can not fail on consecutive turns")
 
 DOUBLE_BATTLE_TEST("Quick Guard protects self and ally from priority moves")
 {
-    u16 move = MOVE_NONE;
+    u32 move = MOVE_NONE;
     struct BattlePokemon *targetOpponent = NULL;
 
     PARAMETRIZE { move = MOVE_TACKLE; targetOpponent = opponentLeft; }
@@ -448,7 +448,7 @@ DOUBLE_BATTLE_TEST("Quick Guard can not fail on consecutive turns")
 
 DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from status moves")
 {
-    u16 move = MOVE_NONE;
+    u32 move = MOVE_NONE;
     struct BattlePokemon *targetOpponent = NULL;
 
     PARAMETRIZE { move = MOVE_HYPER_VOICE; }

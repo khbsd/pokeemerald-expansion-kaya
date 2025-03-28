@@ -162,19 +162,19 @@ enum {
 
 static EWRAM_DATA struct
 {
-    u8 state;
-    u8 heartSpriteIds[16];                                   /*0x001*/
+    u32 state;
+    u32 heartSpriteIds[16];                                   /*0x001*/
     u16 movesToLearn[MAX_RELEARNER_MOVES];                   /*0x01A*/
-    u8 partyMon;                                             /*0x044*/
-    u8 moveSlot;                                             /*0x045*/
+    u32 partyMon;                                             /*0x044*/
+    u32 moveSlot;                                             /*0x045*/
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];  /*0x0E8*/
-    u8 numMenuChoices;                                       /*0x110*/
-    u8 numToShowAtOnce;                                      /*0x111*/
-    u8 moveListMenuTask;                                     /*0x112*/
-    u8 moveListScrollArrowTask;                              /*0x113*/
-    u8 moveDisplayArrowTask;                                 /*0x114*/
+    u32 numMenuChoices;                                       /*0x110*/
+    u32 numToShowAtOnce;                                      /*0x111*/
+    u32 moveListMenuTask;                                     /*0x112*/
+    u32 moveListScrollArrowTask;                              /*0x113*/
+    u32 moveDisplayArrowTask;                                 /*0x114*/
     u16 scrollOffset;                                        /*0x116*/
-    u8 categoryIconSpriteId;                                 /*0x117*/
+    u32 categoryIconSpriteId;                                 /*0x117*/
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
@@ -183,13 +183,13 @@ static EWRAM_DATA struct {
     bool8 showContestInfo;
 } sMoveRelearnerMenuSate = {0};
 
-EWRAM_DATA u8 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
+EWRAM_DATA u32 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
 
 static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
 // The arrow sprites in this spritesheet aren't used. The scroll-arrow system provides its own
 // arrow sprites.
-static const u8 sUI_Tiles[] = INCBIN_U8("graphics/interface/ui_learn_move.4bpp");
+static const u32 sUI_Tiles[] = INCBIN_u32("graphics/interface/ui_learn_move.4bpp");
 
 static const struct OamData sHeartSpriteOamData =
 {
@@ -354,12 +354,12 @@ static void DoMoveRelearnerMain(void);
 static void CreateLearnableMovesList(void);
 static void CreateUISprites(void);
 static void CB2_MoveRelearnerMain(void);
-static void Task_WaitForFadeOut(u8 taskId);
+static void Task_WaitForFadeOut(u32 taskId);
 static void CB2_InitLearnMoveReturnFromSelectMove(void);
 static void InitMoveRelearnerBackgroundLayers(void);
 static void AddScrollArrows(void);
-static void HandleInput(u8);
-static void ShowTeachMoveText(u8);
+static void HandleInput(u32);
+static void ShowTeachMoveText(u32);
 static s32 GetCurrentSelectedMove(void);
 static void FreeMoveRelearnerResources(void);
 static void RemoveScrollArrows(void);
@@ -381,7 +381,7 @@ void TeachMoveRelearnerMove(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
-static void Task_WaitForFadeOut(u8 taskId)
+static void Task_WaitForFadeOut(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -468,7 +468,7 @@ static void CB2_MoveRelearnerMain(void)
     UpdatePaletteFade();
 }
 
-static void PrintMessageWithPlaceholders(const u8 *src)
+static void PrintMessageWithPlaceholders(const u32 *src)
 {
     StringExpandPlaceholders(gStringVar4, src);
     MoveRelearnerPrintMessage(gStringVar4);
@@ -734,12 +734,12 @@ static void DoMoveRelearnerMain(void)
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);
-                u8 originalPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
+                u32 originalPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
 
                 StringCopy(gStringVar3, GetMoveName(moveId));
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->moveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove(), sMoveRelearnerStruct->moveSlot);
-                u8 newPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
+                u32 newPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
                 if (!P_SUMMARY_MOVE_RELEARNER_FULL_PP && gOriginSummaryScreenPage != 0 && originalPP < newPP)
                     SetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot, &originalPP);
                 StringCopy(gStringVar2, GetMoveName(GetCurrentSelectedMove()));
@@ -937,7 +937,7 @@ static void RemoveScrollArrows(void)
 static void CreateLearnableMovesList(void)
 {
     s32 i;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u32 nickname[POKEMON_NAME_LENGTH + 1];
 
     sMoveRelearnerStruct->numMenuChoices = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
 
@@ -967,7 +967,7 @@ void MoveRelearnerShowHideHearts(s32 moveId)
     }
     else
     {
-        numHearts = (u8)(gContestEffects[GetMoveContestEffect(moveId)].appeal / 10);
+        numHearts = (u32)(gContestEffects[GetMoveContestEffect(moveId)].appeal / 10);
 
         if (numHearts == 0xFF)
             numHearts = 0;
@@ -981,7 +981,7 @@ void MoveRelearnerShowHideHearts(s32 moveId)
             gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = FALSE;
         }
 
-        numHearts = (u8)(gContestEffects[GetMoveContestEffect(moveId)].jam / 10);
+        numHearts = (u32)(gContestEffects[GetMoveContestEffect(moveId)].jam / 10);
 
         if (numHearts == 0xFF)
             numHearts = 0;

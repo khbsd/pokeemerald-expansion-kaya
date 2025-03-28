@@ -19,7 +19,7 @@ static const u16 sLotteryPrizes[] =
     ITEM_MASTER_BALL,
 };
 
-static u8 GetMatchingDigits(u16, u16);
+static u32 GetMatchingDigits(u16, u16);
 
 void ResetLotteryCorner(void)
 {
@@ -63,7 +63,7 @@ void PickLotteryCornerTicket(void)
             if (!GetMonData(mon, MON_DATA_IS_EGG))
             {
                 u32 otId = GetMonData(mon, MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
+                u32 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
@@ -87,7 +87,7 @@ void PickLotteryCornerTicket(void)
             !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
+                u32 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
@@ -117,10 +117,10 @@ void PickLotteryCornerTicket(void)
     }
 }
 
-static u8 GetMatchingDigits(u16 winNumber, u16 otId)
+static u32 GetMatchingDigits(u16 winNumber, u16 otId)
 {
-    u8 i;
-    u8 matchingDigits = 0;
+    u32 i;
+    u32 matchingDigits = 0;
 
     for (i = 0; i < 5; i++)
     {

@@ -146,7 +146,7 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - the 
 
 DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - no one has their Speed lowered if the set upper switched")
 {
-    u16 speedPlayer, speedOpponent;
+    u32 speedPlayer, speedOpponent;
 
     // We need to make sure Sticky Web user saves for both sides, so it doesn't matter who sets it first.
     PARAMETRIZE { speedPlayer = 5; speedOpponent = 10; }

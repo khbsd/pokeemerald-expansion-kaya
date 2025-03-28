@@ -37,8 +37,8 @@ void DoTimeBasedEvents(void)
 
 static void UpdatePerDay(struct Time *localTime)
 {
-    u16 *days = GetVarPointer(VAR_DAYS);
-    u16 daysSince;
+    u32 *days = GetVarPointer(VAR_DAYS);
+    u32 daysSince;
 
     if (*days != localTime->days && *days <= localTime->days)
     {

@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Swarm boosts Bug-type moves in a pinch", s16 damage)
 {
-    u16 hp;
+    u32 hp;
     PARAMETRIZE { hp = 99; }
     PARAMETRIZE { hp = 33; }
     GIVEN {

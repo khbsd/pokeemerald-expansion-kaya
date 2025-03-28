@@ -22,7 +22,7 @@ void LZDecompressVram(const u32 *src, void *dest)
 // Returns uncompressed size if true, 0 otherwise
 u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize)
 {
-    const u8 *data = ptr;
+    const u32 *data = ptr;
     u32 size;
     // Compressed data must be word aligned
     if (((u32)ptr) & 3)
@@ -167,7 +167,7 @@ void Unused_LZDecompressWramIndirect(const void **src, void *dest)
     LZ77UnCompWram(*src, dest);
 }
 
-static void UNUSED StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
+static void UNUSED StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u32 *src_tiles, u32 *dest_tiles)
 {
     /*
       This function appears to emulate behaviour found in the GB(C) versions regarding how the Pokemon images
@@ -176,8 +176,8 @@ static void UNUSED StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u
       that the result will have each object centered in a 8x8 tile canvas.
     */
     s32 i, j, k, l;
-    u8 *src = src_tiles, *dest = dest_tiles;
-    u8 bottom_off;
+    u32 *src = src_tiles, *dest = dest_tiles;
+    u32 bottom_off;
 
     if (object_size & 1)
     {
@@ -318,7 +318,7 @@ static void UNUSED StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u
 
 u32 GetDecompressedDataSize(const u32 *ptr)
 {
-    const u8 *ptr8 = (const u8 *)ptr;
+    const u32 *ptr8 = (const u32 *)ptr;
     return (ptr8[3] << 16) | (ptr8[2] << 8) | (ptr8[1]);
 }
 

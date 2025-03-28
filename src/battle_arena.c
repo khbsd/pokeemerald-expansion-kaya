@@ -127,7 +127,7 @@ static void (* const sArenaFunctions[])(void) =
     [BATTLE_ARENA_FUNC_GET_TRAINER_NAME] = BufferArenaOpponentName,
 };
 
-static const u16 sShortStreakPrizeItems[] =
+static const u32 sShortStreakPrizeItems[] =
 {
     ITEM_HP_UP,
     ITEM_PROTEIN,
@@ -137,7 +137,7 @@ static const u16 sShortStreakPrizeItems[] =
     ITEM_ZINC,
 };
 
-static const u16 sLongStreakPrizeItems[] =
+static const u32 sLongStreakPrizeItems[] =
 {
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
@@ -290,7 +290,7 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
     int pointsOpponent = 0;
     s8 *mindPoints = gBattleStruct->arenaMindPoints;
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
-    u16 *hpAtStart = gBattleStruct->arenaStartHp;
+    u32 *hpAtStart = gBattleStruct->arenaStartHp;
 
     switch (category)
     {
@@ -345,7 +345,7 @@ void BattleArena_InitPoints(void)
 {
     s8 *mindPoints = gBattleStruct->arenaMindPoints;
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
-    u16 *hpAtStart = gBattleStruct->arenaStartHp;
+    u32 *hpAtStart = gBattleStruct->arenaStartHp;
 
     mindPoints[0] = 0;
     mindPoints[1] = 0;
@@ -415,7 +415,7 @@ void BattleArena_AddSkillPoints(u8 battler)
     }
 }
 
-void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
+void BattleArena_DeductSkillPoints(u8 battler, u32 stringId)
 {
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
 
@@ -447,7 +447,7 @@ void BattleArena_DeductSkillPoints(u8 battler, u16 stringId)
 
 static void UNUSED UpdateHPAtStart(u8 battler)
 {
-    u16 *hpAtStart = gBattleStruct->arenaStartHp;
+    u32 *hpAtStart = gBattleStruct->arenaStartHp;
 
     hpAtStart[battler] = gBattleMons[battler].hp;
     if (hpAtStart[BATTLE_OPPOSITE(battler)] > gBattleMons[BATTLE_OPPOSITE(battler)].hp)

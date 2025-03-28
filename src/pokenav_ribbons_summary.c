@@ -40,11 +40,11 @@ enum
 #define MON_SPRITE_X_OFF -32
 #define MON_SPRITE_Y     104
 
-static const u8 gText_RibbonsF700[] = _("RIBBONS {DYNAMIC 0}");
+static const u32 gText_RibbonsF700[] = _("RIBBONS {DYNAMIC 0}");
 
 struct Pokenav_RibbonsSummaryList
 {
-    u8 unused1[8];
+    u32 unused1[8];
     struct PokenavMonList *monList;
     u16 selectedPos;
     u16 normalRibbonLastRowStart;
@@ -67,7 +67,7 @@ struct Pokenav_RibbonsSummaryMenu
     u16 monSpriteId;
     struct Sprite *bigRibbonSprite;
     u32 unused;
-    u8 tilemapBuffers[2][BG_SCREEN_SIZE];
+    u32 tilemapBuffers[2][BG_SCREEN_SIZE];
 };
 
 // Used for the initial drawing of the ribbons
@@ -118,9 +118,9 @@ static u32 LoopedTask_ExitRibbonsSummaryMenu(s32);
 
 struct
 {
-    u8 numBits; // The number of bits needed to represent numRibbons
-    u8 numRibbons; // Never read. The contest ribbons have 4 (1 for each rank), the rest are just 1 ribbon
-    u8 ribbonId;
+    u32 numBits; // The number of bits needed to represent numRibbons
+    u32 numRibbons; // Never read. The contest ribbons have 4 (1 for each rank), the rest are just 1 ribbon
+    u32 ribbonId;
     bool8 isGiftRibbon;
 } static  const sRibbonData[] =
 {
@@ -378,7 +378,7 @@ static u32 GetRibbonsSummaryMonListCount(void)
     return list->monList->listCount;
 }
 
-static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
+static void GetMonNicknameLevelGender(u32 *nick, u32 *level, u32 *gender)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     struct PokenavMonList *mons = list->monList;
@@ -805,7 +805,7 @@ static void AddRibbonCountWindow(struct Pokenav_RibbonsSummaryMenu *menu)
 
 static void PrintCurrentMonRibbonCount(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+    u32 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
     ConvertIntToDecimalStringN(gStringVar1, GetCurrMonRibbonCount(), STR_CONV_MODE_LEFT_ALIGN, 2);
     DynamicPlaceholderTextUtil_Reset();
@@ -820,7 +820,7 @@ static void PrintRibbonNameAndDescription(struct Pokenav_RibbonsSummaryMenu *men
 {
     s32 i;
     u32 ribbonId = GetRibbonId();
-    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+    u32 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
     FillWindowPixelBuffer(menu->ribbonCountWindowId, PIXEL_FILL(4));
     if (ribbonId < FIRST_GIFT_RIBBON)
@@ -867,15 +867,15 @@ static void AddRibbonSummaryMonNameWindow(struct Pokenav_RibbonsSummaryMenu *men
     PrintRibbbonsSummaryMonInfo(menu);
 }
 
-static const u8 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sGenderlessIconString[] = _("{UNK_SPACER}");
+static const u32 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sGenderlessIconString[] = _("{UNK_SPACER}");
 
 static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    const u8 *genderTxt;
-    u8 *txtPtr;
-    u8 level, gender;
+    const u32 *genderTxt;
+    u32 *txtPtr;
+    u32 level, gender;
     u16 windowId = menu->nameWindowId;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
@@ -928,7 +928,7 @@ static void AddRibbonListIndexWindow(struct Pokenav_RibbonsSummaryMenu *menu)
 static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *menu)
 {
     s32 x;
-    u8 *txtPtr;
+    u32 *txtPtr;
     u32 id = GetRibbonsSummaryCurrentIndex() + 1;
     u32 count = GetRibbonsSummaryMonListCount();
 
@@ -1218,7 +1218,7 @@ static const struct SpriteTemplate sSpriteTemplate_RibbonIconBig =
 // Create dummy sprite to be used for the zoomed in version of the selected ribbon
 static void CreateBigRibbonSprite(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_RibbonIconsBig);
     Pokenav_AllocAndLoadPalettes(sSpritePalettes_RibbonIcons);

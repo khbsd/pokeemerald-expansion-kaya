@@ -49,7 +49,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sTextColors[] = { TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
+static const u32 sTextColors[] = { TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
 
 static void CB2_SetUpPartiesAndStartBattle(void)
 {
@@ -73,7 +73,7 @@ static void CB2_SetUpPartiesAndStartBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
-static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed)
+static void AddTextPrinterForUnionRoomBattle(u32 windowId, const u32 *str, u32 x, u32 y, s32 speed)
 {
     s32 letterSpacing = 0;
     s32 lineSpacing = 1;
@@ -81,7 +81,7 @@ static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 *str, u8 x, u
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
-static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 *str, s32 speed)
+static bool32 PrintUnionRoomBattleMessage(s16 * state, const u32 *str, s32 speed)
 {
     switch (*state)
     {

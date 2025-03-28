@@ -26,7 +26,7 @@ enum {
 };
 
 static void CB2_MysteryEventMenu(void);
-static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed);
+static void PrintMysteryMenuText(u32 windowId, const u32 *text, u32 x, u32 y, s32 speed);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -110,7 +110,7 @@ void CB2_InitMysteryEventMenu(void)
     }
 }
 
-static bool8 GetEventLoadMessage(u8 *dest, u32 status)
+static bool8 GetEventLoadMessage(u32 *dest, u32 status)
 {
     bool8 retVal = TRUE;
 
@@ -306,11 +306,11 @@ static void CB2_MysteryEventMenu(void)
     UpdatePaletteFade();
 }
 
-static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed)
+static void PrintMysteryMenuText(u32 windowId, const u32 *text, u32 x, u32 y, s32 speed)
 {
-    u8 textColor[3];
-    u8 letterSpacing = 0;
-    u8 lineSpacing = 1;
+    u32 textColor[3];
+    u32 letterSpacing = 0;
+    u32 lineSpacing = 1;
     textColor[0] = 1;
     textColor[1] = 2;
     textColor[2] = 3;

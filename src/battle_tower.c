@@ -70,22 +70,22 @@ static void ValidateApprenticesChecksums(void);
 static void SetNextBattleTentOpponent(void);
 static void CopyEReaderTrainerFarewellMessage(void);
 static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
-static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
-static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
-static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId);
-static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId);
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId);
+static void FillTrainerParty(u16 trainerId, u32 firstMonId, u32 monCount);
+static void FillTentTrainerParty_(u16 trainerId, u32 firstMonId, u32 monCount);
+static void FillFactoryFrontierTrainerParty(u16 trainerId, u32 firstMonId);
+static void FillFactoryTentTrainerParty(u16 trainerId, u32 firstMonId);
+static u32 GetFrontierTrainerFixedIvs(u16 trainerId);
 static void FillPartnerParty(u16 trainerId);
 #if FREE_BATTLE_TOWER_E_READER == FALSE
 static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 #endif //FREE_BATTLE_TOWER_E_READER
-static u8 SetTentPtrsGetLevel(void);
+static u32 SetTentPtrsGetLevel(void);
 
 #include "data/battle_frontier/battle_frontier_trainer_mons.h"
 #include "data/battle_frontier/battle_frontier_trainers.h"
 #include "data/battle_frontier/battle_frontier_mons.h"
 
-const u8 gTowerMaleFacilityClasses[30] =
+const u32 gTowerMaleFacilityClasses[30] =
 {
     FACILITY_CLASS_RUIN_MANIAC,
     FACILITY_CLASS_TUBER_M,
@@ -119,7 +119,7 @@ const u8 gTowerMaleFacilityClasses[30] =
     FACILITY_CLASS_HIKER
 };
 
-const u8 gTowerFemaleFacilityClasses[20] =
+const u32 gTowerFemaleFacilityClasses[20] =
 {
     FACILITY_CLASS_AROMA_LADY,
     FACILITY_CLASS_TUBER_F,
@@ -202,7 +202,7 @@ const u16 gTowerFemaleTrainerGfxIds[20] =
 };
 
 // Excludes the unused RS_FACILITY_CLASS_BOARDER_1 and _2
-static const u8 sRubyFacilityClassToEmerald[RS_FACILITY_CLASSES_COUNT - 2][2] =
+static const u32 sRubyFacilityClassToEmerald[RS_FACILITY_CLASSES_COUNT - 2][2] =
 {
     {RS_FACILITY_CLASS_AQUA_LEADER_ARCHIE, FACILITY_CLASS_AQUA_LEADER_ARCHIE},
     {RS_FACILITY_CLASS_AQUA_GRUNT_M, FACILITY_CLASS_AQUA_GRUNT_M},
@@ -288,332 +288,332 @@ static const u8 sRubyFacilityClassToEmerald[RS_FACILITY_CLASSES_COUNT - 2][2] =
     BattleFrontier_BattleTowerMultiPartnerRoom_Text_##name##Accept,     \
     BattleFrontier_BattleTowerMultiPartnerRoom_Text_##name##Reject
 
-static const u8 *const sPartnerApprenticeTexts1[] =
+static const u32 *const sPartnerApprenticeTexts1[] =
 {
     PARTNER_TEXTS(Apprentice1)
 };
 
-static const u8 *const sPartnerApprenticeTexts2[] =
+static const u32 *const sPartnerApprenticeTexts2[] =
 {
     PARTNER_TEXTS(Apprentice2)
 };
 
-static const u8 *const sPartnerApprenticeTexts3[] =
+static const u32 *const sPartnerApprenticeTexts3[] =
 {
     PARTNER_TEXTS(Apprentice3)
 };
 
-static const u8 *const sPartnerApprenticeTexts4[] =
+static const u32 *const sPartnerApprenticeTexts4[] =
 {
     PARTNER_TEXTS(Apprentice4)
 };
 
-static const u8 *const sPartnerApprenticeTexts5[] =
+static const u32 *const sPartnerApprenticeTexts5[] =
 {
     PARTNER_TEXTS(Apprentice5)
 };
 
-static const u8 *const sPartnerApprenticeTexts6[] =
+static const u32 *const sPartnerApprenticeTexts6[] =
 {
      PARTNER_TEXTS(Apprentice6)
 };
 
-static const u8 *const sPartnerApprenticeTexts7[] =
+static const u32 *const sPartnerApprenticeTexts7[] =
 {
      PARTNER_TEXTS(Apprentice7)
 };
 
-static const u8 *const sPartnerApprenticeTexts8[] =
+static const u32 *const sPartnerApprenticeTexts8[] =
 {
      PARTNER_TEXTS(Apprentice8)
 };
 
-static const u8 *const sPartnerApprenticeTexts9[] =
+static const u32 *const sPartnerApprenticeTexts9[] =
 {
      PARTNER_TEXTS(Apprentice9)
 };
 
-static const u8 *const sPartnerApprenticeTexts10[] =
+static const u32 *const sPartnerApprenticeTexts10[] =
 {
      PARTNER_TEXTS(Apprentice10)
 };
 
-static const u8 *const sPartnerApprenticeTexts11[] =
+static const u32 *const sPartnerApprenticeTexts11[] =
 {
      PARTNER_TEXTS(Apprentice11)
 };
 
-static const u8 *const sPartnerApprenticeTexts12[] =
+static const u32 *const sPartnerApprenticeTexts12[] =
 {
      PARTNER_TEXTS(Apprentice12)
 };
 
-static const u8 *const sPartnerApprenticeTexts13[] =
+static const u32 *const sPartnerApprenticeTexts13[] =
 {
      PARTNER_TEXTS(Apprentice13)
 };
 
-static const u8 *const sPartnerApprenticeTexts14[] =
+static const u32 *const sPartnerApprenticeTexts14[] =
 {
      PARTNER_TEXTS(Apprentice14)
 };
 
-static const u8 *const sPartnerApprenticeTexts15[] =
+static const u32 *const sPartnerApprenticeTexts15[] =
 {
      PARTNER_TEXTS(Apprentice15)
 };
 
-static const u8 *const sPartnerApprenticeTexts16[] =
+static const u32 *const sPartnerApprenticeTexts16[] =
 {
      PARTNER_TEXTS(Apprentice16)
 };
 
-static const u8 *const sPartnerTextsLass[] =
+static const u32 *const sPartnerTextsLass[] =
 {
     PARTNER_TEXTS(Lass)
 };
 
-static const u8 *const sPartnerTextsYoungster[] =
+static const u32 *const sPartnerTextsYoungster[] =
 {
     PARTNER_TEXTS(Youngster)
 };
 
-static const u8 *const sPartnerTextsHiker[] =
+static const u32 *const sPartnerTextsHiker[] =
 {
     PARTNER_TEXTS(Hiker)
 };
 
-static const u8 *const sPartnerTextsBeauty[] =
+static const u32 *const sPartnerTextsBeauty[] =
 {
     PARTNER_TEXTS(Beauty)
 };
 
-static const u8 *const sPartnerTextsFisherman[] =
+static const u32 *const sPartnerTextsFisherman[] =
 {
     PARTNER_TEXTS(Fisherman)
 };
 
-static const u8 *const sPartnerTextsLady[] =
+static const u32 *const sPartnerTextsLady[] =
 {
     PARTNER_TEXTS(Lady)
 };
 
-static const u8 *const sPartnerTextsCyclingTriathleteF[] =
+static const u32 *const sPartnerTextsCyclingTriathleteF[] =
 {
     PARTNER_TEXTS(CyclingTriathleteF)
 };
 
-static const u8 *const sPartnerTextsBugCatcher[] =
+static const u32 *const sPartnerTextsBugCatcher[] =
 {
     PARTNER_TEXTS(BugCatcher)
 };
 
-static const u8 *const sPartnerTextsSchoolKidM[] =
+static const u32 *const sPartnerTextsSchoolKidM[] =
 {
     PARTNER_TEXTS(SchoolKidM)
 };
 
-static const u8 *const sPartnerTextsRichBoy[] =
+static const u32 *const sPartnerTextsRichBoy[] =
 {
     PARTNER_TEXTS(RichBoy)
 };
 
-static const u8 *const sPartnerTextsBlackBelt[] =
+static const u32 *const sPartnerTextsBlackBelt[] =
 {
     PARTNER_TEXTS(BlackBelt)
 };
 
-static const u8 *const sPartnerTextsTuberF[] =
+static const u32 *const sPartnerTextsTuberF[] =
 {
     PARTNER_TEXTS(TuberF)
 };
 
-static const u8 *const sPartnerTextsHexManiac[] =
+static const u32 *const sPartnerTextsHexManiac[] =
 {
     PARTNER_TEXTS(HexManiac)
 };
 
-static const u8 *const sPartnerTextsPkmnBreederM[] =
+static const u32 *const sPartnerTextsPkmnBreederM[] =
 {
     PARTNER_TEXTS(PkmnBreederM)
 };
 
-static const u8 *const sPartnerTextsRunningTriathleteF[] =
+static const u32 *const sPartnerTextsRunningTriathleteF[] =
 {
     PARTNER_TEXTS(RunningTriathleteF)
 };
 
-static const u8 *const sPartnerTextsRunningTriathleteM[] =
+static const u32 *const sPartnerTextsRunningTriathleteM[] =
 {
     PARTNER_TEXTS(RunningTriathleteM)
 };
 
-static const u8 *const sPartnerTextsBattleGirl[] =
+static const u32 *const sPartnerTextsBattleGirl[] =
 {
     PARTNER_TEXTS(BattleGirl)
 };
 
-static const u8 *const sPartnerTextsCyclingTriathleteM[] =
+static const u32 *const sPartnerTextsCyclingTriathleteM[] =
 {
     PARTNER_TEXTS(CyclingTriathleteM)
 };
 
-static const u8 *const sPartnerTextsTuberM[] =
+static const u32 *const sPartnerTextsTuberM[] =
 {
     PARTNER_TEXTS(TuberM)
 };
 
-static const u8 *const sPartnerTextsGuitarist[] =
+static const u32 *const sPartnerTextsGuitarist[] =
 {
     PARTNER_TEXTS(Guitarist)
 };
 
-static const u8 *const sPartnerTextsGentleman[] =
+static const u32 *const sPartnerTextsGentleman[] =
 {
     PARTNER_TEXTS(Gentleman)
 };
 
-static const u8 *const sPartnerTextsPokefanM[] =
+static const u32 *const sPartnerTextsPokefanM[] =
 {
     PARTNER_TEXTS(PokefanM)
 };
 
-static const u8 *const sPartnerTextsExpertM[] =
+static const u32 *const sPartnerTextsExpertM[] =
 {
     PARTNER_TEXTS(ExpertM)
 };
 
-static const u8 *const sPartnerTextsExpertF[] =
+static const u32 *const sPartnerTextsExpertF[] =
 {
     PARTNER_TEXTS(ExpertF)
 };
 
-static const u8 *const sPartnerTextsDragonTamer[] =
+static const u32 *const sPartnerTextsDragonTamer[] =
 {
     PARTNER_TEXTS(DragonTamer)
 };
 
-static const u8 *const sPartnerTextsBirdKeeper[] =
+static const u32 *const sPartnerTextsBirdKeeper[] =
 {
     PARTNER_TEXTS(BirdKeeper)
 };
 
-static const u8 *const sPartnerTextsNinjaBoy[] =
+static const u32 *const sPartnerTextsNinjaBoy[] =
 {
     PARTNER_TEXTS(NinjaBoy)
 };
 
-static const u8 *const sPartnerTextsParasolLady[] =
+static const u32 *const sPartnerTextsParasolLady[] =
 {
     PARTNER_TEXTS(ParasolLady)
 };
 
-static const u8 *const sPartnerTextsBugManiac[] =
+static const u32 *const sPartnerTextsBugManiac[] =
 {
     PARTNER_TEXTS(BugManiac)
 };
 
-static const u8 *const sPartnerTextsSailor[] =
+static const u32 *const sPartnerTextsSailor[] =
 {
     PARTNER_TEXTS(Sailor)
 };
 
-static const u8 *const sPartnerTextsCollector[] =
+static const u32 *const sPartnerTextsCollector[] =
 {
     PARTNER_TEXTS(Collector)
 };
 
-static const u8 *const sPartnerTextsPkmnRangerM[] =
+static const u32 *const sPartnerTextsPkmnRangerM[] =
 {
     PARTNER_TEXTS(PkmnRangerM)
 };
 
-static const u8 *const sPartnerTextsPkmnRangerF[] =
+static const u32 *const sPartnerTextsPkmnRangerF[] =
 {
     PARTNER_TEXTS(PkmnRangerF)
 };
 
-static const u8 *const sPartnerTextsAromaLady[] =
+static const u32 *const sPartnerTextsAromaLady[] =
 {
     PARTNER_TEXTS(AromaLady)
 };
 
-static const u8 *const sPartnerTextsRuinManiac[] =
+static const u32 *const sPartnerTextsRuinManiac[] =
 {
     PARTNER_TEXTS(RuinManiac)
 };
 
-static const u8 *const sPartnerTextsCoolTrainerM[] =
+static const u32 *const sPartnerTextsCoolTrainerM[] =
 {
     PARTNER_TEXTS(CoolTrainerM)
 };
 
-static const u8 *const sPartnerTextsCoolTrainerF[] =
+static const u32 *const sPartnerTextsCoolTrainerF[] =
 {
     PARTNER_TEXTS(CoolTrainerF)
 };
 
-static const u8 *const sPartnerTextsPokemaniac[] =
+static const u32 *const sPartnerTextsPokemaniac[] =
 {
     PARTNER_TEXTS(Pokemaniac)
 };
 
-static const u8 *const sPartnerTextsKindler[] =
+static const u32 *const sPartnerTextsKindler[] =
 {
     PARTNER_TEXTS(Kindler)
 };
 
-static const u8 *const sPartnerTextsCamper[] =
+static const u32 *const sPartnerTextsCamper[] =
 {
     PARTNER_TEXTS(Camper)
 };
 
-static const u8 *const sPartnerTextsPicnicker[] =
+static const u32 *const sPartnerTextsPicnicker[] =
 {
     PARTNER_TEXTS(Picnicker)
 };
 
-static const u8 *const sPartnerTextsPsychicM[] =
+static const u32 *const sPartnerTextsPsychicM[] =
 {
     PARTNER_TEXTS(PsychicM)
 };
 
-static const u8 *const sPartnerTextsPsychicF[] =
+static const u32 *const sPartnerTextsPsychicF[] =
 {
     PARTNER_TEXTS(PsychicF)
 };
 
-static const u8 *const sPartnerTextsSchoolKidF[] =
+static const u32 *const sPartnerTextsSchoolKidF[] =
 {
     PARTNER_TEXTS(SchoolKidF)
 };
 
-static const u8 *const sPartnerTextsPkmnBreederF[] =
+static const u32 *const sPartnerTextsPkmnBreederF[] =
 {
     PARTNER_TEXTS(PkmnBreederF)
 };
 
-static const u8 *const sPartnerTextsPokefanF[] =
+static const u32 *const sPartnerTextsPokefanF[] =
 {
     PARTNER_TEXTS(PokefanF)
 };
 
-static const u8 *const sPartnerTextsSwimmerF[] =
+static const u32 *const sPartnerTextsSwimmerF[] =
 {
     PARTNER_TEXTS(SwimmerF)
 };
 
-static const u8 *const sPartnerTextsSwimmingTriathleteM[] =
+static const u32 *const sPartnerTextsSwimmingTriathleteM[] =
 {
     PARTNER_TEXTS(SwimmingTriathleteM)
 };
 
-static const u8 *const sPartnerTextsSwimmingTriathleteF[] =
+static const u32 *const sPartnerTextsSwimmingTriathleteF[] =
 {
     PARTNER_TEXTS(SwimmingTriathleteF)
 };
 
-static const u8 *const sPartnerTextsSwimmerM[] =
+static const u32 *const sPartnerTextsSwimmerM[] =
 {
     PARTNER_TEXTS(SwimmerM)
 };
@@ -621,7 +621,7 @@ static const u8 *const sPartnerTextsSwimmerM[] =
 struct
 {
     u32 facilityClass;
-    const u8 *const *strings;
+    const u32 *const *strings;
 } static const sPartnerTrainerTextTables[] =
 {
     {FACILITY_CLASS_LASS,                  sPartnerTextsLass},
@@ -676,7 +676,7 @@ struct
     {FACILITY_CLASS_SWIMMER_M,             sPartnerTextsSwimmerM}
 };
 
-static const u8 *const *const sPartnerApprenticeTextTables[NUM_APPRENTICES] =
+static const u32 *const *const sPartnerApprenticeTextTables[NUM_APPRENTICES] =
 {
     sPartnerApprenticeTexts1,
     sPartnerApprenticeTexts2,
@@ -741,13 +741,13 @@ static const u32 sWinStreakMasks[][2] =
 };
 
 // The challenge number at which an Apprentice can appear, depending on how many of their questions were answered
-static const u8 sApprenticeChallengeThreshold[MAX_APPRENTICE_QUESTIONS] =
+static const u32 sApprenticeChallengeThreshold[MAX_APPRENTICE_QUESTIONS] =
 {
     1, 2, 3, 4, 5, 8, 9, 10, 11, 12
 };
 
 // Unclear why this was duplicated
-static const u8 sBattleTowerPartySizes2[] =
+static const u32 sBattleTowerPartySizes2[] =
 {
     [FRONTIER_MODE_SINGLES]     = FRONTIER_PARTY_SIZE,
     [FRONTIER_MODE_DOUBLES]     = FRONTIER_DOUBLES_PARTY_SIZE,
@@ -784,7 +784,7 @@ static const u16 sFrontierTrainerIdRangesHard[][2] =
 // Unknown, unused data
 static const u16 sUnused[] = { 179, 141, 200, 183 };
 
-static const u8 sBattleTowerPartySizes[FRONTIER_MODE_COUNT] =
+static const u32 sBattleTowerPartySizes[FRONTIER_MODE_COUNT] =
 {
     [FRONTIER_MODE_SINGLES]     = FRONTIER_PARTY_SIZE,
     [FRONTIER_MODE_DOUBLES]     = FRONTIER_DOUBLES_PARTY_SIZE,
@@ -893,8 +893,8 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     s32 trainerIds[9];
     s32 idsCount = 0;
     s32 winStreak = 0;
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     if (VarGet(VAR_FRONTIER_FACILITY) != FRONTIER_FACILITY_TOWER)
         return FALSE;
@@ -1008,7 +1008,7 @@ static void SetNextFacilityOpponent(void)
     }
 }
 
-u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
+u16 GetRandomScaledFrontierTrainerId(u32 challengeNum, u32 battleNum)
 {
     u16 trainerId;
 
@@ -1036,7 +1036,7 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
     return trainerId;
 }
 
-static void UNUSED GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
+static void UNUSED GetRandomScaledFrontierTrainerIdRange(u32 challengeNum, u32 battleNum, u16 *trainerIdPtr, u32 *rangePtr)
 {
     u16 trainerId, range;
 
@@ -1065,11 +1065,11 @@ static void UNUSED GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 bat
     *rangePtr = range;
 }
 
-void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
+void SetBattleFacilityTrainerGfxId(u16 trainerId, u32 tempVarId)
 {
     u32 i;
-    u8 facilityClass;
-    u8 trainerObjectGfxId;
+    u32 facilityClass;
+    u32 trainerObjectGfxId;
 
     SetFacilityPtrsGetLevel();
 #if FREE_BATTLE_TOWER_E_READER == FALSE
@@ -1169,7 +1169,7 @@ void SetEReaderTrainerGfxId(void)
 u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
 {
     u32 i;
-    u8 facilityClass;
+    u32 facilityClass;
     u16 trainerObjectGfxId;
 
     SetFacilityPtrsGetLevel();
@@ -1316,7 +1316,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
     gSaveBlock2Ptr->frontier.towerRecords[slotIds[i]] = *newRecord;
 }
 
-u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
+u32 GetFrontierTrainerFrontSpriteId(u16 trainerId)
 {
     SetFacilityPtrsGetLevel();
 
@@ -1352,9 +1352,9 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
     }
 }
 
-u8 GetFrontierOpponentClass(u16 trainerId)
+u32 GetFrontierOpponentClass(u16 trainerId)
 {
-    u8 trainerClass = 0;
+    u32 trainerClass = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
 
@@ -1404,9 +1404,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     return trainerClass;
 }
 
-static u8 GetFrontierTrainerFacilityClass(u16 trainerId)
+static u32 GetFrontierTrainerFacilityClass(u16 trainerId)
 {
-    u8 facilityClass;
+    u32 facilityClass;
     SetFacilityPtrsGetLevel();
 
     if (trainerId == TRAINER_EREADER)
@@ -1439,7 +1439,7 @@ static u8 GetFrontierTrainerFacilityClass(u16 trainerId)
     return facilityClass;
 }
 
-void GetFrontierTrainerName(u8 *dst, u16 trainerId)
+void GetFrontierTrainerName(u32 *dst, u16 trainerId)
 {
     s32 i = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
@@ -1483,7 +1483,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     }
     else
     {
-        u8 id, language;
+        u32 id, language;
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
@@ -1506,7 +1506,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 static bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
     u32 i;
-    u8 facilityClass;
+    u32 facilityClass;
 
     SetFacilityPtrsGetLevel();
     if (trainerId == TRAINER_EREADER)
@@ -1546,28 +1546,28 @@ static bool8 IsFrontierTrainerFemale(u16 trainerId)
         return FALSE;
 }
 
-void FillFrontierTrainerParty(u8 monsCount)
+void FillFrontierTrainerParty(u32 monsCount)
 {
     ZeroEnemyPartyMons();
     FillTrainerParty(TRAINER_BATTLE_PARAM.opponentA, 0, monsCount);
 }
 
-void FillFrontierTrainersParties(u8 monsCount)
+void FillFrontierTrainersParties(u32 monsCount)
 {
     ZeroEnemyPartyMons();
     FillTrainerParty(TRAINER_BATTLE_PARAM.opponentA, 0, monsCount);
     FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB, 3, monsCount);
 }
 
-static void FillTentTrainerParty(u8 monsCount)
+static void FillTentTrainerParty(u32 monsCount)
 {
     ZeroEnemyPartyMons();
     FillTentTrainerParty_(TRAINER_BATTLE_PARAM.opponentA, 0, monsCount);
 }
 
-void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)
+void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u32 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)
 {
-    u8 ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
+    u32 ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
     u16 move;
     u32 personality = 0, ability, friendship, j;
 
@@ -1653,13 +1653,13 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
     CalculateMonStats(dst);
 }
 
-static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
+static void FillTrainerParty(u16 trainerId, u32 firstMonId, u32 monCount)
 {
     s32 i, j;
     u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
-    u8 level = SetFacilityPtrsGetLevel();
-    u8 fixedIV = 0;
-    u8 bfMonCount;
+    u32 level = SetFacilityPtrsGetLevel();
+    u32 fixedIV = 0;
+    u32 bfMonCount;
     const u16 *monSet = NULL;
     u32 otID = 0;
 
@@ -1762,9 +1762,9 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)
 {
-    u8 level = SetFacilityPtrsGetLevel();
+    u32 level = SetFacilityPtrsGetLevel();
     const u16 *monSet = gFacilityTrainers[trainerId].monSet;
-    u8 numMons = 0;
+    u32 numMons = 0;
     u32 monId = monSet[numMons];
 
     while (monId != 0xFFFF)
@@ -1794,24 +1794,24 @@ static void FillFactoryTrainerParty(void)
         FillFactoryTentTrainerParty(TRAINER_BATTLE_PARAM.opponentA, 0);
 }
 
-static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
+static void FillFactoryFrontierTrainerParty(u16 trainerId, u32 firstMonId)
 {
-    u8 i;
-    u8 level;
-    u8 fixedIV;
+    u32 i;
+    u32 level;
+    u32 fixedIV;
     u32 otID;
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
     #ifdef BUGFIX
-        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-        u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+        u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+        u32 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     #else
-        u8 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-        u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / FRONTIER_STAGES_PER_CHALLENGE;
+        u32 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+        u32 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / FRONTIER_STAGES_PER_CHALLENGE;
     #endif
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < FRONTIER_STAGES_PER_CHALLENGE - 1)
             fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
@@ -1847,11 +1847,11 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     }
 }
 
-static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
+static void FillFactoryTentTrainerParty(u16 trainerId, u32 firstMonId)
 {
-    u8 i;
-    u8 level = TENT_MIN_LEVEL;
-    u8 fixedIV = 0;
+    u32 i;
+    u32 level = TENT_MIN_LEVEL;
+    u32 fixedIV = 0;
     u32 otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -1952,7 +1952,7 @@ static void HandleSpecialTrainerBattleEnd(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-static void Task_StartBattleAfterTransition(u8 taskId)
+static void Task_StartBattleAfterTransition(u32 taskId)
 {
     if (IsBattleTransitionDone() == TRUE)
     {
@@ -2111,8 +2111,8 @@ void DoSpecialTrainerBattle(void)
 
 static void SaveCurrentWinStreak(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
     if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < winStreak)
@@ -2122,7 +2122,7 @@ static void SaveCurrentWinStreak(void)
 static void SaveBattleTowerRecord(void)
 {
     s32 i;
-    u8 lvlMode, battleMode, class;
+    u32 lvlMode, battleMode, class;
     struct EmeraldBattleTowerRecord *playerRecord = &gSaveBlock2Ptr->frontier.towerPlayer;
 
     ClearBattleTowerRecord(playerRecord);
@@ -2538,7 +2538,7 @@ static void ShowPartnerCandidateMessage(void)
     // Trainer is a former/record-mixed Apprentice, do Apprentice message
     else
     {
-        u8 apprenticeId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
+        u32 apprenticeId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
         ShowFieldMessage(sPartnerApprenticeTextTables[apprenticeId][gSpecialVar_0x8005]);
     }
 }
@@ -2647,7 +2647,7 @@ static void SetMultiPartnerGfx(void)
 static void SetTowerInterviewData(void)
 {
     s32 i;
-    u8 text[32];
+    u32 text[32];
 
     if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_SINGLES)
         return;
@@ -2715,7 +2715,7 @@ static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
         ((u32 *)record)[i] = 0;
 }
 
-u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
+u16 GetCurrentBattleTowerWinStreak(u32 lvlMode, u32 battleMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
 
@@ -2725,9 +2725,9 @@ u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
         return winStreak;
 }
 
-static u8 GetMonCountForBattleMode(u8 battleMode)
+static u32 GetMonCountForBattleMode(u32 battleMode)
 {
-    u8 partySizes[ARRAY_COUNT(sBattleTowerPartySizes)];
+    u32 partySizes[ARRAY_COUNT(sBattleTowerPartySizes)];
     memcpy(partySizes, sBattleTowerPartySizes, sizeof(sBattleTowerPartySizes));
 
     if (battleMode < ARRAY_COUNT(sBattleTowerPartySizes))
@@ -2738,8 +2738,8 @@ static u8 GetMonCountForBattleMode(u8 battleMode)
 
 struct RibbonCounter
 {
-    u8 partyIndex;
-    u8 count;
+    u32 partyIndex;
+    u32 count;
 };
 
 static void AwardBattleTowerRibbons(void)
@@ -2751,10 +2751,10 @@ static void AwardBattleTowerRibbons(void)
 #else
     struct RibbonCounter ribbons[3]; // BUG: 4 Pokémon can receive ribbons in a double battle mode.
 #endif
-    u8 ribbonType = 0;
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 monCount = GetMonCountForBattleMode(battleMode);
+    u32 ribbonType = 0;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 monCount = GetMonCountForBattleMode(battleMode);
 
     if (lvlMode != FRONTIER_LVL_50)
         ribbonType = MON_DATA_VICTORY_RIBBON;
@@ -2838,7 +2838,7 @@ static void UNUSED FillEReaderTrainerWithPlayerData(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-u8 GetEreaderTrainerFrontSpriteId(void)
+u32 GetEreaderTrainerFrontSpriteId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gFacilityClassToPicIndex[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
@@ -2847,7 +2847,7 @@ u8 GetEreaderTrainerFrontSpriteId(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-u8 GetEreaderTrainerClassId(void)
+u32 GetEreaderTrainerClassId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
@@ -2856,7 +2856,7 @@ u8 GetEreaderTrainerClassId(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-void GetEreaderTrainerName(u8 *dst)
+void GetEreaderTrainerName(u32 *dst)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     s32 i;
@@ -2965,7 +2965,7 @@ static void FillPartnerParty(u16 trainerId)
     u32 ivs, level, personality;
     u16 monId;
     u32 otID;
-    u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
+    u32 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
     s32 ball = -1;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
@@ -2978,7 +2978,7 @@ static void FillPartnerParty(u16 trainerId)
         for (i = 0; i < 3 && i < gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].partySize; i++)
         {
             const struct TrainerMon *partyData = gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].party;
-            const u8 *partnerName = gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
+            const u32 *partnerName = gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
 
             for (k = 0; partnerName[k] != EOS && k < 3; k++)
             {
@@ -3249,7 +3249,7 @@ static void ValidateApprenticesChecksums(void)
     }
 }
 
-void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
+void GetBattleTowerTrainerLanguage(u32 *dst, u16 trainerId)
 {
     if (trainerId == TRAINER_EREADER)
     {
@@ -3275,7 +3275,7 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
     }
 }
 
-u8 SetFacilityPtrsGetLevel(void)
+u32 SetFacilityPtrsGetLevel(void)
 {
     if (gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_TENT)
     {
@@ -3289,9 +3289,9 @@ u8 SetFacilityPtrsGetLevel(void)
     }
 }
 
-u8 GetFrontierEnemyMonLevel(u8 lvlMode)
+u32 GetFrontierEnemyMonLevel(u32 lvlMode)
 {
-    u8 level;
+    u32 level;
 
     switch (lvlMode)
     {
@@ -3330,9 +3330,9 @@ s32 GetHighestLevelInPlayerParty(void)
 
 // Frontier Trainer parties are roughly scaled in difficulty with higher trainer IDs, so scale IVs as well
 // Duplicated in Battle Dome as GetDomeTrainerMonIvs
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
+static u32 GetFrontierTrainerFixedIvs(u16 trainerId)
 {
-    u8 fixedIv;
+    u32 fixedIv;
 
     if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
         fixedIv = 3;
@@ -3370,9 +3370,9 @@ static u16 GetBattleTentTrainerId(void)
         return 0;
 }
 
-static u8 SetTentPtrsGetLevel(void)
+static u32 SetTentPtrsGetLevel(void)
 {
-    u8 level = TENT_MIN_LEVEL;
+    u32 level = TENT_MIN_LEVEL;
     u32 facility = VarGet(VAR_FRONTIER_FACILITY);
 
     if (facility == FRONTIER_FACILITY_FACTORY)
@@ -3424,13 +3424,13 @@ static void SetNextBattleTentOpponent(void)
        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = TRAINER_BATTLE_PARAM.opponentA;
 }
 
-static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
+static void FillTentTrainerParty_(u16 trainerId, u32 firstMonId, u32 monCount)
 {
     s32 i, j;
     u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
-    u8 level = SetTentPtrsGetLevel();
-    u8 fixedIV = 0;
-    u8 bfMonCount;
+    u32 level = SetTentPtrsGetLevel();
+    u32 fixedIV = 0;
+    u32 bfMonCount;
     const u16 *monSet = NULL;
     u32 otID = 0;
     u16 monId;
@@ -3493,10 +3493,10 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
     }
 }
 
-u16 FacilityClassToGraphicsId(u8 facilityClass)
+u16 FacilityClassToGraphicsId(u32 facilityClass)
 {
     u16 trainerObjectGfxId;
-    u8 i;
+    u32 i;
 
     // Search male classes.
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses); i++)
@@ -3527,7 +3527,7 @@ u16 FacilityClassToGraphicsId(u8 facilityClass)
     }
 }
 
-bool32 ValidateBattleTowerRecord(u8 recordId) // unused
+bool32 ValidateBattleTowerRecord(u32 recordId) // unused
 {
     s32 i;
     u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
@@ -3559,7 +3559,7 @@ void TrySetLinkBattleTowerEnemyPartyLevel(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
     {
         s32 i;
-        u8 enemyLevel = SetFacilityPtrsGetLevel();
+        u32 enemyLevel = SetFacilityPtrsGetLevel();
 
         for (i = 0; i < PARTY_SIZE; i++)
         {

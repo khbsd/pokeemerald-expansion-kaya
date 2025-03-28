@@ -56,7 +56,7 @@
 
 struct TransitionData
 {
-    vu8 VBlank_DMA;
+    vu32 VBlank_DMA;
     u16 WININ;
     u16 WINOUT;
     u16 WIN0H;
@@ -79,9 +79,9 @@ struct TransitionData
 
 struct RectangularSpiralLine
 {
-    u8 state;
+    u32 state;
     s16 position;
-    u8 moveIdx;
+    u32 moveIdx;
     s16 reboundPosition;
     bool8 outward;
 };
@@ -94,39 +94,39 @@ static bool8 Transition_WaitForIntro(struct Task *);
 static bool8 Transition_StartMain(struct Task *);
 static bool8 Transition_WaitForMain(struct Task *);
 
-static void LaunchBattleTransitionTask(u8);
-static void Task_BattleTransition(u8);
-static void Task_Intro(u8);
-static void Task_Blur(u8);
-static void Task_Swirl(u8);
-static void Task_Shuffle(u8);
-static void Task_BigPokeball(u8);
-static void Task_PokeballsTrail(u8);
-static void Task_ClockwiseWipe(u8);
-static void Task_Ripple(u8);
-static void Task_Wave(u8);
-static void Task_Slice(u8);
-static void Task_WhiteBarsFade(u8);
-static void Task_GridSquares(u8);
-static void Task_AngledWipes(u8);
-static void Task_Mugshot(u8);
-static void Task_Aqua(u8);
-static void Task_Magma(u8);
-static void Task_Regice(u8);
-static void Task_Registeel(u8);
-static void Task_Regirock(u8);
-static void Task_Kyogre(u8);
-static void Task_Groudon(u8);
-static void Task_Rayquaza(u8);
-static void Task_ShredSplit(u8);
-static void Task_Blackhole(u8);
-static void Task_BlackholePulsate(u8);
-static void Task_RectangularSpiral(u8);
-static void Task_FrontierLogoWiggle(u8);
-static void Task_FrontierLogoWave(u8);
-static void Task_FrontierSquares(u8);
-static void Task_FrontierSquaresScroll(u8);
-static void Task_FrontierSquaresSpiral(u8);
+static void LaunchBattleTransitionTask(u32);
+static void Task_BattleTransition(u32);
+static void Task_Intro(u32);
+static void Task_Blur(u32);
+static void Task_Swirl(u32);
+static void Task_Shuffle(u32);
+static void Task_BigPokeball(u32);
+static void Task_PokeballsTrail(u32);
+static void Task_ClockwiseWipe(u32);
+static void Task_Ripple(u32);
+static void Task_Wave(u32);
+static void Task_Slice(u32);
+static void Task_WhiteBarsFade(u32);
+static void Task_GridSquares(u32);
+static void Task_AngledWipes(u32);
+static void Task_Mugshot(u32);
+static void Task_Aqua(u32);
+static void Task_Magma(u32);
+static void Task_Regice(u32);
+static void Task_Registeel(u32);
+static void Task_Regirock(u32);
+static void Task_Kyogre(u32);
+static void Task_Groudon(u32);
+static void Task_Rayquaza(u32);
+static void Task_ShredSplit(u32);
+static void Task_Blackhole(u32);
+static void Task_BlackholePulsate(u32);
+static void Task_RectangularSpiral(u32);
+static void Task_FrontierLogoWiggle(u32);
+static void Task_FrontierLogoWave(u32);
+static void Task_FrontierSquares(u32);
+static void Task_FrontierSquaresScroll(u32);
+static void Task_FrontierSquaresSpiral(u32);
 static void VBlankCB_BattleTransition(void);
 static void VBlankCB_Swirl(void);
 static void HBlankCB_Swirl(void);
@@ -285,18 +285,18 @@ static bool8 MugshotTrainerPic_SlideSlow(struct Sprite *);
 static bool8 MugshotTrainerPic_SlideOffscreen(struct Sprite *);
 
 static s16 sDebug_RectangularSpiralData;
-static u8 sTestingTransitionId;
-static u8 sTestingTransitionState;
+static u32 sTestingTransitionId;
+static u32 sTestingTransitionState;
 static struct RectangularSpiralLine sRectangularSpiralLines[4];
 
 EWRAM_DATA static struct TransitionData *sTransitionData = NULL;
 
 static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
 static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
-static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
+static const u32 sPokeball_Gfx[] = INCBIN_u32("graphics/battle_transitions/pokeball.4bpp");
 static const u32 sEliteFour_Tileset[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-static const u8 sUnusedBrendan_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
-static const u8 sUnusedLass_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
+static const u32 sUnusedBrendan_Gfx[] = INCBIN_u32("graphics/battle_transitions/unused_brendan.4bpp");
+static const u32 sUnusedLass_Gfx[] = INCBIN_u32("graphics/battle_transitions/unused_lass.4bpp");
 static const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
 static const u16 sEvilTeam_Palette[] = INCBIN_U16("graphics/battle_transitions/evil_team.gbapal");
 static const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
@@ -563,7 +563,7 @@ static const TransitionStateFunc sShredSplit_Funcs[] =
     ShredSplit_End
 };
 
-static const u8 sShredSplit_SectionYCoords[] = {39, DISPLAY_HEIGHT - 41};
+static const u32 sShredSplit_SectionYCoords[] = {39, DISPLAY_HEIGHT - 41};
 static const s16 sShredSplit_SectionMoveDirs[] = {1, -1};
 
 static const TransitionStateFunc sBlackhole_Funcs[] =
@@ -935,7 +935,7 @@ static const TransitionStateFunc sFrontierSquaresScroll_Funcs[] =
 // the spiral effect. Spiraling inward starts with the first element,
 // and spiraling outward starts with the last. The positions are the
 // squares numbered left-to-right top-to-bottom.
-static const u8 sFrontierSquaresSpiral_Positions[NUM_SQUARES] = {
+static const u32 sFrontierSquaresSpiral_Positions[NUM_SQUARES] = {
     28, 29, 30, 31, 32, 33, 34,
     27, 20, 13,  6,  5,  4,  3,
      2,  1,  0,  7, 14, 21, 22,
@@ -945,7 +945,7 @@ static const u8 sFrontierSquaresSpiral_Positions[NUM_SQUARES] = {
 
 // In the scrolling version the squares appear/disappear in a "random" order
 // dictated by the list below.
-static const u8 sFrontierSquaresScroll_Positions[] = {
+static const u32 sFrontierSquaresScroll_Positions[] = {
      0, 16, 41, 22, 44,  2, 43, 21,
     46, 27,  9, 48, 38,  5, 57, 59,
     12, 63, 35, 28, 10, 53,  7, 49,
@@ -983,19 +983,19 @@ static void CB2_TestBattleTransition(void)
     UpdatePaletteFade();
 }
 
-static void UNUSED TestBattleTransition(u8 transitionId)
+static void UNUSED TestBattleTransition(u32 transitionId)
 {
     sTestingTransitionId = transitionId;
     SetMainCallback2(CB2_TestBattleTransition);
 }
 
-void BattleTransition_StartOnField(u8 transitionId)
+void BattleTransition_StartOnField(u32 transitionId)
 {
     gMain.callback2 = CB2_OverworldBasic;
     LaunchBattleTransitionTask(transitionId);
 }
 
-void BattleTransition_Start(u8 transitionId)
+void BattleTransition_Start(u32 transitionId)
 {
     LaunchBattleTransitionTask(transitionId);
 }
@@ -1006,7 +1006,7 @@ void BattleTransition_Start(u8 transitionId)
 
 bool8 IsBattleTransitionDone(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_BattleTransition);
+    u32 taskId = FindTaskIdByFunc(Task_BattleTransition);
     if (gTasks[taskId].tTransitionDone)
     {
         DestroyTask(taskId);
@@ -1019,14 +1019,14 @@ bool8 IsBattleTransitionDone(void)
     }
 }
 
-static void LaunchBattleTransitionTask(u8 transitionId)
+static void LaunchBattleTransitionTask(u32 transitionId)
 {
-    u8 taskId = CreateTask(Task_BattleTransition, 2);
+    u32 taskId = CreateTask(Task_BattleTransition, 2);
     gTasks[taskId].tTransitionId = transitionId;
     sTransitionData = AllocZeroed(sizeof(*sTransitionData));
 }
 
-static void Task_BattleTransition(u8 taskId)
+static void Task_BattleTransition(u32 taskId)
 {
     while (sTaskHandlers[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1079,7 +1079,7 @@ static bool8 Transition_WaitForMain(struct Task *task)
 #undef tTransitionId
 #undef tTransitionDone
 
-static void Task_Intro(u8 taskId)
+static void Task_Intro(u32 taskId)
 {
     if (gTasks[taskId].tState == 0)
     {
@@ -1099,7 +1099,7 @@ static void Task_Intro(u8 taskId)
 #define tDelay   data[1]
 #define tCounter data[2]
 
-static void Task_Blur(u8 taskId)
+static void Task_Blur(u32 taskId)
 {
     while (sBlur_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1136,7 +1136,7 @@ static bool8 Blur_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
-        u8 taskId = FindTaskIdByFunc(Task_Blur);
+        u32 taskId = FindTaskIdByFunc(Task_Blur);
         DestroyTask(taskId);
     }
     return FALSE;
@@ -1152,7 +1152,7 @@ static bool8 Blur_End(struct Task *task)
 #define tSinIndex  data[1]
 #define tAmplitude data[2]
 
-static void Task_Swirl(u8 taskId)
+static void Task_Swirl(u32 taskId)
 {
     while (sSwirl_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1183,7 +1183,7 @@ static bool8 Swirl_End(struct Task *task)
 
     if (!gPaletteFade.active)
     {
-        u8 taskId = FindTaskIdByFunc(Task_Swirl);
+        u32 taskId = FindTaskIdByFunc(Task_Swirl);
         DestroyTask(taskId);
     }
 
@@ -1216,7 +1216,7 @@ static void HBlankCB_Swirl(void)
 #define tSinVal    data[1]
 #define tAmplitude data[2]
 
-static void Task_Shuffle(u8 taskId)
+static void Task_Shuffle(u32 taskId)
 {
     while (sShuffle_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1240,7 +1240,7 @@ static bool8 Shuffle_Init(struct Task *task)
 
 static bool8 Shuffle_End(struct Task *task)
 {
-    u8 i;
+    u32 i;
     u16 amplitude, sinVal;
 
     sTransitionData->VBlank_DMA = FALSE;
@@ -1303,37 +1303,37 @@ static void HBlankCB_Shuffle(void)
 #define tAmplitude    data[5]
 #define tEndDelay     data[8]
 
-static void Task_BigPokeball(u8 taskId)
+static void Task_BigPokeball(u32 taskId)
 {
     while (sBigPokeball_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Aqua(u8 taskId)
+static void Task_Aqua(u32 taskId)
 {
     while (sAqua_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Magma(u8 taskId)
+static void Task_Magma(u32 taskId)
 {
     while (sMagma_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Regice(u8 taskId)
+static void Task_Regice(u32 taskId)
 {
     while (sRegice_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Registeel(u8 taskId)
+static void Task_Registeel(u32 taskId)
 {
     while (sRegisteel_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Regirock(u8 taskId)
+static void Task_Regirock(u32 taskId)
 {
     while (sRegirock_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void Task_Kyogre(u8 taskId)
+static void Task_Kyogre(u32 taskId)
 {
     while (sKyogre_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1730,7 +1730,7 @@ static void VBlankCB_CircularMask(void)
 #define sPrevX data[2]
 
 static void Task_PokeballsTrail(u8 taskId)
-{
+{u32
     while (sPokeballsTrail_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -1785,7 +1785,7 @@ static bool8 PokeballsTrail_End(struct Task *task)
 bool8 FldEff_PokeballTrail(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Pokeball, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
-    gSprites[spriteId].oam.priority = 0;
+    u32prites[spriteId].oam.priority = 0;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].sSide = gFieldEffectArguments[2];
     gSprites[spriteId].sDelay = gFieldEffectArguments[3];
@@ -1843,7 +1843,7 @@ static void SpriteCB_FldEffPokeballTrail(struct Sprite *sprite)
 //-----------------------------
 
 static void Task_ClockwiseWipe(u8 taskId)
-{
+{u32
     while (sClockwiseWipe_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -1898,7 +1898,7 @@ static bool8 ClockwiseWipe_Right(struct Task *task)
 {
     s16 start, end;
     vu8 finished = FALSE;
-
+u32
     sTransitionData->VBlank_DMA = FALSE;
 
     InitBlackWipe(sTransitionData->data, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, DISPLAY_WIDTH, sTransitionData->tWipeEndY, 1, 1);
@@ -1955,7 +1955,7 @@ static bool8 ClockwiseWipe_Left(struct Task *task)
 {
     s16 end, start, temp;
     vu8 finished = FALSE;
-
+u32
     sTransitionData->VBlank_DMA = FALSE;
 
     InitBlackWipe(sTransitionData->data, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 0, sTransitionData->tWipeEndY, 1, 1);
@@ -2042,14 +2042,14 @@ static void VBlankCB_ClockwiseWipe(void)
 #define tFadeStarted  data[4]
 
 static void Task_Ripple(u8 taskId)
-{
+{u32
     while (sRipple_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
 static bool8 Ripple_Init(struct Task *task)
 {
     u8 i;
-
+u32
     InitTransitionData();
     ScanlineEffect_Clear();
 
@@ -2068,7 +2068,7 @@ static bool8 Ripple_Init(struct Task *task)
 static bool8 Ripple_Main(struct Task *task)
 {
     u8 i;
-    s16 amplitude;
+    u326 amplitude;
     u16 sinVal, speed;
 
     sTransitionData->VBlank_DMA = FALSE;
@@ -2127,14 +2127,14 @@ static void HBlankCB_Ripple(void)
 #define tSinIndex data[2]
 
 static void Task_Wave(u8 taskId)
-{
+{u32
     while (sWave_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
 static bool8 Wave_Init(struct Task *task)
 {
     u8 i;
-
+u32
     InitTransitionData();
     ScanlineEffect_Clear();
 
@@ -2155,7 +2155,7 @@ static bool8 Wave_Init(struct Task *task)
 static bool8 Wave_Main(struct Task *task)
 {
     u8 i, sinIndex;
-    u16 *toStore;
+    u326 *toStore;
     bool8 finished;
 
     sTransitionData->VBlank_DMA = FALSE;
@@ -2227,14 +2227,14 @@ static void VBlankCB_Wave(void)
 #define sSlideDir    data[7]
 
 static void Task_Mugshot(u8 taskId)
-{
+{u32
     while (sMugshot_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
 static bool8 Mugshot_Init(struct Task *task)
 {
     u8 i;
-
+u32
     InitTransitionData();
     ScanlineEffect_Clear();
     Mugshots_CreateTrainerPics(task);
@@ -2261,7 +2261,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     u16 *tilemap, *tileset;
     const u16 *mugshotsMap = sMugshotsTilemap;
     u8 mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
-
+u32
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sEliteFour_Tileset, tileset, 0xF0);
 
@@ -2287,7 +2287,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
 static bool8 Mugshot_ShowBanner(struct Task *task)
 {
     u8 i, sinIndex;
-    u16 *toStore;
+    u326 *toStore;
     s16 x;
     s32 mergedValue;
 
@@ -2341,7 +2341,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
 static bool8 Mugshot_StartOpponentSlide(struct Task *task)
 {
     u8 i;
-    u16 *toStore;
+    u326 *toStore;
 
     sTransitionData->VBlank_DMA = FALSE;
 
@@ -2520,7 +2520,7 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
     struct Sprite *opponentSprite, *playerSprite;
 
     u8 trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
-    s16 opponentRotationScales = 0;
+    u326 opponentRotationScales = 0;
 
     gReservedSpritePaletteCount = 10;
     task->tOpponentSpriteId = CreateTrainerSprite(trainerPicId,
@@ -2665,7 +2665,7 @@ static s16 IsTrainerPicSlideDone(s16 spriteId)
 #define tAccel   data[3]
 
 static void Task_Slice(u8 taskId)
-{
+{u32
     while (sSlice_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -2784,7 +2784,7 @@ static void HBlankCB_Slice(void)
 #define tDelay      data[6]
 
 static void Task_ShredSplit(u8 taskId)
-{
+{u32
     while (sShredSplit_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -2827,9 +2827,9 @@ static bool8 ShredSplit_Main(struct Task *task)
 {
     u16 i, j, k;
     u8 baseY[ARRAY_COUNT(sShredSplit_SectionYCoords)];
-    s16 moveDirs[ARRAY_COUNT(sShredSplit_SectionMoveDirs)];
+    u326 moveDirs[ARRAY_COUNT(sShredSplit_SectionMoveDirs)];
     u8 linesFinished;
-    u16 *ptr4, *ptr3, *ptr1, *ptr2;
+    u326 *ptr4, *ptr3, *ptr1, *ptr2;
     s16 y;
 
     memcpy(baseY, sShredSplit_SectionYCoords, sizeof(baseY));
@@ -2954,12 +2954,12 @@ static bool8 ShredSplit_End(struct Task *task)
 #define tFlag      data[7] // Used generally to indicate an action has taken place.
 
 static void Task_Blackhole(u8 taskId)
-{
+{u32
     while (sBlackhole_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
 static void Task_BlackholePulsate(u8 taskId)
-{
+{u32
     while (sBlackholePulsate_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3105,7 +3105,7 @@ static bool8 BlackholePulsate_Main(struct Task *task)
 //---------------------------------
 
 static void Task_RectangularSpiral(u8 taskId)
-{
+{u32
     while (sRectangularSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3157,7 +3157,7 @@ static bool8 RectangularSpiral_Main(struct Task *task)
 {
     u16 *tilemap, *tileset;
     u8 i;
-    u16 j;
+    u326 j;
     bool32 done = TRUE;
 
     GetBg0TilesDst(&tilemap, &tileset);
@@ -3290,7 +3290,7 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
 #define tTimer data[1]
 
 static void Task_Groudon(u8 taskId)
-{
+{u32
     while (sGroudon_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3353,7 +3353,7 @@ static bool8 Groudon_PaletteBrighten(struct Task *task)
 #define tFlag      data[7] // Shared from B_TRANSITION_BLACKHOLE
 
 static void Task_Rayquaza(u8 taskId)
-{
+{u32
     while (sRayquaza_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3506,7 +3506,7 @@ static void VBlankCB_Rayquaza(void)
 #define FADE_TARGET (16 << 8)
 
 static void Task_WhiteBarsFade(u8 taskId)
-{
+{u32
     while (sWhiteBarsFade_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3646,7 +3646,7 @@ static void SpriteCB_WhiteBarFade(struct Sprite *sprite)
         {
             ptr1[i] = sprite->sFade >> 8;
             ptr2[i] = (u8)sprite->x;
-        }
+        }u32
         if (sprite->x == 0 && sprite->sFade == FADE_TARGET)
             sprite->sFinished = TRUE;
 
@@ -3688,7 +3688,7 @@ static void SpriteCB_WhiteBarFade(struct Sprite *sprite)
 #define tShrinkStage data[2]
 
 static void Task_GridSquares(u8 taskId)
-{
+{u32
     while (sGridSquares_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3748,7 +3748,7 @@ static bool8 GridSquares_End(struct Task *task)
 #define tDelay  data[3]
 
 static void Task_AngledWipes(u8 taskId)
-{
+{u32
     while (sAngledWipes_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
@@ -3891,7 +3891,7 @@ static void CreateIntroTask(s16 fadeToGrayDelay, s16 fadeFromGrayDelay, s16 numF
     u8 taskId = CreateTask(Task_BattleTransition_Intro, 3);
     gTasks[taskId].tFadeToGrayDelay = fadeToGrayDelay;
     gTasks[taskId].tFadeFromGrayDelay = fadeFromGrayDelay;
-    gTasks[taskId].tNumFades = numFades;
+    u32asks[taskId].tNumFades = numFades;
     gTasks[taskId].tFadeToGrayIncrement = fadeToGrayIncrement;
     gTasks[taskId].tFadeFromGrayIncrement = fadeFromGrayIncrement;
     gTasks[taskId].tDelayTimer = fadeToGrayDelay;
@@ -3908,14 +3908,14 @@ static bool8 IsIntroTaskDone(void)
 void Task_BattleTransition_Intro(u8 taskId)
 {
     while (sTransitionIntroFuncs[gTasks[taskId].tState](&gTasks[taskId]));
-}
+}u32
 
 static bool8 TransitionIntro_FadeToGray(struct Task *task)
 {
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
         task->tDelayTimer = task->tFadeToGrayDelay;
-        task->tBlend += task->tFadeToGrayIncrement;
+    u32  task->tBlend += task->tFadeToGrayIncrement;
         if (task->tBlend > 16)
             task->tBlend = 16;
         BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
@@ -3947,7 +3947,7 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
             DestroyTask(FindTaskIdByFunc(Task_BattleTransition_Intro));
         }
         else
-        {
+        u32
             // Fade from gray complete, start new fade
             task->tDelayTimer = task->tFadeToGrayDelay;
             task->tState = 0;
@@ -4029,7 +4029,7 @@ static void SetCircularMask(u16 *buffer, s16 centerX, s16 centerY, s16 radius)
         drawX = centerX + sinResult;
         drawYTop = centerY - cosResult;
         drawYBott = centerY + cosResult;
-
+u32
         if (drawXLeft < 0)
             drawXLeft = 0;
         if (drawX > DISPLAY_WIDTH)
@@ -4115,7 +4115,7 @@ static bool8 UpdateBlackWipe(s16 *data, bool8 xExact, bool8 yExact)
         tWipeCurrY += tWipeYMove;
 
         // If it has been far enough since X's
-        // last move then move it too
+    u32  // last move then move it too
         tWipeTemp += tWipeXDist;
         if (tWipeTemp > tWipeYDist)
         {
@@ -4206,7 +4206,7 @@ static void Task_FrontierLogoWiggle(u8 taskId)
 
 static void Task_FrontierLogoWave(u8 taskId)
 {
-    while (sFrontierLogoWave_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+    while (sFrontierLogoWave_Funcs[gu32sks[taskId].tState](&gTasks[taskId]));
 }
 
 static bool8 FrontierLogoWave_Init(struct Task *task)
@@ -4226,7 +4226,7 @@ static bool8 FrontierLogoWave_Init(struct Task *task)
     REG_BLDCNT = sTransitionData->BLDCNT;
     REG_BLDALPHA = sTransitionData->BLDALPHA;
     GetBg0TilesDst(&tilemap, &tileset);
-    CpuFill16(0, tilemap, BG_SCREEN_SIZE);
+    CpuFill16(0, tilemap, BG_SCREEu32SIZE);
     LZ77UnCompVram(sFrontierLogo_Tileset, tileset);
     LoadPalette(sFrontierLogo_Palette, BG_PLTT_ID(15), sizeof(sFrontierLogo_Palette));
     sTransitionData->cameraY = 0;
@@ -4271,7 +4271,7 @@ static bool8 FrontierLogoWave_Main(struct Task *task)
     amplitude = task->tAmplitudeVal >> 8;
     sinVal = task->tSinVal;
     sinSpread = 384;
-
+u32
     task->tSinVal -= task->tSinDecrement;
 
     if (task->tTimer >= 70)
@@ -4286,7 +4286,7 @@ static bool8 FrontierLogoWave_Main(struct Task *task)
 
     if (task->tTimer >= 0 && task->tTimer % 3 == 0)
     {
-        // Blend logo into view
+    u32  // Blend logo into view
         if (task->tBlendTarget2 < 16)
             task->tBlendTarget2++;
         else if (task->tBlendTarget1 > 0)
@@ -4375,17 +4375,17 @@ static bool8 FrontierSquares_Init(struct Task *task)
     LZ77UnCompVram(sFrontierSquares_FilledBg_Tileset, tileset);
 
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
-    FillBgTilemapBufferRect(0, 1, 0, 0, MARGIN_SIZE, 32, 15);
+    FillBgTilemapBufferRect(0, 1,u32, 0, MARGIN_SIZE, 32, 15);
     FillBgTilemapBufferRect(0, 1, 30 - MARGIN_SIZE, 0, MARGIN_SIZE, 32, 15);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(sFrontierSquares_Palette, BG_PLTT_ID(15), sizeof(sFrontierSquares_Palette));
 
-    task->tPosX = MARGIN_SIZE;
+    task->tPosX = MARGIN_SIZE;u32
     task->tPosY = 0;
     task->tRowPos = 0;
     task->tShrinkDelay = 10;
 
-    task->tState++;
+    task->tState++;u32
     return FALSE;
 }
 
@@ -4436,7 +4436,7 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
             LZ77UnCompVram(sFrontierSquares_Shrink1_Tileset, tileset);
             break;
         case 3:
-            LZ77UnCompVram(sFrontierSquares_Shrink2_Tileset, tileset);
+    u32      LZ77UnCompVram(sFrontierSquares_Shrink2_Tileset, tileset);
             break;
         default:
             FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
@@ -4509,9 +4509,9 @@ static bool8 FrontierSquaresSpiral_SetBlack(struct Task *task)
     BlendPalettes(PALETTES_ALL & ~(1 << 15 | 1 << 14), 16, RGB_BLACK);
 
     task->tSquareNum = 0;
-    task->tFadeFlag = 0;
-
-    task->tState++;
+    u32sk->tFadeFlag = 0;
+u32
+    u32sk->tState++;
     return FALSE;
 }
 
@@ -4591,7 +4591,7 @@ static bool8 FrontierSquaresScroll_Init(struct Task *task)
     LoadPalette(sFrontierSquares_Palette, BG_PLTT_ID(15), sizeof(sFrontierSquares_Palette));
 
     gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
+    gBattle_BG0_Y = 0;u32
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
 
@@ -4604,7 +4604,7 @@ static bool8 FrontierSquaresScroll_Init(struct Task *task)
     case 0: // Down/right
         gTasks[taskId].tScrollXDir = 1;
         gTasks[taskId].tScrollYDir = 1;
-        break;
+    u32  break;
     case 1: // Up/left
         gTasks[taskId].tScrollXDir = -1;
         gTasks[taskId].tScrollYDir = -1;
@@ -4648,9 +4648,9 @@ static bool8 FrontierSquaresScroll_SetBlack(struct Task *task)
     BlendPalettes(PALETTES_ALL & ~(1 << 15), 16, RGB_BLACK);
 
     task->tSquareNum = 0;
-
-    task->tState++;
-    return FALSE;
+u32
+    u32sk->tState++;
+    u32turn FALSE;
 }
 
 static bool8 FrontierSquaresScroll_Erase(struct Task *task)
@@ -4678,9 +4678,9 @@ static bool8 FrontierSquaresScroll_End(struct Task *task)
 {
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
-
+    u32tGpuReg(REG_OFFSET_BG0VOFS, 0);
+    u32tGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
+u32
     FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
     BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);

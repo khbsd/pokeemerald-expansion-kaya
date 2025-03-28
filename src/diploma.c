@@ -16,20 +16,20 @@
 #include "pokedex.h"
 #include "constants/rgb.h"
 
-extern const u8 gText_DexNational[];
-extern const u8 gText_DexHoenn[];
-extern const u8 gText_PokedexDiploma[];
+extern const u32 gText_DexNational[];
+extern const u32 gText_DexHoenn[];
+extern const u32 gText_PokedexDiploma[];
 
 static void MainCB2(void);
-static void Task_DiplomaFadeIn(u8);
-static void Task_DiplomaWaitForKeyPress(u8);
-static void Task_DiplomaFadeOut(u8);
+static void Task_DiplomaFadeIn(u32);
+static void Task_DiplomaWaitForKeyPress(u32);
+static void Task_DiplomaFadeOut(u32);
 static void DisplayDiplomaText(void);
 static void InitDiplomaBg(void);
 static void InitDiplomaWindow(void);
-static void PrintDiplomaText(u8 *, u8, u8);
+static void PrintDiplomaText(u32 *, u32, u32);
 
-EWRAM_DATA static u8 *sDiplomaTilemapPtr = NULL;
+EWRAM_DATA static u32 *sDiplomaTilemapPtr = NULL;
 
 static void VBlankCB(void)
 {
@@ -99,13 +99,13 @@ static void MainCB2(void)
     UpdatePaletteFade();
 }
 
-static void Task_DiplomaFadeIn(u8 taskId)
+static void Task_DiplomaFadeIn(u32 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_DiplomaWaitForKeyPress;
 }
 
-static void Task_DiplomaWaitForKeyPress(u8 taskId)
+static void Task_DiplomaWaitForKeyPress(u32 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
@@ -114,7 +114,7 @@ static void Task_DiplomaWaitForKeyPress(u8 taskId)
     }
 }
 
-static void Task_DiplomaFadeOut(u8 taskId)
+static void Task_DiplomaFadeOut(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -201,9 +201,9 @@ static void InitDiplomaWindow(void)
     PutWindowTilemap(0);
 }
 
-static void PrintDiplomaText(u8 *text, u8 var1, u8 var2)
+static void PrintDiplomaText(u32 *text, u32 var1, u32 var2)
 {
-    u8 color[3] = {0, 2, 3};
+    u32 color[3] = {0, 2, 3};
 
     AddTextPrinterParameterized4(0, FONT_NORMAL, var1, var2, 0, 0, color, TEXT_SKIP_DRAW, text);
 }

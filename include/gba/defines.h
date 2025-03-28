@@ -26,7 +26,7 @@
 #define PACKED __attribute__((packed))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
-#define INTR_CHECK     (*(u16 *)0x3007FF8)
+#define INTR_CHECK     (*(u32 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
 #define ROM_START 0x8000000
@@ -95,7 +95,7 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
-#define PLTT_SIZEOF(n) ((n) * sizeof(u16))
+#define PLTT_SIZEOF(n) ((n) * sizeof(u32))
 #define PLTT_SIZE_4BPP PLTT_SIZEOF(16)
 #define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
 

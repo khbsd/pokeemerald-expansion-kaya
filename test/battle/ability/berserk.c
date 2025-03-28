@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Berserk activates only if the target had more than 50% of its hp")
 {
     bool32 activates = FALSE;
-    u16 maxHp = 500, hp = 0;
+    u32 maxHp = 500, hp = 0;
 
     PARAMETRIZE { hp = 250; activates = FALSE; }
     PARAMETRIZE { hp = 249; activates = FALSE; }
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Berserk activates only if the target had more than 50% of it
 
 SINGLE_BATTLE_TEST("Berserk raises Sp.Atk by 1")
 {
-    u16 maxHp = 500;
+    u32 maxHp = 500;
     GIVEN {
         ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Berserk raises Sp.Atk by 1")
 SINGLE_BATTLE_TEST("Berserk activates after all hits from a multi-hit move")
 {
     u32 j;
-    u16 maxHp = 500;
+    u32 maxHp = 500;
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DOUBLE_SLAP) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }

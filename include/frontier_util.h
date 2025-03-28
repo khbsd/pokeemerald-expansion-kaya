@@ -3,7 +3,7 @@
 
 void CallFrontierUtilFunc(void);
 u8 GetFrontierBrainStatus(void);
-void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
+void CopyFrontierTrainerText(u8 whichText, u32 trainerId);
 void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
 void ResetFrontierTrainerIds(void);
@@ -18,9 +18,9 @@ void CopyFrontierBrainTrainerName(u8 *dst);
 bool8 IsFrontierBrainFemale(void);
 void SetFrontierBrainObjEventGfx_2(void);
 void CreateFrontierBrainPokemon(void);
-u16 GetFrontierBrainMonSpecies(u8 monId);
+u32 GetFrontierBrainMonSpecies(u8 monId);
 void SetFrontierBrainObjEventGfx(u8 facility);
-u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
+u32 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
 u8 GetFrontierBrainMonNature(u8 monId);
 u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId);
 s32 GetFronterBrainSymbol(void);

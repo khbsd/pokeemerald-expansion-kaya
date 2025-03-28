@@ -22,11 +22,11 @@ bool8 IsEnoughForCostInVar0x8005(void);
 void SubtractMoneyFromVar0x8005(void);
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed);
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed);
-void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount);
+void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u32 tileStart, u8 pallete, int amount);
 void ChangeAmountInMoneyBox(int amount);
 void DrawMoneyBox(int amount, u8 x, u8 y);
 void HideMoneyBox(void);
-void AddMoneyLabelObject(u16 x, u16 y);
+void AddMoneyLabelObject(u32 x, u32 y);
 void RemoveMoneyLabelObject(void);
 u32 CalculateMoneyTextHorizontalPosition(u32 amount);
 

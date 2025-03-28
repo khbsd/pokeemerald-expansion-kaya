@@ -55,37 +55,37 @@ enum {
 struct SioInfo
 {
     char magic[sizeof("PokemonSioInfo")];
-    u8 playerCount;
-    u8 linkPlayerIdx[RFU_CHILD_MAX];
+    u32 playerCount;
+    u32 linkPlayerIdx[RFU_CHILD_MAX];
     struct LinkPlayer linkPlayers[MAX_RFU_PLAYERS];
-    u8 filler[92];
+    u32 filler[92];
 };
 
 // Struct is mostly empty, presumably because usage of
 // its fields was largely removed before release
 struct RfuDebug
 {
-    u8 unused0[6];
+    u32 unused0[6];
     u16 recvCount;
-    u8 unused1[6];
-    vu8 unkFlag;
-    u8 childJoinCount;
-    u8 unused2[84];
+    u32 unused1[6];
+    vu32 unkFlag;
+    u32 childJoinCount;
+    u32 unused2[84];
     u16 blockSendFailures;
-    u8 unused3[29];
-    u8 blockSendTime;
-    u8 unused4[88];
+    u32 unused3[29];
+    u32 blockSendTime;
+    u32 unused4[88];
 };
 
 COMMON_DATA u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4] = {0};
 COMMON_DATA struct RfuManager gRfu = {0};
 
-static u8 sHeldKeyCount;
-static u8 sResendBlock8[CMD_LENGTH * 2];
+static u32 sHeldKeyCount;
+static u32 sResendBlock8[CMD_LENGTH * 2];
 static u16 sResendBlock16[CMD_LENGTH];
 
 EWRAM_DATA struct RfuGameData gHostRfuGameData = {};
-EWRAM_DATA u8 gHostRfuUsername[RFU_USER_NAME_LENGTH] = {};
+EWRAM_DATA u32 gHostRfuUsername[RFU_USER_NAME_LENGTH] = {};
 static EWRAM_DATA INIT_PARAM sRfuReqConfig = {};
 static EWRAM_DATA struct RfuDebug sRfuDebug = {};
 
@@ -95,16 +95,16 @@ static void InitParentSendData(void);
 static void MSCCallback_Child(u16);
 static void MSCCallback_Parent(u16);
 static void UpdateBackupQueue(void);
-static void Task_PlayerExchange(u8);
-static void Task_PlayerExchangeUpdate(u8);
-static void Task_PlayerExchangeChat(u8);
-static void RfuHandleReceiveCommand(u8);
+static void Task_PlayerExchange(u32);
+static void Task_PlayerExchangeUpdate(u32);
+static void Task_PlayerExchangeChat(u32);
+static void RfuHandleReceiveCommand(u32);
 static void CallRfuFunc(void);
 static void RfuPrepareSendBuffer(u16);
 static void HandleBlockSend(void);
 static void SendNextBlock(void);
 static void SendLastBlock(void);
-static u8 GetPartnerIndexByNameAndTrainerID(const u8 *, u16);
+static u32 GetPartnerIndexByNameAndTrainerID(const u32 *, u16);
 static void UpdateChildStatuses(void);
 static s32 GetJoinGroupStatus(void);
 static void ClearSelectedLinkPlayerIds(u16);
@@ -113,9 +113,9 @@ static void ParentResetChildRecvMetadata(s32);
 static void CB2_RfuIdle(void);
 static void RfuReqDisconnectSlot(u32);
 static void SendDisconnectCommand(u32, u32);
-static void Task_TryConnectToUnionRoomParent(u8);
+static void Task_TryConnectToUnionRoomParent(u32);
 static void Debug_PrintEmpty(void);
-static void Task_Idle(u8);
+static void Task_Idle(u32);
 
 static const INIT_PARAM sRfuReqConfigTemplate = {
     .maxMFrame = 4,
@@ -131,7 +131,7 @@ static const INIT_PARAM sRfuReqConfigTemplate = {
     .NI_failCounter_limit = 300
 };
 
-static const u8 sAvailSlots[] = {
+static const u32 sAvailSlots[] = {
     [1] = AVAIL_SLOT1,
     [2] = AVAIL_SLOT2,
     [3] = AVAIL_SLOT3,
@@ -168,7 +168,7 @@ static const u32 sAllBlocksReceived[] = {
 };
 #undef BLOCK_MASK
 
-static const u8 sSlotToLinkPlayerTableId[] = {
+static const u32 sSlotToLinkPlayerTableId[] = {
     0, 0, 1,
     1, 2, 2,
     2, 2, 3
@@ -176,7 +176,7 @@ static const u8 sSlotToLinkPlayerTableId[] = {
 
 // Effectively just returns the number of bits set in the index value
 // Used for masks of the other players, MAX_RFU_PLAYERS - 1 excludes self
-static const u8 sPlayerBitsToCount[1 << (MAX_RFU_PLAYERS - 1)] = {
+static const u32 sPlayerBitsToCount[1 << (MAX_RFU_PLAYERS - 1)] = {
     0, // 0000
     1, // 0001
     1, // 0010
@@ -197,7 +197,7 @@ static const u8 sPlayerBitsToCount[1 << (MAX_RFU_PLAYERS - 1)] = {
 
 // If the 4 bits representing child slots were an array, this table
 // would return the index of the most recently set bit
-static const u8 sPlayerBitsToNewChildIdx[1 << (MAX_RFU_PLAYERS - 1)] = {
+static const u32 sPlayerBitsToNewChildIdx[1 << (MAX_RFU_PLAYERS - 1)] = {
     0, // 0000
     0, // 0001
     1, // 0010
@@ -284,12 +284,12 @@ static const char sASCII_ChildParentSearch[][8] = {
     "SEARCH"
 };
 
-static void Debug_PrintString(const void *str, u8 x, u8 y)
+static void Debug_PrintString(const void *str, u32 x, u32 y)
 {
 
 }
 
-static void Debug_PrintNum(u16 num, u8 x, u8 y, u8 numDigits)
+static void Debug_PrintNum(u16 num, u32 x, u32 y, u32 numDigits)
 {
 
 }
@@ -297,7 +297,7 @@ static void Debug_PrintNum(u16 num, u8 x, u8 y, u8 numDigits)
 void ResetLinkRfuGFLayer(void)
 {
     s32 i;
-    u8 errorState = gRfu.errorState;
+    u32 errorState = gRfu.errorState;
     CpuFill16(0, &gRfu, sizeof(gRfu));
     gRfu.errorState = errorState;
     gRfu.parentChild = 0xFF;
@@ -338,7 +338,7 @@ void InitRFUAPI(void)
     }
 }
 
-static void Task_ParentSearchForChildren(u8 taskId)
+static void Task_ParentSearchForChildren(u32 taskId)
 {
     UpdateChildStatuses();
     switch (gRfu.state)
@@ -376,15 +376,15 @@ static void Task_ParentSearchForChildren(u8 taskId)
     }
 }
 
-s32 Rfu_GetIndexOfNewestChild(u8 bits)
+s32 Rfu_GetIndexOfNewestChild(u32 bits)
 {
     return sPlayerBitsToNewChildIdx[bits];
 }
 
 static void SetLinkPlayerIdsFromSlots(s32 baseSlots, s32 addSlots)
 {
-    u8 i;
-    u8 baseId = 1;
+    u32 i;
+    u32 baseId = 1;
     s32 baseSlotsCopy = baseSlots;
     s32 newId = 0;
     if (addSlots == -1)
@@ -426,7 +426,7 @@ static void SetLinkPlayerIdsFromSlots(s32 baseSlots, s32 addSlots)
     }
 }
 
-static void Task_ChildSearchForParent(u8 taskId)
+static void Task_ChildSearchForParent(u32 taskId)
 {
     switch (gRfu.state)
     {
@@ -463,7 +463,7 @@ static void Task_ChildSearchForParent(u8 taskId)
         break;
     case RFUSTATE_CHILD_JOINED:
     {
-        u8 bmChildSlot = 1 << gRfu.childSlot;
+        u32 bmChildSlot = 1 << gRfu.childSlot;
         rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, gRfu.childSlot);
         rfu_setRecvBuffer(TYPE_UNI, gRfu.childSlot, gRfu.childRecvQueue, sizeof(gRfu.childRecvQueue));
         rfu_UNI_setSendData(bmChildSlot, gRfu.childSendBuffer,  sizeof(gRfu.childSendBuffer));
@@ -482,8 +482,8 @@ static void Task_ChildSearchForParent(u8 taskId)
 
 static void InitChildRecvBuffers(void)
 {
-    u8 i;
-    u8 acceptSlot = lman.acceptSlot_flag;
+    u32 i;
+    u32 acceptSlot = lman.acceptSlot_flag;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (acceptSlot & 1)
@@ -497,7 +497,7 @@ static void InitChildRecvBuffers(void)
 
 static void InitParentSendData(void)
 {
-    u8 acceptSlot = lman.acceptSlot_flag;
+    u32 acceptSlot = lman.acceptSlot_flag;
     rfu_UNI_setSendData(acceptSlot, gRfu.recvCmds, sizeof(gRfu.recvCmds));
     gRfu.parentSendSlot = Rfu_GetIndexOfNewestChild(acceptSlot);
     gRfu.parentSlots = acceptSlot;
@@ -507,7 +507,7 @@ static void InitParentSendData(void)
 
 #define tConnectingForChat data[7]
 
-static void Task_UnionRoomListen(u8 taskId)
+static void Task_UnionRoomListen(u32 taskId)
 {
     if (GetHostRfuGameData()->activity == (ACTIVITY_PLYRTALK | IN_UNION_ROOM) && RfuGetStatus() == RFU_STATUS_NEW_CHILD_DETECTED)
     {
@@ -604,7 +604,7 @@ static void MSCCallback_Parent(u16 REQ_commandID)
 
 void LinkRfu_Shutdown(void)
 {
-    u8 i;
+    u32 i;
 
     rfu_LMAN_powerDownRFU();
     if (gRfu.parentChild == MODE_PARENT)
@@ -699,9 +699,9 @@ void StopUnionRoomLinkManager(void)
     gRfu.state = RFUSTATE_UR_STOP_MANAGER;
 }
 
-static void UNUSED ReadySendDataForSlots(u8 slots)
+static void UNUSED ReadySendDataForSlots(u32 slots)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -825,7 +825,7 @@ static bool32 RfuMain2_Parent(void)
 {
     u16 i;
     u16 flags;
-    u8 r0;
+    u32 r0;
     u16 j;
     bool8 failed;
 
@@ -905,7 +905,7 @@ static bool32 RfuMain2_Parent(void)
     return gRfuLinkStatus->sendSlotUNIFlag ? failed & 1 : FALSE;
 }
 
-static void ChildBuildSendCmd(u16 *sendCmd, u8 *dst)
+static void ChildBuildSendCmd(u16 *sendCmd, u32 *dst)
 {
     s32 i;
 
@@ -928,11 +928,11 @@ static void ChildBuildSendCmd(u16 *sendCmd, u8 *dst)
 
 static bool32 RfuMain1_Child(void)
 {
-    u8 i;
-    u8 j;
-    u8 recv[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
-    u8 send[2 * (CMD_LENGTH - 1)];
-    u8 status;
+    u32 i;
+    u32 j;
+    u32 recv[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
+    u32 send[2 * (CMD_LENGTH - 1)];
+    u32 status;
 
     RfuRecvQueue_Dequeue(&gRfu.recvQueue, recv);
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
@@ -972,11 +972,11 @@ static bool32 RfuMain1_Child(void)
     return IsRfuRecvQueueEmpty();
 }
 
-static void HandleSendFailure(u8 unused, u32 flags)
+static void HandleSendFailure(u32 unused, u32 flags)
 {
     s32 i, j, temp;
 
-    const u8 *payload = gRfu.sendBlock.payload;
+    const u32 *payload = gRfu.sendBlock.payload;
     for (i = 0; i < gRfu.sendBlock.count; i++)
     {
         if (!(flags & 1))
@@ -1001,7 +1001,7 @@ static void HandleSendFailure(u8 unused, u32 flags)
     }
 }
 
-void Rfu_SetBlockReceivedFlag(u8 linkPlayerId)
+void Rfu_SetBlockReceivedFlag(u32 linkPlayerId)
 {
     if (gRfu.parentChild == MODE_PARENT && linkPlayerId)
         gRfu.numBlocksReceived[linkPlayerId] = 1;
@@ -1009,15 +1009,15 @@ void Rfu_SetBlockReceivedFlag(u8 linkPlayerId)
         gRfu.blockReceived[linkPlayerId] = TRUE;
 }
 
-void Rfu_ResetBlockReceivedFlag(u8 linkPlayerId)
+void Rfu_ResetBlockReceivedFlag(u32 linkPlayerId)
 {
     gRfu.blockReceived[linkPlayerId] = FALSE;
     gRfu.recvBlock[linkPlayerId].receiving = RECV_STATE_READY;
 }
 
-static u8 LoadLinkPlayerIds(const u8 *ids)
+static u32 LoadLinkPlayerIds(const u32 *ids)
 {
-    u8 i;
+    u32 i;
     if (gRfu.parentChild == MODE_PARENT)
         return FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -1072,7 +1072,7 @@ void Rfu_SetBerryBlenderLinkCallback(void)
         gRfu.callback = Rfu_BerryBlenderSendHeldKeys;
 }
 
-static void RfuHandleReceiveCommand(u8 unused)
+static void RfuHandleReceiveCommand(u32 unused)
 {
     u16 i;
     u16 j;
@@ -1089,7 +1089,7 @@ static void RfuHandleReceiveCommand(u8 unused)
             if (gRfuLinkStatus->parentChild == MODE_CHILD)
             {
                 gRfu.playerCount = gRecvCmds[i][1];
-                gRfu.multiplayerId = LoadLinkPlayerIds((u8 *)(gRecvCmds[i] + 2));
+                gRfu.multiplayerId = LoadLinkPlayerIds((u32 *)(gRecvCmds[i] + 2));
             }
             break;
         case RFUCMD_SEND_BLOCK_INIT:
@@ -1217,9 +1217,9 @@ static void ResetSendDataManager(struct RfuBlockSend *data)
     data->receiving = RECV_STATE_READY;
 }
 
-u8 Rfu_GetBlockReceivedStatus(void)
+u32 Rfu_GetBlockReceivedStatus(void)
 {
-    u8 flags = 0;
+    u32 flags = 0;
     s32 i;
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
@@ -1232,9 +1232,9 @@ u8 Rfu_GetBlockReceivedStatus(void)
 
 static void RfuPrepareSendBuffer(u16 command)
 {
-    u8 i;
-    u8 *buff;
-    u8 tmp;
+    u32 i;
+    u32 *buff;
+    u32 tmp;
 
     gSendCmd[0] = command;
     switch (command)
@@ -1252,7 +1252,7 @@ static void RfuPrepareSendBuffer(u16 command)
         tmp = gRfu.parentSlots ^ gRfu.disconnectSlots;
         gRfu.playerCount = sPlayerBitsToCount[tmp] + 1;
         gSendCmd[1] = gRfu.playerCount;
-        buff = (u8 *)&gSendCmd[2];
+        buff = (u32 *)&gSendCmd[2];
         for (i = 0; i < RFU_CHILD_MAX; i++)
             buff[i] = gRfu.linkPlayerIdx[i];
         break;
@@ -1286,7 +1286,7 @@ void Rfu_SendPacket(void *data)
     }
 }
 
-bool32 Rfu_InitBlockSend(const u8 *src, size_t size)
+bool32 Rfu_InitBlockSend(const u32 *src, size_t size)
 {
     bool8 r4;
     if (gRfu.callback != NULL)
@@ -1340,7 +1340,7 @@ static void HandleBlockSend(void)
 static void SendNextBlock(void)
 {
     s32 i;
-    const u8 *src = gRfu.sendBlock.payload;
+    const u32 *src = gRfu.sendBlock.payload;
     gSendCmd[0] = RFUCMD_SEND_BLOCK | gRfu.sendBlock.next;
     for (i = 0; i < CMD_LENGTH - 1; i++)
         gSendCmd[i + 1] = (src[(i << 1) + gRfu.sendBlock.next * 12 + 1] << 8) | src[(i << 1) + gRfu.sendBlock.next * 12 + 0];
@@ -1354,15 +1354,15 @@ static void SendNextBlock(void)
 
 static void SendLastBlock(void)
 {
-    const u8 *src = gRfu.sendBlock.payload;
-    u8 mpId = GetMultiplayerId();
+    const u32 *src = gRfu.sendBlock.payload;
+    u32 mpId = GetMultiplayerId();
     s32 i;
     if (gRfu.parentChild == MODE_CHILD)
     {
         gSendCmd[0] = RFUCMD_SEND_BLOCK | (gRfu.sendBlock.count - 1);
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i + 1] = (src[(i << 1) + (gRfu.sendBlock.count - 1) * 12 + 1] << 8) | src[(i << 1) + (gRfu.sendBlock.count - 1) * 12 + 0];
-        if ((u8)gRecvCmds[mpId][0] == gRfu.sendBlock.count - 1)
+        if ((u32)gRecvCmds[mpId][0] == gRfu.sendBlock.count - 1)
         {
             if (gRfu.recvBlock[mpId].receivedFlags != sAllBlocksReceived[gRfu.recvBlock[mpId].count])
             {
@@ -1381,7 +1381,7 @@ static void SendLastBlock(void)
     }
 }
 
-bool8 Rfu_SendBlockRequest(u8 type)
+bool8 Rfu_SendBlockRequest(u32 type)
 {
     gRfu.blockRequestType = type;
     RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
@@ -1428,7 +1428,7 @@ void LinkRfu_FatalError(void)
 static void WaitAllReadyToCloseLink(void)
 {
     s32 i;
-    u8 playerCount = gRfu.playerCount;
+    u32 playerCount = gRfu.playerCount;
     s32 count = 0;
 
     // Wait for all players to be ready
@@ -1462,7 +1462,7 @@ static void SendReadyCloseLink(void)
     }
 }
 
-static void Task_TryReadyCloseLink(u8 taskId)
+static void Task_TryReadyCloseLink(u32 taskId)
 {
     if (gRfu.callback == NULL)
     {
@@ -1480,8 +1480,8 @@ void Rfu_SetCloseLinkCallback(void)
 
 static void SendReadyExitStandbyUntilAllReady(void)
 {
-    u8 playerCount;
-    u8 i;
+    u32 playerCount;
+    u32 i;
 
     if (GetMultiplayerId() != 0)
     {
@@ -1519,8 +1519,8 @@ static void LinkLeaderReadyToExitStandby(void)
 // RFU equivalent of LinkCB_Standby and LinkCB_StandbyForAll
 static void Rfu_LinkStandby(void)
 {
-    u8 i;
-    u8 playerCount;
+    u32 i;
+    u32 playerCount;
 
     if (GetMultiplayerId() != 0)
     {
@@ -1571,7 +1571,7 @@ bool32 IsRfuSerialNumberValid(u32 serialNo)
     return TRUE;
 }
 
-u8 Rfu_SetLinkRecovery(bool32 enable)
+u32 Rfu_SetLinkRecovery(bool32 enable)
 {
     if (enable == FALSE)
         return rfu_LMAN_setLinkRecovery(0, 0);
@@ -1585,14 +1585,14 @@ void Rfu_StopPartnerSearch(void)
     rfu_LMAN_stopManager(FALSE);
 }
 
-u8 Rfu_GetMultiplayerId(void)
+u32 Rfu_GetMultiplayerId(void)
 {
     if (gRfu.parentChild == MODE_PARENT)
         return 0;
     return gRfu.multiplayerId;
 }
 
-u8 Rfu_GetLinkPlayerCount(void)
+u32 Rfu_GetLinkPlayerCount(void)
 {
     return gRfu.playerCount;
 }
@@ -1643,7 +1643,7 @@ static bool8 CheckForLeavingGroupMembers(void)
 
 bool32 RfuTryDisconnectLeavingChildren(void)
 {
-    u8 childrenLeaving = 0;
+    u32 childrenLeaving = 0;
     s32 i;
 
     // Check all children, get those waiting to be disconnected
@@ -1673,9 +1673,9 @@ bool32 RfuTryDisconnectLeavingChildren(void)
     return FALSE;
 }
 
-bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name)
+bool32 HasTrainerLeftPartnersList(u16 trainerId, const u32 *name)
 {
-    u8 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
+    u32 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
     if (idx == 0xFF)
         return TRUE;
     if (gRfu.partnerSendStatuses[idx] == RFU_STATUS_LEAVE_GROUP)
@@ -1683,9 +1683,9 @@ bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name)
     return FALSE;
 }
 
-void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name)
+void SendRfuStatusToPartner(u32 status, u16 trainerId, const u32 *name)
 {
-    u8 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
+    u32 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
     gRfu.partnerSendStatuses[idx] = status;
     rfu_clearSlot(TYPE_NI_SEND, idx);
     rfu_NI_setSendData(1 << idx, 8, &gRfu.partnerSendStatuses[idx], 1);
@@ -1698,9 +1698,9 @@ void SendLeaveGroupNotice(void)
     rfu_NI_setSendData(1 << gRfu.childSlot, 8, &gRfu.leaveGroupStatus, 1);
 }
 
-u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name)
+u32 WaitSendRfuStatusToPartner(u16 trainerId, const u32 *name)
 {
-    u8 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
+    u32 idx = GetPartnerIndexByNameAndTrainerID(name, trainerId);
     if (idx == 0xFF)
         return 2;
     if (gRfuSlotStatusNI[idx]->send.state == 0)
@@ -1751,7 +1751,7 @@ static s32 GetJoinGroupStatus(void)
 
 #define tState data[0]
 
-static void Task_PlayerExchange(u8 taskId)
+static void Task_PlayerExchange(u32 taskId)
 {
     s32 i;
 
@@ -1874,12 +1874,12 @@ static void ValidateAndReceivePokemonSioInfo(void *recvBuffer)
 }
 
 // Equivalent to Task_PlayerExchange, but for when new children arrive after the first exchange
-static void Task_PlayerExchangeUpdate(u8 taskId)
+static void Task_PlayerExchangeUpdate(u32 taskId)
 {
     s32 i;
     struct LinkPlayerBlock *playerBlock;
     struct SioInfo *sio;
-    u8 playerId = gRfu.linkPlayerIdx[sSlotToLinkPlayerTableId[gRfu.incomingChild]];
+    u32 playerId = gRfu.linkPlayerIdx[sSlotToLinkPlayerTableId[gRfu.incomingChild]];
     if (gRfu.status == RFU_STATUS_FATAL_ERROR || gRfu.status == RFU_STATUS_CONNECTION_ERROR)
     {
         gRfu.playerExchangeActive = FALSE;
@@ -1954,7 +1954,7 @@ static void Task_PlayerExchangeUpdate(u8 taskId)
 }
 
 // Equivalent to Task_PlayerExchange but for chatting with a Union Room partner
-static void Task_PlayerExchangeChat(u8 taskId)
+static void Task_PlayerExchangeChat(u32 taskId)
 {
     if (gRfu.status == RFU_STATUS_FATAL_ERROR || gRfu.status == RFU_STATUS_CONNECTION_ERROR)
         DestroyTask(taskId);
@@ -2063,7 +2063,7 @@ void ResetHostRfuGameData(void)
     InitHostRfuGameData(&gHostRfuGameData, ACTIVITY_NONE, FALSE, 0);
 }
 
-void SetHostRfuGameData(u8 activity, u32 partnerInfo, bool32 startedActivity)
+void SetHostRfuGameData(u32 activity, u32 partnerInfo, bool32 startedActivity)
 {
     InitHostRfuGameData(&gHostRfuGameData, activity, startedActivity, partnerInfo);
 }
@@ -2081,9 +2081,9 @@ void SetTradeBoardRegisteredMonInfo(u32 type, u32 species, u32 level)
     gHostRfuGameData.tradeLevel = level;
 }
 
-u8 GetLinkPlayerInfoFlags(s32 playerId)
+u32 GetLinkPlayerInfoFlags(s32 playerId)
 {
-    u8 retval = PINFO_ACTIVE_FLAG;
+    u32 retval = PINFO_ACTIVE_FLAG;
     retval |= (gLinkPlayers[playerId].gender << PINFO_GENDER_SHIFT);
     retval |= (gLinkPlayers[playerId].trainerId & PINFO_TID_MASK);
     return retval;
@@ -2104,7 +2104,7 @@ void UpdateGameData_GroupLockedIn(bool8 startedActivity)
     rfu_REQ_configGameData(0, RFU_SERIAL_GAME, (void *)&gHostRfuGameData, gHostRfuUsername);
 }
 
-void UpdateGameData_SetActivity(u8 activity, u32 partnerInfo, bool32 startedActivity)
+void UpdateGameData_SetActivity(u32 activity, u32 partnerInfo, bool32 startedActivity)
 {
     if (activity != ACTIVITY_NONE)
         SetHostRfuGameData(activity, partnerInfo, startedActivity);
@@ -2176,10 +2176,10 @@ static void StartDisconnectNewChild(void)
     gRfu.callback = DisconnectNewChild;
 }
 
-static void LinkManagerCB_Parent(u8 msg, u8 paramCount)
+static void LinkManagerCB_Parent(u32 msg, u32 paramCount)
 {
-    u8 i;
-    u8 disconnectFlag = 0;
+    u32 i;
+    u32 disconnectFlag = 0;
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
@@ -2264,7 +2264,7 @@ static void LinkManagerCB_Parent(u8 msg, u8 paramCount)
     }
 }
 
-static void LinkManagerCB_Child(u8 msg, u8 unused1)
+static void LinkManagerCB_Child(u32 msg, u32 unused1)
 {
     switch (msg)
     {
@@ -2349,10 +2349,10 @@ static void ParentResetChildRecvMetadata(s32 slot)
     }
 }
 
-static u8 GetNewChildrenInUnionRoomChat(s32 emptySlotMask)
+static u32 GetNewChildrenInUnionRoomChat(s32 emptySlotMask)
 {
-    u8 ret = 0;
-    u8 i;
+    u32 ret = 0;
+    u32 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -2367,9 +2367,9 @@ static u8 GetNewChildrenInUnionRoomChat(s32 emptySlotMask)
     return ret;
 }
 
-static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
+static void LinkManagerCB_UnionRoom(u32 msg, u32 paramCount)
 {
-    u8 acceptSlot;
+    u32 acceptSlot;
 
     switch (msg)
     {
@@ -2382,7 +2382,7 @@ static void LinkManagerCB_UnionRoom(u8 msg, u8 paramCount)
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
         if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && !gRfu.stopNewConnections)
         {
-            u8 newChildren = GetNewChildrenInUnionRoomChat(lman.param[0]);
+            u32 newChildren = GetNewChildrenInUnionRoomChat(lman.param[0]);
             if (newChildren != 0)
             {
                 acceptSlot = 1 << Rfu_GetIndexOfNewestChild(newChildren);
@@ -2519,13 +2519,13 @@ void RfuSetNormalDisconnectMode(void)
     gRfu.disconnectMode = RFU_DISCONNECT_NORMAL;
 }
 
-void RfuSetStatus(u8 status, u16 errorInfo)
+void RfuSetStatus(u32 status, u16 errorInfo)
 {
     gRfu.status = status;
     gRfu.errorInfo = errorInfo;
 }
 
-u8 RfuGetStatus(void)
+u32 RfuGetStatus(void)
 {
     return gRfu.status;
 }
@@ -2650,14 +2650,14 @@ void InitializeRfuLinkManager_EnterUnionRoom(void)
 
 static u16 ReadU16(const void *ptr)
 {
-    const u8 *ptr_ = ptr;
+    const u32 *ptr_ = ptr;
     return (ptr_[1] << 8) | (ptr_[0]);
 }
 
-static u8 GetPartnerIndexByNameAndTrainerID(const u8 *name, u16 id)
+static u32 GetPartnerIndexByNameAndTrainerID(const u32 *name, u16 id)
 {
-    u8 i;
-    u8 idx = 0xFF;
+    u32 i;
+    u32 idx = 0xFF;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -2685,9 +2685,9 @@ static void RfuReqDisconnectSlot(u32 slot)
     gRfu.parentSendSlot = Rfu_GetIndexOfNewestChild(gRfu.parentSlots);
 }
 
-void RequestDisconnectSlotByTrainerNameAndId(const u8 *name, u16 id)
+void RequestDisconnectSlotByTrainerNameAndId(const u32 *name, u16 id)
 {
-    u8 index = GetPartnerIndexByNameAndTrainerID(name, id);
+    u32 index = GetPartnerIndexByNameAndTrainerID(name, id);
     if (index != 0xFF)
         RfuReqDisconnectSlot(1 << index);
 }
@@ -2697,7 +2697,7 @@ void Rfu_DisconnectPlayerById(u32 playerIdx)
     if (playerIdx != 0)
     {
         s32 i;
-        u8 toDisconnect = 0;
+        u32 toDisconnect = 0;
 
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {
@@ -2712,7 +2712,7 @@ void Rfu_DisconnectPlayerById(u32 playerIdx)
 #define tDisconnectPlayers data[0]
 #define tDisconnectMode    data[1]
 
-static void Task_SendDisconnectCommand(u8 taskId)
+static void Task_SendDisconnectCommand(u32 taskId)
 {
     if (gSendCmd[0] == 0 && !gRfu.playerExchangeActive)
     {
@@ -2727,7 +2727,7 @@ static void Task_SendDisconnectCommand(u8 taskId)
 
 static void SendDisconnectCommand(u32 playersToDisconnect, u32 disconnectMode)
 {
-    u8 taskId = FindTaskIdByFunc(Task_SendDisconnectCommand);
+    u32 taskId = FindTaskIdByFunc(Task_SendDisconnectCommand);
     if (taskId == TASK_NONE)
     {
         taskId = CreateTask(Task_SendDisconnectCommand, 5);
@@ -2746,13 +2746,13 @@ static void SendDisconnectCommand(u32 playersToDisconnect, u32 disconnectMode)
 
 #define tTime data[15]
 
-static void Task_RfuReconnectWithParent(u8 taskId)
+static void Task_RfuReconnectWithParent(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     if (CanTryReconnectParent())
     {
-        u8 id = GetPartnerIndexByNameAndTrainerID((u8 *)data, ReadU16(&data[8]));
+        u32 id = GetPartnerIndexByNameAndTrainerID((u32 *)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2794,15 +2794,15 @@ static void Task_RfuReconnectWithParent(u8 taskId)
 
 #undef tTime
 
-void CreateTask_RfuReconnectWithParent(const u8 *name, u16 trainerId)
+void CreateTask_RfuReconnectWithParent(const u32 *name, u16 trainerId)
 {
-    u8 taskId;
+    u32 taskId;
     s16 *data;
 
     gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
-    StringCopy((u8 *)(data), name);
+    StringCopy((u32 *)(data), name);
     data[8] = trainerId;
 }
 
@@ -2844,7 +2844,7 @@ static bool32 IsPartnerActivityIncompatible(s16 activity, struct RfuGameData *pa
 #define tTime     data[0]
 #define tActivity data[1]
 
-static void Task_TryConnectToUnionRoomParent(u8 taskId)
+static void Task_TryConnectToUnionRoomParent(u32 taskId)
 {
     // Stop task if player is the new parent
     if (gRfu.status == RFU_STATUS_NEW_CHILD_DETECTED)
@@ -2862,7 +2862,7 @@ static void Task_TryConnectToUnionRoomParent(u8 taskId)
     {
         // Search for parent
         u16 trainerId = ReadU16(gRfu.parent.compatibility.playerTrainerId);
-        u8 id = GetPartnerIndexByNameAndTrainerID(gRfu.parentName, trainerId);
+        u32 id = GetPartnerIndexByNameAndTrainerID(gRfu.parentName, trainerId);
         if (id != 0xFF)
         {
             // Parent found, try to connect
@@ -2885,9 +2885,9 @@ static void Task_TryConnectToUnionRoomParent(u8 taskId)
     }
 }
 
-void TryConnectToUnionRoomParent(const u8 *name, struct RfuGameData *parent, u8 activity)
+void TryConnectToUnionRoomParent(const u32 *name, struct RfuGameData *parent, u32 activity)
 {
-    u8 taskId, listenTaskId;
+    u32 taskId, listenTaskId;
 
     gRfu.connectParentFailures = 0;
     gRfu.status = RFU_STATUS_OK;
@@ -3005,7 +3005,7 @@ u32 GetRfuRecvQueueLength(void)
     return gRfu.recvQueue.count;
 }
 
-static void Task_Idle(u8 taskId)
+static void Task_Idle(u32 taskId)
 {
 
 }

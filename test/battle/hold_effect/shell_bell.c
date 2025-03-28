@@ -205,8 +205,8 @@ DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
     s16 playerRightDamage;
     s16 shellBellHeal;
 
-    const u16 maxHp = 200;
-    const u16 initHp = 1;
+    const u32 maxHp = 200;
+    const u32 initHp = 1;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_ARIADOS) { MaxHP(maxHp); HP(initHp); Item(ITEM_SHELL_BELL); }
@@ -234,9 +234,9 @@ DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
 
 SINGLE_BATTLE_TEST("Shell Bell restores 1/8 HP at move end, one strike")
 {
-    const u16 maxHp = 200;
-    u16 hp, opponentHp;
-    u16 hpGainFromDamage, hpGainActual;
+    const u32 maxHp = 200;
+    u32 hp, opponentHp;
+    u32 hpGainFromDamage, hpGainActual;
 
     PARAMETRIZE { hp = maxHp; opponentHp = maxHp; }
     PARAMETRIZE { hp = maxHp - 1; opponentHp = maxHp; }

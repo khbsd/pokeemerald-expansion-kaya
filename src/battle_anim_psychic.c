@@ -485,7 +485,7 @@ const struct SpriteTemplate gPsychoCutSpriteTemplate =
 static void AnimPsychoCut(struct Sprite *sprite)
 {
     s16 lVarX, lVarY;
-    u16 rot;
+    u32 rot;
 
     if (IsContest())
     {
@@ -643,8 +643,8 @@ static void AnimDefensiveWall_Step2(struct Sprite *sprite)
 
 static void AnimDefensiveWall_Step3(struct Sprite *sprite)
 {
-    u16 color;
-    u16 startOffset;
+    u32 color;
+    u32 startOffset;
     int i;
 
     if (++sprite->data[1] == 2)
@@ -877,7 +877,7 @@ static void AnimTask_Teleport_Step(u8 taskId)
 
 void AnimTask_ImprisonOrbs(u8 taskId)
 {
-    u16 var0, var1;
+    u32 var0, var1;
 
     struct Task *task = &gTasks[taskId];
 
@@ -898,7 +898,7 @@ void AnimTask_ImprisonOrbs(u8 taskId)
 
 static void AnimTask_ImprisonOrbs_Step(u8 taskId)
 {
-    u16 i;
+    u32 i;
     u8 spriteId;
     struct Task *task = &gTasks[taskId];
 

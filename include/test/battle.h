@@ -224,7 +224,7 @@
  * running, and results will contain an entry for each parameter, e.g.:
  *     SINGLE_BATTLE_TEST("Blaze boosts Fire-type moves in a pinch", s16 damage)
  *     {
- *         u16 hp;
+ *         u32 hp;
  *         PARAMETRIZE { hp = 99; }
  *         PARAMETRIZE { hp = 33; }
  *         GIVEN {
@@ -550,13 +550,13 @@ enum
 struct QueuedAbilityEvent
 {
     u8 battlerId;
-    u16 ability;
+    u32 ability;
 };
 
 struct QueuedAnimationEvent
 {
     u8 type;
-    u16 id;
+    u32 id;
     u8 attacker:4;
     u8 target:4;
 };
@@ -608,8 +608,8 @@ struct QueuedEvent
 
 struct TurnRNG
 {
-    u16 tag;
-    u16 value;
+    u32 tag;
+    u32 value;
 };
 
 struct BattlerTurn
@@ -622,7 +622,7 @@ struct BattlerTurn
 
 struct ExpectedAIAction
 {
-    u16 sourceLine;
+    u32 sourceLine;
     u8 type:4; // which action
     u8 moveSlots:4; // Expected move(s) to be chosen or not, marked as bits.
     u8 target:4; // move target or id of mon which gets sent out
@@ -645,14 +645,14 @@ struct ExpectedAiScore
     u8 cmp:3; // Uses battle script command's CMP_ macros
     u8 toValue:1; // compare to value, not to move
     u8 set:1;
-    u16 sourceLine;
+    u32 sourceLine;
 };
 
 struct AILogLine
 {
     const char *file;
-    u16 line:15;
-    u16 set:1; // Whether score was set, or added/subtracted
+    u32 line:15;
+    u32 set:1; // Whether score was set, or added/subtracted
     s16 score;
 };
 
@@ -674,13 +674,13 @@ struct BattleTestData
     u8 explicitMoves[NUM_BATTLE_SIDES];
     bool8 hasExplicitSpeeds;
     u8 explicitSpeeds[NUM_BATTLE_SIDES];
-    u16 slowerThan[NUM_BATTLE_SIDES][PARTY_SIZE];
+    u32 slowerThan[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 currentSide;
     u8 currentPartyIndex;
     struct Pokemon *currentMon;
     u8 gender;
     u8 nature;
-    u16 forcedAbilities[NUM_BATTLE_SIDES][PARTY_SIZE];
+    u32 forcedAbilities[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 chosenGimmick[NUM_BATTLE_SIDES][PARTY_SIZE];
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
@@ -695,7 +695,7 @@ struct BattleTestData
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordTurnNumbers[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
-    u16 recordIndexes[MAX_BATTLERS_COUNT];
+    u32 recordIndexes[MAX_BATTLERS_COUNT];
     struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
 
     u8 queuedEventsCount;
@@ -707,7 +707,7 @@ struct BattleTestData
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
-    u16 flagId;
+    u32 flagId;
 
     struct BattleTrialData trial;
 };
@@ -716,16 +716,16 @@ struct BattleTestRunnerState
 {
     u8 battlersCount;
     bool8 forceMoveAnim;
-    u16 parametersCount; // Valid only in BattleTest_Setup.
-    u16 parameters;
-    u16 runParameter;
-    u16 rngTag;
-    u16 rngTrialOffset;
-    u16 trials;
-    u16 runTrial;
-    u16 expectedRatio;
-    u16 observedRatio;
-    u16 trialRatio;
+    u32 parametersCount; // Valid only in BattleTest_Setup.
+    u32 parameters;
+    u32 runParameter;
+    u32 rngTag;
+    u32 rngTrialOffset;
+    u32 trials;
+    u32 runTrial;
+    u32 expectedRatio;
+    u32 observedRatio;
+    u32 trialRatio;
     bool8 runRandomly:1;
     bool8 didRunRandomly:1;
     bool8 runGiven:1;
@@ -814,7 +814,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 
 struct RandomlyContext
 {
-    u16 tag;
+    u32 tag;
 };
 
 void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
@@ -822,7 +822,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext);
 /* Given */
 
 struct moveWithPP {
-    u16 moveId;
+    u32 moveId;
     u8 pp;
 };
 
@@ -856,7 +856,7 @@ struct moveWithPP {
 #define SpDefenseIV(spDefenseIV) SpDefenseIV_(__LINE__, spDefenseIV)
 #define SpeedIV(speedIV) SpeedIV_(__LINE__, speedIV)
 #define Item(item) Item_(__LINE__, item)
-#define Moves(move1, ...) do { u16 moves_[MAX_MON_MOVES] = {move1, __VA_ARGS__}; Moves_(__LINE__, moves_); } while(0)
+#define Moves(move1, ...) do { u32 moves_[MAX_MON_MOVES] = {move1, __VA_ARGS__}; Moves_(__LINE__, moves_); } while(0)
 #define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
@@ -866,7 +866,7 @@ struct moveWithPP {
 #define TeraType(teraType) TeraType_(__LINE__, teraType)
 #define Shadow(isShadow) Shadow_(__LINE__, shadow)
 
-void SetFlagForTest(u32 sourceLine, u16 flagId);
+void SetFlagForTest(u32 sourceLine, u32 flagId);
 void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
 void ClearFlagAfterTest(void);
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
@@ -893,7 +893,7 @@ void SpAttackIV_(u32 sourceLine, u32 spAttackIV);
 void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV);
 void SpeedIV_(u32 sourceLine, u32 speedIV);
 void Item_(u32 sourceLine, u32 item);
-void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES]);
+void Moves_(u32 sourceLine, u32 moves[MAX_MON_MOVES]);
 void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
@@ -906,7 +906,7 @@ void Shadow_(u32 sourceLine, bool32 isShadow);
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves
 {
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
 };
 
 struct TestAIScoreStruct
@@ -956,25 +956,25 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 
 struct MoveContext
 {
-    u16 move;
-    u16 explicitMove:1;
-    u16 moveSlot:2;
-    u16 explicitMoveSlot:1;
-    u16 hit:1;
-    u16 explicitHit:1;
-    u16 criticalHit:1;
-    u16 explicitCriticalHit:1;
-    u16 secondaryEffect:1;
-    u16 explicitSecondaryEffect:1;
-    u16 gimmick:4;
-    u16 explicitGimmick:1;
-    u16 allowed:1;
+    u32 move;
+    u32 explicitMove:1;
+    u32 moveSlot:2;
+    u32 explicitMoveSlot:1;
+    u32 hit:1;
+    u32 explicitHit:1;
+    u32 criticalHit:1;
+    u32 explicitCriticalHit:1;
+    u32 secondaryEffect:1;
+    u32 explicitSecondaryEffect:1;
+    u32 gimmick:4;
+    u32 explicitGimmick:1;
+    u32 allowed:1;
     // End of word
-    u16 explicitAllowed:1;
-    u16 partyIndex:3; // Used for moves where you select a party member without swiching, such as Revival Blessing
-    u16 explicitPartyIndex:1;
-    u16 notExpected:1; // Has effect only with EXPECT_MOVE
-    u16 explicitNotExpected:1;
+    u32 explicitAllowed:1;
+    u32 partyIndex:3; // Used for moves where you select a party member without swiching, such as Revival Blessing
+    u32 explicitPartyIndex:1;
+    u32 notExpected:1; // Has effect only with EXPECT_MOVE
+    u32 explicitNotExpected:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
     struct TurnRNG rng;
@@ -983,12 +983,12 @@ struct MoveContext
 
 struct ItemContext
 {
-    u16 itemId;
-    u16 explicitItemId:1;
-    u16 partyIndex;
-    u16 explicitPartyIndex:1;
-    u16 move;
-    u16 explicitMove:1;
+    u32 itemId;
+    u32 explicitItemId:1;
+    u32 partyIndex;
+    u32 explicitPartyIndex:1;
+    u32 move;
+    u32 explicitMove:1;
 };
 
 void OpenTurn(u32 sourceLine);
@@ -1048,7 +1048,7 @@ enum QueueGroupType
 
 struct AbilityEventContext
 {
-    u16 ability;
+    u32 ability;
 };
 
 struct AnimationEventContext
@@ -1060,11 +1060,11 @@ struct AnimationEventContext
 struct HPEventContext
 {
     u8 _;
-    u16 hp;
+    u32 hp;
     bool8 explicitHP;
     s16 damage;
     bool8 explicitDamage;
-    u16 *captureHP;
+    u32 *captureHP;
     bool8 explicitCaptureHP;
     s16 *captureDamage;
     bool8 explicitCaptureDamage;
@@ -1081,7 +1081,7 @@ struct ExpEventContext
 
 struct StatusEventContext
 {
-    u16 status1;
+    u32 status1;
     bool8 none:1;
     bool8 sleep:1;
     bool8 poison:1;

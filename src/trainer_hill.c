@@ -36,12 +36,12 @@
 
 struct FloorTrainers
 {
-    u8 name[HILL_TRAINERS_PER_FLOOR][TRAINER_NAME_LENGTH + 1];
-    u8 facilityClass[HILL_TRAINERS_PER_FLOOR];
+    u32 name[HILL_TRAINERS_PER_FLOOR][TRAINER_NAME_LENGTH + 1];
+    u32 facilityClass[HILL_TRAINERS_PER_FLOOR];
 };
 
 static EWRAM_DATA struct {
-    u8 floorId;
+    u32 floorId;
     struct TrainerHillChallenge challenge;
     struct TrainerHillFloor floors[NUM_TRAINER_HILL_FLOORS];
 } *sHillData = NULL;
@@ -75,7 +75,7 @@ static void TrainerHillDummy(void);
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
 #endif //FREE_TRAINER_HILL
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level);
+static void SetTrainerHillMonLevel(struct Pokemon *mon, u32 level);
 #if FREE_TRAINER_HILL == FALSE
 static u16 GetPrizeItemId(void);
 #endif //FREE_TRAINER_HILL
@@ -85,8 +85,8 @@ static u16 GetPrizeItemId(void);
 
 struct
 {
-    u8 trainerClass;
-    u8 musicId;
+    u32 trainerClass;
+    u32 musicId;
 } static const sTrainerClassesAndMusic[] =
 {
     {TRAINER_CLASS_TEAM_AQUA, TRAINER_ENCOUNTER_MUSIC_AQUA},
@@ -202,7 +202,7 @@ static const u16 *const *const sPrizeListSets[] =
 };
 
 static const u16 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
-static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+static const u32 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_MODES] =
 {
@@ -221,7 +221,7 @@ static const struct TrainerHillFloor *const sFloorData[NUM_TRAINER_HILL_MODES] =
 };
 
 // Unused.
-static const u8 *const sFloorStrings[] =
+static const u32 *const sFloorStrings[] =
 {
     gText_TrainerHill1F,
     gText_TrainerHill2F,
@@ -251,7 +251,7 @@ static void (* const sHillFunctions[])(void) =
     [TRAINER_HILL_FUNC_SET_MODE]              = TrainerHillSetMode,
 };
 
-static const u8 *const sModeStrings[NUM_TRAINER_HILL_MODES] =
+static const u32 *const sModeStrings[NUM_TRAINER_HILL_MODES] =
 {
     [HILL_MODE_NORMAL]  = gText_NormalTagMatch,
     [HILL_MODE_VARIETY] = gText_VarietyTagMatch,
@@ -276,7 +276,7 @@ static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] =
     [TRAINER_HILL_3F - 1] = MAP_NUM(TRAINER_HILL_4F),
     [TRAINER_HILL_4F - 1] = MAP_NUM(TRAINER_HILL_ROOF)
 };
-static const u8 sTrainerPartySlots[HILL_TRAINERS_PER_FLOOR][PARTY_SIZE / 2] =
+static const u32 sTrainerPartySlots[HILL_TRAINERS_PER_FLOOR][PARTY_SIZE / 2] =
 {
     {0, 1, 2},
     {3, 4, 5}
@@ -304,30 +304,30 @@ void ResetTrainerHillResults(void)
 #endif //FREE_TRAINER_HILL
 }
 
-static u8 GetFloorId(void)
+static u32 GetFloorId(void)
 {
     return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 }
 
-u8 GetTrainerHillOpponentClass(u16 trainerId)
+u32 GetTrainerHillOpponentClass(u16 trainerId)
 {
-    u8 id = trainerId - 1;
+    u32 id = trainerId - 1;
 
     return gFacilityClassToTrainerClass[sFloorTrainers->facilityClass[id]];
 }
 
-void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
+void GetTrainerHillTrainerName(u32 *dst, u16 trainerId)
 {
     s32 i;
-    u8 id = trainerId - 1;
+    u32 id = trainerId - 1;
 
     for (i = 0; i < TRAINER_NAME_LENGTH + 1; i++)
         dst[i] = sFloorTrainers->name[id][i];
 }
 
-u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
+u32 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
 {
-    u8 id, facilityClass;
+    u32 id, facilityClass;
 
     SetUpDataStruct();
     id = trainerId - 1;
@@ -380,9 +380,9 @@ static void FreeDataStruct(void)
     TRY_FREE_AND_SET_NULL(sHillData);
 }
 
-void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
+void CopyTrainerHillTrainerText(u32 which, u16 trainerId)
 {
-    u8 id, floorId;
+    u32 id, floorId;
 
     SetUpDataStruct();
     floorId = GetFloorId();
@@ -668,7 +668,7 @@ static void SetTimerValue(u32 *dst, u32 val)
 
 void LoadTrainerHillObjectEventTemplates(void)
 {
-    u8 i, floorId;
+    u32 i, floorId;
     struct ObjectEventTemplate *eventTemplates = gSaveBlock1Ptr->objectEventTemplates;
 
     if (!LoadTrainerHillFloorObjectEventScripts())
@@ -682,7 +682,7 @@ void LoadTrainerHillObjectEventTemplates(void)
     floorId = GetFloorId();
     for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
     {
-        u8 bits;
+        u32 bits;
 
         eventTemplates[i] = sTrainerObjectEventTemplate;
         eventTemplates[i].localId = i + 1;
@@ -707,7 +707,7 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
+static u16 GetMetatileForFloor(u32 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
     bool8 impassable;
     u16 metatile;
@@ -725,7 +725,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     s32 y, x;
     const u16 *src;
     u16 *dst;
-    u8 mapId = GetCurrentTrainerHillMapId();
+    u32 mapId = GetCurrentTrainerHillMapId();
 
     if (mapId == TRAINER_HILL_ENTRANCE)
     {
@@ -785,9 +785,9 @@ bool32 InTrainerHill(void)
     return ret;
 }
 
-u8 GetCurrentTrainerHillMapId(void)
+u32 GetCurrentTrainerHillMapId(void)
 {
-    u8 mapId;
+    u32 mapId;
 
     if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_1F)
         mapId = TRAINER_HILL_1F;
@@ -828,9 +828,9 @@ const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)
 
 // For warping from the roof in challenges where the 4F is not the final challenge floor
 // This would only occur in the JP-exclusive Default and E-Reader challenges
-const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u8 warpEventId)
+const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u32 warpEventId)
 {
-    u8 numFloors;
+    u32 numFloors;
     const struct MapHeader *header;
 
     if (warpEventId == 1)
@@ -844,23 +844,23 @@ const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u8 warpEventId)
     return &header->events->warps[0];
 }
 
-u16 LocalIdToHillTrainerId(u8 localId)
+u16 LocalIdToHillTrainerId(u32 localId)
 {
     return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
-bool8 GetHillTrainerFlag(u8 objectEventId)
+bool8 GetHillTrainerFlag(u32 objectEventId)
 {
     u32 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
-    u8 bitId = gObjectEvents[objectEventId].localId - 1 + trainerIndexStart;
+    u32 bitId = gObjectEvents[objectEventId].localId - 1 + trainerIndexStart;
 
     return gSaveBlock2Ptr->frontier.trainerFlags & (1u << bitId);
 }
 
 void SetHillTrainerFlag(void)
 {
-    u8 i;
-    u8 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
+    u32 i;
+    u32 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
 
     for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
     {
@@ -884,7 +884,7 @@ void SetHillTrainerFlag(void)
     }
 }
 
-const u8 *GetTrainerHillTrainerScript(void)
+const u32 *GetTrainerHillTrainerScript(void)
 {
     return TrainerHill_EventScript_TrainerBattle;
 }
@@ -895,9 +895,9 @@ static void ShowTrainerHillPostBattleText(void)
     ShowFieldMessageFromBuffer();
 }
 
-static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)
+static void CreateNPCTrainerHillParty(u16 trainerId, u32 firstMonId)
 {
-    u8 trId, level;
+    u32 trId, level;
     s32 i, floorId, partySlot;
 
     if (trainerId == 0 || trainerId > HILL_TRAINERS_PER_FLOOR)
@@ -909,7 +909,7 @@ static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)
     floorId = GetFloorId();
     for (i = firstMonId, partySlot = 0; i < firstMonId + PARTY_SIZE / 2; i++, partySlot++)
     {
-        u8 id = sTrainerPartySlots[trId][partySlot];
+        u32 id = sTrainerPartySlots[trId][partySlot];
         struct Pokemon *mon = &gEnemyParty[i];
 
         CreateBattleTowerMon(mon, &sHillData->floors[floorId].trainers[trId].mons[id]);
@@ -940,10 +940,10 @@ u32 GetTrainerHillAIFlags(void)
     return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
 }
 
-u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
+u32 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 {
     s32 i;
-    u8 trId, facilityClass;
+    u32 trId, facilityClass;
 
     SetUpDataStruct();
     trId = trainerId - 1;
@@ -959,7 +959,7 @@ u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
     return 0;
 }
 
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level)
+static void SetTrainerHillMonLevel(struct Pokemon *mon, u32 level)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
@@ -969,9 +969,9 @@ static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level)
     CalculateMonStats(mon);
 }
 
-u8 GetNumFloorsInTrainerHillChallenge(void)
+u32 GetNumFloorsInTrainerHillChallenge(void)
 {
-    u8 floors;
+    u32 floors;
 
     SetUpDataStruct();
     floors = sHillData->challenge.numFloors;
@@ -1040,9 +1040,9 @@ static void TrainerHillSetMode(void)
 
 // Determines which prize list to use from the set of prize lists.
 #if FREE_TRAINER_HILL == FALSE
-static u8 GetPrizeListId(bool8 allowTMs)
+static u32 GetPrizeListId(bool8 allowTMs)
 {
-    u8 prizeListId, i, modBy;
+    u32 prizeListId, i, modBy;
 
     // The initial selection depends on the trainer numbers for the completed challenge.
     // These don't change with the available challenge modes, so Normal/Unique will always
@@ -1068,7 +1068,7 @@ static u8 GetPrizeListId(bool8 allowTMs)
 
 static u16 GetPrizeItemId(void)
 {
-    u8 i;
+    u32 i;
     const u16 *prizeList;
     s32 trainerNumSum = 0, prizeListSetId, minutes, id;
 

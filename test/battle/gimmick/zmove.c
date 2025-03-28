@@ -663,7 +663,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Searing Sunraze Smash ignores the target's abilitie
 
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Revelation Dance always transforms into Breakneck Blitz")
 {
-    u16 species;
+    u32 species;
     PARAMETRIZE { species = SPECIES_ORICORIO_BAILE; }
     PARAMETRIZE { species = SPECIES_ORICORIO_PAU; }
     PARAMETRIZE { species = SPECIES_ORICORIO_POM_POM; }

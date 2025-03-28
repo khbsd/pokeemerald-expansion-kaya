@@ -4,17 +4,17 @@
 #include "constants/battle_move_effects.h"
 
 struct BattlePyramidRequirement {
-    const u16 *moves; /* use moves instead of effects so we don't need to find moves with said effect in our loop */
-    u16 abilities[10];
+    const u32 *moves; /* use moves instead of effects so we don't need to find moves with said effect in our loop */
+    u32 abilities[10];
     u8 nAbilities;
     u8 type;
     u8 nMoves;
-    const u16 *evoItems;
+    const u32 *evoItems;
     u8 nEvoItems;
 };
 
 // EFFECT_PARALYZE, MOVE_EFFECT_PARALYZE (30% or more)
-static const u16 sParalyzingMoves[] = {
+static const u32 sParalyzingMoves[] = {
     //MOVE_THUNDER_PUNCH,
     MOVE_BODY_SLAM,
     MOVE_STUN_SPORE,
@@ -36,7 +36,7 @@ static const u16 sParalyzingMoves[] = {
 };
 
 // MOVE_EFFECT_POISON (30% or more), EFFECT_POISON, MOVE_EFFECT_TOXIC, EFFECT_TOXIC, EFFECT_TOXIC_THREAD
-static const u16 sPoisoningMoves[] = {
+static const u32 sPoisoningMoves[] = {
     MOVE_POISON_STING,
     //MOVE_TWINEEDLE,
     MOVE_SMOG,
@@ -58,7 +58,7 @@ static const u16 sPoisoningMoves[] = {
 };
 
 // MOVE_EFFECT_BURN, EFFECT_WILL_O_WISP
-static const u16 sBurningMoves[] = {
+static const u32 sBurningMoves[] = {
     MOVE_WILL_O_WISP,
     //MOVE_EMBER,
     //MOVE_FLAMETHROWER,
@@ -80,7 +80,7 @@ static const u16 sBurningMoves[] = {
 };
 
 // EFFECT_FREEZE, MOVE_EFFECT_FREEZE_OR_FROSTBITE
-static const u16 sFrostbiteMoves[] = {
+static const u32 sFrostbiteMoves[] = {
     MOVE_ICE_PUNCH,
     MOVE_ICE_BEAM,
     MOVE_BLIZZARD,
@@ -89,21 +89,21 @@ static const u16 sFrostbiteMoves[] = {
 };
 
 // EFFECT_GRUDGE, EFFECT_SPITE, EFFECT_EERIE_SPELL
-static const u16 sPPReducingMoves[] = {
+static const u32 sPPReducingMoves[] = {
     MOVE_GRUDGE,
     MOVE_SPITE,
     MOVE_EERIE_SPELL,
 };
 
 // EFFECT_EXPLOSION
-static const u16 sExplosionMoves[] = {
+static const u32 sExplosionMoves[] = {
     MOVE_SELF_DESTRUCT,
     MOVE_EXPLOSION,
     MOVE_MISTY_EXPLOSION,
 };
 
 // EFFECT_RAIN_DANCE, EFFECT_SANDSTORM, EFFECT_HAIL, EFFECT_SUNNY_DAY,
-static const u16 sWeatherChangingMoves[] = {
+static const u32 sWeatherChangingMoves[] = {
     MOVE_RAIN_DANCE,
     MOVE_SANDSTORM,
     MOVE_HAIL,
@@ -111,7 +111,7 @@ static const u16 sWeatherChangingMoves[] = {
 };
 
 // MOVE_EFFECT_RECHARGE, recoil
-static const u16 sPowerfulNormalMoves[] = {
+static const u32 sPowerfulNormalMoves[] = {
     MOVE_HYPER_BEAM,
     MOVE_GIGA_IMPACT,
     MOVE_THRASH,
@@ -119,7 +119,7 @@ static const u16 sPowerfulNormalMoves[] = {
     MOVE_DOUBLE_EDGE,
 };
 
-static const u16 sEvoItems[] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE};
+static const u32 sEvoItems[] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE};
 
 static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[] = {
     [0] = /* pokemon with moves that paraylze */

@@ -15,7 +15,7 @@
 
 EWRAM_DATA static bool8 sIsRegisteelPuzzle = 0;
 
-static const u8 sRegicePathCoords[][2] =
+static const u32 sRegicePathCoords[][2] =
 {
     {4,  21},
     {5,  21},
@@ -55,7 +55,7 @@ static const u8 sRegicePathCoords[][2] =
     {4,  22},
 };
 
-static void Task_SealedChamberShakingEffect(u8);
+static void Task_SealedChamberShakingEffect(u32);
 static void DoBrailleRegirockEffect(void);
 static void DoBrailleRegisteelEffect(void);
 
@@ -116,7 +116,7 @@ void ShouldDoBrailleRegirockEffectOld(void)
 
 void DoSealedChamberShakingEffect_Long(void)
 {
-    u8 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
+    u32 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
 
     gTasks[taskId].tDelayCounter = 0;
     gTasks[taskId].tShakeCounter = 0;
@@ -128,7 +128,7 @@ void DoSealedChamberShakingEffect_Long(void)
 
 void DoSealedChamberShakingEffect_Short(void)
 {
-    u8 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
+    u32 taskId = CreateTask(Task_SealedChamberShakingEffect, 9);
 
     gTasks[taskId].tDelayCounter = 0;
     gTasks[taskId].tShakeCounter = 0;
@@ -138,7 +138,7 @@ void DoSealedChamberShakingEffect_Short(void)
     SetCameraPanningCallback(0);
 }
 
-static void Task_SealedChamberShakingEffect(u8 taskId)
+static void Task_SealedChamberShakingEffect(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -265,7 +265,7 @@ static void UNUSED DoBrailleWait(void)
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?
 bool8 FldEff_UsePuzzleEffect(void)
 {
-    u8 taskId = CreateFieldMoveTask();
+    u32 taskId = CreateFieldMoveTask();
 
     if (sIsRegisteelPuzzle == TRUE)
     {
@@ -284,7 +284,7 @@ bool8 FldEff_UsePuzzleEffect(void)
 // step on every space on the perimeter of the cave (and only those spaces) then return to the back wall.
 bool8 ShouldDoBrailleRegicePuzzle(void)
 {
-    u8 i;
+    u32 i;
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ISLAND_CAVE)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ISLAND_CAVE))
@@ -300,8 +300,8 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
 
         for (i = 0; i < ARRAY_COUNT(sRegicePathCoords); i++)
         {
-            u8 xPos = sRegicePathCoords[i][0];
-            u8 yPos = sRegicePathCoords[i][1];
+            u32 xPos = sRegicePathCoords[i][0];
+            u32 yPos = sRegicePathCoords[i][1];
             if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
             {
                 // Player is standing on a correct space, set the corresponding bit

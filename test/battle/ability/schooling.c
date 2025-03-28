@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25-percent or less at the end of the turn")
 {
-    u16 level;
+    u32 level;
     PARAMETRIZE { level = 19; }
     PARAMETRIZE { level = 20; }
 
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25
 
 SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is over 25-percent before the first turn")
 {
-    u16 level;
+    u32 level;
     bool32 overQuarterHP;
     PARAMETRIZE { level = 19; overQuarterHP = FALSE; }
     PARAMETRIZE { level = 20; overQuarterHP = FALSE; }
@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is ov
 
 SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is healed above 25-percent")
 {
-    u16 level;
+    u32 level;
     PARAMETRIZE { level = 19; }
     PARAMETRIZE { level = 20; }
 

@@ -14,7 +14,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle);
 void RemoveBerryTree(u8 id);
 u8 GetBerryTypeByBerryTreeId(u8 id);
 u8 GetStageByBerryTreeId(u8);
-u8 ItemIdToBerryType(u16 item);
+u8 ItemIdToBerryType(u32 item);
 void GetBerryNameByBerryType(u8 berry, u8 *string);
 void ResetBerryTreeSparkleFlag(u8 id);
 void Bag_ChooseBerry(void);
@@ -32,7 +32,7 @@ extern const struct Berry gBerries[];
 
 struct BerryCrushBerryData {
     u8 difficulty; // The number of A presses required to crush it
-    u16 powder;
+    u32 powder;
 };
 
 extern const struct BerryCrushBerryData gBerryCrush_BerryData[];

@@ -266,11 +266,11 @@ struct Taillow
 
 struct RouletteTable
 {
-    u8 minBet; // Never read
-    u8 randDistanceHigh;
-    u8 randDistanceLow;
-    u8 wheelSpeed;
-    u8 wheelDelay;
+    u32 minBet; // Never read
+    u32 randDistanceHigh;
+    u32 randDistanceLow;
+    u32 wheelSpeed;
+    u32 wheelDelay;
     struct Shroomish shroomish;
     struct Taillow taillow;
     u16 ballSpeed;
@@ -280,14 +280,14 @@ struct RouletteTable
 
 struct GridSelection
 {
-    u8 spriteIdOffset;
-    u8 baseMultiplier:4;
-    u8 column:4; // Never read
-    u8 row;      // Never read
-    u8 x;
-    u8 y;
-    u8 var05;    // Never read
-    u8 tilemapOffset;
+    u32 spriteIdOffset;
+    u32 baseMultiplier:4;
+    u32 column:4; // Never read
+    u32 row;      // Never read
+    u32 x;
+    u32 y;
+    u32 var05;    // Never read
+    u32 tilemapOffset;
     u32 flag;
     u32 inSelectionFlags;
     u16 flashFlags;
@@ -295,35 +295,35 @@ struct GridSelection
 
 struct RouletteSlot
 {
-    u8 id1; // Never read
-    u8 id2; // Never read
-    u8 gridSquare;
+    u32 id1; // Never read
+    u32 id2; // Never read
+    u32 gridSquare;
     u32 flag;
 };
 
 static EWRAM_DATA struct Roulette
 {
-    u8 unk0; // Never read
-    u8 shroomishShadowTimer;
-    u8 partySpeciesFlags;
+    u32 unk0; // Never read
+    u32 shroomishShadowTimer;
+    u32 partySpeciesFlags;
     bool8 useTaillow:5;
     bool8 ballStuck:1;
     bool8 ballUnstuck:1;
     bool8 ballRolling:1; // Never read
-    u8 tableId:2;
-    u8 unused:5;
+    u32 tableId:2;
+    u32 unused:5;
     bool8 isSpecialRate:1;
     u32 hitFlags;
-    u8 hitSquares[BALLS_PER_ROUND];
-    u8 pokeHits[NUM_BOARD_POKES];
-    u8 colorHits[NUM_BOARD_COLORS];
-    u8 minBet;
-    u8 curBallNum:4; // Never actually gets incremented, tracked with tBallNum instead
-    u8 unk1:4; // Never read
-    u8 betSelection[BALLS_PER_ROUND]; // Because curBallNum is used as the only index, only the first element is ever used (prev bet selections are never needed)
-    u8 wheelDelayTimer;
-    u8 wheelSpeed;
-    u8 wheelDelay;
+    u32 hitSquares[BALLS_PER_ROUND];
+    u32 pokeHits[NUM_BOARD_POKES];
+    u32 colorHits[NUM_BOARD_COLORS];
+    u32 minBet;
+    u32 curBallNum:4; // Never actually gets incremented, tracked with tBallNum instead
+    u32 unk1:4; // Never read
+    u32 betSelection[BALLS_PER_ROUND]; // Because curBallNum is used as the only index, only the first element is ever used (prev bet selections are never needed)
+    u32 wheelDelayTimer;
+    u32 wheelSpeed;
+    u32 wheelDelay;
     s16 wheelAngle;
     s16 gridX;
     s16 selectionRectDrawState;
@@ -331,11 +331,11 @@ static EWRAM_DATA struct Roulette
     struct OamMatrix wheelRotation;
     u16 shroomishShadowAlpha;
     struct Sprite *ball;
-    u8 spriteIds[MAX_SPRITES];
-    u8 curBallSpriteId;
-    u8 ballState;
-    u8 hitSlot;
-    u8 stuckHitSlot;
+    u32 spriteIds[MAX_SPRITES];
+    u32 curBallSpriteId;
+    u32 ballState;
+    u32 hitSlot;
+    u32 stuckHitSlot;
     s16 ballTravelDist; // Never read
     s16 ballTravelDistFast;
     u16 ballTravelDistMed;
@@ -347,63 +347,63 @@ static EWRAM_DATA struct Roulette
     f32 ballFallSpeed;
     f32 ballFallAccel;
     f32 varA0;
-    u8 playTaskId;
-    u8 spinTaskId;
-    u8 filler_1[2];
+    u32 playTaskId;
+    u32 spinTaskId;
+    u32 filler_1[2];
     u16 taskWaitDelay;
     u16 taskWaitKey;
     TaskFunc nextTask;
-    u8 filler_2[4];
+    u32 filler_2[4];
     TaskFunc prevTask;
     struct RouletteFlashUtil flashUtil;
     u16 tilemapBuffers[7][0x400];
     u16 *gridTilemap;
 } *sRoulette = NULL;
 
-static EWRAM_DATA u8 sTextWindowId = 0;
+static EWRAM_DATA u32 sTextWindowId = 0;
 
-static void Task_SpinWheel(u8);
-static void Task_StartPlaying(u8);
-static void Task_ContinuePlaying(u8);
-static void Task_StopPlaying(u8);
-static void Task_SelectFirstEmptySquare(u8);
-static void Task_HandleBetGridInput(u8);
-static void Task_SlideGridOffscreen(u8);
-static void Task_InitBallRoll(u8);
-static void Task_RollBall(u8);
-static void Task_RecordBallHit(u8);
-static void Task_SlideGridOnscreen(u8);
-static void Task_FlashBallOnWinningSquare(u8);
-static void Task_PrintSpinResult(u8);
-static void Task_PrintPayout(u8);
-static void Task_EndTurn(u8);
-static void Task_TryPrintEndTurnMsg(u8);
-static void Task_ClearBoard(u8);
-static void ExitRoulette(u8);
-static void Task_ExitRoulette(u8);
-static void StartTaskAfterDelayOrInput(u8, TaskFunc, u16, u16);
-static void ResetBallDataForNewSpin(u8);
+static void Task_SpinWheel(u32);
+static void Task_StartPlaying(u32);
+static void Task_ContinuePlaying(u32);
+static void Task_StopPlaying(u32);
+static void Task_SelectFirstEmptySquare(u32);
+static void Task_HandleBetGridInput(u32);
+static void Task_SlideGridOffscreen(u32);
+static void Task_InitBallRoll(u32);
+static void Task_RollBall(u32);
+static void Task_RecordBallHit(u32);
+static void Task_SlideGridOnscreen(u32);
+static void Task_FlashBallOnWinningSquare(u32);
+static void Task_PrintSpinResult(u32);
+static void Task_PrintPayout(u32);
+static void Task_EndTurn(u32);
+static void Task_TryPrintEndTurnMsg(u32);
+static void Task_ClearBoard(u32);
+static void ExitRoulette(u32);
+static void Task_ExitRoulette(u32);
+static void StartTaskAfterDelayOrInput(u32, TaskFunc, u16, u16);
+static void ResetBallDataForNewSpin(u32);
 static void ResetHits(void);
-static void Task_AcceptMinBet(u8);
-static void Task_DeclineMinBet(u8);
-static u8 RecordHit(u8, u8);
-static bool8 IsHitInBetSelection(u8, u8);
-static void FlashSelectionOnWheel(u8);
-static void DrawGridBackground(u8);
-static u8 GetMultiplier(u8);
+static void Task_AcceptMinBet(u32);
+static void Task_DeclineMinBet(u32);
+static u32 RecordHit(u32, u32);
+static bool8 IsHitInBetSelection(u32, u32);
+static void FlashSelectionOnWheel(u32);
+static void DrawGridBackground(u32);
+static u32 GetMultiplier(u32);
 static void UpdateWheelPosition(void);
-static void LoadOrFreeMiscSpritePalettesAndSheets(u8);
+static void LoadOrFreeMiscSpritePalettesAndSheets(u32);
 static void CreateGridSprites(void);
-static void ShowHideGridIcons(bool8, u8);
+static void ShowHideGridIcons(bool8, u32);
 static void CreateGridBallSprites(void);
-static void ShowHideGridBalls(bool8, u8);
-static void ShowHideWinSlotCursor(u8);
+static void ShowHideGridBalls(bool8, u32);
+static void ShowHideWinSlotCursor(u32);
 static void CreateWheelIconSprites(void);
 static void SpriteCB_WheelIcon(struct Sprite *);
 static void CreateInterfaceSprites(void);
 static void SetCreditDigits(u16);
-static void SetMultiplierSprite(u8);
-static void SetBallCounterNumLeft(u8);
+static void SetMultiplierSprite(u32);
+static void SetBallCounterNumLeft(u32);
 static void SpriteCB_GridSquare(struct Sprite *);
 static void CreateWheelCenterSprite(void);
 static void SpriteCB_WheelCenter(struct Sprite *);
@@ -807,7 +807,7 @@ static const struct RouletteSlot sRouletteSlots[] =
         .flag = F_PURPLE_MAKUHITA,
     },
 };
-static const u8 sTableMinBets[] = {1, 3, 1, 6};
+static const u32 sTableMinBets[] = {1, 3, 1, 6};
 
 static const struct RouletteTable sRouletteTables[] =
 {
@@ -1114,7 +1114,7 @@ static void FreeRoulette(void)
 
 static void InitRouletteTableData(void)
 {
-    u8 i;
+    u32 i;
     u16 bgColors[3] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)}; // 3rd is never used, same as 1st
 
     sRoulette->tableId = (gSpecialVar_0x8004 & 1);
@@ -1169,7 +1169,7 @@ static void InitRouletteTableData(void)
 
 static void CB2_LoadRoulette(void)
 {
-    u8 taskId;
+    u32 taskId;
 
     switch (gMain.state)
     {
@@ -1253,7 +1253,7 @@ static void CB2_LoadRoulette(void)
     gMain.state++;
 }
 
-static void Task_SpinWheel(u8 taskId)
+static void Task_SpinWheel(u32 taskId)
 {
     s16 sin;
     s16 cos;
@@ -1272,7 +1272,7 @@ static void Task_SpinWheel(u8 taskId)
     sRoulette->wheelRotation.c = -sin;
 }
 
-static void Task_StartPlaying(u8 taskId)
+static void Task_StartPlaying(u32 taskId)
 {
     if (UpdatePaletteFade() == 0)
     {
@@ -1290,7 +1290,7 @@ static void Task_StartPlaying(u8 taskId)
     }
 }
 
-static void Task_AskKeepPlaying(u8 taskId)
+static void Task_AskKeepPlaying(u32 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DrawStdWindowFrame(sTextWindowId, FALSE);
@@ -1299,21 +1299,21 @@ static void Task_AskKeepPlaying(u8 taskId)
     DoYesNoFuncWithChoice(taskId, &sYesNoTable_KeepPlaying);
 }
 
-static void Task_ContinuePlaying(u8 taskId)
+static void Task_ContinuePlaying(u32 taskId)
 {
     ClearStdWindowAndFrame(0, TRUE);
     gTasks[taskId].func = Task_SelectFirstEmptySquare;
 }
 
-static void Task_StopPlaying(u8 taskId)
+static void Task_StopPlaying(u32 taskId)
 {
     DestroyTask(sRoulette->spinTaskId);
     ExitRoulette(taskId);
 }
 
-static void UpdateGridSelectionRect(u8 selectionId)
+static void UpdateGridSelectionRect(u32 selectionId)
 {
-    u8 temp0, temp1;
+    u32 temp0, temp1;
     switch (selectionId)
     {
     case SELECTION_NONE:
@@ -1344,13 +1344,13 @@ static void UpdateGridSelectionRect(u8 selectionId)
     }
 }
 
-static void UpdateGridSelection(u8 taskId)
+static void UpdateGridSelection(u32 taskId)
 {
     SetMultiplierSprite(gTasks[taskId].tSelectionId);
     UpdateGridSelectionRect(gTasks[taskId].tSelectionId);
 }
 
-static void Task_StartHandleBetGridInput(u8 taskId)
+static void Task_StartHandleBetGridInput(u32 taskId)
 {
     sRoulette->selectionRectDrawState = SELECT_STATE_DRAW;
     UpdateGridSelectionRect(gTasks[taskId].tSelectionId);
@@ -1359,7 +1359,7 @@ static void Task_StartHandleBetGridInput(u8 taskId)
     gTasks[taskId].func = Task_HandleBetGridInput;
 }
 
-static void Task_SelectFirstEmptySquare(u8 taskId)
+static void Task_SelectFirstEmptySquare(u32 taskId)
 {
     s16 i;
 
@@ -1391,7 +1391,7 @@ static void Task_SelectFirstEmptySquare(u8 taskId)
     gTasks[taskId].func = Task_StartHandleBetGridInput;
 }
 
-static bool8 CanMoveSelectionInDir(s16 *selectionId, u8 dir)
+static bool8 CanMoveSelectionInDir(s16 *selectionId, u32 dir)
 {
     s8 temp1 = 0;
     s8 temp = 0;
@@ -1430,9 +1430,9 @@ static bool8 CanMoveSelectionInDir(s16 *selectionId, u8 dir)
     return FALSE;
 }
 
-static void ProcessBetGridInput(u8 taskId)
+static void ProcessBetGridInput(u32 taskId)
 {
-    u8 headerOffset = 0;
+    u32 headerOffset = 0;
     bool8 dirPressed = FALSE;
     if ((!(JOY_NEW(DPAD_UP))    || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 0)))
      && (!(JOY_NEW(DPAD_DOWN))  || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 1)))
@@ -1440,7 +1440,7 @@ static void ProcessBetGridInput(u8 taskId)
      && (!(JOY_NEW(DPAD_RIGHT)) || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 3)))
      && (dirPressed))
     {
-        u8 i;
+        u32 i;
         DrawGridBackground(gTasks[taskId].tSelectionId);
         UpdateGridSelection(taskId);
         gTasks[taskId].data[1] = 0;
@@ -1467,7 +1467,7 @@ static void ProcessBetGridInput(u8 taskId)
     }
 }
 
-static void Task_StartSpin(u8 taskId)
+static void Task_StartSpin(u32 taskId)
 {
     IncrementDailyRouletteUses();
     sRoulette->selectionRectDrawState = SELECT_STATE_ERASE;
@@ -1480,7 +1480,7 @@ static void Task_StartSpin(u8 taskId)
     gTasks[taskId].func = Task_SlideGridOffscreen;
 }
 
-static void Task_PlaceBet(u8 taskId)
+static void Task_PlaceBet(u32 taskId)
 {
     sRoulette->betSelection[sRoulette->curBallNum] = gTasks[taskId].tSelectionId;
     gTasks[taskId].tMultiplier = GetMultiplier(sRoulette->betSelection[sRoulette->curBallNum]);
@@ -1491,7 +1491,7 @@ static void Task_PlaceBet(u8 taskId)
     gTasks[taskId].func = Task_StartSpin;
 }
 
-static void Task_HandleBetGridInput(u8 taskId)
+static void Task_HandleBetGridInput(u32 taskId)
 {
     ProcessBetGridInput(taskId);
 
@@ -1528,7 +1528,7 @@ static void Task_HandleBetGridInput(u8 taskId)
     }
 }
 
-static void Task_SlideGridOffscreen(u8 taskId)
+static void Task_SlideGridOffscreen(u32 taskId)
 {
     if (gTasks[taskId].data[1]-- > 0)
     {
@@ -1554,7 +1554,7 @@ static void Task_SlideGridOffscreen(u8 taskId)
 // Half the value returned by this function is the max distance that can be added on per roll
 // i.e. the lower this value is, the closer the roll will be to a consistent distance
 // Odds of a lower value increase as play continues, if the player has Shroomish and/or Taillow in the party, and dependent on the time
-static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
+static u32 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
 {
     switch (sRoulette->partySpeciesFlags)
     {
@@ -1627,9 +1627,9 @@ static u8 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
     }
 }
 
-static void Task_InitBallRoll(u8 taskId)
+static void Task_InitBallRoll(u32 taskId)
 {
-    u8 randTravelMod;
+    u32 randTravelMod;
     s8 randTravelDist;
     s8 startAngleId;
     u16 travelDist = 0;
@@ -1671,7 +1671,7 @@ static void Task_InitBallRoll(u8 taskId)
     gTasks[taskId].func = Task_RollBall;
 }
 
-static void Task_RollBall(u8 taskId)
+static void Task_RollBall(u32 taskId)
 {
     sRoulette->ballRolling = TRUE;
     sRoulette->ball = &gSprites[sRoulette->spriteIds[sRoulette->curBallSpriteId]];
@@ -1683,7 +1683,7 @@ static void Task_RollBall(u8 taskId)
     gTasks[taskId].func = Task_RecordBallHit;
 }
 
-static void Task_RecordBallHit(u8 taskId)
+static void Task_RecordBallHit(u32 taskId)
 {
     // Wait for ball to finish rolling
     if (sRoulette->ballState != BALL_STATE_ROLLING)
@@ -1724,7 +1724,7 @@ static void Task_RecordBallHit(u8 taskId)
     }
 }
 
-static void Task_SlideGridOnscreen(u8 taskId)
+static void Task_SlideGridOnscreen(u32 taskId)
 {
     if (gTasks[taskId].data[1]-- > 0)
     {
@@ -1747,7 +1747,7 @@ static void Task_SlideGridOnscreen(u8 taskId)
     }
 }
 
-static void Task_FlashBallOnWinningSquare(u8 taskId)
+static void Task_FlashBallOnWinningSquare(u32 taskId)
 {
     if (gTasks[taskId].data[1]-- > 1)
     {
@@ -1771,7 +1771,7 @@ static void Task_FlashBallOnWinningSquare(u8 taskId)
     }
 }
 
-static void Task_TryIncrementWins(u8 taskId)
+static void Task_TryIncrementWins(u32 taskId)
 {
     switch (gTasks[taskId].tWonBet)
     {
@@ -1796,7 +1796,7 @@ static void Task_TryIncrementWins(u8 taskId)
     }
 }
 
-static void Task_PrintSpinResult(u8 taskId)
+static void Task_PrintSpinResult(u32 taskId)
 {
     switch (gTasks[taskId].tWonBet)
     {
@@ -1831,7 +1831,7 @@ static void Task_PrintSpinResult(u8 taskId)
 
 #define tPayout data[1]
 
-static void Task_GivePayout(u8 taskId)
+static void Task_GivePayout(u32 taskId)
 {
     switch (gTasks[taskId].data[7])
     {
@@ -1861,7 +1861,7 @@ static void Task_GivePayout(u8 taskId)
         StartTaskAfterDelayOrInput(taskId, Task_EndTurn, NO_DELAY, A_BUTTON | B_BUTTON);
 }
 
-static void Task_PrintPayout(u8 taskId)
+static void Task_PrintPayout(u32 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, (sRoulette->minBet * gTasks[taskId].tMultiplier), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, Roulette_Text_YouveWonXCoins);
@@ -1875,7 +1875,7 @@ static void Task_PrintPayout(u8 taskId)
 
 #undef tPayout
 
-static void Task_EndTurn(u8 taskId)
+static void Task_EndTurn(u32 taskId)
 {
     RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
     sRoulette->flashUtil.palettes[FLASH_ICON].available = sRoulette->flashUtil.palettes[FLASH_ICON_2].available = sRoulette->flashUtil.palettes[FLASH_ICON_3].available = FALSE;
@@ -1883,9 +1883,9 @@ static void Task_EndTurn(u8 taskId)
     gTasks[taskId].func = Task_TryPrintEndTurnMsg;
 }
 
-static void Task_TryPrintEndTurnMsg(u8 taskId)
+static void Task_TryPrintEndTurnMsg(u32 taskId)
 {
-    u8 i = 0;
+    u32 i = 0;
     gTasks[taskId].tSelectionId = i;
     sRoulette->betSelection[sRoulette->curBallNum] = SELECTION_NONE;
     DrawGridBackground(SELECTION_NONE);
@@ -1930,9 +1930,9 @@ static void Task_TryPrintEndTurnMsg(u8 taskId)
     }
 }
 
-static void Task_ClearBoard(u8 taskId)
+static void Task_ClearBoard(u32 taskId)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     gTasks[taskId].tBallNum = 0;
     ResetBallDataForNewSpin(taskId);
@@ -1959,7 +1959,7 @@ static void Task_ClearBoard(u8 taskId)
     }
 }
 
-static void ExitRoulette(u8 taskId)
+static void ExitRoulette(u32 taskId)
 {
     RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
     RouletteFlash_Reset(&sRoulette->flashUtil);
@@ -1973,7 +1973,7 @@ static void ExitRoulette(u8 taskId)
     gTasks[taskId].func = Task_ExitRoulette;
 }
 
-static void Task_ExitRoulette(u8 taskId)
+static void Task_ExitRoulette(u32 taskId)
 {
     if (UpdatePaletteFade() == 0)
     {
@@ -1994,7 +1994,7 @@ static void Task_ExitRoulette(u8 taskId)
     }
 }
 
-static void Task_WaitForNextTask(u8 taskId)
+static void Task_WaitForNextTask(u32 taskId)
 {
     if (sRoulette->taskWaitDelay == 0 || JOY_NEW(sRoulette->taskWaitKey))
     {
@@ -2009,7 +2009,7 @@ static void Task_WaitForNextTask(u8 taskId)
         sRoulette->taskWaitDelay--;
 }
 
-static void StartTaskAfterDelayOrInput(u8 taskId, TaskFunc task, u16 delay, u16 key)
+static void StartTaskAfterDelayOrInput(u32 taskId, TaskFunc task, u16 delay, u16 key)
 {
     sRoulette->prevTask = gTasks[taskId].func;
     if (task == NULL)
@@ -2023,9 +2023,9 @@ static void StartTaskAfterDelayOrInput(u8 taskId, TaskFunc task, u16 delay, u16 
     gTasks[taskId].func = Task_WaitForNextTask;
 }
 
-static void ResetBallDataForNewSpin(u8 taskId)
+static void ResetBallDataForNewSpin(u32 taskId)
 {
-    u8 i = 0;
+    u32 i = 0;
     sRoulette->unk0 = FALSE;
     sRoulette->ballRolling = FALSE;
     sRoulette->ballStuck = FALSE;
@@ -2041,7 +2041,7 @@ static void ResetBallDataForNewSpin(u8 taskId)
 
 static void ResetHits(void)
 {
-    u8 i;
+    u32 i;
     sRoulette->hitFlags = 0;
 
     for (i = 0; i < BALLS_PER_ROUND; i++)
@@ -2056,9 +2056,9 @@ static void ResetHits(void)
     ShowHideGridBalls(TRUE, -1);
 }
 
-static u8 RecordHit(u8 taskId, u8 slotId)
+static u32 RecordHit(u32 taskId, u32 slotId)
 {
-    u8 i, j;
+    u32 i, j;
     u32 columnFlags[NUM_BOARD_POKES] = {
         F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT,
         F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL,
@@ -2096,9 +2096,9 @@ static u8 RecordHit(u8 taskId, u8 slotId)
     return sRouletteSlots[slotId].gridSquare;
 }
 
-static bool8 IsHitInBetSelection(u8 gridSquare, u8 betSelection)
+static bool8 IsHitInBetSelection(u32 gridSquare, u32 betSelection)
 {
-    u8 hit = gridSquare;
+    u32 hit = gridSquare;
     if (--gridSquare < NUM_GRID_SELECTIONS)
     {
         switch (betSelection)
@@ -2130,12 +2130,12 @@ static bool8 IsHitInBetSelection(u8 gridSquare, u8 betSelection)
     return FALSE;
 }
 
-static void FlashSelectionOnWheel(u8 selectionId)
+static void FlashSelectionOnWheel(u32 selectionId)
 {
     u16 flashFlags = 0;
-    u8 numSelected;
+    u32 numSelected;
     u16 palOffset;
-    u8 i;
+    u32 i;
 
     switch (selectionId)
     {
@@ -2199,7 +2199,7 @@ static void FlashSelectionOnWheel(u8 selectionId)
             // If there is only 1 unhit space, also add its flags so its color will flash as well
             for (i = 0; i < NUM_BOARD_COLORS; i++)
             {
-                u8 columnSlotId = i * 5 + selectionId + 5;
+                u32 columnSlotId = i * 5 + selectionId + 5;
                 if (!(sRoulette->hitFlags & sGridSelections[columnSlotId].flag))
                 {
                     iconFlash[GET_ROW_IDX(columnSlotId)].paletteOffset += palOffset;
@@ -2220,13 +2220,13 @@ static void FlashSelectionOnWheel(u8 selectionId)
     }
 }
 
-static void DrawGridBackground(u8 selectionId)
+static void DrawGridBackground(u32 selectionId)
 {
-    vu8 i, j;
+    vu32 i, j;
     vu16 x, y;
-    vu8 tilemapOffset;
-    u8 selectionIds[NUM_BOARD_POKES >= NUM_BOARD_COLORS ? NUM_BOARD_POKES + 1 : NUM_BOARD_COLORS + 1];
-    u8 numSquares;
+    vu32 tilemapOffset;
+    u32 selectionIds[NUM_BOARD_POKES >= NUM_BOARD_COLORS ? NUM_BOARD_POKES + 1 : NUM_BOARD_COLORS + 1];
+    u32 numSquares;
     sRoulette->updateGridHighlight = TRUE;
     ShowHideGridIcons(FALSE, 0);
     SetTilemapRect(sRoulette->tilemapBuffers[2], sRoulette->gridTilemap, 14, 7, 16, 13);
@@ -2274,9 +2274,9 @@ static void DrawGridBackground(u8 selectionId)
     }
 }
 
-static u8 GetMultiplier(u8 selectionId)
+static u32 GetMultiplier(u32 selectionId)
 {
-    u8 multipliers[5] = {0, 3, 4, 6, MAX_MULTIPLIER};
+    u32 multipliers[5] = {0, 3, 4, 6, MAX_MULTIPLIER};
 
     if (selectionId > NUM_GRID_SELECTIONS)
         selectionId = 0;
@@ -2322,7 +2322,7 @@ static void UpdateWheelPosition(void)
     SetGpuReg(REG_OFFSET_BG2Y_H, (bg2y & 0x0fff0000) >> 16);
 }
 
-static const u8 sFiller[3] = {};
+static const u32 sFiller[3] = {};
 static const u16 sShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
 static const u16 sBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
 static const u16 sBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
@@ -3370,13 +3370,13 @@ static const struct SpriteTemplate sSpriteTemplate_TaillowShadow =
     .callback = SpriteCB_Taillow
 };
 
-static void Task_ShowMinBetYesNo(u8 taskId)
+static void Task_ShowMinBetYesNo(u32 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &sYesNoTable_AcceptMinBet);
 }
 
-static void Task_FadeToRouletteGame(u8 taskId)
+static void Task_FadeToRouletteGame(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -3386,7 +3386,7 @@ static void Task_FadeToRouletteGame(u8 taskId)
     }
 }
 
-static void Task_AcceptMinBet(u8 taskId)
+static void Task_AcceptMinBet(u32 taskId)
 {
     ClearStdWindowAndFrame(0, TRUE);
     HideCoinsWindow();
@@ -3397,7 +3397,7 @@ static void Task_AcceptMinBet(u8 taskId)
     gTasks[taskId].func = Task_FadeToRouletteGame;
 }
 
-static void Task_DeclineMinBet(u8 taskId)
+static void Task_DeclineMinBet(u32 taskId)
 {
     ClearStdWindowAndFrame(0, FALSE);
     HideCoinsWindow();
@@ -3405,7 +3405,7 @@ static void Task_DeclineMinBet(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void Task_NotEnoughForMinBet(u8 taskId)
+static void Task_NotEnoughForMinBet(u32 taskId)
 {
     gTasks[taskId].data[0]++;
     if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -3418,7 +3418,7 @@ static void Task_NotEnoughForMinBet(u8 taskId)
     }
 }
 
-static void Task_PrintMinBet(u8 taskId)
+static void Task_PrintMinBet(u32 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
@@ -3432,7 +3432,7 @@ static void Task_PrintMinBet(u8 taskId)
     }
 }
 
-static void Task_PrintRouletteEntryMsg(u8 taskId)
+static void Task_PrintRouletteEntryMsg(u32 taskId)
 {
     s32 minBet;
     PrintCoinsString(gTasks[taskId].tCoins);
@@ -3474,7 +3474,7 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
 
 void PlayRoulette(void)
 {
-    u8 taskId;
+    u32 taskId;
     LockPlayerFieldControls();
     ShowCoinsWindow(GetCoins(), 1, 1);
     taskId = CreateTask(Task_PrintRouletteEntryMsg, 0);
@@ -3501,10 +3501,10 @@ static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
     }
 }
 
-static u8 CreateWheelIconSprite(const struct SpriteTemplate *template, u8 r1, u16 *angle)
+static u32 CreateWheelIconSprite(const struct SpriteTemplate *template, u32 r1, u16 *angle)
 {
     u16 temp;
-    u8 spriteId = CreateSprite(template, 116, 80, template->oam->y);
+    u32 spriteId = CreateSprite(template, 116, 80, template->oam->y);
     gSprites[spriteId].data[0] = *angle;
     gSprites[spriteId].data[1] = r1;
     gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -3519,15 +3519,15 @@ static u8 CreateWheelIconSprite(const struct SpriteTemplate *template, u8 r1, u1
 
 static void CreateGridSprites(void)
 {
-    u8 i, j;
-    u8 spriteId;
+    u32 i, j;
+    u32 spriteId;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_Headers);
     LoadCompressedSpriteSheet(&sSpriteSheet_GridIcons);
 
     for (i = 0; i < NUM_BOARD_COLORS; i++)
     {
-        u8 y = i * 24;
+        u32 y = i * 24;
         for (j = 0; j < NUM_BOARD_POKES; j++)
         {
             spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_GRID_ICONS + j] = CreateSprite(&sSpriteTemplates_GridIcons[j], (j * 24) + 148, y + 92, 30);
@@ -3551,16 +3551,16 @@ static void CreateGridSprites(void)
 
 static void UNUSED DestroyGridSprites(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < NUM_ROULETTE_SLOTS; i++)
     {
         DestroySprite(&gSprites[sRoulette->spriteIds[i + SPR_GRID_ICONS]]);
     }
 }
 
-static void ShowHideGridIcons(bool8 hideAll, u8 hideSquare)
+static void ShowHideGridIcons(bool8 hideAll, u32 hideSquare)
 {
-    u8 i;
+    u32 i;
     switch (hideAll)
     {
     case TRUE:
@@ -3591,7 +3591,7 @@ static void ShowHideGridIcons(bool8 hideAll, u8 hideSquare)
 
 static void CreateGridBallSprites(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < BALLS_PER_ROUND; i++)
     {
         sRoulette->spriteIds[i + SPR_GRID_BALLS] = CreateSprite(&sSpriteTemplate_Ball, 116, 20, 10);
@@ -3603,9 +3603,9 @@ static void CreateGridBallSprites(void)
     }
 }
 
-static void ShowHideGridBalls(bool8 hideAll, u8 hideBallId)
+static void ShowHideGridBalls(bool8 hideAll, u32 hideBallId)
 {
-    u8 i = 0;
+    u32 i = 0;
     if (hideAll)
     {
         for (; i < BALLS_PER_ROUND; i++)
@@ -3631,7 +3631,7 @@ static void ShowHideGridBalls(bool8 hideAll, u8 hideBallId)
     }
 }
 
-static void ShowHideWinSlotCursor(u8 selectionId)
+static void ShowHideWinSlotCursor(u32 selectionId)
 {
     if (selectionId == 0)
     {
@@ -3647,7 +3647,7 @@ static void ShowHideWinSlotCursor(u8 selectionId)
 
 static void CreateWheelIconSprites(void)
 {
-    u8 i, j;
+    u32 i, j;
     u16 angle;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_WheelIcons);
@@ -3657,7 +3657,7 @@ static void CreateWheelIconSprites(void)
     {
         for (j = 0; j < NUM_BOARD_POKES; j++)
         {
-            u8 spriteId;
+            u32 spriteId;
             spriteId = sRoulette->spriteIds[(i * NUM_BOARD_POKES) + SPR_WHEEL_ICONS + j] = CreateWheelIconSprite(&sSpriteTemplates_WheelIcons[i * NUM_BOARD_POKES + j], 40, &angle);
             gSprites[spriteId].animPaused = TRUE;
             gSprites[spriteId].affineAnimPaused = TRUE;
@@ -3687,7 +3687,7 @@ static void SpriteCB_WheelIcon(struct Sprite *sprite)
 
 static void CreateInterfaceSprites(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_Interface[i]);
@@ -3717,12 +3717,12 @@ static void CreateInterfaceSprites(void)
 
 static void SetCreditDigits(u16 num)
 {
-    u8 i;
+    u32 i;
     u16 d = 1000;
     bool8 printZero = FALSE;
     for (i = 0; i < MAX_COIN_DIGITS; i++)
     {
-        u8 digit = num / d;
+        u32 digit = num / d;
         gSprites[sRoulette->spriteIds[i + SPR_CREDIT_DIGITS]].invisible = TRUE;
         if (digit > 0 || printZero || i == MAX_COIN_DIGITS - 1)
         {
@@ -3738,9 +3738,9 @@ static void SetCreditDigits(u16 num)
 }
 
 // Identical to GetMultiplier but with different data array
-static u8 GetMultiplierAnimId(u8 selectionId)
+static u32 GetMultiplierAnimId(u32 selectionId)
 {
-    u8 animIds[5] = {0, 1, 2, 3, 4};
+    u32 animIds[5] = {0, 1, 2, 3, 4};
 
     if (selectionId > NUM_GRID_SELECTIONS)
         selectionId = 0;
@@ -3765,17 +3765,17 @@ static u8 GetMultiplierAnimId(u8 selectionId)
     return 0;
 }
 
-static void SetMultiplierSprite(u8 selectionId)
+static void SetMultiplierSprite(u32 selectionId)
 {
     struct Sprite *sprite = &gSprites[sRoulette->spriteIds[SPR_MULTIPLIER]];
     sprite->animCmdIndex = GetMultiplierAnimId(selectionId);
     sprite->oam.tileNum = sprite->sheetTileStart + (*sprite->anims + sprite->animCmdIndex)->type;
 }
 
-static void SetBallCounterNumLeft(u8 numBalls)
+static void SetBallCounterNumLeft(u32 numBalls)
 {
-    u8 i;
-    u8 t = 0;
+    u32 i;
+    u32 t = 0;
     if (sRoulette->minBet == 1)
         t = 2;
     switch (numBalls)
@@ -3832,7 +3832,7 @@ static void SpriteCB_GridSquare(struct Sprite *sprite)
 
 static void CreateWheelCenterSprite(void)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_WheelCenter);
 
@@ -3858,7 +3858,7 @@ static void SpriteCB_WheelCenter(struct Sprite *sprite)
 
 static void CreateWheelBallSprites(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < BALLS_PER_ROUND; i++)
     {
         sRoulette->spriteIds[i] = CreateSprite(&sSpriteTemplate_Ball, 116, 80, 57 - i);
@@ -3872,11 +3872,11 @@ static void CreateWheelBallSprites(void)
 
 static void HideWheelBalls(void)
 {
-    u8 spriteId = sRoulette->spriteIds[SPR_WHEEL_BALLS];
-    u8 i;
+    u32 spriteId = sRoulette->spriteIds[SPR_WHEEL_BALLS];
+    u32 i;
     for (i = 0; i < BALLS_PER_ROUND; i++)
     {
-        u8 j;
+        u32 j;
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].callback = &SpriteCallbackDummy;
         StartSpriteAnim(&gSprites[spriteId], 0);
@@ -3927,7 +3927,7 @@ static s16 UpdateBallRelativeWheelAngle(struct Sprite *sprite)
     return sprite->sBallWheelAngle;
 }
 
-static u8 UpdateSlotBelowBall(struct Sprite *sprite)
+static u32 UpdateSlotBelowBall(struct Sprite *sprite)
 {
     sRoulette->hitSlot = UpdateBallRelativeWheelAngle(sprite) / (f32)DEGREES_PER_SLOT;
     return sRoulette->hitSlot;
@@ -4203,7 +4203,7 @@ static void SpriteCB_RollBall_TryLand(struct Sprite *sprite)
     else
     {
         // Space has already been landed on, try to fall into adjacent space
-        u8 slotId;
+        u32 slotId;
         u32 fallRight;
         m4aSongNumStart(SE_BALL_BOUNCE_1);
         fallRight = Random() & 1;
@@ -4327,7 +4327,7 @@ static void SpriteCB_RollBall_Start(struct Sprite *sprite)
 static void CreateShroomishSprite(struct Sprite *ball)
 {
     u16 t;
-    u8 i;
+    u32 i;
     s16 coords[2][2] = {
         {116, 44},
         {116, 112}
@@ -4359,7 +4359,7 @@ static void CreateShroomishSprite(struct Sprite *ball)
 
 static void CreateTaillowSprite(struct Sprite *ball)
 {
-    u8 i = 0;
+    u32 i = 0;
     s16 t;
     s16 coords[2][2] = {
         {256, 84}, // Right approach
@@ -4386,14 +4386,14 @@ static void CreateTaillowSprite(struct Sprite *ball)
 
 static void SetBallStuck(struct Sprite *sprite)
 {
-    u8 slotId;
+    u32 slotId;
     u16 angle;
-    u8 numCandidates = 0;
-    u8 maxSlotToCheck = 5;
-    u8 betSlotId = 0;
-    u8 i = 0;
-    u8 slotsToSkip;
-    u8 slotCandidates[NUM_ROULETTE_SLOTS - 2] = {}; // - 2 because we know at least 2 are already occupied
+    u32 numCandidates = 0;
+    u32 maxSlotToCheck = 5;
+    u32 betSlotId = 0;
+    u32 i = 0;
+    u32 slotsToSkip;
+    u32 slotCandidates[NUM_ROULETTE_SLOTS - 2] = {}; // - 2 because we know at least 2 are already occupied
     u16 rand = Random();
 
     sRoulette->ballState = BALL_STATE_STUCK;

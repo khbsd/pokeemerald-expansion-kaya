@@ -26,7 +26,7 @@ static void AnimFireSpiralOutward_Step2(struct Sprite *);
 static void AnimTask_EruptionLaunchRocks_Step(u8);
 static void CreateEruptionLaunchRocks(u8, u8, u8);
 static void AnimEruptionLaunchRock(struct Sprite *);
-static u16 GetEruptionLaunchRockInitialYPos(u8);
+static u32 GetEruptionLaunchRockInitialYPos(u8);
 static void InitEruptionLaunchRockCoordData(struct Sprite *, s16, s16);
 static void UpdateEruptionLaunchRockPos(struct Sprite *);
 static void AnimEruptionFallingRock_Step(struct Sprite *);
@@ -1015,11 +1015,11 @@ static void AnimTask_EruptionLaunchRocks_Step(u8 taskId)
 
 static void CreateEruptionLaunchRocks(u8 spriteId, u8 taskId, u8 activeSpritesIdx)
 {
-    u16 i, j;
+    u32 i, j;
     s8 sign;
 
-    u16 y = GetEruptionLaunchRockInitialYPos(spriteId);
-    u16 x = gSprites[spriteId].x;
+    u32 y = GetEruptionLaunchRockInitialYPos(spriteId);
+    u32 x = gSprites[spriteId].x;
 
     if(GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
@@ -1063,7 +1063,7 @@ static void AnimEruptionLaunchRock(struct Sprite *sprite)
     }
 }
 
-static u16 GetEruptionLaunchRockInitialYPos(u8 spriteId)
+static u32 GetEruptionLaunchRockInitialYPos(u8 spriteId)
 {
     s16 y = gSprites[spriteId].y + gSprites[spriteId].y2 + gSprites[spriteId].centerToCornerVecY;
 
@@ -1079,8 +1079,8 @@ static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s16 speedX, s
 {
     sprite->sSpeedDelay = 0;
     sprite->sLaunchStage = 0;
-    sprite->sX = (u16)sprite->x * 8;
-    sprite->sY = (u16)sprite->y * 8;
+    sprite->sX = (u32)sprite->x * 8;
+    sprite->sY = (u32)sprite->y * 8;
     sprite->sSpeedX = speedX * 8;
     sprite->sSpeedY = speedY * 8;
 }
@@ -1092,7 +1092,7 @@ static void UpdateEruptionLaunchRockPos(struct Sprite *sprite)
     {
         sprite->sSpeedDelay = 0;
         ++sprite->sLaunchStage;
-        extraLaunchSpeed = (u16)sprite->sLaunchStage * (u16)sprite->sLaunchStage;
+        extraLaunchSpeed = (u32)sprite->sLaunchStage * (u32)sprite->sLaunchStage;
         sprite->sY += extraLaunchSpeed;
     }
 

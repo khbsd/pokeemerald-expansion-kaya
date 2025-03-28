@@ -19,7 +19,7 @@ static const struct Trainer sTestTrainers[DIFFICULTY_COUNT][NUM_TEST_TRAINERS] =
 #include "trainer_control.h"
 };
 
-enum DifficultyLevel GetTrainerDifficultyLevelTest(u16 trainerId)
+enum DifficultyLevel GetTrainerDifficultyLevelTest(u32 trainerId)
 {
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
 

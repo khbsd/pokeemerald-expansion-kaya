@@ -35,16 +35,16 @@
 
 static void CB2_StarterChoose(void);
 static void ClearStarterLabel(void);
-static void Task_StarterChoose(u8 taskId);
-static void Task_HandleStarterChooseInput(u8 taskId);
-static void Task_WaitForStarterSprite(u8 taskId);
-static void Task_AskConfirmStarter(u8 taskId);
-static void Task_HandleConfirmStarterInput(u8 taskId);
-static void Task_DeclineStarter(u8 taskId);
-static void Task_MoveStarterChooseCursor(u8 taskId);
-static void Task_CreateStarterLabel(u8 taskId);
-static void CreateStarterPokemonLabel(u8 selection);
-static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
+static void Task_StarterChoose(u32 taskId);
+static void Task_HandleStarterChooseInput(u32 taskId);
+static void Task_WaitForStarterSprite(u32 taskId);
+static void Task_AskConfirmStarter(u32 taskId);
+static void Task_HandleConfirmStarterInput(u32 taskId);
+static void Task_DeclineStarter(u32 taskId);
+static void Task_MoveStarterChooseCursor(u32 taskId);
+static void Task_CreateStarterLabel(u32 taskId);
+static void CreateStarterPokemonLabel(u32 selection);
+static u32 CreatePokemonFrontSprite(u16 species, u32 x, u32 y);
 static void SpriteCB_SelectionHand(struct Sprite *sprite);
 static void SpriteCB_Pokeball(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon(struct Sprite *sprite);
@@ -96,14 +96,14 @@ static const struct WindowTemplate sWindowTemplate_StarterLabel =
     .baseBlock = 0x0274
 };
 
-static const u8 sPokeballCoords[STARTER_MON_COUNT][2] =
+static const u32 sPokeballCoords[STARTER_MON_COUNT][2] =
 {
     {60, 64},
     {120, 88},
     {180, 64},
 };
 
-static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
+static const u32 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 {
     {0, 9},
     {16, 10},
@@ -148,7 +148,7 @@ static const struct BgTemplate sBgTemplates[3] =
     },
 };
 
-static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
+static const u32 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct OamData sOam_Hand =
 {
@@ -201,7 +201,7 @@ static const struct OamData sOam_StarterCircle =
     .affineParam = 0,
 };
 
-static const u8 sCursorCoords[][2] =
+static const u32 sCursorCoords[][2] =
 {
     {60, 32},
     {120, 56},
@@ -373,8 +373,8 @@ static void VblankCB_StarterChoose(void)
 
 void CB2_ChooseStarter(void)
 {
-    u8 taskId;
-    u8 spriteId;
+    u32 taskId;
+    u32 spriteId;
 
     SetVBlankCallback(NULL);
 
@@ -471,7 +471,7 @@ static void CB2_StarterChoose(void)
     UpdatePaletteFade();
 }
 
-static void Task_StarterChoose(u8 taskId)
+static void Task_StarterChoose(u32 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
@@ -481,13 +481,13 @@ static void Task_StarterChoose(u8 taskId)
     gTasks[taskId].func = Task_HandleStarterChooseInput;
 }
 
-static void Task_HandleStarterChooseInput(u8 taskId)
+static void Task_HandleStarterChooseInput(u32 taskId)
 {
-    u8 selection = gTasks[taskId].tStarterSelection;
+    u32 selection = gTasks[taskId].tStarterSelection;
 
     if (JOY_NEW(A_BUTTON))
     {
-        u8 spriteId;
+        u32 spriteId;
 
         ClearStarterLabel();
 
@@ -515,7 +515,7 @@ static void Task_HandleStarterChooseInput(u8 taskId)
     }
 }
 
-static void Task_WaitForStarterSprite(u8 taskId)
+static void Task_WaitForStarterSprite(u32 taskId)
 {
     if (gSprites[gTasks[taskId].tCircleSpriteId].affineAnimEnded &&
         gSprites[gTasks[taskId].tCircleSpriteId].x == STARTER_PKMN_POS_X &&
@@ -525,7 +525,7 @@ static void Task_WaitForStarterSprite(u8 taskId)
     }
 }
 
-static void Task_AskConfirmStarter(u8 taskId)
+static void Task_AskConfirmStarter(u32 taskId)
 {
     PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -535,9 +535,9 @@ static void Task_AskConfirmStarter(u8 taskId)
     gTasks[taskId].func = Task_HandleConfirmStarterInput;
 }
 
-static void Task_HandleConfirmStarterInput(u8 taskId)
+static void Task_HandleConfirmStarterInput(u32 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -562,18 +562,18 @@ static void Task_HandleConfirmStarterInput(u8 taskId)
     }
 }
 
-static void Task_DeclineStarter(u8 taskId)
+static void Task_DeclineStarter(u32 taskId)
 {
     gTasks[taskId].func = Task_StarterChoose;
 }
 
-static void CreateStarterPokemonLabel(u8 selection)
+static void CreateStarterPokemonLabel(u32 selection)
 {
-    u8 categoryText[32];
+    u32 categoryText[32];
     struct WindowTemplate winTemplate;
-    const u8 *speciesName;
+    const u32 *speciesName;
     s32 width;
-    u8 labelLeft, labelRight, labelTop, labelBottom;
+    u32 labelLeft, labelRight, labelTop, labelBottom;
 
     u16 species = GetStarterPokemon(selection);
     CopyMonCategoryText(species, categoryText);
@@ -614,21 +614,21 @@ static void ClearStarterLabel(void)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void Task_MoveStarterChooseCursor(u8 taskId)
+static void Task_MoveStarterChooseCursor(u32 taskId)
 {
     ClearStarterLabel();
     gTasks[taskId].func = Task_CreateStarterLabel;
 }
 
-static void Task_CreateStarterLabel(u8 taskId)
+static void Task_CreateStarterLabel(u32 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     gTasks[taskId].func = Task_HandleStarterChooseInput;
 }
 
-static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
+static u32 CreatePokemonFrontSprite(u16 species, u32 x, u32 y)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     spriteId = CreateMonPicSprite_Affine(species, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
@@ -641,7 +641,7 @@ static void SpriteCB_SelectionHand(struct Sprite *sprite)
     sprite->x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
     sprite->y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
     sprite->y2 = Sin(sprite->data[1], 8);
-    sprite->data[1] = (u8)(sprite->data[1]) + 4;
+    sprite->data[1] = (u32)(sprite->data[1]) + 4;
 }
 
 static void SpriteCB_Pokeball(struct Sprite *sprite)

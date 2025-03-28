@@ -1324,7 +1324,7 @@ const struct SpriteTemplate gPetalBlizzardTwister1Template =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimMoveTwisterParticle
 };
-static const u16 sPetalBlizzardFlowerOam[] = {0x0, 0x2000,0x0800,0x0};  //todo: convert to oam data
+static const u32 sPetalBlizzardFlowerOam[] = {0x0, 0x2000,0x0800,0x0};  //todo: convert to oam data
 static const union AnimCmd sAnimCmd_PetalBlizzard2_0[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -7897,8 +7897,8 @@ static void SpriteCB_MindBlownExplosion(struct Sprite *sprite)
 {
     u8 a;
     u8 b;
-    u16 x;
-    u16 y;
+    u32 x;
+    u32 y;
 
     if (gBattleAnimArgs[4] == 0)
     {
@@ -8488,7 +8488,7 @@ static const s8 sHomerunEnemyVerticalMovement[] =
 
 void AnimTask_TwinkleTackleLaunchStep(u8 taskId)
 {
-    u16 rotation;
+    u32 rotation;
     s16 xScale, yScale;
     struct Task* task = &gTasks[taskId];
     struct Sprite *sprite = &gSprites[task->tSpriteId];
@@ -8506,7 +8506,7 @@ void AnimTask_TwinkleTackleLaunchStep(u8 taskId)
             ++task->tTimer;
         return;
     }
-    else if ((u16) task->tTimer < NELEMS(sHomerunEnemyHorizontalMovement))
+    else if ((u32) task->tTimer < NELEMS(sHomerunEnemyHorizontalMovement))
     {
         s8 movement = sHomerunEnemyHorizontalMovement[task->tTimer];
         if (task->tSide == B_SIDE_PLAYER)

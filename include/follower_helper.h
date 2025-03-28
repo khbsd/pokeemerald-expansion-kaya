@@ -16,14 +16,14 @@ enum {
     FOLLOWER_EMOTION_LENGTH,
 };
 
-// Can be either 3 bytes, a u16 and a byte, or a 24-bit value
+// Can be either 3 bytes, a u32 and a byte, or a 24-bit value
 union __attribute__((packed)) MsgConditionData
 {
-    u8 bytes[3];
+    u32 bytes[3];
     struct __attribute__((packed))
     {
-        u16 hw;
-        u8 b;
+        u32 hw;
+        u32 b;
     } split;
     u32 raw:24;
 }; // size = 0x3
@@ -36,8 +36,8 @@ struct __attribute__((packed)) MsgCondition
 
 struct FollowerMsgInfoExtended
 {
-    const u8 *text;
-    const u8 *script;
+    const u32 *text;
+    const u32 *script;
 
     u32 emotion:4;
     u32 weight:3;
@@ -63,24 +63,24 @@ struct FollowerMsgInfoExtended
 #define MSG_COND_NEAR_MB        10
 
 #define MATCH_U24(type, value) {type, {.raw = value}}
-#define MATCH_U16(type, value1, value2) {type, {.split = {.hw = value1, .b = value2}}}
-#define MATCH_U8(type, v1, v2, v3) {type, {.bytes = {v1, v2, v3}}}
+#define MATCH_u32(type, value1, value2) {type, {.split = {.hw = value1, .b = value2}}}
+#define MATCH_u32(type, v1, v2, v3) {type, {.bytes = {v1, v2, v3}}}
 
 #define MATCH_SPECIES(species) MATCH_U24(MSG_COND_SPECIES, species)
-#define MATCH_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, 0)
+#define MATCH_TYPES(type1, type2) MATCH_u32(MSG_COND_TYPE, type1, type2, 0)
 // Checks that follower has *neither* of the two types
-#define MATCH_NOT_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, TYPE_NONE | 1)
+#define MATCH_NOT_TYPES(type1, type2) MATCH_u32(MSG_COND_TYPE, type1, type2, TYPE_NONE | 1)
 #define MATCH_STATUS(status) MATCH_U24(MSG_COND_STATUS, status)
 #define MATCH_MAPSEC(mapsec) MATCH_U24(MSG_COND_MAPSEC, mapsec)
-#define MATCH_MAP_RAW(mapGroup, mapNum) MATCH_U8(MSG_COND_MAP, mapGroup, mapNum, 0)
-#define MATCH_MAP(map) MATCH_U8(MSG_COND_MAP, MAP_GROUP(map), MAP_NUM(map), 0)
+#define MATCH_MAP_RAW(mapGroup, mapNum) MATCH_u32(MSG_COND_MAP, mapGroup, mapNum, 0)
+#define MATCH_MAP(map) MATCH_u32(MSG_COND_MAP, MAP_GROUP(map), MAP_NUM(map), 0)
 // Matches one of two metatile behaviors follower is standing on
-#define MATCH_ON_MB(mb1, mb2) MATCH_U8(MSG_COND_ON_MB, mb1, mb2, 0)
-#define MATCH_WEATHER(weather1, weather2) MATCH_U8(MSG_COND_WEATHER, weather1, weather2, 0)
+#define MATCH_ON_MB(mb1, mb2) MATCH_u32(MSG_COND_ON_MB, mb1, mb2, 0)
+#define MATCH_WEATHER(weather1, weather2) MATCH_u32(MSG_COND_WEATHER, weather1, weather2, 0)
 #define MATCH_MUSIC(song) MATCH_U24(MSG_COND_MUSIC, song)
 #define MATCH_TIME_OF_DAY(time) MATCH_U24(MSG_COND_TIME_OF_DAY, time)
 // Matches metatile behavior within a '+' shape of size `distance`
-#define MATCH_NEAR_MB(mb, distance) MATCH_U8(MSG_COND_NEAR_MB, mb, distance, 0)
+#define MATCH_NEAR_MB(mb, distance) MATCH_u32(MSG_COND_NEAR_MB, mb, distance, 0)
 
 enum {
     COND_MSG_CELEBI,

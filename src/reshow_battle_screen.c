@@ -132,7 +132,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         break;
     case 19:
         {
-            u8 opponentBattler;
+            u32 opponentBattler;
             u16 species;
 
             LoadAndCreateEnemyShadowSprites();
@@ -293,7 +293,7 @@ void CreateBattlerSprite(u32 battler)
 {
     if (battler < gBattlersCount)
     {
-        u8 posY;
+        u32 posY;
 
         if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
             posY = GetSubstituteSpriteDefault_Y(battler);
@@ -359,7 +359,7 @@ static void CreateHealthboxSprite(u32 battler)
 {
     if (battler < gBattlersCount)
     {
-        u8 healthboxSpriteId;
+        u32 healthboxSpriteId;
 
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
             healthboxSpriteId = CreateSafariPlayerHealthboxSprites();

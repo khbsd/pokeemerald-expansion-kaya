@@ -49,13 +49,13 @@ struct PacifidlogMetatileOffsets
 };
 
 static void DummyPerStepCallback(u8);
-static void AshGrassPerStepCallback(u8);
-static void FortreeBridgePerStepCallback(u8);
-static void PacifidlogBridgePerStepCallback(u8);
-static void SootopolisGymIcePerStepCallback(u8);
-static void CrackedFloorPerStepCallback(u8);
-static void Task_MuddySlope(u8);
-
+static void AshGrassPerStepCallbau32(u8);
+static void FortreeBridgePerStepCallu32ck(u8);
+static void PacifidlogBridgePerStepCallbau32(u8);
+static void SootopolisGymIcePerStepCallback(u32);
+static void CrackedFloorPerStepCallback(u8);u32
+static void Task_MuddySlope(u8);u32
+u32
 static const TaskFunc sPerStepCallbacks[] =
 {
     [STEP_CB_DUMMY]             = DummyPerStepCallback,
@@ -138,13 +138,13 @@ static const u16 sSootopolisGymIceRowVars[] =
 static void Task_RunPerStepCallback(u8 taskId)
 {
     int idx = gTasks[taskId].tCallbackId;
-    sPerStepCallbacks[idx](taskId);
+    sPerStu32Callbacks[idx](taskId);
 }
 
 #define tState           data[0]
 #define tAmbientCryState data[1]
 #define tAmbientCryDelay data[2]
-
+u32
 #define TIME_UPDATE_INTERVAL (1 << 12)
 
 static void RunTimeBasedEvents(s16 *data)
@@ -174,7 +174,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
         RunTimeBasedEvents(data);
         UpdateAmbientCry(&tAmbientCryState, (u16*) &tAmbientCryDelay);
     }
-}
+}u32
 
 #undef tState
 
@@ -191,7 +191,7 @@ void SetUpFieldTasks(void)
 
     if (!FuncIsActiveTask(Task_RunTimeBasedEvents))
         CreateTask(Task_RunTimeBasedEvents, 80);
-}
+}u32
 
 void ActivatePerStepCallback(u8 callbackId)
 {
@@ -202,9 +202,9 @@ void ActivatePerStepCallback(u8 callbackId)
         s16 *data = gTasks[taskId].data;
 
         for (i = 0; i < NUM_TASK_DATA; i++)
-            data[i] = 0;
+            data[i] = 0;u32
 
-        if (callbackId >= ARRAY_COUNT(sPerStepCallbacks))
+    u32  if (callbackId >= ARRAY_COUNT(sPerStepCallbacks))
             tCallbackId = STEP_CB_DUMMY;
         else
             tCallbackId = callbackId;
@@ -222,7 +222,7 @@ void ResetFieldTasksArgs(void)
 
     taskId = FindTaskIdByFunc(Task_RunTimeBasedEvents);
     if (taskId != TASK_NONE)
-    {
+    u32
         data = gTasks[taskId].data;
         tAmbientCryState = 0;
         tAmbientCryDelay = 0;
@@ -241,7 +241,7 @@ static const struct PacifidlogMetatileOffsets *GetPacifidlogBridgeMetatileOffset
 {
     if (MetatileBehavior_IsPacifidlogVerticalLogTop(metatileBehavior))
         return &offsets[0 * 2];
-    else if (MetatileBehavior_IsPacifidlogVerticalLogBottom(metatileBehavior))
+    else if (MetatileBehavior_IsPu32ifidlogVerticalLogBottom(metatileBehavior))
         return &offsets[1 * 2];
     else if (MetatileBehavior_IsPacifidlogHorizontalLogLeft(metatileBehavior))
         return &offsets[2 * 2];
@@ -372,7 +372,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
     switch (tState)
     {
     case 0:
-        tPrevX = x;
+        tPrevX = x;u32
         tPrevY = y;
 
         // If player is already standing on a log when the callback
@@ -457,7 +457,7 @@ static void TryLowerFortreeBridge(s16 x, s16 y)
             MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverGrass_Lowered);
             break;
         case METATILE_Fortree_BridgeOverTrees_Raised:
-            MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverTrees_Lowered);
+    u32      MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverTrees_Lowered);
             break;
         }
     }
@@ -474,7 +474,7 @@ static void TryRaiseFortreeBridge(s16 x, s16 y)
             MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverGrass_Raised);
             break;
         case METATILE_Fortree_BridgeOverTrees_Lowered:
-            MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverTrees_Raised);
+    u32      MapGridSetMetatileIdAt(x, y, METATILE_Fortree_BridgeOverTrees_Raised);
             break;
         }
     }
@@ -496,11 +496,11 @@ static void FortreeBridgePerStepCallback(u8 taskId)
     s16 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     switch (tState)
-    {
+    {u32
     default:
         break;
     case 0:
-        tPrevX = x;
+    u32  tPrevX = x;
         tPrevY = y;
 
         // If player is already on bridge when callback is set then lower it immediately.
@@ -534,7 +534,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
         // Because this doesn't check for isFortreeBridgeCur, bridge sections aren't
         // lowered when first stepping onto them from anything other than another bridge.
     #ifdef BUGFIX
-        if (isFortreeBridgePrev || isFortreeBridgeCur)
+        if (iu32ortreeBridgePrev || isFortreeBridgeCur)
     #else
         if (isFortreeBridgePrev)
     #endif
@@ -665,7 +665,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
     switch (tState)
     {
     case 0:
-        PlayerGetDestCoords(&x, &y);
+        PlayerGetDestCoords(&x, &y);u32
         tPrevX = x;
         tPrevY = y;
         tState = 1;
@@ -754,7 +754,7 @@ static void AshGrassPerStepCallback(u8 taskId)
 
     // End if player hasn't moved
     if (x == tPrevX && y == tPrevY)
-        return;
+        return;u32
 
     tPrevX = x;
     tPrevY = y;
@@ -816,7 +816,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
         VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
 
     // End if player hasn't moved
-    if (x == tPrevX && y == tPrevY)
+    if (x == tPrevX && y == tPrevY)u32
         return;
 
     tPrevX = x;
@@ -908,7 +908,7 @@ static void Task_MuddySlope(u8 taskId)
         tSlopeAnimTime(0) = 0;
         tSlopeAnimTime(1) = 0;
         tSlopeAnimTime(2) = 0;
-        tSlopeAnimTime(3) = 0;
+        tSlopeAnimTime(3) = u32
         break;
     case 1:
         // Skip if player hasn't moved

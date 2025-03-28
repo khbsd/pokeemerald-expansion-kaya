@@ -28,12 +28,12 @@
 
 struct IntroCreditsSpriteMetadata
 {
-    u8 animNum:4;
-    u8 shape:2;
-    u8 size:2;
-    u8 x;
-    u8 y;
-    u8 subpriority;
+    u32 animNum:4;
+    u32 shape:2;
+    u32 size:2;
+    u32 x;
+    u32 y;
+    u32 subpriority;
     u16 xOff;
 };
 
@@ -724,9 +724,9 @@ EWRAM_DATA s16 gIntroCredits_MovingSceneryState = 0;
 static void CreateCloudSprites(void);
 static void CreateTreeSprites(void);
 static void CreateHouseSprites(void);
-static void Task_BicycleBgAnimation(u8);
+static void Task_BicycleBgAnimation(u32);
 
-void LoadIntroPart2Graphics(u8 scenery)
+void LoadIntroPart2Graphics(u32 scenery)
 {
     LZ77UnCompVram(sGrass_Gfx, (void *)(BG_CHAR_ADDR(1)));
     LZ77UnCompVram(sGrass_Tilemap, (void *)(BG_SCREEN_ADDR(15)));
@@ -758,7 +758,7 @@ void LoadIntroPart2Graphics(u8 scenery)
 }
 
 // Note: This is only called with scenery=1.
-void SetIntroPart2BgCnt(u8 scenery)
+void SetIntroPart2BgCnt(u32 scenery)
 {
     switch (scenery)
     {
@@ -835,7 +835,7 @@ void SetIntroPart2BgCnt(u8 scenery)
     }
 }
 
-void LoadCreditsSceneGraphics(u8 scene)
+void LoadCreditsSceneGraphics(u32 scene)
 {
     LZ77UnCompVram(sGrass_Gfx, (void *)(BG_CHAR_ADDR(1)));
     LZ77UnCompVram(sGrass_Tilemap, (void *)(BG_SCREEN_ADDR(15)));
@@ -886,7 +886,7 @@ void LoadCreditsSceneGraphics(u8 scene)
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
 }
 
-void SetCreditsSceneBgCnt(u8 scene)
+void SetCreditsSceneBgCnt(u32 scene)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
                                | BGCNT_CHARBASE(0)
@@ -921,9 +921,9 @@ void SetCreditsSceneBgCnt(u8 scene)
 #define tBg3PosLo data[9]
 
 // Create task that manages the moving backgrounds during the bicycle ride
-u8 CreateBicycleBgAnimationTask(u8 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Speed)
+u32 CreateBicycleBgAnimationTask(u32 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Speed)
 {
-    u8 taskId = CreateTask(Task_BicycleBgAnimation, 0);
+    u32 taskId = CreateTask(Task_BicycleBgAnimation, 0);
 
     gTasks[taskId].tMode = mode;
     gTasks[taskId].tBg1Speed = bg1Speed;
@@ -939,7 +939,7 @@ u8 CreateBicycleBgAnimationTask(u8 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Spee
     return taskId;
 }
 
-static void Task_BicycleBgAnimation(u8 taskId)
+static void Task_BicycleBgAnimation(u32 taskId)
 {
     s16 bg1Speed;
     s16 bg2Speed;
@@ -986,7 +986,7 @@ static void Task_BicycleBgAnimation(u8 taskId)
     }
 }
 
-void CycleSceneryPalette(u8 mode)
+void CycleSceneryPalette(u32 mode)
 {
     u16 x;
     u16 y;
@@ -1061,13 +1061,13 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
     }
 }
 
-static void CreateMovingScenerySprites(bool8 hasVerticalMove, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u8 numSprites)
+static void CreateMovingScenerySprites(bool8 hasVerticalMove, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u32 numSprites)
 {
-    u8 i;
+    u32 i;
 
     for(i = 0; i < numSprites; i++)
     {
-        u8 sprite = CreateSprite(&sSpriteTemplate_MovingScenery, metadata[i].x, metadata[i].y, metadata[i].subpriority);
+        u32 sprite = CreateSprite(&sSpriteTemplate_MovingScenery, metadata[i].x, metadata[i].y, metadata[i].subpriority);
         CalcCenterToCornerVec(&gSprites[sprite], metadata[i].shape, metadata[i].size, ST_OAM_AFFINE_OFF);
         gSprites[sprite].oam.priority = 3;
         gSprites[sprite].oam.shape = metadata[i].shape;
@@ -1115,18 +1115,18 @@ static void SpriteCB_Bicycle(struct Sprite *sprite)
     sprite->y2 = gSprites[sprite->sPlayerSpriteId].y2;
 }
 
-u8 CreateIntroBrendanSprite(s16 x, s16 y)
+u32 CreateIntroBrendanSprite(s16 x, s16 y)
 {
-    u8 playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
-    u8 bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
+    u32 playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
+    u32 bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }
 
-u8 CreateIntroMaySprite(s16 x, s16 y)
+u32 CreateIntroMaySprite(s16 x, s16 y)
 {
-    u8 playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
-    u8 bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
+    u32 playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
+    u32 bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }
@@ -1148,10 +1148,10 @@ static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 }
 
 // In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static u8 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
+static u32 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
 {
-    u8 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
-    u8 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);
+    u32 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
+    u32 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);
     gSprites[rightSpriteId].sLeftSpriteId = leftSpriteId;
     StartSpriteAnim(&gSprites[rightSpriteId], 1);
     gSprites[rightSpriteId].callback = &SpriteCB_FlygonRightHalf;
@@ -1159,10 +1159,10 @@ static u8 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
 }
 
 
-u8 CreateIntroFlygonSprite(s16 x, s16 y)
+u32 CreateIntroFlygonSprite(s16 x, s16 y)
 {
-    u8 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x - 32, y, 5);
-    u8 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x + 32, y, 6);
+    u32 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x - 32, y, 5);
+    u32 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x + 32, y, 6);
     gSprites[rightSpriteId].sLeftSpriteId = leftSpriteId;
     StartSpriteAnim(&gSprites[rightSpriteId], 1);
     gSprites[rightSpriteId].callback = &SpriteCB_FlygonRightHalf;

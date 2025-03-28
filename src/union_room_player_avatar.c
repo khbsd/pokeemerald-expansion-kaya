@@ -19,9 +19,9 @@
 static EWRAM_DATA struct UnionRoomObject * sUnionObjWork = NULL;
 static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
 
-static u8 CreateTask_AnimateUnionRoomPlayers(void);
+static u32 CreateTask_AnimateUnionRoomPlayers(void);
 static u32 IsUnionRoomPlayerInvisible(u32, u32);
-static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
+static void SetUnionRoomObjectFacingDirection(s32, s32, u32);
 
 // Graphics ids should correspond with the classes in gUnionRoomFacilityClasses
 static const u16 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
@@ -70,7 +70,7 @@ static const s8 sUnionRoomGroupOffsets[MAX_RFU_PLAYERS][2] = {
     { 0,  1}  // Bottom
 };
 
-static const u8 sOppositeFacingDirection[] = {
+static const u32 sOppositeFacingDirection[] = {
     [DIR_NONE]  = DIR_NONE,
     [DIR_SOUTH] = DIR_NORTH,
     [DIR_NORTH] = DIR_SOUTH,
@@ -80,7 +80,7 @@ static const u8 sOppositeFacingDirection[] = {
 
 // Compare to sUnionRoomGroupOffsets, the direction each group member
 // needs to be facing in order to face the group leader in the center.
-static const u8 sMemberFacingDirections[MAX_RFU_PLAYERS] = {
+static const u32 sMemberFacingDirections[MAX_RFU_PLAYERS] = {
     DIR_SOUTH, // Leader, but never read
     DIR_WEST,
     DIR_SOUTH,
@@ -88,7 +88,7 @@ static const u8 sMemberFacingDirections[MAX_RFU_PLAYERS] = {
     DIR_NORTH
 };
 
-static const u8 sUnionRoomLocalIds[] = {
+static const u32 sUnionRoomLocalIds[] = {
     LOCALID_UNION_ROOM_PLAYER_1,
     LOCALID_UNION_ROOM_PLAYER_2,
     LOCALID_UNION_ROOM_PLAYER_3,
@@ -111,12 +111,12 @@ static const u16 sHidePlayerFlags[] = {
     FLAG_HIDE_UNION_ROOM_PLAYER_8
 };
 
-static const u8 sMovement_UnionPlayerExit[2] = {
+static const u32 sMovement_UnionPlayerExit[2] = {
     MOVEMENT_ACTION_FLY_UP,
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 sMovement_UnionPlayerEnter[2] = {
+static const u32 sMovement_UnionPlayerEnter[2] = {
     MOVEMENT_ACTION_FLY_DOWN,
     MOVEMENT_ACTION_STEP_END
 };
@@ -180,9 +180,9 @@ static void RemoveUnionRoomPlayerObjectEvent(u32 leaderId)
     RemoveObjectEventByLocalIdAndMap(sUnionRoomLocalIds[leaderId], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-static bool32 SetUnionRoomPlayerEnterExitMovement(u32 leaderId, const u8 *movement)
+static bool32 SetUnionRoomPlayerEnterExitMovement(u32 leaderId, const u32 *movement)
 {
-    u8 objectId;
+    u32 objectId;
     struct ObjectEvent * object;
     if (TryGetObjectEventIdByLocalIdAndMap(sUnionRoomLocalIds[leaderId], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
         return FALSE;
@@ -196,7 +196,7 @@ static bool32 SetUnionRoomPlayerEnterExitMovement(u32 leaderId, const u8 *moveme
 
 static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 leaderId)
 {
-    u8 objectId;
+    u32 objectId;
     struct ObjectEvent * object;
     if (TryGetObjectEventIdByLocalIdAndMap(sUnionRoomLocalIds[leaderId], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
         return TRUE;
@@ -212,7 +212,7 @@ static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 leaderId)
     return TRUE;
 }
 
-u8 InitUnionRoomPlayerObjects(struct UnionRoomObject * players)
+u32 InitUnionRoomPlayerObjects(struct UnionRoomObject * players)
 {
     s32 i;
 
@@ -352,14 +352,14 @@ static void AnimateUnionRoomPlayer(u32 leaderId, struct UnionRoomObject * object
     object->schedAnim = UNION_ROOM_SPAWN_NONE;
 }
 
-static void Task_AnimateUnionRoomPlayers(u8 taskId)
+static void Task_AnimateUnionRoomPlayers(u32 taskId)
 {
     s32 i;
     for (i = 0; i < MAX_UNION_ROOM_LEADERS; i++)
         AnimateUnionRoomPlayer(i, &sUnionObjWork[i]);
 }
 
-static u8 CreateTask_AnimateUnionRoomPlayers(void)
+static u32 CreateTask_AnimateUnionRoomPlayers(void)
 {
     if (FuncIsActiveTask(Task_AnimateUnionRoomPlayers) == TRUE)
         return NUM_TASKS;
@@ -369,7 +369,7 @@ static u8 CreateTask_AnimateUnionRoomPlayers(void)
 
 static void DestroyTask_AnimateUnionRoomPlayers(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_AnimateUnionRoomPlayers);
+    u32 taskId = FindTaskIdByFunc(Task_AnimateUnionRoomPlayers);
     if (taskId < NUM_TASKS)
         DestroyTask(taskId);
 }
@@ -389,7 +389,7 @@ void DestroyUnionRoomPlayerObjects(void)
     DestroyTask_AnimateUnionRoomPlayers();
 }
 
-void CreateUnionRoomPlayerSprites(u8 *spriteIds, s32 leaderId)
+void CreateUnionRoomPlayerSprites(u32 *spriteIds, s32 leaderId)
 {
     s32 memberId;
     for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
@@ -404,7 +404,7 @@ void CreateUnionRoomPlayerSprites(u8 *spriteIds, s32 leaderId)
     }
 }
 
-void DestroyUnionRoomPlayerSprites(u8 *spriteIds)
+void DestroyUnionRoomPlayerSprites(u32 *spriteIds)
 {
     s32 i;
     for (i = 0; i < NUM_UNION_ROOM_SPRITES; i++)
@@ -426,7 +426,7 @@ void SetTilesAroundUnionRoomPlayersPassable(void)
     }
 }
 
-static u8 GetNewFacingDirectionForUnionRoomPlayer(u32 memberId, u32 leaderId, struct RfuGameData * gameData)
+static u32 GetNewFacingDirectionForUnionRoomPlayer(u32 memberId, u32 leaderId, struct RfuGameData * gameData)
 {
     if (memberId) // If not leader
         return sMemberFacingDirections[memberId];
@@ -549,7 +549,7 @@ void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
         UpdateUnionRoomPlayerSprites(uroom);
 }
 
-bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdPtr, s16 *leaderIdPtr, u8 *spriteIds)
+bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdPtr, s16 *leaderIdPtr, u32 *spriteIds)
 {
     s16 x, y;
     s32 i, memberId;
@@ -588,7 +588,7 @@ bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdP
     return FALSE;
 }
 
-static void SetUnionRoomObjectFacingDirection(s32 memberId, s32 leaderId, u8 newDirection)
+static void SetUnionRoomObjectFacingDirection(s32 memberId, s32 leaderId, u32 newDirection)
 {
     TurnVirtualObject(MAX_RFU_PLAYERS * leaderId - UR_SPRITE_START_ID + memberId, newDirection);
     // should be line below, but order is swapped here

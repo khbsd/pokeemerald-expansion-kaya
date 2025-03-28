@@ -33,7 +33,7 @@ struct Test
     const char *filename;
     const struct TestRunner *runner;
     void *data;
-    u16 sourceLine;
+    u32 sourceLine;
 };
 
 struct TestRunnerState
@@ -61,9 +61,9 @@ extern const struct TestRunner gAssumptionsRunner;
 
 struct FunctionTestRunnerState
 {
-    u16 parameters;
-    u16 runParameter;
-    u16 checkProgressParameter;
+    u32 parameters;
+    u32 runParameter;
+    u32 checkProgressParameter;
 };
 
 extern const struct TestRunner gFunctionTestRunner;

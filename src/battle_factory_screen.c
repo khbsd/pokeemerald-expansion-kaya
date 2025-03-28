@@ -87,8 +87,8 @@ enum {
 
 struct FactorySelectableMon
 {
-    u16 monId;
-    u16 ballSpriteId;
+    u32 monId;
+    u32 ballSpriteId;
     u8 selectedId; // 0 - not selected, 1 - first Pokémon, 2 - second Pokémon, 3 - third Pokémon
     struct Pokemon monData;
 };
@@ -115,7 +115,7 @@ struct FactorySelectScreen
     bool8 monPicAnimating;
     u8 fadeSpeciesNameTaskId;
     bool8 fadeSpeciesNameActive;
-    u16 speciesNameColorBackup;
+    u32 speciesNameColorBackup;
     bool8 fadeSpeciesNameFadeOut;
     u8 fadeSpeciesNameCoeffDelay;
     u8 fadeSpeciesNameCoeff;
@@ -149,7 +149,7 @@ struct FactorySwapScreen
     bool8 monSwapped;
     u8 fadeSpeciesNameTaskId;
     bool8 fadeSpeciesNameActive;
-    u16 speciesNameColorBackup;
+    u32 speciesNameColorBackup;
     bool8 fadeSpeciesNameFadeOut;
     u8 fadeSpeciesNameCoeffDelay;
     u8 fadeSpeciesNameCoeff;
@@ -196,7 +196,7 @@ static u8 Select_DeclineChosenMons(void);
 static u8 Select_OptionSummary(void);
 static u8 Select_OptionOthers(void);
 static u8 Select_OptionRentDeselect(void);
-static bool32 Select_AreSpeciesValid(u16);
+static bool32 Select_AreSpeciesValid(u32);
 
 // Swap screen
 static void CB2_InitSwapScreen(void);
@@ -258,9 +258,9 @@ static struct FactorySwapScreen *sFactorySwapScreen;
 
 COMMON_DATA u8 (*gFactorySelect_CurrentOptionFunc)(void) = NULL;
 
-static const u16 sPokeballGray_Pal[]         = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
-static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
-static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
+static const u32 sPokeballGray_Pal[]         = INCBIN_u32("graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
+static const u32 sPokeballSelected_Pal[]     = INCBIN_u32("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
+static const u32 sInterface_Pal[]            = INCBIN_u32("graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
 static const u8 sPokeball_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/pokeball.4bpp"); // Unused, gPokeballSelection_Gfx used instead
 static const u8 sArrow_Gfx[]                 = INCBIN_U8( "graphics/battle_frontier/factory_screen/arrow.4bpp");
 static const u8 sMenuHighlightLeft_Gfx[]     = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_left.4bpp");
@@ -272,8 +272,8 @@ static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "graphics/battle_front
 static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
 static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
 static const u8 sMonPicBg_Tilemap[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.bin");
-static const u16 sMonPicBg_Gfx[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
-static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
+static const u32 sMonPicBg_Gfx[]             = INCBIN_u32("graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
+static const u32 sMonPicBg_Pal[]             = INCBIN_u32("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
 {
@@ -405,7 +405,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSelectText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal");
+static const u32 sSelectText_Pal[] = INCBIN_u32("graphics/battle_frontier/factory_screen/text.gbapal");
 static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
@@ -1031,7 +1031,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSwapText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
+static const u32 sSwapText_Pal[] = INCBIN_u32("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
 static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
@@ -1755,7 +1755,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
-        u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+        u32 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         if (i < rentalRank)
             ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
@@ -1780,7 +1780,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
-        u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+        u32 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otId, 0, &sFactorySelectScreen->mons[i + firstMonId].monData);
     }
@@ -1857,7 +1857,7 @@ static void Select_PrintRentalPkmnString(void)
 
 static void Select_PrintMonSpecies(void)
 {
-    u16 species;
+    u32 species;
     u8 x;
     u8 monId = sFactorySelectScreen->cursorPos;
 
@@ -1928,7 +1928,7 @@ static u8 Select_RunMenuOptionFunc(void)
 static u8 Select_OptionRentDeselect(void)
 {
     u8 selectedId = sFactorySelectScreen->mons[sFactorySelectScreen->cursorPos].selectedId;
-    u16 monId  = sFactorySelectScreen->mons[sFactorySelectScreen->cursorPos].monId;
+    u32 monId  = sFactorySelectScreen->mons[sFactorySelectScreen->cursorPos].monId;
     if (selectedId == 0 && !Select_AreSpeciesValid(monId))
     {
         Select_PrintCantSelectSameMon();
@@ -1974,7 +1974,7 @@ static u8 Select_OptionOthers(void)
 
 static void Select_PrintMonCategory(void)
 {
-    u16 species;
+    u32 species;
     u8 text[30];
     u8 x;
     u8 monId = sFactorySelectScreen->cursorPos;
@@ -1994,7 +1994,7 @@ static void Select_CreateMonSprite(void)
 {
     u8 monId = sFactorySelectScreen->cursorPos;
     struct Pokemon *mon = &sFactorySelectScreen->mons[monId].monData;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
@@ -2013,7 +2013,7 @@ static void Select_SetMonPicAnimating(bool8 animating)
 static void Select_ReshowMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
+    u32 species;
     u32 personality;
     bool8 isShiny;
 
@@ -2043,7 +2043,7 @@ static void Select_CreateChosenMonsSprites(void)
             if (sFactorySelectScreen->mons[j].selectedId == i + 1)
             {
                 struct Pokemon *mon = &sFactorySelectScreen->mons[j].monData;
-                u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+                u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                 u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
                 bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
@@ -2232,7 +2232,7 @@ static void Select_SetWinRegs(s16 mWin0H, s16 nWin0H, s16 mWin0V, s16 nWin0V)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
 }
 
-static bool32 Select_AreSpeciesValid(u16 monId)
+static bool32 Select_AreSpeciesValid(u32 monId)
 {
     u8 i, j;
     u32 species = gFacilityTrainerMons[monId].species;
@@ -2444,7 +2444,7 @@ static void Swap_Task_Exit(u8 taskId)
 
 static void Swap_Task_HandleYesNo(u8 taskId)
 {
-    u16 loPtr, hiPtr;
+    u32 loPtr, hiPtr;
 
     if (sFactorySwapScreen->monPicAnimating == TRUE)
         return;
@@ -2981,7 +2981,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
 static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
 {
     u8 slideTaskId;
-    u16 hiPtr, loPtr;
+    u32 hiPtr, loPtr;
 
     switch (gTasks[taskId].tState)
     {
@@ -3064,7 +3064,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
 static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
 {
     u8 slideTaskId;
-    u16 hiPtr, loPtr;
+    u32 hiPtr, loPtr;
     if (sFactorySwapScreen->monPicAnimating == TRUE)
         return;
 
@@ -3754,7 +3754,7 @@ static void Swap_PrintPkmnSwap(void)
 
 static void Swap_PrintMonSpecies(void)
 {
-    u16 species;
+    u32 species;
     u8 x;
 
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
@@ -3854,9 +3854,9 @@ static void Swap_PrintOneActionString(u8 which)
 // For printing the species name once its selected. Keep the current fade but don't keep fading in and out
 static void Swap_PrintMonSpeciesAtFade(void)
 {
-    u16 species;
+    u32 species;
     u8 x;
-    u16 pal[5];
+    u32 pal[5];
 
     CpuCopy16(sSwapText_Pal, pal, 8);
     if (!sFactorySwapScreen->fromSummaryScreen)
@@ -3888,7 +3888,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
 // Reprints the species name over the faded one after a transition
 static void Swap_PrintMonSpeciesForTransition(void)
 {
-    u16 species;
+    u32 species;
     u8 x;
 
     LoadPalette(sSwapText_Pal, BG_PLTT_ID(PALNUM_FADE_TEXT), sizeof(sSwapText_Pal));
@@ -3914,7 +3914,7 @@ static void Swap_PrintMonSpeciesForTransition(void)
 
 static void Swap_PrintMonCategory(void)
 {
-    u16 species;
+    u32 species;
     u8 text[30];
     u8 x;
     u8 monId = sFactorySwapScreen->cursorPos;
@@ -4055,7 +4055,7 @@ static void OpenMonPic(u8 *spriteId, bool8 *animating, bool8 swapScreen)
 static void Swap_ShowSummaryMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
+    u32 species;
     u32 personality;
     bool8 isShiny;
 
@@ -4139,11 +4139,11 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
 static bool8 Swap_AlreadyHasSameSpecies(u8 monId)
 {
     u8 i;
-    u16 species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
+    u32 species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        if (i != sFactorySwapScreen->playerMonId && (u16)(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)) == species)
+        if (i != sFactorySwapScreen->playerMonId && (u32)(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)) == species)
             return TRUE;
     }
     return FALSE;
@@ -4271,7 +4271,7 @@ static void Task_CloseMonPic(u8 taskId)
 static void Swap_CreateMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
+    u32 species;
     u32 personality;
     bool8 isShiny;
 

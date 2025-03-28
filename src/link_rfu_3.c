@@ -23,22 +23,22 @@ enum {
 
 struct RfuUnusedQueue
 {
-    u8 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
-    vu8 recvSlot;
-    vu8 sendSlot;
-    vu8 count;
-    vu8 full;
+    u32 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
+    vu32 recvSlot;
+    vu32 sendSlot;
+    vu32 count;
+    vu32 full;
 };
 
-EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
+EWRAM_DATA u32 gWirelessStatusIndicatorSpriteId = 0;
 
-static u8 sSequenceArrayValOffset;
+static u32 sSequenceArrayValOffset;
 
 static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
 static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/link/wireless_icon.4bpp.lz");
 
 // Most of the below two tables won't make sense with ASCII encoding.
-static const u8 sWireless_ASCIItoRSETable[256] = {
+static const u32 sWireless_ASCIItoRSETable[256] = {
     EOS,
     0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
     0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
@@ -134,7 +134,7 @@ static const u8 sWireless_ASCIItoRSETable[256] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-const u8 gWireless_RSEtoASCIITable[256] = {
+const u32 gWireless_RSEtoASCIITable[256] = {
     [CHAR_SPACE] = ' ',
     0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d,
     0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
@@ -358,11 +358,11 @@ static void UNUSED RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
     queue->full = FALSE;
 }
 
-void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
+void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u32 *data)
 {
     s32 i;
     u16 imeBak;
-    u8 count;
+    u32 count;
 
     if (queue->count < RECV_QUEUE_NUM_SLOTS)
     {
@@ -394,7 +394,7 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
     }
 }
 
-void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
+void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u32 *data)
 {
     s32 i;
     u16 imeBak;
@@ -427,7 +427,7 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
     }
 }
 
-bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
+bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u32 *src)
 {
     u16 imeBak;
     s32 i;
@@ -453,7 +453,7 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
     return TRUE;
 }
 
-bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
+bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u32 *src)
 {
     s32 i;
     u16 imeBak;
@@ -473,7 +473,7 @@ bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
     return TRUE;
 }
 
-void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
+void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u32 *data)
 {
     s32 i;
 
@@ -496,7 +496,7 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
     }
 }
 
-bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
+bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u32 *src)
 {
     s32 i;
 
@@ -514,7 +514,7 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
     return TRUE;
 }
 
-static void UNUSED RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data)
+static void UNUSED RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u32 *data)
 {
     s32 i;
 
@@ -533,7 +533,7 @@ static void UNUSED RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data
     }
 }
 
-static bool8 UNUSED RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
+static bool8 UNUSED RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u32 *dest)
 {
     s32 i;
 
@@ -552,10 +552,10 @@ static bool8 UNUSED RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *des
 // Populates an array with a sequence of numbers (which numbers depends on the mode)
 // and sets the final element to the total of the other elements
 #define SEQ_ARRAY_MAX_SIZE 200
-static void UNUSED PopulateArrayWithSequence(u8 *arr, u8 mode)
+static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
 {
     s32 i;
-    u8 rval;
+    u32 rval;
     u16 total = 0;
     switch (mode)
     {
@@ -606,7 +606,7 @@ static void UNUSED PopulateArrayWithSequence(u8 *arr, u8 mode)
 
 // File boundary here maybe?
 
-static void UNUSED PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
+static void UNUSED PkmnStrToASCII(u32 *asciiStr, const u32 *pkmnStr)
 {
     s32 i;
 
@@ -615,7 +615,7 @@ static void UNUSED PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
     asciiStr[i] = 0;
 }
 
-static void UNUSED ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
+static void UNUSED ASCIIToPkmnStr(u32 *pkmnStr, const u32 *asciiStr)
 {
     s32 i;
 
@@ -624,11 +624,11 @@ static void UNUSED ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
     pkmnStr[i] = EOS;
 }
 
-static u8 GetConnectedChildStrength(u8 maxFlags)
+static u32 GetConnectedChildStrength(u32 maxFlags)
 {
-    u8 flagCount = 0;
+    u32 flagCount = 0;
     u32 flags = gRfuLinkStatus->connSlotFlag;
-    u8 i;
+    u32 i;
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
@@ -656,7 +656,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
     return 0;
 }
 
-void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedActivity, s32 partnerInfo)
+void InitHostRfuGameData(struct RfuGameData *data, u32 activity, bool32 startedActivity, s32 partnerInfo)
 {
     s32 i;
 
@@ -681,7 +681,7 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->compatibility.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u8 *username, u8 idx)
+bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
 {
     bool8 retVal;
 
@@ -716,7 +716,7 @@ bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u8 *username, u8
     return retVal;
 }
 
-bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u8 *username, u8 idx)
+bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_WONDER_DISTRIBUTOR)
@@ -733,7 +733,7 @@ bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u8 *usern
     return retVal;
 }
 
-void CopyHostRfuGameDataAndUsername(struct RfuGameData *gameData, u8 *username)
+void CopyHostRfuGameDataAndUsername(struct RfuGameData *gameData, u32 *username)
 {
     memcpy(gameData, &gHostRfuGameData, RFU_GAME_NAME_LENGTH);
     memcpy(username, gHostRfuUsername, RFU_USER_NAME_LENGTH);
@@ -748,9 +748,9 @@ void CopyHostRfuGameDataAndUsername(struct RfuGameData *gameData, u8 *username)
 #define sValidator    data[7]
 #define STATUS_INDICATOR_ACTIVE 0x1234 // Used to validate active indicator
 
-void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
+void CreateWirelessStatusIndicatorSprite(u32 x, u32 y)
 {
-    u8 sprId;
+    u32 sprId;
 
     if (x == 0 && y == 0)
     {
@@ -793,10 +793,10 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
     gWirelessStatusIndicatorSpriteId = SPRITE_NONE;
 }
 
-static u8 GetParentSignalStrength(void)
+static u32 GetParentSignalStrength(void)
 {
-    u8 i;
-    u8 flags = gRfuLinkStatus->connSlotFlag;
+    u32 i;
+    u32 flags = gRfuLinkStatus->connSlotFlag;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (flags & 1)
@@ -821,8 +821,8 @@ void UpdateWirelessStatusIndicatorSprite(void)
     if (gWirelessStatusIndicatorSpriteId != SPRITE_NONE && gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
-        u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
-        u8 i = 0;
+        u32 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
+        u32 i = 0;
 
         // Get weakest signal strength
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
@@ -885,13 +885,13 @@ void UpdateWirelessStatusIndicatorSprite(void)
 #undef sTileStart
 #undef sValidator
 
-static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
+static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u32 *name)
 {
     dest->trainerId = trainerId;
     StringCopy(dest->trainerName, name);
 }
 
-static bool32 NameIsNotEmpty(const u8 *name)
+static bool32 NameIsNotEmpty(const u32 *name)
 {
     s32 i;
 
@@ -958,7 +958,7 @@ void SaveLinkTrainerNames(void)
     }
 }
 
-bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
+bool32 PlayerHasMetTrainerBefore(u16 id, u32 *name)
 {
     s32 i;
 

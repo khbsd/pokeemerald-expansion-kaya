@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Covert Cloak blocks secondary effects")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_NUZZLE; }
     PARAMETRIZE { move = MOVE_INFERNO; }
     PARAMETRIZE { move = MOVE_MORTAL_SPIN; }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Covert Cloak blocks secondary effects")
 
 SINGLE_BATTLE_TEST("Covert Cloak does not block primary effects")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_INFESTATION; }
     PARAMETRIZE { move = MOVE_THOUSAND_ARROWS; }
     PARAMETRIZE { move = MOVE_JAW_LOCK; }
@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Covert Cloak does not block primary effects")
 
 SINGLE_BATTLE_TEST("Covert Cloak does not block self-targeting effects, primary or secondary")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_POWER_UP_PUNCH; }
     PARAMETRIZE { move = MOVE_RAPID_SPIN; }
     PARAMETRIZE { move = MOVE_LEAF_STORM; }

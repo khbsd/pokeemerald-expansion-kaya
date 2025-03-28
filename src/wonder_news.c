@@ -53,7 +53,7 @@ void WonderNews_Reset(void)
 // Only used in FRLG
 void WonderNews_IncrementStepCounter(void)
 {
-    u16 *stepCounter = GetVarPointer(VAR_WONDER_NEWS_STEP_COUNTER);
+    u32 *stepCounter = GetVarPointer(VAR_WONDER_NEWS_STEP_COUNTER);
     struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
     // If the player has reached the reward limit, start counting steps.
@@ -67,11 +67,11 @@ void WonderNews_IncrementStepCounter(void)
 }
 
 // Only used in FRLG
-u16 WonderNews_GetRewardInfo(void)
+u32 WonderNews_GetRewardInfo(void)
 {
-    u16 *result = &gSpecialVar_Result;
+    u32 *result = &gSpecialVar_Result;
     struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
-    u16 rewardType;
+    u32 rewardType;
 
     // Checks if Mystery Event is enabled, not Mystery Gift?
     if (!IsMysteryEventEnabled() || !ValidateSavedWonderNews())

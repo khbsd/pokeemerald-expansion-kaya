@@ -75,7 +75,7 @@ struct PlayerRecordEmerald
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
     /* 0x12DC */ struct PlayerHallRecords hallRecords;
-    /* 0x1434 */ u8 filler_1434[16];
+    /* 0x1434 */ u32 filler_1434[16];
 }; // 0x1444
 
 union PlayerRecord
@@ -96,7 +96,7 @@ static LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
-static u8 sDaycareMailRandSum;
+static u32 sDaycareMailRandSum;
 #if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
 static struct PlayerHallRecords *sPartnerHallRecords[HALL_RECORDS_COUNT];
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
@@ -105,22 +105,22 @@ static EWRAM_DATA struct RecordMixingDaycareMail sRecordMixMail = {0};
 static EWRAM_DATA union PlayerRecord *sReceivedRecords = NULL;
 static EWRAM_DATA union PlayerRecord *sSentRecord = NULL;
 
-static void Task_RecordMixing_Main(u8);
-static void Task_MixingRecordsRecv(u8);
-static void Task_SendPacket(u8);
-static void Task_CopyReceiveBuffer(u8);
-static void Task_SendPacket_SwitchToReceive(u8);
+static void Task_RecordMixing_Main(u32);
+static void Task_MixingRecordsRecv(u32);
+static void Task_SendPacket(u32);
+static void Task_CopyReceiveBuffer(u32);
+static void Task_SendPacket_SwitchToReceive(u32);
 static void *LoadPtrFromTaskData(const u16 *);
 static void StorePtrInTaskData(void *, u16 *);
-static u8 GetMultiplayerId_(void);
-static void *GetPlayerRecvBuffer(u8);
-static void ReceiveOldManData(OldMan *, size_t, u8);
-static void ReceiveBattleTowerData(void *, size_t, u8);
-static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
-static void CalculateDaycareMailRandSum(const u8 *);
-static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u8, TVShow *);
-static void ReceiveGiftItem(u16 *, u8 );
-static void Task_DoRecordMixing(u8);
+static u32 GetMultiplayerId_(void);
+static void *GetPlayerRecvBuffer(u32);
+static void ReceiveOldManData(OldMan *, size_t, u32);
+static void ReceiveBattleTowerData(void *, size_t, u32);
+static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u32);
+static void CalculateDaycareMailRandSum(const u32 *);
+static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u32, TVShow *);
+static void ReceiveGiftItem(u16 *, u32 );
+static void Task_DoRecordMixing(u32);
 static void GetSavedApprentices(struct Apprentice *, struct Apprentice *);
 static void ReceiveApprenticeData(struct Apprentice *, size_t, u32);
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *, size_t, u32);
@@ -129,15 +129,15 @@ static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *);
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *);
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *);
 
-static const u8 sPlayerIdxOrders_2Player[] = {1, 0};
+static const u32 sPlayerIdxOrders_2Player[] = {1, 0};
 
-static const u8 sPlayerIdxOrders_3Player[][3] =
+static const u32 sPlayerIdxOrders_3Player[][3] =
 {
     {1, 2, 0},
     {2, 0, 1},
 };
 
-static const u8 sPlayerIdxOrders_4Player[][4] =
+static const u32 sPlayerIdxOrders_4Player[][4] =
 {
     {1, 0, 3, 2},
     {3, 0, 1, 2},
@@ -151,14 +151,14 @@ static const u8 sPlayerIdxOrders_4Player[][4] =
 };
 
 // When 3 players can swap mail 2 players are randomly selected and the 3rd is left out
-static const u8 sDaycareMailSwapIds_3Player[NUM_SWAP_COMBOS][2] =
+static const u32 sDaycareMailSwapIds_3Player[NUM_SWAP_COMBOS][2] =
 {
     {0, 1},
     {1, 2},
     {2, 0},
 };
 
-static const u8 sDaycareMailSwapIds_4Player[NUM_SWAP_COMBOS][4] =
+static const u32 sDaycareMailSwapIds_4Player[NUM_SWAP_COMBOS][4] =
 {
     {0, 1,   2, 3}, // 0 swaps with 1, 2 swaps with 3
     {0, 2,   1, 3},
@@ -280,12 +280,12 @@ static void ReceiveExchangePacket(u32 multiplayerId)
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(sReceivedRecords->emerald), multiplayerId);
         ReceiveGiftItem(&sReceivedRecords->emerald.giftItem, multiplayerId);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(sReceivedRecords->emerald), multiplayerId);
-        ReceiveApprenticeData(sReceivedRecords->emerald.apprentices, sizeof(sReceivedRecords->emerald), (u8)multiplayerId);
-        ReceiveRankingHallRecords(&sReceivedRecords->emerald.hallRecords, sizeof(sReceivedRecords->emerald), (u8)multiplayerId);
+        ReceiveApprenticeData(sReceivedRecords->emerald.apprentices, sizeof(sReceivedRecords->emerald), (u32)multiplayerId);
+        ReceiveRankingHallRecords(&sReceivedRecords->emerald.hallRecords, sizeof(sReceivedRecords->emerald), (u32)multiplayerId);
     }
 }
 
-static void PrintTextOnRecordMixing(const u8 *src)
+static void PrintTextOnRecordMixing(const u32 *src)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, src, 0, 1, 0, NULL);
@@ -294,7 +294,7 @@ static void PrintTextOnRecordMixing(const u8 *src)
 
 #define tCounter data[0]
 
-static void Task_RecordMixing_SoundEffect(u8 taskId)
+static void Task_RecordMixing_SoundEffect(u32 taskId)
 {
     if (++gTasks[taskId].tCounter == 50)
     {
@@ -310,7 +310,7 @@ static void Task_RecordMixing_SoundEffect(u8 taskId)
 #define tSoundTaskId data[15]
 
 // Note: gSpecialVar_0x8005 here contains the player's spot id.
-static void Task_RecordMixing_Main(u8 taskId)
+static void Task_RecordMixing_Main(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -388,7 +388,7 @@ static void Task_RecordMixing_Main(u8 taskId)
 #define tNumChunksRecv(i) data[1 + (i)] // Number of chunks of the record received per player
 #define tRecvRecords      data[5] // Used to store a ptr, so data[5] and data[6]
 
-static void Task_MixingRecordsRecv(u8 taskId)
+static void Task_MixingRecordsRecv(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -409,7 +409,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
         break;
     case 101:
         {
-            u8 players = GetLinkPlayerCount_2();
+            u32 players = GetLinkPlayerCount_2();
             if (IsLinkMaster() == TRUE)
             {
                 if (players == GetSavedPlayerCount())
@@ -454,7 +454,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
         break;
     case 2:
         {
-            u8 subTaskId;
+            u32 subTaskId;
 
             task->data[6] = GetLinkPlayerCount_2();
             task->tState = 0;
@@ -490,7 +490,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
     }
 }
 
-static void Task_SendPacket(u8 taskId)
+static void Task_SendPacket(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->tState)
@@ -526,15 +526,15 @@ static void Task_SendPacket(u8 taskId)
     }
 }
 
-static void Task_CopyReceiveBuffer(u8 taskId)
+static void Task_CopyReceiveBuffer(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 status = GetBlockReceivedStatus();
-    u8 handledPlayers = 0;
+    u32 status = GetBlockReceivedStatus();
+    u32 handledPlayers = 0;
 
     if (status == GetLinkPlayerCountAsBitFlags())
     {
-        u8 i;
+        u32 i;
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if ((status >> i) & 1)
@@ -558,7 +558,7 @@ static void Task_CopyReceiveBuffer(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void Task_WaitReceivePacket(u8 taskId)
+static void Task_WaitReceivePacket(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -567,7 +567,7 @@ static void Task_WaitReceivePacket(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void Task_ReceivePacket(u8 taskId)
+static void Task_ReceivePacket(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -576,7 +576,7 @@ static void Task_ReceivePacket(u8 taskId)
         ReceiveExchangePacket(task->tMultiplayerId);
 }
 
-static void Task_SendPacket_SwitchToReceive(u8 taskId)
+static void Task_SendPacket_SwitchToReceive(u32 taskId)
 {
     gTasks[taskId].func = Task_ReceivePacket;
     sReadyToReceive = TRUE;
@@ -593,12 +593,12 @@ static void StorePtrInTaskData(void *records, u16 *asShort)
     asShort[1] = ((u32)records >> 16);
 }
 
-static u8 GetMultiplayerId_(void)
+static u32 GetMultiplayerId_(void)
 {
     return GetMultiplayerId();
 }
 
-static void *GetPlayerRecvBuffer(u8 id)
+static void *GetPlayerRecvBuffer(u32 id)
 {
     return gBlockRecvBuffer[id];
 }
@@ -628,9 +628,9 @@ static void ShufflePlayerIndices(u32 *data)
     }
 }
 
-static void ReceiveOldManData(OldMan *records, size_t recordSize, u8 multiplayerId)
+static void ReceiveOldManData(OldMan *records, size_t recordSize, u32 multiplayerId)
 {
-    u8 version;
+    u32 version;
     u16 language;
     OldMan *oldMan;
     u32 mixIndices[MAX_LINK_PLAYERS];
@@ -649,7 +649,7 @@ static void ReceiveOldManData(OldMan *records, size_t recordSize, u8 multiplayer
     ResetMauvilleOldManFlag();
 }
 
-static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multiplayerId)
+static void ReceiveBattleTowerData(void *records, size_t recordSize, u32 multiplayerId)
 {
     struct EmeraldBattleTowerRecord *battleTowerRecord;
     struct BattleTowerPokemon *btPokemon;
@@ -681,7 +681,7 @@ static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multipla
     PutNewBattleTowerRecord((void *)records + recordSize * multiplayerId);
 }
 
-static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8 multiplayerId)
+static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u32 multiplayerId)
 {
     LilycoveLady *lilycoveLady;
     u32 mixIndices[MAX_LINK_PLAYERS];
@@ -711,7 +711,7 @@ static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8
     }
 }
 
-static u8 GetDaycareMailItemId(struct DaycareMail *mail)
+static u32 GetDaycareMailItemId(struct DaycareMail *mail)
 {
     return mail->message.itemId;
 }
@@ -723,7 +723,7 @@ enum {
     DAYCARE_SLOT,
 };
 
-static void SwapDaycareMail(struct RecordMixingDaycareMail *records, size_t recordSize, u8 (*idxs)[2], u8 playerSlot1, u8 playerSlot2)
+static void SwapDaycareMail(struct RecordMixingDaycareMail *records, size_t recordSize, u32 (*idxs)[2], u32 playerSlot1, u32 playerSlot2)
 {
     struct DaycareMail temp;
     struct RecordMixingDaycareMail *mixMail1, *mixMail2;
@@ -742,9 +742,9 @@ static void SwapDaycareMail(struct RecordMixingDaycareMail *records, size_t reco
 
 // This sum is used to determine which players will swap daycare mail if there are more than 2 players who can.
 // The TV show data is used to calculate this sum.
-static void CalculateDaycareMailRandSum(const u8 *src)
+static void CalculateDaycareMailRandSum(const u32 *src)
 {
-    u8 sum;
+    u32 sum;
     s32 i;
 
     sum = 0;
@@ -754,22 +754,22 @@ static void CalculateDaycareMailRandSum(const u8 *src)
     sDaycareMailRandSum = sum;
 }
 
-static u8 GetDaycareMailRandSum(void)
+static u32 GetDaycareMailRandSum(void)
 {
     return sDaycareMailRandSum;
 }
 
-static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size_t recordSize, u8 multiplayerId, TVShow *shows)
+static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size_t recordSize, u32 multiplayerId, TVShow *shows)
 {
     u16 i, j;
-    u8 linkPlayerCount;
-    u8 tableId;
+    u32 linkPlayerCount;
+    u32 tableId;
     struct RecordMixingDaycareMail *mixMail;
-    u8 playerSlot1, playerSlot2;
+    u32 playerSlot1, playerSlot2;
     void *ptr;
     bool8 canHoldItem[MAX_LINK_PLAYERS][DAYCARE_MON_COUNT];
-    u8 idxs[MAX_LINK_PLAYERS][2];
-    u8 numDaycareCanHold;
+    u32 idxs[MAX_LINK_PLAYERS][2];
+    u32 numDaycareCanHold;
     bool32 anyRS;
     rng_value_t localRngState = LocalRandomSeed(gLinkPlayers[0].trainerId);
 
@@ -959,7 +959,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
 }
 
 
-static void ReceiveGiftItem(u16 *item, u8 multiplayerId)
+static void ReceiveGiftItem(u16 *item, u32 multiplayerId)
 {
     if (multiplayerId != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == POCKET_KEY_ITEMS)
     {
@@ -977,7 +977,7 @@ static void ReceiveGiftItem(u16 *item, u8 multiplayerId)
     }
 }
 
-static void Task_DoRecordMixing(u8 taskId)
+static void Task_DoRecordMixing(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1351,7 +1351,7 @@ static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallR
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
 {
 #if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
-    u8 linkPlayerCount = GetLinkPlayerCount();
+    u32 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *mixHallRecords = AllocZeroed(sizeof(*mixHallRecords));
 
     GetNewHallRecords(mixHallRecords, records, recordSize, multiplayerId, linkPlayerCount);

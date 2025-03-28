@@ -884,7 +884,7 @@ const struct SpriteTemplate gBellSpriteTemplate =
 
 #define NUM_MUSIC_NOTE_PAL_TAGS  3
 
-static const u16 sMusicNotePaletteTagsTable[NUM_MUSIC_NOTE_PAL_TAGS] =
+static const u32 sMusicNotePaletteTagsTable[NUM_MUSIC_NOTE_PAL_TAGS] =
 {
     ANIM_TAG_MUSIC_NOTES_2,
     ANIM_SPRITES_START - 1,
@@ -1551,7 +1551,7 @@ void AnimSonicBoomProjectile(struct Sprite *sprite)
 {
     s16 targetXPos;
     s16 targetYPos;
-    u16 rotation;
+    u32 rotation;
 
     if (IsContest())
     {
@@ -1606,14 +1606,14 @@ static void AnimAirWaveProjectile_Step1(struct Sprite *sprite)
     sprite->data[1] += sprite->data[5];
     sprite->data[2] += sprite->data[6];
     if (1 & task->data[7])
-        sprite->x2 = ((u16)sprite->data[1] >> 8) * -1;
+        sprite->x2 = ((u32)sprite->data[1] >> 8) * -1;
     else
-        sprite->x2 = (u16)sprite->data[1] >> 8;
+        sprite->x2 = (u32)sprite->data[1] >> 8;
 
     if (1 & task->data[8])
-        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
+        sprite->y2 = ((u32)sprite->data[2] / 256u) * -1;
     else
-        sprite->y2 = (u16)sprite->data[2] / 256u;
+        sprite->y2 = (u32)sprite->data[2] / 256u;
 
     if (sprite->data[0]-- <= 0)
     {
@@ -1632,14 +1632,14 @@ static void AnimAirWaveProjectile(struct Sprite *sprite)
     sprite->data[1] += (-2 & task->data[7]);
     sprite->data[2] += (-2 & task->data[8]);
     if (1 & task->data[7])
-        sprite->x2 = ((u16)sprite->data[1] >> 8) * -1;
+        sprite->x2 = ((u32)sprite->data[1] >> 8) * -1;
     else
-        sprite->x2 = (u16)sprite->data[1] >> 8;
+        sprite->x2 = (u32)sprite->data[1] >> 8;
 
     if (1 & task->data[8])
-        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
+        sprite->y2 = ((u32)sprite->data[2] / 256u) * -1;
     else
-        sprite->y2 = (u16)sprite->data[2] / 256u;
+        sprite->y2 = (u32)sprite->data[2] / 256u;
 
     if (sprite->data[0]-- <= 0)
     {
@@ -1776,12 +1776,12 @@ void AnimTask_AirCutterProjectile(u8 taskId)
         gBattleAnimArgs[4] ^= 0x80;
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (gBattleAnimArgs[4] - 64);
+            u32 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) - gBattleAnimArgs[4];
+            u32 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }
@@ -1789,12 +1789,12 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     {
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (gBattleAnimArgs[4] - 64);
+            u32 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) - gBattleAnimArgs[4];
+            u32 var = GetBattlerSpriteSubpriority(gBattleAnimTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }
@@ -1814,7 +1814,7 @@ static void AnimVoidLines(struct Sprite *sprite)
 
 static void AnimVoidLines_Step(struct Sprite *sprite)
 {
-    u16 id, val;
+    u32 id, val;
     int i;
 
     if (++sprite->data[1] == 2)
@@ -1836,7 +1836,7 @@ static void AnimCoinThrow(struct Sprite *sprite)
 {
     s16 r6;
     s16 r7;
-    u16 var;
+    u32 var;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     r6 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
@@ -1894,7 +1894,7 @@ static void AnimBulletSeed(struct Sprite *sprite)
 static void AnimBulletSeed_Step1(struct Sprite *sprite)
 {
     int i;
-    u16 rand;
+    u32 rand;
     s16 *ptr;
     PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     sprite->x += sprite->x2;
@@ -2174,7 +2174,7 @@ static void AnimTask_Minimize_Step(u8 taskId)
 
 static void CreateMinimizeSprite(struct Task *task, u8 taskId)
 {
-    u16 matrixNum;
+    u32 matrixNum;
     s16 spriteId = CloneBattlerSpriteWithBlend(ANIM_ATTACKER);
     if (spriteId >= 0)
     {
@@ -2659,8 +2659,8 @@ static void AnimHyperVoiceRing_WaitEnd(struct Sprite *sprite)
 
 void AnimHyperVoiceRing(struct Sprite *sprite)
 {
-    u16 startX = 0;
-    u16 startY = 0;
+    u32 startX = 0;
+    u32 startY = 0;
     s16 x = 0;
     s16 y = 0;
     u8 yCoordType;
@@ -2822,7 +2822,7 @@ static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *sprite)
         sprite->data[0] = 16;
         sprite->data[1] = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u16)sprite->data[0], 0));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u32)sprite->data[0], 0));
         sprite->callback = AnimSoftBoiledEgg_Step3_Callback2;
     }
 }
@@ -2840,7 +2840,7 @@ static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *sprite)
 
 static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->invisible = TRUE;
         if (sprite->data[7] == 0)
@@ -3097,7 +3097,7 @@ void AnimTask_LoadMusicNotesPals(u8 taskId)
     gMonSpritesGfxPtr->buffer = AllocZeroed(MON_PIC_SIZE * MAX_MON_PIC_FRAMES);
     LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->buffer);
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
-        LoadPalette(&gMonSpritesGfxPtr->buffer[i * 32], (u16)(OBJ_PLTT_ID(paletteNums[i])), PLTT_SIZE_4BPP);
+        LoadPalette(&gMonSpritesGfxPtr->buffer[i * 32], (u32)(OBJ_PLTT_ID(paletteNums[i])), PLTT_SIZE_4BPP);
 
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     DestroyAnimVisualTask(taskId);
@@ -3148,8 +3148,8 @@ void AnimMagentaHeart(struct Sprite *sprite)
 
 void AnimTask_FakeOut(u8 taskId)
 {
-    u16 win0h = IsContest() ? 152 : DISPLAY_WIDTH;
-    u16 win0v = 0;
+    u32 win0h = IsContest() ? 152 : DISPLAY_WIDTH;
+    u32 win0v = 0;
 
     gBattle_WIN0H = win0h;
     gBattle_WIN0V = DISPLAY_HEIGHT;
@@ -3300,7 +3300,7 @@ static void AnimRedHeartRising_Step(struct Sprite *sprite)
 {
     s16 y;
     sprite->data[2] += sprite->data[1];
-    sprite->y2 = -((u16)sprite->data[2] >> 8);
+    sprite->y2 = -((u32)sprite->data[2] >> 8);
     sprite->x2 = Sin(sprite->data[3], 4);
     sprite->data[3] = (sprite->data[3] + 3) & 0xFF;
     y = sprite->y + sprite->y2;
@@ -3529,7 +3529,7 @@ static void AnimOrbitFast_Step(struct Sprite *sprite)
         break;
     }
 
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
         DestroyAnimSprite(sprite);
 }
 
@@ -3758,8 +3758,8 @@ static void AnimJaggedMusicNote(struct Sprite *sprite)
     sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2)  + gBattleAnimArgs[1];
     sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
     sprite->data[0] = 0;
-    sprite->data[1] = (u16)sprite->x << 3;
-    sprite->data[2] = (u16)sprite->y << 3;
+    sprite->data[1] = (u32)sprite->x << 3;
+    sprite->data[2] = (u32)sprite->y << 3;
     sprite->data[3] = (gBattleAnimArgs[1] << 3) / 8;
     sprite->data[4] = (gBattleAnimArgs[2] << 3) / 8;
 
@@ -3800,7 +3800,7 @@ static void AnimPerishSongMusicNote(struct Sprite *sprite)
     if (!sprite->data[0])
     {
         sprite->x = 120;
-        sprite->y = (gBattleAnimArgs[0] + (((u16)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
+        sprite->y = (gBattleAnimArgs[0] + (((u32)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
 
         StartSpriteAnim(sprite, gBattleAnimArgs[1]);
 
@@ -3810,8 +3810,8 @@ static void AnimPerishSongMusicNote(struct Sprite *sprite)
 
     sprite->data[0]++;
 
-    sprite->data[1] = (sprite->data[0] + ((u16)sprite->data[0] >> 31)) / 2;
-    index = ((sprite->data[0] * 3) + (u16)sprite->data[3]);
+    sprite->data[1] = (sprite->data[0] + ((u32)sprite->data[0] >> 31)) / 2;
+    index = ((sprite->data[0] * 3) + (u32)sprite->data[3]);
     var2 = 0xFF;
     sprite->data[6] = (sprite->data[6] + 10) & 0xFF;
 

@@ -45,31 +45,31 @@ static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .baseBlock = 0x0125,
 };
 
-static const u8 *const sTrainerCardColorNames[] = {
+static const u32 *const sTrainerCardColorNames[] = {
     gText_BronzeCard,
     gText_CopperCard,
     gText_SilverCard,
     gText_GoldCard
 };
 
-static void Task_LinkupStart(u8 taskId);
-static void Task_LinkupAwaitConnection(u8 taskId);
-static void Task_LinkupConfirmWhenReady(u8 taskId);
-static void Task_LinkupAwaitConfirmation(u8 taskId);
-static void Task_LinkupTryConfirmation(u8 taskId);
-static void Task_LinkupConfirm(u8 taskId);
-static void Task_LinkupExchangeDataWithLeader(u8 taskId);
-static void Task_LinkupCheckStatusAfterConfirm(u8 taskId);
-static void Task_LinkupAwaitTrainerCardData(u8 taskId);
-static void Task_StopLinkup(u8 taskId);
-static void Task_LinkupFailed(u8 taskId);
-static void Task_LinkupConnectionError(u8 taskId);
-static bool8 TryLinkTimeout(u8 taskId);
-static void Task_ValidateMixingGameLanguage(u8 taskId);
-static void Task_ReestablishLink(u8 taskId);
-static void Task_ReestablishLinkAwaitConnection(u8 taskId);
-static void Task_ReestablishLinkLeader(u8 taskId);
-static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
+static void Task_LinkupStart(u32 taskId);
+static void Task_LinkupAwaitConnection(u32 taskId);
+static void Task_LinkupConfirmWhenReady(u32 taskId);
+static void Task_LinkupAwaitConfirmation(u32 taskId);
+static void Task_LinkupTryConfirmation(u32 taskId);
+static void Task_LinkupConfirm(u32 taskId);
+static void Task_LinkupExchangeDataWithLeader(u32 taskId);
+static void Task_LinkupCheckStatusAfterConfirm(u32 taskId);
+static void Task_LinkupAwaitTrainerCardData(u32 taskId);
+static void Task_StopLinkup(u32 taskId);
+static void Task_LinkupFailed(u32 taskId);
+static void Task_LinkupConnectionError(u32 taskId);
+static bool8 TryLinkTimeout(u32 taskId);
+static void Task_ValidateMixingGameLanguage(u32 taskId);
+static void Task_ReestablishLink(u32 taskId);
+static void Task_ReestablishLinkAwaitConnection(u32 taskId);
+static void Task_ReestablishLinkLeader(u32 taskId);
+static void Task_ReestablishLinkAwaitConfirmation(u32 taskId);
 
 #define tState      data[0]
 
@@ -80,11 +80,11 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
 #define tTimer      data[4]
 #define tWindowId   data[5]
 
-static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
+static void CreateLinkupTask(u32 minPlayers, u32 maxPlayers)
 {
     if (FindTaskIdByFunc(Task_LinkupStart) == TASK_NONE)
     {
-        u8 taskId1;
+        u32 taskId1;
 
         taskId1 = CreateTask(Task_LinkupStart, 80);
         gTasks[taskId1].tMinPlayers = minPlayers;
@@ -94,7 +94,7 @@ static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
 
 static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
 {
-    u8 xPos;
+    u32 xPos;
 
     ConvertIntToDecimalStringN(gStringVar1, numPlayers, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStandardWindowBorderStyle(windowId, FALSE);
@@ -112,7 +112,7 @@ static void ClearLinkPlayerCountWindow(u16 windowId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
+static void UpdateLinkPlayerCountDisplay(u32 taskId, u32 numPlayers)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -126,7 +126,7 @@ static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
     }
 }
 
-static u32 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
+static u32 ExchangeDataAndGetLinkupStatus(u32 minPlayers, u32 maxPlayers)
 {
     switch (GetLinkPlayerDataExchangeStatusTimed(minPlayers, maxPlayers))
     {
@@ -149,7 +149,7 @@ static u32 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
     }
 }
 
-static bool32 CheckLinkErrored(u8 taskId)
+static bool32 CheckLinkErrored(u32 taskId)
 {
     if (HasLinkErrorOccurred() == TRUE)
     {
@@ -159,7 +159,7 @@ static bool32 CheckLinkErrored(u8 taskId)
     return FALSE;
 }
 
-static bool32 CheckLinkCanceledBeforeConnection(u8 taskId)
+static bool32 CheckLinkCanceledBeforeConnection(u32 taskId)
 {
     if ((JOY_NEW(B_BUTTON))
      && IsLinkConnectionEstablished() == FALSE)
@@ -171,7 +171,7 @@ static bool32 CheckLinkCanceledBeforeConnection(u8 taskId)
     return FALSE;
 }
 
-static bool32 CheckLinkCanceled(u8 taskId)
+static bool32 CheckLinkCanceled(u32 taskId)
 {
     if (IsLinkConnectionEstablished())
         SetSuppressLinkErrorMessage(TRUE);
@@ -185,7 +185,7 @@ static bool32 CheckLinkCanceled(u8 taskId)
     return FALSE;
 }
 
-static bool32 CheckSioErrored(u8 taskId)
+static bool32 CheckSioErrored(u32 taskId)
 {
     if (GetSioMultiSI() == TRUE)
     {
@@ -195,7 +195,7 @@ static bool32 CheckSioErrored(u8 taskId)
     return FALSE;
 }
 
-static void UNUSED Task_DelayedBlockRequest(u8 taskId)
+static void UNUSED Task_DelayedBlockRequest(u32 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
@@ -205,7 +205,7 @@ static void UNUSED Task_DelayedBlockRequest(u8 taskId)
     }
 }
 
-static void Task_LinkupStart(u8 taskId)
+static void Task_LinkupStart(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -223,7 +223,7 @@ static void Task_LinkupStart(u8 taskId)
     data[0]++;
 }
 
-static void Task_LinkupAwaitConnection(u8 taskId)
+static void Task_LinkupAwaitConnection(u32 taskId)
 {
     u32 playerCount = GetLinkPlayerCount_2();
 
@@ -248,7 +248,7 @@ static void Task_LinkupAwaitConnection(u8 taskId)
     }
 }
 
-static void Task_LinkupConfirmWhenReady(u8 taskId)
+static void Task_LinkupConfirmWhenReady(u32 taskId)
 {
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
      || CheckSioErrored(taskId) == TRUE
@@ -262,7 +262,7 @@ static void Task_LinkupConfirmWhenReady(u8 taskId)
     }
 }
 
-static void Task_LinkupAwaitConfirmation(u8 taskId)
+static void Task_LinkupAwaitConfirmation(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s32 linkPlayerCount = GetLinkPlayerCount_2();
@@ -287,7 +287,7 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
     gTasks[taskId].func = Task_LinkupTryConfirmation;
 }
 
-static void Task_LinkupTryConfirmation(u8 taskId)
+static void Task_LinkupTryConfirmation(u32 taskId)
 {
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
      || CheckSioErrored(taskId) == TRUE
@@ -315,10 +315,10 @@ static void Task_LinkupTryConfirmation(u8 taskId)
     }
 }
 
-static void Task_LinkupConfirm(u8 taskId)
+static void Task_LinkupConfirm(u32 taskId)
 {
-    u8 minPlayers = gTasks[taskId].tMinPlayers;
-    u8 maxPlayers = gTasks[taskId].tMaxPlayers;
+    u32 minPlayers = gTasks[taskId].tMinPlayers;
+    u32 maxPlayers = gTasks[taskId].tMaxPlayers;
 
     if (CheckLinkErrored(taskId) == TRUE
      || TryLinkTimeout(taskId) == TRUE)
@@ -336,9 +336,9 @@ static void Task_LinkupConfirm(u8 taskId)
     }
 }
 
-static void Task_LinkupExchangeDataWithLeader(u8 taskId)
+static void Task_LinkupExchangeDataWithLeader(u32 taskId)
 {
-    u8 minPlayers, maxPlayers;
+    u32 minPlayers, maxPlayers;
     struct TrainerCard *card;
 
     minPlayers = gTasks[taskId].tMinPlayers;
@@ -378,7 +378,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
     }
 }
 
-static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
+static void Task_LinkupCheckStatusAfterConfirm(u32 taskId)
 {
     struct TrainerCard *card;
 
@@ -505,9 +505,9 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
     }
 }
 
-static void Task_LinkupAwaitTrainerCardData(u8 taskId)
+static void Task_LinkupAwaitTrainerCardData(u32 taskId)
 {
-    u8 index;
+    u32 index;
 
     if (CheckLinkErrored(taskId) == TRUE)
         return;
@@ -525,7 +525,7 @@ static void Task_LinkupAwaitTrainerCardData(u8 taskId)
     FinishLinkup(&gSpecialVar_Result, taskId);
 }
 
-static void Task_StopLinkup(u8 taskId)
+static void Task_StopLinkup(u32 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -536,7 +536,7 @@ static void Task_StopLinkup(u8 taskId)
     }
 }
 
-static void Task_LinkupFailed(u8 taskId)
+static void Task_LinkupFailed(u32 taskId)
 {
     gSpecialVar_Result = LINKUP_FAILED;
     ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
@@ -546,7 +546,7 @@ static void Task_LinkupFailed(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void Task_LinkupConnectionError(u8 taskId)
+static void Task_LinkupConnectionError(u32 taskId)
 {
     gSpecialVar_Result = LINKUP_CONNECTION_ERROR;
     ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
@@ -556,7 +556,7 @@ static void Task_LinkupConnectionError(u8 taskId)
     DestroyTask(taskId);
 }
 
-static bool8 TryLinkTimeout(u8 taskId)
+static bool8 TryLinkTimeout(u32 taskId)
 {
     gTasks[taskId].tTimer++;
     if (gTasks[taskId].tTimer > 600)
@@ -570,8 +570,8 @@ static bool8 TryLinkTimeout(u8 taskId)
 
 void TryBattleLinkup(void)
 {
-    u8 minPlayers = 2;
-    u8 maxPlayers = 2;
+    u32 minPlayers = 2;
+    u32 maxPlayers = 2;
 
     switch (gSpecialVar_0x8004)
     {
@@ -633,7 +633,7 @@ void ValidateMixingGameLanguage(void)
     }
 }
 
-static void Task_ValidateMixingGameLanguage(u8 taskId)
+static void Task_ValidateMixingGameLanguage(u32 taskId)
 {
     int playerCount;
     int i;
@@ -650,7 +650,7 @@ static void Task_ValidateMixingGameLanguage(u8 taskId)
             playerCount = GetLinkPlayerCount();
             for (i = 0; i < playerCount; i++)
             {
-                u32 version = (u8)gLinkPlayers[i].version;
+                u32 version = (u32)gLinkPlayers[i].version;
                 u32 language = gLinkPlayers[i].language;
 
                 if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
@@ -721,7 +721,7 @@ void TryContestEModeLinkup(void)
     CreateLinkupTask(2, 4);
 }
 
-u8 CreateTask_ReestablishCableClubLink(void)
+u32 CreateTask_ReestablishCableClubLink(void)
 {
     if (FuncIsActiveTask(Task_ReestablishLink) != FALSE)
         return TASK_NONE;
@@ -754,7 +754,7 @@ u8 CreateTask_ReestablishCableClubLink(void)
     return CreateTask(Task_ReestablishLink, 80);
 }
 
-static void Task_ReestablishLink(u8 taskId)
+static void Task_ReestablishLink(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -771,7 +771,7 @@ static void Task_ReestablishLink(u8 taskId)
     data[0]++;
 }
 
-static void Task_ReestablishLinkAwaitConnection(u8 taskId)
+static void Task_ReestablishLinkAwaitConnection(u32 taskId)
 {
     if (GetLinkPlayerCount_2() >= 2)
     {
@@ -782,7 +782,7 @@ static void Task_ReestablishLinkAwaitConnection(u8 taskId)
     }
 }
 
-static void Task_ReestablishLinkLeader(u8 taskId)
+static void Task_ReestablishLinkLeader(u32 taskId)
 {
     if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
     {
@@ -791,7 +791,7 @@ static void Task_ReestablishLinkLeader(u8 taskId)
     }
 }
 
-static void Task_ReestablishLinkAwaitConfirmation(u8 taskId)
+static void Task_ReestablishLinkAwaitConfirmation(u32 taskId)
 {
     if (gReceivedRemoteLinkPlayers == TRUE
      && IsLinkPlayerDataExchangeComplete() == TRUE)
@@ -830,7 +830,7 @@ static void SetLinkBattleTypeFlags(int linkService)
 
 #define tTimer data[1]
 
-static void Task_StartWiredCableClubBattle(u8 taskId)
+static void Task_StartWiredCableClubBattle(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -875,7 +875,7 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
     }
 }
 
-static void Task_StartWirelessCableClubBattle(u8 taskId)
+static void Task_StartWirelessCableClubBattle(u32 taskId)
 {
     int i;
     s16 *data = gTasks[taskId].data;
@@ -945,7 +945,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
 
 static void CB2_ReturnFromUnionRoomBattle(void)
 {
-    u8 playerCount;
+    u32 playerCount;
     int i;
     bool32 linkedWithFRLG;
 
@@ -956,7 +956,7 @@ static void CB2_ReturnFromUnionRoomBattle(void)
         linkedWithFRLG = FALSE;
         for (i = 0; i < playerCount; i++)
         {
-            u32 version = (u8)gLinkPlayers[i].version;
+            u32 version = (u32)gLinkPlayers[i].version;
             if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
             {
                 linkedWithFRLG = TRUE;
@@ -1039,7 +1039,7 @@ void ExitLinkRoom(void)
 }
 
 // Note: gSpecialVar_0x8005 contains the id of the seat the player entered
-static void Task_EnterCableClubSeat(u8 taskId)
+static void Task_EnterCableClubSeat(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1086,12 +1086,12 @@ static void Task_EnterCableClubSeat(u8 taskId)
 
 void CreateTask_EnterCableClubSeat(TaskFunc followupFunc)
 {
-    u8 taskId = CreateTask(Task_EnterCableClubSeat, 80);
+    u32 taskId = CreateTask(Task_EnterCableClubSeat, 80);
     SetTaskFuncWithFollowupFunc(taskId, Task_EnterCableClubSeat, followupFunc);
     ScriptContext_Stop();
 }
 
-static void Task_StartWiredTrade(u8 taskId)
+static void Task_StartWiredTrade(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1124,7 +1124,7 @@ static void Task_StartWiredTrade(u8 taskId)
     }
 }
 
-static void Task_StartWirelessTrade(u8 taskId)
+static void Task_StartWirelessTrade(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1189,7 +1189,7 @@ void ColosseumPlayerSpotTriggered(void)
 
 static UNUSED void CreateTask_EnterCableClubSeatNoFollowup(void)
 {
-    u8 UNUSED taskId = CreateTask(Task_EnterCableClubSeat, 80);
+    u32 UNUSED taskId = CreateTask(Task_EnterCableClubSeat, 80);
     ScriptContext_Stop();
 }
 
@@ -1200,7 +1200,7 @@ void Script_ShowLinkTrainerCard(void)
 
 // Returns FALSE if the player has no stars. Returns TRUE otherwise, and puts the name of the
 // color into gStringVar2.
-bool32 GetLinkTrainerCardColor(u8 linkPlayerIndex)
+bool32 GetLinkTrainerCardColor(u32 linkPlayerIndex)
 {
     u32 numStars;
 
@@ -1217,7 +1217,7 @@ bool32 GetLinkTrainerCardColor(u8 linkPlayerIndex)
 
 #define tTimer data[0]
 
-void Task_WaitForLinkPlayerConnection(u8 taskId)
+void Task_WaitForLinkPlayerConnection(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1250,7 +1250,7 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
 
 #undef tTimer
 
-static void Task_WaitExitToScript(u8 taskId)
+static void Task_WaitExitToScript(u32 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -1259,7 +1259,7 @@ static void Task_WaitExitToScript(u8 taskId)
     }
 }
 
-static void UNUSED ExitLinkToScript(u8 taskId)
+static void UNUSED ExitLinkToScript(u32 taskId)
 {
     SetCloseLinkCallback();
     gTasks[taskId].func = Task_WaitExitToScript;
@@ -1268,7 +1268,7 @@ static void UNUSED ExitLinkToScript(u8 taskId)
 #define tTimer data[1]
 
 // Confirm that all cabled link players are connected
-void Task_ReconnectWithLinkPlayers(u8 taskId)
+void Task_ReconnectWithLinkPlayers(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

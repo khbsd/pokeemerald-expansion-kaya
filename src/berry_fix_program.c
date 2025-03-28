@@ -24,7 +24,7 @@ enum {
 struct {
     u8 state;
     u8 curScene;
-    u16 timer;
+    u32 timer;
     struct MultiBootParam mb;
 } static * sBerryFix;
 
@@ -117,7 +117,7 @@ static const struct WindowTemplate sBerryFixWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 ALIGNED(4) sText_Pal[] = INCBIN_U16("graphics/berry_fix/text.gbapal");
+static const u32 ALIGNED(4) sText_Pal[] = INCBIN_u32("graphics/berry_fix/text.gbapal");
 static const u8 sBerryProgramTextColors[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
 static const u8 sGameTitleTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_4};
 
@@ -143,7 +143,7 @@ static const u8 *const sBerryProgramTexts[] = {
 static const struct {
     const u32 *gfx;
     const u32 *tilemap;
-    const u16 *palette;
+    const u32 *palette;
 } sBerryFixGraphics[] = {
     [SCENE_ENSURE_CONNECT] = {
         gBerryFixGbaConnect_Gfx,

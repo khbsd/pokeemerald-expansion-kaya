@@ -22,8 +22,8 @@
 #include "constants/songs.h"
 
 static void FieldCallback_SweetScent(void);
-static void TrySweetScentEncounter(u8 taskId);
-static void FailSweetScentEncounter(u8 taskId);
+static void TrySweetScentEncounter(u32 taskId);
+static void FailSweetScentEncounter(u32 taskId);
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
@@ -40,7 +40,7 @@ static void FieldCallback_SweetScent(void)
 
 bool8 FldEff_SweetScent(void)
 {
-    u8 taskId;
+    u32 taskId;
 
     SetWeatherScreenFadeOut();
     taskId = CreateFieldMoveTask();
@@ -83,7 +83,7 @@ static void FreeDestroyTask(u32 taskId)
     DestroyTask(taskId);
 }
 
-static void TrySweetScentEncounter(u8 taskId)
+static void TrySweetScentEncounter(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -110,7 +110,7 @@ static void TrySweetScentEncounter(u8 taskId)
     }
 }
 
-static void FailSweetScentEncounter(u8 taskId)
+static void FailSweetScentEncounter(u32 taskId)
 {
     if (!gPaletteFade.active)
     {

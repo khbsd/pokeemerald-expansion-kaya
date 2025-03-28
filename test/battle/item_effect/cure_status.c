@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Burn Heal heals a battler from being burned")
 
 SINGLE_BATTLE_TEST("Ice Heal heals a battler from being frozen or frostbite")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_FREEZE; }
     PARAMETRIZE { status = STATUS1_FROSTBITE; }
     GIVEN {
@@ -114,7 +114,7 @@ SINGLE_BATTLE_TEST("Ice Heal heals a battler from being frozen or frostbite")
 
 SINGLE_BATTLE_TEST("Full Heal heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -137,7 +137,7 @@ SINGLE_BATTLE_TEST("Full Heal heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Heal Powder heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -160,7 +160,7 @@ SINGLE_BATTLE_TEST("Heal Powder heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Pewter Crunchies heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -183,7 +183,7 @@ SINGLE_BATTLE_TEST("Pewter Crunchies heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Lava Cookies heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -206,7 +206,7 @@ SINGLE_BATTLE_TEST("Lava Cookies heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Rage Candy Bar heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -229,7 +229,7 @@ SINGLE_BATTLE_TEST("Rage Candy Bar heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Old Gateu heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -252,7 +252,7 @@ SINGLE_BATTLE_TEST("Old Gateu heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Casteliacone heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -275,7 +275,7 @@ SINGLE_BATTLE_TEST("Casteliacone heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Lumiose Galette heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -298,7 +298,7 @@ SINGLE_BATTLE_TEST("Lumiose Galette heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Shalour Sable heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -321,7 +321,7 @@ SINGLE_BATTLE_TEST("Shalour Sable heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Big Malasada heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -344,7 +344,7 @@ SINGLE_BATTLE_TEST("Big Malasada heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Jubilife Muffin heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_POISON; }
     PARAMETRIZE { status = STATUS1_BURN; }
@@ -367,7 +367,7 @@ SINGLE_BATTLE_TEST("Jubilife Muffin heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Full Heal, Heal Powder and Local Specialties heal a battler from being confused")
 {
-    u16 item;
+    u32 item;
     PARAMETRIZE { item = ITEM_FULL_HEAL; }
     PARAMETRIZE { item = ITEM_HEAL_POWDER; }
     PARAMETRIZE { item = ITEM_PEWTER_CRUNCHIES; }

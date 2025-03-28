@@ -8,7 +8,7 @@ void BufferContestantMonSpecies(void);
 void ShowContestResults(void);
 void ContestLinkTransfer(u8);
 void ShowContestPainting(void);
-u16 GetContestRand(void);
+u32 GetContestRand(void);
 u8 CountPlayerMuseumPaintings(void);
 
 #endif // GUARD_CONTEST_UTIL_H

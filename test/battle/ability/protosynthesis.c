@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Protosynthesis boosts the highest stat")
 
 SINGLE_BATTLE_TEST("Protosynthesis boosts either Attack or Special Attack, not both")
 {
-    u16 species;
+    u32 species;
     u32 move;
     s16 damage[2];
 
@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Protosynthesis boosts either Attack or Special Attack, not b
 
 SINGLE_BATTLE_TEST("Protosynthesis ability pop up activates only once during the duration of sunny day")
 {
-    u16 turns;
+    u32 turns;
 
     GIVEN {
         PLAYER(SPECIES_WALKING_WAKE) { Ability(ABILITY_PROTOSYNTHESIS); }

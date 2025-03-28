@@ -199,9 +199,9 @@ static void CompleteOnBattlerSpritePosX_0(u32 battler)
         PlayerBufferExecCompleted(battler);
 }
 
-static u16 GetPrevBall(u16 ballId)
+static u32 GetPrevBall(u32 ballId)
 {
-    u16 ballPrev;
+    u32 ballPrev;
     s32 i, j;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
@@ -245,7 +245,7 @@ static u32 GetNextBall(u32 ballId)
 
 static void HandleInputChooseAction(u32 battler)
 {
-    u16 itemId = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
+    u32 itemId = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
 
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
@@ -425,8 +425,8 @@ void HandleInputChooseTarget(u32 battler)
 {
     s32 i;
     static const u8 identities[MAX_BATTLERS_COUNT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
-    u16 move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + gMoveSelectionCursor[battler]);
-    u16 moveTarget = GetBattlerMoveTargetType(battler, move);
+    u32 move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + gMoveSelectionCursor[battler]);
+    u32 moveTarget = GetBattlerMoveTargetType(battler, move);
 
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);
     for (i = 0; i < gBattlersCount; i++)
@@ -657,7 +657,7 @@ static void TryShowAsTarget(u32 battler)
 
 void HandleInputChooseMove(u32 battler)
 {
-    u16 moveTarget;
+    u32 moveTarget;
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
@@ -1409,7 +1409,7 @@ static void DynamaxModifyHPLevelUp(struct Pokemon *mon, u32 battler, u32 oldMaxH
 
 static s32 GetTaskExpValue(u8 taskId)
 {
-    return (u16)(gTasks[taskId].tExpTask_gainedExp_1) | (gTasks[taskId].tExpTask_gainedExp_2 << 16);
+    return (u32)(gTasks[taskId].tExpTask_gainedExp_1) | (gTasks[taskId].tExpTask_gainedExp_2 << 16);
 }
 
 static void Task_GiveExpToMon(u8 taskId)
@@ -1421,7 +1421,7 @@ static void Task_GiveExpToMon(u8 taskId)
     if (WhichBattleCoords(battler) == 1 || monId != gBattlerPartyIndexes[battler]) // Give exp without moving the expbar.
     {
         struct Pokemon *mon = &gPlayerParty[monId];
-        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+        u32 species = GetMonData(mon, MON_DATA_SPECIES);
         u8 level = GetMonData(mon, MON_DATA_LEVEL);
         u32 currExp = GetMonData(mon, MON_DATA_EXP);
         u32 nextLvlExp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
@@ -1466,7 +1466,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     u8 battler = gTasks[taskId].tExpTask_battler;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
     u32 exp = GetMonData(mon, MON_DATA_EXP);
     u32 currLvlExp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
     u32 expToNextLvl;
@@ -1482,7 +1482,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 static void Task_GiveExpWithExpBar(u8 taskId)
 {
     u8 level;
-    u16 species;
+    u32 species;
     u32 oldMaxHP;
     s32 currExp, expOnNextLvl, newExpPoints;
 
@@ -1754,9 +1754,9 @@ static void TryMoveSelectionDisplayMoveDescription(u32 battler)
 static void MoveSelectionDisplayMoveDescription(u32 battler)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[battler][4]);
-    u16 move = moveInfo->moves[gMoveSelectionCursor[battler]];
-    u16 pwr = GetMovePower(move);
-    u16 acc = GetMoveAccuracy(move);
+    u32 move = moveInfo->moves[gMoveSelectionCursor[battler]];
+    u32 pwr = GetMovePower(move);
+    u32 acc = GetMoveAccuracy(move);
 
     u8 pwr_num[3], acc_num[3];
     u8 cat_desc[7] = _("CAT: ");
@@ -1797,7 +1797,7 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 {
-    u16 src[2];
+    u32 src[2];
     src[0] = baseTileNum + 1;
     src[1] = baseTileNum + 2;
 
@@ -1807,7 +1807,7 @@ void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 
 void MoveSelectionDestroyCursorAt(u8 cursorPosition)
 {
-    u16 src[2];
+    u32 src[2];
     src[0] = 0x1016;
     src[1] = 0x1016;
 
@@ -1817,7 +1817,7 @@ void MoveSelectionDestroyCursorAt(u8 cursorPosition)
 
 void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 {
-    u16 src[2];
+    u32 src[2];
     src[0] = 1;
     src[1] = 2;
 
@@ -1827,7 +1827,7 @@ void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
 
 void ActionSelectionDestroyCursorAt(u8 cursorPosition)
 {
-    u16 src[2];
+    u32 src[2];
     src[0] = 0x1016;
     src[1] = 0x1016;
 
@@ -2246,7 +2246,7 @@ static void PlayerHandleDMA3Transfer(u32 battler)
             | (gBattleResources->bufferA[battler][2] << 8)
             | (gBattleResources->bufferA[battler][3] << 16)
             | (gBattleResources->bufferA[battler][4] << 24);
-    u16 sizeArg = gBattleResources->bufferA[battler][5] | (gBattleResources->bufferA[battler][6] << 8);
+    u32 sizeArg = gBattleResources->bufferA[battler][5] | (gBattleResources->bufferA[battler][6] << 8);
 
     const u8 *src = &gBattleResources->bufferA[battler][7];
     u8 *dst = (u8 *)(dstArg);

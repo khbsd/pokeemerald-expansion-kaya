@@ -41,7 +41,7 @@ static bool32 AllMonsFainted(void)
     return TRUE;
 }
 
-static void FaintFromFieldPoison(u8 partyIdx)
+static void FaintFromFieldPoison(u32 partyIdx)
 {
     struct Pokemon *pokemon = &gPlayerParty[partyIdx];
     u32 status = STATUS1_NONE;
@@ -54,7 +54,7 @@ static void FaintFromFieldPoison(u8 partyIdx)
     StringGet_Nickname(gStringVar1);
 }
 
-static bool32 MonFaintedFromPoison(u8 partyIdx)
+static bool32 MonFaintedFromPoison(u32 partyIdx)
 {
     struct Pokemon *pokemon = &gPlayerParty[partyIdx];
     if (IsMonValidSpecies(pokemon) && GetMonData(pokemon, MON_DATA_HP) == ((OW_POISON_DAMAGE < GEN_4) ? 0 : 1) && GetAilmentFromStatus(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
@@ -66,7 +66,7 @@ static bool32 MonFaintedFromPoison(u8 partyIdx)
 #define tState    data[0]
 #define tPartyIdx data[1]
 
-static void Task_TryFieldPoisonWhiteOut(u8 taskId)
+static void Task_TryFieldPoisonWhiteOut(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (tState)

@@ -44,15 +44,15 @@ struct Weather
     s8 targetColorMapIndex;
     u8 colorMapStepDelay;
     u8 colorMapStepCounter;
-    u16 fadeDestColor;
+    u32 fadeDestColor;
     u8 palProcessingState;
     u8 fadeScreenCounter;
     bool8 readyForInit;
     u8 taskId;
     u8 fadeInFirstFrame;
     u8 fadeInTimer;
-    u16 initStep;
-    u16 finishStep;
+    u32 initStep;
+    u32 finishStep;
     u8 currWeather;
     u8 nextWeather;
     u8 weatherGfxLoaded;
@@ -60,7 +60,7 @@ struct Weather
     u8 weatherPicSpritePalIndex;
     u8 contrastColorMapSpritePalIndex;
     // Rain
-    u16 rainSpriteVisibleCounter;
+    u32 rainSpriteVisibleCounter;
     u8 curRainSpriteIndex;
     u8 targetRainSpriteCount;
     u8 rainSpriteCount;
@@ -69,57 +69,57 @@ struct Weather
     u8 rainStrength;
     u8 cloudSpritesCreated;
     // Snow
-    u16 snowflakeVisibleCounter;
-    u16 snowflakeTimer;
+    u32 snowflakeVisibleCounter;
+    u32 snowflakeTimer;
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
     // Thunderstorm
-    u16 thunderTimer;        // general-purpose timer for state transitions
-    u16 thunderSETimer;      // timer for thunder sound effect
+    u32 thunderTimer;        // general-purpose timer for state transitions
+    u32 thunderSETimer;      // timer for thunder sound effect
     bool8 thunderAllowEnd;
     bool8 thunderLongBolt;   // true if this cycle will end in a long lightning bolt
     u8 thunderShortBolts;    // the number of short bolts this cycle
     bool8 thunderEnqueued;
     // Horizontal fog
-    u16 fogHScrollPosX;
-    u16 fogHScrollCounter;
-    u16 fogHScrollOffset;
+    u32 fogHScrollPosX;
+    u32 fogHScrollCounter;
+    u32 fogHScrollOffset;
     u8 lightenedFogSpritePals[6];
     u8 lightenedFogSpritePalsCount;
     u8 fogHSpritesCreated;
     // Ash
-    u16 ashBaseSpritesX;
-    u16 ashUnused;
+    u32 ashBaseSpritesX;
+    u32 ashUnused;
     u8 ashSpritesCreated;
     // Sandstorm
     u32 sandstormXOffset;
     u32 sandstormYOffset;
-    u16 sandstormUnused;
-    u16 sandstormBaseSpritesX;
-    u16 sandstormPosY;
-    u16 sandstormWaveIndex;
-    u16 sandstormWaveCounter;
+    u32 sandstormUnused;
+    u32 sandstormBaseSpritesX;
+    u32 sandstormPosY;
+    u32 sandstormWaveIndex;
+    u32 sandstormWaveCounter;
     u8 sandstormSpritesCreated;
     u8 sandstormSwirlSpritesCreated;
     // Diagonal fog
-    u16 fogDBaseSpritesX;
-    u16 fogDPosY;
-    u16 fogDScrollXCounter;
-    u16 fogDScrollYCounter;
-    u16 fogDXOffset;
-    u16 fogDYOffset;
+    u32 fogDBaseSpritesX;
+    u32 fogDPosY;
+    u32 fogDScrollXCounter;
+    u32 fogDScrollYCounter;
+    u32 fogDXOffset;
+    u32 fogDYOffset;
     u8 fogDSpritesCreated;
     // Bubbles
-    u16 bubblesDelayCounter;
-    u16 bubblesDelayIndex;
-    u16 bubblesCoordsIndex;
-    u16 bubblesSpriteCount;
+    u32 bubblesDelayCounter;
+    u32 bubblesDelayIndex;
+    u32 bubblesCoordsIndex;
+    u32 bubblesSpriteCount;
     u8 bubblesSpritesCreated;
 
-    u16 currBlendEVA;
-    u16 currBlendEVB;
-    u16 targetBlendEVA;
-    u16 targetBlendEVB;
+    u32 currBlendEVA;
+    u32 currBlendEVB;
+    u32 targetBlendEVA;
+    u32 targetBlendEVB;
     u8 blendUpdateCounter;
     u8 blendFrameCounter;
     u8 blendDelay;
@@ -135,7 +135,7 @@ struct Weather
 // field_weather.c
 extern struct Weather gWeather;
 extern struct Weather *const gWeatherPtr;
-extern const u16 gFogPalette[];
+extern const u32 gFogPalette[];
 
 // field_weather_effect.c
 extern const u8 gWeatherFogHorizontalTiles[];
@@ -150,7 +150,7 @@ void FadeScreen(u8 mode, s8 delay);
 bool8 IsWeatherNotFadingIn(void);
 void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex);
 void ApplyWeatherColorMapToPal(u8 paletteIndex);
-void LoadCustomWeatherSpritePalette(const u16 *palette);
+void LoadCustomWeatherSpritePalette(const u32 *palette);
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 void DroughtStateInit(void);
@@ -159,7 +159,7 @@ void Weather_SetBlendCoeffs(u8 eva, u8 evb);
 void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
 bool8 Weather_UpdateBlend(void);
 u8 GetCurrentWeather(void);
-void SetRainStrengthFromSoundEffect(u16 soundEffect);
+void SetRainStrengthFromSoundEffect(u32 soundEffect);
 void PlayRainStoppingSoundEffect(void);
 u8 IsWeatherChangeComplete(void);
 void SetWeatherScreenFadeOut(void);
@@ -225,7 +225,7 @@ void SetSavedWeather(u32 weather);
 void SetSavedWeatherFromCurrMapHeader(void);
 void SetWeather(u32 weather);
 void DoCurrentWeather(void);
-void UpdateWeatherPerDay(u16 increment);
+void UpdateWeatherPerDay(u32 increment);
 void ResumePausedWeather(void);
 
 #endif // GUARD_WEATHER_H

@@ -555,7 +555,7 @@ TEST("Type names fit on Pokedex Search Screen")
     EXPECT_LE(GetStringWidth(fontId, gTypesInfo[type].name, 0), widthPx);
 }
 
-extern u16 sBattlerAbilities[MAX_BATTLERS_COUNT];
+extern u32 sBattlerAbilities[MAX_BATTLERS_COUNT];
 //*
 #define BATTLE_STRING_BUFFER_SIZE 1000
 TEST("Battle strings fit on the battle message window")

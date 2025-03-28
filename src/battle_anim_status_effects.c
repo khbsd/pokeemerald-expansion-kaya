@@ -323,7 +323,7 @@ static void Task_UpdateFlashingCircleImpacts(u8 taskId)
         }
         else
         {
-            u16 var = gTasks[taskId].data[4];
+            u32 var = gTasks[taskId].data[4];
 
             gTasks[taskId].data[4]--;
             if (gTasks[taskId].data[4] < 0)
@@ -469,7 +469,7 @@ static void AnimTask_FrozenIceCube_Step2(u8 taskId)
         gTasks[taskId].data[2]++;
         if (gTasks[taskId].data[2] == 3)
         {
-            u16 temp;
+            u32 temp;
 
             temp = gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 13];
             gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 13] = gPlttBufferFaded[OBJ_PLTT_ID(palIndex) + 14];

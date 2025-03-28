@@ -5,13 +5,13 @@ struct HealLocation
 {
     s8 group;
     s8 map;
-    u16 x;
-    u16 y;
+    u32 x;
+    u32 y;
 };
 
-u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum);
+u32 GetHealLocationIndexByMap(u32 mapGroup, u32 mapNum);
 u32 GetHealLocationIndexByWarpData(struct WarpData *warp);
-const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum);
+const struct HealLocation *GetHealLocationByMap(u32 mapGroup, u32 mapNum);
 const struct HealLocation *GetHealLocation(u32 index);
 bool32 IsLastHealLocationPlayerHouse();
 void SetWhiteoutRespawnWarpAndHealerNPC(struct WarpData * warp);

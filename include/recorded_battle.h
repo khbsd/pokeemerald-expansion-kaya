@@ -18,10 +18,10 @@ struct RecordedBattleSave
     rng_value_t rngSeed;
     u32 battleFlags;
     u8 playersBattlers[MAX_LINK_PLAYERS];
-    u16 opponentA;
-    u16 opponentB;
-    u16 partnerId;
-    u16 multiplayerId;
+    u32 opponentA;
+    u32 opponentB;
+    u32 partnerId;
+    u32 multiplayerId;
     u8 lvlMode;
     u8 frontierFacility;
     u8 frontierBrainSymbol;
@@ -31,7 +31,7 @@ struct RecordedBattleSave
     u8 recordMixFriendName[PLAYER_NAME_LENGTH + 1];
     u8 recordMixFriendClass;
     u8 apprenticeId;
-    u16 easyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT];
+    u32 easyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT];
     u8 recordMixFriendLanguage;
     u8 apprenticeLanguage;
     u8 battleRecord[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
@@ -75,7 +75,7 @@ u8 GetRecordedBattleFronterBrainSymbol(void);
 void RecordedBattle_SaveParties(void);
 u8 GetBattlerLinkPlayerGender(u32 battler);
 void RecordedBattle_ClearFrontierPassFlag(void);
-void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags);
+void RecordedBattle_SetFrontierPassFlagFromHword(u32 flags);
 u8 RecordedBattle_GetFrontierPassFlag(void);
 u8 GetBattleSceneInRecordedBattle(void);
 u8 GetTextSpeedInRecordedBattle(void);
@@ -90,6 +90,6 @@ u8 GetRecordedBattleApprenticeId(void);
 u8 GetRecordedBattleRecordMixFriendLanguage(void);
 u8 GetRecordedBattleApprenticeLanguage(void);
 void RecordedBattle_SaveBattleOutcome(void);
-u16 *GetRecordedBattleEasyChatSpeech(void);
+u32 *GetRecordedBattleEasyChatSpeech(void);
 
 #endif // GUARD_RECORDED_BATTLE_H

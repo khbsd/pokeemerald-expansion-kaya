@@ -124,7 +124,7 @@ u32 GetNoOfHitsToKOBattlerDmg(u32 dmg, u32 battlerDef);
 u32 GetNoOfHitsToKOBattler(u32 battlerAtk, u32 battlerDef, u32 moveIndex, enum DamageCalcContext calcContext);
 u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef, enum DamageCalcContext calcContext);
 uq4_12_t AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef);
-u16 *GetMovesArray(u32 battler);
+u32 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u32 moveEffect);
 bool32 HasMove(u32 battlerId, u32 move);
 bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensive);

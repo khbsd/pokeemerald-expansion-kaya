@@ -1,16 +1,16 @@
-const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
+const u32 gSlotMachineMenu_Pal[] = INCBIN_u32("graphics/slot_machine/menu.gbapal");
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/menu.4bpp.lz");
-const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
+const u32 gSlotMachineMenu_Tilemap[] = INCBIN_u32("graphics/slot_machine/menu.bin");
 
-const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/info_box.bin");
+const u32 gSlotMachineInfoBox_Tilemap[] = INCBIN_u32("graphics/slot_machine/info_box.bin");
 
-const u16 gSlotMachineReelSymbols_Pal[] = INCBIN_U16("graphics/slot_machine/reel_symbols/1.gbapal");
-const u16 gSlotMachineReelTimePikachu_Pal[] = INCBIN_U16("graphics/slot_machine/reel_time_pikachu.gbapal");
-const u16 gSlotMachineReelTimeMisc_Pal[] = INCBIN_U16("graphics/slot_machine/shadow.gbapal");
-const u16 gSlotMachineReelTimeMachine_Pal[] = INCBIN_U16("graphics/slot_machine/reel_time_machine.gbapal");
-const u16 gSlotMachineMisc_Pal[] = INCBIN_U16("graphics/slot_machine/smoke.gbapal");
-const u16 gSlotMachineReelTimeExplosion_Pal[] = INCBIN_U16("graphics/slot_machine/reel_time_explosion/0.gbapal");
-const u16 gSlotMachineDigitalDisplay_Pal[] = INCBIN_U16("graphics/slot_machine/digital_display.gbapal");
+const u32 gSlotMachineReelSymbols_Pal[] = INCBIN_u32("graphics/slot_machine/reel_symbols/1.gbapal");
+const u32 gSlotMachineReelTimePikachu_Pal[] = INCBIN_u32("graphics/slot_machine/reel_time_pikachu.gbapal");
+const u32 gSlotMachineReelTimeMisc_Pal[] = INCBIN_u32("graphics/slot_machine/shadow.gbapal");
+const u32 gSlotMachineReelTimeMachine_Pal[] = INCBIN_u32("graphics/slot_machine/reel_time_machine.gbapal");
+const u32 gSlotMachineMisc_Pal[] = INCBIN_u32("graphics/slot_machine/smoke.gbapal");
+const u32 gSlotMachineReelTimeExplosion_Pal[] = INCBIN_u32("graphics/slot_machine/reel_time_explosion/0.gbapal");
+const u32 gSlotMachineDigitalDisplay_Pal[] = INCBIN_u32("graphics/slot_machine/digital_display.gbapal");
 
 const u8 gSlotMachineReelSymbol1Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/1.4bpp");
 const u8 gSlotMachineReelSymbol2Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/2.4bpp");

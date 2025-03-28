@@ -12,7 +12,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Weak Armor lowers Defense by 1 and boosts Speed by 2 when hit by a physical attack")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_GUST; }

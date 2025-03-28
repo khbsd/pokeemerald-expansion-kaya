@@ -4,7 +4,7 @@
 
 AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it knows it faints to target: AI faster")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_CALM_MIND; }
@@ -24,7 +24,7 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
 
 AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it knows it faints to target: AI slower")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_CALM_MIND; }
@@ -56,7 +56,7 @@ AI_SINGLE_BATTLE_TEST("AI will increase speed if it is slower")
 
 AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon going to use")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_CALM_MIND; }

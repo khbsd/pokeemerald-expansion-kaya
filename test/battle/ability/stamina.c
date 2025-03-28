@@ -18,7 +18,7 @@
 SINGLE_BATTLE_TEST("Stamina raises Defense by 1 when hit by a move")
 {
     s16 turnOneHit, turnTwoHit;
-    u16 move;
+    u32 move;
 
     PARAMETRIZE {move = MOVE_TACKLE; }
     PARAMETRIZE {move = MOVE_GUST; }
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Stamina raises Defense by 1 when hit by a move")
 
 DOUBLE_BATTLE_TEST("Stamina activates correctly for every battler with the ability when hit by a multi target move")
 {
-    u16 abilityLeft, abilityRight;
+    u32 abilityLeft, abilityRight;
 
     PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_STAMINA; }
     PARAMETRIZE {abilityLeft = ABILITY_STAMINA, abilityRight = ABILITY_NONE; }

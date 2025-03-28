@@ -44,9 +44,9 @@ static void InitKeys_(void);
 static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
-static void Task_RunLoopedTask_LinkMode(u8);
-static void Task_RunLoopedTask(u8);
-static void Task_Pokenav(u8);
+static void Task_RunLoopedTask_LinkMode(u32);
+static void Task_RunLoopedTask(u32);
+static void Task_Pokenav(u32);
 static void CB2_InitPokenavForTutorial(void);
 
 const struct PokenavCallbacks PokenavMenuCallbacks[15] =
@@ -203,7 +203,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
     },
 };
 
-EWRAM_DATA u8 gNextLoopedTaskId = 0;
+EWRAM_DATA u32 gNextLoopedTaskId = 0;
 EWRAM_DATA struct PokenavResources *gPokenavResources = NULL;
 
 // code
@@ -248,7 +248,7 @@ bool32 FuncIsActiveLoopedTask(LoopedTask func)
     return FALSE;
 }
 
-static void Task_RunLoopedTask(u8 taskId)
+static void Task_RunLoopedTask(u32 taskId)
 {
     LoopedTask loopedTask = (LoopedTask)GetWordTaskArg(taskId, 1);
     s16 *state = &gTasks[taskId].data[0];
@@ -281,7 +281,7 @@ static void Task_RunLoopedTask(u8 taskId)
 }
 
 // Every "Continue" action pauses instead.
-static void Task_RunLoopedTask_LinkMode(u8 taskId)
+static void Task_RunLoopedTask_LinkMode(u32 taskId)
 {
     LoopedTask task;
     s16 *state;
@@ -431,7 +431,7 @@ static void VBlankCB_Pokenav(void)
 
 #define tState data[0]
 
-static void Task_Pokenav(u8 taskId)
+static void Task_Pokenav(u32 taskId)
 {
     u32 menuId;
     s16 *data = gTasks[taskId].data;

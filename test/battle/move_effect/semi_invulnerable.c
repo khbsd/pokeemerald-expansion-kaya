@@ -19,7 +19,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn 1, then strike turn 2")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_DIG; }
@@ -125,7 +125,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
 
 SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_DIG; }
@@ -230,7 +230,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
 // No way to apply this test with Shadow Force/Phantom Force
 SINGLE_BATTLE_TEST("Semi-invulnerable moves apply a status that won't block certain moves")
 {
-    u16 move, opMove;
+    u32 move, opMove;
 
     PARAMETRIZE { move = MOVE_FLY; opMove = MOVE_SKY_UPPERCUT; }
     PARAMETRIZE { move = MOVE_DIG; opMove = MOVE_EARTHQUAKE; }

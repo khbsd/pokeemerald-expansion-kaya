@@ -63,15 +63,15 @@ enum
 struct SaveSectorLocation
 {
     void *data;
-    u16 size;
+    u32 size;
 };
 
 struct SaveSector
 {
     u8 data[SECTOR_DATA_SIZE];
     u8 saveBlock3Chunk[SAVE_BLOCK_3_CHUNK_SIZE];
-    u16 id;
-    u16 checksum;
+    u32 id;
+    u32 checksum;
     u32 signature;
     u32 counter;
 }; // size is SECTOR_SIZE (0x1000)
@@ -79,14 +79,14 @@ struct SaveSector
 #define SECTOR_SIGNATURE_OFFSET offsetof(struct SaveSector, signature)
 #define SECTOR_COUNTER_OFFSET   offsetof(struct SaveSector, counter)
 
-extern u16 gLastWrittenSector;
+extern u32 gLastWrittenSector;
 extern u32 gLastSaveCounter;
-extern u16 gLastKnownGoodSector;
+extern u32 gLastKnownGoodSector;
 extern u32 gDamagedSaveSectors;
 extern u32 gSaveCounter;
 extern struct SaveSector *gFastSaveSector;
-extern u16 gIncrementalSectorId;
-extern u16 gSaveFileStatus;
+extern u32 gIncrementalSectorId;
+extern u32 gSaveFileStatus;
 extern void (*gGameContinueCallback)(void);
 extern struct SaveSectorLocation gRamSaveSectorLocations[];
 
@@ -103,7 +103,7 @@ bool8 LinkFullSave_SetLastSectorSignature(void);
 bool8 WriteSaveBlock2(void);
 bool8 WriteSaveBlock1Sector(void);
 u8 LoadGameSave(u8 saveType);
-u16 GetSaveBlocksPointersBaseOffset(void);
+u32 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
 u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
 void Task_LinkFullSave(u8 taskId);

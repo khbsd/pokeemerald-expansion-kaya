@@ -16,22 +16,22 @@
 #include "constants/items.h"
 
 static u16 BerryTypeToItemId(u16 berry);
-static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
-static u8 GetNumStagesWateredByBerryTreeId(u8 id);
-static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
-static u8 CalcBerryYield(struct BerryTree *tree);
-static u8 GetBerryCountByBerryTreeId(u8 id);
-static u16 GetStageDurationByBerryType(u8);
-static u8 GetDrainRateByBerryType(u8);
-static u8 GetWaterBonusByBerryType(u8);
-static u8 GetWeedingBonusByBerryType(u8);
-static u8 GetPestsBonusByBerryType(u8);
-static void SetTreeMutations(u8 id, u8 berry);
-static u8 GetTreeMutationValue(u8 id);
-static u16 GetBerryPestSpecies(u8 berryId);
+static u32 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
+static u32 GetNumStagesWateredByBerryTreeId(u32 id);
+static u32 CalcBerryYieldInternal(u16 max, u16 min, u32 water);
+static u32 CalcBerryYield(struct BerryTree *tree);
+static u32 GetBerryCountByBerryTreeId(u32 id);
+static u16 GetStageDurationByBerryType(u32);
+static u32 GetDrainRateByBerryType(u32);
+static u32 GetWaterBonusByBerryType(u32);
+static u32 GetWeedingBonusByBerryType(u32);
+static u32 GetPestsBonusByBerryType(u32);
+static void SetTreeMutations(u32 id, u32 berry);
+static u32 GetTreeMutationValue(u32 id);
+static u16 GetBerryPestSpecies(u32 berryId);
 static void TryForWeeds(struct BerryTree *tree);
 static void TryForPests(struct BerryTree *tree);
-static void AddTreeBonus(struct BerryTree *tree, u8 bonus);
+static void AddTreeBonus(struct BerryTree *tree, u32 bonus);
 
 // Check include/config/overworld.h configs and throw an error if illegal
 #if OW_BERRY_GROWTH_RATE < GEN_3 || (OW_BERRY_GROWTH_RATE > GEN_7 && OW_BERRY_GROWTH_RATE != GEN_6_ORAS)
@@ -1691,11 +1691,11 @@ const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
 
 const struct BerryTree gBlankBerryTree = {};
 
-void SetEnigmaBerry(u8 *src)
+void SetEnigmaBerry(u32 *src)
 {
 #if FREE_ENIGMA_BERRY == FALSE
     u32 i;
-    u8 *dest = (u8 *)&gSaveBlock1Ptr->enigmaBerry;
+    u32 *dest = (u32 *)&gSaveBlock1Ptr->enigmaBerry;
 
     for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry); i++)
         dest[i] = src[i];
@@ -1707,9 +1707,9 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 {
     u32 i;
     u32 checksum;
-    u8 *dest;
+    u32 *dest;
 
-    dest = (u8 *)enigmaBerry;
+    dest = (u32 *)enigmaBerry;
     checksum = 0;
     for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry) - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
         checksum += dest[i];
@@ -1733,7 +1733,7 @@ bool32 IsEnigmaBerryValid(void)
 #endif //FREE_ENIGMA_BERRY
 }
 
-const struct Berry *GetBerryInfo(u8 berry)
+const struct Berry *GetBerryInfo(u32 berry)
 {
     if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY_E_READER) && IsEnigmaBerryValid())
     {
@@ -1751,7 +1751,7 @@ const struct Berry *GetBerryInfo(u8 berry)
     }
 }
 
-struct BerryTree *GetBerryTreeInfo(u8 id)
+struct BerryTree *GetBerryTreeInfo(u32 id)
 {
     return &gSaveBlock1Ptr->berryTrees[id];
 }
@@ -1857,7 +1857,7 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
     return TRUE;
 }
 
-static u16 GetMulchAffectedGrowthRate(u16 berryDuration, u8 mulch, u8 stage)
+static u16 GetMulchAffectedGrowthRate(u16 berryDuration, u32 mulch, u32 stage)
 {
     if (stage == BERRY_STAGE_BERRIES)
         return berryDuration;
@@ -1952,7 +1952,7 @@ void BerryTreeTimeUpdate(s32 minutes)
     }
 }
 
-void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
+void PlantBerryTree(u32 id, u32 berry, u32 stage, bool8 allowGrowth)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
 
@@ -1976,27 +1976,27 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     SetTreeMutations(id, berry);
 }
 
-void RemoveBerryTree(u8 id)
+void RemoveBerryTree(u32 id)
 {
     gSaveBlock1Ptr->berryTrees[id] = gBlankBerryTree;
 }
 
-u8 GetBerryTypeByBerryTreeId(u8 id)
+u32 GetBerryTypeByBerryTreeId(u32 id)
 {
     return gSaveBlock1Ptr->berryTrees[id].berry;
 }
 
-u8 GetStageByBerryTreeId(u8 id)
+u32 GetStageByBerryTreeId(u32 id)
 {
     return gSaveBlock1Ptr->berryTrees[id].stage;
 }
 
-u8 GetMulchByBerryTreeId(u8 id)
+u32 GetMulchByBerryTreeId(u32 id)
 {
     return gSaveBlock1Ptr->berryTrees[id].mulch;
 }
 
-u8 ItemIdToBerryType(u16 item)
+u32 ItemIdToBerryType(u16 item)
 {
     u16 berry = item - FIRST_BERRY_INDEX;
 
@@ -2016,20 +2016,20 @@ static u16 BerryTypeToItemId(u16 berry)
         return berry + FIRST_BERRY_INDEX - 1;
 }
 
-void GetBerryNameByBerryType(u8 berry, u8 *string)
+void GetBerryNameByBerryType(u32 berry, u32 *string)
 {
     memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_LENGTH);
     string[BERRY_NAME_LENGTH] = EOS;
 }
 
-void AllowBerryTreeGrowth(u8 id)
+void AllowBerryTreeGrowth(u32 id)
 {
     GetBerryTreeInfo(id)->stopGrowth = FALSE;
 }
 
-static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
+static u32 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
 {
-    u8 count = 0;
+    u32 count = 0;
 
     if (tree->watered & (1 << 0))
         count++;
@@ -2042,7 +2042,7 @@ static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
     return count;
 }
 
-static u8 GetNumStagesWateredByBerryTreeId(u8 id)
+static u32 GetNumStagesWateredByBerryTreeId(u32 id)
 {
     return BerryTreeGetNumStagesWatered(GetBerryTreeInfo(id));
 }
@@ -2056,7 +2056,7 @@ static u8 GetNumStagesWateredByBerryTreeId(u8 id)
 //
 // See resulting yields: https://gist.github.com/hondew/2a099dbe54aa91414decdbfaa524327d,
 // and bug fix: https://gist.github.com/hondew/0f0164e5b9dadfd72d24f30f2c049a0b.
-static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
+static u32 CalcBerryYieldInternal(u16 max, u16 min, u32 water)
 {
     u32 randMin;
     u32 randMax;
@@ -2082,12 +2082,12 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     }
 }
 
-static u8 CalcBerryYield(struct BerryTree *tree)
+static u32 CalcBerryYield(struct BerryTree *tree)
 {
     const struct Berry *berry = GetBerryInfo(tree->berry);
-    u8 min = tree->berryYield;
-    u8 max = berry->maxYield;
-    u8 result;
+    u32 min = tree->berryYield;
+    u32 max = berry->maxYield;
+    u32 result;
     if (OW_BERRY_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
         min += 2;
     if (!(OW_BERRY_MOISTURE && OW_BERRY_ALWAYS_WATERABLE))
@@ -2100,35 +2100,35 @@ static u8 CalcBerryYield(struct BerryTree *tree)
     return result;
 }
 
-static u8 GetBerryCountByBerryTreeId(u8 id)
+static u32 GetBerryCountByBerryTreeId(u32 id)
 {
     return gSaveBlock1Ptr->berryTrees[id].berryYield;
 }
 
-static u16 GetStageDurationByBerryType(u8 berry)
+static u16 GetStageDurationByBerryType(u32 berry)
 {
     return GetBerryInfo(berry)->growthDuration * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
-static u8 GetDrainRateByBerryType(u8 berry)
+static u32 GetDrainRateByBerryType(u32 berry)
 {
     return GetBerryInfo(berry)->drainRate;
 }
 
-static u8 GetWaterBonusByBerryType(u8 berry)
+static u32 GetWaterBonusByBerryType(u32 berry)
 {
     return GetBerryInfo(berry)->waterBonus;
 }
 
-static u8 GetWeedingBonusByBerryType(u8 berry)
+static u32 GetWeedingBonusByBerryType(u32 berry)
 {
-    u8 bonus = GetBerryInfo(berry)->weedsBonus;
+    u32 bonus = GetBerryInfo(berry)->weedsBonus;
     return (bonus == 0) ? 1 : bonus * 5;
 }
 
-static u8 GetPestsBonusByBerryType(u8 berry)
+static u32 GetPestsBonusByBerryType(u32 berry)
 {
-    u8 bonus = GetBerryInfo(berry)->pestsBonus;
+    u32 bonus = GetBerryInfo(berry)->pestsBonus;
     return (bonus == 0) ? 2 : bonus * 5;
 }
 
@@ -2141,11 +2141,11 @@ bool8 CanWaterBerryPlot(void)
 
 void ObjectEventInteractionGetBerryTreeData(void)
 {
-    u8 id;
-    u8 berry;
-    u8 localId;
-    u8 group;
-    u8 num;
+    u32 id;
+    u32 berry;
+    u32 localId;
+    u32 group;
+    u32 num;
 
     id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     berry = GetBerryTypeByBerryTreeId(id);
@@ -2164,15 +2164,15 @@ void ObjectEventInteractionGetBerryTreeData(void)
 
 void ObjectEventInteractionGetBerryName(void)
 {
-    u8 berryType = GetBerryTypeByBerryTreeId(GetObjectEventBerryTreeId(gSelectedObjectEvent));
+    u32 berryType = GetBerryTypeByBerryTreeId(GetObjectEventBerryTreeId(gSelectedObjectEvent));
     GetBerryNameByBerryType(berryType, gStringVar1);
 }
 
 void ObjectEventInteractionGetBerryCountString(void)
 {
-    u8 treeId = GetObjectEventBerryTreeId(gSelectedObjectEvent);
-    u8 berry = GetBerryTypeByBerryTreeId(treeId);
-    u8 count = GetBerryCountByBerryTreeId(treeId);
+    u32 treeId = GetObjectEventBerryTreeId(gSelectedObjectEvent);
+    u32 berry = GetBerryTypeByBerryTreeId(treeId);
+    u32 count = GetBerryCountByBerryTreeId(treeId);
 
     // The strings for growing Berries all refer to a singular berry plant.
     // This ensures that text about planting a Berry and the growing Berry reads correctly.
@@ -2204,7 +2204,7 @@ void Bag_ChooseMulch(void)
 
 void ObjectEventInteractionPlantBerryTree(void)
 {
-    u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
+    u32 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
     PlantBerryTree(GetObjectEventBerryTreeId(gSelectedObjectEvent), berry, BERRY_STAGE_PLANTED, TRUE);
     ObjectEventInteractionGetBerryTreeData();
@@ -2212,7 +2212,7 @@ void ObjectEventInteractionPlantBerryTree(void)
 
 void ObjectEventInteractionApplyMulch(void)
 {
-    u8 mulch = ITEM_TO_MULCH(gSpecialVar_ItemId);
+    u32 mulch = ITEM_TO_MULCH(gSpecialVar_ItemId);
 
     gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].mulch = mulch;
     StringExpandPlaceholders(gStringVar1, gItemsInfo[gSpecialVar_ItemId].name);
@@ -2220,9 +2220,9 @@ void ObjectEventInteractionApplyMulch(void)
 
 void ObjectEventInteractionPickBerryTree(void)
 {
-    u8 id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
-    u8 berry = GetBerryTypeByBerryTreeId(id);
-    u8 mutation = GetTreeMutationValue(id);
+    u32 id = GetObjectEventBerryTreeId(gSelectedObjectEvent);
+    u32 berry = GetBerryTypeByBerryTreeId(id);
+    u32 mutation = GetTreeMutationValue(id);
 
     if (!OW_BERRY_MUTATIONS || mutation == 0)
     {
@@ -2333,7 +2333,7 @@ bool8 PlayerHasMulch(void)
 }
 
 #if OW_BERRY_MUTATIONS == TRUE
-static const u8 sBerryMutations[][3] = {
+static const u32 sBerryMutations[][3] = {
     {ITEM_TO_BERRY(ITEM_IAPAPA_BERRY), ITEM_TO_BERRY(ITEM_MAGO_BERRY),   ITEM_TO_BERRY(ITEM_POMEG_BERRY)},
     {ITEM_TO_BERRY(ITEM_CHESTO_BERRY), ITEM_TO_BERRY(ITEM_PERSIM_BERRY), ITEM_TO_BERRY(ITEM_KELPSY_BERRY)},
     {ITEM_TO_BERRY(ITEM_ORAN_BERRY),   ITEM_TO_BERRY(ITEM_PECHA_BERRY),  ITEM_TO_BERRY(ITEM_QUALOT_BERRY)},
@@ -2351,9 +2351,9 @@ static const u8 sBerryMutations[][3] = {
     // Up to one more Mutation can be added here for a total of 15 (only 4 bits are allocated)
 };
 
-static u8 GetMutationOutcome(u8 berry1, u8 berry2)
+static u32 GetMutationOutcome(u32 berry1, u32 berry2)
 {
-    u8 i;
+    u32 i;
     for(i = 0; i < ARRAY_COUNT(sBerryMutations); i++)
     {
         if ((sBerryMutations[i][0] == berry1 && sBerryMutations[i][1] == berry2)
@@ -2363,9 +2363,9 @@ static u8 GetMutationOutcome(u8 berry1, u8 berry2)
     return 0;
 }
 
-static u8 TryForMutation(u8 berryTreeId, u8 berry)
+static u32 TryForMutation(u32 berryTreeId, u32 berry)
 {
-    u8 i, j, mulch;
+    u32 i, j, mulch;
     s16 x1, x2, y1, y2;
 
     // Get location of current tree
@@ -2402,17 +2402,17 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
 #endif
 
 struct TreeMutationBitfield {
-  u8 a: 2;
-  u8 b: 2;
-  u8 unused: 4;
+  u32 a: 2;
+  u32 b: 2;
+  u32 unused: 4;
 };
 
 union TreeMutation {
-  u8 value;
+  u32 value;
   struct TreeMutationBitfield asField;
 };
 
-static u8 GetTreeMutationValue(u8 id)
+static u32 GetTreeMutationValue(u32 id)
 {
 #if OW_BERRY_MUTATIONS
     struct BerryTree *tree = GetBerryTreeInfo(id);
@@ -2430,7 +2430,7 @@ static u8 GetTreeMutationValue(u8 id)
 #endif
 }
 
-static void SetTreeMutations(u8 id, u8 berry)
+static void SetTreeMutations(u32 id, u32 berry)
 {
 #if OW_BERRY_MUTATIONS == TRUE
     struct BerryTree *tree = GetBerryTreeInfo(id);
@@ -2442,7 +2442,7 @@ static void SetTreeMutations(u8 id, u8 berry)
 #endif
 }
 
-static u16 GetBerryPestSpecies(u8 berryId)
+static u16 GetBerryPestSpecies(u32 berryId)
 {
 #if OW_BERRY_PESTS == TRUE
     const struct Berry *berry = GetBerryInfo(berryId);
@@ -2494,7 +2494,7 @@ static void TryForPests(struct BerryTree *tree)
         tree->pests = TRUE;
 }
 
-static void AddTreeBonus(struct BerryTree *tree, u8 bonus)
+static void AddTreeBonus(struct BerryTree *tree, u32 bonus)
 {
     if (OW_BERRY_MOISTURE) // use watered field to save track of intermediate bonuses
     {

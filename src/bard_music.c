@@ -189,7 +189,7 @@ static s16 GetWordPitch(int tableIndex, int pitchIndex)
     return sPitchTables[tableIndex][pitchIndex];
 }
 
-const struct BardSoundTemplate *GetWordSoundTemplates(u16 easyChatWord)
+const struct BardSoundTemplate *GetWordSoundTemplates(u32 easyChatWord)
 {
     u32 category;
     u32 subword;
@@ -220,7 +220,7 @@ const struct BardSoundTemplate *GetWordSoundTemplates(u16 easyChatWord)
 
 // Assumes that 'soundTemplates' has already been loaded with the BardSoundTemplates for the easy chat word to calculate sounds for.
 // 'pitchTableIndex' is chosen depending on the easy chat word, but is essentially an arbitrary value 0-4.
-void CalcWordSounds(struct BardSong *song, u16 pitchTableIndex)
+void CalcWordSounds(struct BardSong *song, u32 pitchTableIndex)
 {
     int i;
     const struct BardSoundTemplate *template;

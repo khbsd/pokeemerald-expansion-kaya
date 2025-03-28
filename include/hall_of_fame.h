@@ -5,8 +5,8 @@ struct HallofFameMon
 {
     u32 tid;
     u32 personality;
-    u16 isShiny:1;
-    u16 species:15;
+    u32 isShiny:1;
+    u32 species:15;
     u8 lvl;
     u8 nickname[POKEMON_NAME_LENGTH];
 };

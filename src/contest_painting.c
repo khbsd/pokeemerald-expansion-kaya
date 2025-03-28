@@ -26,64 +26,64 @@ COMMON_DATA struct ImageProcessingContext gImageProcessingContext = {0};
 COMMON_DATA struct ContestWinner *gContestPaintingWinner = {0};
 COMMON_DATA u16 *gContestPaintingMonPalette = NULL;
 
-static u8 sHoldState;
+static u32 sHoldState;
 static u16 sMosaicVal;
 static u16 sFadeCounter;
 static bool8 sVarsInitialized;
-static u8 sWindowId;
+static u32 sWindowId;
 
 static void ShowContestPainting(void);
 static void HoldContestPainting(void);
 static void InitContestPaintingWindow(void);
 static void InitContestPaintingBg(void);
 static void InitContestPaintingVars(bool8);
-static void CreateContestPaintingPicture(u8, u8);
-static void PrintContestPaintingCaption(u8, u8);
+static void CreateContestPaintingPicture(u32, u32);
+static void PrintContestPaintingCaption(u32, u32);
 static void VBlankCB_ContestPainting(void);
-static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64]);
+static void _InitContestMonPixels(u32 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64]);
 
-extern const u8 gContestHallPaintingCaption[];
-extern const u8 gContestCoolness[];
-extern const u8 gContestBeauty[];
-extern const u8 gContestCuteness[];
-extern const u8 gContestSmartness[];
-extern const u8 gContestToughness[];
-extern const u8 gContestRankNormal[];
-extern const u8 gContestRankSuper[];
-extern const u8 gContestRankHyper[];
-extern const u8 gContestRankMaster[];
-extern const u8 gContestLink[];
-extern const u8 gContestPaintingCool1[];
-extern const u8 gContestPaintingCool2[];
-extern const u8 gContestPaintingCool3[];
-extern const u8 gContestPaintingBeauty1[];
-extern const u8 gContestPaintingBeauty2[];
-extern const u8 gContestPaintingBeauty3[];
-extern const u8 gContestPaintingCute1[];
-extern const u8 gContestPaintingCute2[];
-extern const u8 gContestPaintingCute3[];
-extern const u8 gContestPaintingSmart1[];
-extern const u8 gContestPaintingSmart2[];
-extern const u8 gContestPaintingSmart3[];
-extern const u8 gContestPaintingTough1[];
-extern const u8 gContestPaintingTough2[];
-extern const u8 gContestPaintingTough3[];
+extern const u32 gContestHallPaintingCaption[];
+extern const u32 gContestCoolness[];
+extern const u32 gContestBeauty[];
+extern const u32 gContestCuteness[];
+extern const u32 gContestSmartness[];
+extern const u32 gContestToughness[];
+extern const u32 gContestRankNormal[];
+extern const u32 gContestRankSuper[];
+extern const u32 gContestRankHyper[];
+extern const u32 gContestRankMaster[];
+extern const u32 gContestLink[];
+extern const u32 gContestPaintingCool1[];
+extern const u32 gContestPaintingCool2[];
+extern const u32 gContestPaintingCool3[];
+extern const u32 gContestPaintingBeauty1[];
+extern const u32 gContestPaintingBeauty2[];
+extern const u32 gContestPaintingBeauty3[];
+extern const u32 gContestPaintingCute1[];
+extern const u32 gContestPaintingCute2[];
+extern const u32 gContestPaintingCute3[];
+extern const u32 gContestPaintingSmart1[];
+extern const u32 gContestPaintingSmart2[];
+extern const u32 gContestPaintingSmart3[];
+extern const u32 gContestPaintingTough1[];
+extern const u32 gContestPaintingTough2[];
+extern const u32 gContestPaintingTough3[];
 
 static const u16 sPictureFramePalettes[]         = INCBIN_U16("graphics/picture_frame/bg.gbapal");
-static const u8 sPictureFrameTiles_Cool[]        = INCBIN_U8("graphics/picture_frame/cool.4bpp.rl");
-static const u8 sPictureFrameTiles_Beauty[]      = INCBIN_U8("graphics/picture_frame/beauty.4bpp.rl");
-static const u8 sPictureFrameTiles_Cute[]        = INCBIN_U8("graphics/picture_frame/cute.4bpp.rl");
-static const u8 sPictureFrameTiles_Smart[]       = INCBIN_U8("graphics/picture_frame/smart.4bpp.rl");
-static const u8 sPictureFrameTiles_Tough[]       = INCBIN_U8("graphics/picture_frame/tough.4bpp.rl");
-static const u8 sPictureFrameTiles_HallLobby[]   = INCBIN_U8("graphics/picture_frame/lobby.4bpp.rl");
-static const u8 sPictureFrameTilemap_Cool[]      = INCBIN_U8("graphics/picture_frame/cool_map.bin.rl");
-static const u8 sPictureFrameTilemap_Beauty[]    = INCBIN_U8("graphics/picture_frame/beauty_map.bin.rl");
-static const u8 sPictureFrameTilemap_Cute[]      = INCBIN_U8("graphics/picture_frame/cute_map.bin.rl");
-static const u8 sPictureFrameTilemap_Smart[]     = INCBIN_U8("graphics/picture_frame/smart_map.bin.rl");
-static const u8 sPictureFrameTilemap_Tough[]     = INCBIN_U8("graphics/picture_frame/tough_map.bin.rl");
-static const u8 sPictureFrameTilemap_HallLobby[] = INCBIN_U8("graphics/picture_frame/lobby_map.bin.rl");
+static const u32 sPictureFrameTiles_Cool[]        = INCBIN_u32("graphics/picture_frame/cool.4bpp.rl");
+static const u32 sPictureFrameTiles_Beauty[]      = INCBIN_u32("graphics/picture_frame/beauty.4bpp.rl");
+static const u32 sPictureFrameTiles_Cute[]        = INCBIN_u32("graphics/picture_frame/cute.4bpp.rl");
+static const u32 sPictureFrameTiles_Smart[]       = INCBIN_u32("graphics/picture_frame/smart.4bpp.rl");
+static const u32 sPictureFrameTiles_Tough[]       = INCBIN_u32("graphics/picture_frame/tough.4bpp.rl");
+static const u32 sPictureFrameTiles_HallLobby[]   = INCBIN_u32("graphics/picture_frame/lobby.4bpp.rl");
+static const u32 sPictureFrameTilemap_Cool[]      = INCBIN_u32("graphics/picture_frame/cool_map.bin.rl");
+static const u32 sPictureFrameTilemap_Beauty[]    = INCBIN_u32("graphics/picture_frame/beauty_map.bin.rl");
+static const u32 sPictureFrameTilemap_Cute[]      = INCBIN_u32("graphics/picture_frame/cute_map.bin.rl");
+static const u32 sPictureFrameTilemap_Smart[]     = INCBIN_u32("graphics/picture_frame/smart_map.bin.rl");
+static const u32 sPictureFrameTilemap_Tough[]     = INCBIN_u32("graphics/picture_frame/tough_map.bin.rl");
+static const u32 sPictureFrameTilemap_HallLobby[] = INCBIN_u32("graphics/picture_frame/lobby_map.bin.rl");
 
-static const u8 *const sContestCategoryNames_Unused[] =
+static const u32 *const sContestCategoryNames_Unused[] =
 {
     [CONTEST_CATEGORY_COOL]   = gContestCoolness,
     [CONTEST_CATEGORY_BEAUTY] = gContestBeauty,
@@ -92,7 +92,7 @@ static const u8 *const sContestCategoryNames_Unused[] =
     [CONTEST_CATEGORY_TOUGH]  = gContestToughness,
 };
 
-static const u8 *const sContestRankNames[] =
+static const u32 *const sContestRankNames[] =
 {
     [CONTEST_RANK_NORMAL] = gContestRankNormal,
     [CONTEST_RANK_SUPER]  = gContestRankSuper,
@@ -125,7 +125,7 @@ static const struct WindowTemplate sWindowTemplate =
     .baseBlock = 1,
 };
 
-static const u8 *const sMuseumCaptions[NUM_PAINTING_CAPTIONS * CONTEST_CATEGORIES_COUNT] =
+static const u32 *const sMuseumCaptions[NUM_PAINTING_CAPTIONS * CONTEST_CATEGORIES_COUNT] =
 {
     [0 + NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_COOL]   = gContestPaintingCool1,
     [1 + NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_COOL]   = gContestPaintingCool2,
@@ -163,8 +163,8 @@ static const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 
 void SetContestWinnerForPainting(int contestWinnerId)
 {
-    u8 *saveIdx = &gCurContestWinnerSaveIdx;
-    u8 *isForArtist = &gCurContestWinnerIsForArtist;
+    u32 *saveIdx = &gCurContestWinnerSaveIdx;
+    u32 *isForArtist = &gCurContestWinnerIsForArtist;
     gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
     *saveIdx = contestWinnerId - 1;
     *isForArtist = FALSE;
@@ -277,10 +277,10 @@ static void InitContestPaintingWindow(void)
     ShowBg(1);
 }
 
-static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
+static void PrintContestPaintingCaption(u32 contestType, bool8 isForArtist)
 {
     int x;
-    u8 category;
+    u32 category;
 
     // Artist's painting has no caption
     if (isForArtist == TRUE)
@@ -382,10 +382,10 @@ static void InitContestMonPixels(u16 species, bool8 backPic)
     }
 }
 
-static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
+static void _InitContestMonPixels(u32 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
 {
     u16 tileY, tileX, pixelY, pixelX;
-    u8 colorIndex;
+    u32 colorIndex;
 
     for (tileY = 0; tileY < 8; tileY++)
     {
@@ -413,9 +413,9 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
 
 #define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
 
-static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 isForArtist)
+static void LoadContestPaintingFrame(u32 contestWinnerId, bool8 isForArtist)
 {
-    u8 x, y;
+    u32 x, y;
 
     LoadPalette(sPictureFramePalettes, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
     if (isForArtist == TRUE)
@@ -500,7 +500,7 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 isForArtist)
 
 #undef VRAM_PICTURE_DATA
 
-static void InitPaintingMonOamData(u8 contestWinnerId)
+static void InitPaintingMonOamData(u32 contestWinnerId)
 {
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
@@ -517,9 +517,9 @@ static void InitPaintingMonOamData(u8 contestWinnerId)
     }
 }
 
-static u8 GetImageEffectForContestWinner(u8 contestWinnerId)
+static u32 GetImageEffectForContestWinner(u32 contestWinnerId)
 {
-    u8 contestCategory;
+    u32 contestCategory;
 
     if (contestWinnerId < MUSEUM_CONTEST_WINNERS_START)
         contestCategory = gContestPaintingWinner->contestCategory;
@@ -549,7 +549,7 @@ static void AllocPaintingResources(void)
     gContestMonPixels = AllocZeroed(0x2000);
 }
 
-static void DoContestPaintingImageProcessing(u8 imageEffect)
+static void DoContestPaintingImageProcessing(u32 imageEffect)
 {
     gImageProcessingContext.canvasPixels = gContestMonPixels;
     gImageProcessingContext.canvasPalette = gContestPaintingMonPalette;
@@ -586,7 +586,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
     LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
 }
 
-static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)
+static void CreateContestPaintingPicture(u32 contestWinnerId, bool8 isForArtist)
 {
     AllocPaintingResources();
     InitContestMonPixels(gContestPaintingWinner->species, FALSE);

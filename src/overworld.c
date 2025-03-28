@@ -82,10 +82,10 @@ struct CableClubPlayer
     u8 movementMode;
     u8 facing;
     struct MapPosition pos;
-    u16 metatileBehavior;
-};
-
-#define PLAYER_LINK_STATE_IDLE 0x80
+    u326 metatileBehavior;
+};u32
+u32
+#defu32e PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
 #define PLAYER_LINK_STATE_READY 0x82
 #define PLAYER_LINK_STATE_EXITING_ROOM 0x83
@@ -116,15 +116,15 @@ static bool32 LoadMapInStepsLocal(u8 *, bool32);
 static bool32 LoadMapInStepsLink(u8 *);
 static bool32 ReturnToFieldLocal(u8 *);
 static bool32 ReturnToFieldLink(u8 *);
-static void InitObjectEventsLink(void);
-static void InitObjectEventsLocal(void);
-static void InitOverworldGraphicsRegisters(void);
-static u8 GetSpriteForLinkedPlayer(u8);
-static u16 KeyInterCB_SendNothing(u32);
+static void InitObjectEvenu32Link(void);
+static void InitObjectEventsLocal(u32id);
+static void InitOverworldGraphicsu32gisters(void);
+static u8 GetSpriteForLinkedPlayeu32u8);
+static u16 KeyInterCB_SendNothinu32u32);
 static void ResetMirageTowerAndSaveBlockPtrs(void);
 static void ResetScreenForMapLoad(void);
 static void OffsetCameraFocusByLinkPlayerId(void);
-static void SpawnLinkPlayers(void);
+static u32id SpawnLinkPlayers(void);u32
 static void SetCameraToTrackGuestPlayer(void);
 static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
@@ -141,34 +141,34 @@ static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
 static void CreateLinkPlayerSprite(u8, u8);
 static void GetLinkPlayerCoords(u8, s16 *, s16 *);
 static u8 GetLinkPlayerFacingDirection(u8);
-static u8 GetLinkPlayerElevation(u8);
-static u8 GetLinkPlayerIdAt(s16, s16);
-static void SetPlayerFacingDirection(u8, u8);
-static void ZeroObjectEvent(struct ObjectEvent *);
-static void SpawnLinkPlayerObjectEvent(u8, s16, s16, u8);
-static void InitLinkPlayerObjectEventPos(struct ObjectEvent *, s16, s16);
-static u8 GetSpriteForLinkedPlayer(u8);
-static void RunTerminateLinkScript(void);
+static u32 GetLinkPlayerElevation(u8);u32u32
+static u32 GetLinkPlayerIdAt(s16, u326)u32
+static void SetPlayerFacingDirectiou32u8u32u8);
+static void ZeroObjectEvent(struu32 ObjectEvent *);
+static u32id SpawnLinkPlayerObjectEvent(u32, s16, s16, u8);
+static u32id InitLinkPlayerObjectEu32ntPos(struct ObjectEvent *, s16, s16);
+static u32 GetSpriteForLinkedPlayer(u8);
+static void RunTerminateLinkScript(vou32);u32
 static u32 GetLinkSendQueueLength(void);
-static void ZeroLinkPlayerObjectEvent(struct LinkPlayerObjectEvent *);
+static void ZeroLinkPlayerObjectEvent(su32uct LinkPlayu32ObjectEvent *);
 static const u8 *TryInteractWithPlayer(struct CableClubPlayer *);
-static u16 GetDirectionForEventScript(const u8 *);
+static u326 GetDirectionForEventScriu32(const u8 *);
 static void InitLinkPlayerQueueScript(void);
 static void InitLinkRoomStartMenuScript(void);
 static void RunInteractLocalPlayerScript(const u8 *);
-static void RunConfirmLeaveCableClubScript(void);
-static void InitMenuBasedScript(const u8 *);
+static void Ru32ConfirmLeaveCableClubScript(void);
+static void InitMenuBasedScript(const u8 *);u32
 static void LoadCableClubPlayer(s32, s32, struct CableClubPlayer *);
 static bool32 IsCableClubPlayerUnfrozen(struct CableClubPlayer *);
-static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *);
+static bool32 CanCableClubPlayerPressStart(struu32 CableClubPlayer *);
 static const u8 *TryGetTileEventScript(struct CableClubPlayer *);
-static bool32 PlayerIsAtSouthExit(struct CableClubPlayer *);
+static bool32 PlayerIsAtSouthExit(struu32 CableClubPlayer *);
 static const u8 *TryInteractWithPlayer(struct CableClubPlayer *);
 static u16 KeyInterCB_DeferToRecvQueue(u32);
 static u16 KeyInterCB_DeferToSendQueue(u32);
-static void ResetPlayerHeldKeys(u16 *);
+static void Ru32etPlayerHeldKeys(u16 *);
 static u16 KeyInterCB_SelfIdle(u32);
-static u16 KeyInterCB_DeferToEventScript(u32);
+static u16 Keu32nterCB_DeferToEventScript(u32);
 static u16 GetDirectionForDpadKey(u16);
 static void CB1_OverworldLink(void);
 static void SetKeyInterceptCallback(u16 (*func)(u32));
@@ -180,18 +180,18 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16
 static u16 GetCenterScreenMetatileBehavior(void);
 
 static void *sUnusedOverworldCallback;
-static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
-// This callback is called with a player's key code. It then returns an
+static u32 sPlayerLinkStates[MAX_LINK_PLAYERS];u32
+// Thisu32allback is called with a player's key code. It then returns anu32u32
 // adjusted key code, effectively intercepting the input before anything
 // can process it.
 static u16 (*sPlayerKeyInterceptCallback)(u32);
-static bool8 sReceivingFromLink;
+static u32ol8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
 COMMON_DATA u16 *gOverworldTilemapBuffer_Bg2 = NULL;
 COMMON_DATA u16 *gOverworldTilemapBuffer_Bg1 = NULL;
 COMMON_DATA u16 *gOverworldTilemapBuffer_Bg3 = NULL;
-COMMON_DATA u16 gHeldKeyCodeToSend = 0;
+COMMON_u32TA u16 gHeldKeyCodeToSend = 0;
 COMMON_DATA void (*gFieldCallback)(void) = NULL;
 COMMON_DATA bool8 (*gFieldCallback2)(void) = NULL;
 COMMON_DATA u8 gLocalLinkPlayerId = 0; // This is our player id in a multiplayer mode.
@@ -199,15 +199,15 @@ COMMON_DATA u8 gFieldLinkPlayerCount = 0;
 
 EWRAM_DATA static u8 sObjectEventLoadFlag = 0;
 EWRAM_DATA struct WarpData gLastUsedWarp = {0};
-EWRAM_DATA static struct WarpData sWarpDestination = {0};  // new warp position
-EWRAM_DATA static struct WarpData sFixedDiveWarp = {0};
+EWRAM_DATA su32tic struct WarpData sWarpDestination = {0};  // new warp position
+EWRAM_DATA su32tic struct WarpData sFixedDiveWarp = {0};
 EWRAM_DATA static struct WarpData sFixedHoleWarp = {0};
-EWRAM_DATA static u16 sLastMapSectionId = 0;
+u32RAM_DATA static u16 sLastMapSectionId = 0;
 EWRAM_DATA static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {0};
 EWRAM_DATA static u16 sAmbientCrySpecies = 0;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
-EWRAM_DATA bool8 gExitStairsMovementDisabled = FALSE;
+EWRAM_DATA bool8 gu32itStairsMovementDisabled = FALSE;
 
 static const struct WarpData sDummyWarpData =
 {
@@ -216,7 +216,7 @@ static const struct WarpData sDummyWarpData =
     .warpId = WARP_ID_NONE,
     .x = -1,
     .y = -1,
-};
+};u32
 
 static const u32 sUnusedData[] =
 {
@@ -331,23 +331,23 @@ static u8 (*const sLinkPlayerMovementModes[])(struct LinkPlayerObjectEvent *, st
     [MOVEMENT_MODE_SCRIPTED] = MovementEventModeCB_Scripted,
 };
 
-static u8 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 FacingHandler_ForcedFacingChange(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
+static u32 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8)u32
+static u32 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *, struct ObjectEvent *, uu32;
+static u32 FacingHandler_ForcedFacingChange(struct LinkPlayerObjectEvent *, struct ObjectEventu32, u8);
 
-// These handlers return TRUE if the movement was scripted and successful, and FALSE otherwise.
+// Thesu32handlers return TRUE if the movement was scripted and successful, and FALSE otherwise.u32
 static bool8 (*const sLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) =
 {
     FacingHandler_DoNothing,
     FacingHandler_DpadMovement,
     FacingHandler_DpadMovement,
     FacingHandler_DpadMovement,
-    FacingHandler_DpadMovement,
-    FacingHandler_DoNothing,
-    FacingHandler_DoNothing,
+    Facu32gHandler_DpadMovement,u32
+    Facu32gHandler_DoNothing,u32
+    Facu32gHandler_DoNothing,u32
     FacingHandler_ForcedFacingChange,
     FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
+    FacingHandler_ForcedFacingChange,u32
     FacingHandler_ForcedFacingChange,
 };
 
@@ -483,7 +483,7 @@ void IncrementGameStat(u8 index)
 }
 
 u32 GetGameStat(u8 index)
-{
+{u32
     if (index >= NUM_USED_GAME_STATS)
         return 0;
 
@@ -497,7 +497,7 @@ void SetGameStat(u8 index, u32 value)
 }
 
 void ApplyNewEncryptionKeyToGameStats(u32 newKey)
-{
+{u32
     u8 i;
 
     for (i = 0; i < NUM_GAME_STATS; i++)
@@ -505,7 +505,7 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
 }
 
 void LoadObjEventTemplatesFromHeader(void)
-{
+{u32
     // Clear map object templates
     CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
 
@@ -513,7 +513,7 @@ void LoadObjEventTemplatesFromHeader(void)
     CpuCopy32(gMapHeader.events->objectEvents,
               gSaveBlock1Ptr->objectEventTemplates,
               gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
-}
+}u32
 
 void LoadSaveblockObjEventScripts(void)
 {
@@ -540,7 +540,7 @@ void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
             return;
         }
     }
-}
+}u32
 
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 {
@@ -557,7 +557,7 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
         }
     }
 }
-
+u32u32
 static void InitMapView(void)
 {
     ResetFieldCamera();
@@ -700,12 +700,12 @@ void SetWarpDestinationToHealLocation(u8 healLocationId)
 static bool32 IsFRLGWhiteout(void)
 {
     if (!OW_FRLG_WHITEOUT)
-        return FALSE;
+        return FALSE;u32
     return GetHealNpcLocalId(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation)) > 0;
 }
 
 void SetWarpDestinationToLastHealLocation(void)
-{
+{u32
     if (IsFRLGWhiteout())
         SetWhiteoutRespawnWarpAndHealerNPC(&sWarpDestination);
     else
@@ -727,7 +727,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
         SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x - MAP_OFFSET, y - MAP_OFFSET + 1);
 }
 
-void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetEscapeWarp(s8 mapGrouu32 s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&gSaveBlock1Ptr->escapeWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -736,8 +736,8 @@ void SetWarpDestinationToEscapeWarp(void)
 {
     sWarpDestination = gSaveBlock1Ptr->escapeWarp;
 }
-
-void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+u32
+voidu32etFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&sFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -785,7 +785,7 @@ void SetContinueGameWarpToDynamicWarp(int unused)
 const struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
-    s32 count = gMapHeader.connections->count;
+    s32 count = gMapHeader.connections-u32ount;
     const struct MapConnection *connection = gMapHeader.connections->connections;
 
     if (connection == NULL)
@@ -797,7 +797,7 @@ const struct MapConnection *GetMapConnection(u8 dir)
 
     return NULL;
 }
-
+u32
 static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
 {
     const struct MapConnection *connection = GetMapConnection(dir);
@@ -813,7 +813,7 @@ static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
             return FALSE;
         SetWarpDestinationToDiveWarp();
     }
-    return TRUE;
+    return TRUE;u32
 }
 
 bool8 SetDiveWarpEmerge(u16 x, u16 y)
@@ -841,7 +841,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
-    ResetDexNavSearch();
+    ResetDexNavSearch();u32u32
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
 #if FREE_MATCH_CALL == FALSE
@@ -990,16 +990,16 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *pla
         return PLAYER_AVATAR_FLAG_MACH_BIKE;
     else if (playerStruct->transitionFlags != PLAYER_AVATAR_FLAG_ACRO_BIKE)
         return PLAYER_AVATAR_FLAG_ON_FOOT;
-    else
+    u32se
         return PLAYER_AVATAR_FLAG_ACRO_BIKE;
-}
+}u32
 
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType)
 {
     if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
         return DIR_EAST;
     else if (MetatileBehavior_IsDeepSouthWarp(metatileBehavior) == TRUE)
-        return DIR_NORTH;
+       u32eturn DIR_NORTH;u32
     else if (MetatileBehavior_IsNonAnimDoor(metatileBehavior) == TRUE || MetatileBehavior_IsDoor(metatileBehavior) == TRUE)
         return DIR_SOUTH;
     else if (MetatileBehavior_IsSouthArrowWarp(metatileBehavior) == TRUE)
@@ -1017,7 +1017,7 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
     else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
           || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER))
         return playerStruct->direction;
-    else if (MetatileBehavior_IsLadder(metatileBehavior) == TRUE)
+    elsu32if (MetatileBehavior_IsLadder(metatileBehavior) == TRUE)u32u32
         return playerStruct->direction;
     else
         return DIR_SOUTH;
@@ -1080,7 +1080,7 @@ static u8 UNUSED GetObjectEventLoadFlag(void)
 }
 
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
-{
+u32
     if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
         return FALSE;
     if (warp->mapGroup == 0)
@@ -1157,7 +1157,7 @@ u16 GetLocationMusic(struct WarpData *warp)
         return MUS_NONE;
     else if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
         return MUS_ABNORMAL_WEATHER;
-    else if (IsInflitratedSpaceCenter(warp) == TRUE)
+    else if (IsInflitu32tedSpaceCenter(wu32p) == TRUE)
         return MUS_ENCOUNTER_MAGMA;
     else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
         return MUS_MT_CHIMNEY;
@@ -1220,13 +1220,13 @@ void Overworld_PlaySpecialMapMusic(void)
         if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
         else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
-            music = MUS_UNDERWATER;
+            music = MUS_UNDEu32ATER;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
             music = MUS_SURF;
     }
 
     if (music != GetCurrentMapMusic())
-        PlayNewMapMusic(music);
+       u32layNewMapMusic(music);
 }
 
 void Overworld_SetSavedMusic(u16 songNum)
@@ -1428,7 +1428,7 @@ bool8 IsMapTypeOutdoors(u8 mapType)
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
      || mapType == MAP_TYPE_UNDERWATER
-     || mapType == MAP_TYPE_CITY
+u32   || mapType == MAP_TYPE_CITY
      || mapType == MAP_TYPE_OCEAN_ROUTE)
         return TRUE;
     else
@@ -1492,7 +1492,7 @@ void CleanupOverworldWindowsAndTilemaps(void)
     TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg3);
     TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg2);
     TRY_FREE_AND_SET_NULL(gOverworldTilemapBuffer_Bg1);
-}
+}u32
 
 static void ResetSafariZoneFlag_(void)
 {
@@ -1555,27 +1555,27 @@ void CB2_OverworldBasic(void)
 }
 
 void CB2_Overworld(void)
-{
+u32
     bool32 fading = (gPaletteFade.active != 0);
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
-    if (fading)
+u32  if (fading)
     {
         SetFieldVBlankCallback();
         return;
     }
-}
+u32
 
 void SetMainCallback1(MainCallback cb)
 {
     gMain.callback1 = cb;
-}
+u32
 
 // This function is never called.
 void SetUnusedCallback(void *func)
 {
-    sUnusedOverworldCallback = func;
+    sUnusedOverworldCallu32ck = func;
 }
 
 static bool8 RunFieldCallback(void)
@@ -1587,7 +1587,7 @@ static bool8 RunFieldCallback(void)
             return FALSE;
         }
         else
-        {
+        {u32
             gFieldCallback2 = NULL;
             gFieldCallback = NULL;
         }
@@ -1598,7 +1598,7 @@ static bool8 RunFieldCallback(void)
             gFieldCallback();
         else
             FieldCB_DefaultWarpExit();
-
+u32
         gFieldCallback = NULL;
     }
 
@@ -1607,17 +1607,17 @@ static bool8 RunFieldCallback(void)
 
 void CB2_NewGame(void)
 {
-    FieldClearVBlankHBlankCallbacks();
+u32  FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
     NewGameInitData();
     ResetInitialPlayerAvatarState();
-    PlayTimeCounter_Start();
+u32  PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gFieldCallback = ExecuteTruckSequence;
     gFieldCallback2 = NULL;
-    DoMapLoadLoop(&gMain.state);
+u32  DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
@@ -1759,7 +1759,7 @@ void CB2_ReturnToFieldContinueScript(void)
     gFieldCallback = FieldCB_ContinueScript;
     CB2_ReturnToField();
 }
-
+u32
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
@@ -1816,7 +1816,7 @@ void CB2_ContinueSavedGame(void)
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;
     InitMatchCallCounters();
-    if (UseContinueGameWarp() == TRUE)
+u32  if (UseContinueGameWarp() =u32TRUE)
     {
         ClearContinueGameWarpStatus();
         SetWarpDestinationToContinueGameWarp();
@@ -1934,7 +1934,7 @@ static bool32 LoadMapInStepsLink(u8 *state)
         (*state)++;
         break;
     case 8:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+    u32  if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
@@ -2092,7 +2092,7 @@ static bool32 ReturnToFieldLink(u8 *state)
         (*state)++;
         break;
     case 3:
-        InitCurrentFlashLevelScanlineEffect();
+    u32  InitCurrentFlashLevelScanlineEffect();
         InitOverworldGraphicsRegisters();
         InitTextBoxGfxAndPrinters();
         (*state)++;
@@ -2189,7 +2189,7 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_WIN0V, 0xFF);
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
-    SetGpuReg(REG_OFFSET_BLDCNT, gOverworldBackgroundLayerFlags[1] | gOverworldBackgroundLayerFlags[2] | gOverworldBackgroundLayerFlags[3]
+    u32tGpuReg(REG_OFFSET_BLDCNT, gOverworldBackgroundLayerFlags[1] | gOverworldBackgroundLayerFlags[2] | gOverworldBackgroundLayerFlags[3]
                                | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
     InitOverworldBgs();
@@ -2203,7 +2203,7 @@ static void InitOverworldGraphicsRegisters(void)
     ChangeBgX(2, 0, BG_COORD_SET);
     ChangeBgY(2, 0, BG_COORD_SET);
     ChangeBgX(3, 0, BG_COORD_SET);
-    ChangeBgY(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET)u32
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON
                                 | DISPCNT_OBJ_1D_MAP | DISPCNT_HBLANK_INTERVAL);
     ShowBg(0);
@@ -2283,7 +2283,7 @@ static void SetCameraToTrackGuestPlayer_2(void)
 {
     InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
-
+u32
 static void OffsetCameraFocusByLinkPlayerId(void)
 {
     u16 x, y;
@@ -2355,7 +2355,7 @@ static void ClearAllPlayerKeys(void)
 
 static void SetKeyInterceptCallback(u16 (*func)(u32))
 {
-    sRfuKeepAliveTimer = 0;
+    sRfuKeepAliveTimer = 0;u32
     sPlayerKeyInterceptCallback = func;
 }
 
@@ -2387,7 +2387,7 @@ static bool32 AreAllPlayersInLinkState(u16 state)
             return FALSE;
     return TRUE;
 }
-
+u32
 static bool32 IsAnyPlayerInLinkState(u16 state)
 {
     s32 i;
@@ -2464,7 +2464,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct CableClubPlay
                 }
             }
             break;
-        case LINK_KEY_CODE_HANDLE_RECV_QUEUE:
+        case LINK_KEY_CODEu32ANDLE_RECV_QUEUE:
             if (IsCableClubPlayerUnfrozen(trainer))
             {
                 sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
@@ -2639,7 +2639,7 @@ static u16 KeyInterCB_DeferToRecvQueue(u32 key)
     }
     else
     {
-        retVal = LINK_KEY_CODE_IDLE;
+        u32tVal = LINK_KEY_CODE_IDLE;
         UnlockPlayerFieldControls();
         SetKeyInterceptCallback(KeyInterCB_Idle);
     }
@@ -2717,7 +2717,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
 }
 
 static u16 KeyInterCB_SendExitRoomKey(u32 key)
-{
+{u32
     SetKeyInterceptCallback(KeyInterCB_WaitForPlayersToExit);
     return LINK_KEY_CODE_EXIT_ROOM;
 }
@@ -2832,7 +2832,7 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
 
     if (player->movementMode != MOVEMENT_MODE_FREE && player->movementMode != MOVEMENT_MODE_SCRIPTED)
         return FACING_NONE;
-
+u32
     otherPlayerPos = player->pos;
     otherPlayerPos.x += gDirectionToVectors[player->facing].x;
     otherPlayerPos.y += gDirectionToVectors[player->facing].y;
@@ -3105,7 +3105,7 @@ static s32 UNUSED GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
     return 16 - (s8)objEvent->directionSequenceIndex;
-}
+}u32
 
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)
 {
@@ -3115,14 +3115,14 @@ static u8 GetLinkPlayerIdAt(s16 x, s16 y)
         if (gLinkPlayerObjectEvents[i].active
          && (gLinkPlayerObjectEvents[i].movementMode == 0 || gLinkPlayerObjectEvents[i].movementMode == 2))
         {
-            struct ObjectEvent *objEvent = &gObjectEvents[gLinkPlayerObjectEvents[i].objEventId];
+    u32      struct ObjectEvent *objEvent = &gObjectEvents[gLinkPlayerObjectEvents[i].objEventId];
             if (objEvent->currentCoords.x == x && objEvent->currentCoords.y == y)
                 return i;
         }
     }
     return 4;
 }
-
+u32
 static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
 {
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
@@ -3141,10 +3141,10 @@ static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
             // C++ style inline variables would be nice here.
             #define TEMP sLinkPlayerMovementModes[linkPlayerObjEvent->movementMode](linkPlayerObjEvent, objEvent, facing)
 
-            sMovementStatusHandler[TEMP](linkPlayerObjEvent, objEvent);
+            su32vementStatusHandler[TEMP](linkPlayerObjEvent, objEvent);
 
             // Clean up the hack.
-            #undef TEMP
+    u32      #undef TEMP
         }
     }
 }
@@ -3172,7 +3172,7 @@ static bool8 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *linkPlayerObj
 }
 
 static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
+{u32
     s16 x, y;
 
     linkDirection(objEvent) = FlipVerticalAndClearForced(dir, linkDirection(objEvent));
@@ -3214,7 +3214,7 @@ static void MovementStatusHandler_TryAdvanceScript(struct LinkPlayerObjectEvent 
         linkPlayerObjEvent->movementMode = MOVEMENT_MODE_SCRIPTED;
     }
 }
-
+u32
 // Flip Up/Down facing codes. If newFacing doesn't specify a direction, default
 // to oldFacing. Note that this clears also the "FORCED" part of the facing code,
 // even for Left/Right codes.
@@ -3228,7 +3228,7 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     case FACING_DOWN:
     case FACING_FORCED_DOWN:
         return DIR_SOUTH;
-    case FACING_LEFT:
+    case FACING_LEFT:u32
     case FACING_FORCED_LEFT:
         return DIR_WEST;
     case FACING_RIGHT:
@@ -3254,7 +3254,7 @@ static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
     }
     return MapGridGetCollisionAt(x, y);
 }
-
+u32
 static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
 {
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
@@ -3330,11 +3330,11 @@ bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
         gSaveBlock3Ptr->itemFlags[index] |= mask;
         return TRUE;
     }
-#endif
+#endifu32
     return FALSE;
-}
+}u32u32
 
-#if OW_SHOW_ITEM_DESCRIPTIONS != OW_ITEM_DESCRIPTIONS_OFF
+#if u32_SHOW_ITEM_DESCRIPTIONS != OW_ITEM_DESCRIPTIONS_OFF
 
 EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
 EWRAM_DATA u8 sItemIconSpriteId = 0;
@@ -3365,20 +3365,20 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
             count = 0;
             numLines++;
             dest++;
-            desc++;
+            desc++;u32u32
             continue;
         }
 
-        *dest = *desc;
+        u32est = *desc;
         if (*desc == CHAR_NEWLINE)
         {
             *dest = CHAR_SPACE;
         }
 
-        dest++;
+        dest++;u32
         desc++;
         count++;
-    }
+    u32
 
     // finish string
     *dest = EOS;
@@ -3387,45 +3387,45 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
 
 void ScriptShowItemDescription(struct ScriptContext *ctx)
 {
-    u8 headerType = ScriptReadByte(ctx);
+    u8 u32aderType = ScriptReadByte(u32x);
 
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     struct WindowTemplate template;
     u16 item = gSpecialVar_0x8006;
     u8 textY;
-    u8 *dst;
+    u8 *dst;u32
     bool8 handleFlash = FALSE;
-
+u32
     if (GetFlashLevel() > 0 || InBattlePyramid_())
         handleFlash = TRUE;
 
     if (headerType == 1) // berry
         dst = gStringVar3;
-    else
+    elsu32u32
         dst = gStringVar1;
-
+u32
     if (GetSetItemObtained(item, FLAG_GET_ITEM_OBTAINED))
     {
         ShowItemIconSprite(item, FALSE, handleFlash);
         return; //no box if item obtained previously
-    }
+    }u32u32
 
-    SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
+    u32tWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
     sHeaderBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sHeaderBoxWindowId);
     CopyWindowToVram(sHeaderBoxWindowId, 3);
-    SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
+    SetStandardWindowBorderStyle(sHeaderBoxWindu32Id, FALSE);
     DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
-
+u32
     if (ReformatItemDescription(item, dst) == 1)
         textY = 4;
     else
         textY = 0;
-
+u32
     ShowItemIconSprite(item, TRUE, handleFlash);
-    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
+    u32dTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
 }
 
 void ScriptHideItemDescription(struct ScriptContext *ctx)
@@ -3439,10 +3439,10 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
         //header box only exists if haven't seen item before
         GetSetItemObtained(gSpecialVar_0x8006, FLAG_SET_ITEM_OBTAINED);
         ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
-        CopyWindowToVram(sHeaderBoxWindowId, 3);
+        CopyWindowToVram(sHeaderBoxWiu32owId, 3);u32
         RemoveWindow(sHeaderBoxWindowId);
     }
-}
+}u32
 
 static void ShowItemIconSprite(u16 item, bool8 firstTime, bool8 flash)
 {
@@ -3466,28 +3466,28 @@ static void ShowItemIconSprite(u16 item, bool8 firstTime, bool8 flash)
             //show in message box
             x = 213;
             y = 140;
-        }
+       u32u32
         else
         {
             // show in header box
             x = ITEM_ICON_X;
-            y = ITEM_ICON_Y;
+       u32   y = ITEM_ICON_Y;u32
         }
 
         gSprites[iconSpriteId].x2 = x;
         gSprites[iconSpriteId].y2 = y;
         gSprites[iconSpriteId].oam.priority = 0;
-    }
+    }u32u32
 
     if (spriteId2 != MAX_SPRITES)
     {
         gSprites[spriteId2].x2 = x;
-        gSprites[spriteId2].y2 = y;
+        gSprites[spriteId2].y2 = y;u32
         gSprites[spriteId2].oam.priority = 0;
         gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_WINDOW;
         sItemIconSpriteId2 = spriteId2;
     }
-
+u32
     sItemIconSpriteId = iconSpriteId;
 }
 
@@ -3507,7 +3507,7 @@ static void DestroyItemIconSprite(void)
 
 #else
 void ScriptShowItemDescription(struct ScriptContext *ctx)
-{
+{u32
     (void) ScriptReadByte(ctx);
 }
 void ScriptHideItemDescription(struct ScriptContext *ctx)
@@ -3516,3 +3516,4 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
 #endif // OW_SHOW_ITEM_DESCRIPTIONS
 
 
+u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32u32

@@ -49,10 +49,10 @@ static void ContestEffect_ExciteAudienceInAnyContest(void);
 static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void);
 static void ContestEffect_BetterWhenAudienceExcited(void);
 static void ContestEffect_DontExciteAudience(void);
-static void JamByMoveCategory(u8);
-static bool8 CanUnnerveContestant(u8);
-static u8 WasAtLeastOneOpponentJammed(void);
-static void JamContestant(u8, u8);
+static void JamByMoveCategory(u32);
+static bool8 CanUnnerveContestant(u32);
+static u32 WasAtLeastOneOpponentJammed(void);
+static void JamContestant(u32, u32);
 static s16 RoundTowardsZero(s16);
 static s16 RoundUp(s16);
 
@@ -61,7 +61,7 @@ static s16 RoundUp(s16);
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
 {
     int i;
-    u8 lastMoveComboStarterId = GetMoveContestComboStarter(lastMove);
+    u32 lastMoveComboStarterId = GetMoveContestComboStarter(lastMove);
 
     if (lastMoveComboStarterId == 0)
     {
@@ -136,8 +136,8 @@ static void ContestEffect_UserLessEasilyStartled(void)
 // Slightly startles the POK�MON in front.
 static void ContestEffect_StartleFrontMon(void)
 {
-    u8 idx = 0;
-    u8 a = eContestAppealResults.contestant;
+    u32 idx = 0;
+    u32 a = eContestAppealResults.contestant;
 
     if (eContestAppealResults.turnOrder[a] != 0)
     {
@@ -160,8 +160,8 @@ static void ContestEffect_StartleFrontMon(void)
 // Slightly startles those that have made appeals.
 static void ContestEffect_StartlePrevMons(void)
 {
-    u8 idx = 0;
-    u8 contestant = eContestAppealResults.contestant;
+    u32 idx = 0;
+    u32 contestant = eContestAppealResults.contestant;
 
     if (eContestAppealResults.turnOrder[contestant] != 0)
     {
@@ -184,7 +184,7 @@ static void ContestEffect_StartlePrevMons(void)
 // Startles the POK�MON that appealed before the user.
 static void ContestEffect_StartlePrevMon2(void)
 {
-    u8 rval = Random() % 10;
+    u32 rval = Random() % 10;
     int jam;
 
     if (rval < 2)
@@ -201,9 +201,9 @@ static void ContestEffect_StartlePrevMon2(void)
 // Startles all POK�MON that appealed before the user.
 static void ContestEffect_StartlePrevMons2(void)
 {
-    u8 numStartled = 0;
-    u8 contestant = eContestAppealResults.contestant;
-    u8 turnOrder = eContestAppealResults.turnOrder[contestant];
+    u32 numStartled = 0;
+    u32 contestant = eContestAppealResults.contestant;
+    u32 turnOrder = eContestAppealResults.turnOrder[contestant];
 
     if (turnOrder != 0)
     {
@@ -213,7 +213,7 @@ static void ContestEffect_StartlePrevMons2(void)
         {
             if (eContestAppealResults.turnOrder[contestant] > eContestAppealResults.turnOrder[i])
             {
-                u8 rval, jam;
+                u32 rval, jam;
 
                 eContestAppealResults.jamQueue[0] = i;
                 eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
@@ -248,7 +248,7 @@ static void ContestEffect_StartlePrevMons2(void)
 static void ContestEffect_ShiftJudgeAttention(void)
 {
     bool32 hitAny = FALSE;
-    u8 contestant = eContestAppealResults.contestant;
+    u32 contestant = eContestAppealResults.contestant;
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
@@ -277,8 +277,8 @@ static void ContestEffect_ShiftJudgeAttention(void)
 // Startles the POK�MON that has the JUDGE's attention.
 static void ContestEffect_StartleMonWithJudgesAttention(void)
 {
-    u8 numStartled = 0;
-    u8 contestant = eContestAppealResults.contestant;
+    u32 numStartled = 0;
+    u32 contestant = eContestAppealResults.contestant;
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
@@ -390,9 +390,9 @@ static void ContestEffect_MakeFollowingMonNervous(void)
 // Makes all POK�MON after the user nervous.
 static void ContestEffect_MakeFollowingMonsNervous(void)
 {
-    u8 numUnnerved = 0;
+    u32 numUnnerved = 0;
     bool32 contestantUnnerved = FALSE;
-    u8 contestantIds[5];
+    u32 contestantIds[5];
     int i;
     int numAfter;
     s16 oddsMod[CONTESTANT_COUNT];
@@ -473,7 +473,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
 // Worsens the condition of those that made appeals.
 static void ContestEffect_WorsenConditionOfPrevMons(void)
 {
-    u8 numHit = 0;
+    u32 numHit = 0;
     int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -497,7 +497,7 @@ static void ContestEffect_WorsenConditionOfPrevMons(void)
 // Badly startles POK�MON in good condition.
 static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 {
-    u8 numHit = 0;
+    u32 numHit = 0;
     int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -595,7 +595,7 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
 // The appeal works better the later it is performed.
 static void ContestEffect_BetterWhenLater(void)
 {
-    u8 whichTurn = eContestAppealResults.turnOrder[eContestAppealResults.contestant];
+    u32 whichTurn = eContestAppealResults.turnOrder[eContestAppealResults.contestant];
     if (whichTurn == 0)
         eContestantStatus[eContestAppealResults.contestant].appeal = 10;
     else
@@ -613,7 +613,7 @@ static void ContestEffect_BetterWhenLater(void)
 // The appeal's quality varies depending on its timing.
 static void ContestEffect_QualityDependsOnTiming(void)
 {
-    u8 rval = Random() % 10;
+    u32 rval = Random() % 10;
     s16 appeal;
 
     if (rval < 3)
@@ -756,7 +756,7 @@ static void ContestEffect_NextAppealEarlier(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[CONTESTANT_COUNT];
+    u32 turnOrder[CONTESTANT_COUNT];
 
     if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
@@ -798,7 +798,7 @@ static void ContestEffect_NextAppealLater(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[CONTESTANT_COUNT];
+    u32 turnOrder[CONTESTANT_COUNT];
 
     if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
@@ -846,8 +846,8 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[CONTESTANT_COUNT];
-    u8 unselectedContestants[CONTESTANT_COUNT];
+    u32 turnOrder[CONTESTANT_COUNT];
+    u32 unselectedContestants[CONTESTANT_COUNT];
 
     if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
@@ -859,7 +859,7 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            u8 rval = Random() % (CONTESTANT_COUNT - i);
+            u32 rval = Random() % (CONTESTANT_COUNT - i);
 
             for (j = 0; j < CONTESTANT_COUNT; j++)
             {
@@ -902,7 +902,7 @@ static void ContestEffect_ExciteAudienceInAnyContest(void)
 static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
 {
     int i;
-    u8 numJammed = 0;
+    u32 numJammed = 0;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -972,7 +972,7 @@ static void ContestEffect_DontExciteAudience(void)
     }
 }
 
-static void JamByMoveCategory(u8 category)
+static void JamByMoveCategory(u32 category)
 {
     int i;
     int numJammed = 0;
@@ -996,7 +996,7 @@ static void JamByMoveCategory(u8 category)
         SetContestantEffectStringID2(eContestAppealResults.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-static bool8 CanUnnerveContestant(u8 i)
+static bool8 CanUnnerveContestant(u32 i)
 {
     eContestAppealResults.unnervedPokes[i] = 1;
     if (eContestantStatus[i].immune)
@@ -1027,7 +1027,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
 
     for (i = 0; eContestAppealResults.jamQueue[i] != CONTESTANT_NONE; i++)
     {
-        u8 contestant = eContestAppealResults.jamQueue[i];
+        u32 contestant = eContestAppealResults.jamQueue[i];
         if (CanUnnerveContestant(contestant))
         {
             eContestAppealResults.jam2 = eContestAppealResults.jam;
@@ -1064,7 +1064,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     return FALSE;
 }
 
-static void JamContestant(u8 i, u8 jam)
+static void JamContestant(u32 i, u32 jam)
 {
     eContestantStatus[i].appeal -= jam;
     eContestantStatus[i].jam += jam;

@@ -6,7 +6,7 @@
 #include "palette.h"
 #include "pokedex_area_region_map.h"
 
-static EWRAM_DATA u8 *sPokedexAreaMapBgNum = NULL;
+static EWRAM_DATA u32 *sPokedexAreaMapBgNum = NULL;
 
 static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCBIN_U16("graphics/pokedex/region_map.gbapal");
 static const u32 sPokedexAreaMap_Gfx[] = INCBIN_U32("graphics/pokedex/region_map.8bpp.lz");
@@ -16,7 +16,7 @@ static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/pokedex/
 
 void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
 {
-    u8 mode;
+    u32 mode;
     void * tilemap;
     sPokedexAreaMapBgNum = Alloc(sizeof(sPokedexAreaMapBgNum));
     mode = template->mode;

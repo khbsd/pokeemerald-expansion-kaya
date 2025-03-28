@@ -16,10 +16,10 @@
 
 struct FieldCameraOffset
 {
-    u8 xPixelOffset;
-    u8 yPixelOffset;
-    u8 xTileOffset;
-    u8 yTileOffset;
+    u32 xPixelOffset;
+    u32 yPixelOffset;
+    u32 xTileOffset;
+    u32 yTileOffset;
     bool8 copyBGToVRAM;
 };
 
@@ -99,10 +99,10 @@ void DrawWholeMapView(void)
 
 static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 j;
+    u32 i;
+    u32 j;
     u32 r6;
-    u8 temp;
+    u32 temp;
 
     for (i = 0; i < 32; i += 2)
     {
@@ -137,8 +137,8 @@ static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffse
 
 static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r7;
 
     temp = cameraOffset->yTileOffset + 28;
@@ -156,8 +156,8 @@ static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, const st
 
 static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r7 = cameraOffset->yTileOffset * 32;
 
     for (i = 0; i < 32; i += 2)
@@ -171,8 +171,8 @@ static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, const st
 
 static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r6 = cameraOffset->xTileOffset;
 
     for (i = 0; i < 32; i += 2)
@@ -186,9 +186,9 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, const str
 
 static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
-    u8 r5 = cameraOffset->xTileOffset + 28;
+    u32 i;
+    u32 temp;
+    u32 r5 = cameraOffset->xTileOffset + 28;
 
     if (r5 >= 32)
         r5 -= 32;
@@ -400,7 +400,7 @@ void CameraUpdate(void)
     if (curMovementOffsetY != 0 && curMovementOffsetY == -movementSpeedY)
     {
         if (movementSpeedY > 0)
-            deltaX = 1;
+            deltaX = 1;u32
         else
             deltaX = -1;
     }
@@ -511,3 +511,4 @@ static void CameraPanningCB_PanAhead(void)
     }
     */
 }
+u32

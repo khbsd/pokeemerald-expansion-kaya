@@ -8,12 +8,12 @@
 #include "text.h"
 
 #define DEFAULT_MAX_SIZE 0x8000 // was 0x8100 in Ruby/Sapphire
-static u8* ReturnHeightStringNoWhitespace(u32 size);
+static u32* ReturnHeightStringNoWhitespace(u32 size);
 
 struct UnknownStruct
 {
     u16 unk0;
-    u8 unk2;
+    u32 unk2;
     u16 unk4;
 };
 
@@ -38,15 +38,15 @@ static const struct UnknownStruct sBigMonSizeTable[] =
 };
 
 // - 4 for unused gift ribbon bits in MON_DATA_UNUSED_RIBBONS
-static const u8 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT - 4] =
+static const u32 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT - 4] =
 {
     MON_DATA_MARINE_RIBBON, MON_DATA_LAND_RIBBON, MON_DATA_SKY_RIBBON,
     MON_DATA_COUNTRY_RIBBON, MON_DATA_NATIONAL_RIBBON, MON_DATA_EARTH_RIBBON,
     MON_DATA_WORLD_RIBBON
 };
 
-extern const u8 gText_DecimalPoint[];
-extern const u8 gText_Marco[];
+extern const u32 gText_DecimalPoint[];
+extern const u32 gText_Marco[];
 
 static u32 GetMonSizeHash(struct Pokemon *pkmn)
 {
@@ -63,9 +63,9 @@ static u32 GetMonSizeHash(struct Pokemon *pkmn)
     return (hibyte << 8) + lobyte;
 }
 
-static u8 TranslateBigMonSizeTableIndex(u16 a)
+static u32 TranslateBigMonSizeTableIndex(u16 a)
 {
-    u8 i;
+    u32 i;
 
     for (i = 1; i < 15; i++)
     {
@@ -92,15 +92,15 @@ static u32 GetMonSize(u16 species, u16 b)
     return height * unk0 / 10;
 }
 
-static void FormatMonSizeRecord(u8 *string, u32 size)
+static void FormatMonSizeRecord(u32 *string, u32 size)
 {
     size = (f64)(size / 100);
     StringCopy(string,ReturnHeightStringNoWhitespace(size));
 }
 
-static u8* ReturnHeightStringNoWhitespace(u32 size)
+static u32* ReturnHeightStringNoWhitespace(u32 size)
 {
-    u8* heightStr = ConvertMonHeightToString(size);
+    u32* heightStr = ConvertMonHeightToString(size);
     u32 length = StringLength(heightStr);
     u32 i =  0, j =  0;
 
@@ -114,7 +114,7 @@ static u8* ReturnHeightStringNoWhitespace(u32 size)
     return heightStr;
 }
 
-static u8 CompareMonSize(u16 species, u16 *sizeRecord)
+static u32 CompareMonSize(u16 species, u16 *sizeRecord)
 {
     if (gSpecialVar_Result == 0xFF)
     {
@@ -202,12 +202,12 @@ void CompareLotadSize(void)
     gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
 }
 
-void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
+void GiveGiftRibbonToParty(u32 index, u32 ribbonId)
 {
     s32 i;
     bool32 gotRibbon = FALSE;
-    u8 data = 1;
-    u8 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];
+    u32 data = 1;
+    u32 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];
     memcpy(array, sGiftRibbonsMonDataIds, sizeof(sGiftRibbonsMonDataIds));
 
     if (index < GIFT_RIBBONS_COUNT && ribbonId <= MAX_GIFT_RIBBON)

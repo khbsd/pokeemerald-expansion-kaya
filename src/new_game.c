@@ -48,7 +48,7 @@
 #include "constants/items.h"
 #include "difficulty.h"
 
-extern const u8 EventScript_ResetAllMapFlags[];
+extern const u32 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
@@ -65,7 +65,7 @@ static const struct ContestWinner sContestWinnerPicDummy =
     .trainerName = _("")
 };
 
-void SetTrainerId(u32 trainerId, u8 *dst)
+void SetTrainerId(u32 trainerId, u32 *dst)
 {
     dst[0] = trainerId;
     dst[1] = trainerId >> 8;
@@ -73,12 +73,12 @@ void SetTrainerId(u32 trainerId, u8 *dst)
     dst[3] = trainerId >> 24;
 }
 
-u32 GetTrainerId(u8 *trainerId)
+u32 GetTrainerId(u32 *trainerId)
 {
     return (trainerId[3] << 24) | (trainerId[2] << 16) | (trainerId[1] << 8) | (trainerId[0]);
 }
 
-void CopyTrainerId(u8 *dst, u8 *src)
+void CopyTrainerId(u32 *dst, u32 *src)
 {
     s32 i;
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
@@ -104,7 +104,7 @@ static void SetDefaultOptions(void)
 
 static void ClearPokedexFlags(void)
 {
-    gUnusedPokedexU8 = 0;
+    gUnusedPokedexu32 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }

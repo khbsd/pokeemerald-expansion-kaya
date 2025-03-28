@@ -5,17 +5,17 @@ extern u8 gUnusedPokedexU8;
 extern void (*gPokedexVBlankCB)(void);
 
 void ResetPokedex(void);
-u16 GetNationalPokedexCount(u8);
-u16 GetHoennPokedexCount(u8);
-u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality);
-s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
-void DrawFootprint(u8 windowId, u16 species);
-u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
+u32 GetNationalPokedexCount(u8);
+u32 GetHoennPokedexCount(u8);
+u8 DisplayCaughtMonDexPage(u32 species, bool32 isShiny, u32 personality);
+s8 GetSetPokedexFlag(u32 nationalNum, u8 caseId);
+void DrawFootprint(u8 windowId, u32 species);
+u32 CreateMonSpriteFromNationalDexNumber(u32, s16, s16, u32);
 bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
 void CB2_OpenPokedex(void);
-void PrintMonMeasurements(u16 species, u32 owned);
+void PrintMonMeasurements(u32 species, u32 owned);
 u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
 

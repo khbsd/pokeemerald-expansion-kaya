@@ -19,10 +19,10 @@
 
 struct WonderGraphics
 {
-    u8 titleTextPal:4;
-    u8 bodyTextPal:4;
-    u8 footerTextPal:4; // Card only
-    u8 stampShadowPal:4; // Card only
+    u32 titleTextPal:4;
+    u32 bodyTextPal:4;
+    u32 footerTextPal:4; // Card only
+    u32 stampShadowPal:4; // Card only
     const u32 * tiles;
     const u32 * map;
     const u16 * pal;
@@ -43,9 +43,9 @@ enum {
 
 struct CardStatTextData
 {
-    u8 width;
-    u8 statText[WONDER_CARD_TEXT_LENGTH + 1];
-    u8 statNumberText[4];
+    u32 width;
+    u32 statText[WONDER_CARD_TEXT_LENGTH + 1];
+    u32 statNumberText[4];
 };
 
 struct WonderCardData
@@ -53,36 +53,36 @@ struct WonderCardData
     /*0000*/ struct WonderCard card;
     /*014c*/ struct WonderCardMetadata cardMetadata;
     /*0170*/ const struct WonderGraphics * gfx;
-    /*0174*/ u8 enterExitState;
-    /*0175*/ u8 statFooterWidth;
+    /*0174*/ u32 enterExitState;
+    /*0175*/ u32 statFooterWidth;
     /*0176*/ u16 windowIds[CARD_WIN_COUNT];
-    /*017C*/ u8 monIconSpriteId;
-    /*017D*/ u8 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadow and 1 for the Pokémon
-    /*018B*/ u8 titleText[WONDER_CARD_TEXT_LENGTH + 1];
-    /*01B4*/ u8 subtitleText[WONDER_CARD_TEXT_LENGTH + 1];
-    /*01DD*/ u8 idNumberText[7];
-    /*01E4*/ u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH + 1];
-    /*0288*/ u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH + 1];
-    /*02B1*/ u8 giftText[WONDER_CARD_TEXT_LENGTH + 1];
+    /*017C*/ u32 monIconSpriteId;
+    /*017D*/ u32 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadow and 1 for the Pokémon
+    /*018B*/ u32 titleText[WONDER_CARD_TEXT_LENGTH + 1];
+    /*01B4*/ u32 subtitleText[WONDER_CARD_TEXT_LENGTH + 1];
+    /*01DD*/ u32 idNumberText[7];
+    /*01E4*/ u32 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH + 1];
+    /*0288*/ u32 footerLine1Text[WONDER_CARD_TEXT_LENGTH + 1];
+    /*02B1*/ u32 giftText[WONDER_CARD_TEXT_LENGTH + 1];
     /*02DC*/ struct CardStatTextData statTextData[8];
-    /*045C*/ u8 bgTilemapBuffer[0x1000];
+    /*045C*/ u32 bgTilemapBuffer[0x1000];
 };
 
 EWRAM_DATA static struct WonderCardData * sWonderCardData = NULL;
 
 static void BufferCardText(void);
-static void DrawCardWindow(u8 whichWindow);
+static void DrawCardWindow(u32 whichWindow);
 static void CreateCardSprites(void);
 static void DestroyCardSprites(void);
 
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 
-static const u8 sCard_TextColorTable[][3] = {
+static const u32 sCard_TextColorTable[][3] = {
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
 };
 
-static const u8 ALIGNED(4) sCard_FooterTextOffsets[CARD_TYPE_COUNT] =
+static const u32 ALIGNED(4) sCard_FooterTextOffsets[CARD_TYPE_COUNT] =
 {
     [CARD_TYPE_GIFT] = 7,
     [CARD_TYPE_STAMP] = 4,
@@ -390,7 +390,7 @@ static void BufferCardText(void)
             {
                 // Dynamic char encountered
                 // These are used to give the id of which stat to print
-                u8 id = sWonderCardData->card.footerLine2Text[i + 1];
+                u32 id = sWonderCardData->card.footerLine2Text[i + 1];
                 if (id >= ARRAY_COUNT(stats))
                 {
                     // Invalid stat id, skip ahead
@@ -412,7 +412,7 @@ static void BufferCardText(void)
     }
 }
 
-static void DrawCardWindow(u8 whichWindow)
+static void DrawCardWindow(u32 whichWindow)
 {
     s8 i = 0;
     s32 windowId = sWonderCardData->windowIds[whichWindow];
@@ -484,7 +484,7 @@ static void DrawCardWindow(u8 whichWindow)
 
 static void CreateCardSprites(void)
 {
-    u8 i = 0;
+    u32 i = 0;
     sWonderCardData->monIconSpriteId = SPRITE_NONE;
 
     // Create icon sprite
@@ -515,7 +515,7 @@ static void CreateCardSprites(void)
 
 static void DestroyCardSprites(void)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     // Destroy icon sprite
     if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
@@ -552,21 +552,21 @@ struct WonderNewsData
 {
     /*0000*/ struct WonderNews news;
     /*01bc*/ const struct WonderGraphics * gfx;
-    /*01c0*/ u8 arrowsRemoved:1;
-             u8 enterExitState:7;
-    /*01c1*/ u8 arrowTaskId;
+    /*01c0*/ u32 arrowsRemoved:1;
+             u32 enterExitState:7;
+    /*01c1*/ u32 arrowTaskId;
     /*01c2*/ bool8 scrolling:1;
-             u8 scrollIncrement:7;
+             u32 scrollIncrement:7;
     /*01c3*/ bool8 scrollingDown:1;
-             u8 scrollTotal:7;
+             u32 scrollTotal:7;
     /*01c4*/ u16 scrollEnd;
     /*01c6*/ u16 scrollOffset;
     /*01c8*/ u16 windowIds[NEWS_WIN_COUNT];
-    /*01cc*/ u8 unused[2];
-    /*01ce*/ u8 titleText[WONDER_NEWS_TEXT_LENGTH + 1];
-    /*01f7*/ u8 bodyText[WONDER_NEWS_BODY_TEXT_LINES][WONDER_NEWS_TEXT_LENGTH + 1];
+    /*01cc*/ u32 unused[2];
+    /*01ce*/ u32 titleText[WONDER_NEWS_TEXT_LENGTH + 1];
+    /*01f7*/ u32 bodyText[WONDER_NEWS_BODY_TEXT_LINES][WONDER_NEWS_TEXT_LENGTH + 1];
     /*0394*/ struct ScrollArrowsTemplate arrowsTemplate;
-    /*03a4*/ u8 bgTilemapBuffer[0x1000];
+    /*03a4*/ u32 bgTilemapBuffer[0x1000];
 };
 
 EWRAM_DATA static struct WonderNewsData * sWonderNewsData = NULL;
@@ -575,7 +575,7 @@ static void BufferNewsText(void);
 static void DrawNewsWindows(void);
 static void UpdateNewsScroll(void);
 
-static const u8 sNews_TextColorTable[][3] = {
+static const u32 sNews_TextColorTable[][3] = {
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY}
 };
@@ -864,7 +864,7 @@ u32 WonderNews_GetInput(u16 input)
 
 static void BufferNewsText(void)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     // Copy title text
     memcpy(sWonderNewsData->titleText, sWonderNewsData->news.titleText, WONDER_NEWS_TEXT_LENGTH);
@@ -884,7 +884,7 @@ static void BufferNewsText(void)
 
 static void DrawNewsWindows(void)
 {
-    u8 i = 0;
+    u32 i = 0;
     s32 x;
     PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_TITLE]);
     PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_BODY]);

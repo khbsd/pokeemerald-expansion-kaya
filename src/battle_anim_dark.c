@@ -486,7 +486,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
 {
     struct ScanlineEffectParams scanlineParams;
     struct BattleAnimBgData animBg;
-    u16 i;
+    u32 i;
     u8 pos;
     int var0;
     struct Task *task = &gTasks[taskId];
@@ -616,7 +616,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
     struct BattleAnimBgData animBg;
     struct ScanlineEffectParams scanlineParams;
     u8 x;
-    u16 i;
+    u32 i;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -845,7 +845,7 @@ static void DoMementoShadowEffect(struct Task *task)
 
 static void SetAllBattlersSpritePriority(u8 priority)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -899,10 +899,10 @@ void AnimClawSlash(struct Sprite *sprite)
 // Custom color argument is used in MOVE_POISON_TAIL to make the mon turn purplish/pinkish as if became cloaked in poison.
 void AnimTask_MetallicShine(u8 taskId)
 {
-    u16 species;
+    u32 species;
     u8 spriteId;
     u8 newSpriteId;
-    u16 paletteNum;
+    u32 paletteNum;
     struct BattleAnimBgData animBg;
     bool32 priorityChanged = FALSE;
 
@@ -964,7 +964,7 @@ void AnimTask_MetallicShine(u8 taskId)
 static void AnimTask_MetallicShine_Step(u8 taskId)
 {
     struct BattleAnimBgData animBg;
-    u16 paletteNum;
+    u32 paletteNum;
     u8 spriteId;
 
     gTasks[taskId].data[10] += 4;

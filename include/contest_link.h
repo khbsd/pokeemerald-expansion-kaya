@@ -15,7 +15,7 @@ void Task_LinkContest_CommunicateTurnOrder(u8);
 void Task_LinkContest_FinalizeConnection(u8);
 void Task_LinkContest_CommunicateMoveSelections(u8);
 bool32 LinkContest_TryLinkStandby(s16 *);
-bool32 LinkContest_SendBlock(void *, u16);
+bool32 LinkContest_SendBlock(void *, u32);
 bool8 LinkContest_GetBlockReceivedFromAllPlayers(void);
 bool8 LinkContest_GetBlockReceived(u8);
 u8 LinkContest_GetLeaderIndex(u8 *);

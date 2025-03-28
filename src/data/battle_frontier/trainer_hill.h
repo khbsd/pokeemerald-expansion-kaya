@@ -177,7 +177,7 @@ static const struct TrainerHillFloor sFloors_JPDefault[] = {
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_jp/floor_0/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_jp/floor_0/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_jp/floor_0/collision.bin"),
             .trainerCoords = { COORDS_XY(8,2), COORDS_XY(8,7) },
             .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
             .trainerRanges = TRAINER_RANGE(2, 3)
@@ -344,7 +344,7 @@ static const struct TrainerHillFloor sFloors_JPDefault[] = {
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_jp/floor_1/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_jp/floor_1/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_jp/floor_1/collision.bin"),
             .trainerCoords = { COORDS_XY(7,6), COORDS_XY(7,10) },
             .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
             .trainerRanges = TRAINER_RANGE(3, 3)
@@ -632,7 +632,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_normal/floor_0/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_normal/floor_0/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_normal/floor_0/collision.bin"),
             .trainerCoords = {COORDS_XY(11,1), COORDS_XY(13,2)},
             .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_NORTH),
             .trainerRanges = TRAINER_RANGE(2, 1),
@@ -911,7 +911,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_normal/floor_1/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_normal/floor_1/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_normal/floor_1/collision.bin"),
             .trainerCoords = {COORDS_XY(4,11), COORDS_XY(9,14)},
             .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_EAST),
             .trainerRanges = TRAINER_RANGE(3, 5),
@@ -1189,7 +1189,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_normal/floor_2/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_normal/floor_2/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_normal/floor_2/collision.bin"),
             .trainerCoords = {COORDS_XY(5,2), COORDS_XY(9,2)},
             .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
             .trainerRanges = TRAINER_RANGE(3, 3),
@@ -1460,7 +1460,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         },
         .map = {
             .metatileData = INCBIN_U8("graphics/trainer_hill/maps_normal/floor_3/metatiles.bin"),
-            .collisionData = INCBIN_U16("graphics/trainer_hill/maps_normal/floor_3/collision.bin"),
+            .collisionData = INCBIN_u32("graphics/trainer_hill/maps_normal/floor_3/collision.bin"),
             .trainerCoords = {COORDS_XY(7,4), COORDS_XY(7,10)},
             .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
             .trainerRanges = TRAINER_RANGE(3, 3),
@@ -1738,7 +1738,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_variety/floor_0/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_variety/floor_0/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_variety/floor_0/collision.bin"),
                 .trainerCoords = {COORDS_XY(5,8), COORDS_XY(9,8)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -2035,7 +2035,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_variety/floor_1/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_variety/floor_1/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_variety/floor_1/collision.bin"),
                 .trainerCoords = {COORDS_XY(3,8), COORDS_XY(11,8)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(7, 7),
@@ -2313,7 +2313,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_variety/floor_2/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_variety/floor_2/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_variety/floor_2/collision.bin"),
                 .trainerCoords = {COORDS_XY(9,1), COORDS_XY(14,1)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(4, 4),
@@ -2582,7 +2582,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_variety/floor_3/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_variety/floor_3/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_variety/floor_3/collision.bin"),
                 .trainerCoords = {COORDS_XY(10,2), COORDS_XY(14,2)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -2865,7 +2865,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_unique/floor_0/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_unique/floor_0/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_unique/floor_0/collision.bin"),
                 .trainerCoords = {COORDS_XY(4,3), COORDS_XY(7,3)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(2, 2),
@@ -3143,7 +3143,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_unique/floor_1/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_unique/floor_1/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_unique/floor_1/collision.bin"),
                 .trainerCoords = {COORDS_XY(9,6), COORDS_XY(13,6)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -3421,7 +3421,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_unique/floor_2/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_unique/floor_2/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_unique/floor_2/collision.bin"),
                 .trainerCoords = {COORDS_XY(6,9), COORDS_XY(8,9)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(1, 1),
@@ -3689,7 +3689,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_unique/floor_3/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_unique/floor_3/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_unique/floor_3/collision.bin"),
                 .trainerCoords = {COORDS_XY(8,2), COORDS_XY(11,5)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_NORTH),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -3979,7 +3979,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_expert/floor_0/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_expert/floor_0/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_expert/floor_0/collision.bin"),
                 .trainerCoords = {COORDS_XY(4,7), COORDS_XY(10,7)},
                 .trainerDirections = TRAINER_DIRS(DIR_WEST, DIR_EAST),
                 .trainerRanges = TRAINER_RANGE(5, 5),
@@ -4258,7 +4258,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_expert/floor_1/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_expert/floor_1/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_expert/floor_1/collision.bin"),
                 .trainerCoords = {COORDS_XY(7,10), COORDS_XY(7,14)},
                 .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -4537,7 +4537,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_expert/floor_2/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_expert/floor_2/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_expert/floor_2/collision.bin"),
                 .trainerCoords = {COORDS_XY(7,6), COORDS_XY(7,10)},
                 .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
                 .trainerRanges = TRAINER_RANGE(3, 3),
@@ -4808,7 +4808,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 },
             .map = {
                 .metatileData = INCBIN_U8("graphics/trainer_hill/maps_expert/floor_3/metatiles.bin"),
-                .collisionData = INCBIN_U16("graphics/trainer_hill/maps_expert/floor_3/collision.bin"),
+                .collisionData = INCBIN_u32("graphics/trainer_hill/maps_expert/floor_3/collision.bin"),
                 .trainerCoords = {COORDS_XY(7,6), COORDS_XY(7,10)},
                 .trainerDirections = TRAINER_DIRS(DIR_SOUTH, DIR_NORTH),
                 .trainerRanges = TRAINER_RANGE(3, 3),

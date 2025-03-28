@@ -62,41 +62,41 @@ enum
 
 #define MAX_SMOKE 10
 
-typedef u8 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
+typedef u32 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
 
 struct RayquazaScene
 {
     MainCallback exitCallback;
     TilemapBuffer tilemapBuffers[4];
     u16 unk; // never read
-    u8 animId;
+    u32 animId;
     bool8 endEarly;
     s16 revealedLightLine;
     s16 revealedLightTimer;
-    u8 unused[12];
+    u32 unused[12];
 };
 
 static EWRAM_DATA struct RayquazaScene *sRayScene = NULL;
 
 static void CB2_InitRayquazaScene(void);
 static void CB2_RayquazaScene(void);
-static void Task_EndAfterFadeScreen(u8);
+static void Task_EndAfterFadeScreen(u32);
 
 // RAY_ANIM_DUO_FIGHT_PRE / RAY_ANIM_DUO_FIGHT
-static void Task_DuoFightAnim(u8);
-static void Task_HandleDuoFight(u8);
-static void Task_DuoFightEnd(u8);
-static void DuoFightEnd(u8, s8);
-static void Task_DuoFight_AnimateClouds(u8);
-static void DuoFight_PanOffScene(u8);
+static void Task_DuoFightAnim(u32);
+static void Task_HandleDuoFight(u32);
+static void Task_DuoFightEnd(u32);
+static void DuoFightEnd(u32, s8);
+static void Task_DuoFight_AnimateClouds(u32);
+static void DuoFight_PanOffScene(u32);
 static void DuoFight_AnimateRain(void);
 static void DuoFight_Lightning1(void);
 static void DuoFight_Lightning2(void);
 static void DuoFight_LightningLong(void);
-static u8 DuoFightPre_CreateGroudonSprites(void);
-static u8 DuoFightPre_CreateKyogreSprites(void);
-static u8 DuoFight_CreateGroudonSprites(void);
-static u8 DuoFight_CreateKyogreSprites(void);
+static u32 DuoFightPre_CreateGroudonSprites(void);
+static u32 DuoFightPre_CreateKyogreSprites(void);
+static u32 DuoFight_CreateGroudonSprites(void);
+static u32 DuoFight_CreateKyogreSprites(void);
 static void SpriteCB_DuoFightPre_Groudon(struct Sprite *);
 static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *);
 static void SpriteCB_DuoFight_Groudon(struct Sprite *);
@@ -105,42 +105,42 @@ static void DuoFight_SlideGroudonDown(struct Sprite *);
 static void DuoFight_SlideKyogreDown(struct Sprite *);
 
 // RAY_ANIM_TAKES_FLIGHT
-static void Task_RayTakesFlightAnim(u8);
-static void Task_HandleRayTakesFlight(u8);
-static void Task_RayTakesFlightEnd(u8);
-static void Task_TakesFlight_CreateSmoke(u8);
+static void Task_RayTakesFlightAnim(u32);
+static void Task_HandleRayTakesFlight(u32);
+static void Task_RayTakesFlightEnd(u32);
+static void Task_TakesFlight_CreateSmoke(u32);
 static void SpriteCB_TakesFlight_Smoke(struct Sprite *);
 
 // RAY_ANIM_DESCENDS
-static void Task_RayDescendsAnim(u8);
-static void Task_HandleRayDescends(u8);
-static void Task_RayDescendsEnd(u8);
-static u8 CreateDescendsRayquazaSprite(void);
+static void Task_RayDescendsAnim(u32);
+static void Task_HandleRayDescends(u32);
+static void Task_RayDescendsEnd(u32);
+static u32 CreateDescendsRayquazaSprite(void);
 static void SpriteCB_Descends_Rayquaza(struct Sprite *);
 
 // RAY_ANIM_CHARGES
-static void Task_RayChargesAnim(u8);
-static void Task_HandleRayCharges(u8);
-static void Task_RayChargesEnd(u8);
-static void Task_RayCharges_ShakeRayquaza(u8);
-static void Task_RayCharges_FlyOffscreen(u8);
+static void Task_RayChargesAnim(u32);
+static void Task_HandleRayCharges(u32);
+static void Task_RayChargesEnd(u32);
+static void Task_RayCharges_ShakeRayquaza(u32);
+static void Task_RayCharges_FlyOffscreen(u32);
 static void RayCharges_AnimateBg(void);
 
 // RAY_ANIM_CHASES_AWAY
-static void Task_RayChasesAwayAnim(u8);
-static void Task_HandleRayChasesAway(u8);
-static void Task_RayChasesAwayEnd(u8);
-static void Task_ChasesAway_AnimateBg(u8);
-static void ChasesAway_KyogreStartLeave(u8);
-static void ChasesAway_GroudonStartLeave(u8);
-static void ChasesAway_CreateTrioSprites(u8);
-static void Task_ChasesAway_AnimateRing(u8);
+static void Task_RayChasesAwayAnim(u32);
+static void Task_HandleRayChasesAway(u32);
+static void Task_RayChasesAwayEnd(u32);
+static void Task_ChasesAway_AnimateBg(u32);
+static void ChasesAway_KyogreStartLeave(u32);
+static void ChasesAway_GroudonStartLeave(u32);
+static void ChasesAway_CreateTrioSprites(u32);
+static void Task_ChasesAway_AnimateRing(u32);
 static void SpriteCB_ChasesAway_GroudonLeave(struct Sprite *);
 static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *);
 static void SpriteCB_ChasesAway_RayquazaFloat(struct Sprite *);
 static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *);
 static void SpriteCB_ChasesAway_DuoRingPush(struct Sprite *);
-static void ChasesAway_SetRayquazaAnim(struct Sprite *, u8, s16, s16);
+static void ChasesAway_SetRayquazaAnim(struct Sprite *, u32, s16, s16);
 
 static const TaskFunc sTasksForAnimations[] =
 {
@@ -1287,7 +1287,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
     }
 };
 
-void DoRayquazaScene(u8 animId, bool8 endEarly, void (*exitCallback)(void))
+void DoRayquazaScene(u32 animId, bool8 endEarly, void (*exitCallback)(void))
 {
     sRayScene = AllocZeroed(sizeof(*sRayScene));
     sRayScene->animId = animId;
@@ -1332,7 +1332,7 @@ static void VBlankCB_RayquazaScene(void)
     TransferPlttBuffer();
 }
 
-static void Task_EndAfterFadeScreen(u8 taskId)
+static void Task_EndAfterFadeScreen(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1344,7 +1344,7 @@ static void Task_EndAfterFadeScreen(u8 taskId)
     }
 }
 
-static void Task_SetNextAnim(u8 taskId)
+static void Task_SetNextAnim(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1391,7 +1391,7 @@ static void ResetWindowDimensions(void)
 #define sGroudonShoulderSpriteId data[1]
 #define sGroudonClawSpriteId     data[2]
 
-static void Task_HandleDuoFightPre(u8 taskId)
+static void Task_HandleDuoFightPre(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     DuoFight_AnimateRain();
@@ -1423,9 +1423,9 @@ static void Task_HandleDuoFightPre(u8 taskId)
     }
 }
 
-static u8 DuoFightPre_CreateGroudonSprites(void)
+static u32 DuoFightPre_CreateGroudonSprites(void)
 {
-    u8 spriteId;
+    u32 spriteId;
     s16 *data;
 
     spriteId = CreateSprite(&sSpriteTemplate_DuoFightPre_Groudon, 88, 72, 3);
@@ -1475,9 +1475,9 @@ static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite)
     }
 }
 
-static u8 DuoFightPre_CreateKyogreSprites(void)
+static u32 DuoFightPre_CreateKyogreSprites(void)
 {
-    u8 spriteId;
+    u32 spriteId;
     s16 *data;
 
     spriteId = CreateSprite(&sSpriteTemplate_DuoFightPre_Kyogre, 136, 96, 1);
@@ -1613,7 +1613,7 @@ static void LoadDuoFightSceneGfx(void)
     LoadCompressedSpritePalette(&sSpritePal_DuoFight_Kyogre);
 }
 
-static void Task_DuoFightAnim(u8 taskId)
+static void Task_DuoFightAnim(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ScanlineEffect_Clear();
@@ -1643,7 +1643,7 @@ static void Task_DuoFightAnim(u8 taskId)
     PlaySE(SE_DOWNPOUR);
 }
 
-static void Task_DuoFight_AnimateClouds(u8 taskId)
+static void Task_DuoFight_AnimateClouds(u32 taskId)
 {
     s16 i;
     u16 *data = (u16*)gTasks[taskId].data;
@@ -1702,7 +1702,7 @@ static void Task_DuoFight_AnimateClouds(u8 taskId)
     }
 }
 
-static void Task_HandleDuoFight(u8 taskId)
+static void Task_HandleDuoFight(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     DuoFight_AnimateRain();
@@ -1773,7 +1773,7 @@ static void DuoFight_AnimateRain(void)
 
 // Only used by the full version, which pans up at the end (so scene objects move down)
 // DuoFightPre just fades to black with no pan
-static void DuoFight_PanOffScene(u8 taskId)
+static void DuoFight_PanOffScene(u32 taskId)
 {
     u16 bgY;
     s16 *data = gTasks[taskId].data;
@@ -1791,14 +1791,14 @@ static void DuoFight_PanOffScene(u8 taskId)
     }
 }
 
-static void DuoFightEnd(u8 taskId, s8 palDelay)
+static void DuoFightEnd(u32 taskId, s8 palDelay)
 {
     PlaySE(SE_DOWNPOUR_STOP);
     BeginNormalPaletteFade(PALETTES_ALL, palDelay, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_DuoFightEnd;
 }
 
-static void Task_DuoFightEnd(u8 taskId)
+static void Task_DuoFightEnd(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     DuoFight_AnimateRain();
@@ -1815,9 +1815,9 @@ static void Task_DuoFightEnd(u8 taskId)
     }
 }
 
-static u8 DuoFight_CreateGroudonSprites(void)
+static u32 DuoFight_CreateGroudonSprites(void)
 {
-    u8 spriteId;
+    u32 spriteId;
     s16 *data;
 
     spriteId = CreateSprite(&sSpriteTemplate_DuoFight_Groudon, 98, 72, 3);
@@ -1879,9 +1879,9 @@ static void DuoFight_SlideGroudonDown(struct Sprite *sprite)
     }
 }
 
-static u8 DuoFight_CreateKyogreSprites(void)
+static u32 DuoFight_CreateKyogreSprites(void)
 {
-    u8 spriteId;
+    u32 spriteId;
     s16 *data;
 
     spriteId = CreateSprite(&sSpriteTemplate_DuoFight_Kyogre, 126, 96, 1);
@@ -2047,7 +2047,7 @@ static void LoadTakesFlightSceneGfx(void)
     LoadCompressedSpritePalette(&sSpritePal_TakesFlight_Smoke);
 }
 
-static void Task_RayTakesFlightAnim(u8 taskId)
+static void Task_RayTakesFlightAnim(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     PlayNewMapMusic(MUS_RAYQUAZA_APPEARS);
@@ -2065,7 +2065,7 @@ static void Task_RayTakesFlightAnim(u8 taskId)
 
 // Animate Rayquaza (flying up and down, and changing size as it gets further from the screen)
 // In this scene Rayquaza is a bg tilemap on bg 2, not a sprite
-static void Task_HandleRayTakesFlight(u8 taskId)
+static void Task_HandleRayTakesFlight(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (tState)
@@ -2142,7 +2142,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
 #undef tYOffset
 #undef tYOffsetDir
 
-static void Task_RayTakesFlightEnd(u8 taskId)
+static void Task_RayTakesFlightEnd(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2159,12 +2159,12 @@ static void Task_RayTakesFlightEnd(u8 taskId)
 #define sSmokeId data[0]
 #define sTimer   data[1]
 
-static void Task_TakesFlight_CreateSmoke(u8 taskId)
+static void Task_TakesFlight_CreateSmoke(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if ((tTimer & 3) == 0)
     {
-        u8 spriteId = CreateSprite(&sSpriteTemplate_TakesFlight_Smoke,
+        u32 spriteId = CreateSprite(&sSpriteTemplate_TakesFlight_Smoke,
                                    (sTakesFlight_SmokeCoords[tSmokeId][0] * 4) + 120,
                                    (sTakesFlight_SmokeCoords[tSmokeId][1] * 4) + 80,
                                    0);
@@ -2287,7 +2287,7 @@ static void HBlankCB_RayDescends(void)
 #define tState data[0]
 #define tTimer data[1]
 
-static void Task_RayDescendsAnim(u8 taskId)
+static void Task_RayDescendsAnim(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     InitDescendsSceneBgs();
@@ -2306,7 +2306,7 @@ static void Task_RayDescendsAnim(u8 taskId)
     gTasks[taskId].func = Task_HandleRayDescends;
 }
 
-static void Task_HandleRayDescends(u8 taskId)
+static void Task_HandleRayDescends(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (tState)
@@ -2370,7 +2370,7 @@ static void Task_HandleRayDescends(u8 taskId)
     }
 }
 
-static void Task_RayDescendsEnd(u8 taskId)
+static void Task_RayDescendsEnd(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2387,9 +2387,9 @@ static void Task_RayDescendsEnd(u8 taskId)
 #define sXMovePeriod  data[3]
 #define sYMovePeriod  data[4]
 
-static u8 CreateDescendsRayquazaSprite(void)
+static u32 CreateDescendsRayquazaSprite(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_Descends_Rayquaza, 160, 0, 0);
+    u32 spriteId = CreateSprite(&sSpriteTemplate_Descends_Rayquaza, 160, 0, 0);
     s16 *data = gSprites[spriteId].data;
     sTailSpriteId = CreateSprite(&sSpriteTemplate_Descends_RayquazaTail, 184, -48, 0);
     gSprites[spriteId].callback = SpriteCB_Descends_Rayquaza;
@@ -2505,7 +2505,7 @@ static void LoadChargesSceneGfx(void)
 #define tRayquazaTaskId data[2]
 #define tSoundTimer     data[3]
 
-static void Task_RayChargesAnim(u8 taskId)
+static void Task_RayChargesAnim(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     InitChargesSceneBgs();
@@ -2519,7 +2519,7 @@ static void Task_RayChargesAnim(u8 taskId)
     gTasks[taskId].func = Task_HandleRayCharges;
 }
 
-static void Task_HandleRayCharges(u8 taskId)
+static void Task_HandleRayCharges(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     RayCharges_AnimateBg();
@@ -2584,7 +2584,7 @@ static void Task_HandleRayCharges(u8 taskId)
 #define tShakeDir data[2]
 #define tTimer    data[15]
 
-static void Task_RayCharges_ShakeRayquaza(u8 taskId)
+static void Task_RayCharges_ShakeRayquaza(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if ((tTimer & 3) == 0)
@@ -2597,7 +2597,7 @@ static void Task_RayCharges_ShakeRayquaza(u8 taskId)
 }
 
 // Rayquaza backs up then launches forward
-static void Task_RayCharges_FlyOffscreen(u8 taskId)
+static void Task_RayCharges_FlyOffscreen(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (tState == 0)
@@ -2634,7 +2634,7 @@ static void RayCharges_AnimateBg(void)
     ChangeBgY(0, 0x800, BG_COORD_ADD);
 }
 
-static void Task_RayChargesEnd(u8 taskId)
+static void Task_RayChargesEnd(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     RayCharges_AnimateBg();
@@ -2698,7 +2698,7 @@ static void LoadChasesAwaySceneGfx(void)
 #define tTimer    data[1]
 #define tBgTaskId data[2]
 
-static void Task_RayChasesAwayAnim(u8 taskId)
+static void Task_RayChasesAwayAnim(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     InitChasesAwaySceneBgs();
@@ -2720,7 +2720,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     gTasks[tBgTaskId].data[4] = 1;
 }
 
-static void Task_HandleRayChasesAway(u8 taskId)
+static void Task_HandleRayChasesAway(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (tState)
@@ -2793,7 +2793,7 @@ static void Task_HandleRayChasesAway(u8 taskId)
 #define tBlendLoDir data[4]
 
 // Flickers the ray of light behind Rayquaza
-static void Task_ChasesAway_AnimateBg(u8 taskId)
+static void Task_ChasesAway_AnimateBg(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if ((tTimer & 0xF) == 0)
@@ -2818,7 +2818,7 @@ static void Task_ChasesAway_AnimateBg(u8 taskId)
 
 #define tTimer data[1]
 
-static void Task_RayChasesAwayEnd(u8 taskId)
+static void Task_RayChasesAwayEnd(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
@@ -2852,7 +2852,7 @@ static void Task_RayChasesAwayEnd(u8 taskId)
 #define tKyogreSpriteId   taskData[4]
 #define tRayquazaSpriteId taskData[5]
 
-static void ChasesAway_CreateTrioSprites(u8 taskId)
+static void ChasesAway_CreateTrioSprites(u32 taskId)
 {
     s16 *taskData, *spriteData;
 
@@ -2888,7 +2888,7 @@ static void ChasesAway_CreateTrioSprites(u8 taskId)
 #define sSpeed             data[6]
 #define sIsKyogre          data[7]
 
-static void ChasesAway_PushDuoBack(u8 taskId)
+static void ChasesAway_PushDuoBack(u32 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
@@ -2944,7 +2944,7 @@ static void SpriteCB_ChasesAway_DuoRingPush(struct Sprite *sprite)
 #undef sSpeed
 #undef sIsKyogre
 
-static void ChasesAway_GroudonStartLeave(u8 taskId)
+static void ChasesAway_GroudonStartLeave(u32 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
     gSprites[tGroudonSpriteId].callback = SpriteCB_ChasesAway_GroudonLeave;
@@ -2976,7 +2976,7 @@ static void SpriteCB_ChasesAway_GroudonLeave(struct Sprite *sprite)
     }
 }
 
-static void ChasesAway_KyogreStartLeave(u8 taskId)
+static void ChasesAway_KyogreStartLeave(u32 taskId)
 {
     s16 *taskData, *spriteData;
 
@@ -3125,7 +3125,7 @@ static void SpriteCB_ChasesAway_RayquazaFloat(struct Sprite *body)
     body->sFloatTimer++;
 }
 
-static void ChasesAway_SetRayquazaAnim(struct Sprite *body, u8 animNum, s16 x, s16 y)
+static void ChasesAway_SetRayquazaAnim(struct Sprite *body, u32 animNum, s16 x, s16 y)
 {
     struct Sprite *tail = &gSprites[body->sTailSpriteId];
 
@@ -3154,7 +3154,7 @@ static void ChasesAway_SetRayquazaAnim(struct Sprite *body, u8 animNum, s16 x, s
 #define tScaleSpeed data[4]
 #define tSoundTimer data[5]
 
-static void Task_ChasesAway_AnimateRing(u8 taskId)
+static void Task_ChasesAway_AnimateRing(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (tState)

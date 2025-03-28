@@ -16,7 +16,7 @@ struct StringWord {
 
 struct StringLine {
     struct StringWord *words;
-    u16 numWords;
+    u32 numWords;
     u8 spaceWidth;
     u8 extraSpaceWidth;
 };

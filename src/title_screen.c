@@ -43,15 +43,15 @@ enum {
 
 static void MainCB2(void);
 static void Task_TitleScreenPhase1(u8);
-static void Task_TitleScreenPhase2(u8);
-static void Task_TitleScreenPhase3(u8);
-static void CB2_GoToMainMenu(void);
+static void Task_TitleScreenPhase2(u32);
+static void Task_TitleScreenPhase3(u32);
+static void CB2_GoToMainMenu(void);u32
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
-
+u32
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
 static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite);
@@ -425,8 +425,8 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite)
 static void CreatePressStartBanner(s16 x, s16 y)
 {
     u8 i;
-    u8 spriteId;
-
+    u32 spriteId;
+u32
     x -= 64;
     for (i = 0; i < NUM_PRESS_START_FRAMES; i++, x += 32)
     {
@@ -439,8 +439,8 @@ static void CreatePressStartBanner(s16 x, s16 y)
 static void CreateCopyrightBanner(s16 x, s16 y)
 {
     u8 i;
-    u8 spriteId;
-
+    u32 spriteId;
+u32
     x -= 64;
     for (i = 0; i < NUM_COPYRIGHT_FRAMES; i++, x += 32)
     {
@@ -523,9 +523,9 @@ static void SpriteCB_PokemonLogoShine_Fast(struct Sprite *sprite)
 }
 
 static void StartPokemonLogoShine(u8 mode)
-{
+{u32
     u8 spriteId;
-
+u32
     switch (mode)
     {
     case SHINE_MODE_SINGLE_NO_BG_COLOR:
@@ -620,7 +620,7 @@ void CB2_InitTitleScreen(void)
     case 2:
     {
         u8 taskId = CreateTask(Task_TitleScreenPhase1, 0);
-
+u32
         gTasks[taskId].tCounter = 256;
         gTasks[taskId].tSkipToNext = FALSE;
         gTasks[taskId].tPointless = -16;
@@ -682,7 +682,7 @@ static void MainCB2(void)
 
 // Shine the Pokémon logo two more times, and fade in the version banner
 static void Task_TitleScreenPhase1(u8 taskId)
-{
+{u32
     // Skip to next phase when A, B, Start, or Select is pressed
     if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
     {
@@ -703,7 +703,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
     else
     {
         u8 spriteId;
-
+u32
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
         SetGpuReg(REG_OFFSET_WININ, 0);
         SetGpuReg(REG_OFFSET_WINOUT, 0);
@@ -730,7 +730,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
 
 // Create "Press Start" and copyright banners, and slide Pokémon logo up
 static void Task_TitleScreenPhase2(u8 taskId)
-{
+{u32
     u32 yPos;
 
     // Skip to next phase when A, B, Start, or Select is pressed
@@ -778,7 +778,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
 
 // Show Rayquaza silhouette and process main title screen input
 static void Task_TitleScreenPhase3(u8 taskId)
-{
+{u32
     if (JOY_NEW(A_BUTTON) || JOY_NEW(START_BUTTON))
     {
         FadeOutBGM(4);
@@ -858,7 +858,7 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     if ((frameNum % 4) == 0) // Change color every 4th frame
     {
-        s32 intensity = Cos(frameNum, 128) + 128;
+        s32 intensity = Cos(frameNum, 12u32 + 128;
         s32 r = 31 - ((intensity * 32 - intensity) / 256);
         s32 g = 31 - (intensity * 22 / 256);
         s32 b = 12;

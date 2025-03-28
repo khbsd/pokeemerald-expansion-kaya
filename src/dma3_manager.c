@@ -10,8 +10,8 @@
 
 struct Dma3Request
 {
-    const u8 *src;
-    u8 *dest;
+    const u32 *src;
+    u32 *dest;
     u16 size;
     u16 mode;
     u32 value;
@@ -20,7 +20,7 @@ struct Dma3Request
 static struct Dma3Request sDma3Requests[MAX_DMA_REQUESTS];
 
 static vbool8 sDma3ManagerLocked;
-static u8 sDma3RequestCursor;
+static u32 sDma3RequestCursor;
 
 void ClearDma3Requests(void)
 {
@@ -55,7 +55,7 @@ void ProcessDma3Requests(void)
 
         if (bytesTransferred > 40 * 1024)
             return; // don't transfer more than 40 KiB
-        if (*(u8 *)REG_ADDR_VCOUNT > 224)
+        if (*(u32 *)REG_ADDR_VCOUNT > 224)
             return; // we're about to leave vblank, stop
 
         switch (sDma3Requests[sDma3RequestCursor].mode)

@@ -19,11 +19,11 @@
 
 #define TAG_SWAP_LINE 109
 
-static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
-static void Task_CallYesOrNoCallback(u8 taskId);
+static void Task_ContinueTaskAfterMessagePrints(u32 taskId);
+static void Task_CallYesOrNoCallback(u32 taskId);
 
 EWRAM_DATA static struct YesNoFuncTable sYesNo = {0};
-EWRAM_DATA static u8 sMessageWindowId = 0;
+EWRAM_DATA static u32 sMessageWindowId = 0;
 
 static TaskFunc sMessageNextTask;
 
@@ -121,7 +121,7 @@ void SetVBlankHBlankCallbacksToNull(void)
     SetHBlankCallback(NULL);
 }
 
-void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
+void DisplayMessageAndContinueTask(u32 taskId, u32 windowId, u16 tileNum, u32 paletteNum, u32 fontId, u32 textSpeed, const u32 *string, void *taskFunc)
 {
     sMessageWindowId = windowId;
     DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
@@ -135,32 +135,32 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
-bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
+bool16 RunTextPrintersRetIsActive(u32 textPrinterId)
 {
     RunTextPrinters();
     return IsTextPrinterActive(textPrinterId);
 }
 
-static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
+static void Task_ContinueTaskAfterMessagePrints(u32 taskId)
 {
     if (!RunTextPrintersRetIsActive(sMessageWindowId))
         sMessageNextTask(taskId);
 }
 
-void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
+void DoYesNoFuncWithChoice(u32 taskId, const struct YesNoFuncTable *data)
 {
     sYesNo = *data;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 unused1, u8 unused2, u8 unused3, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u32 taskId, const struct WindowTemplate *template, u32 unused1, u32 unused2, u32 unused3, u16 tileStart, u32 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
     sYesNo = *yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-static void Task_CallYesOrNoCallback(u8 taskId)
+static void Task_CallYesOrNoCallback(u32 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -249,7 +249,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
     return FALSE;
 }
 
-u8 GetLRKeysPressed(void)
+u32 GetLRKeysPressed(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
@@ -262,7 +262,7 @@ u8 GetLRKeysPressed(void)
     return 0;
 }
 
-u8 GetLRKeysPressedAndHeld(void)
+u32 GetLRKeysPressedAndHeld(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
@@ -319,7 +319,7 @@ bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
         return FALSE;
 }
 
-void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
+void SetItemListPerPageCount(struct ItemSlot *slots, u32 slotsCount, u32 *pageItems, u32 *totalItems, u32 maxPerPage)
 {
     u16 i;
     struct ItemSlot *slots_ = slots;
@@ -340,7 +340,7 @@ void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItem
         *pageItems = *totalItems;
 }
 
-void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems)
+void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u32 maxShownItems, u32 totalItems)
 {
     if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
         *scrollOffset = totalItems - maxShownItems;
@@ -354,9 +354,9 @@ void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownIte
     }
 }
 
-void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems)
+void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u32 shownItems, u32 totalItems, u32 maxShownItems)
 {
-    u8 i;
+    u32 i;
 
     if (maxShownItems % 2 != 0)
     {
@@ -396,9 +396,9 @@ void LoadListMenuSwapLineGfx(void)
     LoadCompressedSpritePalette(&sSpritePalette_SwapLine);
 }
 
-void CreateSwapLineSprites(u8 *spriteIds, u8 count)
+void CreateSwapLineSprites(u32 *spriteIds, u32 count)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < count; i++)
     {
@@ -410,9 +410,9 @@ void CreateSwapLineSprites(u8 *spriteIds, u8 count)
     }
 }
 
-void DestroySwapLineSprites(u8 *spriteIds, u8 count)
+void DestroySwapLineSprites(u32 *spriteIds, u32 count)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < count; i++)
     {
@@ -423,17 +423,17 @@ void DestroySwapLineSprites(u8 *spriteIds, u8 count)
     }
 }
 
-void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
+void SetSwapLineSpritesInvisibility(u32 *spriteIds, u32 count, bool8 invisible)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < count; i++)
         gSprites[spriteIds[i]].invisible = invisible;
 }
 
-void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
+void UpdateSwapLineSpritesPos(u32 *spriteIds, u32 count, s16 x, u16 y)
 {
-    u8 i;
+    u32 i;
     bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
     count &= ~SWAP_LINE_HAS_MARGIN;
 

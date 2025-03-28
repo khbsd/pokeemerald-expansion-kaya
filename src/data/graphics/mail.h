@@ -1,15 +1,15 @@
-const u16 gMailPalette_Orange[] = INCBIN_U16("graphics/mail/orange/palette.gbapal");
-const u16 gMailPalette_Harbor[] = INCBIN_U16("graphics/mail/harbor/palette.gbapal");
-const u16 gMailPalette_Glitter[] = INCBIN_U16("graphics/mail/glitter/palette.gbapal");
-const u16 gMailPalette_Mech[] = INCBIN_U16("graphics/mail/mech/palette.gbapal");
-const u16 gMailPalette_Wood[] = INCBIN_U16("graphics/mail/wood/palette.gbapal");
-const u16 gMailPalette_Wave[] = INCBIN_U16("graphics/mail/wave/palette.gbapal");
-const u16 gMailPalette_Bead[] = INCBIN_U16("graphics/mail/bead/palette.gbapal");
-const u16 gMailPalette_Shadow[] = INCBIN_U16("graphics/mail/shadow/palette.gbapal");
-const u16 gMailPalette_Tropic[] = INCBIN_U16("graphics/mail/tropic/palette.gbapal");
-const u16 gMailPalette_Dream[] = INCBIN_U16("graphics/mail/dream/palette.gbapal");
-const u16 gMailPalette_Fab[] = INCBIN_U16("graphics/mail/fab/palette.gbapal");
-const u16 gMailPalette_Retro[] = INCBIN_U16("graphics/mail/retro/palette.gbapal");
+const u32 gMailPalette_Orange[] = INCBIN_u32("graphics/mail/orange/palette.gbapal");
+const u32 gMailPalette_Harbor[] = INCBIN_u32("graphics/mail/harbor/palette.gbapal");
+const u32 gMailPalette_Glitter[] = INCBIN_u32("graphics/mail/glitter/palette.gbapal");
+const u32 gMailPalette_Mech[] = INCBIN_u32("graphics/mail/mech/palette.gbapal");
+const u32 gMailPalette_Wood[] = INCBIN_u32("graphics/mail/wood/palette.gbapal");
+const u32 gMailPalette_Wave[] = INCBIN_u32("graphics/mail/wave/palette.gbapal");
+const u32 gMailPalette_Bead[] = INCBIN_u32("graphics/mail/bead/palette.gbapal");
+const u32 gMailPalette_Shadow[] = INCBIN_u32("graphics/mail/shadow/palette.gbapal");
+const u32 gMailPalette_Tropic[] = INCBIN_u32("graphics/mail/tropic/palette.gbapal");
+const u32 gMailPalette_Dream[] = INCBIN_u32("graphics/mail/dream/palette.gbapal");
+const u32 gMailPalette_Fab[] = INCBIN_u32("graphics/mail/fab/palette.gbapal");
+const u32 gMailPalette_Retro[] = INCBIN_u32("graphics/mail/retro/palette.gbapal");
 
 const u32 gMailTiles_Orange[] = INCBIN_U32("graphics/mail/orange/tiles.4bpp.lz");
 const u32 gMailTiles_Harbor[] = INCBIN_U32("graphics/mail/harbor/tiles.4bpp.lz");

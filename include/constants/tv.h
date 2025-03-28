@@ -168,7 +168,7 @@
 #define SECRET_BASE_USED_JUMP_MAT       (1 << 14)
 #define SECRET_BASE_UNUSED_FLAG         (1 << 15)
 
-#define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u16s
+#define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u32s
 
 // TV Show states for Pokémon Contest Live Updates
 #define CONTESTLIVE_STATE_INTRO                 0

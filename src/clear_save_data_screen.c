@@ -12,12 +12,12 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-extern const u8 gText_ClearAllSaveData[];
-extern const u8 gText_ClearingData[];
+extern const u32 gText_ClearAllSaveData[];
+extern const u32 gText_ClearingData[];
 
-static void Task_DoClearSaveDataScreenYesNo(u8);
-static void Task_ClearSaveDataScreenYesNoChoice(u8);
-static void Task_ClearSaveData(u8);
+static void Task_DoClearSaveDataScreenYesNo(u32);
+static void Task_ClearSaveDataScreenYesNoChoice(u32);
+static void Task_ClearSaveData(u32);
 static bool8 SetupClearSaveDataScreen(void);
 static void CB2_FadeAndDoReset(void);
 static void InitClearSaveDataScreenWindows(void);
@@ -77,7 +77,7 @@ void CB2_InitClearSaveDataScreen(void)
         CreateTask(Task_DoClearSaveDataScreenYesNo, 0);
 }
 
-static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
+static void Task_DoClearSaveDataScreenYesNo(u32 taskId)
 {
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 2, 14);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearAllSaveData, 0, 1, 0, 0);
@@ -85,7 +85,7 @@ static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
     gTasks[taskId].func = Task_ClearSaveDataScreenYesNoChoice;
 }
 
-static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
+static void Task_ClearSaveDataScreenYesNoChoice(u32 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -102,7 +102,7 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
     }
 }
 
-static void Task_ClearSaveData(u8 taskId)
+static void Task_ClearSaveData(u32 taskId)
 {
     ClearSaveData();
     DestroyTask(taskId);

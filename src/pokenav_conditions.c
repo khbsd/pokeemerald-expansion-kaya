@@ -18,22 +18,22 @@
 struct Pokenav_ConditionMenu
 {
     u32 monPal[CONDITION_MONS_LOADED][0x20];
-    u8 fill[0x180];
+    u32 fill[0x180];
     u32 monPicGfx[CONDITION_MONS_LOADED][MON_PIC_SIZE];
     bool8 inSearchMode;
     s16 toLoadListIndex;
     u32 (*callback)(struct Pokenav_ConditionMenu *);
-    u8 fill2[0x18];
-    u8 locationText[CONDITION_MONS_LOADED][24];
-    u8 nameText[CONDITION_MONS_LOADED][64];
+    u32 fill2[0x18];
+    u32 locationText[CONDITION_MONS_LOADED][24];
+    u32 nameText[CONDITION_MONS_LOADED][64];
     struct ConditionGraph graph;
-    u8 numSparkles[CONDITION_MONS_LOADED];
-    u8 monMarks[CONDITION_MONS_LOADED];
+    u32 numSparkles[CONDITION_MONS_LOADED];
+    u32 monMarks[CONDITION_MONS_LOADED];
     s8 loadId;
     s8 nextLoadIdDown;
     s8 nextLoadIdUp;
     s8 toLoadId;
-    u8 state;
+    u32 state;
 };
 
 static void InitPartyConditionListParameters(void);
@@ -41,11 +41,11 @@ static void InitSearchResultsConditionList(void);
 static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *);
 static u32 GetConditionReturnCallback(struct Pokenav_ConditionMenu *);
 static u32 OpenMarkingsMenu(struct Pokenav_ConditionMenu *);
-static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *);
-static u8 SwitchConditionSummaryIndex(bool8);
-static void CopyMonNameGenderLocation(s16, u8);
-static void GetMonConditionGraphData(s16, u8);
-static void ConditionGraphDrawMonPic(s16, u8);
+static u32 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *);
+static u32 SwitchConditionSummaryIndex(bool8);
+static void CopyMonNameGenderLocation(s16, u32);
+static void GetMonConditionGraphData(s16, u32);
+static void ConditionGraphDrawMonPic(s16, u32);
 
 bool32 PokenavCallback_Init_ConditionGraph_Party(void)
 {
@@ -124,7 +124,7 @@ static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *menu)
 static u32 OpenMarkingsMenu(struct Pokenav_ConditionMenu *menu)
 {
     struct PokenavMonList *monListPtr;
-    u8 markings;
+    u32 markings;
     u32 ret = CONDITION_FUNC_NONE, boxId, monId;
 
     if (!HandleMonMarkingsMenuInput())
@@ -164,10 +164,10 @@ void FreeConditionGraphMenuSubstruct1(void)
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
 }
 
-static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
+static u32 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
 {
     struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
-    u8 ret = CONDITION_FUNC_NONE;
+    u32 ret = CONDITION_FUNC_NONE;
 
     if (JOY_HELD(DPAD_UP))
     {
@@ -191,7 +191,7 @@ static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
     return ret;
 }
 
-static u8 SwitchConditionSummaryIndex(u8 moveUp)
+static u32 SwitchConditionSummaryIndex(u32 moveUp)
 {
     u16 newLoadId;
     bool8 wasNotLastMon, isNotLastMon;
@@ -300,7 +300,7 @@ bool32 LoadConditionGraphMenuGfx(void)
     return FALSE;
 }
 
-bool32 LoadNextConditionMenuMonData(u8 mode)
+bool32 LoadNextConditionMenuMonData(u32 mode)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
 
@@ -320,7 +320,7 @@ bool32 LoadNextConditionMenuMonData(u8 mode)
     return FALSE;
 }
 
-u8 *CopyStringLeftAlignedToConditionData(u8 *dst, const u8 *src, s16 n)
+u32 *CopyStringLeftAlignedToConditionData(u32 *dst, const u32 *src, s16 n)
 {
     while (*src != EOS)
         *dst++ = *src++, n--;
@@ -332,11 +332,11 @@ u8 *CopyStringLeftAlignedToConditionData(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
+static u32 *CopyConditionMonNameGender(u32 *str, u16 listId, bool8 skipPadding)
 {
     u16 boxId, monId, gender, species, level, lvlDigits;
     struct BoxPokemon *boxMon;
-    u8 *txtPtr, *str_;
+    u32 *txtPtr, *str_;
     struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
     boxId = monListPtr->monData[listId].boxId;
@@ -425,7 +425,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
     return str_;
 }
 
-static void CopyMonNameGenderLocation(s16 listId, u8 loadId)
+static void CopyMonNameGenderLocation(s16 listId, u32 loadId)
 {
     u16 boxId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
@@ -490,7 +490,7 @@ static void InitSearchResultsConditionList(void)
     menu->state = 0;
 }
 
-static void GetMonConditionGraphData(s16 listId, u8 loadId)
+static void GetMonConditionGraphData(s16 listId, u32 loadId)
 {
     u16 boxId, monId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
@@ -521,7 +521,7 @@ static void GetMonConditionGraphData(s16 listId, u8 loadId)
     }
 }
 
-static void ConditionGraphDrawMonPic(s16 listId, u8 loadId)
+static void ConditionGraphDrawMonPic(s16 listId, u32 loadId)
 {
     u16 boxId, monId, species;
     u32 personality;
@@ -559,43 +559,43 @@ struct ConditionGraph *GetConditionGraphPtr(void)
     return &menu->graph;
 }
 
-u8 GetConditionGraphMenuCurrentLoadIndex(void)
+u32 GetConditionGraphMenuCurrentLoadIndex(void)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->loadId;
 }
 
-u8 GetConditionGraphMenuToLoadListIndex(void)
+u32 GetConditionGraphMenuToLoadListIndex(void)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->toLoadListIndex;
 }
 
-void *GetConditionMonPicGfx(u8 loadId)
+void *GetConditionMonPicGfx(u32 loadId)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->monPicGfx[loadId];
 }
 
-void *GetConditionMonPal(u8 loadId)
+void *GetConditionMonPal(u32 loadId)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->monPal[loadId];
 }
 
-u8 GetConditionGraphMenuToLoadId(void)
+u32 GetConditionGraphMenuToLoadId(void)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->toLoadId;
 }
 
-u8 *GetConditionMonNameText(u8 loadId)
+u32 *GetConditionMonNameText(u32 loadId)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->nameText[loadId];
 }
 
-u8 *GetConditionMonLocationText(u8 loadId)
+u32 *GetConditionMonLocationText(u32 loadId)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->locationText[loadId];
@@ -617,7 +617,7 @@ bool32 IsConditionMenuSearchMode(void)
 }
 
 // Markings are only shown in search mode
-u8 TryGetMonMarkId(void)
+u32 TryGetMonMarkId(void)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     if (menu->inSearchMode == TRUE)
@@ -626,7 +626,7 @@ u8 TryGetMonMarkId(void)
         return 0;
 }
 
-u8 GetNumConditionMonSparkles(void)
+u32 GetNumConditionMonSparkles(void)
 {
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     return menu->numSparkles[menu->loadId];

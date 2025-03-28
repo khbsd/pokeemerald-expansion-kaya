@@ -44,8 +44,8 @@ struct BerryTagScreenStruct
     u16 tilemapBuffers[3][0x400];
     u16 berryId;
     u16 currentSpriteBerryId;
-    u8 berrySpriteId;
-    u8 flavorCircleIds[FLAVOR_COUNT];
+    u32 berrySpriteId;
+    u32 flavorCircleIds[FLAVOR_COUNT];
     u16 gfxState;
 };
 
@@ -95,7 +95,7 @@ static const struct BgTemplate sBackgroundTemplates[] =
 
 static const u16 sFontPalette[] = INCBIN_U16("graphics/bag/berry_tag_screen.gbapal");
 
-static const u8 sTextColors[2][3] =
+static const u32 sTextColors[2][3] =
 {
     {0, 2, 3},
     {15, 14, 13}
@@ -142,7 +142,7 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 *const sBerryFirmnessStrings[] =
+static const u32 *const sBerryFirmnessStrings[] =
 {
     [BERRY_FIRMNESS_UNKNOWN]    = COMPOUND_STRING("???"),
     [BERRY_FIRMNESS_VERY_SOFT]  = COMPOUND_STRING("Very soft"),
@@ -168,18 +168,18 @@ static void PrintBerryDescription1(void);
 static void PrintBerryDescription2(void);
 static bool8 InitBerryTagScreen(void);
 static bool8 LoadBerryTagGfx(void);
-static void Task_HandleInput(u8 taskId);
-static void Task_CloseBerryTagScreen(u8 taskId);
-static void Task_DisplayAnotherBerry(u8 taskId);
-static void TryChangeDisplayedBerry(u8 taskId, s8 toMove);
+static void Task_HandleInput(u32 taskId);
+static void Task_CloseBerryTagScreen(u32 taskId);
+static void Task_DisplayAnotherBerry(u32 taskId);
+static void TryChangeDisplayedBerry(u32 taskId, s8 toMove);
 static void HandleBagCursorPositionChange(s8 toMove);
 
-static const u8 sText_SizeSlash[] = _("SIZE /");
-static const u8 sText_FirmSlash[] = _("FIRM /");
-static const u8 sText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
-static const u8 sText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
-static const u8 sText_BerryTag[] = _("BERRY TAG");
-static const u8 sText_ThreeMarks[] = _("???");
+static const u32 sText_SizeSlash[] = _("SIZE /");
+static const u32 sText_FirmSlash[] = _("FIRM /");
+static const u32 sText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
+static const u32 sText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
+static const u32 sText_BerryTag[] = _("BERRY TAG");
+static const u32 sText_ThreeMarks[] = _("???");
 
 // code
 void DoBerryTagScreen(void)
@@ -386,7 +386,7 @@ static void HandleInitWindows(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void PrintTextInBerryTagScreen(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed, u8 colorStructId)
+static void PrintTextInBerryTagScreen(u32 windowId, const u32 *text, u32 x, u32 y, s32 speed, u32 colorStructId)
 {
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, 0, sTextColors[colorStructId], speed, text);
 }
@@ -523,14 +523,14 @@ static void DestroyFlavorCircleSprites(void)
         DestroySprite(&gSprites[sBerryTag->flavorCircleIds[i]]);
 }
 
-static void PrepareToCloseBerryTagScreen(u8 taskId)
+static void PrepareToCloseBerryTagScreen(u32 taskId)
 {
     PlaySE(SE_SELECT);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_CloseBerryTagScreen;
 }
 
-static void Task_CloseBerryTagScreen(u8 taskId)
+static void Task_CloseBerryTagScreen(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -543,7 +543,7 @@ static void Task_CloseBerryTagScreen(u8 taskId)
     }
 }
 
-static void Task_HandleInput(u8 taskId)
+static void Task_HandleInput(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -560,7 +560,7 @@ static void Task_HandleInput(u8 taskId)
 #define tBerryY data[0]
 #define tBgOp   data[1]
 
-static void TryChangeDisplayedBerry(u8 taskId, s8 toMove)
+static void TryChangeDisplayedBerry(u32 taskId, s8 toMove)
 {
     s16 *data = gTasks[taskId].data;
     s16 currPocketPosition = gBagPosition.scrollPosition[BERRIES_POCKET] + gBagPosition.cursorPosition[BERRIES_POCKET];
@@ -603,7 +603,7 @@ static void HandleBagCursorPositionChange(s8 toMove)
 
 #define DISPLAY_SPEED 16
 
-static void Task_DisplayAnotherBerry(u8 taskId)
+static void Task_DisplayAnotherBerry(u32 taskId)
 {
     u16 i;
     s16 y;

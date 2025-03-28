@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Pokemon regardless of its typing")
 {
-    u16 species;
+    u32 species;
 
     PARAMETRIZE { species = SPECIES_ODDISH; }
     PARAMETRIZE { species = SPECIES_BELDUM; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Pokemon regardless of
 
 SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Steel type with a status poison effect")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     PARAMETRIZE { move = MOVE_TOXIC; }
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Corrosion does not effect poison type damaging moves if the 
 
 SINGLE_BATTLE_TEST("Corrosion can poison Poison- and Steel-type targets if it uses Fling while holding a Toxic Orb or a Poison Barb")
 {
-    u16 heldItem;
+    u32 heldItem;
 
     PARAMETRIZE { heldItem = ITEM_POISON_BARB; }
     PARAMETRIZE { heldItem = ITEM_TOXIC_ORB; }
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion holds a T
 
 SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion poisons a target with Synchronize, Synchronize will not poison Poison- or Steel-type Pokémon")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     GIVEN {
@@ -133,7 +133,7 @@ SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion poisons a
 
 SINGLE_BATTLE_TEST("Corrosion cannot bypass moves that prevent poisoning such as Safeguard")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     GIVEN {
@@ -155,7 +155,7 @@ SINGLE_BATTLE_TEST("Corrosion cannot bypass moves that prevent poisoning such as
 
 SINGLE_BATTLE_TEST("Corrosion cannot bypass abilities that prevent poisoning such as Immunity")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     GIVEN {
@@ -177,7 +177,7 @@ SINGLE_BATTLE_TEST("Corrosion cannot bypass abilities that prevent poisoning suc
 
 SINGLE_BATTLE_TEST("Corrosion allows the Pokémon with the ability to poison a Steel or Poison-type opponent by using Magic Coat")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     GIVEN {
@@ -201,7 +201,7 @@ SINGLE_BATTLE_TEST("Corrosion allows the Pokémon with the ability to poison a S
 
 SINGLE_BATTLE_TEST("Corrosion's effect is lost if the move used by the Pokémon with the ability is reflected by Magic Coat")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISON_POWDER; }
     GIVEN {

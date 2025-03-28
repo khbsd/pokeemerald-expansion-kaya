@@ -1,4 +1,4 @@
-const u16 gEasyChatGroup_Pokemon[] = {
+const u32 gEasyChatGroup_Pokemon[] = {
     SPECIES_ABRA,
     SPECIES_ABSOL,
     SPECIES_AGGRON,

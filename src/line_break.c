@@ -3,7 +3,7 @@
 #include "text.h"
 #include "malloc.h"
 
-void StripLineBreaks(u8 *src)
+void StripLineBreaks(u32 *src)
 {
     u32 currIndex = 0;
     while (src[currIndex] != EOS)
@@ -14,15 +14,15 @@ void StripLineBreaks(u8 *src)
     }
 }
 
-void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
+void BreakStringAutomatic(u32 *src, u32 maxWidth, u32 screenLines, u32 fontId)
 {
     u32 currIndex = 0;
-    u8 *currSrc = src;
+    u32 *currSrc = src;
     while (src[currIndex] != EOS)
     {
         if (src[currIndex] == CHAR_PROMPT_CLEAR)
         {
-            u8 replacedChar = src[currIndex + 1];
+            u32 replacedChar = src[currIndex + 1];
             src[currIndex + 1] = EOS;
             BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId);
             src[currIndex + 1] = replacedChar;
@@ -33,7 +33,7 @@ void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
     BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId);
 }
 
-void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
+void BreakSubStringAutomatic(u32 *src, u32 maxWidth, u32 screenLines, u32 fontId)
 {
     //  If the string already has line breaks, don't interfere with them
     if (StringHasManualBreaks(src))
@@ -193,7 +193,7 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
 }
 
 //  Only allow word splitting on allowed chars
-bool32 IsWordSplittingChar(const u8 *src, u32 index)
+bool32 IsWordSplittingChar(const u32 *src, u32 index)
 {
     switch (src[index])
     {
@@ -247,7 +247,7 @@ u32 GetStringBadness(struct StringLine *stringLines, u32 numLines, u32 maxWidth)
 }
 
 //  Build the new string from the data stored in the StringLine structs
-void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, u8 *str)
+void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, u32 *str)
 {
     u32 srcCharIndex = 0;
     for (u32 lineIndex = 0; lineIndex < numLines; lineIndex++)
@@ -268,7 +268,7 @@ void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, 
     }
 }
 
-bool32 StringHasManualBreaks(u8 *src)
+bool32 StringHasManualBreaks(u32 *src)
 {
     u32 charIndex = 0;
     while (src[charIndex] != EOS)

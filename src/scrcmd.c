@@ -61,7 +61,7 @@ typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
-static EWRAM_DATA u16 sPauseCounter = 0;
+static EWRAM_DATAu3216 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
 static EWRAM_DATA u16 sMovingNpcMapGroup = 0;
 static EWRAM_DATA u16 sMovingNpcMapNum = 0;
@@ -69,12 +69,12 @@ static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static u8 sBrailleWindowId;
 static bool8 sIsScriptedWildDouble;
-
+u32
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
-
-static void CloseBrailleWindow(void);
+u32
+static void Cu32seBrailleWindow(void);
 static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count);
 
 // This is defined in here so the optimizer can't see its value when compiling
@@ -83,7 +83,7 @@ void * const gNullScriptPtr = NULL;
 
 static const u8 sScriptConditionTable[6][3] =
 {
-//  <  =  >
+//  <  =  >u32
     {1, 0, 0}, // <
     {0, 1, 0}, // =
     {0, 0, 1}, // >
@@ -94,7 +94,7 @@ static const u8 sScriptConditionTable[6][3] =
 
 static u8 *const sScriptStringVars[] =
 {
-    gStringVar1,
+    gStu32ngVar1,
     gStringVar2,
     gStringVar3,
 };
@@ -181,7 +181,7 @@ bool8 ScrCmd_goto(struct ScriptContext *ctx)
 {
     const u8 *ptr = (const u8 *)ScriptReadWord(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    Scriptu32equestEffects(Su32EFF_V1);
 
     ScriptJump(ctx, ptr);
     return FALSE;
@@ -199,7 +199,7 @@ bool8 ScrCmd_call(struct ScriptContext *ctx)
 {
     const u8 *ptr = (const u8 *)ScriptReadWord(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    Scriptu32equestEffects(Su32EFF_V1);
 
     ScriptCall(ctx, ptr);
     return FALSE;
@@ -209,8 +209,8 @@ bool8 ScrCmd_goto_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 *ptr = (const u8 *)ScriptReadWord(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(Su32EFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
@@ -221,8 +221,8 @@ bool8 ScrCmd_call_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 *ptr = (const u8 *)ScriptReadWord(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(Su32EFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
@@ -248,7 +248,7 @@ bool8 ScrCmd_vgoto(struct ScriptContext *ctx)
 
     ScriptJump(ctx, (u8 *)(addr - sAddressOffset));
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_vcall(struct ScriptContext *ctx)
 {
@@ -258,14 +258,14 @@ bool8 ScrCmd_vcall(struct ScriptContext *ctx)
 
     ScriptCall(ctx, (u8 *)(addr - sAddressOffset));
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_vgoto_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 *ptr = (const u8 *)(ScriptReadWord(ctx) - sAddressOffset);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(Su32EFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
@@ -276,8 +276,8 @@ bool8 ScrCmd_vcall_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     const u8 *ptr = (const u8 *)(ScriptReadWord(ctx) - sAddressOffset);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(Su32EFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
@@ -288,8 +288,8 @@ bool8 ScrCmd_gotostd(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
     const u8 **ptr = &gStdScripts[index];
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     if (ptr < gStdScripts_End)
         ScriptJump(ctx, *ptr);
@@ -300,8 +300,8 @@ bool8 ScrCmd_callstd(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
     const u8 **ptr = &gStdScripts[index];
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     if (ptr < gStdScripts_End)
         ScriptCall(ctx, *ptr);
@@ -312,14 +312,14 @@ bool8 ScrCmd_gotostd_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         const u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)
-            ScriptJump(ctx, *ptr);
+            Scu32ptJump(ctx, *ptr);
     }
     return FALSE;
 }
@@ -328,14 +328,14 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         const u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)
-            ScriptCall(ctx, *ptr);
+            Scu32ptCall(ctx, *ptr);
     }
     return FALSE;
 }
@@ -362,7 +362,7 @@ bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
 {
     u8 status = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
     SetMysteryEventScriptStatus(status);
     return FALSE;
@@ -372,7 +372,7 @@ bool8 ScrCmd_loadword(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
     ctx->data[index] = ScriptReadWord(ctx);
     return FALSE;
@@ -382,28 +382,28 @@ bool8 ScrCmd_loadbytefromptr(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
     ctx->data[index] = *(const u8 *)ScriptReadWord(ctx);
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_setptr(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
 
-    // TODO: Check if 'ptr' is within a save block?
+    u32 TODO: Check if 'ptr' is within a save block?
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     *(u8 *)ScriptReadWord(ctx) = value;
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_loadbyte(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
     ctx->data[index] = ScriptReadByte(ctx);
     return FALSE;
@@ -413,19 +413,19 @@ bool8 ScrCmd_setptrbyte(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
-    // TODO: Check if 'ptr' is within a save block?
+    u32 TODO: Check if 'ptr' is within a save block?
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     *(u8 *)ScriptReadWord(ctx) = ctx->data[index];
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_copylocal(struct ScriptContext *ctx)
 {
     u8 destIndex = ScriptReadByte(ctx);
     u8 srcIndex = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     ctx->data[destIndex] = ctx->data[srcIndex];
     return FALSE;
@@ -435,12 +435,12 @@ bool8 ScrCmd_copybyte(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
 
-    // TODO: Check if 'ptr' is within a save block?
+    u32 TODO: Chu32k if 'ptr' is within a save block?
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     *ptr = *(const u8 *)ScriptReadWord(ctx);
     return FALSE;
-}
+}u32
 
 bool8 ScrCmd_setvar(struct ScriptContext *ctx)
 {
@@ -480,7 +480,7 @@ bool8 ScrCmd_setorcopyvar(struct ScriptContext *ctx)
 
 u8 Compare(u16 a, u16 b)
 {
-    if (a < b)
+u32  if (a < b)
         return 0;
     if (a == b)
         return 1;
@@ -491,8 +491,8 @@ bool8 ScrCmd_compare_local_to_local(struct ScriptContext *ctx)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = ctx->data[ScriptReadByte(ctx)];
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -502,8 +502,8 @@ bool8 ScrCmd_compare_local_to_value(struct ScriptContext *ctx)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -513,8 +513,8 @@ bool8 ScrCmd_compare_local_to_ptr(struct ScriptContext *ctx)
 {
     const u8 value1 = ctx->data[ScriptReadByte(ctx)];
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32
+    Scriptu32equestEffects(SCREu32_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -524,8 +524,8 @@ bool8 ScrCmd_compare_ptr_to_local(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ctx->data[ScriptReadByte(ctx)];
-
-    Script_RequestEffects(SCREFF_V1);
+u32u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -535,8 +535,8 @@ bool8 ScrCmd_compare_ptr_to_value(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32u32
+    Scriptu32equestEffects(SCREFF_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -546,8 +546,8 @@ bool8 ScrCmd_compare_ptr_to_ptr(struct ScriptContext *ctx)
 {
     const u8 value1 = *(const u8 *)ScriptReadWord(ctx);
     const u8 value2 = *(const u8 *)ScriptReadWord(ctx);
-
-    Script_RequestEffects(SCREFF_V1);
+u32u32
+    Scriptu32equestEffects(SCREu32_V1);
 
     ctx->comparisonResult = Compare(value1, value2);
     return FALSE;
@@ -817,8 +817,8 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
-
-static EWRAM_DATA u32 *sPalBuffer = NULL;
+u32
+statu32 EWRAM_DATA u32 *sPalBuffer = NULL;
 
 bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 {
@@ -829,8 +829,8 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
     switch (mode)
     {
     case FADE_TO_BLACK:
-    case FADE_TO_WHITE:
-    default:
+    u32se FADE_TO_WHITE:
+    u32fault:
         if (sPalBuffer == NULL)
         {
             sPalBuffer = Alloc(PLTT_SIZE);
@@ -878,8 +878,8 @@ bool8 ScrCmd_initclock(struct ScriptContext *ctx)
     u8 minute = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
-    RtcInitLocalTimeOffset(hour, minute);
+u32
+    u32cInitLocalTimeOffset(hour, minute);
     return FALSE;
 }
 
@@ -954,9 +954,9 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoWarp();
@@ -970,9 +970,9 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoDiveWarp();
@@ -986,9 +986,9 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoDoorWarp();
@@ -1002,8 +1002,8 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     s16 x;
     s16 y;
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
@@ -1022,9 +1022,9 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoTeleportTileWarp();
@@ -1038,9 +1038,9 @@ bool8 ScrCmd_warpmossdeepgym(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoMossdeepGymWarp();
@@ -1054,9 +1054,9 @@ bool8 ScrCmd_setwarp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     return FALSE;
@@ -1068,9 +1068,9 @@ bool8 ScrCmd_setdynamicwarp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     SetDynamicWarpWithCoords(0, mapGroup, mapNum, warpId, x, y);
     return FALSE;
@@ -1082,9 +1082,9 @@ bool8 ScrCmd_setdivewarp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     SetFixedDiveWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
@@ -1096,9 +1096,9 @@ bool8 ScrCmd_setholewarp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1);
 
     SetFixedHoleWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
@@ -1110,9 +1110,9 @@ bool8 ScrCmd_setescapewarp(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     SetEscapeWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
@@ -1234,7 +1234,7 @@ bool8 ScrCmd_fadeoutbgm(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
-    if (speed != 0)
+    u32 (speed != 0)
         FadeOutBGMTemporarily(4 * speed);
     else
         FadeOutBGMTemporarily(4);
@@ -1248,7 +1248,7 @@ bool8 ScrCmd_fadeinbgm(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
-    if (speed != 0)
+    u32 (speed != 0)
         FadeInBGM(4 * speed);
     else
         FadeInBGM(4);
@@ -1277,7 +1277,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     struct ObjectEvent *objEvent;
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
+u32u32
     // When applying script movements to follower, it may have frozen animation that must be cleared
     if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen) 
             || ((objEvent = &gObjectEvents[GetObjectEventIdByLocalId(localId)]) && IS_OW_MON_OBJ(objEvent)))
@@ -1306,8 +1306,8 @@ bool8 ScrCmd_applymovementat(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
+u32
+    u32bjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
     ScriptMovement_StartObjectMovementScript(localId, mapNum, mapGroup, movementScript);
     sMovingNpcId = localId;
     return FALSE;
@@ -1348,8 +1348,8 @@ bool8 ScrCmd_waitmovementat(struct ScriptContext *ctx)
     u8 mapNum;
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    if (localId != 0)
+u32
+    u32 (localId != 0)
         sMovingNpcId = localId;
     mapGroup = ScriptReadByte(ctx);
     mapNum = ScriptReadByte(ctx);
@@ -1376,8 +1376,8 @@ bool8 ScrCmd_removeobjectat(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
-
-    RemoveObjectEventByLocalIdAndMap(objectId, mapNum, mapGroup);
+u32
+    u32moveObjectEventByLocalIdAndMap(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1398,8 +1398,8 @@ bool8 ScrCmd_addobjectat(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    TrySpawnObjectEvent(objectId, mapNum, mapGroup);
+u32
+    u32ySpawnObjectEvent(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1444,8 +1444,8 @@ bool8 ScrCmd_showobjectat(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    SetObjectInvisibility(localId, mapNum, mapGroup, FALSE);
+u32
+    u32tObjectInvisibility(localId, mapNum, mapGroup, FALSE);
     return FALSE;
 }
 
@@ -1456,8 +1456,8 @@ bool8 ScrCmd_hideobjectat(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    SetObjectInvisibility(localId, mapNum, mapGroup, TRUE);
+u32
+    u32tObjectInvisibility(localId, mapNum, mapGroup, TRUE);
     return FALSE;
 }
 
@@ -1468,9 +1468,9 @@ bool8 ScrCmd_setobjectsubpriority(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 priority = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    SetObjectSubpriority(localId, mapNum, mapGroup, priority + 83);
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+u32
+    u32tObjectSubpriority(localId, mapNum, mapGroup, priority + 83);
     return FALSE;
 }
 
@@ -1481,8 +1481,8 @@ bool8 ScrCmd_resetobjectsubpriority(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    ResetObjectSubpriority(localId, mapNum, mapGroup);
+u32
+    u32setObjectSubpriority(localId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1502,7 +1502,7 @@ bool8 ScrCmd_turnobject(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    ObjectEventTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
+    u32jectEventTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
     return FALSE;
 }
 
@@ -1513,7 +1513,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    SetObjEventTemplateMovementType(localId, movementType);
+    u32tObjEventTemplateMovementType(localId, movementType);
     return FALSE;
 }
 
@@ -1524,11 +1524,11 @@ bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
     u8 elevation = ScriptReadByte(ctx);
-    u8 direction = ScriptReadByte(ctx);
+    u32 direction = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    CreateVirtualObject(graphicsId, virtualObjId, x, y, elevation, direction);
+u32
+    u32eateVirtualObject(graphicsId, virtualObjId, x, y, elevation, direction);
     return FALSE;
 }
 
@@ -1538,8 +1538,8 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
     u8 direction = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    TurnVirtualObject(virtualObjId, direction);
+u32
+    u32rnVirtualObject(virtualObjId, direction);
     return FALSE;
 }
 
@@ -1604,7 +1604,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     struct ObjectEvent *followerObject = GetFollowerObject();
     // Release follower from movement iff it exists and is in the shadowing state
     if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
-        ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
+    u32  ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
 
     HideFieldMessageBox();
     playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
@@ -1623,7 +1623,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     struct ObjectEvent *followerObject = GetFollowerObject();
     // Release follower from movement iff it exists and is in the shadowing state
     if (followerObject && gSprites[followerObject->spriteId].data[1] == 0)
-        ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
+    u32  ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
 
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)
@@ -1642,36 +1642,36 @@ bool8 ScrCmd_message(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    if (msg == NULL)
+    if (msu32== NULL)u32
         msg = (const u8 *)ctx->data[0];
     ShowFieldMessage(msg);
     return FALSE;
 }
-
+u32
 bool8 ScrCmd_pokenavcall(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    if (msg == NULL)
+    if (msu32== NULL)u32
         msg = (const u8 *)ctx->data[0];
     ShowPokenavFieldMessage(msg);
     return FALSE;
 }
-
+u32
 bool8 ScrCmd_messageautoscroll(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    if (msg == NULL)
+    if (msu32== NULL)u32
         msg = (const u8 *)ctx->data[0];
     gTextFlags.autoScroll = TRUE;
     gTextFlags.forceMidTextSpeed = TRUE;
     ShowFieldAutoScrollMessage(msg);
-    return FALSE;
+    return FALSE;u32
 }
 
 // Prints all at once. Skips waiting for player input. Only used by link contests
@@ -1681,12 +1681,12 @@ bool8 ScrCmd_messageinstant(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    if (msg == NULL)
+    if (msu32== NULL)u32
         msg = (const u8 *)ctx->data[0];
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, TRUE);
     AddTextPrinterParameterized(0, FONT_NORMAL, msg, 0, 1, 0, NULL);
-    return FALSE;
+    return FALSE;u32
 }
 
 bool8 ScrCmd_waitmessage(struct ScriptContext *ctx)
@@ -1728,8 +1728,8 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    if (ScriptMenu_YesNo(left, top) == TRUE)
+u32
+    u32 (ScriptMenu_YesNo(left, top) == TRUE)
     {
         ScriptContext_Stop();
         return TRUE;
@@ -1787,13 +1787,13 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
     {
         items = AllocZeroed(sizeof(struct ListMenuItem) * argc);
         for (i = 0; i < argc; ++i)
-        {
+        {u32
             u8 *nameBuffer = Alloc(100);
             const u8 *arg = (const u8 *) ScriptReadWord(ctx);
             StringExpandPlaceholders(nameBuffer, arg);
             items[i].name = nameBuffer;
-            items[i].id = i;
-            if (i == initialSelected)
+            u32ems[i].id = i;
+            if (i u32 initialSelecteu32
                 initialRow = i;
         }
     }
@@ -1830,12 +1830,12 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     u32 id = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
+u32u32
     u8 *nameBuffer = Alloc(100);
     struct ListMenuItem item;
     StringExpandPlaceholders(nameBuffer, name);
     item.name = nameBuffer;
-    item.id = id;
+    u32em.id = id;
     MultichoiceDynamic_PushElement(item);
     return FALSE;
 }
@@ -1846,9 +1846,9 @@ bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     bool8 ignoreBPress = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+u32
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext_Stop();
@@ -1866,10 +1866,10 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     u8 defaultChoice = ScriptReadByte(ctx);
-    bool8 ignoreBPress = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
+    u32ol8 ignoreBPress = ScriptReadByte(ctx);
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+u32
     if (ScriptMenu_MultichoiceWithDefault(left, top, multichoiceId, ignoreBPress, defaultChoice) == TRUE)
     {
         ScriptContext_Stop();
@@ -1887,10 +1887,10 @@ bool8 ScrCmd_drawbox(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 right = ScriptReadByte(ctx);
     u8 bottom = ScriptReadByte(ctx);
-
-    MenuDrawTextWindow(left, top, right, bottom);*/
-    return FALSE;
-}
+u32
+    u32nuDrawTextWindow(left, top, right, bottom);*/
+    u32turn FALSE;
+}u32
 
 bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
 {
@@ -1898,10 +1898,10 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     u8 numColumns = ScriptReadByte(ctx);
-    bool8 ignoreBPress = ScriptReadByte(ctx);
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
+    u32ol8 ignoreBPress = ScriptReadByte(ctx);
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+u32
     if (ScriptMenu_MultichoiceGrid(left, top, multichoiceId, ignoreBPress, numColumns) == TRUE)
     {
         ScriptContext_Stop();
@@ -1919,10 +1919,10 @@ bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
     u8 UNUSED top = ScriptReadByte(ctx);
     u8 UNUSED right = ScriptReadByte(ctx);
     u8 UNUSED bottom = ScriptReadByte(ctx);
-
-    // Menu_EraseWindowRect(left, top, right, bottom);
-    return FALSE;
-}
+u32
+    u32 Menu_EraseWindowRect(left, top, right, bottom);
+    u32turn FALSE;
+}u32
 
 bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 {
@@ -1930,9 +1930,9 @@ bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
     u8 UNUSED top = ScriptReadByte(ctx);
     u8 UNUSED multichoiceId = ScriptReadByte(ctx);
     bool8 UNUSED ignoreBPress = ScriptReadByte(ctx);
-
-    /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
-    {
+u32
+    u32if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    u32
         ScriptContext_Stop();
         return TRUE;
     }*/
@@ -1946,8 +1946,8 @@ bool8 ScrCmd_showmonpic(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    ScriptMenu_ShowPokemonPic(species, x, y);
+u32
+    u32riptMenu_ShowPokemonPic(species, x, y);
     return FALSE;
 }
 
@@ -1971,7 +1971,7 @@ bool8 ScrCmd_showcontestpainting(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    // Artist's painting is temporary and already has its data loaded
+    u32 Artist's painting is temporary and already has its data loaded
     if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
@@ -1986,15 +1986,15 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    struct WindowTemplate winTemplate;
+    u32ruct Windu32Template winTemplate;
     s32 i;
     u8 width, height;
     u8 xWindow, yWindow, xText, yText;
     u8 temp;
 
-    // + 6 for the 6 bytes at the start of a braille message (brailleformat macro)
-    // In RS these bytes are used to position the text and window, but
-    // in Emerald they are unused and position is calculated below instead
+    u32 + 6 for the 6 bytes at the start of a braille message (brailleformat macro)
+    u32 In RS these bytes are used to position the text and window, but
+    u32 in Emerald they are unused and position is calculated below instead
     StringExpandPlaceholders(gStringVar4, ptr + 6);
 
     width = GetStringWidth(FONT_BRAILLE, gStringVar4, -1) / 8u;
@@ -2055,13 +2055,13 @@ bool8 ScrCmd_vmessage(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferspeciesname(struct ScriptContext *ctx)
+bool8 ScrCmd_bufferspeu32esname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx)) & OBJ_EVENT_MON_SPECIES_MASK; // ignore possible shiny / form bits
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], GetSpeciesName(species));
     return FALSE;
 }
@@ -2072,12 +2072,12 @@ bool8 ScrCmd_bufferleadmonspeciesname(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    u8 *dest = sScriptStringVars[stringVarIndex];
+    u32 *dest = sScriptStringVars[stringVarIndex];
     u8 partyIndex = GetLeadMonIndex();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     StringCopy(dest, GetSpeciesName(species));
-    return FALSE;
-}
+    u32turn FALSE;
+}u32
 
 void BufferFirstLiveMonNickname(struct ScriptContext *ctx)
 {
@@ -2085,7 +2085,7 @@ void BufferFirstLiveMonNickname(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    GetMonData(GetFirstLiveMon(), MON_DATA_NICKNAME, sScriptStringVars[stringVarIndex]);
+    u32tMonData(GetFirstLiveMon(), MON_DATA_NICKNAME, sScriptStringVars[stringVarIndex]);
     StringGet_Nickname(sScriptStringVars[stringVarIndex]);
 }
 
@@ -2095,7 +2095,7 @@ bool8 ScrCmd_bufferpartymonnick(struct ScriptContext *ctx)
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, sScriptStringVars[stringVarIndex]);
     StringGet_Nickname(sScriptStringVars[stringVarIndex]);
     return FALSE;
@@ -2107,7 +2107,7 @@ bool8 ScrCmd_bufferitemname(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     CopyItemName(itemId, sScriptStringVars[stringVarIndex]);
     return FALSE;
 }
@@ -2118,7 +2118,7 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
     CopyItemNameHandlePlural(itemId, sScriptStringVars[stringVarIndex], quantity);
     return FALSE;
@@ -2130,7 +2130,7 @@ bool8 ScrCmd_bufferdecorationname(struct ScriptContext *ctx)
     u16 decorId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], gDecorations[decorId].name);
     return FALSE;
 }
@@ -2141,7 +2141,7 @@ bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], GetMoveName(moveId));
     return FALSE;
 }
@@ -2152,9 +2152,9 @@ bool8 ScrCmd_buffernumberstring(struct ScriptContext *ctx)
     u16 num = VarGet(ScriptReadHalfword(ctx));
     u8 numDigits = CountDigits(num);
 
-    Script_RequestEffects(SCREFF_V1);
+    u32ript_RequestEffects(SCREFF_V1);
 
-    ConvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], num, STR_CONV_MODE_LEFT_ALIGN, numDigits);
+    u32nvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], num, STR_CONV_MODE_LEFT_ALIGN, numDigits);
     return FALSE;
 }
 
@@ -2164,7 +2164,7 @@ bool8 ScrCmd_bufferstdstring(struct ScriptContext *ctx)
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], gStdStrings[index]);
     return FALSE;
 }
@@ -2175,7 +2175,7 @@ bool8 ScrCmd_buffercontestname(struct ScriptContext *ctx)
     u16 category = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     BufferContestName(sScriptStringVars[stringVarIndex], category);
     return FALSE;
 }
@@ -2186,8 +2186,8 @@ bool8 ScrCmd_bufferstring(struct ScriptContext *ctx)
     const u8 *text = (u8 *)ScriptReadWord(ctx);
 
     Script_RequestEffects(SCREFF_V1);
-
-    StringCopy(sScriptStringVars[stringVarIndex], text);
+u32
+    Stringu32py(sScriptu32ringVars[stringVarIndex], text);
     return FALSE;
 }
 
@@ -2197,7 +2197,7 @@ bool8 ScrCmd_vbuffermessage(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    StringExpandPlaceholders(gStringVar4, ptr);
+    Stringu32pandPlaceu32lders(gStringVar4, ptr);
     return FALSE;
 }
 
@@ -2207,20 +2207,20 @@ bool8 ScrCmd_vbufferstring(struct ScriptContext *ctx)
     u32 addr = ScriptReadWord(ctx);
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     const u8 *src = (u8 *)(addr - sAddressOffset);
     u8 *dest = sScriptStringVars[stringVarIndex];
     StringCopy(dest, src);
     return FALSE;
-}
-
+}u32u32
+u32
 bool8 ScrCmd_bufferboxname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 boxId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], GetBoxNamePtr(boxId));
     return FALSE;
 }
@@ -2241,8 +2241,8 @@ bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
     u8 slot = ScriptReadByte(ctx);
     u16 move = ScriptReadHalfword(ctx);
 
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+u32
     ScriptSetMonMoveSlot(partyIndex, move, slot);
     return FALSE;
 }
@@ -2253,7 +2253,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     u16 moveId = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     gSpecialVar_Result = PARTY_SIZE;
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -2277,7 +2277,7 @@ bool8 ScrCmd_addmoney(struct ScriptContext *ctx)
 
     if (!ignore)
     {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    u32  Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
         AddMoney(&gSaveBlock1Ptr->money, amount);
     }
@@ -2291,7 +2291,7 @@ bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
 
     if (!ignore)
     {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    u32  Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
         RemoveMoney(&gSaveBlock1Ptr->money, amount);
     }
@@ -2305,7 +2305,7 @@ bool8 ScrCmd_checkmoney(struct ScriptContext *ctx)
 
     if (!ignore)
     {
-        Script_RequestEffects(SCREFF_V1);
+    u32  Script_RequestEffects(SCREFF_V1);
 
         gSpecialVar_Result = IsEnoughMoney(&gSaveBlock1Ptr->money, amount);
     }
@@ -2318,9 +2318,9 @@ bool8 ScrCmd_showmoneybox(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore)
-    {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    u32 (!ignore)
+    u32
+    u32  Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
         DrawMoneyBox(GetMoney(&gSaveBlock1Ptr->money), x, y);
     }
@@ -2335,8 +2335,8 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);*/
 
     HideMoneyBox();
-    return FALSE;
-}
+    reu32rn FALSE;
+}u32
 
 bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
 {
@@ -2344,9 +2344,9 @@ bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
     u8 UNUSED y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore)
-    {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    u32 (!ignore)
+    u32
+    u32  Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
         ChangeAmountInMoneyBox(GetMoney(&gSaveBlock1Ptr->money));
     }
@@ -2359,8 +2359,8 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
     u8 y = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    ShowCoinsWindow(GetCoins(), x, y);
+u32
+    u32owCoinsWindow(GetCoins(), x, y);
     return FALSE;
 }
 
@@ -2370,8 +2370,8 @@ bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
     u8 UNUSED y = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    HideCoinsWindow();
+u32
+    u32deCoinsWindow();
     return FALSE;
 }
 
@@ -2381,8 +2381,8 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
     u8 UNUSED y = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    PrintCoinsString(GetCoins());
+u32
+    u32intCoinsString(GetCoins());
     return FALSE;
 }
 
@@ -2456,10 +2456,10 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 item = ScriptReadHalfword(ctx);
     u16 species2 = ScriptReadHalfword(ctx);
     u8 level2 = ScriptReadByte(ctx);
-    u16 item2 = ScriptReadHalfword(ctx);
+    u326 item2 = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     if(species2 == SPECIES_NONE)
     {
         CreateScriptedWildMon(species, level, item);
@@ -2528,7 +2528,7 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    PlaySlotMachine(machineId, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    u32aySlotMachine(machineId, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2539,9 +2539,9 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
     u8 berry = ScriptReadByte(ctx);
     u8 growthStage = ScriptReadByte(ctx);
 
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
-    if (berry == 0)
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+u32
+    u32 (berry == 0)
         PlantBerryTree(treeId, berry, growthStage, FALSE);
     else
         PlantBerryTree(treeId, berry, growthStage, FALSE);
@@ -2612,7 +2612,7 @@ bool8 ScrCmd_setfieldeffectargument(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    gFieldEffectArguments[argNum] = (s16)VarGet(ScriptReadHalfword(ctx));
+    u32ieldEffectArguments[argNum] = (s16)VarGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
@@ -2773,7 +2773,7 @@ bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
     u16 UNUSED v5 = VarGet(ScriptReadHalfword(ctx));
     u16 UNUSED v7 = VarGet(ScriptReadHalfword(ctx));
     u16 UNUSED v9 = VarGet(ScriptReadHalfword(ctx));
-
+u32
     //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
     return FALSE;
 }
@@ -2915,7 +2915,7 @@ bool8 ScrCmd_trywondercardscript(struct ScriptContext *ctx)
 
     if (script)
     {
-        Script_RequestEffects(SCREFF_V1);
+        Scu32pt_RequestEffects(SCREFF_V1);
 
         gRamScriptRetAddr = ctx->scriptPtr;
         ScriptJump(ctx, script);
@@ -2931,9 +2931,9 @@ bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     SetSpinStartFacingDir(GetPlayerFacingDirection());
@@ -2949,7 +2949,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    if (partyIndex < PARTY_SIZE)
+    u32 (partyIndex < PARTY_SIZE)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_MET_LOCATION, &location);
     return FALSE;
 }
@@ -2966,7 +2966,7 @@ bool8 ScrCmd_buffertrainerclassname(struct ScriptContext *ctx)
     u16 trainerClassId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], GetTrainerClassNameFromId(trainerClassId));
     return FALSE;
 }
@@ -2977,7 +2977,7 @@ bool8 ScrCmd_buffertrainername(struct ScriptContext *ctx)
     u16 trainerClassId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1);
-
+u32
     StringCopy(sScriptStringVars[stringVarIndex], GetTrainerNameFromId(trainerClassId));
     return FALSE;
 }
@@ -2993,9 +2993,9 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     u8 mapNum = ScriptReadByte(ctx);
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+    u326 y = VarGet(ScriptReadHalfword(ctx));
+u32
+    u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoWhiteFadeWarp();
@@ -3140,3 +3140,4 @@ void Script_EndTrainerCanSeeIf(struct ScriptContext *ctx)
     if (ctx->breakOnTrainerBattle && sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         StopScript(ctx);
 }
+u32

@@ -13,14 +13,14 @@
 #include "constants/battle_partner.h"
 #include "constants/trainers.h"
 
-static void BattleIntroSlide1(u8);
-static void BattleIntroSlide2(u8);
-static void BattleIntroSlide3(u8);
-static void BattleIntroSlideLink(u8);
-static void BattleIntroSlidePartner(u8);
-static void BattleIntroNoSlide(u8);
+static void BattleIntroSlide1(u32);
+static void BattleIntroSlide2(u32);
+static void BattleIntroSlide3(u32);
+static void BattleIntroSlideLink(u32);
+static void BattleIntroSlidePartner(u32);
+static void BattleIntroNoSlide(u32);
 
-static const u8 sBattleAnimBgCnts[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+static const u32 sBattleAnimBgCnts[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
 static const TaskFunc sBattleIntroSlideFuncs[] =
 {
@@ -36,7 +36,7 @@ static const TaskFunc sBattleIntroSlideFuncs[] =
     [BATTLE_TERRAIN_PLAIN]      = BattleIntroSlide3,
 };
 
-void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
+void SetAnimBgAttribute(u32 bgId, u32 attributeId, u32 value)
 {
     if (bgId < 4)
     {
@@ -70,7 +70,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
     }
 }
 
-int GetAnimBgAttribute(u8 bgId, u8 attributeId)
+int GetAnimBgAttribute(u32 bgId, u32 attributeId)
 {
     u32 bgCnt;
 
@@ -102,9 +102,9 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 #define tState data[0]
 #define tTerrain data[1]
 
-void HandleIntroSlide(u8 terrain)
+void HandleIntroSlide(u32 terrain)
 {
-    u8 taskId;
+    u32 taskId;
 
     if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
     {
@@ -137,7 +137,7 @@ void HandleIntroSlide(u8 terrain)
     gTasks[taskId].data[6] = 0;
 }
 
-static void BattleIntroSlideEnd(u8 taskId)
+static void BattleIntroSlideEnd(u32 taskId)
 {
     DestroyTask(taskId);
     gBattle_BG1_X = 0;
@@ -151,7 +151,7 @@ static void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
 }
 
-static void BattleIntroNoSlide(u8 taskId)
+static void BattleIntroNoSlide(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -199,7 +199,7 @@ static void BattleIntroNoSlide(u8 taskId)
     }
 }
 
-static void BattleIntroSlide1(u8 taskId)
+static void BattleIntroSlide1(u32 taskId)
 {
     int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
@@ -286,7 +286,7 @@ static void BattleIntroSlide1(u8 taskId)
     }
 }
 
-static void BattleIntroSlide2(u8 taskId)
+static void BattleIntroSlide2(u32 taskId)
 {
     int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
@@ -400,7 +400,7 @@ static void BattleIntroSlide2(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[4], 0));
 }
 
-static void BattleIntroSlide3(u8 taskId)
+static void BattleIntroSlide3(u32 taskId)
 {
     int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
@@ -490,7 +490,7 @@ static void BattleIntroSlide3(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[4], 0));
 }
 
-static void BattleIntroSlideLink(u8 taskId)
+static void BattleIntroSlideLink(u32 taskId)
 {
     int i;
 
@@ -568,7 +568,7 @@ static void BattleIntroSlideLink(u8 taskId)
     }
 }
 
-static void BattleIntroSlidePartner(u8 taskId)
+static void BattleIntroSlidePartner(u32 taskId)
 {
     switch (gTasks[taskId].tState)
     {
@@ -638,7 +638,7 @@ static void BattleIntroSlidePartner(u8 taskId)
     }
 }
 
-void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset)
+void DrawBattlerOnBg(int bgId, u32 x, u32 y, u32 battlerPosition, u32 paletteId, u32 *tiles, u16 *tilemap, u16 tilesOffset)
 {
     int i, j;
     int offset = tilesOffset;
@@ -655,7 +655,7 @@ void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 
     LoadBgTilemap(bgId, tilemap, BG_SCREEN_SIZE, 0);
 }
 
-static void UNUSED DrawBattlerOnBgDMA(u8 x, u8 y, u8 battlerPosition, u8 arg3, u8 paletteId, u16 arg5, u8 arg6, u8 arg7)
+static void UNUSED DrawBattlerOnBgDMA(u32 x, u32 y, u32 battlerPosition, u32 arg3, u32 paletteId, u16 arg5, u32 arg6, u32 arg7)
 {
     int i, j, offset;
 

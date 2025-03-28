@@ -62,16 +62,16 @@
 struct ApprenticePartyMovesData
 {
     u8 moveCounter;
-    u16 moves[MULTI_PARTY_SIZE][NUM_WHICH_MOVE_QUESTIONS];
+    u32 moves[MULTI_PARTY_SIZE][NUM_WHICH_MOVE_QUESTIONS];
     u8 moveSlots[MULTI_PARTY_SIZE][NUM_WHICH_MOVE_QUESTIONS];
 };
 
 struct ApprenticeQuestionData
 {
-    u16 speciesId;
-    u16 altSpeciesId;
-    u16 moveId1;
-    u16 moveId2;
+    u32 speciesId;
+    u32 altSpeciesId;
+    u32 moveId1;
+    u32 moveId2;
 };
 
 // IWRAM common
@@ -80,8 +80,8 @@ COMMON_DATA struct ApprenticeQuestionData *gApprenticeQuestionData = NULL;
 COMMON_DATA void (*gApprenticeFunc)(void) = NULL;
 
 // This file's functions.
-static u16 GetRandomAlternateMove(u8 monId);
-static bool8 TrySetMove(u8 monId, u16 moveId);
+static u32 GetRandomAlternateMove(u8 monId);
+static bool8 TrySetMove(u8 monId, u32 moveId);
 static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
 static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
 static void RemoveAndHideWindow(u8 windowId);
@@ -308,15 +308,15 @@ static void SetRandomQuestionData(void)
 
 // Get the second move choice for the "Which move" question
 // Unlike the first move choice, this can be either a level up move or a TM/HM move
-static u16 GetRandomAlternateMove(u8 monId)
+static u32 GetRandomAlternateMove(u8 monId)
 {
     u8 i, j;
     u8 id;
     u8 numLearnsetMoves;
-    u16 species;
+    u32 species;
     const struct LevelUpMove *learnset;
     bool32 needTMs = FALSE;
-    u16 moveId = MOVE_NONE;
+    u32 moveId = MOVE_NONE;
     bool32 shouldUseMove;
     u8 level;
 
@@ -421,7 +421,7 @@ static u16 GetRandomAlternateMove(u8 monId)
     return moveId;
 }
 
-static bool8 TrySetMove(u8 monId, u16 moveId)
+static bool8 TrySetMove(u8 monId, u32 moveId)
 {
     u8 i;
 
@@ -435,7 +435,7 @@ static bool8 TrySetMove(u8 monId, u16 moveId)
     return TRUE;
 }
 
-static void GetLatestLearnedMoves(u16 species, u16 *moves)
+static void GetLatestLearnedMoves(u32 species, u32 *moves)
 {
     u8 i, j;
     u8 level, numLearnsetMoves;
@@ -463,9 +463,9 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
 
 // Get the level up move or previously suggested move to be the first move choice
 // Compare to GetRandomAlternateMove, which gets the move that will be the second choice
-static u16 GetDefaultMove(u8 monId, u8 speciesArrayId, u8 moveSlot)
+static u32 GetDefaultMove(u8 monId, u8 speciesArrayId, u8 moveSlot)
 {
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
     u8 i, numQuestions;
 
     if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
@@ -565,7 +565,7 @@ static void CreateApprenticeMenu(u8 menu)
         top = 6;
         for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
-            u16 species;
+            u32 species;
             u32 speciesTableId;
 
             speciesTableId = APPRENTICE_SPECIES_ID(i);
@@ -1270,7 +1270,7 @@ static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
-        gApprenticeFunc = (void *)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
+        gApprenticeFunc = (void *)(u32)(((u32)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
         gApprenticeFunc();
         DestroyTask(taskId);
     }

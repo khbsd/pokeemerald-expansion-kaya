@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Fling fails if pokemon holds no item")
 {
-    u16 item;
+    u32 item;
 
     PARAMETRIZE {item = ITEM_NONE; }
     PARAMETRIZE {item = ITEM_RAZOR_CLAW; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Fling fails if pokemon holds no item")
 
 SINGLE_BATTLE_TEST("Fling fails if pokemon is under the effects of Embargo or Magic Room")
 {
-    u16 move;
+    u32 move;
 
     PARAMETRIZE {move = MOVE_CELEBRATE; }
     PARAMETRIZE {move = MOVE_EMBARGO; }
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Fling fails if pokemon is under the effects of Embargo or Ma
 
 SINGLE_BATTLE_TEST("Fling fails for pokemon with Klutz ability")
 {
-    u16 ability;
+    u32 ability;
 
     PARAMETRIZE {ability = ABILITY_KLUTZ; }
     PARAMETRIZE {ability = ABILITY_RUN_AWAY; }
@@ -153,7 +153,7 @@ SINGLE_BATTLE_TEST("Fling - Item is lost when target protects itself")
 SINGLE_BATTLE_TEST("Fling doesn't consume the item if pokemon is asleep/frozen/paralyzed")
 {
     u32 status;
-    u16 item;
+    u32 item;
 
     PARAMETRIZE {status = STATUS1_SLEEP_TURN(2); item = ITEM_RAZOR_CLAW; }
     PARAMETRIZE {status = STATUS1_PARALYSIS; item = ITEM_RAZOR_CLAW; }
@@ -203,7 +203,7 @@ SINGLE_BATTLE_TEST("Fling doesn't consume the item if pokemon is asleep/frozen/p
 
 SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
 {
-    u16 item;
+    u32 item;
 
     PARAMETRIZE {item = ITEM_FLAME_ORB; }
     PARAMETRIZE {item = ITEM_LIGHT_BALL; }
@@ -259,7 +259,7 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
 
 SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
 {
-    u16 item;
+    u32 item;
 
     PARAMETRIZE {item = ITEM_FLAME_ORB; }
     PARAMETRIZE {item = ITEM_LIGHT_BALL; }
@@ -338,7 +338,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
 
 SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even if the trigger conditions are not met")
 {
-    u16 item, effect;
+    u32 item, effect;
     u8 statId = 0;
     u32 status1 = STATUS1_NONE;
 

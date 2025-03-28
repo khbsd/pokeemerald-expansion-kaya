@@ -14,7 +14,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Steel Roller and Ice Spinner can remove a terrain from the field")
 {
     u32 j;
-    static const u16 terrainMoves[] =
+    static const u32 terrainMoves[] =
     {
         MOVE_ELECTRIC_TERRAIN,
         MOVE_PSYCHIC_TERRAIN,
@@ -22,8 +22,8 @@ SINGLE_BATTLE_TEST("Steel Roller and Ice Spinner can remove a terrain from the f
         MOVE_MISTY_TERRAIN,
     };
 
-    u16 terrainMove = MOVE_NONE;
-    u16 removeTerrainMove = MOVE_NONE;
+    u32 terrainMove = MOVE_NONE;
+    u32 removeTerrainMove = MOVE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(terrainMoves); j++)
     {

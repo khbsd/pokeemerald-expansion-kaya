@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_BURN; }
     PARAMETRIZE { status = STATUS1_FREEZE; }
     PARAMETRIZE { status = STATUS1_PARALYSIS; }
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
 
 SINGLE_BATTLE_TEST("Full Restore restores a party members HP and cures any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_BURN; }
     PARAMETRIZE { status = STATUS1_FREEZE; }
     PARAMETRIZE { status = STATUS1_PARALYSIS; }
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Full Restore restores a party members HP and cures any prima
 
 SINGLE_BATTLE_TEST("Full Restore heals a battler from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_BURN; }
     PARAMETRIZE { status = STATUS1_FREEZE; }
     PARAMETRIZE { status = STATUS1_PARALYSIS; }
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Full Restore heals a battler from any primary status")
 
 SINGLE_BATTLE_TEST("Full Restore heals a party member from any primary status")
 {
-    u16 status;
+    u32 status;
     PARAMETRIZE { status = STATUS1_BURN; }
     PARAMETRIZE { status = STATUS1_FREEZE; }
     PARAMETRIZE { status = STATUS1_PARALYSIS; }

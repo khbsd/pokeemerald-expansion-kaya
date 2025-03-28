@@ -76,13 +76,13 @@ void FreeBattleResources(void)
     }
 }
 
-void AdjustFriendshipOnBattleFaint(u8 battler)
+void AdjustFriendshipOnBattleFaint(u32 battler)
 {
-    u8 opposingBattlerId;
+    u32 opposingBattlerId;
 
     if (IsDoubleBattle())
     {
-        u8 opposingBattlerId2;
+        u32 opposingBattlerId2;
 
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
@@ -108,24 +108,24 @@ void AdjustFriendshipOnBattleFaint(u8 battler)
     }
 }
 
-void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
+void SwitchPartyOrderInGameMulti(u32 battler, u32 arg1)
 {
     if (GetBattlerSide(battler) != B_SIDE_OPPONENT)
     {
         s32 i;
         for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-            gBattlePartyCurrentOrder[i] = *(i + (u8 *)(gBattleStruct->battlerPartyOrders));
+            gBattlePartyCurrentOrder[i] = *(i + (u32 *)(gBattleStruct->battlerPartyOrders));
 
         SwitchPartyMonSlots(GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]), GetPartyIdFromBattlePartyId(arg1));
 
         for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-            *(i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
+            *(i + (u32 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
     }
 }
 
 // Called when a Pokémon is unable to attack during a Battle Palace battle.
 // Check if it was because they are frozen/asleep, and if so try to cure the status.
-u32 BattlePalace_TryEscapeStatus(u8 battler)
+u32 BattlePalace_TryEscapeStatus(u32 battler)
 {
     u32 effect = 0;
 

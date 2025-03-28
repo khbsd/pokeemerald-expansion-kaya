@@ -15,9 +15,9 @@ enum
 };
 
 #define ROAMER(index) (&gSaveBlock1Ptr->roamer[index])
-EWRAM_DATA static u8 sLocationHistory[ROAMER_COUNT][3][2] = {0};
-EWRAM_DATA static u8 sRoamerLocation[ROAMER_COUNT][2] = {0};
-EWRAM_DATA u8 gEncounteredRoamerIndex = 0;
+EWRAM_DATA static u32 sLocationHistory[ROAMER_COUNT][3][2] = {0};
+EWRAM_DATA static u32 sRoamerLocation[ROAMER_COUNT][2] = {0};
+EWRAM_DATA u32 gEncounteredRoamerIndex = 0;
 
 #define ___ MAP_NUM(UNDEFINED) // For empty spots in the location table
 
@@ -33,7 +33,7 @@ EWRAM_DATA u8 gEncounteredRoamerIndex = 0;
 //         map in the location table there is not a location set that starts with
 //         that map then the roamer will be significantly less likely to move away
 //         from that map when it lands there.
-static const u8 sRoamerLocations[][6] =
+static const u32 sRoamerLocations[][6] =
 {
     { MAP_NUM(ROUTE110), MAP_NUM(ROUTE111), MAP_NUM(ROUTE117), MAP_NUM(ROUTE118), MAP_NUM(ROUTE134), ___ },
     { MAP_NUM(ROUTE111), MAP_NUM(ROUTE110), MAP_NUM(ROUTE117), MAP_NUM(ROUTE118), ___, ___ },
@@ -97,7 +97,7 @@ void MoveAllRoamers(void)
         RoamerMove(i);
 }
 
-static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
+static void CreateInitialRoamerMon(u32 index, u16 species, u32 level)
 {
     ClearRoamerLocationHistory(index);
     CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
@@ -118,7 +118,7 @@ static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
     sRoamerLocation[index][MAP_NUM] = sRoamerLocations[Random() % NUM_LOCATION_SETS][0];
 }
 
-static u8 GetFirstInactiveRoamerIndex(void)
+static u32 GetFirstInactiveRoamerIndex(void)
 {
     u32 i;
 
@@ -130,9 +130,9 @@ static u8 GetFirstInactiveRoamerIndex(void)
     return ROAMER_COUNT;
 }
 
-bool8 TryAddRoamer(u16 species, u8 level)
+bool8 TryAddRoamer(u16 species, u32 level)
 {
-    u8 index = GetFirstInactiveRoamerIndex();
+    u32 index = GetFirstInactiveRoamerIndex();
 
     if (index < ROAMER_COUNT)
     {
@@ -173,7 +173,7 @@ void UpdateLocationHistoryForRoamer(void)
 
 void RoamerMoveToOtherLocationSet(u32 roamerIndex)
 {
-    u8 mapNum = 0;
+    u32 mapNum = 0;
 
     if (!ROAMER(roamerIndex)->active)
         return;
@@ -196,7 +196,7 @@ void RoamerMoveToOtherLocationSet(u32 roamerIndex)
 
 void RoamerMove(u32 roamerIndex)
 {
-    u8 locSet = 0;
+    u32 locSet = 0;
 
     if ((Random() % 16) == 0)
     {
@@ -212,7 +212,7 @@ void RoamerMove(u32 roamerIndex)
             // Find the location set that starts with the roamer's current map
             if (sRoamerLocation[roamerIndex][MAP_NUM] == sRoamerLocations[locSet][0])
             {
-                u8 mapNum;
+                u32 mapNum;
                 // Choose a new map (excluding the first) within this set
                 // Also exclude a map if the roamer was there 2 moves ago
                 do
@@ -229,7 +229,7 @@ void RoamerMove(u32 roamerIndex)
     }
 }
 
-bool8 IsRoamerAt(u32 roamerIndex, u8 mapGroup, u8 mapNum)
+bool8 IsRoamerAt(u32 roamerIndex, u32 mapGroup, u32 mapNum)
 {
     if (ROAMER(roamerIndex)->active && mapGroup == sRoamerLocation[roamerIndex][MAP_GRP] && mapNum == sRoamerLocation[roamerIndex][MAP_NUM])
         return TRUE;
@@ -286,7 +286,7 @@ void SetRoamerInactive(u32 roamerIndex)
     ROAMER(roamerIndex)->active = FALSE;
 }
 
-void GetRoamerLocation(u32 roamerIndex, u8 *mapGroup, u8 *mapNum)
+void GetRoamerLocation(u32 roamerIndex, u32 *mapGroup, u32 *mapNum)
 {
     *mapGroup = sRoamerLocation[roamerIndex][MAP_GRP];
     *mapNum = sRoamerLocation[roamerIndex][MAP_NUM];

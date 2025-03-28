@@ -42,8 +42,8 @@
 struct BattleDebugModifyArrows
 {
     u8 arrowSpriteId[2];
-    u16 minValue;
-    u16 maxValue;
+    u32 minValue;
+    u32 maxValue;
     int currValue;
     u8 currentDigit:4;
     u8 maxDigits:4;
@@ -263,7 +263,7 @@ enum
 enum
 {
     VAL_U8,
-    VAL_U16,
+    VAL_u32,
     VAL_U32,
     VAL_BITFIELD_8,
     VAL_BITFIELD_16,
@@ -272,13 +272,13 @@ enum
     VAR_SHOW_HP,
     VAR_SUBSTITUTE,
     VAR_IN_LOVE,
-    VAR_U16_4_ENTRIES,
+    VAR_u32_4_ENTRIES,
     VAL_S8,
     VAL_ALL_STAT_STAGES,
 };
 
 // Static Declarations
-static const u8 *GetHoldEffectName(u16 holdEffect);
+static const u8 *GetHoldEffectName(u32 holdEffect);
 
 // const rom data
 static const u8 sText_Moves[] = _("Moves");
@@ -828,7 +828,7 @@ static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
     [LIST_ITEM_STAT_STAGES] = TRUE,
 };
 
-static const u16 sBgColor[] = {RGB_WHITE};
+static const u32 sBgColor[] = {RGB_WHITE};
 
 // this file's functions
 static void Task_DebugMenuFadeOut(u8 taskId);
@@ -843,7 +843,7 @@ static void PrintDigitChars(struct BattleDebugMenu *data);
 static void SetUpModifyArrows(struct BattleDebugMenu *data);
 static void UpdateBattlerValue(struct BattleDebugMenu *data);
 static void UpdateMonData(struct BattleDebugMenu *data);
-static u16 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus, bool32 statusTrue);
+static u32 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus, bool32 statusTrue);
 static bool32 TryMoveDigit(struct BattleDebugModifyArrows *modArrows, bool32 moveUp);
 static void SwitchToDebugView(u8 taskId);
 static void SwitchToDebugViewFromAiParty(u8 taskId);
@@ -1120,9 +1120,9 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     {
         if (GetBattlerSide(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
         {
-            u16 ability = AI_DATA->abilities[i];
-            u16 holdEffect = AI_DATA->holdEffects[i];
-            u16 item = AI_DATA->items[i];
+            u32 ability = AI_DATA->abilities[i];
+            u32 holdEffect = AI_DATA->holdEffects[i];
+            u32 item = AI_DATA->items[i];
             u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilitiesInfo[ability].name, x, 0, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, ItemId_GetName(item), x, 15, 0, NULL);
@@ -1270,7 +1270,7 @@ static void Task_ShowAiParty(u8 taskId)
         aiMons = AI_PARTY->mons[GetBattlerSide(data->aiBattlerId)];
         for (i = 0; i < AI_PARTY->count[GetBattlerSide(data->aiBattlerId)]; i++)
         {
-            u16 species = SPECIES_NONE; // Question mark
+            u32 species = SPECIES_NONE; // Question mark
             if (aiMons[i].wasSentInBattle && aiMons[i].species)
                 species = aiMons[i].species;
             data->spriteIds.aiPartyIcons[i] = CreateMonIcon(species, SpriteCallbackDummy, (i * 41) + 15, 7, 1, 0);
@@ -1780,14 +1780,14 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
     case VAL_S8:
         *(s8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
-    case VAL_U16:
-        *(u16 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+    case VAL_u32:
+        *(u32 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
-    case VAR_U16_4_ENTRIES:
-        ((u16 *)(data->modifyArrows.modifiedValPtr))[0] = data->modifyArrows.currValue;
-        ((u16 *)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
-        ((u16 *)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
-        ((u16 *)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
+    case VAR_u32_4_ENTRIES:
+        ((u32 *)(data->modifyArrows.modifiedValPtr))[0] = data->modifyArrows.currValue;
+        ((u32 *)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
+        ((u32 *)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
+        ((u32 *)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
         break;
     case VAL_ALL_STAT_STAGES:
         for (i = 0; i < NUM_BATTLE_STATS; i++)
@@ -1877,7 +1877,7 @@ static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
         charDigits[i] = valueDigits[i] + CHAR_0;
 }
 
-static u16 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus, bool32 statusTrue)
+static u32 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus, bool32 statusTrue)
 {
     struct SideTimer *sideTimer = &gSideTimers[GetBattlerSide(data->battlerId)];
 
@@ -2055,7 +2055,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.maxValue = ABILITIES_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].ability;
-        data->modifyArrows.typeOfVal = VAL_U16;
+        data->modifyArrows.typeOfVal = VAL_u32;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].ability;
         break;
     case LIST_ITEM_MOVES:
@@ -2066,13 +2066,13 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[0];
             data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[0];
-            data->modifyArrows.typeOfVal = VAR_U16_4_ENTRIES;
+            data->modifyArrows.typeOfVal = VAR_u32_4_ENTRIES;
         }
         else
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
             data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
-            data->modifyArrows.typeOfVal = VAL_U16;
+            data->modifyArrows.typeOfVal = VAL_u32;
         }
         break;
     case LIST_ITEM_PP:
@@ -2088,7 +2088,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.maxValue = ITEMS_COUNT - 1;
         data->modifyArrows.maxDigits = 3;
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].item;
-        data->modifyArrows.typeOfVal = VAL_U16;
+        data->modifyArrows.typeOfVal = VAL_u32;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].item;
         break;
     case LIST_ITEM_TYPES:
@@ -2103,7 +2103,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = 9999;
         data->modifyArrows.maxDigits = 4;
-        data->modifyArrows.typeOfVal = VAL_U16;
+        data->modifyArrows.typeOfVal = VAL_u32;
         if (data->currentSecondaryListItemId == LIST_STAT_HP_CURRENT)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].hp;
@@ -2119,8 +2119,8 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         }
         else
         {
-            data->modifyArrows.modifiedValPtr = (u16 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
-            data->modifyArrows.currValue = *(u16 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
+            data->modifyArrows.modifiedValPtr = (u32 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
+            data->modifyArrows.currValue = *(u32 *)((&gBattleMons[data->battlerId].attack) + (data->currentSecondaryListItemId - 2));
         }
         break;
     case LIST_ITEM_STAT_STAGES:
@@ -2608,7 +2608,7 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_OGERPON_MASK] = sText_HoldEffectOgerponMask,
     [HOLD_EFFECT_BERSERK_GENE] = sText_HoldEffectBerserkGene,
 };
-static const u8 *GetHoldEffectName(u16 holdEffect)
+static const u8 *GetHoldEffectName(u32 holdEffect)
 {
     if (holdEffect > ARRAY_COUNT(sHoldEffectNames))
         return sHoldEffectNames[0];

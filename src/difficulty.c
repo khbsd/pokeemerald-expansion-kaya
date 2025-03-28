@@ -23,7 +23,7 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 
-enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
+enum DifficultyLevel GetBattlePartnerDifficultyLevel(u32 partnerId)
 {
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
 
@@ -39,7 +39,7 @@ enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
     return difficulty;
 }
 
-enum DifficultyLevel GetTrainerDifficultyLevel(u16 trainerId)
+enum DifficultyLevel GetTrainerDifficultyLevel(u32 trainerId)
 {
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
 

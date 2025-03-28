@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Quark Drive boosts the highest stat")
 
 SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both")
 {
-    u16 species;
+    u32 species;
     u32 move;
     s16 damage[2];
 
@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both
 
 SINGLE_BATTLE_TEST("Quark Drive ability pop up activates only once during the duration of electric terrain")
 {
-    u16 turns;
+    u32 turns;
 
     GIVEN {
         PLAYER(SPECIES_IRON_MOTH) { Ability(ABILITY_QUARK_DRIVE); }

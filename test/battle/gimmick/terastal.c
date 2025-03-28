@@ -298,7 +298,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove the user's Flying type while Te
 
 SINGLE_BATTLE_TEST("(TERA) Type-changing moves fail against a Terastallized Pokemon")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_SOAK; }
     PARAMETRIZE { move = MOVE_FORESTS_CURSE; }
     PARAMETRIZE { move = MOVE_TRICK_OR_TREAT; }

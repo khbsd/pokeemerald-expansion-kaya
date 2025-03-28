@@ -1619,10 +1619,10 @@ static void fprint_species(FILE *f, const char *prefix, struct String s)
     else
     {
         bool underscore = false;
-        static const unsigned char *male = (unsigned char *)u8"♂";
-        static const unsigned char *female = (unsigned char *)u8"♀";
-        static const unsigned char *e_diacritic = (unsigned char *)u8"é";
-        static const unsigned char *right_single_quotation_mark = (unsigned char *)u8"’";
+        static const unsigned char *male = (unsigned char *)u32"♂";
+        static const unsigned char *female = (unsigned char *)u32"♀";
+        static const unsigned char *e_diacritic = (unsigned char *)u32"é";
+        static const unsigned char *right_single_quotation_mark = (unsigned char *)u32"’";
         for (int i = 0; i < s.string_n; i++)
         {
             unsigned char c = s.string[i];

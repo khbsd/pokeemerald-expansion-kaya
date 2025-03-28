@@ -12,10 +12,10 @@
 
 // this file's functions
 static bool8 IsNotSpecialBattleString(u16 stringId);
-static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
+static void AddMovePoints(u32 caseId, u16 arg1, u32 arg2, u32 arg3);
 static void TrySetBattleSeminarShow(void);
 static void AddPointsOnFainting(bool8 targetFainted);
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot);
+static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u32 moveSlot);
 static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride);
 
 #define TABLE_END ((u16)-1)
@@ -324,9 +324,9 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     struct BattleTv *tvPtr;
     u32 atkSide, defSide, effSide, scriptingSide;
     struct Pokemon *atkMon, *defMon;
-    u8 moveSlot;
+    u32 moveSlot;
     u32 atkFlank, defFlank, effFlank;
-    u8 *perishCount;
+    u32 *perishCount;
     u16 *statStringId, *finishedMoveId;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && stringId != STRINGID_ITDOESNTAFFECT && stringId != STRINGID_NOTVERYEFFECTIVE)
@@ -348,7 +348,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         return;
     }
 
-    perishCount = (u8 *)(gBattleTextBuff1 + 4);
+    perishCount = (u32 *)(gBattleTextBuff1 + 4);
     statStringId = (u16 *)(gBattleTextBuff2 + 2);
     finishedMoveId = (u16 *)(gBattleTextBuff1 + 2);
 
@@ -744,7 +744,7 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
 {
     struct BattleTv *tvPtr;
     u32 atkSide, defSide;
-    u8 moveSlot;
+    u32 moveSlot;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
         return;
@@ -789,7 +789,7 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
     AddMovePoints(PTS_MUD_SPORT,    move, 0,         0);
 }
 
-void BattleTv_SetDataBasedOnAnimation(u8 animationId)
+void BattleTv_SetDataBasedOnAnimation(u32 animationId)
 {
     struct BattleTv *tvPtr;
     u32 atkSide;
@@ -824,9 +824,9 @@ void TryPutLinkBattleTvShowOnAir(void)
 {
     u16 playerBestSpecies = 0, opponentBestSpecies = 0;
     s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
-    u8 playerBestMonId = 0, opponentBestMonId = 0;
+    u32 playerBestMonId = 0, opponentBestMonId = 0;
     struct BattleTvMovePoints *movePoints = NULL;
-    u8 countPlayer = 0, countOpponent = 0;
+    u32 countPlayer = 0, countOpponent = 0;
     s16 sum = 0;
     u16 species = 0;
     u16 moveId = 0;
@@ -916,7 +916,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     }
 }
 
-static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
+static void AddMovePoints(u32 caseId, u16 arg1, u32 arg2, u32 arg3)
 {
     struct BattleTvMovePoints *movePoints = &gBattleStruct->tvMovePoints;
     struct BattleTv *tvPtr = &gBattleStruct->tv;
@@ -929,7 +929,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
     {
     case PTS_MOVE_EFFECT: // arg1 -> move slot, arg2 -> move
     {
-        u8 baseFromEffect = gBattleMoveEffects[GetMoveEffect(arg2)].battleTvScore;
+        u32 baseFromEffect = gBattleMoveEffects[GetMoveEffect(arg2)].battleTvScore;
 
         // Various cases to add/remove points
         if (GetMoveRecoil(arg2) > 0)
@@ -1358,7 +1358,7 @@ void BattleTv_ClearExplosionFaintCause(void)
     }
 }
 
-u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
+u32 GetBattlerMoveSlotId(u32 battlerId, u16 moveId)
 {
     s32 i;
     struct Pokemon *party;
@@ -1377,7 +1377,7 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
     return i;
 }
 
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot)
+static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u32 moveSlot)
 {
     if (weatherFlags & B_WEATHER_RAIN)
         AddMovePoints(PTS_RAIN, moveId, moveSlot, 0);

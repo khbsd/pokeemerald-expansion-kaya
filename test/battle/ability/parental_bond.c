@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Parental Bond does not convert a move with three or more str
 
 SINGLE_BATTLE_TEST("Parental Bond converts multi-target moves into a two-strike move in Single Battles")
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_EARTHQUAKE; }
     PARAMETRIZE { move = MOVE_ICY_WIND; }
 
@@ -105,7 +105,7 @@ DOUBLE_BATTLE_TEST("Parental Bond does not convert multi-target moves into a two
 
 SINGLE_BATTLE_TEST("Parental Bond-converted moves only hit once on Lightning Rod/Storm Drain mons")
 {
-    u16 move, species, ability, type;
+    u32 move, species, ability, type;
     PARAMETRIZE { move = MOVE_THUNDERBOLT; ability = ABILITY_LIGHTNING_ROD; species = SPECIES_RAICHU; type = TYPE_ELECTRIC; }
     PARAMETRIZE { move = MOVE_SURF; ability = ABILITY_STORM_DRAIN; species = SPECIES_LILEEP; type = TYPE_WATER; }
     GIVEN {

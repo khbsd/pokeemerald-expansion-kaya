@@ -86,7 +86,7 @@ struct TextPrinter
 {
     struct TextPrinterTemplate printerTemplate;
 
-    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
+    void (*callback)(struct TextPrinterTemplate *, u32); // 0x10
 
     u8 subStructFields[7]; // always cast to struct TextPrinterSubStruct... so why bother
     u8 active;
@@ -100,7 +100,7 @@ struct TextPrinter
 
 struct FontInfo
 {
-    u16 (*fontFunction)(struct TextPrinter *x);
+    u32 (*fontFunction)(struct TextPrinter *x);
     u8 maxLetterWidth;
     u8 maxLetterHeight;
     u8 letterSpacing;
@@ -116,7 +116,7 @@ extern const struct FontInfo *gFonts;
 struct GlyphWidthFunc
 {
     u32 fontId;
-    u32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u32 glyphId, bool32 isJapanese);
 };
 
 typedef struct {
@@ -140,8 +140,8 @@ extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
 void DeactivateAllTextPrinters(void);
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
-bool32 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+u32 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u32));
+bool32 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u32));
 void RunTextPrinters(void);
 bool32 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
@@ -157,12 +157,12 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
 bool32 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
 bool32 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool32 TextPrinterWait(struct TextPrinter *textPrinter);
-void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *counter, u8 *yCoordIndex);
-s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId);
+void DrawDownArrow(u8 windowId, u32 x, u32 y, u8 bgColor, bool32 drawArrow, u8 *counter, u8 *yCoordIndex);
+s32 GetGlyphWidth(u32 glyphId, bool32 isJapanese, u8 fontId);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize);
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str);
-u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);
+u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u32 x, u32 y);
 u8 GetKeypadIconTileOffset(u8 keypadIconId);
 u8 GetKeypadIconWidth(u8 keypadIconId);
 u8 GetKeypadIconHeight(u8 keypadIconId);
@@ -171,8 +171,8 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 
 // braille.c
-u16 FontFunc_Braille(struct TextPrinter *textPrinter);
-u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese);
+u32 FontFunc_Braille(struct TextPrinter *textPrinter);
+u32 GetGlyphWidth_Braille(u32 glyphId, bool32 isJapanese);
 
 u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 widthPx);
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);

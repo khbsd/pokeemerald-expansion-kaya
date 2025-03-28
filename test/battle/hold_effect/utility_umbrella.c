@@ -11,7 +11,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Utility Umbrella blocks Sun damage modifiers", s16 damage)
 {
-    u16 setupMove, attackingMove, heldItem;
+    u32 setupMove, attackingMove, heldItem;
     PARAMETRIZE { setupMove = MOVE_SUNNY_DAY; attackingMove = MOVE_EMBER;     heldItem = ITEM_UTILITY_UMBRELLA; }
     PARAMETRIZE { setupMove = MOVE_SUNNY_DAY; attackingMove = MOVE_EMBER;     heldItem = ITEM_NONE; }
     PARAMETRIZE { setupMove = MOVE_SUNNY_DAY; attackingMove = MOVE_WATER_GUN; heldItem = ITEM_UTILITY_UMBRELLA; }
@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Utility Umbrella blocks Sun damage modifiers", s16 damage)
 
 SINGLE_BATTLE_TEST("Utility Umbrella blocks Rain damage modifiers", s16 damage)
 {
-    u16 setupMove, attackingMove, heldItem;
+    u32 setupMove, attackingMove, heldItem;
     PARAMETRIZE { setupMove = MOVE_RAIN_DANCE; attackingMove = MOVE_EMBER;     heldItem = ITEM_UTILITY_UMBRELLA; }
     PARAMETRIZE { setupMove = MOVE_RAIN_DANCE; attackingMove = MOVE_EMBER;     heldItem = ITEM_NONE; }
     PARAMETRIZE { setupMove = MOVE_RAIN_DANCE; attackingMove = MOVE_WATER_GUN; heldItem = ITEM_UTILITY_UMBRELLA; }

@@ -121,32 +121,32 @@ enum {
 
 struct PokemonSubstruct0
 {
-    u16 species:11; // 2047 species.
-    u16 teraType:5; // 30 types.
-    u16 heldItem:10; // 1023 items.
-    u16 unused_02:6;
+    u32 species:11; // 2047 species.
+    u32 teraType:5; // 30 types.
+    u32 heldItem:10; // 1023 items.
+    u32 unused_02:6;
     u32 experience:21;
     u32 nickname11:8; // 11th character of nickname.
     u32 unused_04:3;
     u8 ppBonuses;
     u8 friendship;
-    u16 pokeball:6; // 63 balls.
-    u16 nickname12:8; // 12th character of nickname.
-    u16 unused_0A:2;
+    u32 pokeball:6; // 63 balls.
+    u32 nickname12:8; // 12th character of nickname.
+    u32 unused_0A:2;
 };
 
 struct PokemonSubstruct1
 {
-    u16 move1:11; // 2047 moves.
-    u16 evolutionTracker1:5;
-    u16 move2:11; // 2047 moves.
-    u16 evolutionTracker2:5;
-    u16 move3:11; // 2047 moves.
-    u16 unused_04:5;
-    u16 move4:11; // 2047 moves.
-    u16 unused_06:3;
-    u16 hyperTrainedHP:1;
-    u16 hyperTrainedAttack:1;
+    u32 move1:11; // 2047 moves.
+    u32 evolutionTracker1:5;
+    u32 move2:11; // 2047 moves.
+    u32 evolutionTracker2:5;
+    u32 move3:11; // 2047 moves.
+    u32 unused_04:5;
+    u32 move4:11; // 2047 moves.
+    u32 unused_06:3;
+    u32 hyperTrainedHP:1;
+    u32 hyperTrainedAttack:1;
     u8 pp1:7; // 127 PP.
     u8 hyperTrainedDefense:1;
     u8 pp2:7; // 127 PP.
@@ -177,10 +177,10 @@ struct PokemonSubstruct3
 {
     u8 pokerus;
     u8 metLocation;
-    u16 metLevel:7;
-    u16 metGame:4;
-    u16 dynamaxLevel:4;
-    u16 otGender:1;
+    u32 metLevel:7;
+    u32 metGame:4;
+    u32 dynamaxLevel:4;
+    u32 otGender:1;
     u32 hpIV:5;
     u32 attackIV:5;
     u32 defenseIV:5;
@@ -234,7 +234,7 @@ union PokemonSubstruct
     struct PokemonSubstruct1 type1;
     struct PokemonSubstruct2 type2;
     struct PokemonSubstruct3 type3;
-    u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
+    u32 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u32, not u8
 };
 
 struct BoxPokemon
@@ -253,10 +253,10 @@ struct BoxPokemon
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
-    u16 checksum;
-    u16 hpLost:14; // 16383 HP.
-    u16 shinyModifier:1;
-    u16 unused_1E:1;
+    u32 checksum;
+    u32 hpLost:14; // 16383 HP.
+    u32 shinyModifier:1;
+    u32 unused_1E:1;
 
     union
     {
@@ -271,13 +271,13 @@ struct Pokemon
     u32 status;
     u8 level;
     u8 mail;
-    u16 hp;
-    u16 maxHP;
-    u16 attack;
-    u16 defense;
-    u16 speed;
-    u16 spAttack;
-    u16 spDefense;
+    u32 hp;
+    u32 maxHP;
+    u32 attack;
+    u32 defense;
+    u32 speed;
+    u32 spAttack;
+    u32 spDefense;
 };
 
 struct MonSpritesGfxManager
@@ -308,13 +308,13 @@ enum {
 
 struct BattlePokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 attack;
-    /*0x04*/ u16 defense;
-    /*0x06*/ u16 speed;
-    /*0x08*/ u16 spAttack;
-    /*0x0A*/ u16 spDefense;
-    /*0x0C*/ u16 moves[MAX_MON_MOVES];
+    /*0x00*/ u32 species;
+    /*0x02*/ u32 attack;
+    /*0x04*/ u32 defense;
+    /*0x06*/ u32 speed;
+    /*0x08*/ u32 spAttack;
+    /*0x0A*/ u32 spDefense;
+    /*0x0C*/ u32 moves[MAX_MON_MOVES];
     /*0x14*/ u32 hpIV:5;
     /*0x14*/ u32 attackIV:5;
     /*0x15*/ u32 defenseIV:5;
@@ -323,14 +323,14 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 abilityNum:2;
     /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
-    /*0x20*/ u16 ability;
+    /*0x20*/ u32 ability;
     /*0x22*/ u8 types[3];
     /*0x25*/ u8 pp[MAX_MON_MOVES];
-    /*0x29*/ u16 hp;
+    /*0x29*/ u32 hp;
     /*0x2B*/ u8 level;
     /*0x2C*/ u8 friendship;
-    /*0x2D*/ u16 maxHP;
-    /*0x2F*/ u16 item;
+    /*0x2D*/ u32 maxHP;
+    /*0x2F*/ u32 item;
     /*0x31*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x3C*/ u8 ppBonuses;
     /*0x3D*/ u8 otName[PLAYER_NAME_LENGTH + 1];
@@ -345,9 +345,9 @@ struct BattlePokemon
 
 struct Evolution
 {
-    u16 method;
-    u16 param;
-    u16 targetSpecies;
+    u32 method;
+    u32 param;
+    u32 targetSpecies;
 };
 
 struct SpeciesInfo /*0xC4*/
@@ -361,35 +361,35 @@ struct SpeciesInfo /*0xC4*/
     u8 types[2];
     u8 catchRate;
     u8 forceTeraType;
-    u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
-    u16 evYield_HP:2;
-    u16 evYield_Attack:2;
-    u16 evYield_Defense:2;
-    u16 evYield_Speed:2;
-    u16 evYield_SpAttack:2;
-    u16 evYield_SpDefense:2;
-    u16 padding2:4;
-    u16 itemCommon;
-    u16 itemRare;
+    u32 expYield; // expYield was changed from u8 to u32 for the new Exp System.
+    u32 evYield_HP:2;
+    u32 evYield_Attack:2;
+    u32 evYield_Defense:2;
+    u32 evYield_Speed:2;
+    u32 evYield_SpAttack:2;
+    u32 evYield_SpDefense:2;
+    u32 padding2:4;
+    u32 itemCommon;
+    u32 itemRare;
     u8 genderRatio;
     u8 eggCycles;
     u8 friendship;
     u8 growthRate;
     u8 eggGroups[2];
-    u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
+    u32 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
     u8 safariZoneFleeRate;
 
     // Pokédex data
     u8 categoryName[13];
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
-    u16 cryId;
-    u16 natDexNum;
-    u16 height; //in decimeters
-    u16 weight; //in hectograms
-    u16 pokemonScale;
-    u16 pokemonOffset;
-    u16 trainerScale;
-    u16 trainerOffset;
+    u32 cryId;
+    u32 natDexNum;
+    u32 height; //in decimeters
+    u32 weight; //in hectograms
+    u32 pokemonScale;
+    u32 pokemonOffset;
+    u32 trainerScale;
+    u32 trainerOffset;
     const u8 *description;
     u8 bodyColor:7;
     // Graphical Data
@@ -454,15 +454,15 @@ struct SpeciesInfo /*0xC4*/
     // Shadow settings
     s8 enemyShadowXOffset; // This determines the X-offset for an enemy Pokémon's shadow during battle; negative values point left, positive values point right.
     s8 enemyShadowYOffset; // This determines the Y-offset for an enemy Pokémon's shadow during battle; negative values point up, positive values point down.
-    u16 enemyShadowSize:3; // This determines the size of the shadow sprite used for an enemy Pokémon's front sprite during battle.
-    u16 suppressEnemyShadow:1; // If set to true, then a shadow will not be drawn beneath an enemy Pokémon's front sprite during battle.
-    u16 padding5:12;
+    u32 enemyShadowSize:3; // This determines the size of the shadow sprite used for an enemy Pokémon's front sprite during battle.
+    u32 suppressEnemyShadow:1; // If set to true, then a shadow will not be drawn beneath an enemy Pokémon's front sprite during battle.
+    u32 padding5:12;
     // Move Data
     const struct LevelUpMove *levelUpLearnset;
-    const u16 *teachableLearnset;
-    const u16 *eggMoveLearnset;
+    const u32 *teachableLearnset;
+    const u32 *eggMoveLearnset;
     const struct Evolution *evolutions;
-    const u16 *formSpeciesIdTable;
+    const u32 *formSpeciesIdTable;
     const struct FormChange *formChangeTable;
 #if OW_POKEMON_OBJECT_EVENTS
     struct ObjectEventGraphicsInfo overworldData;
@@ -560,33 +560,33 @@ struct NatureInfo
 struct SpindaSpot
 {
     u8 x, y;
-    u16 image[SPINDA_SPOT_HEIGHT];
+    u32 image[SPINDA_SPOT_HEIGHT];
 };
 
 struct LevelUpMove
 {
-    u16 move;
-    u16 level;
+    u32 move;
+    u32 level;
 };
 
 struct FormChange
 {
-    u16 method;
-    u16 targetSpecies;
-    u16 param1;
-    u16 param2;
-    u16 param3;
+    u32 method;
+    u32 targetSpecies;
+    u32 param1;
+    u32 param2;
+    u32 param3;
 };
 
 struct Fusion
 {
-    u16 fusionStorageIndex;
-    u16 itemId;
-    u16 targetSpecies1;
-    u16 targetSpecies2;
-    u16 fusingIntoMon;
-    u16 fusionMove;
-    u16 unfuseForgetMove;
+    u32 fusionStorageIndex;
+    u32 itemId;
+    u32 targetSpecies1;
+    u32 targetSpecies2;
+    u32 fusingIntoMon;
+    u32 fusionMove;
+    u32 unfuseForgetMove;
 };
 
 extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
@@ -607,7 +607,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-extern u16 gFollowerSteps;
+extern u32 gFollowerSteps;
 
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
@@ -617,7 +617,7 @@ extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
 extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
-extern const u16 gUnionRoomFacilityClasses[];
+extern const u32 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
@@ -627,47 +627,47 @@ void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
 void ZeroPlayerPartyMons(void);
 void ZeroEnemyPartyMons(void);
-void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
-void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
-void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
-void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
-void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level);
-void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality);
-void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId);
-void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
+void CreateMon(struct Pokemon *mon, u32 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void CreateBoxMon(struct BoxPokemon *boxMon, u32 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void CreateMonWithNature(struct Pokemon *mon, u32 species, u8 level, u8 fixedIV, u8 nature);
+void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u32 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
+void CreateMaleMon(struct Pokemon *mon, u32 species, u8 level);
+void CreateMonWithIVsPersonality(struct Pokemon *mon, u32 species, u8 level, u32 ivs, u32 personality);
+void CreateMonWithIVsOTID(struct Pokemon *mon, u32 species, u8 level, u8 *ivs, u32 otId);
+void CreateMonWithEVSpread(struct Pokemon *mon, u32 species, u8 level, u8 fixedIV, u8 evSpread);
 void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src);
 void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50);
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
-void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
+void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u32 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
-u16 GetUnionRoomTrainerPic(void);
-u16 GetUnionRoomTrainerClass(void);
+u32 GetUnionRoomTrainerPic(void);
+u32 GetUnionRoomTrainerClass(void);
 void CreateEnemyEventMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
-u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
-u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
-u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
-void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
-void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
+u32 GiveMoveToMon(struct Pokemon *mon, u32 move);
+u32 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u32 move);
+u32 GiveMoveToBattleMon(struct BattlePokemon *mon, u32 move);
+void SetMonMoveSlot(struct Pokemon *mon, u32 move, u8 slot);
+void SetBattleMonMoveSlot(struct BattlePokemon *mon, u32 move, u8 slot);
 void GiveMonInitialMoveset(struct Pokemon *mon);
 void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
-u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
-void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
-void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+u32 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
+void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u32 move);
+void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u32 move);
 u8 CountAliveMonsInBattle(u8 caseId, u32 battler);
 u8 GetDefaultMoveTarget(u8 battlerId);
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
-u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
-bool32 IsPersonalityFemale(u16 species, u32 personality);
+u8 GetGenderFromSpeciesAndPersonality(u32 species, u32 personality);
+bool32 IsPersonalityFemale(u32 species, u32 personality);
 u32 GetUnownSpeciesId(u32 personality);
-void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition);
-void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition);
-void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToPokemon(u32 speciesTag, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerBack(u32 trainerSpriteId, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerFront(u32 trainerPicId, u8 battlerPosition);
 
 /* GameFreak called Get(Box)MonData with either 2 or 3 arguments, for
  * type safety we have a Get(Box)MonData macro which dispatches to
@@ -691,75 +691,75 @@ u8 CalculateEnemyPartyCount(void);
 u8 CalculateEnemyPartyCountInSide(u32 battler);
 u8 GetMonsStateToDoubles(void);
 u8 GetMonsStateToDoubles_2(void);
-u16 GetAbilityBySpecies(u16 species, u8 abilityNum);
-u16 GetMonAbility(struct Pokemon *mon);
+u32 GetAbilityBySpecies(u32 species, u8 abilityNum);
+u32 GetMonAbility(struct Pokemon *mon);
 void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerClass(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
 bool8 IsPokemonStorageFull(void);
-const u8 *GetSpeciesName(u16 species);
-const u8 *GetSpeciesCategory(u16 species);
-const u8 *GetSpeciesPokedexDescription(u16 species);
-u16 GetSpeciesHeight(u16 species);
-u16 GetSpeciesWeight(u16 species);
-const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
-const u16 *GetSpeciesTeachableLearnset(u16 species);
-const u16 *GetSpeciesEggMoves(u16 species);
-const struct Evolution *GetSpeciesEvolutions(u16 species);
-const u16 *GetSpeciesFormTable(u16 species);
-const struct FormChange *GetSpeciesFormChanges(u16 species);
-u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
+const u8 *GetSpeciesName(u32 species);
+const u8 *GetSpeciesCategory(u32 species);
+const u8 *GetSpeciesPokedexDescription(u32 species);
+u32 GetSpeciesHeight(u32 species);
+u32 GetSpeciesWeight(u32 species);
+const struct LevelUpMove *GetSpeciesLevelUpLearnset(u32 species);
+const u32 *GetSpeciesTeachableLearnset(u32 species);
+const u32 *GetSpeciesEggMoves(u32 species);
+const struct Evolution *GetSpeciesEvolutions(u32 species);
+const u32 *GetSpeciesFormTable(u32 species);
+const struct FormChange *GetSpeciesFormChanges(u32 species);
+u8 CalculatePPWithBonus(u32 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
 void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst);
 void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex);
-bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex);
-bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e);
+bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u32 item, u8 partyIndex, u8 moveIndex);
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u32 item, u8 partyIndex, u8 moveIndex, u8 e);
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battlerId);
-u8 GetItemEffectParamOffset(u32 battler, u16 itemId, u8 effectByte, u8 effectBit);
-u8 *UseStatIncreaseItem(u16 itemId);
+u8 GetItemEffectParamOffset(u32 battler, u32 itemId, u8 effectByte, u8 effectBit);
+u8 *UseStatIncreaseItem(u32 itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 u32 GetGMaxTargetSpecies(u32 species);
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner);
+u32 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u32 evolutionItem, struct Pokemon *tradePartner);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
-u16 NationalPokedexNumToSpecies(u16 nationalNum);
-u16 NationalToHoennOrder(u16 nationalNum);
-u16 SpeciesToNationalPokedexNum(u16 species);
-u16 SpeciesToHoennPokedexNum(u16 species);
-u16 HoennToNationalOrder(u16 hoennNum);
+u32 NationalPokedexNumToSpecies(u32 nationalNum);
+u32 NationalToHoennOrder(u32 nationalNum);
+u32 SpeciesToNationalPokedexNum(u32 species);
+u32 SpeciesToHoennPokedexNum(u32 species);
+u32 HoennToNationalOrder(u32 hoennNum);
 void DrawSpindaSpots(u32 personality, u8 *dest, bool32 isSecondFrame);
-void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
+void EvolutionRenameMon(struct Pokemon *mon, u32 oldSpecies, u32 newSpecies);
 u8 GetPlayerFlankId(void);
-u16 GetLinkTrainerFlankId(u8 id);
-s32 GetBattlerMultiplayerId(u16 id);
-u8 GetTrainerEncounterMusicId(u16 trainerOpponentId);
-u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
+u32 GetLinkTrainerFlankId(u8 id);
+s32 GetBattlerMultiplayerId(u32 id);
+u8 GetTrainerEncounterMusicId(u32 trainerOpponentId);
+u32 ModifyStatByNature(u8 nature, u32 n, u8 statIndex);
 void AdjustFriendship(struct Pokemon *mon, u8 event);
-void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
-u16 GetMonEVCount(struct Pokemon *mon);
+void MonGainEVs(struct Pokemon *mon, u32 defeatedSpecies);
+u32 GetMonEVCount(struct Pokemon *mon);
 void RandomlyGivePartyPokerus(struct Pokemon *party);
 u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
-void UpdatePartyPokerusTime(u16 days);
+void UpdatePartyPokerusTime(u32 days);
 void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
-u8 CanLearnTeachableMove(u16 species, u16 move);
-u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
-u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
+u8 CanLearnTeachableMove(u32 species, u32 move);
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u32 *moves);
+u8 GetLevelUpMovesBySpecies(u32 species, u32 *moves);
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon);
-u16 SpeciesToPokedexNum(u16 species);
-bool32 IsSpeciesInHoennDex(u16 species);
-u16 GetBattleBGM(void);
+u32 SpeciesToPokedexNum(u32 species);
+bool32 IsSpeciesInHoennDex(u32 species);
+u32 GetBattleBGM(void);
 void PlayBattleBGM(void);
-void PlayMapChosenOrBattleBGM(u16 songId);
-void CreateTask_PlayMapChosenOrBattleBGM(u16 songId);
+void PlayMapChosenOrBattleBGM(u32 songId);
+void CreateTask_PlayMapChosenOrBattleBGM(u32 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality);
-const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale);
-bool8 IsMoveHM(u16 move);
-bool8 IsMonSpriteNotFlipped(u16 species);
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u32 species, bool32 isShiny, u32 personality);
+const u32 *GetMonSpritePalFromSpecies(u32 species, bool32 isShiny, bool32 isFemale);
+bool8 IsMoveHM(u32 move);
+bool8 IsMonSpriteNotFlipped(u32 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor);
 bool8 IsTradedMon(struct Pokemon *mon);
@@ -770,40 +770,40 @@ void SetMonPreventsSwitchingString(void);
 void SetWildMonHeldItem(void);
 bool8 IsMonShiny(struct Pokemon *mon);
 const u8 *GetTrainerPartnerName(void);
-void BattleAnimateFrontSprite(struct Sprite *sprite, u16 species, bool8 noCry, u8 panMode);
-void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, u8 panModeAnimFlag);
-void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u16 species, bool8 oneFrame);
+void BattleAnimateFrontSprite(struct Sprite *sprite, u32 species, bool8 noCry, u8 panMode);
+void DoMonFrontSpriteAnimation(struct Sprite *sprite, u32 species, bool8 noCry, u8 panModeAnimFlag);
+void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u32 species, bool8 oneFrame);
 void StopPokemonAnimationDelayTask(void);
-void BattleAnimateBackSprite(struct Sprite *sprite, u16 species);
+void BattleAnimateBackSprite(struct Sprite *sprite, u32 species);
 u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId);
-u16 FacilityClassToPicIndex(u16 facilityClass);
-u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
-void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
-bool8 HasTwoFramesAnimation(u16 species);
+u32 FacilityClassToPicIndex(u32 facilityClass);
+u32 PlayerGenderToFrontTrainerPicId(u8 playerGender);
+void HandleSetPokedexFlag(u32 nationalNum, u8 caseId, u32 personality);
+bool8 HasTwoFramesAnimation(u32 species);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
 void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
-u16 GetFormSpeciesId(u16 speciesId, u8 formId);
-u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
-u32 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
-u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg);
-bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method);
-u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
+u32 GetFormSpeciesId(u32 speciesId, u8 formId);
+u8 GetFormIdFromFormSpeciesId(u32 formSpeciesId);
+u32 GetFormChangeTargetSpecies(struct Pokemon *mon, u32 method, u32 arg);
+u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u32 method, u32 arg);
+bool32 DoesSpeciesHaveFormChangeMethod(u32 species, u32 method);
+u32 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
-bool32 SpeciesHasGenderDifferences(u16 species);
-bool32 TryFormChange(u32 monId, u32 side, u16 method);
-void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
+bool32 SpeciesHasGenderDifferences(u32 species);
+bool32 TryFormChange(u32 monId, u32 side, u32 method);
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u32 method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 u32 GetMonAffectionHearts(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
-u16 SanitizeSpeciesId(u16 species);
-bool32 IsSpeciesEnabled(u16 species);
-u16 GetCryIdBySpecies(u16 species);
-u16 GetSpeciesPreEvolution(u16 species);
+u32 SanitizeSpeciesId(u32 species);
+bool32 IsSpeciesEnabled(u32 species);
+u32 GetCryIdBySpecies(u32 species);
+u32 GetSpeciesPreEvolution(u32 species);
 void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
-void UpdateDaysPassedSinceFormChange(u16 days);
+void UpdateDaysPassedSinceFormChange(u32 days);
 void TrySetDayLimitToFormChange(struct Pokemon *mon);
 u32 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler);
 uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier);

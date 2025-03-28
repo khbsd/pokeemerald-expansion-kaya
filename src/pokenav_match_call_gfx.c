@@ -33,24 +33,24 @@ struct Pokenav_MatchCallGfx
 {
     bool32 (*isTaskActiveCB)(void);
     u32 loopTaskId;
-    u8 filler8[6];
+    u32 filler8[6];
     bool8 skipHangUpSE;
     bool8 newRematchRequest;
     u16 locWindowId;
     u16 infoBoxWindowId;
     u16 msgBoxWindowId;
     s16 pageDelta;
-    u8 unused18;
-    u8 unused19;
+    u32 unused18;
+    u32 unused19;
     u16 trainerPicPalOffset;
     struct Sprite *optionsCursorSprite;
     struct Sprite *trainerPicSprite;
-    u8 bgTilemapBuffer1[BG_SCREEN_SIZE];
-    u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
-    u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
-    u8 *trainerPicGfxPtr;
-    u8 trainerPicGfx[TRAINER_PIC_SIZE];
-    u8 trainerPicPal[0x20];
+    u32 bgTilemapBuffer1[BG_SCREEN_SIZE];
+    u32 unusedTilemapBuffer[BG_SCREEN_SIZE];
+    u32 bgTilemapBuffer2[BG_SCREEN_SIZE];
+    u32 *trainerPicGfxPtr;
+    u32 trainerPicGfx[TRAINER_PIC_SIZE];
+    u32 trainerPicPal[0x20];
 };
 
 static bool32 GetCurrentLoopedTaskActive(void);
@@ -84,14 +84,14 @@ static void UpdateWindowsToShowCheckPage(struct Pokenav_MatchCallGfx *);
 static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *);
 static bool32 WaitForTrainerPic(struct Pokenav_MatchCallGfx *);
 static void TrainerPicSlideOffscreen(struct Pokenav_MatchCallGfx *);
-static void Task_FlashPokeballIcons(u8);
+static void Task_FlashPokeballIcons(u32);
 static void TryDrawRematchPokeballIcon(u16, u32, u32);
 static void PrintNumberRegisteredLabel(u16);
 static void PrintNumberRegistered(u16);
 static void PrintNumberOfBattlesLabel(u16);
 static void PrintNumberOfBattles(u16);
-static void PrintMatchCallInfoLabel(u16, const u8 *, int);
-static void PrintMatchCallInfoNumber(u16, const u8 *, int);
+static void PrintMatchCallInfoLabel(u16, const u32 *, int);
+static void PrintMatchCallInfoNumber(u16, const u32 *, int);
 static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *, int);
 static void CloseMatchCallSelectOptionsWindow(struct Pokenav_MatchCallGfx *);
 static struct Sprite *CreateTrainerPicSprite(void);
@@ -124,10 +124,10 @@ static const u16 sListWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/lis
 static const u16 sPokeball_Pal[] = INCBIN_U16("graphics/pokenav/match_call/pokeball.gbapal");
 static const u32 sPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/pokeball.4bpp.lz");
 
-static const u8 gText_NumberRegistered[] = _("No. registered");
-static const u8 gText_NumberOfBattles[] = _("No. of battles");
-static const u8 gText_TrainerCloseBy[] = _("That TRAINER is close by.\nTalk to the TRAINER in person!");
-static const u8 gText_Unknown[] = _("UNKNOWN");
+static const u32 gText_NumberRegistered[] = _("No. registered");
+static const u32 gText_NumberOfBattles[] = _("No. of battles");
+static const u32 gText_TrainerCloseBy[] = _("That TRAINER is close by.\nTalk to the TRAINER in person!");
+static const u32 gText_Unknown[] = _("UNKNOWN");
 
 static const struct BgTemplate sMatchCallBgTemplates[3] =
 {
@@ -202,7 +202,7 @@ static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
     .baseBlock = 38
 };
 
-static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
+static const u32 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 {
     [MATCH_CALL_OPTION_CALL]   = COMPOUND_STRING("CALL"),
     [MATCH_CALL_OPTION_CHECK]  = COMPOUND_STRING("CHECK"),
@@ -210,7 +210,7 @@ static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 };
 
 // The series of 5 dots that appear when someone is called with Match Call
-static const u8 sText_CallingDots[] = _("·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·\p");
+static const u32 sText_CallingDots[] = _("·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·\p");
 
 static const struct WindowTemplate sCallMsgBoxWindowTemplate =
 {
@@ -905,12 +905,12 @@ static void DestroyMatchCallList(void)
 
 static void SetPokeballIconsFlashing(bool32 active)
 {
-    u8 taskId = FindTaskIdByFunc(Task_FlashPokeballIcons);
+    u32 taskId = FindTaskIdByFunc(Task_FlashPokeballIcons);
     if (taskId != TASK_NONE)
         gTasks[taskId].tActive = active;
 }
 
-static void Task_FlashPokeballIcons(u8 taskId)
+static void Task_FlashPokeballIcons(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (tActive)
@@ -936,7 +936,7 @@ enum {
 
 static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 tileOffset)
 {
-    u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
+    u32 bg = GetWindowAttribute(windowId, WINDOW_BG);
     u16 *tilemap = GetBgTilemapBuffer(bg);
     tilemap += tileOffset * 64 + 0x1D;
     if (ShouldDrawRematchPokeballIcon(rematchId))
@@ -953,7 +953,7 @@ static void TryDrawRematchPokeballIcon(u16 windowId, u32 rematchId, u32 tileOffs
 
 void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset)
 {
-    u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
+    u32 bg = GetWindowAttribute(windowId, WINDOW_BG);
     u16 *tilemap = GetBgTilemapBuffer(bg);
     tilemap += tileOffset * 64 + 0x1D;
     tilemap[0] = POKEBALL_ICON_EMPTY;
@@ -988,7 +988,7 @@ static void PrintNumberRegisteredLabel(u16 windowId)
 
 static void PrintNumberRegistered(u16 windowId)
 {
-    u8 str[3];
+    u32 str[3];
     ConvertIntToDecimalStringN(str, GetNumberRegistered(), STR_CONV_MODE_LEFT_ALIGN, 3);
     PrintMatchCallInfoNumber(windowId, str, 1);
 }
@@ -1000,7 +1000,7 @@ static void PrintNumberOfBattlesLabel(u16 windowId)
 
 static void PrintNumberOfBattles(u16 windowId)
 {
-    u8 str[5];
+    u32 str[5];
     int numTrainerBattles = GetGameStat(GAME_STAT_TRAINER_BATTLES);
     if (numTrainerBattles > 99999)
         numTrainerBattles = 99999;
@@ -1009,13 +1009,13 @@ static void PrintNumberOfBattles(u16 windowId)
     PrintMatchCallInfoNumber(windowId, str, 3);
 }
 
-static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top)
+static void PrintMatchCallInfoLabel(u16 windowId, const u32 *str, int top)
 {
     int y = top * 16 + 1;
     AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
+static void PrintMatchCallInfoNumber(u16 windowId, const u32 *str, int top)
 {
     int x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
     int y = top * 16 + 1;
@@ -1024,7 +1024,7 @@ static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
 
 static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
 {
-    u8 mapName[32];
+    u32 mapName[32];
     int x;
     int index = PokenavList_GetSelectedIndex() + delta;
     int mapSec = GetMatchCallMapSec(index);
@@ -1144,8 +1144,8 @@ static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
 static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
 {
     int index = PokenavList_GetSelectedIndex();
-    const u8 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
-    u8 speed = GetPlayerTextSpeedDelay();
+    const u32 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
+    u32 speed = GetPlayerTextSpeedDelay();
     AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
 }
 
@@ -1175,7 +1175,7 @@ static bool32 WaitForCallMessageBoxErase(struct Pokenav_MatchCallGfx *gfx)
 static void AllocMatchCallSprites(void)
 {
     int i;
-    u8 paletteNum;
+    u32 paletteNum;
     struct SpriteSheet spriteSheet;
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
 
@@ -1189,7 +1189,7 @@ static void AllocMatchCallSprites(void)
     spriteSheet.data = gfx->trainerPicGfx;
     spriteSheet.size = sizeof(gfx->trainerPicGfx);
     spriteSheet.tag = GFXTAG_TRAINER_PIC;
-    gfx->trainerPicGfxPtr = (u8 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
+    gfx->trainerPicGfxPtr = (u32 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
     paletteNum = AllocSpritePalette(PALTAG_TRAINER_PIC);
     gfx->trainerPicPalOffset = OBJ_PLTT_ID(paletteNum);
     gfx->trainerPicSprite = CreateTrainerPicSprite();
@@ -1214,7 +1214,7 @@ static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *gfx, int top)
 {
     if (!gfx->optionsCursorSprite)
     {
-        u8 spriteId = CreateSprite(&sOptionsCursorSpriteTemplate, 4, 80, 5);
+        u32 spriteId = CreateSprite(&sOptionsCursorSpriteTemplate, 4, 80, 5);
         gfx->optionsCursorSprite = &gSprites[spriteId];
         UpdateCursorGfxPos(gfx, top);
     }
@@ -1242,7 +1242,7 @@ static void SpriteCB_OptionsCursor(struct Sprite *sprite)
 
 static struct Sprite *CreateTrainerPicSprite(void)
 {
-    u8 spriteId = CreateSprite(&sTrainerPicSpriteTemplate, 44, 104, 6);
+    u32 spriteId = CreateSprite(&sTrainerPicSpriteTemplate, 44, 104, 6);
     return &gSprites[spriteId];
 }
 

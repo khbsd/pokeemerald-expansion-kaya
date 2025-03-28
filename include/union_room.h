@@ -29,7 +29,7 @@ struct RfuPlayerData
 struct RfuPlayer
 {
     struct RfuPlayerData rfu;
-    u16 timeoutCounter;
+    u32 timeoutCounter;
     u8 groupScheduledAnim:2;
     bool8 useRedText:1; // Never set
     u8 newPlayerCountdown;
@@ -65,12 +65,12 @@ struct WirelessLink_Leader
     u8 nPlayerModeWindowId;
     u8 listTaskId;
     u8 playerCount;
-    u16 yesNoWindowId;
+    u32 yesNoWindowId;
     u8 unused;
     u8 listenTaskId;
     u8 activity;
     u8 joinRequestAnswer;
-    u16 memberConfirmTimeout;
+    u32 memberConfirmTimeout;
 };
 
 struct WirelessLink_Group
@@ -107,8 +107,8 @@ struct WirelessLink_URoom
     struct RfuIncomingPlayerList *incomingChildList;
     struct RfuPlayerList *spawnPlayer;
     struct RfuIncomingPlayerList *incomingParentList;
-    u16 unknown; // Never read
-    u16 unreadPlayerId;
+    u32 unknown; // Never read
+    u32 unreadPlayerId;
     u8 state;
     u8 stateAfterPrint;
     u8 textState;
@@ -122,10 +122,10 @@ struct WirelessLink_URoom
     u8 spriteIds[NUM_UNION_ROOM_SPRITES];
     u8 unused2;
     u8 tradeBoardListMenuId;
-    u16 playerSendBuffer[6];
+    u32 playerSendBuffer[6];
     u8 activityRequestStrbufs[4][16];
-    u16 partnerYesNoResponse;
-    u16 recvActivityRequest[3];
+    u32 partnerYesNoResponse;
+    u32 recvActivityRequest[3];
     struct UnionRoomObject objects[MAX_UNION_ROOM_LEADERS];
     u8 trainerCardStrBuffer[12][15];
     u8 trainerCardColorStrBuffer[48];
@@ -134,21 +134,21 @@ struct WirelessLink_URoom
 
 struct UnionRoomTrade
 {
-    u16 state;
-    u16 type;
+    u32 state;
+    u32 type;
     u32 playerPersonality;
     u8 offerPlayerId;
-    u16 playerSpecies;
-    u16 playerLevel;
-    u16 species;
-    u16 level;
+    u32 playerSpecies;
+    u32 playerLevel;
+    u32 species;
+    u32 level;
     u32 personality;
 };
 
 extern u8 gPlayerCurrActivity;
 extern struct RfuGameCompatibilityData gRfuPartnerCompatibilityData;
 
-extern u16 gUnionRoomOfferedSpecies;
+extern u32 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 
 u8 CreateTask_CreateTradeMenu(void);
@@ -157,6 +157,6 @@ void CreateTask_LinkMysteryGiftWithFriend(u32 activity);
 void CreateTask_LinkMysteryGiftOverWireless(u32 activity);
 void CreateTask_SendMysteryGift(u32 activity);
 u8 CreateTask_ListenToWireless(void);
-void StartUnionRoomBattle(u16 battleFlags);
+void StartUnionRoomBattle(u32 battleFlags);
 
 #endif //GUARD_UNION_ROOM_H

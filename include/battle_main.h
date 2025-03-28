@@ -7,12 +7,12 @@
 // For displaying a multi battle partner's Pokémon in the party menu
 struct MultiPartnerMenuPokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
+    /*0x00*/ u32 species;
+    /*0x02*/ u32 heldItem;
     /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
+    /*0x10*/ u32 hp;
+    /*0x12*/ u32 maxhp;
     /*0x14*/ u32 status;
     /*0x18*/ u32 personality;
     /*0x1C*/ u8 gender;
@@ -72,7 +72,7 @@ void SwapTurnOrder(u8 id1, u8 id2);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
 u32 GetBattlerTotalSpeedStat(u32 battler);
 s8 GetChosenMovePriority(u32 battlerId);
-s8 GetBattleMovePriority(u32 battlerId, u16 move);
+s8 GetBattleMovePriority(u32 battlerId, u32 move);
 s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
                               u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
 s32 GetWhichBattlerFasterOrTies(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);

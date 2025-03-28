@@ -16,21 +16,21 @@
     instead of Em
 */
 
-static void Task_LinkContest_CommunicateMonsEm(u8);
-static void Task_LinkContest_StartCommunicateRngEm(u8);
-static void Task_LinkContest_CommunicateRngEm(u8);
-static void Task_LinkContest_StartCommunicateLeaderIdsEm(u8);
-static void Task_LinkContest_CommunicateLeaderIdsEm(u8);
-static void Task_LinkContest_StartCommunicateCategoryEm(u8);
-static void Task_LinkContest_CommunicateCategoryEm(u8);
-static void Task_LinkContest_SetUpContestEm(u8);
-static void Task_LinkContest_CommunicateAIMonsEm(u8);
-static void Task_LinkContest_CalculateRound1Em(u8);
-static void Task_LinkContest_CalculateTurnOrderEm(u8);
+static void Task_LinkContest_CommunicateMonsEm(u32);
+static void Task_LinkContest_StartCommunicateRngEm(u32);
+static void Task_LinkContest_CommunicateRngEm(u32);
+static void Task_LinkContest_StartCommunicateLeaderIdsEm(u32);
+static void Task_LinkContest_CommunicateLeaderIdsEm(u32);
+static void Task_LinkContest_StartCommunicateCategoryEm(u32);
+static void Task_LinkContest_CommunicateCategoryEm(u32);
+static void Task_LinkContest_SetUpContestEm(u32);
+static void Task_LinkContest_CommunicateAIMonsEm(u32);
+static void Task_LinkContest_CalculateRound1Em(u32);
+static void Task_LinkContest_CalculateTurnOrderEm(u32);
 
 #define tCategory data[9]
 
-void Task_LinkContest_StartCommunicationEm(u8 taskId)
+void Task_LinkContest_StartCommunicationEm(u32 taskId)
 {
     int gameCleared;
 
@@ -60,28 +60,28 @@ void Task_LinkContest_StartCommunicationEm(u8 taskId)
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonsEm, Task_LinkContest_StartCommunicateRngEm);
 }
 
-static void Task_LinkContest_StartCommunicateRngEm(u8 taskId)
+static void Task_LinkContest_StartCommunicateRngEm(u32 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRngEm, Task_LinkContest_StartCommunicateLeaderIdsEm);
 }
 
-static void Task_LinkContest_StartCommunicateLeaderIdsEm(u8 taskId)
+static void Task_LinkContest_StartCommunicateLeaderIdsEm(u32 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateLeaderIdsEm, Task_LinkContest_StartCommunicateCategoryEm);
 }
 
-static void Task_LinkContest_StartCommunicateCategoryEm(u8 taskId)
+static void Task_LinkContest_StartCommunicateCategoryEm(u32 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateCategoryEm, Task_LinkContest_SetUpContestEm);
 }
 
-static void Task_LinkContest_SetUpContestEm(u8 taskId)
+static void Task_LinkContest_SetUpContestEm(u32 taskId)
 {
-    u8 i;
-    u8 rank;
+    u32 i;
+    u32 rank;
     int gameCleared;
-    u8 categories[CONTESTANT_COUNT];
-    u8 leaderIds[CONTESTANT_COUNT];
+    u32 categories[CONTESTANT_COUNT];
+    u32 leaderIds[CONTESTANT_COUNT];
 
     memset(categories, 0, sizeof(categories));
     memset(leaderIds, 0, sizeof(leaderIds));
@@ -136,19 +136,19 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
         gTasks[taskId].func = Task_LinkContest_CalculateRound1Em;
 }
 
-static void Task_LinkContest_CalculateRound1Em(u8 taskId)
+static void Task_LinkContest_CalculateRound1Em(u32 taskId)
 {
     CalculateRound1Points(gSpecialVar_ContestCategory);
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, Task_LinkContest_CalculateTurnOrderEm);
 }
 
-static void Task_LinkContest_CalculateTurnOrderEm(u8 taskId)
+static void Task_LinkContest_CalculateTurnOrderEm(u32 taskId)
 {
     SortContestants(FALSE);
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, Task_LinkContest_FinalizeConnection);
 }
 
-static void Task_LinkContest_CommunicateMonsEm(u8 taskId)
+static void Task_LinkContest_CommunicateMonsEm(u32 taskId)
 {
     int i;
 
@@ -184,7 +184,7 @@ static void Task_LinkContest_CommunicateMonsEm(u8 taskId)
     }
 }
 
-static void Task_LinkContest_CommunicateRngEm(u8 taskId)
+static void Task_LinkContest_CommunicateRngEm(u32 taskId)
 {
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
@@ -224,7 +224,7 @@ static void Task_LinkContest_CommunicateRngEm(u8 taskId)
     }
 }
 
-static void Task_LinkContest_CommunicateLeaderIdsEm(u8 taskId)
+static void Task_LinkContest_CommunicateLeaderIdsEm(u32 taskId)
 {
     int i;
     u16 data[CONTESTANT_COUNT];
@@ -263,7 +263,7 @@ static void Task_LinkContest_CommunicateLeaderIdsEm(u8 taskId)
     }
 }
 
-static void Task_LinkContest_CommunicateCategoryEm(u8 taskId)
+static void Task_LinkContest_CommunicateCategoryEm(u32 taskId)
 {
     int i;
     u16 data[CONTESTANT_COUNT];
@@ -302,7 +302,7 @@ static void Task_LinkContest_CommunicateCategoryEm(u8 taskId)
     }
 }
 
-static void Task_LinkContest_CommunicateAIMonsEm(u8 taskId)
+static void Task_LinkContest_CommunicateAIMonsEm(u32 taskId)
 {
     int i;
 

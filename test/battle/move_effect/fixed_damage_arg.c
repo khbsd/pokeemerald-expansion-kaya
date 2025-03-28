@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s16 damage)
 {
-    u16 mon;
+    u32 mon;
     PARAMETRIZE { mon = SPECIES_RATTATA; }
     PARAMETRIZE { mon = SPECIES_ARON; }
 

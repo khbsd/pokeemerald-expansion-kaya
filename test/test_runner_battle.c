@@ -700,7 +700,7 @@ static s32 TryHP(s32 i, s32 n, u32 battlerId, u32 oldHP, u32 newHP)
                 switch (event->type)
                 {
                 case HP_EVENT_NEW_HP:
-                    *(u16 *)(u32)(event->address) = newHP;
+                    *(u32 *)(u32)(event->address) = newHP;
                     break;
                 case HP_EVENT_DELTA_HP:
                     *(s16 *)(u32)(event->address) = oldHP - newHP;
@@ -906,7 +906,7 @@ static void CheckIfMaxScoreEqualExpectMove(u32 battlerId, s32 target, struct Exp
     u32 i;
     s32 *scores = gAiBattleData->finalScore[battlerId][target];
     s32 bestScore = 0, bestScoreId = 0;
-    u16 *moves = gBattleMons[battlerId].moves;
+    u32 *moves = gBattleMons[battlerId].moves;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (scores[i] > bestScore)
@@ -1360,7 +1360,7 @@ static void CB2_BattleTest_NextParameter(void)
     }
 }
 
-static inline rng_value_t MakeRngValue(const u16 seed)
+static inline rng_value_t MakeRngValue(const u32 seed)
 {
     int i;
     rng_value_t result = {0, 0, seed, 1};
@@ -1507,7 +1507,7 @@ const struct TestRunner gBattleTestRunner =
     .handleExitWithResult = BattleTest_HandleExitWithResult,
 };
 
-void SetFlagForTest(u32 sourceLine, u16 flagId)
+void SetFlagForTest(u32 sourceLine, u32 flagId)
 {
     INVALID_IF(DATA.flagId != 0, "FLAG can only be set once per test");
     DATA.flagId = flagId;
@@ -1563,7 +1563,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
 // (sNaturePersonalities[i] % NUM_NATURES) == i
 // (sNaturePersonalities[i] & 0xFF) == 0
 // NOTE: Using 25 << 8 rather than 0 << 8 to prevent shiny females.
-static const u16 sNaturePersonalities[NUM_NATURES] =
+static const u32 sNaturePersonalities[NUM_NATURES] =
 {
     25 << 8, 21 << 8, 17 << 8, 13 << 8,  9 << 8,
      5 << 8,  1 << 8, 22 << 8, 18 << 8, 14 << 8,
@@ -1764,7 +1764,7 @@ void Item_(u32 sourceLine, u32 item)
     SetMonData(DATA.currentMon, MON_DATA_HELD_ITEM, &item);
 }
 
-void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
+void Moves_(u32 sourceLine, u32 moves[MAX_MON_MOVES])
 {
     s32 i;
     INVALID_IF(!DATA.currentMon, "Moves outside of PLAYER/OPPONENT");
@@ -2596,13 +2596,13 @@ void QueueHP(u32 sourceLine, struct BattlePokemon *battler, struct HPEventContex
     if (ctx.explicitHP)
     {
         type = HP_EVENT_NEW_HP;
-        address = (u16)ctx.hp;
+        address = (u32)ctx.hp;
     }
     else if (ctx.explicitDamage)
     {
         INVALID_IF(ctx.damage == 0, "damage is 0");
         type = HP_EVENT_DELTA_HP;
-        address = (u16)ctx.damage;
+        address = (u32)ctx.damage;
     }
     else if (ctx.explicitCaptureHP)
     {

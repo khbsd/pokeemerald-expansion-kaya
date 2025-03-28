@@ -7,7 +7,7 @@
 #include "data/heal_locations.h"
 #include "data/heal_locations_pkm_center.h"
 
-u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
+u32 GetHealLocationIndexByMap(u32 mapGroup, u32 mapNum)
 {
     u32 i;
 
@@ -19,7 +19,7 @@ u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
     return HEAL_LOCATION_NONE;
 }
 
-const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum)
+const struct HealLocation *GetHealLocationByMap(u32 mapGroup, u32 mapNum)
 {
     u32 index = GetHealLocationIndexByMap(mapGroup, mapNum);
 

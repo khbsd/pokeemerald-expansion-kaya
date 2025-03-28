@@ -2,7 +2,7 @@
 #include "test/battle.h"
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
-SINGLE_BATTLE_TEST("Dynamax: Dynamax increases HP and max HP by 1.5x", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax increases HP and max HP by 1.5x", u32 hp)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax increases HP and max HP by 1.5x", u16 hp)
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Dynamax Level increases HP and max HP multipliers by 0.05 for each level", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax Level increases HP and max HP multipliers by 0.05 for each level", u32 hp)
 {
     u32 dynamax, level;
     PARAMETRIZE { dynamax = GIMMICK_NONE; level = 0; }
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax Level increases HP and max HP multipliers b
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u32 hp)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -101,7 +101,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u16 hp)
 SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns and correctly converts HP according to Dynamax Level")
 {
     u32 dynamaxLevel, dynamax;
-    u16 capturedHP, finalHP;
+    u32 capturedHP, finalHP;
     s16 capturedDamage;
     PARAMETRIZE { dynamaxLevel = 0; dynamax = GIMMICK_NONE; }
     PARAMETRIZE { dynamaxLevel = 0; dynamax = GIMMICK_DYNAMAX; }
@@ -399,7 +399,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon lose their substitutes")
 
 SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon that changes forms does not gain HP")
 {
-    u16 capturedHP, finalHP;
+    u32 capturedHP, finalHP;
     GIVEN {
         PLAYER(SPECIES_GRENINJA_BATTLE_BOND) { Ability(ABILITY_BATTLE_BOND); HP(100); Speed(100); }
         OPPONENT(SPECIES_CATERPIE) { HP(1); Speed(1000); }
@@ -542,7 +542,7 @@ SINGLE_BATTLE_TEST("Dynamax: Pokemon with Gigantamax forms revert upon switching
 
 SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by Choice items", s16 damage)
 {
-    u16 item;
+    u32 item;
     PARAMETRIZE { item = ITEM_CHOICE_BAND; }
     PARAMETRIZE { item = ITEM_NONE; }
     GIVEN {
@@ -965,7 +965,7 @@ SINGLE_BATTLE_TEST("Dynamax: G-Max Steelsurge sets up sharp steel")
 // The test below should apply to G-Max Fireball and G-Max Drum Solo, too.
 SINGLE_BATTLE_TEST("Dynamax: G-Max Hydrosnipe has fixed power and ignores abilities", s16 damage)
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_WATER_GUN; }
     PARAMETRIZE { move = MOVE_HYDRO_CANNON; }
     GIVEN {

@@ -51,8 +51,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers Water Gun over Bubble if it knows that foe has
 
 AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they both require the same number of hits to ko")
 {
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 hp, expectedMove, turns, abilityAtk, expectedMove2;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 hp, expectedMove, turns, abilityAtk, expectedMove2;
 
     abilityAtk = ABILITY_NONE;
     expectedMove2 = MOVE_NONE;
@@ -135,8 +135,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they b
 AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves which are super-effective but deal less damage")
 {
     u8 turns = 0;
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 expectedMove, abilityAtk, abilityDef;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 expectedMove, abilityAtk, abilityDef;
 
     abilityAtk = ABILITY_NONE;
 
@@ -193,8 +193,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers Earthquake over Drill Run if both require the 
 
 AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over a one with a downside effect if both require the same number of hits to ko")
 {
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 hp, expectedMove, turns;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 hp, expectedMove, turns;
 
     // Both moves require the same number of turns but Flamethrower will be chosen over Overheat (powerful effect)
     PARAMETRIZE { move1 = MOVE_OVERHEAT; move2 = MOVE_FLAMETHROWER; hp = 300; expectedMove = MOVE_FLAMETHROWER; turns = 2; }
@@ -256,9 +256,9 @@ AI_SINGLE_BATTLE_TEST("AI can choose a status move that boosts the attack by two
 
 AI_SINGLE_BATTLE_TEST("AI chooses the safest option to faint the target, taking into account accuracy and move effect")
 {
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 expectedMove, expectedMove2 = MOVE_NONE;
-    u16 abilityAtk = ABILITY_NONE, holdItemAtk = ITEM_NONE;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 expectedMove, expectedMove2 = MOVE_NONE;
+    u32 abilityAtk = ABILITY_NONE, holdItemAtk = ITEM_NONE;
 
     // Psychic is not very effective, but always hits. Solarbeam requires a charging turn, Double Edge has recoil and Focus Blast can miss;
     PARAMETRIZE { abilityAtk = ABILITY_STURDY; move1 = MOVE_FOCUS_BLAST; move2 = MOVE_SOLAR_BEAM; move3 = MOVE_PSYCHIC; move4 = MOVE_DOUBLE_EDGE; expectedMove = MOVE_PSYCHIC; }
@@ -293,9 +293,9 @@ AI_SINGLE_BATTLE_TEST("AI chooses the safest option to faint the target, taking 
 
 AI_SINGLE_BATTLE_TEST("AI chooses the safest option to faint the target, taking into account accuracy and move effect failing")
 {
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-    u16 expectedMove, expectedMove2 = MOVE_NONE;
-    u16 abilityAtk = ABILITY_NONE, holdItemAtk = ITEM_NONE;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 expectedMove, expectedMove2 = MOVE_NONE;
+    u32 abilityAtk = ABILITY_NONE, holdItemAtk = ITEM_NONE;
 
     // Fiery Dance and Skull Bash are chosen because user is holding Power Herb
     PARAMETRIZE { abilityAtk = ABILITY_STURDY; holdItemAtk = ITEM_POWER_HERB; move1 = MOVE_FOCUS_BLAST; move2 = MOVE_SKULL_BASH; move3 = MOVE_FIERY_DANCE; move4 = MOVE_DOUBLE_EDGE;
@@ -322,8 +322,8 @@ AI_SINGLE_BATTLE_TEST("AI chooses the safest option to faint the target, taking 
 
 AI_SINGLE_BATTLE_TEST("AI won't use Solar Beam if there is no Sun up or the user is not holding Power Herb")
 {
-    u16 abilityAtk = ABILITY_NONE;
-    u16 holdItemAtk = ITEM_NONE;
+    u32 abilityAtk = ABILITY_NONE;
+    u32 holdItemAtk = ITEM_NONE;
 
     PARAMETRIZE { abilityAtk = ABILITY_DROUGHT; }
     PARAMETRIZE { holdItemAtk = ITEM_POWER_HERB; }
@@ -372,8 +372,8 @@ AI_SINGLE_BATTLE_TEST("AI won't use ground type attacks against flying type Poke
 AI_DOUBLE_BATTLE_TEST("AI won't use a Weather changing move if partner already chose such move")
 {
     u32 j, k;
-    static const u16 weatherMoves[] = {MOVE_SUNNY_DAY, MOVE_HAIL, MOVE_RAIN_DANCE, MOVE_SANDSTORM, MOVE_SNOWSCAPE};
-    u16 weatherMoveLeft = MOVE_NONE, weatherMoveRight = MOVE_NONE;
+    static const u32 weatherMoves[] = {MOVE_SUNNY_DAY, MOVE_HAIL, MOVE_RAIN_DANCE, MOVE_SANDSTORM, MOVE_SNOWSCAPE};
+    u32 weatherMoveLeft = MOVE_NONE, weatherMoveRight = MOVE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(weatherMoves); j++)
     {
@@ -400,7 +400,7 @@ AI_DOUBLE_BATTLE_TEST("AI won't use a Weather changing move if partner already c
 
 AI_DOUBLE_BATTLE_TEST("AI will not use Helping Hand if partner does not have any damage moves")
 {
-    u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
+    u32 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
 
     PARAMETRIZE { move1 = MOVE_LEER; move2 = MOVE_TOXIC; }
     PARAMETRIZE { move1 = MOVE_HELPING_HAND; move2 = MOVE_PROTECT; }
@@ -523,8 +523,8 @@ AI_SINGLE_BATTLE_TEST("First Impression is preferred on the first turn of the sp
 
 AI_SINGLE_BATTLE_TEST("First Impression is not chosen if it's blocked by certain abilities")
 {
-    u16 species;
-    u16 ability;
+    u32 species;
+    u32 ability;
 
     PARAMETRIZE { species = SPECIES_BRUXISH; ability = ABILITY_DAZZLING; }
     PARAMETRIZE { species = SPECIES_FARIGIRAF; ability = ABILITY_ARMOR_TAIL; }

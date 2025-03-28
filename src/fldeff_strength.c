@@ -34,7 +34,7 @@ static void FieldCallback_Strength(void)
 }
 
 bool8 FldEff_UseStrength(void)
-{
+{u32
     u8 taskId = CreateFieldMoveTask();
     gTasks[taskId].data[8] = (u32)StartStrengthFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartStrengthFieldEffect;

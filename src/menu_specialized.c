@@ -28,7 +28,7 @@
 #include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
-EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
+EWRAM_DATA static u32 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
 static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
@@ -71,12 +71,12 @@ static const struct WindowTemplate sWindowTemplates_MailboxMenu[MAILBOXWIN_COUNT
     }
 };
 
-static const u8 sPlayerNameTextColors[] =
+static const u32 sPlayerNameTextColors[] =
 {
     TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY
 };
 
-static const u8 sEmptyItemName[] = _("");
+static const u32 sEmptyItemName[] = _("");
 
 static const struct ScanlineEffectParams sConditionGraphScanline =
 {
@@ -85,7 +85,7 @@ static const struct ScanlineEffectParams sConditionGraphScanline =
     .initState = 1,
 };
 
-static const u8 sConditionToLineLength[MAX_CONDITION + 1] =
+static const u32 sConditionToLineLength[MAX_CONDITION + 1] =
 {
      4,  5,  6,  7,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 13,
     13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17,
@@ -195,9 +195,9 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
 // Mailbox menu
 //--------------
 
-bool8 MailboxMenu_Alloc(u8 count)
+bool8 MailboxMenu_Alloc(u32 count)
 {
-    u8 i;
+    u32 i;
 
     // + 1 to count for 'Cancel'
     sMailboxList = Alloc((count + 1) * sizeof(*sMailboxList));
@@ -210,7 +210,7 @@ bool8 MailboxMenu_Alloc(u8 count)
     return TRUE;
 }
 
-u8 MailboxMenu_AddWindow(u8 windowIdx)
+u32 MailboxMenu_AddWindow(u32 windowIdx)
 {
     if (sMailboxWindowIds[windowIdx] == WINDOW_NONE)
     {
@@ -229,7 +229,7 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
     return sMailboxWindowIds[windowIdx];
 }
 
-void MailboxMenu_RemoveWindow(u8 windowIdx)
+void MailboxMenu_RemoveWindow(u32 windowIdx)
 {
     ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], FALSE);
     ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
@@ -237,14 +237,14 @@ void MailboxMenu_RemoveWindow(u8 windowIdx)
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
-static u8 UNUSED MailboxMenu_GetWindowId(u8 windowIdx)
+static u32 UNUSED MailboxMenu_GetWindowId(u32 windowIdx)
 {
     return sMailboxWindowIds[windowIdx];
 }
 
-static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
+static void MailboxMenu_ItemPrintFunc(u32 windowId, u32 itemId, u32 y)
 {
-    u8 buffer[30];
+    u32 buffer[30];
     u16 length;
 
     if (itemId == LIST_CANCEL)
@@ -258,7 +258,7 @@ static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, 8, y, 0, 0, sPlayerNameTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
-u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
+u32 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
 {
     u16 i;
     for (i = 0; i < page->count; i++)
@@ -322,7 +322,7 @@ void MailboxMenu_Free(void)
 
 void ConditionGraph_Init(struct ConditionGraph *graph)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < CONDITION_COUNT; j++)
     {
@@ -439,7 +439,7 @@ void ConditionGraph_Draw(struct ConditionGraph *graph)
     graph->needsDraw = FALSE;
 }
 
-void ConditionGraph_InitWindow(u8 bg)
+void ConditionGraph_InitWindow(u32 bg)
 {
     u32 flags;
 
@@ -666,9 +666,9 @@ static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *graph)
     }
 }
 
-void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions)
+void ConditionGraph_CalcPositions(u32 *conditions, struct UCoords16 *positions)
 {
-    u8 lineLength, sinIdx;
+    u32 lineLength, sinIdx;
     s8 posIdx;
     u16 i;
 
@@ -703,7 +703,7 @@ void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions)
 
 void InitMoveRelearnerWindows(bool8 useContestWindow)
 {
-    u8 i;
+    u32 i;
 
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
@@ -736,7 +736,7 @@ static void MoveRelearnerDummy(void)
 
 }
 
-u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
+u32 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
 {
     gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
     gMultiuseListMenuTemplate.totalItems = numChoices;
@@ -753,8 +753,8 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
 static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
     s32 x;
-    u8 buffer[32];
-    const u8 *str;
+    u32 buffer[32];
+    const u32 *str;
 
     if (B_SHOW_CATEGORY_ICON == TRUE)
         MoveRelearnerShowHideCategoryIcon(chosenMove);
@@ -814,7 +814,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 {
     s32 x;
-    const u8 *str;
+    const u32 *str;
 
     MoveRelearnerShowHideHearts(chosenMove);
     FillWindowPixelBuffer(RELEARNERWIN_DESC_CONTEST, PIXEL_FILL(1));
@@ -853,9 +853,9 @@ static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct List
     MoveRelearnerMenuLoadContestMoveDescription(itemIndex);
 }
 
-void MoveRelearnerPrintMessage(u8 *str)
+void MoveRelearnerPrintMessage(u32 *str)
 {
-    u8 speed;
+    u32 speed;
 
     FillWindowPixelBuffer(RELEARNERWIN_MSG, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
@@ -878,7 +878,7 @@ void MoveRelearnerCreateYesNoMenu(void)
 // Condition menu
 //----------------
 
-s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
+s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u32 *dst)
 {
     s32 ret;
 
@@ -901,11 +901,11 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 }
 
 // Gets the name/gender/level string for the condition menu
-static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
+static u32 *GetConditionMenuMonString(u32 *dst, u16 boxId, u16 monId)
 {
     u16 box, mon, species, level, gender;
     struct BoxPokemon *boxMon;
-    u8 *str;
+    u32 *str;
 
     box = boxId;
     mon = monId;
@@ -982,7 +982,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 }
 
 // Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
-static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
+static u32 *BufferConditionMenuSpacedStringN(u32 *dst, const u32 *src, s16 n)
 {
     while (*src != EOS)
     {
@@ -996,7 +996,7 @@ static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonNameAndLocString(u32 *locationDst, u32 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
     u16 box = boxId;
@@ -1032,7 +1032,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
     }
 }
 
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u32 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
@@ -1194,7 +1194,7 @@ void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplat
 
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
 {
-    u8 i;
+    u32 i;
 
     struct SpriteSheet dataSheets[] =
     {
@@ -1342,7 +1342,7 @@ static void SetConditionSparklePosition(struct Sprite *sprite)
     }
 }
 
-static void InitConditionSparkles(u8 count, bool8 allowFirstShowAll, struct Sprite **sprites)
+static void InitConditionSparkles(u32 count, bool8 allowFirstShowAll, struct Sprite **sprites)
 {
     u16 i;
 
@@ -1372,7 +1372,7 @@ static void InitConditionSparkles(u8 count, bool8 allowFirstShowAll, struct Spri
 static void SetNextConditionSparkle(struct Sprite *sprite)
 {
     u16 i;
-    u8 id = sprite->sNextSparkleSpriteId;
+    u32 id = sprite->sNextSparkleSpriteId;
     for (i = 0; i < sprite->sNumExtraSparkles + 1; i++)
     {
         gSprites[id].sDelayTimer = (gSprites[id].sSparkleId * 16) + 1;
@@ -1383,16 +1383,16 @@ static void SetNextConditionSparkle(struct Sprite *sprite)
 
 void ResetConditionSparkleSprites(struct Sprite **sprites)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
         sprites[i] = NULL;
 }
 
-void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 _count)
+void CreateConditionSparkleSprites(struct Sprite **sprites, u32 monSpriteId, u32 _count)
 {
     u16 i, spriteId, firstSpriteId = 0;
-    u8 count = _count;
+    u32 count = _count;
 
     for (i = 0; i < count + 1; i++)
     {
@@ -1481,7 +1481,7 @@ static void SpriteCB_ConditionSparkle(struct Sprite *sprite)
 
 static void ShowAllConditionSparkles(struct Sprite *sprite)
 {
-    u8 i, id = sprite->sNextSparkleSpriteId;
+    u32 i, id = sprite->sNextSparkleSpriteId;
 
     for (i = 0; i < sprite->sNumExtraSparkles + 1; i++)
     {
@@ -1498,7 +1498,7 @@ static void ShowAllConditionSparkles(struct Sprite *sprite)
 #undef sMonSpriteId
 #undef sNextSparkleSpriteId
 
-static const u8 *const sLvlUpStatStrings[NUM_STATS] =
+static const u32 *const sLvlUpStatStrings[NUM_STATS] =
 {
     gText_MaxHP,
     gText_Attack,
@@ -1508,12 +1508,12 @@ static const u8 *const sLvlUpStatStrings[NUM_STATS] =
     gText_Speed
 };
 
-void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
+void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
     u16 i, x;
     s16 statsDiff[NUM_STATS];
-    u8 text[12];
-    u8 color[3];
+    u32 text[12];
+    u32 color[3];
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
 
@@ -1563,12 +1563,12 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
     }
 }
 
-void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr)
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
     u16 i, numDigits, x;
     s16 stats[NUM_STATS];
-    u8 text[12];
-    u8 color[3];
+    u32 text[12];
+    u32 color[3];
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
 

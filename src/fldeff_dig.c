@@ -39,7 +39,7 @@ static void FieldCallback_Dig(void)
 
 bool8 FldEff_UseDig(void)
 {
-    u8 taskId = CreateFieldMoveTask();
+    u32 taskId = CreateFieldMoveTask();
 
     gTasks[taskId].data[8] = (u32)StartDigFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartDigFieldEffect;
@@ -50,7 +50,7 @@ bool8 FldEff_UseDig(void)
 
 static void StartDigFieldEffect(void)
 {
-    u8 taskId;
+    u32 taskId;
 
     FieldEffectActiveListRemove(FLDEFF_USE_DIG);
     if (ShouldDoBrailleDigEffect())

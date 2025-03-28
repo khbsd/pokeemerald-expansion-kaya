@@ -1,9 +1,9 @@
 #include "librfu.h"
 
 static void STWI_intr_timer(void);
-static u16 STWI_init(u8 request);
+static u16 STWI_init(u32 request);
 static s32 STWI_start_Command(void);
-static void STWI_set_timer(u8 unk);
+static void STWI_set_timer(u32 unk);
 static void STWI_stop_timer(void);
 static s32 STWI_restart_Command(void);
 static s32 STWI_reset_ClockCounter(void);
@@ -86,12 +86,12 @@ void AgbRFU_SoftReset(void)
     gSTWIStatus->sending = 0;
 }
 
-void STWI_set_MS_mode(u8 mode)
+void STWI_set_MS_mode(u32 mode)
 {
     gSTWIStatus->msMode = mode;
 }
 
-u16 STWI_read_status(u8 index)
+u16 STWI_read_status(u32 index)
 {
     switch (index)
     {
@@ -195,9 +195,9 @@ void STWI_send_ConfigStatusREQ(void)
     }
 }
 
-void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
+void STWI_send_GameConfigREQ(const u32 *serial_gname, const u32 *uname)
 {
-    u8 *packetBytes;
+    u32 *packetBytes;
     s32 i;
 
     if (!STWI_init(ID_GAME_CONFIG_REQ))
@@ -224,11 +224,11 @@ void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
     }
 }
 
-void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
+void STWI_send_SystemConfigREQ(u16 availSlotFlag, u32 maxMFrame, u32 mcTimer)
 {
     if (!STWI_init(ID_SYSTEM_CONFIG_REQ))
     {
-        u8 *packetBytes;
+        u32 *packetBytes;
 
         gSTWIStatus->reqLength = 1;
         packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
@@ -322,11 +322,11 @@ void STWI_send_CP_EndREQ(void)
     }
 }
 
-void STWI_send_DataTxREQ(const void *in, u8 size)
+void STWI_send_DataTxREQ(const void *in, u32 size)
 {
     if (!STWI_init(ID_DATA_TX_REQ))
     {
-        u8 reqLength = (size / sizeof(u32));
+        u32 reqLength = (size / sizeof(u32));
         if (size & (sizeof(u32) - 1))
             reqLength += 1;
         gSTWIStatus->reqLength = reqLength;
@@ -335,11 +335,11 @@ void STWI_send_DataTxREQ(const void *in, u8 size)
     }
 }
 
-void STWI_send_DataTxAndChangeREQ(const void *in, u8 size)
+void STWI_send_DataTxAndChangeREQ(const void *in, u32 size)
 {
     if (!STWI_init(ID_DATA_TX_AND_CHANGE_REQ))
     {
-        u8 reqLength = (size / sizeof(u32));
+        u32 reqLength = (size / sizeof(u32));
         if (size & (sizeof(u32) - 1))
             reqLength += 1;
         gSTWIStatus->reqLength = reqLength;
@@ -366,7 +366,7 @@ void STWI_send_MS_ChangeREQ(void)
     }
 }
 
-void STWI_send_DataReadyAndChangeREQ(u8 unk)
+void STWI_send_DataReadyAndChangeREQ(u32 unk)
 {
     if (!STWI_init(ID_DATA_READY_AND_CHANGE_REQ))
     {
@@ -376,7 +376,7 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
         }
         else
         {
-            u8 *packetBytes;
+            u32 *packetBytes;
 
             gSTWIStatus->reqLength = 1;
             packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
@@ -390,11 +390,11 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
     }
 }
 
-void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
+void STWI_send_DisconnectedAndChangeREQ(u32 unk0, u32 unk1)
 {
     if (!STWI_init(ID_DISCONNECTED_AND_CHANGE_REQ))
     {
-        u8 *packetBytes;
+        u32 *packetBytes;
 
         gSTWIStatus->reqLength = 1;
         packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
@@ -416,7 +416,7 @@ void STWI_send_ResumeRetransmitAndChangeREQ(void)
     }
 }
 
-void STWI_send_DisconnectREQ(u8 unk)
+void STWI_send_DisconnectREQ(u32 unk)
 {
     if (!STWI_init(ID_DISCONNECT_REQ))
     {
@@ -426,7 +426,7 @@ void STWI_send_DisconnectREQ(u8 unk)
     }
 }
 
-void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
+void STWI_send_TestModeREQ(u32 unk0, u32 unk1)
 {
     if (!STWI_init(ID_TEST_MODE_REQ))
     {
@@ -436,7 +436,7 @@ void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
     }
 }
 
-void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
+void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u32 unk2)
 {
     u32 *packetData;
     u32 arg1;
@@ -503,7 +503,7 @@ static void STWI_intr_timer(void)
     }
 }
 
-static void STWI_set_timer(u8 count)
+static void STWI_set_timer(u32 count)
 {
     vu16 *timerL = &REG_TMCNT_L(gSTWIStatus->timerSelect);
     vu16 *timerH = &REG_TMCNT_H(gSTWIStatus->timerSelect);
@@ -542,7 +542,7 @@ static void STWI_stop_timer(void)
 /*
  * Set up STWI to send REQ. Returns 1 if error (see below).
  */
-static u16 STWI_init(u8 request)
+static u16 STWI_init(u32 request)
 {
     if (!REG_IME)
     {

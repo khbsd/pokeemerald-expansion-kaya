@@ -100,7 +100,7 @@ void BattleAI_SetupItems(void)
 {
     s32 i;
     u8 *data = (u8 *)BATTLE_HISTORY;
-    const u16 *items = GetTrainerItemsFromId(TRAINER_BATTLE_PARAM.opponentA);
+    const u32 *items = GetTrainerItemsFromId(TRAINER_BATTLE_PARAM.opponentA);
 
     for (i = 0; i < sizeof(struct BattleHistory); i++)
         data[i] = 0;
@@ -146,7 +146,7 @@ static u32 GetWildAiFlags(void)
     return flags;
 }
 
-static u32 GetAiFlags(u16 trainerId)
+static u32 GetAiFlags(u32 trainerId)
 {
     u32 flags = 0;
 
@@ -407,7 +407,7 @@ static u32 Ai_SetMoveAccuracy(struct AiLogicData *aiData, u32 battlerAtk, u32 ba
 static void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef, u32 weather)
 {
     u32 moveIndex, move;
-    u16 *moves = GetMovesArray(battlerAtk);
+    u32 *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -2517,7 +2517,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_INSTRUCT:
             {
-                u16 instructedMove;
+                u32 instructedMove;
                 if (AI_IsSlower(battlerAtk, battlerDef, move))
                     instructedMove = predictedMove;
                 else
@@ -3068,7 +3068,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 break;
             case EFFECT_INSTRUCT:
                 {
-                    u16 instructedMove;
+                    u32 instructedMove;
                     if (AI_IsFaster(battlerAtk, battlerAtkPartner, move))
                         instructedMove = aiData->partnerMove;
                     else
@@ -3174,7 +3174,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     s32 noOfHits[MAX_MON_MOVES];
     s32 score = 0;
     s32 leastHits = 1000;
-    u16 *moves = GetMovesArray(battlerAtk);
+    u32 *moves = GetMovesArray(battlerAtk);
     bool8 isTwoTurnNotSemiInvulnerableMove[MAX_MON_MOVES];
 
     for (i = 0; i < MAX_MON_MOVES; i++)

@@ -18,9 +18,9 @@
 
 struct SendRecvHeader
 {
-    u16 ident;
-    u16 crc;
-    u16 size;
+    u32 ident;
+    u32 crc;
+    u32 size;
 };
 
 static u32 MGL_Receive(struct MysteryGiftLink *);

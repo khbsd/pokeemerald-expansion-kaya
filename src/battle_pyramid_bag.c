@@ -39,7 +39,7 @@
 #define TAG_ITEM_ICON     4133
 #define TAG_ITEM_ICON_ALT 4134
 
-#define POS_NONE ((u8)-1)
+#define POS_NONE ((u32)-1)
 
 enum {
     WIN_LIST,
@@ -51,23 +51,23 @@ enum {
 EWRAM_DATA struct PyramidBagMenu *gPyramidBagMenu = NULL;
 EWRAM_DATA struct PyramidBagMenuState gPyramidBagMenuState = {0};
 
-static void Task_HandlePyramidBagInput(u8);
-static void Task_ChooseItemsToTossFromPyramidBag(u8);
-static void Task_ClosePyramidBag(u8);
-static void Task_BeginItemSwap(u8);
-static void OpenContextMenu(u8);
-static void TryCloseBagToGiveItem(u8);
-static void HandleMenuActionInput_2x2(u8);
-static void HandleMenuActionInput_SingleRow(u8);
-static void Task_WaitCloseErrorMessage(u8);
-static void SetTaskToMainPyramidBagInputHandler(u8);
-static void AskConfirmToss(u8);
-static void Task_ChooseHowManyToToss(u8);
-static void Task_TossItem(u8);
-static void ShowCantHoldMessage(u8);
-static void PerformItemSwap(u8);
-static void Task_ItemSwapHandleInput(u8);
-static void CancelItemSwap(u8);
+static void Task_HandlePyramidBagInput(u32);
+static void Task_ChooseItemsToTossFromPyramidBag(u32);
+static void Task_ClosePyramidBag(u32);
+static void Task_BeginItemSwap(u32);
+static void OpenContextMenu(u32);
+static void TryCloseBagToGiveItem(u32);
+static void HandleMenuActionInput_2x2(u32);
+static void HandleMenuActionInput_SingleRow(u32);
+static void Task_WaitCloseErrorMessage(u32);
+static void SetTaskToMainPyramidBagInputHandler(u32);
+static void AskConfirmToss(u32);
+static void Task_ChooseHowManyToToss(u32);
+static void Task_TossItem(u32);
+static void ShowCantHoldMessage(u32);
+static void PerformItemSwap(u32);
+static void Task_ItemSwapHandleInput(u32);
+static void CancelItemSwap(u32);
 static void SetBagItemsListTemplate(void);
 static void CB2_LoadPyramidBagMenu(void);
 static void InitPyramidBagBgs(void);
@@ -83,32 +83,32 @@ static void ShowNumToToss(void);
 static void CloseBattlePyramidBagTextWindow(void);
 static bool8 LoadPyramidBagGfx(void);
 static bool8 LoadPyramidBagMenu(void);
-static void ShowItemIcon(u16, u8);
-static void CopyBagItemName(u8 *, u16);
-static void FreeItemIconSpriteByAltId(u8);
+static void ShowItemIcon(u16, u32);
+static void CopyBagItemName(u32 *, u16);
+static void FreeItemIconSpriteByAltId(u32);
 static void PrintItemDescription(s32);
-static void PrintSelectorArrowAtPos(u8, u8);
-static void PyramidBagPrint(u8, const u8 *, u8, u8, u8, u8, u8, u8);
-static void PyramidBagPrint_Quantity(u8, const u8 *, u8, u8, u8, u8, u8, u8);
-static u8 OpenMenuActionWindowById(u8);
-static void CloseMenuActionWindowById(u8);
-static void PrintMenuActionText_SingleRow(u8);
-static void PrintMenuActionText_MultiRow(u8, u8, u8);
+static void PrintSelectorArrowAtPos(u32, u32);
+static void PyramidBagPrint(u32, const u32 *, u32, u32, u32, u32, u32, u32);
+static void PyramidBagPrint_Quantity(u32, const u32 *, u32, u32, u32, u32, u32, u32);
+static u32 OpenMenuActionWindowById(u32);
+static void CloseMenuActionWindowById(u32);
+static void PrintMenuActionText_SingleRow(u32);
+static void PrintMenuActionText_MultiRow(u32, u32, u32);
 static bool8 IsValidMenuAction(s8);
-static void CreatePyramidBagYesNo(u8, const struct YesNoFuncTable *);
-static void DrawTossNumberWindow(u8);
-static void UpdateSwapLinePos(u8);
+static void CreatePyramidBagYesNo(u32, const struct YesNoFuncTable *);
+static void DrawTossNumberWindow(u32);
+static void UpdateSwapLinePos(u32);
 static void SetSwapLineInvisibility(bool8);
 static void SpriteCB_BagWaitForShake(struct Sprite *);
-static void BagAction_UseOnField(u8);
-static void BagAction_Toss(u8);
-static void BagAction_Give(u8);
-static void BagAction_Cancel(u8);
-static void BagAction_UseInBattle(u8);
+static void BagAction_UseOnField(u32);
+static void BagAction_Toss(u32);
+static void BagAction_Give(u32);
+static void BagAction_Cancel(u32);
+static void BagAction_UseInBattle(u32);
 static void BagCursorMoved(s32, bool8, struct ListMenu *);
-static void PrintItemQuantity(u8 windowId, u32 itemId, u8 y);
-static void TossItem(u8);
-static void DontTossItem(u8);
+static void PrintItemQuantity(u32 windowId, u32 itemId, u32 y);
+static void TossItem(u32);
+static void DontTossItem(u32);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -182,10 +182,10 @@ static const struct MenuAction sMenuActions[] =
     [ACTION_DUMMY] =        { gText_EmptyString2, {NULL} },
 };
 
-static const u8 sMenuActionIds_Field[] = {ACTION_USE_FIELD, ACTION_GIVE, ACTION_TOSS, ACTION_CANCEL};
-static const u8 sMenuActionIds_ChooseToss[] = {ACTION_TOSS, ACTION_CANCEL};
-static const u8 sMenuActionIds_Battle[] = {ACTION_USE_BATTLE, ACTION_CANCEL};
-static const u8 sMenuActionIds_BattleCannotUse[] = {ACTION_CANCEL};
+static const u32 sMenuActionIds_Field[] = {ACTION_USE_FIELD, ACTION_GIVE, ACTION_TOSS, ACTION_CANCEL};
+static const u32 sMenuActionIds_ChooseToss[] = {ACTION_TOSS, ACTION_CANCEL};
+static const u32 sMenuActionIds_Battle[] = {ACTION_USE_BATTLE, ACTION_CANCEL};
+static const u32 sMenuActionIds_BattleCannotUse[] = {ACTION_CANCEL};
 
 static const struct YesNoFuncTable sYesNoTossFuncions =
 {
@@ -199,7 +199,7 @@ enum {
     COLORID_NONE = 0xFF
 };
 
-static const u8 sTextColors[][3] =
+static const u32 sTextColors[][3] =
 {
     [COLORID_DARK_GRAY]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
     [COLORID_LIGHT_GRAY] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE},
@@ -398,7 +398,7 @@ void ChooseItemsToTossFromPyramidBag(void)
     CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
 
-static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId)
+static void Task_ChooseItemsToTossFromPyramidBag(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -414,7 +414,7 @@ void CB2_ReturnToPyramidBagMenu(void)
     GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.exitCallback);
 }
 
-void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void))
+void GoToBattlePyramidBagMenu(u32 location, void (*exitCallback)(void))
 {
     gPyramidBagMenu = AllocZeroed(sizeof(*gPyramidBagMenu));
 
@@ -618,7 +618,7 @@ static void SetBagItemsListTemplate(void)
     gMultiuseListMenuTemplate.maxShowed = gPyramidBagMenu->listMenuMaxShown;
 }
 
-static void CopyBagItemName(u8 *dst, u16 itemId)
+static void CopyBagItemName(u32 *dst, u16 itemId)
 {
     if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
     {
@@ -651,7 +651,7 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     }
 }
 
-static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
+static void PrintItemQuantity(u32 windowId, u32 itemIndex, u32 y)
 {
     s32 xAlign;
     if (itemIndex == LIST_CANCEL)
@@ -661,7 +661,7 @@ static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
     {
         // Performing a swap. Keep a gray selector arrow on the position to swap to
         // and erase the selector arrow anywhere else
-        if (gPyramidBagMenu->toSwapPos == (u8)(itemIndex))
+        if (gPyramidBagMenu->toSwapPos == (u32)(itemIndex))
             PrintSelectorArrowAtPos(y, COLORID_LIGHT_GRAY);
         else
             PrintSelectorArrowAtPos(y, COLORID_NONE);
@@ -678,7 +678,7 @@ static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
 
 static void PrintItemDescription(s32 listMenuId)
 {
-    const u8 *desc;
+    const u32 *desc;
     if (listMenuId != LIST_CANCEL)
     {
         desc = ItemId_GetDescription(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][listMenuId]);
@@ -718,39 +718,39 @@ static void RemoveScrollArrow(void)
 
 static void CreatePyramidBagInputTask(void)
 {
-    u8 taskId = CreateTask(Task_HandlePyramidBagInput, 0);
+    u32 taskId = CreateTask(Task_HandlePyramidBagInput, 0);
     s16 *data = gTasks[taskId].data;
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, gPyramidBagMenuState.scrollPosition, gPyramidBagMenuState.cursorPosition);
 }
 
-static void SwapItems(u8 id1, u8 id2)
+static void SwapItems(u32 id1, u32 id2)
 {
     u16 temp;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
 
     SWAP(itemIds[id1], itemIds[id2], temp);
     SWAP(quantities[id1], quantities[id2], temp);
 }
 
-static void MovePyramidBagItemSlotInList(u8 from, u8 to)
+static void MovePyramidBagItemSlotInList(u32 from, u32 to)
 {
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
 
     if (from != to)
     {
         s16 i;
         u16 firstSlotItemId = itemIds[from];
-        u8 firstSlotQuantity = quantities[from];
+        u32 firstSlotQuantity = quantities[from];
 
         if (to > from)
         {
@@ -776,12 +776,12 @@ static void MovePyramidBagItemSlotInList(u8 from, u8 to)
 
 static void CompactItems(void)
 {
-    u8 i, j;
+    u32 i, j;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
-    u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
@@ -837,7 +837,7 @@ void UpdatePyramidBagCursorPos(void)
 
 static void InitPyramidBagScroll(void)
 {
-    u8 i;
+    u32 i;
 
     if (gPyramidBagMenuState.cursorPosition > 4)
     {
@@ -852,13 +852,13 @@ static void InitPyramidBagScroll(void)
     }
 }
 
-static void PrintSelectorArrow(u8 listMenuTaskId, u8 colorId)
+static void PrintSelectorArrow(u32 listMenuTaskId, u32 colorId)
 {
-    u8 y = ListMenuGetYCoordForPrintingArrowCursor(listMenuTaskId);
+    u32 y = ListMenuGetYCoordForPrintingArrowCursor(listMenuTaskId);
     PrintSelectorArrowAtPos(y, colorId);
 }
 
-static void PrintSelectorArrowAtPos(u8 y, u8 colorId)
+static void PrintSelectorArrowAtPos(u32 y, u32 colorId)
 {
     if (colorId == COLORID_NONE) // If 'no color', erase arrow
         FillWindowPixelRect(WIN_LIST, PIXEL_FILL(0), 0, y, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), GetMenuCursorDimensionByFont(FONT_NORMAL, 1));
@@ -866,13 +866,13 @@ static void PrintSelectorArrowAtPos(u8 y, u8 colorId)
         PyramidBagPrint(WIN_LIST, gText_SelectorArrow2, 0, y, 0, 0, 0, colorId);
 }
 
-void CloseBattlePyramidBag(u8 taskId)
+void CloseBattlePyramidBag(u32 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePyramidBag;
 }
 
-static void Task_ClosePyramidBag(u8 taskId)
+static void Task_ClosePyramidBag(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
@@ -894,7 +894,7 @@ static void Task_ClosePyramidBag(u8 taskId)
     }
 }
 
-static void Task_HandlePyramidBagInput(u8 taskId)
+static void Task_HandlePyramidBagInput(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || gPaletteFade.active)
@@ -939,7 +939,7 @@ static void Task_HandlePyramidBagInput(u8 taskId)
     }
 }
 
-static void OpenContextMenu(u8 taskId)
+static void OpenContextMenu(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -988,19 +988,19 @@ static void OpenContextMenu(u8 taskId)
         gTasks[taskId].func = HandleMenuActionInput_SingleRow;
 }
 
-static void PrintMenuActionText_SingleRow(u8 windowId)
+static void PrintMenuActionText_SingleRow(u32 windowId)
 {
     PrintMenuActionTexts(windowId, FONT_NARROW, 8, 1, 0, 0x10, gPyramidBagMenu->menuActionsCount, sMenuActions, gPyramidBagMenu->menuActionIds);
     InitMenuInUpperLeftCornerNormal(windowId, gPyramidBagMenu->menuActionsCount, 0);
 }
 
-static void PrintMenuActionText_MultiRow(u8 windowId, u8 horizontalCount, u8 verticalCount)
+static void PrintMenuActionText_MultiRow(u32 windowId, u32 horizontalCount, u32 verticalCount)
 {
     PrintMenuActionGrid(windowId, FONT_NARROW, 8, 1, 56, horizontalCount, verticalCount, sMenuActions, gPyramidBagMenu->menuActionIds);
     InitMenuActionGrid(windowId, 56, horizontalCount, verticalCount, 0);
 }
 
-static void HandleMenuActionInput_SingleRow(u8 taskId)
+static void HandleMenuActionInput_SingleRow(u32 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -1011,18 +1011,18 @@ static void HandleMenuActionInput_SingleRow(u8 taskId)
             break;
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
-            sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
+            sMenuActions[ACTION_CANCEL].func.void_u32(taskId);
             break;
         default:
             PlaySE(SE_SELECT);
-            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
-                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
+            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u32 != NULL)
+                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u32(taskId);
             break;
         }
     }
 }
 
-static void HandleMenuActionInput_2x2(u8 taskId)
+static void HandleMenuActionInput_2x2(u32 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -1062,13 +1062,13 @@ static void HandleMenuActionInput_2x2(u8 taskId)
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
-                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
+            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u32 != NULL)
+                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u32(taskId);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
+            sMenuActions[ACTION_CANCEL].func.void_u32(taskId);
         }
     }
 }
@@ -1095,9 +1095,9 @@ static void CloseMenuActionWindow(void)
         CloseMenuActionWindowById(MENU_WIN_2x2);
 }
 
-static void BagAction_UseOnField(u8 taskId)
+static void BagAction_UseOnField(u32 taskId)
 {
-    u8 pocketId = ItemId_GetPocket(gSpecialVar_ItemId);
+    u32 pocketId = ItemId_GetPocket(gSpecialVar_ItemId);
 
     if (pocketId == POCKET_KEY_ITEMS
         || pocketId == POCKET_POKE_BALLS
@@ -1116,7 +1116,7 @@ static void BagAction_UseOnField(u8 taskId)
     }
 }
 
-static void BagAction_Cancel(u8 taskId)
+static void BagAction_Cancel(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1128,13 +1128,13 @@ static void BagAction_Cancel(u8 taskId)
     SetTaskToMainPyramidBagInputHandler(taskId);
 }
 
-static void SetTaskToMainPyramidBagInputHandler(u8 taskId)
+static void SetTaskToMainPyramidBagInputHandler(u32 taskId)
 {
     AddScrollArrows();
     gTasks[taskId].func = Task_HandlePyramidBagInput;
 }
 
-static void BagAction_Toss(u8 taskId)
+static void BagAction_Toss(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1155,7 +1155,7 @@ static void BagAction_Toss(u8 taskId)
     }
 }
 
-static void AskConfirmToss(u8 taskId)
+static void AskConfirmToss(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1167,7 +1167,7 @@ static void AskConfirmToss(u8 taskId)
     CreatePyramidBagYesNo(taskId, &sYesNoTossFuncions);
 }
 
-static void DontTossItem(u8 taskId)
+static void DontTossItem(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1195,7 +1195,7 @@ static void UpdateNumToToss(s16 num)
     AddTextPrinterParameterized(WIN_TOSS_NUM, FONT_NORMAL, gStringVar4, x, 2, 0, NULL);
 }
 
-static void Task_ChooseHowManyToToss(u8 taskId)
+static void Task_ChooseHowManyToToss(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1223,7 +1223,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     }
 }
 
-static void TossItem(u8 taskId)
+static void TossItem(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1235,7 +1235,7 @@ static void TossItem(u8 taskId)
     gTasks[taskId].func = Task_TossItem;
 }
 
-static void Task_TossItem(u8 taskId)
+static void Task_TossItem(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
@@ -1255,7 +1255,7 @@ static void Task_TossItem(u8 taskId)
     }
 }
 
-static void BagAction_Give(u8 taskId)
+static void BagAction_Give(u32 taskId)
 {
     CloseMenuActionWindow();
     if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
@@ -1273,14 +1273,14 @@ static void BagAction_Give(u8 taskId)
     }
 }
 
-static void ShowCantHoldMessage(u8 taskId)
+static void ShowCantHoldMessage(u32 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeld);
     DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_WaitCloseErrorMessage);
 }
 
-static void Task_WaitCloseErrorMessage(u8 taskId)
+static void Task_WaitCloseErrorMessage(u32 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
@@ -1289,7 +1289,7 @@ static void Task_WaitCloseErrorMessage(u8 taskId)
     }
 }
 
-void Task_CloseBattlePyramidBagMessage(u8 taskId)
+void Task_CloseBattlePyramidBagMessage(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1299,7 +1299,7 @@ void Task_CloseBattlePyramidBagMessage(u8 taskId)
     SetTaskToMainPyramidBagInputHandler(taskId);
 }
 
-static void TryCloseBagToGiveItem(u8 taskId)
+static void TryCloseBagToGiveItem(u32 taskId)
 {
     if (!IsWritingMailAllowed(gSpecialVar_ItemId))
         DisplayItemMessageInBattlePyramid(taskId, gText_CantWriteMail, Task_WaitCloseErrorMessage);
@@ -1309,7 +1309,7 @@ static void TryCloseBagToGiveItem(u8 taskId)
         ShowCantHoldMessage(taskId);
 }
 
-static void BagAction_UseInBattle(u8 taskId)
+static void BagAction_UseInBattle(u32 taskId)
 {
     // Safety check
     u16 type = ItemId_GetType(gSpecialVar_ItemId);
@@ -1325,7 +1325,7 @@ static void BagAction_UseInBattle(u8 taskId)
         ItemUseInBattle_PartyMenuChooseMove(taskId);
 }
 
-static void Task_BeginItemSwap(u8 taskId)
+static void Task_BeginItemSwap(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1341,7 +1341,7 @@ static void Task_BeginItemSwap(u8 taskId)
     gTasks[taskId].func = Task_ItemSwapHandleInput;
 }
 
-static void Task_ItemSwapHandleInput(u8 taskId)
+static void Task_ItemSwapHandleInput(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
@@ -1378,7 +1378,7 @@ static void Task_ItemSwapHandleInput(u8 taskId)
     }
 }
 
-static void PerformItemSwap(u8 taskId)
+static void PerformItemSwap(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
@@ -1403,7 +1403,7 @@ static void PerformItemSwap(u8 taskId)
     }
 }
 
-static void CancelItemSwap(u8 taskId)
+static void CancelItemSwap(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
@@ -1421,13 +1421,13 @@ static void CancelItemSwap(u8 taskId)
 
 void TryStoreHeldItemsInPyramidBag(void)
 {
-    u8 i;
+    u32 i;
     struct Pokemon *party = gPlayerParty;
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
 #else
-    u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+    u32 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
 #endif
     u16 heldItem;
 
@@ -1458,7 +1458,7 @@ void TryStoreHeldItemsInPyramidBag(void)
 
 static void InitPyramidBagWindows(void)
 {
-    u8 i;
+    u32 i;
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
@@ -1475,30 +1475,30 @@ static void InitPyramidBagWindows(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void PyramidBagPrint(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorTableId)
+static void PyramidBagPrint(u32 windowId, const u32 *src, u32 x, u32 y, u32 letterSpacing, u32 lineSpacing, u32 speed, u32 colorTableId)
 {
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors[colorTableId], speed, src);
 }
 
-static void PyramidBagPrint_Quantity(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorTableId)
+static void PyramidBagPrint_Quantity(u32 windowId, const u32 *src, u32 x, u32 y, u32 letterSpacing, u32 lineSpacing, u32 speed, u32 colorTableId)
 {
     AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, letterSpacing, lineSpacing, sTextColors[colorTableId], speed, src);
 }
 
-static void DrawTossNumberWindow(u8 windowId)
+static void DrawTossNumberWindow(u32 windowId)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static u8 UNUSED GetMenuActionWindowId(u8 windowArrayId)
+static u32 UNUSED GetMenuActionWindowId(u32 windowArrayId)
 {
     return gPyramidBagMenu->windowIds[windowArrayId];
 }
 
-static u8 OpenMenuActionWindowById(u8 windowArrayId)
+static u32 OpenMenuActionWindowById(u32 windowArrayId)
 {
-    u8 *windowId = &gPyramidBagMenu->windowIds[windowArrayId];
+    u32 *windowId = &gPyramidBagMenu->windowIds[windowArrayId];
     if (*windowId == WINDOW_NONE)
     {
         *windowId = AddWindow(&sWindowTemplates_MenuActions[windowArrayId]);
@@ -1508,9 +1508,9 @@ static u8 OpenMenuActionWindowById(u8 windowArrayId)
     return *windowId;
 }
 
-static void CloseMenuActionWindowById(u8 windowArrayId)
+static void CloseMenuActionWindowById(u32 windowArrayId)
 {
-    u8 *windowId = &gPyramidBagMenu->windowIds[windowArrayId];
+    u32 *windowId = &gPyramidBagMenu->windowIds[windowArrayId];
     if (*windowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*windowId, FALSE);
@@ -1521,12 +1521,12 @@ static void CloseMenuActionWindowById(u8 windowArrayId)
     }
 }
 
-static void CreatePyramidBagYesNo(u8 taskId, const struct YesNoFuncTable *yesNoTable)
+static void CreatePyramidBagYesNo(u32 taskId, const struct YesNoFuncTable *yesNoTable)
 {
     CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_MenuActions[MENU_WIN_YESNO], 1, 0, 2, 1, 0xE, yesNoTable);
 }
 
-void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback)(u8 taskId))
+void DisplayItemMessageInBattlePyramid(u32 taskId, const u32 *str, void (*callback)(u32 taskId))
 {
     FillWindowPixelBuffer(WIN_MSG, PIXEL_FILL(1));
     DisplayMessageAndContinueTask(taskId, WIN_MSG, 0xA, 0xD, FONT_NORMAL, GetPlayerTextSpeedDelay(), str, callback);
@@ -1541,9 +1541,9 @@ static void CloseBattlePyramidBagTextWindow(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void FreeItemIconSprite(u8 spriteArrId)
+static void FreeItemIconSprite(u32 spriteArrId)
 {
-    u8 *spriteId = &gPyramidBagMenu->spriteIds[spriteArrId];
+    u32 *spriteId = &gPyramidBagMenu->spriteIds[spriteArrId];
     if (*spriteId != SPRITE_NONE)
     {
         // spriteArrId is PBAG_SPRITE_ITEM_ICON / PBAG_SPRITE_ITEM_ICON_ALT here (1-2)
@@ -1570,7 +1570,7 @@ static void LoadPyramidBagPalette(void)
 
 static void CreatePyramidBagSprite(void)
 {
-    u8 *spriteId = &gPyramidBagMenu->spriteIds[PBAG_SPRITE_BAG];
+    u32 *spriteId = &gPyramidBagMenu->spriteIds[PBAG_SPRITE_BAG];
     *spriteId = CreateSprite(&sSpriteTemplate_PyramidBag, 68, 56, 0);
 }
 
@@ -1595,8 +1595,8 @@ static void SpriteCB_BagWaitForShake(struct Sprite *sprite)
 
 static void ShowItemIcon(u16 itemId, bool8 isAlt)
 {
-    u8 itemSpriteId;
-    u8 *spriteId = &gPyramidBagMenu->spriteIds[isAlt + PBAG_SPRITE_ITEM_ICON];
+    u32 itemSpriteId;
+    u32 *spriteId = &gPyramidBagMenu->spriteIds[isAlt + PBAG_SPRITE_ITEM_ICON];
     if (*spriteId == SPRITE_NONE)
     {
         FreeSpriteTilesByTag(TAG_ITEM_ICON + isAlt);
@@ -1626,7 +1626,7 @@ static void SetSwapLineInvisibility(bool8 invisible)
     SetSwapLineSpritesInvisibility(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES, invisible);
 }
 
-static void UpdateSwapLinePos(u8 y)
+static void UpdateSwapLinePos(u32 y)
 {
     UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }

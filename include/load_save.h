@@ -40,7 +40,7 @@ void CheckForFlashMemory(void);
 void ClearSav3(void);
 void ClearSav2(void);
 void ClearSav1(void);
-void SetSaveBlocksPointers(u16 offset);
+void SetSaveBlocksPointers(u32 offset);
 void MoveSaveBlocks_ResetHeap(void);
 u32 UseContinueGameWarp(void);
 void ClearContinueGameWarpStatus(void);
@@ -55,7 +55,7 @@ void CopyPartyAndObjectsToSave(void);
 void CopyPartyAndObjectsFromSave(void);
 void LoadPlayerBag(void);
 void SavePlayerBag(void);
-void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey);
+void ApplyNewEncryptionKeyToHword(u32 *hWord, u32 newKey);
 void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
 
 #endif // GUARD_LOAD_SAVE_H

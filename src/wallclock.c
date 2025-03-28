@@ -22,20 +22,20 @@
 #include "constants/songs.h"
 
 static void CB2_WallClock(void);
-static void Task_SetClock_WaitFadeIn(u8 taskId);
-static void Task_SetClock_HandleInput(u8 taskId);
-static void Task_SetClock_AskConfirm(u8 taskId);
-static void Task_SetClock_HandleConfirmInput(u8 taskId);
-static void Task_SetClock_Confirmed(u8 taskId);
-static void Task_SetClock_Exit(u8 taskId);
-static void Task_ViewClock_WaitFadeIn(u8 taskId);
-static void Task_ViewClock_HandleInput(u8 taskId);
-static void Task_ViewClock_FadeOut(u8 taskId);
-static void Task_ViewClock_Exit(u8 taskId);
-static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed);
-static bool32 AdvanceClock(u8 taskId, u8 direction);
-static void UpdateClockPeriod(u8 taskId, u8 direction);
-static void InitClockWithRtc(u8 taskId);
+static void Task_SetClock_WaitFadeIn(u32 taskId);
+static void Task_SetClock_HandleInput(u32 taskId);
+static void Task_SetClock_AskConfirm(u32 taskId);
+static void Task_SetClock_HandleConfirmInput(u32 taskId);
+static void Task_SetClock_Confirmed(u32 taskId);
+static void Task_SetClock_Exit(u32 taskId);
+static void Task_ViewClock_WaitFadeIn(u32 taskId);
+static void Task_ViewClock_HandleInput(u32 taskId);
+static void Task_ViewClock_FadeOut(u32 taskId);
+static void Task_ViewClock_Exit(u32 taskId);
+static u16 CalcNewMinHandAngle(u16 angle, u32 direction, u32 speed);
+static bool32 AdvanceClock(u32 taskId, u32 direction);
+static void UpdateClockPeriod(u32 taskId, u32 direction);
+static void InitClockWithRtc(u32 taskId);
 static void SpriteCB_MinuteHand(struct Sprite *sprite);
 static void SpriteCB_HourHand(struct Sprite *sprite);
 static void SpriteCB_PMIndicator(struct Sprite *sprite);
@@ -135,7 +135,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_ClockHand =
     sHand_Gfx, 0x2000, GFXTAG_WALL_CLOCK_HAND
 };
 
-static const u8 sUnused[8] = {0};
+static const u32 sUnused[8] = {0};
 
 static const struct SpritePalette sSpritePalettes_Clock[] =
 {
@@ -685,8 +685,8 @@ static void WallClockInit(void)
 
 void CB2_StartWallClock(void)
 {
-    u8 taskId;
-    u8 spriteId;
+    u32 taskId;
+    u32 spriteId;
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
@@ -727,10 +727,10 @@ void CB2_StartWallClock(void)
 
 void CB2_ViewWallClock(void)
 {
-    u8 taskId;
-    u8 spriteId;
-    u8 angle1;
-    u8 angle2;
+    u32 taskId;
+    u32 spriteId;
+    u32 angle1;
+    u32 angle2;
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gWallClockView_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
@@ -782,7 +782,7 @@ static void CB2_WallClock(void)
     UpdatePaletteFade();
 }
 
-static void Task_SetClock_WaitFadeIn(u8 taskId)
+static void Task_SetClock_WaitFadeIn(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -790,7 +790,7 @@ static void Task_SetClock_WaitFadeIn(u8 taskId)
     }
 }
 
-static void Task_SetClock_HandleInput(u8 taskId)
+static void Task_SetClock_HandleInput(u32 taskId)
 {
     if (gTasks[taskId].tMinuteHandAngle % 6)
     {
@@ -830,7 +830,7 @@ static void Task_SetClock_HandleInput(u8 taskId)
     }
 }
 
-static void Task_SetClock_AskConfirm(u8 taskId)
+static void Task_SetClock_AskConfirm(u32 taskId)
 {
     DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x250, 0x0d);
     AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
@@ -840,7 +840,7 @@ static void Task_SetClock_AskConfirm(u8 taskId)
     gTasks[taskId].func = Task_SetClock_HandleConfirmInput;
 }
 
-static void Task_SetClock_HandleConfirmInput(u8 taskId)
+static void Task_SetClock_HandleConfirmInput(u32 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -858,14 +858,14 @@ static void Task_SetClock_HandleConfirmInput(u8 taskId)
     }
 }
 
-static void Task_SetClock_Confirmed(u8 taskId)
+static void Task_SetClock_Confirmed(u32 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock_Exit;
 }
 
-static void Task_SetClock_Exit(u8 taskId)
+static void Task_SetClock_Exit(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -874,32 +874,32 @@ static void Task_SetClock_Exit(u8 taskId)
     }
 }
 
-static void Task_ViewClock_WaitFadeIn(u8 taskId)
+static void Task_ViewClock_WaitFadeIn(u32 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_ViewClock_HandleInput;
 }
 
-static void Task_ViewClock_HandleInput(u8 taskId)
+static void Task_ViewClock_HandleInput(u32 taskId)
 {
     InitClockWithRtc(taskId);
     if (JOY_NEW(A_BUTTON | B_BUTTON))
         gTasks[taskId].func = Task_ViewClock_FadeOut;
 }
 
-static void Task_ViewClock_FadeOut(u8 taskId)
+static void Task_ViewClock_FadeOut(u32 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ViewClock_Exit;
 }
 
-static void Task_ViewClock_Exit(u8 taskId)
+static void Task_ViewClock_Exit(u32 taskId)
 {
     if (!gPaletteFade.active)
         SetMainCallback2(gMain.savedCallback);
 }
 
-static u8 CalcMinHandDelta(u16 speed)
+static u32 CalcMinHandDelta(u16 speed)
 {
     if (speed > 60)
         return 6;
@@ -911,9 +911,9 @@ static u8 CalcMinHandDelta(u16 speed)
     return 1;
 }
 
-static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
+static u16 CalcNewMinHandAngle(u16 angle, u32 direction, u32 speed)
 {
-    u8 delta = CalcMinHandDelta(speed);
+    u32 delta = CalcMinHandDelta(speed);
     switch (direction)
     {
     case MOVE_BACKWARD:
@@ -932,7 +932,7 @@ static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
     return angle;
 }
 
-static bool32 AdvanceClock(u8 taskId, u8 direction)
+static bool32 AdvanceClock(u32 taskId, u32 direction)
 {
     switch (direction)
     {
@@ -974,9 +974,9 @@ static bool32 AdvanceClock(u8 taskId, u8 direction)
     return FALSE;
 }
 
-static void UpdateClockPeriod(u8 taskId, u8 direction)
+static void UpdateClockPeriod(u32 taskId, u32 direction)
 {
-    u8 hours = gTasks[taskId].tHours;
+    u32 hours = gTasks[taskId].tHours;
     switch (direction)
     {
     case MOVE_BACKWARD:
@@ -1004,7 +1004,7 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
     }
 }
 
-static void InitClockWithRtc(u8 taskId)
+static void InitClockWithRtc(u32 taskId)
 {
     RtcCalcLocalTime();
     gTasks[taskId].tHours = gLocalTime.hours;

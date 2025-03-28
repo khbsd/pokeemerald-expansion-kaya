@@ -36,9 +36,9 @@ static void IntrDummy(void);
 extern void gInitialMainCB2(void);
 extern void CB2_FlashNotDetectedScreen(void);
 
-const u8 gGameVersion = GAME_VERSION;
+const u32 gGameVersion = GAME_VERSION;
 
-const u8 gGameLanguage = GAME_LANGUAGE; // English
+const u32 gGameLanguage = GAME_LANGUAGE; // English
 
 const char BuildDateTime[] = "2005 02 21 11:10";
 
@@ -68,7 +68,7 @@ COMMON_DATA struct Main gMain = {0};
 COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
 COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
-COMMON_DATA u8 gLinkVSyncDisabled = 0;
+COMMON_DATA u32 gLinkVSyncDisabled = 0;
 COMMON_DATA s8 gPcmDmaCounter = 0;
 COMMON_DATA void *gAgbMainLoop_sp = NULL;
 

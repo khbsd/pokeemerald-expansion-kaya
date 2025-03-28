@@ -28,7 +28,7 @@ struct DynamicListMenuEventArgs
 {
     struct ListMenuTemplate *list;
     u16 selectedItem;
-    u8 windowId;
+    u32 windowId;
 };
 
 typedef void (*DynamicListCallback)(struct DynamicListMenuEventArgs *eventArgs);
@@ -40,27 +40,27 @@ struct DynamicListMenuEventCollection
     DynamicListCallback OnDestroy;
 };
 
-static EWRAM_DATA u8 sProcessInputDelay = 0;
-static EWRAM_DATA u8 sDynamicMenuEventId = 0;
+static EWRAM_DATA u32 sProcessInputDelay = 0;
+static EWRAM_DATA u32 sDynamicMenuEventId = 0;
 static EWRAM_DATA struct DynamicMultichoiceStack *sDynamicMultiChoiceStack = NULL;
 static EWRAM_DATA u16 *sDynamicMenuEventScratchPad = NULL;
 
-static u8 sLilycoveSSTidalSelections[SSTIDAL_SELECTION_COUNT];
+static u32 sLilycoveSSTidalSelections[SSTIDAL_SELECTION_COUNT];
 
 static void FreeListMenuItems(struct ListMenuItem *items, u32 count);
-static void Task_HandleScrollingMultichoiceInput(u8 taskId);
-static void Task_HandleMultichoiceInput(u8 taskId);
-static void Task_HandleYesNoInput(u8 taskId);
-static void Task_HandleMultichoiceGridInput(u8 taskId);
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet);
-static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos);
-static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId);
-static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId);
+static void Task_HandleScrollingMultichoiceInput(u32 taskId);
+static void Task_HandleMultichoiceInput(u32 taskId);
+static void Task_HandleYesNoInput(u32 taskId);
+static void Task_HandleMultichoiceGridInput(u32 taskId);
+static void DrawMultichoiceMenuDynamic(u32 left, u32 top, u32 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u32 maxBeforeScroll, u32 callbackSet);
+static void DrawMultichoiceMenu(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress, u32 cursorPos);
+static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u32 count, u32 windowId, u32 multichoiceId);
+static void DrawLinkServicesMultichoiceMenu(u32 multichoiceId);
 static void CreatePCMultichoice(void);
 static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
 static void CreateStartMenuForPokenavTutorial(void);
-static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId);
+static void InitMultichoiceNoWrap(bool8 ignoreBPress, u32 unusedCount, u32 windowId, u32 multichoiceId);
 static void MultichoiceDynamicEventDebug_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventDebug_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
@@ -96,7 +96,7 @@ static const struct ListMenuTemplate sScriptableListMenuTemplate =
     .fontId = FONT_NORMAL,
 };
 
-bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow, u32 callbackSet)
+bool8 ScriptMenu_MultichoiceDynamic(u32 left, u32 top, u32 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 maxBeforeScroll, u32 initialRow, u32 callbackSet)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -111,7 +111,7 @@ bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuIte
     }
 }
 
-bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress)
+bool8 ScriptMenu_Multichoice(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -125,7 +125,7 @@ bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPre
     }
 }
 
-bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 defaultChoice)
+bool8 ScriptMenu_MultichoiceWithDefault(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress, u32 defaultChoice)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -218,7 +218,7 @@ static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
     Free(items);
 }
 
-static u16 UNUSED GetLengthWithExpandedPlayerName(const u8 *str)
+static u16 UNUSED GetLengthWithExpandedPlayerName(const u32 *str)
 {
     u16 length = 0;
 
@@ -328,7 +328,7 @@ void MultichoiceDynamic_DestroyStack(void)
 
 static void MultichoiceDynamic_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
-    u8 taskId;
+    u32 taskId;
     if (!onInit)
         PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(Task_HandleScrollingMultichoiceInput);
@@ -343,13 +343,13 @@ static void MultichoiceDynamic_MoveCursor(s32 itemIndex, bool8 onInit, struct Li
     }
 }
 
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet)
+static void DrawMultichoiceMenuDynamic(u32 left, u32 top, u32 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u32 maxBeforeScroll, u32 callbackSet)
 {
     u32 i;
-    u8 windowId;
+    u32 windowId;
     s32 width = 0;
-    u8 newWidth;
-    u8 taskId;
+    u32 newWidth;
+    u32 taskId;
     u32 windowHeight;
     struct ListMenu *list;
 
@@ -418,12 +418,12 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     }
 }
 
-void DrawMultichoiceMenuInternal(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos, const struct MenuAction *actions, int count)
+void DrawMultichoiceMenuInternal(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress, u32 cursorPos, const struct MenuAction *actions, int count)
 {
     int i;
-    u8 windowId;
+    u32 windowId;
     int width = 0;
-    u8 newWidth;
+    u32 newWidth;
 
     for (i = 0; i < count; i++)
     {
@@ -440,7 +440,7 @@ void DrawMultichoiceMenuInternal(u8 left, u8 top, u8 multichoiceId, bool8 ignore
     InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
 }
 
-static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos)
+static void DrawMultichoiceMenu(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress, u32 cursorPos)
 {
     DrawMultichoiceMenuInternal(left, top, multichoiceId, ignoreBPress, cursorPos, sMultichoiceLists[multichoiceId].list, sMultichoiceLists[multichoiceId].count);
 }
@@ -454,10 +454,10 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
 #define tWindowId       data[6]
 #define tMultichoiceId  data[7]
 
-static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId)
+static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u32 count, u32 windowId, u32 multichoiceId)
 {
-    u8 i;
-    u8 taskId;
+    u32 i;
+    u32 taskId;
     sProcessInputDelay = 2;
 
     for (i = 0; i < ARRAY_COUNT(sLinkServicesMultichoiceIds); i++)
@@ -483,7 +483,7 @@ static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, 
     DrawLinkServicesMultichoiceMenu(multichoiceId);
 }
 
-static void Task_HandleScrollingMultichoiceInput(u8 taskId)
+static void Task_HandleScrollingMultichoiceInput(u32 taskId)
 {
     bool32 done = FALSE;
     s32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
@@ -536,7 +536,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     }
 }
 
-static void Task_HandleMultichoiceInput(u8 taskId)
+static void Task_HandleMultichoiceInput(u32 taskId)
 {
     s8 selection;
     s16 *data = gTasks[taskId].data;
@@ -580,7 +580,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
     }
 }
 
-bool8 ScriptMenu_YesNo(u8 left, u8 top)
+bool8 ScriptMenu_YesNo(u32 left, u32 top)
 {
     if (FuncIsActiveTask(Task_HandleYesNoInput) == TRUE)
     {
@@ -604,7 +604,7 @@ bool8 IsScriptActive(void)
         return TRUE;
 }
 
-static void Task_HandleYesNoInput(u8 taskId)
+static void Task_HandleYesNoInput(u32 taskId)
 {
     if (gTasks[taskId].tRight < 5)
     {
@@ -630,7 +630,7 @@ static void Task_HandleYesNoInput(u8 taskId)
     ScriptContext_Enable();
 }
 
-bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 columnCount)
+bool8 ScriptMenu_MultichoiceGrid(u32 left, u32 top, u32 multichoiceId, bool8 ignoreBPress, u32 columnCount)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceGridInput) == TRUE)
     {
@@ -638,8 +638,8 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
     }
     else
     {
-        u8 taskId;
-        u8 rowCount, newWidth;
+        u32 taskId;
+        u32 rowCount, newWidth;
         int i, width;
 
         gSpecialVar_Result = 0xFF;
@@ -667,7 +667,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
     }
 }
 
-static void Task_HandleMultichoiceGridInput(u8 taskId)
+static void Task_HandleMultichoiceGridInput(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s8 selection = Menu_ProcessGridInput();
@@ -710,11 +710,11 @@ bool16 ScriptMenu_CreatePCMultichoice(void)
 
 static void CreatePCMultichoice(void)
 {
-    u8 x = 8;
+    u32 x = 8;
     u32 pixelWidth = 0;
-    u8 width;
-    u8 numChoices;
-    u8 windowId;
+    u32 width;
+    u32 numChoices;
+    u32 windowId;
     int i;
 
     for (i = 0; i < ARRAY_COUNT(sPCNameStrings); i++)
@@ -783,12 +783,12 @@ bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
 // otherwise gSpecialVar_0x8004 is 0
 static void CreateLilycoveSSTidalMultichoice(void)
 {
-    u8 selectionCount = 0;
-    u8 count;
+    u32 selectionCount = 0;
+    u32 count;
     u32 pixelWidth;
-    u8 width;
-    u8 windowId;
-    u8 i;
+    u32 width;
+    u32 windowId;
+    u32 i;
     u32 j;
 
     for (i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
@@ -894,7 +894,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
         for (j = 0; j < SSTIDAL_SELECTION_COUNT; j++)
         {
-            u8 selection = sLilycoveSSTidalSelections[j];
+            u32 selection = sLilycoveSSTidalSelections[j];
             if (selection != 0xFF)
             {
                 pixelWidth = DisplayTextAndGetWidth(sLilycoveSSTidalDestinations[selection], pixelWidth);
@@ -935,7 +935,7 @@ void GetLilycoveSSTidalSelection(void)
 #define tWindowY     data[4]
 #define tWindowId    data[5]
 
-static void Task_PokemonPicWindow(u8 taskId)
+static void Task_PokemonPicWindow(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -958,10 +958,10 @@ static void Task_PokemonPicWindow(u8 taskId)
     }
 }
 
-bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
+bool8 ScriptMenu_ShowPokemonPic(u16 species, u32 x, u32 y)
 {
-    u8 taskId;
-    u8 spriteId;
+    u32 taskId;
+    u32 spriteId;
 
     if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
     {
@@ -985,7 +985,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
 
 bool8 (*ScriptMenu_HidePokemonPic(void))(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
+    u32 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 
     if (taskId == TASK_NONE)
         return NULL;
@@ -1008,21 +1008,21 @@ static bool8 IsPicboxClosed(void)
 #undef tWindowY
 #undef tWindowId
 
-u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
+u32 CreateWindowFromRect(u32 x, u32 y, u32 width, u32 height)
 {
     struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 100);
-    u8 windowId = AddWindow(&template);
+    u32 windowId = AddWindow(&template);
     PutWindowTilemap(windowId);
     return windowId;
 }
 
-void ClearToTransparentAndRemoveWindow(u8 windowId)
+void ClearToTransparentAndRemoveWindow(u32 windowId)
 {
     ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
-static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId)
+static void DrawLinkServicesMultichoiceMenu(u32 multichoiceId)
 {
     switch (multichoiceId)
     {
@@ -1069,7 +1069,7 @@ bool16 ScriptMenu_CreateStartMenuForPokenavTutorial(void)
 
 static void CreateStartMenuForPokenavTutorial(void)
 {
-    u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
+    u32 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, FALSE);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokedex, 8, 9, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokemon, 8, 25, TEXT_SKIP_DRAW, NULL);
@@ -1086,9 +1086,9 @@ static void CreateStartMenuForPokenavTutorial(void)
 
 #define tWindowId       data[6]
 
-static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId)
+static void InitMultichoiceNoWrap(bool8 ignoreBPress, u32 unusedCount, u32 windowId, u32 multichoiceId)
 {
-    u8 taskId;
+    u32 taskId;
     sProcessInputDelay = 2;
     taskId = CreateTask(Task_HandleMultichoiceInput, 80);
     gTasks[taskId].tIgnoreBPress = ignoreBPress;
@@ -1106,14 +1106,14 @@ static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowI
 #undef tWindowId
 #undef tMultichoiceId
 
-static int DisplayTextAndGetWidthInternal(const u8 *str)
+static int DisplayTextAndGetWidthInternal(const u32 *str)
 {
-    u8 temp[64];
+    u32 temp[64];
     StringExpandPlaceholders(temp, str);
     return GetStringWidth(FONT_NORMAL, temp, 0);
 }
 
-int DisplayTextAndGetWidth(const u8 *str, int prevWidth)
+int DisplayTextAndGetWidth(const u32 *str, int prevWidth)
 {
     int width = DisplayTextAndGetWidthInternal(str);
     if (width < prevWidth)

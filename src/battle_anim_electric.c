@@ -845,8 +845,8 @@ void AnimTask_ElectricBolt(u8 taskId)
 
 static void AnimTask_ElectricBolt_Step(u8 taskId)
 {
-    u16 r8;
-    u16 r2;
+    u32 r8;
+    u32 r2;
     s16 r12;
     u8 spriteId = 0;
     u8 r7 = 0;
@@ -1116,7 +1116,7 @@ static void AnimVoltTackleOrbSlide_Step(struct Sprite *sprite)
     case 1:
         sprite->x += sprite->data[7];
         gSprites[sprite->data[6]].x2 += sprite->data[7];
-        if ((u16)(sprite->x + 80) > 400)
+        if ((u32)(sprite->x + 80) > 400)
             DestroySpriteAndMatrix(sprite);
     }
 }
@@ -1218,7 +1218,7 @@ void AnimTask_VoltTackleBolt(u8 taskId)
             }
             else
             {
-                u16 temp;
+                u32 temp;
                 task->data[5] = gBattleAnimArgs[0] * 10 + 40;
                 temp = task->data[3];
                 task->data[3] = task->data[4];

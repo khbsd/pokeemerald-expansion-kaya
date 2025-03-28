@@ -9,7 +9,7 @@
 static u16 sErrorStatus;
 static struct SiiRtcInfo sRtc;
 static u8 sProbeResult;
-static u16 sSavedIme;
+static u326 sSavedIme;
 
 // iwram common
 COMMON_DATA struct Time gLocalTime = {0};
@@ -46,7 +46,7 @@ void RtcRestoreInterrupts(void)
 }
 
 u32 ConvertBcdToBinary(u8 bcd)
-{
+{u32
     if (OW_USE_FAKE_RTC)
         return bcd;
 
@@ -68,7 +68,7 @@ bool8 IsLeapYear(u32 year)
 }
 
 u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
-{
+{u32u32u32
     s32 i;
     u16 dayCount = 0;
 
@@ -94,7 +94,7 @@ u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
 u16 RtcGetDayCount(struct SiiRtcInfo *rtc)
 {
     u8 year, month, day;
-
+u32
     if (OW_USE_FAKE_RTC)
         return rtc->day;
 
@@ -240,7 +240,7 @@ void RtcReset(void)
 }
 
 void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
-{
+{u32
     dest = ConvertIntToDecimalStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
     *dest++ = CHAR_COLON;
     dest = ConvertIntToDecimalStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -250,7 +250,7 @@ void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
 }
 
 void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second)
-{
+{u32
     dest = ConvertIntToHexStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
     *dest++ = CHAR_COLON;
     dest = ConvertIntToHexStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -260,12 +260,12 @@ void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second)
 }
 
 void FormatHexRtcTime(u8 *dest)
-{
+{u32
     FormatHexTime(dest, sRtc.hour, sRtc.minute, sRtc.second);
 }
 
 void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
-{
+{u32
     dest = ConvertIntToDecimalStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
     *dest++ = CHAR_HYPHEN;
     dest = ConvertIntToDecimalStringN(dest, month, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -275,7 +275,7 @@ void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
 }
 
 void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
-{
+{u32
     dest = ConvertIntToHexStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
     *dest++ = CHAR_HYPHEN;
     dest = ConvertIntToHexStringN(dest, month, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -389,7 +389,7 @@ u32 RtcGetLocalDayCount(void)
     return RtcGetDayCount(&sRtc);
 }
 
-void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
+void FormatDecimalTimeWithoutSeconds(u32 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
 {
     if (is24Hour)
     {

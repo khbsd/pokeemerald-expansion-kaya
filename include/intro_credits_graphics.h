@@ -17,7 +17,7 @@ enum {
     SCENE_CITY_NIGHT,
 };
 
-extern u16 gIntroCredits_MovingSceneryVBase;
+extern u32 gIntroCredits_MovingSceneryVBase;
 extern s16 gIntroCredits_MovingSceneryVOffset;
 extern s16 gIntroCredits_MovingSceneryState;
 
@@ -37,7 +37,7 @@ void LoadIntroPart2Graphics(u8 scenery);
 void SetIntroPart2BgCnt(u8 scenery);
 void LoadCreditsSceneGraphics(u8);
 void SetCreditsSceneBgCnt(u8);
-u8 CreateBicycleBgAnimationTask(u8 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Speed);
+u8 CreateBicycleBgAnimationTask(u8 mode, u32 bg1Speed, u32 bg2Speed, u32 bg3Speed);
 void CycleSceneryPalette(u8);
 u8 CreateIntroBrendanSprite(s16 x, s16 y);
 u8 CreateIntroMaySprite(s16 x, s16 y);

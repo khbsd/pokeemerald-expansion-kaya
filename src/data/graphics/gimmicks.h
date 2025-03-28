@@ -5,11 +5,11 @@ static const u8 ALIGNED(4) sBurstTriggerGfx[] = INCBIN_U8("graphics/battle_inter
 static const u8 ALIGNED(4) sDynamaxTriggerGfx[] = INCBIN_U8("graphics/battle_interface/dynamax_trigger.4bpp");
 static const u8 ALIGNED(4) sTeraTriggerGfx[] = INCBIN_U8("graphics/battle_interface/tera_trigger.4bpp");
 
-static const u16 sMegaTriggerPal[] = INCBIN_U16("graphics/battle_interface/mega_trigger.gbapal");
-static const u16 sZMoveTriggerPal[] = INCBIN_U16("graphics/battle_interface/z_move_trigger.gbapal");
-static const u16 sBurstTriggerPal[] = INCBIN_U16("graphics/battle_interface/burst_trigger.gbapal");
-static const u16 sDynamaxTriggerPal[] = INCBIN_U16("graphics/battle_interface/dynamax_trigger.gbapal");
-static const u16 sTeraTriggerPal[] = INCBIN_U16("graphics/battle_interface/tera_trigger.gbapal");
+static const u32 sMegaTriggerPal[] = INCBIN_u32("graphics/battle_interface/mega_trigger.gbapal");
+static const u32 sZMoveTriggerPal[] = INCBIN_u32("graphics/battle_interface/z_move_trigger.gbapal");
+static const u32 sBurstTriggerPal[] = INCBIN_u32("graphics/battle_interface/burst_trigger.gbapal");
+static const u32 sDynamaxTriggerPal[] = INCBIN_u32("graphics/battle_interface/dynamax_trigger.gbapal");
+static const u32 sTeraTriggerPal[] = INCBIN_u32("graphics/battle_interface/tera_trigger.gbapal");
 
 static const struct SpriteSheet sSpriteSheet_MegaTrigger = {sMegaTriggerGfx, sizeof(sMegaTriggerGfx), TAG_GIMMICK_TRIGGER_TILE};
 static const struct SpriteSheet sSpriteSheet_ZMoveTrigger = {sZMoveTriggerGfx, sizeof(sZMoveTriggerGfx), TAG_GIMMICK_TRIGGER_TILE};
@@ -95,9 +95,9 @@ static const u8 ALIGNED(4) sDarkIndicatorGfx[] = INCBIN_U8("graphics/battle_inte
 static const u8 ALIGNED(4) sFairyIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/fairy_indicator.4bpp");
 static const u8 ALIGNED(4) sStellarIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/stellar_indicator.4bpp");
 
-static const u16 sMiscIndicatorPal[] = INCBIN_U16("graphics/battle_interface/misc_indicator.gbapal"); // has room for more colors
-static const u16 sMegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/mega_indicator.gbapal");
-static const u16 sTeraIndicatorPal[] = INCBIN_U16("graphics/battle_interface/tera_indicator.gbapal");
+static const u32 sMiscIndicatorPal[] = INCBIN_u32("graphics/battle_interface/misc_indicator.gbapal"); // has room for more colors
+static const u32 sMegaIndicatorPal[] = INCBIN_u32("graphics/battle_interface/mega_indicator.gbapal");
+static const u32 sTeraIndicatorPal[] = INCBIN_u32("graphics/battle_interface/tera_indicator.gbapal");
 
 static const struct SpriteSheet sSpriteSheet_MegaIndicator = {sMegaIndicatorGfx, sizeof(sMegaIndicatorGfx), TAG_MEGA_INDICATOR_TILE};
 static const struct SpriteSheet sSpriteSheet_AlphaIndicator = {sAlphaIndicatorGfx, sizeof(sAlphaIndicatorGfx), TAG_ALPHA_INDICATOR_TILE};

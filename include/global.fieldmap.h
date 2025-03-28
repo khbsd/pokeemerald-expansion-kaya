@@ -40,9 +40,9 @@ struct Tileset
     /*0x00*/ bool8 isCompressed;
     /*0x01*/ bool8 isSecondary;
     /*0x04*/ const u32 *tiles;
-    /*0x08*/ const u16 (*palettes)[16];
-    /*0x0C*/ const u16 *metatiles;
-    /*0x10*/ const u16 *metatileAttributes;
+    /*0x08*/ const u32 (*palettes)[16];
+    /*0x0C*/ const u32 *metatiles;
+    /*0x10*/ const u32 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 
@@ -50,8 +50,8 @@ struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
-    /*0x08*/ const u16 *border;
-    /*0x0C*/ const u16 *map;
+    /*0x08*/ const u32 *border;
+    /*0x0C*/ const u32 *map;
     /*0x10*/ const struct Tileset *primaryTileset;
     /*0x14*/ const struct Tileset *secondaryTileset;
 };
@@ -60,26 +60,26 @@ struct BackupMapLayout
 {
     s32 width;
     s32 height;
-    u16 *map;
+    u32 *map;
 };
 
 struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
-    /*0x01*/ u16 graphicsId;
+    /*0x01*/ u32 graphicsId;
     /*0x03*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u16 movementRangeX:4;
-             u16 movementRangeY:4;
-             u16 unused:8;
-    /*0x0C*/ u16 trainerType;
-    /*0x0E*/ u16 trainerRange_berryTreeId;
+    /*0x0A*/ u32 movementRangeX:4;
+             u32 movementRangeY:4;
+             u32 unused:8;
+    /*0x0C*/ u32 trainerType;
+    /*0x0E*/ u32 trainerRange_berryTreeId;
     /*0x10*/ const u8 *script;
-    /*0x14*/ u16 flagId;
-    /*0x16*/ u16 filler;
+    /*0x14*/ u32 flagId;
+    /*0x16*/ u32 filler;
 }; // size = 0x18
 
 struct WarpEvent
@@ -95,21 +95,21 @@ struct CoordEvent
 {
     s16 x, y;
     u8 elevation;
-    u16 trigger;
-    u16 index;
+    u32 trigger;
+    u32 index;
     const u8 *script;
 };
 
 struct BgEvent
 {
-    u16 x, y;
+    u32 x, y;
     u8 elevation;
     u8 kind; // The "kind" field determines how to access bgUnion union below.
     union {
         const u8 *script;
         struct {
-            u16 item;
-            u16 hiddenItemId;
+            u32 item;
+            u32 hiddenItemId;
         } hiddenItem;
         u32 secretBaseId;
     } bgUnion;
@@ -147,8 +147,8 @@ struct MapHeader
     /* 0x04 */ const struct MapEvents *events;
     /* 0x08 */ const u8 *mapScripts;
     /* 0x0C */ const struct MapConnections *connections;
-    /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapLayoutId;
+    /* 0x10 */ u32 music;
+    /* 0x12 */ u32 mapLayoutId;
     /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
@@ -196,7 +196,7 @@ struct ObjectEvent
              u32 hideReflection:1;
              u32 shiny:1; // OW mon shininess
              u32 padding:3;
-    /*0x04*/ u16 graphicsId; // 12 bits for species; high 4 bits for form
+    /*0x04*/ u32 graphicsId; // 12 bits for species; high 4 bits for form
     /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;
     /*0x08*/ u8 localId;
@@ -207,10 +207,10 @@ struct ObjectEvent
     /*0x0C*/ struct Coords16 initialCoords;
     /*0x10*/ struct Coords16 currentCoords;
     /*0x14*/ struct Coords16 previousCoords;
-    /*0x18*/ u16 facingDirection:4; // current direction?
-             u16 movementDirection:4;
-             u16 rangeX:4;
-             u16 rangeY:4;
+    /*0x18*/ u32 facingDirection:4; // current direction?
+             u32 movementDirection:4;
+             u32 rangeX:4;
+             u32 rangeY:4;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
     /*0x1C*/ u8 movementActionId;
@@ -227,10 +227,10 @@ struct ObjectEvent
 
 struct ObjectEventGraphicsInfo
 {
-    /*0x00*/ u16 tileTag;
-    /*0x02*/ u16 paletteTag;
-    /*0x04*/ u16 reflectionPaletteTag;
-    /*0x06*/ u16 size;
+    /*0x00*/ u32 tileTag;
+    /*0x02*/ u32 paletteTag;
+    /*0x04*/ u32 reflectionPaletteTag;
+    /*0x06*/ u32 size;
     /*0x08*/ s16 width;
     /*0x0A*/ s16 height;
     /*0x0C*/ u8 paletteSlot:4;

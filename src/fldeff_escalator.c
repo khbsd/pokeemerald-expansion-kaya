@@ -6,10 +6,10 @@
 #include "task.h"
 #include "constants/metatile_labels.h"
 
-static EWRAM_DATA u8 sEscalatorAnim_TaskId = 0;
+static EWRAM_DATA u32 sEscalatorAnim_TaskId = 0;
 
-static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatileMasks);
-static void Task_DrawEscalator(u8 taskId);
+static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u16 metatileMasks);
+static void Task_DrawEscalator(u32 taskId);
 
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
@@ -63,7 +63,7 @@ static const s16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
 #define tPlayerX          data[4]
 #define tPlayerY          data[5]
 
-static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatileMasks)
+static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u16 metatileMasks)
 {
     s16 x = gTasks[taskId].tPlayerX - 1;
     s16 y = gTasks[taskId].tPlayerY - 1;
@@ -110,7 +110,7 @@ static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatile
     }
 }
 
-static void Task_DrawEscalator(u8 taskId)
+static void Task_DrawEscalator(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -153,9 +153,9 @@ static void Task_DrawEscalator(u8 taskId)
     }
 }
 
-static u8 CreateEscalatorTask(bool16 goingUp)
+static u32 CreateEscalatorTask(bool16 goingUp)
 {
-    u8 taskId = CreateTask(Task_DrawEscalator, 0);
+    u32 taskId = CreateTask(Task_DrawEscalator, 0);
     s16 *data = gTasks[taskId].data;
 
     PlayerGetDestCoords(&tPlayerX, &tPlayerY);

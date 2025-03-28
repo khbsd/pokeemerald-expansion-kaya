@@ -6,13 +6,13 @@
 
 static EWRAM_DATA struct
 {
-    u8 count;
+    u32 count;
     struct ConfettiUtil *array;
 } *sWork = NULL;
 
-bool32 ConfettiUtil_Init(u8 count)
+bool32 ConfettiUtil_Init(u32 count)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     if (count == 0)
         return FALSE;
@@ -41,7 +41,7 @@ bool32 ConfettiUtil_Init(u8 count)
 
 bool32 ConfettiUtil_Free(void)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     if (sWork == NULL)
         return FALSE;
@@ -59,7 +59,7 @@ bool32 ConfettiUtil_Free(void)
 
 bool32 ConfettiUtil_Update(void)
 {
-    u8 i = 0;
+    u32 i = 0;
 
     if (sWork == NULL || sWork->array == NULL)
         return FALSE;
@@ -89,7 +89,7 @@ bool32 ConfettiUtil_Update(void)
     return TRUE;
 }
 
-static bool32 SetAnimAndTileNum(struct ConfettiUtil *structPtr, u8 animNum)
+static bool32 SetAnimAndTileNum(struct ConfettiUtil *structPtr, u32 animNum)
 {
     u16 tileStart;
 
@@ -105,7 +105,7 @@ static bool32 SetAnimAndTileNum(struct ConfettiUtil *structPtr, u8 animNum)
     return TRUE;
 }
 
-u8 ConfettiUtil_SetCallback(u8 id, void (*func)(struct ConfettiUtil *))
+u32 ConfettiUtil_SetCallback(u32 id, void (*func)(struct ConfettiUtil *))
 {
     if (sWork == NULL || id >= sWork->count)
         return 0xFF;
@@ -116,7 +116,7 @@ u8 ConfettiUtil_SetCallback(u8 id, void (*func)(struct ConfettiUtil *))
     return id;
 }
 
-u8 ConfettiUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue)
+u32 ConfettiUtil_SetData(u32 id, u32 dataArrayId, s16 dataValue)
 {
     if (sWork == NULL || id >= sWork->count)
         return 0xFF;
@@ -127,10 +127,10 @@ u8 ConfettiUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue)
     return id;
 }
 
-u8 ConfettiUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u8 animNum, u8 priority)
+u32 ConfettiUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u32 animNum, u32 priority)
 {
     struct ConfettiUtil *structPtr = NULL;
-    u8 i;
+    u32 i;
 
     if (sWork == NULL || oam == NULL)
         return 0xFF;
@@ -167,7 +167,7 @@ u8 ConfettiUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x
     return structPtr->id;
 }
 
-u8 ConfettiUtil_Remove(u8 id)
+u32 ConfettiUtil_Remove(u32 id)
 {
     if (sWork == NULL || !sWork->array[id].active)
         return 0xFF;

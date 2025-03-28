@@ -4,8 +4,8 @@
 
 struct LilycoveContestLadyValues
 {
-    u16 monGfxId;
-    u16 monSpecies;
+    u32 monGfxId;
+    u32 monSpecies;
     const u8 *monName;
     const u8 *categoryName;
     const u8 *contestName;
@@ -50,7 +50,7 @@ static const struct LilycoveContestLadyValues sContestLadyValues[] =
     },
 };
 
-static const u16 sLilycoveLadyGfxId[] =
+static const u32 sLilycoveLadyGfxId[] =
 {
     OBJ_EVENT_GFX_WOMAN_4,
     OBJ_EVENT_GFX_WOMAN_2,
@@ -58,7 +58,7 @@ static const u16 sLilycoveLadyGfxId[] =
 };
 
 // Quiz Lady data
-static const u16 sQuizLadyQuestion1[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion1[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_STORES,
@@ -71,7 +71,7 @@ static const u16 sQuizLadyQuestion1[QUIZ_QUESTION_LEN] =
     EC_WORD_POKENAV
 };
 
-static const u16 sQuizLadyQuestion2[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion2[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_ISN_T,
@@ -84,7 +84,7 @@ static const u16 sQuizLadyQuestion2[QUIZ_QUESTION_LEN] =
     EC_WORD_DARK
 };
 
-static const u16 sQuizLadyQuestion3[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion3[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_HOW,
     EC_WORD_DO,
@@ -97,7 +97,7 @@ static const u16 sQuizLadyQuestion3[QUIZ_QUESTION_LEN] =
     EC_WORD_CUTE_CHARM
 };
 
-static const u16 sQuizLadyQuestion4[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion4[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_IS,
@@ -110,7 +110,7 @@ static const u16 sQuizLadyQuestion4[QUIZ_QUESTION_LEN] =
     EC_WORD_MACHINE
 };
 
-static const u16 sQuizLadyQuestion5[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion5[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_ITEM,
@@ -123,7 +123,7 @@ static const u16 sQuizLadyQuestion5[QUIZ_QUESTION_LEN] =
     EC_WORD_PHONE
 };
 
-static const u16 sQuizLadyQuestion6[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion6[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_WILL,
@@ -136,7 +136,7 @@ static const u16 sQuizLadyQuestion6[QUIZ_QUESTION_LEN] =
     EC_WORD_SWIFT_SWIM
 };
 
-static const u16 sQuizLadyQuestion7[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion7[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_OF,
@@ -149,7 +149,7 @@ static const u16 sQuizLadyQuestion7[QUIZ_QUESTION_LEN] =
     EC_WORD_ROCK
 };
 
-static const u16 sQuizLadyQuestion8[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion8[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_WILL,
@@ -162,7 +162,7 @@ static const u16 sQuizLadyQuestion8[QUIZ_QUESTION_LEN] =
     EC_WORD_WONDER_GUARD
 };
 
-static const u16 sQuizLadyQuestion9[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion9[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_WILL,
@@ -175,7 +175,7 @@ static const u16 sQuizLadyQuestion9[QUIZ_QUESTION_LEN] =
     EC_WORD_SHED_SKIN
 };
 
-static const u16 sQuizLadyQuestion10[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion10[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_GOES,
@@ -188,7 +188,7 @@ static const u16 sQuizLadyQuestion10[QUIZ_QUESTION_LEN] =
     EC_WORD_POKENAV
 };
 
-static const u16 sQuizLadyQuestion11[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion11[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_STORES,
@@ -201,7 +201,7 @@ static const u16 sQuizLadyQuestion11[QUIZ_QUESTION_LEN] =
     EC_WORD_TELEVISION
 };
 
-static const u16 sQuizLadyQuestion12[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion12[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_WHICH,
     EC_WORD_MACHINE,
@@ -214,7 +214,7 @@ static const u16 sQuizLadyQuestion12[QUIZ_QUESTION_LEN] =
     EC_WORD_TELEVISION
 };
 
-static const u16 sQuizLadyQuestion13[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion13[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_A,
     EC_WORD_POKEMON,
@@ -227,7 +227,7 @@ static const u16 sQuizLadyQuestion13[QUIZ_QUESTION_LEN] =
     EC_WORD_LETTER
 };
 
-static const u16 sQuizLadyQuestion14[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion14[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_STEEL,
     EC_WORD_IS,
@@ -240,7 +240,7 @@ static const u16 sQuizLadyQuestion14[QUIZ_QUESTION_LEN] =
     EC_EMPTY_WORD
 };
 
-static const u16 sQuizLadyQuestion15[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion15[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_DARK,
     EC_WORD_IS,
@@ -253,7 +253,7 @@ static const u16 sQuizLadyQuestion15[QUIZ_QUESTION_LEN] =
     EC_EMPTY_WORD
 };
 
-static const u16 sQuizLadyQuestion16[QUIZ_QUESTION_LEN] =
+static const u32 sQuizLadyQuestion16[QUIZ_QUESTION_LEN] =
 {
     EC_WORD_GHOST,
     EC_WORD_IS,
@@ -266,7 +266,7 @@ static const u16 sQuizLadyQuestion16[QUIZ_QUESTION_LEN] =
     EC_EMPTY_WORD
 };
 
-static const u16 *const sQuizLadyQuizQuestions[] =
+static const u32 *const sQuizLadyQuizQuestions[] =
 {
     sQuizLadyQuestion1,
     sQuizLadyQuestion2,
@@ -286,7 +286,7 @@ static const u16 *const sQuizLadyQuizQuestions[] =
     sQuizLadyQuestion16
 };
 
-static const u16 sQuizLadyQuizAnswers[] =
+static const u32 sQuizLadyQuizAnswers[] =
 {
     EC_WORD_POKEDEX,
     EC_WORD_DARK,
@@ -306,7 +306,7 @@ static const u16 sQuizLadyQuizAnswers[] =
     EC_WORD_DARK
 };
 
-static const u16 sQuizLadyPrizes[] =
+static const u32 sQuizLadyPrizes[] =
 {
     ITEM_GLITTER_MAIL,
     ITEM_BEAD_MAIL,
@@ -337,7 +337,7 @@ static const u8 *const sFavorLadyRequests[] =
     COMPOUND_STRING("pointy"),
 };
 
-static const u16 sFavorLadyAcceptedItems_Slippery[] =
+static const u32 sFavorLadyAcceptedItems_Slippery[] =
 {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
@@ -354,7 +354,7 @@ static const u16 sFavorLadyAcceptedItems_Slippery[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Roundish[] =
+static const u32 sFavorLadyAcceptedItems_Roundish[] =
 {
     ITEM_FLUFFY_TAIL,
     ITEM_PEARL,
@@ -375,7 +375,7 @@ static const u16 sFavorLadyAcceptedItems_Roundish[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Whamish[] =
+static const u32 sFavorLadyAcceptedItems_Whamish[] =
 {
     ITEM_REVIVAL_HERB,
     ITEM_POTION,
@@ -394,7 +394,7 @@ static const u16 sFavorLadyAcceptedItems_Whamish[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Shiny[] =
+static const u32 sFavorLadyAcceptedItems_Shiny[] =
 {
     ITEM_HEAL_POWDER,
     ITEM_X_SPEED,
@@ -419,7 +419,7 @@ static const u16 sFavorLadyAcceptedItems_Shiny[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Sticky[] =
+static const u32 sFavorLadyAcceptedItems_Sticky[] =
 {
     ITEM_ENERGY_ROOT,
     ITEM_FULL_RESTORE,
@@ -434,7 +434,7 @@ static const u16 sFavorLadyAcceptedItems_Sticky[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Pointy[] =
+static const u32 sFavorLadyAcceptedItems_Pointy[] =
 {
     ITEM_QUICK_CLAW,
     ITEM_POISON_BARB,
@@ -449,7 +449,7 @@ static const u16 sFavorLadyAcceptedItems_Pointy[] =
     ITEM_NONE
 };
 
-static const u16 *const sFavorLadyAcceptedItemLists[] =
+static const u32 *const sFavorLadyAcceptedItemLists[] =
 {
     sFavorLadyAcceptedItems_Slippery,
     sFavorLadyAcceptedItems_Roundish,
@@ -459,7 +459,7 @@ static const u16 *const sFavorLadyAcceptedItemLists[] =
     sFavorLadyAcceptedItems_Pointy
 };
 
-static const u16 sFavorLadyPrizes[] =
+static const u32 sFavorLadyPrizes[] =
 {
     ITEM_LUXURY_BALL,
     ITEM_NUGGET,

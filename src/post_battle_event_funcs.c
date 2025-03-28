@@ -14,8 +14,8 @@ int GameClear(void)
     int i;
     bool32 ribbonGet;
     struct RibbonCounter {
-        u8 partyIndex;
-        u8 count;
+        u32 partyIndex;
+        u32 count;
     } ribbonCounts[6];
 
     HealPlayerParty();
@@ -53,7 +53,7 @@ int GameClear(void)
          && !GetMonData(mon, MON_DATA_SANITY_IS_EGG)
          && !GetMonData(mon, MON_DATA_CHAMPION_RIBBON))
         {
-            u8 val[1] = {TRUE};
+            u32 val[1] = {TRUE};
             SetMonData(mon, MON_DATA_CHAMPION_RIBBON, val);
             ribbonCounts[i].count = GetRibbonCount(mon);
             ribbonGet = TRUE;

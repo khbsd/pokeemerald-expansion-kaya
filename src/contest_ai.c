@@ -8,8 +8,8 @@
 
 #define AI_ACTION_DONE (1 << 0)
 
-extern const u8 *gAIScriptPtr;
-extern const u8 *gContestAI_ScriptsTable[];
+extern const u32 *gAIScriptPtr;
+extern const u32 *gContestAI_ScriptsTable[];
 
 static void ContestAICmd_score(void);
 static void ContestAICmd_get_appeal_num(void);
@@ -291,11 +291,11 @@ static const ContestAICmdFunc sContestAICmdTable[] =
 };
 
 static void ContestAI_DoAIProcessing(void);
-static bool8 GetContestantIdByTurn(u8);
-static void AIStackPushVar(const u8 *);
-static u8 AIStackPop(void);
+static bool8 GetContestantIdByTurn(u32);
+static void AIStackPushVar(const u32 *);
+static u32 AIStackPop(void);
 
-void ContestAI_ResetAI(u8 contestantAI)
+void ContestAI_ResetAI(u32 contestantAI)
 {
     int i;
     memset(&eContestAI, 0, sizeof(struct ContestAIInfo));
@@ -308,7 +308,7 @@ void ContestAI_ResetAI(u8 contestantAI)
     eContestAI.aiFlags = gContestMons[eContestAI.contestantId].aiFlags;
 }
 
-u8 ContestAI_GetActionToUse(void)
+u32 ContestAI_GetActionToUse(void)
 {
     while (eContestAI.aiFlags != 0)
     {
@@ -326,8 +326,8 @@ u8 ContestAI_GetActionToUse(void)
     {
         // Randomly choose a move index. If it's the move
         // with the highest (or tied highest) score, return
-        u8 moveIdx = MOD(Random(), MAX_MON_MOVES);
-        u8 score = eContestAI.moveScores[moveIdx];
+        u32 moveIdx = MOD(Random(), MAX_MON_MOVES);
+        u32 score = eContestAI.moveScores[moveIdx];
         int i;
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -381,7 +381,7 @@ static void ContestAI_DoAIProcessing(void)
     }
 }
 
-static u8 GetContestantIdByTurn(u8 turn)
+static u32 GetContestantIdByTurn(u32 turn)
 {
     int i;
 
@@ -814,7 +814,7 @@ static void ContestAICmd_check_most_appealing_move(void)
 {
     int i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
-    u8 appeal = gContestEffects[GetMoveContestEffect(move)].appeal;
+    u32 appeal = gContestEffects[GetMoveContestEffect(move)].appeal;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -845,7 +845,7 @@ static void ContestAICmd_check_most_jamming_move(void)
 {
     int i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
-    u8 jam = gContestEffects[GetMoveContestEffect(move)].jam;
+    u32 jam = gContestEffects[GetMoveContestEffect(move)].jam;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1024,7 +1024,7 @@ static void ContestAICmd_if_most_used_count_not_eq(void)
 
 static void ContestAICmd_check_combo_starter(void)
 {
-    u8 result = 0;
+    u32 result = 0;
     int i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
@@ -1070,7 +1070,7 @@ static void ContestAICmd_if_not_combo_starter(void)
 
 static void ContestAICmd_check_combo_finisher(void)
 {
-    u8 result = 0;
+    u32 result = 0;
     int i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
@@ -1116,7 +1116,7 @@ static void ContestAICmd_if_not_combo_finisher(void)
 
 static void ContestAICmd_check_would_finish_combo(void)
 {
-    u8 result = 0;
+    u32 result = 0;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     if (eContestantStatus[eContestAI.contestantId].prevMove)
@@ -1151,7 +1151,7 @@ static void ContestAICmd_if_would_not_finish_combo(void)
 
 static void ContestAICmd_get_condition(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     eContestAI.scriptResult = eContestantStatus[contestant].condition / 10;
     gAIScriptPtr += 2;
@@ -1200,7 +1200,7 @@ static void ContestAICmd_if_condition_not_eq(void)
 static void ContestAICmd_get_used_combo_starter(void)
 {
     u16 result = FALSE;
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     if (IsContestantAllowedToCombo(contestant))
         result = GetMoveContestComboStarter(eContestantStatus[contestant].prevMove) ? TRUE : FALSE;
@@ -1281,7 +1281,7 @@ static void ContestAICmd_if_cannot_participate(void)
 
 static void ContestAICmd_get_completed_combo(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     eContestAI.scriptResult = eContestantStatus[contestant].completedComboFlag;
     gAIScriptPtr += 2;
@@ -1309,7 +1309,7 @@ static void ContestAICmd_if_not_completed_combo(void)
 
 static void ContestAICmd_get_points_diff(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     eContestAI.scriptResult = eContestantStatus[contestant].pointTotal - eContestantStatus[eContestAI.contestantId].pointTotal;
     gAIScriptPtr += 2;
@@ -1357,7 +1357,7 @@ static void ContestAICmd_if_points_not_eq_mon(void)
 
 static void ContestAICmd_get_preliminary_points_diff(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     eContestAI.scriptResult = gContestMonRound1Points[contestant] - gContestMonRound1Points[eContestAI.contestantId];
     gAIScriptPtr += 2;
@@ -1405,8 +1405,8 @@ static void ContestAICmd_if_preliminary_points_not_eq_mon(void)
 
 static void ContestAICmd_get_used_moves_effect(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
-    u8 round = gAIScriptPtr[2];
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 round = gAIScriptPtr[2];
     u16 move = eContest.moveHistory[round][contestant];
 
     eContestAI.scriptResult = GetMoveContestEffect(move);
@@ -1455,8 +1455,8 @@ static void ContestAICmd_if_used_moves_effect_not_eq(void)
 
 static void ContestAICmd_get_used_moves_excitement(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
-    u8 round = gAIScriptPtr[2];
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 round = gAIScriptPtr[2];
     s8 result = eContest.excitementHistory[round][contestant];
 
     eContestAI.scriptResult = result;
@@ -1505,8 +1505,8 @@ static void ContestAICmd_if_used_moves_excitement_not_eq(void)
 
 static void ContestAICmd_get_used_moves_effect_type(void)
 {
-    u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
-    u8 round = gAIScriptPtr[2];
+    u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
+    u32 round = gAIScriptPtr[2];
     u16 move = eContest.moveHistory[round][contestant];
 
     eContestAI.scriptResult = gContestEffects[GetMoveContestEffect(move)].effectType;
@@ -1672,7 +1672,7 @@ static void ContestAICmd_end(void)
         eContestAI.aiAction |= AI_ACTION_DONE;
 }
 
-static void AIStackPushVar(const u8 *ptr)
+static void AIStackPushVar(const u32 *ptr)
 {
     eContestAI.stack[eContestAI.stackSize++] = ptr;
 }

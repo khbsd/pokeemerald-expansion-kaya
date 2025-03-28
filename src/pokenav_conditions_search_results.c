@@ -22,13 +22,13 @@ enum
     CONDITION_SEARCH_FUNC_SELECT_MON,
 };
 
-static const u8 gText_NumberIndex[] = _("No. {DYNAMIC 0}");
+static const u32 gText_NumberIndex[] = _("No. {DYNAMIC 0}");
 
 struct Pokenav_SearchResults
 {
     u32 (*callback)(struct Pokenav_SearchResults *);
     u32 loopedTaskId;
-    u8 fill1[4];
+    u32 fill1[4];
     s32 boxId;
     s32 monId;
     u32 conditionDataId;
@@ -43,7 +43,7 @@ struct Pokenav_SearchResultsGfx
     u32 loopedTaskId;
     u16 winid;
     bool32 fromGraph;
-    u8 buff[BG_SCREEN_SIZE];
+    u32 buff[BG_SCREEN_SIZE];
 }; // size: 0x810
 
 static u32 HandleConditionSearchInput_WaitSetup(struct Pokenav_SearchResults *);
@@ -67,7 +67,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32);
 static void AddSearchResultListMenuWindow(struct Pokenav_SearchResultsGfx *);
 static void PrintSearchResultListMenuItems(struct Pokenav_SearchResultsGfx *);
 static void CreateSearchResultsList(void);
-static void BufferSearchMonListItem(struct PokenavMonListItem *, u8 *);
+static void BufferSearchMonListItem(struct PokenavMonListItem *, u32 *);
 
 static const u32 sSearchMonDataIds[] = {MON_DATA_COOL, MON_DATA_BEAUTY, MON_DATA_CUTE, MON_DATA_SMART, MON_DATA_TOUGH};
 
@@ -127,9 +127,9 @@ static const struct WindowTemplate sSearchResultListMenuWindowTemplate =
     .baseBlock = 20
 };
 
-static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
-static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
+static const u32 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GRAY}{WHITE}{LIGHT_GRAY}");
+static const u32 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_ConditionSearch(void)
 {
@@ -475,7 +475,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         HideBg(3);
         if (!gfx->fromGraph)
         {
-            u8 searchGfxId = GetSelectedConditionSearch() + POKENAV_MENUITEM_CONDITION_SEARCH_COOL;
+            u32 searchGfxId = GetSelectedConditionSearch() + POKENAV_MENUITEM_CONDITION_SEARCH_COOL;
             LoadLeftHeaderGfxForIndex(searchGfxId);
             ShowLeftHeaderGfx(searchGfxId, TRUE, FALSE);
             ShowLeftHeaderGfx(POKENAV_GFX_CONDITION_MENU, TRUE, FALSE);
@@ -700,12 +700,12 @@ static void CreateSearchResultsList(void)
     CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
-static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 *dest)
+static void BufferSearchMonListItem(struct PokenavMonListItem * item, u32 *dest)
 {
-    u8 gender;
-    u8 level;
-    u8 *s, *end;
-    const u8 *genderStr;
+    u32 gender;
+    u32 level;
+    u32 *s, *end;
+    const u32 *genderStr;
     u32 fontId;
 
     // Mon is in party

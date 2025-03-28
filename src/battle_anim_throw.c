@@ -24,8 +24,8 @@
 
 // iwram
 COMMON_DATA u32 gMonShrinkDuration = 0;
-COMMON_DATA u16 gMonShrinkDelta = 0;
-COMMON_DATA u16 gMonShrinkDistance = 0;
+COMMON_DATA u32 gMonShrinkDelta = 0;
+COMMON_DATA u32 gMonShrinkDistance = 0;
 
 enum {
     BALL_ROLL_1,
@@ -594,7 +594,7 @@ static const struct SpriteTemplate sBallParticleSpriteTemplates[POKEBALL_COUNT] 
     },
 };
 
-const u16 gBallOpenFadeColors[] =
+const u32 gBallOpenFadeColors[] =
 {
     // Todo, assign different colors
     [BALL_STRANGE] = RGB(16, 23, 30),
@@ -721,7 +721,7 @@ static void AnimTask_UnusedLevelUpHealthBox_Step(u8 taskId)
 
     battler = gBattleAnimAttacker;
     gTasks[taskId].data[13] += gTasks[taskId].data[1];
-    gBattle_BG1_Y += (u16)gTasks[taskId].data[13] >> 8;
+    gBattle_BG1_Y += (u32)gTasks[taskId].data[13] >> 8;
     gTasks[taskId].data[13] &= 0xFF;
 
     switch (gTasks[taskId].data[15])
@@ -778,7 +778,7 @@ static void LoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battl
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
-    u16 offset1, offset2;
+    u32 offset1, offset2;
 
     healthBoxSpriteId = gHealthboxSpriteIds[battler];
     spriteId1 = gSprites[healthBoxSpriteId].oam.affineParam;
@@ -977,7 +977,7 @@ void AnimTask_ThrowBall(u8 taskId)
 static void AnimTask_ThrowBall_Step(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].tSpriteId;
-    if ((u16)gSprites[spriteId].sDuration == 0xFFFF)
+    if ((u32)gSprites[spriteId].sDuration == 0xFFFF)
         DestroyAnimVisualTask(taskId);
 }
 
@@ -1049,8 +1049,8 @@ static void Task_PlayerThrow_Wait(u8 taskId)
 
 static void SpriteCB_Ball_Throw(struct Sprite *sprite)
 {
-    u16 targetX = sprite->sTargetXArg;
-    u16 targetY = sprite->sTargetYArg;
+    u32 targetX = sprite->sTargetXArg;
+    u32 targetY = sprite->sTargetYArg;
 
     sprite->sOffsetX = sprite->x;
     sprite->sTargetX = targetX;
@@ -1324,7 +1324,7 @@ static void SpriteCB_Ball_Wobble(struct Sprite *sprite)
 static void SpriteCB_Ball_Wobble_Step(struct Sprite *sprite)
 {
     s8 shakes;
-    u16 frame;
+    u32 frame;
 
     switch (STATE(sprite->sState))
     {
@@ -2267,7 +2267,7 @@ static void Task_FadeMon_ToBallColor(u8 taskId)
     }
     else if (!gPaletteFade.active)
     {
-        u32 selectedPalettes = (u16)gTasks[taskId].tPaletteLo | ((u16)gTasks[taskId].tPaletteHi << 16);
+        u32 selectedPalettes = (u32)gTasks[taskId].tPaletteLo | ((u32)gTasks[taskId].tPaletteHi << 16);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB_WHITE);
         DestroyTask(taskId);
     }
@@ -2277,7 +2277,7 @@ static void Task_FadeMon_ToNormal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u32 selectedPalettes = (u16)gTasks[taskId].tPaletteLo | ((u16)gTasks[taskId].tPaletteHi << 16);
+        u32 selectedPalettes = (u32)gTasks[taskId].tPaletteLo | ((u32)gTasks[taskId].tPaletteHi << 16);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB_WHITE);
         gTasks[taskId].func = Task_FadeMon_ToNormal_Step;
     }
@@ -2463,7 +2463,7 @@ static void Task_ShinyStars(u8 taskId)
     u8 battler;
     u8 x, y;
     u8 spriteId;
-    u16 timer;
+    u32 timer;
     s16 starIdx;
     u8 pan;
 

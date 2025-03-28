@@ -143,7 +143,7 @@ SINGLE_BATTLE_TEST("Swallow heals HP depending on Stockpile's count", s16 hpHeal
 
 SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsical, s16 dmgSpecial)
 {
-    u16 move;
+    u32 move;
     PARAMETRIZE { move = MOVE_STOCKPILE; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
@@ -178,7 +178,7 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsic
 DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit Up or Swallow", s16 dmgPyhsicalBefore, s16 dmgPhysicalAfter, s16 dmgSpecialBefore, s16 dmgSpecialAfter)
 {
     u8 count;
-    u16 move;
+    u32 move;
     PARAMETRIZE { count = 1; move = MOVE_SPIT_UP; }
     PARAMETRIZE { count = 2; move = MOVE_SWALLOW; }
     PARAMETRIZE { count = 3; move = MOVE_SPIT_UP; }

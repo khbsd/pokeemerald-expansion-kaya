@@ -156,10 +156,10 @@ static void ClearSavedWonderNewsMetadata(void)
 }
 #endif //FREE_MYSTERY_GIFT
 
-bool32 IsWonderNewsSameAsSaved(const u8 *news)
+bool32 IsWonderNewsSameAsSaved(const u32 *news)
 {
 #if FREE_MYSTERY_GIFT == FALSE
-    const u8 *savedNews = (const u8 *)&gSaveBlock1Ptr->mysteryGift.news;
+    const u32 *savedNews = (const u32 *)&gSaveBlock1Ptr->mysteryGift.news;
     u32 i;
     if (!ValidateSavedWonderNews())
         return FALSE;

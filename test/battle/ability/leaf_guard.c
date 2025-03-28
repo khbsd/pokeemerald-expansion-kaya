@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Leaf Guard prevents non-volatile status conditions in sun")
 {
     u32 move;
-    u16 status;
+    u32 status;
     PARAMETRIZE { move = MOVE_WILL_O_WISP; status = STATUS1_BURN; }
     PARAMETRIZE { move = MOVE_HYPNOSIS; status = STATUS1_SLEEP; }
     PARAMETRIZE { move = MOVE_THUNDER_WAVE; status = STATUS1_PARALYSIS; }

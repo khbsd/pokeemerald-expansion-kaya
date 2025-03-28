@@ -53,7 +53,7 @@ bool8 IsMirageIslandPresent(void)
 
 void UpdateShoalTideFlag(void)
 {
-    static const u8 tide[] =
+    static const u32 tide[] =
     {
         1, // 00
         1, // 01
@@ -91,7 +91,7 @@ void UpdateShoalTideFlag(void)
     }
 }
 
-static void Task_WaitWeather(u8 taskId)
+static void Task_WaitWeather(u32 taskId)
 {
     if (IsWeatherChangeComplete())
     {

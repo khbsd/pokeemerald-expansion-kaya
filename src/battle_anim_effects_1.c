@@ -1324,7 +1324,7 @@ const struct SpriteTemplate gSilverWindSmallSparkSpriteTemplate =
     .callback = AnimFlyingParticle,
 };
 
-const u16 gMagicalLeafBlendColors[] =
+const u32 gMagicalLeafBlendColors[] =
 {
     RGB_RED,
     RGB(31, 19, 0),
@@ -2283,7 +2283,7 @@ const struct SpriteTemplate gWavyMusicNotesSpriteTemplate =
     .callback = AnimWavyMusicNotes,
 };
 
-const u16 gParticlesColorBlendTable[][6] =
+const u32 gParticlesColorBlendTable[][6] =
 {
     {ANIM_TAG_MUSIC_NOTES,     RGB_WHITE, RGB(31, 26, 28), RGB(31, 22, 26), RGB(31, 17, 24), RGB(31, 13, 22)},
     {ANIM_TAG_BENT_SPOON,      RGB_WHITE, RGB(25, 31, 26), RGB(20, 31, 21), RGB(15, 31, 16), RGB(10, 31, 12)},
@@ -3415,8 +3415,8 @@ static void AnimAbsorptionOrb_Step(struct Sprite *sprite)
 // properties and the sprite anim are randomly determined.
 void AnimHyperBeamOrb(struct Sprite *sprite)
 {
-    u16 speed;
-    u16 animNum = Random2();
+    u32 speed;
+    u32 animNum = Random2();
 
     StartSpriteAnim(sprite, animNum % 8);
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
@@ -3821,7 +3821,7 @@ static void AnimSporeParticle_Step(struct Sprite *sprite)
 {
     sprite->x2 = Sin(sprite->data[1], 32);
     sprite->y2 = Cos(sprite->data[1], -3) + ((sprite->data[2] += 24) >> 8);
-    if ((u16)(sprite->data[1] - 0x40) < 0x80)
+    if ((u32)(sprite->data[1] - 0x40) < 0x80)
     {
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
     }
@@ -3886,7 +3886,7 @@ static void AnimPetalDanceBigFlower_Step(struct Sprite *sprite)
     {
         sprite->x2 += Sin(sprite->data[5], 32);
         sprite->y2 += Cos(sprite->data[5], -5);
-        if ((u16)(sprite->data[5] - 0x40) < 0x80)
+        if ((u32)(sprite->data[5] - 0x40) < 0x80)
             sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
         else
             sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + 1;
@@ -3923,7 +3923,7 @@ static void AnimPetalDanceSmallFlower_Step(struct Sprite *sprite)
     if (!AnimTranslateLinear(sprite))
     {
         sprite->x2 += Sin(sprite->data[5], 8);
-        if ((u16)(sprite->data[5] - 59) < 5 || (u16)(sprite->data[5] - 187) < 5)
+        if ((u32)(sprite->data[5] - 59) < 5 || (u32)(sprite->data[5] - 187) < 5)
             sprite->oam.matrixNum ^= ST_OAM_HFLIP;
 
         sprite->data[5] += 5;
@@ -4132,7 +4132,7 @@ static void AnimTeraStarstormStars_Step(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         DestroyAnimSprite(sprite);
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
@@ -4277,7 +4277,7 @@ static void AnimConstrictBinding_Step1(struct Sprite *sprite)
 {
     u8 UNUSED spriteId;
 
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->affineAnimPaused = 0;
         spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
@@ -4351,7 +4351,7 @@ static void AnimTask_DuplicateAndShrinkToPos_Step1(u8 taskId)
 
 static void AnimTask_DuplicateAndShrinkToPos_Step2(u8 taskId)
 {
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         if (gTasks[taskId].data[0] == 0)
         {
@@ -4503,8 +4503,8 @@ static void InitItemBagData(struct Sprite *sprite, s16 c)
 
 bool8 moveAlongLinearPath(struct Sprite *sprite)
 {
-    u16 xStartPos = (u8)(sprite->data[5] >> 8);
-    u16 yStartPos = (u8)sprite->data[5];
+    u32 xStartPos = (u8)(sprite->data[5] >> 8);
+    u32 yStartPos = (u8)sprite->data[5];
     s32 xEndPos = (u8)(sprite->data[6] >> 8);
     s32 yEndPos = (u8)sprite->data[6];
     s16 totalTime = sprite->data[7] >> 8;
@@ -4790,7 +4790,7 @@ static void AnimTrickBag_Step2(struct Sprite *sprite)
         sprite->data[1] = (gTrickBagCoordinates[sprite->data[0]][0] * gTrickBagCoordinates[sprite->data[0]][2] + sprite->data[1]) & 0xFF;
         if (!IsContest())
         {
-            if ((u16)(sprite->data[1] - 1) < 191)
+            if ((u32)(sprite->data[1] - 1) < 191)
                 sprite->subpriority = 31;
             else
                 sprite->subpriority = 29;
@@ -5175,9 +5175,9 @@ void AnimNeedleArmSpike(struct Sprite *sprite)
 {
     s16 a;
     s16 b;
-    u16 c;
-    u16 x;
-    u16 y;
+    u32 c;
+    u32 x;
+    u32 y;
 
     if (gBattleAnimArgs[4] == 0)
     {
@@ -5629,7 +5629,7 @@ static void AnimMilkBottle_Step2(struct Sprite *sprite, int unk1, int unk2)
     if (sprite->data[3] <= 11)
         sprite->data[4] += 2;
 
-    if ((u16)(sprite->data[3] - 0x12) <= 0x17)
+    if ((u32)(sprite->data[3] - 0x12) <= 0x17)
         sprite->data[4] -= 2;
 
     if ((sprite->data[3]) > 0x2F)
@@ -5882,7 +5882,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
 
 static void AnimLockOnTarget_Step5(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->data[1] = 0;
         sprite->data[0] = 0;
@@ -6374,7 +6374,7 @@ void AnimConversion(struct Sprite *sprite)
         sprite->data[0]++;
     }
 
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u32)gBattleAnimArgs[7] == 0xFFFF)
         DestroyAnimSprite(sprite);
 }
 
@@ -6551,17 +6551,17 @@ static void AnimTask_MoonlightEndFade_Step(u8 taskId)
     case 0:
         if (++task->data[1] > 0)
         {
-            u16 color;
-            u16 bitmask;
-            u16 r3;
-            u16 i;
-            u16 j;
+            u32 color;
+            u32 bitmask;
+            u32 r3;
+            u32 i;
+            u32 j;
             task->data[1] = 0;
             if (++task->data[2] <= 15)
             {
-                u16 red;
-                u16 green;
-                u16 blue;
+                u32 red;
+                u32 green;
+                u32 blue;
                 task->data[4] += task->data[7];
                 task->data[5] += task->data[8];
                 task->data[6] += task->data[9];
@@ -6702,7 +6702,7 @@ static void AnimHornHit_Step(struct Sprite *sprite)
 void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
 {
     s32 i, spriteId;
-    u16 palOffsetBattler, palOffsetSpoon;
+    u32 palOffsetBattler, palOffsetSpoon;
     struct Task *task = &gTasks[taskId];
 
     task->tBattlerSpriteId = GetAnimBattlerSpriteId(animBattler);
@@ -6932,7 +6932,7 @@ static void AnimTask_AllySwitchDataSwap(u8 taskId)
     // For Snipe Shot and abilities Stalwart/Propeller Tail - keep the original target.
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        u16 ability = GetBattlerAbility(i);
+        u32 ability = GetBattlerAbility(i);
         if (gChosenMoveByBattler[i] == MOVE_SNIPE_SHOT || ability == ABILITY_PROPELLER_TAIL || ability == ABILITY_STALWART)
             gBattleStruct->moveTarget[i] ^= BIT_FLANK;
     }
@@ -7049,9 +7049,9 @@ static void AnimSuperFang(struct Sprite *sprite)
 
 void AnimTask_MusicNotesRainbowBlend(u8 taskId)
 {
-    u16 i;
-    u16 j;
-    u16 index;
+    u32 i;
+    u32 j;
+    u32 index;
 
     index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[0][0]);
     if (index != 0xFF)
@@ -7077,7 +7077,7 @@ void AnimTask_MusicNotesRainbowBlend(u8 taskId)
 // clears the rainbow effect for musical notes.
 void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
 {
-    u16 i;
+    u32 i;
     for (i = 1; i < ARRAY_COUNT(gParticlesColorBlendTable); i++)
         FreeSpritePaletteByTag(gParticlesColorBlendTable[i][0]);
 
@@ -7459,7 +7459,7 @@ static void AnimPoisonJabProjectile(struct Sprite *sprite)
 {
     s16 targetXPos;
     s16 targetYPos;
-    u16 rotation;
+    u32 rotation;
 
     InitSpritePosToAnimTarget(sprite, TRUE);
     targetXPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);

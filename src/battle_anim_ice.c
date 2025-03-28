@@ -1067,7 +1067,7 @@ static void AnimSwirlingFogAnim(struct Sprite *sprite)
         sprite->x2 += Sin(sprite->data[5], sprite->data[6]);
         sprite->y2 += Cos(sprite->data[5], -6);
 
-        if ((u16)(sprite->data[5] - 64) <= 0x7F)
+        if ((u32)(sprite->data[5] - 64) <= 0x7F)
             sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]);
         else
             sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]) + 1;
@@ -1392,7 +1392,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
         sprite->y2 += (gSineTable[sprite->data[5] + 0x40] * -3) >> 8;
         if (!IsContest())
         {
-            u16 var0 = sprite->data[5] - 0x40;
+            u32 var0 = sprite->data[5] - 0x40;
             if (var0 <= 0x7F)
                 sprite->oam.priority = sprite->data[7] >> 8;
             else
@@ -1402,7 +1402,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
         }
         else
         {
-            u16 var0 = sprite->data[5] - 0x40;
+            u32 var0 = sprite->data[5] - 0x40;
             if (var0 <= 0x7F)
                 sprite->subpriority = 128;
             else

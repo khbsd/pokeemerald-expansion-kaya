@@ -22,23 +22,23 @@
 #include "main.h"
 
 extern struct BackupMapLayout gBackupMapLayout;
-extern u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE];
+extern u32 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE];
 
 u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);
-void MapGridSetMetatileIdAt(int, int, u16);
-void MapGridSetMetatileEntryAt(int, int, u16);
-void GetCameraCoords(u16 *, u16 *);
+void MapGridSetMetatileIdAt(int, int, u32);
+void MapGridSetMetatileEntryAt(int, int, u32);
+void GetCameraCoords(u32 *, u32 *);
 u8 MapGridGetCollisionAt(int, int);
 int GetMapBorderIdAt(int x, int y);
 bool32 CanCameraMoveInDirection(int direction);
-u16 GetMetatileAttributesById(u16 metatileId);
-void GetCameraFocusCoords(u16 *x, u16 *y);
+u32 GetMetatileAttributesById(u32 metatileId);
+void GetCameraFocusCoords(u32 *x, u32 *y);
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
 u8 MapGridGetElevationAt(int x, int y);
 bool8 CameraMove(int deltaX, int deltaY);
 void SaveMapView(void);
-void SetCameraFocusCoords(u16 x, u16 y);
+void SetCameraFocusCoords(u32 x, u32 y);
 void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);

@@ -30,7 +30,7 @@ __attribute__((section(".persistent"))) static struct {
 void TestRunner_Battle(const struct Test *);
 
 static bool32 MgbaOpen_(void);
-static void MgbaExit_(u8 exitCode);
+static void MgbaExit_(u32 exitCode);
 static s32 MgbaVPrintf_(const char *fmt, va_list va);
 static void Intr_Timer2(void);
 
@@ -532,7 +532,7 @@ static bool32 MgbaOpen_(void)
     return REG_DEBUG_ENABLE == 0x1DEA;
 }
 
-static void MgbaExit_(u8 exitCode)
+static void MgbaExit_(u32 exitCode)
 {
     register u32 _exitCode asm("r0") = exitCode;
     asm("swi 0x3" :: "r" (_exitCode));
@@ -557,7 +557,7 @@ static s32 MgbaPutchar_(s32 i, s32 c)
     return i;
 }
 
-extern const u8 gWireless_RSEtoASCIITable[];
+extern const u32 gWireless_RSEtoASCIITable[];
 
 // Bare-bones, only supports plain %s, %S, and %d.
 static s32 MgbaVPrintf_(const char *fmt, va_list va)
@@ -566,7 +566,7 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
     s32 c, d;
     u32 p;
     const char *s;
-    const u8 *pokeS;
+    const u32 *pokeS;
     while (*fmt)
     {
         switch ((c = *fmt++))
@@ -665,7 +665,7 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
                     i = MgbaPutchar_(i, c);
                 break;
             case 'S':
-                pokeS = va_arg(va, const u8 *);
+                pokeS = va_arg(va, const u32 *);
                 while ((c = *pokeS++) != EOS)
                 {
                     if ((c = gWireless_RSEtoASCIITable[c]) != '\0')

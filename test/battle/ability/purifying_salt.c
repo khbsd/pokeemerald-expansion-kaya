@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 damage)
 {
-    u16 ability;
+    u32 ability;
     PARAMETRIZE { ability = ABILITY_STURDY; }
     PARAMETRIZE { ability = ABILITY_PURIFYING_SALT; }
     GIVEN {
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 dam
 
 SINGLE_BATTLE_TEST("Purifying Salt halves damage from dynamic Ghost-type moves", s16 damage)
 {
-    u16 ability;
+    u32 ability;
     PARAMETRIZE { ability = ABILITY_STURDY; }
     PARAMETRIZE { ability = ABILITY_PURIFYING_SALT; }
     GIVEN {
@@ -54,7 +54,7 @@ SINGLE_BATTLE_TEST("Purifying Salt makes Rest fail")
 SINGLE_BATTLE_TEST("Purifying Salt grants immunity to status effects")
 {
     u32 move;
-    u16 status;
+    u32 status;
     PARAMETRIZE { move = MOVE_WILL_O_WISP; status = STATUS1_BURN; }
     PARAMETRIZE { move = MOVE_HYPNOSIS; status = STATUS1_SLEEP; }
     PARAMETRIZE { move = MOVE_THUNDER_WAVE; status = STATUS1_PARALYSIS; }

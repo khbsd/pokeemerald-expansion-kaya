@@ -4,14 +4,14 @@
 #include "constants/rgb.h"
 
 // IWRAM common
-COMMON_DATA u8 gCanvasColumnStart = 0;
+COMMON_DATA u32 gCanvasColumnStart = 0;
 COMMON_DATA u16 *gCanvasPixels = NULL;
-COMMON_DATA u8 gCanvasRowEnd = 0;
-COMMON_DATA u8 gCanvasHeight = 0;
-COMMON_DATA u8 gCanvasColumnEnd = 0;
-COMMON_DATA u8 gCanvasRowStart = 0;
-COMMON_DATA u8 gCanvasMonPersonality = 0;
-COMMON_DATA u8 gCanvasWidth = 0;
+COMMON_DATA u32 gCanvasRowEnd = 0;
+COMMON_DATA u32 gCanvasHeight = 0;
+COMMON_DATA u32 gCanvasColumnEnd = 0;
+COMMON_DATA u32 gCanvasRowStart = 0;
+COMMON_DATA u32 gCanvasMonPersonality = 0;
+COMMON_DATA u32 gCanvasWidth = 0;
 COMMON_DATA u16 *gCanvasPalette = NULL;
 COMMON_DATA u16 gCanvasPaletteStart = 0;
 
@@ -24,19 +24,19 @@ static void ApplyImageEffect_BlurRight(void);
 static void ApplyImageEffect_BlurDown(void);
 static void ApplyImageEffect_Shimmer(void);
 static void ApplyImageEffect_Grayscale(void);
-static void ApplyImageEffect_PersonalityColor(u8);
-static void ApplyImageEffect_RedChannelGrayscale(u8);
-static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8);
+static void ApplyImageEffect_PersonalityColor(u32);
+static void ApplyImageEffect_RedChannelGrayscale(u32);
+static void ApplyImageEffect_RedChannelGrayscaleHighlight(u32);
 static void AddPointillismPoints(u16);
 static u16 ConvertColorToGrayscale(u16 *);
 static u16 QuantizePixel_Blur(u16 *, u16 *, u16 *);
-static u16 QuantizePixel_PersonalityColor(u16 *, u8);
+static u16 QuantizePixel_PersonalityColor(u16 *, u32);
 static u16 QuantizePixel_BlackAndWhite(u16 *);
 static u16 QuantizePixel_BlackOutline(u16 *, u16 *);
 static u16 QuantizePixel_Invert(u16 *);
 static u16 QuantizePixel_BlurHard(u16 *, u16 *, u16 *);
 static u16 QuantizePixel_MotionBlur(u16 *, u16 *);
-static u16 GetColorFromPersonality(u8);
+static u16 GetColorFromPersonality(u32);
 static void QuantizePalette_Standard(bool8);
 static void SetPresetPalette_PrimaryColors(void);
 static void QuantizePalette_PrimaryColors(void);
@@ -121,9 +121,9 @@ void ApplyImageProcessingEffects(struct ImageProcessingContext *context)
     }
 }
 
-static void ApplyImageEffect_RedChannelGrayscale(u8 delta)
+static void ApplyImageEffect_RedChannelGrayscale(u32 delta)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -135,7 +135,7 @@ static void ApplyImageEffect_RedChannelGrayscale(u8 delta)
             {
                 // Gets the grayscale value, based on the pixel's red channel.
                 // Also adds a delta to skew lighter or darker.
-                u8 grayValue = (*pixel & RGB_RED);
+                u32 grayValue = (*pixel & RGB_RED);
                 grayValue += delta;
                 if (grayValue > 31)
                     grayValue = 31;
@@ -146,9 +146,9 @@ static void ApplyImageEffect_RedChannelGrayscale(u8 delta)
     }
 }
 
-static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8 highlight)
+static void ApplyImageEffect_RedChannelGrayscaleHighlight(u32 highlight)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -158,7 +158,7 @@ static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8 highlight)
         {
             if (!IS_ALPHA(*pixel))
             {
-                u8 grayValue = (*pixel & RGB_RED);
+                u32 grayValue = (*pixel & RGB_RED);
                 if (grayValue > 31 - highlight)
                     grayValue = 31 - (highlight >> 1);
 
@@ -177,7 +177,7 @@ static void ApplyImageEffect_Pointillism(void)
 
 static void ApplyImageEffect_Grayscale(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -193,7 +193,7 @@ static void ApplyImageEffect_Grayscale(void)
 
 static void ApplyImageEffect_Blur(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < gCanvasColumnEnd; i++)
     {
@@ -217,9 +217,9 @@ static void ApplyImageEffect_Blur(void)
     }
 }
 
-static void ApplyImageEffect_PersonalityColor(u8 personality)
+static void ApplyImageEffect_PersonalityColor(u32 personality)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -235,7 +235,7 @@ static void ApplyImageEffect_PersonalityColor(u8 personality)
 
 static void ApplyImageEffect_BlackAndWhite(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -251,7 +251,7 @@ static void ApplyImageEffect_BlackAndWhite(void)
 
 static void ApplyImageEffect_BlackOutline(void)
 {
-    u8 i, j;
+    u32 i, j;
     u16 *pixel;
 
     // Handle top row of pixels first.
@@ -287,7 +287,7 @@ static void ApplyImageEffect_BlackOutline(void)
 
 static void ApplyImageEffect_Invert(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -303,7 +303,7 @@ static void ApplyImageEffect_Invert(void)
 
 static void ApplyImageEffect_Shimmer(void)
 {
-    u8 i, j;
+    u32 i, j;
     u16 *pixel;
     u16 prevPixel;
 
@@ -365,7 +365,7 @@ static void ApplyImageEffect_Shimmer(void)
 
 static void ApplyImageEffect_BlurRight(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -385,7 +385,7 @@ static void ApplyImageEffect_BlurRight(void)
 
 static void ApplyImageEffect_BlurDown(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < gCanvasColumnEnd; i++)
     {
@@ -405,16 +405,16 @@ static void ApplyImageEffect_BlurDown(void)
 
 struct PointillismPoint
 {
-    u8 column;
-    u8 row;
+    u32 column;
+    u32 row;
     u16 delta;
 };
 
 static void AddPointillismPoints(u16 point)
 {
-    u8 i;
+    u32 i;
     bool8 offsetDownLeft;
-    u8 colorType;
+    u32 colorType;
     struct PointillismPoint points[6];
 
     points[0].column = sPointillismPoints[point][0];
@@ -512,7 +512,7 @@ static u16 ConvertColorToGrayscale(u16 *color)
 
 // The dark colors are the colored edges of the Cool painting effect.
 // Everything else is white.
-static u16 QuantizePixel_PersonalityColor(u16 *color, u8 personality)
+static u16 QuantizePixel_PersonalityColor(u16 *color, u32 personality)
 {
     u16 red =   GET_R(*color);
     u16 green = GET_G(*color);
@@ -526,13 +526,13 @@ static u16 QuantizePixel_PersonalityColor(u16 *color, u8 personality)
 
 // Based on the given value, which comes from the first 8 bits of
 // the mon's personality value, return a color.
-static u16 GetColorFromPersonality(u8 personality)
+static u16 GetColorFromPersonality(u32 personality)
 {
     u16 red =   0;
     u16 green = 0;
     u16 blue =  0;
-    u8 strength = (personality / 6) % 3;
-    u8 colorType = personality % 6;
+    u32 strength = (personality / 6) % 3;
+    u32 colorType = personality % 6;
 
     switch (colorType)
     {
@@ -621,7 +621,7 @@ static u16 QuantizePixel_MotionBlur(u16 *prevPixel, u16 *curPixel)
 {
     u16 pixelChannels[2][3];
     u16 diffs[3];
-    u8 i;
+    u32 i;
     u16 largestDiff;
     u16 red, green, blue;
 
@@ -880,7 +880,7 @@ static void SetPresetPalette_BlackAndWhite(void)
 
 static void SetPresetPalette_GrayscaleSmall(void)
 {
-    u8 i;
+    u32 i;
 
     gCanvasPalette[0] = RGB_BLACK;
     gCanvasPalette[1] = RGB_BLACK;
@@ -890,7 +890,7 @@ static void SetPresetPalette_GrayscaleSmall(void)
 
 static void SetPresetPalette_Grayscale(void)
 {
-    u8 i;
+    u32 i;
 
     gCanvasPalette[0] = RGB_BLACK;
     for (i = 0; i < 32; i++)
@@ -899,7 +899,7 @@ static void SetPresetPalette_Grayscale(void)
 
 static void QuantizePalette_Standard(bool8 useLimitedPalette)
 {
-    u8 i, j;
+    u32 i, j;
     u16 maxIndex;
 
     maxIndex = 0xDF;
@@ -923,7 +923,7 @@ static void QuantizePalette_Standard(bool8 useLimitedPalette)
             else
             {
                 u16 quantizedColor = QuantizePixel_Standard(pixel);
-                u8 curIndex = 1;
+                u32 curIndex = 1;
                 if (curIndex < maxIndex)
                 {
                     if (gCanvasPalette[curIndex] == RGB_BLACK)
@@ -976,7 +976,7 @@ static void QuantizePalette_Standard(bool8 useLimitedPalette)
 
 static void QuantizePalette_BlackAndWhite(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -1007,7 +1007,7 @@ static void QuantizePalette_BlackAndWhite(void)
 
 static void QuantizePalette_GrayscaleSmall(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -1025,7 +1025,7 @@ static void QuantizePalette_GrayscaleSmall(void)
 
 static void QuantizePalette_Grayscale(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
@@ -1043,7 +1043,7 @@ static void QuantizePalette_Grayscale(void)
 
 static void QuantizePalette_PrimaryColors(void)
 {
-    u8 i, j;
+    u32 i, j;
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {

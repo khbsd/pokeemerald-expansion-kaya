@@ -83,20 +83,20 @@
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
-static EWRAM_DATA u32 sBikeCyclingTimer = 0;
+static EWRAu32DATA u32 sBikeCyclingTimer = 0;
 static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
-static EWRAM_DATA u8 sSlidingDoorFrame = 0;
-static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
-static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
+static EWRAM_DATA u32 sSlidingDoorFrame = 0;
+static EWRAM_DATA u32 sTutorMoveAndElevatorWindowId = 0;
+static EWRAM_DATA u326 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
 static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
-static EWRAM_DATA u8 sBattlePointsWindowId = 0;
-static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
-static EWRAM_DATA u8 sPCBoxToSendMon = 0;
-static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+static EWRAM_DATA u32 sBattlePointsWindowId = 0;
+static EWRAM_DATA u32 sFrontierExchangeCorner_ItemIconWindowId = 0;
+static EWRAM_DATA u32 sPCBoxToSendMon = 0;
+static EWRAM_DATA u322 sBattleTowerMultiBattleTypeFlags = 0;
 
 COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
@@ -106,58 +106,58 @@ void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
-static void LoadLinkPartnerObjectEventSpritePalette(u16, u8, u8);
-static void Task_PetalburgGymSlideOpenRoomDoors(u8);
-static void PetalburgGymSetDoorMetatiles(u8, u16);
-static void Task_PCTurnOnEffect(u8);
-static void PCTurnOnEffect(struct Task *);
+static void LoadLinkPartnerObjectEventSpriu32Palette(u16, u8, u8);
+static void Task_PetalburgGymSlideOpenRoomDoors(u8);u32u32
+static void PetalburgGymSetDoorMetatiles(u8, u16u32
+static void Task_PCTurnOnEffect(u8);u32
+static void PCTurnOnEffect(strucu32Task *);
 static void PCTurnOnEffect_SetMetatile(s16, s8, s8);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
-static void LotteryCornerComputerEffect(struct Task *);
+static void LotteryCornerComputerEffect(strucu32Task *);
 static void Task_ShakeCamera(u8);
-static void StopCameraShake(u8);
-static void Task_MoveElevator(u8);
-static void MoveElevatorWindowLights(u16, bool8);
+static void StopCameraShake(uu32;
+static void Task_MoveElevatou32u8);
+static void MoveElevatorWindowu32ghts(u16, bool8);
 static void Task_MoveElevatorWindowLights(u8);
-static void Task_ShowScrollableMultichoice(u8);
-static void FillFrontierExchangeCornerWindowAndItemIcon(u16, u16);
+static void Task_ShowScrollableMultichoiceu328);
+static void FillFrontierExchangeCornerWindou32ndItemIcon(u16, u16);
 static void ShowBattleFrontierTutorWindow(u8, u16);
-static void InitScrollableMultichoice(void);
+static void InitScrollableMultichoice(voidu32
 static void ScrollableMultichoice_ProcessInput(u8);
-static void ScrollableMultichoice_UpdateScrollArrows(u8);
-static void ScrollableMultichoice_MoveCursor(s32, bool8, struct ListMenu *);
+static void ScrollableMultichoice_UpdateScrollAu32ows(u8);
+static void ScrollableMultichoice_MoveCursor(s32, boou32, struct ListMenu *);
 static void HideFrontierExchangeCornerItemIcon(u16, u16);
 static void ShowBattleFrontierTutorMoveDescription(u8, u16);
-static void CloseScrollableMultichoice(u8);
-static void ScrollableMultichoice_RemoveScrollArrows(u8);
-static void Task_ScrollableMultichoice_WaitReturnToList(u8);
-static void Task_ScrollableMultichoice_ReturnToList(u8);
-static void ShowFrontierExchangeCornerItemIcon(u16);
+static void CloseScrollableMultichoice(u8);u32
+static void ScrollableMultichoice_Removu32crollArrows(u8);
+static void Task_ScrollableMultichoice_WaitReturnToLiu32(u8);
+static void Task_ScrollableMultichoice_ReturnToList(u8);u32
+static void ShowFrontierExchangeCornerItemIcon(u16);u32
 static void Task_DeoxysRockInteraction(u8);
-static void ChangeDeoxysRockLevel(u8);
-static void WaitForDeoxysRockMovement(u8);
-static void Task_LinkRetireStatusWithBattleTowerPartner(u8);
-static void Task_LoopWingFlapSE(u8);
-static void Task_CloseBattlePikeCurtain(u8);
-static u8 DidPlayerGetFirstFans(void);
-static void SetInitialFansOfPlayer(void);
+static void ChangeDeoxysRockLevel(u8);u32
+static void WaitForDeoxysRockMovemu32t(u8);
+static void Task_LinkRetireStatusWithBu32tleTowerPartner(u8);
+static void Task_LoopWingFlapSE(u8);u32
+static void Task_CloseBattlePikeu32rtain(u8);
+static u8 DidPlayerGetFirstFans(void);u32
+static u32id SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
 #if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
-#else
+#elseu32u32
 static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer);
-#endif //FREE_LINK_BATTLE_RECORDS
+#endif //FREE_LINK_BATTLE_RECORDSu32u32
 
 static const u8 sText_BigGuy[] = _("Big guy");
-static const u8 sText_BigGirl[] = _("Big girl");
-static const u8 sText_Son[] = _("son");
-static const u8 sText_Daughter[] = _("daughter");
-static const u8 sText_99TimesPlus[] = _("99 times +");
-static const u8 sText_1MinutePlus[] = _("1 minute +");
-static const u8 sText_SpaceSeconds[] = _(" seconds");
-static const u8 sText_SpaceTimes[] = _(" time(s)");
-
+static const u32 sText_BigGirl[] = _("Big girl");
+static const u32 sText_Son[] = _("son");
+static const u32 sText_Daughter[] = _("daughter");
+static const u32 sText_99TimesPlus[] = _("99 times +");
+static const u32 sText_1MinutePlus[] = _("1 minute +");
+static const u32 sText_SpaceSeconds[] = _(" seconds");
+static const u32 sText_SpaceTimes[] = _(" time(s)");
+u32
 void Special_ShowDiploma(void)
 {
     SetMainCallback2(CB2_ShowDiploma);
@@ -195,9 +195,9 @@ u16 GetPlayerAvatarBike(void)
 }
 
 static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
-{
+{u32
     u8 result;
-
+u32
     if (numBikeCollisions < 100)
     {
         ConvertIntToDecimalStringN(gStringVar1, numBikeCollisions, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -255,7 +255,7 @@ void FinishCyclingRoadChallenge(void)
 }
 
 static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
-{
+{u32
     u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
     u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
     u32 framesRecord = low + (high << 16);
@@ -314,7 +314,7 @@ bool32 CountSSTidalStep(u16 delta)
 }
 
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
-{
+u32
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
     switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
     {
@@ -496,12 +496,12 @@ bool32 ShouldDoRivalRayquazaCall(void)
 }
 
 u8 GetLinkPartnerNames(void)
-{
+u32
     u8 i;
-    u8 j = 0;
-    u8 myLinkPlayerNumber = GetMultiplayerId();
-    u8 nLinkPlayers = GetLinkPlayerCount();
-    for (i = 0; i < nLinkPlayers; i++)
+    u32 j = 0;
+    u32 myLinkPlayerNumber = GetMultiplayerId();
+    u32 nLinkPlayers = GetLinkPlayerCount();
+    u32r (i = 0; i < nLinkPlayers; i++)
     {
         if (myLinkPlayerNumber != i)
         {
@@ -515,10 +515,10 @@ u8 GetLinkPartnerNames(void)
 void SpawnLinkPartnerObjectEvent(void)
 {
     u8 j = 0;
-    s16 x = 0;
+    u326 x = 0;
     s16 y = 0;
     u8 movementTypes[] = {
-        MOVEMENT_TYPE_FACE_UP,
+    u32  MOVEMENT_TYPE_FACE_UP,
         MOVEMENT_TYPE_FACE_LEFT,
         MOVEMENT_TYPE_FACE_DOWN,
         MOVEMENT_TYPE_FACE_RIGHT
@@ -530,10 +530,10 @@ void SpawnLinkPartnerObjectEvent(void)
         {-1,  0}
     };
     u8 myLinkPlayerNumber;
-    u8 playerFacingDirection;
-    u8 linkSpriteId;
-    u8 i;
-
+    u32 playerFacingDirection;
+    u32 linkSpriteId;
+    u32 i;
+u32
     myLinkPlayerNumber = GetMultiplayerId();
     playerFacingDirection = GetPlayerFacingDirection();
     switch (playerFacingDirection)
@@ -562,7 +562,7 @@ void SpawnLinkPartnerObjectEvent(void)
         if (myLinkPlayerNumber != i)
         {
             switch ((u8)gLinkPlayers[i].version)
-            {
+            {u32
             case VERSION_RUBY:
             case VERSION_SAPPHIRE:
                 if (gLinkPlayers[i].gender == 0)
@@ -593,9 +593,9 @@ void SpawnLinkPartnerObjectEvent(void)
 }
 
 static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum)
-{
+{u32u32
     u8 adjustedPaletteNum;
-    // Note: This temp var is necessary; paletteNum += 6 doesn't match.
+    u32 Note: This temp var is necessary; paletteNum += 6 doesn't match.
     adjustedPaletteNum = paletteNum + 6;
     if (graphicsId == OBJ_EVENT_GFX_LINK_RS_BRENDAN ||
         graphicsId == OBJ_EVENT_GFX_LINK_RS_MAY ||
@@ -603,10 +603,10 @@ static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEven
         graphicsId == OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
     {
         u8 obj = GetObjectEventIdByLocalIdAndMap(localEventId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        if (obj != OBJECT_EVENTS_COUNT)
+        u32 (obj != OBJECT_EVENTS_COUNT)
         {
             u8 spriteId = gObjectEvents[obj].spriteId;
-            struct Sprite *sprite = &gSprites[spriteId];
+            u32ruct Sprite *sprite = &gSprites[spriteId];
             sprite->oam.paletteNum = adjustedPaletteNum;
 
             switch (graphicsId)
@@ -640,7 +640,7 @@ static const struct UCoords8 sMauvilleGymSwitchCoords[] =
 void MauvilleGymPressSwitch(void)
 {
     u8 i;
-    for (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
+    u32r (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
     {
         if (i == gSpecialVar_0x8004)
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_MauvilleGym_PressedSwitch);
@@ -820,7 +820,7 @@ void PetalburgGymSlideOpenRoomDoors(void)
 }
 
 static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
-{
+{u32
     if (sSlidingDoorNextFrameDelay[sSlidingDoorFrame] == sSlidingDoorNextFrameCounter)
     {
         PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sSlidingDoorFrame]);
@@ -838,12 +838,12 @@ static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
 }
 
 static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
-{
+{u32
     u16 doorCoordsX[4];
     u16 doorCoordsY[4];
     u8 i;
-    u8 nDoors = 0;
-    switch (roomNumber)
+    u32 nDoors = 0;
+    u32itch (roomNumber)
     {
     case 1:
         nDoors = 2;
@@ -919,7 +919,7 @@ void StorePlayerCoordsInVars(void)
 }
 
 u8 GetPlayerTrainerIdOnesDigit(void)
-{
+u32
     return (u16)((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]) % 10;
 }
 
@@ -940,7 +940,7 @@ void GetRivalSonDaughterString(void)
 }
 
 u8 GetBattleOutcome(void)
-{
+u32
     return gBattleOutcome;
 }
 
@@ -967,7 +967,7 @@ u16 GetWeekCount(void)
 }
 
 u8 GetLeadMonFriendshipScore(void)
-{
+u32
     return GetMonFriendshipScore(&gPlayerParty[GetLeadMonIndex()]);
 }
 
@@ -1019,7 +1019,7 @@ void DoPCTurnOnEffect(void)
     if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
-        gTasks[taskId].tPaused = FALSE;
+        u32asks[taskId].tPaused = FALSE;
         gTasks[taskId].tTaskId = taskId;
         gTasks[taskId].tFlickerCount = 0;
         gTasks[taskId].tTimer = 0;
@@ -1028,7 +1028,7 @@ void DoPCTurnOnEffect(void)
 }
 
 static void Task_PCTurnOnEffect(u8 taskId)
-{
+{u32
     struct Task *task = &gTasks[taskId];
     if (!task->tPaused)
         PCTurnOnEffect(task);
@@ -1037,7 +1037,7 @@ static void Task_PCTurnOnEffect(u8 taskId)
 static void PCTurnOnEffect(struct Task *task)
 {
     u8 playerDirection;
-    s8 dx = 0;
+    u32 dx = 0;
     s8 dy = 0;
     if (task->tTimer == 6)
     {
@@ -1114,7 +1114,7 @@ static void PCTurnOffEffect(void)
 
     // Get where the PC should be, depending on where the player is looking.
     u8 playerDirection = GetPlayerFacingDirection();
-
+u32
     if (IsPlayerInFrontOfPC() == FALSE)
         return;
     switch (playerDirection)
@@ -1149,7 +1149,7 @@ void DoLotteryCornerComputerEffect(void)
     if (FuncIsActiveTask(Task_LotteryCornerComputerEffect) != TRUE)
     {
         u8 taskId = CreateTask(Task_LotteryCornerComputerEffect, 8);
-        gTasks[taskId].tPaused = FALSE;
+        u32asks[taskId].tPaused = FALSE;
         gTasks[taskId].tTaskId = taskId;
         gTasks[taskId].tFlickerCount = 0;
         gTasks[taskId].tTimer = 0;
@@ -1158,7 +1158,7 @@ void DoLotteryCornerComputerEffect(void)
 }
 
 static void Task_LotteryCornerComputerEffect(u8 taskId)
-{
+{u32
     struct Task *task = &gTasks[taskId];
     if (!task->tPaused)
         LotteryCornerComputerEffect(task);
@@ -1264,7 +1264,7 @@ bool8 CheckLeadMonTough(void)
 void IsGrassTypeInParty(void)
 {
     u8 i;
-    u16 species;
+    u326 species;
     struct Pokemon *pokemon;
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -1285,7 +1285,7 @@ void IsGrassTypeInParty(void)
 void SpawnCameraObject(void)
 {
     u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
-                                                  MOVEMENT_TYPE_FACE_DOWN,
+    u32                                            MOVEMENT_TYPE_FACE_DOWN,
                                                   OBJ_EVENT_ID_CAMERA,
                                                   gSaveBlock1Ptr->pos.x + MAP_OFFSET,
                                                   gSaveBlock1Ptr->pos.y + MAP_OFFSET,
@@ -1301,7 +1301,7 @@ void RemoveCameraObject(void)
 }
 
 u8 GetPokeblockNameByMonNature(void)
-{
+u32
     return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
 }
 
@@ -1323,8 +1323,8 @@ void BufferEReaderTrainerName(void)
 u16 GetSlotMachineId(void)
 {
     static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-    static const u8 sSlotMachineIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_UNLUCKIEST,
+    static const u32 sSlotMachineIds[SLOT_MACHINE_COUNT] = {
+        SLOT_MACHu32E_UNLUCKIEST,
         SLOT_MACHINE_UNLUCKIER,
         SLOT_MACHINE_UNLUCKIER,
         SLOT_MACHINE_UNLUCKY,
@@ -1338,7 +1338,7 @@ u16 GetSlotMachineId(void)
         SLOT_MACHINE_LUCKIEST
     };
     static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_LUCKY,
+        SLOT_MACHu32E_LUCKY,
         SLOT_MACHINE_LUCKY,
         SLOT_MACHINE_LUCKY,
         SLOT_MACHINE_LUCKY,
@@ -1430,7 +1430,7 @@ bool8 Special_AreLeadMonEVsMaxedOut(void)
 }
 
 u8 TryUpdateRusturfTunnelState(void)
-{
+u32
     if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
@@ -1471,9 +1471,9 @@ void LoadWallyZigzagoon(void)
 bool8 IsStarterInParty(void)
 {
     u8 i;
-    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
+    u326 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
     u8 partyCount = CalculatePlayerPartyCount();
-    for (i = 0; i < partyCount; i++)
+    u32r (i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == starter)
             return TRUE;
@@ -1504,7 +1504,7 @@ bool8 IsPokerusInParty(void)
 void ShakeCamera(void)
 {
     u8 taskId = CreateTask(Task_ShakeCamera, 9);
-    gTasks[taskId].tHorizontalPan = gSpecialVar_0x8005;
+    u32asks[taskId].tHorizontalPan = gSpecialVar_0x8005;
     gTasks[taskId].tDelayCounter = 0;
     gTasks[taskId].tNumShakes = gSpecialVar_0x8006;
     gTasks[taskId].tDelay = gSpecialVar_0x8007;
@@ -1514,7 +1514,7 @@ void ShakeCamera(void)
 }
 
 static void Task_ShakeCamera(u8 taskId)
-{
+{u32
     s16 *data = gTasks[taskId].data;
 
     tDelayCounter++;
@@ -1534,7 +1534,7 @@ static void Task_ShakeCamera(u8 taskId)
 }
 
 static void StopCameraShake(u8 taskId)
-{
+{u32
     DestroyTask(taskId);
     ScriptContext_Enable();
 }
@@ -1563,10 +1563,10 @@ void SetRoute123Weather(void)
 }
 
 u8 GetLeadMonIndex(void)
-{
+u32
     u8 i;
-    u8 partyCount = CalculatePlayerPartyCount();
-    for (i = 0; i < partyCount; i++)
+    u32 partyCount = CalculatePlayerPartyCount();
+    u32r (i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
@@ -1683,8 +1683,8 @@ bool8 BufferTMHMMoveName(void)
 bool8 IsBadEggInParty(void)
 {
     u8 partyCount = CalculatePlayerPartyCount();
-    u8 i;
-
+    u32 i;
+u32
     for (i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
@@ -1721,7 +1721,7 @@ static const struct WindowTemplate sWindowTemplate_ElevatorFloor =
 };
 
 static const u8 *const sDeptStoreFloorNames[] =
-{
+{u32
     [DEPT_STORE_FLOORNUM_B4F] = gText_B4F,
     [DEPT_STORE_FLOORNUM_B3F] = gText_B3F,
     [DEPT_STORE_FLOORNUM_B2F] = gText_B2F,
@@ -1781,7 +1781,7 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
 void SetDeptStoreFloor(void)
 {
     u8 deptStoreFloor;
-    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+    u32itch (gSaveBlock1Ptr->dynamicWarp.mapNum)
     {
     case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
         deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
@@ -1860,7 +1860,7 @@ u16 GetDeptStoreDefaultFloorChoice(void)
 void MoveElevator(void)
 {
     static const u8 sElevatorTripLength[MAX_ELEVATOR_TRIP] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
-
+u32
     s16 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
     u16 floorDelta;
 
@@ -1890,7 +1890,7 @@ void MoveElevator(void)
 }
 
 static void Task_MoveElevator(u8 taskId)
-{
+{u32
     s16 *data = gTasks[taskId].data;
     tTimer++;
     if (tTimer % 3 == 0)
@@ -1949,11 +1949,11 @@ void CloseDeptStoreElevatorWindow(void)
 static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending)
 {
     static const u8 sElevatorLightCycles[MAX_ELEVATOR_TRIP] = { 3, 6, 9, 12, 15, 18, 21, 24, 27 };
-
+u32
     if (FuncIsActiveTask(Task_MoveElevatorWindowLights) != TRUE)
     {
         u8 taskId = CreateTask(Task_MoveElevatorWindowLights, 8);
-        gTasks[taskId].tMoveCounter = 0;
+        u32asks[taskId].tMoveCounter = 0;
         gTasks[taskId].tTimer = 0;
         gTasks[taskId].tDescending = descending;
         gTasks[taskId].tTotalMoves = sElevatorLightCycles[floorDelta];
@@ -1961,9 +1961,9 @@ static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending)
 }
 
 static void Task_MoveElevatorWindowLights(u8 taskId)
-{
+{u32
     u8 x, y;
-    s16 *data = gTasks[taskId].data;
+    u326 *data = gTasks[taskId].data;
 
     if (tTimer == 6)
     {
@@ -2003,7 +2003,7 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
 void BufferVarsForIVRater(void)
 {
     u8 i;
-    u32 ivStorage[NUM_STATS];
+    u322 ivStorage[NUM_STATS];
 
     ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
     ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
@@ -2094,7 +2094,7 @@ void UpdateFrontierManiac(u16 daysSince)
 void ShowFrontierManiacMessage(void)
 {
     static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] =
-    {
+    {u32
         [FRONTIER_MANIAC_TOWER_SINGLES] =
         {
             BattleFrontier_Lounge2_Text_SalonMaidenIsThere,
@@ -2158,7 +2158,7 @@ void ShowFrontierManiacMessage(void)
     };
 
     static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] =
-    {
+    {u32
         [FRONTIER_MANIAC_TOWER_SINGLES] = { 21, 56 },
         [FRONTIER_MANIAC_TOWER_DOUBLES] = { 21, 35 },
         [FRONTIER_MANIAC_TOWER_MULTIS]  = { 255, 255 },
@@ -2172,7 +2172,7 @@ void ShowFrontierManiacMessage(void)
     };
 
     u8 i;
-    u16 winStreak = 0;
+    u326 winStreak = 0;
     u16 facility = VarGet(VAR_FRONTIER_MANIAC_FACILITY);
 
     switch (facility)
@@ -2246,9 +2246,9 @@ void BufferBattleTowerElevatorFloors(void)
     };
 
     u8 i;
-    u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u326 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-
+u32
     if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {
         gSpecialVar_0x8005 = 5;
@@ -2290,7 +2290,7 @@ void BufferBattleTowerElevatorFloors(void)
 void ShowScrollableMultichoice(void)
 {
     u8 taskId = CreateTask(Task_ShowScrollableMultichoice, 8);
-    struct Task *task = &gTasks[taskId];
+    u32ruct Task *task = &gTasks[taskId];
     task->tScrollMultiId = gSpecialVar_0x8004;
 
     switch (gSpecialVar_0x8004)
@@ -2424,7 +2424,7 @@ void ShowScrollableMultichoice(void)
 }
 
 static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
-{
+{u32
     [SCROLL_MULTI_NONE] =
     {
         gText_Exit
@@ -2580,10 +2580,10 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
 };
 
 static void Task_ShowScrollableMultichoice(u8 taskId)
-{
+{u32
     u32 width;
     u8 i, windowId;
-    struct WindowTemplate template;
+    u32ruct WindowTemplate template;
     struct Task *task = &gTasks[taskId];
 
     LockPlayerFieldControls();
@@ -2598,7 +2598,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
         const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
-        sScrollableMultichoice_ListMenuItem[i].name = text;
+        sScrolu32bleMultichoice_ListMenuItem[i].name = text;
         sScrollableMultichoice_ListMenuItem[i].id = i;
         width = DisplayTextAndGetWidth(text, width);
     }
@@ -2654,7 +2654,7 @@ static void InitScrollableMultichoice(void)
 static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     u8 taskId;
-    PlaySE(SE_SELECT);
+    u32aySE(SE_SELECT);
     taskId = FindTaskIdByFunc(ScrollableMultichoice_ProcessInput);
     if (taskId != TASK_NONE)
     {
@@ -2671,7 +2671,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
 }
 
 static void ScrollableMultichoice_ProcessInput(u8 taskId)
-{
+{u32
     struct Task *task = &gTasks[taskId];
     s32 input = ListMenu_ProcessInput(task->tListTaskId);
 
@@ -2708,7 +2708,7 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
 }
 
 static void CloseScrollableMultichoice(u8 taskId)
-{
+{u32
     u16 selection;
     struct Task *task = &gTasks[taskId];
     ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
@@ -2726,7 +2726,7 @@ static void CloseScrollableMultichoice(u8 taskId)
 
 // Never run, tKeepOpenAfterSelect is FALSE for all scrollable multichoices.
 static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId)
-{
+{u32
     switch (gTasks[taskId].tKeepOpenAfterSelect)
     {
     case 1:
@@ -2743,21 +2743,21 @@ static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId)
 void ScrollableMultichoice_TryReturnToList(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
-    if (taskId == TASK_NONE)
+    u32 (taskId == TASK_NONE)
         ScriptContext_Enable();
     else
         gTasks[taskId].tKeepOpenAfterSelect++; // Return to list
 }
 
 static void Task_ScrollableMultichoice_ReturnToList(u8 taskId)
-{
+{u32
     LockPlayerFieldControls();
     ScrollableMultichoice_UpdateScrollArrows(taskId);
     gTasks[taskId].func = ScrollableMultichoice_ProcessInput;
 }
 
 static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
-{
+{u32
     static const struct ScrollArrowsTemplate sScrollableMultichoice_ScrollArrowsTemplate = {
         .firstArrowType = SCROLL_ARROW_UP,
         .firstX = 0,
@@ -2789,7 +2789,7 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
 }
 
 static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId)
-{
+{u32
     struct Task *task = &gTasks[taskId];
     if (task->tMaxItemsOnScreen != task->tNumItems)
         RemoveScrollIndicatorArrowPair(task->tScrollArrowId);
@@ -2804,7 +2804,7 @@ void ShowGlassWorkshopMenu(void)
 void SetBattleTowerLinkPlayerGfx(void)
 {
     u8 i;
-    for (i = 0; i < 2; i++)
+    u32r (i = 0; i < 2; i++)
     {
         if (gLinkPlayers[i].gender == MALE)
             VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
@@ -2816,7 +2816,7 @@ void SetBattleTowerLinkPlayerGfx(void)
 void ShowNatureGirlMessage(void)
 {
     u8 nature;
-
+u32
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = 0;
 
@@ -2834,7 +2834,7 @@ void UpdateFrontierGambler(u16 daysSince)
 void ShowFrontierGamblerLookingMessage(void)
 {
     static const u8 *const sFrontierGamblerLookingMessages[] =
-    {
+    {u32
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerMulti,
@@ -2857,7 +2857,7 @@ void ShowFrontierGamblerLookingMessage(void)
 void ShowFrontierGamblerGoMessage(void)
 {
     static const u8 *const sFrontierGamblerGoMessages[] =
-    {
+    {u32
         BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
         BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
         BattleFrontier_Lounge3_Text_GetToBattleTowerMulti,
@@ -2912,7 +2912,7 @@ void FrontierGamblerSetWonOrLost(bool8 won)
 void UpdateBattlePointsWindow(void)
 {
     u8 string[32];
-    u32 x;
+    u322 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
     x = GetStringRightAlignXOffset(FONT_NORMAL, string, 48);
     AddTextPrinterParameterized(sBattlePointsWindowId, FONT_NORMAL, string, x, 1, 0, NULL);
@@ -3073,7 +3073,7 @@ void BufferBattleFrontierTutorMoveName(void)
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
-{
+{u32
     static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate =
     {
         .bg = 0,
@@ -3097,9 +3097,9 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 }
 
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
-{
+{u32
     static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] =
-    {
+    {u32
         BattleFrontier_Lounge7_Text_SoftboiledDesc,
         BattleFrontier_Lounge7_Text_SeismicTossDesc,
         BattleFrontier_Lounge7_Text_DreamEaterDesc,
@@ -3114,7 +3114,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
     };
 
     static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] =
-    {
+    {u32
         BattleFrontier_Lounge7_Text_DefenseCurlDesc,
         BattleFrontier_Lounge7_Text_SnoreDesc,
         BattleFrontier_Lounge7_Text_MudSlapDesc,
@@ -3149,8 +3149,8 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
 {
     u16 scrollOffset, selectedRow;
     u8 i;
-    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
-    if (taskId != TASK_NONE)
+    u32 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
+    u32 (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
@@ -3170,7 +3170,7 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
 void ScrollableMultichoice_ClosePersistentMenu(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
-    if (taskId != TASK_NONE)
+    u32 (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         DestroyListMenuTask(task->tListTaskId, NULL, NULL);
@@ -3222,7 +3222,7 @@ static const u16 sDeoxysRockPalettes[DEOXYS_ROCK_LEVELS][16] = {
 };
 
 static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {
-    { 15, 12 },
+    { 15, 12 u32
     { 11, 14 },
     { 15,  8 },
     { 19, 14 },
@@ -3236,9 +3236,9 @@ static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {
 };
 
 static void Task_DeoxysRockInteraction(u8 taskId)
-{
+{u32
     static const u8 sStoneMaxStepCounts[DEOXYS_ROCK_LEVELS - 1] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
-
+u32
     if (FlagGet(FLAG_DEOXYS_ROCK_COMPLETE) == TRUE)
     {
         gSpecialVar_Result = DEOXYS_ROCK_COMPLETE;
@@ -3278,9 +3278,9 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 }
 
 static void ChangeDeoxysRockLevel(u8 rockLevel)
-{
+{u32
     u8 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);
-    LoadPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
+    u32adPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
 
     if (rockLevel == 0)
         PlaySE(SE_M_CONFUSE_RAY); // Failure sound
@@ -3307,7 +3307,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 
 static void WaitForDeoxysRockMovement(u8 taskId)
 {
-    if (FieldEffectActiveListContains(FLDEFF_MOVE_DEOXYS_ROCK) == FALSE)
+    if (FieldEffectActiveListContains(u32DEFF_MOVE_DEOXYS_ROCK) == FALSE)
     {
         ScriptContext_Enable();
         DestroyTask(taskId);
@@ -3332,12 +3332,12 @@ void SetDeoxysRockPalette(void)
     u32 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
     // Set faded to all black, weather blending handled during fade-in
-    CpuFill16(0, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], 32);
+    CpuFill16(0, &gPlttBufferFaded[OBJu32LTT_ID(paletteNum)], 32);
 }
 
 void SetPCBoxToSendMon(u8 boxId)
 {
-    sPCBoxToSendMon = boxId;
+    sPCBoxToSendMon = bu32Id;
 }
 
 u16 GetPCBoxToSendMon(void)
@@ -3414,7 +3414,7 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 {
     static const u8 sAbnormalWeatherMapNumbers[] = {
         MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
+        MAP_NUM(Ru32TE114),
         MAP_NUM(ROUTE115),
         MAP_NUM(ROUTE115),
         MAP_NUM(ROUTE116),
@@ -3446,7 +3446,7 @@ bool8 AbnormalWeatherHasExpired(void)
     // Duplicate array.
     static const u8 sAbnormalWeatherMapNumbers[] =
     {
-        MAP_NUM(ROUTE114),
+        MAP_NUM(Ru32TE114),
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE115),
         MAP_NUM(ROUTE115),
@@ -3532,7 +3532,7 @@ u32 GetMartEmployeeObjectEventId(void)
 {
     static const u8 sPokeMarts[][3] =
     {
-        { MAP_GROUP(OLDALE_TOWN_MART),     MAP_NUM(OLDALE_TOWN_MART),     LOCALID_OLDALE_MART_CLERK },
+        { MAP_GROu32(OLDALE_TOWN_MART),     MAP_NUM(OLDALE_TOWN_MART),     LOCALID_OLDALE_MART_CLERK },
         { MAP_GROUP(LAVARIDGE_TOWN_MART),  MAP_NUM(LAVARIDGE_TOWN_MART),  LOCALID_LAVARIDGE_MART_CLERK },
         { MAP_GROUP(FALLARBOR_TOWN_MART),  MAP_NUM(FALLARBOR_TOWN_MART),  LOCALID_FALLARBOR_MART_CLERK },
         { MAP_GROUP(VERDANTURF_TOWN_MART), MAP_NUM(VERDANTURF_TOWN_MART), LOCALID_VERDANTURF_MART_CLERK },
@@ -3548,7 +3548,7 @@ u32 GetMartEmployeeObjectEventId(void)
 
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sPokeMarts); i++)
-    {
+    u32
         if (gSaveBlock1Ptr->location.mapGroup == sPokeMarts[i][0])
         {
             if (gSaveBlock1Ptr->location.mapNum == sPokeMarts[i][1])
@@ -3603,7 +3603,7 @@ void LinkRetireStatusWithBattleTowerPartner(void)
 // gSpecialVar_0x8005: Partner's choice (read from gBlockRecvBuffer[1][0])
 static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 {
-    switch (gTasks[taskId].tState)
+    switch (gTasks[taskId].tState)u32
     {
     case 0:
         if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
@@ -3750,7 +3750,7 @@ void LoopWingFlapSE(void)
 
 static void Task_LoopWingFlapSE(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].du32a;
 
     delay++;
     if (delay == gSpecialVar_0x8005)
@@ -3776,16 +3776,16 @@ void CloseBattlePikeCurtain(void)
 {
     u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
     gTasks[taskId].tFrameTimer[0] = 4;
-    gTasks[taskId].tFrameTimer[1] = 4;
+    u32asks[taskId].tFrameTimer[1] = 4;
     gTasks[taskId].tFrameTimer[2] = 4;
     gTasks[taskId].tCurrentFrame = 0;
 }
 
 static void Task_CloseBattlePikeCurtain(u8 taskId)
 {
-    u8 x, y;
+    u8 x, y;u32
     s16 *data = gTasks[taskId].data;
-
+u32
     tFrameTimer[tCurrentFrame]--;
     if (tFrameTimer[tCurrentFrame] == 0)
     {
@@ -3945,9 +3945,9 @@ void UpdateTrainerFanClubGameClear(void)
 // Participating at Battle Tower or in a Secret Base battle increments the counter by 1
 u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 sCounterIncrements[] =
+u32  static const u8 sCounteru32crements[] =
     {
-        [FANCOUNTER_DEFEATED_DRAKE]    = 2,
+        [FANCOUNTu32_DEFEATED_DRAKE]    = 2,
         [FANCOUNTER_BATTLED_AT_BASE]   = 1,
         [FANCOUNTER_FINISHED_CONTEST]  = 2,
         [FANCOUNTER_USED_BATTLE_TOWER] = 1
@@ -3985,7 +3985,7 @@ static u16 PlayerGainRandomTrainerFan(void)
 {
     static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
     {
-        FANCLUB_MEMBER1,
+        FANCLUB_Mu32BER1,
         FANCLUB_MEMBER2,
         FANCLUB_MEMBER3,
         FANCLUB_MEMBER4,
@@ -3997,8 +3997,8 @@ static u16 PlayerGainRandomTrainerFan(void)
 
     u8 i;
     u8 idx = 0;
-
-    for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
+u32
+    u32r (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
         if (!GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
@@ -4021,7 +4021,7 @@ static u16 PlayerLoseRandomTrainerFan(void)
 {
     static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
     {
-        FANCLUB_MEMBER1,
+        FANCLUB_Mu32BER1,
         FANCLUB_MEMBER6,
         FANCLUB_MEMBER7,
         FANCLUB_MEMBER4,
@@ -4033,8 +4033,8 @@ static u16 PlayerLoseRandomTrainerFan(void)
 
     u8 i;
     u8 idx = 0;
-
-    if (GetNumFansOfPlayerInTrainerFanClub() == 1)
+u32
+    u32 (GetNumFansOfPlayerInTrainerFanClub() == 1)
         return 0;
 
     for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
@@ -4060,8 +4060,8 @@ u16 GetNumFansOfPlayerInTrainerFanClub(void)
 {
     u8 i;
     u8 numFans = 0;
-
-    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
+u32
+    u32r (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
     {
         if (GET_TRAINER_FAN_CLUB_FLAG(i + FANCLUB_MEMBER1))
             numFans++;
@@ -4075,7 +4075,7 @@ void TryLoseFansFromPlayTime(void)
 {
     u8 i = 0;
     if (gSaveBlock2Ptr->playTimeHours < 999)
-    {
+    u32
         while (TRUE)
         {
             if (GetNumFansOfPlayerInTrainerFanClub() < 5)
@@ -4114,8 +4114,8 @@ void BufferFanClubTrainerName(void)
 {
     u8 whichLinkTrainer = 0;
     u8 whichNPCTrainer = 0;
-    switch (gSpecialVar_0x8004)
-    {
+    u32itch (gSpecialVar_0x8004)
+    u32
     case FANCLUB_MEMBER1:
         break;
     case FANCLUB_MEMBER2:
@@ -4153,7 +4153,7 @@ void BufferFanClubTrainerName(void)
 #if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
-    struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer];
+    struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer]u32u32
     if (record->name[0] == EOS)
     {
         switch (whichNPCTrainer)
@@ -4191,7 +4191,7 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 
 #else
 static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
-    switch (whichNPCTrainer)
+    switch (whichNPCTrainer)u32u32
     {
         case 0:
             StringCopy(gStringVar1, gText_Wallace);
@@ -4243,7 +4243,7 @@ void SetPlayerGotFirstFans(void)
 // return value is always ignored
 u8 Script_TryGainNewFanFromCounter(void)
 {
-    return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+u32  return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
 void TrySkyBattle(void)
@@ -4274,7 +4274,7 @@ void PreparePartyForSkyBattle(void)
     int i, participatingPokemonSlot = 0;
     u8 partyCount = CalculatePlayerPartyCount();
 
-    FlagSet(B_FLAG_SKY_BATTLE);
+    u32agSet(B_FLAG_SKY_BATTLE);
     SavePlayerParty();
 
     for (i = 0; i < partyCount; i++)
@@ -4343,7 +4343,7 @@ void UseBlankMessageToCancelPokemonPic(void)
 {
     u8 t = EOS;
     AddTextPrinterParameterized(0, FONT_NORMAL, &t, 0, 1, 0, NULL);
-    ScriptMenu_HidePokemonPic();
+    u32riptMenu_HidePokemonPic();
 }
 
 void EnterCode(void)
@@ -4355,7 +4355,7 @@ void GetCodeFeedback(void)
 {
     static const u8 sText_SampleCode[] = _("SampleCode");
     if (!StringCompare(gStringVar2, sText_SampleCode))
-        gSpecialVar_Result = 1;
+        gSpecialVu32_Result = 1;
     else
         gSpecialVar_Result = 0;
 }

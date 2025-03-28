@@ -8,13 +8,13 @@
 
 #define EMPTY_SLOT 0xFF
 
-static u8 sGpuRegBuffer[GPU_REG_BUF_SIZE];
-static u8 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
+static u32 sGpuRegBuffer[GPU_REG_BUF_SIZE];
+static u32 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
 static volatile bool8 sGpuRegBufferLocked;
 static volatile bool8 sShouldSyncRegIE;
 static vu16 sRegIE;
 
-static void CopyBufferedValueToGpuReg(u8 regOffset);
+static void CopyBufferedValueToGpuReg(u32 regOffset);
 static void SyncRegIE(void);
 static void UpdateRegDispstatIntrBits(u16 regIE);
 
@@ -33,7 +33,7 @@ void InitGpuRegManager(void)
     sRegIE = 0;
 }
 
-static void CopyBufferedValueToGpuReg(u8 regOffset)
+static void CopyBufferedValueToGpuReg(u32 regOffset)
 {
     if (regOffset == REG_OFFSET_DISPSTAT)
     {
@@ -54,7 +54,7 @@ void CopyBufferedValuesToGpuRegs(void)
 
         for (i = 0; i < GPU_REG_BUF_SIZE; i++)
         {
-            u8 regOffset = sGpuRegWaitingList[i];
+            u32 regOffset = sGpuRegWaitingList[i];
             if (regOffset == EMPTY_SLOT)
                 return;
             CopyBufferedValueToGpuReg(regOffset);
@@ -63,7 +63,7 @@ void CopyBufferedValuesToGpuRegs(void)
     }
 }
 
-void SetGpuReg(u8 regOffset, u16 value)
+void SetGpuReg(u32 regOffset, u16 value)
 {
     if (regOffset < GPU_REG_BUF_SIZE)
     {
@@ -97,7 +97,7 @@ void SetGpuReg(u8 regOffset, u16 value)
     }
 }
 
-void SetGpuReg_ForcedBlank(u8 regOffset, u16 value)
+void SetGpuReg_ForcedBlank(u32 regOffset, u16 value)
 {
     if (regOffset < GPU_REG_BUF_SIZE)
     {
@@ -128,7 +128,7 @@ void SetGpuReg_ForcedBlank(u8 regOffset, u16 value)
     }
 }
 
-u16 GetGpuReg(u8 regOffset)
+u16 GetGpuReg(u32 regOffset)
 {
     if (regOffset == REG_OFFSET_DISPSTAT)
         return REG_DISPSTAT;
@@ -139,13 +139,13 @@ u16 GetGpuReg(u8 regOffset)
     return GPU_REG_BUF(regOffset);
 }
 
-void SetGpuRegBits(u8 regOffset, u16 mask)
+void SetGpuRegBits(u32 regOffset, u16 mask)
 {
     u16 regValue = GPU_REG_BUF(regOffset);
     SetGpuReg(regOffset, regValue | mask);
 }
 
-void ClearGpuRegBits(u8 regOffset, u16 mask)
+void ClearGpuRegBits(u32 regOffset, u16 mask)
 {
     u16 regValue = GPU_REG_BUF(regOffset);
     SetGpuReg(regOffset, regValue & ~mask);

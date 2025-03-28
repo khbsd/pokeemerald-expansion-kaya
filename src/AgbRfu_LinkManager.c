@@ -18,8 +18,8 @@ COMMON_DATA LINK_MANAGER lman = {0};
 
 static void rfu_LMAN_clearVariables(void);
 static void rfu_LMAN_settingPCSWITCH(u32 rand);
-static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult);
-static void rfu_LMAN_MSC_callback(u16 reqCommandId);
+static void rfu_LMAN_REQ_callback(u32 reqCommandId, u32 reqResult);
+static void rfu_LMAN_MSC_callback(u32 reqCommandId);
 static void rfu_LMAN_PARENT_checkRecvChildName(void);
 static void rfu_LMAN_CHILD_checkSendChildName(void);
 static void rfu_LMAN_CHILD_checkSendChildName2(void);
@@ -65,7 +65,7 @@ void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag)
     rfu_REQ_sendData(clockChangeFlag);
 }
 
-u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u16))
+u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u32))
 {
     if (LMAN_callback_p == NULL)
     {
@@ -124,10 +124,10 @@ void rfu_LMAN_powerDownRFU(void)
     lman.state = LMAN_STATE_STOP_MODE;
 }
 
-u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list)
+u8 rfu_LMAN_establishConnection(u8 parent_child, u32 connect_period, u32 name_accept_period, u32 *acceptable_serialNo_list)
 {
     u8 i;
-    u16 *serial_list;
+    u32 *serial_list;
 
     if (lman.state != LMAN_STATE_READY && (lman.state != LMAN_STATE_WAIT_RECV_CHILD_NAME || parent_child != MODE_PARENT))
     {
@@ -183,7 +183,7 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
     return 0;
 }
 
-u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 connect_period)
+u8 rfu_LMAN_CHILD_connectParent(u32 parentId, u32 connect_period)
 {
     u8 i;
 
@@ -329,7 +329,7 @@ void rfu_LMAN_stopManager(u8 forced_stop_and_RFU_reset_flag)
     }
 }
 
-static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
+static bool8 rfu_LMAN_linkWatcher(u32 REQ_commandID)
 {
     u8 i;
     u8 bm_linkLossSlot;
@@ -595,7 +595,7 @@ static void rfu_LMAN_settingPCSWITCH(u32 rand)
     }
 }
 
-static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
+static void rfu_LMAN_REQ_callback(u32 reqCommandId, u32 reqResult)
 {
     u8 status;
     u8 *stwiRecvBuffer;
@@ -959,7 +959,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
     }
 }
 
-static void rfu_LMAN_MSC_callback(u16 reqCommandId)
+static void rfu_LMAN_MSC_callback(u32 reqCommandId)
 {
     u8 active_bak;
     u8 thisAck_flag;
@@ -1005,7 +1005,7 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
     u8 i;
     u8 flags;
     u8 tgtSlot;
-    const u16 *ptr;
+    const u32 *ptr;
 
     if (lman.state == LMAN_STATE_START_SEARCH_CHILD || lman.state == LMAN_STATE_POLL_SEARCH_CHILD || lman.state == LMAN_STATE_END_SEARCH_CHILD || lman.state == LMAN_STATE_WAIT_RECV_CHILD_NAME)
     {
@@ -1121,7 +1121,7 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
 
 static void rfu_LMAN_CHILD_checkSendChildName(void)
 {
-    u16 imeBak = REG_IME;
+    u32 imeBak = REG_IME;
     REG_IME = 0;
     if (lman.state == LMAN_STATE_SEND_CHILD_NAME)
     {
@@ -1178,7 +1178,7 @@ static void rfu_LMAN_CHILD_linkRecoveryProcess(void)
 static u8 rfu_LMAN_CHILD_checkEnableParentCandidate(void)
 {
     u8 i;
-    u16 *serialNo;
+    u32 *serialNo;
     u8 flags = 0x00;
 
     for (i = 0; i < gRfuLinkStatus->findParentCount; i++)
@@ -1291,7 +1291,7 @@ static void rfu_LMAN_checkNICommunicateStatus(void)
     }
 }
 
-void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u16))
+void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u32))
 {
     lman.MSC_callback = MSC_callback_p;
     rfu_setMSCCallback(rfu_LMAN_MSC_callback);
@@ -1302,9 +1302,9 @@ static void UNUSED rfu_LMAN_setLMANCallback(void (*func)(u8, u8))
     lman.LMAN_callback = func;
 }
 
-u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period)
+u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u32 recovery_period)
 {
-    u16 imeBak;
+    u32 imeBak;
     if (lman.linkRecovery_enable && enable_flag == 0 && lman.linkRecoveryTimer.active)
     {
         return LMAN_ERROR_NOW_LINK_RECOVERY;
@@ -1317,7 +1317,7 @@ u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period)
     return 0;
 }
 
-static u8 UNUSED rfu_LMAN_setNIFailCounterLimit(u16 NI_failCounter_limit)
+static u8 UNUSED rfu_LMAN_setNIFailCounterLimit(u32 NI_failCounter_limit)
 {
     if (gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag)
     {

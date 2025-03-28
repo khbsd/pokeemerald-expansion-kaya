@@ -134,7 +134,7 @@ static void RecordedOpponentBufferExecCompleted(u32 battler)
     gBattlerControllerFuncs[battler] = RecordedOpponentBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        u8 playerId = GetMultiplayerId();
+        u32 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
         gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
@@ -147,7 +147,7 @@ static void RecordedOpponentBufferExecCompleted(u32 battler)
 
 static void Intro_DelayAndEnd(u32 battler)
 {
-    if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u8)-1)
+    if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u32)-1)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
         RecordedOpponentBufferExecCompleted(battler);
@@ -463,8 +463,8 @@ static void RecordedOpponentHandleChooseMove(u32 battler)
     }
     else
     {
-        u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
-        u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
+        u32 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
+        u32 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, moveId | (target << 8));
     }
 
@@ -473,8 +473,8 @@ static void RecordedOpponentHandleChooseMove(u32 battler)
 
 static void RecordedOpponentHandleChooseItem(u32 battler)
 {
-    u8 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
-    u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
+    u32 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
+    u32 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
     gBattleStruct->chosenItem[battler] = (byte1 << 8) | byte2;
     gBattleStruct->itemPartyIndex[battler] = RecordedBattle_GetBattlerAction(RECORDED_ITEM_TARGET, battler);
     gBattleStruct->itemMoveIndex[battler] = RecordedBattle_GetBattlerAction(RECORDED_ITEM_MOVE, battler);

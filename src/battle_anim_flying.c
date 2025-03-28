@@ -400,7 +400,7 @@ void AnimTask_AnimateGustTornadoPalette(u8 taskId)
 static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
 {
     u8 data2;
-    u16 temp;
+    u32 temp;
     int i, base;
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
@@ -540,7 +540,7 @@ void AnimFlyBallAttack_Step(struct Sprite *sprite)
 {
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
-    if (((u16)sprite->data[3] >> 8) > 200)
+    if (((u32)sprite->data[3] >> 8) > 200)
     {
         sprite->x += sprite->x2;
         sprite->x2 = 0;
@@ -573,20 +573,20 @@ void DestroyAnimSpriteAfterTimer(struct Sprite *sprite)
 
 struct FeatherDanceData
 {
-    u16 unk0_0a:1;
-    u16 unk0_0b:1;
-    u16 unk0_0c:1;
-    u16 unk0_0d:1;
-    u16 unk0_1:4;
-    u16 unk1:8;
-    u16 unk2;
+    u32 unk0_0a:1;
+    u32 unk0_0b:1;
+    u32 unk0_0c:1;
+    u32 unk0_0d:1;
+    u32 unk0_1:4;
+    u32 unk1:8;
+    u32 unk2;
     s16 unk4;
-    u16 unk6;
-    u16 unk8;
-    u16 unkA;
+    u32 unk6;
+    u32 unk8;
+    u32 unkA;
     u8 unkC[2];
-    u16 unkE_0:1;
-    u16 unkE_1:15;
+    u32 unkE_0:1;
+    u32 unkE_1:15;
 };
 
 static void AnimFallingFeather(struct Sprite *sprite)
@@ -615,7 +615,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
     data->unkA = (gBattleAnimArgs[2] >> 8) & 0xFF;
     data->unk4 = gBattleAnimArgs[3];
     data->unk6 = gBattleAnimArgs[4];
-    *(u16 *)(data->unkC) = gBattleAnimArgs[5];
+    *(u32 *)(data->unkC) = gBattleAnimArgs[5];
 
     if (data->unk2 >= 64 && data->unk2 <= 191)
     {
@@ -922,7 +922,7 @@ static void AnimUnusedBubbleThrow(struct Sprite *sprite)
 
 static void AnimWhirlwindLine(struct Sprite * sprite)
 {
-    u16 offset;
+    u32 offset;
     u8 mult;
 
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
@@ -1206,7 +1206,7 @@ static void AnimUnusedFlashingLight_Step(struct Sprite *sprite)
 
 static void AnimSkyAttackBird(struct Sprite *sprite)
 {
-    u16 rotation;
+    u32 rotation;
     s16 posx = sprite->x;
     s16 posy = sprite->y;
 

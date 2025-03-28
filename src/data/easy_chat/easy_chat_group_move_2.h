@@ -1,6 +1,6 @@
 #include "constants/moves.h"
 
-const u16 gEasyChatGroup_Move2[] = {
+const u32 gEasyChatGroup_Move2[] = {
     MOVE_ACID,
     MOVE_ACID_ARMOR,
     MOVE_AERIAL_ACE,

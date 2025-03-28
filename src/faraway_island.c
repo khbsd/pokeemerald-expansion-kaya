@@ -9,19 +9,19 @@
 #include "constants/field_effects.h"
 #include "constants/metatile_behaviors.h"
 
-static u8 GetValidMewMoveDirection(u8);
-static bool8 ShouldMewMoveNorth(struct ObjectEvent *, u8);
-static bool8 ShouldMewMoveSouth(struct ObjectEvent *, u8);
-static bool8 ShouldMewMoveEast(struct ObjectEvent *, u8);
-static bool8 ShouldMewMoveWest(struct ObjectEvent *, u8);
-static u8 GetRandomMewDirectionCandidate(u8);
+static u32 GetValidMewMoveDirection(u32);
+static bool8 ShouldMewMoveNorth(struct ObjectEvent *, u32);
+static bool8 ShouldMewMoveSouth(struct ObjectEvent *, u32);
+static bool8 ShouldMewMoveEast(struct ObjectEvent *, u32);
+static bool8 ShouldMewMoveWest(struct ObjectEvent *, u32);
+static u32 GetRandomMewDirectionCandidate(u32);
 static bool8 CanMewMoveToCoords(s16, s16);
 
-static EWRAM_DATA u8 sGrassSpriteId = 0;
+static EWRAM_DATA u32 sGrassSpriteId = 0;
 
 static s16 sPlayerToMewDeltaX;
 static s16 sPlayerToMewDeltaY;
-static u8 sMewDirectionCandidates[4];
+static u32 sMewDirectionCandidates[4];
 
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
@@ -34,9 +34,9 @@ static const s16 sFarawayIslandRockCoords[4][2] =
     {13 + MAP_OFFSET, 13 + MAP_OFFSET},
 };
 
-static u8 GetMewObjectEventId(void)
+static u32 GetMewObjectEventId(void)
 {
-    u8 objectEventId;
+    u32 objectEventId;
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_FARAWAY_ISLAND_MEW, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     return objectEventId;
 }
@@ -45,7 +45,7 @@ static u8 GetMewObjectEventId(void)
 // This function returns the direction Mew will take a step, and is run every time the player takes a step
 u32 GetMewMoveDirection(void)
 {
-    u8 i;
+    u32 i;
     int mewSafeFromTrap;
     struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
@@ -279,10 +279,10 @@ static bool8 CanMewMoveToCoords(s16 x, s16 y)
 }
 
 // Last ditch effort to move, clear move candidates and try all directions again
-static u8 GetValidMewMoveDirection(u8 ignoredDir)
+static u32 GetValidMewMoveDirection(u32 ignoredDir)
 {
-    u8 i;
-    u8 count = 0;
+    u32 i;
+    u32 count = 0;
     struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     for (i = 0; i < ARRAY_COUNT(sMewDirectionCandidates); i++)
@@ -414,7 +414,7 @@ void DestroyMewEmergingGrassSprite(void)
         DestroySprite(&gSprites[sGrassSpriteId]);
 }
 
-static bool8 ShouldMewMoveNorth(struct ObjectEvent *mew, u8 index)
+static bool8 ShouldMewMoveNorth(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaY > 0 && CanMewMoveToCoords(mew->currentCoords.x, mew->currentCoords.y - 1))
     {
@@ -425,7 +425,7 @@ static bool8 ShouldMewMoveNorth(struct ObjectEvent *mew, u8 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveEast(struct ObjectEvent *mew, u8 index)
+static bool8 ShouldMewMoveEast(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaX < 0 && CanMewMoveToCoords(mew->currentCoords.x + 1, mew->currentCoords.y))
     {
@@ -436,7 +436,7 @@ static bool8 ShouldMewMoveEast(struct ObjectEvent *mew, u8 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveSouth(struct ObjectEvent *mew, u8 index)
+static bool8 ShouldMewMoveSouth(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaY < 0 && CanMewMoveToCoords(mew->currentCoords.x, mew->currentCoords.y + 1))
     {
@@ -447,7 +447,7 @@ static bool8 ShouldMewMoveSouth(struct ObjectEvent *mew, u8 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveWest(struct ObjectEvent *mew, u8 index)
+static bool8 ShouldMewMoveWest(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaX > 0 && CanMewMoveToCoords(mew->currentCoords.x - 1, mew->currentCoords.y))
     {
@@ -458,7 +458,7 @@ static bool8 ShouldMewMoveWest(struct ObjectEvent *mew, u8 index)
     return FALSE;
 }
 
-static u8 GetRandomMewDirectionCandidate(u8 numDirections)
+static u32 GetRandomMewDirectionCandidate(u32 numDirections)
 {
     return sMewDirectionCandidates[VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) % numDirections];
 }

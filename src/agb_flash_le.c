@@ -1,7 +1,7 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-const u16 leMaxTime[] =
+const u32 leMaxTime[] =
 {
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
       10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,

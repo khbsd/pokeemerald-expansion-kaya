@@ -32,47 +32,47 @@
 struct PokedexCryMeterNeedle {
     s8 rotation;
     s8 targetRotation;
-    u8 moveIncrement;
+    u32 moveIncrement;
     u16 spriteId;
 };
 
 struct PokedexCryScreen
 {
-    u8 cryWaveformBuffer[16];
-    u8 cryState;
-    u8 playhead;
-    u8 waveformPreviousY;
+    u32 cryWaveformBuffer[16];
+    u32 cryState;
+    u32 playhead;
+    u32 waveformPreviousY;
     u16 unk; // Never read
-    u8 playStartPos;
+    u32 playStartPos;
     u16 species;
-    u8 cryOverrideCountdown;
-    u8 cryRepeatDelay;
+    u32 cryOverrideCountdown;
+    u32 cryRepeatDelay;
 };
 
 static void PlayCryScreenCry(u16);
 static void BufferCryWaveformSegment(void);
 static void DrawWaveformFlatline(void);
-static void AdvancePlayhead(u8);
-static void DrawWaveformSegment(u8, u8);
-static void DrawWaveformWindow(u8);
-static void ShiftWaveformOver(u8, s16, bool8);
+static void AdvancePlayhead(u32);
+static void DrawWaveformSegment(u32, u32);
+static void DrawWaveformWindow(u32);
+static void ShiftWaveformOver(u32, s16, bool8);
 static void SpriteCB_CryMeterNeedle(struct Sprite *);
 static void SetCryMeterNeedleTarget(s8);
 
 // IWRAM common
-COMMON_DATA u8 gDexCryScreenState = 0;
+COMMON_DATA u32 gDexCryScreenState = 0;
 
 // EWRAM vars
 static EWRAM_DATA struct PokedexCryScreen *sDexCryScreen = NULL;
-static EWRAM_DATA u8 *sCryWaveformWindowTiledata = NULL;
+static EWRAM_DATA u32 *sCryWaveformWindowTiledata = NULL;
 static EWRAM_DATA struct PokedexCryMeterNeedle *sCryMeterNeedle = NULL;
 
 static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
-static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
+static const u32 sCryMeterNeedle_Gfx[] = INCBIN_u32("graphics/pokedex/cry_meter_needle.4bpp");
 
 static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
 static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+static const u32 sCryMeter_Gfx[] = INCBIN_u32("graphics/pokedex/cry_meter.4bpp.lz");
 
 static const u16 sWaveformOffsets[][72] =
 {
@@ -160,13 +160,13 @@ static const u16 sWaveformOffsets[][72] =
 };
 
 static const u16 sCryScreenBg_Pal[] = INCBIN_U16("graphics/pokedex/cry_screen_bg.gbapal");
-static const u8 sCryScreenBg_Gfx[] = INCBIN_U8("graphics/pokedex/cry_screen_bg.4bpp");
+static const u32 sCryScreenBg_Gfx[] = INCBIN_u32("graphics/pokedex/cry_screen_bg.4bpp");
 
-static const u8 sWaveformTileDataNybbleMasks[] = {0xF0, 0x0F};
+static const u32 sWaveformTileDataNybbleMasks[] = {0xF0, 0x0F};
 
 // Waveform is blue in the middle (8) grading to white at peaks (15)
 // Split into two arrays for the two vertical slice halves
-static const u8 sWaveformColor[][16] =
+static const u32 sWaveformColor[][16] =
 {
     {
         15,      14,      13,      12,      11,      10,       9,       8,
@@ -225,10 +225,10 @@ static const struct SpritePalette sCryMeterNeedleSpritePalettes[] =
     {}
 };
 
-bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
+bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u32 windowId)
 {
-    u8 i;
-    u8 finished = FALSE;
+    u32 i;
+    u32 finished = FALSE;
 
     switch (gDexCryScreenState)
     {
@@ -236,7 +236,7 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
         if (!sDexCryScreen)
         {
             sDexCryScreen = AllocZeroed(sizeof(*sDexCryScreen));
-            sCryWaveformWindowTiledata = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+            sCryWaveformWindowTiledata = (u32 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
         }
 
         sDexCryScreen->unk = window->unk0;
@@ -268,9 +268,9 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
     return finished;
 }
 
-void UpdateCryWaveformWindow(u8 windowId)
+void UpdateCryWaveformWindow(u32 windowId)
 {
-    u8 waveformIdx;
+    u32 waveformIdx;
 
     DrawWaveformWindow(windowId);
     AdvancePlayhead(windowId);
@@ -353,7 +353,7 @@ static void PlayCryScreenCry(u16 species)
 
 static void BufferCryWaveformSegment(void)
 {
-    u8 i;
+    u32 i;
     s8 *baseBuffer;
     s8 *buffer;
 
@@ -373,9 +373,9 @@ static void DrawWaveformFlatline(void)
     DrawWaveformSegment(sDexCryScreen->playStartPos * 8 + sDexCryScreen->playhead - 1, 0);
 }
 
-static void AdvancePlayhead(u8 windowId)
+static void AdvancePlayhead(u32 windowId)
 {
-    u8 i;
+    u32 i;
     u16 offset;
 
     ShiftWaveformOver(windowId, sDexCryScreen->playhead, FALSE);
@@ -387,18 +387,18 @@ static void AdvancePlayhead(u8 windowId)
 
 // Waveform segments are drawn in alternate vertical slices
 // Note that the waveform isnt put on screen until DrawWaveformWindow
-static void DrawWaveformSegment(u8 position, u8 amplitude)
+static void DrawWaveformSegment(u32 position, u32 amplitude)
 {
     // Position is a bitfield containing the play start pos, the playhead pos, and which vertical slice half to draw
     #define PLAY_START_POS (position >> 3)
     #define PLAYHEAD_POS   (position & ((1 << 3) - 1))
     #define VERT_SLICE     (position & 1)
 
-    u8 currentPointY;
-    u8 nybble;
+    u32 currentPointY;
+    u32 nybble;
     u16 offset;
     u16 temp;
-    u8 y;
+    u32 y;
 
     temp = (amplitude + 127) * 256;
     y = temp / 1152.0;
@@ -432,7 +432,7 @@ static void DrawWaveformSegment(u8 position, u8 amplitude)
     sDexCryScreen->waveformPreviousY = currentPointY;
 }
 
-static void DrawWaveformWindow(u8 windowId)
+static void DrawWaveformWindow(u32 windowId)
 {
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -440,16 +440,16 @@ static void DrawWaveformWindow(u8 windowId)
 // rsVertical is leftover from a very different version of this function in RS
 // In RS, when TRUE it would use VOFS and when FALSE it would use HOFS (only FALSE was used)
 // Here when TRUE it does nothing
-static void ShiftWaveformOver(u8 windowId, s16 offset, bool8 rsVertical)
+static void ShiftWaveformOver(u32 windowId, s16 offset, bool8 rsVertical)
 {
     if (!rsVertical)
     {
-        u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
+        u32 bg = GetWindowAttribute(windowId, WINDOW_BG);
         ChangeBgX(bg, offset << 8, BG_COORD_SET);
     }
 }
 
-bool8 LoadCryMeter(struct CryScreenWindow *window, u8 windowId)
+bool8 LoadCryMeter(struct CryScreenWindow *window, u32 windowId)
 {
     bool8 finished = FALSE;
 
@@ -493,7 +493,7 @@ static void SpriteCB_CryMeterNeedle(struct Sprite *sprite)
     s16 y;
     struct ObjAffineSrcData affine;
     struct OamMatrix matrix;
-    u8 amplitude;
+    u32 amplitude;
 
     gSprites[sCryMeterNeedle->spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[sCryMeterNeedle->spriteId].oam.affineParam = 0;
@@ -571,8 +571,8 @@ static void SetCryMeterNeedleTarget(s8 offset)
     u16 rotation = (MIN_NEEDLE_POS - offset) & 0xFF;
 
     // Min is positive, max is negative. Make sure needle hasnt moved out of bounds
-    if (rotation > MIN_NEEDLE_POS && rotation < (u8)MAX_NEEDLE_POS)
-        rotation = (u8)MAX_NEEDLE_POS;
+    if (rotation > MIN_NEEDLE_POS && rotation < (u32)MAX_NEEDLE_POS)
+        rotation = (u32)MAX_NEEDLE_POS;
 
     sCryMeterNeedle->targetRotation = rotation;
     sCryMeterNeedle->moveIncrement = NEEDLE_MOVE_INCREMENT;

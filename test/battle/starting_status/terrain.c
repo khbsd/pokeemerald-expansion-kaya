@@ -6,7 +6,7 @@
 
 SINGLE_BATTLE_TEST("B_VAR_STARTING_STATUS starts a chosen terrain at the beginning of battle and lasts infinitely long")
 {
-    u16 terrain;
+    u32 terrain;
 
     PARAMETRIZE { terrain = STARTING_STATUS_GRASSY_TERRAIN; }
     PARAMETRIZE { terrain = STARTING_STATUS_PSYCHIC_TERRAIN; }

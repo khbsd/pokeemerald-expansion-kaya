@@ -7,9 +7,9 @@
 
 struct RematchTrainer
 {
-    u16 trainerIds[REMATCHES_COUNT];
-    u16 mapGroup;
-    u16 mapNum;
+    u32 trainerIds[REMATCHES_COUNT];
+    u32 mapGroup;
+    u32 mapNum;
 };
 
 /*
@@ -26,12 +26,12 @@ typedef union PACKED TrainerBattleParameter
         u8 playMusicB:1;
         u8 mode:4;
         u8 objEventLocalIdA;
-        u16 opponentA;
+        u32 opponentA;
         u8 *introTextA;
         u8 *defeatTextA;
         u8 *battleScriptRetAddrA;
         u8 objEventLocalIdB;
-        u16 opponentB;
+        u32 opponentB;
         u8 *introTextB;
         u8 *defeatTextB;
         u8 *battleScriptRetAddrB;
@@ -45,7 +45,7 @@ typedef union PACKED TrainerBattleParameter
 extern const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES];
 
 extern TrainerBattleParameter gTrainerBattleParameter;
-extern u16 gPartnerTrainerId;
+extern u32 gPartnerTrainerId;
 
 #define TRAINER_BATTLE_PARAM gTrainerBattleParameter.params
 
@@ -76,9 +76,9 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetTrainerFacingDirection(void);
 u8 GetTrainerBattleMode(void);
 bool8 GetTrainerFlag(void);
-bool8 HasTrainerBeenFought(u16 trainerId);
-void SetTrainerFlag(u16 trainerId);
-void ClearTrainerFlag(u16 trainerId);
+bool8 HasTrainerBeenFought(u32 trainerId);
+void SetTrainerFlag(u32 trainerId);
+void ClearTrainerFlag(u32 trainerId);
 void BattleSetup_StartTrainerBattle(void);
 void BattleSetup_StartRematchBattle(void);
 void ShowTrainerIntroSpeech(void);
@@ -91,14 +91,14 @@ const u8 *GetTrainerBLoseText(void);
 const u8 *GetTrainerWonSpeech(void);
 void UpdateRematchIfDefeated(s32 rematchTableId);
 void IncrementRematchStepCounter(void);
-void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum);
-bool32 DoesSomeoneWantRematchIn(u16 mapGroup, u16 mapNum);
-bool32 IsRematchTrainerIn(u16 mapGroup, u16 mapNum);
-u16 GetLastBeatenRematchTrainerId(u16 trainerId);
+void TryUpdateRandomTrainerRematches(u32 mapGroup, u32 mapNum);
+bool32 DoesSomeoneWantRematchIn(u32 mapGroup, u32 mapNum);
+bool32 IsRematchTrainerIn(u32 mapGroup, u32 mapNum);
+u32 GetLastBeatenRematchTrainerId(u32 trainerId);
 bool8 ShouldTryRematchBattle(void);
 bool8 IsTrainerReadyForRematch(void);
 void ShouldTryGetTrainerScript(void);
-u16 CountBattledRematchTeams(u16 trainerId);
+u32 CountBattledRematchTeams(u32 trainerId);
 void TrainerBattleLoadArgs(const u8 *data);
 void TrainerBattleLoadArgsTrainerA(const u8 *data);
 void TrainerBattleLoadArgsTrainerB(const u8 *data);
@@ -106,8 +106,8 @@ void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
 
 void DoStandardWildBattle_Debug(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
-s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
-s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
-u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId);
+s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u32 trainerId);
+s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u32 trainerId);
+u32 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u32 firstBattleTrainerId);
 
 #endif // GUARD_BATTLE_SETUP_H

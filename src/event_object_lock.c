@@ -17,7 +17,7 @@ bool8 IsPlayerStandingStill(void)
 }
 
 // Freeze player once their movement is finished
-static void Task_FreezePlayer(u8 taskId)
+static void Task_FreezePlayer(u32 taskId)
 {
     if (IsPlayerStandingStill())
     {
@@ -51,7 +51,7 @@ void FreezeObjects_WaitForPlayer(void)
 #define tObjectId     data[2]
 
 // Freeze selected object and player once their movement is finished
-static void Task_FreezeSelectedObjectAndPlayer(u8 taskId)
+static void Task_FreezeSelectedObjectAndPlayer(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -86,7 +86,7 @@ bool8 IsFreezeSelectedObjectAndPlayerFinished(void)
 // The selected object and player are frozen once their movement is finished.
 void FreezeObjects_WaitForPlayerAndSelected(void)
 {
-    u8 taskId;
+    u32 taskId;
     FreezeObjectEventsExceptOne(gSelectedObjectEvent);
     taskId = CreateTask(Task_FreezeSelectedObjectAndPlayer, 80);
     if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
@@ -98,7 +98,7 @@ void FreezeObjects_WaitForPlayerAndSelected(void)
 
 void ScriptUnfreezeObjectEvents(void)
 {
-    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    u32 playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -106,7 +106,7 @@ void ScriptUnfreezeObjectEvents(void)
 
 void UnionRoom_UnlockPlayerAndChatPartner(void)
 {
-    u8 playerObjectId;
+    u32 playerObjectId;
 
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
@@ -127,10 +127,10 @@ void Script_ClearHeldMovement(void)
 }
 
 // Freeze designated object and player once their movement is finished
-static void Task_FreezeObjectAndPlayer(u8 taskId)
+static void Task_FreezeObjectAndPlayer(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 objectEventId = task->tObjectId;
+    u32 objectEventId = task->tObjectId;
 
     if (!task->tPlayerFrozen && IsPlayerStandingStill() == TRUE)
     {
@@ -150,7 +150,7 @@ static void Task_FreezeObjectAndPlayer(u8 taskId)
 // The approaching trainers and player are frozen once their movement is finished
 void FreezeForApproachingTrainers(void)
 {
-    u8 trainerObjectId1, trainerObjectId2, taskId;
+    u32 trainerObjectId1, trainerObjectId2, taskId;
     struct ObjectEvent *followerObj = GetFollowerObject();
     trainerObjectId1 = GetChosenApproachingTrainerObjectEventId(0);
 

@@ -3,8 +3,8 @@
 
 struct PulseBlendSettings
 {
-    u16 blendColor;
-    u16 paletteOffset;
+    u32 blendColor;
+    u32 paletteOffset;
     u8 numColors;
     u8 delay;
     u8 numFadeCycles;
@@ -29,7 +29,7 @@ struct PulseBlendPalette
 
 struct PulseBlend
 {
-    u16 usedPulseBlendPalettes;
+    u32 usedPulseBlendPalettes;
     struct PulseBlendPalette pulseBlendPalettes[16];
 };
 
@@ -38,8 +38,8 @@ struct PulseBlend
 
 struct RouletteFlashSettings
 {
-    u16 color;
-    u16 paletteOffset;
+    u32 color;
+    u32 paletteOffset;
     u8 numColors;
     u8 delay;
     s8 unk6;      // Set but never used
@@ -62,22 +62,22 @@ struct RouletteFlashUtil
 {
     u8 enabled;
     u8 unused;
-    u16 flags;
+    u32 flags;
     struct RouletteFlashPalette palettes[16];
 };
 
 int InitPulseBlendPaletteSettings(struct PulseBlend *, const struct PulseBlendSettings *);
 void InitPulseBlend(struct PulseBlend *);
-void MarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
-void UnloadUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
-void UnmarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
+void MarkUsedPulseBlendPalettes(struct PulseBlend *, u32, u8);
+void UnloadUsedPulseBlendPalettes(struct PulseBlend *, u32, u8);
+void UnmarkUsedPulseBlendPalettes(struct PulseBlend *, u32, u8);
 void UpdatePulseBlend(struct PulseBlend *);
-void FillTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height);
-void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height);
+void FillTilemapRect(u32 *dest, u32 src, u8 left, u8 top, u8 width, u8 height);
+void SetTilemapRect(u32 *dest, u32 *src, u8 left, u8 top, u8 width, u8 height);
 void RouletteFlash_Run(struct RouletteFlashUtil *r0);
 void RouletteFlash_Reset(struct RouletteFlashUtil *r0);
 u8 RouletteFlash_Add(struct RouletteFlashUtil *r0, u8 r1, const struct RouletteFlashSettings *r2);
-void RouletteFlash_Stop(struct RouletteFlashUtil *r0, u16 r1);
-void RouletteFlash_Enable(struct RouletteFlashUtil *r0, u16 r1);
+void RouletteFlash_Stop(struct RouletteFlashUtil *r0, u32 r1);
+void RouletteFlash_Enable(struct RouletteFlashUtil *r0, u32 r1);
 
 #endif // GUARD_PALETTE_UTIL_H

@@ -13,13 +13,13 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
 };
-static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
+static const u32 sFont_Braille[] = INCBIN_u32("graphics/fonts/braille.fwjpnfont");
 
-static void DecompressGlyph_Braille(u16);
+static void DecompressGlyph_Braille(u32);
 
-u16 FontFunc_Braille(struct TextPrinter *textPrinter)
+u32 FontFunc_Braille(struct TextPrinter *textPrinter)
 {
-    u16 char_;
+    u32 char_;
     struct TextPrinterSubStruct *subStruct;
     subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -195,9 +195,9 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
     return RENDER_FINISH;
 }
 
-static void DecompressGlyph_Braille(u16 glyph)
+static void DecompressGlyph_Braille(u32 glyph)
 {
-    const u16 *glyphs = sFont_Braille + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
+    const u32 *glyphs = sFont_Braille + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
     DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
     DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
     DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
@@ -206,7 +206,7 @@ static void DecompressGlyph_Braille(u16 glyph)
     gCurGlyph.height = 16;
 }
 
-u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese)
+u32 GetGlyphWidth_Braille(u32 glyphId, bool32 isJapanese)
 {
     return 16;
 }

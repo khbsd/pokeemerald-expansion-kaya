@@ -61,8 +61,8 @@ enum {
     SORT_MODE_FULL,
 };
 
-static void SortTrends(struct DewfordTrend *, u16, u8);
-static bool8 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u8);
+static void SortTrends(struct DewfordTrend *, u16, u32);
+static bool8 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u32);
 static void SeedTrendRng(struct DewfordTrend *);
 static bool8 IsPhraseInSavedTrends(u16 *);
 static bool8 IsEasyChatPairEqual(u16 *, u16 *);
@@ -206,7 +206,7 @@ bool8 TrySetTrendyPhrase(u16 *phrase)
 }
 
 
-static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u8 mode)
+static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u32 mode)
 {
     u16 i;
     for (i = 0; i < numTrends; i++)
@@ -226,7 +226,7 @@ static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u8 mode)
 #define SAVED_TRENDS_SIZE (sizeof(struct DewfordTrend) * SAVED_TRENDS_COUNT)
 #define BUFFER_SIZE max(SAVED_TRENDS_SIZE * MAX_LINK_PLAYERS, 0x100) // More space was allocated than needed
 
-void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 unused)
+void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u32 unused)
 {
     u16 i, j, numTrends, players;
     struct DewfordTrend *linkedTrendsBuffer, *savedTrendsBuffer, *src, *dst, *temp;
@@ -245,7 +245,7 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 
     // Buffer the new trends being received via Record Mixing
     players = GetLinkPlayerCount();
     for (i = 0; i < players; i++)
-        memcpy(&linkedTrendsBuffer[i * SAVED_TRENDS_COUNT], (u8 *)linkedTrends + i * size, SAVED_TRENDS_SIZE);
+        memcpy(&linkedTrendsBuffer[i * SAVED_TRENDS_COUNT], (u32 *)linkedTrends + i * size, SAVED_TRENDS_SIZE);
 
     // Determine which of the received trends should be saved.
     // savedTrendsBuffer starts empty, and when finished will contain
@@ -325,7 +325,7 @@ void GetDewfordHallPaintingNameIndex(void)
 // Returns TRUE if a > b (a is "trendier" than b), FALSE if a < b (b is "trendier" than a)
 // How one trend is compared to the other depends on the mode
 // In SORT_MODE_FULL if the trends are equal then TRUE is always returned, otherwise TRUE or FALSE is returned randomly
-static bool8 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u8 mode)
+static bool8 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u32 mode)
 {
     switch (mode)
     {

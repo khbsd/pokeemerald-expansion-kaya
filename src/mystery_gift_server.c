@@ -34,7 +34,7 @@ void MysterGiftServer_CreateForCard(void)
     MysteryGiftServer_Init(sServer, gMysteryGiftServerScript_SendWonderCard, 0, 1);
 }
 
-u32 MysterGiftServer_Run(u16 * endVal)
+u32 MysterGiftServer_Run(u32 * endVal)
 {
     u32 result;
     if (sServer == NULL)

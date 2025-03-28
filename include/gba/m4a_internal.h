@@ -38,8 +38,8 @@
 
 struct WaveData
 {
-    u16 type;
-    u16 status;
+    u32 type;
+    u32 status;
     u32 freq;
     u32 loopStart;
     u32 size; // number of samples
@@ -160,8 +160,8 @@ struct SoundChannel
     void *prevChannelPointer;
     void *nextChannelPointer;
     u32 dummy4;
-    u16 xpi;
-    u16 xpc;
+    u32 xpi;
+    u32 xpc;
 };
 
 #define MAX_DIRECTSOUND_CHANNELS 12
@@ -254,7 +254,7 @@ struct PokemonCrySong
     u8 tieKeyValue; // 0x2A
     u8 tieVelocityValue; // 0x2B
     u8 unkCmd0C[2]; // 0x2C
-    u16 unkCmd0CParam; // 0x2E
+    u32 unkCmd0CParam; // 0x2E
     u8 end[2]; // 0x30
 };
 
@@ -302,7 +302,7 @@ struct MusicPlayerTrack
     struct SoundChannel *chan;
     struct ToneData tone;
     u8 gap[10];
-    u16 unk_3A;
+    u32 unk_3A;
     u32 unk_3C;
     u8 *cmdPtr;
     u8 *patternStack[3];
@@ -331,13 +331,13 @@ struct MusicPlayerInfo
     u32 clock;
     u8 gap[8];
     u8 *memAccArea;
-    u16 tempoD;
-    u16 tempoU;
-    u16 tempoI;
-    u16 tempoC;
-    u16 fadeOI;
-    u16 fadeOC;
-    u16 fadeOV;
+    u32 tempoD;
+    u32 tempoU;
+    u32 tempoI;
+    u32 tempoC;
+    u32 fadeOI;
+    u32 fadeOC;
+    u32 fadeOV;
     struct MusicPlayerTrack *tracks;
     struct ToneData *tone;
     u32 ident;
@@ -350,14 +350,14 @@ struct MusicPlayer
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
     u8 numTracks;
-    u16 unk_A;
+    u32 unk_A;
 };
 
 struct Song
 {
     struct SongHeader *header;
-    u16 ms;
-    u16 me;
+    u32 ms;
+    u32 me;
 };
 
 extern const struct MusicPlayer gMPlayTable[];
@@ -389,7 +389,7 @@ extern struct CgbChannel gCgbChans[];
 
 extern const u8 gScaleTable[];
 extern const u32 gFreqTable[];
-extern const u16 gPcmSamplesPerVBlankTable[];
+extern const u32 gPcmSamplesPerVBlankTable[];
 
 extern const u8 gCgbScaleTable[];
 extern const s16 gCgbFreqTable[];
@@ -402,7 +402,7 @@ extern const struct ToneData voicegroup000;
 extern char gNumMusicPlayers[];
 extern char gMaxLines[];
 
-#define NUM_MUSIC_PLAYERS ((u16)gNumMusicPlayers)
+#define NUM_MUSIC_PLAYERS ((u32)gNumMusicPlayers)
 #define MAX_LINES ((u32)gMaxLines)
 
 u32 umul3232H32(u32 multiplier, u32 multiplicand);
@@ -417,7 +417,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
 void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
 void FadeOutBody(struct MusicPlayerInfo *mplayInfo);
 void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track);
-void MPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed);
+void MPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u32 speed);
 void ClearChain(void *x);
 void Clear64byte(void *addr);
 void SoundInit(struct SoundInfo *soundInfo);
@@ -434,19 +434,19 @@ void SampleFreqSet(u32 freq);
 void m4aSoundVSyncOn(void);
 void m4aSoundVSyncOff(void);
 
-void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
-void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
-void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
-void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s8 pan);
+void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u32 tempo);
+void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u32 volume);
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s16 pitch);
+void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s8 pan);
 void ClearModM(struct MusicPlayerTrack *track);
-void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 modDepth);
-void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 lfoSpeed);
+void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 modDepth);
+void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 lfoSpeed);
 
 struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone);
 void SetPokemonCryVolume(u8 val);
 void SetPokemonCryPanpot(s8 val);
 void SetPokemonCryPitch(s16 val);
-void SetPokemonCryLength(u16 val);
+void SetPokemonCryLength(u32 val);
 void SetPokemonCryRelease(u8 val);
 void SetPokemonCryProgress(u32 val);
 bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);

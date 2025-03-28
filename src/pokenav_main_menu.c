@@ -23,9 +23,9 @@ struct Pokenav_MainMenu
     struct Sprite *spinningPokenav;
     struct Sprite *leftHeaderSprites[2];
     struct Sprite *submenuLeftHeaderSprites[2];
-    ALIGNED(4) u8 tilemapBuffer[BG_SCREEN_SIZE];
-    ALIGNED(4) u8 leftHeaderMenuBuffer[0x1000];
-    ALIGNED(4) u8 leftHeaderSubMenuBuffer[0x1000];
+    ALIGNED(4) u32 tilemapBuffer[BG_SCREEN_SIZE];
+    ALIGNED(4) u32 leftHeaderMenuBuffer[0x1000];
+    ALIGNED(4) u32 leftHeaderSubMenuBuffer[0x1000];
 };
 
 // This struct uses a 32bit tag, and doesn't have a size field.
@@ -85,7 +85,7 @@ static const struct WindowTemplate sHelpBarWindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
+static const u32 *const sHelpBarTexts[HELPBAR_COUNT] =
 {
     [HELPBAR_NONE]                  = COMPOUND_STRING("{CLEAR 0x80}"),
     [HELPBAR_MAP_ZOOMED_OUT]        = COMPOUND_STRING("{A_BUTTON}ZOOM {B_BUTTON}CANCEL"),
@@ -103,7 +103,7 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
     [HELPBAR_RIBBONS_CHECK]         = COMPOUND_STRING("{B_BUTTON}CANCEL"),
 };
 
-static const u8 sHelpBarTextColors[3] =
+static const u32 sHelpBarTextColors[3] =
 {
     TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
 };
@@ -581,7 +581,7 @@ static void DrawHelpBar(u32 windowId)
 static void InitPokenavMainMenuResources(void)
 {
     s32 i;
-    u8 spriteId;
+    u32 spriteId;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     for (i = 0; i < ARRAY_COUNT(sSpinningPokenavSpriteSheet); i++)
