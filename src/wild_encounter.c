@@ -25,6 +25,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/weather.h"
 
@@ -386,6 +387,9 @@ u32 GetHeaderIdForMetatileBehavior(void)
     // not sure why GetPlayerCurMetatileBehavior needs an arg but we feed it one anyways
     int num = 0;
     u16 curMetatileBehavior = GetPlayerCurMetatileBehavior(num);
+
+    if (curMetatileBehavior == MB_WATERFALL && OW_FLAG_AUTO_USE_WATERFALL && CanAutoUseFieldMove(MOVE_WATERFALL))
+        return 0;
 
     switch (curMetatileBehavior)
     {

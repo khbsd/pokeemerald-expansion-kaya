@@ -28,6 +28,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
@@ -436,6 +437,9 @@ static u8 GetForcedMovementByMetatileBehavior(void)
     {
         u8 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
 
+        if (metatileBehavior == MB_WATERFALL && CanAutoUseFieldMove(MOVE_WATERFALL))
+            return 0;
+
         for (i = 0; i < NUM_FORCED_MOVEMENTS; i++)
         {
             if (sForcedMovementTestFuncs[i](metatileBehavior))
@@ -483,7 +487,7 @@ static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
     if (collision)
     {
         ForcedMovement_None();
-        if (collision < COLLISION_STOP_SURFING)
+        if (collision < COLLISION_STOP_SURFING || collision == COLLISION_WATERFALL)
         {
             return FALSE;
         }
@@ -740,6 +744,9 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
 {
     u8 collision = GetCollisionAtCoords(objectEvent, x, y, direction);
 
+    if (collision == COLLISION_WATERFALL)
+        return COLLISION_NONE;
+
     if (collision == COLLISION_ELEVATION_MISMATCH && CanStopSurfing(x, y, direction))
         return COLLISION_STOP_SURFING;
 
@@ -765,12 +772,7 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
         AutoUseSurf();
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
-    {
         AutoUseStrength(GetObjectEventIdByXY(x, y), direction);
-    }
-        
-    if (IsPlayerFacingClimbableWaterfall() && IsPlayerSurfingNorth())
-        AutoUseWaterfall();
 
     return collision;
 }
@@ -1409,8 +1411,8 @@ bool8 IsPlayerFacingClimbableWaterfall(void)
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
     return (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) 
-        && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y))
-        && IsPlayerSurfingNorth());
+        && (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y))
+        || MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(playerObjEvent->currentCoords.x, playerObjEvent->currentCoords.y))));
 }
 
 void ClearPlayerAvatarInfo(void)

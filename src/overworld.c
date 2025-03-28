@@ -1202,7 +1202,7 @@ void AutoUseWaterfall(void)
 {
     if (CanAutoUseFieldMove(MOVE_WATERFALL) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (!FlagGet(FLAG_SYS_USE_WATERFALL))
+        /*if (!FlagGet(FLAG_SYS_USE_WATERFALL))
         {
             FlagSet(FLAG_SYS_USE_WATERFALL);
             gSkipShowMonAnim = TRUE;
@@ -1210,7 +1210,9 @@ void AutoUseWaterfall(void)
         else
             gSkipShowMonAnim = FALSE;
 
-        FieldCallback_Waterfall();
+        FieldCallback_Waterfall();*/
+
+        
     }
 }
 

@@ -1,6 +1,8 @@
 #include "global.h"
+#include "overworld.h"
 #include "metatile_behavior.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/moves.h"
 
 #define TILE_FLAG_HAS_ENCOUNTERS (1 << 0)
 #define TILE_FLAG_SURFABLE       (1 << 1)
@@ -39,7 +41,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_DEEP_WATER]                         = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_WATER_2]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_DEEP_WATER_3]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
-    [MB_WATERFALL]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
+    [MB_WATERFALL]                          = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SOOTOPOLIS_DEEP_WATER]              = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_OCEAN_WATER]                        = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_OCEAN_WATER_2]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
@@ -380,7 +382,7 @@ bool8 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
      || (metatileBehavior >= MB_EASTWARD_CURRENT && metatileBehavior <= MB_SOUTHWARD_CURRENT)
      || metatileBehavior == MB_MUDDY_SLOPE
      || metatileBehavior == MB_CRACKED_FLOOR
-     || metatileBehavior == MB_WATERFALL
+     || (metatileBehavior == MB_WATERFALL && !CanAutoUseFieldMove(MOVE_WATERFALL))
      || metatileBehavior == MB_ICE
      || metatileBehavior == MB_SECRET_BASE_JUMP_MAT
      || metatileBehavior == MB_SECRET_BASE_SPIN_MAT)
@@ -1205,6 +1207,7 @@ bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
      || metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER
      || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
+     || (metatileBehavior == MB_WATERFALL && CanAutoUseFieldMove(MOVE_WATERFALL))
      || (metatileBehavior == MB_EASTWARD_CURRENT
       || metatileBehavior == MB_WESTWARD_CURRENT
       || metatileBehavior == MB_NORTHWARD_CURRENT

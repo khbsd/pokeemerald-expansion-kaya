@@ -53,6 +53,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/moves.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
@@ -6323,6 +6324,15 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
     #endif
 
     objectEvent->directionOverwrite = DIR_NONE;
+
+    if (MetatileBehavior_IsSurfableFishableWater(currentBehavior) 
+        && MetatileBehavior_IsWaterfall(nextBehavior)
+        && !CanAutoUseFieldMove(MOVE_WATERFALL))
+        return COLLISION_IMPASSABLE;
+    else if (MetatileBehavior_IsSurfableFishableWater(currentBehavior) 
+        && MetatileBehavior_IsWaterfall(nextBehavior)
+        && CanAutoUseFieldMove(MOVE_WATERFALL))
+        return COLLISION_WATERFALL;
 
     //sideways stairs checks
     if (MetatileBehavior_IsSidewaysStairsLeftSideTop(nextBehavior) && dir == DIR_EAST)
