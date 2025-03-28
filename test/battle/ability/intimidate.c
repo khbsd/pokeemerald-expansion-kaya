@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
-SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch out", s16 damage)
+SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch out", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch ou
     }
 }
 
-SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 damage)
+SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }

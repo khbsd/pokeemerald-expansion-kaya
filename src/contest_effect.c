@@ -53,8 +53,8 @@ static void JamByMoveCategory(u32);
 static bool32 CanUnnerveContestant(u32);
 static u32 WasAtLeastOneOpponentJammed(void);
 static void JamContestant(u32, u32);
-static s16 RoundTowardsZero(s16);
-static s16 RoundUp(s16);
+static s32 RoundTowardsZero(s32);
+static s32 RoundUp(s32);
 
 #include "data/contest_moves.h"
 
@@ -395,8 +395,8 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     u32 contestantIds[5];
     int i;
     int numAfter;
-    s16 oddsMod[CONTESTANT_COUNT];
-    s16 odds[CONTESTANT_COUNT];
+    s32 oddsMod[CONTESTANT_COUNT];
+    s32 odds[CONTESTANT_COUNT];
 
     memset(contestantIds, CONTESTANT_NONE, ARRAY_COUNT(contestantIds));
     for (i = 0, numAfter = 0; i < CONTESTANT_COUNT; i++)
@@ -570,7 +570,7 @@ static void ContestEffect_AppealAsGoodAsPrevOnes(void)
 // Makes the appeal as good as the one before it.
 static void ContestEffect_AppealAsGoodAsPrevOne(void)
 {
-    s16 appeal = 0;
+    s32 appeal = 0;
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
@@ -614,7 +614,7 @@ static void ContestEffect_BetterWhenLater(void)
 static void ContestEffect_QualityDependsOnTiming(void)
 {
     u32 rval = Random() % 10;
-    s16 appeal;
+    s32 appeal;
 
     if (rval < 3)
     {
@@ -931,7 +931,7 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
 // The appeal works best the more the crowd is excited.
 static void ContestEffect_BetterWhenAudienceExcited(void)
 {
-    s16 appeal;
+    s32 appeal;
 
     if (eContest.applauseLevel == 0)
     {
@@ -1022,7 +1022,7 @@ static bool32 CanUnnerveContestant(u32 i)
 
 static bool32 WasAtLeastOneOpponentJammed(void)
 {
-    s16 jamBuffer[CONTESTANT_COUNT] = {0};
+    s32 jamBuffer[CONTESTANT_COUNT] = {0};
     int i;
 
     for (i = 0; eContestAppealResults.jamQueue[i] != CONTESTANT_NONE; i++)
@@ -1070,9 +1070,9 @@ static void JamContestant(u32 i, u32 jam)
     eContestantStatus[i].jam += jam;
 }
 
-static s16 RoundTowardsZero(s16 score)
+static s32 RoundTowardsZero(s32 score)
 {
-    s16 absScore = abs(score) % 10;
+    s32 absScore = abs(score) % 10;
     if (score < 0)
     {
         if (absScore != 0)
@@ -1085,9 +1085,9 @@ static s16 RoundTowardsZero(s16 score)
     return score;
 }
 
-static s16 RoundUp(s16 score)
+static s32 RoundUp(s32 score)
 {
-    s16 absScore = abs(score) % 10;
+    s32 absScore = abs(score) % 10;
     if (absScore != 0)
         score += 10 - absScore;
     return score;

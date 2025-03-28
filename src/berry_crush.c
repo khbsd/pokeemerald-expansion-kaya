@@ -251,10 +251,10 @@ struct BerryCrushPlayerCoords
     u32 playerId;
     u32 windowGfxX;
     u32 windowGfxY;
-    s16 impactXOffset;
-    s16 impactYOffset;
-    s16 berryXOffset;
-    s16 berryXDest;
+    s32 impactXOffset;
+    s32 impactYOffset;
+    s32 berryXOffset;
+    s32 berryXDest;
 };
 
 struct BerryCrushGame_Gfx
@@ -263,9 +263,9 @@ struct BerryCrushGame_Gfx
     u32 vibrationIdx;
     u32 numVibrations;
     bool32 vibrating;
-    s16 minutes;
-    s16 secondsInt;
-    s16 secondsFrac;
+    s32 minutes;
+    s32 secondsInt;
+    s32 secondsFrac;
     const struct BerryCrushPlayerCoords *playerCoords[MAX_RFU_PLAYERS];
     struct Sprite *coreSprite;
     struct Sprite *impactSprites[MAX_RFU_PLAYERS];
@@ -295,8 +295,8 @@ struct BerryCrushGame
     u32 gameState;
     u32 playAgainState;
     u32 pressingSpeed;
-    s16 targetAPresses;
-    s16 totalAPresses;
+    s32 targetAPresses;
+    s32 totalAPresses;
     s32 powder;
     s32 targetDepth;
     u32 newDepth;
@@ -308,12 +308,12 @@ struct BerryCrushGame
     u32 sparkleAmount:3;
     u32 leaderTimer;
     u32 timer;
-    s16 depth;
-    s16 vibration;
-    s16 bigSparkleCounter;
-    s16 numBigSparkles;
-    s16 numBigSparkleChecks;
-    s16 sparkleCounter;
+    s32 depth;
+    s32 vibration;
+    s32 bigSparkleCounter;
+    s32 numBigSparkles;
+    s32 numBigSparkleChecks;
+    s32 sparkleCounter;
     u32 commandArgs[12];
     u32 sendCmd[6];
     u32 recvCmd[7];
@@ -1371,9 +1371,9 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
 {
     u32 i;
     u32 spriteId;
-    s16 distance, var1;
-    s16 *data;
-    s16 speed;
+    s32 distance, var1;
+    s32 *data;
+    s32 speed;
     u32 var2;
 
     for (i = 0; i < game->playerCount; i++)
@@ -1412,7 +1412,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
 
 static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
 {
-    s16 *data = sprite->data;
+    s32 *data = sprite->data;
 
     sYSpeed += sYAccel;
     sprite->y2 += sYSpeed >> 8;
@@ -1569,7 +1569,7 @@ static void FramesToMinSec(struct BerryCrushGame_Gfx *gfx, u32 frames)
 {
     u32 i = 0;
     u32 fractionalFrames = 0;
-    s16 r3 = 0;
+    s32 r3 = 0;
 
     gfx->minutes = frames / (60 * 60);
     gfx->secondsInt = (frames % (60 * 60)) / 60;
@@ -1796,7 +1796,7 @@ static void Task_ShowRankings(u32 taskId)
 {
     u32 i = 0, j, xPos, yPos;
     u32 score = 0;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -2089,7 +2089,7 @@ static void SpriteCB_Sparkle_End(struct Sprite *sprite)
 
 static void SpriteCB_Sparkle(struct Sprite *sprite)
 {
-    s16 *data = sprite->data;
+    s32 *data = sprite->data;
 
     sYSpeed += sYAccel;
     sprite->y2 += sYSpeed >> 8;
@@ -2111,8 +2111,8 @@ static void SpriteCB_Sparkle(struct Sprite *sprite)
 
 static void SpriteCB_Sparkle_Init(struct Sprite *sprite)
 {
-    s16 *data = sprite->data;
-    s16 xMult, xDiv;
+    s32 *data = sprite->data;
+    s32 xMult, xDiv;
     s32 var;
     u32 zero = 0;
 
@@ -2814,7 +2814,7 @@ static void RecvLinkData(struct BerryCrushGame *game)
     memcpy(game->recvCmd, gRecvCmds[0], sizeof(game->recvCmd));
     linkState = (struct BerryCrushGame_LinkState *)&game->recvCmd;
     game->depth = linkState->depth;
-    game->vibration = (s16)linkState->vibration;
+    game->vibration = (s32)linkState->vibration;
     game->timer = linkState->timer;
     UpdateInputEffects(game, &(game->gfx));
 

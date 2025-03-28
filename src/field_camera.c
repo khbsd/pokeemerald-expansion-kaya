@@ -34,8 +34,8 @@ static void DrawMetatile(s32, const u32 *, u32);
 static void CameraPanningCB_PanAhead(void);
 
 static struct FieldCameraOffset sFieldCameraOffset;
-static s16 sHorizontalCameraPan;
-static s16 sVerticalCameraPan;
+static s32 sHorizontalCameraPan;
+static s32 sVerticalCameraPan;
 static bool32 sBikeCameraPanFlag;
 static void (*sFieldCameraPanningCallback)(void);
 
@@ -85,7 +85,7 @@ void FieldUpdateBgTilemapScroll(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, r4);
 }
 
-void GetCameraOffsetWithPan(s16 *x, s16 *y)
+void GetCameraOffsetWithPan(s32 *x, s32 *y)
 {
     *x = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
     *y = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
@@ -439,7 +439,7 @@ void SetCameraPanningCallback(void (*callback)(void))
     sFieldCameraPanningCallback = callback;
 }
 
-void SetCameraPanning(s16 horizontal, s16 vertical)
+void SetCameraPanning(s32 horizontal, s32 vertical)
 {
     sHorizontalCameraPan = horizontal;
     sVerticalCameraPan = vertical + 32;

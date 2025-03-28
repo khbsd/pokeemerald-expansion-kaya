@@ -75,7 +75,7 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not trigger if Pokemon faint to indirect dam
 
 DOUBLE_BATTLE_TEST("Grim Neigh does not increase damage done by the same move that causes another Pokemon to faint")
 {
-    s16 damage[2];
+    s32 damage[2];
     u32 species = 0, ability = 0, abilityPopUp = 0;
     PARAMETRIZE { species = SPECIES_SPECTRIER;            ability = ABILITY_GRIM_NEIGH;          abilityPopUp = ABILITY_GRIM_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_SHADOW; ability = ABILITY_AS_ONE_SHADOW_RIDER; abilityPopUp = ABILITY_GRIM_NEIGH; }

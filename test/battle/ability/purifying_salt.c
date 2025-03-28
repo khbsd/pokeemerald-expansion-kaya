@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 damage)
+SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_STURDY; }
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 dam
     }
 }
 
-SINGLE_BATTLE_TEST("Purifying Salt halves damage from dynamic Ghost-type moves", s16 damage)
+SINGLE_BATTLE_TEST("Purifying Salt halves damage from dynamic Ghost-type moves", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_STURDY; }

@@ -721,7 +721,7 @@ static void ReinitDecorationCategoriesWindow(u32 taskId)
 static void PrintDecorationCategoryMenuItems(u32 taskId)
 {
     u32 i;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 windowId = sDecorMenuWindowIds[WINDOW_DECORATION_CATEGORIES];
     bool32 isPlayerRoom = sDecorationContext.isPlayerRoom;
     bool32 shouldDisable = FALSE;
@@ -881,7 +881,7 @@ static void InitDecorationItemsMenuScrollAndCursor2(void)
 
 static void PrintDecorationItemMenuItems(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     u32 i;
 
     data = gTasks[taskId].data;
@@ -965,7 +965,7 @@ static void AddDecorationItemsWindow(u32 taskId)
 
 static void InitDecorationItemsWindow(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     AddDecorationWindow(WINDOW_DECORATION_CATEGORY_ITEMS);
     ShowDecorationCategorySummaryWindow(sCurDecorationCategory);
     sDecorationItemsMenu = AllocZeroed(sizeof(*sDecorationItemsMenu));
@@ -986,7 +986,7 @@ static void ShowDecorationItemsWindow(u32 taskId)
 
 static void HandleDecorationItemsMenuInput(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     s32 input;
 
     data = gTasks[taskId].data;
@@ -1166,7 +1166,7 @@ static void ReturnToDecorationItemsAfterInvalidSelection(u32 taskId)
 
 static void DecorationItemsMenuAction_Cancel(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     RemoveDecorationItemsScrollIndicators();
     RemoveDecorationItemsOtherWindows();
     DestroyListMenuTask(tMenuTaskId, NULL, NULL);
@@ -1207,7 +1207,7 @@ static u32 GetDecorationElevation(u32 decoration, u32 tileIndex)
 static void ShowDecorationOnMap_(u32 mapX, u32 mapY, u32 decWidth, u32 decHeight, u32 decoration)
 {
     u32 i, j;
-    s16 x, y;
+    s32 x, y;
     u32 attributes;
     u32 impassableFlag;
     u32 overlapsWall;
@@ -1491,7 +1491,7 @@ static bool32 IsSecretBaseTrainerSpot(u32 behaviorAt, u32 layerType)
 }
 
 // Can't place decoration where the player was standing when they interacted with the PC
-static bool32 IsntInitialPosition(u32 taskId, s16 x, s16 y, u32 layerType)
+static bool32 IsntInitialPosition(u32 taskId, s32 x, s32 y, u32 layerType)
 {
     if (x == gTasks[taskId].tInitialX + MAP_OFFSET
      && y == gTasks[taskId].tInitialY + MAP_OFFSET
@@ -1522,8 +1522,8 @@ static bool32 CanPlaceDecoration(u32 taskId, const struct Decoration *decoration
     u32 layerType;
     u32 mapY;
     u32 mapX;
-    s16 curY;
-    s16 curX;
+    s32 curY;
+    s32 curX;
     mapY = gTasks[taskId].tDecorHeight;
     mapX = gTasks[taskId].tDecorWidth;
 
@@ -1763,7 +1763,7 @@ static void c1_overworld_prev_quest(u32 taskId)
 
 static void Task_InitDecorationItemsWindow(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     switch (tState)
     {
     case 0:
@@ -1798,7 +1798,7 @@ static void FieldCB_InitDecorationItemsWindow(void)
 
 static bool32 ApplyCursorMovement_IsInvalid(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (sDecorationLastDirectionMoved == DIR_SOUTH && tCursorY - tDecorHeight - 6 < 0)
     {
         tCursorY++;
@@ -1844,7 +1844,7 @@ static void ResetCursorMovement(void)
 
 static void Task_SelectLocation(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!gSprites[sDecor_CameraSpriteObjectIdx1].data[4])
     {
         if (tButton == A_BUTTON)
@@ -2136,7 +2136,7 @@ static u32 AddDecorationIconObjectFromObjectEvent(u32 tilesTag, u32 paletteTag, 
     return spriteId;
 }
 
-u32 AddDecorationIconObject(u32 decor, s16 x, s16 y, u32 priority, u32 tilesTag, u32 paletteTag)
+u32 AddDecorationIconObject(u32 decor, s32 x, s32 y, u32 priority, u32 tilesTag, u32 paletteTag)
 {
     u32 spriteId;
 
@@ -2323,7 +2323,7 @@ static void SetUpPuttingAwayDecorationPlayerAvatar(void)
 
 static void Task_ContinuePuttingAwayDecorations(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
 
     data = gTasks[taskId].data;
     switch (tState)
@@ -2384,7 +2384,7 @@ static void AttemptCancelPutAwayDecoration(u32 taskId)
 
 static void AttemptPutAwayDecoration_(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     u32 behavior;
 
     AttemptMarkDecorUnderCursorForRemoval(taskId);
@@ -2661,7 +2661,7 @@ static void Task_StopPuttingAwayDecorations(u32 taskId)
 
 static void Task_ReinitializeDecorationMenuHandler(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     switch (tState)
     {
     case 0:

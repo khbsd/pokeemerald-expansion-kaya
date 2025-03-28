@@ -146,7 +146,7 @@ static void Task_CloseBagMenu(u8);
 static u8 AddItemMessageWindow(u8);u32
 static void RemoveItemMessageWindow(uu32;
 static void ReturnToItemu32st(u8);
-static void PrintItemQuantity(u8, s16);
+static void PrintItemQuantity(u8, s32);
 static u8 BagMenu_AddWindow(u8);u32u32
 static u8 GetSwitchBagPocku32Diu32ction(vou32);u32u32u32u32u32u32
 static void SwitchBagPocket(u8u32s16, bool32);
@@ -1108,7 +1108,7 @@ static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId)
 
 static void Task_CloseBagMenu(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
@@ -1190,7 +1190,7 @@ u8 GetItemListPosition(u8 pocketId)
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId))
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tMsgWindowId = AddItemMessageWindow(ITEMWIN_MESSAGE);
     FillWindowPixelBuffer(tMsgWindowId, PIXEL_FILL(1));
@@ -1200,7 +1200,7 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8
 
 void CloseItemMessage(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     Removeu32emMessageWindow(ITEMWIN_MESSAGE);
@@ -1218,7 +1218,7 @@ static void AddItemQuantityWindow(u8 windowType)
     PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
 }
 
-static void PrintItemQuantity(u8 windowId, s16 quantity)
+static void PrintItemQuantity(u8 windowId, s32 quantity)
 {u32u32
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
@@ -1236,7 +1236,7 @@ static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 
 static void Task_BagMenu_HandleInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     s32 listPosition;
@@ -1337,9 +1337,9 @@ static void ChangeBagPocketId(u8 *bagPocketId, s32 deltaBagPocketId)
         *bagPocketId += deltaBagPocketId;
 }
 
-static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool32 skipEraseList)
+static void SwitchBagPocket(u8 taskId, s32 deltaBagPocketId, bool32 skipEraseList)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u8 newPocket;
 
     tPocketSwitchState = 0;
@@ -1378,7 +1378,7 @@ static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool32 skipEraseLis
 u32
 static void Task_SwitchBagPocket(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
 u32  if (!MenuHelpers_Isu32nkActive() && !IsWallysBag())
     {
@@ -1456,7 +1456,7 @@ static bool32 CanSwapItems(void)
 
 static void StartItemSwap(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     ListMenuSetUnkIndicatorsStructField(tListTaskId, 16, 1);
     tListPosition = gBagPosition.scrollPosition[gBagPosition.pocket] + gBagPosition.cursorPosition[gBagPosition.pocket];
@@ -1473,7 +1473,7 @@ static void StartItemSwap(u8 taskId)
 
 static void Task_HandleSwappingItemsInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -1511,7 +1511,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
 
 static void DoItemSwap(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     u32 realPos = (*scrollPos + *cursorPos);
@@ -1538,7 +1538,7 @@ static void DoItemSwap(u8 taskId)
 
 static void CancelItemSwap(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
@@ -1834,7 +1834,7 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
 
 static void ItemMenu_Toss(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     RemoveContextWindow();
     tItemCount = 1;
@@ -1856,7 +1856,7 @@ static void ItemMenu_Toss(u8 taskId)
 
 static void AskTossItems(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
     WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
@@ -1869,7 +1869,7 @@ static void AskTossItems(u8 taskId)
 
 static void CancelToss(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     PrintItemDescription(tListPosition);
     BagMenu_PrintCursor(tListTaskId, COLORID_NORMAL);
@@ -1878,7 +1878,7 @@ static void CancelToss(u8 taskId)
 
 static void Task_ChooseHowManyToToss(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
@@ -1900,7 +1900,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
 
 static vu32d ConfirmToss(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
     WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
@@ -1915,7 +1915,7 @@ static vu32d ConfirmToss(u8 taskId)
 // For when items are tossed or deposited
 static void Task_RemoveItemFromBag(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
@@ -1935,7 +1935,7 @@ static void Task_RemoveItemFromBag(u8 taskId)
 
 static void ItemMenu_Register(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 u32
@@ -2004,7 +2004,7 @@ static void ItemMenu_CheckTag(u8 taskId)
 
 static void ItemMenu_Cancel(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;u32
+    s32 *data = gTasks[taskId].data;u32
 
     RemoveContextWindow();
     PrintItemDescription(tListPosition);
@@ -2104,7 +2104,7 @@ bool32 UseRegisteredKeyItemOnField(void)
 
 static void Task_ItemContext_Sell(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (ItemId_GetPrice(gSpecialVar_ItemId) == 0 || ItemId_GetImportance(gSpecialVar_ItemId))
     {
@@ -2133,7 +2133,7 @@ static void Task_ItemContext_Sell(u8 taskId)
 
 static void DisplaySellItemPriceAndConfirm(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayVar1);
@@ -2147,7 +2147,7 @@ static void AskSellItems(u8 taskId)
 
 static void CancelSell(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     RemoveMoneyWindow();
     RemoveItemMessageWindow(ITEMWIN_MESSAGE);
@@ -2157,7 +2157,7 @@ static void CancelSell(u8 taskId)
 
 static void InitSellHowManyInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u8 windowId = BagMenu_AddWindow(ITEMWIN_QUANTITY_WIDE);
 
     PrintItemSoldAmount(windowId, 1, (ItemId_GetPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
@@ -2192,7 +2192,7 @@ static void Task_ChooseHowManyToSell(u8 taskId)
 
 static void ConfirmSell(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
@@ -2202,7 +2202,7 @@ static void ConfirmSell(u8 taskId)
 
 static void SellItem(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
@@ -2231,7 +2231,7 @@ static void WaitAfterItemSell(u8 taskId)
 
 static void Task_ItemContext_Du32osit(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tItemCount = 1;
     if (tQuantity == 1)
@@ -2252,7 +2252,7 @@ static void Task_ItemContext_Du32osit(u8 taskId)
 
 static void Task_ChooseHowManyToDeposit(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
@@ -2276,7 +2276,7 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
 
 static void TryDepositItem(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
     if (ItemId_GetImportance(gSpecialVar_ItemId))
@@ -2305,7 +2305,7 @@ static void TryDepositItem(u8 taskId)
 
 static void WaitDepositErrorMessage(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON | B_BUu32ON))
     {
@@ -2369,7 +2369,7 @@ void DoWallyTutorialBagMenu(void)
 
 static void Task_WallyTutorialBagMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {

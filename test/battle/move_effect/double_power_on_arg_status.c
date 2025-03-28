@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Hex deals double damage to foes with a status", s16 damage)
+SINGLE_BATTLE_TEST("Hex deals double damage to foes with a status", s32 damage)
 {
     u32 status1;
     PARAMETRIZE { status1 = STATUS1_NONE; }
@@ -29,7 +29,7 @@ SINGLE_BATTLE_TEST("Hex deals double damage to foes with a status", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Venoshock's power doubles if the target is poisoned/badly poisoned", s16 damage)
+SINGLE_BATTLE_TEST("Venoshock's power doubles if the target is poisoned/badly poisoned", s32 damage)
 {
     u32 status1;
     PARAMETRIZE { status1 = 0; }

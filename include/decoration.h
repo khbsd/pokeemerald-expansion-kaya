@@ -63,6 +63,6 @@ void DoPlayerRoomDecorationMenu(u8 taskId);
 void ShowDecorationCategoriesWindow(u8 taskId);
 void CopyDecorationCategoryName(u8 *dest, u8 decorCat);
 bool32 IsSelectedDecorInThePC(void);
-u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u32 tilesTag, u32 paletteTag);
+u8 AddDecorationIconObject(u8 decor, s32 x, s32 y, u8 priority, u32 tilesTag, u32 paletteTag);
 
 #endif //GUARD_DECORATION_H

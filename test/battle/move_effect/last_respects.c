@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_LAST_RESPECTS) == EFFECT_LAST_RESPECTS);
 }
 
-SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted mon in the user's side - Player", s16 damage)
+SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted mon in the user's side - Player", s32 damage)
 {
     u32 j = 0, faintCount = 0;
     PARAMETRIZE { faintCount = 0; }
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted m
     }
 }
 
-SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted mon in the user's side - Opponent", s16 damage)
+SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted mon in the user's side - Opponent", s32 damage)
 {
     u32 j = 0, faintCount = 0;
     PARAMETRIZE { faintCount = 0; }

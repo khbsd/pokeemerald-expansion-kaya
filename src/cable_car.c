@@ -801,7 +801,7 @@ static void CreateCableCarSprites(void)
         OBJ_EVENT_GFX_PICNICKER,
         OBJ_EVENT_GFX_ZIGZAGOON_1
     };
-    s16 hikerCoords[2][2] = {
+    s32 hikerCoords[2][2] = {
         {   0,  80 }, // Going up
         { 240, 146 }  // Going down
     };

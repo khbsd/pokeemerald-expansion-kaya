@@ -266,8 +266,8 @@ void CheckPlayerHasSecretBase(void)
 
 static u32 GetSecretBaseTypeInFrontOfPlayer_(void)
 {
-    s16 x, y;
-    s16 behavior;
+    s32 x, y;
+    s32 behavior;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
@@ -298,9 +298,9 @@ void GetSecretBaseTypeInFrontOfPlayer(void)
     gSpecialVar_0x8007 = GetSecretBaseTypeInFrontOfPlayer_();
 }
 
-static void FindMetatileIdMapCoords(s16 *x, s16 *y, u32 metatileId)
+static void FindMetatileIdMapCoords(s32 *x, s32 *y, u32 metatileId)
 {
-    s16 i, j;
+    s32 i, j;
     const struct MapLayout *mapLayout = gMapHeader.mapLayout;
 
     for (j = 0; j < mapLayout->height; j++)
@@ -321,8 +321,8 @@ static void FindMetatileIdMapCoords(s16 *x, s16 *y, u32 metatileId)
 void ToggleSecretBaseEntranceMetatile(void)
 {
     u32 i;
-    s16 x, y;
-    s16 metatileId;
+    s32 x, y;
+    s32 metatileId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     metatileId = MapGridGetMetatileIdAt(x, y);
@@ -391,9 +391,9 @@ void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
             {
                 if (gSaveBlock1Ptr->secretBases[j].secretBaseId == events->bgEvents[bgId].bgUnion.secretBaseId)
                 {
-                    s16 x = events->bgEvents[bgId].x + MAP_OFFSET;
-                    s16 y = events->bgEvents[bgId].y + MAP_OFFSET;
-                    s16 tile_id = MapGridGetMetatileIdAt(x, y);
+                    s32 x = events->bgEvents[bgId].x + MAP_OFFSET;
+                    s32 y = events->bgEvents[bgId].y + MAP_OFFSET;
+                    s32 tile_id = MapGridGetMetatileIdAt(x, y);
                     for (i = 0; i < ARRAY_COUNT(sSecretBaseEntranceMetatiles); i++)
                     {
                         if (sSecretBaseEntranceMetatiles[i].closedMetatileId == tile_id)
@@ -470,7 +470,7 @@ static void EnterNewlyCreatedSecretBase_WaitFadeIn(u32 taskId)
 
 static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
 {
-    s16 x = 0, y = 0;
+    s32 x = 0, y = 0;
 
     LockPlayerFieldControls();
     HideMapNamePopUpWindow();
@@ -519,7 +519,7 @@ bool32 CurMapIsSecretBase(void)
 void InitSecretBaseAppearance(bool32 hidePC)
 {
     u32 secretBaseIdx;
-    s16 x, y = 0;
+    s32 x, y = 0;
     u32 *decorations;
     u32 *decorPos;
 
@@ -658,7 +658,7 @@ void SetSecretBaseOwnerGfxId(void)
 
 void SetCurSecretBaseIdFromPosition(const struct MapPosition *position, const struct MapEvents *events)
 {
-    s16 i;
+    s32 i;
     for (i = 0; i < events->bgEventCount; i++)
     {
         if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE
@@ -825,7 +825,7 @@ static void ClosePlayerSecretBaseEntrance(void)
 {
     u32 i;
     u32 j;
-    s16 metatileId;
+    s32 metatileId;
     const struct MapEvents *events = gMapHeader.events;
 
     for (i = 0; i < events->bgEventCount; i++)
@@ -866,7 +866,7 @@ void MoveOutOfSecretBaseFromOutside(void)
 
 static u32 GetNumRegisteredSecretBases(void)
 {
-    s16 i;
+    s32 i;
     u32 count = 0;
     for (i = 1; i < SECRET_BASES_COUNT; i++)
     {
@@ -937,7 +937,7 @@ static void Task_ShowSecretBaseRegistryMenu(u32 taskId)
 
 static void BuildRegistryMenuItems(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     u32 i;
     u32 count;
 
@@ -1197,11 +1197,11 @@ void GetSecretBaseOwnerAndState(void)
 
 void SecretBasePerStepCallback(u32 taskId)
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 behavior;
     u32 tileId;
-    s16 *data;
+    s32 *data;
 
     data = gTasks[taskId].data;
     switch (tState)
@@ -1393,9 +1393,9 @@ static bool32 SecretBasesBelongToSamePlayer(struct SecretBase *secretBase1, stru
     return FALSE;
 }
 
-static s16 GetSecretBaseIndexFromId(u32 secretBaseId)
+static s32 GetSecretBaseIndexFromId(u32 secretBaseId)
 {
-    s16 i;
+    s32 i;
     for (i = 0; i < SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == secretBaseId)
@@ -1407,7 +1407,7 @@ static s16 GetSecretBaseIndexFromId(u32 secretBaseId)
 
 static u32 FindAvailableSecretBaseIndex(void)
 {
-    s16 i;
+    s32 i;
     for (i = 1; i < SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == 0)
@@ -1419,7 +1419,7 @@ static u32 FindAvailableSecretBaseIndex(void)
 
 static u32 FindUnregisteredSecretBaseIndex(void)
 {
-    s16 i;
+    s32 i;
     for (i = 1; i < SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].registryStatus == UNREGISTERED && gSaveBlock1Ptr->secretBases[i].toRegister == FALSE)
@@ -1431,7 +1431,7 @@ static u32 FindUnregisteredSecretBaseIndex(void)
 
 static u32 TrySaveFriendsSecretBase(struct SecretBase *secretBase, u32 version, u32 language)
 {
-    s16 index;
+    s32 index;
 
     // Secret base has no location
     if (!secretBase->secretBaseId)
@@ -1887,7 +1887,7 @@ void DrewSecretBaseBattle(void)
 
 void CheckInteractedWithFriendsPosterDecor(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch (MapGridGetMetatileIdAt(x, y))
@@ -1915,7 +1915,7 @@ void CheckInteractedWithFriendsPosterDecor(void)
 
 void CheckInteractedWithFriendsFurnitureBottom(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch (MapGridGetMetatileIdAt(x, y))
@@ -1993,7 +1993,7 @@ void CheckInteractedWithFriendsFurnitureBottom(void)
 
 void CheckInteractedWithFriendsFurnitureMiddle(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch (MapGridGetMetatileIdAt(x, y))
@@ -2017,7 +2017,7 @@ void CheckInteractedWithFriendsFurnitureMiddle(void)
 
 void CheckInteractedWithFriendsFurnitureTop(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch (MapGridGetMetatileIdAt(x, y))
@@ -2063,7 +2063,7 @@ void CheckInteractedWithFriendsFurnitureTop(void)
 
 void CheckInteractedWithFriendsSandOrnament(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch ((int)MapGridGetMetatileIdAt(x, y))

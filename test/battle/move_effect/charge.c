@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Charge doubles the damage of the next Electric move of the user")
 {
-    s16 damage[2] = {0};
+    s32 damage[2] = {0};
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Charge doubles the damage of the next Electric move of the u
 
 SINGLE_BATTLE_TEST("Charge's effect is kept until the user uses an Electric move (Gen 9+)")
 {
-    s16 damage[2] = {0};
+    s32 damage[2] = {0};
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Charge's effect is kept until the user uses an Electric move
 
 SINGLE_BATTLE_TEST("Charge's effect is removed if the user fails using an Electric move (Gen 9+)")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Charge's effect is removed if the user fails using an Electr
 SINGLE_BATTLE_TEST("Charge's effect does not stack with Electromorphosis or Wind Power")
 {
     u32 species, ability;
-    s16 damage[2];
+    s32 damage[2];
 
     PARAMETRIZE { species = SPECIES_WATTREL; ability = ABILITY_WIND_POWER; }
     PARAMETRIZE { species = SPECIES_TADBULB; ability = ABILITY_ELECTROMORPHOSIS; }
@@ -104,7 +104,7 @@ SINGLE_BATTLE_TEST("Charge's effect does not stack with Electromorphosis or Wind
 
 SINGLE_BATTLE_TEST("Charge's effect is removed regardless if the next move is Electric or not (Gen 3-8)")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         ASSUME(GetMoveType(MOVE_TACKLE) != TYPE_ELECTRIC);
         ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
@@ -132,7 +132,7 @@ SINGLE_BATTLE_TEST("Charge's effect is removed regardless if the next move is El
 
 SINGLE_BATTLE_TEST("Charge will not expire if it flinches twice in a row")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
          ASSUME(GetMoveAdditionalEffectById(MOVE_IRON_HEAD, 0)->moveEffect == MOVE_EFFECT_FLINCH);
          PLAYER(SPECIES_WOBBUFFET);

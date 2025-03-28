@@ -984,7 +984,7 @@ static void AnimTask_ThrowBall_Step(u8 taskId)
 // Safari Zone throw / Wally's throw
 void AnimTask_ThrowBall_StandingTrainer(u8 taskId)
 {
-    s16 x, y;
+    s32 x, y;
     enum PokeBall ballId;
     u8 subpriority;
     u8 spriteId;
@@ -1214,7 +1214,7 @@ static void SpriteCB_Ball_Bounce(struct Sprite *sprite)
 static void SpriteCB_Ball_Bounce_Step(struct Sprite *sprite)
 {
     bool32 lastBounce;
-    s16 bounceCount;
+    s32 bounceCount;
 
     lastBounce = FALSE;
 
@@ -1741,8 +1741,8 @@ static void SpriteCB_Ball_Block(struct Sprite *sprite)
 // Poké Ball moves down off screen after being blocked. The x-speed oscillates.
 static void SpriteCB_Ball_Block_Step(struct Sprite *sprite)
 {
-    s16 dy = sprite->sDy + 0x800;
-    s16 dx = sprite->sDx + 0x680;
+    s32 dy = sprite->sDy + 0x800;
+    s32 dx = sprite->sDx + 0x680;
     sprite->x2 -= dx >> 8;
     sprite->y2 += dy >> 8;
     sprite->sDy = (sprite->sDy + 0x800) & 0xFF;
@@ -2464,7 +2464,7 @@ static void Task_ShinyStars(u8 taskId)
     u8 x, y;
     u8 spriteId;
     u32 timer;
-    s16 starIdx;
+    s32 starIdx;
     u8 pan;
 
     if (gTasks[taskId].tTimer < 60)

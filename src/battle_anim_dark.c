@@ -795,8 +795,8 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
 static void DoMementoShadowEffect(struct Task *task)
 {
     int var0, var1;
-    s16 var2;
-    s16 i;
+    s32 var2;
+    s32 i;
     int var4;
 
     var2 = task->data[5] - task->data[4];
@@ -814,7 +814,7 @@ static void DoMementoShadowEffect(struct Task *task)
         {
             if (i >= 0)
             {
-                s16 var3 = (var1 >> 8) - i;
+                s32 var3 = (var1 >> 8) - i;
                 gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = var3 + task->data[10];
             }
 

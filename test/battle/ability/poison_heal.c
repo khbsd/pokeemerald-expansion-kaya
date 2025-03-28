@@ -21,8 +21,8 @@ SINGLE_BATTLE_TEST("Poison Heal heals from (Toxic) Poison damage")
 
 SINGLE_BATTLE_TEST("Poison Heal heals from Toxic Poison damage are constant")
 {
-    s16 turnOneHit;
-    s16 turnTwoHit;
+    s32 turnOneHit;
+    s32 turnTwoHit;
 
     GIVEN {
         PLAYER(SPECIES_SHROOMISH) { Ability(ABILITY_POISON_HEAL); Status1(STATUS1_TOXIC_POISON);  HP(1), MaxHP(400); }

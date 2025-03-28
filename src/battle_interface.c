@@ -175,7 +175,7 @@ static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u
 static u8 *AddTextPrinterAndCreateWindowOnHealthboxToFit(const u8 *, u32, u32, u32, u32 *, u32);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
-static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
+static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s32 currHp, s32 maxHp);
 static void UpdateStatusIconInHealthbox(u8);
 
 static void TextIntoHealthboxObject(void *, u8 *, s32);
@@ -650,7 +650,7 @@ u32 WhichBattleCoords(u32 battlerId) // 0 - singles, 1 - doubles
 
 u8 CreateBattlerHealthboxSprites(u8 battlerId)
 {
-    s16 data6 = 0;
+    s32 data6 = 0;
     u8 healthboxLeftSpriteId, healthboxRightSpriteId;
     u8 healthbarSpriteId;
     struct Sprite *healthBarSpritePtr;
@@ -825,7 +825,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     UpdateIndicatorVisibilityAndType(healthboxSpriteId, FALSE);
 }
 
-static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
+static void UpdateSpritePos(u8 spriteId, s32 x, s32 y)
 {
     gSprites[spriteId].x = x;
     gSprites[spriteId].y = y;
@@ -873,7 +873,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
     }
 }
 
-void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
+void GetBattlerHealthboxCoords(u8 battler, s32 *x, s32 *y)
 {
     *x = 0, *y = 0;
 
@@ -906,7 +906,7 @@ void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
 
 void InitBattlerHealthboxCoords(u8 battler)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetBattlerHealthboxCoords(battler, &x, &y);
     UpdateSpritePos(gHealthboxSpriteIds[battler], x, y);
@@ -959,7 +959,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     RemoveWindowOnHealthbox(windowId);
 }
 
-static void PrintHpOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor, u32 rightTile, u32 leftTile)
+static void PrintHpOnHealthbox(u32 spriteId, s32 currHp, s32 maxHp, u32 bgColor, u32 rightTile, u32 leftTile)
 {
     u8 *windowTileData;
     u32 windowId, tilesCount, x;
@@ -988,7 +988,7 @@ static void PrintHpOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor,
 }
 
 // Note: this is only possible to trigger via debug, it was an unused GF function.
-static void UpdateOpponentHpTextDoubles(u32 healthboxSpriteId, u32 barSpriteId, s16 value, u8 maxOrCurrent)
+static void UpdateOpponentHpTextDoubles(u32 healthboxSpriteId, u32 barSpriteId, s32 value, u8 maxOrCurrent)
 {
     u8 text[32], *txtPtr;
     u32 i, var;
@@ -1034,7 +1034,7 @@ static void UpdateOpponentHpTextDoubles(u32 healthboxSpriteId, u32 barSpriteId, 
 }
 
 // Same with this one.
-static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 maxOrCurrent)
+static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s32 value, u32 maxOrCurrent)
 {
     u8 text[32];
     u32 var, i;
@@ -1060,7 +1060,7 @@ static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 ma
     }
 }
 
-void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
+void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s32 currHp, s32 maxHp)
 {
     u32 battlerId = gSprites[healthboxSpriteId].hMain_Battler;
     if (WhichBattleCoords(battlerId))
@@ -1081,7 +1081,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
     }
 }
 
-static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
+static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s32 currHp, s32 maxHp)
 {
     u32 barSpriteId = gSprites[healthboxSpriteId].data[5];
 
@@ -1251,7 +1251,7 @@ void SwapHpBarsWithHpText(void)
 u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool32 skipPlayer, bool32 isBattleStart)
 {
     bool32 isOpponent;
-    s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
+    s32 bar_X, bar_Y, bar_pos2_X, bar_data0;
     s32 i, j, var;
     u8 summaryBarSpriteId;
     u8 ballIconSpritesIds[PARTY_SIZE];
@@ -1796,7 +1796,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     u8 battlerId, healthBarSpriteId;
     u32 status, pltAdder;
     const u8 *statusGfxPtr;
-    s16 tileNumAdder;
+    s32 tileNumAdder;
     u8 statusPalId;
 
     battlerId = gSprites[healthboxSpriteId].hMain_Battler;
@@ -2301,7 +2301,7 @@ static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8
     return abs(result);
 }
 
-u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
+u8 GetScaledHPFraction(s32 hp, s32 maxhp, u8 scale)
 {
     u8 result = hp * scale / maxhp;
 
@@ -2311,7 +2311,7 @@ u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale)
     return result;
 }
 
-u8 GetHPBarLevel(s16 hp, s16 maxhp)
+u8 GetHPBarLevel(s32 hp, s32 maxhp)
 {
     u8 result;
 
@@ -2450,7 +2450,7 @@ static const struct SpriteTemplate sSpriteTemplate_AbilityPopUp =
 #define ABILITY_POP_UP_POS_X_DIFF (64 - 7) // Hide second sprite underneath to gain proper letter spacing
 #define ABILITY_POP_UP_POS_X_SLIDE 68
 
-static const s16 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
+static const s32 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
 {
     {29, 80}, // player left
     {186, 19}, // opponent left
@@ -2458,7 +2458,7 @@ static const s16 sAbilityPopUpCoordsDoubles[MAX_BATTLERS_COUNT][2] =
     {186, 36}, // opponent right
 };
 
-static const s16 sAbilityPopUpCoordsSingles[MAX_BATTLERS_COUNT][2] =
+static const s32 sAbilityPopUpCoordsSingles[MAX_BATTLERS_COUNT][2] =
 {
     {29, 97}, // player
     {186, 57}, // opponent
@@ -2710,7 +2710,7 @@ static inline bool32 IsAnyAbilityPopUpActive(void)
 
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 {
-    const s16 (*coords)[2];
+    const s32 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
 
     if (B_ABILITY_POP_UP == FALSE)

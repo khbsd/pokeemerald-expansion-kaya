@@ -18,9 +18,9 @@ SINGLE_BATTLE_TEST("Two strike count turns a move into a 2-hit move")
 
 SINGLE_BATTLE_TEST("Three strike count turns a move into a 3-hit move")
 {
-    s16 firstHit;
-    s16 secondHit;
-    s16 thirdHit;
+    s32 firstHit;
+    s32 secondHit;
+    s32 thirdHit;
 
     GIVEN {
         ASSUME(GetMoveStrikeCount(MOVE_TRIPLE_DIVE) == 3);
@@ -44,9 +44,9 @@ SINGLE_BATTLE_TEST("Three strike count turns a move into a 3-hit move")
 
 SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical hit")
 {
-    s16 firstHit;
-    s16 secondHit;
-    s16 thirdHit;
+    s32 firstHit;
+    s32 secondHit;
+    s32 thirdHit;
 
     GIVEN {
         ASSUME(GetMoveStrikeCount(MOVE_SURGING_STRIKES) == 3);

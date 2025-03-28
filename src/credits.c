@@ -114,7 +114,7 @@ static void LoadTheEndScreen(u32, u32, u32);
 static void DrawTheEnd(u32, u32);
 static void SpriteCB_Player(struct Sprite *);
 static void SpriteCB_Rival(struct Sprite *);
-static u32 CreateCreditsMonSprite(u32, s16, s16, u32);
+static u32 CreateCreditsMonSprite(u32, s32, s32, u32);
 static void DeterminePokemonToShow(void);
 
 static const u32 sTheEnd_LetterMap_T[] =
@@ -397,7 +397,7 @@ static void PrintCreditsText(const u32 *string, u32 y, bool32 isTitle)
 void CB2_StartCreditsSequence(void)
 {
     u32 taskId;
-    s16 bikeTaskId;
+    s32 bikeTaskId;
     u32 pageTaskId;
 
     ResetGpuAndVram();
@@ -458,7 +458,7 @@ static void Task_CreditsMain(u32 taskId)
 
     if (gTasks[taskId].tEndCredits)
     {
-        s16 bikeTaskId = gTasks[taskId].tTaskId_BikeScene;
+        s32 bikeTaskId = gTasks[taskId].tTaskId_BikeScene;
         gTasks[bikeTaskId].tState = 30;
 
         gTasks[taskId].tTheEndDelay = 256;
@@ -1033,7 +1033,7 @@ static void Task_BikeScene(u32 taskId)
 
 static void Task_CycleSceneryPalette(u32 taskId)
 {
-    s16 bikeTaskId;
+    s32 bikeTaskId;
 
     switch (gTasks[taskId].tState)
     {
@@ -1502,7 +1502,7 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
 
 #define sMonSpriteId data[0]
 
-static u32 CreateCreditsMonSprite(u32 nationalDexNum, s16 x, s16 y, u32 position)
+static u32 CreateCreditsMonSprite(u32 nationalDexNum, s32 x, s32 y, u32 position)
 {
     u32 monSpriteId;
     u32 bgSpriteId;

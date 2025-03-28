@@ -635,7 +635,7 @@ static void CreateApprenticeMenu(u8 menu)
 static void Task_ChooseAnswer(u8 taskId)
 {
     s32 input;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!tWrapAround)
         input = Menu_ProcessInputNoWrap();

@@ -689,7 +689,7 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     }
     else
     {
-        if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
+        if ((s32)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
         {
             i = mplayInfo->trackCount;
             track = mplayInfo->tracks;
@@ -1253,7 +1253,7 @@ void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u32
     mplayInfo->ident = ID_NUMBER;
 }
 
-void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s16 pitch)
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s32 pitch)
 {
     s32 i;
     u32 bit;
@@ -1685,9 +1685,9 @@ void SetPokemonCryPanpot(s32 val)
     gPokemonCrySong.panValue = (val + C_V) & 0x7F;
 }
 
-void SetPokemonCryPitch(s16 val)
+void SetPokemonCryPitch(s32 val)
 {
-    s16 b = val + 0x80;
+    s32 b = val + 0x80;
     u8 a = gPokemonCrySong.tuneValue2 - gPokemonCrySong.tuneValue;
     u32okemonCrySong.tieKeyValue = (b >> 8) & 0x7F;
     gPokemonCrySong.tuneValue = (b >> 1) & 0x7F;

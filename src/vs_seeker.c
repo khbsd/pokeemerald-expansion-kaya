@@ -58,8 +58,8 @@ struct VsSeekerTrainerInfo
     u32 trainerIdx;
     u32 localId;
     u32 objectEventId;
-    s16 xCoord;
-    s16 yCoord;
+    s32 xCoord;
+    s32 yCoord;
     u32 graphicsId;
 };
 
@@ -344,7 +344,7 @@ static void Task_VsSeekerFrameCountdown(u32 taskId)
 
 static void Task_VsSeeker_PlaySoundAndGetResponseCode(u32 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
 
     if (data[2] != 2 && --data[1] == 0)
     {
@@ -741,8 +741,8 @@ static void ClearAllTrainerRematchStates(void)
 #if FREE_MATCH_CALL == FALSE
 static bool32 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
 
     PlayerGetDestCoords(&x, &y);
     x -= 7;

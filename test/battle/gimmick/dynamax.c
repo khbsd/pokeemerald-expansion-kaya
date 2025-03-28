@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns and correctly con
 {
     u32 dynamaxLevel, dynamax;
     u32 capturedHP, finalHP;
-    s16 capturedDamage;
+    s32 capturedDamage;
     PARAMETRIZE { dynamaxLevel = 0; dynamax = GIMMICK_NONE; }
     PARAMETRIZE { dynamaxLevel = 0; dynamax = GIMMICK_DYNAMAX; }
     PARAMETRIZE { dynamaxLevel = 1; dynamax = GIMMICK_DYNAMAX; }
@@ -438,7 +438,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon that changes forms does not gain 
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Max Moves deal 1/4 damage through protect", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Max Moves deal 1/4 damage through protect", s32 damage)
 {
     bool32 protected;
     PARAMETRIZE { protected = TRUE; }
@@ -540,7 +540,7 @@ SINGLE_BATTLE_TEST("Dynamax: Pokemon with Gigantamax forms revert upon switching
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by Choice items", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by Choice items", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_CHOICE_BAND; }
@@ -582,7 +582,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot use Max Guard while holdin
 // Anything that is conditional based off max HP still uses gBattleMons[battler].maxHP.
 // Below are some tests, but very far from all encompassing:
 
-SINGLE_BATTLE_TEST("Dynamax: Endeavor uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Endeavor uses a Pokemon's non-Dynamax HP", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -601,7 +601,7 @@ SINGLE_BATTLE_TEST("Dynamax: Endeavor uses a Pokemon's non-Dynamax HP", s16 dama
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Super Fang uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Super Fang uses a Pokemon's non-Dynamax HP", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -620,7 +620,7 @@ SINGLE_BATTLE_TEST("Dynamax: Super Fang uses a Pokemon's non-Dynamax HP", s16 da
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Pain Split uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Pain Split uses a Pokemon's non-Dynamax HP", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -639,7 +639,7 @@ SINGLE_BATTLE_TEST("Dynamax: Pain Split uses a Pokemon's non-Dynamax HP", s16 da
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Sitrus Berries heal based on a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Sitrus Berries heal based on a Pokemon's non-Dynamax HP", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -659,7 +659,7 @@ SINGLE_BATTLE_TEST("Dynamax: Sitrus Berries heal based on a Pokemon's non-Dynama
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Heal Pulse heals based on a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Heal Pulse heals based on a Pokemon's non-Dynamax HP", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -742,7 +742,7 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Strike lowers both opponents' speed")
 // This test should apply to all stat-boosting Max Moves, too.
 DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
 {
-    s16 damage[4];
+    s32 damage[4];
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_KNUCKLE, MOVE_EFFECT_RAISE_TEAM_ATTACK));
         ASSUME(GetMoveCategory(MOVE_CLOSE_COMBAT) == DAMAGE_CATEGORY_PHYSICAL);
@@ -963,7 +963,7 @@ SINGLE_BATTLE_TEST("Dynamax: G-Max Steelsurge sets up sharp steel")
 }
 
 // The test below should apply to G-Max Fireball and G-Max Drum Solo, too.
-SINGLE_BATTLE_TEST("Dynamax: G-Max Hydrosnipe has fixed power and ignores abilities", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: G-Max Hydrosnipe has fixed power and ignores abilities", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_WATER_GUN; }
@@ -1257,7 +1257,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Meltdown torments both opponents for 3 turns"
 // This test applies to G-Max Cannonade, G-Max Vine Lash, and G-Max Volcalith, too.
 DOUBLE_BATTLE_TEST("Dynamax: G-Max Wildfire sets a field effect that damages non-Fire types")
 {
-    s16 damage;
+    s32 damage;
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_WILDFIRE, MOVE_EFFECT_WILDFIRE));
         PLAYER(SPECIES_CHARIZARD) { GigantamaxFactor(TRUE); }
@@ -1355,7 +1355,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Snooze makes only the target drowsy")
 
 DOUBLE_BATTLE_TEST("Dynamax: G-Max Finale heals allies by 1/6 of their health")
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_FINALE, MOVE_EFFECT_HEAL_TEAM));
         PLAYER(SPECIES_ALCREMIE) { HP(1); GigantamaxFactor(TRUE); }
@@ -1483,7 +1483,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Depletion takes away 2 PP from the target's l
 }
 
 // This test applies to G-Max Rapid Flow, too.
-DOUBLE_BATTLE_TEST("Dynamax: G-Max One Blow bypasses Max Guard for full damage", s16 damage)
+DOUBLE_BATTLE_TEST("Dynamax: G-Max One Blow bypasses Max Guard for full damage", s32 damage)
 {
     bool32 protect;
     PARAMETRIZE { protect = TRUE; }

@@ -168,7 +168,7 @@ static void Task_CloseMonPic(u8);
 
 // Select screen
 static void CB2_InitSelectScreen(void);
-static void Select_SetWinRegs(s16, s16, s16, s16);
+static void Select_SetWinRegs(s32, s32, s32, s32);
 static void Select_InitMonsData(void);
 static void Select_InitAllSprites(void);
 static void Select_ReshowMonSprite(void);
@@ -1309,7 +1309,7 @@ static void Select_InitMonsData(void)
 static void Select_InitAllSprites(void)
 {
     u8 i, cursorPos;
-    s16 x;
+    s32 x;
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
@@ -2223,7 +2223,7 @@ static void Select_HideChosenMons(void)
     sFactorySelectScreen->monPicAnimating = TRUE;
 }
 
-static void Select_SetWinRegs(s16 mWin0H, s16 nWin0H, s16 mWin0V, s16 nWin0V)
+static void Select_SetWinRegs(s32 mWin0H, s32 nWin0H, s32 mWin0V, s32 nWin0V)
 {
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(mWin0H, nWin0H));
@@ -2863,7 +2863,7 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
     s32 posX = 0;
     s32 deltaX = gTasks[taskId].tXIncrement;
     bool32 sliding;
-    s16 currPosX;
+    s32 currPosX;
     u8 prevTaskId;
 
     if (gTasks[taskId].tSlidingOn == TRUE)

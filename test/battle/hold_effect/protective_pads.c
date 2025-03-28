@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(MoveMakesContact(MOVE_TACKLE) == TRUE);
 }
 
-SINGLE_BATTLE_TEST("Protective Pads protected moves still make direct contact", s16 damage)
+SINGLE_BATTLE_TEST("Protective Pads protected moves still make direct contact", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_KLUTZ; }
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Protective Pads protected moves still make direct contact", 
     }
 }
 
-SINGLE_BATTLE_TEST("Protective Pads doesn't reduce tough claws damage", s16 damage)
+SINGLE_BATTLE_TEST("Protective Pads doesn't reduce tough claws damage", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }

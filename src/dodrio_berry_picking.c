@@ -180,7 +180,7 @@ struct StatusBar
 {
     u32 unused[12];
     bool32 entered[NUM_STATUS_SQUARES];
-    s16 yChange[NUM_STATUS_SQUARES];
+    s32 yChange[NUM_STATUS_SQUARES];
     u32 spriteIds[NUM_STATUS_SQUARES];
     u32 flashTimer;
 }; // size = 0x40
@@ -404,7 +404,7 @@ static void SpriteCB_Status(struct Sprite *);
 static void SpriteCB_Dodrio(struct Sprite *);
 static u32 DoDodrioMissedAnim(struct Sprite *);
 static u32 DoDodrioIntroAnim(struct Sprite *);
-static s16 GetDodrioXPos(u32, u32);
+static s32 GetDodrioXPos(u32, u32);
 static void SetDodrioInvisibility(bool32, u32);
 static void LoadGfx(void);
 static bool32 LoadBgGfx(void);
@@ -1433,7 +1433,7 @@ static void Task_NewGameIntro(u32 taskId)
 
 static void Task_CommunicateMonInfo(u32 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
     u32 i;
 
     switch (tState)
@@ -2597,7 +2597,7 @@ static void ResetForPlayAgainPrompt(void)
     UpdateBerrySprites();
 }
 
-static const s16 sBerryScoreMultipliers[] = {
+static const s32 sBerryScoreMultipliers[] = {
     [BERRY_BLUE]   = 10,
     [BERRY_GREEN]  = 30,
     [BERRY_GOLD]   = 50,
@@ -2765,7 +2765,7 @@ static u32 GetHighestBerryResult(u32 berryId)
 static u32 GetScoreByRanking(u32 ranking)
 {
     u32 scores[MAX_RFU_PLAYERS], temp;
-    s16 unsorted = TRUE;
+    s32 unsorted = TRUE;
     u32 i;
     u32 numPlayers = sGame->numPlayers;
 
@@ -2954,7 +2954,7 @@ static void Task_ShowDodrioBerryPickingRecords(u32 taskId)
 {
     struct WindowTemplate window;
     s32 i, width, widthCurr;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -4166,12 +4166,12 @@ static void LoadBerryGfx(void)
     Free(ptr);
 }
 
-static const s16 sBerryIconXCoords[] = {88, 128, 168, 208};
+static const s32 sBerryIconXCoords[] = {88, 128, 168, 208};
 
 static void CreateBerrySprites(void)
 {
     u32 i;
-    s16 x;
+    s32 x;
 
     struct SpriteTemplate berry =
     {
@@ -4291,7 +4291,7 @@ static void SpriteCB_Cloud(struct Sprite *sprite)
     }
 }
 
-static const s16 sCloudStartCoords[NUM_CLOUDS][2] =
+static const s32 sCloudStartCoords[NUM_CLOUDS][2] =
 {
     {230, 55},
     { 30, 74}
@@ -4373,9 +4373,9 @@ static void SetCloudInvisibility(bool32 invisible)
 
 #undef sFrozen
 
-static s16 GetDodrioXPos(u32 playerId, u32 numPlayers)
+static s32 GetDodrioXPos(u32 playerId, u32 numPlayers)
 {
-    s16 x = 0;
+    s32 x = 0;
     switch (numPlayers)
     {
     case 1:

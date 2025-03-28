@@ -353,8 +353,8 @@ static void RestoreButtonColor(u32);
 static void StartButtonFlash(struct Task *, u32, bool32);
 static void CreateSprites(void);
 static void CreateCursorSprite(void);
-static void SetCursorPos(s16, s16);
-static void GetCursorPos(s16 *x, s16 *y);
+static void SetCursorPos(s32, s32);
+static void GetCursorPos(s32 *x, s32 *y);
 static void MoveCursorToOKButton(void);
 static void SetCursorInvisibility(u32);
 static void SetCursorFlashing(bool32);
@@ -751,8 +751,8 @@ static bool32 MainState_StartPageSwap(void)
 
 static bool32 MainState_WaitPageSwap(void)
 {
-    s16 cursorX;
-    s16 cursorY;
+    s32 cursorX;
+    s32 cursorY;
     bool32 onLastColumn;
 
     if (IsPageSwapAnimNotInProgress())
@@ -1056,7 +1056,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
 
 static void SpriteCB_InputArrow(struct Sprite *sprite)
 {
-    const s16 x[] = {0, -4, -2, -1};
+    const s32 x[] = {0, -4, -2, -1};
 
     if (sprite->sDelay == 0 || --sprite->sDelay == 0)
     {
@@ -1075,7 +1075,7 @@ static void SpriteCB_InputArrow(struct Sprite *sprite)
 
 static void SpriteCB_Underscore(struct Sprite *sprite)
 {
-    const s16 y[] = {2, 3, 2, 1};
+    const s32 y[] = {2, 3, 2, 1};
     u32 pos;
 
     pos = GetTextEntryPosition();
@@ -1121,7 +1121,7 @@ static void CreateCursorSprite(void)
     SetCursorPos(0, 0);
 }
 
-static void SetCursorPos(s16 x, s16 y)
+static void SetCursorPos(s32 x, s32 y)
 {
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
@@ -1137,7 +1137,7 @@ static void SetCursorPos(s16 x, s16 y)
     cursorSprite->sY = y;
 }
 
-static void GetCursorPos(s16 *x, s16 *y)
+static void GetCursorPos(s32 *x, s32 *y)
 {
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
@@ -1177,8 +1177,8 @@ static const u32 sButtonKeyRoles[] = {KEY_ROLE_PAGE, KEY_ROLE_BACKSPACE, KEY_ROL
 
 static u32 GetKeyRoleAtCursorPos(void)
 {
-    s16 cursorX;
-    s16 cursorY;
+    s32 cursorX;
+    s32 cursorY;
 
     GetCursorPos(&cursorX, &cursorY);
     if (cursorX < GetCurrentPageColumnCount())
@@ -1341,7 +1341,7 @@ static void CreateBackOkSprites(void)
 static void CreateTextEntrySprites(void)
 {
     u32 spriteId;
-    s16 xPos;
+    s32 xPos;
     u32 i;
 
     xPos = sNamingScreen->inputCharBaseXPos - 5;
@@ -1621,7 +1621,7 @@ static void Input_Override(struct Task *task)
 
 static void HandleDpadMovement(struct Task *task)
 {
-    const s16 sDpadDeltaX[] =
+    const s32 sDpadDeltaX[] =
     {
         [INPUT_NONE]       = 0,
         [INPUT_DPAD_UP]    = 0,
@@ -1630,7 +1630,7 @@ static void HandleDpadMovement(struct Task *task)
         [INPUT_DPAD_RIGHT] = 1
     };
 
-    const s16 sDpadDeltaY[] =
+    const s32 sDpadDeltaY[] =
     {
         [INPUT_NONE]       = 0,
         [INPUT_DPAD_UP]    = -1,
@@ -1639,13 +1639,13 @@ static void HandleDpadMovement(struct Task *task)
         [INPUT_DPAD_RIGHT] = 0
     };
 
-    const s16 sKeyRowToButtonRow[KBROW_COUNT] = {0, 1, 1, 2};
-    const s16 sButtonRowToKeyRow[BUTTON_COUNT] = {0, 0, 3};
+    const s32 sKeyRowToButtonRow[KBROW_COUNT] = {0, 1, 1, 2};
+    const s32 sButtonRowToKeyRow[BUTTON_COUNT] = {0, 0, 3};
 
-    s16 cursorX;
-    s16 cursorY;
+    s32 cursorX;
+    s32 cursorY;
     u32 input;
-    s16 prevCursorX;
+    s32 prevCursorX;
 
     GetCursorPos(&cursorX, &cursorY);
     input = INPUT_NONE;
@@ -1797,7 +1797,7 @@ static void DrawGenderIcon(void)
     }
 }
 
-static u32 GetCharAtKeyboardPos(s16 x, s16 y)
+static u32 GetCharAtKeyboardPos(s32 x, s32 y)
 {
     return sKeyboardChars[CurrentPageToKeyboardId()][y][x];
 }
@@ -1849,8 +1849,8 @@ static void DeleteTextCharacter(void)
 // Returns TRUE if the text entry is now full
 static bool32 AddTextCharacter(void)
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
 
     GetCursorPos(&x, &y);
     BufferCharacter(GetCharAtKeyboardPos(x, y));

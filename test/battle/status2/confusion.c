@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Confusion adds a 50/33% chance to hit self with 40 power")
 {
-    s16 damage[2];
+    s32 damage[2];
     u32 genConfig, pctChance;
 
     PARAMETRIZE { genConfig = GEN_6; pctChance = 50; }

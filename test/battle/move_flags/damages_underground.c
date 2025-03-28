@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Being underground causes the target to take double damage from certain moves", s16 damage)
+SINGLE_BATTLE_TEST("Being underground causes the target to take double damage from certain moves", s32 damage)
 {
     bool32 useDig;
     PARAMETRIZE { useDig = FALSE; }

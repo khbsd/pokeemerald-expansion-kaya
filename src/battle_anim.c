@@ -108,7 +108,7 @@ EWRAM_DATA u32 gAnimMovePower = 0;
 EWRAM_DATA static u32 sAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT] = {0};
 EWRAM_DATA u8 gAnimFriendship = 0;
 EWRAM_DATA u32 gWeatherMoveAnim = 0;
-EWRAM_DATA s16 gBattleAnimArgs[ANIM_ARGS_COUNT] = {0};
+EWRAM_DATA s32 gBattleAnimArgs[ANIM_ARGS_COUNT] = {0};
 EWRAM_DATA static u32 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
@@ -576,9 +576,9 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
     return numTargets;
 }
 
-static s16 GetSubpriorityForMoveAnim(u8 argVar)
+static s32 GetSubpriorityForMoveAnim(u8 argVar)
 {
-    s16 subpriority;
+    s32 subpriority;
 
     if (argVar & ANIMSPRITE_IS_TARGET)
     {
@@ -612,7 +612,7 @@ static void Cmd_createsprite(void)
     const struct SpriteTemplate *template;
     u8 argVar;
     u8 argsCount;
-    s16 subpriority;
+    s32 subpriority;
 
     sBattleAnimScriptPtr++;
     template = (const struct SpriteTemplate *)(T2_READ_32(sBattleAnimScriptPtr));
@@ -645,7 +645,7 @@ static void CreateSpriteOnTargets(const struct SpriteTemplate *template, u8 argV
     u32 i, battler;
     u8 targets[MAX_BATTLERS_COUNT];
     int ntargets;
-    s16 subpriority;
+    s32 subpriority;
 
     for (i = 0; i < argsCount; i++)
     {
@@ -918,7 +918,7 @@ static void Task_InitUpdateMonBg(u8 taskId)
 {
     u8 updateTaskId;
 
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u8 battlerSpriteId = gBattlerSpriteIds[tBattlerId];
     gSprites[battlerSpriteId].invisible = TRUE;
 
@@ -1193,7 +1193,7 @@ void ResetBattleAnimBg(bool32 toBG2)
 static void Task_UpdateMonBg(u8 taskId)
 {
     u8 spriteId, battlerId;
-    s16 x, y;
+    s32 x, y;
     struct BattleAnimBgData animBg;
 
     spriteId = gTasks[taskId].t2_SpriteId;
@@ -1542,7 +1542,7 @@ static void Task_FadeToBg(u8 taskId)
     }
     else if (gTasks[taskId].tState == 2)
     {
-        s16 bgId = gTasks[taskId].tBackgroundId;
+        s32 bgId = gTasks[taskId].tBackgroundId;
 
         if (bgId == -1)
             LoadDefaultBg();
@@ -1699,9 +1699,9 @@ s32 BattleAnimAdjustPanning2(s32 pan)
     return pan;
 }
 
-s16 KeepPanInRange(s16 panArg, int oldPan)
+s32 KeepPanInRange(s32 panArg, int oldPan)
 {
-    s16 pan = panArg;
+    s32 pan = panArg;
 
     if (pan > SOUND_PAN_TARGET)
         pan = SOUND_PAN_TARGET;
@@ -1711,9 +1711,9 @@ s16 KeepPanInRange(s16 panArg, int oldPan)
     return pan;
 }
 
-s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan)
+s32 CalculatePanIncrement(s32 sourcePan, s32 targetPan, s32 incrementPan)
 {
-    s16 ret;
+    s32 ret;
 
     if (sourcePan < targetPan)
         ret = ((incrementPan < 0) ? -incrementPan : incrementPan);
@@ -1790,8 +1790,8 @@ void Task_PanFromInitialToTarget(u8 taskId)
     bool32 destroyTask = FALSE;
     if (gTasks[taskId].tFrameCounter++ >= gTasks[taskId].tFramesToWait)
     {
-        s16 pan;
-        s16 initialPanning, targetPanning, currentPan, incrementPan;
+        s32 pan;
+        s32 initialPanning, targetPanning, currentPan, incrementPan;
 
         gTasks[taskId].tFrameCounter = 0;
         initialPanning = gTasks[taskId].tInitialPan;
@@ -2043,7 +2043,7 @@ static void Cmd_waitsound(void)
 static void Cmd_jumpargeq(void)
 {
     u8 argId;
-    s16 valueToCheck;
+    s32 valueToCheck;
 
     sBattleAnimScriptPtr++;
     argId = sBattleAnimScriptPtr[0];
@@ -2235,7 +2235,7 @@ static void Cmd_createdragondartsprite(void)
     struct SpriteTemplate template;
     u8 argVar;
     u8 argsCount;
-    s16 subpriority;
+    s32 subpriority;
     struct Pokemon *party = GetBattlerParty(gBattleAnimAttacker);
 
     sBattleAnimScriptPtr++;

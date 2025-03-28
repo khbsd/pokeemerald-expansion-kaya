@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Dynamax Cannon causes double damage to Dynamaxed Pokemon", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax Cannon causes double damage to Dynamaxed Pokemon", s32 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }

@@ -147,7 +147,7 @@ static const struct CompressedSpritePalette sSpritePalette_Confetti[] =
     {},
 };
 
-static const s16 sHallOfFame_MonFullTeamPositions[PARTY_SIZE][4] =
+static const s32 sHallOfFame_MonFullTeamPositions[PARTY_SIZE][4] =
 {
     {120,   210,    120,    40},
     {326,   220,    56,     40},
@@ -157,7 +157,7 @@ static const s16 sHallOfFame_MonFullTeamPositions[PARTY_SIZE][4] =
     {310,   -92,    40,     88}
 };
 
-static const s16 sHallOfFame_MonHalfTeamPositions[PARTY_SIZE / 2][4] =
+static const s32 sHallOfFame_MonHalfTeamPositions[PARTY_SIZE / 2][4] =
 {
     {120,   234,    120,    64},
     {326,   244,    56,     64},
@@ -562,7 +562,7 @@ static void Task_Hof_SetMonDisplayTask(u32 taskId)
 static void Task_Hof_DisplayMon(u32 taskId)
 {
     u32 spriteId;
-    s16 startX, startY, destX, destY;
+    s32 startX, startY, destX, destY;
 
     u32 currMonId = gTasks[taskId].tDisplayedMonId;
     struct HallofFameMon* currMon = &sHofMonPtr->mon[currMonId];
@@ -911,7 +911,7 @@ static void Task_HofPC_DrawSpritesPrintText(u32 taskId)
         if (currMon->species != 0)
         {
             u32 spriteId;
-            s16 posX, posY;
+            s32 posX, posY;
 
             if (gTasks[taskId].tMonNo > PARTY_SIZE / 2)
             {
@@ -1358,7 +1358,7 @@ static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
     }
     else
     {
-        s16 species = sprite->tSpecies;
+        s32 species = sprite->tSpecies;
 
         if (species == SPECIES_EGG)
             DoMonFrontSpriteAnimation(sprite, species, TRUE, 3);
@@ -1401,8 +1401,8 @@ static bool32 CreateHofConfettiSprite(void)
     u32 spriteID;
     struct Sprite *sprite;
 
-    s16 posX = Random() % DISPLAY_WIDTH;
-    s16 posY = -(Random() % 8);
+    s32 posX = Random() % DISPLAY_WIDTH;
+    s32 posY = -(Random() % 8);
 
     spriteID = CreateSprite(&sSpriteTemplate_HofConfetti, posX, posY, 0);
     sprite = &gSprites[spriteID];
@@ -1485,7 +1485,7 @@ static void UpdateDomeConfetti(struct ConfettiUtil *util)
 static void Task_DoDomeConfetti(u32 taskId)
 {
     u32 id = 0;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

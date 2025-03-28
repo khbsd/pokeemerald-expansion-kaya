@@ -538,7 +538,7 @@ struct BattleTv
 
 struct BattleTvMovePoints
 {
-    s16 points[2][PARTY_SIZE * 4];
+    s32 points[2][PARTY_SIZE * 4];
 };
 
 struct LinkBattlerHeader
@@ -1010,7 +1010,7 @@ struct BattleAnimationInfo
     u8 field_9_x80:1;
     u8 numBallParticles;
     u8 field_B;
-    s16 ballSubpx;
+    s32 ballSubpx;
     u8 field_E;
     u8 field_F;
 };

@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal under Cloud Ni
     }
 }
 
-DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies by 1.5x", s16 damageL, s16 damageR)
+DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies by 1.5x", s32 damageL, s32 damageR)
 {
     bool32 sunny;
     PARAMETRIZE { sunny = FALSE; }
@@ -125,7 +125,7 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
     }
 }
 
-DOUBLE_BATTLE_TEST("Flower Gift increases the Sp. Def of Cherrim and its allies by 1.5x", s16 damageL, s16 damageR)
+DOUBLE_BATTLE_TEST("Flower Gift increases the Sp. Def of Cherrim and its allies by 1.5x", s32 damageL, s32 damageR)
 {
     bool32 sunny;
     PARAMETRIZE { sunny = FALSE; }

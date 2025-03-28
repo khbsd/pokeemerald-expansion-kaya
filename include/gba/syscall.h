@@ -19,7 +19,7 @@ void VBlankIntrWait(void);
 
 u32 Sqrt(u32 num);
 
-u32 ArcTan2(s16 x, s16 y);
+u32 ArcTan2(s32 x, s32 y);
 
 #define CPU_SET_SRC_FIXED 0x01000000
 #define CPU_SET_16BIT     0x00000000

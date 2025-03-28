@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(GetMoveType(MOVE_ACROBATICS) == TYPE_FLYING);
 }
 
-SINGLE_BATTLE_TEST("Acrobatics doubles in power if the user has no held item", s16 damage)
+SINGLE_BATTLE_TEST("Acrobatics doubles in power if the user has no held item", s32 damage)
 {
     u32 heldItem;
     PARAMETRIZE { heldItem = ITEM_POTION; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Acrobatics doubles in power if the user has no held item", s
     }
 }
 
-SINGLE_BATTLE_TEST("Acrobatics still doubles in power when Flying Gem is consumed", s16 damage)
+SINGLE_BATTLE_TEST("Acrobatics still doubles in power when Flying Gem is consumed", s32 damage)
 {
     u32 heldItem;
     PARAMETRIZE { heldItem = ITEM_NONE; }

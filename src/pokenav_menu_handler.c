@@ -8,7 +8,7 @@
 struct Pokenav_Menu
 {
     u32 menuType;
-    s16 cursorPos;
+    s32 cursorPos;
     u32 currMenuItem;
     u32 helpBarIndex;
     u32 menuId;

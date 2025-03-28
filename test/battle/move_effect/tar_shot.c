@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Tar Shot doubles the effectiveness of Fire-type moves used on the target")
 {
-    s16 damage[2];
+    s32 damage[2];
     u32 species;
 
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Tar Shot doubles the effectiveness of Fire-type moves used o
 
 SINGLE_BATTLE_TEST("Tar Shot does not affect Pokemon that are Terastallized")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET) ;
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Tar Shot does not affect Pokemon that are Terastallized")
 
 SINGLE_BATTLE_TEST("Tar Shot does affect Pokemon that Terastallized after Tar Shot status was applied")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET) ;

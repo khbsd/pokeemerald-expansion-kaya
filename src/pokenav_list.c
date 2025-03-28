@@ -471,7 +471,7 @@ void PokenavList_EraseListForCheckPage(void)
     list->loopedTaskId = CreateLoopedTask(LoopedTask_EraseListForCheckPage, 6);
 }
 
-void PrintCheckPageInfo(s16 delta)
+void PrintCheckPageInfo(s32 delta)
 {
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     list->windowState.windowTopIndex += delta;
@@ -851,7 +851,7 @@ static void LoadListArrowGfx(void)
 static void CreateListArrowSprites(struct PokenavListWindowState *windowState, struct PokenavListSub *list)
 {
     u32 spriteId;
-    s16 x;
+    s32 x;
 
     spriteId = CreateSprite(&sSpriteTemplate_RightArrow, list->listWindow.x * 8 + 3, (list->listWindow.y + 1) * 8, 7);
     list->rightArrow = &gSprites[spriteId];
@@ -915,7 +915,7 @@ static void SpriteCB_DownArrow(struct Sprite *sprite)
 
     if (++sprite->sTimer > 3)
     {
-        s16 offset;
+        s32 offset;
 
         sprite->sTimer = 0;
         offset = (sprite->sOffset + 1) & 7;
@@ -933,7 +933,7 @@ static void SpriteCB_UpArrow(struct Sprite *sprite)
 
     if (++sprite->sTimer > 3)
     {
-        s16 offset;
+        s32 offset;
 
         sprite->sTimer = 0;
         offset = (sprite->sOffset + 1) & 7;

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_FOUL_PLAY) == EFFECT_FOUL_PLAY);
 }
 
-SINGLE_BATTLE_TEST("Foul Play uses physical attack stat of target", s16 damage)
+SINGLE_BATTLE_TEST("Foul Play uses physical attack stat of target", s32 damage)
 {
     u32 move;
 

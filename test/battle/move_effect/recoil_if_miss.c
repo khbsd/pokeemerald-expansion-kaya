@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick has no recoil if no target")
 
 SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shield damage and Pokemon can faint from either of these")
 {
-    s16 hp, maxHp = 256;
+    s32 hp, maxHp = 256;
     bool32 faintOnSpiky = FALSE, faintOnJumpKick = FALSE;
 
     PARAMETRIZE { hp = maxHp; }

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gItemsInfo[ITEM_BERSERK_GENE].holdEffect == HOLD_EFFECT_BERSERK_GENE);
 }
 
-SINGLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a single battle", s16 damage)
+SINGLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a single battle", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a single 
     }
 }
 
-DOUBLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a double battle", s16 damage)
+DOUBLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a double battle", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
@@ -58,7 +58,7 @@ DOUBLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a double 
     }
 }
 
-SINGLE_BATTLE_TEST("Berserk Gene activates on switch in", s16 damage)
+SINGLE_BATTLE_TEST("Berserk Gene activates on switch in", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Berserk Gene activates on switch in", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but still raises attack sharply in a single battle", s16 damage)
+SINGLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but still raises attack sharply in a single battle", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but s
     }
 }
 
-DOUBLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but still raises attack sharply in a double battle", s16 damage)
+DOUBLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but still raises attack sharply in a double battle", s32 damage)
 {
     u32 item;
     bool32 positionLeft = FALSE;

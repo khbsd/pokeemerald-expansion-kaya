@@ -544,7 +544,7 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
 #define tBattler         data[3]
 #define tOpponentBattler data[4]
 
-u32 DoPokeballSendOutAnimation(u32 battler, s16 pan, u32 kindOfThrow)
+u32 DoPokeballSendOutAnimation(u32 battler, s32 pan, u32 kindOfThrow)
 {
     u32 taskId;
 
@@ -1172,7 +1172,7 @@ static void SpriteCB_MonSendOut_2(struct Sprite *sprite)
 
     if (HIBYTE(sprite->data[7]) >= 35 && HIBYTE(sprite->data[7]) < 80)
     {
-        s16 r4;
+        s32 r4;
 
         if ((sprite->oam.affineParam & 0xFF00) == 0)
         {
@@ -1352,7 +1352,7 @@ static void SpriteCB_ReleasedMonFlyOut(struct Sprite *sprite)
 
     if (sprite->sTrigIdx < 128)
     {
-        s16 sine = -(gSineTable[(u32)sprite->sTrigIdx] / 8);
+        s32 sine = -(gSineTable[(u32)sprite->sTrigIdx] / 8);
 
         sprite->sTrigIdx += 4;
         gSprites[monSpriteId].x2 = sine;

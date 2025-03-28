@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
     }
 }
 
-SINGLE_BATTLE_TEST("Tera Blast becomes a physical move if the user is Terastallized and has a higher Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Tera Blast becomes a physical move if the user is Terastallized and has a higher Attack stat", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast lowers both offensive stats")
 
 SINGLE_BATTLE_TEST("Stellar-type Tera Blast has 100 BP and a one-time 1.2x boost")
 {
-    s16 damage[3];
+    s32 damage[3];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);

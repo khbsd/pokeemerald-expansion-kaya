@@ -16,8 +16,8 @@ struct PartyMenu
     s32 slotId2;
     u8 action;
     u32 bagItem;
-    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
-    s16 learnMoveState;  // data2, used only as a learn move state
+    s32 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
+    s32 learnMoveState;  // data2, used only as a learn move state
 };
 
 extern struct PartyMenu gPartyMenu;
@@ -41,7 +41,7 @@ void Task_HandleChooseMonInput(u8 taskId);
 u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
 u8 DisplayPartyMenuMessage(const u8 *str, bool32 keepOpen);
 bool32 IsPartyMenuTextPrinterActive(void);
-void PartyMenuModifyHP(u8 taskId, u8 slot, s32 hpIncrement, s16 HPDifference, TaskFunc task);
+void PartyMenuModifyHP(u8 taskId, u8 slot, s32 hpIncrement, s32 HPDifference, TaskFunc task);
 u8 GetAilmentFromStatus(u32 status);
 u8 GetMonAilment(struct Pokemon *mon);
 void DisplayPartyMenuStdMessage(u32 stringId);

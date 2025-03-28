@@ -221,7 +221,7 @@ struct PartyMenuInternal
     // It is likely that the 0x160 value used below is a constant defined by
     // bin2c, the utility used to encode the compressed palette data.
     u32 palBuffer[BG_PLTT_SIZE / sizeof(u32)];
-    s16 data[16];
+    s32 data[16];
 };
 
 struct PartyMenuBox
@@ -433,7 +433,7 @@ static void Task_PartyMenuReplaceMove(u32);
 static void Task_StopLearningMoveYesNo(u32);
 static void Task_HandleStopLearningMoveYesNoInput(u32);
 static void Task_TryLearningNextMoveAfterText(u32);
-static void BufferMonStatsToTaskData(struct Pokemon *, s16 *);
+static void BufferMonStatsToTaskData(struct Pokemon *, s32 *);
 static void UpdateMonDisplayInfoAfterRareCandy(u32, struct Pokemon *);
 static void Task_DisplayLevelUpStatsPg1(u32);
 static void DisplayLevelUpStatsPg1(u32);
@@ -2070,7 +2070,7 @@ static void BufferBagFullCantTakeItemMessage(u32 itemUnused)
 
 static void Task_PartyMenuModifyHP(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tHP += tHPIncrement;
     tHPToAdd--;
@@ -2087,10 +2087,10 @@ static void Task_PartyMenuModifyHP(u32 taskId)
     }
 }
 
-void PartyMenuModifyHP(u32 taskId, u32 slot, s32 hpIncrement, s16 hpDifference, TaskFunc task)
+void PartyMenuModifyHP(u32 taskId, u32 slot, s32 hpIncrement, s32 hpDifference, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tHP = GetMonData(mon, MON_DATA_HP);
     tMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
@@ -2105,7 +2105,7 @@ void PartyMenuModifyHP(u32 taskId, u32 slot, s32 hpIncrement, s16 hpDifference, 
 // Because caseId is always passed 0, none of the other cases ever occur
 static void ResetHPTaskData(u32 taskId, u32 caseId, u32 hp)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (caseId) // always zero
     {
@@ -2171,7 +2171,7 @@ u32 GetMonAilment(struct Pokemon *mon)
 
 static void SetPartyMonsAllowedInMinigame(void)
 {
-    s16 *ptr;
+    s32 *ptr;
 
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
     {
@@ -2993,7 +2993,7 @@ static void Task_HandleSelectionMenuInput(u32 taskId)
     if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s32 input;
-        s16 *data = gTasks[taskId].data;
+        s32 *data = gTasks[taskId].data;
 
         if (sPartyMenuInternal->numActions <= 3)
             input = Menu_ProcessInputNoWrapAround_other();
@@ -3081,7 +3081,7 @@ static void CursorCb_Switch(u32 taskId)
 
 static void SwitchSelectedMons(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 windowIds[2];
 
     if (gPartyMenu.slotId2 == gPartyMenu.slotId)
@@ -3126,7 +3126,7 @@ static void SwitchSelectedMons(u32 taskId)
 }
 
 // returns FALSE if the slot has slid fully offscreen / back onscreen
-static bool32 TryMovePartySlot(s16 x, s16 width, u32 *leftMove, u32 *newX, u32 *newWidth)
+static bool32 TryMovePartySlot(s32 x, s32 width, u32 *leftMove, u32 *newX, u32 *newWidth)
 {
     if (x + width < 0)
         return FALSE;
@@ -3152,7 +3152,7 @@ static bool32 TryMovePartySlot(s16 x, s16 width, u32 *leftMove, u32 *newX, u32 *
     return TRUE;
 }
 
-static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width, s16 height, s16 dir)
+static void MoveAndBufferPartySlot(const void *rectSrc, s32 x, s32 y, s32 width, s32 height, s32 dir)
 {
     u32 srcX, newX, newWidth;
 
@@ -3164,7 +3164,7 @@ static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width,
     }
 }
 
-static void MovePartyMenuBoxSprites(struct PartyMenuBox *menuBox, s16 offset)
+static void MovePartyMenuBoxSprites(struct PartyMenuBox *menuBox, s32 offset)
 {
     gSprites[menuBox->pokeballSpriteId].x2 += offset * 8;
     gSprites[menuBox->itemSpriteId].x2 += offset * 8;
@@ -3174,7 +3174,7 @@ static void MovePartyMenuBoxSprites(struct PartyMenuBox *menuBox, s16 offset)
 
 static void SlidePartyMenuBoxSpritesOneStep(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (tSlot1SlideDir != 0)
         MovePartyMenuBoxSprites(&sPartyMenuBoxes[gPartyMenu.slotId], tSlot1SlideDir);
@@ -3184,7 +3184,7 @@ static void SlidePartyMenuBoxSpritesOneStep(u32 taskId)
 
 static void SlidePartyMenuBoxOneStep(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (tSlot1SlideDir != 0)
         MoveAndBufferPartySlot(sSlot1TilemapBuffer, tSlot1Left + tSlot1Offset, tSlot1Top, tSlot1Width, tSlot1Height, tSlot1SlideDir);
@@ -3195,7 +3195,7 @@ static void SlidePartyMenuBoxOneStep(u32 taskId)
 
 static void Task_SlideSelectedSlotsOffscreen(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 slidingSlotPositions[2];
 
     SlidePartyMenuBoxOneStep(taskId);
@@ -3225,7 +3225,7 @@ static void Task_SlideSelectedSlotsOffscreen(u32 taskId)
 
 static void Task_SlideSelectedSlotsOnscreen(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     SlidePartyMenuBoxOneStep(taskId);
     SlidePartyMenuBoxSpritesOneStep(taskId);
@@ -4165,7 +4165,7 @@ static void FieldCallback_Waterfall(void)
 
 static bool32 SetUpFieldMove_Waterfall(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE && IsPlayerSurfingNorth() == TRUE)
@@ -4766,7 +4766,7 @@ void Task_AbilityCapsule(u32 taskId)
 {
     static const u32 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
     static const u32 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -4840,7 +4840,7 @@ void Task_AbilityCapsule(u32 taskId)
 
 void ItemUseCB_AbilityCapsule(u32 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tState = 0;
     tMonId = gPartyMenu.slotId;
@@ -4854,7 +4854,7 @@ void Task_AbilityPatch(u32 taskId)
 {
     static const u32 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
     static const u32 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -4927,7 +4927,7 @@ void Task_AbilityPatch(u32 taskId)
 
 void ItemUseCB_AbilityPatch(u32 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tState = 0;
     tMonId = gPartyMenu.slotId;
@@ -4956,7 +4956,7 @@ void Task_Mint(u32 taskId)
 {
     static const u32 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
     static const u32 doneText[] = _("{STR_VAR_1}'s stats may have changed due\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -5028,7 +5028,7 @@ void Task_Mint(u32 taskId)
 
 void ItemUseCB_Mint(u32 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tState = 0;
     tMonId = gPartyMenu.slotId;
@@ -5284,7 +5284,7 @@ static void TryUseItemOnMove(u32 taskId)
     else
     {
         u32 move = MOVE_NONE;
-        s16 *moveSlot = &gPartyMenu.data1;
+        s32 *moveSlot = &gPartyMenu.data1;
         u32 item = gSpecialVar_ItemId;
 
         if (ExecuteTableBasedItemEffect(mon, item, ptr->slotId, *moveSlot))
@@ -5401,7 +5401,7 @@ void ItemUseCB_TMHM(u32 taskId, TaskFunc task)
 static void Task_LearnedMove(u32 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    s16 *move = &gPartyMenu.data1;
+    s32 *move = &gPartyMenu.data1;
     u32 item = gSpecialVar_ItemId;
 
     if (move[1] == 0)
@@ -5603,7 +5603,7 @@ void ItemUseCB_RareCandy(u32 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     struct PartyMenuInternal *ptr = sPartyMenuInternal;
-    s16 *arrayPtr = ptr->data;
+    s32 *arrayPtr = ptr->data;
     u32 *itemPtr = &gSpecialVar_ItemId;
     bool32 cannotUseEffect;
     u32 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
@@ -5873,7 +5873,7 @@ static void DisplayMonLearnedMove(u32 taskId, u32 move)
     gTasks[taskId].func = Task_DoLearnedMoveFanfareAfterText;
 }
 
-static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)
+static void BufferMonStatsToTaskData(struct Pokemon *mon, s32 *data)
 {
     data[0] = GetMonData(mon, MON_DATA_MAX_HP);
     data[1] = GetMonData(mon, MON_DATA_ATK);
@@ -5891,7 +5891,7 @@ static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)
 void Task_DynamaxCandy(u32 taskId)
 {
     static const u32 doneText[] = _("{STR_VAR_1}'s Dynamax Level\nincreased by 1!{PAUSE_UNTIL_PRESS}");
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -5933,7 +5933,7 @@ void Task_DynamaxCandy(u32 taskId)
 
 void ItemUseCB_DynamaxCandy(u32 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tState = 0;
     tMonId = gPartyMenu.slotId;
@@ -6753,7 +6753,7 @@ u32 GetItemEffectType(u32 item)
 static void TryTutorSelectedMon(u32 taskId)
 {
     struct Pokemon *mon;
-    s16 *move;
+    s32 *move;
 
     if (!gPaletteFade.active)
     {
@@ -7574,7 +7574,7 @@ static void Task_InitMultiPartnerPartySlideIn(u32 taskId)
 
 static void Task_MultiPartnerPartySlideIn(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 i;
 
     if (!gPaletteFade.active)
@@ -7596,14 +7596,14 @@ static void Task_MultiPartnerPartySlideIn(u32 taskId)
 
 static void Task_WaitAfterMultiPartnerPartySlideIn(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     // data[0] used as a timer afterwards rather than the x pos
     if (++data[0] == 256)
         Task_ClosePartyMenu(taskId);
 }
 
-static void MoveMultiPartyMenuBoxSprite(u32 spriteId, s16 x)
+static void MoveMultiPartyMenuBoxSprite(u32 spriteId, s32 x)
 {
     if (x >= 0)
         gSprites[spriteId].x2 = x;
@@ -7611,7 +7611,7 @@ static void MoveMultiPartyMenuBoxSprite(u32 spriteId, s16 x)
 
 static void SlideMultiPartyMenuBoxSpritesOneStep(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 i;
 
     for (i = MULTI_PARTY_SIZE; i < PARTY_SIZE; i++)

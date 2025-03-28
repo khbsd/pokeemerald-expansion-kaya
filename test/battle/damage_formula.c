@@ -5,8 +5,8 @@
 
 SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
 {
-    s16 dmg;
-    s16 expectedDamage;
+    s32 dmg;
+    s32 expectedDamage;
     PARAMETRIZE { expectedDamage = 196; }
     PARAMETRIZE { expectedDamage = 192; }
     PARAMETRIZE { expectedDamage = 192; }
@@ -43,8 +43,8 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
 
 SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
 {
-    s16 dmg;
-    s16 expectedDamage;
+    s32 dmg;
+    s32 expectedDamage;
     PARAMETRIZE { expectedDamage = 324; }
     PARAMETRIZE { expectedDamage = 316; }
     PARAMETRIZE { expectedDamage = 312; }
@@ -81,8 +81,8 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
 
 SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Marshadow vs Mawile)")
 {
-    s16 dmg;
-    s16 expectedDamage;
+    s32 dmg;
+    s32 expectedDamage;
     PARAMETRIZE { expectedDamage = 145; }
     PARAMETRIZE { expectedDamage = 144; }
     PARAMETRIZE { expectedDamage = 142; }
@@ -119,7 +119,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Marshadow vs Mawile)")
 
 DOUBLE_BATTLE_TEST("A spread move will do correct damage to the second mon if the first target faints from first hit of the spread move")
 {
-    s16 damage[6];
+    s32 damage[6];
     GIVEN {
         PLAYER(SPECIES_REGIROCK);
         PLAYER(SPECIES_REGIROCK);
@@ -153,8 +153,8 @@ DOUBLE_BATTLE_TEST("A spread move will do correct damage to the second mon if th
 
 SINGLE_BATTLE_TEST("Punching Glove vs Muscle Band Damage calculation")
 {
-    s16 dmgPlayer, dmgOpponent;
-    s16 expectedDamagePlayer, expectedDamageOpponent;
+    s32 dmgPlayer, dmgOpponent;
+    s32 expectedDamagePlayer, expectedDamageOpponent;
     PARAMETRIZE { expectedDamagePlayer = 204, expectedDamageOpponent = 201; }
     PARAMETRIZE { expectedDamagePlayer = 201, expectedDamageOpponent = 198; }
     PARAMETRIZE { expectedDamagePlayer = 199, expectedDamageOpponent = 196; }
@@ -194,8 +194,8 @@ SINGLE_BATTLE_TEST("Punching Glove vs Muscle Band Damage calculation")
 
 SINGLE_BATTLE_TEST("Gem boosted Damage calculation")
 {
-    s16 dmg;
-    s16 expectedDamage;
+    s32 dmg;
+    s32 expectedDamage;
     PARAMETRIZE { expectedDamage = 240; }
     PARAMETRIZE { expectedDamage = 237; }
     PARAMETRIZE { expectedDamage = 234; }
@@ -231,15 +231,15 @@ SINGLE_BATTLE_TEST("Gem boosted Damage calculation")
 
 #define NUM_DAMAGE_SPREADS (DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO) + 1
 
-static const s16 sThunderShockTransistorSpread[] = { 54, 55, 56, 57, 57, 58, 59, 60, 60, 60, 61, 62, 63, 63, 64, 65 };
-static const s16 sThunderShockRegularSpread[] = { 42, 42, 43, 43, 44, 45, 45, 45, 46, 46, 47, 48, 48, 48, 49, 50 };
-static const s16 sWildChargeTransistorSpread[] = { 123, 124, 126, 127, 129, 130, 132, 133, 135, 136, 138, 139, 141, 142, 144, 145 };
-static const s16 sWildChargeRegularSpread[] = { 94, 96, 96, 98, 99, 100, 101, 102, 103, 105, 105, 107, 108, 109, 110, 111 };
+static const s32 sThunderShockTransistorSpread[] = { 54, 55, 56, 57, 57, 58, 59, 60, 60, 60, 61, 62, 63, 63, 64, 65 };
+static const s32 sThunderShockRegularSpread[] = { 42, 42, 43, 43, 44, 45, 45, 45, 46, 46, 47, 48, 48, 48, 49, 50 };
+static const s32 sWildChargeTransistorSpread[] = { 123, 124, 126, 127, 129, 130, 132, 133, 135, 136, 138, 139, 141, 142, 144, 145 };
+static const s32 sWildChargeRegularSpread[] = { 94, 96, 96, 98, 99, 100, 101, 102, 103, 105, 105, 107, 108, 109, 110, 111 };
 
-DOUBLE_BATTLE_TEST("Transistor Damage calculation", s16 damage)
+DOUBLE_BATTLE_TEST("Transistor Damage calculation", s32 damage)
 {
-    s16 expectedDamageTransistorSpec = 0, expectedDamageRegularPhys = 0, expectedDamageRegularSpec = 0, expectedDamageTransistorPhys = 0;
-    s16 damagePlayerLeft, damagePlayerRight, damageOpponentLeft, damageOpponentRight;
+    s32 expectedDamageTransistorSpec = 0, expectedDamageRegularPhys = 0, expectedDamageRegularSpec = 0, expectedDamageTransistorPhys = 0;
+    s32 damagePlayerLeft, damagePlayerRight, damageOpponentLeft, damageOpponentRight;
     for (u32 spread = 0; spread < 16; ++spread) {
         PARAMETRIZE { expectedDamageTransistorSpec = sThunderShockTransistorSpread[spread],
                       expectedDamageRegularSpec = sThunderShockRegularSpread[spread],

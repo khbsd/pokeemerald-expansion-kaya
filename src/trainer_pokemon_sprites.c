@@ -119,7 +119,7 @@ static void AssignSpriteAnimsTable(bool32 isTrainer)
         sCreatingSpriteTemplate.anims = gAnims_Trainer;
 }
 
-static u32 CreatePicSprite(u32 species, bool32 isShiny, u32 personality, bool32 isFrontPic, s16 x, s16 y, u32 paletteSlot, u32 paletteTag, bool32 isTrainer)
+static u32 CreatePicSprite(u32 species, bool32 isShiny, u32 personality, bool32 isFrontPic, s32 x, s32 y, u32 paletteSlot, u32 paletteTag, bool32 isTrainer)
 {
     u32 i;
     u32 *framePics;
@@ -173,7 +173,7 @@ static u32 CreatePicSprite(u32 species, bool32 isShiny, u32 personality, bool32 
     return spriteId;
 }
 
-u32 CreateMonPicSprite_Affine(u32 species, bool32 isShiny, u32 personality, u32 flags, s16 x, s16 y, u32 paletteSlot, u32 paletteTag)
+u32 CreateMonPicSprite_Affine(u32 species, bool32 isShiny, u32 personality, u32 flags, s32 x, s32 y, u32 paletteSlot, u32 paletteTag)
 {
     u32 *framePics;
     struct SpriteFrameImage *images;
@@ -300,7 +300,7 @@ static u32 CreateTrainerCardSprite(u32 species, bool32 isShiny, u32 personality,
     return 0xFFFF;
 }
 
-u32 CreateMonPicSprite(u32 species, bool32 isShiny, u32 personality, bool32 isFrontPic, s16 x, s16 y, u32 paletteSlot, u32 paletteTag)
+u32 CreateMonPicSprite(u32 species, bool32 isShiny, u32 personality, bool32 isFrontPic, s32 x, s32 y, u32 paletteSlot, u32 paletteTag)
 {
     return CreatePicSprite(species, isShiny, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
 }
@@ -326,7 +326,7 @@ u32 CreateTrainerCardMonIconSprite(u32 species, bool32 isShiny, u32 personality,
     return CreateTrainerCardSprite(species, isShiny, personality, isFrontPic, destX, destY, paletteSlot, windowId, FALSE);
 }
 
-u32 CreateTrainerPicSprite(u32 species, bool32 isFrontPic, s16 x, s16 y, u32 paletteSlot, u32 paletteTag)
+u32 CreateTrainerPicSprite(u32 species, bool32 isFrontPic, s32 x, s32 y, u32 paletteSlot, u32 paletteTag)
 {
     return CreatePicSprite(species, FALSE, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
 }

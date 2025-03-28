@@ -16,7 +16,7 @@
 #define SELECTION_OK NUM_MON_MARKINGS
 #define SELECTION_CANCEL (SELECTION_OK + 1)
 
-static void CreateMonMarkingsMenuSprites(s16, s16, u32, u32);
+static void CreateMonMarkingsMenuSprites(s32, s32, u32, u32);
 static void SpriteCB_Dummy(struct Sprite *);
 static void SpriteCB_Marking(struct Sprite *);
 static void SpriteCB_Cursor(struct Sprite *);
@@ -345,7 +345,7 @@ void BufferMonMarkingsMenuTiles(void)
     while (BufferMenuFrameTiles());
 }
 
-void OpenMonMarkingsMenu(u32 markings, s16 x, s16 y)
+void OpenMonMarkingsMenu(u32 markings, s32 x, s32 y)
 {
     u32 i;
     sMenu->cursorPos = 0;
@@ -441,7 +441,7 @@ bool32 HandleMonMarkingsMenuInput(void)
 #define sMarkingId data[0]
 #define sCursorYOffset data[0]
 
-static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u32 baseTileTag, u32 basePaletteTag)
+static void CreateMonMarkingsMenuSprites(s32 x, s32 y, u32 baseTileTag, u32 basePaletteTag)
 {
     u32 i;
     u32 spriteId;

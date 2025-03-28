@@ -8,8 +8,8 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Shed Tail creates a Substitute at the cost of 1/2 users maximum HP and switches the user out")
 {
-    s16 maxHP = 0;
-    s16 costHP = 0;
+    s32 maxHP = 0;
+    s32 costHP = 0;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_WEATHER_BALL) == EFFECT_WEATHER_BALL);
 }
 
-SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Fire-type move in Sunlight", s16 damage)
+SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Fire-type move in Sunlight", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Fire-type move
     }
 }
 
-SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Water-type move in Rain", s16 damage)
+SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Water-type move in Rain", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Water-type mov
     }
 }
 
-SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Rock-type move in a Sandstorm", s16 damage)
+SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Rock-type move in a Sandstorm", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Rock-type move
     }
 }
 
-SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to an Ice-type move in Hail and Snow", s16 damage)
+SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to an Ice-type move in Hail and Snow", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }

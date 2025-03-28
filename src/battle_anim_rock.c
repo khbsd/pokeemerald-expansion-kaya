@@ -373,7 +373,7 @@ const struct SpriteTemplate gFallingSeedSpriteTemplate =
 
 static void AnimStealthRock(struct Sprite *sprite)
 {
-    s16 x, y;
+    s32 x, y;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);
@@ -678,7 +678,7 @@ void AnimTask_Rollout(u32 taskId)
 {
     u32 var0, var1, var2, var3;
     u32 rolloutCounter;
-    s16 pan1, pan2;
+    s32 pan1, pan2;
     struct Task *task;
 
     task = &gTasks[taskId];
@@ -724,7 +724,7 @@ void AnimTask_TectonicRageRollout(u32 taskId)
 {
     u32 var0, var1, var2, var3;
     int var5;
-    s16 pan1, pan2;
+    s32 pan1, pan2;
     struct Task *task;
     u32 rolloutCounter = 1;
 

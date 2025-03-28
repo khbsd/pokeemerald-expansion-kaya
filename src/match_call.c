@@ -1220,7 +1220,7 @@ static bool32 (*const sMatchCallTaskFuncs[])(u8) =
 u32
 static void ExecuteMatchCall(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (sMatchCallTaskFuncs[tState](taskId))
     {
         tState++;
@@ -1246,7 +1246,7 @@ static const struct WindowTemplate sMatchCallTextWindow =
 
 static bool32 MatchCall_LoadGfx(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tWindowId = AddWindow(&sMatchCallTextWindow);
     if (tWindowId == WINDOW_NONE)
     {
@@ -1277,7 +1277,7 @@ static bool32 MatchCall_LoadGfx(u8 taskId)
 
 static bool32 MatchCall_DrawWindow(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (FreeTempTileDataBuffersIfPossible())
         return FALSE;
 
@@ -1292,7 +1292,7 @@ static bool32 MatchCall_DrawWindow(u8 taskId)
 
 static bool32 MatchCall_ReadyIntro(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         // Note that "..." is not printed yet, just readied
@@ -1316,7 +1316,7 @@ static bool32 MatchCall_SlideWindowIn(u8 taskId)
 
 static bool32 MatchCall_PrintIntro(u8 u32skId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!RunMatchCallTextPrinter(tWindowId))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
@@ -1333,7 +1333,7 @@ static bool32 MatchCall_PrintIntro(u8 u32skId)
 
 static bool32 MatchCall_PrintMessage(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!RunMatchCallTextPrinter(tWindowId) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
@@ -1347,7 +1347,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
 
 static bool32 MatchCall_SlideWindowOut(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (ChangeBgY(0, 0x600, BG_COORD_SUB) <= -0x2000)
     {
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 14, 30, 6);
@@ -1442,7 +1442,7 @@ static bool32 RunMatchCallTextPrinter(int windowId)
 
 static void Task_SpinPokenavIcon(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (++tTimer > 8)
     {
         tTimer = 0;

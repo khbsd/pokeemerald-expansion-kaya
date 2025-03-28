@@ -39,7 +39,7 @@ struct Pokenav_MatchCallGfx
     u32 locWindowId;
     u32 infoBoxWindowId;
     u32 msgBoxWindowId;
-    s16 pageDelta;
+    s32 pageDelta;
     u32 unused18;
     u32 unused19;
     u32 trainerPicPalOffset;
@@ -912,7 +912,7 @@ static void SetPokeballIconsFlashing(bool32 active)
 
 static void Task_FlashPokeballIcons(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (tActive)
     {
         tSinIdx += 4;

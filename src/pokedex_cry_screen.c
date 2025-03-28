@@ -55,7 +55,7 @@ static void DrawWaveformFlatline(void);
 static void AdvancePlayhead(u32);
 static void DrawWaveformSegment(u32, u32);
 static void DrawWaveformWindow(u32);
-static void ShiftWaveformOver(u32, s16, bool32);
+static void ShiftWaveformOver(u32, s32, bool32);
 static void SpriteCB_CryMeterNeedle(struct Sprite *);
 static void SetCryMeterNeedleTarget(s32);
 
@@ -440,7 +440,7 @@ static void DrawWaveformWindow(u32 windowId)
 // rsVertical is leftover from a very different version of this function in RS
 // In RS, when TRUE it would use VOFS and when FALSE it would use HOFS (only FALSE was used)
 // Here when TRUE it does nothing
-static void ShiftWaveformOver(u32 windowId, s16 offset, bool32 rsVertical)
+static void ShiftWaveformOver(u32 windowId, s32 offset, bool32 rsVertical)
 {
     if (!rsVertical)
     {
@@ -489,8 +489,8 @@ static void SpriteCB_CryMeterNeedle(struct Sprite *sprite)
 {
     u32 i;
     s32 peakAmplitude;
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     struct ObjAffineSrcData affine;
     struct OamMatrix matrix;
     u32 amplitude;

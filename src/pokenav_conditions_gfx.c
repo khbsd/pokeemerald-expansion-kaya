@@ -127,7 +127,7 @@ struct Pokenav_ConditionMenuGfx
     u32 filler[2];
     u32 partyPokeballSpriteIds[PARTY_SIZE + 1];
     u32 (*callback)(void);
-    s16 monTransitionX;
+    s32 monTransitionX;
     u32 monPicSpriteId;
     u32 monPalIndex;
     u32 monGfxTileStart;

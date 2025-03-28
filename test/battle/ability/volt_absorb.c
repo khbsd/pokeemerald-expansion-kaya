@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Volt Absorb is only triggered once on multi strike moves")
 
 DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from damaging other pokemon") // Fixed issue #1961
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
         ASSUME(GetMoveType(MOVE_EXPLOSION) == TYPE_NORMAL);

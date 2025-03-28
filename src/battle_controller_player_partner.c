@@ -290,7 +290,7 @@ static void PlayerPartnerHandleSwitchInAnim(u32 battler)
 static void PlayerPartnerHandleDrawTrainerPic(u32 battler)
 {
     bool32 isFrontPic;
-    s16 xPos, yPos;
+    s32 xPos, yPos;
     u32 trainerPicId;
 
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(gPartnerTrainerId);

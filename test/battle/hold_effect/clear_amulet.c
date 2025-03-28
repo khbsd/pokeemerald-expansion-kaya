@@ -8,8 +8,8 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Clear Amulet prevents Intimidate")
 {
-    s16 turnOneHit;
-    s16 turnTwoHit;
+    s32 turnOneHit;
+    s32 turnTwoHit;
 
     GIVEN {
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_SHED_SKIN); };

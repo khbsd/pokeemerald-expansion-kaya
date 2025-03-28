@@ -98,7 +98,7 @@ static const u32 sEvoSparkleMatrices[] =
     0x240, 0x200, 0x1C0, 0x180, 0x140, 0x100
 };
 
-static const s16 sUnused[] =
+static const s32 sUnused[] =
 {
     -4, 0x10,
     -3, 0x30,

@@ -1225,13 +1225,13 @@ static void UNUSED BtlController_EmitCmd23(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// why is the argument u32 if it's being cast to s16 anyway?
+// why is the argument u32 if it's being cast to s32 anyway?
 void BtlController_EmitHealthBarUpdate(u32 battler, u32 bufferId, u32 hpValue)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_HEALTHBARUPDATE;
     gBattleResources->transferBuffer[1] = 0;
-    gBattleResources->transferBuffer[2] = (s16)hpValue;
-    gBattleResources->transferBuffer[3] = ((s16)hpValue & 0xFF00) >> 8;
+    gBattleResources->transferBuffer[2] = (s32)hpValue;
+    gBattleResources->transferBuffer[3] = ((s32)hpValue & 0xFF00) >> 8;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
@@ -1536,7 +1536,7 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
     struct MovePpInfo moveData;
     u8 nickname[POKEMON_NAME_LENGTH * 2];
     u8 *src;
-    s16 data16;
+    s32 data16;
     u32 data32;
     s32 size = 0;
 
@@ -2239,7 +2239,7 @@ static void Controller_HandleTrainerSlideBack(u32 battler)
 
 void Controller_WaitForHealthBar(u32 battler)
 {
-    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
+    s32 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
     if (hpValue != -1)
@@ -2459,7 +2459,7 @@ void BtlController_HandleReturnMonToBall(u32 battler)
 
 #define sSpeedX data[0]
 
-void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority)
+void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 isFrontPic, s32 xPos, s32 yPos, s32 subpriority)
 {
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT) // Always the front sprite for the opponent.
     {
@@ -2555,7 +2555,7 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
 
 #undef sSpeedX
 
-void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAnim)
+void BtlController_HandleTrainerSlideBack(u32 battler, s32 data0, bool32 startAnim)
 {
     u32 side = GetBattlerSide(battler);
 
@@ -2685,7 +2685,7 @@ void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 ar
 void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText)
 {
     s32 maxHP, curHP;
-    s16 hpVal;
+    s32 hpVal;
     struct Pokemon *party = GetBattlerParty(battler);
 
     LoadBattleBarGfx(0);
@@ -2833,7 +2833,7 @@ bool32 TwoOpponentIntroMons(u32 battler) // Double battle with both opponent pok
 // Sprite data for SpriteCB_FreePlayerSpriteLoadMonSprite
 #define sBattlerId data[5]
 
-void BtlController_HandleIntroTrainerBallThrow(u32 battler, u32 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler))
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u32 tagTrainerPal, const u32 *trainerPal, s32 framesToWait, void (*controllerCallback)(u32 battler))
 {
     u8 paletteNum, taskId;
     u32 side = GetBattlerSide(battler);

@@ -1000,8 +1000,8 @@ bool32 ScrCmd_warphole(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
 u32
     u32ript_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
@@ -2612,7 +2612,7 @@ bool32 ScrCmd_setfieldeffectargument(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    u32ieldEffectArguments[argNum] = (s16)VarGet(ScriptReadHalfword(ctx));
+    u32ieldEffectArguments[argNum] = (s32)VarGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 

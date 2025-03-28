@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("X Attack sharply raises battler's Attack stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("X Defense sharply raises battler's Defense stat", s16 damage
     }
 }
 
-SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -73,7 +73,7 @@ SINGLE_BATTLE_TEST("X Sp. Atk sharply raises battler's Sp. Attack stat", s16 dam
     }
 }
 
-SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("X Sp. Def sharply raises battler's Sp. Defense stat", s16 da
     }
 }
 
-SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s16 damage)
+SINGLE_BATTLE_TEST("X Speed sharply raises battler's Speed stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -152,7 +152,7 @@ SINGLE_BATTLE_TEST("X Accuracy sharply raises battler's Accuracy stat")
     }
 }
 
-SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Attack stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -172,7 +172,7 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Attack stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Defense stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -192,7 +192,7 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Defense stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Sp. Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Sp. Attack stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -212,7 +212,7 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Sp. Attack stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Max Mushrooms battler's Sp. Defense stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms battler's Sp. Defense stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }
@@ -232,7 +232,7 @@ SINGLE_BATTLE_TEST("Max Mushrooms battler's Sp. Defense stat", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s16 damage)
+SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s32 damage)
 {
     u32 useItem;
     PARAMETRIZE { useItem = FALSE; }

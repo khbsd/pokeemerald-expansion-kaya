@@ -238,10 +238,10 @@ static EWRAM_DATA struct {
     u32 neverRead_DA;
     u32 scrX;
     u32 scrY;
-    s16 bg1vofs;
-    s16 bg1hofs;
-    s16 bg2vofs;
-    s16 bg2hofs;
+    s32 bg1vofs;
+    s32 bg1hofs;
+    s32 bg2vofs;
+    s32 bg2hofs;
     u32 sXY;
     u32 gbaScale;
     u32 alpha;
@@ -4860,7 +4860,7 @@ void DrawTextOnTradeWindow(u32 windowId, const u32 *str, u32 speed)
 
 static void Task_AnimateWirelessSignal(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     u32 paletteIdx = sWirelessSignalAnimParams[tIdx][0] * 16;
 
@@ -4903,7 +4903,7 @@ static void Task_AnimateWirelessSignal(u32 taskId)
 
 static void Task_OpenCenterWhiteColumn(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (data[0] == 0)
     {
@@ -4930,7 +4930,7 @@ static void Task_OpenCenterWhiteColumn(u32 taskId)
 
 static void Task_CloseCenterWhiteColumn(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (data[0] == 0)
     {

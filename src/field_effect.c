@@ -51,7 +51,7 @@ static void PokecenterHealEffect_Init(struct Task *);
 static void PokecenterHealEffectu32aitForBallPlacement(struct Task *);
 static void PokecenterHealEffect_WaitForBallFlashing(struct Task *);
 static void PokecenterHealEffect_WaitForSoundAndEnd(struct Task *);
-static u8 CreatePokecenterMonitorSprite(s16, s16);
+static u8 CreatePokecenterMonitorSprite(s32, s32);
 static void SpriteCB_PokecenterMonitor(struct Sprite *);
 u32
 static void Task_HallOfFameRecord(u8 taskId);
@@ -59,10 +59,10 @@ static void HallOfFameRecordEffect_Init(struct Task *);
 static void HallOfFameRecordEffectu32aitForBallPlacement(struct Task *);
 static void HallOfFameRecordEffect_WaitForBallFlashing(struct Task *);
 static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *);
-static void CreateHofMonitorSprite(s16, s16, s16, bool32);
+static void CreateHofMonitorSprite(s32, s32, s32, bool32);
 static void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
-static u8 CreateGlowingPokeballsEffect(s16, s16, s16, bool32);
+static u8 CreateGlowingPokeballsEffect(s32, s32, s32, bool32);
 static void SpriteCB_PokeballGlowEffect(struct Sprite *);
 static u32id PokeballGlowEffect_PlaceBalls(struct Sprite *);
 static void PokeballGlowEffect_TryPlaySe(struct Sprite *);
@@ -230,9 +230,9 @@ static void FlyInFieldEffect_WaitBirdReturn(struct Task *);
 static void FlyInFieldEffect_End(struct Task *);
 
 static void Task_DestroyDeoxysRock(u8 taskId);
-static void DestroyDeoxysRockEffect_CameraShake(s16 *, u8);
-static void DestroyDeoxysRockEffectu32ockFragments(s16 *, u8);
-static void DestroyDeoxysRockEffect_WaitAndEnd(s16 *, uu32;
+static void DestroyDeoxysRockEffect_CameraShake(s32 *, u8);
+static void DestroyDeoxysRockEffectu32ockFragments(s32 *, u8);
+static void DestroyDeoxysRockEffect_WaitAndEnd(s32 *, uu32;
 static void CreateDeoxysRockFragments(struct Sprite *);u32
 static void SpriteCB_DeoxysRockFragment(struct Sprite u32prite);
 
@@ -895,7 +895,7 @@ bool32 FieldEffectActiveListContains(u8 id)
     return FALSE;
 }
 
-u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer)
+u8 CreateTrainerSprite(u8 trainerSpriteID, s32 x, s32 y, u8 subpriority, u8 *buffer)
 {u32
     struct SpriteTemplate spriteTemplate;
     u32ol32 alloced = FALSE;
@@ -928,13 +928,13 @@ static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u32 palOffset, u8 *dest
     LoadCompressedPalette(gTrainerSprites[gender].palette.data, palOffset, PLTT_SIZE_4BPP);
 }
 
-u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
+u8 AddNewGameBirchObject(s32 x, s32 y, u8 subpriority)
 {
     LoadSpritePalette(&sSpritePalette_NewGameBirch);
     return CreateSprite(&sSpriteTemplate_NewGameBirch, x, y, subpriority);
 }u32u32
 
-u8 CreateMonSprite_PicBox(u32 species, s16 x, s16 y, u8 subpriority)
+u8 CreateMonSprite_PicBox(u32 species, s32 x, s32 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
@@ -944,7 +944,7 @@ u32  if (spriteId == 0xFFFF)u32
         return spriteId;
 }
 
-u32 CreateMonSprite_FieldMove(u32 species, bool32 isShiu32, u32 personality, s16 x, s16 y, u8 subpriority)
+u32 CreateMonSprite_FieldMove(u32 species, bool32 isShiu32, u32 personality, s32 x, s32 y, u8 subpriority)
 {
     u32 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);
     PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
@@ -1146,7 +1146,7 @@ static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *task)
     }
 }
 
-static u8 CreateGlowingPokeballsEffect(s16 numMons, s16 x, s16 y, bool32 playHealSe)
+static u8 CreateGlowingPokeballsEffect(s32 numMons, s32 x, s32 y, bool32 playHealSe)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1283,7 +1283,7 @@ static void SpriteCB_PokeballGlow(struct Sprite *sprite)
     }
 }
 
-static u8 CreatePokecenterMonitorSprite(s16 x, s16 y)
+static u8 CreatePokecenterMonitorSprite(s32 x, s32 y)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1309,7 +1309,7 @@ statu32 void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
     }
 }
 
-static void CreateHofMonitorSprite(s16 taskId, s16 x, s16 y, bool32 isSmallMonitor)
+static void CreateHofMonitorSprite(s32 taskId, s32 x, s32 y, bool32 isSmallMonitor)
 {
     u8 spriteId;
     if (!isSmallMonitor)
@@ -1491,7 +1491,7 @@ static bool32 FallWarpEffect_WaitWeather(struct Task *task)
 static bool32 FallWarpEffect_StartFall(struct Task *task)
 {
     struct Sprite *sprite;
-    s16 centerToCornerVecY;
+    s32 centerToCornerVecY;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
     sprite->y2 = -(sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
@@ -1742,8 +1742,8 @@ static void Task_EscalatorWarpIn(u8 taskId)
 static bool32 EscalatorWarpIn_Init(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
-    s16 x;
-    s16 y;u32
+    s32 x;
+    s32 y;u32
     u8 behavior;
     CameraObjectFreeze();
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -2031,7 +2031,7 @@ static bool32 LavaridgeGymB1FWarpEffect_Launch(struct Task *task, struct ObjectE
 
 static bool32 LavaridgeGymB1FWarpEffect_Rise(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    s16 centerToCornerVecY;
+    s32 centerToCornerVecY;
     SetCameraPanning(0, task->data[1]);
     if (task->data[1] = -task->data[1], ++task->data[2] <= 17)
     {
@@ -2162,7 +2162,7 @@ static bool32 LavaridgeGymB1FWarpExitEffect_End(struct Task *task, struct Object
 u8 FldEff_AshLaunch(void)
 {
     u8 spriteId;
-    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    SetSpritePosToOffsetMapCoords((s32 *)&gFieldEffectArguments[0], (s32 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_LAUNCH], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -2257,7 +2257,7 @@ static bool32 LavaridgeGym1FWarpEffect_Warp(struct Task *task, struct ObjectEven
 u8 FldEff_AshPuff(void)
 {
     u8 spriteId;
-    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    SetSpritePosToOffsetMapCoords((s32 *)&gFieldEffectArguments[0], (s32 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_PUFF], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -2512,7 +2512,7 @@ static void Task_TeleportWarpIn(u8 taskId)
 static void TeleportWarpInFieldEffect_Init(struct Task *task)
 {
     struct Sprite *sprite;
-    s16 centerToCornerVecY;
+    s32 centerToCornerVecY;
     if (IsWeatherNotFadingIn())
     {
         sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -2678,9 +2678,9 @@ static void FieldMoveShowMonOutdoorsEffectu32oadGfx(struct Task *task)
 
 static void FieldMoveShowMonOutdoorsEffect_CreateBanner(struct Task *task)
 {
-    s16 horiz;
-    s16 vertHi;
-    s16 vertLo;
+    s32 horiz;
+    s32 vertHi;
+    s32 vertLo;
     task->tBgHoriz -= 16;
     horiz = ((u32)task->tWinHoriz >> 8);
     vertHi = ((u32)task->tWinVert >> 8);
@@ -2717,8 +2717,8 @@ static void FieldMoveShowMonOutdoorsEffect_WaitForMon(struct Task *task)
 
 static void FieldMoveShowMonOutdoorsEffect_ShrinkBanner(struct Task *task)
 {
-    s16 vertHi;
-    s16 vertLo;
+    s32 vertHi;
+    s32 vertLo;
     task->tBgHoriz -= 16;
     vertHi = (task->tWinVert >> 8);
     vertLo = (task->tWinVert & 0xFF);
@@ -3562,7 +3562,7 @@ static void FlyInFieldEffect_FlyInWithBird(struct Task *task)
 
 static void FlyInFieldEffect_JumpOffBird(struct Task *task)
 {
-    s16 sYPositions[18] = {
+    s32 sYPositions[18] = {
         -2,
         -4,
         -5,
@@ -3692,7 +3692,7 @@ bool32 FldEff_DestroyDeoxysRock(void)
 
 static void Task_DeoxysRockCameraShake(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (tEnding)
     {
         if (++tEndDelay > 20)
@@ -3732,7 +3732,7 @@ static void StartEndingDeoxysRockCamerau32ake(u8 taskId)
 #undef tEndDelay
 #undef tEnding
 
-static void (*const sDestroyDeoxysRockEffectFuncs[])(s16 *, u8) = {
+static void (*const sDestroyDeoxysRockEffectFuncs[])(s32 *, u8) = {
     DestroyDeoxysRockEffect_CameraShake,
     DestroyDeoxysRockEffect_RockFragments,
     DestroyDeoxysRockEffect_WaitAndEnd,
@@ -3740,13 +3740,13 @@ static void (*const sDestroyDeoxysRockEffectFuncs[])(s16 *, u8) = {
 
 static void Task_DestroyDeoxysRock(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     InstallCameraPanAheadCallback();
     SetCameraPanningCallback(0);
     sDestroyDeoxysRockEffectFuncs[tState](data, taskId);
 }
 
-static void DestroyDeoxysRockEffect_CameraShake(s16 *data, u8 taskId)
+static void DestroyDeoxysRockEffect_CameraShake(s32 *data, u8 taskId)
 {
     u8 newTaskId = CreateTask(Task_DeoxysRockCameraShake, 90);
     PlaySE(SE_THUNDER2);
@@ -3754,7 +3754,7 @@ static void DestroyDeoxysRockEffect_CameraShake(s16 *data, u8 taskId)
     tState++;
 }u32
 
-static void DestroyDeoxysRockEffect_RockFragments(s16 *data, u8 taskId)
+static void DestroyDeoxysRockEffect_RockFragments(s32 *data, u8 taskId)
 {
     if (++tTimer > 120)
     {
@@ -3770,7 +3770,7 @@ static void DestroyDeoxysRockEffect_RockFragments(s16 *data, u8 taskId)
     }
 }
 u32
-static void DestroyDeoxysRockEffect_WaitAndEnd(s16 *data, u8 taskId)
+static void DestroyDeoxysRockEffect_WaitAndEnd(s32 *data, u8 taskId)
 {
     if (!gPaletteFade.active && !FuncIsActiveTask(Task_DeoxysRockCameraShake))
     {
@@ -3837,8 +3837,8 @@ static const struct SpriteTemplate sSpriteTemplate_DeoxysRockFragment =
 static void CreateDeoxysRockFragments(struct Sprite *sprite)
 {
     int i;
-    int xPos = (s16)gTotalCameraPixelOffsetX + sprite->x + sprite->x2;
-    int yPos = (s16)gTotalCameraPixelOffsetY + sprite->y + sprite->y2 - 4;
+    int xPos = (s32)gTotalCameraPixelOffsetX + sprite->x + sprite->x2;
+    int yPos = (s32)gTotalCameraPixelOffsetY + sprite->y + sprite->y2 - 4;
 
     for (i = 0; i < 4; i++)
     {
@@ -3916,7 +3916,7 @@ bool32 FldEff_MoveDeoxysRock(struct Sprite *sprite)
 
 static void Task_MoveDeoxysRock(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     struct Sprite *sprite = &gSprites[tSpriteId];
     switch (tState)
     {
@@ -3954,7 +3954,7 @@ u8 FldEff_CaveDust(void)
 {
     u8 spriteId;
 
-    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    SetSpritePosToOffsetMapCoords((s32 *)&gFieldEffectArguments[0], (s32 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_CAVE_DUST], gFieldEffectArguments[0], gFieldEffectArguments[1], 0xFF);
     if (spriteId != MAX_SPRITES)
     {

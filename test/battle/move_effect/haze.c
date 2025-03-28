@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_HAZE) == EFFECT_HAZE);
 }
 
-SINGLE_BATTLE_TEST("Haze resets stat changes", s16 damage)
+SINGLE_BATTLE_TEST("Haze resets stat changes", s32 damage)
 {
     bool32 haze;
     PARAMETRIZE { haze = FALSE; }

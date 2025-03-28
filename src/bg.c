@@ -236,7 +236,7 @@ void SetTextModeAndHideBgs(void)
     SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_BITS);
 }
 
-static void SetBgAffineInternal(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u32 rotationAngle)
+static void SetBgAffineInternal(u32 bg, s32 srcCenterX, s32 srcCenterY, s32 dispCenterX, s32 dispCenterY, s32 scaleX, s32 scaleY, u32 rotationAngle)
 {
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
@@ -271,10 +271,10 @@ static void SetBgAffineInternal(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 disp
     SetGpuReg(REG_OFFSET_BG2PC, dest.pc);
     SetGpuReg(REG_OFFSET_BG2PD, dest.pd);
     SetGpuReg(REG_OFFSET_BG2PA, dest.pa);
-    SetGpuReg(REG_OFFSET_BG2X_L, (s16)(dest.dx));
-    SetGpuReg(REG_OFFSET_BG2X_H, (s16)(dest.dx >> 16));
-    SetGpuReg(REG_OFFSET_BG2Y_L, (s16)(dest.dy));
-    SetGpuReg(REG_OFFSET_BG2Y_H, (s16)(dest.dy >> 16));
+    SetGpuReg(REG_OFFSET_BG2X_L, (s32)(dest.dx));
+    SetGpuReg(REG_OFFSET_BG2X_H, (s32)(dest.dx >> 16));
+    SetGpuReg(REG_OFFSET_BG2Y_L, (s32)(dest.dy));
+    SetGpuReg(REG_OFFSET_BG2Y_H, (s32)(dest.dy >> 16));
 }
 
 bool32 IsInvalidBg(u32 bg)
@@ -765,7 +765,7 @@ s32 GetBgY(u32 bg)
         return sGpuBgConfigs2[bg].bg_y;
 }
 
-void SetBgAffine(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u32 rotationAngle)
+void SetBgAffine(u32 bg, s32 srcCenterX, s32 srcCenterY, s32 dispCenterX, s32 dispCenterY, s32 scaleX, s32 scaleY, u32 rotationAngle)
 {
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
@@ -773,8 +773,8 @@ void SetBgAffine(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 di
 u32 Unused_AdjustBgMosaic(u32 val, u32 mode)
 {
     u32 mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
-    s16 bgH = mosaic & 0xF;
-    s16 bgV = (mosaic >> 4) & 0xF;
+    s32 bgH = mosaic & 0xF;
+    s32 bgV = (mosaic >> 4) & 0xF;
 
     mosaic &= 0xFF00; // clear background mosaic sizes
 
@@ -952,7 +952,7 @@ void CopyToBgTilemapBufferRect_ChangePalette(u32 bg, const void *src, u32 destX,
     CopyRectToBgTilemapBufferRect(bg, src, 0, 0, rectWidth, rectHeight, destX, destY, rectWidth, rectHeight, palette, 0, 0);
 }
 
-void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u32 srcX, u32 srcY, u32 srcWidth, u32 srcHeight, u32 destX, u32 destY, u32 rectWidth, u32 rectHeight, u32 palette1, s16 tileOffset, s16 palette2)
+void CopyRectToBgTilemapBufferRect(u32 bg, const void *src, u32 srcX, u32 srcY, u32 srcWidth, u32 srcHeight, u32 destX, u32 destY, u32 rectWidth, u32 rectHeight, u32 palette1, s32 tileOffset, s32 palette2)
 {
     u32 screenWidth, screenHeight, screenSize;
     u32 var;
@@ -1034,7 +1034,7 @@ void FillBgTilemapBufferRect(u32 bg, u32 tileNum, u32 x, u32 y, u32 width, u32 h
     WriteSequenceToBgTilemapBuffer(bg, tileNum, x, y, width, height, palette, 0);
 }
 
-void WriteSequenceToBgTilemapBuffer(u32 bg, u32 firstTileNum, u32 x, u32 y, u32 width, u32 height, u32 paletteSlot, s16 tileNumDelta)
+void WriteSequenceToBgTilemapBuffer(u32 bg, u32 firstTileNum, u32 x, u32 y, u32 width, u32 height, u32 paletteSlot, s32 tileNumDelta)
 {
     u32 mode;
     u32 mode2;

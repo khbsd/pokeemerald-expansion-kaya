@@ -9,8 +9,8 @@ struct DigitObjUtilTemplate
     u8 priority:2;
     u8 oamCount;
     u8 xDelta;
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     const struct SpriteSheet *spriteSheet;
     const struct SpritePalette *spritePal;
 };

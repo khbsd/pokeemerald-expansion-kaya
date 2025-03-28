@@ -12,8 +12,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Future Sight uses Sp. Atk stat of the original user without modifiers")
 {
     u32 item;
-    s16 seedFlareDmg;
-    s16 futureSightDmg;
+    s32 seedFlareDmg;
+    s32 futureSightDmg;
 
     PARAMETRIZE { item = ITEM_TWISTED_SPOON; }
     PARAMETRIZE { item = ITEM_PSYCHIC_GEM; }
@@ -41,8 +41,8 @@ SINGLE_BATTLE_TEST("Future Sight uses Sp. Atk stat of the original user without 
 
 SINGLE_BATTLE_TEST("Future Sight is not boosted by Life Orb is original user if not on the field")
 {
-    s16 seedFlareDmg;
-    s16 futureSightDmg;
+    s32 seedFlareDmg;
+    s32 futureSightDmg;
 
     GIVEN {
         PLAYER(SPECIES_PIKACHU);
@@ -68,8 +68,8 @@ SINGLE_BATTLE_TEST("Future Sight is not boosted by Life Orb is original user if 
 
 SINGLE_BATTLE_TEST("Future Sight receives STAB from party mon")
 {
-    s16 seedFlareDmg;
-    s16 futureSightDmg;
+    s32 seedFlareDmg;
+    s32 futureSightDmg;
 
     GIVEN {
         PLAYER(SPECIES_RALTS);

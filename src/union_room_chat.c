@@ -167,7 +167,7 @@ struct UnionRoomChatDisplay
     u32 currLine;
     u32 scrollCount;
     u32 messageWindowId;
-    s16 bg1hofs;
+    s32 bg1hofs;
     u32 expandedPlaceholdersBuffer[0x106];
     u32 bg0Buffer[BG_SCREEN_SIZE];
     u32 bg1Buffer[BG_SCREEN_SIZE];
@@ -283,8 +283,8 @@ static void SetRegisteredTextPalette(bool32);
 static void PrintChatMessage(u32, u32 *, u32);
 static void StartKeyboardCursorAnim(void);
 static bool32 TryKeyboardCursorReopen(void);
-static void UpdateSlidingKeyboard(s16);
-static void FinishSlidingKeyboard(s16);
+static void UpdateSlidingKeyboard(s32);
+static void FinishSlidingKeyboard(s32);
 static bool32 Display_Dummy(u32 *);
 static bool32 Display_LoadGfx(u32 *state);
 static bool32 Display_ShowKeyboardSwapMenu(u32 *state);
@@ -1107,7 +1107,7 @@ static void Chat_HandleInput(void)
 
 static void Chat_Switch(void)
 {
-    s16 input;
+    s32 input;
     bool32 shouldSwitchPages;
 
     switch (sChat->funcState)
@@ -2040,7 +2040,7 @@ void InitUnionRoomChatRegisteredTexts(void)
 static void Task_ReceiveChatMessage(u32 taskId)
 {
     u32 *buffer;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -3153,13 +3153,13 @@ static void InitScanlineEffect(void)
     ScanlineEffect_SetParams(params);
 }
 
-static void UpdateSlidingKeyboard(s16 bg1hofs)
+static void UpdateSlidingKeyboard(s32 bg1hofs)
 {
     CpuFill16(bg1hofs, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
     CpuFill16(0,       gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
 }
 
-static void FinishSlidingKeyboard(s16 bg1hofs)
+static void FinishSlidingKeyboard(s32 bg1hofs)
 {
     CpuFill16(bg1hofs, gScanlineEffectRegBuffers[0],         0x120);
     CpuFill16(0,       gScanlineEffectRegBuffers[0] +  0x90, 0x20);

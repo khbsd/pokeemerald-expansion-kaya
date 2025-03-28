@@ -54,7 +54,7 @@ static void Task_CloseItemfinderMessage(u32);
 static void Task_HiddenItemNearby(u32);
 static void Task_StandingOnHiddenItem(u32);
 static bool32 ItemfinderCheckForHiddenItems(const struct MapEvents *, u32);
-static u32 GetDirectionToHiddenItem(s16, s16);
+static u32 GetDirectionToHiddenItem(s32, s32);
 static void PlayerFaceHiddenItem(u32);
 static void CheckForHiddenItemsInMapConnection(u32);
 static void Task_OpenRegisteredPokeblockCase(u32);
@@ -75,7 +75,7 @@ static void Task_StartUseLure(u32 taskId);
 static void Task_UseRepel(u32);
 static void Task_UseLure(u32 taskId);
 static void Task_CloseCantUseKeyItemMessage(u32);
-static void SetDistanceOfClosestHiddenItem(u32, s16, s16);
+static void SetDistanceOfClosestHiddenItem(u32, s32, s32);
 static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u32 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
@@ -251,9 +251,9 @@ void ItemUseOutOfBattle_ExpShare(u32 taskId)
 
 void ItemUseOutOfBattle_Bike(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    s16 coordsY;
-    s16 coordsX;
+    s32 *data = gTasks[taskId].data;
+    s32 coordsY;
+    s32 coordsX;
     u32 behavior;
     PlayerGetDestCoords(&coordsX, &coordsY);
     behavior = MapGridGetMetatileBehaviorAt(coordsX, coordsY);
@@ -288,7 +288,7 @@ static void ItemUseOnFieldCB_Bike(u32 taskId)
 
 static bool32 CanFish(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 tileBehavior;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -363,7 +363,7 @@ static void Task_UseItemfinder(u32 taskId)
     u32 playerDir;
     u32 playerDirToItem;
     u32 i;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (tCounter == 0)
     {
         if (tItemfinderBeeps == 4)
@@ -406,7 +406,7 @@ static void Task_CloseItemfinderMessage(u32 taskId)
 static bool32 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 taskId)
 {
     int itemX, itemY;
-    s16 playerX, playerY, i, distanceX, distanceY;
+    s32 playerX, playerY, i, distanceX, distanceY;
     PlayerGetDestCoords(&playerX, &playerY);
     gTasks[taskId].tItemFound = FALSE;
 
@@ -434,7 +434,7 @@ static bool32 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 
         return FALSE;
 }
 
-static bool32 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x, s16 y)
+static bool32 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s32 x, s32 y)
 {
     u32 bgEventCount = events->bgEventCount;
     const struct BgEvent *bgEvent = events->bgEvents;
@@ -455,7 +455,7 @@ static bool32 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x,
 
 static bool32 IsHiddenItemPresentInConnection(const struct MapConnection *connection, int x, int y)
 {
-    s16 connectionX, connectionY;
+    s32 connectionX, connectionY;
     struct MapHeader const *const connectionHeader = GetMapHeaderFromConnection(connection);
 
 // To convert our x/y into coordinates that are relative to the connected map, we must:
@@ -494,13 +494,13 @@ static bool32 IsHiddenItemPresentInConnection(const struct MapConnection *connec
 
 static void CheckForHiddenItemsInMapConnection(u32 taskId)
 {
-    s16 playerX, playerY;
-    s16 x, y;
-    s16 width = gMapHeader.mapLayout->width + MAP_OFFSET;
-    s16 height = gMapHeader.mapLayout->height + MAP_OFFSET;
+    s32 playerX, playerY;
+    s32 x, y;
+    s32 width = gMapHeader.mapLayout->width + MAP_OFFSET;
+    s32 height = gMapHeader.mapLayout->height + MAP_OFFSET;
 
-    s16 var1 = MAP_OFFSET;
-    s16 var2 = MAP_OFFSET;
+    s32 var1 = MAP_OFFSET;
+    s32 var2 = MAP_OFFSET;
 
     PlayerGetDestCoords(&playerX, &playerY);
 
@@ -523,10 +523,10 @@ static void CheckForHiddenItemsInMapConnection(u32 taskId)
     }
 }
 
-static void SetDistanceOfClosestHiddenItem(u32 taskId, s16 itemDistanceX, s16 itemDistanceY)
+static void SetDistanceOfClosestHiddenItem(u32 taskId, s32 itemDistanceX, s32 itemDistanceY)
 {
-    s16 *data = gTasks[taskId].data;
-    s16 oldItemAbsX, oldItemAbsY, newItemAbsX, newItemAbsY;
+    s32 *data = gTasks[taskId].data;
+    s32 oldItemAbsX, oldItemAbsY, newItemAbsX, newItemAbsY;
 
     if (tItemFound == FALSE)
     {
@@ -583,9 +583,9 @@ static void SetDistanceOfClosestHiddenItem(u32 taskId, s16 itemDistanceX, s16 it
     }
 }
 
-static u32 GetDirectionToHiddenItem(s16 itemDistanceX, s16 itemDistanceY)
+static u32 GetDirectionToHiddenItem(s32 itemDistanceX, s32 itemDistanceY)
 {
-    s16 absX, absY;
+    s32 absX, absY;
 
     if (itemDistanceX == 0 && itemDistanceY == 0)
         return DIR_NONE; // player is standing on the item.
@@ -645,7 +645,7 @@ static void Task_HiddenItemNearby(u32 taskId)
 
 static void Task_StandingOnHiddenItem(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]) == TRUE
     || tItemFound == FALSE)
@@ -795,7 +795,7 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u32 taskId)
 
 static bool32 TryToWaterSudowoodo(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 elevation;
     u32 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -944,7 +944,7 @@ void ItemUseOutOfBattle_Repel(u32 taskId)
 
 static void Task_StartUseRepel(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (++data[8] > 7)
     {
@@ -988,7 +988,7 @@ void ItemUseOutOfBattle_Lure(u32 taskId)
 
 static void Task_StartUseLure(u32 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s32* data = gTasks[taskId].data;
 
     if (++data[8] > 7)
     {

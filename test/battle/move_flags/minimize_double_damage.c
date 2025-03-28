@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("MinimizeDoubleDamage flag makes moves cause double damage to Minimized targets", s16 damage)
+SINGLE_BATTLE_TEST("MinimizeDoubleDamage flag makes moves cause double damage to Minimized targets", s32 damage)
 {
     bool32 useMinimize;
     PARAMETRIZE { useMinimize = FALSE; }

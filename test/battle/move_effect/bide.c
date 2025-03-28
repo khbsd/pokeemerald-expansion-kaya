@@ -8,9 +8,9 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Bide deals twice the taken damage over two turns")
 {
-    s16 damage1;
-    s16 damage2;
-    s16 bideDamage;
+    s32 damage1;
+    s32 damage2;
+    s32 bideDamage;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

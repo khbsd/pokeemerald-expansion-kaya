@@ -388,7 +388,7 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
 
 // Draws a single frame of the door animation, or skips drawing to wait between frames.
 // Returns FALSE when the final frame has been reached
-static bool32 AnimateDoorFrame(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, s16 *data)
+static bool32 AnimateDoorFrame(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, s32 *data)
 {
     if (tCounter == 0)
         DrawDoor(gfx, &frames[tFrameId], tX, tY);
@@ -443,7 +443,7 @@ static s32 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct D
     else
     {
         u32 taskId = CreateTask(Task_AnimateDoor, 0x50);
-        s16 *data = gTasks[taskId].data;
+        s32 *data = gTasks[taskId].data;
 
         tX = x;
         tY = y;

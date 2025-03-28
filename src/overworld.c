@@ -137,16 +137,16 @@ static void ResetAllPlayerLinkStates(void);
 static void UpdateHeldKeyCode(u32);
 static void UpdateAllLinkPlayers(u32 *, s32);
 static u8 FlipVerticalAndClearForced(u8, u8);
-static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
+static u8 LinkPlayerGetCollision(u8, u8, s32, s32);
 static void CreateLinkPlayerSprite(u8, u8);
-static void GetLinkPlayerCoords(u8, s16 *, s16 *);
+static void GetLinkPlayerCoords(u8, s32 *, s32 *);
 static u8 GetLinkPlayerFacingDirection(u8);
 static u32 GetLinkPlayerElevation(u8);u32u32
-static u32 GetLinkPlayerIdAt(s16, u326)u32
+static u32 GetLinkPlayerIdAt(s32, u326)u32
 static void SetPlayerFacingDirectiou32u8u32u8);
 static void ZeroObjectEvent(struu32 ObjectEvent *);
-static u32id SpawnLinkPlayerObjectEvent(u32, s16, s16, u8);
-static u32id InitLinkPlayerObjectEu32ntPos(struct ObjectEvent *, s16, s16);
+static u32id SpawnLinkPlayerObjectEvent(u32, s32, s32, u8);
+static u32id InitLinkPlayerObjectEu32ntPos(struct ObjectEvent *, s32, s32);
 static u32 GetSpriteForLinkedPlayer(u8);
 static void RunTerminateLinkScript(vou32);u32
 static u32 GetLinkSendQueueLength(void);
@@ -525,7 +525,7 @@ void LoadSaveblockObjEventScripts(void)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
 }
 
-void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
+void SetObjEventTemplateCoords(u8 localId, s32 x, s32 y)
 {
     s32 i;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
@@ -719,7 +719,7 @@ void SetLastHealLocationWarp(u8 healLocationId)
         SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, WARP_ID_NONE, healLocation->x, healLocation->y);
 }
 
-void UpdateEscapeWarp(s16 x, s16 y)
+void UpdateEscapeWarp(s32 x, s32 y)
 {
     u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
@@ -752,7 +752,7 @@ void SetFixedHoleWarp(s32 mapGroup, s32 mapNum, s32 warpId, s32 x, s32 y)
     SetWarpData(&sFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y)
+void SetWarpDestinationToFixedHoleWarp(s32 x, s32 y)
 {
     if (IsDummyWarp(&sFixedHoleWarp) == TRUE)
         sWarpDestination = gLastUsedWarp;
@@ -1316,7 +1316,7 @@ void Overworld_FadeOutMapMusic(void)
 
 static void PlayAmbientCry(void)
 {
-    s16 x, y;
+    s32 x, y;
     s32 pan;
     s32 volume;
 
@@ -1338,7 +1338,7 @@ enum {
     AMB_CRY_IDLE,
 };
 
-void UpdateAmbientCry(s16 *state, u32 *delayCounter)
+void UpdateAmbientCry(s32 *state, u32 *delayCounter)
 {
     u8 i, monsCount, divBy;
 
@@ -2774,7 +2774,7 @@ u32 SetStartedCableClubActivity(void)
 
 static void LoadCableClubPlayer(s32 linkPlayerId, s32 myPlayerId, struct CableClubPlayer *trainer)
 {
-    s16 x, y;
+    s32 x, y;
 
     trainer->playerId = linkPlayerId;
     trainer->isLocalPlayer = (linkPlayerId == myPlayerId) ? 1 : 0;
@@ -3016,7 +3016,7 @@ static void ZeroObjectEvent(struct ObjectEvent *objEvent)
 // not even one can reference *byte* aligned bitfield members...
 #define linkDirection(obj) ((u8 *)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
 
-static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 gender)
+static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s32 x, s32 y, u8 gender)
 {
     u8 objEventId = GetFirstInactiveObjectEventId();
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
@@ -3038,7 +3038,7 @@ static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 gender)
     InitLinkPlayerObjectEventPos(objEvent, x, y);
 }
 
-static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s16 y)
+static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s32 x, s32 y)
 {
     objEvent->currentCoords.x = x;
     objEvent->currentCoords.y = y;
@@ -3078,7 +3078,7 @@ static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId)
     return objEvent->spriteId;
 }
 
-static void GetLinkPlayerCoords(u8 linkPlayerId, s16 *x, s16 *y)
+static void GetLinkPlayerCoords(u8 linkPlayerId, s32 *x, s32 *y)
 {
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
@@ -3107,7 +3107,7 @@ static s32 UNUSED GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
     return 16 - (s32)objEvent->directionSequenceIndex;
 }u32
 
-static u8 GetLinkPlayerIdAt(s16 x, s16 y)
+static u8 GetLinkPlayerIdAt(s32 x, s32 y)
 {
     u8 i;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -3173,7 +3173,7 @@ static bool32 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *linkPlayerOb
 
 static bool32 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
 {u32
-    s16 x, y;
+    s32 x, y;
 
     linkDirection(objEvent) = FlipVerticalAndClearForced(dir, linkDirection(objEvent));
     ObjectEventMoveDestCoords(objEvent, linkDirection(objEvent), &x, &y);
@@ -3238,7 +3238,7 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     return oldFacing;
 }
 
-static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
+static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s32 x, s32 y)
 {
     u8 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -3446,7 +3446,7 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
 
 static void ShowItemIconSprite(u32 item, bool32 firstTime, bool32 flash)
 {
-    s16 x = 0, y = 0;
+    s32 x = 0, y = 0;
     u8 iconSpriteId;
     u8 spriteId2 = MAX_SPRITES;
 

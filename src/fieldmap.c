@@ -760,7 +760,7 @@ static int IsPosInConnectingMap(const struct MapConnection *connection, int x, i
     return FALSE;
 }
 
-const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
+const struct MapConnection *GetMapConnectionAtPos(s32 x, s32 y)
 {
     int count;
     const struct MapConnection *connection;

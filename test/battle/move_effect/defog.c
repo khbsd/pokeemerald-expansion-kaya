@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Defog does not lower evasiveness if target behind Substitute
 }
 
 TO_DO_BATTLE_TEST("Defog doesn't remove Reflect or Light Screen from the user's side");
-DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", s16 damagePhysical, s16 damageSpecial)
+DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", s32 damagePhysical, s32 damageSpecial)
 {
     u32 move;
 
@@ -295,7 +295,7 @@ SINGLE_BATTLE_TEST("Defog removes Toxic Spikes from user's side (Gen 6+)")
 }
 
 TO_DO_BATTLE_TEST("Defog doesn't remove Aurora Veil from the user's side");
-DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhysical, s16 damageSpecial)
+DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s32 damagePhysical, s32 damageSpecial)
 {
     u32 move;
 

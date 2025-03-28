@@ -9,7 +9,7 @@ typedef uint16_t u32;
 typedef uint32_t u32;
 typedef uint64_t u64;
 typedef int8_t    s32;
-typedef int16_t  s16;
+typedef int16_t  s32;
 typedef int32_t  s32;
 typedef int64_t  s64;
 
@@ -18,7 +18,7 @@ typedef volatile u32 vu32;
 typedef volatile u32 vu32;
 typedef volatile u64 vu64;
 typedef volatile s32   vs8;
-typedef volatile s16 vs16;
+typedef volatile s32 vs16;
 typedef volatile s32 vs32;
 typedef volatile s64 vs64;
 
@@ -122,27 +122,27 @@ struct BgAffineSrcData
 {
     s32 texX;
     s32 texY;
-    s16 scrX;
-    s16 scrY;
-    s16 sx;
-    s16 sy;
+    s32 scrX;
+    s32 scrY;
+    s32 sx;
+    s32 sy;
     u32 alpha;
 };
 
 struct BgAffineDstData
 {
-    s16 pa;
-    s16 pb;
-    s16 pc;
-    s16 pd;
+    s32 pa;
+    s32 pb;
+    s32 pc;
+    s32 pd;
     s32 dx;
     s32 dy;
 };
 
 struct ObjAffineSrcData
 {
-    s16 xScale;
-    s16 yScale;
+    s32 xScale;
+    s32 yScale;
     u32 rotation;
 };
 

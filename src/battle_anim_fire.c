@@ -27,7 +27,7 @@ static void AnimTask_EruptionLaunchRocks_Step(u8);
 static void CreateEruptionLaunchRocks(u8, u8, u8);
 static void AnimEruptionLaunchRock(struct Sprite *);
 static u32 GetEruptionLaunchRockInitialYPos(u8);
-static void InitEruptionLaunchRockCoordData(struct Sprite *, s16, s16);
+static void InitEruptionLaunchRockCoordData(struct Sprite *, s32, s32);
 static void UpdateEruptionLaunchRockPos(struct Sprite *);
 static void AnimEruptionFallingRock_Step(struct Sprite *);
 static void AnimWillOWispOrb_Step(struct Sprite *);
@@ -376,7 +376,7 @@ const struct SpriteTemplate gEruptionLaunchRockSpriteTemplate =
     .callback = AnimEruptionLaunchRock,
 };
 
-static const s16 sEruptionLaunchRockSpeeds[][2] =
+static const s32 sEruptionLaunchRockSpeeds[][2] =
 {
     {-2, -5},
     {-1, -1},
@@ -1065,7 +1065,7 @@ static void AnimEruptionLaunchRock(struct Sprite *sprite)
 
 static u32 GetEruptionLaunchRockInitialYPos(u8 spriteId)
 {
-    s16 y = gSprites[spriteId].y + gSprites[spriteId].y2 + gSprites[spriteId].centerToCornerVecY;
+    s32 y = gSprites[spriteId].y + gSprites[spriteId].y2 + gSprites[spriteId].centerToCornerVecY;
 
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         y += 74;
@@ -1075,7 +1075,7 @@ static u32 GetEruptionLaunchRockInitialYPos(u8 spriteId)
     return y;
 }
 
-static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s16 speedX, s16 speedY)
+static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s32 speedX, s32 speedY)
 {
     sprite->sSpeedDelay = 0;
     sprite->sLaunchStage = 0;
@@ -1259,8 +1259,8 @@ void AnimWillOWispOrb(struct Sprite *sprite)
 
 static void AnimWillOWispOrb_Step(struct Sprite *sprite)
 {
-    s16 initialData5;
-    s16 newData5;
+    s32 initialData5;
+    s32 newData5;
 
     if (!AnimTranslateLinear(sprite))
     {

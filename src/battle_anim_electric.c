@@ -668,7 +668,7 @@ void AnimSparkElectricity(struct Sprite *sprite)
 {
     u8 battler;
     u32 matrixNum;
-    s16 sineVal;
+    s32 sineVal;
 
     switch (gBattleAnimArgs[4])
     {
@@ -847,12 +847,12 @@ static void AnimTask_ElectricBolt_Step(u8 taskId)
 {
     u32 r8;
     u32 r2;
-    s16 r12;
+    s32 r12;
     u8 spriteId = 0;
     u8 r7 = 0;
     u8 sp = gTasks[taskId].data[2];
-    s16 x = gTasks[taskId].data[0];
-    s16 y = gTasks[taskId].data[1];
+    s32 x = gTasks[taskId].data[0];
+    s32 y = gTasks[taskId].data[1];
 
     if (!gTasks[taskId].data[2])
     {

@@ -8,8 +8,8 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Substitute creates a Substitute at the cost of 1/4 users maximum HP")
 {
-    s16 maxHP = 0;
-    s16 costHP = 0;
+    s32 maxHP = 0;
+    s32 costHP = 0;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

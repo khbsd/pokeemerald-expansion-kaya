@@ -58,7 +58,7 @@ void Trader_ResetFlag(void)
 void CreateAvailableDecorationsMenu(u32 taskId)
 {
     u32 i;
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     struct WindowTemplate windowTemplate = {
         .bg = 0,
@@ -98,7 +98,7 @@ void CreateAvailableDecorationsMenu(u32 taskId)
 
 void Task_BufferDecorSelectionAndCloseWindow(u32 taskId, u32 decorationId)
 {
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
         gSpecialVar_0x8004 = 0xFFFF;
     else

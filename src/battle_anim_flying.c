@@ -580,7 +580,7 @@ struct FeatherDanceData
     u32 unk0_1:4;
     u32 unk1:8;
     u32 unk2;
-    s16 unk4;
+    s32 unk4;
     u32 unk6;
     u32 unk8;
     u32 unkA;
@@ -592,7 +592,7 @@ struct FeatherDanceData
 static void AnimFallingFeather(struct Sprite *sprite)
 {
     u8 battler, matrixNum, sinIndex;
-    s16 spriteCoord;
+    s32 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
@@ -667,7 +667,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
 static void AnimFallingFeather_Step(struct Sprite *sprite)
 {
     u8 matrixNum, sinIndex;
-    s16 sinVal = 0;
+    s32 sinVal = 0;
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
     if (data->unk0_0a)
     {
@@ -1207,8 +1207,8 @@ static void AnimUnusedFlashingLight_Step(struct Sprite *sprite)
 static void AnimSkyAttackBird(struct Sprite *sprite)
 {
     u32 rotation;
-    s16 posx = sprite->x;
-    s16 posy = sprite->y;
+    s32 posx = sprite->x;
+    s32 posy = sprite->y;
 
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);

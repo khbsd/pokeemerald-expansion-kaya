@@ -43,7 +43,7 @@ enum
 
 // use pokeblock
 extern u8 gPokeblockMonId;
-extern s16 gPokeblockGain;
+extern s32 gPokeblockGain;
 
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void));
 
@@ -60,15 +60,15 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);
 void OpenPokeblockCaseOnFeeder(void);
 void ResetPokeblockScrollPositions(void);
-u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
+u8 CreatePokeblockCaseSprite(s32 x, s32 y, u8 subpriority);
 void ClearPokeblocks(void);
 u8 GetHighestPokeblocksFlavorLevel(const struct Pokeblock *pokeblock);
 u8 GetPokeblocksFeel(const struct Pokeblock *pokeblock);
 s32 GetFirstFreePokeblockSlot(void);
 bool32 AddPokeblock(const struct Pokeblock *pokeblock);
 bool32 TryClearPokeblock(u8 pkblId);
-s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 field);
-s16 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock);
+s32 GetPokeblockData(const struct Pokeblock *pokeblock, u8 field);
+s32 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock);
 void PokeblockCopyName(const struct Pokeblock *pokeblock, u8 *dest);
 bool32 CopyMonFavoritePokeblockName(u8 nature, u8 *dest);
 u8 GetPokeblocksFlavor(const struct Pokeblock *pokeblock);

@@ -392,7 +392,7 @@ extern const u32 gFreqTable[];
 extern const u32 gPcmSamplesPerVBlankTable[];
 
 extern const u8 gCgbScaleTable[];
-extern const s16 gCgbFreqTable[];
+extern const s32 gCgbFreqTable[];
 extern const u8 gNoiseTable[];
 
 extern const struct PokemonCrySong gPokemonCrySongTemplate;
@@ -436,7 +436,7 @@ void m4aSoundVSyncOff(void);
 
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u32 tempo);
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u32 volume);
-void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s16 pitch);
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s32 pitch);
 void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s32 pan);
 void ClearModM(struct MusicPlayerTrack *track);
 void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 modDepth);
@@ -445,7 +445,7 @@ void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 lf
 struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone);
 void SetPokemonCryVolume(u8 val);
 void SetPokemonCryPanpot(s32 val);
-void SetPokemonCryPitch(s16 val);
+void SetPokemonCryPitch(s32 val);
 void SetPokemonCryLength(u32 val);
 void SetPokemonCryRelease(u8 val);
 void SetPokemonCryProgress(u32 val);

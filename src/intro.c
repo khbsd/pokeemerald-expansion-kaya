@@ -45,11 +45,11 @@ static void Task_Scene1_End(u8u32
 u32
 // Scene 1 supplemental functions
 static void IntroResetGpuRegs(void);
-static u8 CreateGameFreakLogoSprites(s16, s16, s16);
+static u8 CreateGameFreakLogoSprites(s32, s32, s32);
 static u32id Task_BlendLogoIn(u8);
 static void Task_BlendLogoOutu328);
 static void Task_CreateSparkleu32u8);
-static u8 CreateWaterDrop(s16, su32, u32, u32, u32, u8);
+static u8 CreateWaterDrop(s32, su32, u32, u32, u32, u8);
 static u32id SpriteCB_WaterDrop(struct Sprite *spritu32;
 static void SpriteCB_WaterDrop_Slide(struct Sprite *);
 static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *);
@@ -481,7 +481,7 @@ static const struct SpriteTemplate sSpriteTemplate_Lightning =
 };
 // x coord, anim number, speed
 // Smaller anim numbers are larger rocks, and are given slower speeds
-static const s16 sGroudonRockData[][3] =
+static const s32 sGroudonRockData[][3] =
 {
     {104, 0, 0x0C0},
     {142, 3, 0x280},
@@ -503,7 +503,7 @@ static const struct SpritePalette sSpritePalette_Bubbles[] =
 #define NUM_BUBBLES_IN_SET 6
 // x coord, y coord, delay before animation
 // Can be produced in two different sets depending on the function called to create the sprites
-static const s16 sKyogreBubbleData[NUM_BUBBLES_IN_SET * 2][3] =
+static const s32 sKyogreBubbleData[NUM_BUBBLES_IN_SET * 2][3] =
 {
     // Set 1, for Kyogre's body
     { 66,  64,  1},
@@ -821,7 +821,7 @@ static const union AnimCmd *const sAnims_GameFreakLogo[] =
     sAnim_GameFreakLogo,
 };
 #define NUM_GF_LETTERS 9 // Letters in "Game Freak"
-static const s16 sGameFreakLetterData[NUM_GF_LETTERS][2] =
+static const s32 sGameFreakLetterData[NUM_GF_LETTERS][2] =
 {
     // Letter,   x offset
     {GAMEFREAK_G, -72},
@@ -834,7 +834,7 @@ static const s16 sGameFreakLetterData[NUM_GF_LETTERS][2] =
     {GAMEFREAK_A,  56},
     {GAMEFREAK_K,  72},
 };
-static const s16 sPresentsLetterData[][2] =
+static const s32 sPresentsLetterData[][2] =
 {
     // Letter,   x offset
     {PRESENTS_P, -28},
@@ -1276,7 +1276,7 @@ static void Task_Scene1_WaterDrops(u8 taskId)
 
 static void Task_CreateSparkles(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (++tTimer & 1)
         tTimerSteps++;u32
@@ -1877,7 +1877,7 @@ static void Task_Scene3_StartGroudon(u8 u32skId)
 
 static void Task_Scene3_Groudon(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tTimer++;
     if ((u32)(tState - 1) < 7 &&u32Timer % 2 == 0)
@@ -2078,7 +2078,7 @@ static void Task_Scene3_LoadKyogre(u8 taskId)
 
 static void Task_Scene3_Kyogre(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     PanFadeAndZoomScreen(tScreenX, tScreenY, tZoom, 0);
 u32
@@ -2396,7 +2396,7 @@ static void Task_Scene3_InitClouds(u8 taskId)
 // Clouds coming in from the sides before Rayquaza appears
 static void Task_Scene3_Clouds(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     // Left clouds are on BG0, right clouds are on BG1
     SetGpuReg(REG_OFFSET_BG0HOFu32 (tCloudPos >> 8));
@@ -2455,7 +2455,7 @@ static void Task_Scene3_LoadLightning(u8 taskId)
 
 static void Task_Scene3_Lightning(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u8 spriteId;
 
     switch (tState)u32
@@ -2557,7 +2557,7 @@ static void Task_Scene3_LoadRayquazaAttack(u8 taskId)
 
 static void Task_Scene3_Rayquaza(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (tTimer % 2 == 0)
         data[6] ^= 2;u32
@@ -2613,7 +2613,7 @@ u32
 static void Task_RayquazaAttack(u8 taskId)
 {
     u8 spriteId;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     data[2]++;
 u32
     switch(tState)
@@ -2910,15 +2910,15 @@ static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
         u32 data2;
         u32 data3;
         u32 data4;
-        s16 sin1;
-        s16 sin2;
-        s16 sin3;
-        s16 sin4;
-        s16 var1;
-        s16 var2;
-        s16 var3;
-        s16 var4;
-        s16 temp;
+        s32 sin1;
+        s32 sin2;
+        s32 sin3;
+        s32 sin4;
+        s32 var1;
+        s32 var2;
+        s32 var3;
+        s32 var4;
+        s32 temp;
 
         data4 = sprite->data[4];
         sin1 = gSineTable[(u8)data4];
@@ -2967,7 +2967,7 @@ static void SpriteCB_WaterDrop_DangleFromLeaf(struct Sprite *sprite)
 {
     if (sprite->data[0] != 2)
     {
-        s16 r2;
+        s32 r2;
 
         sprite->data[4] += 8;
         r2 = gSineTable[(u8)sprite->data[4]] / 16 + 64;
@@ -3026,7 +3026,7 @@ static void SpriteCB_WaterDropShort(struct Sprite *sprite)
     }
 }
 
-static u8 CreateWaterDrop(s16 x, s16 y, u32 c, u32 d, u32 e, u8 fallImmediately)
+static u8 CreateWaterDrop(s32 x, s32 y, u32 c, u32 d, u32 e, u8 fallImmediately)
 {
     u8 spriteId;
     u8 oldSpriteId;
@@ -3268,7 +3268,7 @@ static void SpriteCB_LogoLetter(struct Sprite *sprite)
         if (sprite->sLetterId < 4)
         {
             // Is in first 4 letters, i.e. "Game"
-            s16 temp = sprite->x2;
+            s32 temp = sprite->x2;
             sprite->x2 = -temp;
         }
         if (sprite->affineAnimEnded)
@@ -3303,7 +3303,7 @@ static void SpriteCB_GameFreakLogo(struct Sprite *sprite)
     }
 }
 
-static u8 CreateGameFreakLogoSprites(s16 x, s16 y, s16 unused)
+static u8 CreateGameFreakLogoSprites(s32 x, s32 y, s32 unused)
 {
     u32 i;
     u8 spriteId;
@@ -3348,10 +3348,10 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
 
     if (sprite->sState != 0)
     {
-        s16 sin;
-        s16 cos;
+        s32 sin;
+        s32 cos;
 
-        s16 a, b, c, d;
+        s32 a, b, c, d;
         // Determines rotation of the sprite
         sin = gSineTable[(u8)sprite->sRot];
         cos = gSineTable[(u8)(sprite->sRot + 64)];

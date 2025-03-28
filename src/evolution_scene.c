@@ -1492,7 +1492,7 @@ static void VBlankCB_TradeEvolutionScene(void)
 // of stages, each stage having a different palette range and timing
 static void Task_UpdateBgPalette(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (tPaused)
         return;

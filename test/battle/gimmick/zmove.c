@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves are affected by Ion Deluge")
     }
 }
 
-SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves deal 1/4 damage through protect", s16 damage)
+SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves deal 1/4 damage through protect", s32 damage)
 {
     bool32 protected;
     PARAMETRIZE { protected = TRUE; }
@@ -275,7 +275,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Copycat raises the user's accuracy by one stage a
     }
 }
 
-SINGLE_BATTLE_TEST("(Z-MOVE) Z-Me First raises the user's speed by two stages and copies the last used non-status move as a Z-Move with boosted damage", s16 damage)
+SINGLE_BATTLE_TEST("(Z-MOVE) Z-Me First raises the user's speed by two stages and copies the last used non-status move as a Z-Move with boosted damage", s32 damage)
 {
     u32 meFirst;
     PARAMETRIZE { meFirst = TRUE; }
@@ -492,7 +492,7 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Dancer does not use a Z-Move if the battler has use
 }
 
 // Signature Z-Moves
-SINGLE_BATTLE_TEST("(Z-MOVE) Light That Burns the Sky uses the battler's highest attacking stat", s16 damage)
+SINGLE_BATTLE_TEST("(Z-MOVE) Light That Burns the Sky uses the battler's highest attacking stat", s32 damage)
 {
     bool32 useSwordsDance;
     PARAMETRIZE { useSwordsDance = FALSE; }

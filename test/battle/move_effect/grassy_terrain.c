@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain recovers 1/16th HP at end of turn")
     }
 }
 
-SINGLE_BATTLE_TEST("Grassy Terrain increases power of Grass-type moves by 30/50 percent", s16 damage)
+SINGLE_BATTLE_TEST("Grassy Terrain increases power of Grass-type moves by 30/50 percent", s32 damage)
 {
     bool32 terrain;
     PARAMETRIZE { terrain = FALSE; }

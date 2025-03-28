@@ -95,8 +95,8 @@ struct DexNavSearch
     u32 monLevel;
     u32 proximity;
     u32 environment;
-    s16 tileX;
-    s16 tileY;
+    s32 tileX;
+    s32 tileY;
     u32 fldEffSpriteId;
     u32 fldEffId;
     u32 movementCount;
@@ -150,7 +150,7 @@ static u32 DexNavGeneratePotential(u32 searchLevel);
 static u32 DexNavTryGenerateMonLevel(u32 species, u32 environment);
 static u32 GetEncounterLevelFromMapData(u32 species, u32 environment);
 static void CreateDexNavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, u32 item, u32* moves);
-static u32 GetPlayerDistance(s16 x, s16 y);
+static u32 GetPlayerDistance(s32 x, s32 y);
 static u32 DexNavPickTile(u32 environment, u32 xSize, u32 ySize, bool32 smallScan);
 static void DexNavProximityUpdate(void);
 static void DexNavDrawIcons(void);
@@ -432,7 +432,7 @@ static const struct CompressedSpriteSheet sHiddenMonIconSpriteSheet = {sHiddenMo
 ///////////////////////
 //// DEXNAV SEARCH ////
 ///////////////////////
-static s16 GetSearchWindowY(void)
+static s32 GetSearchWindowY(void)
 {
     return (GetWindowAttribute(sDexNavSearchDataPtr->windowId, WINDOW_TILEMAP_TOP) * 8);
 }
@@ -589,7 +589,7 @@ static void RemoveDexNavWindowAndGfx(void)
 //////////////////////
 ////DEXNAV SEARCH/////
 //////////////////////
-static u32 GetPlayerDistance(s16 x, s16 y)
+static u32 GetPlayerDistance(s32 x, s32 y)
 {
     u32 deltaX = abs(x - (gSaveBlock1Ptr->pos.x + 7));
     u32 deltaY = abs(y - (gSaveBlock1Ptr->pos.y + 7));
@@ -605,10 +605,10 @@ static void DexNavProximityUpdate(void)
 static bool32 DexNavPickTile(u32 environment, u32 areaX, u32 areaY, bool32 smallScan)
 {
     // area of map to cover starting from camera position {-7, -7}
-    s16 topX = gSaveBlock1Ptr->pos.x - SCANSTART_X + (smallScan * 5);
-    s16 topY = gSaveBlock1Ptr->pos.y - SCANSTART_Y + (smallScan * 5);
-    s16 botX = topX + areaX;
-    s16 botY = topY + areaY;
+    s32 topX = gSaveBlock1Ptr->pos.x - SCANSTART_X + (smallScan * 5);
+    s32 topY = gSaveBlock1Ptr->pos.y - SCANSTART_Y + (smallScan * 5);
+    s32 botX = topX + areaX;
+    s32 botY = topY + areaY;
     u32 i;
     bool32 nextIter;
     u32 scale = 0;
@@ -1719,7 +1719,7 @@ static void CreateSelectionCursor(void)
     UpdateCursorPosition();
 }
 
-static void CreateNoDataIcon(s16 x, s16 y)
+static void CreateNoDataIcon(s32 x, s32 y)
 {
     CreateSprite(&sNoDataIconTemplate, x, y, 0);
 }
@@ -1980,7 +1980,7 @@ static void DexNavLoadEncounterData(void)
     }
 }
 
-static void TryDrawIconInSlot(u32 species, s16 x, s16 y)
+static void TryDrawIconInSlot(u32 species, s32 x, s32 y)
 {
     if (species == SPECIES_NONE || species > NUM_SPECIES)
         CreateNoDataIcon(x, y);   //'X' in slot
@@ -1992,7 +1992,7 @@ static void TryDrawIconInSlot(u32 species, s16 x, s16 y)
 
 static void DrawSpeciesIcons(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 i;
     u32 species;
 

@@ -109,8 +109,8 @@ struct FrontierPassData
     void (*callback)(void);
     u32 state;
     u32 battlePoints;
-    s16 cursorX;
-    s16 cursorY;
+    s32 cursorX;
+    s32 cursorY;
     u32 cursorArea;
     u32 previousCursorArea;
     bool32 hasBattleRecord:1;
@@ -128,8 +128,8 @@ struct FrontierPassGfx
     u32 *mapAndCardTilemap;
     u32 *battleRecordTilemap;
     bool32 zooming;
-    s16 scaleX;
-    s16 scaleY;
+    s32 scaleX;
+    s32 scaleY;
     u32 tilemapBuff1[BG_SCREEN_SIZE * 2];
     u32 tilemapBuff2[BG_SCREEN_SIZE * 2];
     u32 tilemapBuff3[BG_SCREEN_SIZE / 2];
@@ -138,8 +138,8 @@ struct FrontierPassGfx
 struct FrontierPassSaved
 {
     void (*callback)(void);
-    s16 cursorX;
-    s16 cursorY;
+    s32 cursorX;
+    s32 cursorY;
 };
 
 struct FrontierMapData
@@ -188,7 +188,7 @@ static const u32 sCardBall_Filled_Tilemap[]      = INCBIN_U32("graphics/frontier
 static const u32 sBattleRecord_Tilemap[]         = INCBIN_U32("graphics/frontier_pass/record_frame.bin.lz");
 static const u32 sMapAndCard_Zooming_Tilemap[]   = INCBIN_U32("graphics/frontier_pass/small_map_and_card_affine.bin.lz");
 
-static const s16 sBgAffineCoords[][2] =
+static const s32 sBgAffineCoords[][2] =
 {
     [CURSOR_AREA_MAP - 1]  = {216,  32},
     [CURSOR_AREA_CARD - 1] = {216, 128}
@@ -338,10 +338,10 @@ static const u32 sTextColors[][3] =
 
 struct
 {
-    s16 yStart;
-    s16 yEnd;
-    s16 xStart;
-    s16 xEnd;
+    s32 yStart;
+    s32 yEnd;
+    s32 xStart;
+    s32 xEnd;
 }
 static const sPassAreasLayout[CURSOR_AREA_COUNT - 1] =
 {
@@ -550,8 +550,8 @@ struct
 {
     const u32 *name;
     const u32 *description;
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 animNum;
 } static const sMapLandmarks[NUM_FRONTIER_FACILITIES] =
 {
@@ -864,7 +864,7 @@ static bool32 HideFrontierPass(void)
     return FALSE;
 }
 
-static u32 GetCursorAreaFromCoords(s16 x, s16 y)
+static u32 GetCursorAreaFromCoords(s32 x, s32 y)
 {
     u32 i;
 
@@ -1066,7 +1066,7 @@ static void Task_HandleFrontierPassInput(u32 taskId)
 // Zoom in/out for the Frontier map or the trainer card
 static void Task_PassAreaZoom(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (sPassData->state)
     {
@@ -1509,7 +1509,7 @@ static bool32 ExitFrontierMap(void)
 
 static void Task_HandleFrontierMap(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -1633,7 +1633,7 @@ static void InitFrontierMapSprites(void)
     struct SpriteTemplate sprite;
     u32 spriteId;
     u32 id;
-    s16 x = 0, y;
+    s32 x = 0, y;
 
     FreeAllSpritePalettes();
     LoadSpritePalettes(sSpritePalettes);

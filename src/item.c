@@ -613,7 +613,7 @@ void MoveItemSlotInList(struct ItemSlot* itemSlots_, u32 from, u32 to_)
 
     if (from != to)
     {
-        s16 i, count;
+        s32 i, count;
         struct ItemSlot firstSlot = itemSlots[from];
 
         if (to > from)

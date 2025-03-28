@@ -8,7 +8,7 @@ ASSUMPTIONS
     ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
 }
 
-SINGLE_BATTLE_TEST("Sunlight multiplies the power of Fire-type moves by 1.5x", s16 damage)
+SINGLE_BATTLE_TEST("Sunlight multiplies the power of Fire-type moves by 1.5x", s32 damage)
 {
     u32 setupMove;
     PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Sunlight multiplies the power of Fire-type moves by 1.5x", s
     }
 }
 
-SINGLE_BATTLE_TEST("Sunlight multiplies the power of Water-type moves by 0.5x", s16 damage)
+SINGLE_BATTLE_TEST("Sunlight multiplies the power of Water-type moves by 0.5x", s32 damage)
 {
     u32 setupMove;
     PARAMETRIZE { setupMove = MOVE_CELEBRATE; }

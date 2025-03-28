@@ -247,7 +247,7 @@ static void CB2_ExitWirelessCommunicationStatusScreen(void)
 }
 
 // Cycle through palettes that relocate various shades of blue to create the wave effect at the bottom of the screen.
-static void CyclePalette(s16 * counter, s16 * palIdx)
+static void CyclePalette(s32 * counter, s32 * palIdx)
 {
     s32 idx;
     if (++(*counter) > 5)

@@ -45,7 +45,7 @@ static void Bike_UpdateDirTimerHistory(u32);
 static void Bike_UpdateABStartSelectHistory(u32);
 static u32 Bike_DPadToDirection(u32);
 static u32 GetBikeCollision(u32);
-static u32 GetBikeCollisionAt(struct ObjectEvent *, s16, s16, u32, u32);
+static u32 GetBikeCollisionAt(struct ObjectEvent *, s32, s32, u32, u32);
 static bool32 IsRunningDisallowedByMetatile(u32);
 static void Bike_TryAdvanceCyclingRoadCollisions();
 static u32 CanBikeFaceDirOnMetatile(u32, u32);
@@ -890,14 +890,14 @@ static u32 GetBikeCollision(u32 direction)
 {
     u32 metatileBehavior;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    s16 x = playerObjEvent->currentCoords.x;
-    s16 y = playerObjEvent->currentCoords.y;
+    s32 x = playerObjEvent->currentCoords.x;
+    s32 y = playerObjEvent->currentCoords.y;
     MoveCoords(direction, &x, &y);
     metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
     return GetBikeCollisionAt(playerObjEvent, x, y, direction, metatileBehavior);
 }
 
-static u32 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 direction, u32 metatileBehavior)
+static u32 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s32 x, s32 y, u32 direction, u32 metatileBehavior)
 {
     u32 collision = CheckForObjectEventCollision(objectEvent, x, y, direction, metatileBehavior);
 
@@ -972,7 +972,7 @@ static bool32 WillPlayerCollideWithCollision(u32 newTileCollision, u32 direction
 
 bool32 IsBikingDisallowedByPlayer(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 tileBehavior;
 
     if (!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER)))
@@ -1040,10 +1040,10 @@ static void Bike_SetBikeStill(void)
     gPlayerAvatar.bikeSpeed = PLAYER_SPEED_STANDING;
 }
 
-s16 GetPlayerSpeed(void)
+s32 GetPlayerSpeed(void)
 {
     // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the player's current speed.
-    s16 machSpeeds[3];
+    s32 machSpeeds[3];
 
     memcpy(machSpeeds, sMachBikeSpeeds, sizeof(machSpeeds));
 
@@ -1059,7 +1059,7 @@ s16 GetPlayerSpeed(void)
 
 void Bike_HandleBumpySlopeJump(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 tileBehavior;
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)

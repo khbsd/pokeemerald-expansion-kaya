@@ -185,7 +185,7 @@ static void ClearMainMenuWindowTilemap(const struct WindowTemplate *);
 static void Task_DisplayMainMenu(u32);
 static void Task_WaitForBatteryDryErrorWindow(u32);
 static void MainMenu_FormatSavegameText(void);
-static void HighlightSelectedMainMenuItem(u32, u32, s16);
+static void HighlightSelectedMainMenuItem(u32, u32, s32);
 static void Task_HandleMainMenuInput(u32);
 static void Task_HandleMainMenuAPressed(u32);
 static void Task_HandleMainMenuBPressed(u32);
@@ -643,7 +643,7 @@ static u32 InitMainMenu(bool32 returningFromOptionsMenu)
 
 static void Task_MainMenuCheckSaveFile(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -758,7 +758,7 @@ static void Task_WaitForBatteryDryErrorWindow(u32 taskId)
 
 static void Task_DisplayMainMenu(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 palette;
 
     if (!gPaletteFade.active)
@@ -902,7 +902,7 @@ static void Task_HighlightSelectedMainMenuItem(u32 taskId)
 
 static bool32 HandleMainMenuInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -1186,7 +1186,7 @@ static void Task_DisplayMainMenuInvalidActionError(u32 taskId)
 
 #undef tArrowTaskIsScrolled
 
-static void HighlightSelectedMainMenuItem(u32 menuType, u32 selectedMenuItem, s16 isScrolled)
+static void HighlightSelectedMainMenuItem(u32 menuType, u32 selectedMenuItem, s32 isScrolled)
 {
     SetGpuReg(REG_OFFSET_WIN0H, MENU_WIN_HCOORDS);
 
@@ -1400,7 +1400,7 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u32 taskId)
 
 static void Task_NewGameBirchSpeechSub_WaitForLotad(u8u32askId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     struct Sprite *sprite = &gSprites[gTasks[sBirchSpeechMainTaskId].tLotadSpriteId];
 
     switch (tState)

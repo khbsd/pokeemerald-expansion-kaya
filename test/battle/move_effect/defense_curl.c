@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_DEFENSE_CURL) == EFFECT_DEFENSE_CURL);
 }
 
-SINGLE_BATTLE_TEST("Defense Curl raises Defense by 1 stage", s16 damage)
+SINGLE_BATTLE_TEST("Defense Curl raises Defense by 1 stage", s32 damage)
 {
     bool32 raiseDefense;
     PARAMETRIZE { raiseDefense = FALSE; }

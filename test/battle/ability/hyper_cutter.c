@@ -3,8 +3,8 @@
 
 SINGLE_BATTLE_TEST("Hyper Cutter prevents intimidate")
 {
-    s16 turnOneHit;
-    s16 turnTwoHit;
+    s32 turnOneHit;
+    s32 turnTwoHit;
 
     GIVEN {
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_SHED_SKIN); }

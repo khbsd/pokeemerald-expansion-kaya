@@ -718,8 +718,8 @@ const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[] =
 };
 
 EWRAM_DATA u32 gIntroCredits_MovingSceneryVBase = 0;
-EWRAM_DATA s16 gIntroCredits_MovingSceneryVOffset = 0;
-EWRAM_DATA s16 gIntroCredits_MovingSceneryState = 0;
+EWRAM_DATA s32 gIntroCredits_MovingSceneryVOffset = 0;
+EWRAM_DATA s32 gIntroCredits_MovingSceneryState = 0;
 
 static void CreateCloudSprites(void);
 static void CreateTreeSprites(void);
@@ -941,9 +941,9 @@ u32 CreateBicycleBgAnimationTask(u32 mode, u32 bg1Speed, u32 bg2Speed, u32 bg3Sp
 
 static void Task_BicycleBgAnimation(u32 taskId)
 {
-    s16 bg1Speed;
-    s16 bg2Speed;
-    s16 bg3Speed;
+    s32 bg1Speed;
+    s32 bg2Speed;
+    s32 bg3Speed;
     s32 offset;
 
     // Move BG1
@@ -1037,7 +1037,7 @@ void CycleSceneryPalette(u32 mode)
 static void SpriteCB_MovingScenery(struct Sprite *sprite)
 {
     s32 x;
-    s16 state = gIntroCredits_MovingSceneryState;
+    s32 state = gIntroCredits_MovingSceneryState;
 
     if (state != INTROCRED_SCENERY_FROZEN)
     {
@@ -1115,7 +1115,7 @@ static void SpriteCB_Bicycle(struct Sprite *sprite)
     sprite->y2 = gSprites[sprite->sPlayerSpriteId].y2;
 }
 
-u32 CreateIntroBrendanSprite(s16 x, s16 y)
+u32 CreateIntroBrendanSprite(s32 x, s32 y)
 {
     u32 playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
     u32 bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
@@ -1123,7 +1123,7 @@ u32 CreateIntroBrendanSprite(s16 x, s16 y)
     return playerSpriteId;
 }
 
-u32 CreateIntroMaySprite(s16 x, s16 y)
+u32 CreateIntroMaySprite(s32 x, s32 y)
 {
     u32 playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
     u32 bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
@@ -1148,7 +1148,7 @@ static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 }
 
 // In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static u32 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
+static u32 UNUSED CreateIntroFlygonSprite_Unused(s32 x, s32 y)
 {
     u32 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
     u32 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);
@@ -1159,7 +1159,7 @@ static u32 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
 }
 
 
-u32 CreateIntroFlygonSprite(s16 x, s16 y)
+u32 CreateIntroFlygonSprite(s32 x, s32 y)
 {
     u32 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x - 32, y, 5);
     u32 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatias, x + 32, y, 6);

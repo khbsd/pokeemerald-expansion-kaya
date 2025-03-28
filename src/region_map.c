@@ -85,9 +85,9 @@ static u32 ProcessRegionMapInput_Full(void);
 static u32 MoveRegionMapCursor_Full(void);
 static u32 ProcessRegionMapInput_Zoomed(void);
 static u32 MoveRegionMapCursor_Zoomed(void);
-static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u32 e, u32 f, u32 rotation);
+static void CalcZoomScrollParams(s32 scrollX, s32 scrollY, s32 c, s32 d, u32 e, u32 f, u32 rotation);
 static u32 GetMapSecIdAt(u32 x, u32 y);
-static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
+static void RegionMap_SetBG2XAndBG2Y(s32 x, s32 y);
 static void InitMapBasedOnPlayerLocation(void);
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
 static u32 GetMapsecType(u32 mapSecId);
@@ -905,7 +905,7 @@ bool32 UpdateRegionMapZoom(void)
     return retVal;
 }
 
-static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u32 e, u32 f, u32 rotation)
+static void CalcZoomScrollParams(s32 scrollX, s32 scrollY, s32 c, s32 d, u32 e, u32 f, u32 rotation)
 {
     s32 var1;
     s32 var2;
@@ -928,7 +928,7 @@ static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u32 e, 
     sRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y)
+static void RegionMap_SetBG2XAndBG2Y(s32 x, s32 y)
 {
     sRegionMap->bg2x = (x << 8) + 0x1c00;
     sRegionMap->bg2y = (y << 8) + 0x2400;
@@ -951,7 +951,7 @@ void UpdateRegionMapVideoRegs(void)
     }
 }
 
-void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y)
+void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s32 x, s32 y)
 {
     CalcZoomScrollParams(x, y, 0x38, 0x48, 0x100, 0x100, 0);
     UpdateRegionMapVideoRegs();
@@ -1135,8 +1135,8 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
     s32 mapGroup;
     s32 mapNum;
     u32 dimensionScale;
-    s16 xOnMap;
-    s16 yOnMap;
+    s32 xOnMap;
+    s32 yOnMap;
     const struct MapHeader *mapHeader;
 
     y = 0;
@@ -1255,7 +1255,7 @@ static u32 CorrectSpecialMapSecId_Internal(u32 mapSecId)
 
 static u32 GetTerraOrMarineCaveMapSecId(void)
 {
-    s16 idx;
+    s32 idx;
 
     idx = VarGet(VAR_ABNORMAL_WEATHER_LOCATION) - 1;
 

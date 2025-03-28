@@ -381,7 +381,7 @@ static const s32 sIndicatorPositions[][2] =
 void CreateIndicatorSprite(u32 battler)
 {
     u32 position, spriteId;
-    s16 xHealthbox = 0, x = 0, y = 0;
+    s32 xHealthbox = 0, x = 0, y = 0;
 
     position = GetBattlerPosition(battler);
     GetBattlerHealthboxCoords(battler, &xHealthbox, &y);

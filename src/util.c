@@ -96,10 +96,10 @@ void StoreWordInTwoHalfwords(u32 *h, u32 w)
 
 void LoadWordFromTwoHalfwords(u32 *h, u32 *w)
 {
-    *w = h[0] | (s16)h[1] << 16;
+    *w = h[0] | (s32)h[1] << 16;
 }
 
-void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u32 alpha)
+void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s32 scrX, s32 scrY, s32 sx, s32 sy, u32 alpha)
 {
     src->texX = texX;
     src->texY = texY;
@@ -110,7 +110,7 @@ void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX
     src->alpha = alpha;
 }
 
-void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u32 alpha)
+void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s32 scrX, s32 scrY, s32 sx, s32 sy, u32 alpha)
 {
     struct BgAffineSrcData src;
 

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_CONFIDE) == EFFECT_SPECIAL_ATTACK_DOWN);
 }
 
-SINGLE_BATTLE_TEST("Confide lowers Special Attack", s16 damage)
+SINGLE_BATTLE_TEST("Confide lowers Special Attack", s32 damage)
 {
     bool32 lowerSpecialAttack;
     PARAMETRIZE { lowerSpecialAttack = FALSE; }

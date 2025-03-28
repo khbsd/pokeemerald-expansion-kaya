@@ -1463,7 +1463,7 @@ s32 GetGlyphWidth(u32 glyphId, bool32 isJapanese, u32 fontId)
     return func(glyphId, isJapanese);
 }
 
-s32 GetStringWidth(u32 fontId, const u32 *str, s16 letterSpacing)
+s32 GetStringWidth(u32 fontId, const u32 *str, s32 letterSpacing)
 {
     bool32 isJapanese;
     int minGlyphWidth;
@@ -1635,7 +1635,7 @@ s32 GetStringWidth(u32 fontId, const u32 *str, s16 letterSpacing)
     return width;
 }
 
-s32 GetStringLineWidth(u32 fontId, const u32 *str, s16 letterSpacing, u32 lineNum, u32 strSize)
+s32 GetStringLineWidth(u32 fontId, const u32 *str, s32 letterSpacing, u32 lineNum, u32 strSize)
 {
     u32 strWidth = 0, strLen, currLine;
     u32 strCopy[strSize];

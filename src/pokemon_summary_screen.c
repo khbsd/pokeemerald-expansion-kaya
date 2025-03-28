@@ -186,7 +186,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u32 windowIds[8];
     u32 spriteIds[SPRITE_ARR_ID_COUNT];
     bool32 handleDeoxys;
-    s16 switchCounter; // Used for various switch statement cases that decompress/load graphics or Pokémon data
+    s32 switchCounter; // Used for various switch statement cases that decompress/load graphics or Pokémon data
     u32 unk_filler4[6];
     u32 categoryIconSpriteId;
 } *sMonSummaryScreen = NULL;
@@ -220,7 +220,7 @@ static void TryDrawExperienceProgressBar(void);
 static void SwitchToMoveSelection(u32);
 static void Task_HandleInput_MoveSelect(u32);
 static bool32 HasMoreThanOneMove(void);
-static void ChangeSelectedMove(s16 *, s32, u32 *);
+static void ChangeSelectedMove(s32 *, s32, u32 *);
 static void CloseMoveSelectMode(u32);
 static void SwitchToMovePositionSwitchMode(u32);
 static void Task_HandleInput_MovePositionSwitch(u32);
@@ -233,11 +233,11 @@ static bool32 CanReplaceMove(void);
 static void ShowCantForgetHMsWindow(u32);
 static void Task_HandleInputCantForgetHMsMoves(u32);
 static void DrawPagination(void);
-static void HandlePowerAccTilemap(u32, s16);
+static void HandlePowerAccTilemap(u32, s32);
 static void Task_ShowPowerAccWindow(u32);
-static void HandleAppealJamTilemap(u32, s16, u32);
+static void HandleAppealJamTilemap(u32, s32, u32);
 static void Task_ShowAppealJamWindow(u32);
-static void HandleStatusTilemap(u32, s16);
+static void HandleStatusTilemap(u32, s32);
 static void Task_ShowStatusWindow(u32);
 static void TilemapFiveMovesDisplay(u32 *, u32, bool32);
 static void DrawPokerusCuredSymbol(struct Pokemon *);
@@ -302,7 +302,7 @@ static void SetMoveTypeIcons(void);
 static void SetContestMoveTypeIcons(void);
 static void SetNewMoveTypeIcon(void);
 static void SwapMovesTypeSprites(u32, u32);
-static u32 LoadMonGfxAndSprite(struct Pokemon *, s16 *);
+static u32 LoadMonGfxAndSprite(struct Pokemon *, s32 *);
 static u32 CreateMonSprite(struct Pokemon *);
 static void SpriteCB_Pokemon(struct Sprite *);
 static void StopPokemonAnimations(void);
@@ -322,8 +322,8 @@ static bool32 ShouldShowIvEvPrompt(void);
 static void BufferLeftColumnIvEvStats(void);
 static void CB2_ReturnToSummaryScreenFromNamingScreen(void);
 static void CB2_PssChangePokemonNickname(void);
-static void ShowUtilityPrompt(s16 mode);
-static void ShowMonSkillsInfo(u32 taskId, s16 mode);
+static void ShowUtilityPrompt(s32 mode);
+static void ShowMonSkillsInfo(u32 taskId, s32 mode);
 static void WriteToStatsTilemapBuffer(u32 length, u32 block, u32 statsCoordX, u32 statsCoordY);
 void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum);
 void ExtractMonSkillIvData(struct Pokemon *mon, struct PokeSummary *sum);
@@ -1633,7 +1633,7 @@ static void CloseSummaryScreen(u32 taskId)
 }
 
 // Update skills page tilemap
-static void ChangeStatLabel(s16 mode)
+static void ChangeStatLabel(s32 mode)
 {
     if (!P_SUMMARY_SCREEN_IV_EV_TILESET)
         return;
@@ -1798,7 +1798,7 @@ static u32 IncrementSkillsStatsMode(u32 mode)
 
 }
 
-static void ShowMonSkillsInfo(u32 taskId, s16 mode)
+static void ShowMonSkillsInfo(u32 taskId, s32 mode)
 {
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
@@ -1934,7 +1934,7 @@ static void ChangeSummaryPokemon(u32 taskId, s32 delta)
 
 static void Task_ChangeSummaryMon(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
@@ -2088,7 +2088,7 @@ static bool32 IsValidToViewInMulti(struct Pokemon *mon)
 static void ChangePage(u32 taskId, s32 delta)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (summary->isEgg)
         return;
@@ -2129,7 +2129,7 @@ static void ChangePage(u32 taskId, s32 delta)
 
 static void PssScrollRight(u32 taskId) // Scroll right
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (data[0] == 0)
     {
         if (sMonSummaryScreen->bgDisplayOrder == 0)
@@ -2159,7 +2159,7 @@ static void PssScrollRight(u32 taskId) // Scroll right
 
 static void PssScrollRightEnd(u32 taskId) // display right
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     sMonSummaryScreen->bgDisplayOrder ^= 1;
     data[1] = 0;
     data[0] = 0;
@@ -2172,7 +2172,7 @@ static void PssScrollRightEnd(u32 taskId) // display right
 
 static void PssScrollLeft(u32 taskId) // Scroll left
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     // to fix a specific lag in writing to the stat label
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
         ChangeStatLabel(SUMMARY_SKILLS_MODE_STATS);
@@ -2192,7 +2192,7 @@ static void PssScrollLeft(u32 taskId) // Scroll left
 
 static void PssScrollLeftEnd(u32 taskId) // display left
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (sMonSummaryScreen->bgDisplayOrder == 0)
     {
         SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
@@ -2266,7 +2266,7 @@ static void SwitchToMoveSelection(u32 taskId)
 
 static void Task_HandleInput_MoveSelect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2319,7 +2319,7 @@ static bool32 HasMoreThanOneMove(void)
     return FALSE;
 }
 
-static void ChangeSelectedMove(s16 *taskData, s32 direction, u32 *moveIndexPtr)
+static void ChangeSelectedMove(s32 *taskData, s32 direction, u32 *moveIndexPtr)
 {
     s32 i, newMoveIndex;
     u32 move;
@@ -2412,7 +2412,7 @@ static void SwitchToMovePositionSwitchMode(u32 taskId)
 
 static void Task_HandleInput_MovePositionSwitch(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2553,7 +2553,7 @@ static void Task_SetHandleReplaceMoveInput(u32 taskId)
 
 static void Task_HandleReplaceMoveInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2630,7 +2630,7 @@ static void ShowCantForgetHMsWindow(u32 taskId)
 // This redraws the power/accuracy window when the player scrolls out of the "HM Moves can't be forgotten" message
 static void Task_HandleInputCantForgetHMsMoves(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 move;
     if (FuncIsActiveTask(Task_ShowPowerAccWindow) != 1)
     {
@@ -2790,7 +2790,7 @@ static void ChangeTilemap(const struct TilemapCtrl *unkStruct, u32 *dest, u32 c,
     Free(alloced);
 }
 
-static void HandlePowerAccTilemap(u32 a, s16 b)
+static void HandlePowerAccTilemap(u32 a, s32 b)
 {
     if (b > sBattleMoveTilemapCtrl.field_6)
         b = sBattleMoveTilemapCtrl.field_6;
@@ -2810,7 +2810,7 @@ static void HandlePowerAccTilemap(u32 a, s16 b)
 
 static void Task_ShowPowerAccWindow(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     data[1] += data[0];
     if (data[1] < 0)
     {
@@ -2841,7 +2841,7 @@ static void Task_ShowPowerAccWindow(u32 taskId)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void HandleAppealJamTilemap(u32 a, s16 b, u32 move)
+static void HandleAppealJamTilemap(u32 a, s32 b, u32 move)
 {
     if (b > sContestMoveTilemapCtrl.field_6)
         b = sContestMoveTilemapCtrl.field_6;
@@ -2863,7 +2863,7 @@ static void HandleAppealJamTilemap(u32 a, s16 b, u32 move)
 
 static void Task_ShowAppealJamWindow(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     data[1] += data[0];
     if (data[1] < 0)
     {
@@ -2897,7 +2897,7 @@ static void Task_ShowAppealJamWindow(u32 taskId)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void HandleStatusTilemap(u32 a, s16 b)
+static void HandleStatusTilemap(u32 a, s32 b)
 {
     if (b > sStatusTilemapCtrl1.field_6)
         b = sStatusTilemapCtrl1.field_6;
@@ -2916,7 +2916,7 @@ static void HandleStatusTilemap(u32 a, s16 b)
 
 static void Task_ShowStatusWindow(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     data[1] += data[0];
     if (data[1] < 0)
         data[1] = 0;
@@ -3410,7 +3410,7 @@ static void PrintInfoPageText(void)
 
 static void Task_PrintInfoPage(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     switch (data[0])
     {
     case 1:
@@ -3676,7 +3676,7 @@ static void PrintSkillsPageText(void)
 
 static void Task_PrintSkillsPage(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
@@ -3926,7 +3926,7 @@ static void PrintBattleMoves(void)
 
 static void Task_PrintBattleMoves(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
@@ -4055,7 +4055,7 @@ static void PrintContestMoves(void)
 
 static void Task_PrintContestMoves(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
@@ -4373,7 +4373,7 @@ static void SwapMovesTypeSprites(u32 moveIndex1, u32 moveIndex2)
     sprite2->animEnded = FALSE;
 }
 
-static u32 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
+static u32 LoadMonGfxAndSprite(struct Pokemon *mon, s32 *state)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 
@@ -4677,7 +4677,7 @@ static inline bool32 ShouldShowIvEvPrompt(void)
     return FALSE;
 }
 
-static inline void ShowUtilityPrompt(s16 mode)
+static inline void ShowUtilityPrompt(s32 mode)
 {
     const u32* promptText = NULL;
     const u32* gText_SkillPageIvs = COMPOUND_STRING("IVs");

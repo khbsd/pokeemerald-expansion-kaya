@@ -372,19 +372,19 @@ struct SlotMachine
     /*0x08*/ u32 matches;
     /*0x0A*/ u32 reelTimeSpinsLeft;
     /*0x0B*/ u32 reelTimeSpinsUsed;
-    /*0x0C*/ s16 coins;
-    /*0x0E*/ s16 payout;
-    /*0x10*/ s16 netCoinLoss; // never negative
-    /*0x12*/ s16 bet;
-    /*0x14*/ s16 reeltimePixelOffset;
-    /*0x16*/ s16 reeltimePosition;
-    /*0x18*/ s16 currentReel;
-    /*0x1A*/ s16 reelSpeed;
-    /*0x1C*/ s16 reelPixelOffsets[NUM_REELS];
+    /*0x0C*/ s32 coins;
+    /*0x0E*/ s32 payout;
+    /*0x10*/ s32 netCoinLoss; // never negative
+    /*0x12*/ s32 bet;
+    /*0x14*/ s32 reeltimePixelOffset;
+    /*0x16*/ s32 reeltimePosition;
+    /*0x18*/ s32 currentReel;
+    /*0x1A*/ s32 reelSpeed;
+    /*0x1C*/ s32 reelPixelOffsets[NUM_REELS];
     /*0x22*/ u32 reelShockOffsets[NUM_REELS];
-    /*0x28*/ s16 reelPositions[NUM_REELS];
-    /*0x2E*/ s16 reelExtraTurns[NUM_REELS];
-    /*0x34*/ s16 winnerRows[NUM_REELS];
+    /*0x28*/ s32 reelPositions[NUM_REELS];
+    /*0x2E*/ s32 reelExtraTurns[NUM_REELS];
+    /*0x34*/ s32 winnerRows[NUM_REELS];
     /*0x3A*/ u32 slotReelTasks[NUM_REELS];
     /*0x3D*/ u32 digDisplayTaskId;
     /*0x3E*/ u32 pikaPowerBoltTaskId;
@@ -412,7 +412,7 @@ struct DigitalDisplaySprite
 {
     /*0x00*/ u32 spriteTemplateId;
     /*0x01*/ u32 dispInfoId;
-    /*0x02*/ s16 spriteId;
+    /*0x02*/ s32 spriteId;
 };
 
 static void CB2_SlotMachineSetup(void);
@@ -481,7 +481,7 @@ static bool32 IsFinalTask_Task_Payout(void);
 static bool32 PayoutTask_Init(struct Task *);
 static bool32 PayoutTask_GivePayout(struct Task *);
 static bool32 PayoutTask_Free(struct Task *);
-static u32 GetSymbolAtRest(u32, s16);
+static u32 GetSymbolAtRest(u32, s32);
 static void CreateReelTasks(void);
 static void SpinSlotReel(u32);
 static void StopSlotReel(u32);
@@ -557,8 +557,8 @@ static void ReelTime_ExplodeMachine(struct Task *);
 static void ReelTime_WaitExplode(struct Task *);
 static void ReelTime_WaitSmoke(struct Task *);
 static void ReelTime_EndFailure(struct Task *);
-static void LoadReelTimeWindowTilemap(s16, s16);
-static void ClearReelTimeWindowTilemap(s16);
+static void LoadReelTimeWindowTilemap(s32, s32);
+static void ClearReelTimeWindowTilemap(s32);
 static void OpenInfoBox(u32);
 static bool32 IsInfoBoxClosed(void);
 static void Task_InfoBox(u32 );
@@ -578,7 +578,7 @@ static void DigitalDisplay_Idle(struct Task *);
 static void Task_DigitalDisplay(u32);
 static void CreateReelSymbolSprites(void);
 static void CreateCreditPayoutNumberSprites(void);
-static void CreateCoinNumberSprite(s16, s16, u32, s16);
+static void CreateCoinNumberSprite(s32, s32, u32, s32);
 static void CreateReelBackgroundSprite(void);
 static void CreateReelTimePikachuSprite(void);
 static void DestroyReelTimePikachuSprite(void);
@@ -591,10 +591,10 @@ static void DestroyReelTimeMachineSprites(void);
 static void DestroyReelTimeShadowSprites(void);
 static void DestroyBrokenReelTimeMachineSprite(void);
 static void CreateReelTimeBoltSprites(void);
-static void SetReelTimeBoltDelay(s16);
+static void SetReelTimeBoltDelay(s32);
 static void DestroyReelTimeBoltSprites(void);
 static void CreateReelTimePikachuAuraSprites(void);
-static void SetReelTimePikachuAuraFlashDelay(s16);
+static void SetReelTimePikachuAuraFlashDelay(s32);
 static void DestroyReelTimePikachuAuraSprites(void);
 static void CreateReelTimeExplosionSprite(void);
 static void DestroyReelTimeExplosionSprite(void);
@@ -603,18 +603,18 @@ static void DestroyReelTimeDuckSprites(void);
 static void CreateReelTimeSmokeSprite(void);
 static bool32 IsReelTimeSmokeAnimFinished(void);
 static void DestroyReelTimeSmokeSprite(void);
-static u32 CreatePikaPowerBoltSprite(s16, s16);
+static u32 CreatePikaPowerBoltSprite(s32, s32);
 static void DestroyPikaPowerBoltSprite(u32);
-static u32 CreateDigitalDisplaySprite(u32, void (*callback)(struct Sprite *), s16, s16, s16);
+static u32 CreateDigitalDisplaySprite(u32, void (*callback)(struct Sprite *), s32, s32, s32);
 static void LoadSlotMachineGfx(void);
 static void LoadReelBackground(void);
 static void LoadMenuGfx(void);
 static void LoadMenuAndReelOverlayTilemaps(void);
-static void SetReelButtonTilemap(s16, u32, u32, u32, u32);
+static void SetReelButtonTilemap(s32, u32, u32, u32, u32);
 static void LoadInfoBoxTilemap(void);
 static void LoadSlotMachineMenuTilemap(void);
 static void LoadSlotMachineReelOverlay(void);
-static u32 CreateStdDigitalDisplaySprite(u32, u32, s16);
+static u32 CreateStdDigitalDisplaySprite(u32, u32, s32);
 static void SpriteCB_DigitalDisplay_Static(struct Sprite *);
 static void SpriteCB_DigitalDisplay_Stop(struct Sprite *);
 static void SpriteCB_DigitalDisplay_AButtonStop(struct Sprite *);
@@ -685,7 +685,7 @@ static const u32 sSpecialDrawOdds[NUM_SLOT_MACHINE_IDS][MAX_BET];
 static const u32 sBiasSymbols[];
 static const u32 sBiasesSpecial[3];
 static const u32 sBiasesRegular[5];
-static const s16 sDigitalDisplay_SpriteCoords[][2];
+static const s32 sDigitalDisplay_SpriteCoords[][2];
 static const SpriteCallback sDigitalDisplay_SpriteCallbacks[];
 static const struct SpriteTemplate *const sSpriteTemplates_DigitalDisplay[NUM_DIG_DISPLAY_SPRITES];
 static const struct SubspriteTable *const sSubspriteTables_DigitalDisplay[NUM_DIG_DISPLAY_SPRITES];
@@ -705,7 +705,7 @@ static const u32 sReelTimeGfx[];
 static const struct SpriteSheet sSlotMachineSpriteSheets[22];
 static const struct SpritePalette sSlotMachineSpritePalettes[];
 static const u32 *const sDigitalDisplay_Pal;
-static const s16 sInitialReelPositions[NUM_REELS][2];
+static const s32 sInitialReelPositions[NUM_REELS][2];
 static const u32 sBiasProbabilities_Special[][NUM_SLOT_MACHINE_IDS];
 static const u32 sBiasProbabilities_Regular[][NUM_SLOT_MACHINE_IDS];
 static const u32 sReelTimeProbabilities_NormalGame[][17];
@@ -925,7 +925,7 @@ static void (*const sReelStopButtonTasks[])(struct Task *task, u32 taskId) =
     StopReelButton_Unpress,
 };
 
-static const s16 sReelButtonOffsets[NUM_REELS] = {5, 10, 15};
+static const s32 sReelButtonOffsets[NUM_REELS] = {5, 10, 15};
 
 static void (*const sPikaPowerBoltTasks[])(struct Task *task) =
 {
@@ -966,8 +966,8 @@ static void (*const sReelTimeTasks[])(struct Task *task) =
 };
 
 static const u32 sReelTimePikachuAnimIds[] = {1, 1, 2, 2};
-static const s16 sReelTimeBoltDelays[] = {64, 48, 24, 8};
-static const s16 sPikachuAuraFlashDelays[] = {10, 8, 6, 4};
+static const s32 sReelTimeBoltDelays[] = {64, 48, 24, 8};
+static const s32 sPikachuAuraFlashDelays[] = {10, 8, 6, 4};
 
 static void (*const sInfoBoxTasks[])(struct Task *task) =
 {
@@ -1340,7 +1340,7 @@ static bool32 SlotTask_AskInsertBet(struct Task *task)
 // SLOTTASK_BET_INPUT
 static bool32 SlotTask_HandleBetInput(struct Task *task)
 {
-    s16 i;
+    s32 i;
 
     if (JOY_NEW(SELECT_BUTTON))
     {
@@ -1860,12 +1860,12 @@ static bool32 ShouldTrySpecialBias(void)
 // the unluckiest, a 73% chance.
 static u32 TrySelectBias_Special(void)
 {
-    s16 whichBias;
+    s32 whichBias;
 
     for (whichBias = 0; whichBias < (int)ARRAY_COUNT(sBiasesSpecial); whichBias++)
     {
-        s16 rval = Random() & 0xff;
-        s16 value = sBiasProbabilities_Special[whichBias][sSlotMachine->machineId];
+        s32 rval = Random() & 0xff;
+        s32 value = sBiasProbabilities_Special[whichBias][sSlotMachine->machineId];
         if (value > rval)
             break;
     }
@@ -1874,12 +1874,12 @@ static u32 TrySelectBias_Special(void)
 
 static u32 TrySelectBias_Regular(void)
 {
-    s16 whichBias;
+    s32 whichBias;
 
     for (whichBias = 0; whichBias < (int)ARRAY_COUNT(sBiasesRegular); whichBias++)
     {
-        s16 rval = Random() & 0xff;
-        s16 value = sBiasProbabilities_Regular[whichBias][sSlotMachine->machineId];
+        s32 rval = Random() & 0xff;
+        s32 value = sBiasProbabilities_Regular[whichBias][sSlotMachine->machineId];
 
         // Boost odds of BIAS_POWER if it's a lucky game.
         if (whichBias == 0 && sSlotMachine->luckyGame == TRUE)
@@ -1925,7 +1925,7 @@ static u32 GetReelTimeSpinProbability(u32 spins)
 static void GetReelTimeDraw(void)
 {
     u32 rval;
-    s16 spins;
+    s32 spins;
 
     sSlotMachine->reelTimeDraw = 0;
     rval = Random();
@@ -2166,33 +2166,33 @@ static bool32 PayoutTask_Free(struct Task *task)
 //           | ... | ... | ... |
 //           | [ ] | [ ] | [ ] | <- offset = 20
 //           .-----------------.
-static u32 GetSymbolAtRest(u32 reel, s16 offset)
+static u32 GetSymbolAtRest(u32 reel, s32 offset)
 {
-    s16 pos = (sSlotMachine->reelPositions[reel] + offset) % SYMBOLS_PER_REEL;
+    s32 pos = (sSlotMachine->reelPositions[reel] + offset) % SYMBOLS_PER_REEL;
     if (pos < 0)
         pos += SYMBOLS_PER_REEL;
     return sReelSymbols[reel][pos];
 }
 
 // Calculates GetSymbolAtRest as if the reel were snapped downwards into place.
-static u32 GetSymbol(u32 reel, s16 offset)
+static u32 GetSymbol(u32 reel, s32 offset)
 {
-    s16 inc = 0;
-    s16 pixelOffset = sSlotMachine->reelPixelOffsets[reel] % REEL_SYMBOL_HEIGHT;
+    s32 inc = 0;
+    s32 pixelOffset = sSlotMachine->reelPixelOffsets[reel] % REEL_SYMBOL_HEIGHT;
     if (pixelOffset != 0)
         inc = -1;
     return GetSymbolAtRest(reel, offset + inc);
 }
 
-static u32 GetReelTimeSymbol(s16 offset)
+static u32 GetReelTimeSymbol(s32 offset)
 {
-    s16 newPosition = (sSlotMachine->reeltimePosition + offset) % REELTIME_SYMBOLS;
+    s32 newPosition = (sSlotMachine->reeltimePosition + offset) % REELTIME_SYMBOLS;
     if (newPosition < 0)
         newPosition += REELTIME_SYMBOLS;
     return sReelTimeSymbols[newPosition];
 }
 
-static void AdvanceSlotReel(u32 reelIndex, s16 value)
+static void AdvanceSlotReel(u32 reelIndex, s32 value)
 {
     sSlotMachine->reelPixelOffsets[reelIndex] += value;
     sSlotMachine->reelPixelOffsets[reelIndex] %= REEL_HEIGHT;
@@ -2201,9 +2201,9 @@ static void AdvanceSlotReel(u32 reelIndex, s16 value)
 
 // Advances the reel no further than the next symbol. Returns the remaining
 // pixels until the next symbol.
-s16 AdvanceSlotReelToNextSymbol(u32 reelIndex, s16 value)
+s32 AdvanceSlotReelToNextSymbol(u32 reelIndex, s32 value)
 {
-    s16 offset = sSlotMachine->reelPixelOffsets[reelIndex] % REEL_SYMBOL_HEIGHT;
+    s32 offset = sSlotMachine->reelPixelOffsets[reelIndex] % REEL_SYMBOL_HEIGHT;
     if (offset != 0)
     {
         if (offset < value)
@@ -2214,7 +2214,7 @@ s16 AdvanceSlotReelToNextSymbol(u32 reelIndex, s16 value)
     return offset;
 }
 
-static void AdvanceReeltimeReel(s16 value)
+static void AdvanceReeltimeReel(s32 value)
 {
     sSlotMachine->reeltimePixelOffset += value;
     sSlotMachine->reeltimePixelOffset %= REELTIME_REEL_HEIGHT;
@@ -2223,9 +2223,9 @@ static void AdvanceReeltimeReel(s16 value)
 
 // Advances the reel no further than the next symbol. Returns the remaining
 // pixels until the next symbol.
-s16 AdvanceReeltimeReelToNextSymbol(s16 value)
+s32 AdvanceReeltimeReelToNextSymbol(s32 value)
 {
-    s16 offset = sSlotMachine->reeltimePixelOffset % REELTIME_SYMBOL_HEIGHT;
+    s32 offset = sSlotMachine->reeltimePixelOffset % REELTIME_SYMBOL_HEIGHT;
     if (offset != 0)
     {
         if (offset < value)
@@ -2319,7 +2319,7 @@ static bool32 ReelTask_DecideStop(struct Task *task)
 static bool32 ReelTask_MoveToStop(struct Task *task)
 {
     u32 reelStopShocks[ARRAY_COUNT(sReelStopShocks)];
-    s16 reelPixelPos;
+    s32 reelPixelPos;
 
     memcpy(reelStopShocks, sReelStopShocks, sizeof(sReelStopShocks));
     reelPixelPos = sSlotMachine->reelPixelOffsets[task->tReelId] % REEL_SYMBOL_HEIGHT;
@@ -2385,7 +2385,7 @@ static bool32 DecideStop_Bias_Reel1(void)
 // The biasSymbol for subsequent reels is determined based on which of the bias
 // symbols can be found in reel 1. This really only matters when the machine is
 // biased toward 7's. It will try to match a 7 of the same color as reel 1.
-static bool32 EitherSymbolAtPos_Reel1(s16 pos, u32 sym1, u32 sym2)
+static bool32 EitherSymbolAtPos_Reel1(s32 pos, u32 sym1, u32 sym2)
 {
     u32 sym = GetSymbol(LEFT_REEL, pos);
     if (sym == sym1 || sym == sym2)
@@ -2398,7 +2398,7 @@ static bool32 EitherSymbolAtPos_Reel1(s16 pos, u32 sym1, u32 sym2)
 
 // Returns true if there are cherries on screen in reel 1 after the given number
 // of turns.
-static bool32 AreCherriesOnScreen_Reel1(s16 turns)
+static bool32 AreCherriesOnScreen_Reel1(s32 turns)
 {
     if (GetSymbol(LEFT_REEL, 1 - turns) == SYMBOL_CHERRY
         || GetSymbol(LEFT_REEL, 2 - turns) == SYMBOL_CHERRY
@@ -2420,7 +2420,7 @@ static bool32 BiasedTowardCherryOr7s(void)
 // stop there. That symbol becomes the biasSymbol for the subsequent reels.
 static bool32 DecideStop_Bias_Reel1_Bet1(u32 sym1, u32 sym2)
 {
-    s16 i;
+    s32 i;
 
     for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
@@ -2459,7 +2459,7 @@ static bool32 DecideStop_Bias_Reel1_Bet1(u32 sym1, u32 sym2)
 //    up on screen.
 static bool32 DecideStop_Bias_Reel1_Bet2or3(u32 sym1, u32 sym2)
 {
-    s16 i;
+    s32 i;
     bool32 cherry7Bias = BiasedTowardCherryOr7s();
     if (cherry7Bias || !AreCherriesOnScreen_Reel1(0))
     {
@@ -2513,8 +2513,8 @@ static bool32 DecideStop_Bias_Reel2(void)
 // as reel 1.
 static bool32 DecideStop_Bias_Reel2_Bet1or2(void)
 {
-    s16 i;
-    s16 reel1BiasRow = sSlotMachine->winnerRows[0];
+    s32 i;
+    s32 reel1BiasRow = sSlotMachine->winnerRows[0];
 
     for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
@@ -2563,7 +2563,7 @@ static bool32 DecideStop_Bias_Reel2_Bet1or2(void)
 // only 2 coins.
 static bool32 DecideStop_Bias_Reel2_Bet3(void)
 {
-    s16 i;
+    s32 i;
     // If you can line up the bias symbol in the same row as reel 1 within 4
     // turns
     if (DecideStop_Bias_Reel2_Bet1or2())
@@ -2626,8 +2626,8 @@ static bool32 DecideStop_Bias_Reel3(void)
 // row as reel 2.
 static bool32 DecideStop_Bias_Reel3_Bet1or2(u32 biasSymbol)
 {
-    s16 i;
-    s16 reel2BiasRow = sSlotMachine->winnerRows[1];
+    s32 i;
+    s32 reel2BiasRow = sSlotMachine->winnerRows[1];
 
     for (i = 0; i <= MAX_EXTRA_TURNS; i++)
     {
@@ -2645,8 +2645,8 @@ static bool32 DecideStop_Bias_Reel3_Bet1or2(u32 biasSymbol)
 // symbols from the first two reels.
 static bool32 DecideStop_Bias_Reel3_Bet3(u32 biasSymbol)
 {
-    s16 i;
-    s16 biasRow;
+    s32 i;
+    s32 biasRow;
 
     // First two bias symbols in the same row. Try to line up bias symbol in
     // same the row here too
@@ -2676,7 +2676,7 @@ static bool32 DecideStop_Bias_Reel3_Bet3(u32 biasSymbol)
 // Based on the distribution of reel 1, this will add at most 3 extra turns.
 static void DecideStop_NoBias_Reel1(void)
 {
-    s16 i = 0;
+    s32 i = 0;
 
     while (AreCherriesOnScreen_Reel1(i) != 0)
         i++;
@@ -2733,7 +2733,7 @@ static void DecideStop_NoBias_Reel2_Bet1(void)
         u32 reel1MiddleSym = GetSymbol(LEFT_REEL, 2 - sSlotMachine->reelExtraTurns[0]);
         if (IfSymbol7_SwitchColor(&reel1MiddleSym))
         {
-            s16 i;
+            s32 i;
             for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (reel1MiddleSym == GetSymbol(MIDDLE_REEL, 2 - i))
@@ -2764,7 +2764,7 @@ static void DecideStop_NoBias_Reel2_Bet2(void)
         u32 reel1BiasSym = GetSymbol(LEFT_REEL, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
         if (IfSymbol7_SwitchColor(&reel1BiasSym))
         {
-            s16 i;
+            s32 i;
             for (i = 0; i <= MAX_EXTRA_TURNS; i++)
             {
                 if (reel1BiasSym == GetSymbol(MIDDLE_REEL, sSlotMachine->winnerRows[0] - i))
@@ -2822,8 +2822,8 @@ static void DecideStop_NoBias_Reel2_Bet2(void)
 //    turns
 static void DecideStop_NoBias_Reel2_Bet3(void)
 {
-    s16 i;
-    s16 j;
+    s32 i;
+    s32 j;
     u32 reel1BiasSym;
 
     if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->machineBias & BIAS_STRAIGHT_7)
@@ -2958,7 +2958,7 @@ static void DecideStop_NoBias_Reel3(void)
 //  - Otherwise, spin until you get a symbol that won't complete a match.
 static void DecideStop_NoBias_Reel3_Bet1(void)
 {
-    s16 i = 0;
+    s32 i = 0;
     u32 sym1 = GetSymbol(LEFT_REEL, 2 - sSlotMachine->reelExtraTurns[0]);
     u32 sym2 = GetSymbol(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
 
@@ -3023,8 +3023,8 @@ static void DecideStop_NoBias_Reel3_Bet1(void)
 // lose.
 static void DecideStop_NoBias_Reel3_Bet2(void)
 {
-    s16 extraTurns = 0;
-    s16 i;
+    s32 extraTurns = 0;
+    s32 i;
     u32 sym1;
     u32 sym2;
     u32 sym3;
@@ -3057,7 +3057,7 @@ static void DecideStop_NoBias_Reel3_Bet2(void)
 
     while (TRUE)
     {
-        s16 numMatches;
+        s32 numMatches;
         // Iterate over the rows of the screen after `extraTurns` turns
         for (i = 1, numMatches = 0; i <= 3; i++)
         {
@@ -3120,8 +3120,8 @@ static void DecideStop_NoBias_Reel3_Bet3(void)
     u32 sym1;
     u32 sym2;
     u32 sym3;
-    s16 row;
-    s16 i;
+    s32 row;
+    s32 i;
 
     // Spin until there's no matches in any row straight across, potentially
     // skewing toward a 7 mismatch. Consider this the new starting position for
@@ -3307,7 +3307,7 @@ static bool32 TryStopMatchLineFlashing(u32 spriteId)
 
 static void SpriteCB_FlashMatchingLines(struct Sprite *sprite)
 {
-    s16 maxColorChange;
+    s32 maxColorChange;
     if (sprite->sFlashing)
     {
         if (!sprite->sDelayTimer--)
@@ -3440,9 +3440,9 @@ static void PikaPowerBolt_WaitAnim(struct Task *task)
 {
     if (gSprites[task->tSpriteId].data[7])
     {
-        s16 r5 = task->tNumBolts + 2;
-        s16 r3 = 0;
-        s16 r2 = 0;
+        s32 r5 = task->tNumBolts + 2;
+        s32 r3 = 0;
+        s32 r2 = 0;
         if (task->tNumBolts == 1)
             r3 = 1, r2 = 1;
         else if (task->tNumBolts == 16)
@@ -3457,9 +3457,9 @@ static void PikaPowerBolt_WaitAnim(struct Task *task)
 
 static void PikaPowerBolt_ClearAll(struct Task *task)
 {
-    s16 r5 = task->tNumBolts + 2;
-    s16 r3 = 0;
-    s16 r2 = 3;
+    s32 r5 = task->tNumBolts + 2;
+    s32 r3 = 0;
+    s32 r2 = 3;
     if (task->tNumBolts == 1)
         r3 = 1, r2 = 1;
     else if (task->tNumBolts == 16)
@@ -3489,9 +3489,9 @@ static void ResetPikaPowerBoltTask(struct Task *task)
 
 static void LoadPikaPowerMeter(u32 bolts)
 {
-    s16 i;
-    s16 r3 = 0, r1 = 0;
-    s16 r4 = 3;
+    s32 i;
+    s32 r3 = 0, r1 = 0;
+    s32 r4 = 3;
     for (i = 0; i < bolts; i++, r4++)
     {
         r3 = 0, r1 = 0;
@@ -3573,7 +3573,7 @@ static void ReelTime_Init(struct Task *task)
 
 static void ReelTime_WindowEnter(struct Task *task)
 {
-    s16 r3;
+    s32 r3;
     gSpriteCoordOffsetX -= 8;
     task->data[1] += 8;
     r3 = ((task->data[1] + 240) & 0xff) >> 3;
@@ -3607,8 +3607,8 @@ static void ReelTime_PikachuSpeedUp1(struct Task *task)
 {
     int i;
     u32 pikachuAnimIds[ARRAY_COUNT(sReelTimePikachuAnimIds)];
-    s16 reelTimeBoltDelays[ARRAY_COUNT(sReelTimeBoltDelays)];
-    s16 pikachuAuraFlashDelays[ARRAY_COUNT(sPikachuAuraFlashDelays)];
+    s32 reelTimeBoltDelays[ARRAY_COUNT(sReelTimeBoltDelays)];
+    s32 pikachuAuraFlashDelays[ARRAY_COUNT(sPikachuAuraFlashDelays)];
 
     memcpy(pikachuAnimIds, sReelTimePikachuAnimIds, sizeof(sReelTimePikachuAnimIds));
     memcpy(reelTimeBoltDelays, sReelTimeBoltDelays, sizeof(sReelTimeBoltDelays));
@@ -3688,7 +3688,7 @@ static void ReelTime_CheckExplode(struct Task *task)
 // Reel spins until it lands on the selected outcome.
 static void ReelTime_LandOnOutcome(struct Task *task)
 {
-    s16 reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
+    s32 reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
     if (reeltimePixelOffset)
     {
         reeltimePixelOffset = AdvanceReeltimeReelToNextSymbol(task->tRtReelSpeed >> 8);
@@ -3746,7 +3746,7 @@ static void ReelTime_WaitClearPikaPower(struct Task *task)
 
 static void ReelTime_CloseWindow(struct Task *task)
 {
-    s16 r4;
+    s32 r4;
     gSpriteCoordOffsetX -= 8;
     task->data[1] += 8;
     task->data[3] += 8;
@@ -3861,14 +3861,14 @@ static void ReelTime_EndFailure(struct Task *task)
     DestroyTask(FindTaskIdByFunc(Task_ReelTime));
 }
 
-static void LoadReelTimeWindowTilemap(s16 a0, s16 a1)
+static void LoadReelTimeWindowTilemap(s32 a0, s32 a1)
 {
-    s16 i;
+    s32 i;
     for (i = 4; i < 15; i++)
         LoadBgTilemap(1, &sReelTimeWindow_Tilemap[a1 + (i - 4) * 20], 2, 32 * i + a0);
 }
 
-static void ClearReelTimeWindowTilemap(s16 a0)
+static void ClearReelTimeWindowTilemap(s32 a0)
 {
     u32 i;
     for (i = 4; i < 15; i++)
@@ -4012,7 +4012,7 @@ static void CreateDigitalDisplayScene(u32 id)
     }
 }
 
-static void AddDigitalDisplaySprite(u32 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 spriteId)
+static void AddDigitalDisplaySprite(u32 templateIdx, SpriteCallback callback, s32 x, s32 y, s32 spriteId)
 {
     u32 i;
     struct Task *task = &gTasks[sSlotMachine->digDisplayTaskId];
@@ -4070,9 +4070,9 @@ static void DigitalDisplay_Idle(struct Task *task)
 
 static void CreateReelSymbolSprites(void)
 {
-    s16 i;
-    s16 j;
-    s16 x;
+    s32 i;
+    s32 j;
+    s32 x;
     for (i = 0, x = 0x30; i < 3; i++, x += 0x28)
     {
         for (j = 0; j < 120; j += 24)
@@ -4097,8 +4097,8 @@ static void SpriteCB_ReelSymbol(struct Sprite *sprite)
 
 static void CreateCreditPayoutNumberSprites(void)
 {
-    s16 i;
-    s16 x;
+    s32 i;
+    s32 x;
 
     // Credit number sprite
     for (x = 203, i = 1; i <= MAX_COINS; i *= 10, x -= 7)
@@ -4114,7 +4114,7 @@ static void CreateCreditPayoutNumberSprites(void)
 #define sDigitMax data[2]
 #define sCurNum   data[3] // Only used to determine whether the sprite has already been updated to show the correct digit
 
-static void CreateCoinNumberSprite(s16 x, s16 y, bool32 isPayout, s16 digitMult)
+static void CreateCoinNumberSprite(s32 x, s32 y, bool32 isPayout, s32 digitMult)
 {
     struct Sprite *sprite = &gSprites[CreateSprite(&sSpriteTemplate_CoinNumber, x, y, 13)];
     sprite->oam.priority = 2;
@@ -4256,7 +4256,7 @@ static void CreateBrokenReelTimeMachineSprite(void)
 static void CreateReelTimeNumberSprites(void)
 {
     u32 i;
-    s16 r5;
+    s32 r5;
     for (i = 0, r5 = 0; i < ARRAY_COUNT(sSlotMachine->reelTimeNumberSpriteIds); i++, r5 += 20)
     {
         u32 spriteId = CreateSprite(&sSpriteTemplate_ReelTimeNumbers, 368, 0, 10);
@@ -4270,7 +4270,7 @@ static void CreateReelTimeNumberSprites(void)
 
 static void SpriteCB_ReelTimeNumbers(struct Sprite *sprite)
 {
-    s16 r0 = (u32)(sSlotMachine->reeltimePixelOffset + sprite->data[7]);
+    s32 r0 = (u32)(sSlotMachine->reeltimePixelOffset + sprite->data[7]);
     r0 %= 40;
     sprite->y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, GetReelTimeSymbol(r0 / 20));
@@ -4382,7 +4382,7 @@ static void SpriteCB_ReelTimeBolt(struct Sprite *sprite)
     }
 }
 
-static void SetReelTimeBoltDelay(s16 delay)
+static void SetReelTimeBoltDelay(s32 delay)
 {
     gSprites[sSlotMachine->reelTimeBoltSpriteIds[0]].sDelay = delay;
     gSprites[sSlotMachine->reelTimeBoltSpriteIds[1]].sDelay = delay;
@@ -4437,7 +4437,7 @@ static void SpriteCB_ReelTimePikachuAura(struct Sprite *sprite)
     }
 }
 
-static void SetReelTimePikachuAuraFlashDelay(s16 delay)
+static void SetReelTimePikachuAuraFlashDelay(s32 delay)
 {
     gSprites[sSlotMachine->reelTimePikachuAuraSpriteIds[0]].sDelay = delay;
 }
@@ -4574,7 +4574,7 @@ static void DestroyReelTimeSmokeSprite(void)
 #undef sTimer
 #undef sAnimFinished
 
-static u32 CreatePikaPowerBoltSprite(s16 x, s16 y)
+static u32 CreatePikaPowerBoltSprite(s32 x, s32 y)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_PikaPowerBolt, x, y, 12);
     struct Sprite *sprite = &gSprites[spriteId];
@@ -4597,7 +4597,7 @@ static void DestroyPikaPowerBoltSprite(u32 spriteId)
     DestroySprite(sprite);
 }
 
-static u32 CreateStdDigitalDisplaySprite(u32 templateIdx, u32 dispInfoId, s16 spriteId)
+static u32 CreateStdDigitalDisplaySprite(u32 templateIdx, u32 dispInfoId, s32 spriteId)
 {
     return CreateDigitalDisplaySprite(templateIdx, sDigitalDisplay_SpriteCallbacks[dispInfoId], sDigitalDisplay_SpriteCoords[dispInfoId][0], sDigitalDisplay_SpriteCoords[dispInfoId][1], spriteId);
 }
@@ -4606,7 +4606,7 @@ static u32 CreateStdDigitalDisplaySprite(u32 templateIdx, u32 dispInfoId, s16 sp
 #define sCounter     data[1]
 #define sSpriteId    data[6]
 
-static u32 CreateDigitalDisplaySprite(u32 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 internalSpriteId)
+static u32 CreateDigitalDisplaySprite(u32 templateIdx, SpriteCallback callback, s32 x, s32 y, s32 internalSpriteId)
 {
     struct SpriteTemplate spriteTemplate;
     u32 spriteId;
@@ -4632,8 +4632,8 @@ static void SpriteCB_DigitalDisplay_Static(struct Sprite *sprite)
 
 static void SpriteCB_DigitalDisplay_Smoke(struct Sprite *sprite)
 {
-    s16 targetX[] = {4, -4, 4, -4};
-    s16 targetY[] = {4, 4, -4, -4};
+    s32 targetX[] = {4, -4, 4, -4};
+    s32 targetY[] = {4, 4, -4, -4};
 
     if (sprite->sCounter++ >= 16)
     {
@@ -4883,9 +4883,9 @@ static void SpriteCB_DigitalDisplay_PokeballShining(struct Sprite *sprite)
 static void SpriteCB_DigitalDisplay_RegBonus(struct Sprite *sprite)
 {
     // Elements in array correspond to R E G B O N U S
-    s16 letterXOffset[] = {  0, -40,   0,   0, 48,   0,  24,   0};
-    s16 letterYOffset[] = {-32,   0, -32, -48,  0, -48,   0, -48};
-    s16 letterDelay[]   = { 16,  12,  16,   0,  0,   4,   8,   8};
+    s32 letterXOffset[] = {  0, -40,   0,   0, 48,   0,  24,   0};
+    s32 letterYOffset[] = {-32,   0, -32, -48,  0, -48,   0, -48};
+    s32 letterDelay[]   = { 16,  12,  16,   0,  0,   4,   8,   8};
 
     switch (sprite->sState)
     {
@@ -4918,7 +4918,7 @@ static void SpriteCB_DigitalDisplay_RegBonus(struct Sprite *sprite)
 
 static void SpriteCB_DigitalDisplay_BigBonus(struct Sprite *sprite)
 {
-    s16 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
+    s32 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
 
     if (sprite->sState == 0)
     {
@@ -5074,7 +5074,7 @@ static void LoadSlotMachineMenuTilemap(void)
 
 static void LoadSlotMachineReelOverlay(void)
 {
-    s16 x, y, dx;
+    s32 x, y, dx;
 
     for (x = 4; x < 18; x += 5)
     {
@@ -5095,7 +5095,7 @@ static void LoadSlotMachineReelOverlay(void)
 }
 
 // For (un)shading the gray button at the bottom of a reel when A is pressed. The button is colored in quadrants
-static void SetReelButtonTilemap(s16 offset, u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight)
+static void SetReelButtonTilemap(s32 offset, u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight)
 {
     sReelButtonPress_Tilemap[0] = topLeft;
     sReelButtonPress_Tilemap[1] = topRight;
@@ -5296,7 +5296,7 @@ static const u32 sReelTimeSymbols[] = {
 
 // Column 0: Normal game
 // Column 1: Lucky game
-static const s16 sInitialReelPositions[NUM_REELS][2] = {
+static const s32 sInitialReelPositions[NUM_REELS][2] = {
     [LEFT_REEL]   = {0,  6},
     [MIDDLE_REEL] = {0, 10},
     [RIGHT_REEL]  = {0,  2}
@@ -5509,7 +5509,7 @@ static const u32 sSlotPayouts[] = {
     [MATCH_BLUE_7]        = 300
 };
 
-static const s16 sDigitalDisplay_SpriteCoords[][2] = {
+static const s32 sDigitalDisplay_SpriteCoords[][2] = {
     [DIG_DISPINFO_INSERT] = { 208, 56},
     [DIG_DISPINFO_STOP_S] = { 184,  0},
     [DIG_DISPINFO_STOP_T] = { 200,  8},

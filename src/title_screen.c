@@ -422,7 +422,7 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite)
     }
 }
 
-static void CreatePressStartBanner(s16 x, s16 y)
+static void CreatePressStartBanner(s32 x, s32 y)
 {
     u8 i;
     u32 spriteId;
@@ -436,7 +436,7 @@ u32
     }
 }
 
-static void CreateCopyrightBanner(s16 x, s16 y)
+static void CreateCopyrightBanner(s32 x, s32 y)
 {
     u8 i;
     u32 spriteId;

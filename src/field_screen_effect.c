@@ -51,13 +51,13 @@ static void Task_WarpAndLoadMap(u32 taskId);
 static void Task_DoDoorWarp(u32 taskId);
 static void Task_EnableScriptAfterMusicFade(u32 taskId);
 
-static void ExitStairsMovement(s16*, s16*, s16*, s16*, s16*);
-static void GetStairsMovementDirection(u32, s16*, s16*);
+static void ExitStairsMovement(s32*, s32*, s32*, s32*, s32*);
+static void GetStairsMovementDirection(u32, s32*, s32*);
 static void Task_ExitStairs(u32);
-static bool32 WaitStairExitMovementFinished(s16*, s16*, s16*, s16*, s16*);
-static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
+static bool32 WaitStairExitMovementFinished(s32*, s32*, s32*, s32*, s32*);
+static void UpdateStairsMovement(s32, s32, s32*, s32*, s32*);
 static void Task_StairWarp(u32);
-static void ForceStairsMovement(u32, s16*, s16*);
+static void ForceStairsMovement(u32, s32*, s32*);
 
 // data[0] is used universally by tasks in this file as a state for switches
 #define tState       data[0]
@@ -268,7 +268,7 @@ void FieldCB_ReturnToFieldWirelessLink(void)
 
 static void SetUpWarpExitTask(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 behavior;
     TaskFunc func;
 
@@ -334,8 +334,8 @@ static void FieldCB_MossdeepGymWarpExit(void)
 static void Task_ExitDoor(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s16 *x = &task->data[2];
-    s16 *y = &task->data[3];
+    s32 *x = &task->data[2];
+    s32 *y = &task->data[3];
 
     switch (task->tState)
     {
@@ -383,8 +383,8 @@ static void Task_ExitDoor(u32 taskId)
 static void Task_ExitNonAnimDoor(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s16 *x = &task->data[2];
-    s16 *y = &task->data[3];
+    s32 *x = &task->data[2];
+    s32 *y = &task->data[3];
 
     switch (task->tState)
     {
@@ -626,7 +626,7 @@ void DoCableClubWarp(void)
 
 static void Task_ReturnToWorldFromLinkRoom(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -694,8 +694,8 @@ static void Task_WarpAndLoadMap(u32 taskId)
 static void Task_DoDoorWarp(u32 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s16 *x = &task->data[2];
-    s16 *y = &task->data[3];
+    s32 *x = &task->data[2];
+    s32 *y = &task->data[3];
     struct ObjectEvent *followerObject = GetFollowerObject();
 
     switch (task->tState)
@@ -870,7 +870,7 @@ static void SetOrbFlashScanlineEffectWindowBoundaries(u32 *dest, s32 centerX, s3
 
 static void UpdateFlashLevelEffect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -904,7 +904,7 @@ static void UpdateFlashLevelEffect(u32 taskId)
 
 static void UpdateOrbFlashEffect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -954,7 +954,7 @@ static void StartWaitForFlashUpdate(void)
 static u32 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u32 delta)
 {
     u32 taskId = CreateTask(UpdateFlashLevelEffect, 80);
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tCurFlashRadius = initialFlashRadius;
     tDestFlashRadius = destFlashRadius;
@@ -973,7 +973,7 @@ static u32 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlas
 static u32 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u32 delta)
 {
     u32 taskId = CreateTask(UpdateOrbFlashEffect, 80);
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tCurFlashRadius = initialFlashRadius;
     tDestFlashRadius = destFlashRadius;
@@ -1143,7 +1143,7 @@ static bool32 UpdateOrbEffectBlend(u32 shakeDir)
 
 static void Task_OrbEffect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -1234,7 +1234,7 @@ static void Task_OrbEffect(u32 taskId)
 void DoOrbEffect(void)
 {
     u8 taskId = CreateTask(Task_OrbEffect, 80);
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 u32
     if (gSpecialVar_Result == 0)
     {
@@ -1400,7 +1400,7 @@ void FieldCB_RushInjuredPokemonToCenter(void)
     gTasks[taskId].tState = FRLG_WHITEOUT_ENTER_MSG_SCREEN;
 }
 
-static void GetStairsMovementDirection(u32 metatileBehavior, s16 *speedX, s16 *speedY)
+static void GetStairsMovementDirection(u32 metatileBehavior, s32 *speedX, s32 *speedY)
 {
     if (MetatileBehavior_IsDirectionalUpRightStairWarp(metatileBehavior))
     {
@@ -1429,7 +1429,7 @@ static void GetStairsMovementDirection(u32 metatileBehavior, s16 *speedX, s16 *s
     }
 }
 
-static bool32 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+static bool32 WaitStairExitMovementFinished(s32 *speedX, s32 *speedY, s32 *offsetX, s32 *offsetY, s32 *timer)
 {
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if (*timer != 0)
@@ -1449,9 +1449,9 @@ static bool32 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offse
     }
 }
 
-static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+static void ExitStairsMovement(s32 *speedX, s32 *speedY, s32 *offsetX, s32 *offsetY, s32 *timer)
 {
-    s16 x, y;
+    s32 x, y;
     u32 metatileBehavior;
     s32 direction;
     struct Sprite *sprite;
@@ -1484,7 +1484,7 @@ static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offs
 
 static void Task_ExitStairs(u8 taskId)
 {
-    s16 * data = gTasks[tasku32].data;
+    s32 * data = gTasks[tasku32].data;
     switch (tState)
     {
     default:
@@ -1509,7 +1509,7 @@ static void Task_ExitStairs(u8 taskId)
     }
 }
 
-static void ForceStairsMovement(u32 metatileBehavior, s16 *speedX, s16 *speedY)
+static void ForceStairsMovement(u32 metatileBehavior, s32 *speedX, s32 *speedY)
 {
     ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
     GetStairsMovementDirection(metatileBehavior, speedX, speedY);
@@ -1528,7 +1528,7 @@ static void ForceStairsMovement(u32 metatileBehavior, s16 *speedX, s16 *speedY)
 #define tTimer            data[6]
 #define tDelay            data[15]
 
-static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+static void UpdateStairsMovement(s32 speedX, s32 speedY, s32 *offsetX, s32 *offsetY, s32 *timer)
 {
     struct Sprite *playerSprite = &gSprites[gPlayerAvatar.spriteId];
     struct ObjectEvent *playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -1546,7 +1546,7 @@ static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offs
 
 static void Task_StairWarp(u8 taskId)
 {
-    s16 * data = gTasks[tasu32d].data;
+    s32 * data = gTasks[tasu32d].data;
     struct ObjectEvent *playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *playerSprite = &gSprites[gPlayerAvatar.spriteId];
 

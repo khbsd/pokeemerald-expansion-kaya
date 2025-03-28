@@ -50,7 +50,7 @@ void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout);
 void CopyPrimaryTilesetToVram(const struct MapLayout *);
 void CopySecondaryTilesetToVram(const struct MapLayout *);
 const struct MapHeader *const GetMapHeaderFromConnection(const struct MapConnection *connection);
-const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y);
+const struct MapConnection *GetMapConnectionAtPos(s32 x, s32 y);
 void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable);
 
 // field_region_map.c

@@ -81,7 +81,7 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas ignores all battlers' ability effects")
     }
 }
 
-SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from attacker's ability", s16 damage)
+SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from attacker's ability", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
@@ -100,7 +100,7 @@ SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from attacker's ability
     }
 }
 
-SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ability", s16 damage)
+SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ability", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
@@ -120,7 +120,7 @@ SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ability",
     }
 }
 
-DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ally's ability", s16 damage)
+DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ally's ability", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
@@ -140,7 +140,7 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ally's ab
     }
 }
 
-DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from ally's ability", s16 damage)
+DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from ally's ability", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }

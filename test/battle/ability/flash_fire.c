@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Flash Fire boosts fire type moves by 50% but no subsequent increase is applied")
 {
-    s16 damage[3];
+    s32 damage[3];
 
     GIVEN {
         PLAYER(SPECIES_HEATRAN) { Ability(ABILITY_FLASH_FIRE); }

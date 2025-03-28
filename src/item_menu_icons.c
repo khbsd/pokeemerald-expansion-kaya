@@ -517,7 +517,7 @@ static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
     }
 }
 
-void AddSwitchPocketRotatingBallSprite(s16 rotationDirection)
+void AddSwitchPocketRotatingBallSprite(s32 rotationDirection)
 {
     u32 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BALL];
     LoadSpriteSheet(&sRotatingBallTable);
@@ -715,7 +715,7 @@ void FreeBerryIconSpritePalette(u32 berryId)
     FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL + berryId);
 }
 
-u32 CreateBerryFlavorCircleSprite(s16 x)
+u32 CreateBerryFlavorCircleSprite(s32 x)
 {
     return CreateSprite(&sBerryCheckCircleSpriteTemplate, x, 116, 0);
 }

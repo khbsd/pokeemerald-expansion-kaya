@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Electric Terrain protects grounded battlers from falling asl
     }
 }
 
-SINGLE_BATTLE_TEST("Electric Terrain increases power of Electric-type moves by 30/50 percent", s16 damage)
+SINGLE_BATTLE_TEST("Electric Terrain increases power of Electric-type moves by 30/50 percent", s32 damage)
 {
     bool32 terrain;
     PARAMETRIZE { terrain = FALSE; }

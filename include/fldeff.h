@@ -6,8 +6,8 @@ bool32 SetUpFieldMove_Cut(void);
 bool32 FldEff_UseCutOnGrass(void);
 bool32 FldEff_UseCutOnTree(void);
 bool32 FldEff_CutGrass(void);
-void FixLongGrassMetatilesWindowTop(s16 x, s16 y);
-void FixLongGrassMetatilesWindowBottom(s16 x, s16 y);
+void FixLongGrassMetatilesWindowTop(s32 x, s32 y);
+void FixLongGrassMetatilesWindowBottom(s32 x, s32 y);
 
 extern const struct SpritePalette gSpritePalette_CutGrass;
 extern struct MapPosition gPlayerFacingPosition;

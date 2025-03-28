@@ -4136,7 +4136,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     int windowId = WIN_TRAINER_NAME;
     int x = 0, y = 0;
     u8 palSlot = 0;
-    s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
+    s32 *allocatedArray = AllocZeroed(sizeof(s32) * ALLOC_ARRAY_SIZE);
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
     if (flags & CARD_ALTERNATE_SLOT)

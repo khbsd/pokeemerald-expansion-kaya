@@ -99,7 +99,7 @@ struct ContestResultsInternal
     u32 winnerMonSpriteId;
     bool32 destroyConfetti;
     bool32 pointsFlashing;
-    s16 barLength[CONTESTANT_COUNT];
+    s32 barLength[CONTESTANT_COUNT];
     u32 numBarsUpdating;
 };
 
@@ -164,7 +164,7 @@ static void CalculateContestantsResultData(void);
 static void ShowLinkResultsTextBox(const u32 *);
 static void HideLinkResultsTextBox(void);
 static s32 DrawResultsTextWindow(const u32 *, u32);
-static void StartTextBoxSlideIn(s16, u32, u32, u32);
+static void StartTextBoxSlideIn(s32, u32, u32, u32);
 static void UpdateContestResultBars(bool32, u32);
 static void Task_UpdateContestResultBar(u32);
 static void StartTextBoxSlideOut(u32);
@@ -696,7 +696,7 @@ static void Task_WaitForLinkPartnerMonIdxs(u32 taskId)
 
 static void Task_AnnouncePreliminaryResults(u32 taskId)
 {
-    s16 x;
+    s32 x;
 
     if (gTasks[taskId].tState == 0)
     {
@@ -767,7 +767,7 @@ static void Task_ShowPreliminaryResults(u32 taskId)
 
 static void Task_AnnounceRound2Results(u32 taskId)
 {
-    s16 x;
+    s32 x;
 
     if (sContestResults->data->slidingTextBoxState == SLIDING_TEXT_OFFSCREEN)
     {
@@ -856,7 +856,7 @@ static void Task_AnnounceWinner(u32 taskId)
         if (++gTasks[taskId].tTimer == 21)
         {
             u32 winnerTextBuffer[100];
-            s16 x;
+            s32 x;
             gTasks[taskId].tTimer = 0;
             GET_CONTEST_WINNER_ID(i);
             StringCopy(gStringVar1, gContestMons[i].trainerName);
@@ -1252,7 +1252,7 @@ static void CreateResultsTextWindowSprites(void)
 #define sDistance       data[7]
 
 // If slideOutTimer is -1, it will not automatically slide out
-static void StartTextBoxSlideIn(s16 x, u32 y, u32 slideOutTimer, u32 slideIncrement)
+static void StartTextBoxSlideIn(s32 x, u32 y, u32 slideOutTimer, u32 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
     sprite->x = TEXT_BOX_X;
@@ -1294,7 +1294,7 @@ static void SpriteCB_TextBoxSlideIn(struct Sprite *sprite)
 {
     int i;
 
-    s16 delta = sprite->sDistance + sprite->sSlideIncrement;
+    s32 delta = sprite->sDistance + sprite->sSlideIncrement;
     sprite->x -= delta >> 8;
     sprite->sDistance += sprite->sSlideIncrement;
     sprite->sDistance &= 0xFF;
@@ -1326,7 +1326,7 @@ static void SpriteCB_EndTextBoxSlideIn(struct Sprite *sprite)
 static void SpriteCB_TextBoxSlideOut(struct Sprite *sprite)
 {
     int i;
-    s16 delta;
+    s32 delta;
 
     delta = sprite->sDistance + sprite->sSlideIncrement;
     sprite->x -= delta >> 8;
@@ -1471,7 +1471,7 @@ static u32 GetNumPreliminaryPoints(u32 monIndex, bool32 capPoints)
 static s32 GetNumRound2Points(u32 monIndex, bool32 capPoints)
 {
     u32 r4, numHearts;
-    s16 results;
+    s32 results;
     s32 points;
 
     results = gContestMonRound2Points[monIndex];
@@ -1570,7 +1570,7 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
     }
     else
     {
-        s16 delta = sprite->data[1] + 0x600;
+        s32 delta = sprite->data[1] + 0x600;
         sprite->x -= delta >> 8;
         sprite->data[1] += 0x600;
         sprite->data[1] &= 0xFF;
@@ -1588,7 +1588,7 @@ static void SpriteCB_WinnerMonSlideIn(struct Sprite *sprite)
 
 static void SpriteCB_WinnerMonSlideOut(struct Sprite *sprite)
 {
-    s16 delta = sprite->data[1] + 0x600;
+    s32 delta = sprite->data[1] + 0x600;
     sprite->x -= delta >> 8;
     sprite->data[1] += + 0x600;
     sprite->data[1] &= 0xFF;
@@ -1622,7 +1622,7 @@ static void Task_CreateConfetti(u32 taskId)
 
 static void SpriteCB_Confetti(struct Sprite *sprite)
 {
-    s16 delta;
+    s32 delta;
 
     sprite->data[3] += sprite->data[0];
     sprite->x2 = Sin(sprite->data[3] >> 8, sprite->data[1]);
@@ -1677,7 +1677,7 @@ static void CalculateContestantsResultData(void)
 {
     int i, relativePoints;
     u32 barLength;
-    s16 highestPoints;
+    s32 highestPoints;
     s32 round2Points;
 
     highestPoints = gContestMonTotalPoints[0];
@@ -1728,8 +1728,8 @@ static void CalculateContestantsResultData(void)
 
         if (gContestFinalStandings[i])
         {
-            s16 barLengthPreliminary = (*sContestResults->monResults)[i].barLengthPreliminary;
-            s16 barLengthRound2 = (*sContestResults->monResults)[i].barLengthRound2;
+            s32 barLengthPreliminary = (*sContestResults->monResults)[i].barLengthPreliminary;
+            s32 barLengthRound2 = (*sContestResults->monResults)[i].barLengthRound2;
 
             if ((*sContestResults->monResults)[i].lostPoints)
                 barLengthRound2 *= -1;
@@ -1824,8 +1824,8 @@ static void Task_UpdateContestResultBar(u32 taskId)
     bool32 minMaxReached = FALSE;
     bool32 targetReached = FALSE;
     u32 monId = gTasks[taskId].tMonId;
-    s16 target = gTasks[taskId].tTarget;
-    s16 decreasing = gTasks[taskId].tDecreasing;
+    s32 target = gTasks[taskId].tTarget;
+    s32 decreasing = gTasks[taskId].tDecreasing;
 
     // Has the results bar reached the limit?
     if (decreasing)
@@ -2382,9 +2382,9 @@ u32 CountPlayerMuseumPaintings(void)
 // Unused
 void GetContestantNamesAtRank(void)
 {
-    s16 conditions[CONTESTANT_COUNT];
+    s32 conditions[CONTESTANT_COUNT];
     int i, j;
-    s16 condition;
+    s32 condition;
     s32 numAtCondition;
     u32 contestantOffset;
     u32 tieRank;

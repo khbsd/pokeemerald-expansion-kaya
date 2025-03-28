@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_COLLISION_COURSE) == EFFECT_COLLISION_COURSE);
 }
 
-SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super effective", s16 damage)
+SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super effective", s32 damage)
 {
     u32 move;
 
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super 
     }
 }
 
-SINGLE_BATTLE_TEST("Collision Course does normal damage if not super effective", s16 damage)
+SINGLE_BATTLE_TEST("Collision Course does normal damage if not super effective", s32 damage)
 {
     u32 move;
 

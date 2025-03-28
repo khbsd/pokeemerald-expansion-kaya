@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Protosynthesis boosts either Attack or Special Attack, not b
 {
     u32 species;
     u32 move;
-    s16 damage[2];
+    s32 damage[2];
 
     PARAMETRIZE { species = SPECIES_ROARING_MOON; move = MOVE_TACKLE; }
     PARAMETRIZE { species = SPECIES_ROARING_MOON; move = MOVE_ROUND; }

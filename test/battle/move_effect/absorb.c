@@ -8,8 +8,8 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Absorb recovers 50% of the damage dealt")
 {
-    s16 damage;
-    s16 healed;
+    s32 damage;
+    s32 healed;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -44,10 +44,10 @@ SINGLE_BATTLE_TEST("Absorb fails if Heal Block applies")
 
 DOUBLE_BATTLE_TEST("Matcha Gatcha recovers 50% of the damage dealt from both targets")
 {
-    s16 damageLeft;
-    s16 damageRight;
-    s16 healedLeft;
-    s16 healedRight;
+    s32 damageLeft;
+    s32 damageRight;
+    s32 healedLeft;
+    s32 healedRight;
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_MATCHA_GOTCHA) == EFFECT_ABSORB);
@@ -71,8 +71,8 @@ DOUBLE_BATTLE_TEST("Matcha Gatcha recovers 50% of the damage dealt from both tar
 
 SINGLE_BATTLE_TEST("Draining Kiss recovers 75% of the damage dealt")
 {
-    s16 damage;
-    s16 healed;
+    s32 damage;
+    s32 healed;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);

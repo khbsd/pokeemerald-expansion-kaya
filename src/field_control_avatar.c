@@ -254,7 +254,7 @@ static void GetPlayerPosition(struct MapPosition *position)
 
 static void GetInFrontOfPlayerPosition(struct MapPosition *position)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&position->x, &position->y);
     PlayerGetDestCoords(&x, &y);
@@ -266,7 +266,7 @@ static void GetInFrontOfPlayerPosition(struct MapPosition *position)
 
 static u32 GetPlayerCurMetatileBehavior(int runningState)
 {
-    s16 x, y;
+    s32 x, y;
 
     PlayerGetDestCoords(&x, &y);
     return MapGridGetMetatileBehaviorAt(x, y);
@@ -342,8 +342,8 @@ static const u32 *GetInteractedObjectEventScript(struct MapPosition *position, u
 {
     u32 objectEventId;
     const u32 *script;
-    s16 currX = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-    s16 currY = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    s32 currX = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s32 currY = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u32 currBehavior = MapGridGetMetatileBehaviorAt(currX, currY);
 
     switch (direction)
@@ -615,7 +615,7 @@ static bool32 TryStartCoordEventScript(struct MapPosition *position)
 
 static bool32 TryStartMiscWalkingScripts(u32 metatileBehavior)
 {
-    s16 x, y;
+    s32 x, y;
 
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
@@ -1123,7 +1123,7 @@ bool32 TryDoDiveWarp(struct MapPosition *position, u32 metatileBehavior)
 
 u32 TrySetDiveWarp(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 metatileBehavior;
 
     PlayerGetDestCoords(&x, &y);

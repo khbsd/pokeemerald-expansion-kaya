@@ -17,7 +17,7 @@ struct AnimStatsChangeData
     u8 battler1;
     u8 battler2;
     bool32 hidBattler2;
-    s16 data[8];
+    s32 data[8];
     u32 species;
 };
 

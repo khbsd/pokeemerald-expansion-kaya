@@ -996,7 +996,7 @@ u32 TryWriteSpecialSaveSector(u32 sector, u32 *src)
 // Most notably it does save the PC data.
 void Task_LinkFullSave(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

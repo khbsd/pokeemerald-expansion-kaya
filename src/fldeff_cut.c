@@ -51,12 +51,12 @@ static void FieldCallback_CutTree(void);
 static void FieldCallback_CutGrass(void);
 static void StartCutTreeFieldEffect(void);
 static void StartCutGrassFieldEffect(void);
-static void SetCutGrassMetatile(s16, s16);
-static void SetCutGrassMetatiles(s16, s16);
+static void SetCutGrassMetatile(s32, s32);
+static void SetCutGrassMetatiles(s32, s32);
 static void CutGrassSpriteCallback1(struct Sprite *);
 static void CutGrassSpriteCallback2(struct Sprite *);
 static void CutGrassSpriteCallbackEu32(struct Sprite *);
-static void HandleLongGrassOnHyper(u8, s16, s16);
+static void HandleLongGrassOnHyper(u8, s32, s32);
 
 // IWRAu32variables
 static u32 sCutSquareSide;
@@ -351,7 +351,7 @@ bool32 FldEff_CutGrass(void)
 }
 
 // set map grid metatile depending on x, y
-static void SetCutGrassMetatile(s16 x, s16 y)
+static void SetCutGrassMetatile(s32 x, s32 y)
 {
     s32 metatileId = MapGridGetMetatileIdAt(x, y);
 
@@ -400,7 +400,7 @@ enum
     LONG_GRASS_BASE_RIGHT
 };
 u32
-static u8 GetLongGrassCaseAt(s16 x, s16 y)
+static u8 GetLongGrassCaseAt(s32 x, s32 y)
 {
     u32 metatileId = MapGridGetMetatileIdAt(x, y);
 
@@ -416,14 +416,14 @@ static u8 GetLongGrassCaseAt(s16 x, s16 y)
         return LONG_GRASS_NONE;
 }
 
-static void SetCutGrassMetatiles(s16 x, s16 y)
+static void SetCutGrassMetatiles(s32 x, s32 y)
 {
-    s16 i;
-    s16 lowerY = y + sCutSquareSide;
+    s32 i;
+    s32 lowerY = y + sCutSquareSide;
 
     for (i = 0; i < sCutSquareSide; i++)
     {
-        s16 currentX = x + i;
+        s32 currentX = x + i;
         if (MapGridGetMetatileIdAt(currentX, y) == METATILE_General_LongGrass)
         {
             switch (GetLongGrassCaseAt(currentX, y + 1))
@@ -462,9 +462,9 @@ static void SetCutGrassMetatiles(s16 x, s16 y)
     }
 }
 u32
-static void HandleLongGrassOnHyper(u8 caseId, s16 x, s16 y)
+static void HandleLongGrassOnHyper(u8 caseId, s32 x, s32 y)
 {
-    s16 newX;
+    s32 newX;
     bool32 arr[3];
 
     if (caseId == 0)
@@ -589,7 +589,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
         ScriptContext_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
 }
 
-void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
+void FixLongGrassMetatilesWindowTop(s32 x, s32 y)
 {u32
     u8 metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
     if (MetatileBehavior_IsLongGrass_Duplicate(metatileBehavior))
@@ -612,7 +612,7 @@ void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
     }
 }
 
-void FixLongGrassMetatilesWindowBottom(s16 x, s16 y)
+void FixLongGrassMetatilesWindowBottom(s32 x, s32 y)
 {
     if (MapGridGetMetatileIdAt(x, y) == METATILE_General_Grass)
     {u32

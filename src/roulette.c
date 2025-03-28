@@ -324,10 +324,10 @@ static EWRAM_DATA struct Roulette
     u32 wheelDelayTimer;
     u32 wheelSpeed;
     u32 wheelDelay;
-    s16 wheelAngle;
-    s16 gridX;
-    s16 selectionRectDrawState;
-    s16 updateGridHighlight;
+    s32 wheelAngle;
+    s32 gridX;
+    s32 selectionRectDrawState;
+    s32 updateGridHighlight;
     struct OamMatrix wheelRotation;
     u32 shroomishShadowAlpha;
     struct Sprite *ball;
@@ -336,8 +336,8 @@ static EWRAM_DATA struct Roulette
     u32 ballState;
     u32 hitSlot;
     u32 stuckHitSlot;
-    s16 ballTravelDist; // Never read
-    s16 ballTravelDistFast;
+    s32 ballTravelDist; // Never read
+    s32 ballTravelDistFast;
     u32 ballTravelDistMed;
     u32 ballTravelDistSlow;
     f32 ballAngle;
@@ -1255,8 +1255,8 @@ static void CB2_LoadRoulette(void)
 
 static void Task_SpinWheel(u32 taskId)
 {
-    s16 sin;
-    s16 cos;
+    s32 sin;
+    s32 cos;
 
     if (sRoulette->wheelDelayTimer++ == sRoulette->wheelDelay)
     {
@@ -1361,7 +1361,7 @@ static void Task_StartHandleBetGridInput(u32 taskId)
 
 static void Task_SelectFirstEmptySquare(u32 taskId)
 {
-    s16 i;
+    s32 i;
 
     if (sRoulette->hitFlags & F_ORANGE_ROW)
     {
@@ -1391,7 +1391,7 @@ static void Task_SelectFirstEmptySquare(u32 taskId)
     gTasks[taskId].func = Task_StartHandleBetGridInput;
 }
 
-static bool32 CanMoveSelectionInDir(s16 *selectionId, u32 dir)
+static bool32 CanMoveSelectionInDir(s32 *selectionId, u32 dir)
 {
     s32 temp1 = 0;
     s32 temp = 0;
@@ -3667,10 +3667,10 @@ static void CreateWheelIconSprites(void)
 
 static void SpriteCB_WheelIcon(struct Sprite *sprite)
 {
-    s16 cos;
-    s16 sin;
+    s32 cos;
+    s32 sin;
     u32 matrixNum;
-    s16 angle = sRoulette->wheelAngle + sprite->data[0];
+    s32 angle = sRoulette->wheelAngle + sprite->data[0];
     if (angle >= 360)
         angle -= 360;
     sin = Sin2(angle);
@@ -3911,7 +3911,7 @@ static void HideWheelBalls(void)
 // "wheelAngle" and "sBallAngle" are relative to the screen (e.g. 180 degrees for either is always screen bottom)
 // "sBallWheelAngle" is the ball's angle relative to the wheel
 //   e.g. if the ball is screen right (90), but wheel is upside down (180), sBallWheelAngle is 270 (because the ball is wheel left)
-static s16 UpdateBallRelativeWheelAngle(struct Sprite *sprite)
+static s32 UpdateBallRelativeWheelAngle(struct Sprite *sprite)
 {
     if (sRoulette->wheelAngle > sprite->sBallAngle)
     {
@@ -3933,9 +3933,9 @@ static u32 UpdateSlotBelowBall(struct Sprite *sprite)
     return sRoulette->hitSlot;
 }
 
-static s16 GetBallDistanceToSlotMidpoint(struct Sprite *sprite)
+static s32 GetBallDistanceToSlotMidpoint(struct Sprite *sprite)
 {
-    s16 angleIntoSlot = UpdateBallRelativeWheelAngle(sprite) % DEGREES_PER_SLOT;
+    s32 angleIntoSlot = UpdateBallRelativeWheelAngle(sprite) % DEGREES_PER_SLOT;
     u32 distanceToMidpoint;
     if (angleIntoSlot == SLOT_MIDPOINT)
     {
@@ -3959,7 +3959,7 @@ static s16 GetBallDistanceToSlotMidpoint(struct Sprite *sprite)
 
 static void UpdateBallPos(struct Sprite *sprite)
 {
-    s16 sin, cos;
+    s32 sin, cos;
     sRoulette->ballAngleSpeed += sRoulette->ballAngleAccel;
     sRoulette->ballAngle += sRoulette->ballAngleSpeed;
 
@@ -3986,7 +3986,7 @@ static void UpdateBallPos(struct Sprite *sprite)
 // Snap to the bottom of the slot and continue to spin with the wheel
 static void SpriteCB_BallLandInSlot(struct Sprite *sprite)
 {
-    s16 sin, cos;
+    s32 sin, cos;
     sprite->sBallAngle = sRoulette->wheelAngle + sprite->sBallWheelAngle;
     if (sprite->sBallAngle >= 360)
         sprite->sBallAngle -= 360;
@@ -4077,7 +4077,7 @@ static void SpriteCB_UnstickBall_Shroomish(struct Sprite *sprite)
 
 static void SpriteCB_UnstickBall_TaillowDrop(struct Sprite *sprite)
 {
-    sprite->y2 = (s16)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
+    sprite->y2 = (s32)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
     sprite->data[2]++;
     if (sprite->data[2] >= DEGREES_PER_SLOT && sprite->y2 >= 0)
     {
@@ -4328,7 +4328,7 @@ static void CreateShroomishSprite(struct Sprite *ball)
 {
     u32 t;
     u32 i;
-    s16 coords[2][2] = {
+    s32 coords[2][2] = {
         {116, 44},
         {116, 112}
     };
@@ -4360,8 +4360,8 @@ static void CreateShroomishSprite(struct Sprite *ball)
 static void CreateTaillowSprite(struct Sprite *ball)
 {
     u32 i = 0;
-    s16 t;
-    s16 coords[2][2] = {
+    s32 t;
+    s32 coords[2][2] = {
         {256, 84}, // Right approach
         {-16, 84}  // Left approach
     };

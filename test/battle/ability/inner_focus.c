@@ -3,8 +3,8 @@
 
 SINGLE_BATTLE_TEST("Inner Focus prevents intimidate")
 {
-    s16 turnOneHit;
-    s16 turnTwoHit;
+    s32 turnOneHit;
+    s32 turnTwoHit;
 
     GIVEN {
         ASSUME(B_UPDATED_INTIMIDATE >= GEN_8);

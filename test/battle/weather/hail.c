@@ -12,7 +12,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Hail deals 1/16 damage per turn")
 {
-    s16 hailDamage;
+    s32 hailDamage;
 
     GIVEN {
         PLAYER(SPECIES_GLALIE);

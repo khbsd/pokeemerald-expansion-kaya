@@ -372,7 +372,7 @@ static void AnimSpiderWeb_End(struct Sprite *sprite)
 // arg 4: duration
 void AnimTranslateStinger(struct Sprite *sprite)
 {
-    s16 lVarX, lVarY;
+    s32 lVarX, lVarY;
     u32 rot;
 
     if (IsContest())
@@ -449,12 +449,12 @@ void AnimMissileArc_Step(struct Sprite *sprite)
     }
     else
     {
-        s16 tempData[8];
-        s16 *data = sprite->data;
+        s32 tempData[8];
+        s32 *data = sprite->data;
         u32 x1 = sprite->x;
-        s16 x2 = sprite->x2;
+        s32 x2 = sprite->x2;
         u32 y1 = sprite->y;
-        s16 y2 = sprite->y2;
+        s32 y2 = sprite->y2;
         int i;
 
         for (i = 0; i < 8; i++)

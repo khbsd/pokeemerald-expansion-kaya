@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Dragon's Maw increases Dragon-type move damage", s16 damage)
+SINGLE_BATTLE_TEST("Dragon's Maw increases Dragon-type move damage", s32 damage)
 {
     u32 move;
     u32 ability;

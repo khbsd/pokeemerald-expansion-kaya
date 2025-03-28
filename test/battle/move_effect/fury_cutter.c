@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Fury Cutter power doubles with each use, up to 160 power")
 {
-    s16 damage[6];
+    s32 damage[6];
     int turn;
     int maxTurns;
 
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Fury Cutter power doubles with each use, up to 160 power")
 
 SINGLE_BATTLE_TEST("Fury Cutter counter is the same for both hits of Parental Bond")
 {
-    s16 damage[4];
+    s32 damage[4];
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_PARENTAL_BOND); }

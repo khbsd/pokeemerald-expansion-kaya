@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP_USER_ALLY);
 }
 
-SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s16 damage)
+SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s32 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s16 damage)
     }
 }
 
-DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s16 damageLeft, s16 damageRight)
+DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s32 damageLeft, s32 damageRight)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }
@@ -66,7 +66,7 @@ DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s16 dam
 
 DOUBLE_BATTLE_TEST("Howl does not work on partner if it has Soundproof")
 {
-    s16 damage[2];
+    s32 damage[2];
 
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);

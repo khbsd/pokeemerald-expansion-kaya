@@ -95,7 +95,7 @@ void ProcessDma3Requests(void)
     }
 }
 
-s16 RequestDma3Copy(const void *src, void *dest, u32 size, u32 mode)
+s32 RequestDma3Copy(const void *src, void *dest, u32 size, u32 mode)
 {
     int cursor;
     int i = 0;
@@ -127,7 +127,7 @@ s16 RequestDma3Copy(const void *src, void *dest, u32 size, u32 mode)
     return -1;  // no free DMA request was found
 }
 
-s16 RequestDma3Fill(s32 value, void *dest, u32 size, u32 mode)
+s32 RequestDma3Fill(s32 value, void *dest, u32 size, u32 mode)
 {
     int cursor;
     int i = 0;
@@ -160,7 +160,7 @@ s16 RequestDma3Fill(s32 value, void *dest, u32 size, u32 mode)
     return -1;  // no free DMA request was found
 }
 
-s16 CheckForSpaceForDma3Request(s16 index)
+s32 CheckForSpaceForDma3Request(s32 index)
 {
     int i = 0;
 

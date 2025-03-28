@@ -25,7 +25,7 @@ struct MonMarkingsMenu
 
 void InitMonMarkingsMenu(struct MonMarkingsMenu *ptr);
 void BufferMonMarkingsMenuTiles(void);
-void OpenMonMarkingsMenu(u8 markings, s16 x, s16 y);
+void OpenMonMarkingsMenu(u8 markings, s32 x, s32 y);
 void FreeMonMarkingsMenu(void);
 bool32 HandleMonMarkingsMenuInput(void);
 struct Sprite *CreateMonMarkingAllCombosSprite(u32 tileTag, u32 paletteTag, const u32 *palette);

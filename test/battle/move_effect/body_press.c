@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_BODY_PRESS) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
-SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s16 damage)
+SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s32 damage)
 {
     u32 move;
 
@@ -29,7 +29,7 @@ SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s16 damage
     }
 }
 
-SINGLE_BATTLE_TEST("Body Press's damage depends on the user's base Defense instead of its base Attack", s16 damage)
+SINGLE_BATTLE_TEST("Body Press's damage depends on the user's base Defense instead of its base Attack", s32 damage)
 {
     u32 def, atk;
     PARAMETRIZE { def = 150; atk = 179; } // Atk is higher
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Body Press's damage depends on the user's base Defense inste
     }
 }
 
-SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not Attack stat stages", s16 damage)
+SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not Attack stat stages", s32 damage)
 {
     u32 move;
 
@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not At
     }
 }
 
-SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s16 damage)
+SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s32 damage)
 {
     u32 move;
 
@@ -94,7 +94,7 @@ SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s16 damag
     }
 }
 
-SINGLE_BATTLE_TEST("Body Press uses Special Defense stat Stages in Wonder Room", s16 damage)
+SINGLE_BATTLE_TEST("Body Press uses Special Defense stat Stages in Wonder Room", s32 damage)
 {
     u32 move;
 

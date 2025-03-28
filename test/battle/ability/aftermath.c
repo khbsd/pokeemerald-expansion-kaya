@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Aftermath damages the attacker by 1/4th of its max HP if fainted by a contact move")
 {
-    s16 aftermathDamage;
+    s32 aftermathDamage;
 
     GIVEN {
         PLAYER(SPECIES_VOLTORB) { HP(1); Ability(ABILITY_AFTERMATH); };

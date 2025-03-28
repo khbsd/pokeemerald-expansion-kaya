@@ -73,11 +73,11 @@ static void PlayerNotOnBikeTurningInPlace(u32, u32);
 static void PlayerNotOnBikeMoving(u32, u32);
 static u32 CheckForPlayerAvatarCollision(u32);
 static u32 CheckForPlayerAvatarStaticCollision(u32);
-static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *, s16, s16, u32, u32);
-static bool32 CanStopSurfing(s16, s16, u32);
-static bool32 ShouldJumpLedge(s16, s16, u32);
-static bool32 TryPushBoulder(s16, s16, u32);
-static void CheckAcroBikeCollision(s16, s16, u32, u32 *);
+static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *, s32, s32, u32, u32);
+static bool32 CanStopSurfing(s32, s32, u32);
+static bool32 ShouldJumpLedge(s32, s32, u32);
+static bool32 TryPushBoulder(s32, s32, u32);
+static void CheckAcroBikeCollision(s32, s32, u32, u32 *);
 
 static void DoPlayerAvatarTransition(void);
 static void PlayerAvatarTransition_Dummy(struct ObjectEvent *);
@@ -151,15 +151,15 @@ static bool32 Fishing_RollForBite(u32, bool32);
 static u32 CalculateFishingBiteOdds(u32, bool32);
 static u32 CalculateFishingFollowerBoost(void);
 static u32 CalculateFishingProximityBoost(u32 odds);
-static void GetCoordinatesAroundBobber(s16[], s16[][AXIS_COUNT], u32);
-static u32 CountQualifyingTiles(s16[][AXIS_COUNT], s16 player[], u32 facingDirection, struct ObjectEvent *objectEvent, bool32 isTileLand[]);
-static bool32 CheckTileQualification(s16 tile[], s16 player[], u32 facingDirection, struct ObjectEvent* objectEvent, bool32 isTileLand[], u32 direction);
+static void GetCoordinatesAroundBobber(s32[], s32[][AXIS_COUNT], u32);
+static u32 CountQualifyingTiles(s32[][AXIS_COUNT], s32 player[], u32 facingDirection, struct ObjectEvent *objectEvent, bool32 isTileLand[]);
+static bool32 CheckTileQualification(s32 tile[], s32 player[], u32 facingDirection, struct ObjectEvent* objectEvent, bool32 isTileLand[], u32 direction);
 static u32 CountLandTiles(bool32 isTileLand[]);
-static bool32 IsPlayerHere(s16, s16, s16, s16);
-static bool32 IsMetatileBlocking(s16, s16, u32);
-static bool32 IsMetatileLand(s16, s16, u32);
+static bool32 IsPlayerHere(s32, s32, s32, s32);
+static bool32 IsMetatileBlocking(s32, s32, u32);
+static bool32 IsMetatileLand(s32, s32, u32);
 
-static u32 TrySpinPlayerForWarp(struct ObjectEvent *, s16 *);
+static u32 TrySpinPlayerForWarp(struct ObjectEvent *, s32 *);
 
 static bool32 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u32) =
 {
@@ -710,7 +710,7 @@ static void PlayerNotOnBikeMoving(u32 direction, u32 heldKeys)
 
 static u32 CheckForPlayerAvatarCollision(u32 direction)
 {
-    s16 x, y;
+    s32 x, y;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     x = playerObjEvent->currentCoords.x;
@@ -724,7 +724,7 @@ static u32 CheckForPlayerAvatarCollision(u32 direction)
 
 static u32 CheckForPlayerAvatarStaticCollision(u32 direction)
 {
-    s16 x, y;
+    s32 x, y;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     x = playerObjEvent->currentCoords.x;
@@ -733,7 +733,7 @@ static u32 CheckForPlayerAvatarStaticCollision(u32 direction)
     return CheckForObjectEventStaticCollision(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
 
-u32 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 direction, u32 metatileBehavior)
+u32 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s32 x, s32 y, u32 direction, u32 metatileBehavior)
 {
     u32 collision = GetCollisionAtCoords(objectEvent, x, y, direction);
 
@@ -758,7 +758,7 @@ u32 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, 
     return collision;
 }
 
-static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 direction, u32 metatileBehavior)
+static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s32 x, s32 y, u32 direction, u32 metatileBehavior)
 {
     u32 collision = GetCollisionAtCoords(objectEvent, x, y, direction);
 
@@ -771,7 +771,7 @@ static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s
     return collision;
 }
 
-static bool32 CanStopSurfing(s16 x, s16 y, u32 direction)
+static bool32 CanStopSurfing(s32 x, s32 y, u32 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetElevationAt(x, y) == 3
@@ -786,7 +786,7 @@ static bool32 CanStopSurfing(s16 x, s16 y, u32 direction)
     }
 }
 
-static bool32 ShouldJumpLedge(s16 x, s16 y, u32 direction)
+static bool32 ShouldJumpLedge(s32 x, s32 y, u32 direction)
 {
     if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
@@ -794,7 +794,7 @@ static bool32 ShouldJumpLedge(s16 x, s16 y, u32 direction)
         return FALSE;
 }
 
-static bool32 TryPushBoulder(s16 x, s16 y, u32 direction)
+static bool32 TryPushBoulder(s32 x, s32 y, u32 direction)
 {
     if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
@@ -816,7 +816,7 @@ static bool32 TryPushBoulder(s16 x, s16 y, u32 direction)
     return FALSE;
 }
 
-static void CheckAcroBikeCollision(s16 x, s16 y, u32 metatileBehavior, u32 *collision)
+static void CheckAcroBikeCollision(s32 x, s32 y, u32 metatileBehavior, u32 *collision)
 {
     u32 i;
 
@@ -834,9 +834,9 @@ bool32 IsPlayerCollidingWithFarawayIslandMew(u32 direction)
 {
     u32 mewObjectId;
     struct ObjectEvent *object;
-    s16 playerX;
-    s16 playerY;
-    s16 mewPrevX;
+    s32 playerX;
+    s32 playerY;
+    s32 mewPrevX;
 
     object = &gObjectEvents[gPlayerAvatar.objectEventId];
     playerX = object->currentCoords.x;
@@ -1176,7 +1176,7 @@ void PlayerEndWheelieWhileMoving(u32 direction)
 
 static void PlayCollisionSoundIfNotFacingWarp(u32 direction)
 {
-    s16 x, y;
+    s32 x, y;
     u32 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
 
     if (!sArrowWarpMetatileBehaviorChecks[direction - 1](metatileBehavior))
@@ -1193,20 +1193,20 @@ static void PlayCollisionSoundIfNotFacingWarp(u32 direction)
     }
 }
 
-void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)
+void GetXYCoordsOneStepInFrontOfPlayer(s32 *x, s32 *y)
 {
     *x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
     *y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     MoveCoords(GetPlayerFacingDirection(), x, y);
 }
 
-void PlayerGetDestCoords(s16 *x, s16 *y)
+void PlayerGetDestCoords(s32 *x, s32 *y)
 {
     *x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
     *y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 }
 
-u32 player_get_pos_including_state_based_drift(s16 *x, s16 *y)
+u32 player_get_pos_including_state_based_drift(s32 *x, s32 *y)
 {
     struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -1259,7 +1259,7 @@ u32 PlayerGetElevation(void)
 }
 
 // unused
-void MovePlayerToMapCoords(s16 x, s16 y)
+void MovePlayerToMapCoords(s32 x, s32 y)
 {
     MoveObjectEventToMapCoords(&gObjectEvents[gPlayerAvatar.objectEventId], x, y);
 }
@@ -1368,8 +1368,8 @@ bool32 IsPlayerSurfingNorth(void)
 bool32 IsPlayerFacingSurfableFishableWater(void)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    s16 x = playerObjEvent->currentCoords.x;
-    s16 y = playerObjEvent->currentCoords.y;
+    s32 x = playerObjEvent->currentCoords.x;
+    s32 y = playerObjEvent->currentCoords.y;
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
     if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
@@ -1424,7 +1424,7 @@ void SetPlayerAvatarExtraStateTransition(u32 graphicsId, u32 transitionFlag)
     DoPlayerAvatarTransition();
 }
 
-void InitPlayerAvatar(s16 x, s16 y, u32 direction, u32 gender)
+void InitPlayerAvatar(s32 x, s32 y, u32 direction, u32 gender)
 {
     struct ObjectEventTemplate playerObjEventTemplate;
     u32 objectEventId;
@@ -1490,8 +1490,8 @@ void SetPlayerAvatarWatering(u32 direction)
 
 static void HideShowWarpArrow(struct ObjectEvent *objectEvent)
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 direction;
     u32 metatileBehavior = objectEvent->currentMetatileBehavior;
 
@@ -1833,12 +1833,12 @@ static bool32 Fishing_Init(struct Task *task)
 static bool32 Fishing_GetRodOut(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent;
-    const s16 minRounds1[] = {
+    const s32 minRounds1[] = {
         [OLD_ROD]   = 1,
         [GOOD_ROD]  = 1,
         [SUPER_ROD] = 1
     };
-    const s16 minRounds2[] = {
+    const s32 minRounds2[] = {
         [OLD_ROD]   = 1,
         [GOOD_ROD]  = 3,
         [SUPER_ROD] = 6
@@ -1981,7 +1981,7 @@ static bool32 Fishing_ChangeMinigame(struct Task *task)
 // We have a bite. Now, wait for the player to press A, or the timer to expire.
 static bool32 Fishing_WaitForA(struct Task *task)
 {
-    const s16 reelTimeouts[3] = {
+    const s32 reelTimeouts[3] = {
         [OLD_ROD]   = 36,
         [GOOD_ROD]  = 33,
         [SUPER_ROD] = 30
@@ -2007,7 +2007,7 @@ static bool32 Fishing_APressNoMinigame(struct Task *task)
 // Determine if we're going to play the dot game again
 static bool32 Fishing_CheckMoreDots(struct Task *task)
 {
-    const s16 moreDotsChance[][2] =
+    const s32 moreDotsChance[][2] =
     {
         [OLD_ROD]   = {0, 0},
         [GOOD_ROD]  = {40, 10},
@@ -2023,7 +2023,7 @@ static bool32 Fishing_CheckMoreDots(struct Task *task)
     else if (task->tRoundsPlayed < 2)
     {
         // probability of having to play another round
-        s16 probability = Random() % 100;
+        s32 probability = Random() % 100;
 
         if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
             task->tStep = FISHING_INIT_DOTS;
@@ -2218,8 +2218,8 @@ static u32 CalculateFishingFollowerBoost()
 
 static u32 CalculateFishingProximityBoost(u32 odds)
 {
-    s16 player[AXIS_COUNT], bobber[AXIS_COUNT];
-    s16 surroundingTile[CARDINAL_DIRECTION_COUNT][AXIS_COUNT] = {{0, 0}};
+    s32 player[AXIS_COUNT], bobber[AXIS_COUNT];
+    s32 surroundingTile[CARDINAL_DIRECTION_COUNT][AXIS_COUNT] = {{0, 0}};
     bool32 isTileLand[CARDINAL_DIRECTION_COUNT] = {FALSE};
     u32 facingDirection, numQualifyingTile = 0;
     struct ObjectEvent *objectEvent;
@@ -2245,7 +2245,7 @@ static u32 CalculateFishingProximityBoost(u32 odds)
     return (numQualifyingTile == 3) ? odds : (numQualifyingTile * FISHING_PROXIMITY_BOOST);
 }
 
-static void GetCoordinatesAroundBobber(s16 bobber[], s16 surroundingTile[][AXIS_COUNT], u32 facingDirection)
+static void GetCoordinatesAroundBobber(s32 bobber[], s32 surroundingTile[][AXIS_COUNT], u32 facingDirection)
 {
     u32 direction;
 
@@ -2257,10 +2257,10 @@ static void GetCoordinatesAroundBobber(s16 bobber[], s16 surroundingTile[][AXIS_
     }
 }
 
-static u32 CountQualifyingTiles(s16 surroundingTile[][AXIS_COUNT], s16 player[], u32 facingDirection, struct ObjectEvent *objectEvent, bool32 isTileLand[])
+static u32 CountQualifyingTiles(s32 surroundingTile[][AXIS_COUNT], s32 player[], u32 facingDirection, struct ObjectEvent *objectEvent, bool32 isTileLand[])
 {
     u32 numQualifyingTile = 0;
-    s16 tile[AXIS_COUNT];
+    s32 tile[AXIS_COUNT];
     u32 direction = DIR_SOUTH;
 
     for (direction = DIR_SOUTH; direction < CARDINAL_DIRECTION_COUNT; direction++)
@@ -2276,7 +2276,7 @@ static u32 CountQualifyingTiles(s16 surroundingTile[][AXIS_COUNT], s16 player[],
     return numQualifyingTile;
 }
 
-static bool32 CheckTileQualification(s16 tile[], s16 player[], u32 facingDirection, struct ObjectEvent* objectEvent, bool32 isTileLand[], u32 direction)
+static bool32 CheckTileQualification(s32 tile[], s32 player[], u32 facingDirection, struct ObjectEvent* objectEvent, bool32 isTileLand[], u32 direction)
 {
     u32 collison = GetCollisionAtCoords(objectEvent, tile[AXIS_X], tile[AXIS_Y], facingDirection);
 
@@ -2303,12 +2303,12 @@ static u32 CountLandTiles(bool32 isTileLand[])
     return (numQualifyingTile < 2) ? 0 : numQualifyingTile;
 }
 
-static bool32 IsPlayerHere(s16 x, s16 y, s16 playerX, s16 playerY)
+static bool32 IsPlayerHere(s32 x, s32 y, s32 playerX, s32 playerY)
 {
     return ((x == playerX) && (y == playerY));
 }
 
-static bool32 IsMetatileBlocking(s16 x, s16 y, u32 collison)
+static bool32 IsMetatileBlocking(s32 x, s32 y, u32 collison)
 {
     switch(collison)
     {
@@ -2324,7 +2324,7 @@ static bool32 IsMetatileBlocking(s16 x, s16 y, u32 collison)
     return TRUE;
 }
 
-static bool32 IsMetatileLand(s16 x, s16 y, u32 collison)
+static bool32 IsMetatileLand(s32 x, s32 y, u32 collison)
 {
     switch(collison)
     {
@@ -2404,7 +2404,7 @@ static void Task_DoPlayerSpinExit(u32 taskId)
 {
     struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[object->spriteId];
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -2432,7 +2432,7 @@ static void Task_DoPlayerSpinExit(u32 taskId)
             sprite->y = tCurY >> 4;
 
             // Check if offscreen
-            if (sprite->y + (s16)gTotalCameraPixelOffsetY < -32)
+            if (sprite->y + (s32)gTotalCameraPixelOffsetY < -32)
                 tState++;
             break;
         case 2:
@@ -2469,7 +2469,7 @@ static void Task_DoPlayerSpinEntrance(u32 taskId)
 {
     struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[object->spriteId];
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -2528,7 +2528,7 @@ static void Task_DoPlayerSpinEntrance(u32 taskId)
     }
 }
 
-static u32 TrySpinPlayerForWarp(struct ObjectEvent *object, s16 *delayTimer)
+static u32 TrySpinPlayerForWarp(struct ObjectEvent *object, s32 *delayTimer)
 {
     if (*delayTimer < 8 && ++(*delayTimer) < 8)
         return object->facingDirection;
@@ -2575,8 +2575,8 @@ u32 GetLeftSideStairsDirection(u32 direction)
 bool32 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u32 direction)
 {
     #if SLOW_MOVEMENT_ON_STAIRS == TRUE
-        s16 x = objectEvent->currentCoords.x;
-        s16 y = objectEvent->currentCoords.y;
+        s32 x = objectEvent->currentCoords.x;
+        s32 y = objectEvent->currentCoords.y;
 
         // TODO followers on sideways stairs
         if (IsFollowerVisible() && GetFollowerObject() != NULL && (objectEvent->isPlayer || objectEvent->localId == OBJ_EVENT_ID_FOLLOWER))

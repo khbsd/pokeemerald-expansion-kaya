@@ -14,7 +14,7 @@ struct BardSoundTemplate
     u8 songId;
     s32 lengthAdjustment;
     u32 unused; // Only set on EC_WORD_WAAAH, and never read.
-    s16 volume;
+    s32 volume;
 };
 
 // This is the length and pitch to play the phoneme song at.
@@ -31,10 +31,10 @@ struct BardSong
     u8 soundIndex;
     u8 timer;
     u8 state;
-    s16 length; // Length of the sound for the word currently being sung (i.e. the sum of 'length' in all the current word's phonemes).
+    s32 length; // Length of the sound for the word currently being sung (i.e. the sum of 'length' in all the current word's phonemes).
     u32 volume;
-    s16 pitch;
-    s16 voiceInflection;
+    s32 pitch;
+    s32 voiceInflection;
     u32 lyrics[NUM_BARD_SONG_WORDS];
     struct BardSound sounds[MAX_BARD_SOUNDS_PER_WORD];
     const struct BardSoundTemplate *soundTemplates;

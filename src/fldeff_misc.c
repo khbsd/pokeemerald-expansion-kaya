@@ -33,7 +33,7 @@ static void CreateComputerScreenEffectTask(TaskFunc, u32, u32, u32);
 static void Task_SecretBasePCTurnOn(u32);
 
 static void Task_PopSecretBaseBalloon(u32);
-static void DoBalloonSoundEffect(s16);
+static void DoBalloonSoundEffect(s32);
 
 static void Task_WateringBerryTreeAnim_Start(u32);
 static void Task_WateringBerryTreeAnim_Continue(u32);
@@ -667,7 +667,7 @@ static void StartSecretBaseTreeFieldEffect(void)
 
 bool32 FldEff_SecretPowerTree(void)
 {
-    s16 mb = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) & 0xFFF;
+    s32 mb = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) & 0xFFF;
 
     if (mb == MB_SECRET_BASE_SPOT_TREE_LEFT)
         gFieldEffectArguments[7] = 0;
@@ -787,7 +787,7 @@ static void SpriteCB_ShrubEntranceEnd(struct Sprite *sprite)
 
 bool32 FldEff_SecretBasePCTurnOn(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 taskId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -802,7 +802,7 @@ bool32 FldEff_SecretBasePCTurnOn(void)
 
 static void Task_SecretBasePCTurnOn(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -834,7 +834,7 @@ static void Task_SecretBasePCTurnOn(u32 taskId)
 
 void DoSecretBasePCTurnOffEffect(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     PlaySE(SE_PC_OFF);
@@ -847,7 +847,7 @@ void DoSecretBasePCTurnOffEffect(void)
     CurrentMapDrawMetatileAt(x, y);
 }
 
-void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
+void PopSecretBaseBalloon(s32 metatileId, s32 x, s32 y)
 {
     u32 taskId = CreateTask(Task_PopSecretBaseBalloon, 0);
 
@@ -860,7 +860,7 @@ void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
 
 static void Task_PopSecretBaseBalloon(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (data[3] == 6)
         data[3] = 0;
@@ -882,7 +882,7 @@ static void Task_PopSecretBaseBalloon(u32 taskId)
     }
 }
 
-static void DoBalloonSoundEffect(s16 metatileId)
+static void DoBalloonSoundEffect(s32 metatileId)
 {
     switch (metatileId)
     {
@@ -911,7 +911,7 @@ bool32 FldEff_Nop48(void)
     return FALSE;
 }
 
-static void DoSecretBaseBreakableDoorEffect(s16 x, s16 y)
+static void DoSecretBaseBreakableDoorEffect(s32 x, s32 y)
 {
     PlaySE(SE_BREAKABLE_DOOR);
     MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_BreakableDoor_BottomOpen);
@@ -933,7 +933,7 @@ static void Task_ShatterSecretBaseBreakableDoor(u32 taskId)
     }
 }
 
-void ShatterSecretBaseBreakableDoor(s16 x, s16 y)
+void ShatterSecretBaseBreakableDoor(s32 x, s32 y)
 {
     u32 dir = GetPlayerFacingDirection();
 
@@ -991,7 +991,7 @@ static void Task_SecretBaseMusicNoteMatSound(u32 taskId)
     }
 }
 
-void PlaySecretBaseMusicNoteMatSound(s16 metatileId)
+void PlaySecretBaseMusicNoteMatSound(s32 metatileId)
 {
     u32 taskId = CreateTask(Task_SecretBaseMusicNoteMatSound, 5);
 
@@ -1013,8 +1013,8 @@ static void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 
 void DoSecretBaseGlitterMatSparkle(void)
 {
-    s16 x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-    s16 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    s32 x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s32 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u32 spriteId;
 
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 4);
@@ -1032,7 +1032,7 @@ void DoSecretBaseGlitterMatSparkle(void)
 
 bool32 FldEff_SandPillar(void)
 {
-    s16 x, y;
+    s32 x, y;
 
     LockPlayerFieldControls();
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -1118,7 +1118,7 @@ static void SpriteCB_SandPillar_End(struct Sprite *sprite)
 
 void InteractWithShieldOrTVDecoration(void)
 {
-    s16 x, y;
+    s32 x, y;
     s32 metatileId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -1205,7 +1205,7 @@ bool32 IsLargeBreakableDecoration(u32 metatileId, bool32 checkBase)
 
 static void Task_FieldPoisonEffect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -1265,7 +1265,7 @@ static void Task_WateringBerryTreeAnim_Continue(u32 taskId)
 
     if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
-        s16 value = gTasks[taskId].data[1]++;
+        s32 value = gTasks[taskId].data[1]++;
 
         // Continue holding watering action 10 times, then end
         if (value < 10)

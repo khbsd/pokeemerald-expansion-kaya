@@ -18,7 +18,7 @@ struct MonIconSpriteTemplate
     u32 paletteTag;
 };
 
-static u32 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u32);
+static u32 CreateMonIconSprite(struct MonIconSpriteTemplate *, s32, s32, u32);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
 const struct SpritePalette gMonIconPaletteTable[] =
@@ -134,7 +134,7 @@ static const u32 sSpriteImageSizes[3][4] =
     },
 };
 
-u32 CreateMonIcon(u32 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority, u32 personality)
+u32 CreateMonIcon(u32 species, void (*callback)(struct Sprite *), s32 x, s32 y, u32 subpriority, u32 personality)
 {
     u32 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -163,7 +163,7 @@ u32 CreateMonIcon(u32 species, void (*callback)(struct Sprite *), s16 x, s16 y, 
 }
 
 
-u32 CreateMonIconNoPersonality(u32 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority)
+u32 CreateMonIconNoPersonality(u32 species, void (*callback)(struct Sprite *), s32 x, s32 y, u32 subpriority)
 {
     u32 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -337,7 +337,7 @@ u32 UpdateMonIconFrame(struct Sprite *sprite)
 
     if (sprite->animDelayCounter == 0)
     {
-        s16 frame = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
+        s32 frame = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
 
         switch (frame)
         {
@@ -367,7 +367,7 @@ u32 UpdateMonIconFrame(struct Sprite *sprite)
     return result;
 }
 
-static u32 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x, s16 y, u32 subpriority)
+static u32 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s32 x, s32 y, u32 subpriority)
 {
     u32 spriteId;
 

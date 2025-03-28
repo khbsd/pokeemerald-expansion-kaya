@@ -186,7 +186,7 @@ static bool32 UNUSED IsStaticCountdownRunning(void)
 
 static void Task_StaticCountdown(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -205,7 +205,7 @@ static void Task_StaticCountdown(u32 taskId)
     }
 }
 
-static void StaticCountdown_CreateSprites(u32 taskId, s16 *data)
+static void StaticCountdown_CreateSprites(u32 taskId, s32 *data)
 {
     u32 i;
     struct Sprite *sprite;
@@ -228,7 +228,7 @@ static void StaticCountdown_CreateSprites(u32 taskId, s16 *data)
 
 static void Task_StaticCountdown_Init(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tSpriteTemplateId = 0;
     tSpriteSheetId = 0;
     tSpritePalId = 0;
@@ -250,7 +250,7 @@ static void Task_StaticCountdown_Init(u32 taskId)
 static void Task_StaticCountdown_Free(u32 taskId)
 {
     u32 i = 0;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     for (i = 0; i < tNumSprites; i++)
         DestroySprite(&gSprites[tSpriteIds(i)]);
@@ -260,7 +260,7 @@ static void Task_StaticCountdown_Free(u32 taskId)
 
 static void SpriteCB_StaticCountdown(struct Sprite *sprite)
 {
-    s16 *data = gTasks[sprite->sTaskId].data;
+    s32 *data = gTasks[sprite->sTaskId].data;
 
     if (tTimer % tInterval != 0)
         return;
@@ -298,7 +298,7 @@ static void SpriteCB_StaticCountdown(struct Sprite *sprite)
 
 static void Task_StaticCountdown_Start(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     PlaySE(SE_BALL_BOUNCE_1);
     gSprites[tSpriteIds(0)].callback = SpriteCB_StaticCountdown;
     gSprites[tSpriteIds(0)].invisible = FALSE;
@@ -312,7 +312,7 @@ static void Task_StaticCountdown_Start(u32 taskId)
 static void Task_StaticCountdown_Run(u32 taskId)
 {
     u32 packet[RFU_PACKET_SIZE];
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (gReceivedRemoteLinkPlayers)
     {
@@ -368,8 +368,8 @@ static void Task_MinigameCountdown(u32 taskId);
 static bool32 RunMinigameCountdownDigitsAnim(u32 spriteId);
 static bool32 IsStartGraphicAnimRunning(u32 spriteId);
 static void Load321StartGfx(u32 tileTag, u32 palTag);
-static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority);
-static void CreateStartSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2);
+static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s32 x, s32 y, u32 subpriority);
+static void CreateStartSprite(u32 tileTag, u32 palTag, s32 x, s32 y, u32 subpriority, s32 *spriteId1, s32 *spriteId2);
 static void InitStartGraphic(u32 spriteId1, u32 spriteId2, u32 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
@@ -386,7 +386,7 @@ static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 #define tSpriteId2   data[8]
 #define tSpriteId3   data[9]
 
-void StartMinigameCountdown(u32 tilesTag, u32 palTag, s16 x, s16 y, u32 subpriority)
+void StartMinigameCountdown(u32 tilesTag, u32 palTag, s32 x, s32 y, u32 subpriority)
 {
     u32 taskId = CreateTask(Task_MinigameCountdown, 80);
     gTasks[taskId].tTilesTag = tilesTag;
@@ -403,7 +403,7 @@ bool32 IsMinigameCountdownRunning(void)
 
 static void Task_MinigameCountdown(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -548,7 +548,7 @@ static bool32 IsStartGraphicAnimRunning(u32 spriteId)
 static void SpriteCB_Start(struct Sprite *sprite)
 {
     int y;
-    s16 *data = sprite->data;
+    s32 *data = sprite->data;
 
     switch (sState)
     {
@@ -724,7 +724,7 @@ static const union AffineAnimCmd *const sAffineAnimTable_Numbers[] =
     sAffineAnim_Numbers_Land     // Land after the jump
 };
 
-static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority)
+static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s32 x, s32 y, u32 subpriority)
 {
     struct SpriteTemplate spriteTemplate =
     {
@@ -739,7 +739,7 @@ static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subprio
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-static void CreateStartSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2)
+static void CreateStartSprite(u32 tileTag, u32 palTag, s32 x, s32 y, u32 subpriority, s32 *spriteId1, s32 *spriteId2)
 {
     struct SpriteTemplate spriteTemplate =
     {

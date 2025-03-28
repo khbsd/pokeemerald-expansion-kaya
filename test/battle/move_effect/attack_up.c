@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_MEDITATE) == EFFECT_ATTACK_UP);
 }
 
-SINGLE_BATTLE_TEST("Meditate raises Attack by 1 stage", s16 damage)
+SINGLE_BATTLE_TEST("Meditate raises Attack by 1 stage", s32 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }

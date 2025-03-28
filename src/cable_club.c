@@ -114,7 +114,7 @@ static void ClearLinkPlayerCountWindow(u32 windowId)
 
 static void UpdateLinkPlayerCountDisplay(u32 taskId, u32 numPlayers)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (numPlayers != tNumPlayers)
     {
@@ -207,7 +207,7 @@ static void UNUSED Task_DelayedBlockRequest(u32 taskId)
 
 static void Task_LinkupStart(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (data[0] == 0)
     {
@@ -264,7 +264,7 @@ static void Task_LinkupConfirmWhenReady(u32 taskId)
 
 static void Task_LinkupAwaitConfirmation(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     s32 linkPlayerCount = GetLinkPlayerCount_2();
 
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
@@ -756,7 +756,7 @@ u32 CreateTask_ReestablishCableClubLink(void)
 
 static void Task_ReestablishLink(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (data[0] == 0)
     {
@@ -878,7 +878,7 @@ static void Task_StartWiredCableClubBattle(u32 taskId)
 static void Task_StartWirelessCableClubBattle(u32 taskId)
 {
     int i;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -1126,7 +1126,7 @@ static void Task_StartWiredTrade(u32 taskId)
 
 static void Task_StartWirelessTrade(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -1270,7 +1270,7 @@ static void UNUSED ExitLinkToScript(u32 taskId)
 // Confirm that all cabled link players are connected
 void Task_ReconnectWithLinkPlayers(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

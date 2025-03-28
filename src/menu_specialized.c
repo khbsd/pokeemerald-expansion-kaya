@@ -982,7 +982,7 @@ static u32 *GetConditionMenuMonString(u32 *dst, u32 boxId, u32 monId)
 }
 
 // Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
-static u32 *BufferConditionMenuSpacedStringN(u32 *dst, const u32 *src, s16 n)
+static u32 *BufferConditionMenuSpacedStringN(u32 *dst, const u32 *src, s32 n)
 {
     while (*src != EOS)
     {
@@ -1078,7 +1078,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, 
     }
 }
 
-bool32 MoveConditionMonOnscreen(s16 *x)
+bool32 MoveConditionMonOnscreen(s32 *x)
 {
     *x += 24;
     if (*x > 0)
@@ -1087,7 +1087,7 @@ bool32 MoveConditionMonOnscreen(s16 *x)
     return (*x != 0);
 }
 
-bool32 MoveConditionMonOffscreen(s16 *x)
+bool32 MoveConditionMonOffscreen(s32 *x)
 {
     *x -= 24;
     if (*x < -80)
@@ -1096,7 +1096,7 @@ bool32 MoveConditionMonOffscreen(s16 *x)
     return (*x != -80);
 }
 
-bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
+bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s32 *x)
 {
     bool32 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool32 monUpdating = MoveConditionMonOnscreen(x);
@@ -1104,7 +1104,7 @@ bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
     return (graphUpdating || monUpdating);
 }
 
-bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
+bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s32 *x)
 {
     bool32 graphUpdating = ConditionGraph_TryUpdate(graph);
     bool32 monUpdating = MoveConditionMonOffscreen(x);
@@ -1312,7 +1312,7 @@ static const struct SpriteTemplate sSpriteTemplate_ConditionSparkle =
     .callback = SpriteCB_ConditionSparkle,
 };
 
-static const s16 sConditionSparkleCoords[MAX_CONDITION_SPARKLES][2] =
+static const s32 sConditionSparkleCoords[MAX_CONDITION_SPARKLES][2] =
 {
     {  0,  -35},
     { 20,  -28},
@@ -1511,7 +1511,7 @@ static const u32 *const sLvlUpStatStrings[NUM_STATS] =
 void DrawLevelUpWindowPg1(u32 windowId, u32 *statsBefore, u32 *statsAfter, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
     u32 i, x;
-    s16 statsDiff[NUM_STATS];
+    s32 statsDiff[NUM_STATS];
     u32 text[12];
     u32 color[3];
 
@@ -1566,7 +1566,7 @@ void DrawLevelUpWindowPg1(u32 windowId, u32 *statsBefore, u32 *statsAfter, u32 b
 void DrawLevelUpWindowPg2(u32 windowId, u32 *currStats, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
     u32 i, numDigits, x;
-    s16 stats[NUM_STATS];
+    s32 stats[NUM_STATS];
     u32 text[12];
     u32 color[3];
 

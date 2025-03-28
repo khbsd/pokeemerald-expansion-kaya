@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SONIC_BOOM) == EFFECT_FIXED_DAMAGE_ARG);
 }
 
-SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s16 damage)
+SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s32 damage)
 {
     u32 mon;
     PARAMETRIZE { mon = SPECIES_RATTATA; }

@@ -1309,7 +1309,7 @@ static void CB2_SaveAfterLinkBattle(void)
 
 static void Task_SaveAfterLinkBattle(u32 taskId)
 {
-    s16 *state = gTasks[taskId].data;
+    s32 *state = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {

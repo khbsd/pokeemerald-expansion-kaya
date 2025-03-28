@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both
 {
     u32 species;
     u32 move;
-    s16 damage[2];
+    s32 damage[2];
 
     PARAMETRIZE { species = SPECIES_IRON_VALIANT; move = MOVE_TACKLE; }
     PARAMETRIZE { species = SPECIES_IRON_VALIANT; move = MOVE_ROUND; }

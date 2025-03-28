@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
-SINGLE_BATTLE_TEST("Opportunist only copies foe's positive stat changes in a turn", s16 damage)
+SINGLE_BATTLE_TEST("Opportunist only copies foe's positive stat changes in a turn", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_FRISK; }
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Opportunist only copies foe's positive stat changes in a tur
 }
 
 
-DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimidate against Contrary foe in a double battle", s16 damageLeft, s16 damageRight)
+DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimidate against Contrary foe in a double battle", s32 damageLeft, s32 damageRight)
 {
     u32 abilityLeft, abilityRight;
 

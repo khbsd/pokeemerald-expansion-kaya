@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Dry Skin heals 1/8th Max HP in Rain")
 
 TO_DO_BATTLE_TEST("Dry Skin doesn't heal in Rain if Cloud Nine/Air Lock is on the field");
 
-SINGLE_BATTLE_TEST("Dry Skin increases damage taken from Fire-type moves by 25%", s16 damage)
+SINGLE_BATTLE_TEST("Dry Skin increases damage taken from Fire-type moves by 25%", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_EFFECT_SPORE; }

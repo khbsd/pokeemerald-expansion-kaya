@@ -3,8 +3,8 @@
 
 SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke prevent intimidate")
 {
-    s16 turnOneHit;
-    s16 turnTwoHit;
+    s32 turnOneHit;
+    s32 turnTwoHit;
     u32 species, ability;
 
     PARAMETRIZE{ species = SPECIES_METANG; ability = ABILITY_CLEAR_BODY; }
@@ -273,7 +273,7 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
     }
 }
 
-SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent Attack reduction from burn", s16 damage)
+SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent Attack reduction from burn", s32 damage)
 {
     bool32 burned = FALSE;
     u32 species, ability;

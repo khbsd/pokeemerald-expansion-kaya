@@ -1174,7 +1174,7 @@ static void Task_ScrollIndicatorArrowPair(u32 taskId)
 
 void Task_ScrollIndicatorArrowPairOnMainMenu(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     struct ScrollIndicatorPair *scrollData = (void *) data;
 
     if (tIsScrolled)

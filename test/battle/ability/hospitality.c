@@ -3,7 +3,7 @@
 
 DOUBLE_BATTLE_TEST("Hospitality user restores 25% of ally's health")
 {
-    s16 health;
+    s32 health;
 
     PARAMETRIZE { health = 75; }
     PARAMETRIZE { health = 100; }

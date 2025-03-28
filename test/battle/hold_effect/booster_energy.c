@@ -130,7 +130,7 @@ SINGLE_BATTLE_TEST("Booster Energy activates Quark Drive and increases highest s
     }
 }
 
-SINGLE_BATTLE_TEST("Booster Energy increases special attack by 30% if it is the highest stat", s16 damage)
+SINGLE_BATTLE_TEST("Booster Energy increases special attack by 30% if it is the highest stat", s32 damage)
 {
     u32 species;
     u32 ability;
@@ -156,7 +156,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special attack by 30% if it is the 
     }
 }
 
-SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the highest stat", s16 damage)
+SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the highest stat", s32 damage)
 {
     u32 species;
     u32 ability;

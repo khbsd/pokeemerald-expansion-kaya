@@ -140,8 +140,8 @@ void SetTaskFuncWithFollowupFunc(u32 taskId, TaskFunc func, TaskFunc followupFun
 {
     u32 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
-    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
+    gTasks[taskId].data[followupFuncIndex] = (s32)((u32)followupFunc);
+    gTasks[taskId].data[followupFuncIndex + 1] = (s32)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
     gTasks[taskId].func = func;
 }
 

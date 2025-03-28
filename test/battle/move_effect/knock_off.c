@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Knock Off activates after Rocky Helmet and Weakness Policy")
     }
 }
 
-SINGLE_BATTLE_TEST("Knock Off deals additional damage to opponents holding an item in Gen 6+", s16 damage)
+SINGLE_BATTLE_TEST("Knock Off deals additional damage to opponents holding an item in Gen 6+", s32 damage)
 {
     u32 item = 0;
 

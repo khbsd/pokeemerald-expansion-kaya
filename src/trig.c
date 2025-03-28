@@ -2,7 +2,7 @@
 #include "trig.h"
 
 // Values of sin(x*(π/128)) as Q8.8 fixed-point numbers from x = 0 to x = 319
-const s16 gSineTable[] =
+const s32 gSineTable[] =
 {
     Q_8_8(0),           // sin(0*(π/128))
     Q_8_8(0.0234375),   // sin(1*(π/128))
@@ -327,7 +327,7 @@ const s16 gSineTable[] =
 };
 
 // values of sin(x) as Q4.12 fixed-point numbers from x = 0° to x = 179°
-const s16 gSineDegreeTable[] =
+const s32 gSineDegreeTable[] =
 {
     Q_4_12(0),              // sin(0°)
     Q_4_12(0.017333984375), // sin(1°)
@@ -512,23 +512,23 @@ const s16 gSineDegreeTable[] =
 };
 
 // amplitude * sin(index*(π/128))
-s16 Sin(s16 index, s16 amplitude)
+s32 Sin(s32 index, s32 amplitude)
 {
     return (amplitude * gSineTable[index]) >> 8;
 }
 
 // amplitude * cos(index*(π/128))
-s16 Cos(s16 index, s16 amplitude)
+s32 Cos(s32 index, s32 amplitude)
 {
     return (amplitude * gSineTable[index + 64]) >> 8;
 }
 
 // angle in degrees
-s16 Sin2(u32 angle)
+s32 Sin2(u32 angle)
 {
     s32 angleMod = angle % 180;
     s32 negate = ((angle / 180) & 1);
-    s16 value = gSineDegreeTable[angleMod];
+    s32 value = gSineDegreeTable[angleMod];
 
     if (negate)
         return -value;
@@ -537,7 +537,7 @@ s16 Sin2(u32 angle)
 }
 
 // angle in degrees
-s16 Cos2(u32 angle)
+s32 Cos2(u32 angle)
 {
     return Sin2(angle + 90);
 }

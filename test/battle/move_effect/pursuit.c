@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Pursuit doesn't attack switching foe if user already acted t
     }
 }
 
-SINGLE_BATTLE_TEST("Pursuit doubles in power if attacking while target switches out", s16 damage)
+SINGLE_BATTLE_TEST("Pursuit doubles in power if attacking while target switches out", s32 damage)
 {
     u32 speed;
     PARAMETRIZE { speed = 5; }
@@ -396,7 +396,7 @@ DOUBLE_BATTLE_TEST("Pursuit user mega evolves before attacking a switching foe a
     }
 }
 
-SINGLE_BATTLE_TEST("Pursuit user terastalizes before attacking a switching foe and gets the damage boost from the tera type", s16 damage)
+SINGLE_BATTLE_TEST("Pursuit user terastalizes before attacking a switching foe and gets the damage boost from the tera type", s32 damage)
 {
     u32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }

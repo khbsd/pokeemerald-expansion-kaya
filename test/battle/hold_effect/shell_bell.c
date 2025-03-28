@@ -9,9 +9,9 @@ ASSUMPTIONS
 #define HITS 5
 SINGLE_BATTLE_TEST("Shell Bell recovers 1/8 of HP from after the last hit from all hits of a multi hit move")
 {
-    s16 multiHitDamage[HITS];
-    s16 totalDamage = 0;
-    s16 shellBellRecovery = 0;
+    s32 multiHitDamage[HITS];
+    s32 totalDamage = 0;
+    s32 shellBellRecovery = 0;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); Item(ITEM_SHELL_BELL); }
@@ -174,8 +174,8 @@ SINGLE_BATTLE_TEST("Shell Bell does not activate on Future Sight if the original
 
 SINGLE_BATTLE_TEST("Shell Bell does not activate on Future Sight if the original user is on the field")
 {
-    s16 damage = 0;
-    s16 healed = 0;
+    s32 damage = 0;
+    s32 healed = 0;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); Item(ITEM_SHELL_BELL); }
@@ -200,10 +200,10 @@ SINGLE_BATTLE_TEST("Shell Bell does not activate on Future Sight if the original
 
 DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
 {
-    s16 opponentLeftDamage;
-    s16 opponentRightDamage;
-    s16 playerRightDamage;
-    s16 shellBellHeal;
+    s32 opponentLeftDamage;
+    s32 opponentRightDamage;
+    s32 playerRightDamage;
+    s32 shellBellHeal;
 
     const u32 maxHp = 200;
     const u32 initHp = 1;
@@ -225,7 +225,7 @@ DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
 
         HP_BAR(playerLeft, captureDamage: &shellBellHeal);
     } THEN {
-        const s16 totalDamage = opponentLeftDamage
+        const s32 totalDamage = opponentLeftDamage
             + playerRightDamage + opponentRightDamage;
         EXPECT_EQ(shellBellHeal, -totalDamage / 8);
         EXPECT_EQ(playerLeft->hp, initHp + (totalDamage / 8));

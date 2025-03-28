@@ -43,7 +43,7 @@ struct PyramidBagMenu
     u8 listMenuMaxShown;
     struct ListMenuItem bagListItems[PYRAMID_BAG_ITEMS_COUNT + 1];
     u8 itemStrings[PYRAMID_BAG_ITEMS_COUNT + 1][ITEM_NAME_LENGTH + 10];
-    s16 state;
+    s32 state;
     u8 unused2[4];
 };
 

@@ -123,7 +123,7 @@
  *
  * This can be translated to an automated test as follows:
  *
- *    SINGLE_BATTLE_TEST("Meditate raises Attack", s16 damage)
+ *    SINGLE_BATTLE_TEST("Meditate raises Attack", s32 damage)
  *    {
  *        bool32 raiseAttack;
  *        PARAMETRIZE { raiseAttack = FALSE; }
@@ -222,7 +222,7 @@
  * PARAMETRIZE
  * Runs a test multiple times. i will be set to which parameter is
  * running, and results will contain an entry for each parameter, e.g.:
- *     SINGLE_BATTLE_TEST("Blaze boosts Fire-type moves in a pinch", s16 damage)
+ *     SINGLE_BATTLE_TEST("Blaze boosts Fire-type moves in a pinch", s32 damage)
  *     {
  *         u32 hp;
  *         PARAMETRIZE { hp = 99; }
@@ -413,7 +413,7 @@
  * If captureDamage: or captureHP: are used, causes the test to fail if
  * the HP bar does not change, and then writes that change to the
  * pointer, e.g.:
- *     s16 damage;
+ *     s32 damage;
  *     HP_BAR(player, captureDamage: &damage);
  * If none of the above are used, causes the test to fail if the HP
  * does not change at all.
@@ -653,7 +653,7 @@ struct AILogLine
     const char *file;
     u32 line:15;
     u32 set:1; // Whether score was set, or added/subtracted
-    s16 score;
+    s32 score;
 };
 
 // Data which is updated by the test runner during a battle and needs to
@@ -1062,11 +1062,11 @@ struct HPEventContext
     u8 _;
     u32 hp;
     bool32 explicitHP;
-    s16 damage;
+    s32 damage;
     bool32 explicitDamage;
     u32 *captureHP;
     bool32 explicitCaptureHP;
-    s16 *captureDamage;
+    s32 *captureDamage;
     bool32 explicitCaptureDamage;
 };
 

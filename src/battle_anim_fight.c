@@ -538,8 +538,8 @@ void AnimBasicFistOrFoot(struct Sprite *sprite)
 static void AnimFistOrFootRandomPos(struct Sprite *sprite)
 {
     u32 battler;
-    s16 xMod, yMod;
-    s16 x, y;
+    s32 xMod, yMod;
+    s32 x, y;
 
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
@@ -937,10 +937,10 @@ static void AnimSuperpowerRock_Step1(struct Sprite *sprite)
     }
     else
     {
-        s16 pos0 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-        s16 pos1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-        s16 pos2 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-        s16 pos3 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+        s32 pos0 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+        s32 pos1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+        s32 pos2 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        s32 pos3 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
         sprite->data[0] = pos2 - pos0;
         sprite->data[1] = pos3 - pos1;

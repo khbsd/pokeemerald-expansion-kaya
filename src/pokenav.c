@@ -251,7 +251,7 @@ bool32 FuncIsActiveLoopedTask(LoopedTask func)
 static void Task_RunLoopedTask(u32 taskId)
 {
     LoopedTask loopedTask = (LoopedTask)GetWordTaskArg(taskId, 1);
-    s16 *state = &gTasks[taskId].data[0];
+    s32 *state = &gTasks[taskId].data[0];
     bool32 exitLoop = FALSE;
 
     while (!exitLoop)
@@ -284,7 +284,7 @@ static void Task_RunLoopedTask(u32 taskId)
 static void Task_RunLoopedTask_LinkMode(u32 taskId)
 {
     LoopedTask task;
-    s16 *state;
+    s32 *state;
     u32 action;
 
     if (Overworld_IsRecvQueueAtMax())
@@ -434,7 +434,7 @@ static void VBlankCB_Pokenav(void)
 static void Task_Pokenav(u32 taskId)
 {
     u32 menuId;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

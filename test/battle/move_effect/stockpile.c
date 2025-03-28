@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Spit Up and Swallow don't work if used without Stockpile")
     }
 }
 
-SINGLE_BATTLE_TEST("Spit Up's power raises depending on Stockpile's count", s16 damage)
+SINGLE_BATTLE_TEST("Spit Up's power raises depending on Stockpile's count", s32 damage)
 {
     u8 count;
     PARAMETRIZE { count = 1; }
@@ -103,7 +103,7 @@ SINGLE_BATTLE_TEST("Spit Up's power raises depending on Stockpile's count", s16 
     }
 }
 
-SINGLE_BATTLE_TEST("Swallow heals HP depending on Stockpile's count", s16 hpHeal)
+SINGLE_BATTLE_TEST("Swallow heals HP depending on Stockpile's count", s32 hpHeal)
 {
     u8 count;
     PARAMETRIZE { count = 1; }
@@ -141,7 +141,7 @@ SINGLE_BATTLE_TEST("Swallow heals HP depending on Stockpile's count", s16 hpHeal
     }
 }
 
-SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsical, s16 dmgSpecial)
+SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s32 dmgPyhsical, s32 dmgSpecial)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_STOCKPILE; }
@@ -175,7 +175,7 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsic
     }
 }
 
-DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit Up or Swallow", s16 dmgPyhsicalBefore, s16 dmgPhysicalAfter, s16 dmgSpecialBefore, s16 dmgSpecialAfter)
+DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit Up or Swallow", s32 dmgPyhsicalBefore, s32 dmgPhysicalAfter, s32 dmgSpecialBefore, s32 dmgSpecialAfter)
 {
     u8 count;
     u32 move;

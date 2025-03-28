@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gItemsInfo[ITEM_MIRROR_HERB].holdEffect == HOLD_EFFECT_MIRROR_HERB);
 }
 
-SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a turn", s16 damage)
+SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a turn", s32 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }

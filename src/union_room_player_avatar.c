@@ -47,7 +47,7 @@ static const u32 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
     }
 };
 
-static const s16 sUnionRoomPlayerCoords[MAX_UNION_ROOM_LEADERS][2] = {
+static const s32 sUnionRoomPlayerCoords[MAX_UNION_ROOM_LEADERS][2] = {
     { 4,  6},
     {13,  8},
     {10,  6},
@@ -254,7 +254,7 @@ static bool32 AnimateUnionRoomPlayerDespawn(s32 * state, u32 leaderId, struct Un
 
 static bool32 AnimateUnionRoomPlayerSpawn(s32 * state, u32 leaderId, struct UnionRoomObject * object)
 {
-    s16 x, y;
+    s32 x, y;
 
     switch (*state)
     {
@@ -466,7 +466,7 @@ static void DespawnGroupMember(u32 leaderId, u32 memberId)
 
 static void AssembleGroup(u32 leaderId, struct RfuGameData * gameData)
 {
-    s16 x, y, x2, y2;
+    s32 x, y, x2, y2;
     s32 i;
 
     PlayerGetDestCoords(&x, &y);
@@ -549,9 +549,9 @@ void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
         UpdateUnionRoomPlayerSprites(uroom);
 }
 
-bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdPtr, s16 *leaderIdPtr, u32 *spriteIds)
+bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s32 *memberIdPtr, s32 *leaderIdPtr, u32 *spriteIds)
 {
-    s16 x, y;
+    s32 x, y;
     s32 i, memberId;
     struct RfuPlayer * leaders;
     if (!IsPlayerStandingStill())

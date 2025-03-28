@@ -115,8 +115,8 @@ u32 MoveRotatingTileObjects(u32 puzzleNumber)
     {
         s32 puzzleTileStart;
         u32 puzzleTileNum;
-        s16 x = objectEvents[i].x + MAP_OFFSET;
-        s16 y = objectEvents[i].y + MAP_OFFSET;
+        s32 x = objectEvents[i].x + MAP_OFFSET;
+        s32 y = objectEvents[i].y + MAP_OFFSET;
         u32 metatile = MapGridGetMetatileIdAt(x, y);
 
         if (!sRotatingTilePuzzle->isTrickHouse)
@@ -207,8 +207,8 @@ void TurnRotatingTileObjects(void)
         s32 rotation;
         s32 tileDifference;
         u32 objectEventId;
-        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
-        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + MAP_OFFSET;
+        s32 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
+        s32 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + MAP_OFFSET;
         u32 metatile = MapGridGetMetatileIdAt(x, y);
 
         // NOTE: The following 2 assignments and if else could all be replaced with rotation = ROTATE_COUNTERCLOCKWISE
@@ -318,8 +318,8 @@ static void TurnUnsavedRotatingTileObject(u32 eventTemplateId, u32 puzzleTileNum
     s32 puzzleTileStart;
     u32 movementType;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
-    s16 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
+    s32 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
+    s32 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
     u32 metatile = MapGridGetMetatileIdAt(x, y);
 
     if (!sRotatingTilePuzzle->isTrickHouse)

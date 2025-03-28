@@ -137,7 +137,7 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect friendship
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo doesn't block a held item's form-changing effect, but it does block its other effects", s16 damage)
+SINGLE_BATTLE_TEST("Embargo doesn't block a held item's form-changing effect, but it does block its other effects", s32 damage)
 {
     u32 heldItem;
 
@@ -249,7 +249,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't block the effects of berries obtained throug
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move Judgment", s16 damage)
+SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move Judgment", s32 damage)
 {
     u32 heldItem;
 
@@ -270,7 +270,7 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move J
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move Techno Blast", s16 damage)
+SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move Techno Blast", s32 damage)
 {
     u32 heldItem;
 
@@ -291,7 +291,7 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move T
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo disables the effect of the Memory items on the move Multi Attack", s16 damage)
+SINGLE_BATTLE_TEST("Embargo disables the effect of the Memory items on the move Multi Attack", s32 damage)
 {
     u32 heldItem;
 

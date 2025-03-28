@@ -364,7 +364,7 @@ static void RecordedPlayerHandleSwitchInAnim(u32 battler)
 static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
 {
     bool32 isFrontPic;
-    s16 xPos, yPos;
+    s32 xPos, yPos;
     u32 trainerPicId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)

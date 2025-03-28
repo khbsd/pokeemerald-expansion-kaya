@@ -74,7 +74,7 @@ DOUBLE_BATTLE_TEST("Stealth Rock damages the correct pokemon when Eject Button i
     }
 }
 
-SINGLE_BATTLE_TEST("Stealth Rock damage terastalized mons with the correct amount of damage", s16 damage)
+SINGLE_BATTLE_TEST("Stealth Rock damage terastalized mons with the correct amount of damage", s32 damage)
 {
     u32 tera;
 

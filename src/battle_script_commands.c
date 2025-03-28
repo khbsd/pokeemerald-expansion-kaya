@@ -2516,7 +2516,7 @@ static void Cmd_healthbarupdate(void)
             }
             else
             {
-                s16 healthValue = min(gBattleStruct->moveDamage[battler], 10000); // Max damage (10000) not present in R/S, ensures that huge damage values don't change sign
+                s32 healthValue = min(gBattleStruct->moveDamage[battler], 10000); // Max damage (10000) not present in R/S, ensures that huge damage values don't change sign
 
                 BtlController_EmitHealthBarUpdate(battler, BUFFER_A, healthValue);
                 MarkBattlerForControllerExec(battler);

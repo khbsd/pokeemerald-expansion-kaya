@@ -397,7 +397,7 @@ static void ShowChooseTimeWindow(u32 windowId, u32 days, u32 hours, u32 minutes,
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u32 keys)
+static bool32 MoveTimeUpDown(s32 *val, int minVal, int maxVal, u32 keys)
 {
     if (keys & DPAD_DOWN)
     {
@@ -438,7 +438,7 @@ static void Task_ResetRtc_SetFinished(u32 taskId)
 
 static void Task_ResetRtc_Exit(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     HideChooseTimeWindow(tWindowId);
     FreeCursorPalette();
@@ -447,7 +447,7 @@ static void Task_ResetRtc_Exit(u32 taskId)
 
 static void Task_ResetRtc_HandleInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 selection = tSelection;
     const struct ResetRtcInputMap *selectionInfo = &sInputMap[selection - 1];
 
@@ -504,7 +504,7 @@ static void Task_ResetRtc_HandleInput(u32 taskId)
 
 static void Task_ResetRtc_Init(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tFinished = FALSE;
     tDays = gLocalTime.days;
     tHours = gLocalTime.hours;
@@ -576,7 +576,7 @@ static void ShowMessage(const u32 *str)
 
 static void Task_ShowResetRtcPrompt(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -642,7 +642,7 @@ enum {
 
 static void Task_ResetRtcScreen(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

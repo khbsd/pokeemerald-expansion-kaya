@@ -177,9 +177,9 @@ static void Task_CallYesOrNoCallback(u32 taskId)
 }
 
 // Returns TRUE if the quantity was changed, FALSE if it remained the same
-bool32 AdjustQuantityAccordingToDPadInput(s16 *quantity, u32 max)
+bool32 AdjustQuantityAccordingToDPadInput(s32 *quantity, u32 max)
 {
-    s16 valBefore = *quantity;
+    s32 valBefore = *quantity;
 
     if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
@@ -431,7 +431,7 @@ void SetSwapLineSpritesInvisibility(u32 *spriteIds, u32 count, bool32 invisible)
         gSprites[spriteIds[i]].invisible = invisible;
 }
 
-void UpdateSwapLineSpritesPos(u32 *spriteIds, u32 count, s16 x, u32 y)
+void UpdateSwapLineSpritesPos(u32 *spriteIds, u32 count, s32 x, u32 y)
 {
     u32 i;
     bool32 hasMargin = count & SWAP_LINE_HAS_MARGIN;

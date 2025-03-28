@@ -719,7 +719,7 @@ static void RemoveScrollArrow(void)
 static void CreatePyramidBagInputTask(void)
 {
     u32 taskId = CreateTask(Task_HandlePyramidBagInput, 0);
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, gPyramidBagMenuState.scrollPosition, gPyramidBagMenuState.cursorPosition);
 }
 
@@ -748,7 +748,7 @@ static void MovePyramidBagItemSlotInList(u32 from, u32 to)
 
     if (from != to)
     {
-        s16 i;
+        s32 i;
         u32 firstSlotItemId = itemIds[from];
         u32 firstSlotQuantity = quantities[from];
 
@@ -874,7 +874,7 @@ void CloseBattlePyramidBag(u32 taskId)
 
 static void Task_ClosePyramidBag(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         DestroyListMenuTask(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
@@ -896,7 +896,7 @@ static void Task_ClosePyramidBag(u32 taskId)
 
 static void Task_HandlePyramidBagInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || gPaletteFade.active)
         return;
 
@@ -941,7 +941,7 @@ static void Task_HandlePyramidBagInput(u32 taskId)
 
 static void OpenContextMenu(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     RemoveScrollArrow();
     PrintSelectorArrow(tListTaskId, COLORID_LIGHT_GRAY);
@@ -1118,7 +1118,7 @@ static void BagAction_UseOnField(u32 taskId)
 
 static void BagAction_Cancel(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CloseMenuActionWindow();
     PrintItemDescription(tListPos);
@@ -1136,7 +1136,7 @@ static void SetTaskToMainPyramidBagInputHandler(u32 taskId)
 
 static void BagAction_Toss(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CloseMenuActionWindow();
     tNumToToss = 1;
@@ -1157,7 +1157,7 @@ static void BagAction_Toss(u32 taskId)
 
 static void AskConfirmToss(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, tNumToToss, STR_CONV_MODE_LEFT_ALIGN, MAX_PYRAMID_ITEM_DIGITS);
@@ -1169,7 +1169,7 @@ static void AskConfirmToss(u32 taskId)
 
 static void DontTossItem(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     PrintItemDescription(tListPos);
     PrintSelectorArrow(tListTaskId, COLORID_DARK_GRAY);
@@ -1186,7 +1186,7 @@ static void ShowNumToToss(void)
     AddTextPrinterParameterized(WIN_TOSS_NUM, FONT_NORMAL, gStringVar4, x, 2, 0, NULL);
 }
 
-static void UpdateNumToToss(s16 num)
+static void UpdateNumToToss(s32 num)
 {
     s32 x;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEADING_ZEROS, MAX_PYRAMID_ITEM_DIGITS);
@@ -1197,7 +1197,7 @@ static void UpdateNumToToss(s16 num)
 
 static void Task_ChooseHowManyToToss(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (AdjustQuantityAccordingToDPadInput(&tNumToToss, tQuantity) == TRUE)
     {
@@ -1225,7 +1225,7 @@ static void Task_ChooseHowManyToToss(u32 taskId)
 
 static void TossItem(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, tNumToToss, STR_CONV_MODE_LEFT_ALIGN, MAX_PYRAMID_ITEM_DIGITS);
@@ -1237,7 +1237,7 @@ static void TossItem(u32 taskId)
 
 static void Task_TossItem(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
     u32 *selectedRow = &gPyramidBagMenuState.cursorPosition;
 
@@ -1291,7 +1291,7 @@ static void Task_WaitCloseErrorMessage(u32 taskId)
 
 void Task_CloseBattlePyramidBagMessage(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     CloseBattlePyramidBagTextWindow();
     PrintItemDescription(tListPos);
@@ -1327,7 +1327,7 @@ static void BagAction_UseInBattle(u32 taskId)
 
 static void Task_BeginItemSwap(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tListPos = gPyramidBagMenuState.scrollPosition + gPyramidBagMenuState.cursorPosition;
     gPyramidBagMenu->toSwapPos = tListPos;
@@ -1343,7 +1343,7 @@ static void Task_BeginItemSwap(u32 taskId)
 
 static void Task_ItemSwapHandleInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         if (JOY_NEW(SELECT_BUTTON))
@@ -1380,7 +1380,7 @@ static void Task_ItemSwapHandleInput(u32 taskId)
 
 static void PerformItemSwap(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
     u32 *selectedRow = &gPyramidBagMenuState.cursorPosition;
     u32 swapPos = *scrollOffset + *selectedRow;
@@ -1405,7 +1405,7 @@ static void PerformItemSwap(u32 taskId)
 
 static void CancelItemSwap(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *scrollOffset = &gPyramidBagMenuState.scrollPosition;
     u32 *selectedRow = &gPyramidBagMenuState.cursorPosition;
 

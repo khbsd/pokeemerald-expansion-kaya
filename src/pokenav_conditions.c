@@ -21,7 +21,7 @@ struct Pokenav_ConditionMenu
     u32 fill[0x180];
     u32 monPicGfx[CONDITION_MONS_LOADED][MON_PIC_SIZE];
     bool32 inSearchMode;
-    s16 toLoadListIndex;
+    s32 toLoadListIndex;
     u32 (*callback)(struct Pokenav_ConditionMenu *);
     u32 fill2[0x18];
     u32 locationText[CONDITION_MONS_LOADED][24];
@@ -43,9 +43,9 @@ static u32 GetConditionReturnCallback(struct Pokenav_ConditionMenu *);
 static u32 OpenMarkingsMenu(struct Pokenav_ConditionMenu *);
 static u32 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *);
 static u32 SwitchConditionSummaryIndex(bool32);
-static void CopyMonNameGenderLocation(s16, u32);
-static void GetMonConditionGraphData(s16, u32);
-static void ConditionGraphDrawMonPic(s16, u32);
+static void CopyMonNameGenderLocation(s32, u32);
+static void GetMonConditionGraphData(s32, u32);
+static void ConditionGraphDrawMonPic(s32, u32);
 
 bool32 PokenavCallback_Init_ConditionGraph_Party(void)
 {
@@ -320,7 +320,7 @@ bool32 LoadNextConditionMenuMonData(u32 mode)
     return FALSE;
 }
 
-u32 *CopyStringLeftAlignedToConditionData(u32 *dst, const u32 *src, s16 n)
+u32 *CopyStringLeftAlignedToConditionData(u32 *dst, const u32 *src, s32 n)
 {
     while (*src != EOS)
         *dst++ = *src++, n--;
@@ -425,7 +425,7 @@ static u32 *CopyConditionMonNameGender(u32 *str, u32 listId, bool32 skipPadding)
     return str_;
 }
 
-static void CopyMonNameGenderLocation(s16 listId, u32 loadId)
+static void CopyMonNameGenderLocation(s32 listId, u32 loadId)
 {
     u32 boxId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
@@ -490,7 +490,7 @@ static void InitSearchResultsConditionList(void)
     menu->state = 0;
 }
 
-static void GetMonConditionGraphData(s16 listId, u32 loadId)
+static void GetMonConditionGraphData(s32 listId, u32 loadId)
 {
     u32 boxId, monId, i;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
@@ -521,7 +521,7 @@ static void GetMonConditionGraphData(s16 listId, u32 loadId)
     }
 }
 
-static void ConditionGraphDrawMonPic(s16 listId, u32 loadId)
+static void ConditionGraphDrawMonPic(s32 listId, u32 loadId)
 {
     u32 boxId, monId, species;
     u32 personality;

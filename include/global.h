@@ -111,7 +111,7 @@
 
 #define S16TOPOSFLOAT(val)   \
 ({                           \
-    s16 v = (val);           \
+    s32 v = (val);           \
     float f = (float)v;      \
     if(v < 0) f += 65536.0f; \
     f;                       \
@@ -170,8 +170,8 @@ struct UCoords8
 
 struct Coords16
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
 };
 
 struct UCoords16
@@ -194,7 +194,7 @@ struct UCoords32
 
 struct Time
 {
-    /*0x00*/ s16 days;
+    /*0x00*/ s32 days;
     /*0x02*/ s32 hours;
     /*0x03*/ s32 minutes;
     /*0x04*/ s32 seconds;
@@ -611,7 +611,7 @@ struct WarpData
     s32 mapNum;
     s32 warpId;
     //u8 padding;
-    s16 x, y;
+    s32 x, y;
 };
 
 struct ItemSlot
@@ -1127,8 +1127,8 @@ extern struct SaveBlock1* gSaveBlock1Ptr;
 
 struct MapPosition
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     s32 elevation;
 };
 

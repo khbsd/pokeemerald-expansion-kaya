@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_HYDRO_STEAM) == EFFECT_HYDRO_STEAM);
 }
 
-SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain", s16 damage)
+SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain", s32 damage)
 {
     u32 setupMove;
     PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain",
     }
 }
 
-SINGLE_BATTLE_TEST("Hydro Steam is affected by Utility Umbrella", s16 damage)
+SINGLE_BATTLE_TEST("Hydro Steam is affected by Utility Umbrella", s32 damage)
 {
     u32 itemPlayer;
     u32 itemOpponent;

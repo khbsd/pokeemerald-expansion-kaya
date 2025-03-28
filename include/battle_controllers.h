@@ -263,9 +263,9 @@ void BtlController_HandleSetRawMonData(u32 battler);
 void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler));
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
 void BtlController_HandleReturnMonToBall(u32 battler);
-void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);
+void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s32 xPos, s32 yPos, s32 subpriority);
 void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId);
-void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim);
+void BtlController_HandleTrainerSlideBack(u32 battlerId, s32 data0, bool32 startAnim);
 void BtlController_HandleFaintAnimation(u32 battler);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
@@ -287,7 +287,7 @@ void BtlController_HandleIntroSlide(u32 battler);
 void BtlController_HandleSpriteInvisibility(u32 battler);
 bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
 bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
-void BtlController_HandleIntroTrainerBallThrow(u32 battler, u32 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler));
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u32 tagTrainerPal, const u32 *trainerPal, s32 framesToWait, void (*controllerCallback)(u32 battler));
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
 void BtlController_HandleHidePartyStatusSummary(u32 battler);
 void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);

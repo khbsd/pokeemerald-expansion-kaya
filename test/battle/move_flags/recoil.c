@@ -3,8 +3,8 @@
 
 SINGLE_BATTLE_TEST("Recoil: Take Down deals 25% of recoil damage to the user")
 {
-    s16 directDamage;
-    s16 recoilDamage;
+    s32 directDamage;
+    s32 recoilDamage;
 
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_TAKE_DOWN) == 25);
@@ -23,8 +23,8 @@ SINGLE_BATTLE_TEST("Recoil: Take Down deals 25% of recoil damage to the user")
 
 SINGLE_BATTLE_TEST("Recoil: Double Edge deals 33% of recoil damage to the user")
 {
-    s16 directDamage;
-    s16 recoilDamage;
+    s32 directDamage;
+    s32 recoilDamage;
 
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_DOUBLE_EDGE) == 33);
@@ -43,8 +43,8 @@ SINGLE_BATTLE_TEST("Recoil: Double Edge deals 33% of recoil damage to the user")
 
 SINGLE_BATTLE_TEST("Recoil: Head Smash deals 50% of recoil damage to the user")
 {
-    s16 directDamage;
-    s16 recoilDamage;
+    s32 directDamage;
+    s32 recoilDamage;
 
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_HEAD_SMASH) == 50);
@@ -63,8 +63,8 @@ SINGLE_BATTLE_TEST("Recoil: Head Smash deals 50% of recoil damage to the user")
 
 SINGLE_BATTLE_TEST("Recoil: Flare Blitz deals 33% of recoil damage to the user and can burn target")
 {
-    s16 directDamage;
-    s16 recoilDamage;
+    s32 directDamage;
+    s32 recoilDamage;
 
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_FLARE_BLITZ) == 33);

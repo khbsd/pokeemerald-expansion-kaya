@@ -75,7 +75,7 @@ struct AnimJumpCmd
 // Otherwise, it is the imageValue for a frame command.
 union AnimCmd
 {
-    s16 type;
+    s32 type;
     struct AnimFrameCmd frame;
     struct AnimLoopCmd loop;
     struct AnimJumpCmd jump;
@@ -92,33 +92,33 @@ union AnimCmd
 
 struct AffineAnimFrameCmd
 {
-    s16 xScale;
-    s16 yScale;
+    s32 xScale;
+    s32 yScale;
     u8 rotation;
     u8 duration;
 };
 
 struct AffineAnimLoopCmd
 {
-    s16 type;
-    s16 count;
+    s32 type;
+    s32 count;
 };
 
 struct AffineAnimJumpCmd
 {
-    s16 type;
+    s32 type;
     u32 target;
 };
 
 struct AffineAnimEndCmdAlt
 {
-    s16 type;
+    s32 type;
     u32 val;
 };
 
 union AffineAnimCmd
 {
-    s16 type;
+    s32 type;
     struct AffineAnimFrameCmd frame;
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
@@ -146,8 +146,8 @@ struct AffineAnimState
     u8 animCmdIndex;
     u8 delayCounter;
     u8 loopCounter;
-    s16 xScale;
-    s16 yScale;
+    s32 xScale;
+    s32 yScale;
     u32 rotation;
 };
 
@@ -203,8 +203,8 @@ struct Sprite
     /*0x18*/ const struct SubspriteTable *subspriteTables;
     /*0x1C*/ SpriteCallback callback;
 
-    /*0x20*/ s16 x, y;
-    /*0x24*/ s16 x2, y2;
+    /*0x20*/ s32 x, y;
+    /*0x24*/ s32 x2, y2;
     /*0x28*/ s32 centerToCornerVecX;
     /*0x29*/ s32 centerToCornerVecY;
 
@@ -216,7 +216,7 @@ struct Sprite
     /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
-    /*0x2E*/ s16 data[8];
+    /*0x2E*/ s32 data[8];
 
     /*0x3E*/ u32 inUse:1;                   //1
              u32 coordOffsetEnabled:1;      //2
@@ -249,10 +249,10 @@ struct Sprite
 
 struct OamMatrix
 {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
+    s32 a;
+    s32 b;
+    s32 c;
+    s32 d;
 };
 
 extern const struct OamData gDummyOamData;
@@ -264,18 +264,18 @@ extern u8 gReservedSpritePaletteCount;
 extern struct Sprite gSprites[MAX_SPRITES + 1];
 extern u8 gOamLimit;
 extern u32 gReservedSpriteTileCount;
-extern s16 gSpriteCoordOffsetX;
-extern s16 gSpriteCoordOffsetY;
+extern s32 gSpriteCoordOffsetX;
+extern s32 gSpriteCoordOffsetY;
 extern struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
 extern bool32 gAffineAnimsDisabled;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);
 void BuildOamBuffer(void);
-u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
-u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateSprite(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority);
+u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority);
 u32 CreateInvisibleSprite(void (*callback)(struct Sprite *));
-u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority);
 void DestroySprite(struct Sprite *sprite);
 void ResetOamRange(u32 start, u32 end);
 void LoadOam(void);
@@ -289,7 +289,7 @@ void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);
 void DestroySpriteAndFreeResources(struct Sprite *sprite);
 void AnimateSprite(struct Sprite *sprite);
-void SetSpriteMatrixAnchor(struct Sprite *sprite, s16 x, s16 y);
+void SetSpriteMatrixAnchor(struct Sprite *sprite, s32 x, s32 y);
 void StartSpriteAnim(struct Sprite *sprite, u8 animNum);
 void StartSpriteAnimIfDifferent(struct Sprite *sprite, u8 animNum);
 void SeekSpriteAnim(struct Sprite *sprite, u8 animCmdIndex);
@@ -301,11 +301,11 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite);
 u8 AllocOamMatrix(void);
 void FreeOamMatrix(u8 matrixNum);
 void InitSpriteAffineAnim(struct Sprite *sprite);
-void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u32 rotation);
+void SetOamMatrixRotationScaling(u8 matrixNum, s32 xScale, s32 yScale, u32 rotation);
 u32 LoadSpriteSheet(const struct SpriteSheet *sheet);
 u32 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
-s16 AllocSpriteTiles(u32 tileCount);
+s32 AllocSpriteTiles(u32 tileCount);
 u32 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
 void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);

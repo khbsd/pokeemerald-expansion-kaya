@@ -124,10 +124,10 @@ struct Weather
     u8 blendFrameCounter;
     u8 blendDelay;
     // Drought
-    s16 droughtBrightnessStage;
-    s16 droughtLastBrightnessStage;
-    s16 droughtTimer;
-    s16 droughtState;
+    s32 droughtBrightnessStage;
+    s32 droughtLastBrightnessStage;
+    s32 droughtTimer;
+    s32 droughtState;
     u8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };

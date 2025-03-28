@@ -231,7 +231,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
 
 static void Task_BattleStart(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -266,7 +266,7 @@ static void CreateBattleStartTask(u32 transition, u32 song)
 
 static void Task_BattleStart_Debug(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -608,7 +608,7 @@ static void CB2_EndScriptedWildBattle(void)
 u32 BattleSetup_GetTerrainId(void)
 {
     u32 tileBehavior;
-    s16 x, y;
+    s32 x, y;
 
     if (I_FISHING_ENVIRONMENT >= GEN_4 && gIsFishingEncounter)
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -672,7 +672,7 @@ u32 BattleSetup_GetTerrainId(void)
 static u32 GetBattleTransitionTypeByMap(void)
 {
     u32 tileBehavior;
-    s16 x, y;
+    s32 x, y;
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);

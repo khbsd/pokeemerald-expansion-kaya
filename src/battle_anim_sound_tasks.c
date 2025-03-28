@@ -45,7 +45,7 @@ void SoundTask_FireBlast(u8 taskId)
 
 static void SoundTask_FireBlast_Step1(u8 taskId)
 {
-    s16 pan = gTasks[taskId].data[2];
+    s32 pan = gTasks[taskId].data[2];
     s32 panIncrement = gTasks[taskId].data[4];
     if (++gTasks[taskId].data[11] == 111)
     {

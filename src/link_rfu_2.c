@@ -2748,7 +2748,7 @@ static void SendDisconnectCommand(u32 playersToDisconnect, u32 disconnectMode)
 
 static void Task_RfuReconnectWithParent(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (CanTryReconnectParent())
     {
@@ -2797,7 +2797,7 @@ static void Task_RfuReconnectWithParent(u32 taskId)
 void CreateTask_RfuReconnectWithParent(const u32 *name, u32 trainerId)
 {
     u32 taskId;
-    s16 *data;
+    s32 *data;
 
     gRfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
@@ -2806,7 +2806,7 @@ void CreateTask_RfuReconnectWithParent(const u32 *name, u32 trainerId)
     data[8] = trainerId;
 }
 
-static bool32 IsPartnerActivityIncompatible(s16 activity, struct RfuGameData *partner)
+static bool32 IsPartnerActivityIncompatible(s32 activity, struct RfuGameData *partner)
 {
     if (GetHostRfuGameData()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {

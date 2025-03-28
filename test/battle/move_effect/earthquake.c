@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Earthquake's and Bulldoze's damage is halved when Grassy Terrain is in effect", s16 damage)
+SINGLE_BATTLE_TEST("Earthquake's and Bulldoze's damage is halved when Grassy Terrain is in effect", s32 damage)
 {
     bool32 terrain;
     u32 move;

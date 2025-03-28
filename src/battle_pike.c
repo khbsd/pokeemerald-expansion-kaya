@@ -1221,7 +1221,7 @@ static bool32 StatusInflictionFadeIn(struct Task *task)
     return FALSE;
 }
 
-static void StartStatusInflictionScreenFlash(s16 fadeOutDelay, s16 fadeInDelay, s16 numFades, s16 fadeOutSpeed, s16 fadeInSpped)
+static void StartStatusInflictionScreenFlash(s32 fadeOutDelay, s32 fadeInDelay, s32 numFades, s32 fadeOutSpeed, s32 fadeInSpped)
 {
     u32 taskId = CreateTask(DoStatusInflictionScreenFlash, 3);
 

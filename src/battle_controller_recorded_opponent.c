@@ -396,7 +396,7 @@ static void RecordedOpponentHandleSwitchInAnim(u32 battler)
 
 static void RecordedOpponentHandleDrawTrainerPic(u32 battler)
 {
-    s16 xPos;
+    s32 xPos;
     u32 trainerPicId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)

@@ -438,7 +438,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
 
 SINGLE_BATTLE_TEST("Fling deals damage based on items fling power")
 {
-    s16 damage[2];
+    s32 damage[2];
 
     GIVEN {
         ASSUME(GetMovePower(MOVE_CRUNCH) == 80);

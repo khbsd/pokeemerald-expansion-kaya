@@ -33,7 +33,7 @@ DOUBLE_BATTLE_TEST("Round allows other battlers which also selected the moves to
 
 DOUBLE_BATTLE_TEST("Round usages beyond the first one has double base power")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);

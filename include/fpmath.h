@@ -1,14 +1,14 @@
 #ifndef FPMATH_H_
 #define FPMATH_H_
 
-typedef s16 q4_12_t;
+typedef s32 q4_12_t;
 typedef u32 uq4_12_t;
 
 #define Q_4_12_SHIFT (12)
 #define UQ_4_12_SHIFT (12)
 
 // Converts a number to Q8.8 fixed-point format
-#define Q_8_8(n) ((s16)((n) * 256))
+#define Q_8_8(n) ((s32)((n) * 256))
 
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((q4_12_t)((n) * 4096))

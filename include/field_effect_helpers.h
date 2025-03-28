@@ -16,14 +16,14 @@ u8 CreateWarpArrowSprite(void);
 u8 StartUnderwaterSurfBlobBobbing(u8 oldSpriteId);
 void SetSurfBlob_BobState(u8 spriteId, u8 state);
 void SetSurfBlob_DontSyncAnim(u8 spriteId, bool32 dontSync);
-void SetSurfBlob_PlayerOffset(u8 spriteId, bool32 hasOffset, s16 offset);
+void SetSurfBlob_PlayerOffset(u8 spriteId, bool32 hasOffset, s32 offset);
 bool32 UpdateRevealDisguise(struct ObjectEvent *);
 void StartRevealDisguise(struct ObjectEvent *);
-void StartAshFieldEffect(s16, s16, u32, s16);
+void StartAshFieldEffect(s32, s32, u32, s32);
 void SetUpReflection(struct ObjectEvent *, struct Sprite *, u8);
 void SetUpShadow(struct ObjectEvent *, struct Sprite *);
 u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent *);
-u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
+u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s32 x, s32 y);
 void UpdateRayquazaSpotlightEffect(struct Sprite *);
 void UpdateShadowFieldEffect(struct Sprite *);
 void UpdateTallGrassFieldEffect(struct Sprite *);
@@ -41,6 +41,6 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *);
 void UpdateBubblesFieldEffect(struct Sprite *);
 void UpdateSparkleFieldEffect(struct Sprite *);
 void SetSpriteInvisible(u8 spriteId);
-void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y);
+void ShowWarpArrowSprite(u8 spriteId, u8 direction, s32 x, s32 y);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

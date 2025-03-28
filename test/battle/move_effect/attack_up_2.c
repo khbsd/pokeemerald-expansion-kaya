@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
 }
 
-SINGLE_BATTLE_TEST("Swords Dance raises Attack by 2 stages", s16 damage)
+SINGLE_BATTLE_TEST("Swords Dance raises Attack by 2 stages", s32 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }

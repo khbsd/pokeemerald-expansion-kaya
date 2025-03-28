@@ -1380,7 +1380,7 @@ static void AnimBouncingMusicNote_Step(struct Sprite *sprite)
 
 static void AnimVibrateBattlerBack_Step(struct Sprite *sprite)
 {
-    s16 temp;
+    s32 temp;
     gSprites[sprite->data[2]].x2 += sprite->data[1];
     temp = sprite->data[1];
     sprite->data[1] = -temp;
@@ -1450,7 +1450,7 @@ void AnimTask_Withdraw(u8 taskId)
 static void AnimTask_Withdraw_Step(u8 taskId)
 {
     u8 spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
-    s16 rotation;
+    s32 rotation;
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         rotation = -gTasks[taskId].data[0];
     else
@@ -1549,8 +1549,8 @@ static void AnimSwordsDanceBlade_Step(struct Sprite *sprite)
 // arg 4: duration
 void AnimSonicBoomProjectile(struct Sprite *sprite)
 {
-    s16 targetXPos;
-    s16 targetYPos;
+    s32 targetXPos;
+    s32 targetYPos;
     u32 rotation;
 
     if (IsContest())
@@ -1624,9 +1624,9 @@ static void AnimAirWaveProjectile_Step1(struct Sprite *sprite)
 
 static void AnimAirWaveProjectile(struct Sprite *sprite)
 {
-    s16 a;
-    s16 b;
-    s16 c;
+    s32 a;
+    s32 b;
+    s32 c;
 
     struct Task *task = &gTasks[sprite->data[7]];
     sprite->data[1] += (-2 & task->data[7]);
@@ -1707,11 +1707,11 @@ static void AirCutterProjectileStep1(u8 taskId)
 
 void AnimTask_AirCutterProjectile(u8 taskId)
 {
-    s16 attackerY = 0;
-    s16 attackerX = 0;
-    s16 targetX = 0;
-    s16 targetY = 0;
-    s16 xDiff, yDiff;
+    s32 attackerY = 0;
+    s32 attackerX = 0;
+    s32 targetX = 0;
+    s32 targetY = 0;
+    s32 xDiff, yDiff;
 
     if (IsContest())
     {
@@ -1834,8 +1834,8 @@ static void AnimVoidLines_Step(struct Sprite *sprite)
 
 static void AnimCoinThrow(struct Sprite *sprite)
 {
-    s16 r6;
-    s16 r7;
+    s32 r6;
+    s32 r7;
     u32 var;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
@@ -1895,7 +1895,7 @@ static void AnimBulletSeed_Step1(struct Sprite *sprite)
 {
     int i;
     u32 rand;
-    s16 *ptr;
+    s32 *ptr;
     PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
@@ -1959,10 +1959,10 @@ static void AnimRazorWindTornado(struct Sprite *sprite)
 // arg 0: invert
 static void AnimViceGripPincer(struct Sprite *sprite)
 {
-    s16 startXOffset = 32;
-    s16 startYOffset = -32;
-    s16 endXOffset = 16;
-    s16 endYOffset = -16;
+    s32 startXOffset = 32;
+    s32 startYOffset = -32;
+    s32 endXOffset = 16;
+    s32 endYOffset = -16;
     if (gBattleAnimArgs[0])
     {
         startXOffset = -32;
@@ -1991,10 +1991,10 @@ static void AnimViceGripPincer_Step(struct Sprite *sprite)
 // arg 0: animation id
 static void AnimGuillotinePincer(struct Sprite *sprite)
 {
-    s16 startXOffset = 32;
-    s16 startYOffset = -32;
-    s16 endXOffset = 16;
-    s16 endYOffset = -16;
+    s32 startXOffset = 32;
+    s32 startYOffset = -32;
+    s32 endXOffset = 16;
+    s32 endYOffset = -16;
     if (gBattleAnimArgs[0])
     {
         startXOffset = -32;
@@ -2175,7 +2175,7 @@ static void AnimTask_Minimize_Step(u8 taskId)
 static void CreateMinimizeSprite(struct Task *task, u8 taskId)
 {
     u32 matrixNum;
-    s16 spriteId = CloneBattlerSpriteWithBlend(ANIM_ATTACKER);
+    s32 spriteId = CloneBattlerSpriteWithBlend(ANIM_ATTACKER);
     if (spriteId >= 0)
     {
         if ((matrixNum = AllocOamMatrix()) == 0xFF)
@@ -2461,7 +2461,7 @@ void AnimTask_SketchDrawMon(u8 taskId)
     struct Task *task = &gTasks[taskId];
     struct ScanlineEffectParams params;
 
-    s16 i;
+    s32 i;
     task->data[0] = GetBattlerYCoordWithElevation(gBattleAnimTarget) + 32;
     task->data[1] = 4;
     task->data[2] = 0;
@@ -2620,8 +2620,8 @@ static void AnimPencil_Step(struct Sprite *sprite)
 static void AnimBlendThinRing(struct Sprite *sprite)
 {
     u8 battler = 0;
-    s16 x = 0;
-    s16 y = 0;
+    s32 x = 0;
+    s32 y = 0;
     u8 r4;
 
     if (gBattleAnimArgs[2] == 0)
@@ -2661,8 +2661,8 @@ void AnimHyperVoiceRing(struct Sprite *sprite)
 {
     u32 startX = 0;
     u32 startY = 0;
-    s16 x = 0;
-    s16 y = 0;
+    s32 x = 0;
+    s32 y = 0;
     u8 yCoordType;
     u8 battler1;
     u8 battler2;
@@ -2757,7 +2757,7 @@ void AnimUproarRing(struct Sprite *sprite)
 
 static void AnimSoftBoiledEgg(struct Sprite *sprite)
 {
-    s16 r1;
+    s32 r1;
     InitSpritePosToAnimAttacker(sprite, FALSE);
     r1 = GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER ? -160 : 160;
     sprite->data[0] = 0x380;
@@ -2768,7 +2768,7 @@ static void AnimSoftBoiledEgg(struct Sprite *sprite)
 
 static void AnimSoftBoiledEgg_Step1(struct Sprite *sprite)
 {
-    s16 add;
+    s32 add;
     sprite->y2 -= (sprite->data[0] >> 8);
     sprite->x2 = sprite->data[1] >> 8;
     sprite->data[0] -= 32;
@@ -3298,7 +3298,7 @@ static void AnimRedHeartRising(struct Sprite *sprite)
 
 static void AnimRedHeartRising_Step(struct Sprite *sprite)
 {
-    s16 y;
+    s32 y;
     sprite->data[2] += sprite->data[1];
     sprite->y2 = -((u32)sprite->data[2] >> 8);
     sprite->x2 = Sin(sprite->data[3], 4);
@@ -3586,7 +3586,7 @@ static void AnimEyeSparkle(struct Sprite *sprite)
 
 static void AnimAngel(struct Sprite *sprite)
 {
-    s16 var0;
+    s32 var0;
     if (!sprite->data[0])
     {
         sprite->x += gBattleAnimArgs[0];

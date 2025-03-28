@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Retaliate doubles in base power the turn after an ally faints")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WYNAUT) { HP(1); }
         PLAYER(SPECIES_WOBBUFFET);
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Retaliate doubles in base power the turn after an ally faint
 
 SINGLE_BATTLE_TEST("Retaliate doubles in base power the turn after an ally faints (opponent)")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT) { HP(1); }
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Retaliate doubles in base power the turn after an ally faint
 
 DOUBLE_BATTLE_TEST("Retaliate works with passive damage")
 {
-    s16 damage[2];
+    s32 damage[2];
     u32 move;
     u32 move2 = MOVE_CELEBRATE;
     struct BattlePokemon *moveTarget = playerLeft;
@@ -95,7 +95,7 @@ DOUBLE_BATTLE_TEST("Retaliate works with passive damage")
 
 SINGLE_BATTLE_TEST("Retaliate works with Perish Song")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_PERISH_SONG) == EFFECT_PERISH_SONG);
         PLAYER(SPECIES_WYNAUT);
@@ -118,7 +118,7 @@ SINGLE_BATTLE_TEST("Retaliate works with Perish Song")
 
 SINGLE_BATTLE_TEST("Retaliate works with self-inflicted fainting")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HEALING_WISH) == EFFECT_HEALING_WISH);
         PLAYER(SPECIES_WYNAUT);

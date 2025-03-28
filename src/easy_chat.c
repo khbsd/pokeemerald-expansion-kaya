@@ -184,7 +184,7 @@ static bool32 DestroySideWindowSprites(void);
 static bool32 IsModeWindowAnimActive(void);
 static void UpdateModeWindowAnim(void);
 static void UpdateRectangleCursorPos(void);
-static void InitLowerWindowScroll(s16, u32);
+static void InitLowerWindowScroll(s32, u32);
 static bool32 UpdateLowerWindowScroll(void);
 static void ClearWordSelectWindow(void);
 static void InitLowerWindowText(u32);
@@ -1344,7 +1344,7 @@ static void Task_InitEasyChatScreen(u32 taskId)
 static void Task_EasyChatScreen(u32 taskId)
 {
     u32 funcId;
-    s16 *data;
+    s32 *data;
 
     data = gTasks[taskId].data;
     switch (tState)
@@ -1400,7 +1400,7 @@ static void Task_EasyChatScreen(u32 taskId)
 // If an allocation fails it will switch to the exit callback
 static bool32 InitEasyChatScreen(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
 
     data = gTasks[taskId].data;
     switch (tState)
@@ -3170,7 +3170,7 @@ static bool32 UpdateMainCursor(void)
     u32 *ecWord;
     u32 frameId;
     u32 cursorColumn, cursorRow, numColumns;
-    s16 x;
+    s32 x;
     int stringWidth;
     int trueStringWidth;
     u32 y;
@@ -3743,7 +3743,7 @@ static bool32 WordSelectPageScrollDown(void)
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 scrollChange = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
+            s32 scrollChange = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
             InitLowerWindowScroll(scrollChange, 8);
             sScreenControl->funcState++;
         }
@@ -3776,7 +3776,7 @@ static bool32 WordSelectPageScrollUp(void)
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 scrollChange = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
+            s32 scrollChange = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
             InitLowerWindowScroll(scrollChange, 8);
             sScreenControl->funcState++;
         }
@@ -4570,10 +4570,10 @@ static void ResetLowerWindowScroll(void)
     sScreenControl->scrollOffset = 0;
 }
 
-static void InitLowerWindowScroll(s16 scrollChange, u32 speed)
+static void InitLowerWindowScroll(s32 scrollChange, u32 speed)
 {
     int bgY;
-    s16 yChange;
+    s32 yChange;
 
     bgY = GetBgY(2);
     sScreenControl->scrollOffset += scrollChange;

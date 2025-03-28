@@ -20,7 +20,7 @@ const uq4_12_t MetronomeMultipliers[] = {
 
 SINGLE_BATTLE_TEST("Metronome Item gradually boosts power of consecutively used moves by 20%, up to 100%")
 {
-    s16 damage[METRONOME_TURNS];
+    s32 damage[METRONOME_TURNS];
     u32 j;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Metronome Item gradually boosts power of consecutively used 
 
 SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the attacker uses a different move")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the attacker uses a diffe
 
 SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the move fails")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the move fails")
 
 SINGLE_BATTLE_TEST("Metronome Item counts called moves instead of the calling move")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -105,7 +105,7 @@ SINGLE_BATTLE_TEST("Metronome Item counts called moves instead of the calling mo
     }
 }
 
-SINGLE_BATTLE_TEST("Metronome Item counts charging turn of moves for its attacking turn", s16 damage)
+SINGLE_BATTLE_TEST("Metronome Item counts charging turn of moves for its attacking turn", s32 damage)
 {
     u32 item;
 
@@ -132,7 +132,7 @@ SINGLE_BATTLE_TEST("Metronome Item counts charging turn of moves for its attacki
 
 SINGLE_BATTLE_TEST("Metronome Item doesn't increase damage per hit of multi-hit moves")
 {
-    s16 damage[3];
+    s32 damage[3];
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FURY_ATTACK) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }

@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/50 percent", s16 damage)
+SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/50 percent", s32 damage)
 {
     bool32 terrain;
     PARAMETRIZE { terrain = FALSE; }

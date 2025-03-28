@@ -300,8 +300,8 @@ static void AnimConfuseRayBallBounce(struct Sprite *sprite)
 
 static void AnimConfuseRayBallBounce_Step1(struct Sprite *sprite)
 {
-    s16 r0;
-    s16 r2;
+    s32 r0;
+    s32 r2;
     UpdateConfuseRayBallBlend(sprite);
     if (AnimTranslateLinear(sprite))
     {
@@ -323,8 +323,8 @@ static void AnimConfuseRayBallBounce_Step1(struct Sprite *sprite)
 
 static void AnimConfuseRayBallBounce_Step2(struct Sprite *sprite)
 {
-    s16 r2;
-    s16 r0;
+    s32 r2;
+    s32 r0;
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
     sprite->x2 += Sin(sprite->data[5], 10);
@@ -465,8 +465,8 @@ static void AnimTask_NightShadeClone_Step2(u32 taskId)
 // arg 2: duration step 3 (center -> target)
 void AnimShadowBall(struct Sprite *sprite)
 {
-    s16 oldPosX = sprite->x;
-    s16 oldPosY = sprite->y;
+    s32 oldPosX = sprite->x;
+    s32 oldPosY = sprite->y;
 
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -664,7 +664,7 @@ void AnimTask_SpiteTargetShadow(u32 taskId)
 
 static void AnimTask_SpiteTargetShadow_Step1(u32 taskId)
 {
-    s16 startLine;
+    s32 startLine;
     struct Task *task = &gTasks[taskId];
     u32 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
@@ -686,7 +686,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u32 taskId)
             }
             else
             {
-                s16 mask2;
+                s32 mask2;
                 gSprites[task->data[0]].oam.paletteNum = task->data[14];
                 gSprites[task->data[0]].oam.objMode = ST_OAM_OBJ_NORMAL;
                 gSprites[task->data[0]].oam.priority = 3;
@@ -811,9 +811,9 @@ static void AnimTask_SpiteTargetShadow_Step3(u32 taskId)
 
 static void AnimDestinyBondWhiteShadow(struct Sprite *sprite)
 {
-    s16 battler1X, battler1Y;
-    s16 battler2X, battler2Y;
-    s16 yDiff;
+    s32 battler1X, battler1Y;
+    s32 battler2X, battler2Y;
+    s32 yDiff;
 
     if (gBattleAnimArgs[0] == 0)
     {
@@ -862,10 +862,10 @@ static void AnimDestinyBondWhiteShadow_Step(struct Sprite *sprite)
 void AnimTask_DestinyBondWhiteShadow(u32 taskId)
 {
     struct Task *task;
-    s16 battler;
+    s32 battler;
     u32 spriteId;
-    s16 baseX, baseY;
-    s16 x, y;
+    s32 baseX, baseY;
+    s32 x, y;
 
     task = &gTasks[taskId];
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
@@ -1019,8 +1019,8 @@ static void AnimTask_DestinyBondWhiteShadow_Step(u32 taskId)
 
 void AnimTask_CurseStretchingBlackBg(u32 taskId)
 {
-    s16 startX, startY;
-    s16 leftDistance, topDistance, bottomDistance, rightDistance;
+    s32 startX, startY;
+    s32 leftDistance, topDistance, bottomDistance, rightDistance;
 
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
@@ -1055,9 +1055,9 @@ void AnimTask_CurseStretchingBlackBg(u32 taskId)
 
 static void AnimTask_CurseStretchingBlackBg_Step1(u32 taskId)
 {
-    s16 step;
-    s16 leftDistance, rightDistance, topDistance, bottomDistance;
-    s16 startX, startY;
+    s32 step;
+    s32 leftDistance, rightDistance, topDistance, bottomDistance;
+    s32 startX, startY;
     u32 left, right, top, bottom;
     u32 selectedPalettes;
 
@@ -1110,8 +1110,8 @@ static void AnimTask_CurseStretchingBlackBg_Step2(u32 taskId)
 
 static void AnimCurseNail(struct Sprite *sprite)
 {
-    s16 xDelta;
-    s16 xDelta2;
+    s32 xDelta;
+    s32 xDelta2;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
@@ -1228,7 +1228,7 @@ void AnimGhostStatusSprite(struct Sprite *sprite)
         if (++coeffB > 16)
             coeffB = 16;
         --coeffA;
-        if ((s16)coeffA < 0)
+        if ((s32)coeffA < 0)
             coeffA = 0;
 
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(coeffA, coeffB));
@@ -1452,8 +1452,8 @@ void AnimTask_PulverizingPancakeWhiteShadow(u32 taskId)
 {
     struct Task *task;
     u32 spriteId;
-    s16 baseX, baseY;
-    s16 x, y;
+    s32 baseX, baseY;
+    s32 x, y;
 
     task = &gTasks[taskId];
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Drizzle summons rain", s16 damage)
+SINGLE_BATTLE_TEST("Drizzle summons rain", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_DRIZZLE; }

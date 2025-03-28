@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Fickle Beam deals double damage 30% of the time")
 {
-    s16 damage[2];
+    s32 damage[2];
 
     PASSES_RANDOMLY(30, 100, RNG_FICKLE_BEAM);
     GIVEN {

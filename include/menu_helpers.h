@@ -22,7 +22,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u32 tileNum, u8 palet
 bool32 RunTextPrintersRetIsActive(u8 textPrinterId);
 void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data);
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 unused1, u8 unused2, u8 unused3, u32 tileStart, u8 palette, const struct YesNoFuncTable *yesNo);
-bool32 AdjustQuantityAccordingToDPadInput(s16 *quantity, u32 max);
+bool32 AdjustQuantityAccordingToDPadInput(s32 *quantity, u32 max);
 u8 GetLRKeysPressed(void);
 u8 GetLRKeysPressedAndHeld(void);
 bool32 IsHoldingItemAllowed(u32 itemId);
@@ -36,6 +36,6 @@ void LoadListMenuSwapLineGfx(void);
 void CreateSwapLineSprites(u8 *spriteIds, u8 count);
 void DestroySwapLineSprites(u8 *spriteIds, u8 count);
 void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool32 invisible);
-void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u32 y);
+void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s32 x, u32 y);
 
 #endif //GUARD_MENU_HELPERS_H

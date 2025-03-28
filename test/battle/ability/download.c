@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_TRI_ATTACK) == DAMAGE_CATEGORY_SPECIAL);
 }
 
-SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def", s16 damage)
+SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def"
     }
 }
 
-SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than Def", s16 damage)
+SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than Def", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than De
     }
 }
 
-SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet", s16 damagePhysical, s16 damageSpecial)
+SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet", s32 damagePhysical, s32 damageSpecial)
 {
     u32 ability;
 
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet
     }
 }
 
-DOUBLE_BATTLE_TEST("Download raises Sp.Attack if enemies have lower total Sp. Def than Def", s16 damage)
+DOUBLE_BATTLE_TEST("Download raises Sp.Attack if enemies have lower total Sp. Def than Def", s32 damage)
 {
     u32 ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }

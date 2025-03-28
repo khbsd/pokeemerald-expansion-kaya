@@ -446,7 +446,7 @@ static const struct SpriteTemplate sRainSpriteTemplate =
 };
 
 // Q28.4 fixed-point format values
-static const s16 sRainSpriteMovement[][2] =
+static const s32 sRainSpriteMovement[][2] =
 {
     {-0x68,  0xD0},
     {-0xA0, 0x140},
@@ -952,7 +952,7 @@ static void UNUSED WaitSnowflakeSprite(struct Sprite *sprite)
 
 static void UpdateSnowflakeSprite(struct Sprite *sprite)
 {
-    s16 x;
+    s32 x;
 
     sprite->tPosY += sprite->tDeltaY;
     sprite->y = sprite->tPosY >> 7;
@@ -2254,7 +2254,7 @@ static const struct SpriteSheet sWeatherBubbleSpriteSheet =
     .tag = GFXTAG_BUBBLE,
 };
 
-static const s16 sBubbleStartCoords[][2] =
+static const s32 sBubbleStartCoords[][2] =
 {
     {120, 160},
     {376, 160},
@@ -2346,8 +2346,8 @@ static const struct SpriteTemplate sBubbleSpriteTemplate =
 
 static void CreateBubbleSprite(u32 coordsIndex)
 {
-    s16 x = sBubbleStartCoords[coordsIndex][0];
-    s16 y = sBubbleStartCoords[coordsIndex][1] - gSpriteCoordOffsetY;
+    s32 x = sBubbleStartCoords[coordsIndex][0];
+    s32 y = sBubbleStartCoords[coordsIndex][1] - gSpriteCoordOffsetY;
     u8 spriteId = CreateSpriteAtEnd(&sBubbleSpriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -2413,7 +2413,7 @@ u32
 
 static void Task_DoAbnormalWeather(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -2441,7 +2441,7 @@ static void Task_DoAbnormalWeather(u8 taskId)
 static void CreateAbnormalWeatherTask(void)
 {
     u8 taskId = CreateTask(Task_DoAbnormalWeather, 0);
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tDelay = 600;
     if (sCurrentAbnormalWeather == WEATHER_DOWNPOUR)

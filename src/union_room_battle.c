@@ -23,7 +23,7 @@
 
 struct UnionRoomBattle
 {
-    s16 textState;
+    s32 textState;
 };
 
 static EWRAM_DATA struct UnionRoomBattle * sBattle = NULL;
@@ -81,7 +81,7 @@ static void AddTextPrinterForUnionRoomBattle(u32 windowId, const u32 *str, u32 x
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
-static bool32 PrintUnionRoomBattleMessage(s16 * state, const u32 *str, s32 speed)
+static bool32 PrintUnionRoomBattleMessage(s32 * state, const u32 *str, s32 speed)
 {
     switch (*state)
     {

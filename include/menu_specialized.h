@@ -107,10 +107,10 @@ void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions);
 void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new);
 
 // Condition menu
-bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x);
-bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x);
-bool32 MoveConditionMonOnscreen(s16 *x);
-bool32 MoveConditionMonOffscreen(s16 *x);
+bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s32 *x);
+bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s32 *x);
+bool32 MoveConditionMonOnscreen(s32 *x);
+bool32 MoveConditionMonOffscreen(s32 *x);
 void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel);
 void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u32 boxId, u32 monId, u32 partyId, u32 id, u32 numMons, bool32 excludesCancel);
 void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel);

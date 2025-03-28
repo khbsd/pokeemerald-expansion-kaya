@@ -171,9 +171,9 @@ struct Contest
 
 struct ContestantStatus
 {
-    s16 baseAppeal;
-    s16 appeal;
-    s16 pointTotal;
+    s32 baseAppeal;
+    s32 appeal;
+    s32 pointTotal;
     u32 currMove;
     u32 prevMove;
     u8 moveCategory;
@@ -221,8 +221,8 @@ struct ContestantStatus
 struct ContestAppealMoveResults
 {
     u8 turnOrder[CONTESTANT_COUNT];
-    s16 jam;
-    s16 jam2;
+    s32 jam;
+    s32 jam2;
     u8 jamQueue[5];
     u8 unnervedPokes[CONTESTANT_COUNT];
     u8 contestant;
@@ -238,8 +238,8 @@ struct ContestAIInfo
     /*0x0A*/ u8 filler[6];
     /*0x10*/ u8 currentAIFlag;
     /*0x14*/ u32 aiFlags;
-    /*0x18*/ s16 scriptResult;
-    /*0x1A*/ s16 vars[3];
+    /*0x18*/ s32 scriptResult;
+    /*0x1A*/ s32 vars[3];
     /*0x20*/ const u8 *stack[8];
     /*0x40*/ u8 stackSize;
     /*0x41*/ u8 contestantId;
@@ -273,7 +273,7 @@ struct ContestFinalStandings
 struct ContestTV
 {
     u32 appeals[CONTEST_NUM_APPEALS];
-    s16 move;
+    s32 move;
     u8 winnerFlags;
     u8 loserFlags;
     bool32 madeAppeal:1;
@@ -314,10 +314,10 @@ struct ContestResources
 #define eContestTempSave (*(struct ContestTempSave *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];
-extern s16 gContestMonRound1Points[CONTESTANT_COUNT];
-extern s16 gContestMonTotalPoints[CONTESTANT_COUNT];
-extern s16 gContestMonAppealPointTotals[CONTESTANT_COUNT];
-extern s16 gContestMonRound2Points[CONTESTANT_COUNT];
+extern s32 gContestMonRound1Points[CONTESTANT_COUNT];
+extern s32 gContestMonTotalPoints[CONTESTANT_COUNT];
+extern s32 gContestMonAppealPointTotals[CONTESTANT_COUNT];
+extern s32 gContestMonRound2Points[CONTESTANT_COUNT];
 extern u8 gContestFinalStandings[CONTESTANT_COUNT];
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;

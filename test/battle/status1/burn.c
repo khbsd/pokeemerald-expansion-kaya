@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Burn deals 1/16th (Gen7+) or 1/8th damage per turn")
     }
 }
 
-SINGLE_BATTLE_TEST("Burn reduces Attack by 50%", s16 damage)
+SINGLE_BATTLE_TEST("Burn reduces Attack by 50%", s32 damage)
 {
     bool32 burned;
     PARAMETRIZE { burned = FALSE; }

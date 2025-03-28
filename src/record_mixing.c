@@ -312,7 +312,7 @@ static void Task_RecordMixing_SoundEffect(u32 taskId)
 // Note: gSpecialVar_0x8005 here contains the player's spot id.
 static void Task_RecordMixing_Main(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

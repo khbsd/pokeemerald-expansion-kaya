@@ -1021,8 +1021,8 @@ static void InitClockWithRtc(u32 taskId)
 static void SpriteCB_MinuteHand(struct Sprite *sprite)
 {
     u32 angle = gTasks[sprite->sTaskId].tMinuteHandAngle;
-    s16 sin = Sin2(angle) / 16;
-    s16 cos = Cos2(angle) / 16;
+    s32 sin = Sin2(angle) / 16;
+    s32 cos = Cos2(angle) / 16;
     u32 x, y;
 
     SetOamMatrix(0, cos, sin, -sin, cos);
@@ -1041,8 +1041,8 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
 static void SpriteCB_HourHand(struct Sprite *sprite)
 {
     u32 angle = gTasks[sprite->sTaskId].tHourHandAngle;
-    s16 sin = Sin2(angle) / 16;
-    s16 cos = Cos2(angle) / 16;
+    s32 sin = Sin2(angle) / 16;
+    s32 cos = Cos2(angle) / 16;
     u32 x, y;
 
     SetOamMatrix(1, cos, sin, -sin, cos);

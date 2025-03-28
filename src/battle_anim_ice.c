@@ -622,7 +622,7 @@ static void AvalancheAnim_Step2(struct Sprite *sprite)
 // Unused
 static void AnimUnusedIceCrystalThrow(struct Sprite *sprite)
 {
-    s16 targetX, targetY, attackerX, attackerY;
+    s32 targetX, targetY, attackerX, attackerY;
 
     sprite->oam.tileNum += 7;
     targetX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
@@ -757,7 +757,7 @@ static void AnimFlickerIceEffectParticle(struct Sprite *sprite)
 static void AnimSwirlingSnowball(struct Sprite *sprite)
 {
     int i;
-    s16 tempDataHolder[8];
+    s32 tempDataHolder[8];
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
 
@@ -813,7 +813,7 @@ static void AnimSwirlingSnowball(struct Sprite *sprite)
 
 void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
 {
-    s16 tempVar;
+    s32 tempVar;
 
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
@@ -832,7 +832,7 @@ void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
 
 static void AnimSwirlingSnowball_Step2(struct Sprite *sprite)
 {
-    s16 tempVar;
+    s32 tempVar;
     tempVar = GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER ? 20 : -20;
 
     if (sprite->data[5] <= 31)
@@ -879,7 +879,7 @@ static void AnimSwirlingSnowball_End(struct Sprite *sprite)
 void AnimMoveParticleBeyondTarget(struct Sprite *sprite)
 {
     int i;
-    s16 tempDataHolder[8];
+    s32 tempDataHolder[8];
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
 
@@ -994,7 +994,7 @@ static void AnimWaveFromCenterOfTarget(struct Sprite *sprite)
 // arg 5: ??? unknown boolean
 static void InitSwirlingFogAnim(struct Sprite *sprite)
 {
-    s16 tempVar;
+    s32 tempVar;
     u8  battler;
 
     if (gBattleAnimArgs[4] == 0)
@@ -1305,7 +1305,7 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
 
     if (B_UPDATED_MOVE_DATA >= GEN_5)
     {
-        s16 x, y;
+        s32 x, y;
         SetAverageBattlerPositions(gBattleAnimTarget, gBattleAnimArgs[7], &x, &y);
         sprite->data[1] = sprite->x + gBattleAnimArgs[1];
         sprite->data[2] = x + gBattleAnimArgs[3];
@@ -1358,7 +1358,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
         if (sprite->data[0] <= 0)
         {
             #if B_UPDATED_MOVE_DATA >= GEN_5
-                s16 x, y;
+                s32 x, y;
                 SetAverageBattlerPositions(gBattleAnimTarget, 0, &x, &y);
                 sprite->x = x;
             #else
@@ -1500,8 +1500,8 @@ static void AnimTask_Hail2(u8 taskId)
 static bool32 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c)
 {
     u8 id;
-    s16 battlerX, battlerY;
-    s16 spriteX;
+    s32 battlerX, battlerY;
+    s32 spriteX;
     bool32 possibleBool = FALSE;
     s32 unk = sHailCoordData[hailStructId].unk3;
 
@@ -1644,7 +1644,7 @@ static void AnimThrowIceBall(struct Sprite *sprite)
 // Initializes the particles that scatter at the end of the Ice Ball animation.
 static void InitIceBallParticle(struct Sprite *sprite)
 {
-    s16 randA, randB;
+    s32 randA, randB;
 
     sprite->oam.tileNum += 8;
     InitSpritePosToAnimTarget(sprite, TRUE);

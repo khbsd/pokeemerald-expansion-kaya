@@ -4,7 +4,7 @@
 // Please add Sandstorm interactions with move, item and ability effects on their respective files.
 SINGLE_BATTLE_TEST("Sandstorm deals 1/16 damage per turn")
 {
-    s16 sandstormDamage;
+    s32 sandstormDamage;
 
     GIVEN {
         PLAYER(SPECIES_SANDSLASH);
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Sandstorm deals 1/16 damage per turn")
    } THEN { EXPECT_EQ(sandstormDamage, opponent->maxHP / 16); }
 }
 
-SINGLE_BATTLE_TEST("Sandstorm multiplies the special defense of Rock-types by 1.5x", s16 damage)
+SINGLE_BATTLE_TEST("Sandstorm multiplies the special defense of Rock-types by 1.5x", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_SANDSTORM; }

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SCREECH) == EFFECT_DEFENSE_DOWN_2);
 }
 
-SINGLE_BATTLE_TEST("Screech lowers Defense by 2 stages", s16 damage)
+SINGLE_BATTLE_TEST("Screech lowers Defense by 2 stages", s32 damage)
 {
     bool32 lowerDefense;
     PARAMETRIZE { lowerDefense = FALSE; }

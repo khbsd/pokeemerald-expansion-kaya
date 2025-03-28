@@ -93,7 +93,7 @@ static void Task_LinkContest_InitFlags(u32 taskId)
     SwitchTaskToFollowupFunc(taskId);
 }
 
-bool32 LinkContest_TryLinkStandby(s16 *state)
+bool32 LinkContest_TryLinkStandby(s32 *state)
 {
     // Skip standby for RS cabled links
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)

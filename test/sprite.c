@@ -168,8 +168,8 @@ static void SortSprites(void)
         struct Sprite *sprite2 = &gSprites[sSpriteOrder[i]];
         u32 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
         u32 sprite2Priority = sSpritePriorities[sSpriteOrder[i]];
-        s16 sprite1Y = sprite1->oam.y;
-        s16 sprite2Y = sprite2->oam.y;
+        s32 sprite1Y = sprite1->oam.y;
+        s32 sprite2Y = sprite2->oam.y;
 
         if (sprite1Y >= DISPLAY_HEIGHT)
             sprite1Y = sprite1Y - 256;

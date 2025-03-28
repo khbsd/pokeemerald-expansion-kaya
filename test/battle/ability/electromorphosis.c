@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Electromorphosis sets up Charge when hit by any move")
 {
-    s16 dmgBefore, dmgAfter;
+    s32 dmgBefore, dmgAfter;
     u32 move;
 
     PARAMETRIZE {move = MOVE_TACKLE; }

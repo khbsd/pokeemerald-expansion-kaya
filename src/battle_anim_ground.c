@@ -17,7 +17,7 @@ static void AnimTask_DigBounceMovement(u8);
 static void AnimTask_DigEndBounceMovementSetInvisible(u8);
 static void AnimTask_DigSetVisibleUnderground(u8);
 static void AnimTask_DigRiseUpFromHole(u8);
-static void SetDigScanlineEffect(u8, s16, s16);
+static void SetDigScanlineEffect(u8, s32, s32);
 static void AnimTask_ShakeTerrain(u8);
 static void AnimTask_ShakeBattlers(u8);
 static void SetBattlersXOffsetForShake(struct Task *);
@@ -221,7 +221,7 @@ static void AnimBoneHitProjectile(struct Sprite *sprite)
 void AnimDirtScatter(struct Sprite *sprite)
 {
     u8 targetXPos, targetYPos;
-    s16 xOffset, yOffset;
+    s32 xOffset, yOffset;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
 
@@ -473,9 +473,9 @@ static void AnimTask_DigRiseUpFromHole(u8 taskId)
     }
 }
 
-static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
+static void SetDigScanlineEffect(u8 useBG1, s32 y, s32 endY)
 {
-    s16 bgX;
+    s32 bgX;
     struct ScanlineEffectParams scanlineParams;
 
     if (useBG1 == 1)
@@ -522,7 +522,7 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
 void AnimDirtPlumeParticle(struct Sprite *sprite)
 {
     s32 battler;
-    s16 xOffset;
+    s32 xOffset;
 
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;

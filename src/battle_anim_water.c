@@ -764,7 +764,7 @@ static void AnimWaterBubbleProjectile_Step3(struct Sprite *sprite)
 
 static void AnimAuroraBeamRings(struct Sprite *sprite)
 {
-    s16 unkArg;
+    s32 unkArg;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -1112,13 +1112,13 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
         gTasks[taskId].data[6] = 0;
         if (++gTasks[taskId].data[3] <= 13)
         {
-            gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
+            gTasks[gTasks[taskId].data[15]].data[1] = (s32)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
             gTasks[taskId].data[4]++;
         }
         if (gTasks[taskId].data[3] > 54)
         {
             gTasks[taskId].data[4]--;
-            gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[4]) | ((16 - gTasks[taskId].data[4]) << 8));
+            gTasks[gTasks[taskId].data[15]].data[1] = (s32)((gTasks[taskId].data[4]) | ((16 - gTasks[taskId].data[4]) << 8));
         }
     }
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
@@ -1153,7 +1153,7 @@ static void AnimTask_CreateSurfWave_Step2(u8 taskId)
 
 static void AnimTask_SurfWaveScanlineEffect(u8 taskId)
 {
-    s16 i;
+    s32 i;
     struct ScanlineEffectParams params;
     struct Task *task = &gTasks[taskId];
 
@@ -1219,8 +1219,8 @@ static void AnimTask_SurfWaveScanlineEffect(u8 taskId)
 
 static void AnimSmallDriftingBubbles(struct Sprite *sprite)
 {
-    s16 randData;
-    s16 randData2;
+    s32 randData;
+    s32 randData2;
 
     sprite->oam.tileNum += 8;
     InitSpritePosToAnimTarget(sprite, TRUE);
@@ -1364,12 +1364,12 @@ static u8 GetWaterSpoutPowerForAnim(void)
 
 static void CreateWaterSpoutLaunchDroplets(struct Task *task, u8 taskId)
 {
-    s16 i;
-    s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-    s16 attackerCoordY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    s16 trigIndex = 172;
+    s32 i;
+    s32 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    s32 attackerCoordY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    s32 trigIndex = 172;
     u8 subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
-    s16 increment = 4 - task->data[1];
+    s32 increment = 4 - task->data[1];
     u8 spriteId;
 
     if (increment <= 0)
@@ -1738,13 +1738,13 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
 
 static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
-    s16 combinedX;
-    s16 combinedY;
-    s16 i;
-    s16 something;
-    s16 unusedVar = 1; //unusedVar is needed to match
-    s16 randomSomethingY;
-    s16 randomSomethingX;
+    s32 combinedX;
+    s32 combinedY;
+    s32 i;
+    s32 something;
+    s32 unusedVar = 1; //unusedVar is needed to match
+    s32 randomSomethingY;
+    s32 randomSomethingX;
     u8 spriteId;
 
     something = sprite->data[0] / 2;

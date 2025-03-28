@@ -29,10 +29,10 @@ static void Task_RunTrainerSeeFuncList(u32 taskId);
 static void Task_EndTrainerApproach(u32 taskId);
 static void SetIconSpriteData(struct Sprite *sprite, u32 fldEffId, u32 spriteAnimNum);
 
-static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
-static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
-static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
-static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
+static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y);
+static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y);
+static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y);
+static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y);
 
 static bool32 TrainerSeeIdle(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
 static bool32 TrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
@@ -68,7 +68,7 @@ static const u32 sEmotion_XGfx[] = INCBIN_u32("graphics/field_effects/pics/emote
 // HGSS emote graphics ripped by Lemon on The Spriters Resource: https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/
 static const u32 sEmotion_Gfx[] = INCBIN_u32("graphics/misc/emotes.4bpp");
 
-static u32 (*const sDirectionalApproachDistanceFuncs[])(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y) =
+static u32 (*const sDirectionalApproachDistanceFuncs[])(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y) =
 {
     GetTrainerApproachDistanceSouth,
     GetTrainerApproachDistanceNorth,
@@ -501,7 +501,7 @@ static u32 CheckTrainer(u32 objectEventId)
 
 static u32 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
 {
-    s16 x, y;
+    s32 x, y;
     u32 i;
     u32 approachDistance;
 
@@ -525,7 +525,7 @@ static u32 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
 }
 
 // Returns how far south the player is from trainer. 0 if out of trainer's sight.
-static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
+static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y)
 {
     if (trainerObj->currentCoords.x == x
      && y > trainerObj->currentCoords.y
@@ -536,7 +536,7 @@ static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 r
 }
 
 // Returns how far north the player is from trainer. 0 if out of trainer's sight.
-static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
+static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y)
 {
     if (trainerObj->currentCoords.x == x
      && y < trainerObj->currentCoords.y
@@ -547,7 +547,7 @@ static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 r
 }
 
 // Returns how far west the player is from trainer. 0 if out of trainer's sight.
-static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
+static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y)
 {
     if (trainerObj->currentCoords.y == y
      && x < trainerObj->currentCoords.x
@@ -558,7 +558,7 @@ static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 ra
 }
 
 // Returns how far east the player is from trainer. 0 if out of trainer's sight.
-static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
+static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s32 range, s32 x, s32 y)
 {
     if (trainerObj->currentCoords.y == y
      && x > trainerObj->currentCoords.x
@@ -570,7 +570,7 @@ static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 ra
 
 static u32 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u32 approachDistance, u32 direction)
 {
-    s16 x, y;
+    s32 x, y;
     u32 rangeX, rangeY;
     u32 i;
     u32 collision;

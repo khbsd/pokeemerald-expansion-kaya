@@ -28,8 +28,8 @@ SINGLE_BATTLE_TEST("Gem is consumed when it corresponds to the type of a move")
 
 SINGLE_BATTLE_TEST("Gem boost is only applied once")
 {
-    s16 boostedHit;
-    s16 normalHit;
+    s32 boostedHit;
+    s32 normalHit;
 
     GIVEN {
         ASSUME(I_GEM_BOOST_POWER >= GEN_6);
@@ -52,8 +52,8 @@ SINGLE_BATTLE_TEST("Gem boost is only applied once")
 
 SINGLE_BATTLE_TEST("Gem modifier is used for all hits of Multi Hit Moves")
 {
-    s16 firstHit;
-    s16 secondHit;
+    s32 firstHit;
+    s32 secondHit;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMAL_GEM); };

@@ -123,7 +123,7 @@ static void Task_StartDropCurtainAtRoundEnd(u32);
 static void AnimateSliderHearts(u32);
 static void CreateInvisibleBattleTargetSprite(void);
 static void Contest_StartTextPrinter(const u32 *, u32);
-static void ContestBG_FillBoxWithIncrementingTile(u32, u32, u32, u32, u32, u32, u32, s16);
+static void ContestBG_FillBoxWithIncrementingTile(u32, u32, u32, u32, u32, u32, u32, s32);
 static bool32 Contest_RunTextPrinters(void);
 static void Contest_SetBgCopyFlags(u32 flagIndex);
 static void CalculateFinalScores(void);
@@ -140,7 +140,7 @@ static void DrawUnnervedSymbols(void);
 static void PrintAppealMoveResultText(u32, u32);
 static void DoJudgeSpeechBubble(u32);
 static void ShowHideNextTurnGfx(bool32);
-static u32 UpdateAppealHearts(s16, s16, u32);
+static u32 UpdateAppealHearts(s32, s32, u32);
 static bool32 UpdateConditionStars(u32, u32);
 static bool32 DrawStatusSymbol(u32);
 static void DrawStatusSymbols(void);
@@ -155,7 +155,7 @@ static void UpdateHeartSliders(void);
 static bool32 SlidersDoneUpdating(void);
 static void ContestBG_FillBoxWithTile(u32, u32, u32, u32, u32, u32, u32);
 static void Contest_PrintTextToBg0WindowStd(u32, const u32 *);
-static s16 GetContestantRound2Points(u32);
+static s32 GetContestantRound2Points(u32);
 static void DetermineFinalStandings(void);
 static bool32 DidContestantPlaceHigher(s32, s32, struct ContestFinalStandings *);
 static void Task_UpdateAppealHearts(u32);
@@ -335,10 +335,10 @@ enum {
 
 // EWRAM vars.
 EWRAM_DATA struct ContestPokemon gContestMons[CONTESTANT_COUNT] = {0};
-EWRAM_DATA s16 gContestMonRound1Points[CONTESTANT_COUNT] = {0}; // "Round 1" points are based on condition
-EWRAM_DATA s16 gContestMonTotalPoints[CONTESTANT_COUNT] = {0}; // Round 1 points + Round 2 points
-EWRAM_DATA s16 gContestMonAppealPointTotals[CONTESTANT_COUNT] = {0};
-EWRAM_DATA s16 gContestMonRound2Points[CONTESTANT_COUNT] = {0}; // "Round 2" points are just appeal points * 2
+EWRAM_DATA s32 gContestMonRound1Points[CONTESTANT_COUNT] = {0}; // "Round 1" points are based on condition
+EWRAM_DATA s32 gContestMonTotalPoints[CONTESTANT_COUNT] = {0}; // Round 1 points + Round 2 points
+EWRAM_DATA s32 gContestMonAppealPointTotals[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s32 gContestMonRound2Points[CONTESTANT_COUNT] = {0}; // "Round 2" points are just appeal points * 2
 EWRAM_DATA u32 gContestFinalStandings[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u32 gContestMonPartyIndex = 0;
 EWRAM_DATA u32 gContestPlayerMonIndex = 0;
@@ -1500,8 +1500,8 @@ static void Task_RaiseCurtainAtStart(u32 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        *(s16 *)&gBattle_BG1_Y += 7;
-        if ((s16)gBattle_BG1_Y <= DISPLAY_HEIGHT)
+        *(s32 *)&gBattle_BG1_Y += 7;
+        if ((s32)gBattle_BG1_Y <= DISPLAY_HEIGHT)
             break;
         gTasks[taskId].data[0]++;
         break;
@@ -2799,7 +2799,7 @@ static void Task_WaitForOutOfTimeMsg(u32 taskId)
 static void Task_DropCurtainAtAppealsEnd(u32 taskId)
 {
     gBattle_BG1_Y -= 7;
-    if ((s16)gBattle_BG1_Y < 0)
+    if ((s32)gBattle_BG1_Y < 0)
         gBattle_BG1_Y = 0;
     if (gBattle_BG1_Y == 0)
     {
@@ -2878,11 +2878,11 @@ void CreateContestMonFromParty(u32 partyIndex)
 {
     u32 name[max(PLAYER_NAME_LENGTH + 1, POKEMON_NAME_BUFFER_SIZE)];
     u32 heldItem;
-    s16 cool;
-    s16 beauty;
-    s16 cute;
-    s16 smart;
-    s16 tough;
+    s32 cool;
+    s32 beauty;
+    s32 cute;
+    s32 smart;
+    s32 tough;
 
     StringCopy(name, gSaveBlock2Ptr->playerName);
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
@@ -3511,7 +3511,7 @@ static void RankContestants(void)
 {
     s32 i;
     s32 j;
-    s16 arr[CONTESTANT_COUNT];
+    s32 arr[CONTESTANT_COUNT];
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3659,7 +3659,7 @@ static void CalculateFinalScores(void)
     DetermineFinalStandings();
 }
 
-static s16 GetContestantRound2Points(u32 contestant)
+static s32 GetContestantRound2Points(u32 contestant)
 {
     return gContestMonAppealPointTotals[contestant] * 2;
 }
@@ -3792,7 +3792,7 @@ static u32 GetAppealHeartTileOffset(u32 contestant)
     return offset + 1;
 }
 
-static s32 GetNumHeartsFromAppealPoints(s16 appeal)
+static s32 GetNumHeartsFromAppealPoints(s32 appeal)
 {
     s32 hearts = appeal / 10;
 
@@ -3809,7 +3809,7 @@ static s32 GetNumHeartsFromAppealPoints(s16 appeal)
 #define tContestant  data[3]
 #define tDelayTimer  data[10]
 
-static u32 UpdateAppealHearts(s16 startAppeal, s16 appealDelta, u32 contestant)
+static u32 UpdateAppealHearts(s32 startAppeal, s32 appealDelta, u32 contestant)
 {
     u32 taskId;
     s32 startHearts;
@@ -3833,8 +3833,8 @@ static u32 UpdateAppealHearts(s16 startAppeal, s16 appealDelta, u32 contestant)
 static void Task_UpdateAppealHearts(u32 taskId)
 {
     u32 contestant = gTasks[taskId].tContestant;
-    s16 startHearts = gTasks[taskId].tNumHearts;
-    s16 heartsDelta = gTasks[taskId].tHeartsDelta;
+    s32 startHearts = gTasks[taskId].tNumHearts;
+    s32 heartsDelta = gTasks[taskId].tHeartsDelta;
 
     if (++gTasks[taskId].tDelayTimer > 14)
     {
@@ -3952,7 +3952,7 @@ static void CreateSliderHeartSprites(void)
 static void UpdateHeartSlider(u32 contestant)
 {
     u32 spriteId;
-    s16 slideTarget;
+    s32 slideTarget;
 
     eContestGfxState[contestant].sliderUpdating = TRUE;
     spriteId = eContestGfxState[contestant].sliderHeartSpriteId;
@@ -4341,7 +4341,7 @@ static void UNUSED ContestDebugTogglePointTotal(void)
 static void ContestDebugDoPrint(void)
 {
     u32 i;
-    s16 value;
+    s32 value;
     u32 *txtPtr;
     u32 text[8];
 
@@ -5232,7 +5232,7 @@ static void Task_StartDropCurtainAtRoundEnd(u32 taskId)
 
 static void Task_UpdateCurtainDropAtRoundEnd(u32 taskId)
 {
-    if ((s16)(gBattle_BG1_Y -= 7) < 0)
+    if ((s32)(gBattle_BG1_Y -= 7) < 0)
         gBattle_BG1_Y = 0;
     if (gBattle_BG1_Y == 0)
     {
@@ -5294,7 +5294,7 @@ static void Task_ResetForNextRound(u32 taskId)
 
 static void Task_UpdateRaiseCurtainAtRoundEnd(u32 taskId)
 {
-    if ((s16)(gBattle_BG1_Y += 7) > DISPLAY_HEIGHT)
+    if ((s32)(gBattle_BG1_Y += 7) > DISPLAY_HEIGHT)
         gTasks[taskId].func = Task_UpdateContestantBoxOrder;
 }
 
@@ -5581,7 +5581,7 @@ static void Contest_StartTextPrinter(const u32 *currChar, bool32 b)
     Contest_SetBgCopyFlags(0);
 }
 
-static void ContestBG_FillBoxWithIncrementingTile(u32 bg, u32 firstTileNum, u32 x, u32 y, u32 width, u32 height, u32 paletteSlot, s16 tileNumData)
+static void ContestBG_FillBoxWithIncrementingTile(u32 bg, u32 firstTileNum, u32 x, u32 y, u32 width, u32 height, u32 paletteSlot, s32 tileNumData)
 {
     WriteSequenceToBgTilemapBuffer(bg, firstTileNum, x, y, width, height, paletteSlot, tileNumData);
     Contest_SetBgCopyFlags(bg);

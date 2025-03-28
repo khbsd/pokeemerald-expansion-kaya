@@ -3,7 +3,7 @@
 
 // Base Power and STAB Checks
 
-SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other STAB boosts", s16 damage1, s16 damage2)
+SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other STAB boosts", s32 damage1, s32 damage2)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other 
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallizing does not affect the power of non-STAB moves", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallizing does not affect the power of non-STAB moves", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing does not affect the power of non-STAB 
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type gives that type 1.5x STAB", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type gives that type 1.5x STAB", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type gives that type 
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type gives that type 2x STAB", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type gives that type 2x STAB", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type gives that type 2x 
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallizing boosts moves of the same type to 60 BP", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallizing boosts moves of the same type to 60 BP", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -107,7 +107,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing boosts moves of the same type to 60 BP
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -128,7 +128,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technicia
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technicia
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to multi-hit moves", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to multi-hit moves", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -167,7 +167,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to mult
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to priority moves", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to priority moves", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -186,7 +186,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to prio
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to dynamic base power moves", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to dynamic base power moves", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -207,7 +207,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to dyna
 
 // Defensive Type Checks
 
-SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -410,7 +410,7 @@ SINGLE_BATTLE_TEST("(TERA) Revelation Dance uses a Terastallized Pokemon's Tera 
 // This tests that Tera STAB modifiers depend on the user's original types, too.
 SINGLE_BATTLE_TEST("(TERA) Double Shock does not remove the user's Electric type while Terastallized, and changes STAB modifier depending on when it is used")
 {
-    s16 damage[4];
+    s32 damage[4];
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DOUBLE_SHOCK) == EFFECT_FAIL_IF_NOT_ARG_TYPE);
         PLAYER(SPECIES_PICHU) { TeraType(TYPE_ELECTRIC); }
@@ -474,7 +474,7 @@ SINGLE_BATTLE_TEST("(TERA) Transform does not copy the target's Tera Type, and i
 }
 
 // Stellar Type checks
-SINGLE_BATTLE_TEST("(TERA) Stellar type does not change the user's defensive profile", s16 damage)
+SINGLE_BATTLE_TEST("(TERA) Stellar type does not change the user's defensive profile", s32 damage)
 {
     bool32 tera;
     PARAMETRIZE { tera = GIMMICK_NONE; }
@@ -566,7 +566,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove Flying-type ground immunity whe
 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-time 2.0x boost to STAB moves")
 {
-    s16 damage[3];
+    s32 damage[3];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -596,7 +596,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-t
 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-time 1.2x boost to non-STAB moves")
 {
-    s16 damage[3];
+    s32 damage[3];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -625,7 +625,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-t
 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves up to 60 BP once per type")
 {
-    s16 damage[4];
+    s32 damage[4];
     GIVEN {
         ASSUME(GetMovePower(MOVE_MEGA_DRAIN) == 40);
         ASSUME(GetMovePower(MOVE_BUBBLE) == 40);
@@ -678,7 +678,7 @@ SINGLE_BATTLE_TEST("(TERA) Protean cannot change the type of a Terastallized Pok
 
 SINGLE_BATTLE_TEST("(TERA) Status moves don't expend Stellar's one-time type boost")
 {
-    s16 damage[2];
+    s32 damage[2];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -705,7 +705,7 @@ SINGLE_BATTLE_TEST("(TERA) Status moves don't expend Stellar's one-time type boo
 
 SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-typed moves")
 {
-    s16 damage[4];
+    s32 damage[4];
     GIVEN {
         ASSUME(GetMoveType(MOVE_WEATHER_BALL) == TYPE_NORMAL);
         PLAYER(SPECIES_PELIPPER) { Ability(ABILITY_DRIZZLE); TeraType(TYPE_STELLAR); }
@@ -745,7 +745,7 @@ SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-
 
 SINGLE_BATTLE_TEST("(TERA) Terapagos retains the Stellar type boost at all times")
 {
-    s16 damage[2];
+    s32 damage[2];
     u32 move;
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_MACH_PUNCH; }

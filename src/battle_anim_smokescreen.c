@@ -97,7 +97,7 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 
 #define sMainSpriteId data[0]
 
-u8 SmokescreenImpact(s16 x, s16 y, bool32 persist)
+u8 SmokescreenImpact(s32 x, s32 y, bool32 persist)
 {
     u8 mainSpriteId;
     u8 spriteId1, spriteId2, spriteId3, spriteId4;

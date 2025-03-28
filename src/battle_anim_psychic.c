@@ -484,7 +484,7 @@ const struct SpriteTemplate gPsychoCutSpriteTemplate =
 
 static void AnimPsychoCut(struct Sprite *sprite)
 {
-    s16 lVarX, lVarY;
+    s32 lVarX, lVarY;
     u32 rot;
 
     if (IsContest())
@@ -506,7 +506,7 @@ static void AnimPsychoCut(struct Sprite *sprite)
         if (GetBattlerPosition(gBattleAnimTarget) == B_POSITION_PLAYER_LEFT
          || GetBattlerPosition(gBattleAnimTarget) == B_POSITION_OPPONENT_LEFT)
         {
-            s16 temp1, temp2;
+            s32 temp1, temp2;
 
             temp1 = gBattleAnimArgs[2];
             gBattleAnimArgs[2] = -temp1;
@@ -774,8 +774,8 @@ static void AnimBentSpoon(struct Sprite *sprite)
 // Used by Amnesia
 static void AnimQuestionMark(struct Sprite *sprite)
 {
-    s16 x = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) /  2;
-    s16 y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / -2;
+    s32 x = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) /  2;
+    s32 y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / -2;
 
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         x = -x;
@@ -1168,7 +1168,7 @@ static void AnimSkillSwapOrb(struct Sprite *sprite)
 // arg0: Stage. Stage 0 is a slight right distortion, 1 is a medium left distortion, and 2 is a severe right distortion
 void AnimTask_ExtrasensoryDistortion(u8 taskId)
 {
-    s16 i;
+    s32 i;
     u8 yOffset;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
@@ -1227,7 +1227,7 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
 
 static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId)
 {
-    s16 sineIndex, i;
+    s32 sineIndex, i;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -1237,7 +1237,7 @@ static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId)
         i = task->data[14];
         while (i <= task->data[15])
         {
-            s16 var2 = (gSineTable[sineIndex] >> task->data[12]);
+            s32 var2 = (gSineTable[sineIndex] >> task->data[12]);
             if (var2 > 0)
                 var2 += (task->data[1] & 3);
             else if (var2 < 0)
@@ -1266,8 +1266,8 @@ static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId)
 // arg0: battler
 void AnimTask_TransparentCloneGrowAndShrink(u8 taskId)
 {
-    s16 spriteId;
-    s16 matrixNum;
+    s32 spriteId;
+    s32 matrixNum;
     struct Task *task = &gTasks[taskId];
 
     matrixNum = AllocOamMatrix();

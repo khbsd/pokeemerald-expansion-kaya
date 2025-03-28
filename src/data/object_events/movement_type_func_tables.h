@@ -10,7 +10,7 @@ u8 (*const gMovementTypeFuncs_WanderAround[])(struct ObjectEvent *, struct Sprit
 
 const u8 gStandardDirections[] = {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST};
 
-u8 (*const gGetVectorDirectionFuncs[])(s16, s16, s16, s16) = {
+u8 (*const gGetVectorDirectionFuncs[])(s32, s32, s32, s32) = {
     GetVectorDirection,
     GetLimitedVectorDirection_SouthNorth,
     GetLimitedVectorDirection_WestEast,

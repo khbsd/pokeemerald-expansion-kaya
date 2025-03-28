@@ -340,7 +340,7 @@ void PokenavList_ToggleVerticalArrows(bool32 shouldHide);
 void PokenavList_DrawCurrentItemIcon(void);
 void PokenavList_EraseListForCheckPage(void);
 bool32 PokenavList_IsTaskActive(void);
-void PrintCheckPageInfo(s16 delta);
+void PrintCheckPageInfo(s32 delta);
 u32 PokenavList_GetTopIndex(void);
 void PokenavList_ReshowListFromCheckPage(void);
 

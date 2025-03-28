@@ -11,7 +11,7 @@ void RemoveBagSprite(u8 id);
 void AddBagVisualSprite(u8 bagPocketId);
 void SetBagVisualPocketId(u8 bagPocketId, bool32 isSwitchingPockets);
 void ShakeBagSprite(void);
-void AddSwitchPocketRotatingBallSprite(s16 rotationDirection);
+void AddSwitchPocketRotatingBallSprite(s32 rotationDirection);
 void AddBagItemIconSprite(u32 itemId, u8 id);
 void RemoveBagItemIconSprite(u8 id);
 void CreateItemMenuSwapLine(void);
@@ -30,6 +30,6 @@ void DestroyBerryIconSpritePtr(struct Sprite *sprite, u32 berryId, bool32 freePa
 
 void FreeBerryIconSpritePalette(u32 berryId); // Unused atm, because it's also handled by DestroyBerryIconSprite. Leaving it as it is, because it may still be useful in some custom cases.
 
-u8 CreateBerryFlavorCircleSprite(s16 x);
+u8 CreateBerryFlavorCircleSprite(s32 x);
 
 #endif // GUARD_ITEM_MENU_ICONS_H

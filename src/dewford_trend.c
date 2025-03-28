@@ -66,7 +66,7 @@ static bool32 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u32);
 static void SeedTrendRng(struct DewfordTrend *);
 static bool32 IsPhraseInSavedTrends(u32 *);
 static bool32 IsEasyChatPairEqual(u32 *, u32 *);
-static s16 GetSavedTrendIndex(struct DewfordTrend *, struct DewfordTrend *, u32);
+static s32 GetSavedTrendIndex(struct DewfordTrend *, struct DewfordTrend *, u32);
 
 void InitDewfordTrend(void)
 {
@@ -257,7 +257,7 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u32
     {
         for (j = 0; j < SAVED_TRENDS_COUNT; j++)
         {
-            s16 idx = GetSavedTrendIndex(savedTrendsBuffer, src, numTrends);
+            s32 idx = GetSavedTrendIndex(savedTrendsBuffer, src, numTrends);
             if (idx < 0)
             {
                 // This phrase is not a currently saved trend, save it
@@ -406,9 +406,9 @@ static bool32 IsEasyChatPairEqual(u32 *words1, u32 *words2)
     return TRUE;
 }
 
-static s16 GetSavedTrendIndex(struct DewfordTrend *savedTrends, struct DewfordTrend *trend, u32 numSaved)
+static s32 GetSavedTrendIndex(struct DewfordTrend *savedTrends, struct DewfordTrend *trend, u32 numSaved)
 {
-    s16 i;
+    s32 i;
     for (i = 0; i < numSaved; i++)
     {
         if (IsEasyChatPairEqual(trend->words, savedTrends->words))

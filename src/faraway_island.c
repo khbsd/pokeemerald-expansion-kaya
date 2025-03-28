@@ -15,18 +15,18 @@ static bool32 ShouldMewMoveSouth(struct ObjectEvent *, u32);
 static bool32 ShouldMewMoveEast(struct ObjectEvent *, u32);
 static bool32 ShouldMewMoveWest(struct ObjectEvent *, u32);
 static u32 GetRandomMewDirectionCandidate(u32);
-static bool32 CanMewMoveToCoords(s16, s16);
+static bool32 CanMewMoveToCoords(s32, s32);
 
 static EWRAM_DATA u32 sGrassSpriteId = 0;
 
-static s16 sPlayerToMewDeltaX;
-static s16 sPlayerToMewDeltaY;
+static s32 sPlayerToMewDeltaX;
+static s32 sPlayerToMewDeltaY;
 static u32 sMewDirectionCandidates[4];
 
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
-static const s16 sFarawayIslandRockCoords[4][2] =
+static const s32 sFarawayIslandRockCoords[4][2] =
 {
     {14 + MAP_OFFSET,  9 + MAP_OFFSET},
     {18 + MAP_OFFSET,  9 + MAP_OFFSET},
@@ -267,7 +267,7 @@ u32 GetMewMoveDirection(void)
 }
 
 // Mew can move to any Tall/Long Grass metatile the player isn't currently on
-static bool32 CanMewMoveToCoords(s16 x, s16 y)
+static bool32 CanMewMoveToCoords(s32 x, s32 y)
 {
     if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x == x
      && gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y == y)
@@ -369,8 +369,8 @@ bool32 ShouldMewShakeGrass(struct ObjectEvent *objectEvent)
 
 void SetMewAboveGrass(void)
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     mew->invisible = FALSE;

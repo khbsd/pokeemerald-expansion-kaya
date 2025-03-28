@@ -79,7 +79,7 @@ static void SpriteCB_Egg_Reveal(struct Sprite *);
 static void SpriteCB_EggShard(struct Sprite *);
 static void EggHatchPrintMessage(u32, u32 *, u32, u32, u32);
 static void CreateRandomEggShardSprite(void);
-static void CreateEggShardSprite(u32, u32, s16, s16, s16, u32);
+static void CreateEggShardSprite(u32, u32, s32, s32, s32, u32);
 
 static struct EggHatchData *sEggHatchData;
 
@@ -282,7 +282,7 @@ static const struct WindowTemplate sYesNoWinTemplate =
     .baseBlock = 424
 };
 
-static const s16 sEggShardVelocities[][2] =
+static const s32 sEggShardVelocities[][2] =
 {
     // First shake
     {Q_8_8(-1.5),       Q_8_8(-3.75)},
@@ -825,7 +825,7 @@ static void SpriteCB_Egg_WaitHatch(struct Sprite *sprite)
 
 static void SpriteCB_Egg_Hatch(struct Sprite *sprite)
 {
-    s16 i;
+    s32 i;
 
     // Fade to white to hide transition from egg to Pokémon
     if (sprite->sTimer == 0)
@@ -896,8 +896,8 @@ static void CreateRandomEggShardSprite(void)
 {
     u32 spriteAnimIndex;
 
-    s16 velocityX = sEggShardVelocities[sEggHatchData->eggShardVelocityId][0];
-    s16 velocityY = sEggShardVelocities[sEggHatchData->eggShardVelocityId][1];
+    s32 velocityX = sEggShardVelocities[sEggHatchData->eggShardVelocityId][0];
+    s32 velocityY = sEggShardVelocities[sEggHatchData->eggShardVelocityId][1];
     sEggHatchData->eggShardVelocityId++;
 
     // Randomly choose one of the 4 shard images
@@ -906,7 +906,7 @@ static void CreateRandomEggShardSprite(void)
     CreateEggShardSprite(EGG_X, EGG_Y - 15, velocityX, velocityY, 100, spriteAnimIndex);
 }
 
-static void CreateEggShardSprite(u32 x, u32 y, s16 velocityX, s16 velocityY, s16 acceleration, u32 spriteAnimIndex)
+static void CreateEggShardSprite(u32 x, u32 y, s32 velocityX, s32 velocityY, s32 acceleration, u32 spriteAnimIndex)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
     gSprites[spriteId].sVelocX = velocityX;

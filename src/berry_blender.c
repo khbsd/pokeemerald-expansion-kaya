@@ -148,7 +148,7 @@ struct BerryBlender
     u32 unk0; // never read
     u32 scoreIconIds[NUM_SCORE_TYPES];
     u32 arrowPos;
-    s16 speed;
+    s32 speed;
     u32 maxRPM;
     u32 playerArrowSpriteIds[BLENDER_MAX_PLAYERS];
     u32 playerArrowSpriteIds2[BLENDER_MAX_PLAYERS];
@@ -174,8 +174,8 @@ struct BerryBlender
     u32 progressBarValue;
     u32 maxProgressBarValue;
     u32 centerScale;
-    s16 bg_X;
-    s16 bg_Y;
+    s32 bg_X;
+    s32 bg_Y;
     u32 opponentTaskIds[BLENDER_MAX_PLAYERS - 1];
     u32 perfectOpponents; // for debugging, NPCs will always hit Best
     u32 scores[BLENDER_MAX_PLAYERS][NUM_SCORE_TYPES];
@@ -188,7 +188,7 @@ struct BerryBlender
     u32 ownRanking;
     struct TvBlenderStruct tvBlender;
     u32 tilemapBuffers[2][BG_SCREEN_SIZE];
-    s16 textState;
+    s32 textState;
     void *tilesBuffer;
     struct BlenderGameBlock gameBlock;
 };
@@ -207,11 +207,11 @@ static void SpriteCB_ScoreSymbolBest(struct Sprite *);
 static void InitLocalPlayers(u32);
 static void CB2_LoadBerryBlender(void);
 static void UpdateBlenderCenter(void);
-static bool32 PrintMessage(s16 *, const u32 *, s32 );
+static bool32 PrintMessage(s32 *, const u32 *, s32 );
 static void StartBlender(void);
 static void CB2_StartBlenderLink(void);
 static void CB2_StartBlenderLocal(void);
-static void Blender_DummiedOutFunc(s16, s16);
+static void Blender_DummiedOutFunc(s32, s32);
 static void CB2_PlayBlender(void);
 static void DrawBlenderCenter(struct BgAffineSrcData *);
 static bool32 UpdateBlenderLandScreenShake(void);
@@ -222,7 +222,7 @@ static void SetPlayerBerryData(u32, u32);
 static void Blender_AddTextPrinter(u32, const u32 *, u32, u32, s32, s32);
 static void ResetLinkCmds(void);
 static void CreateParticleSprites(void);
-static void ShakeBgCoordForHit(s16 *, u32);
+static void ShakeBgCoordForHit(s32 *, u32);
 static void TryUpdateProgressBar(u32, u32);
 static void UpdateRPM(u32);
 static void RestoreBgCoords(void);
@@ -238,10 +238,10 @@ static bool32 TryAddContestLinkTvShow(struct Pokeblock *, struct TvBlenderStruct
 
 EWRAM_DATA static struct BerryBlender *sBerryBlender = NULL;
 
-static s16 sPokeblockFlavors[FLAVOR_COUNT + 1]; // + 1 for feel
-static s16 sPokeblockPresentFlavors[FLAVOR_COUNT + 1];
-static s16 sDebug_MaxRPMStage;
-static s16 sDebug_GameTimeStage;
+static s32 sPokeblockFlavors[FLAVOR_COUNT + 1]; // + 1 for feel
+static s32 sPokeblockPresentFlavors[FLAVOR_COUNT + 1];
+static s32 sDebug_MaxRPMStage;
+static s32 sDebug_GameTimeStage;
 
 COMMON_DATA u32 gInGameOpponentsNo = 0;
 
@@ -841,7 +841,7 @@ static const struct SpriteTemplate sSpriteTemplate_Start =
 
 // Data for throwing the berries in at the start
 // x, y, bounce speed, x speed, y speed
-static const s16 sBerrySpriteData[][5] =
+static const s32 sBerrySpriteData[][5] =
 {
     {-10,  20,  10,   2,   1},
     {250,  20,  10,  -2,   1},
@@ -1126,9 +1126,9 @@ static void CB2_LoadBerryBlender(void)
 // Because of changing how Berry sprites are generated, we have to leave data[6] and data[7] untouched as it has an allocated memory ptr for berry's gfx.
 struct BerrySpriteData
 {
-    s16 sTargetY; // data0
-    s16 sX; // data1
-    s16 sY; // data2
+    s32 sTargetY; // data0
+    s32 sX; // data1
+    s32 sY; // data2
 
     s32 sBounceSpeed; // data3
     u32 berryId; // data3
@@ -2235,7 +2235,7 @@ static void CB2_PlayBlender(void)
     UpdatePaletteFade();
 }
 
-static void Blender_DummiedOutFunc(s16 bgX, s16 bgY)
+static void Blender_DummiedOutFunc(s32 bgX, s32 bgY)
 {
 
 }
@@ -2257,9 +2257,9 @@ static bool32 AreBlenderBerriesSame(struct BlenderBerry* berries, u32 a, u32 b)
         return FALSE;
 }
 
-static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, u32 numPlayers, u32 negativeFlavors)
+static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s32 *_flavors, u32 numPlayers, u32 negativeFlavors)
 {
-    s16 flavors[FLAVOR_COUNT + 1];
+    s32 flavors[FLAVOR_COUNT + 1];
     s32 i, j;
     u32 numFlavors;
 
@@ -2361,22 +2361,22 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
     return PBLOCK_CLR_NONE;
 }
 
-static void Debug_SetMaxRPMStage(s16 value)
+static void Debug_SetMaxRPMStage(s32 value)
 {
     sDebug_MaxRPMStage = value;
 }
 
-static s16 UNUSED Debug_GetMaxRPMStage(void)
+static s32 UNUSED Debug_GetMaxRPMStage(void)
 {
     return sDebug_MaxRPMStage;
 }
 
-static void Debug_SetGameTimeStage(s16 value)
+static void Debug_SetGameTimeStage(s32 value)
 {
     sDebug_GameTimeStage = value;
 }
 
-static s16 UNUSED Debug_GetGameTimeStage(void)
+static s32 UNUSED Debug_GetGameTimeStage(void)
 {
     return sDebug_GameTimeStage;
 }
@@ -2490,7 +2490,7 @@ static void Debug_SetStageVars(void)
 {
     u32 frames = (u32)(sBerryBlender->gameFrameTime);
     u32 maxRPM = sBerryBlender->maxRPM;
-    s16 stage = 0;
+    s32 stage = 0;
 
     if (frames < 900)
         stage = 5;
@@ -3364,13 +3364,13 @@ static void UpdateRPM(u32 speed)
 
 // Passed a pointer to the bg x/y
 // Used when hitting a Best at high RPM
-static void ShakeBgCoordForHit(s16 *coord, u32 speed)
+static void ShakeBgCoordForHit(s32 *coord, u32 speed)
 {
     if (*coord == 0)
         *coord = (Random() % speed) - (speed / 2);
 }
 
-static void RestoreBgCoord(s16 *coord)
+static void RestoreBgCoord(s32 *coord)
 {
     if (*coord < 0)
         (*coord)++;
@@ -3385,7 +3385,7 @@ static void RestoreBgCoords(void)
     RestoreBgCoord(&sBerryBlender->bg_Y);
 }
 
-static void BlenderLandShakeBgCoord(s16 *coord, u32 timer)
+static void BlenderLandShakeBgCoord(s32 *coord, u32 timer)
 {
     s32 strength;
 
@@ -3870,7 +3870,7 @@ static void Blender_AddTextPrinter(u32 windowId, const u32 *string, u32 x, u32 y
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, 1, txtColor, speed, string);
 }
 
-static bool32 PrintMessage(s16 *textState, const u32 *string, s32 textSpeed)
+static bool32 PrintMessage(s32 *textState, const u32 *string, s32 textSpeed)
 {
     switch (*textState)
     {

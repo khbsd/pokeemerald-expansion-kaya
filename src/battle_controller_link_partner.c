@@ -214,7 +214,7 @@ static void LinkPartnerHandleSwitchInAnim(u32 battler)
 
 static void LinkPartnerHandleDrawTrainerPic(u32 battler)
 {
-    s16 xPos;
+    s32 xPos;
     u32 trainerPicId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)

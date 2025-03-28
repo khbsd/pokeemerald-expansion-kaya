@@ -19,8 +19,8 @@ struct DigitPrinter
     u32 xDelta;
     u32 tilesPerImage;
     u32 tileStart;
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 tileTag;
     u32 palTag;
     u32 pow10;

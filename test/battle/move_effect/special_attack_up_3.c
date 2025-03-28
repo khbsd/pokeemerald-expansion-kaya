@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_TAIL_GLOW) == EFFECT_SPECIAL_ATTACK_UP_3);
 }
 
-SINGLE_BATTLE_TEST("Tail Glow drastically raises Special Attack", s16 damage)
+SINGLE_BATTLE_TEST("Tail Glow drastically raises Special Attack", s32 damage)
 {
     bool32 raiseSpecialAttack;
     PARAMETRIZE { raiseSpecialAttack = FALSE; }

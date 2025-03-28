@@ -1217,7 +1217,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
     const u32 *palette;
     struct PokemonSpriteVisualizer *data;
     u32 species;
-    s16 offset_y;
+    s32 offset_y;
     u32 front_x = sBattlerCoords[0][1].x;
     u32 front_y;
 
@@ -1579,7 +1579,7 @@ static void UpdateShadowSettingsValue(u32 taskId, bool32 increment)
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u32 option = data->submenuYpos[2];
     s32 *offset;
-    s16 *leftTarget, *rightTarget;
+    s32 *leftTarget, *rightTarget;
     if (option == 0)
     {
         offset = &data->shadowSettings.overrideX;
@@ -1600,8 +1600,8 @@ static void UpdateShadowSettingsValue(u32 taskId, bool32 increment)
         *offset = 20;
     UpdateShadowSettingsText(data);
 
-    *leftTarget = (s16)*offset;
-    *rightTarget = (s16)*offset;
+    *leftTarget = (s32)*offset;
+    *rightTarget = (s32)*offset;
 }
 
 static void UpdateShadowSizeValue(u32 taskId, bool32 increment)
@@ -1945,7 +1945,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 {
     const u32 *palette;
     u32 species = data->currentmonId;
-    s16 offset_y;
+    s32 offset_y;
     u32 front_x = sBattlerCoords[0][1].x;
     u32 front_y;
 

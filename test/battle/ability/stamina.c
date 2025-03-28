@@ -17,7 +17,7 @@
 
 SINGLE_BATTLE_TEST("Stamina raises Defense by 1 when hit by a move")
 {
-    s16 turnOneHit, turnTwoHit;
+    s32 turnOneHit, turnTwoHit;
     u32 move;
 
     PARAMETRIZE {move = MOVE_TACKLE; }

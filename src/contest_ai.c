@@ -394,7 +394,7 @@ static u32 GetContestantIdByTurn(u32 turn)
 
 static void ContestAICmd_score(void)
 {
-    s16 score = eContestAI.moveScores[eContestAI.nextMoveIndex] + (s32)gAIScriptPtr[1];
+    s32 score = eContestAI.moveScores[eContestAI.nextMoveIndex] + (s32)gAIScriptPtr[1];
 
     if (score > 255)
         score = 255;
@@ -600,7 +600,7 @@ static void ContestAICmd_if_points_less_than(void)
 {
     ContestAICmd_get_points();
 
-    if (eContestAI.scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult < (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -610,7 +610,7 @@ static void ContestAICmd_if_points_more_than(void)
 {
     ContestAICmd_get_points();
 
-    if (eContestAI.scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult > (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -620,7 +620,7 @@ static void ContestAICmd_if_points_eq(void)
 {
     ContestAICmd_get_points();
 
-    if (eContestAI.scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult == (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -630,7 +630,7 @@ static void ContestAICmd_if_points_not_eq(void)
 {
     ContestAICmd_get_points();
 
-    if (eContestAI.scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult != (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -646,7 +646,7 @@ static void ContestAICmd_if_preliminary_points_less_than(void)
 {
     ContestAICmd_get_preliminary_points();
 
-    if (eContestAI.scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult < (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -656,7 +656,7 @@ static void ContestAICmd_if_preliminary_points_more_than(void)
 {
     ContestAICmd_get_preliminary_points();
 
-    if (eContestAI.scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult > (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -666,7 +666,7 @@ static void ContestAICmd_if_preliminary_points_eq(void)
 {
     ContestAICmd_get_preliminary_points();
 
-    if (eContestAI.scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult == (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -676,7 +676,7 @@ static void ContestAICmd_if_preliminary_points_not_eq(void)
 {
     ContestAICmd_get_preliminary_points();
 
-    if (eContestAI.scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
+    if (eContestAI.scriptResult != (s32)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -970,7 +970,7 @@ static void ContestAICmd_if_num_move_jam_hearts_not_eq(void)
 
 static void ContestAICmd_get_move_used_count(void)
 {
-    s16 result;
+    s32 result;
     u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     if (move != eContestantStatus[eContestAI.contestantId].prevMove)
@@ -1630,7 +1630,7 @@ static void ContestAICmd_if_not_eq_var(void)
 
 // UB: Should just be comparing to gAIScriptPtr[1] in the functions below
 // The values passed via gAIScriptPtr[1] range from 0-255
-// and vars is an s16[3], so this goes way out of bounds
+// and vars is an s32[3], so this goes way out of bounds
 static void ContestAICmd_if_random_less_than(void)
 {
 #ifndef UBFIX

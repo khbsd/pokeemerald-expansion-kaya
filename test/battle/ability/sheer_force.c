@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(MoveIsAffectedBySheerForce(MOVE_ELECTRO_SHOT) == TRUE);
 }
 
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Magnitude", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Magnitude", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Magnitude", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Present", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Present", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Present", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Psywave", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Psywave", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Psywave", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Round", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Round", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -109,7 +109,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Round", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Gyro Ball", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Gyro Ball", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Gyro Ball", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Electro Ball", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Electro Ball", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -143,7 +143,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Electro Ball", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Dragon Energy", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Dragon Energy", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -160,7 +160,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Dragon Energy", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Belch", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Belch", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -177,7 +177,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Belch", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Shell Trap", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Shell Trap", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -194,7 +194,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Shell Trap", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Burn Up", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Burn Up", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -211,7 +211,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Burn Up", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Double Shock", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Double Shock", s32 damage)
 {
     u32 move = 0;
     PARAMETRIZE { move = MOVE_SKILL_SWAP; }
@@ -228,7 +228,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Double Shock", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Steel Roller", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Steel Roller", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -245,7 +245,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Steel Roller", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Synchronoise", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Synchronoise", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -262,7 +262,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Synchronoise", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Aura Wheel", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Aura Wheel", s32 damage)
 {
     u32 move = 0;
     PARAMETRIZE { move = MOVE_SKILL_SWAP; }
@@ -279,7 +279,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Aura Wheel", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Hyperspace Fury", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Hyperspace Fury", s32 damage)
 {
     u32 move = 0;
     PARAMETRIZE { move = MOVE_SKILL_SWAP; }
@@ -296,7 +296,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Hyperspace Fury", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Bolt Beak", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Bolt Beak", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -313,7 +313,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Bolt Beak", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Fishious Rend", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Fishious Rend", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -330,7 +330,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Fishious Rend", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -347,7 +347,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Payback", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Payback", s32 damage)
 {
     u32 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }
@@ -613,7 +613,7 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
 // Test split into four parts that handles ~1/4 of all moves each
 DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to boost 1")
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     u32 move = 0;
     for (u32 j = 1; j < MOVES_COUNT; j += 4)
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -691,7 +691,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 }
 DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to boost 2")
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     u32 move = 0;
     for (u32 j = 2; j < MOVES_COUNT; j += 4)
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -769,7 +769,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 }
 DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to boost 3")
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     u32 move = 0;
     for (u32 j = 3; j < MOVES_COUNT; j += 4)
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -847,7 +847,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 }
 DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to boost 4")
 {
-    s16 damage1, damage2;
+    s32 damage1, damage2;
     u32 move = 0;
     for (u32 j = 4; j < MOVES_COUNT; j += 4)
     {

@@ -5196,7 +5196,7 @@ u32
     if (species && species != SPECIES_EGG)
     {
         u8 friendshipLevel = 0;
-        s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+        s32 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
         u32 opponentTrainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
         if (friendship > 99)u32
@@ -5335,12 +5335,12 @@ u32
         if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
             evIncrease *= 2;
 
-        if (totalEVs + (s16)evIncrease > currentEVCap)
-            evIncrease = ((s16)evIncrease + currentEVCap) - (totalEVs + evIncrease);
+        if (totalEVs + (s32)evIncrease > currentEVCap)
+            evIncrease = ((s32)evIncrease + currentEVCap) - (totalEVs + evIncrease);
 
-        if (evs[i] + (s16)evIncrease > MAX_PER_STAT_EVS)
+        if (evs[i] + (s32)evIncrease > MAX_PER_STAT_EVS)
         {
-            int val1 = (s16)evIncrease + MAX_PER_STAT_EVS;
+            int val1 = (s32)evIncrease + MAX_PER_STAT_EVS;
             int val2 = evs[i] + evIncrease;
             evIncrease = val1 - val2;
         }
@@ -6246,7 +6246,7 @@ static u8 UNUSED GetOwnOpposingLinkMultiBattlerId(bool32 rightSide)
     }
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
-        if (gLinkPlayers[i].id == (s16)battlerId)
+        if (gLinkPlayers[i].id == (s32)battlerId)
             break;
     }
     return i;
@@ -6269,7 +6269,7 @@ u8 GetOpposingLinkMultiBattlerId(bool32 rightSide, u8 multiplayerId)
     }
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
-        if (gLinkPlayers[i].id == (s16)battlerId)
+        if (gLinkPlayers[i].id == (s32)battlerId)
             break;
     }
     return i;

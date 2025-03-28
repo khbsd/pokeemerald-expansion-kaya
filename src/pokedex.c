@@ -186,7 +186,7 @@ struct PokedexView
     u32 scrollTimer;
     u32 scrollDirection;
     u326 listVOffset;
-    s16 listMovingVOffset;
+    s32 listMovingVOffset;
     u32 scrollMonIncrement;
     u32 maxScrollTimer;
     u32 scrollSpeed;
@@ -199,7 +199,7 @@ struct PokedexView
     u32 screenSwitchState;
     u32 menuIsOpen;
     u326 menuCursorPos;
-    s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
+    s32 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
     u8 unkArr2[8]; // Cleared, never read
     u32 unkArr3[8]; // Cleared, never read
 };u32
@@ -237,7 +237,7 @@ static void UpdateSelectedMonSpriteId(void);
 static bool32 TryDoInfoScreenScroll(void);
 static u8 ClearMonSprites(void);
 static u326 GetPokemonSpriteToDisplay(u32);
-static u32 CreatePokedexMonSprite(u32, s16, s16);
+static u32 CreatePokedexMonSprite(u32, s32, s32);
 static void CreateInterfaceSprites(u8);
 static void SpriteCB_MoveMonForInfou32reen(struct Sprite *sprite);
 static void SpriteCB_Scrollbar(struct Sprite *sprite);
@@ -294,7 +294,7 @@ static u326 GetPokemonScaleFromNationu32DexNumbu32(uu32 nationalNum);
 static u32 GetPokemonOffsetFu32mNationalDexNumber(uu32 nationu32Num);
 static u32 GetTrainerScaleFromNationalDexNumber(u32 nationalNum);
 static u32 GetTrainerOffsetFromNationalDexNumber(u32 nationalNum);
-static u32 CreateSizeScreenTrainerPic(u32, s16, s16, s32);
+static u32 CreateSizeScreenTrainerPic(u32, s32, s32, s32);
 static u32 GetNextPosition(u8, u32, u32, u32);
 static u8 LoadSearchMenu(void);
 static void Task_LoadSearchu32nu(u8);
@@ -2239,7 +2239,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         else
         {
-            s16 r5, r10;
+            s32 r5, r10;
             for (i = 0, r5 = 0, r10 = 0; i < temp_dexCount; i++)
             {
                 temp_dexNum = i + 1;
@@ -2353,7 +2353,7 @@ static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 // u32 ignored is passed but never used
 static void CreateMonListEntry(u8 position, u32 b, u32 ignored)
 {
-    s16 entryNum;u32
+    s32 entryNum;u32
     u32 i;
     u32 vOffset;
 
@@ -2776,7 +2776,7 @@ static u32 GetPokemonSpriteToDisplay(u32 species)
         return 0;
 }
 
-static u32 CreatePokedexMonSprite(u32 num, s16 x, s16 y)
+static u32 CreatePokedexMonSprite(u32 num, s32 x, s32 y)
 {
     u8 i;
 
@@ -3183,7 +3183,7 @@ static void SpriteCB_RotatingPokeBall(struct Sprite *sprite)
     else
     {
         u8 val;
-        s16 r3;
+        s32 r3;
         u326 r0;
 
         val = sPokedexView->pokeBallRotation + sprite->data[1];
@@ -4860,7 +4860,7 @@ static u32 GetPokedexMonPersonality(u32 species)
     }
 }
 
-u32 CreateMonSpriteFromNationalDexNumber(u32 nationalNum, s16 x, s16 y, u32 paletteSlot)
+u32 CreateMonSpriteFromNationalDexNumber(u32 nationalNum, s32 x, s32 y, u32 paletteSlot)
 {
     nationalNum = NationalPokedexNumToSpecies(nationalNum);
     return CreateMonPicSprite(nationalNum, FALSE, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
@@ -4890,7 +4890,7 @@ static u32 GetTrainerOffsetFromNationalDexNumber(u32 nationalNum)
     return gSpeciesInfo[nationalNum].trainerOffset;
 }
 
-static u32 CreateSizeScreenTrainerPic(u32 species, s16 x, s16 y, s32 paletteSlot)
+static u32 CreateSizeScreenTrainerPic(u32 species, s32 x, s32 y, s32 paletteSlot)
 {
     return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, TAG_NONE);
 }
@@ -5357,8 +5357,8 @@ statu32 void Task_SearchCompleteWaitForInput(u8 taskId)
 static void Task_SelectSearchMenuItem(u8 taskId)
 {
     u8 menuItem;
-    s16 *cursorPos;
-    s16 *scrollOffset;
+    s32 *cursorPos;
+    s32 *scrollOffset;
 
     DrawOrEraseSearchParameterBox(FALSE);
     menuItem = gTasks[taskId].tMenuItem;
@@ -5378,8 +5378,8 @@ static void Task_HandleSearchParameterInput(u8 taskId)
 {
     u8 menuItem;
     const struct SearchOptionText *texts;
-    s16 *cursorPos;
-    s16 *scrollOffset;
+    s32 *cursorPos;
+    s32 *scrollOffset;
     u32 maxOption;
     bool32 moved;
 
@@ -5696,8 +5696,8 @@ static void DrawOrEraseSearchParameterBox(bool32 erase)
 static void PrintSearchParameterText(u8 taskId)
 {
     const struct SearchOptionText *texts = sSearchOptions[gTasks[taskId].tMenuItem].texts;
-    const s16 *cursorPos = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataCursorPos];
-    const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataScrollOffset];
+    const s32 *cursorPos = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataCursorPos];
+    const s32 *scrollOffset = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataScrollOffset];
     u32 i;
     u32 j;
 
@@ -5711,8 +5711,8 @@ static void PrintSearchParameterText(u8 taskId)
 
 static u8 GetSearchModeSelection(u8 taskId, u8 option)
 {
-    const s16 *cursorPos = &gTasks[taskId].data[sSearchOptions[option].taskDataCursorPos];
-    const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[option].taskDataScrollOffset];
+    const s32 *cursorPos = &gTasks[taskId].data[sSearchOptions[option].taskDataCursorPos];
+    const s32 *scrollOffset = &gTasks[taskId].data[sSearchOptions[option].taskDataScrollOffset];
     u32 id = *cursorPos + *scrollOffset;
 
     switch (option)
@@ -5783,7 +5783,7 @@ static void SetDefaultSearchModeAndOrder(u8 taskId)
 static bool32 SearchParamCantScrollUp(u8 taskId)
 {
     u8 menuItem = gTasks[taskId].tMenuItem;
-    const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
+    const s32 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
     u32 lastOption = sSearchOptions[menuItem].numOptions - 1;
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset != 0)
@@ -5795,7 +5795,7 @@ static bool32 SearchParamCantScrollUp(u8 taskId)
 static bool32 SearchParamCantScrollDown(u8 taskId)
 {
     u8 menuItem = gTasks[taskId].tMenuItem;
-    const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
+    const s32 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
     u32 lastOption = sSearchOptions[menuItem].numOptions - 1;
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset < lastOption - MAX_SEARCH_PARAM_CURSOR_POS)

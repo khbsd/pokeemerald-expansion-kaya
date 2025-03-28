@@ -103,7 +103,7 @@ static void AnimTask_SquishAndSweatDroplets_Step(u8);
 static void CreateSweatDroplets(u8, bool32);
 static void AnimTask_FacadeColorBlend_Step(u8);
 static void AnimTask_GlareEyeDots_Step(u8);
-static void GetGlareEyeDotCoords(s16, s16, s16, s16, u8, u8, s16 *, s16 *);
+static void GetGlareEyeDotCoords(s32, s32, s32, s32, u8, u8, s32 *, s32 *);
 static void AnimTask_BarrageBall_Step(u8);
 static void AnimTask_SmellingSaltsSquish_Step(u8);
 static void AnimTask_HelpingHandAttackerMovement_Step(u8);
@@ -1570,7 +1570,7 @@ static void FadeScreenToWhite_Step(u8 taskId)
 
 static void AnimSpikes(struct Sprite *sprite)
 {
-    s16 x, y;
+    s32 x, y;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);
@@ -1890,12 +1890,12 @@ static void AnimRapidSpin_Step(struct Sprite *sprite)
 
 void AnimTask_RapinSpinMonElevation(u8 taskId)
 {
-    s16 var0;
+    s32 var0;
     u8 toBG2;
-    s16 var2;
+    s32 var2;
     int var3;
     int var4;
-    s16 i;
+    s32 i;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
 
@@ -1974,7 +1974,7 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
 
 static void RapinSpinMonElevation_Step(u8 taskId)
 {
-    s16 i;
+    s32 i;
     struct Task *task = &gTasks[taskId];
 
     task->data[0] -= task->data[5];
@@ -2049,7 +2049,7 @@ void AnimTask_TormentAttacker(u8 taskId)
 static void TormentAttacker_Step(u8 taskId)
 {
     int var0, var1;
-    s16 x, y;
+    s32 x, y;
     u32 i, j;
     u8 spriteId;
     struct Task *task = &gTasks[taskId];
@@ -2685,7 +2685,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
 
 static void AnimGreenStar(struct Sprite *sprite)
 {
-    s16 xOffset;
+    s32 xOffset;
     u8 spriteId1;
     u8 spriteId2;
 
@@ -2722,7 +2722,7 @@ static void AnimGreenStar(struct Sprite *sprite)
 
 static void AnimGreenStar_Step1(struct Sprite *sprite)
 {
-    s16 delta = sprite->data[3] + sprite->data[2];
+    s32 delta = sprite->data[3] + sprite->data[2];
     sprite->y2 -= delta >> 8;
     sprite->data[3] += sprite->data[2];
     sprite->data[3] &= 0xFF;
@@ -2760,7 +2760,7 @@ static void AnimGreenStar_Callback(struct Sprite *sprite)
 {
     if (!sprite->invisible)
     {
-        s16 delta = sprite->data[3] + sprite->data[2];
+        s32 delta = sprite->data[3] + sprite->data[2];
         sprite->y2 -= delta >> 8;
         sprite->data[3] += sprite->data[2];
         sprite->data[3] &= 0xFF;
@@ -3089,9 +3089,9 @@ static void AnimTask_FlailMovement_Step(u8 taskId)
         task->data[2] += 0x200;
         if (task->data[2] >= task->data[14])
         {
-            s16 diff = task->data[14] - task->data[2];
-            s16 div = diff / (task->data[14] * 2);
-            s16 mod = diff % (task->data[14] * 2);
+            s32 diff = task->data[14] - task->data[2];
+            s32 div = diff / (task->data[14] * 2);
+            s32 mod = diff % (task->data[14] * 2);
 
             if ((div & 1) == 0)
             {
@@ -3108,9 +3108,9 @@ static void AnimTask_FlailMovement_Step(u8 taskId)
         task->data[2] -= 0x200;
         if (task->data[2] <= -task->data[14])
         {
-            s16 diff = task->data[14] - task->data[2];
-            s16 div = diff / (task->data[14] * 2);
-            s16 mod = diff % (task->data[14] * 2);
+            s32 diff = task->data[14] - task->data[2];
+            s32 div = diff / (task->data[14] * 2);
+            s32 mod = diff % (task->data[14] * 2);
 
             if ((1 & div) == 0)
             {
@@ -3404,10 +3404,10 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     bool32 isBackPic, isShiny;
     u32 personality;
     u32 species;
-    s16 xOffset;
+    s32 xOffset;
     u32 priority;
     u8 spriteId;
-    s16 coord1, coord2;
+    s32 coord1, coord2;
 
     GetAnimBattlerSpriteId(ANIM_ATTACKER);
     if (IsContest())
@@ -3488,7 +3488,7 @@ void AnimTask_AcidArmor(u8 taskId)
 {
     u8 battler;
     u32 bgX, bgY;
-    s16 y, i;
+    s32 y, i;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
 
@@ -3549,14 +3549,14 @@ void AnimTask_AcidArmor(u8 taskId)
 static void AnimTask_AcidArmor_Step(u8 taskId)
 {
     struct Task *task;
-    s16 var1;
-    s16 var2;
-    s16 bgX, bgY;
-    s16 offset;
-    s16 var0;
-    s16 i;
-    s16 sineIndex;
-    s16 var3;
+    s32 var1;
+    s32 var2;
+    s32 bgX, bgY;
+    s32 offset;
+    s32 var0;
+    s32 i;
+    s32 sineIndex;
+    s32 var3;
 
     task = &gTasks[taskId];
     if (GetBattlerSpriteBGPriorityRank(task->data[5]) == 1)
@@ -3700,7 +3700,7 @@ static void AnimTask_DeepInhale_Step(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-static void InitYawnCloudPosition(struct Sprite *sprite, s16 startX, s16 startY, s16 destX, s16 destY, u32 duration)
+static void InitYawnCloudPosition(struct Sprite *sprite, s32 startX, s32 startY, s32 destX, s32 destY, u32 duration)
 {
     sprite->x = startX;
     sprite->y = startY;
@@ -3722,8 +3722,8 @@ static void UpdateYawnCloudPosition(struct Sprite *sprite)
 // arg 0: which affine anim
 static void AnimYawnCloud(struct Sprite *sprite)
 {
-    s16 destX = sprite->x;
-    s16 destY = sprite->y;
+    s32 destX = sprite->x;
+    s32 destY = sprite->y;
 
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[0]);
@@ -3997,8 +3997,8 @@ static void CreateSweatDroplets(u8 taskId, bool32 lowerDroplets)
     u8 i;
     s32 xOffset, yOffset;
     struct Task *task;
-    s16 xCoords[4];
-    s16 yCoords[2];
+    s32 xCoords[4];
+    s32 yCoords[2];
 
     task = &gTasks[taskId];
     if (!lowerDroplets)
@@ -4208,7 +4208,7 @@ void AnimTask_GlareEyeDots(u8 taskId)
 static void AnimTask_GlareEyeDots_Step(u8 taskId)
 {
     u8 i;
-    s16 x, y;
+    s32 x, y;
     struct Task *task = &gTasks[taskId];
 
     switch (task->tState)
@@ -4276,7 +4276,7 @@ static void AnimTask_GlareEyeDots_Step(u8 taskId)
     }
 }
 
-static void GetGlareEyeDotCoords(s16 startX, s16 startY, s16 endX, s16 endY, u8 pairMax, u8 pairNum, s16 *x, s16 *y)
+static void GetGlareEyeDotCoords(s32 startX, s32 startY, s32 endX, s32 endY, u8 pairMax, u8 pairNum, s32 *x, s32 *y)
 {
     int x2;
     int y2;
@@ -4948,8 +4948,8 @@ static void AnimMeteorMashStar_Step(struct Sprite *sprite)
 // arg 4: duration
 static void AnimMeteorMashStar(struct Sprite *sprite)
 {
-    s16 UNUSED y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-    s16 UNUSED x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    s32 UNUSED y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    s32 UNUSED x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER || IsContest())
     {
@@ -5068,7 +5068,7 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
 // No args.
 void AnimBlockX(struct Sprite *sprite)
 {
-    s16 y;
+    s32 y;
 
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
@@ -5145,7 +5145,7 @@ static void AnimBlockX_Step(struct Sprite *sprite)
 // No args.
 void AnimTask_OdorSleuthMovement(u8 taskId)
 {
-    s16 spriteId1, spriteId2;
+    s32 spriteId1, spriteId2;
 
     if (IsContest())
     {
@@ -5272,7 +5272,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     u32 species;
     u8 subpriority;
     bool32 isBackPic, isShiny;
-    s16 x;
+    s32 x;
 
     switch (gTasks[taskId].data[0])
     {
@@ -5450,7 +5450,7 @@ static void AnimUnusedItemBagSteal(struct Sprite *sprite)
 // No args.
 void AnimTask_SnatchPartnerMove(u8 taskId)
 {
-    s16 attackerX, targetX;
+    s32 attackerX, targetX;
     u8 spriteId;
 
     switch (gTasks[taskId].data[15])

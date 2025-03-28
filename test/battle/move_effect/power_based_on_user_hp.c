@@ -6,9 +6,9 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_ERUPTION) == EFFECT_POWER_BASED_ON_USER_HP);
 }
 
-SINGLE_BATTLE_TEST("Eruption's damage is affected by the user's current HP", s16 damage)
+SINGLE_BATTLE_TEST("Eruption's damage is affected by the user's current HP", s32 damage)
 {
-    s16 hp, maxHp = 256;
+    s32 hp, maxHp = 256;
 
     PARAMETRIZE { hp = maxHp; }
     PARAMETRIZE { hp = maxHp / 2; }

@@ -20,7 +20,7 @@
 #define GATE_ROT_NONE 255
 
 static void SpriteCallback_RotatingGate(struct Sprite *sprite);
-static u32 RotatingGate_CreateGate(u32 gateId, s16 deltaX, s16 deltaY);
+static u32 RotatingGate_CreateGate(u32 gateId, s32 deltaX, s32 deltaY);
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite);
 
 enum
@@ -182,8 +182,8 @@ enum
 
 struct RotatingGatePuzzle
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 shape;
     u32 orientation;
 };
@@ -701,21 +701,21 @@ static void RotatingGate_LoadPuzzleConfig(void)
         sRotatingGate_GateSpriteIds[i] = MAX_SPRITES;
 }
 
-static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
+static void RotatingGate_CreateGatesWithinViewport(s32 deltaX, s32 deltaY)
 {
     u32 i;
 
     // Calculate the bounding box of the camera
     // Same as RotatingGate_DestroyGatesOutsideViewport
-    s16 x = gSaveBlock1Ptr->pos.x - 2;
-    s16 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
-    s16 y = gSaveBlock1Ptr->pos.y - 2;
-    s16 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
+    s32 x = gSaveBlock1Ptr->pos.x - 2;
+    s32 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
+    s32 y = gSaveBlock1Ptr->pos.y - 2;
+    s32 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
 
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {
-        s16 x3 = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
-        s16 y3 = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
+        s32 x3 = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
+        s32 y3 = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
 
         if (y <= y3 && y2 >= y3 && x <= x3 && x2 >= x3 &&
             sRotatingGate_GateSpriteIds[i] == MAX_SPRITES)
@@ -725,12 +725,12 @@ static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
     }
 }
 
-static u32 RotatingGate_CreateGate(u32 gateId, s16 deltaX, s16 deltaY)
+static u32 RotatingGate_CreateGate(u32 gateId, s32 deltaX, s32 deltaY)
 {
     struct Sprite *sprite;
     struct SpriteTemplate template;
     u32 spriteId;
-    s16 x, y;
+    s32 x, y;
 
     const struct RotatingGatePuzzle *gate = &sRotatingGate_PuzzleConfig[gateId];
 
@@ -795,7 +795,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
 {
     u32 x, y;
-    s16 x2, y2;
+    s32 x2, y2;
 
     sprite->invisible = FALSE;
     x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
@@ -804,12 +804,12 @@ static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
     x2 = x + 64; // Dimensions of the rotating gate
     y2 = y + 64;
 
-    if ((s16)x > DISPLAY_WIDTH + 16 - 1 || x2 < -16)
+    if ((s32)x > DISPLAY_WIDTH + 16 - 1 || x2 < -16)
     {
         sprite->invisible = TRUE;
     }
 
-    if ((s16)y > DISPLAY_HEIGHT + 16 - 1 || y2 < -16)
+    if ((s32)y > DISPLAY_HEIGHT + 16 - 1 || y2 < -16)
     {
         sprite->invisible = TRUE;
     }
@@ -825,15 +825,15 @@ static void RotatingGate_DestroyGatesOutsideViewport(void)
     s32 i;
 
     // Same as RotatingGate_CreateGatesWithinViewport
-    s16 x = gSaveBlock1Ptr->pos.x - 2;
-    s16 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
-    s16 y = gSaveBlock1Ptr->pos.y - 2;
-    s16 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
+    s32 x = gSaveBlock1Ptr->pos.x - 2;
+    s32 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
+    s32 y = gSaveBlock1Ptr->pos.y - 2;
+    s32 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
 
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {
-        s16 xGate = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
-        s16 yGate = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
+        s32 xGate = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
+        s32 yGate = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
 
         if (sRotatingGate_GateSpriteIds[i] == MAX_SPRITES)
             continue;
@@ -852,7 +852,7 @@ static s32 RotatingGate_CanRotate(u32 gateId, s32 rotationDirection)
 {
     const struct Coords8 *armPos;
     u32 orientation;
-    s16 x, y;
+    s32 x, y;
     u32 shape;
     s32 i, j;
 
@@ -913,7 +913,7 @@ static void RotatingGate_TriggerRotationAnimation(u32 gateId, s32 rotationDirect
     }
 }
 
-static u32 RotatingGate_GetRotationInfo(u32 direction, s16 x, s16 y)
+static u32 RotatingGate_GetRotationInfo(u32 direction, s32 x, s32 y)
 {
     const u32 *ptr;
 
@@ -940,7 +940,7 @@ void RotatingGate_InitPuzzle(void)
     }
 }
 
-void RotatingGatePuzzleCameraUpdate(s16 deltaX, s16 deltaY)
+void RotatingGatePuzzleCameraUpdate(s32 deltaX, s32 deltaY)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {
@@ -959,7 +959,7 @@ void RotatingGate_InitPuzzleAndGraphics(void)
     }
 }
 
-bool32 CheckForRotatingGatePuzzleCollision(u32 direction, s16 x, s16 y)
+bool32 CheckForRotatingGatePuzzleCollision(u32 direction, s32 x, s32 y)
 {
     s32 i;
 
@@ -967,13 +967,13 @@ bool32 CheckForRotatingGatePuzzleCollision(u32 direction, s16 x, s16 y)
         return FALSE;
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {
-        s16 gateX = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
-        s16 gateY = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
+        s32 gateX = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
+        s32 gateY = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
 
         if (gateX - 2 <= x && x <= gateX + 1 && gateY - 2 <= y && y <= gateY + 1)
         {
-            s16 centerX = x - gateX + 2;
-            s16 centerY = y - gateY + 2;
+            s32 centerX = x - gateX + 2;
+            s32 centerY = y - gateY + 2;
             u32 rotationInfo = RotatingGate_GetRotationInfo(direction, centerX, centerY);
 
             if (rotationInfo != GATE_ROT_NONE)
@@ -997,7 +997,7 @@ bool32 CheckForRotatingGatePuzzleCollision(u32 direction, s16 x, s16 y)
     return FALSE;
 }
 
-bool32 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u32 direction, s16 x, s16 y)
+bool32 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u32 direction, s32 x, s32 y)
 {
     s32 i;
 
@@ -1005,13 +1005,13 @@ bool32 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u32 direction, s16 x,
         return FALSE;
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {
-        s16 gateX = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
-        s16 gateY = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
+        s32 gateX = sRotatingGate_PuzzleConfig[i].x + MAP_OFFSET;
+        s32 gateY = sRotatingGate_PuzzleConfig[i].y + MAP_OFFSET;
 
         if (gateX - 2 <= x && x <= gateX + 1 && gateY - 2 <= y && y <= gateY + 1)
         {
-            s16 centerX = x - gateX + 2;
-            s16 centerY = y - gateY + 2;
+            s32 centerX = x - gateX + 2;
+            s32 centerY = y - gateY + 2;
             u32 rotationInfo = RotatingGate_GetRotationInfo(direction, centerX, centerY);
 
             if (rotationInfo != GATE_ROT_NONE)

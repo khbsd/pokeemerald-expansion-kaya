@@ -2286,10 +2286,10 @@ void SetBerryTreesSeen(void)
 {
     u32 cam_left;
     u32 cam_top;
-    s16 left;
-    s16 top;
-    s16 right;
-    s16 bottom;
+    s32 left;
+    s32 top;
+    s32 right;
+    s32 bottom;
     int i;
 
     GetCameraCoords(&cam_left, &cam_top);
@@ -2301,8 +2301,8 @@ void SetBerryTreesSeen(void)
     {
         if (gObjectEvents[i].active && gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            s16 x = gObjectEvents[i].currentCoords.x;
-            s16 y = gObjectEvents[i].currentCoords.y;
+            s32 x = gObjectEvents[i].currentCoords.x;
+            s32 y = gObjectEvents[i].currentCoords.y;
             if (left <= x && x <= right && top <= y && y <= bottom)
                 AllowBerryTreeGrowth(gObjectEvents[i].trainerRange_berryTreeId);
         }
@@ -2366,7 +2366,7 @@ static u32 GetMutationOutcome(u32 berry1, u32 berry2)
 static u32 TryForMutation(u32 berryTreeId, u32 berry)
 {
     u32 i, j, mulch;
-    s16 x1, x2, y1, y2;
+    s32 x1, x2, y1, y2;
 
     // Get location of current tree
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)

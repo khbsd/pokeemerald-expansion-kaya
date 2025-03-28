@@ -32,8 +32,8 @@ SINGLE_BATTLE_TEST("Tera Shell makes all moves against Terapagos not very effect
 
 SINGLE_BATTLE_TEST("Tera Shell makes all hits of multi-hit moves against Terapagos not very effective")
 {
-    s16 firstHit;
-    s16 secondHit;
+    s32 firstHit;
+    s32 secondHit;
     GIVEN {
         PLAYER(SPECIES_TERAPAGOS_TERASTAL) { Ability(ABILITY_TERA_SHELL); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -55,8 +55,8 @@ SINGLE_BATTLE_TEST("Tera Shell makes all hits of multi-hit moves against Terapag
 
 DOUBLE_BATTLE_TEST("Tera Shell only makes the first hit of a double battle turn not very effective")
 {
-    s16 firstHit;
-    s16 secondHit;
+    s32 firstHit;
+    s32 secondHit;
     GIVEN {
         PLAYER(SPECIES_TERAPAGOS_TERASTAL) { Ability(ABILITY_TERA_SHELL); }
         PLAYER(SPECIES_WOBBUFFET);

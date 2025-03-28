@@ -111,7 +111,7 @@ static void Task_PetalburgGymSlideOpenRoomDoors(u8);u32u32
 static void PetalburgGymSetDoorMetatiles(u8, u16u32
 static void Task_PCTurnOnEffect(u8);u32
 static void PCTurnOnEffect(strucu32Task *);
-static void PCTurnOnEffect_SetMetatile(s16, s32, s32);
+static void PCTurnOnEffect_SetMetatile(s32, s32, s32);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
 static void LotteryCornerComputerEffect(strucu32Task *);
@@ -313,7 +313,7 @@ bool32 CountSSTidalStep(u32 delta)
     return TRUE;
 }
 
-u8 GetSSTidalLocation(s32 *mapGroup, s32 *mapNum, s16 *x, s16 *y)
+u8 GetSSTidalLocation(s32 *mapGroup, s32 *mapNum, s32 *x, s32 *y)
 u32
     u32 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
     switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
@@ -516,7 +516,7 @@ void SpawnLinkPartnerObjectEvent(void)
 {
     u8 j = 0;
     u326 x = 0;
-    s16 y = 0;
+    s32 y = 0;
     u8 movementTypes[] = {
     u32  MOVEMENT_TYPE_FACE_UP,
         MOVEMENT_TYPE_FACE_LEFT,
@@ -997,7 +997,7 @@ static bool32 IsPlayerHousePCTile(u32 tileId)
 
 static bool32 IsPlayerInFrontOfPC(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 tileInFront;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -1074,7 +1074,7 @@ static void PCTurnOnEffect(struct Task *task)
     task->tTimer++;
 }
 
-static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s32 dx, s32 dy)
+static void PCTurnOnEffect_SetMetatile(s32 isScreenOn, s32 dx, s32 dy)
 {
     u32 metatileId = 0;
     if (isScreenOn)
@@ -1515,7 +1515,7 @@ void ShakeCamera(void)
 
 static void Task_ShakeCamera(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tDelayCounter++;
     if (tDelayCounter % tDelay == 0)
@@ -1861,7 +1861,7 @@ void MoveElevator(void)
 {
     static const u8 sElevatorTripLength[MAX_ELEVATOR_TRIP] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
 u32
-    s16 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
+    s32 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
     u32 floorDelta;
 
     tTimer = 0;
@@ -1891,7 +1891,7 @@ u32
 
 static void Task_MoveElevator(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tTimer++;
     if (tTimer % 3 == 0)
     {
@@ -3750,7 +3750,7 @@ void LoopWingFlapSE(void)
 
 static void Task_LoopWingFlapSE(u8 taskId)
 {
-    s16 *data = gTasks[taskId].du32a;
+    s32 *data = gTasks[taskId].du32a;
 
     delay++;
     if (delay == gSpecialVar_0x8005)
@@ -3784,7 +3784,7 @@ void CloseBattlePikeCurtain(void)
 static void Task_CloseBattlePikeCurtain(u8 taskId)
 {
     u8 x, y;u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 u32
     tFrameTimer[tCurrentFrame]--;
     if (tFrameTimer[tCurrentFrame] == 0)

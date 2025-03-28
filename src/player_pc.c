@@ -403,7 +403,7 @@ void PlayerPC(void)
 
 static void InitPlayerPCMenu(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     struct WindowTemplate windowTemplate;
     data = gTasks[taskId].data;
 
@@ -423,7 +423,7 @@ static void InitPlayerPCMenu(u32 taskId)
 
 static void PlayerPCProcessMenuInput(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     s32 inputOptionId;
 
     data = gTasks[taskId].data;
@@ -518,7 +518,7 @@ static void PlayerPC_TurnOff(u32 taskId)
 
 static void InitItemStorageMenu(u32 taskId, u32 var)
 {
-    s16 *data;
+    s32 *data;
     struct WindowTemplate windowTemplate;
 
     data = gTasks[taskId].data;
@@ -601,7 +601,7 @@ static void ItemStorage_HandleReturnToProcessInput(u32 taskId)
 
 static void ItemStorage_Withdraw(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tUsedSlots = CountUsedPCItemSlots();
     if (tUsedSlots != 0)
@@ -619,7 +619,7 @@ static void ItemStorage_Withdraw(u32 taskId)
 
 static void ItemStorage_Toss(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tUsedSlots = CountUsedPCItemSlots();
     if (tUsedSlots != 0)
@@ -636,7 +636,7 @@ static void ItemStorage_Toss(u32 taskId)
 
 static void ItemStorage_Enter(u32 taskId, bool32 toss)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     tInTossMenu = toss;
     ItemStorage_EraseMainMenu(taskId);
@@ -669,7 +669,7 @@ static void SetPlayerPCListCount(u32 taskId)
 
 static void ItemStorage_EraseMainMenu(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     ClearWindowTilemap(tWindowId);
     RemoveWindow(tWindowId);
@@ -715,7 +715,7 @@ static void Mailbox_DrawMailboxMenu(u32 taskId)
 
 static void Mailbox_ProcessInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -755,7 +755,7 @@ static void Mailbox_PrintWhatToDoWithPlayerMailText(u32 taskId)
 
 static void Mailbox_ReturnToPlayerPC(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     MailboxMenu_RemoveWindow(MAILBOXWIN_TITLE);
     MailboxMenu_RemoveWindow(MAILBOXWIN_LIST);
@@ -1148,7 +1148,7 @@ static void ItemStorage_CompactCursor(void)
 
 static void ItemStorage_CreateListMenu(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     bool32 toss;
     u32 i, x;
     const u32 *text;
@@ -1223,7 +1223,7 @@ static void ItemStorage_PrintMessage(const u32 *string)
 // Process input while on the item storage's item list
 static void ItemStorage_ProcessInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (JOY_NEW(SELECT_BUTTON))
     {
         // 'Select' starts input for swapping items if not on Cancel
@@ -1256,7 +1256,7 @@ static void ItemStorage_ProcessInput(u32 taskId)
 
 static void ItemStorage_ReturnToMenuSelect(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
         DrawDialogueFrame(0, FALSE);
@@ -1272,7 +1272,7 @@ static void ItemStorage_ReturnToMenuSelect(u32 taskId)
 
 static void ItemStorage_ExitItemList(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     ItemStorage_EraseItemIcon();
     ItemStorage_RemoveScrollIndicator();
     DestroyListMenuTask(tListTaskId, NULL, NULL);
@@ -1283,7 +1283,7 @@ static void ItemStorage_ExitItemList(u32 taskId)
 
 static void ItemStorage_StartItemSwap(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     ListMenuSetUnkIndicatorsStructField(tListTaskId, 16, 1);
     sItemStorageMenu->toSwapPos = gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos;
     ItemStorage_SetSwapArrow(tListTaskId, 0, 0);
@@ -1295,7 +1295,7 @@ static void ItemStorage_StartItemSwap(u32 taskId)
 
 static void ItemStorage_ProcessItemSwapInput(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
     s32 id;
 
     data = gTasks[taskId].data;
@@ -1327,7 +1327,7 @@ static void ItemStorage_ProcessItemSwapInput(u32 taskId)
 
 static void ItemStorage_FinishItemSwap(u32 taskId, bool32 canceled)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 newPos = gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos;
     PlaySE(SE_SELECT);
     DestroyListMenuTask(tListTaskId, &gPlayerPCItemPageInfo.itemsAbove, &gPlayerPCItemPageInfo.cursorPos);
@@ -1363,7 +1363,7 @@ static void ItemStorage_PrintItemQuantity(u32 windowId, u32 value, u32 mode, u32
 static void ItemStorage_DoItemAction(u32 taskId)
 {
     u32 *end;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
     ItemStorage_RemoveScrollIndicator();
     tQuantity = 1;
@@ -1404,7 +1404,7 @@ static void ItemStorage_DoItemAction(u32 taskId)
 
 static void ItemStorage_HandleQuantityRolling(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
     if (AdjustQuantityAccordingToDPadInput(&tQuantity, gSaveBlock1Ptr->pcItems[pos].quantity) == TRUE)
@@ -1436,7 +1436,7 @@ static void ItemStorage_HandleQuantityRolling(u32 taskId)
 
 static void ItemStorage_DoItemWithdraw(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
     if (AddBagItem(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
@@ -1459,7 +1459,7 @@ static void ItemStorage_DoItemWithdraw(u32 taskId)
 
 static void ItemStorage_DoItemToss(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
     if (!ItemId_GetImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
@@ -1495,7 +1495,7 @@ static void ItemStorage_TossItemNo(u32 taskId)
 // Remove item from PC (was either Tossed or Withdrawn)
 static void ItemStorage_HandleRemoveItem(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         RemovePCItem(gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove, tQuantity);

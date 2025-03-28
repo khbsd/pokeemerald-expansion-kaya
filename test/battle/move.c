@@ -134,7 +134,7 @@ DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie 
     }
 }
 
-SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damage", s16 damage)
+SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damage", s32 damage)
 {
     bool32 criticalHit;
     u32 genConfig;
@@ -155,7 +155,7 @@ SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damag
     }
 }
 
-SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s16 damage)
+SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -176,7 +176,7 @@ SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s16 damag
     }
 }
 
-SINGLE_BATTLE_TEST("Critical hits ignore negative stat stages", s16 damage)
+SINGLE_BATTLE_TEST("Critical hits ignore negative stat stages", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }

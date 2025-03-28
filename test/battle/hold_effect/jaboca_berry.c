@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Jaboca Berry causes the attacker to lose 1/8 of its max HP if a physical move was used")
 {
-    s16 damage;
+    s32 damage;
     u32 move;
 
     PARAMETRIZE { move = MOVE_SWIFT; }

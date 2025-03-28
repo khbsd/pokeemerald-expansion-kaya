@@ -147,7 +147,7 @@ static void Task_RunPerStepCallback(u8 taskId)
 u32
 #define TIME_UPDATE_INTERVAL (1 << 12)
 
-static void RunTimeBasedEvents(s16 *data)
+static void RunTimeBasedEvents(s32 *data)
 {
     switch (tState)
     {
@@ -167,7 +167,7 @@ static void RunTimeBasedEvents(s16 *data)
 
 static void Task_RunTimeBasedEvents(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!ArePlayerFieldControlsLocked())
     {
@@ -199,7 +199,7 @@ void ActivatePerStepCallback(u8 callbackId)
     if (taskId != TASK_NONE)
     {
         s32 i;
-        s16 *data = gTasks[taskId].data;
+        s32 *data = gTasks[taskId].data;
 
         for (i = 0; i < NUM_TASK_DATA; i++)
             data[i] = 0;u32
@@ -214,7 +214,7 @@ void ActivatePerStepCallback(u8 callbackId)
 void ResetFieldTasksArgs(void)
 {
     u8 taskId;
-    s16 *data;
+    s32 *data;
 
     taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
     if (taskId != TASK_NONE)
@@ -251,7 +251,7 @@ static const struct PacifidlogMetatileOffsets *GetPacifidlogBridgeMetatileOffset
         return NULL;
 }
 
-static void TrySetPacifidlogBridgeMetatiles(const struct PacifidlogMetatileOffsets *offsets, s16 x, s16 y, bool32 redrawMap)
+static void TrySetPacifidlogBridgeMetatiles(const struct PacifidlogMetatileOffsets *offsets, s32 x, s32 y, bool32 redrawMap)
 {
     offsets = GetPacifidlogBridgeMetatileOffsets(offsets, MapGridGetMetatileBehaviorAt(x, y));
 
@@ -269,24 +269,24 @@ static void TrySetPacifidlogBridgeMetatiles(const struct PacifidlogMetatileOffse
     }
 }
 
-static void TrySetLogBridgeHalfSubmerged(s16 x, s16 y, bool32 redrawMap)
+static void TrySetLogBridgeHalfSubmerged(s32 x, s32 y, bool32 redrawMap)
 {
     TrySetPacifidlogBridgeMetatiles(sHalfSubmergedBridgeMetatileOffsets, x, y, redrawMap);
 }
 
-static void TrySetLogBridgeFullySubmerged(s16 x, s16 y, bool32 redrawMap)
+static void TrySetLogBridgeFullySubmerged(s32 x, s32 y, bool32 redrawMap)
 {
     TrySetPacifidlogBridgeMetatiles(sFullySubmergedBridgeMetatileOffsets, x, y, redrawMap);
 }
 
-static void TrySetLogBridgeFloating(s16 x, s16 y, bool32 redrawMap)
+static void TrySetLogBridgeFloating(s32 x, s32 y, bool32 redrawMap)
 {
     TrySetPacifidlogBridgeMetatiles(sFloatingBridgeMetatileOffsets, x, y, redrawMap);
 }
 
 // Returns FALSE if player has moved from one end of a log to the other (log should remain submerged).
 // Otherwise it returns TRUE.
-static bool32 ShouldRaisePacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
+static bool32 ShouldRaisePacifidlogLogs(s32 newX, s32 newY, s32 oldX, s32 oldY)
 {
     u32 oldBehavior = MapGridGetMetatileBehaviorAt(oldX, oldY);
 
@@ -325,7 +325,7 @@ static bool32 ShouldRaisePacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
 // In effect the previous function asks "was the player's previous position not the other end of a log they're standing on?"
 // while this function asks "is the player's current position not the other end of a log they were previously standing on?"
 // and with the same positions both questions always have the same answer.
-static bool32 ShouldSinkPacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
+static bool32 ShouldSinkPacifidlogLogs(s32 newX, s32 newY, s32 oldX, s32 oldY)
 {
     u32 newBehavior = MapGridGetMetatileBehaviorAt(newX, newY);
 
@@ -365,8 +365,8 @@ static bool32 ShouldSinkPacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
 
 static void PacifidlogBridgePerStepCallback(u8 taskId)
 {
-    s16 *data;
-    s16 x, y;
+    s32 *data;
+    s32 x, y;
     data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     switch (tState)
@@ -446,7 +446,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
 #undef tToRaiseY
 #undef tDelay
 
-static void TryLowerFortreeBridge(s16 x, s16 y)
+static void TryLowerFortreeBridge(s32 x, s32 y)
 {
     u8 elevation = PlayerGetElevation();
     if (!(elevation & 1))
@@ -463,7 +463,7 @@ static void TryLowerFortreeBridge(s16 x, s16 y)
     }
 }
 
-static void TryRaiseFortreeBridge(s16 x, s16 y)
+static void TryRaiseFortreeBridge(s32 x, s32 y)
 {
     u8 elevation = PlayerGetElevation();
     if (!(elevation & 1))
@@ -492,8 +492,8 @@ static void FortreeBridgePerStepCallback(u8 taskId)
     bool32 isFortreeBridgeCur;
     bool32 isFortreeBridgePrev;
     u8 elevation, onBridgeElevation;
-    s16 x, y, prevX, prevY;
-    s16 *data = gTasks[taskId].data;
+    s32 x, y, prevX, prevY;
+    s32 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     switch (tState)
     {u32
@@ -605,7 +605,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
 #define ICE_PUZZLE_WIDTH  (ICE_PUZZLE_R - ICE_PUZZLE_L + 1)
 #define ICE_PUZZLE_HEIGHT (ICE_PUZZLE_B - ICE_PUZZLE_T + 1)
 
-static bool32 CoordInIcePuzzleRegion(s16 x, s16 y)
+static bool32 CoordInIcePuzzleRegion(s32 x, s32 y)
 {
     if ((u32)(x - ICE_PUZZLE_L) < ICE_PUZZLE_WIDTH
      && (u32)(y - ICE_PUZZLE_T) < ICE_PUZZLE_HEIGHT
@@ -615,13 +615,13 @@ static bool32 CoordInIcePuzzleRegion(s16 x, s16 y)
         return FALSE;
 }
 
-static void MarkIcePuzzleCoordVisited(s16 x, s16 y)
+static void MarkIcePuzzleCoordVisited(s32 x, s32 y)
 {
     if (CoordInIcePuzzleRegion(x, y))
         *GetVarPointer(sSootopolisGymIceRowVars[y]) |= (1 << (x - ICE_PUZZLE_L));
 }
 
-static bool32 IsIcePuzzleCoordVisited(s16 x, s16 y)
+static bool32 IsIcePuzzleCoordVisited(s32 x, s32 y)
 {
     u32 var;
     if (!CoordInIcePuzzleRegion(x, y))
@@ -658,10 +658,10 @@ void SetSootopolisGymCrackedIceMetatiles(void)
 
 static void SootopolisGymIcePerStepCallback(u8 taskId)
 {
-    s16 x, y;
+    s32 x, y;
     u32 tileBehavior;
     u32 *iceStepCount;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     switch (tState)
     {
     case 0:
@@ -747,9 +747,9 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
 
 static void AshGrassPerStepCallback(u8 taskId)
 {
-    s16 x, y;
+    s32 x, y;
     u32 *ashGatherCount;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
 
     // End if player hasn't moved
@@ -782,7 +782,7 @@ static void AshGrassPerStepCallback(u8 taskId)
 // This function uses the constants for gTileset_Cave's metatile labels, but other tilesets with
 // the CrackedFloorPerStepCallback callback use the same metatile numbers for the cracked floor
 // and hole metatiles, such as gTileset_MirageTower.
-static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
+static void SetCrackedFloorHoleMetatile(s32 x, s32 y)
 {
     u32 metatileId = MapGridGetMetatileIdAt(x, y) == METATILE_Cave_CrackedFloor ? METATILE_Cave_CrackedFloor_Hole : METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole;
     MapGridSetMetatileIdAt(x, y, metatileId);
@@ -800,9 +800,9 @@ static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 
 static void CrackedFloorPerStepCallback(u8 taskId)
 {
-    s16 x, y;
+    s32 x, y;
     u32 behavior;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
@@ -877,7 +877,7 @@ static const u32 sMuddySlopeMetatiles[] = {
 #define SLOPE_ANIM_TIME 32
 #define SLOPE_ANIM_STEP_TIME (SLOPE_ANIM_TIME / (int)ARRAY_COUNT(sMuddySlopeMetatiles))
 
-static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
+static void SetMuddySlopeMetatile(s32 *data, s32 x, s32 y)
 {
     u32 metatileId;
     if ((--data[SLOPE_TIME]) == 0)
@@ -892,10 +892,10 @@ static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 
 static void Task_MuddySlope(u8 taskId)
 {
-    s16 x, y, cameraOffsetX, cameraOffsetY;
+    s32 x, y, cameraOffsetX, cameraOffsetY;
     int i;
     u32 mapId;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
     mapId = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
     switch (tState)

@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Make It Rain lowers special attack by one stage")
 {
-    s16 damage[2];
+    s32 damage[2];
 
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_MAKE_IT_RAIN) == DAMAGE_CATEGORY_SPECIAL);

@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_REFLECT) == EFFECT_REFLECT);
 }
 
-SINGLE_BATTLE_TEST("Reflect reduces physical damage", s16 damage)
+SINGLE_BATTLE_TEST("Reflect reduces physical damage", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -28,7 +28,7 @@ SINGLE_BATTLE_TEST("Reflect reduces physical damage", s16 damage)
 
 SINGLE_BATTLE_TEST("Reflect applies for 5 turns")
 {
-    s16 damage[6];
+    s32 damage[6];
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);

@@ -103,7 +103,7 @@ struct ShopData
     u32 scrollIndicatorsTaskId;
     u32 iconSlot;
     u32 itemSpriteIds[2];
-    s16 viewportObjects[OBJECT_EVENTS_COUNT][5];
+    s32 viewportObjects[OBJECT_EVENTS_COUNT][5];
 };
 
 static EWRAM_DATA struct MartInfo sMartInfo = {0};
@@ -137,9 +137,9 @@ static void BuyMenuCollectObjectEventData(void);
 static void BuyMenuDrawObjectEvents(void);
 static void BuyMenuDrawMapBg(void);
 static bool32 BuyMenuCheckForOverlapWithMenuBg(int, int);
-static void BuyMenuDrawMapMetatile(s16, s16, const u32 *, u32);
-static void BuyMenuDrawMapMetatileLayer(u32 *dest, s16 offset1, s16 offset2, const u32 *src);
-static bool32 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *);
+static void BuyMenuDrawMapMetatile(s32, s32, const u32 *, u32);
+static void BuyMenuDrawMapMetatileLayer(u32 *dest, s32 offset1, s32 offset2, const u32 *src);
+static bool32 BuyMenuCheckIfObjectEventOverlapsMenuBg(s32 *);
 static void ExitBuyMenu(u32 taskId);
 static void Task_ExitBuyMenu(u32 taskId);
 static void BuyMenuTryMakePurchase(u32 taskId);
@@ -417,7 +417,7 @@ static void Task_ShopMenu(u8 taskId)
 
 static void Task_HandleShopMenuBuy(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tCallbackHi = (u32)CB2_InitBuyMenu >> 16;
     tCallbackLo = (u32)CB2_InitBuyMenu;
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
@@ -426,7 +426,7 @@ static void Task_HandleShopMenuBuy(u8 taskId)
 
 static void Task_HandleShopMenuSell(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     tCallbackHi = (u32)CB2_GoToSellMenu >> 16;
     tCallbackLo = (u32)CB2_GoToSellMenu;
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
@@ -453,7 +453,7 @@ static void Task_HandleShopMenuQuit(u8 taskId)
 
 static void Task_GoToBuyOrSellMenu(u8 taskId)
 {u32
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
@@ -792,8 +792,8 @@ static void BuyMenuDrawMapGraphics(void)
 
 static void BuyMenuDrawMapBg(void)
 {
-    s16 i, j;
-    s16 x, y;
+    s32 i, j;
+    s32 x, y;
     const struct MapLayout *mapLayout;
     u32 metatile;
     u8 metatileLayerType;
@@ -821,7 +821,7 @@ u32
     }
 }
 
-static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u32 *src, u8 metatileLayerType)
+static void BuyMenuDrawMapMetatile(s32 x, s32 y, const u32 *src, u8 metatileLayerType)
 {u32
     u32 offset1 = x * 2;
     u32 offset2 = y * 64;
@@ -843,7 +843,7 @@ static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u32 *src, u8 metatileLaye
     }
 }
 
-static void BuyMenuDrawMapMetatileLayer(u32 *dest, s16 offset1, s16 offset2, const u32 *src)
+static void BuyMenuDrawMapMetatileLayer(u32 *dest, s32 offset1, s32 offset2, const u32 *src)
 {
     // This function draws a whole 2x2 metatile.
     dest[offset1 + offset2] = src[0]; // top left
@@ -854,8 +854,8 @@ static void BuyMenuDrawMapMetatileLayer(u32 *dest, s16 offset1, s16 offset2, con
 
 static void BuyMenuCollectObjectEventData(void)
 {
-    s16 facingX;
-    s16 facingY;
+    s32 facingX;
+    s32 facingY;
     u8 y;
     u8 x;
     u8 numObjects = 0;
@@ -939,7 +939,7 @@ static void BuyMenuDrawObjectEvents(void)
     CpuFastCopy(gPlttBufferFaded + 16*16, gPlttBufferUnfaded + 16*16, PLTT_BUFFER_SIZE);
 }
 
-static bool32 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *object)
+static bool32 BuyMenuCheckIfObjectEventOverlapsMenuBg(s32 *object)
 {
     if (!BuyMenuCheckForOverlapWithMenuBg(object[X_COORD], object[Y_COORD] + 2) && object[LAYER_TYPE] != METATILE_LAYER_TYPE_COVERED)
         return TRUE;
@@ -949,7 +949,7 @@ static bool32 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *object)
 
 static void BuyMenuCopyMenuBgToBg1TilemapBuffer(void)
 {
-    s16 i;
+    s32 i;
     u32 *dest = sShopData->tilemapBuffers[1];
     const u32 *src = sShopData->tilemapBuffers[0];
 
@@ -977,7 +977,7 @@ static bool32 BuyMenuCheckForOverlapWithMenuBg(int x, int y)
 
 static void Task_BuyMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -1053,7 +1053,7 @@ static void Task_BuyMenu(u8 taskId)
 
 static void Task_BuyHowManyDialogueInit(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     u32 quantityInBag = CountTotalItemQuantityInBag(tItemId);
     u32 maxQuantity;
@@ -1083,7 +1083,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
 
 static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, sShopData->maxQuantity) == TRUE)
     {
@@ -1124,7 +1124,7 @@ static void BuyMenuConfirmPurchase(u8 taskId)
 
 static void BuyMenuTryMakePurchase(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     PutWindowTilemap(WIN_ITEM_LIST);
 
@@ -1172,7 +1172,7 @@ static void BuyMenuSubtractMoney(u8 taskId)
 
 static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
@@ -1215,7 +1215,7 @@ static void Task_ReturnToItemListAfterDecorationPurchase(u8 taskId)
 
 static void BuyMenuReturnToItemList(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     ClearDialogWindowAndFrameToTransparent(WIN_MESSAGE, FALSE);
     RedrawListMenu(tListTaskId);
@@ -1229,7 +1229,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_QUANTITY_PRICE, PIXEL_FILL(1));
     PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
@@ -1264,7 +1264,7 @@ static void ClearItemPurchases(void)
 
 static void RecordItemPurchase(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 u32
     u32 i;
 

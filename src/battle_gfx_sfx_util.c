@@ -1442,7 +1442,7 @@ void FreeMonSpritesGfx(void)
 
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon)
 {
-    s16 hp, maxHP;
+    s32 hp, maxHP;
     s32 barLevel;
 
     if (GetMonData(mon, MON_DATA_STATUS) & (STATUS1_ANY | STATUS1_TOXIC_COUNTER))

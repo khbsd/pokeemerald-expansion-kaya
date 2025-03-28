@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Infernal Parade inflicts burn")
     }
 }
 
-SINGLE_BATTLE_TEST("Infernal Parade's power doubles if the target has a status condition", s16 damage)
+SINGLE_BATTLE_TEST("Infernal Parade's power doubles if the target has a status condition", s32 damage)
 {
     u32 status1;
     PARAMETRIZE { status1 = STATUS1_NONE; }

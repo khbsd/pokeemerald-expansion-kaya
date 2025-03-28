@@ -245,7 +245,7 @@ static bool32 ArePlayerDataDifferent(struct RfuPlayerData *, struct RfuPlayerDat
 static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *, u32);
 static void ResetUnionRoomTrade(struct UnionRoomTrade *);
 static void CreateTask_StartActivity(void);
-static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *, s16);
+static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *, s32);
 static u32 CreateTask_SearchForChildOrParent(struct RfuIncomingPlayerList *, struct RfuIncomingPlayerList *, u32);
 static bool32 RegisterTradeMonAndGetIsEgg(u32, struct UnionRoomTrade *);
 static void RegisterTradeMon(u32, struct UnionRoomTrade *);
@@ -1748,7 +1748,7 @@ static void Task_StartActivity(u32 taskId)
 
 static void Task_RunScriptAndFadeToActivity(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *sendBuff = (u32 *)(gBlockSendBuffer);
 
     switch (data[0])
@@ -2485,7 +2485,7 @@ static void Task_RunUnionRoom(u32 taskId)
     s32 input = 0;
     s32 playerGender = MALE;
     struct WirelessLink_URoom *uroom = sWirelessLinkMain.uRoom;
-    s16 *taskData = gTasks[taskId].data;
+    s32 *taskData = gTasks[taskId].data;
 
     switch (uroom->state)
     {
@@ -3533,7 +3533,7 @@ static void Task_ListenForCompatiblePartners(u32 taskId)
     }
 }
 
-static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *data, s16 linkGroup)
+static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *data, s32 linkGroup)
 {
     if (linkGroup == LINK_GROUP_WONDER_CARD)
     {
@@ -4008,7 +4008,7 @@ static void PrintGroupCandidateOnWindow(u32 windowId, u32 x, u32 y, struct RfuPl
 
 static bool32 IsPlayerFacingTradingBoard(void)
 {
-    s16 x, y;
+    s32 x, y;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
     if (x != 2 + MAP_OFFSET)

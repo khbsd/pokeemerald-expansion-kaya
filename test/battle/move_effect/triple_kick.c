@@ -8,9 +8,9 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Triple Kick damage is increased by its base damage for each hit")
 {
-    s16 firstHit;
-    s16 secondHit;
-    s16 thirdHit;
+    s32 firstHit;
+    s32 secondHit;
+    s32 thirdHit;
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

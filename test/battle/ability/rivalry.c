@@ -8,7 +8,7 @@ ASSUMPTIONS
     ASSUME(gSpeciesInfo[SPECIES_PORYGON].genderRatio == MON_GENDERLESS);
 }
 
-SINGLE_BATTLE_TEST("Rivalry increases power by x1.25 towards Pokémon of the same gender", s16 damage)
+SINGLE_BATTLE_TEST("Rivalry increases power by x1.25 towards Pokémon of the same gender", s32 damage)
 {
     u32 species, ability;
     PARAMETRIZE { species = SPECIES_NIDOKING; ability = ABILITY_POISON_POINT; }
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Rivalry increases power by x1.25 towards Pokémon of the sam
     }
 }
 
-SINGLE_BATTLE_TEST("Rivalry decreases power by x0.75 towards Pokémon of different gender", s16 damage)
+SINGLE_BATTLE_TEST("Rivalry decreases power by x0.75 towards Pokémon of different gender", s32 damage)
 {
     u32 species1, species2, ability;
     PARAMETRIZE { species1 = SPECIES_NIDOKING; species2 = SPECIES_NIDOQUEEN; ability = ABILITY_POISON_POINT; }
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Rivalry decreases power by x0.75 towards Pokémon of differe
     }
 }
 
-SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the attacker is genderless", s16 damage)
+SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the attacker is genderless", s32 damage)
 {
     u32 species, ability;
     PARAMETRIZE { species = SPECIES_NIDOKING; ability = ABILITY_POISON_POINT; }
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the attacker is genderless",
 }
 
 
-SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the target is genderless", s16 damage)
+SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the target is genderless", s32 damage)
 {
     u32 species, ability;
     PARAMETRIZE { species = SPECIES_NIDOKING; ability = ABILITY_POISON_POINT; }

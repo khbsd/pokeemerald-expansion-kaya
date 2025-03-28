@@ -272,7 +272,7 @@ static void InitGame(struct PokemonJump *);
 static void ResetForNewGame(struct PokemonJump *);
 static void InitPlayerAndJumpTypes(void);
 static void ResetPlayersForNewGame(void);
-static s16 GetSpeciesPokemonJumpType(u32 species);
+static s32 GetSpeciesPokemonJumpType(u32 species);
 static void InitJumpMonInfo(struct PokemonJump_MonInfo *, struct Pokemon *);
 static void CB2_PokemonJump(void);
 static void Task_StartPokemonJump(u32);
@@ -357,7 +357,7 @@ static void PrintPrizeFilledBagMessage(u32);
 static void PrintNoRoomForPrizeMessage(u32);
 static bool32 DoPrizeMessageAndFanfare(void);
 static void ClearMessageWindow(void);
-static void SetMonSpriteY(u32, s16);
+static void SetMonSpriteY(u32, s32);
 static void StartMonHitShake(u32);
 static bool32 RemoveMessageWindow(void);
 static void PrintScore(int);
@@ -520,7 +520,7 @@ static void ResetPlayersForNewGame(void)
     }
 }
 
-static s16 GetSpeciesPokemonJumpType(u32 species)
+static s32 GetSpeciesPokemonJumpType(u32 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].pokemonJumpType;
 }
@@ -1517,7 +1517,7 @@ static bool32 CloseMessageAndResetScore(void)
 static void Task_CommunicateMonInfo(u32 taskId)
 {
     int i;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     struct PokemonJump *jump = (struct PokemonJump *)GetWordTaskArg(taskId, DATAIDX_GAME_STRUCT);
 
     switch (tState)
@@ -2281,7 +2281,7 @@ static const struct SpriteTemplate sSpriteTemplate_JumpMon =
     .callback = SpriteCallbackDummy,
 };
 
-static const s16 sVineYCoords[VINE_SPRITES_PER_SIDE][NUM_VINESTATES] =
+static const s32 sVineYCoords[VINE_SPRITES_PER_SIDE][NUM_VINESTATES] =
 {
     {96, 96, 96, 114, 120, 120, 120, 114, 96, 96},
     {70, 80, 96, 114, 120, 128, 120, 114, 96, 80},
@@ -2289,7 +2289,7 @@ static const s16 sVineYCoords[VINE_SPRITES_PER_SIDE][NUM_VINESTATES] =
     {42, 72, 96, 114, 128, 136, 128, 114, 96, 72},
 };
 
-static const s16 sVineXCoords[VINE_SPRITES_PER_SIDE * 2] = {16, 40, 72, 104, 136, 168, 200, 224};
+static const s32 sVineXCoords[VINE_SPRITES_PER_SIDE * 2] = {16, 40, 72, 104, 136, 168, 200, 224};
 
 static const struct SpriteTemplate *const sSpriteTemplates_Vine[VINE_SPRITES_PER_SIDE] =
 {
@@ -2576,7 +2576,7 @@ static void ResetPokeJumpSpriteData(struct Sprite *sprite)
         sprite->data[i] = 0;
 }
 
-static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJump_MonInfo *monInfo, s16 x, s16 y, u32 multiplayerId)
+static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJump_MonInfo *monInfo, s32 x, s32 y, u32 multiplayerId)
 {
     struct SpriteTemplate spriteTemplate;
     struct SpriteSheet spriteSheet;
@@ -2807,7 +2807,7 @@ static void SpriteCB_MonIntroBounce(struct Sprite *sprite)
 #undef sHopPos
 #undef sNumHops
 
-static void CreateStarSprite(struct PokemonJumpGfx *jumpGfx, s16 x, s16 y, u32 multiplayerId)
+static void CreateStarSprite(struct PokemonJumpGfx *jumpGfx, s32 x, s32 y, u32 multiplayerId)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_Star, x, y, 1);
     if (spriteId != MAX_SPRITES)
@@ -3566,12 +3566,12 @@ static const u32 *const sPlayerNameWindowCoords[MAX_RFU_PLAYERS - 1] =
     sPlayerNameWindowCoords_5Players,
 };
 
-static const s16 sMonXCoords_2Players[] = {88, 152};
-static const s16 sMonXCoords_3Players[] = {88, 120, 152};
-static const s16 sMonXCoords_4Players[] = {56, 88, 152, 184};
-static const s16 sMonXCoords_5Players[] = {56, 88, 120, 152, 184};
+static const s32 sMonXCoords_2Players[] = {88, 152};
+static const s32 sMonXCoords_3Players[] = {88, 120, 152};
+static const s32 sMonXCoords_4Players[] = {56, 88, 152, 184};
+static const s32 sMonXCoords_5Players[] = {56, 88, 120, 152, 184};
 
-static const s16 *const sMonXCoords[MAX_RFU_PLAYERS - 1] =
+static const s32 *const sMonXCoords[MAX_RFU_PLAYERS - 1] =
 {
     sMonXCoords_2Players,
     sMonXCoords_3Players,
@@ -3582,7 +3582,7 @@ static const s16 *const sMonXCoords[MAX_RFU_PLAYERS - 1] =
 static void CreateJumpMonSprites(void)
 {
     int i, y, playersCount = GetNumPokeJumpPlayers();
-    const s16 *xCoords = sMonXCoords[playersCount - 2];
+    const s32 *xCoords = sMonXCoords[playersCount - 2];
 
     for (i = 0; i < playersCount; i++)
     {
@@ -3595,7 +3595,7 @@ static void CreateJumpMonSprites(void)
     }
 }
 
-static void SetMonSpriteY(u32 id, s16 y)
+static void SetMonSpriteY(u32 id, s32 y)
 {
     sPokemonJumpGfx->monSprites[id]->y2 = y;
 }
@@ -4040,7 +4040,7 @@ static void Task_ShowPokemonJumpRecords(u32 taskId)
 {
     struct WindowTemplate window;
     int i, width, widthCurr;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {

@@ -49,8 +49,8 @@ struct PokeblockFeed
     struct Sprite savedMonSprite;
     u32 tilemapBuffer[BG_SCREEN_SIZE];
     u32 unused1[8];
-    s16 monAnimX[0x200];
-    s16 monAnimY[0x200];
+    s32 monAnimX[0x200];
+    s32 monAnimY[0x200];
     u32 animRunState;
     u32 animId;
     u32 unused2;
@@ -64,13 +64,13 @@ struct PokeblockFeed
     u32 monSpriteId;
     u32 pokeblockCaseSpriteId;
     u32 pokeblockSpriteId;
-    s16 animData[NUM_ANIMDATA];
-    s16 monInitX;
-    s16 monInitY;
-    s16 maxAnimStageTime;
-    s16 monX;
-    s16 monY;
-    s16 loadGfxState;
+    s32 animData[NUM_ANIMDATA];
+    s32 monInitX;
+    s32 monInitY;
+    s32 maxAnimStageTime;
+    s32 monX;
+    s32 monY;
+    s32 loadGfxState;
     u32 unused4;
 };
 
@@ -117,7 +117,7 @@ EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 // - ANIMDATA_APPR_TIME    : The time over which the target position should be approached
 // - ANIMDATA_IS_LAST      : TRUE if it's the last anim stage for this nature, FALSE otherwise
 //
-static const s16 sMonPokeblockAnims[][NUM_ANIMDATA] =
+static const s32 sMonPokeblockAnims[][NUM_ANIMDATA] =
 {
     [ANIM_HARDY] =
     {   0,   4,   0,   8,  24,   0,   0,   0,  12,   FALSE},
@@ -1061,13 +1061,13 @@ static void CalculateMonAnimMovementEnd(void)
     u32 i;
     u32 approachTime = pokeblockFeed->animData[ANIMDATA_APPR_TIME];
     u32 time = pokeblockFeed->maxAnimStageTime - approachTime;
-    s16 x = pokeblockFeed->monX + pokeblockFeed->animData[ANIMDATA_TARGET_X];
-    s16 y = pokeblockFeed->monY + pokeblockFeed->animData[ANIMDATA_TARGET_Y];
+    s32 x = pokeblockFeed->monX + pokeblockFeed->animData[ANIMDATA_TARGET_X];
+    s32 y = pokeblockFeed->monY + pokeblockFeed->animData[ANIMDATA_TARGET_Y];
 
     for (i = 0; i < time - 1; i++)
     {
-        s16 xOffset = pokeblockFeed->monAnimX[approachTime + i] - x;
-        s16 yOffset = pokeblockFeed->monAnimY[approachTime + i] - y;
+        s32 xOffset = pokeblockFeed->monAnimX[approachTime + i] - x;
+        s32 yOffset = pokeblockFeed->monAnimY[approachTime + i] - y;
 
         pokeblockFeed->monAnimX[approachTime + i] -= xOffset * (i + 1) / time;
         pokeblockFeed->monAnimY[approachTime + i] -= yOffset * (i + 1) / time;
@@ -1081,8 +1081,8 @@ static void CalculateMonAnimMovement(void)
 {
     struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
     bool32 negative = FALSE;
-    s16 x = pokeblockFeed->monX - pokeblockFeed->monInitX;
-    s16 y = pokeblockFeed->monY - pokeblockFeed->monInitY;
+    s32 x = pokeblockFeed->monX - pokeblockFeed->monInitX;
+    s32 y = pokeblockFeed->monY - pokeblockFeed->monInitY;
 
     while (1)
     {

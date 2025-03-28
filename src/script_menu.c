@@ -539,7 +539,7 @@ static void Task_HandleScrollingMultichoiceInput(u32 taskId)
 static void Task_HandleMultichoiceInput(u32 taskId)
 {
     s32 selection;
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -669,7 +669,7 @@ bool32 ScriptMenu_MultichoiceGrid(u32 left, u32 top, u32 multichoiceId, bool32 i
 
 static void Task_HandleMultichoiceGridInput(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     s32 selection = Menu_ProcessGridInput();
 
     switch (selection)

@@ -690,7 +690,7 @@ static s32 TryHP(s32 i, s32 n, u32 battlerId, u32 oldHP, u32 newHP)
                 case HP_EVENT_DELTA_HP:
                     if (event->address == 0)
                         return i;
-                    else if ((s16)event->address == oldHP - newHP)
+                    else if ((s32)event->address == oldHP - newHP)
                         return i;
                     break;
                 }
@@ -703,7 +703,7 @@ static s32 TryHP(s32 i, s32 n, u32 battlerId, u32 oldHP, u32 newHP)
                     *(u32 *)(u32)(event->address) = newHP;
                     break;
                 case HP_EVENT_DELTA_HP:
-                    *(s16 *)(u32)(event->address) = oldHP - newHP;
+                    *(s32 *)(u32)(event->address) = oldHP - newHP;
                     break;
                 }
                 return i;
@@ -1076,7 +1076,7 @@ static s32 TryExp(s32 i, s32 n, u32 battlerId, u32 oldExp, u32 newExp)
                 case EXP_EVENT_DELTA_EXP:
                     if (event->address == 0)
                         return i;
-                    else if ((s16)event->address == oldExp - newExp)
+                    else if ((s32)event->address == oldExp - newExp)
                         return i;
                     break;
                 }

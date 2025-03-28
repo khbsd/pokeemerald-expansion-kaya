@@ -137,7 +137,7 @@ DOUBLE_BATTLE_TEST("Order Up is boosted by Sheer Force without removing the stat
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
     }
 }
-DOUBLE_BATTLE_TEST("Order Up is always boosted by Sheer Force", s16 damage)
+DOUBLE_BATTLE_TEST("Order Up is always boosted by Sheer Force", s32 damage)
 {
     u32 move;
     u32 ability;

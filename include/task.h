@@ -17,7 +17,7 @@ struct Task
     u8 prev;
     u8 next;
     u8 priority;
-    s16 data[NUM_TASK_DATA];
+    s32 data[NUM_TASK_DATA];
 };
 
 extern struct Task gTasks[];

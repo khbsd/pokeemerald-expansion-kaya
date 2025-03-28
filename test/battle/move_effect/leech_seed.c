@@ -23,8 +23,8 @@ SINGLE_BATTLE_TEST("Leech Seed doesn't affect Grass-type Pokémon")
 
 SINGLE_BATTLE_TEST("Leech Seeded targets lose 1/8 of its max HP every turn and give it to the user")
 {
-    s16 damage;
-    s16 healed;
+    s32 damage;
+    s32 healed;
 
     GIVEN {
         PLAYER(SPECIES_WYNAUT) { HP(1); }

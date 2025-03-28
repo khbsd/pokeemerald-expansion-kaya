@@ -7834,8 +7834,8 @@ static void SpriteCB_MoongeistCharge(struct Sprite *sprite)
 //arg 2: duration step 3 (center -> target)
 static void SpriteCB_MindBlownBall(struct Sprite *sprite)
 {
-    s16 oldPosX = sprite->x;
-    s16 oldPosY = sprite->y;
+    s32 oldPosX = sprite->x;
+    s32 oldPosY = sprite->y;
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = 0;
@@ -8111,7 +8111,7 @@ static void SpriteCB_PyroBallLaunch(struct Sprite *sprite)
 //Throws acid at a single target.
 static void SpriteCB_AcidLaunchSingleTarget(struct Sprite *sprite)
 {
-    s16 l1, l2;
+    s32 l1, l2;
 
     if (!gBattleAnimArgs[3])
         StartSpriteAnim(sprite, 2);
@@ -8489,7 +8489,7 @@ static const s32 sHomerunEnemyVerticalMovement[] =
 void AnimTask_TwinkleTackleLaunchStep(u8 taskId)
 {
     u32 rotation;
-    s16 xScale, yScale;
+    s32 xScale, yScale;
     struct Task* task = &gTasks[taskId];
     struct Sprite *sprite = &gSprites[task->tSpriteId];
 
@@ -9068,7 +9068,7 @@ static void SpriteCB_FlippableSlash(struct Sprite* sprite)
 //arg 0: Duration
 static void SpriteCB_DragonEnergyShot(struct Sprite* sprite)
 {
-    s16 startingX, finishingX, y;
+    s32 startingX, finishingX, y;
     u8 def1 = gBattleAnimTarget;
     u8 def2 = BATTLE_PARTNER(def1);
 

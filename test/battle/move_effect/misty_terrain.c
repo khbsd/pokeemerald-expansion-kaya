@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Misty Terrain protects grounded battlers from non-volatile s
     }
 }
 
-SINGLE_BATTLE_TEST("Misty Terrain does not increase the power of Fairy-type moves", s16 damage)
+SINGLE_BATTLE_TEST("Misty Terrain does not increase the power of Fairy-type moves", s32 damage)
 {
     bool32 terrain;
     PARAMETRIZE { terrain = FALSE; }
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Misty Terrain does not increase the power of Fairy-type move
     }
 }
 
-SINGLE_BATTLE_TEST("Misty Terrain decreases power of Dragon-type moves by 50 percent", s16 damage)
+SINGLE_BATTLE_TEST("Misty Terrain decreases power of Dragon-type moves by 50 percent", s32 damage)
 {
     bool32 terrain;
     PARAMETRIZE { terrain = FALSE; }

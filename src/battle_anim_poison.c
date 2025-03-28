@@ -533,7 +533,7 @@ static void AnimSludgeProjectile_Step(struct Sprite *sprite)
 
 static void AnimAcidPoisonBubble(struct Sprite *sprite)
 {
-    s16 l1 = 0, l2 = 0;
+    s32 l1 = 0, l2 = 0;
     if (!gBattleAnimArgs[3])
         StartSpriteAnim(sprite, 2);
 

@@ -39,10 +39,10 @@
 struct PokemonAnimData
 {
     u32 delay;
-    s16 speed; // Only used by 2 sets of animations
-    s16 runs; // Number of times to do the animation
-    s16 rotation;
-    s16 data; // General use
+    s32 speed; // Only used by 2 sets of animations
+    s32 runs; // Number of times to do the animation
+    s32 rotation;
+    s32 data; // General use
 };
 
 struct YellowFlashData
@@ -451,9 +451,9 @@ static void MonAnimDummySpriteCallback(struct Sprite *sprite)
 {
 }
 
-static void SetPosForRotation(struct Sprite *sprite, u32 index, s16 amplitudeX, s16 amplitudeY)
+static void SetPosForRotation(struct Sprite *sprite, u32 index, s32 amplitudeX, s32 amplitudeY)
 {
-    s16 xAdder, yAdder;
+    s32 xAdder, yAdder;
 
     amplitudeX *= -1;
     amplitudeY *= -1;
@@ -483,7 +483,7 @@ u32 GetSpeciesBackAnimSet(u32 species)
 #define tBattlerId data[4]
 #define tSpeciesId data[5]
 
-// BUG: In vanilla, tPtrLo is read as an s16, so if bit 15 of the
+// BUG: In vanilla, tPtrLo is read as an s32, so if bit 15 of the
 // address were to be set it would cause the pointer to be read
 // as 0xFFFFXXXX instead of the desired 0x02YYXXXX.
 // By dumb luck, this is not an issue in vanilla. However,
@@ -570,7 +570,7 @@ void SetSpriteCB_MonAnimDummy(struct Sprite *sprite)
     sprite->callback = MonAnimDummySpriteCallback;
 }
 
-static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u32 rotation)
+static void SetAffineData(struct Sprite *sprite, s32 xScale, s32 yScale, u32 rotation)
 {
     u32 matrixNum;
     struct ObjAffineSrcData affineSrcData;
@@ -606,7 +606,7 @@ static void HandleStartAffineAnim(struct Sprite *sprite)
     sprite->affineAnimPaused = TRUE;
 }
 
-static void HandleSetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u32 rotation)
+static void HandleSetAffineData(struct Sprite *sprite, s32 xScale, s32 yScale, u32 rotation)
 {
     if (!sprite->sDontFlip)
     {
@@ -686,7 +686,7 @@ static void Anim_CircularStretchTwice(struct Sprite *sprite)
     }
     else
     {
-        s16 var = (sprite->data[2] * 512 / 40) % 256;
+        s32 var = (sprite->data[2] * 512 / 40) % 256;
 
         sprite->data[4] = Sin(var, 32) + 256;
         sprite->data[5] = Cos(var, 32) + 256;
@@ -778,7 +778,7 @@ static void VerticalJumps(struct Sprite *sprite)
     }
     else
     {
-        s16 divCounter = counter / 128;
+        s32 divCounter = counter / 128;
         switch (divCounter)
         {
         case 0:
@@ -815,7 +815,7 @@ static void Anim_VerticalJumpsHorizontalJumps(struct Sprite *sprite)
     }
     else
     {
-        s16 divCounter = counter / 128;
+        s32 divCounter = counter / 128;
 
         switch (divCounter)
         {
@@ -856,7 +856,7 @@ static void Anim_GrowVibrate(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256 / 40) % 256;
+        s32 index = (sprite->data[2] * 256 / 40) % 256;
 
         if (sprite->data[2] % 2 == 0)
         {
@@ -1008,7 +1008,7 @@ static void Anim_CircularVibrate(struct Sprite *sprite)
 
 static void Twist(struct Sprite *sprite)
 {
-    s16 id = sprite->data[0];
+    s32 id = sprite->data[0];
 
     if (sAnims[id].delay != 0)
     {
@@ -1104,7 +1104,7 @@ static void CircleCounterclockwise(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] + 192) % 256;
+        s32 index = (sprite->data[2] + 192) % 256;
 
         sprite->x2 = -(Cos(index, sAnims[id].data * 2));
         sprite->y2 = Sin(index, sAnims[id].data) + sAnims[id].data;
@@ -1150,7 +1150,7 @@ static void Anim_GlowBlack(struct Sprite *sprite)
 
 static void Anim_HorizontalStretch(struct Sprite *sprite)
 {
-    s16 index1 = 0, index2 = 0;
+    s32 index1 = 0, index2 = 0;
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1185,7 +1185,7 @@ static void Anim_HorizontalStretch(struct Sprite *sprite)
 
 static void Anim_VerticalStretch(struct Sprite *sprite)
 {
-    s16 posY = 0, index1 = 0, index2 = 0;
+    s32 posY = 0, index1 = 0, index2 = 0;
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1285,7 +1285,7 @@ static void Anim_TipMoveForward(struct Sprite *sprite)
     }
     else
     {
-        s16 index = ((counter - 10) * 128) / 20;
+        s32 index = ((counter - 10) * 128) / 20;
 
         if (counter < 10)
             HandleSetAffineData(sprite, 256, 256, counter / 2 * 512);
@@ -1313,7 +1313,7 @@ static void Anim_HorizontalPivot(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / 100;
+        s32 index = (sprite->data[2] * 256) / 100;
         sprite->y2 = Sin(index, 10);
         HandleSetAffineData(sprite, 256, 256, Sin(index, 3276));
     }
@@ -1324,7 +1324,7 @@ static void Anim_HorizontalPivot(struct Sprite *sprite)
 static void VerticalSlideWobble(struct Sprite *sprite)
 {
     s32 var = 0;
-    s16 index = 0;
+    s32 index = 0;
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1358,7 +1358,7 @@ static void Anim_VerticalSlideWobble(struct Sprite *sprite)
 static void RisingWobble(struct Sprite *sprite)
 {
     s32 var = 0;
-    s16 index = 0;
+    s32 index = 0;
 
     if (sprite->data[2] == 0)
         HandleStartAffineAnim(sprite);
@@ -1392,7 +1392,7 @@ static void Anim_RisingWobble(struct Sprite *sprite)
 static void Anim_HorizontalSlideWobble(struct Sprite *sprite)
 {
     s32 var;
-    s16 index = 0;
+    s32 index = 0;
 
     TryFlipX(sprite);
     var = 0;
@@ -1422,7 +1422,7 @@ static void Anim_HorizontalSlideWobble(struct Sprite *sprite)
 
 static void VerticalSquishBounce(struct Sprite *sprite)
 {
-    s16 posY = 0;
+    s32 posY = 0;
 
     if (sprite->data[2] == 0)
     {
@@ -1441,7 +1441,7 @@ static void VerticalSquishBounce(struct Sprite *sprite)
     }
     else
     {
-        s16 yScale = Sin(sprite->data[4], 32) + 256;
+        s32 yScale = Sin(sprite->data[4], 32) + 256;
 
         if (sprite->data[2] > sprite->data[0] && sprite->data[2] < sprite->data[0] * 2)
             sprite->data[3] += (128 / sprite->data[0]);
@@ -1466,7 +1466,7 @@ static void Anim_VerticalSquishBounce(struct Sprite *sprite)
 
 static void ShrinkGrow(struct Sprite *sprite)
 {
-    s16 posY = 0;
+    s32 posY = 0;
 
     if (sprite->data[2] > (128 / sprite->data[6]) * sprite->data[7])
     {
@@ -1477,7 +1477,7 @@ static void ShrinkGrow(struct Sprite *sprite)
     }
     else
     {
-        s16 yScale = Sin(sprite->data[4], 32) + 256;
+        s32 yScale = Sin(sprite->data[4], 32) + 256;
 
         if (yScale > 256)
             posY = (256 - yScale) / 8;
@@ -1527,11 +1527,11 @@ static const s32 sBounceRotateToSidesData[][8][3] =
 
 static void BounceRotateToSides(struct Sprite *sprite)
 {
-    s16 var;
+    s32 var;
     u32 structId;
     s32 r9;
-    s16 r10;
-    s16 r7;
+    s32 r10;
+    s32 r7;
     u32 arrId;
 
     TryFlipX(sprite);
@@ -1646,7 +1646,7 @@ static void BackAndLunge_1(struct Sprite *sprite)
     sprite->data[7]++;
     if (sprite->x2 <= 0)
     {
-        s16 subResult;
+        s32 subResult;
         u32 var = sprite->data[7];
         sprite->data[6] = 0;
         subResult = sprite->x2;
@@ -2121,7 +2121,7 @@ static void SwingConcave(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
+        s32 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
         sprite->x2 = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, Sin(index, 3276));
     }
@@ -2161,7 +2161,7 @@ static void SwingConvex(struct Sprite *sprite)
     }
     else
     {
-        s16 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
+        s32 index = (sprite->data[2] * 256) / sAnims[sprite->data[0]].data;
         sprite->x2 = -(Sin(index, 10));
         HandleSetAffineData(sprite, 256, 256, -(Sin(index, 3276)));
     }
@@ -2396,8 +2396,8 @@ static void HorizontalJumpsVerticalStretch_1(struct Sprite *sprite)
     }
     else
     {
-        s16 yDelta;
-        s16 yScale = Sin(sprite->data[4], 64) + 256;
+        s32 yDelta;
+        s32 yScale = Sin(sprite->data[4], 64) + 256;
         if (sprite->data[2] >= 16 && sprite->data[2] <= 31)
         {
             sprite->data[3] += 8;
@@ -2801,14 +2801,14 @@ static void Anim_GrowInStages(struct Sprite *sprite)
         sprite->data[6]--;
         if (sprite->data[5] != 3)
         {
-            s16 scale = (8 * sprite->data[6]) / 20;
+            s32 scale = (8 * sprite->data[6]) / 20;
             scale = Sin(sprite->data[7] - scale, 64);
             HandleSetAffineData(sprite, 256 - scale, 256 - scale, 0);
         }
     }
     else
     {
-        s16 var;
+        s32 var;
 
         if (sprite->data[5] == 3)
         {
@@ -2870,7 +2870,7 @@ static void Anim_VerticalSpring(struct Sprite *sprite)
     }
     else
     {
-        s16 yScale;
+        s32 yScale;
 
         sprite->y2 = Sin(sprite->data[7] % 256, 8);
         sprite->data[7] += 8;
@@ -2897,7 +2897,7 @@ static void Anim_VerticalRepeatedSpring(struct Sprite *sprite)
     }
     else
     {
-        s16 yScale;
+        s32 yScale;
 
         sprite->y2 = Sin(sprite->data[7], 16);
         sprite->data[7] += 4;
@@ -2919,7 +2919,7 @@ static void Anim_SpringRising(struct Sprite *sprite)
 
 static void SpringRising_0(struct Sprite *sprite)
 {
-    s16 yScale;
+    s32 yScale;
 
     sprite->data[7] += 8;
     if (sprite->data[7] > 63)
@@ -2939,7 +2939,7 @@ static void SpringRising_0(struct Sprite *sprite)
 
 static void SpringRising_1(struct Sprite *sprite)
 {
-    s16 yScale;
+    s32 yScale;
 
     sprite->data[7] += 4;
     if (sprite->data[7] > 95)
@@ -2950,7 +2950,7 @@ static void SpringRising_1(struct Sprite *sprite)
     }
     else
     {
-        s16 sign, index;
+        s32 sign, index;
 
         sprite->y2 = -(sprite->data[6] * 4) - Sin(sprite->data[7], 8);
         if (sprite->data[7] > 63)
@@ -2977,7 +2977,7 @@ static void SpringRising_1(struct Sprite *sprite)
 
 static void SpringRising_2(struct Sprite *sprite)
 {
-    s16 yScale;
+    s32 yScale;
 
     sprite->data[7] += 8;
     yScale = Cos(sprite->data[7], 128);
@@ -3004,7 +3004,7 @@ static void HorizontalSpring(struct Sprite *sprite)
     }
     else
     {
-        s16 xScale;
+        s32 xScale;
 
         sprite->x2 = Sin(sprite->data[7] % 256, sprite->data[4]);
         sprite->data[7] += sprite->data[6];
@@ -3039,7 +3039,7 @@ static void HorizontalRepeatedSpring(struct Sprite *sprite)
     }
     else
     {
-        s16 xScale;
+        s32 xScale;
 
         sprite->x2 = Sin(sprite->data[7] % 256, sprite->data[4]);
         sprite->data[7] += sprite->data[6];
@@ -3082,7 +3082,7 @@ static void Anim_HorizontalSlideShrink(struct Sprite *sprite)
     }
     else
     {
-        s16 scale;
+        s32 scale;
 
         sprite->x2 = Sin(sprite->data[7] % 256, 8);
         sprite->data[7] += 8;
@@ -3112,7 +3112,7 @@ static void Anim_LungeGrow(struct Sprite *sprite)
     }
     else
     {
-        s16 scale;
+        s32 scale;
 
         sprite->x2 = -(Sin((sprite->data[7] % 256) / 2, 16));
         sprite->data[7] += 8;
@@ -3142,7 +3142,7 @@ static void Anim_CircleIntoBackground(struct Sprite *sprite)
     }
     else
     {
-        s16 scale;
+        s32 scale;
 
         sprite->x2 = -(Sin(sprite->data[7] % 256 , 8));
         sprite->data[7] += 8;
@@ -3163,7 +3163,7 @@ static void Anim_RapidHorizontalHops(struct Sprite *sprite)
     }
     else
     {
-        s16 caseVar = (sprite->data[2] / 512) % 4;
+        s32 caseVar = (sprite->data[2] / 512) % 4;
         switch (caseVar)
         {
         case 0:
@@ -3503,7 +3503,7 @@ static void Anim_VerticalShakeHorizontalSlide_Slow(struct Sprite *sprite)
     }
     else
     {
-        s16 divCase = (sprite->data[2] / 512) % 4;
+        s32 divCase = (sprite->data[2] / 512) % 4;
         switch (divCase)
         {
         case 0:
@@ -3529,7 +3529,7 @@ static void Anim_VerticalShakeHorizontalSlide_Slow(struct Sprite *sprite)
 
 static void VerticalStretchBothEnds(struct Sprite *sprite)
 {
-    s16 index1 = 0, index2 = 0;
+    s32 index1 = 0, index2 = 0;
 
     if (sprite->data[5] > sprite->data[6])
     {
@@ -3550,7 +3550,7 @@ static void VerticalStretchBothEnds(struct Sprite *sprite)
     else
     {
         u32 amplitude, cmpVal1, cmpVal2;
-        s16 xScale, yScale;
+        s32 xScale, yScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
         cmpVal1 = sprite->data[6] / 4;
@@ -3591,7 +3591,7 @@ static void Anim_VerticalStretchBothEnds_Slow(struct Sprite *sprite)
 
 static void HorizontalStretchFar(struct Sprite *sprite)
 {
-    s16 index1 = 0, index2;
+    s32 index1 = 0, index2;
 
     if (sprite->data[5] > sprite->data[6])
     {
@@ -3611,7 +3611,7 @@ static void HorizontalStretchFar(struct Sprite *sprite)
     else
     {
         u32 amplitude, cmpVal1, cmpVal2;
-        s16 xScale;
+        s32 xScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
         cmpVal1 = sprite->data[6] / 4;
@@ -3790,7 +3790,7 @@ static void Anim_CircleCounterclockwise_Long(struct Sprite *sprite)
 
 static void GrowStutter(struct Sprite *sprite)
 {
-    s16 index1 = 0, index2 = 0;
+    s32 index1 = 0, index2 = 0;
     if (sprite->data[5] > sprite->data[6])
     {
         sprite->y2 = 0;
@@ -3810,7 +3810,7 @@ static void GrowStutter(struct Sprite *sprite)
     else
     {
         u32 amplitude, cmpVal1, cmpVal2;
-        s16 xScale, yScale;
+        s32 xScale, yScale;
 
         index2 = (sprite->data[5] * 128) / sprite->data[6];
         cmpVal1 = sprite->data[6] / 4;
@@ -3860,7 +3860,7 @@ static void Anim_VerticalShakeHorizontalSlide(struct Sprite *sprite)
     }
     else
     {
-        s16 divCase = (sprite->data[2] / 512) % 4;
+        s32 divCase = (sprite->data[2] / 512) % 4;
         switch (divCase)
         {
         case 0:
@@ -3894,7 +3894,7 @@ static void Anim_VerticalShakeHorizontalSlide_Fast(struct Sprite *sprite)
     }
     else
     {
-        s16 divCase = (sprite->data[2] / 512) % 4;
+        s32 divCase = (sprite->data[2] / 512) % 4;
         switch (divCase)
         {
         case 0:
@@ -3998,7 +3998,7 @@ static void Grow(struct Sprite *sprite)
     }
     else
     {
-        s16 scale;
+        s32 scale;
 
         sprite->data[7] += sprite->data[6];
         if (sprite->data[7] > 256)
@@ -4311,7 +4311,7 @@ static void ConvexDoubleArc(struct Sprite *sprite)
     }
     else
     {
-        s16 posX;
+        s32 posX;
 
         if (sprite->data[7] > 159)
         {
@@ -4560,7 +4560,7 @@ static void ShrinkGrowVibrate(struct Sprite *sprite)
     {
         s32 sinY;
         u32 y;
-        s16 index = ((u32)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
+        s32 index = ((u32)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
         if (sprite->data[2] % 2 == 0)
         {
             sprite->data[4] = Sin(index, 32) + 256;

@@ -58,7 +58,7 @@ static const u32 sSSTidalSailWestMovementScript[] =
 
 static void Task_Truck3(u32);
 
-static s16 GetTruckCameraBobbingY(int time)
+static s32 GetTruckCameraBobbingY(int time)
 {
     if (!(time % 120))
         return -1;
@@ -76,7 +76,7 @@ static s16 GetTruckCameraBobbingY(int time)
 // Box 1 has 30 added to the time so it jumps earlier, and
 // box 2 has the return value multiplied by less, so it doesn't
 // jump as high.
-static s16 GetTruckBoxYMovement(int time)
+static s32 GetTruckBoxYMovement(int time)
 {
     if (!((time + 120) % 180))
         return -1;
@@ -88,9 +88,9 @@ static s16 GetTruckBoxYMovement(int time)
 
 static void Task_Truck1(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    s16 cameraXpan = 0, cameraYpan = 0;
-    s16 yBox1, yBox2, yBox3;
+    s32 *data = gTasks[taskId].data;
+    s32 cameraXpan = 0, cameraYpan = 0;
+    s32 yBox1, yBox2, yBox3;
 
     yBox1 = GetTruckBoxYMovement(tTimer + 30) * 4;
     SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_TOP,      gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX1_X_OFFSET - cameraXpan, BOX1_Y_OFFSET + yBox1);
@@ -115,9 +115,9 @@ static void Task_Truck1(u32 taskId)
 
 static void Task_Truck2(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    s16 cameraYpan, cameraXpan;
-    s16 yBox1, yBox2, yBox3;
+    s32 *data = gTasks[taskId].data;
+    s32 cameraYpan, cameraXpan;
+    s32 yBox1, yBox2, yBox3;
 
     tTimerHorizontal++;
     tTimerVertical++;
@@ -151,8 +151,8 @@ static void Task_Truck2(u32 taskId)
 
 static void Task_Truck3(u32 taskId)
 {
-   s16 *data = gTasks[taskId].data;
-   s16 cameraXpan, cameraYpan;
+   s32 *data = gTasks[taskId].data;
+   s32 cameraXpan, cameraYpan;
 
    tTimerHorizontal++;
 
@@ -188,7 +188,7 @@ static void Task_Truck3(u32 taskId)
 
 static void Task_HandleTruckSequence(u32 taskId)
 {
-   s16 *data = gTasks[taskId].data;
+   s32 *data = gTasks[taskId].data;
 
     switch (tState)
     {
@@ -281,7 +281,7 @@ void EndTruckSequence(u32 taskId)
 bool32 TrySetPortholeWarpDestination(void)
 {
     s32 mapGroup, mapNum;
-    s16 x, y;
+    s32 x, y;
 
     if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y) != SS_TIDAL_LOCATION_CURRENTS)
     {
@@ -296,7 +296,7 @@ bool32 TrySetPortholeWarpDestination(void)
 
 void Task_HandlePorthole(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     u32 *cruiseState = GetVarPointer(VAR_SS_TIDAL_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 

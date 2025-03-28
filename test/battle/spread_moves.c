@@ -53,8 +53,8 @@ DOUBLE_BATTLE_TEST("Spread Moves: No damage will be dealt to a mon in an invulne
 
 DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will activate both resist berries")
 {
-    s16 opponentLeftDmg[2];
-    s16 opponentRightDmg[2];
+    s32 opponentLeftDmg[2];
+    s32 opponentRightDmg[2];
 
     GIVEN {
         PLAYER(SPECIES_GARDEVOIR);
@@ -85,8 +85,8 @@ DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will activate both resist
 
 DOUBLE_BATTLE_TEST("Spread Moves: If a spread move attack will activate a resist berries on one pokemon, only the damage for that mon will be reduced")
 {
-    s16 opponentLeftDmg[2];
-    s16 opponentRightDmg[2];
+    s32 opponentLeftDmg[2];
+    s32 opponentRightDmg[2];
 
     GIVEN {
         PLAYER(SPECIES_GARDEVOIR);
@@ -115,8 +115,8 @@ DOUBLE_BATTLE_TEST("Spread Moves: If a spread move attack will activate a resist
 
 DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will be weakened by strong winds on both targets")
 {
-    s16 opponentLeftDmg[2];
-    s16 opponentRightDmg[2];
+    s32 opponentLeftDmg[2];
+    s32 opponentRightDmg[2];
 
     GIVEN {
         PLAYER(SPECIES_GARDEVOIR);
@@ -143,8 +143,8 @@ DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will be weakened by stron
 
 DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will be weakened by strong winds on one of the targets")
 {
-    s16 opponentLeftDmg[2];
-    s16 opponentRightDmg[2];
+    s32 opponentLeftDmg[2];
+    s32 opponentRightDmg[2];
 
     GIVEN {
         PLAYER(SPECIES_GARDEVOIR);

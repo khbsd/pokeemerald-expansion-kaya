@@ -64,7 +64,7 @@ struct UsePokeblockSession
     u32 conditionsBeforeBlock[CONDITION_COUNT];
     u32 conditionsAfterBlock[CONDITION_COUNT];
     u32 enhancements[CONDITION_COUNT];
-    s16 pokeblockStatBoosts[CONDITION_COUNT];
+    s32 pokeblockStatBoosts[CONDITION_COUNT];
     u32 numSelections; // num in party + 1 (for Cancel)
     u32 curSelection;
     bool32 (*loadNewSelection)(void);
@@ -92,7 +92,7 @@ struct UsePokeblockMenu
     u32 unusedBuffer[0x1000];
     u32 tilemapBuffer[BG_SCREEN_SIZE + 2];
     u32 selectionIconSpriteIds[PARTY_SIZE + 1];
-    s16 curMonXOffset;
+    s32 curMonXOffset;
     u32 curMonSpriteId;
     u32 curMonPalette;
     u32 curMonSheet;
@@ -142,12 +142,12 @@ static void LoadAndCreateUpDownSprites(void);
 static void CalculateNumAdditionalSparkles(u32);
 static void PrintFirstEnhancement(void);
 static bool32 TryPrintNextEnhancement(void);
-static void BufferEnhancedText(u32 *, u32, s16);
+static void BufferEnhancedText(u32 *, u32, s32);
 static void PrintMenuWindowText(const u32 *);
 static void CalculatePokeblockEffectiveness(struct Pokeblock *, struct Pokemon *);
 static void SpriteCB_UpDown(struct Sprite *);
 static void LoadInitialMonInfo(void);
-static void LoadMonInfo(s16, u32);
+static void LoadMonInfo(s32, u32);
 static bool32 LoadNewSelection_CancelToMon(void);
 static bool32 LoadNewSelection_MonToCancel(void);
 static bool32 LoadNewSelection_MonToMon(void);
@@ -165,7 +165,7 @@ static EWRAM_DATA struct UsePokeblockSession *sInfo = NULL;
 static EWRAM_DATA void (*sExitCallback)(void) = NULL;
 static EWRAM_DATA struct Pokeblock *sPokeblock = NULL;
 EWRAM_DATA u32 gPokeblockMonId = 0;
-EWRAM_DATA s16 gPokeblockGain = 0;
+EWRAM_DATA s32 gPokeblockGain = 0;
 static EWRAM_DATA u32 *sGraph_Tilemap = NULL;
 static EWRAM_DATA u32 *sGraph_Gfx = NULL;
 static EWRAM_DATA u32 *sMonFrame_TilemapPtr = NULL;
@@ -305,7 +305,7 @@ static const struct SpritePalette sSpritePalette_UpDown =
     gUsePokeblockUpDown_Pal, TAG_UP_DOWN
 };
 
-static const s16 sUpDownCoordsOnGraph[CONDITION_COUNT][2] =
+static const s32 sUpDownCoordsOnGraph[CONDITION_COUNT][2] =
 {
     [CONDITION_COOL]   = {156,  36},
     [CONDITION_TOUGH]  = {117,  59},
@@ -966,7 +966,7 @@ static void PrintMenuWindowText(const u32 *message)
     AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
 }
 
-static void BufferEnhancedText(u32 *dest, u32 condition, s16 enhancement)
+static void BufferEnhancedText(u32 *dest, u32 condition, s32 enhancement)
 {
     switch (enhancement)
     {
@@ -996,7 +996,7 @@ static void GetMonConditions(struct Pokemon *mon, u32 *data)
 static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
     u32 i;
-    s16 stat;
+    s32 stat;
     u32 data;
 
     if (GetMonData(mon, MON_DATA_SHEEN) != MAX_SHEEN)
@@ -1055,7 +1055,7 @@ static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct 
 
     for (i = 0; i < CONDITION_COUNT; i++)
     {
-        s16 amount = sInfo->pokeblockStatBoosts[i];
+        s32 amount = sInfo->pokeblockStatBoosts[i];
         s32 boost = amount / 10;
 
         if (amount % 10 >= 5) // round to the nearest
@@ -1177,7 +1177,7 @@ static void LoadPartyInfo(void)
 
 static void LoadInitialMonInfo(void)
 {
-    s16 nextSelection, prevSelection;
+    s32 nextSelection, prevSelection;
 
     LoadMonInfo(sMenu->info.curSelection, 0);
     sMenu->curLoadId = 0;
@@ -1196,7 +1196,7 @@ static void LoadInitialMonInfo(void)
     LoadMonInfo(prevSelection, 2);
 }
 
-static void LoadMonInfo(s16 partyId, u32 loadId)
+static void LoadMonInfo(s32 partyId, u32 loadId)
 {
     u32 boxId = sMenu->party[partyId].boxId;
     u32 monId = sMenu->party[partyId].monId;
@@ -1621,7 +1621,7 @@ static void LoadConditionGfx(void)
 static void CreateConditionSprite(void)
 {
     u32 i;
-    s16 xDiff, xStart;
+    s32 xDiff, xStart;
     int yStart = 17;
     int speed = 8;
     struct Sprite **sprites = sMenu->condition;
@@ -1661,7 +1661,7 @@ static bool32 LoadConditionTitle(void)
 // Literally the word "Condition", the title block that appears over the mon icon
 static void SpriteCB_Condition(struct Sprite *sprite)
 {
-    s16 prevX = sprite->x;
+    s32 prevX = sprite->x;
 
     // Slide onscreen
     sprite->x += sprite->sSpeed;

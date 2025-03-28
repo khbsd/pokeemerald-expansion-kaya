@@ -11,7 +11,7 @@ ASSUMPTIONS
     ASSUME(gItemsInfo[ITEM_HEARTHFLAME_MASK].holdEffectParam == 20);
 }
 
-SINGLE_BATTLE_TEST("Ogerpon Masks increase the base power of moves by 20%", s16 damage)
+SINGLE_BATTLE_TEST("Ogerpon Masks increase the base power of moves by 20%", s32 damage)
 {
     u32 species;
     u32 item;

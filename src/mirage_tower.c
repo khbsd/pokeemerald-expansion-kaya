@@ -61,7 +61,7 @@ struct FallAnim_Fossil
 #define FOSSIL_DISINTEGRATE_LENGTH 0x100
 
 static const struct SpriteSheet sCeilingCrumbleSpriteSheets[];
-static const s16 sCeilingCrumblePositions[][3];
+static const s32 sCeilingCrumblePositions[][3];
 
 static void PlayerDescendMirageTower(u32);
 static void DoScreenShake(u32);
@@ -84,7 +84,7 @@ static const u32 sFossil_Gfx[] = INCBIN_u32("graphics/object_events/pics/misc/fo
 static const u32 sMirageTowerCrumbles_Gfx[] = INCBIN_u32("graphics/misc/mirage_tower_crumbles.4bpp");
 static const u32 sMirageTowerCrumbles_Palette[] = INCBIN_U16("graphics/misc/mirage_tower_crumbles.gbapal");
 
-static const s16 sCeilingCrumblePositions[][3] =
+static const s32 sCeilingCrumblePositions[][3] =
 {
     {  0,  10,  65},
     { 17,   3,  50},
@@ -389,7 +389,7 @@ static void StartScreenShake(u32 yShakeOffset, u32 xShakeOffset, u32 numShakes, 
 
 static void DoScreenShake(u32 taskId)
 {
-    s16 *data;
+    s32 *data;
 
     data = gTasks[taskId].data;
     tTimer++;

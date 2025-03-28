@@ -50,7 +50,7 @@ struct OamDimensions
 };
 
 static void SortSprites(u32 *spritePriorities, s32 n);
-static u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+static u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
 static void ResetAllSprites(void);
@@ -82,7 +82,7 @@ static void ApplyAffineAnimFrameAbsolute(u32 matrixNum, struct AffineAnimFrameCm
 static void DecrementAnimDelayCounter(struct Sprite *sprite);
 static bool32 DecrementAffineAnimDelayCounter(struct Sprite *sprite, u32 matrixNum);
 static void ApplyAffineAnimFrameRelativeAndUpdateMatrix(u32 matrixNum, struct AffineAnimFrameCmd *frameCmd);
-static s16 ConvertScaleParam(s16 scale);
+static s32 ConvertScaleParam(s32 scale);
 static void GetAffineAnimFrame(u32 matrixNum, struct Sprite *sprite, struct AffineAnimFrameCmd *frameCmd);
 static void ApplyAffineAnimFrame(u32 matrixNum, struct AffineAnimFrameCmd *frameCmd);
 static u32 IndexOfSpriteTileTag(u32 tag);
@@ -271,8 +271,8 @@ EWRAM_DATA u32 gOamLimit = 0;
 static EWRAM_DATA u32 sOamDummyIndex = 0;
 EWRAM_DATA u32 gReservedSpriteTileCount = 0;
 EWRAM_DATA static u32 sSpriteTileAllocBitmap[128] = {0};
-EWRAM_DATA s16 gSpriteCoordOffsetX = 0;
-EWRAM_DATA s16 gSpriteCoordOffsetY = 0;
+EWRAM_DATA s32 gSpriteCoordOffsetX = 0;
+EWRAM_DATA s32 gSpriteCoordOffsetY = 0;
 EWRAM_DATA struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT] = {0};
 EWRAM_DATA bool32 gAffineAnimsDisabled = FALSE;
 
@@ -434,7 +434,7 @@ static void SortSprites(u32 *spritePriorities, s32 n)
     InsertionSort(spritePriorities, n);
 }
 
-u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
+u32 CreateSprite(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority)
 {
     u32 i;
 
@@ -445,7 +445,7 @@ u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpri
     return MAX_SPRITES;
 }
 
-u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
+u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority)
 {
     s32 i;
 
@@ -472,7 +472,7 @@ u32 CreateInvisibleSprite(void (*callback)(struct Sprite *))
     }
 }
 
-u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
+u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority)
 {
     struct Sprite *sprite = &gSprites[index];
 
@@ -496,7 +496,7 @@ u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 
 
     if (template->tileTag == TAG_NONE)
     {
-        s16 tileNum;
+        s32 tileNum;
         sprite->images = template->images;
         tileNum = AllocSpriteTiles((u32)(sprite->images->size / TILE_SIZE_4BPP));
         if (tileNum == -1)
@@ -523,7 +523,7 @@ u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 
     return index;
 }
 
-u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
+u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s32 x, s32 y, u32 subpriority)
 {
     u32 i;
 
@@ -634,10 +634,10 @@ void CalcCenterToCornerVec(struct Sprite *sprite, u32 shape, u32 size, u32 affin
     sprite->centerToCornerVecY = y;
 }
 
-s16 AllocSpriteTiles(u32 tileCount)
+s32 AllocSpriteTiles(u32 tileCount)
 {
     u32 i;
-    s16 start;
+    s32 start;
     u32 numTilesFound;
 
     if (tileCount == 0)
@@ -851,7 +851,7 @@ void AnimateSprite(struct Sprite *sprite)
 
 void BeginAnim(struct Sprite *sprite)
 {
-    s16 imageValue;
+    s32 imageValue;
     u32 duration;
     u32 hFlip;
     u32 vFlip;
@@ -903,8 +903,8 @@ void ContinueAnim(struct Sprite *sprite)
     }
     else if (!sprite->animPaused)
     {
-        s16 type;
-        s16 funcIndex;
+        s32 type;
+        s32 funcIndex;
         sprite->animCmdIndex++;
         type = sprite->anims[sprite->animNum][sprite->animCmdIndex].type;
         funcIndex = 3;
@@ -916,7 +916,7 @@ void ContinueAnim(struct Sprite *sprite)
 
 void AnimCmd_frame(struct Sprite *sprite)
 {
-    s16 imageValue;
+    s32 imageValue;
     u32 duration;
     u32 hFlip;
     u32 vFlip;
@@ -954,7 +954,7 @@ void AnimCmd_end(struct Sprite *sprite)
 
 void AnimCmd_jump(struct Sprite *sprite)
 {
-    s16 imageValue;
+    s32 imageValue;
     u32 duration;
     u32 hFlip;
     u32 vFlip;
@@ -1058,8 +1058,8 @@ void ContinueAffineAnim(struct Sprite *sprite)
         }
         else
         {
-            s16 type;
-            s16 funcIndex;
+            s32 type;
+            s32 funcIndex;
             sAffineAnimStates[matrixNum].animCmdIndex++;
             type = sprite->affineAnims[sAffineAnimStates[matrixNum].animNum][sAffineAnimStates[matrixNum].animCmdIndex].type;
             funcIndex = 3;
@@ -1164,7 +1164,7 @@ u32 GetSpriteMatrixNum(struct Sprite *sprite)
 
 // Used to shift a sprite's position as it scales.
 // Only used by the minigame countdown, so that for instance the numbers don't slide up as they squish down before jumping.
-void SetSpriteMatrixAnchor(struct Sprite *sprite, s16 x, s16 y)
+void SetSpriteMatrixAnchor(struct Sprite *sprite, s32 x, s32 y)
 {
     sprite->sAnchorX = x;
     sprite->sAnchorY = y;
@@ -1274,7 +1274,7 @@ void ApplyAffineAnimFrameRelativeAndUpdateMatrix(u32 matrixNum, struct AffineAni
     CopyOamMatrix(matrixNum, &matrix);
 }
 
-s16 ConvertScaleParam(s16 scale)
+s32 ConvertScaleParam(s32 scale)
 {
     s32 val = 0x10000;
     return SAFE_DIV(val, scale);
@@ -1365,7 +1365,7 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite)
 {
     if (sprite->usingSheet)
     {
-        s16 tileOffset = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
+        s32 tileOffset = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
         if (OW_GFX_COMPRESS && sprite->sheetSpan)
             tileOffset = (tileOffset + 1) << sprite->sheetSpan;
         if (tileOffset < 0)
@@ -1435,7 +1435,7 @@ void InitSpriteAffineAnim(struct Sprite *sprite)
     }
 }
 
-void SetOamMatrixRotationScaling(u32 matrixNum, s16 xScale, s16 yScale, u32 rotation)
+void SetOamMatrixRotationScaling(u32 matrixNum, s32 xScale, s32 yScale, u32 rotation)
 {
     struct ObjAffineSrcData srcData;
     struct OamMatrix matrix;
@@ -1448,7 +1448,7 @@ void SetOamMatrixRotationScaling(u32 matrixNum, s16 xScale, s16 yScale, u32 rota
 
 static u32 LoadSpriteSheetWithOffset(const struct SpriteSheet *sheet, u32 offset)
 {
-    s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
+    s32 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
     if (tileStart < 0)
     {
@@ -1716,7 +1716,7 @@ bool32 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, 
             if (hFlip)
             {
                 s32 width = sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].width;
-                s16 right = x;
+                s32 right = x;
                 right += width;
                 x = right;
                 x = ~x + 1;
@@ -1725,7 +1725,7 @@ bool32 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, 
             if (vFlip)
             {
                 s32 height = sOamDimensions[subspriteTable->subsprites[i].shape][subspriteTable->subsprites[i].size].height;
-                s16 bottom = y;
+                s32 bottom = y;
                 bottom += height;
                 y = bottom;
                 y = ~y + 1;
@@ -1734,7 +1734,7 @@ bool32 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, 
             destOam[i] = *oam;
             destOam[i].shape = subspriteTable->subsprites[i].shape;
             destOam[i].size = subspriteTable->subsprites[i].size;
-            destOam[i].x = (s16)baseX + (s16)x;
+            destOam[i].x = (s32)baseX + (s32)x;
             destOam[i].y = baseY + y;
             destOam[i].tileNum = tileNum + subspriteTable->subsprites[i].tileOffset;
 

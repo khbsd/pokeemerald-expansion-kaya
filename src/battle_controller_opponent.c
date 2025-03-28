@@ -485,7 +485,7 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
 
 static void OpponentHandleDrawTrainerPic(u32 battler)
 {
-    s16 xPos;
+    s32 xPos;
     u32 trainerPicId = OpponentGetTrainerPicId(battler);
 
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)

@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Belly Drum cuts the user's HP in half")
     }
 }
 
-SINGLE_BATTLE_TEST("Belly Drum maximizes the user's Attack stat", s16 damage)
+SINGLE_BATTLE_TEST("Belly Drum maximizes the user's Attack stat", s32 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }
@@ -105,7 +105,7 @@ SINGLE_BATTLE_TEST("Belly Drum's HP cost doesn't trigger effects that trigger on
     }
 }
 
-SINGLE_BATTLE_TEST("Belly Drum minimizes the user's Attack stat with Contrary", s16 damage)
+SINGLE_BATTLE_TEST("Belly Drum minimizes the user's Attack stat with Contrary", s32 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }

@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Barb Barrage inflicts poison")
     }
 }
 
-SINGLE_BATTLE_TEST("Barb Barrage's power doubles if the target is poisoned/badly poisoned", s16 damage)
+SINGLE_BATTLE_TEST("Barb Barrage's power doubles if the target is poisoned/badly poisoned", s32 damage)
 {
     u32 status1;
     PARAMETRIZE { status1 = 0; }

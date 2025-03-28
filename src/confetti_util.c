@@ -116,7 +116,7 @@ u32 ConfettiUtil_SetCallback(u32 id, void (*func)(struct ConfettiUtil *))
     return id;
 }
 
-u32 ConfettiUtil_SetData(u32 id, u32 dataArrayId, s16 dataValue)
+u32 ConfettiUtil_SetData(u32 id, u32 dataArrayId, s32 dataValue)
 {
     if (sWork == NULL || id >= sWork->count)
         return 0xFF;
@@ -127,7 +127,7 @@ u32 ConfettiUtil_SetData(u32 id, u32 dataArrayId, s16 dataValue)
     return id;
 }
 
-u32 ConfettiUtil_AddNew(const struct OamData *oam, u32 tileTag, u32 palTag, s16 x, s16 y, u32 animNum, u32 priority)
+u32 ConfettiUtil_AddNew(const struct OamData *oam, u32 tileTag, u32 palTag, s32 x, s32 y, u32 animNum, u32 priority)
 {
     struct ConfettiUtil *structPtr = NULL;
     u32 i;

@@ -765,8 +765,8 @@ static void UNUSED DestroyBlendPalettesGraduallyTask(void)
 static void Task_BlendPalettesGradually(u8 taskId)
 {
     u32 palettes;
-    s16 *data;
-    s16 target;
+    s32 *data;
+    s32 target;
 
     data = gTasks[taskId].data;
     palettes = GetWordTaskArg(taskId, tPalettes);

@@ -14,8 +14,8 @@
 
 struct PokeblockFeeder
 {
-    /*0x00*/ s16 x;
-    /*0x02*/ s16 y;
+    /*0x00*/ s32 x;
+    /*0x02*/ s32 y;
     /*0x04*/ s32 mapNum;
     /*0x05*/ u32 stepCounter;
     /*0x08*/ struct Pokeblock pokeblock;
@@ -130,7 +130,7 @@ static void ClearAllPokeblockFeeders(void)
 
 void GetPokeblockFeederInFront(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 i;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -152,7 +152,7 @@ void GetPokeblockFeederInFront(void)
 
 void GetPokeblockFeederWithinRange(void)
 {
-    s16 x, y;
+    s32 x, y;
     u32 i;
 
     PlayerGetDestCoords(&x, &y);
@@ -202,7 +202,7 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
 
 void SafariZoneActivatePokeblockFeeder(u32 pkblId)
 {
-    s16 x, y;
+    s32 x, y;
     u32 i;
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)

@@ -110,7 +110,7 @@ static void AnimHornHit_Step(struct Sprite *);
 static void AnimSuperFang(struct Sprite *);
 static void AnimWavyMusicNotes(struct Sprite *);
 static void AnimWavyMusicNotes_Step(struct Sprite *);
-static void AnimWavyMusicNotes_CalcVelocity(s16, s16, s16 *, s16 *, s32);
+static void AnimWavyMusicNotes_CalcVelocity(s32, s32, s32 *, s32 *, s32);
 static void AnimFlyingMusicNotes(struct Sprite *);
 static void AnimFlyingMusicNotes_Step(struct Sprite *);
 static void AnimBellyDrumHand(struct Sprite *);
@@ -128,7 +128,7 @@ static void AnimTask_MoonlightEndFade_Step(u8 taskId);
 static void AnimTask_LeafBlade_Step(u8);
 static void AnimTask_DuplicateAndShrinkToPos_Step1(u8);
 static void AnimTask_DuplicateAndShrinkToPos_Step2(u8);
-static s16 LeafBladeGetPosFactor(struct Sprite *);
+static s32 LeafBladeGetPosFactor(struct Sprite *);
 static void AnimTask_LeafBlade_Step2(struct Task *, u8);
 static void AnimTask_LeafBlade_Step2_Callback(struct Sprite *);
 static void AnimTask_SkullBashPositionSet(u8);
@@ -3512,8 +3512,8 @@ static void AnimPluckParticle(struct Sprite *sprite)
 {
     if(sprite->data[0] > 0)
     {
-        s16 yVelocity = sprite->data[5];
-        s16 xVelocity = sprite->data[2];
+        s32 yVelocity = sprite->data[5];
+        s32 xVelocity = sprite->data[2];
         sprite->y -= yVelocity;
         sprite->x += xVelocity;
         if((sprite->data[0] % 7) == 0)
@@ -3638,8 +3638,8 @@ static void AnimMoveTrumpCardParticleAlive(struct Sprite *sprite)
 {
     if(sprite->data[0] > 0)
     {
-        s16 yVelocity = sprite->data[2];
-        s16 xVelocity = sprite->data[1];
+        s32 yVelocity = sprite->data[2];
+        s32 xVelocity = sprite->data[1];
         sprite->y -= yVelocity;
         sprite->x += xVelocity;
         if((sprite->data[0] % 2) == 0)
@@ -4181,9 +4181,9 @@ void AnimTranslateLinearSingleSineWave(struct Sprite *sprite)
 static void AnimTranslateLinearSingleSineWave_Step(struct Sprite *sprite)
 {
     bool32 destroy = FALSE;
-    s16 a = sprite->data[0];
-    s16 b = sprite->data[7];
-    s16 r0;
+    s32 a = sprite->data[0];
+    s32 b = sprite->data[7];
+    s32 r0;
 
     sprite->data[0] = 1;
     TranslateAnimHorizontalArc(sprite);
@@ -4441,10 +4441,10 @@ static void AnimIngrainRoot(struct Sprite *sprite)
 // arg 5: duration
 static void AnimFrenzyPlantRoot(struct Sprite *sprite)
 {
-    s16 attackerX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
-    s16 attackerY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    s16 targetX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-    s16 targetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    s32 attackerX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    s32 attackerY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    s32 targetX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    s32 targetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     targetX -= attackerX;
     targetY -= attackerY;
@@ -4491,7 +4491,7 @@ static void AnimIngrainOrb(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void InitItemBagData(struct Sprite *sprite, s16 c)
+static void InitItemBagData(struct Sprite *sprite, s32 c)
 {
     int a = (sprite->x << 8) | sprite->y;
     int b = (sprite->data[6] << 8) | sprite->data[7];
@@ -4507,10 +4507,10 @@ bool32 moveAlongLinearPath(struct Sprite *sprite)
     u32 yStartPos = (u8)sprite->data[5];
     s32 xEndPos = (u8)(sprite->data[6] >> 8);
     s32 yEndPos = (u8)sprite->data[6];
-    s16 totalTime = sprite->data[7] >> 8;
-    s16 currentTime = sprite->data[7] & 0xFF;
-    s16 yEndPos_2;
-    s16 r0;
+    s32 totalTime = sprite->data[7] >> 8;
+    s32 currentTime = sprite->data[7] & 0xFF;
+    s32 yEndPos_2;
+    s32 r0;
     s32 var1;
     s32 vaxEndPos;
 
@@ -4562,8 +4562,8 @@ static void AnimItemSteal_Step1(struct Sprite *sprite)
 
 static void AnimPresent(struct Sprite *sprite)
 {
-    s16 targetX;
-    s16 targetY;
+    s32 targetX;
+    s32 targetY;
     InitSpritePosToAnimAttacker(sprite, FALSE);
     targetX = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
     targetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
@@ -4608,7 +4608,7 @@ static void AnimKnockOffOpponentsItem(struct Sprite *sprite)
 
 static void AnimKnockOffItem(struct Sprite *sprite)
 {
-    s16 targetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+    s32 targetY = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         sprite->data[6] = 0;
@@ -4653,8 +4653,8 @@ static void AnimPresentHealParticle(struct Sprite *sprite)
 
 static void AnimItemSteal(struct Sprite *sprite)
 {
-    s16 attackerX;
-    s16 attackerY;
+    s32 attackerX;
+    s32 attackerY;
     InitSpritePosToAnimTarget(sprite, FALSE);
     attackerX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
     attackerY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
@@ -5021,9 +5021,9 @@ static void AnimTask_LeafBlade_Step(u8 taskId)
     }
 }
 
-static s16 LeafBladeGetPosFactor(struct Sprite *sprite)
+static s32 LeafBladeGetPosFactor(struct Sprite *sprite)
 {
-    s16 var = 8;
+    s32 var = 8;
     if (sprite->data[4] < sprite->y)
         var = -var;
 
@@ -5036,8 +5036,8 @@ static void AnimTask_LeafBlade_Step2(struct Task *task, u8 taskId)
     if (task->data[14] > 0)
     {
         u8 spriteId;
-        s16 spriteX;
-        s16 spriteY;
+        s32 spriteX;
+        s32 spriteY;
         task->data[14] = 0;
         spriteX = gSprites[task->data[2]].x + gSprites[task->data[2]].x2;
         spriteY = gSprites[task->data[2]].y + gSprites[task->data[2]].y2;
@@ -5173,8 +5173,8 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
 
 void AnimNeedleArmSpike(struct Sprite *sprite)
 {
-    s16 a;
-    s16 b;
+    s32 a;
+    s32 b;
     u32 c;
     u32 x;
     u32 y;
@@ -5809,8 +5809,8 @@ static void AnimLockOnTarget_Step2(struct Sprite *sprite)
 
 static void AnimLockOnTarget_Step3(struct Sprite *sprite)
 {
-    s16 a;
-    s16 b;
+    s32 a;
+    s32 b;
     if (sprite->oam.affineParam == 0)
     {
         sprite->data[0] = 3;
@@ -5906,18 +5906,18 @@ static void AnimLockOnTarget_Step6(struct Sprite *sprite)
 static void AnimLockOnMoveTarget(struct Sprite *sprite)
 {
     sprite->oam.affineParam = gBattleAnimArgs[0];
-    if ((s16)sprite->oam.affineParam == 1)
+    if ((s32)sprite->oam.affineParam == 1)
     {
         sprite->x -= 0x18;
         sprite->y -= 0x18;
     }
-    else if ((s16)sprite->oam.affineParam == 2)
+    else if ((s32)sprite->oam.affineParam == 2)
     {
         sprite->x -= 0x18;
         sprite->y += 0x18;
         sprite->oam.matrixNum = ST_OAM_VFLIP;
     }
-    else if ((s16)sprite->oam.affineParam == 3)
+    else if ((s32)sprite->oam.affineParam == 3)
     {
         sprite->x += 0x18;
         sprite->y -= 0x18;
@@ -7122,7 +7122,7 @@ static void AnimWavyMusicNotes(struct Sprite *sprite)
     sprite->callback = AnimWavyMusicNotes_Step;
 }
 
-static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velocY, s32 xSpeedFactor)
+static void AnimWavyMusicNotes_CalcVelocity(s32 x, s32 y, s32 *velocX, s32 *velocY, s32 xSpeedFactor)
 {
     int x2;
     int time;
@@ -7140,7 +7140,7 @@ static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velo
 
 static void AnimWavyMusicNotes_Step(struct Sprite *sprite)
 {
-    s16 y, trigIdx;
+    s32 y, trigIdx;
     u8 index;
 
     sprite->sMoveTimer++;
@@ -7209,7 +7209,7 @@ static void AnimFlyingMusicNotes_Step(struct Sprite *sprite)
 
 static void AnimBellyDrumHand(struct Sprite *sprite)
 {
-    s16 a;
+    s32 a;
     if (gBattleAnimArgs[0] == 1)
     {
         sprite->oam.matrixNum = ST_OAM_HFLIP;
@@ -7229,7 +7229,7 @@ static void AnimBellyDrumHand(struct Sprite *sprite)
 
 void AnimSlowFlyingMusicNotes(struct Sprite *sprite)
 {
-    s16 xDiff;
+    s32 xDiff;
     u8 index;
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     sprite->y += 8;
@@ -7253,7 +7253,7 @@ static void AnimSlowFlyingMusicNotes_Step(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite) == 0)
     {
-        s16 xDiff;
+        s32 xDiff;
         xDiff = Sin(sprite->data[5], 8);
         if (sprite->x2 < 0)
             xDiff = -xDiff;
@@ -7275,7 +7275,7 @@ void SetSpriteNextToMonHead(u8 battler, struct Sprite *sprite)
     else
         sprite->x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_LEFT) - 8;
 
-    sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) - (s16)GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 4;
+    sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) - (s32)GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 4;
 }
 
 void AnimThoughtBubble(struct Sprite *sprite)
@@ -7360,7 +7360,7 @@ static void AnimFollowMeFinger_Step1(struct Sprite *sprite)
 
 static void AnimFollowMeFinger_Step2(struct Sprite *sprite)
 {
-    s16 x1, x2;
+    s32 x1, x2;
 
     sprite->data[1] += 4;
     if (sprite->data[1] > 254)
@@ -7457,8 +7457,8 @@ static void AnimRockPolishSparkle(struct Sprite *sprite)
 // arg 2: duration
 static void AnimPoisonJabProjectile(struct Sprite *sprite)
 {
-    s16 targetXPos;
-    s16 targetYPos;
+    s32 targetXPos;
+    s32 targetYPos;
     u32 rotation;
 
     InitSpritePosToAnimTarget(sprite, TRUE);

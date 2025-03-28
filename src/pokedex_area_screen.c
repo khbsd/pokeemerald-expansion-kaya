@@ -718,11 +718,11 @@ static void ResetPokedexAreaMapBg(void)u32
 static void CreateAreaMarkerSprites(void)
 {
     u8 spriteId;
-    s16 x;
-    s16 y;
-    s16 i;
-    s16 mapSecId;
-    s16 numSprites;
+    s32 x;
+    s32 y;
+    s32 i;
+    s32 mapSecId;
+    s32 numSprites;
 
     LoadSpriteSheet(&sAreaMarkerSpriteSheet);
     LoadSpritePalette(&sAreaMarkerSpritePalette);

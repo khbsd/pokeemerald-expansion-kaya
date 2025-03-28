@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_STRENGTH_SAP) == EFFECT_STRENGTH_SAP);
 }
 
-SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on target's Attack Stat", s16 hp)
+SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on target's Attack Stat", s32 hp)
 {
     u32 atkStat = 0;
 
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
 }
 
 // Same as above, but Substitute is used before Strength Sap.
-SINGLE_BATTLE_TEST("Strength Sap works exactly the same when attacker is behind substitute", s16 hp)
+SINGLE_BATTLE_TEST("Strength Sap works exactly the same when attacker is behind substitute", s32 hp)
 {
     u32 atkStat = 0;
 
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Strength Sap works exactly the same when attacker is behind 
 }
 
 // This test checks all stat stages from -6 to +6.
-SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on target's Attack Stat and stat Change", s16 hp)
+SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on target's Attack Stat and stat Change", s32 hp)
 {
     s32 j = 0, statStage = 0;
 
@@ -141,7 +141,7 @@ SINGLE_BATTLE_TEST("Strength Sap fails if target is at -6 Atk")
     }
 }
 
-SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s16 hp)
+SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s32 hp)
 {
     u32 item;
 

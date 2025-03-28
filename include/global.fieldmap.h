@@ -68,8 +68,8 @@ struct __attribute__((packed, aligned(4))) ObjectEventTemplate
     /*0x00*/ u8 localId;
     /*0x01*/ u32 graphicsId;
     /*0x03*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
-    /*0x04*/ s16 x;
-    /*0x06*/ s16 y;
+    /*0x04*/ s32 x;
+    /*0x06*/ s32 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
     /*0x0A*/ u32 movementRangeX:4;
@@ -84,7 +84,7 @@ struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 
 struct WarpEvent
 {
-    s16 x, y;
+    s32 x, y;
     u8 elevation;
     u8 warpId;
     u8 mapNum;
@@ -93,7 +93,7 @@ struct WarpEvent
 
 struct CoordEvent
 {
-    s16 x, y;
+    s32 x, y;
     u8 elevation;
     u32 trigger;
     u32 index;
@@ -231,8 +231,8 @@ struct ObjectEventGraphicsInfo
     /*0x02*/ u32 paletteTag;
     /*0x04*/ u32 reflectionPaletteTag;
     /*0x06*/ u32 size;
-    /*0x08*/ s16 width;
-    /*0x0A*/ s16 height;
+    /*0x08*/ s32 width;
+    /*0x0A*/ s32 height;
     /*0x0C*/ u8 paletteSlot:4;
              u8 shadowSize:2;
              u8 inanimate:1;

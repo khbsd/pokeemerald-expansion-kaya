@@ -379,8 +379,8 @@ static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
 
 void AnimTask_FrozenIceCubeAttacker(u8 taskId)
 {
-    s16 x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) - 32;
-    s16 y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) - 36;
+    s32 x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) - 32;
+    s32 y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
 
     if (IsContest())
@@ -398,7 +398,7 @@ void AnimTask_FrozenIceCubeAttacker(u8 taskId)
 void AnimTask_CentredFrozenIceCube(u8 taskId)
 {
     // same as AnimTask_FrozenIceCube but center position on target(s)
-    s16 x, y;
+    s32 x, y;
     u8 spriteId;
     u8 battler1 = gBattleAnimTarget;
     u8 battler2 = BATTLE_PARTNER(battler1);
@@ -428,8 +428,8 @@ void AnimTask_CentredFrozenIceCube(u8 taskId)
 
 void AnimTask_FrozenIceCube(u8 taskId)
 {
-    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
-    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
+    s32 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
+    s32 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
 
     if (IsContest())
@@ -530,7 +530,7 @@ static void AnimTask_FrozenIceCube_Step4(u8 taskId)
 void AnimTask_StatsChange(u8 taskId)
 {
     bool32 goesDown = FALSE;
-    s16 animStatId = 0;
+    s32 animStatId = 0;
     bool32 sharply = FALSE;
 
     switch (gBattleSpritesDataPtr->animationData->animArg)

@@ -73,7 +73,7 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Power Herb does not prevent Cramaront from tr
 
 SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant deal 1/4 of damage opposing mon if hit by a damaging move, Gulping also lowers defense")
 {
-    s16 gulpMissileDamage;
+    s32 gulpMissileDamage;
 
     GIVEN {
         PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }

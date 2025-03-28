@@ -1904,7 +1904,7 @@ static u32 PlayerGetTrainerBackPicId(void)
 static void PlayerHandleDrawTrainerPic(u32 battler)
 {
     bool32 isFrontPic;
-    s16 xPos, yPos;
+    s32 xPos, yPos;
     u32 trainerPicId;
 
     trainerPicId = PlayerGetTrainerBackPicId();

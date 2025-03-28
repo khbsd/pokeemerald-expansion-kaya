@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Torrent boosts Water-type moves in a pinch", s16 damage)
+SINGLE_BATTLE_TEST("Torrent boosts Water-type moves in a pinch", s32 damage)
 {
     u32 hp;
     PARAMETRIZE { hp = 99; }

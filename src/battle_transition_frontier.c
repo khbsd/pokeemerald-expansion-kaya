@@ -228,7 +228,7 @@ static void LoadLogoGfx(void)
     LoadSpritePalette(&sSpritePalette_LogoCircles);
 }
 
-static u32 CreateSlidingLogoCircleSprite(s16 x, s16 y, u32 delayX, u32 delayY, s32 speedX, s32 speedY, u32 spriteAnimNum)
+static u32 CreateSlidingLogoCircleSprite(s32 x, s32 y, u32 delayX, u32 delayY, s32 speedX, s32 speedY, u32 spriteAnimNum)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
@@ -263,7 +263,7 @@ static u32 CreateSlidingLogoCircleSprite(s16 x, s16 y, u32 delayX, u32 delayY, s
 
 static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
 {
-    s16 *data = sprite->data;
+    s32 *data = sprite->data;
 
     if (sprite->x == sTargetX && sprite->y == sTargetY)
     {
@@ -293,7 +293,7 @@ static void SpriteCB_LogoCircleSlide(struct Sprite *sprite)
     }
 }
 
-static u32 CreateSpiralingLogoCircleSprite(s16 x, s16 y, s16 angle, s16 rotateSpeed, s16 radiusStart, s16 radiusEnd, s16 radiusDelta, u32 spriteAnimNum)
+static u32 CreateSpiralingLogoCircleSprite(s32 x, s32 y, s32 angle, s32 rotateSpeed, s32 radiusStart, s32 radiusEnd, s32 radiusDelta, u32 spriteAnimNum)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 

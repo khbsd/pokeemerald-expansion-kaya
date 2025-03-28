@@ -63,51 +63,51 @@ static const struct BardSoundTemplate (*const sBardSoundTemplatesTable[EC_NUM_GR
 
 #define PITCH_END 0x1800
 
-static const s16 sPitch1_0[] = { -0x300, PITCH_END };
-static const s16 sPitch1_1[] = { 0x0900, PITCH_END };
-static const s16 sPitch1_2[] = { 0x0100, PITCH_END };
-static const s16 sPitch1_3[] = { 0x0400, PITCH_END };
-static const s16 sPitch1_4[] = { 0x0b00, PITCH_END };
+static const s32 sPitch1_0[] = { -0x300, PITCH_END };
+static const s32 sPitch1_1[] = { 0x0900, PITCH_END };
+static const s32 sPitch1_2[] = { 0x0100, PITCH_END };
+static const s32 sPitch1_3[] = { 0x0400, PITCH_END };
+static const s32 sPitch1_4[] = { 0x0b00, PITCH_END };
 
-static const s16 sPitch2_0[] = { -0x300, -0x100, PITCH_END };
-static const s16 sPitch2_1[] = { -0x300, 0x0200, PITCH_END };
-static const s16 sPitch2_2[] = { 0x0200, 0x0400, PITCH_END };
-static const s16 sPitch2_3[] = { 0x0600, 0x0800, PITCH_END };
-static const s16 sPitch2_4[] = { 0x0900, 0x0800, PITCH_END };
+static const s32 sPitch2_0[] = { -0x300, -0x100, PITCH_END };
+static const s32 sPitch2_1[] = { -0x300, 0x0200, PITCH_END };
+static const s32 sPitch2_2[] = { 0x0200, 0x0400, PITCH_END };
+static const s32 sPitch2_3[] = { 0x0600, 0x0800, PITCH_END };
+static const s32 sPitch2_4[] = { 0x0900, 0x0800, PITCH_END };
 
-static const s16 sPitch3_0[] = { -0x300, -0x100, -0x300, PITCH_END };
-static const s16 sPitch3_1[] = { 0x0400, -0x300, 0x0400, PITCH_END };
-static const s16 sPitch3_2[] = { 0x0900, 0x0800, 0x0600, PITCH_END };
-static const s16 sPitch3_3[] = { 0x0100, 0x0200, 0x0400, PITCH_END };
-static const s16 sPitch3_4[] = { 0x0600, 0x1000, 0x0d00, PITCH_END };
+static const s32 sPitch3_0[] = { -0x300, -0x100, -0x300, PITCH_END };
+static const s32 sPitch3_1[] = { 0x0400, -0x300, 0x0400, PITCH_END };
+static const s32 sPitch3_2[] = { 0x0900, 0x0800, 0x0600, PITCH_END };
+static const s32 sPitch3_3[] = { 0x0100, 0x0200, 0x0400, PITCH_END };
+static const s32 sPitch3_4[] = { 0x0600, 0x1000, 0x0d00, PITCH_END };
 
-static const s16 sPitch4_0[] = { 0x0400, 0x0900, 0x0400, 0x0900, PITCH_END };
-static const s16 sPitch4_1[] = { 0x0900, 0x0400, 0x0d00, 0x0400, PITCH_END };
-static const s16 sPitch4_2[] = { 0x0100, 0x0200, 0x0400, 0x0600, PITCH_END };
-static const s16 sPitch4_3[] = { 0x0800, 0x0600, 0x0400, 0x0200, PITCH_END };
-static const s16 sPitch4_4[] = { 0x0f00, 0x0d00, 0x0b00, 0x0a00, PITCH_END };
+static const s32 sPitch4_0[] = { 0x0400, 0x0900, 0x0400, 0x0900, PITCH_END };
+static const s32 sPitch4_1[] = { 0x0900, 0x0400, 0x0d00, 0x0400, PITCH_END };
+static const s32 sPitch4_2[] = { 0x0100, 0x0200, 0x0400, 0x0600, PITCH_END };
+static const s32 sPitch4_3[] = { 0x0800, 0x0600, 0x0400, 0x0200, PITCH_END };
+static const s32 sPitch4_4[] = { 0x0f00, 0x0d00, 0x0b00, 0x0a00, PITCH_END };
 
-static const s16 sPitch5_0[] = { -0x300, -0x100, 0x0100, 0x0200, 0x0400, PITCH_END };
-static const s16 sPitch5_1[] = { 0x0900, 0x0800, 0x0600, 0x0400, 0x0200, PITCH_END };
-static const s16 sPitch5_2[] = { 0x0100, 0x0400, 0x0900, 0x0400, 0x0100, PITCH_END };
-static const s16 sPitch5_3[] = { 0x0900, 0x0400, 0x0900, 0x0400, -0x300, PITCH_END };
-static const s16 sPitch5_4[] = { 0x0b00, 0x0800, 0x0400, 0x0400, 0x0600, PITCH_END };
+static const s32 sPitch5_0[] = { -0x300, -0x100, 0x0100, 0x0200, 0x0400, PITCH_END };
+static const s32 sPitch5_1[] = { 0x0900, 0x0800, 0x0600, 0x0400, 0x0200, PITCH_END };
+static const s32 sPitch5_2[] = { 0x0100, 0x0400, 0x0900, 0x0400, 0x0100, PITCH_END };
+static const s32 sPitch5_3[] = { 0x0900, 0x0400, 0x0900, 0x0400, -0x300, PITCH_END };
+static const s32 sPitch5_4[] = { 0x0b00, 0x0800, 0x0400, 0x0400, 0x0600, PITCH_END };
 
-static const s16 sPitch6_0[] = { -0x300, -0x100, 0x0100, 0x0200, 0x0400, 0x0600, PITCH_END };
-static const s16 sPitch6_1[] = { 0x0800, 0x0600, 0x0400, 0x0200, 0x0100, -0x100, PITCH_END };
-static const s16 sPitch6_2[] = { 0x0100, 0x0200, 0x0400, 0x0100, 0x0200, 0x1000, PITCH_END };
-static const s16 sPitch6_3[] = { 0x0400, -0x300, 0x0900, 0x0400, 0x0900, 0x0400, PITCH_END };
-static const s16 sPitch6_4[] = { 0x0800, 0x0900, 0x0800, 0x0900, 0x0800, 0x0900, PITCH_END };
+static const s32 sPitch6_0[] = { -0x300, -0x100, 0x0100, 0x0200, 0x0400, 0x0600, PITCH_END };
+static const s32 sPitch6_1[] = { 0x0800, 0x0600, 0x0400, 0x0200, 0x0100, -0x100, PITCH_END };
+static const s32 sPitch6_2[] = { 0x0100, 0x0200, 0x0400, 0x0100, 0x0200, 0x1000, PITCH_END };
+static const s32 sPitch6_3[] = { 0x0400, -0x300, 0x0900, 0x0400, 0x0900, 0x0400, PITCH_END };
+static const s32 sPitch6_4[] = { 0x0800, 0x0900, 0x0800, 0x0900, 0x0800, 0x0900, PITCH_END };
 
-static const s16 sPitch7_0[] = { 0x0200, 0x0100, 0x0200, 0x0100, 0x0200, 0x0400, 0x0200, PITCH_END };
-static const s16 sPitch7_1[] = { 0x0100, 0x0100, -0x100, -0x100, -0x300, 0x0400, -0x300, PITCH_END };
-static const s16 sPitch7_2[] = { 0x0800, 0x0900, 0x0b00, 0x0d00, 0x0e00, 0x0d00, 0x0b00, PITCH_END };
-static const s16 sPitch7_3[] = { 0x0800, 0x0600, 0x0400, 0x0200, 0x0d00, 0x0b00, 0x0900, PITCH_END };
-static const s16 sPitch7_4[] = { 0x0300, 0x0400, 0x0600, 0x0800, 0x0700, 0x0800, 0x0400, PITCH_END };
+static const s32 sPitch7_0[] = { 0x0200, 0x0100, 0x0200, 0x0100, 0x0200, 0x0400, 0x0200, PITCH_END };
+static const s32 sPitch7_1[] = { 0x0100, 0x0100, -0x100, -0x100, -0x300, 0x0400, -0x300, PITCH_END };
+static const s32 sPitch7_2[] = { 0x0800, 0x0900, 0x0b00, 0x0d00, 0x0e00, 0x0d00, 0x0b00, PITCH_END };
+static const s32 sPitch7_3[] = { 0x0800, 0x0600, 0x0400, 0x0200, 0x0d00, 0x0b00, 0x0900, PITCH_END };
+static const s32 sPitch7_4[] = { 0x0300, 0x0400, 0x0600, 0x0800, 0x0700, 0x0800, 0x0400, PITCH_END };
 
 // In practice only sPitch7_# below are used below.
 // BASE_PITCH_TABLE_INDEX is 30 by default, and this table is always indexed with (x + 30), where x is some value 0 - 4
-static const s16 *const sPitchTables[NUM_BARD_PITCH_TABLES_PER_SIZE * 7] = {
+static const s32 *const sPitchTables[NUM_BARD_PITCH_TABLES_PER_SIZE * 7] = {
     sPitch1_0, sPitch1_1, sPitch1_2, sPitch1_3, sPitch1_4,
     sPitch2_0, sPitch2_1, sPitch2_2, sPitch2_3, sPitch2_4,
     sPitch3_0, sPitch3_1, sPitch3_2, sPitch3_3, sPitch3_4,
@@ -184,7 +184,7 @@ static const int sPhonemeLengths[NUM_PHONEME_SONGS + 1] = {
     [NUM_PHONEME_SONGS] = 15, // This is the length that will be used by PREV_BARD_SOUND to hold the previous phoneme sound.
 };
 
-static s16 GetWordPitch(int tableIndex, int pitchIndex)
+static s32 GetWordPitch(int tableIndex, int pitchIndex)
 {
     return sPitchTables[tableIndex][pitchIndex];
 }

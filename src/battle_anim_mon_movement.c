@@ -363,7 +363,7 @@ void AnimTask_ShakeAndSinkMon(u8 taskId)
 static void AnimTask_ShakeAndSinkMon_Step(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
-    s16 x = gTasks[taskId].data[1];
+    s32 x = gTasks[taskId].data[1];
     if (gTasks[taskId].data[2] == gTasks[taskId].data[8]++)
     {
         gTasks[taskId].data[8] = 0;
@@ -733,7 +733,7 @@ static void SlideMonToOffsetAndBack_End(struct Sprite *sprite)
 // arg 6: lunge duration
 void AnimTask_WindUpLunge(u8 taskId)
 {
-    s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+    s32 wavePeriod = 0x8000 / gBattleAnimArgs[3];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -797,7 +797,7 @@ static void AnimTask_WindUpLunge_Step2(u8 taskId)
 
 void AnimTask_DuckDownHop(u8 taskId)
 {
-    s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+    s32 wavePeriod = 0x8000 / gBattleAnimArgs[3];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -938,7 +938,7 @@ void AnimTask_SwayMon(u8 taskId)
 
 static void AnimTask_SwayMonStep(u8 taskId)
 {
-    s16 sineValue;
+    s32 sineValue;
     u8 spriteId;
     int waveIndex;
     u32 sineIndex;

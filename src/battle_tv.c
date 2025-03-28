@@ -823,11 +823,11 @@ void BattleTv_SetDataBasedOnAnimation(u32 animationId)
 void TryPutLinkBattleTvShowOnAir(void)
 {
     u32 playerBestSpecies = 0, opponentBestSpecies = 0;
-    s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
+    s32 playerBestSum = 0, opponentBestSum = SHRT_MAX;
     u32 playerBestMonId = 0, opponentBestMonId = 0;
     struct BattleTvMovePoints *movePoints = NULL;
     u32 countPlayer = 0, countOpponent = 0;
-    s16 sum = 0;
+    s32 sum = 0;
     u32 species = 0;
     u32 moveId = 0;
     s32 i, j;

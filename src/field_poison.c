@@ -68,7 +68,7 @@ static bool32 MonFaintedFromPoison(u32 partyIdx)
 
 static void Task_TryFieldPoisonWhiteOut(u32 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s32 *data = gTasks[taskId].data;
     switch (tState)
     {
     case 0:

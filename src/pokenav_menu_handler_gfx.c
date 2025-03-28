@@ -1137,7 +1137,7 @@ static void SpriteCB_OptionZoom(struct Sprite * sprite)
 
 static void Task_OptionBlend(u32 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
 
     if (tBlendDelay == 0)
     {
@@ -1294,7 +1294,7 @@ static bool32 IsTaskActive_UpdateBgDotsPalette(void)
 static void Task_UpdateBgDotsPalette(u32 taskId)
 {
     u32 sp8[2];
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
     const u32 * pal1 = (const u32 *)GetWordTaskArg(taskId, 1);
     const u32 * pal2 = (const u32 *)GetWordTaskArg(taskId, 3);
 
@@ -1349,7 +1349,7 @@ static void InitMenuOptionGlow(void)
 
 static void Task_CurrentMenuOptionGlow(u32 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s32 * data = gTasks[taskId].data;
     data[0]++;
     if (data[0] > 0)
     {

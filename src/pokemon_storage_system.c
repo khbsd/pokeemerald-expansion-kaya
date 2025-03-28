@@ -407,9 +407,9 @@ struct PokemonStorageSystemData
     bool32 closeBoxFlashing;
     u32 closeBoxFlashTimer;
     bool32 closeBoxFlashState;
-    s16 newCurrBoxId;
+    s32 newCurrBoxId;
     u32 bg2_X;
-    s16 scrollSpeed;
+    s32 scrollSpeed;
     u32 scrollTimer;
     u32 wallpaperOffset;
     u32 ALIGNED(2) boxTitleTiles[1024];
@@ -423,8 +423,8 @@ struct PokemonStorageSystemData
     struct Sprite *nextBoxTitleSprites[2];
     struct Sprite *arrowSprites[2];
     u32 wallpaperPalBits;
-    s16 wallpaperSetId;
-    s16 wallpaperId;
+    s32 wallpaperSetId;
+    s32 wallpaperId;
     u32 wallpaperTilemap[360];
     u32 wallpaperChangeState;
     u32 scrollState;
@@ -444,8 +444,8 @@ struct PokemonStorageSystemData
     u32 shiftTimer;
     u32 numPartyToCompact;
     u32 iconScrollDistance;
-    s16 iconScrollPos;
-    s16 iconScrollSpeed;
+    s32 iconScrollPos;
+    s32 iconScrollSpeed;
     u32 iconScrollNumIncoming;
     u32 iconScrollCurColumn;
     s32 iconScrollDirection; // Unnecessary duplicate of scrollDirection
@@ -461,8 +461,8 @@ struct PokemonStorageSystemData
     s32 cursorNewY;
     u32 cursorSpeedX;
     u32 cursorSpeedY;
-    s16 cursorTargetX;
-    s16 cursorTargetY;
+    s32 cursorTargetX;
+    s32 cursorTargetY;
     u32 cursorMoveSteps;
     s32 cursorVerticalWrap;
     s32 cursorHorizontalWrap;
@@ -609,7 +609,7 @@ static void SetMenuText(u32);
 static s32 GetMenuItemTextId(u32);
 static void AddMenu(void);
 static bool32 IsMenuLoading(void);
-static s16 HandleMenuInput(void);
+static s32 HandleMenuInput(void);
 static void RemoveMenu(void);
 
 // Pokémon sprites
@@ -621,13 +621,13 @@ static void CompactPartySprites(void);
 static u32 GetNumPartySpritesCompacting(void);
 static void MovePartySpriteToNextSlot(struct Sprite *, u32);
 static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *);
-static void MovePartySprites(s16);
+static void MovePartySprites(s32);
 static void DestroyAllPartyMonIcons(void);
 static void ReshowReleaseMon(void);
 static bool32 ResetReleaseMonSpritePtr(void);
 static void SetMovingMonPriority(u32);
 static void SpriteCB_HeldMon(struct Sprite *);
-static struct Sprite *CreateMonIconSprite(u32, u32, s16, s16, u32, u32);
+static struct Sprite *CreateMonIconSprite(u32, u32, s32, s32, u32, u32);
 static void DestroyBoxMonIcon(struct Sprite *);
 
 // Pokémon data
@@ -770,7 +770,7 @@ static void CycleBoxTitleSprites(void);
 static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
 static void CycleBoxTitleColor(void);
-static s16 GetBoxTitleBaseX(const u32 *);
+static s32 GetBoxTitleBaseX(const u32 *);
 
 // Wallpaper
 static void SetWallpaperForCurrentBox(u32);
@@ -794,7 +794,7 @@ static s32 DetermineBoxScrollDirection(u32);
 static void SetCurrentBox(u32);
 
 // Misc
-static void CreateMainMenu(u32, s16 *);
+static void CreateMainMenu(u32, s32 *);
 static u32 GetCurrentBoxOption(void);
 static void ScrollBackground(void);
 static void UpdateCloseBoxButtonFlash(void);
@@ -1386,7 +1386,7 @@ u32 CountMonsInBox(u32 boxId)
     return count;
 }
 
-s16 GetFirstFreeBoxSpot(u32 boxId)
+s32 GetFirstFreeBoxSpot(u32 boxId)
 {
     u32 i;
 
@@ -1653,9 +1653,9 @@ static void FieldTask_ReturnToPcMenu(void)
 #undef tNextOption
 #undef tWindowId
 
-static void CreateMainMenu(u32 whichMenu, s16 *windowIdPtr)
+static void CreateMainMenu(u32 whichMenu, s32 *windowIdPtr)
 {
-    s16 windowId;
+    s32 windowId;
     struct WindowTemplate template = sWindowTemplate_MainMenu;
     template.width = GetMaxWidthInMenuTable((void *)sMainMenuTexts, OPTIONS_COUNT);
     windowId = AddWindow(&template);
@@ -1673,10 +1673,10 @@ static void CB2_ExitPokeStorage(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-static s16 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s32 startIdx, u32 stopIdx, u32 mode)
+static s32 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s32 startIdx, u32 stopIdx, u32 mode)
 {
-    s16 i;
-    s16 direction;
+    s32 i;
+    s32 direction;
     if (mode == 0 || mode == 1)
     {
         direction = 1;
@@ -4481,8 +4481,8 @@ static void CreateBoxMonIconAtPos(u32 boxPosition)
 
     if (species != SPECIES_NONE)
     {
-        s16 x = 8 * (3 * (boxPosition % IN_BOX_COLUMNS)) + 100;
-        s16 y = 8 * (3 * (boxPosition / IN_BOX_COLUMNS)) + 44;
+        s32 x = 8 * (3 * (boxPosition % IN_BOX_COLUMNS)) + 100;
+        s32 y = 8 * (3 * (boxPosition / IN_BOX_COLUMNS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS));
@@ -4497,7 +4497,7 @@ static void CreateBoxMonIconAtPos(u32 boxPosition)
 #define sDelay         data[4]
 #define sScrollOutX    data[5]
 
-static void StartBoxMonIconsScrollOut(s16 speed)
+static void StartBoxMonIconsScrollOut(s32 speed)
 {
     u32 i;
 
@@ -4566,11 +4566,11 @@ static void DestroyBoxMonIconsInColumn(u32 column)
 }
 
 // Create the appearing icons for the incoming scrolling box
-static u32 CreateBoxMonIconsInColumn(u32 column, u32 distance, s16 speed)
+static u32 CreateBoxMonIconsInColumn(u32 column, u32 distance, s32 speed)
 {
     s32 i;
     u32 y = 44;
-    s16 xDest = 8 * (3 * column) + 100;
+    s32 xDest = 8 * (3 * column) + 100;
     u32 x = xDest - ((distance + 1) * speed);
     u32 subpriority = 19 - column;
     u32 iconsCreated = 0;
@@ -4811,7 +4811,7 @@ static u32 GetNumPartySpritesCompacting(void)
 
 static void MovePartySpriteToNextSlot(struct Sprite *sprite, u32 partyId)
 {
-    s16 x, y;
+    s32 x, y;
 
     sprite->sPartyId = partyId;
     if (partyId == 0)
@@ -4831,8 +4831,8 @@ static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *sprite)
 {
     if (sprite->sMoveSteps != 0)
     {
-        s16 x = sprite->sMonX += sprite->sSpeedX;
-        s16 y = sprite->sMonY += sprite->sSpeedY;
+        s32 x = sprite->sMonX += sprite->sSpeedX;
+        s32 y = sprite->sMonY += sprite->sSpeedY;
         sprite->x = x / 8u;
         sprite->y = y / 8u;
         sprite->sMoveSteps--;
@@ -4871,7 +4871,7 @@ static void DestroyMovingMonIcon(void)
     }
 }
 
-static void MovePartySprites(s16 yDelta)
+static void MovePartySprites(s32 yDelta)
 {
     u32 i, posY;
 
@@ -5153,7 +5153,7 @@ static void RemoveSpeciesFromIconList(u32 species)
     }
 }
 
-static struct Sprite *CreateMonIconSprite(u32 species, u32 personality, s16 x, s16 y, u32 oamPriority, u32 subpriority)
+static struct Sprite *CreateMonIconSprite(u32 species, u32 personality, s32 x, s32 y, u32 oamPriority, u32 subpriority)
 {
     u32 tileNum;
     u32 spriteId;
@@ -5439,9 +5439,9 @@ static bool32 WaitForWallpaperGfxLoad(void)
 
 static void DrawWallpaper(const void *tilemap, s32 direction, u32 offset)
 {
-    s16 tileOffset = offset * 256;
-    s16 paletteNum = (offset * 2) + 3;
-    s16 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
+    s32 tileOffset = offset * 256;
+    s32 paletteNum = (offset * 2) + 3;
+    s32 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
     CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 20, 18, x, 2, 20, 18, 17, tileOffset, paletteNum);
 
@@ -5459,7 +5459,7 @@ static void TrimOldWallpaper(void *tilemap)
 {
     u32 i;
     u32 *dest = tilemap;
-    s16 r3 = ((sStorage->bg2_X / 8) + 30) & 0x3F;
+    s32 r3 = ((sStorage->bg2_X / 8) + 30) & 0x3F;
 
     if (r3 <= 31)
         dest += r3 + 0x260;
@@ -5486,7 +5486,7 @@ static void TrimOldWallpaper(void *tilemap)
 static void InitBoxTitle(u32 boxId)
 {
     u32 tagIndex;
-    s16 x;
+    s32 x;
     u32 i;
 
     struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
@@ -5540,7 +5540,7 @@ static void InitBoxTitle(u32 boxId)
 static void CreateIncomingBoxTitle(u32 boxId, s32 direction)
 {
     u32 palOffset;
-    s16 x, adjustedX;
+    s32 x, adjustedX;
     u32 i;
     struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
     struct SpriteTemplate template = sSpriteTemplate_BoxTitle;
@@ -5635,7 +5635,7 @@ static void CycleBoxTitleColor(void)
         CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[sStorage->boxTitleAltPalOffset], PLTT_SIZEOF(2));
 }
 
-static s16 GetBoxTitleBaseX(const u32 *string)
+static s32 GetBoxTitleBaseX(const u32 *string)
 {
     return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL, string, 0) / 2;
 }
@@ -5889,7 +5889,7 @@ static u32 GetSpeciesAtCursorPosition(void)
 
 static bool32 UpdateCursorPos(void)
 {
-    s16 tmp;
+    s32 tmp;
 
     if (sStorage->cursorMoveSteps == 0)
     {
@@ -6432,7 +6432,7 @@ static void SetShiftedMonData(u32 boxId, u32 position)
 
 static bool32 TryStorePartyMonInBox(u32 boxId)
 {
-    s16 boxPosition = GetFirstFreeBoxSpot(boxId);
+    s32 boxPosition = GetFirstFreeBoxSpot(boxId);
     if (boxPosition == -1)
         return FALSE;
 
@@ -6775,9 +6775,9 @@ static void SetSelectionAfterSummaryScreen(void)
         sCursorPosition = gLastViewedMonIndex;
 }
 
-s16 CompactPartySlots(void)
+s32 CompactPartySlots(void)
 {
-    s16 retVal = -1;
+    s32 retVal = -1;
     u32 i, last;
 
     for (i = 0, last = 0; i < PARTY_SIZE; i++)
@@ -8090,7 +8090,7 @@ static bool32 IsMenuLoading(void)
     return FALSE;
 }
 
-static s16 HandleMenuInput(void)
+static s32 HandleMenuInput(void)
 {
     s32 input = MENU_NOTHING_CHOSEN;
 
@@ -8430,8 +8430,8 @@ static bool32 MultiMove_TryMoveGroup(u32 dir)
 
 static void MultiMove_UpdateSelectedIcons(void)
 {
-    s16 columnChange = (abs(sMultiMove->fromColumn - sMultiMove->cursorColumn)) - (abs(sMultiMove->fromColumn - sMultiMove->toColumn));
-    s16 rowChange = (abs(sMultiMove->fromRow - sMultiMove->cursorRow)) - (abs(sMultiMove->fromRow - sMultiMove->toRow));
+    s32 columnChange = (abs(sMultiMove->fromColumn - sMultiMove->cursorColumn)) - (abs(sMultiMove->fromColumn - sMultiMove->toColumn));
+    s32 rowChange = (abs(sMultiMove->fromRow - sMultiMove->cursorRow)) - (abs(sMultiMove->fromRow - sMultiMove->toRow));
 
     if (columnChange > 0)
         MultiMove_SelectColumn(sMultiMove->cursorColumn, sMultiMove->fromRow, sMultiMove->toRow);
@@ -9621,10 +9621,10 @@ static void SetBoxWallpaper(u32 boxId, u32 wallpaperId)
 }
 
 // For moving to the next Pokémon while viewing the summary screen
-s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u32 currIndex, u32 maxIndex, u32 mode)
+s32 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u32 currIndex, u32 maxIndex, u32 mode)
 {
-    s16 i;
-    s16 direction = -1;
+    s32 i;
+    s32 direction = -1;
 
     if (mode == 0 || mode == 1)
         direction = 1;
@@ -9823,12 +9823,12 @@ bool32 IsWaldaPhraseEmpty(void)
 
 struct TilemapUtil_RectData
 {
-    s16 x;
-    s16 y;
+    s32 x;
+    s32 y;
     u32 width;
     u32 height;
-    s16 destX;
-    s16 destY;
+    s32 destX;
+    s32 destY;
 };
 
 struct TilemapUtil

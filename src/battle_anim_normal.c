@@ -404,7 +404,7 @@ static void AnimSimplePaletteBlend(struct Sprite *sprite)
 //   4: F_PAL_DEF_PARTNER, gBattleAnimTarget partner OBJ palette
 //   5: F_PAL_ANIM_1, BG palette 8 (or 14, if in Contest)
 //   6: F_PAL_ANIM_2, BG palette 9
-u32 UnpackSelectedBattlePalettes(s16 selector)
+u32 UnpackSelectedBattlePalettes(s32 selector)
 {
     bool32 battleBackground = selector & 1;
     bool32 attacker = (selector >> 1) & 1;

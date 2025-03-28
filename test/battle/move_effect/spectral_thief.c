@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Spectral Thief steals opponents boost before attacking", s16 damage)
+SINGLE_BATTLE_TEST("Spectral Thief steals opponents boost before attacking", s32 damage)
 {
     u32 move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
