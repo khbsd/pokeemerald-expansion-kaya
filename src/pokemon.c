@@ -1167,7 +1167,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 totalRerolls += 1;
             if (I_FISHING_CHAIN && gIsFishingEncounter)
                 totalRerolls += CalculateChainFishingShinyRolls();
-            if (gDexNavBattle)
+            if (gDexNavSpecies)
                 totalRerolls += CalculateDexNavShinyRolls();
             if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) && P_EGG_INCREASED_SHINY_ODDS)
                 totalRerolls += 2;
