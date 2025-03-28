@@ -570,8 +570,6 @@ extern const u8 EventScript_TrainerHillTimer[];
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_AutoUseSurf[];
 extern const u8 EventScript_AutoUseConsecutiveSurf[];
-extern const u8 EventScript_AutoUseWaterfall[];
-extern const u8 EventScript_AutoUseConsecutiveWaterfall[];
 extern const u8 EventScript_UseWaterfall[];
 extern const u8 EventScript_CannotUseWaterfall[];
 extern const u8 EventScript_UseDive[];

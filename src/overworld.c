@@ -1198,24 +1198,6 @@ void AutoUseDiveEmerge(void)
         ScriptContext_SetupScript(EventScript_AutoUseDiveUnderwater);
 }
 
-void AutoUseWaterfall(void)
-{
-    if (CanAutoUseFieldMove(MOVE_WATERFALL) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-    {
-        /*if (!FlagGet(FLAG_SYS_USE_WATERFALL))
-        {
-            FlagSet(FLAG_SYS_USE_WATERFALL);
-            gSkipShowMonAnim = TRUE;
-        }
-        else
-            gSkipShowMonAnim = FALSE;
-
-        FieldCallback_Waterfall();*/
-
-        
-    }
-}
-
 void SetCurrentMapLayout(u16 mapLayoutId)
 {
     gSaveBlock1Ptr->mapLayoutId = mapLayoutId;

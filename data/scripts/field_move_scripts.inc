@@ -296,24 +296,6 @@ EventScript_UseWaterfall::
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
 
-EventScript_AutoUseWaterfall::
-	bufferpartymonnick STR_VAR_1, 0
-	setfieldeffectargument 0, 0
-	msgbox Text_WantToWaterfall, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
-	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
-	closemessage
-	dofieldeffect FLDEFF_USE_WATERFALL
-	releaseall
-	end
-
-EventScript_AutoUseConsecutiveWaterfall::
-	bufferpartymonnick STR_VAR_1, 0
-	setfieldeffectargument 0, 0
-	lockall
-	dofieldeffect FLDEFF_USE_WATERFALL
-	end
-
 EventScript_CannotUseWaterfall::
 	releaseall
 	end
