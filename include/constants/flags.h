@@ -82,9 +82,9 @@
 #define FLAG_UNUSED_0x044    0x44 // Unused Flag
 #define FLAG_UNUSED_0x045    0x45 // Unused Flag
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
-#define FLAG_UNUSED_0x047    0x47 // Unused Flag
-#define FLAG_UNUSED_0x048    0x48 // Unused Flag
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
+#define FLAG_DEXNAV_DETECT    0x47 // Unused Flag
+#define FLAG_DEXNAV_SEARCHING   0x48 // Unused Flag
+#define FLAG_DEXNAV_START_MENU    0x49 // Unused Flag
 #define FLAG_KAYA_DOLL_APPEAR       0x4A // NEEDS TO NEVER BE SET
 #define FLAG_KAYA_BOXLINK_FOUND     0x4B
 #define FLAG_KAYA_EXPSHARE_FOUND    0x4C
