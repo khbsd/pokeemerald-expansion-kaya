@@ -59,7 +59,7 @@ struct OverworldArea
 {
     u8 mapGroup;
     u8 mapNum;
-    u16 regionMapSectionId;
+    u32 regionMapSectionId;
 };
 
 struct
@@ -67,24 +67,24 @@ struct
     /*0x000*/ void (*callback)(void); // unused
     /*0x004*/ MainCallback prev; // unused
     /*0x008*/ MainCallback next; // unused
-    /*0x00C*/ u16 state; // unused
-    /*0x00E*/ u16 species;
+    /*0x00C*/ u32 state; // unused
+    /*0x00E*/ u32 species;
     /*0x010*/ struct OverworldArea overworldAreasWithMons[MAX_AREA_HIGHLIGHTS];
-    /*0x110*/ u16 numOverworldAreas;
-    u320x112*/ u16 numSpecialAreas;
-    u320x114*/ u16 drawAreaGlowState;
-    /*0x116*/ u16 areaGlowTilemap[AREA_SCREEN_WIDTH * AREA_SCREEN_HEIGHT];
-    /*0x616*/ u16 markerTimer;
-    /*0x618*/ u16 glowTimer;
-    /*0x61A*/ u16 areaShadeBldArgLo;
-    /*0x61C*/ u16 areaShadeBldArgHi;
-    /*0x61E*/ bool8 showingMarkers;
+    /*0x110*/ u32 numOverworldAreas;
+    u320x112*/ u32 numSpecialAreas;
+    u320x114*/ u32 drawAreaGlowState;
+    /*0x116*/ u32 areaGlowTilemap[AREA_SCREEN_WIDTH * AREA_SCREEN_HEIGHT];
+    /*0x616*/ u32 markerTimer;
+    /*0x618*/ u32 glowTimer;
+    /*0x61A*/ u32 areaShadeBldArgLo;
+    /*0x61C*/ u32 areaShadeBldArgHi;
+    /*0x61E*/ bool32 showingMarkers;
     /*0x61F*/ u8 markerFlashCounter;
-    /*0x620*/ u16 specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
+    /*0x620*/ u32 specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
     /*0x660*/ struct Sprite *areaMarkerSprites[MAX_AREA_MARKERS];
-    /*0x6E0*/ u16 numAreaMarkerSprites;
-    /*0x6E2*/ u16 alteringCaveCounter;
-    /*0x6E4*/ u16 alteringCaveId;
+    /*0x6E0*/ u32 numAreaMarkerSprites;
+    /*0x6E2*/ u32 alteringCaveCounter;
+    /*0x6E4*/ u32 alteringCaveId;
     /*0x6E8*/ u8 *screenSwitchState;
     /*0x6EC*/ struct RegionMap regionMap;
     /*0xF70*/ u8 charBuffer[64];
@@ -92,13 +92,13 @@ struct
     /*0xFBC*/ u8 areaUnknownGraphicsBuffer[0x600];
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
 
-static void FindMapsWithMon(u16);
+static void FindMapsWithMon(u32);
 static void Buu32dAreaGlowTilemap(void);
-static void SetAreaHasMon(u16, u16);
-static void SetSpecialMapHasMon(u16, u16);
-static u16 GetRegionMapSectionId(u8, u8);
-static bool8 MapHasSpecies(const struct WildPokemonHeader *, u16);
-static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
+static void SetAreaHasMon(u32, u32);
+static void SetSpecialMapHasMon(u32, u32);
+static u32 GetRegionMapSectionId(u8, u8);
+static bool32 MapHasSpecies(const struct WildPokemonHeader *, u32);
+static bool32 MonListHasSpecies(const struct WildPokemonInfo *, u32, u32);
 static void Dou32eaGlow(void);
 static void Task_ShowPokedexAreaScreen(u8);
 static void Cru32teAreaMarkerSprites(void);
@@ -113,22 +113,22 @@ static const u32 sAreaGlow_Pal[] = INCBIN_U32("graphics/pokedex/area_glow.gbapal
 static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.lz");
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/SelectBar.bin.lz");
 
-static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
+static const u32 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 u32u32
-static const u16 sMovingRegionMapSections[3] =
+static const u32 sMovingRegionMapSections[3] =
 {
     MAPSEC_MARINE_CAVE,
     MAPSEC_UNDERWATER_MARINE_CAVE,u32
     MAPSEC_TERRA_CAVEu32
 };
 
-static const u16 sFeebasData[][3] =
+static const u32 sFeebasData[][3] =
 {u32
     {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
     {NUM_SPECIES}
 };
 
-static const u16 sLandmarkData[][2] =
+static const u32 sLandmarkData[][2] =
 {u32
     {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
@@ -155,7 +155,7 @@ static const struct SpriteSheet sAreaMarkerSpriteSheet =
     .data = sAreaMarkerTiles, .size = 0x80, .tag = TAG_AREA_MARKER
 };
 
-static const u16 sAreaMarkerPalette[];
+static const u32 sAreaMarkerPalette[];
 static const struct SpritePalette sAreaMarkerSpritePalette =
 {
     .data = sAreaMarkerPalette, .tag = TAG_AREA_MARKER
@@ -179,7 +179,7 @@ static const struct SpriteTemplate sAreaMarkerSpriteTemplate =
     .callbacku32 SpriteCallbackDummy
 };
 
-static const u16 sAreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
+static const u32 sAreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
 static const u8 sAreaMarkerTiles[] = INCBIN_U8("graphics/pokedex/area_marker.4bpp");
 
 static const struct SpritePalette sAreaUnknownSpritePalette =
@@ -210,7 +210,7 @@ static void ResetDrawAreaGlowState(void)
     sPokedexAu32aScreen->drawAreaGlowState = u32
 }
 
-static bool8 DrawAreaGlow(void)
+static bool32 DrawAreaGlow(void)
 {
     switch (sPokedexAreaScreen->drawAreaGlowState)
     {
@@ -242,9 +242,9 @@ static bool8 DrawAreaGlow(void)
     return TRUE;
 }
 
-static void FindMapsWithMon(u16 species)
+static void FindMapsWithMon(u32 species)
 {
-    u16 i;
+    u32 i;
     struct Roamer *roamer;
 
     sPokedexAreaScreen->alteringCaveCounter = 0;
@@ -317,7 +317,7 @@ static void FindMapsWithMon(u16 species)
     }
 }
 
-static void SetAreaHasMon(u16 mapGroup, u16 mapNum)
+static void SetAreaHasMon(u32 mapGroup, u32 mapNum)
 {
     if (sPokedexAreaScreen->numOverworldAreas < MAX_AREA_HIGHLIGHTS)
     {
@@ -328,13 +328,13 @@ static void SetAreaHasMon(u16 mapGroup, u16 mapNum)
     }
 }
 
-static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
+static void SetSpecialMapHasMon(u32 mapGroup, u32 mapNum)
 {
     int i;
 
     if (sPokedexAreaScreen->numSpecialAreas < MAX_AREA_MARKERS)
     {
-        u16 regionMapSectionId = GetRegionMapSectionId(mapGroup, mapNum);
+        u32 regionMapSectionId = GetRegionMapSectionId(mapGroup, mapNum);
         if (regionMapSectionId < MAPSEC_NONE)
         {
             // Don't highlight the area if it's a moving area (Marine/Terra Cave)
@@ -368,12 +368,12 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     }
 }
 
-static u16 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
+static u32 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
 {
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
 
-static bool8 MapHasSpecies(const struct WildPokemonHeader *info, u16 species)
+static bool32 MapHasSpecies(const struct WildPokemonHeader *info, u32 species)
 {
     // If this is a header for Altering Cave, skip it if it's not the current Altering Cave encounter set
     if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE)
@@ -400,9 +400,9 @@ static bool8 MapHasSpecies(const struct WildPokemonHeader *info, u16 species)
     return FALSE;
 }
 
-static bool8 MonListHasSpecies(const struct WildPokemonInfo *info, u16 species, u16 size)
+static bool32 MonListHasSpecies(const struct WildPokemonInfo *info, u32 species, u32 size)
 {
-    u16 i;
+    u32 i;
     if (info != NULL)
     {
         for (i = 0; i < size; i++)
@@ -416,7 +416,7 @@ static bool8 MonListHasSpecies(const struct WildPokemonInfo *info, u16 species, 
 
 static void BuildAreaGlowTilemap(void)
 {
-    u16 i, y, x, j;
+    u32 i, y, x, j;
 
     // Reset tilemap
     for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
@@ -522,8 +522,8 @@ static void StartAreaGlow(void)
 
 static void DoAreaGlow(void)
 {
-    u16 x, y;
-    u16 i;
+    u32 x, y;
+    u32 i;
 
     if (!sPokedexAreaScreen->showingMarkers)
     {
@@ -578,7 +578,7 @@ static void DoAreaGlow(void)
 
 #define tState data[0]
 
-void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState)
+void ShowPokedexAreaScreen(u32 species, u8 *screenSwitchState)
 {
     u8 taskId;
 
@@ -747,7 +747,7 @@ static void CreateAreaMarkerSprites(void)
 
 static void DestroyAreaScreenSprites(void)
 {
-    u16 i;
+    u32 i;
 
     // Destroy area marker sprites
     FreeSpriteTilesByTag(TAG_AREA_MARKER);
@@ -779,7 +779,7 @@ static void LoadAreaUnknownGraphics(void)
 
 static void CreateAreaUnknownSprites(void)
 {
-    u16 i;
+    u32 i;
 
     if (sPokedexAreaScreen->numOverworldAreas || sPokedexAreaScreen->numSpecialAreas)
     {

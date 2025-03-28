@@ -57,11 +57,11 @@ enum {
 struct TextPrinterSubStruct
 {
     u8 fontId:4;  // 0x14
-    bool8 hasPrintBeenSpedUp:1;
+    bool32 hasPrintBeenSpedUp:1;
     u8 unk:3;
     u8 downArrowDelay:5;
     u8 downArrowYPosIdx:2;
-    bool8 hasFontIdBeenSet:1;
+    bool32 hasFontIdBeenSet:1;
     u8 autoScrollDelay;
 };
 
@@ -120,10 +120,10 @@ struct GlyphWidthFunc
 };
 
 typedef struct {
-    bool8 canABSpeedUpPrint:1;
-    bool8 useAlternateDownArrow:1;
-    bool8 autoScroll:1;
-    bool8 forceMidTextSpeed:1;
+    bool32 canABSpeedUpPrint:1;
+    bool32 useAlternateDownArrow:1;
+    bool32 autoScroll:1;
+    bool32 forceMidTextSpeed:1;
 } TextFlags;
 
 struct TextGlyph

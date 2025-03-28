@@ -64,7 +64,7 @@ static void Task_LinkupAwaitTrainerCardData(u32 taskId);
 static void Task_StopLinkup(u32 taskId);
 static void Task_LinkupFailed(u32 taskId);
 static void Task_LinkupConnectionError(u32 taskId);
-static bool8 TryLinkTimeout(u32 taskId);
+static bool32 TryLinkTimeout(u32 taskId);
 static void Task_ValidateMixingGameLanguage(u32 taskId);
 static void Task_ReestablishLink(u32 taskId);
 static void Task_ReestablishLinkAwaitConnection(u32 taskId);
@@ -92,7 +92,7 @@ static void CreateLinkupTask(u32 minPlayers, u32 maxPlayers)
     }
 }
 
-static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
+static void PrintNumPlayersInLink(u32 windowId, u32 numPlayers)
 {
     u32 xPos;
 
@@ -104,7 +104,7 @@ static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void ClearLinkPlayerCountWindow(u16 windowId)
+static void ClearLinkPlayerCountWindow(u32 windowId)
 {
     // Following this call with a copy-to-vram with mode COPYWIN_FULL is identical to
     // calling ClearStdWindowAndFrame(windowId, TRUE).
@@ -427,7 +427,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u32 taskId)
     }
 }
 
-bool32 AreBattleTowerLinkSpeciesSame(u16 *speciesList1, u16 *speciesList2)
+bool32 AreBattleTowerLinkSpeciesSame(u32 *speciesList1, u32 *speciesList2)
 {
     int i;
     int j;
@@ -466,7 +466,7 @@ bool32 AreBattleTowerLinkSpeciesSame(u16 *speciesList1, u16 *speciesList2)
     return haveSameSpecies;
 }
 
-static void FinishLinkup(u16 *linkupStatus, u32 taskId)
+static void FinishLinkup(u32 *linkupStatus, u32 taskId)
 {
     struct TrainerCard *trainerCards = gTrainerCards;
 
@@ -556,7 +556,7 @@ static void Task_LinkupConnectionError(u32 taskId)
     DestroyTask(taskId);
 }
 
-static bool8 TryLinkTimeout(u32 taskId)
+static bool32 TryLinkTimeout(u32 taskId)
 {
     gTasks[taskId].tTimer++;
     if (gTasks[taskId].tTimer > 600)

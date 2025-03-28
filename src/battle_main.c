@@ -85,7 +85,7 @@ static void CB2_HandleStartMultiPartnerBattle(void);
 static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
-static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool8 firstTrainer);
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool32 firstTrainer);
 static void BattleMainCB1(void);
 static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
@@ -99,7 +99,7 @@ static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void SpriteCB_BlinkVisible(struct Sprite *sprite);
 static void SpriteCB_Idle(struct Sprite *sprite);
 static void SpriteCB_BattleSpriteSlideLeft(struct Sprite *sprite);
-static void TurnValuesCleanUp(bool8 var0);
+static void TurnValuesCleanUp(bool32 var0);
 static void SpriteCB_BounceEffect(struct Sprite *sprite);
 static void BattleStartClearSetData(void);
 static void DoBattleIntro(void);
@@ -108,7 +108,7 @@ static void HandleTurnActionSelectionState(void);
 static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler);
-static bool8 AllAtActionConfirmed(void);
+static bool32 AllAtActionConfirmed(void);
 static void TryChangeTurnOrder(void);
 static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2, u32 *quickClawRandom, u32 *quickDrawRandom);
 static void CheckChangingTurnOrderEffects(void);
@@ -215,9 +215,9 @@ EWRAM_DATA u8 gActionSelectionCursor[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerInMenuId = 0;
-EWRAM_DATA bool8 gDoingBattleAnim = FALSE;
+EWRAM_DATA bool32 gDoingBattleAnim = FALSE;
 EWRAM_DATA u32 gTransformedPersonalities[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA bool8 gTransformedShininess[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA bool32 gTransformedShininess[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gPlayerDpadHoldFrames = 0;
 EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
 EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
@@ -228,11 +228,11 @@ EWRAM_DATA struct FieldTimer gFieldTimers = {0};
 EWRAM_DATA u32 gBattleTurnCounter = 0;
 EWRAM_DATA u8 gBattlerAbility = 0;
 EWRAM_DATA struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA bool8 gHasFetchedBall = FALSE;
+EWRAM_DATA bool32 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u32 gLastThrownBall = 0;
 EWRAM_DATA u32 gBallToDisplay = 0;
-EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
+EWRAM_DATA bool32 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
@@ -288,7 +288,7 @@ const struct OamData gOamData_BattleSpritePlayerSide =
     .affineParam = 0,
 };
 
-static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
+static const s32 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
 #include "data/types_info.h"
 
@@ -1997,7 +1997,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     return trainer->partySize;
 }
 
-static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool8 firstTrainer)
+static u8 CreateNPCTrainerParty(struct Pokemon *party, u32 trainerNum, bool32 firstTrainer)
 {
     u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
@@ -2791,7 +2791,7 @@ void SpriteCB_FaintSlideAnim(struct Sprite *sprite)
 #define sBouncerSpriteId    data[6]
 #define sWhich              data[7]
 
-void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude)
+void DoBounceEffect(u8 battler, u8 which, s32 delta, s32 amplitude)
 {
     u8 invisibleSpriteId;
     u8 bouncerSpriteId;
@@ -4684,7 +4684,7 @@ static void HandleTurnActionSelectionState(void)
     }
 }
 
-static bool8 AllAtActionConfirmed(void)
+static bool32 AllAtActionConfirmed(void)
 {
     s32 i, count;
 
@@ -4800,7 +4800,7 @@ u32 GetBattlerTotalSpeedStat(u32 battler)
     return GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
 }
 
-s8 GetChosenMovePriority(u32 battler)
+s32 GetChosenMovePriority(u32 battler)
 {
     u32 move;
 
@@ -4813,9 +4813,9 @@ s8 GetChosenMovePriority(u32 battler)
     return GetBattleMovePriority(battler, move);
 }
 
-s8 GetBattleMovePriority(u32 battler, u32 move)
+s32 GetBattleMovePriority(u32 battler, u32 move)
 {
-    s8 priority;
+    s32 priority;
     u32 ability = GetBattlerAbility(battler);
 
     if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE && !IsBattleMoveStatus(move))
@@ -5099,7 +5099,7 @@ static void SetActionsAndBattlersTurnOrder(void)
     gBattleStruct->quickClawBattlerId = 0;
 }
 
-static void TurnValuesCleanUp(bool8 var0)
+static void TurnValuesCleanUp(bool32 var0)
 {
     s32 i;
 
@@ -5594,7 +5594,7 @@ static void HandleEndTurn_FinishBattle(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            bool8 changedForm = FALSE;
+            bool32 changedForm = FALSE;
 
             // Appeared in battle and didn't faint
             if ((gBattleStruct->appearedInBattle & (1u << i)) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)

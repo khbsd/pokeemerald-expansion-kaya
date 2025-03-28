@@ -83,12 +83,12 @@ struct ConditionGraph
     /*0x248*/ u32 scanlineLeft[CONDITION_GRAPH_HEIGHT][2];
     /*0x350*/ u32 bottom;
     /*0x352*/ u32 updateCounter;
-    /*0x354*/ bool8 needsDraw;
+    /*0x354*/ bool32 needsDraw;
     /*0x355*/ u8 scanlineResetState;
 };
 
 // Mailbox menu
-bool8 MailboxMenu_Alloc(u8 count);
+bool32 MailboxMenu_Alloc(u8 count);
 u8 MailboxMenu_AddWindow(u8 windowIdx);
 u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page);
 void MailboxMenu_AddScrollArrows(struct PlayerPCItemPageStruct *page);
@@ -99,21 +99,21 @@ void MailboxMenu_RemoveWindow(u8 windowIdx);
 void ConditionGraph_Init(struct ConditionGraph *graph);
 void ConditionGraph_InitWindow(u8 bg);
 void ConditionGraph_InitResetScanline(struct ConditionGraph *graph);
-bool8 ConditionGraph_ResetScanline(struct ConditionGraph *graph);
+bool32 ConditionGraph_ResetScanline(struct ConditionGraph *graph);
 void ConditionGraph_Draw(struct ConditionGraph *graph);
-bool8 ConditionGraph_TryUpdate(struct ConditionGraph *graph);
+bool32 ConditionGraph_TryUpdate(struct ConditionGraph *graph);
 void ConditionGraph_Update(struct ConditionGraph *graph);
 void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions);
 void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new);
 
 // Condition menu
-bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x);
-bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x);
-bool8 MoveConditionMonOnscreen(s16 *x);
-bool8 MoveConditionMonOffscreen(s16 *x);
-void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool8 excludesCancel);
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u32 boxId, u32 monId, u32 partyId, u32 id, u32 numMons, bool8 excludesCancel);
-void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool8 excludesCancel);
+bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x);
+bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x);
+bool32 MoveConditionMonOnscreen(s16 *x);
+bool32 MoveConditionMonOffscreen(s16 *x);
+void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel);
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u32 boxId, u32 monId, u32 partyId, u32 id, u32 numMons, bool32 excludesCancel);
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel);
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
 s32 GetBoxOrPartyMonData(u32 boxId, u32 monId, s32 request, u8 *dst);
@@ -127,10 +127,10 @@ void FreeConditionSparkles(struct Sprite **sprites);
 
 // Move relearner
 void MoveRelearnerPrintMessage(u8 *str);
-bool16 MoveRelearnerRunTextPrinters(void);
+bool32 MoveRelearnerRunTextPrinters(void);
 void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u32 numChoices);
-void InitMoveRelearnerWindows(bool8 useContestWindow);
+void InitMoveRelearnerWindows(bool32 useContestWindow);
 
 // Level up window
 void DrawLevelUpWindowPg1(u32 windowId, u32 *statsBefore, u32 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);

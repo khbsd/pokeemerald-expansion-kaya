@@ -62,7 +62,7 @@ void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     FldEff_Shadow();
 }
 
-void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)
+void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool32 stillReflection)
 {
     struct Sprite *reflectionSprite;
 
@@ -1200,12 +1200,12 @@ void SetSurfBlob_BobState(u32 spriteId, u32 state)
     gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF) | (state & 0xF);
 }
 
-void SetSurfBlob_DontSyncAnim(u32 spriteId, bool8 dontSync)
+void SetSurfBlob_DontSyncAnim(u32 spriteId, bool32 dontSync)
 {
     gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF0) | ((dontSync & 0xF) << 4);
 }
 
-void SetSurfBlob_PlayerOffset(u32 spriteId, bool8 hasOffset, s16 offset)
+void SetSurfBlob_PlayerOffset(u32 spriteId, bool32 hasOffset, s16 offset)
 {
     gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF00) | ((hasOffset & 0xF) << 8);
     gSprites[spriteId].sPlayerOffset = offset;
@@ -1561,7 +1561,7 @@ void StartRevealDisguise(struct ObjectEvent *objectEvent)
         gSprites[objectEvent->fieldEffectSpriteId].sState++;
 }
 
-bool8 UpdateRevealDisguise(struct ObjectEvent *objectEvent)
+bool32 UpdateRevealDisguise(struct ObjectEvent *objectEvent)
 {
     struct Sprite *sprite;
 
@@ -1643,9 +1643,9 @@ static void InitRayquazaForFigure8Anim(struct Sprite *sprite)
 }
 
 // Only different from AnimateSpriteInFigure8 by the addition of SetGpuReg to move the spotlight
-static bool8 AnimateRayquazaInFigure8(struct Sprite *sprite)
+static bool32 AnimateRayquazaInFigure8(struct Sprite *sprite)
 {
-    bool8 finished = FALSE;
+    bool32 finished = FALSE;
 
     switch (sprite->sAnimState)
     {

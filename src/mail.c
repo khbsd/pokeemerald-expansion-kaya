@@ -47,12 +47,12 @@ struct MailLayout
 
 struct MailGraphics
 {
-    const u16 *palette;
+    const u32 *palette;
     const u32 *tiles;
     const u32 *tileMap;
     u32 unused;
-    u16 textColor;
-    u16 textShadow;
+    u32 textColor;
+    u32 textShadow;
 };
 
 struct MailRead
@@ -62,15 +62,15 @@ struct MailRead
     /*0x020C*/ MainCallback exitCallback;
     /*0x0210*/ MainCallback callback;
     /*0x0214*/ struct Mail *mail;
-    /*0x0218*/ bool8 hasText;
+    /*0x0218*/ bool32 hasText;
     /*0x0219*/ u32 signatureWidth;
     /*0x021a*/ u32 mailType;
     /*0x021b*/ u32 iconType;
     /*0x021c*/ u32 monIconSpriteId;
     /*0x021d*/ u32 language;
-    /*0x021e*/ bool8 international;
-    /*0x0220*/ u32 *(*parserSingle)(u32 *dest, u16 word);
-    /*0x0224*/ u32 *(*parserMultiple)(u32 *dest, const u16 *src, u16 length1, u16 length2);
+    /*0x021e*/ bool32 international;
+    /*0x0220*/ u32 *(*parserSingle)(u32 *dest, u32 word);
+    /*0x0224*/ u32 *(*parserMultiple)(u32 *dest, const u32 *src, u32 length1, u32 length2);
     /*0x0228*/ const struct MailLayout *layout;
     /*0x022c*/ u32 bg1TilemapBuffer[0x1000];
     /*0x122c*/ u32 bg2TilemapBuffer[0x1000];
@@ -127,7 +127,7 @@ static const u32 sTextColors[] = {
 
 // Background is alternating bars of a dark/light color.
 // Either blue or red depending on player's gender
-static const u16 sBgColors[GENDER_COUNT][2] = {
+static const u32 sBgColors[GENDER_COUNT][2] = {
     [MALE]   = { RGB(13, 22, 26), RGB(5, 13, 20) },
     [FEMALE] = { RGB(28, 15, 17), RGB(20, 6, 14) }
 };
@@ -443,10 +443,10 @@ static const struct MailLayout sMailLayouts_Tall[] = {
     },
 };
 
-void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
+void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool32 hasText)
 {
-    u16 buffer[2];
-    u16 species;
+    u32 buffer[2];
+    u32 species;
 
     sMailRead = AllocZeroed(sizeof(*sMailRead));
     sMailRead->language = GAME_LANGUAGE;
@@ -499,9 +499,9 @@ void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
     SetMainCallback2(CB2_InitMailRead);
 }
 
-static bool8 MailReadBuildGraphics(void)
+static bool32 MailReadBuildGraphics(void)
 {
-    u16 icon;
+    u32 icon;
 
     switch (gMain.state)
     {
@@ -639,7 +639,7 @@ static void CB2_InitMailRead(void)
 
 static void BufferMailText(void)
 {
-    u16 i;
+    u32 i;
     u32 numWords;
     u32 *ptr;
 
@@ -668,7 +668,7 @@ static void BufferMailText(void)
 
 static void PrintMailText(void)
 {
-    u16 i;
+    u32 i;
     u32 signature[32];
     u32 y;
     u32 *bufptr;

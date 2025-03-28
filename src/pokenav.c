@@ -18,8 +18,8 @@ struct PokenavResources
 {
     u32 (*currentMenuCb1)(void);
     u32 currentMenuIndex;
-    u16 mode;
-    u16 conditionSearchId;
+    u32 mode;
+    u32 conditionSearchId;
     bool32 hasAnyRibbons;
     void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
@@ -209,7 +209,7 @@ EWRAM_DATA struct PokenavResources *gPokenavResources = NULL;
 // code
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
-    u16 taskId;
+    u32 taskId;
 
     if (!IsOverworldLinkActive())
         taskId = CreateTask(Task_RunLoopedTask, priority);
@@ -565,7 +565,7 @@ u32 GetPokenavMode(void)
     return gPokenavResources->mode;
 }
 
-void SetPokenavMode(u16 mode)
+void SetPokenavMode(u32 mode)
 {
     gPokenavResources->mode = mode;
 }

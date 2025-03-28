@@ -13,10 +13,10 @@ static void CopyValue32Bit(void);
 // Per-scanline register values.
 // This is double buffered so that it can be safely written to at any time
 // without overwriting the buffer that the DMA is currently reading
-EWRAM_DATA u16 ALIGNED(4) gScanlineEffectRegBuffers[2][0x3C0] = {0};
+EWRAM_DATA u32 ALIGNED(4) gScanlineEffectRegBuffers[2][0x3C0] = {0};
 
 EWRAM_DATA struct ScanlineEffect gScanlineEffect = {0};
-EWRAM_DATA static bool8 sShouldStopWaveTask = FALSE;
+EWRAM_DATA static bool32 sShouldStopWaveTask = FALSE;
 
 void ScanlineEffect_Stop(void)
 {
@@ -47,8 +47,8 @@ void ScanlineEffect_SetParams(struct ScanlineEffectParams params)
     {
         // Set the DMA src to the value for the second scanline because the
         // first DMA transfer occurs in HBlank *after* the first scanline is drawn
-        gScanlineEffect.dmaSrcBuffers[0] = (u16 *)gScanlineEffectRegBuffers[0] + 1;
-        gScanlineEffect.dmaSrcBuffers[1] = (u16 *)gScanlineEffectRegBuffers[1] + 1;
+        gScanlineEffect.dmaSrcBuffers[0] = (u32 *)gScanlineEffectRegBuffers[0] + 1;
+        gScanlineEffect.dmaSrcBuffers[1] = (u32 *)gScanlineEffectRegBuffers[1] + 1;
         gScanlineEffect.setFirstScanlineReg = CopyValue16Bit;
     }
     else  // assume 32-bit
@@ -190,9 +190,9 @@ static void TaskFunc_UpdateWavePerFrame(u32 taskId)
     }
 }
 
-static void GenerateWave(u16 *buffer, u32 frequency, u32 amplitude, u32 unused)
+static void GenerateWave(u32 *buffer, u32 frequency, u32 amplitude, u32 unused)
 {
-    u16 i = 0;
+    u32 i = 0;
     u32 theta = 0;
 
     while (i < 256)
@@ -207,7 +207,7 @@ static void GenerateWave(u16 *buffer, u32 frequency, u32 amplitude, u32 unused)
 // 'frequency' and 'amplitude' control the frequency and amplitude of the wave.
 // 'delayInterval' controls how fast the wave travels up the screen. The wave will shift upwards one scanline every 'delayInterval'+1 frames.
 // 'regOffset' is the offset of the video register to modify.
-u32 ScanlineEffect_InitWave(u32 startLine, u32 endLine, u32 frequency, u32 amplitude, u32 delayInterval, u32 regOffset, bool8 applyBattleBgOffsets)
+u32 ScanlineEffect_InitWave(u32 startLine, u32 endLine, u32 frequency, u32 amplitude, u32 delayInterval, u32 regOffset, bool32 applyBattleBgOffsets)
 {
     int i;
     int offset;

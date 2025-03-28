@@ -13,7 +13,7 @@
 #include "party_menu.h"
 #include "fldeff.h"
 
-EWRAM_DATA static bool8 sIsRegisteelPuzzle = 0;
+EWRAM_DATA static bool32 sIsRegisteelPuzzle = 0;
 
 static const u32 sRegicePathCoords[][2] =
 {
@@ -59,7 +59,7 @@ static void Task_SealedChamberShakingEffect(u32);
 static void DoBrailleRegirockEffect(void);
 static void DoBrailleRegisteelEffect(void);
 
-bool8 ShouldDoBrailleDigEffect(void)
+bool32 ShouldDoBrailleDigEffect(void)
 {
     if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
      && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEALED_CHAMBER_OUTER_ROOM)
@@ -89,7 +89,7 @@ void DoBrailleDigEffect(void)
     FlagSet(FLAG_SYS_BRAILLE_DIG);
 }
 
-bool8 CheckRelicanthWailord(void)
+bool32 CheckRelicanthWailord(void)
 {
     // Emerald change: why did they flip it?
     // First comes Wailord
@@ -164,7 +164,7 @@ static void Task_SealedChamberShakingEffect(u32 taskId)
 #undef tDelay
 #undef tNumShakes
 
-bool8 ShouldDoBrailleRegirockEffect(void)
+bool32 ShouldDoBrailleRegirockEffect(void)
 {
     if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
@@ -217,7 +217,7 @@ static void DoBrailleRegirockEffect(void)
     UnfreezeObjectEvents();
 }
 
-bool8 ShouldDoBrailleRegisteelEffect(void)
+bool32 ShouldDoBrailleRegisteelEffect(void)
 {
     if (!FlagGet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED) && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ANCIENT_TOMB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ANCIENT_TOMB)))
     {
@@ -263,7 +263,7 @@ static void UNUSED DoBrailleWait(void)
 }
 
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?
-bool8 FldEff_UsePuzzleEffect(void)
+bool32 FldEff_UsePuzzleEffect(void)
 {
     u32 taskId = CreateFieldMoveTask();
 
@@ -282,7 +282,7 @@ bool8 FldEff_UsePuzzleEffect(void)
 
 // The puzzle to unlock Regice's cave requires the player to interact with the braille message on the back wall,
 // step on every space on the perimeter of the cave (and only those spaces) then return to the back wall.
-bool8 ShouldDoBrailleRegicePuzzle(void)
+bool32 ShouldDoBrailleRegicePuzzle(void)
 {
     u32 i;
 
@@ -307,19 +307,19 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
                 // Player is standing on a correct space, set the corresponding bit
                 if (i < 16)
                 {
-                    u16 val = VarGet(VAR_REGICE_STEPS_1);
+                    u32 val = VarGet(VAR_REGICE_STEPS_1);
                     val |= 1 << i;
                     VarSet(VAR_REGICE_STEPS_1, val);
                 }
                 else if (i < 32)
                 {
-                    u16 val = VarGet(VAR_REGICE_STEPS_2);
+                    u32 val = VarGet(VAR_REGICE_STEPS_2);
                     val |= 1 << (i - 16);
                     VarSet(VAR_REGICE_STEPS_2, val);
                 }
                 else
                 {
-                    u16 val = VarGet(VAR_REGICE_STEPS_3);
+                    u32 val = VarGet(VAR_REGICE_STEPS_3);
                     val |= 1 << (i - 32);
                     VarSet(VAR_REGICE_STEPS_3, val);
                 }

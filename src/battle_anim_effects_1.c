@@ -110,7 +110,7 @@ static void AnimHornHit_Step(struct Sprite *);
 static void AnimSuperFang(struct Sprite *);
 static void AnimWavyMusicNotes(struct Sprite *);
 static void AnimWavyMusicNotes_Step(struct Sprite *);
-static void AnimWavyMusicNotes_CalcVelocity(s16, s16, s16 *, s16 *, s8);
+static void AnimWavyMusicNotes_CalcVelocity(s16, s16, s16 *, s16 *, s32);
 static void AnimFlyingMusicNotes(struct Sprite *);
 static void AnimFlyingMusicNotes_Step(struct Sprite *);
 static void AnimBellyDrumHand(struct Sprite *);
@@ -1150,7 +1150,7 @@ const struct SpriteTemplate gTrickBagSpriteTemplate =
     .callback = AnimTrickBag,
 };
 
-const s8 gTrickBagCoordinates[][3] =
+const s32 gTrickBagCoordinates[][3] =
 {
     {5, 24,   1},
     {0,  4,   0},
@@ -1822,7 +1822,7 @@ const struct SpriteTemplate gLockOnMoveTargetSpriteTemplate =
     .callback = AnimLockOnMoveTarget,
 };
 
-const s8 gInclineMonCoordTable[][2] =
+const s32 gInclineMonCoordTable[][2] =
 {
     { 64,  64},
     {  0, -64},
@@ -4180,7 +4180,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite *sprite)
 
 static void AnimTranslateLinearSingleSineWave_Step(struct Sprite *sprite)
 {
-    bool8 destroy = FALSE;
+    bool32 destroy = FALSE;
     s16 a = sprite->data[0];
     s16 b = sprite->data[7];
     s16 r0;
@@ -4501,7 +4501,7 @@ static void InitItemBagData(struct Sprite *sprite, s16 c)
     sprite->data[7] = c;
 }
 
-bool8 moveAlongLinearPath(struct Sprite *sprite)
+bool32 moveAlongLinearPath(struct Sprite *sprite)
 {
     u32 xStartPos = (u8)(sprite->data[5] >> 8);
     u32 yStartPos = (u8)sprite->data[5];
@@ -7122,7 +7122,7 @@ static void AnimWavyMusicNotes(struct Sprite *sprite)
     sprite->callback = AnimWavyMusicNotes_Step;
 }
 
-static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velocY, s8 xSpeedFactor)
+static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velocY, s32 xSpeedFactor)
 {
     int x2;
     int time;

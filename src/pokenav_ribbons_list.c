@@ -25,7 +25,7 @@ struct Pokenav_RibbonsMonList
 {
     u32 (*callback)(struct Pokenav_RibbonsMonList *);
     u32 loopedTaskId;
-    u16 winid;
+    u32 winid;
     s32 boxId;
     s32 monId;
     u32 changeBgs;
@@ -37,7 +37,7 @@ struct Pokenav_RibbonsMonMenu
 {
     bool32 (*callback)(void);
     u32 loopedTaskId;
-    u16 winid;
+    u32 winid;
     bool32 fromSummary;
     u32 buff[BG_SCREEN_SIZE];
 };
@@ -72,10 +72,10 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
     BuildBoxMonRibbonList
 };
 
-static const u16 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
+static const u32 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
 static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
 static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
-static const u16 sMonRibbonListUi_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/list_ui.gbapal");
+static const u32 sMonRibbonListUi_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/list_ui.gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =
 {

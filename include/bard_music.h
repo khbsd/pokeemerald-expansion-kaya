@@ -12,7 +12,7 @@
 struct BardSoundTemplate
 {
     u8 songId;
-    s8 lengthAdjustment;
+    s32 lengthAdjustment;
     u32 unused; // Only set on EC_WORD_WAAAH, and never read.
     s16 volume;
 };

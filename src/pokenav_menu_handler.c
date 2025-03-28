@@ -7,10 +7,10 @@
 
 struct Pokenav_Menu
 {
-    u16 menuType;
+    u32 menuType;
     s16 cursorPos;
-    u16 currMenuItem;
-    u16 helpBarIndex;
+    u32 currMenuItem;
+    u32 helpBarIndex;
     u32 menuId;
     u32 (*callback)(struct Pokenav_Menu *);
 };
@@ -506,7 +506,7 @@ int GetCurrentMenuItemId(void)
     return menu->currMenuItem;
 }
 
-u16 GetHelpBarTextId(void)
+u32 GetHelpBarTextId(void)
 {
     struct Pokenav_Menu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU_HANDLER);
     return menu->helpBarIndex;

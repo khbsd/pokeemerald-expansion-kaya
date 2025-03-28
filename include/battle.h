@@ -74,15 +74,15 @@
 struct DisableStruct
 {
     u32 transformedMonPersonality;
-    bool8 transformedMonShininess;
+    bool32 transformedMonShininess;
     u32 disabledMove;
     u32 encoredMove;
     u8 protectUses:4;
     u8 stockpileCounter:4;
-    s8 stockpileDef;
-    s8 stockpileSpDef;
-    s8 stockpileBeforeDef;
-    s8 stockpileBeforeSpDef;
+    s32 stockpileDef;
+    s32 stockpileSpDef;
+    s32 stockpileBeforeDef;
+    s32 stockpileBeforeSpDef;
     u8 substituteHP;
     u8 encoredMovePos;
     u8 disableTimer:4;
@@ -314,8 +314,8 @@ struct AiPartyMon
     u32 level;
     u32 moves[MAX_MON_MOVES];
     u32 status;
-    bool8 isFainted;
-    bool8 wasSentInBattle;
+    bool32 isFainted;
+    bool32 wasSentInBattle;
     u8 switchInCount; // Counts how many times this Pokemon has been sent out or switched into in a battle.
 };
 
@@ -328,7 +328,7 @@ struct AIPartyData // Opposing battlers - party mons.
 struct SwitchinCandidate
 {
     struct BattlePokemon battleMon;
-    bool8 hypotheticalStatus;
+    bool32 hypotheticalStatus;
 };
 
 struct SimulatedDamage
@@ -578,12 +578,12 @@ struct DynamaxData
 struct BattleGimmickData
 {
     u8 usableGimmick[MAX_BATTLERS_COUNT];                // first usable gimmick that can be selected for each battler
-    bool8 playerSelect;                                  // used to toggle trigger and update battle UI
+    bool32 playerSelect;                                  // used to toggle trigger and update battle UI
     u8 triggerSpriteId;
     u8 indicatorSpriteId[MAX_BATTLERS_COUNT];
     u8 toActivate;                                       // stores whether a battler should transform at start of turn as bitfield
     u8 activeGimmick[NUM_BATTLE_SIDES][PARTY_SIZE];      // stores the active gimmick for each party member
-    bool8 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
+    bool32 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
 };
 
 struct LostItem
@@ -673,7 +673,7 @@ struct BattleStruct
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
     u8 scriptPartyIdx; // for printing the nickname
-    bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
+    bool32 selectionScriptFinished[MAX_BATTLERS_COUNT];
     u8 battlerPartyIndexes[MAX_BATTLERS_COUNT];
     u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     u8 battlerPartyOrders[MAX_BATTLERS_COUNT][PARTY_SIZE / 2];
@@ -736,8 +736,8 @@ struct BattleStruct
     struct BattleTvMovePoints tvMovePoints;
     struct BattleTv tv;
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    s8 arenaMindPoints[2];
-    s8 arenaSkillPoints[2];
+    s32 arenaMindPoints[2];
+    s32 arenaSkillPoints[2];
     u32 arenaStartHp[2];
     u8 arenaLostPlayerMons; // Bits for party member, lost as in referee's decision, not by fainting.
     u8 arenaLostOpponentMons;
@@ -749,7 +749,7 @@ struct BattleStruct
     u8 savedBattlerAttacker[5];
     u8 savedTargetCount:4;
     u8 savedAttackerCount:4;
-    bool8 ateBoost[MAX_BATTLERS_COUNT];
+    bool32 ateBoost[MAX_BATTLERS_COUNT];
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     struct ZMoveData zmove;
     struct DynamaxData dynamax;
@@ -943,7 +943,7 @@ struct BattleScripting
     s32 painSplitHp;
     s32 bideDmg;
     u8 multihitString[6];
-    bool8 expOnCatch;
+    bool32 expOnCatch;
     u8 unused;
     u8 animArg1;
     u8 animArg2;
@@ -955,7 +955,7 @@ struct BattleScripting
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
-    bool8 statAnimPlayed;
+    bool32 statAnimPlayed;
     u8 getexpState;
     u8 battleStyle;
     u8 drawlvlupboxState;
@@ -967,13 +967,13 @@ struct BattleScripting
     u8 windowsType; // B_WIN_TYPE_*
     u8 multiplayerId;
     u8 specialTrainerBattleType;
-    bool8 monCaught;
+    bool32 monCaught;
     s32 savedDmg;
     u32 savedMoveEffect; // For moves hitting multiple targets.
     u32 moveEffect;
     u32 multihitMoveEffect;
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
-    bool8 fixedPopup;   // Force ability popup to stick until manually called back
+    bool32 fixedPopup;   // Force ability popup to stick until manually called back
     u32 abilityPopupOverwrite;
     u8 switchCase;  // Special switching conditions, eg. red card
     u8 overrideBerryRequirements;
@@ -1077,7 +1077,7 @@ struct MonSpritesGfx
 struct QueuedStatBoost
 {
     u8 stats;   // bitfield for each battle stat that is set if the stat changes
-    s8 statChanges[NUM_BATTLE_STATS - 1];    // highest bit being set decreases the stat
+    s32 statChanges[NUM_BATTLE_STATS - 1];    // highest bit being set decreases the stat
 }; /* size = 8 */
 
 // All battle variables are declared in battle_main.c
@@ -1168,9 +1168,9 @@ extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u8 gBattlerInMenuId;
-extern bool8 gDoingBattleAnim;
+extern bool32 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
-extern bool8 gTransformedShininess[MAX_BATTLERS_COUNT];
+extern bool32 gTransformedShininess[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
@@ -1189,11 +1189,11 @@ extern u8 gLeveledUpInBattle;
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern bool8 gHasFetchedBall;
+extern bool32 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u32 gLastThrownBall;
 extern u32 gBallToDisplay;
-extern bool8 gLastUsedBallMenuPresent;
+extern bool32 gLastUsedBallMenuPresent;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 extern u8 gCategoryIconSpriteId;
 

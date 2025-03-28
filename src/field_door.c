@@ -14,7 +14,7 @@
 
 struct DoorGraphics
 {
-    u16 metatileNum;
+    u32 metatileNum;
     u32 sound;
     u32 size;
     const void *tiles;
@@ -24,113 +24,113 @@ struct DoorGraphics
 struct DoorAnimFrame
 {
     u32 time;
-    u16 offset;
+    u32 offset;
 };
 
-static bool8 ShouldUseMultiCorridorDoor(void);
+static bool32 ShouldUseMultiCorridorDoor(void);
 
 static const u32 sDoorAnimTiles_Littleroot[] = INCBIN_u32("graphics/door_anims/littleroot.4bpp");
-static const u16 sDoorNullPalette1[16] = {};
+static const u32 sDoorNullPalette1[16] = {};
 static const u32 sDoorAnimTiles_BirchsLab[] = INCBIN_u32("graphics/door_anims/birchs_lab.4bpp");
-static const u16 sDoorNullPalette2[16] = {};
+static const u32 sDoorNullPalette2[16] = {};
 static const u32 sDoorAnimTiles_FallarborLightRoof[] = INCBIN_u32("graphics/door_anims/fallarbor_light_roof.4bpp");
-static const u16 sDoorNullPalette3[16] = {};
+static const u32 sDoorNullPalette3[16] = {};
 static const u32 sDoorAnimTiles_Lilycove[] = INCBIN_u32("graphics/door_anims/lilycove.4bpp");
-static const u16 sDoorNullPalette4[16] = {};
+static const u32 sDoorNullPalette4[16] = {};
 static const u32 sDoorAnimTiles_LilycoveWooden[] = INCBIN_u32("graphics/door_anims/lilycove_wooden.4bpp");
-static const u16 sDoorNullPalette5[16] = {};
+static const u32 sDoorNullPalette5[16] = {};
 static const u32 sDoorAnimTiles_General[] = INCBIN_u32("graphics/door_anims/general.4bpp");
-static const u16 sDoorNullPalette6[16] = {};
+static const u32 sDoorNullPalette6[16] = {};
 static const u32 sDoorAnimTiles_PokeCenter[] = INCBIN_u32("graphics/door_anims/poke_center.4bpp");
 static const u32 sDoorAnimTiles_Gym[] = INCBIN_u32("graphics/door_anims/gym.4bpp");
 static const u32 sDoorAnimTiles_PokeMart[] = INCBIN_u32("graphics/door_anims/poke_mart.4bpp");
 static const u32 sDoorAnimTiles_RustboroTan[] = INCBIN_u32("graphics/door_anims/rustboro_tan.4bpp");
-static const u16 sDoorNullPalette7[16] = {};
+static const u32 sDoorNullPalette7[16] = {};
 static const u32 sDoorAnimTiles_RustboroGray[] = INCBIN_u32("graphics/door_anims/rustboro_gray.4bpp");
-static const u16 sDoorNullPalette8[16] = {};
+static const u32 sDoorNullPalette8[16] = {};
 static const u32 sDoorAnimTiles_Oldale[] = INCBIN_u32("graphics/door_anims/oldale.4bpp");
 static const u32 sFiller1[0x5900] = {};
 static const u32 sDoorAnimTiles_UnusedTops[] = INCBIN_u32("graphics/door_anims/unused_top.4bpp");
 static const u32 sFiller2[0x140] = {};
 static const u32 sDoorAnimTiles_UnusedBottoms[] = INCBIN_u32("graphics/door_anims/unused_bottom.4bpp");
-static const u16 sDoorNullPalette11[16] = {};
+static const u32 sDoorNullPalette11[16] = {};
 static const u32 sDoorAnimTiles_Mauville[] = INCBIN_u32("graphics/door_anims/mauville.4bpp");
-static const u16 sDoorNullPalette12[16] = {};
+static const u32 sDoorNullPalette12[16] = {};
 static const u32 sDoorAnimTiles_Verdanturf[] = INCBIN_u32("graphics/door_anims/verdanturf.4bpp");
-static const u16 sDoorNullPalette13[16] = {};
+static const u32 sDoorNullPalette13[16] = {};
 static const u32 sDoorAnimTiles_Slateport[] = INCBIN_u32("graphics/door_anims/slateport.4bpp");
-static const u16 sDoorNullPalette14[16] = {};
+static const u32 sDoorNullPalette14[16] = {};
 static const u32 sDoorAnimTiles_Dewford[] = INCBIN_u32("graphics/door_anims/dewford.4bpp");
-static const u16 sDoorNullPalette15[16] = {};
+static const u32 sDoorNullPalette15[16] = {};
 static const u32 sDoorAnimTiles_Contest[] = INCBIN_u32("graphics/door_anims/contest.4bpp");
-static const u16 sDoorNullPalette16[16] = {};
+static const u32 sDoorNullPalette16[16] = {};
 static const u32 sDoorAnimTiles_Mossdeep[] = INCBIN_u32("graphics/door_anims/mossdeep.4bpp");
-static const u16 sDoorNullPalette17[16] = {};
+static const u32 sDoorNullPalette17[16] = {};
 static const u32 sDoorAnimTiles_SootopolisPeakedRoof[] = INCBIN_u32("graphics/door_anims/sootopolis_peaked_roof.4bpp");
-static const u16 sDoorNullPalette18[16] = {};
+static const u32 sDoorNullPalette18[16] = {};
 static const u32 sDoorAnimTiles_Sootopolis[] = INCBIN_u32("graphics/door_anims/sootopolis.4bpp");
-static const u16 sDoorNullPalette19[16] = {};
+static const u32 sDoorNullPalette19[16] = {};
 static const u32 sDoorAnimTiles_PokemonLeague[] = INCBIN_u32("graphics/door_anims/pokemon_league.4bpp");
-static const u16 sDoorNullPalette20[16] = {};
+static const u32 sDoorNullPalette20[16] = {};
 static const u32 sDoorAnimTiles_Pacifidlog[] = INCBIN_u32("graphics/door_anims/pacifidlog.4bpp");
-static const u16 sDoorNullPalette21[16] = {};
+static const u32 sDoorNullPalette21[16] = {};
 static const u32 sDoorAnimTiles_PetalburgGym[] = INCBIN_u32("graphics/door_anims/petalburg_gym.4bpp");
-static const u16 sDoorNullPalette22[16] = {};
+static const u32 sDoorNullPalette22[16] = {};
 static const u32 sDoorAnimTiles_CyclingRoad[] = INCBIN_u32("graphics/door_anims/cycling_road.4bpp");
-static const u16 sDoorNullPalette23[16] = {};
+static const u32 sDoorNullPalette23[16] = {};
 static const u32 sDoorAnimTiles_LilycoveDeptStore[] = INCBIN_u32("graphics/door_anims/lilycove_dept_store.4bpp");
-static const u16 sDoorNullPalette24[16] = {};
+static const u32 sDoorNullPalette24[16] = {};
 static const u32 sDoorAnimTiles_SafariZone[] = INCBIN_u32("graphics/door_anims/safari_zone.4bpp");
-static const u16 sDoorNullPalette25[16] = {};
+static const u32 sDoorNullPalette25[16] = {};
 static const u32 sDoorAnimTiles_MossdeepSpaceCenter[] = INCBIN_u32("graphics/door_anims/mossdeep_space_center.4bpp");
-static const u16 sDoorNullPalette26[16] = {};
+static const u32 sDoorNullPalette26[16] = {};
 static const u32 sDoorAnimTiles_CableClub[] = INCBIN_u32("graphics/door_anims/cable_club.4bpp");
-static const u16 sDoorNullPalette27[16] = {};
+static const u32 sDoorNullPalette27[16] = {};
 static const u32 sDoorAnimTiles_AbandonedShip[] = INCBIN_u32("graphics/door_anims/abandoned_ship.4bpp");
-static const u16 sDoorNullPalette28[16] = {};
+static const u32 sDoorNullPalette28[16] = {};
 static const u32 sDoorAnimTiles_FallarborDarkRoof[] = INCBIN_u32("graphics/door_anims/fallarbor_dark_roof.4bpp");
-static const u16 sDoorNullPalette29[16] = {};
+static const u32 sDoorNullPalette29[16] = {};
 static const u32 sDoorAnimTiles_AbandonedShipRoom[] = INCBIN_u32("graphics/door_anims/abandoned_ship_room.4bpp");
-static const u16 sDoorNullPalette30[16] = {};
+static const u32 sDoorNullPalette30[16] = {};
 static const u32 sDoorAnimTiles_LilycoveDeptStoreElevator[] = INCBIN_u32("graphics/door_anims/lilycove_dept_store_elevator.4bpp");
-static const u16 sDoorNullPalette31[16] = {};
+static const u32 sDoorNullPalette31[16] = {};
 static const u32 sDoorAnimTiles_BattleTowerOld[] = INCBIN_u32("graphics/door_anims/battle_tower_old.4bpp");
-static const u16 sDoorNullPalette32[16] = {};
+static const u32 sDoorNullPalette32[16] = {};
 static const u32 sDoorAnimTiles_BattleTowerElevator[] = INCBIN_u32("graphics/door_anims/battle_tower_elevator.4bpp");
-static const u16 sDoorNullPalette33[16] = {};
+static const u32 sDoorNullPalette33[16] = {};
 static const u32 sDoorAnimTiles_UnusedBattleFrontier[] = INCBIN_u32("graphics/door_anims/unused_battle_frontier.4bpp");
-static const u16 sDoorNullPalette34[16] = {};
+static const u32 sDoorNullPalette34[16] = {};
 static const u32 sDoorAnimTiles_BattleDome[] = INCBIN_u32("graphics/door_anims/battle_dome.4bpp");
-static const u16 sDoorNullPalette35[16] = {};
+static const u32 sDoorNullPalette35[16] = {};
 static const u32 sDoorAnimTiles_BattleFactory[] = INCBIN_u32("graphics/door_anims/battle_factory.4bpp");
-static const u16 sDoorNullPalette36[16] = {};
+static const u32 sDoorNullPalette36[16] = {};
 static const u32 sDoorAnimTiles_BattleTower[] = INCBIN_u32("graphics/door_anims/battle_tower.4bpp");
-static const u16 sDoorNullPalette37[16] = {};
+static const u32 sDoorNullPalette37[16] = {};
 static const u32 sDoorAnimTiles_BattleArena[] = INCBIN_u32("graphics/door_anims/battle_arena.4bpp");
-static const u16 sDoorNullPalette38[16] = {};
+static const u32 sDoorNullPalette38[16] = {};
 static const u32 sDoorAnimTiles_BattleArenaLobby[] = INCBIN_u32("graphics/door_anims/battle_arena_lobby.4bpp");
-static const u16 sDoorNullPalette39[16] = {};
+static const u32 sDoorNullPalette39[16] = {};
 static const u32 sDoorAnimTiles_BattleDomeLobby[] = INCBIN_u32("graphics/door_anims/battle_dome_lobby.4bpp");
-static const u16 sDoorNullPalette40[16] = {};
+static const u32 sDoorNullPalette40[16] = {};
 static const u32 sDoorAnimTiles_BattlePalaceLobby[] = INCBIN_u32("graphics/door_anims/battle_palace_lobby.4bpp");
 static const u32 sDoorAnimTiles_BattleTent[] = INCBIN_u32("graphics/door_anims/battle_tent.4bpp");
-static const u16 sDoorNullPalette41[16] = {};
+static const u32 sDoorNullPalette41[16] = {};
 static const u32 sDoorAnimTiles_BattleDomeCorridor[] = INCBIN_u32("graphics/door_anims/battle_dome_corridor.4bpp");
-static const u16 sDoorNullPalette42[16] = {};
+static const u32 sDoorNullPalette42[16] = {};
 static const u32 sDoorAnimTiles_BattleTowerMultiCorridor[] = INCBIN_u32("graphics/door_anims/battle_tower_multi_corridor.4bpp");
-static const u16 sDoorNullPalette43[16] = {};
+static const u32 sDoorNullPalette43[16] = {};
 static const u32 sDoorAnimTiles_BattleFrontier[] = INCBIN_u32("graphics/door_anims/battle_frontier.4bpp");
-static const u16 sDoorNullPalette44[16] = {};
+static const u32 sDoorNullPalette44[16] = {};
 static const u32 sDoorAnimTiles_BattleFrontierSliding[] = INCBIN_u32("graphics/door_anims/battle_frontier_sliding.4bpp");
-static const u16 sDoorNullPalette45[16] = {};
+static const u32 sDoorNullPalette45[16] = {};
 static const u32 sDoorAnimTiles_BattleDomePreBattleRoom[] = INCBIN_u32("graphics/door_anims/battle_dome_pre_battle_room.4bpp");
-static const u16 sDoorNullPalette46[16] = {};
+static const u32 sDoorNullPalette46[16] = {};
 static const u32 sDoorAnimTiles_BattleTentInterior[] = INCBIN_u32("graphics/door_anims/battle_tent_interior.4bpp");
-static const u16 sDoorNullPalette47[16] = {};
+static const u32 sDoorNullPalette47[16] = {};
 static const u32 sDoorAnimTiles_TrainerHillLobbyElevator[] = INCBIN_u32("graphics/door_anims/trainer_hill_lobby_elevator.4bpp");
-static const u16 sDoorNullPalette48[16] = {};
+static const u32 sDoorNullPalette48[16] = {};
 static const u32 sDoorAnimTiles_TrainerHillRoofElevator[] = INCBIN_u32("graphics/door_anims/trainer_hill_roof_elevator.4bpp");
-static const u16 sDoorNullPalette49[16] = {};
+static const u32 sDoorNullPalette49[16] = {};
 
 static const struct DoorAnimFrame sDoorOpenAnimFrames[] =
 {
@@ -294,10 +294,10 @@ static void CopyDoorTilesToVram(const struct DoorGraphics *gfx, const struct Doo
         CpuFastCopy(gfx->tiles + frame->offset, (void *)(VRAM + TILE_OFFSET_4BPP(DOOR_TILE_START_SIZE1)), 8 * TILE_SIZE_4BPP);
 }
 
-static void BuildDoorTiles(u16 *tiles, u16 tileNum, const u32 *paletteNums)
+static void BuildDoorTiles(u32 *tiles, u32 tileNum, const u32 *paletteNums)
 {
     int i;
-    u16 tile;
+    u32 tile;
 
     // Only the first 4 tiles of each metatile (bottom layer) actually use the door tiles
     for (i = 0; i < 4; i++)
@@ -316,7 +316,7 @@ static void BuildDoorTiles(u16 *tiles, u16 tileNum, const u32 *paletteNums)
 
 static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 y, const u32 *paletteNums)
 {
-    u16 tiles[24];
+    u32 tiles[24];
 
     if (gfx->size == 2)
     {
@@ -408,7 +408,7 @@ static bool32 AnimateDoorFrame(struct DoorGraphics *gfx, struct DoorAnimFrame *f
 
 static void Task_AnimateDoor(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(tFramesHi << 16 | tFramesLo);
     struct DoorGraphics *gfx = (struct DoorGraphics *)(tGfxHi << 16 | tGfxLo);
 
@@ -423,7 +423,7 @@ static const struct DoorAnimFrame *GetLastDoorFrame(const struct DoorAnimFrame *
     return frame - 1;
 }
 
-static const struct DoorGraphics *GetDoorGraphics(const struct DoorGraphics *gfx, u16 metatileNum)
+static const struct DoorGraphics *GetDoorGraphics(const struct DoorGraphics *gfx, u32 metatileNum)
 {
     while (gfx->tiles != NULL)
     {
@@ -434,7 +434,7 @@ static const struct DoorGraphics *GetDoorGraphics(const struct DoorGraphics *gfx
     return NULL;
 }
 
-static s8 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frames, u32 x, u32 y)
+static s32 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frames, u32 x, u32 y)
 {
     if (FuncIsActiveTask(Task_AnimateDoor) == TRUE)
     {
@@ -470,7 +470,7 @@ static void DrawOpenedDoor(const struct DoorGraphics *gfx, u32 x, u32 y)
         DrawDoor(gfx, GetLastDoorFrame(sDoorOpenAnimFrames, sDoorOpenAnimFrames), x, y);
 }
 
-static s8 StartDoorOpenAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
+static s32 StartDoorOpenAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
     if (gfx == NULL)
@@ -486,7 +486,7 @@ static s8 StartDoorOpenAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
     }
 }
 
-static s8 StartDoorCloseAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
+static s32 StartDoorCloseAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
     if (gfx == NULL)
@@ -495,7 +495,7 @@ static s8 StartDoorCloseAnimation(const struct DoorGraphics *gfx, u32 x, u32 y)
         return StartDoorAnimationTask(gfx, sDoorCloseAnimFrames, x, y);
 }
 
-static s8 GetDoorSoundType(const struct DoorGraphics *gfx, u32 x, u32 y)
+static s32 GetDoorSoundType(const struct DoorGraphics *gfx, u32 x, u32 y)
 {
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
     if (gfx == NULL)
@@ -522,7 +522,7 @@ void FieldSetDoorClosed(u32 x, u32 y)
         DrawClosedDoor(sDoorAnimGraphicsTable, x, y);
 }
 
-s8 FieldAnimateDoorClose(u32 x, u32 y)
+s32 FieldAnimateDoorClose(u32 x, u32 y)
 {
     if (!MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
         return -1;
@@ -530,7 +530,7 @@ s8 FieldAnimateDoorClose(u32 x, u32 y)
         return StartDoorCloseAnimation(sDoorAnimGraphicsTable, x, y);
 }
 
-s8 FieldAnimateDoorOpen(u32 x, u32 y)
+s32 FieldAnimateDoorOpen(u32 x, u32 y)
 {
     if (!MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
         return -1;
@@ -538,7 +538,7 @@ s8 FieldAnimateDoorOpen(u32 x, u32 y)
         return StartDoorOpenAnimation(sDoorAnimGraphicsTable, x, y);
 }
 
-bool8 FieldIsDoorAnimationRunning(void)
+bool32 FieldIsDoorAnimationRunning(void)
 {
     return FuncIsActiveTask(Task_AnimateDoor);
 }
@@ -558,7 +558,7 @@ u32 GetDoorSoundEffect(u32 x, u32 y)
 }
 
 // Opens the Battle Tower multi partner's door in sync with the player's door
-static bool8 ShouldUseMultiCorridorDoor(void)
+static bool32 ShouldUseMultiCorridorDoor(void)
 {
     if (FlagGet(FLAG_ENABLE_MULTI_CORRIDOR_DOOR))
     {

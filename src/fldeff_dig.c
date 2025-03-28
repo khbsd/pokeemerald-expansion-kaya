@@ -16,7 +16,7 @@ static void FieldCallback_Dig(void);
 static void StartDigFieldEffect(void);
 
 // text
-bool8 SetUpFieldMove_Dig(void)
+bool32 SetUpFieldMove_Dig(void)
 {
     if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
     {
@@ -37,7 +37,7 @@ static void FieldCallback_Dig(void)
     ScriptContext_SetupScript(EventScript_UseDig);
 }
 
-bool8 FldEff_UseDig(void)
+bool32 FldEff_UseDig(void)
 {
     u32 taskId = CreateFieldMoveTask();
 

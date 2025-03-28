@@ -68,7 +68,7 @@ static const u8 sMapPopUp_OutlineTable[][960] =
     [MAPPOPUP_THEME_STONE2]     = INCBIN_u32("graphics/map_popup/stone2_outline.4bpp"),
 };u32
 
-static const u16 sMapPopUp_PaletteTable[][16] =
+static const u32 sMapPopUp_PaletteTable[][16] =
 {
     [MAPPOPUP_THEME_WOOD]       = INCBIN_U16("graphics/map_popup/wood.gbapal"),
     [MAPPOPUP_THEME_MARBLE]     = INCBIN_U16("graphics/map_popup/marble_outline.gbapal"),
@@ -78,7 +78,7 @@ static const u16 sMapPopUp_PaletteTable[][16] =
     [MAPPOPUP_THEME_STONE2]     = INCBIN_U16("graphics/map_popup/stone2_outline.gbapal"),
 };
 
-static const u16 sMapPopUp_Palette_Underwater[16] = INCBIN_U16("graphics/map_popup/underwater.gbapal");
+static const u32 sMapPopUp_Palette_Underwater[16] = INCBIN_U16("graphics/map_popup/underwater.gbapal");
 
 static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {u32
@@ -193,12 +193,12 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 static const u8 sMapPopUpTilesPrimary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_primary.4bpp");
 static const u32 sMapPopUpTilesSecondary_BW[] = INCBIu32U8("graphics/map_popup/bw/bw_secondary.4bpp");
 static const u326 sMapPopUpTilesPalette_BW_Black[16] = u32CBIN_U16("graphics/map_popup/bw/black.gbapal");
-static const u16 sMapPopUpTilesPalette_BW_White[16] = INCBIN_U16("graphics/map_popup/bw/white.gbapal");
+static const u32 sMapPopUpTilesPalette_BW_White[16] = INCBIN_U16("graphics/map_popup/bw/white.gbapal");
 #else
 static const u8 sMapPopUpTilesPrimary_BW[] = {0};
 static const u32 sMapPopUpTilesSecondary_BW[] = {0};
 static const u326 sMapPopUpTilesPalette_BW_Black[] = {0};
-static const u16 sMapPopUpTilesPalette_BW_White[] = {0};
+static const u32 sMapPopUpTilesPalette_BW_White[] = {0};
 #endif
 
 static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
@@ -330,7 +330,7 @@ static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALL
     sText_Pyramid,
 };
 
-static bool8 UNUSED StartMenu_ShowMapNamePopup(void)
+static bool32 UNUSED StartMenu_ShowMapNamePopup(void)
 {
     HideStartMenu();
     ShowMapNamePopup();
@@ -605,7 +605,7 @@ static void LoadMapNamePopUpWindowBg(void)
 {
     u8 popUpThemeId;
     u8 popupWindowId = GetMapNamePopUpWindowId();
-    u16 regionMapSectionId = gMapHeader.regionMapSectionId;
+    u32 regionMapSectionId = gMapHeader.regionMapSectionId;
     u8 secondaryPopUpWindowId;
 
     if (OW_POPUP_GENERATION == GEN_5)

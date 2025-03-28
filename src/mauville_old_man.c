@@ -24,7 +24,7 @@
 #include "constants/mauville_old_man.h"
 
 static void InitGiddyTaleList(void);
-static void StartBardSong(bool8 useNewSongLyrics);
+static void StartBardSong(bool32 useNewSongLyrics);
 static void Task_BardSong(u32 taskId);
 static void StorytellerSetup(void);
 static void Storyteller_ResetFlag(void);
@@ -33,11 +33,11 @@ static u32 sSelectedStory;
 
 COMMON_DATA struct BardSong gBardSong = {0};
 
-static EWRAM_DATA u16 sUnusedPitchTableIndex = 0;
+static EWRAM_DATA u32 sUnusedPitchTableIndex = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
 static EWRAM_DATA u32 sStorytellerWindowId = 0;
 
-static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
+static const u32 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
     EC_WORD_SHAKE,
     EC_WORD_IT,
     EC_WORD_DO,
@@ -73,7 +73,7 @@ static const u32 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
 
 static void SetupBard(void)
 {
-    u16 i;
+    u32 i;
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
 
     bard->id = MAUVILLE_MAN_BARD;
@@ -113,7 +113,7 @@ static void SetupTrader(void)
 
 void SetMauvilleOldMan(void)
 {
-    u16 trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+    u32 trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
 
 
     // Determine man based on the last digit of the player's trainer ID.
@@ -155,7 +155,7 @@ void HasBardSongBeenChanged(void)
 
 void SaveBardSongLyrics(void)
 {
-    u16 i;
+    u32 i;
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
 
     StringCopy(bard->playerName, gSaveBlock2Ptr->playerName);
@@ -176,10 +176,10 @@ void SaveBardSongLyrics(void)
 static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-    u16 * lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
+    u32 * lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
     u32 *wordEnd = gStringVar4;
     u32 *str = wordEnd;
-    u16 paragraphNum;
+    u32 paragraphNum;
 
     // Easy chat "words" aren't strictly single words, e.g. EC_WORD_MATCH_UP is the string "MATCH UP".
     // The bard song needs to know when it's at the end of an easy chat word and not just at a space in
@@ -250,7 +250,7 @@ void SetHipsterTaughtWord(void)
 
 void HipsterTryTeachWord(void)
 {
-    u16 word = UnlockRandomTrendySaying();
+    u32 word = UnlockRandomTrendySaying();
 
     if (word == EC_EMPTY_WORD)
     {
@@ -317,7 +317,7 @@ void GenerateGiddyLine(void)
 static void InitGiddyTaleList(void)
 {
     struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
-    u16 wordGroupsAndCount[][2] = {
+    u32 wordGroupsAndCount[][2] = {
         {EC_GROUP_POKEMON,   0},
         {EC_GROUP_LIFESTYLE, 0},
         {EC_GROUP_HOBBIES,   0},
@@ -325,10 +325,10 @@ static void InitGiddyTaleList(void)
         {EC_GROUP_MOVE_2,    0},
         {EC_GROUP_POKEMON_NATIONAL, 0}
     };
-    u16 i;
-    u16 totalWords;
-    u16 temp;
-    u16 var; // re-used
+    u32 i;
+    u32 totalWords;
+    u32 temp;
+    u32 var; // re-used
 
     // Shuffle question list
     for (i = 0; i < GIDDY_MAX_QUESTIONS; i++)
@@ -438,7 +438,7 @@ enum {
 // This value will be used twice; once for an unused variable, and again to select a pitch table in CalcWordSounds.
 #define WORD_TO_PITCH_TABLE_INDEX(a) ( MOD(a, (NUM_BARD_PITCH_TABLES_PER_SIZE-1)) + (((a) >> 3) & 1) )
 
-static void StartBardSong(bool8 useNewSongLyrics)
+static void StartBardSong(bool32 useNewSongLyrics)
 {
     u32 taskId = CreateTask(Task_BardSong, 80);
 
@@ -450,7 +450,7 @@ static void EnableTextPrinters(void)
     gDisableTextPrinters = FALSE;
 }
 
-static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 renderCmd)
+static void DisableTextPrinters(struct TextPrinterTemplate * printer, u32 renderCmd)
 {
     gDisableTextPrinters = TRUE;
 }
@@ -482,7 +482,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
     case BARD_STATE_INIT:
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-        u16 *lyrics;
+        u32 *lyrics;
         s32 i;
 
         // Copy lyrics
@@ -499,7 +499,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
     }
     case BARD_STATE_GET_WORD:
     {
-        u16 easyChatWord = song->lyrics[song->lyricsIndex];
+        u32 easyChatWord = song->lyrics[song->lyricsIndex];
         song->soundTemplates = GetWordSoundTemplates(easyChatWord);
         CalcWordSounds(song, WORD_TO_PITCH_TABLE_INDEX(easyChatWord));
         song->lyricsIndex++;
@@ -623,7 +623,7 @@ static void Task_BardSong(u32 taskId)
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
         u32 *str = &gStringVar4[task->tCharIndex];
-        u16 wordLen = 0;
+        u32 wordLen = 0;
 
         // Read letters until delimiter
         while (*str != CHAR_SPACE
@@ -1313,7 +1313,7 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static bool8 StorytellerInitializeRandomStat(void)
+static bool32 StorytellerInitializeRandomStat(void)
 {
     u32 storyIds[sNumStories];
     s32 i, j;
@@ -1360,7 +1360,7 @@ static void PrintStoryList(void)
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;
-        u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
+        u32 gameStatID = sStorytellerPtr->gameStatIDs[i];
 
         if (gameStatID == 0)
             break;
@@ -1372,7 +1372,7 @@ static void PrintStoryList(void)
     SetStandardWindowBorderStyle(sStorytellerWindowId, FALSE);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
-        u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
+        u32 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
             break;
         AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
@@ -1431,7 +1431,7 @@ u32 StorytellerGetFreeStorySlot(void)
 }
 
 // Returns TRUE if stat has increased
-bool8 StorytellerUpdateStat(void)
+bool32 StorytellerUpdateStat(void)
 {
     u32 stat;
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
@@ -1445,7 +1445,7 @@ bool8 StorytellerUpdateStat(void)
     return FALSE;
 }
 
-bool8 HasStorytellerAlreadyRecorded(void)
+bool32 HasStorytellerAlreadyRecorded(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
@@ -1455,7 +1455,7 @@ bool8 HasStorytellerAlreadyRecorded(void)
         return TRUE;
 }
 
-bool8 Script_StorytellerInitializeRandomStat(void)
+bool32 Script_StorytellerInitializeRandomStat(void)
 {
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return StorytellerInitializeRandomStat();

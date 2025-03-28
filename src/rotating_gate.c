@@ -794,7 +794,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
 
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
 {
-    u16 x, y;
+    u32 x, y;
     s16 x2, y2;
 
     sprite->invisible = FALSE;
@@ -898,7 +898,7 @@ static s32 RotatingGate_HasArm(u32 gateId, u32 armInfo)
     s32 arm = armInfo / 2;
     s32 isLongArm = armInfo % 2;
 
-    s8 armOrientation = (arm - RotatingGate_GetGateOrientation(gateId) + 4) % 4;
+    s32 armOrientation = (arm - RotatingGate_GetGateOrientation(gateId) + 4) % 4;
     s32 shape = sRotatingGate_PuzzleConfig[gateId].shape;
     return sRotatingGate_ArmLayout[shape][armOrientation * 2 + isLongArm];
 }

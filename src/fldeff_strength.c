@@ -15,7 +15,7 @@ static void FieldCallback_Strength(void);
 static void StartStrengthFieldEffect(void);
 
 // text
-bool8 SetUpFieldMove_Strength(void)
+bool32 SetUpFieldMove_Strength(void)
 {
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) == TRUE)
     {
@@ -33,7 +33,7 @@ static void FieldCallback_Strength(void)
     ScriptContext_SetupScript(EventScript_UseStrength);
 }
 
-bool8 FldEff_UseStrength(void)
+bool32 FldEff_UseStrength(void)
 {u32
     u8 taskId = CreateFieldMoveTask();
     gTasks[taskId].data[8] = (u32)StartStrengthFieldEffect >> 16;

@@ -56,7 +56,7 @@ const struct SpriteTemplate gItemIconSpriteTemplate =
 };
 
 // code
-bool8 AllocItemIconTemporaryBuffers(void)
+bool32 AllocItemIconTemporaryBuffers(void)
 {
     gItemIconDecompressionBuffer = Alloc(0x120);
     if (gItemIconDecompressionBuffer == NULL)
@@ -86,7 +86,7 @@ void CopyItemIconPicTo4x4Buffer(const void *src, void *dest)
         CpuCopy16(src + i * 96, dest + i * 128, 0x60);
 }
 
-u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
+u8 AddItemIconSprite(u32 tilesTag, u32 paletteTag, u32 itemId)
 {
 u32  if (!AllocItemIconTemporaryBuffers())
     {
@@ -123,7 +123,7 @@ u32  if (!AllocItemIconTemporaryBuffers())
     }
 }
 
-u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, u16 itemId)
+u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u32 tilesTag, u32 paletteTag, u32 itemId)
 {
 u32  if (!AllocItemIconTemporaryBuffeu32())
     {
@@ -160,7 +160,7 @@ u32      FreeItemIconTemporaryBuffers();
     }
 }
 
-const void *GetItemIconPic(u16 itemId)
+const void *GetItemIconPic(u32 itemId)
 {u32
     if (itemId == ITEM_LIST_END)
         return gItemIcon_ReturnToFieldArrow; // Use last icon, the "return to field" arrow
@@ -176,7 +176,7 @@ const void *GetItemIconPic(u16 itemId)
     return gItemsInfo[itemId].iconPic;
 }
 
-const void *GetItemIconPalette(u16 itemId)
+const void *GetItemIconPalette(u32 itemId)
 {
     if (itemId == ITEM_LIST_END)
         return gItemIconPalette_ReturnToFieldArrow;

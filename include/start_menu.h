@@ -1,7 +1,7 @@
 #ifndef GUARD_START_MENU_H
 #define GUARD_START_MENU_H
 
-extern bool8 (*gMenuCallback)(void);
+extern bool32 (*gMenuCallback)(void);
 
 void ShowReturnToFieldStartMenu(void);
 void Task_ShowStartMenu(u8 taskId);

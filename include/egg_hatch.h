@@ -2,7 +2,7 @@
 #define GUARD_EGG_HATCH_H
 
 void ScriptHatchMon(void);
-bool8 CheckDaycareMonReceivedMail(void);
+bool32 CheckDaycareMonReceivedMail(void);
 void EggHatch(void);
 u8 GetEggCyclesToSubtract(void);
 u32 CountPartyAliveNonEggMons(void);

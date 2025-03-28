@@ -288,8 +288,8 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
     int animNum = 0;
     int pointsPlayer = 0;
     int pointsOpponent = 0;
-    s8 *mindPoints = gBattleStruct->arenaMindPoints;
-    s8 *skillPoints = gBattleStruct->arenaSkillPoints;
+    s32 *mindPoints = gBattleStruct->arenaMindPoints;
+    s32 *skillPoints = gBattleStruct->arenaSkillPoints;
     u32 *hpAtStart = gBattleStruct->arenaStartHp;
 
     switch (category)
@@ -343,8 +343,8 @@ static void SpriteCB_JudgmentIcon(struct Sprite *sprite)
 
 void BattleArena_InitPoints(void)
 {
-    s8 *mindPoints = gBattleStruct->arenaMindPoints;
-    s8 *skillPoints = gBattleStruct->arenaSkillPoints;
+    s32 *mindPoints = gBattleStruct->arenaMindPoints;
+    s32 *skillPoints = gBattleStruct->arenaSkillPoints;
     u32 *hpAtStart = gBattleStruct->arenaStartHp;
 
     mindPoints[0] = 0;
@@ -382,7 +382,7 @@ void BattleArena_AddMindPoints(u8 battler)
 
 void BattleArena_AddSkillPoints(u8 battler)
 {
-    s8 *skillPoints = gBattleStruct->arenaSkillPoints;
+    s32 *skillPoints = gBattleStruct->arenaSkillPoints;
 
     if (gHitMarker & HITMARKER_OBEYS)
     {
@@ -417,7 +417,7 @@ void BattleArena_AddSkillPoints(u8 battler)
 
 void BattleArena_DeductSkillPoints(u8 battler, u32 stringId)
 {
-    s8 *skillPoints = gBattleStruct->arenaSkillPoints;
+    s32 *skillPoints = gBattleStruct->arenaSkillPoints;
 
     switch (stringId)
     {

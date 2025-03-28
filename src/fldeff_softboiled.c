@@ -15,11 +15,11 @@ static void Task_DisplayHPRestoredMessage(u32 taskId);
 static void Task_FinishSoftboiled(u32 taskId);
 static void CantUseSoftboiledOnMon(u32 taskId);
 
-bool8 SetUpFieldMove_SoftBoiled(void)
+bool32 SetUpFieldMove_SoftBoiled(void)
 {
-    u16 maxHp;
-    u16 hp;
-    u16 minHp;
+    u32 maxHp;
+    u32 hp;
+    u32 minHp;
 
     maxHp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_MAX_HP);
     hp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_HP);
@@ -41,7 +41,7 @@ void ChooseMonForSoftboiled(u32 taskId)
 
 void Task_TryUseSoftboiledOnPartyMon(u32 taskId)
 {
-    u16 hp;
+    u32 hp;
 
     u32 userPartyId = gPartyMenu.slotId;
     u32 recipientPartyId = gPartyMenu.slotId2;

@@ -39,11 +39,11 @@ struct Pokenav_MenuGfx
 {
     bool32 (*isTaskActiveCB)(void);
     u32 loopedTaskId;
-    u16 optionDescWindowId;
+    u32 optionDescWindowId;
     u32 bg3ScrollTaskId;
     u32 cursorPos;
     u32 numIconsBlending;
-    bool8 pokenavAlreadyOpen;
+    bool32 pokenavAlreadyOpen;
     bool32 iconVisible[MAX_POKENAV_MENUITEMS];
     struct Sprite * blueLightSprite;
     struct Sprite * iconSprites[MAX_POKENAV_MENUITEMS][NUM_OPTION_SUBSPRITES];
@@ -66,7 +66,7 @@ static void FreeAndDestroyMainMenuSprites(void);
 static void CreateMenuOptionSprites(void);
 static void DestroyMenuOptionSprites(void);
 static void DrawCurrentMenuOptionLabels(void);
-static void DrawOptionLabelGfx(const u16 *const *, s32, s32);
+static void DrawOptionLabelGfx(const u32 *const *, s32, s32);
 static void StartOptionAnimations_Enter(void);
 static void StartOptionAnimations_CursorMoved(void);
 static void StartOptionAnimations_Exit(void);
@@ -99,13 +99,13 @@ static void InitMenuOptionGlow(void);
 static void Task_CurrentMenuOptionGlow(u32);
 static void SetMenuOptionGlow(void);
 
-static const u16 sPokenavBgDotsPal[] = INCBIN_U16("graphics/pokenav/bg_dots.gbapal");
+static const u32 sPokenavBgDotsPal[] = INCBIN_U16("graphics/pokenav/bg_dots.gbapal");
 static const u32 sPokenavBgDotsTiles[] = INCBIN_U32("graphics/pokenav/bg_dots.4bpp.lz");
 static const u32 sPokenavBgDotsTilemap[] = INCBIN_U32("graphics/pokenav/bg_dots.bin.lz");
-static const u16 sPokenavDeviceBgPal[] = INCBIN_U16("graphics/pokenav/device_outline.gbapal");
+static const u32 sPokenavDeviceBgPal[] = INCBIN_U16("graphics/pokenav/device_outline.gbapal");
 static const u32 sPokenavDeviceBgTiles[] = INCBIN_U32("graphics/pokenav/device_outline.4bpp.lz");
 static const u32 sPokenavDeviceBgTilemap[] = INCBIN_U32("graphics/pokenav/device_outline_map.bin.lz");
-static const u16 sMatchCallBlueLightPal[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
+static const u32 sMatchCallBlueLightPal[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
 static const u32 sMatchCallBlueLightTiles[] = INCBIN_U32("graphics/pokenav/blue_light.4bpp.lz");
 
 static const u32 gText_NoRibbonWinners[] = _("There are no RIBBON winners.");
@@ -177,25 +177,25 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 };
 
 // Tile number, palette tag offset
-static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Party[]     = {0x0A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Search[]    = {0x0C0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cool[]      = {0x0E0, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Beauty[]    = {0x100, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cute[]      = {0x120, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Smart[]     = {0x140, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Tough[]     = {0x160, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cancel[]    = {0x180, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Party[]     = {0x0A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Search[]    = {0x0C0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Cool[]      = {0x0E0, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Beauty[]    = {0x100, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Cute[]      = {0x120, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Smart[]     = {0x140, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Tough[]     = {0x160, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u32 sOptionsLabelGfx_Cancel[]    = {0x180, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
 
 struct
 {
-    u16 yStart;
-    u16 deltaY;
-    const u16 *gfx[MAX_POKENAV_MENUITEMS];
+    u32 yStart;
+    u32 deltaY;
+    const u32 *gfx[MAX_POKENAV_MENUITEMS];
 } static const sPokenavMenuOptionLabelGfx[POKENAV_MENU_TYPE_COUNT] =
 {
     [POKENAV_MENU_TYPE_DEFAULT] =
@@ -855,7 +855,7 @@ static void DrawCurrentMenuOptionLabels(void)
     DrawOptionLabelGfx(sPokenavMenuOptionLabelGfx[menuType].gfx, sPokenavMenuOptionLabelGfx[menuType].yStart, sPokenavMenuOptionLabelGfx[menuType].deltaY);
 }
 
-static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY)
+static void DrawOptionLabelGfx(const u32 *const *optionGfx, s32 yPos, s32 deltaY)
 {
     s32 i, j;
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
@@ -1293,10 +1293,10 @@ static bool32 IsTaskActive_UpdateBgDotsPalette(void)
 
 static void Task_UpdateBgDotsPalette(u32 taskId)
 {
-    u16 sp8[2];
+    u32 sp8[2];
     s16 * data = gTasks[taskId].data;
-    const u16 * pal1 = (const u16 *)GetWordTaskArg(taskId, 1);
-    const u16 * pal2 = (const u16 *)GetWordTaskArg(taskId, 3);
+    const u32 * pal1 = (const u32 *)GetWordTaskArg(taskId, 1);
+    const u32 * pal2 = (const u32 *)GetWordTaskArg(taskId, 3);
 
     PokenavCopyPalette(pal1, pal2, 2, 12, ++data[0], sp8);
     LoadPalette(sp8, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(2));

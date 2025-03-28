@@ -51,7 +51,7 @@ void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void
 void PreparePokeblockFeedScene(void);
 
 // pokeblock
-extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
+extern const s32 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
 extern const u8 *const gPokeblockNames[];
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
@@ -64,13 +64,13 @@ u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
 void ClearPokeblocks(void);
 u8 GetHighestPokeblocksFlavorLevel(const struct Pokeblock *pokeblock);
 u8 GetPokeblocksFeel(const struct Pokeblock *pokeblock);
-s8 GetFirstFreePokeblockSlot(void);
+s32 GetFirstFreePokeblockSlot(void);
 bool32 AddPokeblock(const struct Pokeblock *pokeblock);
 bool32 TryClearPokeblock(u8 pkblId);
 s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 field);
 s16 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock);
 void PokeblockCopyName(const struct Pokeblock *pokeblock, u8 *dest);
-bool8 CopyMonFavoritePokeblockName(u8 nature, u8 *dest);
+bool32 CopyMonFavoritePokeblockName(u8 nature, u8 *dest);
 u8 GetPokeblocksFlavor(const struct Pokeblock *pokeblock);
 
 #endif // GUARD_POKEBLOCK_H

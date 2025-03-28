@@ -5,7 +5,7 @@
 struct Landmark
 {
     const u32 *name;
-    u16 flag;
+    u32 flag;
 };
 
 struct LandmarkList
@@ -423,7 +423,7 @@ const u32 *GetLandmarkName(u32 mapSection, u32 id, u32 count)
 
 static const struct Landmark *const *GetLandmarks(u32 mapSection, u32 id)
 {
-    u16 i = 0;
+    u32 i = 0;
 
     for (; sLandmarkLists[i].mapSection != MAPSEC_NONE; i++)
     {

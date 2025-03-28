@@ -480,7 +480,7 @@ s32 AgbRFU_checkID(u8 maxTries);
 // librfu_rfu
 // API Initialization and Initial Settings
     // API Initialization
-u32 rfu_initializeAPI(u32 *APIBuffer, u32 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
+u32 rfu_initializeAPI(u32 *APIBuffer, u32 buffByteSize, IntrFunc *sioIntrTable_p, bool32 copyInterruptToRam);
     // Set Timer Interrupt
 void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p);
     // Resident Function called from within a V-Blank Interrupt
@@ -532,7 +532,7 @@ void rfu_REQ_disconnect(u8 bmDisconnectSlot);
     // Switch to AGB clock slave
 void rfu_REQ_changeMasterSlave(void);
     // Acquire either the master or slave clock from the current AGB-RFU
-bool8 rfu_getMasterSlave(void);
+bool32 rfu_getMasterSlave(void);
 
 // Communication Configuration
     // MSC Callback Configuration
@@ -569,7 +569,7 @@ u32 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot);
 
     // Functions for sending/receiving data to RFU
         // Data transmission
-void rfu_REQ_sendData(bool8 clockChangeFlag);
+void rfu_REQ_sendData(bool32 clockChangeFlag);
         // Used only by parent device. Resend previous sent data (packet)
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
         // Read receive data
@@ -592,7 +592,7 @@ void rfu_REQ_noise(void);
 void IntrSIO32(void);
 
 // librfu_stwi
-void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool32 copyInterruptToRam);
 void STWI_set_MS_mode(u8 mode);
 void STWI_init_Callback_M(void);
 void STWI_init_Callback_S(void);

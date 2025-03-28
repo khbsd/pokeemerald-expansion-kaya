@@ -55,7 +55,7 @@ typedef enum
 struct VsSeekerTrainerInfo
 {
     const u32 *script;
-    u16 trainerIdx;
+    u32 trainerIdx;
     u32 localId;
     u32 objectEventId;
     s16 xCoord;
@@ -66,7 +66,7 @@ struct VsSeekerTrainerInfo
 struct VsSeekerStruct
 {
     struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
-    u16 trainerIdxArray[OBJECT_EVENTS_COUNT];
+    u32 trainerIdxArray[OBJECT_EVENTS_COUNT];
     u32 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
     u32 numRematchableTrainers;
     u32 trainerHasNotYetBeenFought:1;
@@ -86,21 +86,21 @@ static void Task_VsSeekerFrameCountdown(u32 taskId);
 static void Task_VsSeeker_PlaySoundAndGetResponseCode(u32 taskId);
 static void GatherNearbyTrainerInfo(void);
 static void Task_VsSeeker_ShowResponseToPlayer(u32 taskId);
-static bool8 CanUseVsSeeker(void);
+static bool32 CanUseVsSeeker(void);
 static u32 GetVsSeekerResponseInArea(void);
 #if FREE_MATCH_CALL == FALSE
 static u32 GetResponseMovementTypeFromTrainerGraphicsId(u32 graphicsId);
 #endif //FREE_MATCH_CALL
-static u16 GetTrainerFlagFromScript(const u32 * script);
+static u32 GetTrainerFlagFromScript(const u32 * script);
 static void ClearAllTrainerRematchStates(void);
 #if FREE_MATCH_CALL == FALSE
-static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo);
+static bool32 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo);
 static u32 GetRematchableTrainerLocalId(void);
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u32 * script);
-static u32 GetCurVsSeekerResponse(s32 vsSeekerIdx, u16 trainerIdx);
+static u32 GetCurVsSeekerResponse(s32 vsSeekerIdx, u32 trainerIdx);
 #endif //FREE_MATCH_CALL
 static void StartAllRespondantIdleMovements(void);
-static bool8 ObjectEventIdIsSane(u32 objectEventId);
+static bool32 ObjectEventIdIsSane(u32 objectEventId);
 static u32 GetRandomFaceDirectionMovementType();
 
 static const u32 sMovementScript_Wait48[] = {
@@ -178,7 +178,7 @@ static void Task_ResetObjectsRematchWantedState(u32 taskId)
 #undef tIsPlayerFrozen
 #undef tAreObjectsFrozen
 
-u16 VsSeekerConvertLocalIdToTableId(u16 localId)
+u32 VsSeekerConvertLocalIdToTableId(u32 localId)
 {
     u32 localIdIndex = 0;
     u32 trainerId = 0;
@@ -223,7 +223,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
     }
 }
 
-bool8 UpdateVsSeekerStepCounter(void)
+bool32 UpdateVsSeekerStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
     u32 x = 0;
@@ -256,7 +256,7 @@ bool8 UpdateVsSeekerStepCounter(void)
     return FALSE;
 }
 
-void MapResetTrainerRematches(u16 mapGroup, u16 mapNum)
+void MapResetTrainerRematches(u32 mapGroup, u32 mapNum)
 {
     if (!I_VS_SEEKER_CHARGING) return;
 
@@ -432,7 +432,7 @@ static u32 CanUseVsSeeker(void)
 static u32 GetVsSeekerResponseInArea(void)
 {
 #if FREE_MATCH_CALL == FALSE
-    u16 trainerIdx = 0;
+    u32 trainerIdx = 0;
     u32 response = 0, rematchTrainerIdx;
     s32 vsSeekerIdx = 0, randomValue = 0;
 
@@ -559,7 +559,7 @@ static u32 GetGameProgressFlags()
     return numGameProgressFlags;
 }
 
-u16 GetRematchTrainerIdVSSeeker(u16 trainerId)
+u32 GetRematchTrainerIdVSSeeker(u32 trainerId)
 {
     u32 tableId = FirstBattleTrainerIdToRematchTableId(gRematchTable, trainerId);
     u32 rematchTrainerIdx = GetGameProgressFlags();
@@ -585,7 +585,7 @@ bool32 IsVsSeekerEnabled(void)
     return (CheckBagHasItem(ITEM_VS_SEEKER, 1));
 }
 
-static bool8 ObjectEventIdIsSane(u32 objectEventId)
+static bool32 ObjectEventIdIsSane(u32 objectEventId)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
 
@@ -596,7 +596,7 @@ static bool8 ObjectEventIdIsSane(u32 objectEventId)
 
 static u32 GetRandomFaceDirectionMovementType()
 {
-    u16 randomFacingDirection = Random() % 4;
+    u32 randomFacingDirection = Random() % 4;
 
     switch (randomFacingDirection)
     {
@@ -617,7 +617,7 @@ static u32 GetRandomFaceDirectionMovementType()
 static bool32 IsRegularLandTrainer(u32 graphicsId)
 {
     u32 i;
-    u16 regularTrainersOnLand[] =
+    u32 regularTrainersOnLand[] =
     {
         OBJ_EVENT_GFX_AQUA_MEMBER_F,
         OBJ_EVENT_GFX_AQUA_MEMBER_M,
@@ -680,7 +680,7 @@ static bool32 IsRegularLandTrainer(u32 graphicsId)
 static bool32 IsRegularWaterTrainer(u32 graphicsId)
 {
     u32 i;
-    u16 regularTrainersInWater[] =
+    u32 regularTrainersInWater[] =
     {
         OBJ_EVENT_GFX_SWIMMER_F,
         OBJ_EVENT_GFX_SWIMMER_M,
@@ -704,7 +704,7 @@ static u32 GetResponseMovementTypeFromTrainerGraphicsId(u32 graphicsId)
 }
 #endif //FREE_MATCH_CALL
 
-static u16 GetTrainerFlagFromScript(const u32 *script)
+static u32 GetTrainerFlagFromScript(const u32 *script)
     /*
  * The trainer flag is a little-endian short located +2 from
  * the script pointer, assuming the trainerbattle command is
@@ -717,7 +717,7 @@ static u16 GetTrainerFlagFromScript(const u32 *script)
  *       -- --
      */
 {
-    u16 trainerFlag;
+    u32 trainerFlag;
 
     script += 2;
     trainerFlag = script[0];
@@ -739,7 +739,7 @@ static void ClearAllTrainerRematchStates(void)
 }
 
 #if FREE_MATCH_CALL == FALSE
-static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
+static bool32 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
 {
     s16 x;
     s16 y;
@@ -779,7 +779,7 @@ static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * traine
     ScriptMovement_StartObjectMovementScript(trainerInfo->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, script);
 }
 
-static u32 GetCurVsSeekerResponse(s32 vsSeekerIdx, u16 trainerIdx)
+static u32 GetCurVsSeekerResponse(s32 vsSeekerIdx, u32 trainerIdx)
 {
     s32 i;
     s32 j;

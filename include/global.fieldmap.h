@@ -37,8 +37,8 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    /*0x00*/ bool8 isCompressed;
-    /*0x01*/ bool8 isSecondary;
+    /*0x00*/ bool32 isCompressed;
+    /*0x01*/ bool32 isSecondary;
     /*0x04*/ const u32 *tiles;
     /*0x08*/ const u32 (*palettes)[16];
     /*0x0C*/ const u32 *metatiles;
@@ -155,10 +155,10 @@ struct MapHeader
     /* 0x17 */ u8 mapType;
     /* 0x18 */ u8 filler_18[2];
                // fields correspond to the arguments in the map_header_flags macro
-    /* 0x1A */ bool8 allowCycling:1;
-               bool8 allowEscaping:1; // Escape Rope and Dig
-               bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused
+    /* 0x1A */ bool32 allowCycling:1;
+               bool32 allowEscaping:1; // Escape Rope and Dig
+               bool32 allowRunning:1;
+               bool32 showMapName:5; // the last 4 bits are unused
                                     // but the 5 bit sized bitfield is required to match
     /* 0x1B */ u8 battleType;
 };
@@ -328,7 +328,7 @@ struct PlayerAvatar
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 objectEventId;
-    /*0x06*/ bool8 preventStep;
+    /*0x06*/ bool32 preventStep;
     /*0x07*/ u8 gender;
     /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
     /*0x09*/ u8 newDirBackup; // during bike movement, the new direction as opposed to player's direction is backed up here.
@@ -344,7 +344,7 @@ struct PlayerAvatar
 
 struct Camera
 {
-    bool8 active:1;
+    bool32 active:1;
     s32 x;
     s32 y;
 };

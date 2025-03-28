@@ -70,9 +70,9 @@ static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 
-EWRAM_DATA static bool8 sArrowPressed = FALSE;
+EWRAM_DATA static bool32 sArrowPressed = FALSE;
 
-static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text.gbapal");
+static const u32 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
 static const u32 sEqualSignGfx[] = INCBIN_u32("graphics/interface/option_menu_equals_sign.4bpp");
 
@@ -132,7 +132,7 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
     }
 };
 
-static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u32 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
 
 static void MainCB2(void)
 {
@@ -380,7 +380,7 @@ static void HighlightOptionMenuItem(u32 index)
 static void DrawOptionMenuChoice(const u32 *text, u32 x, u32 y, u32 style)
 {
     u32 dst[16];
-    u16 i;
+    u32 i;
 
     for (i = 0; *text != EOS && i < ARRAY_COUNT(dst) - 1; i++)
         dst[i] = *(text++);
@@ -542,7 +542,7 @@ static void FrameType_DrawChoices(u32 selection)
 {
     u32 text[16] = {EOS};
     u32 n = selection + 1;
-    u16 i;
+    u32 i;
 
     for (i = 0; gText_FrameTypeNumber[i] != EOS && i <= 5; i++)
         text[i] = gText_FrameTypeNumber[i];

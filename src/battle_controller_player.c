@@ -1209,7 +1209,7 @@ static void Intro_DelayAndEnd(u32 battler)
 
 static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
-    bool8 healthboxAnimDone = FALSE;
+    bool32 healthboxAnimDone = FALSE;
 
     // Check if healthbox has finished sliding in
     if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))

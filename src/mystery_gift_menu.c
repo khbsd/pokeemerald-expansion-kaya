@@ -46,23 +46,23 @@ static void CreateMysteryGiftTask(void);
 static void Task_MysteryGift(u32 taskId);
 
 EWRAM_DATA static u32 sDownArrowCounterAndYCoordIdx[8] = {};
-EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
+EWRAM_DATA bool32 gGiftIsFromEReader = FALSE;
 
-static const u16 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/mystery_gift_textbox_border.gbapal");
+static const u32 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/mystery_gift_textbox_border.gbapal");
 static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/mystery_gift_textbox_border.4bpp.lz");
 
 struct MysteryGiftTaskData
 {
-    u16 var; // Multipurpose
-    u16 unused1;
-    u16 unused2;
-    u16 unused3;
+    u32 var; // Multipurpose
+    u32 unused1;
+    u32 unused2;
+    u32 unused3;
     u32 state;
     u32 textState;
     u32 unused4;
     u32 unused5;
-    bool8 isWonderNews;
-    bool8 sourceIsFriend;
+    bool32 isWonderNews;
+    bool32 sourceIsFriend;
     u32 msgId;
     u32 *clientMsg;
 };
@@ -483,7 +483,7 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
 }
 
 // Print the text window at the top of the screen with the title and control instructions
-void PrintMysteryGiftOrEReaderHeader(bool8 isEReader, bool32 useCancel)
+void PrintMysteryGiftOrEReaderHeader(bool32 isEReader, bool32 useCancel)
 {
     const u32 *title;
     const u32 *options;
@@ -631,7 +631,7 @@ static bool32 PrintStringAndWait2Seconds(u32 *counter, const u32 *str)
     }
 }
 
-static u32 MysteryGift_HandleThreeOptionMenu(u32 *unused0, u16 * unused1, u32 whichMenu)
+static u32 MysteryGift_HandleThreeOptionMenu(u32 *unused0, u32 * unused1, u32 whichMenu)
 {
     struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
     struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;
@@ -662,10 +662,10 @@ static u32 MysteryGift_HandleThreeOptionMenu(u32 *unused0, u16 * unused1, u32 wh
     return response;
 }
 
-s8 DoMysteryGiftYesNo(u32 *textState, u16 * windowId, bool8 yesNoBoxPlacement, const u32 *str)
+s32 DoMysteryGiftYesNo(u32 *textState, u32 * windowId, bool32 yesNoBoxPlacement, const u32 *str)
 {
     struct WindowTemplate windowTemplate;
-    s8 input;
+    s32 input;
 
     switch (*textState)
     {
@@ -719,7 +719,7 @@ s8 DoMysteryGiftYesNo(u32 *textState, u16 * windowId, bool8 yesNoBoxPlacement, c
 }
 
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
-static s32 HandleGiftSelectMenu(u32 *textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
+static s32 HandleGiftSelectMenu(u32 *textState, u32 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
     struct WindowTemplate UNUSED windowTemplate;
     s32 input;
@@ -852,7 +852,7 @@ static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 useCancel)
     }
 }
 
-static s32 AskDiscardGift(u32 *textState, u16 * windowId, bool32 isWonderNews)
+static s32 AskDiscardGift(u32 *textState, u32 * windowId, bool32 isWonderNews)
 {
     if (!isWonderNews)
         return DoMysteryGiftYesNo(textState, windowId, TRUE, gText_IfThrowAwayCardEventWontHappen);
@@ -897,7 +897,7 @@ static bool32 SaveOnMysteryGiftMenu(u32 *state)
     return FALSE;
 }
 
-static const u32 *GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews, bool8 sourceIsFriend, u32 msgId)
+static const u32 *GetClientResultMessage(bool32 * successMsg, bool32 isWonderNews, bool32 sourceIsFriend, u32 msgId)
 {
     const u32 *msg = NULL;
     *successMsg = FALSE;
@@ -969,7 +969,7 @@ static const u32 *GetClientResultMessage(bool32 * successMsg, bool8 isWonderNews
     return msg;
 }
 
-static bool32 PrintSuccessMessage(u32 *state, const u32 *msg, u16 * timer)
+static bool32 PrintSuccessMessage(u32 *state, const u32 *msg, u32 * timer)
 {
     switch (*state)
     {
@@ -996,7 +996,7 @@ static bool32 PrintSuccessMessage(u32 *state, const u32 *msg, u16 * timer)
     return FALSE;
 }
 
-static const u32 *GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsFriend, u32 msgId)
+static const u32 *GetServerResultMessage(bool32 * wonderSuccess, bool32 sourceIsFriend, u32 msgId)
 {
     const u32 *result = gText_CommunicationError;
     *wonderSuccess = FALSE;
@@ -1053,7 +1053,7 @@ static const u32 *GetServerResultMessage(bool32 * wonderSuccess, bool8 sourceIsF
     return result;
 }
 
-static bool32 PrintServerResultMessage(u32 *state, u16 * timer, bool8 sourceIsFriend, u32 msgId)
+static bool32 PrintServerResultMessage(u32 *state, u32 * timer, bool32 sourceIsFriend, u32 msgId)
 {
     bool32 wonderSuccess;
     const u32 *str = GetServerResultMessage(&wonderSuccess, sourceIsFriend, msgId);
@@ -1615,7 +1615,7 @@ static void Task_MysteryGift(u32 taskId)
     }
 }
 
-u16 GetMysteryGiftBaseBlock(void)
+u32 GetMysteryGiftBaseBlock(void)
 {
     return 0x1A9;
 }

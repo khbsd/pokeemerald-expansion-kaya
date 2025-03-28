@@ -3,8 +3,8 @@
 
 struct HealLocation
 {
-    s8 group;
-    s8 map;
+    s32 group;
+    s32 map;
     u32 x;
     u32 y;
 };

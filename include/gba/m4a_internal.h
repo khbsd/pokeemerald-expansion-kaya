@@ -43,7 +43,7 @@ struct WaveData
     u32 freq;
     u32 loopStart;
     u32 size; // number of samples
-    s8 data[1]; // samples
+    s32 data[1]; // samples
 };
 
 #define TONEDATA_TYPE_CGB    0x07
@@ -155,7 +155,7 @@ struct SoundChannel
     u32 fw;
     u32 frequency;
     struct WaveData *wav;
-    s8 *currentPointer;
+    s32 *currentPointer;
     struct MusicPlayerTrack *track;
     void *prevChannelPointer;
     void *nextChannelPointer;
@@ -213,7 +213,7 @@ struct SoundInfo
     ExtVolPitFunc ExtVolPit;
     u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
-    s8 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
+    s32 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };
 
 struct SongHeader
@@ -277,19 +277,19 @@ struct MusicPlayerTrack
     u8 runningStatus;
     u8 keyM;
     u8 pitM;
-    s8 keyShift;
-    s8 keyShiftX;
-    s8 tune;
+    s32 keyShift;
+    s32 keyShiftX;
+    s32 tune;
     u8 pitX;
-    s8 bend;
+    s32 bend;
     u8 bendRange;
     u8 volMR;
     u8 volML;
     u8 vol;
     u8 volX;
-    s8 pan;
-    s8 panX;
-    s8 modM;
+    s32 pan;
+    s32 panX;
+    s32 modM;
     u8 mod;
     u8 modT;
     u8 lfoSpeed;
@@ -437,20 +437,20 @@ void m4aSoundVSyncOff(void);
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u32 tempo);
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u32 volume);
 void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s16 pitch);
-void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s8 pan);
+void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u32 trackBits, s32 pan);
 void ClearModM(struct MusicPlayerTrack *track);
 void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 modDepth);
 void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u32 trackBits, u8 lfoSpeed);
 
 struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone);
 void SetPokemonCryVolume(u8 val);
-void SetPokemonCryPanpot(s8 val);
+void SetPokemonCryPanpot(s32 val);
 void SetPokemonCryPitch(s16 val);
 void SetPokemonCryLength(u32 val);
 void SetPokemonCryRelease(u8 val);
 void SetPokemonCryProgress(u32 val);
 bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo);
-void SetPokemonCryChorus(s8 val);
+void SetPokemonCryChorus(s32 val);
 void SetPokemonCryStereo(u32 val);
 void SetPokemonCryPriority(u8 val);
 

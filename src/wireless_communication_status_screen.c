@@ -61,7 +61,7 @@ static void Task_WirelessCommunicationScreen(u32);
 static void WCSS_AddTextPrinterParameterized(u32, u32, const u32 *, u32, u32, u32);
 static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u32);
 
-static const u16 sPalettes[][16] = {
+static const u32 sPalettes[][16] = {
     INCBIN_U16("graphics/wireless_status_screen/default.gbapal"),
     {}, // All black. Never read
     INCBIN_U16("graphics/wireless_status_screen/anim_00.gbapal"),

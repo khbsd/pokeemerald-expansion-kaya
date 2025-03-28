@@ -97,7 +97,7 @@ void MoveAllRoamers(void)
         RoamerMove(i);
 }
 
-static void CreateInitialRoamerMon(u32 index, u16 species, u32 level)
+static void CreateInitialRoamerMon(u32 index, u32 species, u32 level)
 {
     ClearRoamerLocationHistory(index);
     CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
@@ -130,7 +130,7 @@ static u32 GetFirstInactiveRoamerIndex(void)
     return ROAMER_COUNT;
 }
 
-bool8 TryAddRoamer(u16 species, u32 level)
+bool32 TryAddRoamer(u32 species, u32 level)
 {
     u32 index = GetFirstInactiveRoamerIndex();
 
@@ -229,7 +229,7 @@ void RoamerMove(u32 roamerIndex)
     }
 }
 
-bool8 IsRoamerAt(u32 roamerIndex, u32 mapGroup, u32 mapNum)
+bool32 IsRoamerAt(u32 roamerIndex, u32 mapGroup, u32 mapNum)
 {
     if (ROAMER(roamerIndex)->active && mapGroup == sRoamerLocation[roamerIndex][MAP_GRP] && mapNum == sRoamerLocation[roamerIndex][MAP_NUM])
         return TRUE;
@@ -243,7 +243,7 @@ void CreateRoamerMonInstance(u32 roamerIndex)
     struct Pokemon *mon = &gEnemyParty[0];
     ZeroEnemyPartyMons();
     CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, ROAMER(roamerIndex)->level, ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
-    // The roamer's status field is u16, but SetMonData expects status to be u32, so will set the roamer's status
+    // The roamer's status field is u32, but SetMonData expects status to be u32, so will set the roamer's status
     // using the status field and the following 3 bytes (cool, beauty, and cute).
     SetMonData(mon, MON_DATA_STATUS, &status);
     SetMonData(mon, MON_DATA_HP, &ROAMER(roamerIndex)->hp);
@@ -254,7 +254,7 @@ void CreateRoamerMonInstance(u32 roamerIndex)
     SetMonData(mon, MON_DATA_TOUGH, &ROAMER(roamerIndex)->tough);
 }
 
-bool8 TryStartRoamerEncounter(void)
+bool32 TryStartRoamerEncounter(void)
 {
     u32 i;
 

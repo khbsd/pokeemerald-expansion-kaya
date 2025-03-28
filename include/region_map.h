@@ -64,18 +64,18 @@ struct RegionMap {
     /*0x072*/ u32 playerIconPaletteTag;
     /*0x074*/ u32 playerIconSpritePosX;
     /*0x076*/ u32 playerIconSpritePosY;
-    /*0x078*/ bool8 zoomed;
+    /*0x078*/ bool32 zoomed;
     /*0x079*/ u32 initStep;
-    /*0x07a*/ s8 cursorMovementFrameCounter;
-    /*0x07b*/ s8 cursorDeltaX;
-    /*0x07c*/ s8 cursorDeltaY;
-    /*0x07d*/ bool8 needUpdateVideoRegs;
-    /*0x07e*/ bool8 blinkPlayerIcon;
-    /*0x07f*/ bool8 playerIsInCave;
+    /*0x07a*/ s32 cursorMovementFrameCounter;
+    /*0x07b*/ s32 cursorDeltaX;
+    /*0x07c*/ s32 cursorDeltaY;
+    /*0x07d*/ bool32 needUpdateVideoRegs;
+    /*0x07e*/ bool32 blinkPlayerIcon;
+    /*0x07f*/ bool32 playerIsInCave;
     /*0x080*/ u32 bgNum;
     /*0x081*/ u32 charBaseIdx;
     /*0x082*/ u32 mapBaseIdx;
-    /*0x083*/ bool8 bgManaged;
+    /*0x083*/ bool32 bgManaged;
     /*0x084*/ u32 filler_084[0x100];
     /*0x184*/ u32 cursorSmallImage[0x100];
     /*0x284*/ u32 cursorLargeImage[0x600];
@@ -93,12 +93,12 @@ struct RegionMapLocation
 // Exported RAM declarations
 
 // Exported ROM declarations
-void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool8 zoomed);
-bool8 LoadRegionMapGfx(void);
+void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool32 zoomed);
+bool32 LoadRegionMapGfx(void);
 void UpdateRegionMapVideoRegs(void);
 void InitRegionMap(struct RegionMap *regionMap, u32 argument);
 u32 DoRegionMapInputCallback(void);
-bool8 UpdateRegionMapZoom(void);
+bool32 UpdateRegionMapZoom(void);
 void FreeRegionMapIconResources(void);
 u32 GetRegionMapSecIdAt(u32 x, u32 y);
 void CreateRegionMapPlayerIcon(u32 tileTag, u32 paletteTag);
@@ -111,7 +111,7 @@ u32 CorrectSpecialMapSecId(u32 mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
-bool8 IsRegionMapZoomed(void);
+bool32 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u32 color, u32 coeff);
 void SetRegionMapDataForZoom(void);

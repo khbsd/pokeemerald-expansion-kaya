@@ -28,7 +28,7 @@ EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void Task_ComputerScreenOpenEffect(u32);
 static void Task_ComputerScreenCloseEffect(u32);
-static void CreateComputerScreenEffectTask(TaskFunc, u16, u16, u32);
+static void CreateComputerScreenEffectTask(TaskFunc, u32, u32, u32);
 
 static void Task_SecretBasePCTurnOn(u32);
 
@@ -63,10 +63,10 @@ static void SpriteCB_SandPillar_End(struct Sprite *);
 
 static const u32 sSecretPowerCave_Gfx[] = INCBIN_u32("graphics/field_effects/pics/secret_power_cave.4bpp");
 static const u32 sFiller[32] = {0};
-static const u16 sSecretPowerCave_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_cave.gbapal");
+static const u32 sSecretPowerCave_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_cave.gbapal");
 static const u32 sSecretPowerShrub_Gfx[] = INCBIN_u32("graphics/field_effects/pics/secret_power_shrub.4bpp");
 static const u32 sSecretPowerTree_Gfx[] = INCBIN_u32("graphics/field_effects/pics/secret_power_tree.4bpp");
-static const u16 sSecretPowerPlant_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_plant.gbapal");
+static const u32 sSecretPowerPlant_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_plant.gbapal");
 
 // TODO: These should also be combined into a single image, not matching for some reason
 static const u32 sSandPillar0_Gfx[] = INCBIN_u32("graphics/field_effects/pics/sand_pillar/0.4bpp");
@@ -273,7 +273,7 @@ static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_SAND_PILLAR};
 
 static const u32 sRecordMixLights_Gfx[] = INCBIN_u32("graphics/field_effects/pics/record_mix_lights.4bpp");
-static const u16 sRecordMixLights_Pal[] = INCBIN_U16("graphics/field_effects/palettes/record_mix_lights.gbapal");
+static const u32 sRecordMixLights_Pal[] = INCBIN_U16("graphics/field_effects/palettes/record_mix_lights.gbapal");
 
 static const struct SpriteFrameImage sPicTable_RecordMixLights[] =
 {
@@ -309,22 +309,22 @@ static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
 };
 
 // For accessing Pokémon storage PC or the Hall of Fame PC
-void ComputerScreenOpenEffect(u16 increment, u16 unused, u32 priority)
+void ComputerScreenOpenEffect(u32 increment, u32 unused, u32 priority)
 {
     CreateComputerScreenEffectTask(Task_ComputerScreenOpenEffect, increment, unused, priority);
 }
 
-void ComputerScreenCloseEffect(u16 increment, u16 unused, u32 priority)
+void ComputerScreenCloseEffect(u32 increment, u32 unused, u32 priority)
 {
     CreateComputerScreenEffectTask(Task_ComputerScreenCloseEffect, increment, unused, priority);
 }
 
-bool8 IsComputerScreenOpenEffectActive(void)
+bool32 IsComputerScreenOpenEffectActive(void)
 {
     return FuncIsActiveTask(Task_ComputerScreenOpenEffect);
 }
 
-bool8 IsComputerScreenCloseEffectActive(void)
+bool32 IsComputerScreenCloseEffectActive(void)
 {
     return FuncIsActiveTask(Task_ComputerScreenCloseEffect);
 }
@@ -339,7 +339,7 @@ bool8 IsComputerScreenCloseEffectActive(void)
 #define tBlendCnt      data[7]
 #define tBlendY        data[8]
 
-static void CreateComputerScreenEffectTask(void (*taskfunc) (u32), u16 increment, u16 unused, u32 priority)
+static void CreateComputerScreenEffectTask(void (*taskfunc) (u32), u32 increment, u32 unused, u32 priority)
 {
     u32 taskId = CreateTask(taskfunc, priority);
 
@@ -544,7 +544,7 @@ static void AdjustSecretPowerSpritePixelOffsets(void)
     }
 }
 
-bool8 SetUpFieldMove_SecretPower(void)
+bool32 SetUpFieldMove_SecretPower(void)
 {
     u32 mb;
 
@@ -589,7 +589,7 @@ static void FieldCallback_SecretBaseCave(void)
     ScriptContext_SetupScript(SecretBase_EventScript_CaveUseSecretPower);
 }
 
-bool8 FldEff_UseSecretPowerCave(void)
+bool32 FldEff_UseSecretPowerCave(void)
 {
     u32 taskId = CreateFieldMoveTask();
 
@@ -605,7 +605,7 @@ static void StartSecretBaseCaveFieldEffect(void)
     FieldEffectStart(FLDEFF_SECRET_POWER_CAVE);
 }
 
-bool8 FldEff_SecretPowerCave(void)
+bool32 FldEff_SecretPowerCave(void)
 {
     AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(&sSpriteTemplate_SecretPowerCave,
@@ -649,7 +649,7 @@ static void FieldCallback_SecretBaseTree(void)
     ScriptContext_SetupScript(SecretBase_EventScript_TreeUseSecretPower);
 }
 
-bool8 FldEff_UseSecretPowerTree(void)
+bool32 FldEff_UseSecretPowerTree(void)
 {
     u32 taskId = CreateFieldMoveTask();
 
@@ -665,7 +665,7 @@ static void StartSecretBaseTreeFieldEffect(void)
     FieldEffectStart(FLDEFF_SECRET_POWER_TREE);
 }
 
-bool8 FldEff_SecretPowerTree(void)
+bool32 FldEff_SecretPowerTree(void)
 {
     s16 mb = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) & 0xFFF;
 
@@ -723,7 +723,7 @@ static void FieldCallback_SecretBaseShrub(void)
     ScriptContext_SetupScript(SecretBase_EventScript_ShrubUseSecretPower);
 }
 
-bool8 FldEff_UseSecretPowerShrub(void)
+bool32 FldEff_UseSecretPowerShrub(void)
 {
     u32 taskId = CreateFieldMoveTask();
 
@@ -739,7 +739,7 @@ static void StartSecretBaseShrubFieldEffect(void)
     FieldEffectStart(FLDEFF_SECRET_POWER_SHRUB);
 }
 
-bool8 FldEff_SecretPowerShrub(void)
+bool32 FldEff_SecretPowerShrub(void)
 {
     AdjustSecretPowerSpritePixelOffsets();
 
@@ -785,7 +785,7 @@ static void SpriteCB_ShrubEntranceEnd(struct Sprite *sprite)
 #define tY     data[1]
 #define tState data[2]
 
-bool8 FldEff_SecretBasePCTurnOn(void)
+bool32 FldEff_SecretBasePCTurnOn(void)
 {
     s16 x, y;
     u32 taskId;
@@ -901,12 +901,12 @@ static void DoBalloonSoundEffect(s16 metatileId)
     }
 }
 
-bool8 FldEff_Nop47(void)
+bool32 FldEff_Nop47(void)
 {
     return FALSE;
 }
 
-bool8 FldEff_Nop48(void)
+bool32 FldEff_Nop48(void)
 {
     return FALSE;
 }
@@ -1030,7 +1030,7 @@ void DoSecretBaseGlitterMatSparkle(void)
     }
 }
 
-bool8 FldEff_SandPillar(void)
+bool32 FldEff_SandPillar(void)
 {
     s16 x, y;
 
@@ -1177,7 +1177,7 @@ void InteractWithShieldOrTVDecoration(void)
 }
 
 // As opposed to a small one (single metatile) like the balloons
-bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase)
+bool32 IsLargeBreakableDecoration(u32 metatileId, bool32 checkBase)
 {
     if (!CurMapIsSecretBase())
         return FALSE;

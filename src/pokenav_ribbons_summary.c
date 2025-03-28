@@ -46,10 +46,10 @@ struct Pokenav_RibbonsSummaryList
 {
     u32 unused1[8];
     struct PokenavMonList *monList;
-    u16 selectedPos;
-    u16 normalRibbonLastRowStart;
-    u16 numNormalRibbons;
-    u16 numGiftRibbons;
+    u32 selectedPos;
+    u32 normalRibbonLastRowStart;
+    u32 numNormalRibbons;
+    u32 numGiftRibbons;
     u32 ribbonIds[FIRST_GIFT_RIBBON];
     u32 giftRibbonIds[NUM_GIFT_RIBBONS];
     u32 unused2;
@@ -60,11 +60,11 @@ struct Pokenav_RibbonsSummaryMenu
 {
     u32 (*callback)(void);
     u32 loopedTaskId;
-    u16 nameWindowId;
-    u16 ribbonCountWindowId;
-    u16 listIdxWindowId;
-    u16 unusedWindowId;
-    u16 monSpriteId;
+    u32 nameWindowId;
+    u32 ribbonCountWindowId;
+    u32 listIdxWindowId;
+    u32 unusedWindowId;
+    u32 monSpriteId;
     struct Sprite *bigRibbonSprite;
     u32 unused;
     u32 tilemapBuffers[2][BG_SCREEN_SIZE];
@@ -102,11 +102,11 @@ static bool32 TrySelectRibbonDown(struct Pokenav_RibbonsSummaryList *);
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 GetRibbonsSummaryCurrentIndex(void);
 static u32 GetRibbonsSummaryMonListCount(void);
-static u16 DrawRibbonsMonFrontPic(s32, s32);
+static u32 DrawRibbonsMonFrontPic(s32, s32);
 static void StartMonSpriteSlide(struct Sprite *, s32, s32, s32);
 static void SpriteCB_MonSpriteSlide(struct Sprite *);
 static void ClearRibbonsSummaryBg(void);
-static void BufferSmallRibbonGfxData(u16 *, u32);
+static void BufferSmallRibbonGfxData(u32 *, u32);
 static void DrawRibbonSmall(u32, u32);
 static void SpriteCB_WaitForRibbonAnimation(struct Sprite *);
 static u32 LoopedTask_OpenRibbonsSummaryMenu(s32);
@@ -121,7 +121,7 @@ struct
     u32 numBits; // The number of bits needed to represent numRibbons
     u32 numRibbons; // Never read. The contest ribbons have 4 (1 for each rank), the rest are just 1 ribbon
     u32 ribbonId;
-    bool8 isGiftRibbon;
+    bool32 isGiftRibbon;
 } static  const sRibbonData[] =
 {
     {1, 1, CHAMPION_RIBBON,      FALSE},
@@ -146,12 +146,12 @@ struct
 #include "data/text/ribbon_descriptions.h"
 #include "data/text/gift_ribbon_descriptions.h"
 
-static const u16 sRibbonIcons1_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons1.gbapal");
-static const u16 sRibbonIcons2_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons2.gbapal");
-static const u16 sRibbonIcons3_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons3.gbapal");
-static const u16 sRibbonIcons4_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons4.gbapal");
-static const u16 sRibbonIcons5_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons5.gbapal");
-static const u16 sMonInfo_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/mon_info.gbapal"); // palette for Pokémon's name/gender/level text
+static const u32 sRibbonIcons1_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons1.gbapal");
+static const u32 sRibbonIcons2_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons2.gbapal");
+static const u32 sRibbonIcons3_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons3.gbapal");
+static const u32 sRibbonIcons4_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons4.gbapal");
+static const u32 sRibbonIcons5_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/icons5.gbapal");
+static const u32 sMonInfo_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/mon_info.gbapal"); // palette for Pokémon's name/gender/level text
 static const u32 sRibbonIconsSmall_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons/icons.4bpp.lz");
 static const u32 sRibbonIconsBig_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons/icons_big.4bpp.lz");
 
@@ -328,7 +328,7 @@ static bool32 TrySelectRibbonDown(struct Pokenav_RibbonsSummaryList *list)
 
 static bool32 TrySelectRibbonLeft(struct Pokenav_RibbonsSummaryList *list)
 {
-    u16 column = list->selectedPos % RIBBONS_PER_ROW;
+    u32 column = list->selectedPos % RIBBONS_PER_ROW;
     if (column != 0)
     {
         list->selectedPos--;
@@ -403,7 +403,7 @@ static void GetMonNicknameLevelGender(u32 *nick, u32 *level, u32 *gender)
     StringGet_Nickname(nick);
 }
 
-static void GetMonSpeciesPersonalityShiny(u16 *species, u32 *personality, bool8 *isShiny)
+static void GetMonSpeciesPersonalityShiny(u32 *species, u32 *personality, bool32 *isShiny)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     struct PokenavMonList *mons = list->monList;
@@ -498,7 +498,7 @@ static u32 *GetGiftRibbonIds(u32 *size)
     return list->giftRibbonIds;
 }
 
-static u16 GetSelectedPosition(void)
+static u32 GetSelectedPosition(void)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     return list->selectedPos;
@@ -876,7 +876,7 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
     const u32 *genderTxt;
     u32 *txtPtr;
     u32 level, gender;
-    u16 windowId = menu->nameWindowId;
+    u32 windowId = menu->nameWindowId;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
@@ -942,9 +942,9 @@ static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *menu)
 
 static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    u16 species;
+    u32 species;
     u32 personality;
-    bool8 isShiny;
+    bool32 isShiny;
 
     GetMonSpeciesPersonalityShiny(&species, &personality, &isShiny);
     ResetAllPicSprites();
@@ -960,11 +960,11 @@ static void DestroyRibbonsMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 // x and y arguments are ignored
 // y is always given as MON_SPRITE_Y
 // x is given as either MON_SPRITE_X_ON or MON_SPRITE_X_OFF (but ignored and MON_SPRITE_X_ON is used)
-static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
+static u32 DrawRibbonsMonFrontPic(s32 x, s32 y)
 {
-    u16 species, spriteId;
+    u32 species, spriteId;
     u32 personality;
-    bool8 isShiny;
+    bool32 isShiny;
 
     GetMonSpeciesPersonalityShiny(&species, &personality, &isShiny);
     spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
@@ -1060,7 +1060,7 @@ static void ClearRibbonsSummaryBg(void)
 
 static void DrawRibbonSmall(u32 i, u32 ribbonId)
 {
-    u16 bgData[4];
+    u32 bgData[4];
     u32 destX = (i % RIBBONS_PER_ROW) * 2 + 11;
     u32 destY = (i / RIBBONS_PER_ROW) * 2 + 4;
 
@@ -1088,8 +1088,8 @@ enum {
 
 struct
 {
-    u16 tileNumOffset;
-    u16 palNumOffset;
+    u32 tileNumOffset;
+    u32 palNumOffset;
 } static const sRibbonGfxData[] =
 {
     [CHAMPION_RIBBON]      = { RIBBONGFX_CHAMPION,       TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_1)},
@@ -1128,10 +1128,10 @@ struct
 
 #undef TO_PAL_OFFSET
 
-static void BufferSmallRibbonGfxData(u16 *dst, u32 ribbonId)
+static void BufferSmallRibbonGfxData(u32 *dst, u32 ribbonId)
 {
-    u16 palNum = sRibbonGfxData[ribbonId].palNumOffset + 2;
-    u16 tileNum = (sRibbonGfxData[ribbonId].tileNumOffset * 2) + 1;
+    u32 palNum = sRibbonGfxData[ribbonId].palNumOffset + 2;
+    u32 tileNum = (sRibbonGfxData[ribbonId].tileNumOffset * 2) + 1;
 
     dst[0] = tileNum | (palNum << 12);
     dst[1] = tileNum | (palNum << 12) | 0x400;

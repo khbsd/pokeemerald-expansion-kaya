@@ -27,14 +27,14 @@ static void ResetQuizLadyForRecordMix(void);
 static void ResetFavorLadyForRecordMix(void);
 static void ResetContestLadyForRecordMix(void);
 static u32 BufferQuizAuthorName(void);
-static bool8 IsQuizTrainerIdNotPlayer(void);
+static bool32 IsQuizTrainerIdNotPlayer(void);
 static u32 GetPlayerNameLength(const u32 *);
 
 static EWRAM_DATA struct LilycoveLadyFavor *sFavorLadyPtr = NULL;
 static EWRAM_DATA struct LilycoveLadyQuiz *sQuizLadyPtr = NULL;
 static EWRAM_DATA struct LilycoveLadyContest *sContestLadyPtr = NULL;
 
-extern EWRAM_DATA u16 gSpecialVar_ItemId;
+extern EWRAM_DATA u32 gSpecialVar_ItemId;
 
 u32 GetLilycoveLadyId(void)
 {
@@ -60,7 +60,7 @@ void SetLilycoveLadyGfx(void)
 
 void InitLilycoveLady(void)
 {
-    u16 id = ((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]);
+    u32 id = ((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]);
     id %= 6;
     id >>= 1;
     switch (id)
@@ -117,7 +117,7 @@ void Script_GetLilycoveLadyId(void)
     gSpecialVar_Result = GetLilycoveLadyId();
 }
 
-static u32 GetNumAcceptedItems(const u16 *itemsArray)
+static u32 GetNumAcceptedItems(const u32 *itemsArray)
 {
     u32 numItems;
 
@@ -178,7 +178,7 @@ void BufferFavorLadyRequest(void)
     StringCopy(gStringVar1, GetFavorLadyRequest(sFavorLadyPtr->favorId));
 }
 
-bool8 HasAnotherPlayerGivenFavorLadyItem(void)
+bool32 HasAnotherPlayerGivenFavorLadyItem(void)
 {
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     if (sFavorLadyPtr->playerName[0] != EOS)
@@ -190,7 +190,7 @@ bool8 HasAnotherPlayerGivenFavorLadyItem(void)
     return FALSE;
 }
 
-static void BufferItemName(u32 *dest, u16 itemId)
+static void BufferItemName(u32 *dest, u32 itemId)
 {
     StringCopy(dest, ItemId_GetName(itemId));
 }
@@ -215,7 +215,7 @@ void BufferFavorLadyPlayerName(void)
 }
 
 // Only used to determine if a record-mixed player had given her an item she liked
-bool8 DidFavorLadyLikeItem(void)
+bool32 DidFavorLadyLikeItem(void)
 {
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     return sFavorLadyPtr->likedItem ? TRUE : FALSE;
@@ -226,11 +226,11 @@ void Script_FavorLadyOpenBagMenu(void)
     FavorLadyOpenBagMenu();
 }
 
-static bool8 DoesFavorLadyLikeItem(u16 itemId)
+static bool32 DoesFavorLadyLikeItem(u32 itemId)
 {
     u32 numItems;
     u32 i;
-    bool8 likedItem;
+    bool32 likedItem;
 
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
@@ -256,12 +256,12 @@ static bool8 DoesFavorLadyLikeItem(u16 itemId)
     return likedItem;
 }
 
-bool8 Script_DoesFavorLadyLikeItem(void)
+bool32 Script_DoesFavorLadyLikeItem(void)
 {
     return DoesFavorLadyLikeItem(gSpecialVar_ItemId);
 }
 
-bool8 IsFavorLadyThresholdMet(void)
+bool32 IsFavorLadyThresholdMet(void)
 {
     u32 numItemsGiven;
 
@@ -270,14 +270,14 @@ bool8 IsFavorLadyThresholdMet(void)
     return numItemsGiven < LILYCOVE_LADY_GIFT_THRESHOLD ? FALSE : TRUE;
 }
 
-static void FavorLadyBufferPrizeName(u16 prize)
+static void FavorLadyBufferPrizeName(u32 prize)
 {
     BufferItemName(gStringVar2, prize);
 }
 
-u16 FavorLadyGetPrize(void)
+u32 FavorLadyGetPrize(void)
 {
-    u16 prize;
+    u32 prize;
 
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     prize = sFavorLadyPrizes[sFavorLadyPtr->favorId];
@@ -422,9 +422,9 @@ static u32 BufferQuizAuthorName(void)
     return authorNameId;
 }
 
-static bool8 IsQuizTrainerIdNotPlayer(void)
+static bool32 IsQuizTrainerIdNotPlayer(void)
 {
-    bool8 notPlayer;
+    bool32 notPlayer;
     u32 i;
 
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
@@ -454,7 +454,7 @@ void BufferQuizPrizeName(void)
     StringCopy(gStringVar1, ItemId_GetName(sQuizLadyPtr->prize));
 }
 
-bool8 BufferQuizAuthorNameAndCheckIfLady(void)
+bool32 BufferQuizAuthorNameAndCheckIfLady(void)
 {
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     if (BufferQuizAuthorName() == QUIZ_AUTHOR_NAME_LADY)
@@ -465,7 +465,7 @@ bool8 BufferQuizAuthorNameAndCheckIfLady(void)
     return FALSE;
 }
 
-bool8 IsQuizLadyWaitingForChallenger(void)
+bool32 IsQuizLadyWaitingForChallenger(void)
 {
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     return sQuizLadyPtr->waitingForChallenger;
@@ -476,7 +476,7 @@ void QuizLadyGetPlayerAnswer(void)
     ShowEasyChatScreen();
 }
 
-bool8 IsQuizAnswerCorrect(void)
+bool32 IsQuizAnswerCorrect(void)
 {
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     CopyEasyChatWord(gStringVar1, sQuizLadyPtr->correctAnswer);
@@ -636,10 +636,10 @@ static void ContestLadySavePlayerNameIfHighSheen(u32 sheen)
     }
 }
 
-bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
+bool32 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
 {
     u32 sheen = 0;
-    bool8 correctFlavor = FALSE;
+    bool32 correctFlavor = FALSE;
 
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     switch (sContestLadyPtr->category)
@@ -736,7 +736,7 @@ u32 GetContestLadyPokeblockState(void)
 }
 
 
-bool8 HasPlayerGivenContestLadyPokeblock(void)
+bool32 HasPlayerGivenContestLadyPokeblock(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     if (sContestLadyPtr->givenPokeblock == TRUE)
@@ -744,9 +744,9 @@ bool8 HasPlayerGivenContestLadyPokeblock(void)
     return FALSE;
 }
 
-bool8 ShouldContestLadyShowGoOnAir(void)
+bool32 ShouldContestLadyShowGoOnAir(void)
 {
-    bool8 putOnAir = FALSE;
+    bool32 putOnAir = FALSE;
 
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD

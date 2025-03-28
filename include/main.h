@@ -28,7 +28,7 @@ struct Main
     /*0x02E*/ u32 newKeys;               // newly pressed keys with L=A remapping
     /*0x030*/ u32 newAndRepeatedKeys;    // newly pressed keys plus key repeat
     /*0x032*/ u32 keyRepeatCounter;      // counts down to 0, triggering key repeat
-    /*0x034*/ bool16 watchedKeysPressed; // whether one of the watched keys was pressed
+    /*0x034*/ bool32 watchedKeysPressed; // whether one of the watched keys was pressed
     /*0x036*/ u32 watchedKeysMask;       // bit mask for watched keys
 
     /*0x038*/ struct OamData oamBuffer[128];
@@ -47,13 +47,13 @@ extern const u8 RomHeaderGameCode[GAME_CODE_LENGTH];
 extern const u8 RomHeaderSoftwareVersion;
 
 extern u32 gKeyRepeatStartDelay;
-extern bool8 gLinkTransferringData;
+extern bool32 gLinkTransferringData;
 extern struct Main gMain;
 extern u32 gKeyRepeatContinueDelay;
-extern bool8 gSoftResetDisabled;
+extern bool32 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
 extern u8 gLinkVSyncDisabled;
-extern s8 gPcmDmaCounter;
+extern s32 gPcmDmaCounter;
 
 void AgbMain(void);
 void AgbMainLoop(void);

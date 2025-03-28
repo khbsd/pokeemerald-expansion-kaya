@@ -38,7 +38,7 @@ static void EndOnPostEvoMon(u32 taskId);
 
 #define TAG_SPARKLE 1001
 
-static const u16 sEvoSparkle_Pal[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
+static const u32 sEvoSparkle_Pal[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
 static const u32 sEvoSparkle_Gfx[] = INCBIN_U32("graphics/misc/evo_sparkle.4bpp.lz");
 
 static const struct CompressedSpriteSheet sEvoSparkleSpriteSheets[] =
@@ -92,7 +92,7 @@ static const struct SpriteTemplate sEvoSparkleSpriteTemplate =
     .callback = SpriteCB_Sparkle_Dummy
 };
 
-static const u16 sEvoSparkleMatrices[] =
+static const u32 sEvoSparkleMatrices[] =
 {
     0x3C0, 0x380, 0x340, 0x300, 0x2C0, 0x280,
     0x240, 0x200, 0x1C0, 0x180, 0x140, 0x100
@@ -117,7 +117,7 @@ static void SpriteCB_Sparkle_Dummy(struct Sprite *sprite)
 
 static void SetEvoSparklesMatrices(void)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < ARRAY_COUNT(sEvoSparkleMatrices); i++)
         SetOamMatrix(20 + i, sEvoSparkleMatrices[i], 0, 0, sEvoSparkleMatrices[i]);
 }
@@ -289,7 +289,7 @@ void LoadEvoSparkleSpriteAndPal(void)
 #define tPalNum data[1]
 #define tTimer  data[15]
 
-u32 EvolutionSparkles_SpiralUpward(u16 palNum)
+u32 EvolutionSparkles_SpiralUpward(u32 palNum)
 {
     u32 taskId = CreateTask(Task_Sparkles_SpiralUpward_Init, 0);
     gTasks[taskId].tPalNum = palNum;
@@ -412,7 +412,7 @@ static void Task_Sparkles_CircleInward_End(u32 taskId)
 
 #define tSpecies data[2] // Never read
 
-u32 EvolutionSparkles_SprayAndFlash(u16 species)
+u32 EvolutionSparkles_SprayAndFlash(u32 species)
 {
     u32 taskId = CreateTask(Task_Sparkles_SprayAndFlash_Init, 0);
     gTasks[taskId].tSpecies = species;
@@ -463,7 +463,7 @@ static void Task_Sparkles_SprayAndFlash_End(u32 taskId)
 }
 
 // Separate from EvolutionSparkles_SprayAndFlash for difference in fade color
-u32 EvolutionSparkles_SprayAndFlash_Trade(u16 species)
+u32 EvolutionSparkles_SprayAndFlash_Trade(u32 species)
 {
     u32 taskId = CreateTask(Task_Sparkles_SprayAndFlashTrade_Init, 0);
     gTasks[taskId].tSpecies = species;
@@ -532,8 +532,8 @@ static void SpriteCB_EvolutionMonSprite(struct Sprite *sprite)
 // Alternately grow/shrink the pre-evolution and post-evolution mon sprites
 u32 CycleEvolutionMonSprite(u32 preEvoSpriteId, u32 postEvoSpriteId)
 {
-    u16 i;
-    u16 monPalette[16];
+    u32 i;
+    u32 monPalette[16];
     u32 taskId;
     s32 toDiv;
 
@@ -601,7 +601,7 @@ static void Task_CycleEvolutionMonSprite_UpdateSize(u32 taskId)
     }
     else
     {
-        u16 oamMatrixArg;
+        u32 oamMatrixArg;
         u32 numSpritesFinished = 0;
         if (!gTasks[taskId].tShowingPostEvo)
         {

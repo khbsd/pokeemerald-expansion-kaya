@@ -53,7 +53,7 @@ static void Task_UseItemfinder(u32);
 static void Task_CloseItemfinderMessage(u32);
 static void Task_HiddenItemNearby(u32);
 static void Task_StandingOnHiddenItem(u32);
-static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u32);
+static bool32 ItemfinderCheckForHiddenItems(const struct MapEvents *, u32);
 static u32 GetDirectionToHiddenItem(s16, s16);
 static void PlayerFaceHiddenItem(u32);
 static void CheckForHiddenItemsInMapConnection(u32);
@@ -65,7 +65,7 @@ static void ItemUseOnFieldCB_Itemfinder(u32);
 static void ItemUseOnFieldCB_Berry(u32);
 static void ItemUseOnFieldCB_WailmerPailBerry(u32);
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u32);
-static bool8 TryToWaterSudowoodo(void);
+static bool32 TryToWaterSudowoodo(void);
 static void BootUpSoundTMHM(u32);
 static void Task_ShowTMHMContainedMessage(u32);
 static void UseTMHMYesNo(u32);
@@ -164,7 +164,7 @@ static void Task_CallItemUseOnFieldCallback(u32 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-static void DisplayCannotUseItemMessage(u32 taskId, bool8 isUsingRegisteredKeyItemOnField, const u32 *str)
+static void DisplayCannotUseItemMessage(u32 taskId, bool32 isUsingRegisteredKeyItemOnField, const u32 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (!isUsingRegisteredKeyItemOnField)
@@ -180,12 +180,12 @@ static void DisplayCannotUseItemMessage(u32 taskId, bool8 isUsingRegisteredKeyIt
     }
 }
 
-void DisplayDadsAdviceCannotUseItemMessage(u32 taskId, bool8 isUsingRegisteredKeyItemOnField)
+void DisplayDadsAdviceCannotUseItemMessage(u32 taskId, bool32 isUsingRegisteredKeyItemOnField)
 {
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, gText_DadsAdvice);
 }
 
-static void DisplayCannotDismountBikeMessage(u32 taskId, bool8 isUsingRegisteredKeyItemOnField)
+static void DisplayCannotDismountBikeMessage(u32 taskId, bool32 isUsingRegisteredKeyItemOnField)
 {
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, sText_CantDismountBike);
 }
@@ -198,7 +198,7 @@ static void Task_CloseCantUseKeyItemMessage(u32 taskId)
     UnlockPlayerFieldControls();
 }
 
-u32 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
+u32 CheckIfItemIsTMHMOrEvolutionStone(u32 itemId)
 {
     if (ItemId_GetFieldFunc(itemId) == ItemUseOutOfBattle_TMHM)
         return 1;
@@ -289,7 +289,7 @@ static void ItemUseOnFieldCB_Bike(u32 taskId)
 static bool32 CanFish(void)
 {
     s16 x, y;
-    u16 tileBehavior;
+    u32 tileBehavior;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
@@ -403,7 +403,7 @@ static void Task_CloseItemfinderMessage(u32 taskId)
     DestroyTask(taskId);
 }
 
-static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 taskId)
+static bool32 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 taskId)
 {
     int itemX, itemY;
     s16 playerX, playerY, i, distanceX, distanceY;
@@ -415,9 +415,9 @@ static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 t
         // Check if there are any hidden items on the current map that haven't been picked up
         if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
-            itemX = (u16)events->bgEvents[i].x + MAP_OFFSET;
+            itemX = (u32)events->bgEvents[i].x + MAP_OFFSET;
             distanceX = itemX - playerX;
-            itemY = (u16)events->bgEvents[i].y + MAP_OFFSET;
+            itemY = (u32)events->bgEvents[i].y + MAP_OFFSET;
             distanceY = itemY - playerY;
 
             // Player can see 7 metatiles on either side horizontally
@@ -434,7 +434,7 @@ static bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u32 t
         return FALSE;
 }
 
-static bool8 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x, s16 y)
+static bool32 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x, s16 y)
 {
     u32 bgEventCount = events->bgEventCount;
     const struct BgEvent *bgEvent = events->bgEvents;
@@ -442,7 +442,7 @@ static bool8 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x, 
 
     for (i = 0; i < bgEventCount; i++)
     {
-        if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
+        if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u32)bgEvent[i].x && y == (u32)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
             if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
                 return TRUE;
@@ -453,7 +453,7 @@ static bool8 IsHiddenItemPresentAtCoords(const struct MapEvents *events, s16 x, 
     return FALSE;
 }
 
-static bool8 IsHiddenItemPresentInConnection(const struct MapConnection *connection, int x, int y)
+static bool32 IsHiddenItemPresentInConnection(const struct MapConnection *connection, int x, int y)
 {
     s16 connectionX, connectionY;
     struct MapHeader const *const connectionHeader = GetMapHeaderFromConnection(connection);
@@ -793,7 +793,7 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u32 taskId)
     DestroyTask(taskId);
 }
 
-static bool8 TryToWaterSudowoodo(void)
+static bool32 TryToWaterSudowoodo(void)
 {
     s16 x, y;
     u32 elevation;
@@ -1071,7 +1071,7 @@ static void ItemUseOnFieldCB_EscapeRope(u32 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
 }
 
-bool8 CanUseDigOrEscapeRopeOnCurMap(void)
+bool32 CanUseDigOrEscapeRopeOnCurMap(void)
 {
     if (gMapHeader.allowEscaping)
         return TRUE;
@@ -1186,7 +1186,7 @@ void ItemUseInBattle_PartyMenuChooseMove(u32 taskId)
     ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-static bool32 SelectedMonHasStatus2(u16 itemId)
+static bool32 SelectedMonHasStatus2(u32 itemId)
 {
     if (gPartyMenu.slotId == 0)
         return gBattleMons[0].status2 & GetItemStatus2Mask(itemId);
@@ -1196,13 +1196,13 @@ static bool32 SelectedMonHasStatus2(u16 itemId)
 }
 
 // Returns whether an item can be used in battle and sets the fail text.
-bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
+bool32 CannotUseItemsInBattle(u32 itemId, struct Pokemon *mon)
 {
-    u16 battleUsage = ItemId_GetBattleUsage(itemId);
-    bool8 cannotUse = FALSE;
+    u32 battleUsage = ItemId_GetBattleUsage(itemId);
+    bool32 cannotUse = FALSE;
     const u32* failStr = NULL;
     u32 i;
-    u16 hp = GetMonData(mon, MON_DATA_HP);
+    u32 hp = GetMonData(mon, MON_DATA_HP);
 
     // Embargo Check
     if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
@@ -1479,13 +1479,13 @@ void ItemUseOutOfBattle_CannotUse(u32 taskId)
 
 static bool32 IsValidLocationForVsSeeker(void)
 {
-    u16 mapGroup = gSaveBlock1Ptr->location.mapGroup;
-    u16 mapNum = gSaveBlock1Ptr->location.mapNum;
-    u16 mapType = gMapHeader.mapType;
+    u32 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    u32 mapNum = gSaveBlock1Ptr->location.mapNum;
+    u32 mapType = gMapHeader.mapType;
 
     typedef struct {
-        u16 mapGroup;
-        u16 mapNum;
+        u32 mapGroup;
+        u32 mapNum;
     } Location;
 
     u32 i;

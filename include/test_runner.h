@@ -1,9 +1,9 @@
 #ifndef GUARD_TEST_RUNNER_H
 #define GUARD_TEST_RUNNER_H
 
-extern const bool8 gTestRunnerEnabled;
-extern const bool8 gTestRunnerHeadless;
-extern const bool8 gTestRunnerSkipIsFail;
+extern const bool32 gTestRunnerEnabled;
+extern const bool32 gTestRunnerHeadless;
+extern const bool32 gTestRunnerSkipIsFail;
 
 #if TESTING
 

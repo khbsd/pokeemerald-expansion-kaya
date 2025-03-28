@@ -825,7 +825,7 @@ void BattleAI_DoAIProcessing_PredictedSwitchin(struct AI_ThinkingStruct *aiThink
 static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     // move data
-    s8 atkPriority = GetBattleMovePriority(battlerAtk, move);
+    s32 atkPriority = GetBattleMovePriority(battlerAtk, move);
     u32 moveEffect = GetMoveEffect(move);
     s32 moveType;
     u32 moveTarget = GetBattlerMoveTargetType(battlerAtk, move);
@@ -3175,7 +3175,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     s32 score = 0;
     s32 leastHits = 1000;
     u32 *moves = GetMovesArray(battlerAtk);
-    bool8 isTwoTurnNotSemiInvulnerableMove[MAX_MON_MOVES];
+    bool32 isTwoTurnNotSemiInvulnerableMove[MAX_MON_MOVES];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {

@@ -36,10 +36,10 @@ static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
 static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 
 // static const rom data
-static const u16 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
+static const u32 sRotatingBall_Pal[] = INCBIN_U16("graphics/bag/rotating_ball.gbapal");
 static const u32 sRotatingBall_Gfx[] = INCBIN_u32("graphics/bag/rotating_ball.4bpp");
 static const u32 sCherryUnused[] = INCBIN_u32("graphics/unused/cherry.4bpp");
-static const u16 sCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
+static const u32 sCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sBagOamData =
 {
@@ -466,7 +466,7 @@ void AddBagVisualSprite(u32 bagPocketId)
 
 #define sPocketId data[0]
 
-void SetBagVisualPocketId(u32 bagPocketId, bool8 isSwitchingPockets)
+void SetBagVisualPocketId(u32 bagPocketId, bool32 isSwitchingPockets)
 {
     struct Sprite *sprite = &gSprites[gBagMenu->spriteIds[ITEMMENUSPRITE_BAG]];
     if (isSwitchingPockets)
@@ -555,7 +555,7 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
         RemoveBagSprite(ITEMMENUSPRITE_BALL);
 }
 
-void AddBagItemIconSprite(u16 itemId, u32 id)
+void AddBagItemIconSprite(u32 itemId, u32 id)
 {
     u32 *spriteId = &gBagMenu->spriteIds[id + ITEMMENUSPRITE_ITEM];
     if (*spriteId == SPRITE_NONE)
@@ -600,7 +600,7 @@ void CreateItemMenuSwapLine(void)
     CreateSwapLineSprites(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH);
 }
 
-void SetItemMenuSwapLineInvisibility(bool8 invisible)
+void SetItemMenuSwapLineInvisibility(bool32 invisible)
 {
     SetSwapLineSpritesInvisibility(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, invisible);
 }
@@ -675,7 +675,7 @@ static u32 CreateBerrySprite(const struct SpriteTemplate *sprTemplate, u32 berry
     dynamicGfx->images[0].relativeFrames = FALSE;
 
     spriteId = CreateSprite(&newSprTemplate, x, y, 0);
-    StoreWordInTwoHalfwords((u16 *) &gSprites[spriteId].data[BERRY_ICON_GFX_PTR_DATA_ID], (u32) dynamicGfx);
+    StoreWordInTwoHalfwords((u32 *) &gSprites[spriteId].data[BERRY_ICON_GFX_PTR_DATA_ID], (u32) dynamicGfx);
     return spriteId;
 }
 
@@ -703,7 +703,7 @@ void DestroyBerryIconSpritePtr(struct Sprite *sprite, u32 berryId, bool32 freePa
 {
     u32 gfxBuffer;
 
-    LoadWordFromTwoHalfwords((u16 *) &sprite->data[BERRY_ICON_GFX_PTR_DATA_ID], &gfxBuffer);
+    LoadWordFromTwoHalfwords((u32 *) &sprite->data[BERRY_ICON_GFX_PTR_DATA_ID], &gfxBuffer);
     Free((void *)gfxBuffer);
     DestroySprite(sprite);
     if (freePal)

@@ -19,7 +19,7 @@ static void Task_LinkContest_InitFlags(u32);
 #define tTimer         data[11]
 #define tStandbyState  data[12]
 
-bool32 LinkContest_SendBlock(void *src, u16 size)
+bool32 LinkContest_SendBlock(void *src, u32 size)
 {
     if (SendBlock(BitmaskAllOtherLinkPlayers(), src, size))
         return TRUE;
@@ -27,7 +27,7 @@ bool32 LinkContest_SendBlock(void *src, u16 size)
         return FALSE;
 }
 
-bool8 LinkContest_GetBlockReceived(u32 flag)
+bool32 LinkContest_GetBlockReceived(u32 flag)
 {
     u32 mask = (1 << flag);
     if (!(GetBlockReceivedStatus() & mask))
@@ -41,7 +41,7 @@ bool8 LinkContest_GetBlockReceived(u32 flag)
     }
 }
 
-bool8 LinkContest_GetBlockReceivedFromAllPlayers(void)
+bool32 LinkContest_GetBlockReceivedFromAllPlayers(void)
 {
     if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
     {

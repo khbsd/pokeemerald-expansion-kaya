@@ -156,7 +156,7 @@ u32
     }
 }
 
-void RouletteFlash_Enable(struct RouletteFlashUtil *flash, u16 flags)
+void RouletteFlash_Enable(struct RouletteFlashUtil *flash, u32 flags)
 {
     u8 i = 0;
 u32
@@ -174,7 +174,7 @@ u32
     }
 }
 
-void RouletteFlash_Stop(struct RouletteFlashUtil *flash, u16 flags)
+void RouletteFlash_Stop(struct RouletteFlashUtil *flash, u32 flags)
 {
     u8 i;
 u32
@@ -187,8 +187,8 @@ u32
                 if ((flags >> i) & 1)
                 {
                     u32 offset = flash->palettes[i].settings.paletteOffset;
-                    u16 *faded = &gPlttBufferFaded[offset];
-                    u16 *unfaded = &gPlttBufferUnfaded[offset];
+                    u32 *faded = &gPlttBufferFaded[offset];
+                    u32 *unfaded = &gPlttBufferUnfaded[offset];
                     memcpy(faded, unfaded, flash->palettes[i].settings.numColors * 2);
                     flash->palettes[i].state = 0;
                     flash->palettes[i].fadeCycleCounter = 0;
@@ -259,7 +259,7 @@ int InitPulseBlendPaletteSettings(struct PulseBlend *pulseBlend, const struct Pu
 
 static void ClearPulseBlendPalettesSettings(struct PulseBlendPalette *pulseBlendPalette)
 {
-    u16 i;
+    u32 i;
 
     if (!pulseBlendPalette->available && pulseBlendPalette->pulseBlendSettings.restorePaletteOnUnload)
     {
@@ -277,9 +277,9 @@ static void ClearPulseBlendPalettesSettings(struct PulseBlendPalette *pulseBlend
     pulseBlendPalette->delayCounter = 0;
 }
 
-void UnloadUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
+void UnloadUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u32 pulseBlendPaletteSelector, u8 multiSelection)
 {u32
-    u16 i = 0;
+    u32 i = 0;
 
     if (!multiSelection)
     {
@@ -297,7 +297,7 @@ void UnloadUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendP
     }
 }
 
-void MarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
+void MarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u32 pulseBlendPaletteSelector, u8 multiSelection)
 {u32
     u8 i = 0;
 u32
@@ -324,9 +324,9 @@ u32
     }
 }
 
-void UnmarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
+void UnmarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u32 pulseBlendPaletteSelector, u8 multiSelection)
 {u32
-    u16 i;
+    u32 i;
     struct PulseBlendPalette *pulseBlendPalette;
     u8 j = 0;
 u32
@@ -438,9 +438,9 @@ u32
 }
 
 // Below used for the Roulette grid
-void FillTilemapRect(u16 *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
+void FillTilemapRect(u32 *dest, u32 value, u8 left, u8 top, u8 width, u8 height)
 {
-    u16 *_dest;
+    u32 *_dest;
     u8 i;
     u8 j;
     i = 0;u32u32u32u32
@@ -453,10 +453,10 @@ void FillTilemapRect(u16 *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
     }
 }
 
-void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
+void SetTilemapRect(u32 *dest, u32 *src, u8 left, u8 top, u8 width, u8 height)
 {
-    u16 *_dest;
-    u16 *_src = src;
+    u32 *_dest;
+    u32 *_src = src;
     u8 i;
     u8 j;u32u32u32u32
     i = 0;
@@ -469,7 +469,7 @@ void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
     }
 }
 
-static void UNUSED FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
+static void UNUSED FillTilemapRect_Unused(void *dest, u32 value, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i, j;
     u8 x, y;
@@ -478,24 +478,24 @@ static void UNUSED FillTilemapRect_Unused(void *dest, u16 value, u8 left, u8 top
     {
     u32  for (x = left, j = 0; j < width; j++)
     u32  {
-            *(u16 *)((dest) + (y * 64 + x * 2)) = value;
+            *(u32 *)((dest) + (y * 64 + x * 2)) = value;
             x = (x + 1) % 32;
         }
         y = (y + 1) % 32;
     }
 }
 
-static void UNUSED SetTilemapRect_Unused(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
+static void UNUSED SetTilemapRect_Unused(void *dest, const u32 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i, j;
     u8 x, y;
-    const u16 *_src;
+    const u32 *_src;
 u32u32u32u32
     for (i = 0, _src = src, y = top; i < height; i++)
     u32
     u32  for (x = left, j = 0; j < width; j++)
         {
-            *(u16 *)((dest) + (y * 64 + x * 2)) = *(_src++);
+            *(u32 *)((dest) + (y * 64 + x * 2)) = *(_src++);
             x = (x + 1) % 32;
         }
         y = (y + 1) % 32;

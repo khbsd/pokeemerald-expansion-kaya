@@ -1150,7 +1150,7 @@ static const struct BgTemplate sTradeSequenceBgTemplates[] =
     },
 };
 
-static const s8 sTradeBallVerticalVelocityTable[] =
+static const s32 sTradeBallVerticalVelocityTable[] =
 {
      0,  0,  1,  0,  1,  0,  1,  1,  1,
      1,  2,  2,  2,  2,  3,  3,  3,  3,

@@ -66,7 +66,7 @@
 
 extern vu16 GPIOPortDirection;
 
-static bool8 sLocked;
+static bool32 sLocked;
 
 static int WriteCommand(u32 value);
 static int WriteData(u32 value);
@@ -134,9 +134,9 @@ u32 SiiRtcProbe(void)
     return (errorCode << 4) | 1;
 }
 
-bool8 SiiRtcReset(void)
+bool32 SiiRtcReset(void)
 {
-    bool8 result;
+    bool32 result;
     struct SiiRtcInfo rtc;
 
     if (sLocked == TRUE)
@@ -163,7 +163,7 @@ bool8 SiiRtcReset(void)
     return result;
 }
 
-bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
+bool32 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 {
     u32 statusData;
 
@@ -196,7 +196,7 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
+bool32 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 {
     u32 statusData;
 
@@ -227,7 +227,7 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
+bool32 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 {
     u32 i;
 
@@ -258,7 +258,7 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
+bool32 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 {
     u32 i;
 
@@ -285,7 +285,7 @@ bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
+bool32 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 {
     u32 i;
 
@@ -316,7 +316,7 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
+bool32 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 {
     u32 i;
 
@@ -343,7 +343,7 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
+bool32 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 {
     u32 i;
     u32 alarmData[2];

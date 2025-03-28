@@ -156,7 +156,7 @@ static void Intro_DelayAndEnd(u32 battler)
 
 static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
-    bool8 healthboxAnimDone = FALSE;
+    bool32 healthboxAnimDone = FALSE;
 
     if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
     {

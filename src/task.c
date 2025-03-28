@@ -149,10 +149,10 @@ void SwitchTaskToFollowupFunc(u32 taskId)
 {
     u32 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[followupFuncIndex]) | (gTasks[taskId].data[followupFuncIndex + 1] << 16));
+    gTasks[taskId].func = (TaskFunc)((u32)(gTasks[taskId].data[followupFuncIndex]) | (gTasks[taskId].data[followupFuncIndex + 1] << 16));
 }
 
-bool8 FuncIsActiveTask(TaskFunc func)
+bool32 FuncIsActiveTask(TaskFunc func)
 {
     u32 i;
 
@@ -198,7 +198,7 @@ void SetWordTaskArg(u32 taskId, u32 dataElem, u32 value)
 u32 GetWordTaskArg(u32 taskId, u32 dataElem)
 {
     if (dataElem < NUM_TASK_DATA - 1)
-        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
+        return (u32)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
 }

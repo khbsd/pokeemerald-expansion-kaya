@@ -356,7 +356,7 @@ struct Wallpaper
 {
     const u32 *tiles;
     const u32 *tilemap;
-    const u16 *palettes;
+    const u32 *palettes;
 };
 
 struct StorageMessage
@@ -377,8 +377,8 @@ struct ChooseBoxMenu
     struct Sprite *menuSideSprites[4];
     struct Sprite *arrowSprites[2];
     bool32 loadedPalette;
-    u16 tileTag;
-    u16 paletteTag;
+    u32 tileTag;
+    u32 paletteTag;
     u32 curBox;
     u32 subpriority;
 };
@@ -387,10 +387,10 @@ struct ItemIcon
 {
     struct Sprite *sprite;
     u32 *tiles;
-    u16 palIndex;
+    u32 palIndex;
     u32 area;
     u32 pos;
-    bool8 active;
+    bool32 active;
 };
 
 struct PokemonStorageSystemData
@@ -398,63 +398,63 @@ struct PokemonStorageSystemData
     u32 state;
     u32 boxOption;
     u32 screenChangeType;
-    bool8 isReopening;
+    bool32 isReopening;
     u32 taskId;
-    u16 partyMenuTilemapBuffer[0x108];
-    u16 partyMenuY;
+    u32 partyMenuTilemapBuffer[0x108];
+    u32 partyMenuY;
     u32 partyMenuMoveTimer;
     u32 showPartyMenuState;
-    bool8 closeBoxFlashing;
+    bool32 closeBoxFlashing;
     u32 closeBoxFlashTimer;
-    bool8 closeBoxFlashState;
+    bool32 closeBoxFlashState;
     s16 newCurrBoxId;
-    u16 bg2_X;
+    u32 bg2_X;
     s16 scrollSpeed;
-    u16 scrollTimer;
+    u32 scrollTimer;
     u32 wallpaperOffset;
     u32 ALIGNED(2) boxTitleTiles[1024];
     u32 boxTitleCycleId;
     u32 wallpaperLoadBoxId;
-    s8 wallpaperLoadDir;
-    u16 boxTitlePal[16];
-    u16 boxTitlePalOffset;
-    u16 boxTitleAltPalOffset;
+    s32 wallpaperLoadDir;
+    u32 boxTitlePal[16];
+    u32 boxTitlePalOffset;
+    u32 boxTitleAltPalOffset;
     struct Sprite *curBoxTitleSprites[2];
     struct Sprite *nextBoxTitleSprites[2];
     struct Sprite *arrowSprites[2];
     u32 wallpaperPalBits;
     s16 wallpaperSetId;
     s16 wallpaperId;
-    u16 wallpaperTilemap[360];
+    u32 wallpaperTilemap[360];
     u32 wallpaperChangeState;
     u32 scrollState;
     u32 scrollToBoxId;
-    s8 scrollDirection;
+    s32 scrollDirection;
     u32 *wallpaperTiles;
     struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
     struct Sprite *boxMonsSprites[IN_BOX_COUNT];
     struct Sprite **shiftMonSpritePtr;
     struct Sprite **releaseMonSpritePtr;
-    u16 numIconsPerSpecies[MAX_MON_ICONS];
-    u16 iconSpeciesList[MAX_MON_ICONS];
-    u16 boxSpecies[IN_BOX_COUNT];
+    u32 numIconsPerSpecies[MAX_MON_ICONS];
+    u32 iconSpeciesList[MAX_MON_ICONS];
+    u32 boxSpecies[IN_BOX_COUNT];
     u32 boxPersonalities[IN_BOX_COUNT];
     u32 incomingBoxId;
     u32 shiftTimer;
     u32 numPartyToCompact;
-    u16 iconScrollDistance;
+    u32 iconScrollDistance;
     s16 iconScrollPos;
     s16 iconScrollSpeed;
-    u16 iconScrollNumIncoming;
+    u32 iconScrollNumIncoming;
     u32 iconScrollCurColumn;
-    s8 iconScrollDirection; // Unnecessary duplicate of scrollDirection
+    s32 iconScrollDirection; // Unnecessary duplicate of scrollDirection
     u32 iconScrollState;
     struct WindowTemplate menuWindow;
     struct StorageMenu menuItems[7];
     u32 menuItemsCount;
     u32 menuWidth;
-    u16 menuWindowId;
+    u32 menuWindowId;
     struct Sprite *cursorSprite;
     struct Sprite *cursorShadowSprite;
     s32 cursorNewX;
@@ -463,9 +463,9 @@ struct PokemonStorageSystemData
     u32 cursorSpeedY;
     s16 cursorTargetX;
     s16 cursorTargetY;
-    u16 cursorMoveSteps;
-    s8 cursorVerticalWrap;
-    s8 cursorHorizontalWrap;
+    u32 cursorMoveSteps;
+    s32 cursorVerticalWrap;
+    s32 cursorHorizontalWrap;
     u32 newCursorArea;
     u32 newCursorPosition;
     u32 cursorPrevHorizPos;
@@ -473,37 +473,37 @@ struct PokemonStorageSystemData
     u32 cursorPalNums[2];
     const u32 *displayMonPalette;
     u32 displayMonPersonality;
-    u16 displayMonSpecies;
-    u16 displayMonItemId;
-    u16 displayUnusedVar;
-    bool8 setMosaic;
+    u32 displayMonSpecies;
+    u32 displayMonItemId;
+    u32 displayUnusedVar;
+    bool32 setMosaic;
     u32 displayMonMarkings;
     u32 displayMonLevel;
-    bool8 displayMonIsEgg;
+    bool32 displayMonIsEgg;
     u32 displayMonName[POKEMON_NAME_LENGTH + 1];
     u32 displayMonNameText[36];
     u32 displayMonSpeciesName[36];
     u32 displayMonGenderLvlText[36];
     u32 displayMonItemName[36];
-    bool8 (*monPlaceChangeFunc)(void);
+    bool32 (*monPlaceChangeFunc)(void);
     u32 monPlaceChangeState;
     u32 shiftBoxId;
     struct Sprite *markingComboSprite;
     struct Sprite *waveformSprites[2];
-    u16 *markingComboTilesPtr;
+    u32 *markingComboTilesPtr;
     struct MonMarkingsMenu markMenu;
     struct ChooseBoxMenu chooseBoxMenu;
     struct Pokemon movingMon;
     struct Pokemon tempMon;
-    s8 canReleaseMon;
-    bool8 releaseStatusResolved;
-    s8 releaseCheckBoxId;
-    s8 releaseCheckBoxPos;
-    s8 releaseBoxId;
-    s8 releaseBoxPos;
-    u16 releaseCheckState;
-    u16 restrictedReleaseMonMoves;
-    u16 restrictedMoveList[8];
+    s32 canReleaseMon;
+    bool32 releaseStatusResolved;
+    s32 releaseCheckBoxId;
+    s32 releaseCheckBoxPos;
+    s32 releaseBoxId;
+    s32 releaseBoxPos;
+    u32 releaseCheckState;
+    u32 restrictedReleaseMonMoves;
+    u32 restrictedMoveList[8];
     u32 summaryMaxPos;
     u32 summaryStartPos;
     u32 summaryScreenMode;
@@ -517,14 +517,14 @@ struct PokemonStorageSystemData
     u32 releaseMonName[POKEMON_NAME_LENGTH + 1];
     u32 itemName[20];
     u32 inBoxMovingMode;
-    u16 multiMoveWindowId;
+    u32 multiMoveWindowId;
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
-    u16 movingItemId;
-    u16 itemInfoWindowOffset;
-    u16 displayMonPalOffset;
-    u16 *displayMonTilePtr;
+    u32 movingItemId;
+    u32 itemInfoWindowOffset;
+    u32 displayMonPalOffset;
+    u32 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
-    u16 displayMonPalBuffer[0x40];
+    u32 displayMonPalBuffer[0x40];
     u32 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u32 ALIGNED(4) itemIconBuffer[0x800];
     u32 wallpaperBgTilemapBuffer[0x1000];
@@ -536,21 +536,21 @@ static u32 sItemIconGfxBuffer[98];
 EWRAM_DATA static u32 sPreviousBoxOption = 0;
 EWRAM_DATA static struct ChooseBoxMenu *sChooseBoxMenu = NULL;
 EWRAM_DATA static struct PokemonStorageSystemData *sStorage = NULL;
-EWRAM_DATA static bool8 sInPartyMenu = 0;
+EWRAM_DATA static bool32 sInPartyMenu = 0;
 EWRAM_DATA static u32 sCurrentBoxOption = 0;
 EWRAM_DATA static u32 sDepositBoxId = 0;
 EWRAM_DATA static u32 sWhichToReshow = 0;
 EWRAM_DATA static u32 sLastUsedBox = 0;
-EWRAM_DATA static u16 sMovingItemId = 0;
+EWRAM_DATA static u32 sMovingItemId = 0;
 EWRAM_DATA static struct Pokemon sSavedMovingMon = {0};
-EWRAM_DATA static s8 sCursorArea = 0;
-EWRAM_DATA static s8 sCursorPosition = 0;
-EWRAM_DATA static bool8 sIsMonBeingMoved = 0;
+EWRAM_DATA static s32 sCursorArea = 0;
+EWRAM_DATA static s32 sCursorPosition = 0;
+EWRAM_DATA static bool32 sIsMonBeingMoved = 0;
 EWRAM_DATA static u32 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u32 sMovingMonOrigBoxPos = 0;
-EWRAM_DATA static bool8 sAutoActionOn = 0;
-EWRAM_DATA static bool8 sJustOpenedBag = 0;
-EWRAM_DATA static bool8 sRefreshDisplayMonGfx = FALSE;
+EWRAM_DATA static bool32 sAutoActionOn = 0;
+EWRAM_DATA static bool32 sJustOpenedBag = 0;
+EWRAM_DATA static bool32 sRefreshDisplayMonGfx = FALSE;
 
 // Main tasks
 static void Task_InitPokeStorage(u32);
@@ -592,8 +592,8 @@ static u32 InBoxInput_SelectingMultiple(void);
 static u32 HandleInput(void);
 static void AddBoxOptionsMenu(void);
 static u32 SetSelectionMenuTexts(void);
-static bool8 SetMenuTexts_Mon(void);
-static bool8 SetMenuTexts_Item(void);
+static bool32 SetMenuTexts_Mon(void);
+static bool32 SetMenuTexts_Item(void);
 
 // Choose box menu
 static void ChooseBoxMenu_CreateSprites(u32);
@@ -606,9 +606,9 @@ static void SpriteCB_ChooseBoxArrow(struct Sprite *);
 // Options menus
 static void InitMenu(void);
 static void SetMenuText(u32);
-static s8 GetMenuItemTextId(u32);
+static s32 GetMenuItemTextId(u32);
 static void AddMenu(void);
-static bool8 IsMenuLoading(void);
+static bool32 IsMenuLoading(void);
 static s16 HandleMenuInput(void);
 static void RemoveMenu(void);
 
@@ -616,18 +616,18 @@ static void RemoveMenu(void);
 static void InitMonIconFields(void);
 static void SpriteCB_BoxMonIconScrollOut(struct Sprite *);
 static void GetIncomingBoxMonData(u32);
-static void CreatePartyMonsSprites(bool8);
+static void CreatePartyMonsSprites(bool32);
 static void CompactPartySprites(void);
 static u32 GetNumPartySpritesCompacting(void);
-static void MovePartySpriteToNextSlot(struct Sprite *, u16);
+static void MovePartySpriteToNextSlot(struct Sprite *, u32);
 static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *);
 static void MovePartySprites(s16);
 static void DestroyAllPartyMonIcons(void);
 static void ReshowReleaseMon(void);
-static bool8 ResetReleaseMonSpritePtr(void);
+static bool32 ResetReleaseMonSpritePtr(void);
 static void SetMovingMonPriority(u32);
 static void SpriteCB_HeldMon(struct Sprite *);
-static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u32, u32);
+static struct Sprite *CreateMonIconSprite(u32, u32, s16, s16, u32, u32);
 static void DestroyBoxMonIcon(struct Sprite *);
 
 // Pokémon data
@@ -638,46 +638,46 @@ static void SetMovingMonData(u32, u32);
 static void SetPlacedMonData(u32, u32);
 static void PurgeMonOrBoxMon(u32, u32);
 static void SetShiftedMonData(u32, u32);
-static bool8 TryStorePartyMonInBox(u32);
+static bool32 TryStorePartyMonInBox(u32);
 static void ResetSelectionAfterDeposit(void);
 static void InitReleaseMon(void);
-static bool8 TryHideReleaseMon(void);
+static bool32 TryHideReleaseMon(void);
 static void InitCanReleaseMonVars(void);
 static void ReleaseMon(void);
 static bool32 AtLeastThreeUsableMons(void);
-static s8 RunCanReleaseMon(void);
+static s32 RunCanReleaseMon(void);
 static void SaveMovingMon(void);
 static void LoadSavedMovingMon(void);
 static void InitSummaryScreenData(void);
 static void SetSelectionAfterSummaryScreen(void);
 static void SetMonMarkings(u32);
-static bool8 IsRemovingLastPartyMon(void);
-static bool8 CanPlaceMon(void);
-static bool8 CanShiftMon(void);
-static bool8 IsMonBeingMoved(void);
+static bool32 IsRemovingLastPartyMon(void);
+static bool32 CanPlaceMon(void);
+static bool32 CanShiftMon(void);
+static bool32 IsMonBeingMoved(void);
 static void TryRefreshDisplayMon(void);
 static void ReshowDisplayMon(void);
 static void SetDisplayMonData(void *, u32);
 
 // Moving multiple Pokémon at once
 static void MultiMove_Free(void);
-static bool8 MultiMove_Init(void);
-static bool8 MultiMove_RunFunction(void);
-static bool8 MultiMove_TryMoveGroup(u32);
-static bool8 MultiMove_CanPlaceSelection(void);
+static bool32 MultiMove_Init(void);
+static bool32 MultiMove_RunFunction(void);
+static bool32 MultiMove_TryMoveGroup(u32);
+static bool32 MultiMove_CanPlaceSelection(void);
 static void MultiMove_SetFunction(u32);
 static u32 MultiMove_GetOrigin(void);
-static bool8 MultiMove_Start(void);
-static bool8 MultiMove_Cancel(void);
-static bool8 MultiMove_ChangeSelection(void);
-static bool8 MultiMove_GrabSelection(void);
-static bool8 MultiMove_MoveMons(void);
-static bool8 MultiMove_PlaceMons(void);
+static bool32 MultiMove_Start(void);
+static bool32 MultiMove_Cancel(void);
+static bool32 MultiMove_ChangeSelection(void);
+static bool32 MultiMove_GrabSelection(void);
+static bool32 MultiMove_MoveMons(void);
+static bool32 MultiMove_PlaceMons(void);
 static void MultiMove_SetIconToBg(u32, u32);
 static void MultiMove_ClearIconFromBg(u32, u32);
 static void MultiMove_ResetBg(void);
 static void MultiMove_UpdateSelectedIcons(void);
-static void MultiMove_InitMove(u16, u16, u16);
+static void MultiMove_InitMove(u32, u32, u32);
 static void MultiMove_GetMonsFromSelection(void);
 static void MultiMove_RemoveMonsFromBox(void);
 static void MultiMove_CreatePlacedMonIcons(void);
@@ -694,26 +694,26 @@ static u32 GetNewItemIconIdx(void);
 static void SetItemIconPosition(u32, u32, u32);
 static void LoadItemIconGfx(u32, const u32 *, const u32 *);
 static void SetItemIconAffineAnim(u32, u32);
-static void SetItemIconActive(u32, bool8);
+static void SetItemIconActive(u32, bool32);
 static u32 GetItemIconIdxByPosition(u32, u32);
 static void CreateItemIconSprites(void);
 static void TryLoadItemIconAtPos(u32, u32);
 static void TryHideItemIconAtPos(u32, u32);
 static void TakeItemFromMon(u32, u32);
-static void InitItemIconInCursor(u16);
+static void InitItemIconInCursor(u32);
 static void SwapItemsWithMon(u32, u32);
 static void GiveItemToMon(u32, u32);
 static void MoveItemFromMonToBag(u32, u32);
 static void MoveItemFromCursorToBag(void);
 static void MoveHeldItemWithPartyMenu(void);
-static bool8 IsItemIconAnimActive(void);
-static bool8 IsMovingItem(void);
+static bool32 IsItemIconAnimActive(void);
+static bool32 IsMovingItem(void);
 static const u32 *GetMovingItemName(void);
-static u16 GetMovingItemId(void);
+static u32 GetMovingItemId(void);
 static void PrintItemDescription(void);
 static void InitItemInfoWindow(void);
-static bool8 UpdateItemInfoWindowSlideIn(void);
-static bool8 UpdateItemInfoWindowSlideOut(void);
+static bool32 UpdateItemInfoWindowSlideIn(void);
+static bool32 UpdateItemInfoWindowSlideOut(void);
 static void DrawItemInfoWindow(u32);
 static void SetItemIconCallback(u32, u32, u32, u32);
 static void SpriteCB_ItemIcon_SetPosToCursor(struct Sprite *);
@@ -733,8 +733,8 @@ static void TryHideItemAtCursor(void);
 static void TryShowItemAtCursor(void);
 static void InitCursor(void);
 static void InitCursorOnReopen(void);
-static void GetCursorCoordsByPos(u32, u32, u16 *, u16 *);
-static bool8 UpdateCursorPos(void);
+static void GetCursorCoordsByPos(u32, u32, u32 *, u32 *);
+static bool32 UpdateCursorPos(void);
 static void DoCursorNewPosUpdate(void);
 static void SetCursorInParty(void);
 static void SetCursorBoxPosition(u32);
@@ -742,30 +742,30 @@ static void ClearSavedCursorPos(void);
 static void SaveCursorPos(void);
 static u32 GetSavedCursorPos(void);
 static void InitMonPlaceChange(u32);
-static bool8 DoMonPlaceChange(void);
-static bool8 MonPlaceChange_Shift(void);
-static bool8 MonPlaceChange_Grab(void);
-static bool8 MonPlaceChange_Place(void);
-static bool8 MultiMonPlaceChange_Up(void);
-static bool8 MultiMonPlaceChange_Down(void);
-static bool8 MonPlaceChange_CursorDown(void);
-static bool8 MonPlaceChange_CursorUp(void);
+static bool32 DoMonPlaceChange(void);
+static bool32 MonPlaceChange_Shift(void);
+static bool32 MonPlaceChange_Grab(void);
+static bool32 MonPlaceChange_Place(void);
+static bool32 MultiMonPlaceChange_Up(void);
+static bool32 MultiMonPlaceChange_Down(void);
+static bool32 MonPlaceChange_CursorDown(void);
+static bool32 MonPlaceChange_CursorUp(void);
 static void TrySetCursorFistAnim(void);
-static bool8 IsCursorOnCloseBox(void);
-static bool8 IsCursorOnBoxTitle(void);
-static bool8 IsCursorInBox(void);
+static bool32 IsCursorOnCloseBox(void);
+static bool32 IsCursorOnBoxTitle(void);
+static bool32 IsCursorInBox(void);
 
 // Scroll arrows
 static void CreateBoxScrollArrows(void);
-static void StartBoxScrollArrowsSlide(s8);
+static void StartBoxScrollArrowsSlide(s32);
 static void StopBoxScrollArrowsSlide(void);
-static void AnimateBoxScrollArrows(bool8);
+static void AnimateBoxScrollArrows(bool32);
 static void SpriteCB_Arrow(struct Sprite *);
-static struct Sprite *CreateChooseBoxArrows(u16, u16, u32, u32, u32);
+static struct Sprite *CreateChooseBoxArrows(u32, u32, u32, u32, u32);
 
 // Box title
 static void InitBoxTitle(u32);
-static void CreateIncomingBoxTitle(u32, s8);
+static void CreateIncomingBoxTitle(u32, s32);
 static void CycleBoxTitleSprites(void);
 static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
@@ -774,10 +774,10 @@ static s16 GetBoxTitleBaseX(const u32 *);
 
 // Wallpaper
 static void SetWallpaperForCurrentBox(u32);
-static bool8 DoWallpaperGfxChange(void);
-static void LoadWallpaperGfx(u32, s8);
+static bool32 DoWallpaperGfxChange(void);
+static void LoadWallpaperGfx(u32, s32);
 static bool32 WaitForWallpaperGfxLoad(void);
-static void DrawWallpaper(const void *, s8, u32);
+static void DrawWallpaper(const void *, s32, u32);
 static void TrimOldWallpaper(void *);
 static void AddWallpaperSetsMenu(void);
 static void AddWallpapersMenu(u32);
@@ -786,11 +786,11 @@ static void SetBoxWallpaper(u32, u32);
 
 // General box
 static void CreateInitBoxTask(u32);
-static bool8 IsInitBoxActive(void);
+static bool32 IsInitBoxActive(void);
 static void Task_InitBox(u32);
 static void SetUpScrollToBox(u32);
-static bool8 ScrollToBox(void);
-static s8 DetermineBoxScrollDirection(u32);
+static bool32 ScrollToBox(void);
+static s32 DetermineBoxScrollDirection(u32);
 static void SetCurrentBox(u32);
 
 // Misc
@@ -822,22 +822,22 @@ static void UpdatePartySlotColors(void);
 static void StartFlashingCloseBoxButton(void);
 static void SetUpDoShowPartyMenu(void);
 static void StartDisplayMonMosaicEffect(void);
-static bool8 InitPokeStorageWindows(void);
-static bool8 DoShowPartyMenu(void);
-static bool8 HidePartyMenu(void);
-static bool8 IsDisplayMosaicActive(void);
-static void ShowYesNoWindow(s8);
-static void UpdateCloseBoxButtonTilemap(bool8);
+static bool32 InitPokeStorageWindows(void);
+static bool32 DoShowPartyMenu(void);
+static bool32 HidePartyMenu(void);
+static bool32 IsDisplayMosaicActive(void);
+static void ShowYesNoWindow(s32);
+static void UpdateCloseBoxButtonTilemap(bool32);
 static void PrintMessage(u32 id);
-static void LoadDisplayMonGfx(u16, u32);
+static void LoadDisplayMonGfx(u32, u32);
 static void SpriteCB_DisplayMonMosaic(struct Sprite *);
-static void SetPartySlotTilemap(u32, bool8);
+static void SetPartySlotTilemap(u32, bool32);
 
 // Tilemap utility
-static void TilemapUtil_SetRect(u32, u16, u16, u16, u16);
-static void TilemapUtil_Move(u32, u32, s8);
-static void TilemapUtil_SetMap(u32, u32, const void *, u16, u16);
-static void TilemapUtil_SetPos(u32, u16, u16);
+static void TilemapUtil_SetRect(u32, u32, u32, u32, u32);
+static void TilemapUtil_Move(u32, u32, s32);
+static void TilemapUtil_SetMap(u32, u32, const void *, u32, u32);
+static void TilemapUtil_SetPos(u32, u32, u32);
 static void TilemapUtil_Init(u32);
 static void TilemapUtil_Free(void);
 static void TilemapUtil_Update(u32);
@@ -922,26 +922,26 @@ static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] =
 static const u32 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
 static const u32 sText_OutOf30[] = _("/30");
 
-static const u16 sChooseBoxMenu_Pal[]        = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
+static const u32 sChooseBoxMenu_Pal[]        = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
 static const u32 sChooseBoxMenuCenter_Gfx[]   = INCBIN_u32("graphics/pokemon_storage/box_selection_popup_center.4bpp");
 static const u32 sChooseBoxMenuSides_Gfx[]    = INCBIN_u32("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
 static const u32 sScrollingBg_Gfx[]          = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
 static const u32 sScrollingBg_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
-static const u16 sDisplayMenu_Pal[]          = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
+static const u32 sDisplayMenu_Pal[]          = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
 static const u32 sDisplayMenu_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
-static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
+static const u32 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
 // sInterface_Pal - parts of the display frame, "PkmnData"'s normal color, Close Box
-static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
-static const u16 sPkmnDataGray_Pal[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data_gray.gbapal");
-static const u16 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
-static const u16 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg_move_items.gbapal");
-static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
-static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_storage/party_slot_filled.bin");
-static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
-static const u16 sWaveform_Pal[]             = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
+static const u32 sInterface_Pal[]            = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
+static const u32 sPkmnDataGray_Pal[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data_gray.gbapal");
+static const u32 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
+static const u32 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg_move_items.gbapal");
+static const u32 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
+static const u32 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_storage/party_slot_filled.bin");
+static const u32 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
+static const u32 sWaveform_Pal[]             = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
 static const u32 sWaveform_Gfx[]             = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
-static const u16 sUnused_Pal[]               = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
-static const u16 sTextWindows_Pal[]          = INCBIN_U16("graphics/pokemon_storage/text_windows.gbapal");
+static const u32 sUnused_Pal[]               = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
+static const u32 sTextWindows_Pal[]          = INCBIN_U16("graphics/pokemon_storage/text_windows.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
@@ -1217,7 +1217,7 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 
 #include "data/wallpapers.h"
 
-static const u16 sUnusedColor = RGB(26, 29, 8);
+static const u32 sUnusedColor = RGB(26, 29, 8);
 
 static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
 
@@ -1293,7 +1293,7 @@ static const struct SpriteTemplate sSpriteTemplate_Arrow =
     .callback = SpriteCB_Arrow
 };
 
-static const u16 sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
+static const u32 sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
 static const u32 sHandCursor_Gfx[] = INCBIN_u32("graphics/pokemon_storage/hand_cursor.4bpp");
 static const u32 sHandCursorShadow_Gfx[] = INCBIN_u32("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
@@ -1306,7 +1306,7 @@ static const u32 sHandCursorShadow_Gfx[] = INCBIN_u32("graphics/pokemon_storage/
 void DrawTextWindowAndBufferTiles(const u32 *string, void *dst, u32 zero1, u32 zero2, s32 bytesToBuffer)
 {
     s32 i, tileBytesToBuffer, remainingBytes;
-    u16 windowId;
+    u32 windowId;
     u32 txtColor[3];
     u32 *tileData1, *tileData2;
     struct WindowTemplate winTemplate = {0};
@@ -1349,7 +1349,7 @@ void DrawTextWindowAndBufferTiles(const u32 *string, void *dst, u32 zero1, u32 z
     RemoveWindow(windowId);
 }
 
-static void UNUSED UnusedDrawTextWindow(const u32 *string, void *dst, u16 offset, u32 bgColor, u32 fgColor, u32 shadowColor)
+static void UNUSED UnusedDrawTextWindow(const u32 *string, void *dst, u32 offset, u32 bgColor, u32 fgColor, u32 shadowColor)
 {
     u32 tilesSize;
     u32 windowId;
@@ -1375,7 +1375,7 @@ static void UNUSED UnusedDrawTextWindow(const u32 *string, void *dst, u16 offset
 
 u32 CountMonsInBox(u32 boxId)
 {
-    u16 i, count;
+    u32 i, count;
 
     for (i = 0, count = 0; i < IN_BOX_COUNT; i++)
     {
@@ -1388,7 +1388,7 @@ u32 CountMonsInBox(u32 boxId)
 
 s16 GetFirstFreeBoxSpot(u32 boxId)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < IN_BOX_COUNT; i++)
     {
@@ -1417,7 +1417,7 @@ u32 CountPartyNonEggMons(void)
 
 u32 CountPartyAliveNonEggMonsExcept(u32 slotToIgnore)
 {
-    u16 i, count;
+    u32 i, count;
 
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
@@ -1433,14 +1433,14 @@ u32 CountPartyAliveNonEggMonsExcept(u32 slotToIgnore)
     return count;
 }
 
-u16 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(void)
+u32 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(void)
 {
     return CountPartyAliveNonEggMonsExcept(gSpecialVar_0x8004);
 }
 
 u32 CountPartyMons(void)
 {
-    u16 i, count;
+    u32 i, count;
 
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
@@ -1453,7 +1453,7 @@ u32 CountPartyMons(void)
     return count;
 }
 
-u32 *StringCopyAndFillWithSpaces(u32 *dst, const u32 *src, u16 n)
+u32 *StringCopyAndFillWithSpaces(u32 *dst, const u32 *src, u32 n)
 {
     u32 *str;
 
@@ -1464,9 +1464,9 @@ u32 *StringCopyAndFillWithSpaces(u32 *dst, const u32 *src, u16 n)
     return str;
 }
 
-static void UNUSED UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+static void UNUSED UnusedWriteRectCpu(u32 *dest, u32 dest_left, u32 dest_top, const u32 *src, u32 src_left, u32 src_top, u32 dest_width, u32 dest_height, u32 src_width)
 {
-    u16 i;
+    u32 i;
 
     dest_width *= 2;
     dest += dest_top * 0x20 + dest_left;
@@ -1479,9 +1479,9 @@ static void UNUSED UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, co
     }
 }
 
-static void UNUSED UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
+static void UNUSED UnusedWriteRectDma(u32 *dest, u32 dest_left, u32 dest_top, u32 width, u32 height)
 {
-    u16 i;
+    u32 i;
 
     dest += dest_top * 0x20 + dest_left;
     width *= 2;
@@ -1673,7 +1673,7 @@ static void CB2_ExitPokeStorage(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-static s16 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u32 stopIdx, u32 mode)
+static s16 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s32 startIdx, u32 stopIdx, u32 mode)
 {
     s16 i;
     s16 direction;
@@ -1706,7 +1706,7 @@ static s16 UNUSED StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startI
 
 void ResetPokemonStorageSystem(void)
 {
-    u16 boxId, boxPosition;
+    u32 boxId, boxPosition;
 
     SetCurrentBox(0);
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
@@ -1736,7 +1736,7 @@ void ResetPokemonStorageSystem(void)
 //------------------------------------------------------------------------------
 
 
-static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u32 subpriority, bool32 loadPal)
+static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u32 tileTag, u32 palTag, u32 subpriority, bool32 loadPal)
 {
     // Because loadPal is always false, the below palette is never used.
     // The Choose Box menu instead uses the palette indicated by palTag, which is always PALTAG_MISC_1 (sHandCursor_Pal)
@@ -1808,7 +1808,7 @@ static u32 HandleChooseBoxMenuInput(void)
 
 static void ChooseBoxMenu_CreateSprites(u32 curBox)
 {
-    u16 i;
+    u32 i;
     u32 spriteId;
     struct SpriteTemplate template;
     struct OamData oamData = {};
@@ -1831,7 +1831,7 @@ static void ChooseBoxMenu_CreateSprites(u32 curBox)
     template.anims = sAnims_ChooseBoxMenu;
     for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->menuSideSprites); i++)
     {
-        u16 anim;
+        u32 anim;
         spriteId = CreateSprite(&template, 124, 80, sChooseBoxMenu->subpriority);
         sChooseBoxMenu->menuSideSprites[i] = &gSprites[spriteId];
         anim = 0;
@@ -1862,7 +1862,7 @@ static void ChooseBoxMenu_CreateSprites(u32 curBox)
 
 static void ChooseBoxMenu_DestroySprites(void)
 {
-    u16 i;
+    u32 i;
     if (sChooseBoxMenu->menuSprite)
     {
         DestroySprite(sChooseBoxMenu->menuSprite);
@@ -2919,7 +2919,7 @@ static void Task_ReleaseMon(u32 taskId)
         {
             while (1)
             {
-                s8 canRelease = RunCanReleaseMon();
+                s32 canRelease = RunCanReleaseMon();
                 if (canRelease == TRUE)
                 {
                     sStorage->state++;
@@ -3765,7 +3765,7 @@ static void Task_ChangeScreen(u32 taskId)
 
 static void GiveChosenBagItem(void)
 {
-    u16 itemId = gSpecialVar_ItemId;
+    u32 itemId = gSpecialVar_ItemId;
 
     if (itemId != ITEM_NONE)
     {
@@ -3829,7 +3829,7 @@ static void LoadPokeStorageMenuGfx(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static bool8 InitPokeStorageWindows(void)
+static bool32 InitPokeStorageWindows(void)
 {
     if (!InitWindows(sWindowTemplates))
     {
@@ -3876,7 +3876,7 @@ static void CreateMarkingComboSprite(void)
 
 static void CreateWaveformSprites(void)
 {
-    u16 i;
+    u32 i;
     struct SpriteSheet sheet = sSpriteSheet_Waveform;
 
     LoadSpriteSheet(&sheet);
@@ -3928,8 +3928,8 @@ static void SpriteCB_DisplayMonMosaic(struct Sprite *sprite)
 
 static void CreateDisplayMonSprite(void)
 {
-    u16 i;
-    u16 tileStart;
+    u32 i;
+    u32 tileStart;
     u32 palSlot;
     u32 spriteId;
     struct SpriteSheet sheet = {sStorage->tileBuffer, MON_PIC_SIZE, GFXTAG_DISPLAY_MON};
@@ -3969,7 +3969,7 @@ static void CreateDisplayMonSprite(void)
     }
 }
 
-static void LoadDisplayMonGfx(u16 species, u32 pid)
+static void LoadDisplayMonGfx(u32 species, u32 pid)
 {
     if (sStorage->displayMonSprite == NULL)
         return;
@@ -4021,7 +4021,7 @@ static void PrintDisplayMonInfo(void)
 // Turn the wave animation on the sides of "Pkmn Data" on/off
 static void UpdateWaveformAnimation(void)
 {
-    u16 i;
+    u32 i;
 
     if (sStorage->displayMonSpecies != SPECIES_NONE)
     {
@@ -4077,7 +4077,7 @@ static void SetUpShowPartyMenu(void)
     CreatePartyMonsSprites(FALSE);
 }
 
-static bool8 ShowPartyMenu(void)
+static bool32 ShowPartyMenu(void)
 {
     if (sStorage->partyMenuMoveTimer == 20)
         return FALSE;
@@ -4106,7 +4106,7 @@ static void SetUpHidePartyMenu(void)
         MoveHeldItemWithPartyMenu();
 }
 
-static bool8 HidePartyMenu(void)
+static bool32 HidePartyMenu(void)
 {
     if (sStorage->partyMenuMoveTimer != 20)
     {
@@ -4138,7 +4138,7 @@ static bool8 HidePartyMenu(void)
     return FALSE;
 }
 
-static void UpdateCloseBoxButtonTilemap(bool8 normal)
+static void UpdateCloseBoxButtonTilemap(bool32 normal)
 {
     if (normal)
         TilemapUtil_SetRect(TILEMAPID_CLOSE_BUTTON, 0, 0, 9, 2);
@@ -4191,10 +4191,10 @@ static void SetPartySlotTilemaps(void)
     }
 }
 
-static void SetPartySlotTilemap(u32 partyId, bool8 hasMon)
+static void SetPartySlotTilemap(u32 partyId, bool32 hasMon)
 {
-    u16 i, j, index;
-    const u16 *data;
+    u32 i, j, index;
+    const u32 *data;
 
     if (hasMon)
         data = sPartySlotFilled_Tilemap;
@@ -4229,7 +4229,7 @@ static void SetUpDoShowPartyMenu(void)
     SetUpShowPartyMenu();
 }
 
-static bool8 DoShowPartyMenu(void)
+static bool32 DoShowPartyMenu(void)
 {
     switch (sStorage->showPartyMenuState)
     {
@@ -4313,7 +4313,7 @@ static void PrintMessage(u32 id)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void ShowYesNoWindow(s8 cursorPos)
+static void ShowYesNoWindow(s32 cursorPos)
 {
     CreateYesNoMenu(&sYesNoWindowTemplate, 11, 14, 0);
     Menu_MoveCursorNoWrapAround(cursorPos);
@@ -4404,7 +4404,7 @@ static void InitCursorItemIcon(void)
 
 static void InitMonIconFields(void)
 {
-    u16 i;
+    u32 i;
 
     LoadMonIconPalettes();
     for (i = 0; i < MAX_MON_ICONS; i++)
@@ -4427,7 +4427,7 @@ static u32 GetMonIconPriorityByCursorPos(void)
 static void CreateMovingMonIcon(void)
 {
     u32 personality = GetMonData(&sStorage->movingMon, MON_DATA_PERSONALITY);
-    u16 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES_OR_EGG);
+    u32 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES_OR_EGG);
     u32 priority = GetMonIconPriorityByCursorPos();
 
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
@@ -4437,8 +4437,8 @@ static void CreateMovingMonIcon(void)
 static void InitBoxMonSprites(u32 boxId)
 {
     u32 boxPosition;
-    u16 i, j, count;
-    u16 species;
+    u32 i, j, count;
+    u32 species;
     u32 personality;
 
     count = 0;
@@ -4477,7 +4477,7 @@ static void InitBoxMonSprites(u32 boxId)
 
 static void CreateBoxMonIconAtPos(u32 boxPosition)
 {
-    u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES_OR_EGG);
+    u32 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES_OR_EGG);
 
     if (species != SPECIES_NONE)
     {
@@ -4499,7 +4499,7 @@ static void CreateBoxMonIconAtPos(u32 boxPosition)
 
 static void StartBoxMonIconsScrollOut(s16 speed)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < IN_BOX_COUNT; i++)
     {
@@ -4551,7 +4551,7 @@ static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
 // the box scroll once they've gone offscreen
 static void DestroyBoxMonIconsInColumn(u32 column)
 {
-    u16 row;
+    u32 row;
     u32 boxPosition = column;
 
     for (row = 0; row < IN_BOX_ROWS; row++)
@@ -4566,12 +4566,12 @@ static void DestroyBoxMonIconsInColumn(u32 column)
 }
 
 // Create the appearing icons for the incoming scrolling box
-static u32 CreateBoxMonIconsInColumn(u32 column, u16 distance, s16 speed)
+static u32 CreateBoxMonIconsInColumn(u32 column, u32 distance, s16 speed)
 {
     s32 i;
-    u16 y = 44;
+    u32 y = 44;
     s16 xDest = 8 * (3 * column) + 100;
-    u16 x = xDest - ((distance + 1) * speed);
+    u32 x = xDest - ((distance + 1) * speed);
     u32 subpriority = 19 - column;
     u32 iconsCreated = 0;
     u32 boxPosition = column;
@@ -4634,7 +4634,7 @@ static u32 CreateBoxMonIconsInColumn(u32 column, u16 distance, s16 speed)
 #undef sDelay
 #undef sScrollOutX
 
-static void InitBoxMonIconScroll(u32 boxId, s8 direction)
+static void InitBoxMonIconScroll(u32 boxId, s32 direction)
 {
     sStorage->iconScrollState = 0;
     sStorage->iconScrollDirection = direction;
@@ -4651,7 +4651,7 @@ static void InitBoxMonIconScroll(u32 boxId, s8 direction)
     StartBoxMonIconsScrollOut(sStorage->iconScrollSpeed);
 }
 
-static bool8 UpdateBoxMonIconScroll(void)
+static bool32 UpdateBoxMonIconScroll(void)
 {
     if (sStorage->iconScrollDistance != 0)
         sStorage->iconScrollDistance--;
@@ -4735,10 +4735,10 @@ static void SetBoxMonIconObjMode(u32 boxPosition, u32 objMode)
         sStorage->boxMonsSprites[boxPosition]->oam.objMode = objMode;
 }
 
-static void CreatePartyMonsSprites(bool8 visible)
+static void CreatePartyMonsSprites(bool32 visible)
 {
-    u16 i, count;
-    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
+    u32 i, count;
+    u32 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
@@ -4779,7 +4779,7 @@ static void CreatePartyMonsSprites(bool8 visible)
 
 static void CompactPartySprites(void)
 {
-    u16 i, targetSlot;
+    u32 i, targetSlot;
 
     sStorage->numPartyToCompact = 0;
     for (i = 0, targetSlot = 0; i < PARTY_SIZE; i++)
@@ -4809,7 +4809,7 @@ static u32 GetNumPartySpritesCompacting(void)
 #define sSpeedY    data[5]
 #define sMoveSteps data[6]
 
-static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 partyId)
+static void MovePartySpriteToNextSlot(struct Sprite *sprite, u32 partyId)
 {
     s16 x, y;
 
@@ -4819,8 +4819,8 @@ static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 partyId)
     else
         x = 152, y = 8 * (3 * (partyId - 1)) + 16;
 
-    sprite->sMonX = (u16)(sprite->x) * 8;
-    sprite->sMonY = (u16)(sprite->y) * 8;
+    sprite->sMonX = (u32)(sprite->x) * 8;
+    sprite->sMonY = (u32)(sprite->y) * 8;
     sprite->sSpeedX = ((x * 8) - sprite->sMonX) / 8;
     sprite->sSpeedY = ((y * 8) - sprite->sMonY) / 8;
     sprite->sMoveSteps = 8;
@@ -4873,7 +4873,7 @@ static void DestroyMovingMonIcon(void)
 
 static void MovePartySprites(s16 yDelta)
 {
-    u16 i, posY;
+    u32 i, posY;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4901,7 +4901,7 @@ static void DestroyPartyMonIcon(u32 partyId)
 
 static void DestroyAllPartyMonIcons(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4972,7 +4972,7 @@ static void SaveMonSpriteAtPos(u32 boxId, u32 position)
     sStorage->shiftTimer = 0;
 }
 
-static bool8 MoveShiftingMons(void)
+static bool32 MoveShiftingMons(void)
 {
     if (sStorage->shiftTimer == 16)
         return FALSE;
@@ -5033,7 +5033,7 @@ static void SetReleaseMon(u32 mode, u32 position)
     }
 }
 
-static bool8 TryHideReleaseMonSprite(void)
+static bool32 TryHideReleaseMonSprite(void)
 {
     if (*sStorage->releaseMonSpritePtr == NULL
     || (*sStorage->releaseMonSpritePtr)->invisible)
@@ -5064,7 +5064,7 @@ static void ReshowReleaseMon(void)
     }
 }
 
-static bool8 ResetReleaseMonSpritePtr(void)
+static bool32 ResetReleaseMonSpritePtr(void)
 {
     if (sStorage->releaseMonSpritePtr == NULL)
         return FALSE;
@@ -5086,9 +5086,9 @@ static void SpriteCB_HeldMon(struct Sprite *sprite)
     sprite->y = sStorage->cursorSprite->y + sStorage->cursorSprite->y2 + 4;
 }
 
-static u16 TryLoadMonIconTiles(u16 species, u32 personality)
+static u32 TryLoadMonIconTiles(u32 species, u32 personality)
 {
-    u16 i, offset;
+    u32 i, offset;
 
 #if P_GENDER_DIFFERENCES
     // Treat female mons as a seperate species as they may have a different icon than males
@@ -5128,10 +5128,10 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     return offset;
 }
 
-static void RemoveSpeciesFromIconList(u16 species)
+static void RemoveSpeciesFromIconList(u32 species)
 {
-    u16 i;
-    bool8 hasFemale = FALSE;
+    u32 i;
+    bool32 hasFemale = FALSE;
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
@@ -5153,9 +5153,9 @@ static void RemoveSpeciesFromIconList(u16 species)
     }
 }
 
-static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u32 oamPriority, u32 subpriority)
+static struct Sprite *CreateMonIconSprite(u32 species, u32 personality, s16 x, s16 y, u32 oamPriority, u32 subpriority)
 {
-    u16 tileNum;
+    u32 tileNum;
     u32 spriteId;
     struct SpriteTemplate template = sSpriteTemplate_MonIcon;
 
@@ -5213,7 +5213,7 @@ static void CreateInitBoxTask(u32 boxId)
     gTasks[taskId].tBoxId = boxId;
 }
 
-static bool8 IsInitBoxActive(void)
+static bool32 IsInitBoxActive(void)
 {
     return FuncIsActiveTask(Task_InitBox);
 }
@@ -5265,7 +5265,7 @@ static void Task_InitBox(u32 taskId)
 
 static void SetUpScrollToBox(u32 boxId)
 {
-    s8 direction = DetermineBoxScrollDirection(boxId);
+    s32 direction = DetermineBoxScrollDirection(boxId);
 
     sStorage->scrollSpeed = (direction > 0) ? 6 : -6;
     sStorage->scrollTimer = 32;
@@ -5275,9 +5275,9 @@ static void SetUpScrollToBox(u32 boxId)
     sStorage->scrollState = 0;
 }
 
-static bool8 ScrollToBox(void)
+static bool32 ScrollToBox(void)
 {
-    bool8 iconsScrolling;
+    bool32 iconsScrolling;
 
     switch (sStorage->scrollState)
     {
@@ -5309,7 +5309,7 @@ static bool8 ScrollToBox(void)
     return TRUE;
 }
 
-static s8 DetermineBoxScrollDirection(u32 boxId)
+static s32 DetermineBoxScrollDirection(u32 boxId)
 {
     u32 i;
     u32 currentBox = StorageGetCurrentBox();
@@ -5337,7 +5337,7 @@ static void SetWallpaperForCurrentBox(u32 wallpaperId)
     sStorage->wallpaperChangeState = 0;
 }
 
-static bool8 DoWallpaperGfxChange(void)
+static bool32 DoWallpaperGfxChange(void)
 {
     switch (sStorage->wallpaperChangeState)
     {
@@ -5372,7 +5372,7 @@ static bool8 DoWallpaperGfxChange(void)
     return TRUE;
 }
 
-static void LoadWallpaperGfx(u32 boxId, s8 direction)
+static void LoadWallpaperGfx(u32 boxId, s32 direction)
 {
     u32 wallpaperId;
     const struct Wallpaper *wallpaper;
@@ -5437,7 +5437,7 @@ static bool32 WaitForWallpaperGfxLoad(void)
     return TRUE;
 }
 
-static void DrawWallpaper(const void *tilemap, s8 direction, u32 offset)
+static void DrawWallpaper(const void *tilemap, s32 direction, u32 offset)
 {
     s16 tileOffset = offset * 256;
     s16 paletteNum = (offset * 2) + 3;
@@ -5457,8 +5457,8 @@ static void DrawWallpaper(const void *tilemap, s8 direction, u32 offset)
 
 static void TrimOldWallpaper(void *tilemap)
 {
-    u16 i;
-    u16 *dest = tilemap;
+    u32 i;
+    u32 *dest = tilemap;
     s16 r3 = ((sStorage->bg2_X / 8) + 30) & 0x3F;
 
     if (r3 <= 31)
@@ -5487,7 +5487,7 @@ static void InitBoxTitle(u32 boxId)
 {
     u32 tagIndex;
     s16 x;
-    u16 i;
+    u32 i;
 
     struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
     struct SpritePalette palettes[] = {
@@ -5495,7 +5495,7 @@ static void InitBoxTitle(u32 boxId)
         {}
     };
 
-    u16 wallpaperId = GetBoxWallpaper(boxId);
+    u32 wallpaperId = GetBoxWallpaper(boxId);
 
     sStorage->boxTitlePal[14] = sBoxTitleColors[wallpaperId][0]; // Shadow color
     sStorage->boxTitlePal[15] = sBoxTitleColors[wallpaperId][1]; // Text Color
@@ -5537,11 +5537,11 @@ static void InitBoxTitle(u32 boxId)
 #define sOutgoingDelay data[1]
 #define sOutgoingX     data[2]
 
-static void CreateIncomingBoxTitle(u32 boxId, s8 direction)
+static void CreateIncomingBoxTitle(u32 boxId, s32 direction)
 {
-    u16 palOffset;
+    u32 palOffset;
     s16 x, adjustedX;
-    u16 i;
+    u32 i;
     struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
     struct SpriteTemplate template = sSpriteTemplate_BoxTitle;
 
@@ -5653,7 +5653,7 @@ static s16 GetBoxTitleBaseX(const u32 *string)
 
 static void CreateBoxScrollArrows(void)
 {
-    u16 i;
+    u32 i;
 
     LoadSpriteSheet(&sSpriteSheet_Arrow);
     for (i = 0; i < 2; i++)
@@ -5672,9 +5672,9 @@ static void CreateBoxScrollArrows(void)
 }
 
 // Slide box scroll arrows horizontally for box change
-static void StartBoxScrollArrowsSlide(s8 direction)
+static void StartBoxScrollArrowsSlide(s32 direction)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < 2; i++)
     {
@@ -5702,7 +5702,7 @@ static void StartBoxScrollArrowsSlide(s8 direction)
 // New box's scroll arrows have entered, stop sliding and set their position
 static void StopBoxScrollArrowsSlide(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < 2; i++)
     {
@@ -5714,9 +5714,9 @@ static void StopBoxScrollArrowsSlide(void)
 }
 
 // Bounce scroll arrows while title is selected
-static void AnimateBoxScrollArrows(bool8 animate)
+static void AnimateBoxScrollArrows(bool32 animate)
 {
-    u16 i;
+    u32 i;
 
     if (animate)
     {
@@ -5780,7 +5780,7 @@ static void SpriteCB_Arrow(struct Sprite *sprite)
 #undef sSpeed
 
 // Arrows for Deposit/Jump Box selection
-static struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u32 animId, u32 priority, u32 subpriority)
+static struct Sprite *CreateChooseBoxArrows(u32 x, u32 y, u32 animId, u32 priority, u32 subpriority)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_Arrow, x, y, subpriority);
     if (spriteId == MAX_SPRITES)
@@ -5834,7 +5834,7 @@ static void InitCursorOnReopen(void)
     }
 }
 
-static void GetCursorCoordsByPos(u32 cursorArea, u32 cursorPosition, u16 *x, u16 *y)
+static void GetCursorCoordsByPos(u32 cursorArea, u32 cursorPosition, u32 *x, u32 *y)
 {
     switch (cursorArea)
     {
@@ -5874,7 +5874,7 @@ static void GetCursorCoordsByPos(u32 cursorArea, u32 cursorPosition, u16 *x, u16
     }
 }
 
-static u16 GetSpeciesAtCursorPosition(void)
+static u32 GetSpeciesAtCursorPosition(void)
 {
     switch (sCursorArea)
     {
@@ -5887,7 +5887,7 @@ static u16 GetSpeciesAtCursorPosition(void)
     }
 }
 
-static bool8 UpdateCursorPos(void)
+static bool32 UpdateCursorPos(void)
 {
     s16 tmp;
 
@@ -5951,7 +5951,7 @@ static bool8 UpdateCursorPos(void)
 
 static void InitNewCursorPos(u32 newCursorArea, u32 newCursorPosition)
 {
-    u16 x = 0, y = 0;
+    u32 x = 0, y = 0;
 
     GetCursorCoordsByPos(newCursorArea, newCursorPosition, &x, &y);
     sStorage->newCursorArea = newCursorArea;
@@ -6149,7 +6149,7 @@ static u32 GetSavedCursorPos(void)
 
 static void InitMonPlaceChange(u32 type)
 {
-    static bool8 (*const placeChangeFuncs[])(void) =
+    static bool32 (*const placeChangeFuncs[])(void) =
     {
         [CHANGE_GRAB]  = MonPlaceChange_Grab,
         [CHANGE_PLACE] = MonPlaceChange_Place,
@@ -6162,7 +6162,7 @@ static void InitMonPlaceChange(u32 type)
 
 // No Shift while moving multiple Pokémon, only grab and place
 // For both grab/place, the cursor moves down, then up
-static void InitMultiMonPlaceChange(bool8 up)
+static void InitMultiMonPlaceChange(bool32 up)
 {
     if (!up)
         sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Down;
@@ -6172,12 +6172,12 @@ static void InitMultiMonPlaceChange(bool8 up)
     sStorage->monPlaceChangeState = 0;
 }
 
-static bool8 DoMonPlaceChange(void)
+static bool32 DoMonPlaceChange(void)
 {
     return sStorage->monPlaceChangeFunc();
 }
 
-static bool8 MonPlaceChange_Grab(void)
+static bool32 MonPlaceChange_Grab(void)
 {
     switch (sStorage->monPlaceChangeState)
     {
@@ -6206,7 +6206,7 @@ static bool8 MonPlaceChange_Grab(void)
     return TRUE;
 }
 
-static bool8 MonPlaceChange_Place(void)
+static bool32 MonPlaceChange_Place(void)
 {
     switch (sStorage->monPlaceChangeState)
     {
@@ -6232,7 +6232,7 @@ static bool8 MonPlaceChange_Place(void)
     return TRUE;
 }
 
-static bool8 MonPlaceChange_Shift(void)
+static bool32 MonPlaceChange_Shift(void)
 {
     switch (sStorage->monPlaceChangeState)
     {
@@ -6267,17 +6267,17 @@ static bool8 MonPlaceChange_Shift(void)
     return TRUE;
 }
 
-static bool8 MultiMonPlaceChange_Down(void)
+static bool32 MultiMonPlaceChange_Down(void)
 {
     return MonPlaceChange_CursorDown();
 }
 
-static bool8 MultiMonPlaceChange_Up(void)
+static bool32 MultiMonPlaceChange_Up(void)
 {
     return MonPlaceChange_CursorUp();
 }
 
-static bool8 MonPlaceChange_CursorDown(void)
+static bool32 MonPlaceChange_CursorDown(void)
 {
     switch (sStorage->cursorSprite->y2)
     {
@@ -6294,7 +6294,7 @@ static bool8 MonPlaceChange_CursorDown(void)
     return TRUE;
 }
 
-static bool8 MonPlaceChange_CursorUp(void)
+static bool32 MonPlaceChange_CursorUp(void)
 {
     switch (sStorage->cursorSprite->y2)
     {
@@ -6430,7 +6430,7 @@ static void SetShiftedMonData(u32 boxId, u32 position)
     sMovingMonOrigBoxPos = position;
 }
 
-static bool8 TryStorePartyMonInBox(u32 boxId)
+static bool32 TryStorePartyMonInBox(u32 boxId)
 {
     s16 boxPosition = GetFirstFreeBoxSpot(boxId);
     if (boxPosition == -1)
@@ -6477,7 +6477,7 @@ static void InitReleaseMon(void)
     StringCopy(sStorage->releaseMonName, sStorage->displayMonName);
 }
 
-static bool8 TryHideReleaseMon(void)
+static bool32 TryHideReleaseMon(void)
 {
     if (!TryHideReleaseMonSprite())
     {
@@ -6493,7 +6493,7 @@ static bool8 TryHideReleaseMon(void)
 static void ReleaseMon(void)
 {
     u32 boxId;
-    u16 item = ITEM_NONE;
+    u32 item = ITEM_NONE;
 
     DestroyReleaseMonIcon();
     if (sIsMonBeingMoved)
@@ -6534,9 +6534,9 @@ static void TrySetCursorFistAnim(void)
 // a Pokémon that knows a required field move.
 struct
 {
-    s8 mapGroup;
-    s8 mapNum;
-    u16 move;
+    s32 mapGroup;
+    s32 mapNum;
+    u32 move;
 } static const sRestrictedReleaseMoves[] =
 {
     {MAP_GROUPS_COUNT, 0, MOVE_SURF},
@@ -6547,7 +6547,7 @@ struct
     {MAP_GROUP(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_ROCK_SMASH},
 };
 
-static void GetRestrictedReleaseMoves(u16 *moves)
+static void GetRestrictedReleaseMoves(u32 *moves)
 {
     s32 i;
 
@@ -6645,10 +6645,10 @@ static bool32 AtLeastThreeUsableMons(void)
     return FALSE;
 }
 
-static s8 RunCanReleaseMon(void)
+static s32 RunCanReleaseMon(void)
 {
-    u16 i;
-    u16 knownMoves;
+    u32 i;
+    u32 knownMoves;
 
     if (sStorage->releaseStatusResolved)
         return sStorage->canReleaseMon;
@@ -6778,11 +6778,11 @@ static void SetSelectionAfterSummaryScreen(void)
 s16 CompactPartySlots(void)
 {
     s16 retVal = -1;
-    u16 i, last;
+    u32 i, last;
 
     for (i = 0, last = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         if (species != SPECIES_NONE)
         {
             if (i != last)
@@ -6816,7 +6816,7 @@ static void SetMonMarkings(u32 markings)
     }
 }
 
-static bool8 IsRemovingLastPartyMon(void)
+static bool32 IsRemovingLastPartyMon(void)
 {
     if (sCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonEggMonsExcept(sCursorPosition) == 0)
         return TRUE;
@@ -6824,7 +6824,7 @@ static bool8 IsRemovingLastPartyMon(void)
         return FALSE;
 }
 
-static bool8 CanPlaceMon(void)
+static bool32 CanPlaceMon(void)
 {
     if (sIsMonBeingMoved)
     {
@@ -6838,7 +6838,7 @@ static bool8 CanPlaceMon(void)
     return FALSE;
 }
 
-static bool8 CanShiftMon(void)
+static bool32 CanShiftMon(void)
 {
     if (sIsMonBeingMoved)
     {
@@ -6852,22 +6852,22 @@ static bool8 CanShiftMon(void)
     return FALSE;
 }
 
-static bool8 IsMonBeingMoved(void)
+static bool32 IsMonBeingMoved(void)
 {
     return sIsMonBeingMoved;
 }
 
-static bool8 IsCursorOnBoxTitle(void)
+static bool32 IsCursorOnBoxTitle(void)
 {
     return (sCursorArea == CURSOR_AREA_BOX_TITLE);
 }
 
-static bool8 IsCursorOnCloseBox(void)
+static bool32 IsCursorOnCloseBox(void)
 {
     return (sCursorArea == CURSOR_AREA_BUTTONS && sCursorPosition == 1);
 }
 
-static bool8 IsCursorInBox(void)
+static bool32 IsCursorInBox(void)
 {
     return (sCursorArea == CURSOR_AREA_IN_BOX);
 }
@@ -6911,7 +6911,7 @@ static void ReshowDisplayMon(void)
 
 void SetMonFormPSS(struct BoxPokemon *boxMon, u32 method)
 {
-    u16 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, method, 0);
+    u32 targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, method, 0);
     if (targetSpecies != GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL))
     {
         SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);
@@ -6922,8 +6922,8 @@ void SetMonFormPSS(struct BoxPokemon *boxMon, u32 method)
 static void SetDisplayMonData(void *pokemon, u32 mode)
 {
     u32 *txtPtr;
-    u16 gender;
-    bool8 sanityIsBadEgg;
+    u32 gender;
+    bool32 sanityIsBadEgg;
 
     sStorage->displayMonItemId = ITEM_NONE;
     gender = MON_MALE;
@@ -6958,7 +6958,7 @@ static void SetDisplayMonData(void *pokemon, u32 mode)
         sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
-            bool8 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
+            bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
             sanityIsBadEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBadEgg)
                 sStorage->displayMonIsEgg = TRUE;
@@ -7082,8 +7082,8 @@ static u32 HandleInput_InBox(void)
 static u32 InBoxInput_Normal(void)
 {
     u32 retVal;
-    s8 cursorArea;
-    s8 cursorPosition;
+    s32 cursorArea;
+    s32 cursorPosition;
 
     do
     {
@@ -7378,9 +7378,9 @@ static u32 InBoxInput_MovingMultiple(void)
 static u32 HandleInput_InParty(void)
 {
     u32 retVal;
-    bool8 gotoBox;
-    s8 cursorArea;
-    s8 cursorPosition;
+    bool32 gotoBox;
+    s32 cursorArea;
+    s32 cursorPosition;
 
     do
     {
@@ -7501,8 +7501,8 @@ static u32 HandleInput_InParty(void)
 static u32 HandleInput_OnBox(void)
 {
     u32 retVal;
-    s8 cursorArea;
-    s8 cursorPosition;
+    s32 cursorArea;
+    s32 cursorPosition;
 
     do
     {
@@ -7572,8 +7572,8 @@ static u32 HandleInput_OnBox(void)
 static u32 HandleInput_OnButtons(void)
 {
     u32 retVal;
-    s8 cursorArea;
-    s8 cursorPosition;
+    s32 cursorArea;
+    s32 cursorPosition;
 
     do
     {
@@ -7647,7 +7647,7 @@ static u32 HandleInput(void)
     struct
     {
         u32 (*func)(void);
-        s8 area;
+        s32 area;
     } static const inputFuncs[] =
     {
         {HandleInput_InBox,     CURSOR_AREA_IN_BOX},
@@ -7657,7 +7657,7 @@ static u32 HandleInput(void)
         {},
     };
 
-    u16 i = 0;
+    u32 i = 0;
     while (inputFuncs[i].func != NULL)
     {
         if (inputFuncs[i].area == sCursorArea)
@@ -7686,9 +7686,9 @@ static u32 SetSelectionMenuTexts(void)
         return SetMenuTexts_Item();
 }
 
-static bool8 SetMenuTexts_Mon(void)
+static bool32 SetMenuTexts_Mon(void)
 {
-    u16 species = GetSpeciesAtCursorPosition();
+    u32 species = GetSpeciesAtCursorPosition();
 
     switch (sStorage->boxOption)
     {
@@ -7740,7 +7740,7 @@ static bool8 SetMenuTexts_Mon(void)
     return TRUE;
 }
 
-static bool8 SetMenuTexts_Item(void)
+static bool32 SetMenuTexts_Item(void)
 {
     if (sStorage->displayMonSpecies == SPECIES_EGG)
         return FALSE;
@@ -7802,7 +7802,7 @@ static void SpriteCB_CursorShadow(struct Sprite *sprite)
 
 static void CreateCursorSprites(void)
 {
-    u16 x, y;
+    u32 x, y;
     u32 spriteId;
     u32 priority, subpriority;
     struct SpriteSheet spriteSheets[] =
@@ -8060,7 +8060,7 @@ static void SetMenuText(u32 textId)
     }
 }
 
-static s8 GetMenuItemTextId(u32 menuIdx)
+static s32 GetMenuItemTextId(u32 menuIdx)
 {
     if (menuIdx >= sStorage->menuItemsCount)
         return -1;
@@ -8085,7 +8085,7 @@ static void AddMenu(void)
 // Called after AddMenu to determine whether or not the handler callback should
 // wait to move on to the next state. Evidently there was no need to wait, and
 // now it always returns FALSE
-static bool8 IsMenuLoading(void)
+static bool32 IsMenuLoading(void)
 {
     return FALSE;
 }
@@ -8169,13 +8169,13 @@ EWRAM_DATA static struct
     u32 minRow;
     u32 columnsTotal;
     u32 rowsTotal;
-    u16 bgX;
-    u16 bgY;
-    u16 bgMoveSteps;
+    u32 bgX;
+    u32 bgY;
+    u32 bgMoveSteps;
     struct BoxPokemon boxMons[IN_BOX_COUNT];
 } *sMultiMove = NULL;
 
-static bool8 MultiMove_Init(void)
+static bool32 MultiMove_Init(void)
 {
     sMultiMove = Alloc(sizeof(*sMultiMove));
     if (sMultiMove != NULL)
@@ -8204,7 +8204,7 @@ static void MultiMove_SetFunction(u32 id)
 }
 
 // Returns TRUE if the called function has more to do, FALSE otherwise
-static bool8 MultiMove_RunFunction(void)
+static bool32 MultiMove_RunFunction(void)
 {
     switch (sMultiMove->funcId)
     {
@@ -8224,7 +8224,7 @@ static bool8 MultiMove_RunFunction(void)
     return FALSE;
 }
 
-static bool8 MultiMove_Start(void)
+static bool32 MultiMove_Start(void)
 {
     switch (sMultiMove->state)
     {
@@ -8262,7 +8262,7 @@ static bool8 MultiMove_Start(void)
     return TRUE;
 }
 
-static bool8 MultiMove_Cancel(void)
+static bool32 MultiMove_Cancel(void)
 {
     switch (sMultiMove->state)
     {
@@ -8289,7 +8289,7 @@ static bool8 MultiMove_Cancel(void)
     return TRUE;
 }
 
-static bool8 MultiMove_ChangeSelection(void)
+static bool32 MultiMove_ChangeSelection(void)
 {
     switch (sMultiMove->state)
     {
@@ -8311,9 +8311,9 @@ static bool8 MultiMove_ChangeSelection(void)
     return TRUE;
 }
 
-static bool8 MultiMove_GrabSelection(void)
+static bool32 MultiMove_GrabSelection(void)
 {
-    bool8 movingBg, movingMon;
+    bool32 movingBg, movingMon;
 
     switch (sMultiMove->state)
     {
@@ -8343,10 +8343,10 @@ static bool8 MultiMove_GrabSelection(void)
     return TRUE;
 }
 
-static bool8 MultiMove_MoveMons(void)
+static bool32 MultiMove_MoveMons(void)
 {
-    bool8 movingCursor = UpdateCursorPos();
-    bool8 movingBg = MultiMove_UpdateMove();
+    bool32 movingCursor = UpdateCursorPos();
+    bool32 movingBg = MultiMove_UpdateMove();
 
     if (!movingCursor && !movingBg)
         return FALSE;
@@ -8354,7 +8354,7 @@ static bool8 MultiMove_MoveMons(void)
         return TRUE;
 }
 
-static bool8 MultiMove_PlaceMons(void)
+static bool32 MultiMove_PlaceMons(void)
 {
     switch (sMultiMove->state)
     {
@@ -8396,7 +8396,7 @@ static bool8 MultiMove_PlaceMons(void)
 }
 
 // Returns TRUE if the movement was successful, FALSE otherwise
-static bool8 MultiMove_TryMoveGroup(u32 dir)
+static bool32 MultiMove_TryMoveGroup(u32 dir)
 {
     switch (dir)
     {
@@ -8503,7 +8503,7 @@ static void MultiMove_DeselectRow(u32 row, u32 minColumn, u32 maxColumn)
 static void MultiMove_SetIconToBg(u32 x, u32 y)
 {
     u32 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
+    u32 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
 
     if (species != SPECIES_NONE)
@@ -8528,7 +8528,7 @@ static void MultiMove_SetIconToBg(u32 x, u32 y)
 static void MultiMove_ClearIconFromBg(u32 x, u32 y)
 {
     u32 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
+    u32 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
 
     if (species != SPECIES_NONE)
     {
@@ -8541,7 +8541,7 @@ static void MultiMove_ClearIconFromBg(u32 x, u32 y)
     }
 }
 
-static void MultiMove_InitMove(u16 x, u16 y, u16 moveSteps)
+static void MultiMove_InitMove(u32 x, u32 y, u32 moveSteps)
 {
     sMultiMove->bgX = x;
     sMultiMove->bgY = y;
@@ -8673,7 +8673,7 @@ static u32 MultiMove_GetOrigin(void)
     return (IN_BOX_COLUMNS * sMultiMove->fromRow) + sMultiMove->fromColumn;
 }
 
-static bool8 MultiMove_CanPlaceSelection(void)
+static bool32 MultiMove_CanPlaceSelection(void)
 {
     s32 i, j;
     s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
@@ -8827,7 +8827,7 @@ static void CreateItemIconSprites(void)
 
 static void TryLoadItemIconAtPos(u32 cursorArea, u32 cursorPos)
 {
-    u16 heldItem;
+    u32 heldItem;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -8880,7 +8880,7 @@ static void TryHideItemIconAtPos(u32 cursorArea, u32 cursorPos)
 static void TakeItemFromMon(u32 cursorArea, u32 cursorPos)
 {
     u32 id;
-    u16 itemId;
+    u32 itemId;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -8909,7 +8909,7 @@ static void TakeItemFromMon(u32 cursorArea, u32 cursorPos)
     sStorage->movingItemId = sStorage->displayMonItemId;
 }
 
-static void InitItemIconInCursor(u16 itemId)
+static void InitItemIconInCursor(u32 itemId)
 {
     const u32 *tiles = GetItemIconPic(itemId);
     const u32 *pal = GetItemIconPalette(itemId);
@@ -8925,7 +8925,7 @@ static void InitItemIconInCursor(u16 itemId)
 static void SwapItemsWithMon(u32 cursorArea, u32 cursorPos)
 {
     u32 id;
-    u16 itemId;
+    u32 itemId;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -8986,7 +8986,7 @@ static void GiveItemToMon(u32 cursorArea, u32 cursorPos)
 static void MoveItemFromMonToBag(u32 cursorArea, u32 cursorPos)
 {
     u32 id;
-    u16 itemId;
+    u32 itemId;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -9040,7 +9040,7 @@ static void MoveHeldItemWithPartyMenu(void)
     }
 }
 
-static bool8 IsItemIconAnimActive(void)
+static bool32 IsItemIconAnimActive(void)
 {
     s32 i;
 
@@ -9059,7 +9059,7 @@ static bool8 IsItemIconAnimActive(void)
     return FALSE;
 }
 
-static bool8 IsMovingItem(void)
+static bool32 IsMovingItem(void)
 {
     s32 i;
 
@@ -9080,7 +9080,7 @@ static const u32 *GetMovingItemName(void)
     return ItemId_GetName(sStorage->movingItemId);
 }
 
-static u16 GetMovingItemId(void)
+static u32 GetMovingItemId(void)
 {
     return sStorage->movingItemId;
 }
@@ -9248,7 +9248,7 @@ static void SetItemIconCallback(u32 id, u32 callbackId, u32 cursorArea, u32 curs
     }
 }
 
-static void SetItemIconActive(u32 id, bool8 active)
+static void SetItemIconActive(u32 id, bool32 active)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
@@ -9277,7 +9277,7 @@ static void InitItemInfoWindow(void)
     DrawItemInfoWindow(0);
 }
 
-static bool8 UpdateItemInfoWindowSlideIn(void)
+static bool32 UpdateItemInfoWindowSlideIn(void)
 {
     s32 i, pos;
 
@@ -9293,7 +9293,7 @@ static bool8 UpdateItemInfoWindowSlideIn(void)
     return (sStorage->itemInfoWindowOffset != 0);
 }
 
-static bool8 UpdateItemInfoWindowSlideOut(void)
+static bool32 UpdateItemInfoWindowSlideOut(void)
 {
     s32 i, pos;
 
@@ -9565,7 +9565,7 @@ void CopyBoxMonAt(u32 boxId, u32 boxPosition, struct BoxPokemon *dst)
         *dst = gPokemonStoragePtr->boxes[boxId][boxPosition];
 }
 
-void CreateBoxMonAt(u32 boxId, u32 boxPosition, u16 species, u32 level, u32 fixedIV, u32 hasFixedPersonality, u32 personality, u32 otIDType, u32 otID)
+void CreateBoxMonAt(u32 boxId, u32 boxPosition, u32 species, u32 level, u32 fixedIV, u32 hasFixedPersonality, u32 personality, u32 otIDType, u32 otID)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
     {
@@ -9631,7 +9631,7 @@ s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u32 currIndex, u32 maxInd
 
     if (mode == 1 || mode == 3)
     {
-        for (i = (s8)currIndex + direction; i >= 0 && i <= maxIndex; i += direction)
+        for (i = (s32)currIndex + direction; i >= 0 && i <= maxIndex; i += direction)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE)
                 return i;
@@ -9639,7 +9639,7 @@ s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u32 currIndex, u32 maxInd
     }
     else
     {
-        for (i = (s8)currIndex + direction; i >= 0 && i <= maxIndex; i += direction)
+        for (i = (s32)currIndex + direction; i >= 0 && i <= maxIndex; i += direction)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE
                 && !GetBoxMonData(&boxMons[i], MON_DATA_IS_EGG))
@@ -9650,7 +9650,7 @@ s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u32 currIndex, u32 maxInd
     return -1;
 }
 
-bool8 CheckFreePokemonStorageSpace(void)
+bool32 CheckFreePokemonStorageSpace(void)
 {
     s32 i, j;
 
@@ -9714,9 +9714,9 @@ u32 CountAllStorageMons(void)
     return count;
 }
 
-bool32 AnyStorageMonWithMove(u16 moveId)
+bool32 AnyStorageMonWithMove(u32 moveId)
 {
-    u16 moves[] = {moveId, MOVES_COUNT};
+    u32 moves[] = {moveId, MOVES_COUNT};
     s32 i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
@@ -9781,12 +9781,12 @@ void SetWaldaWallpaperIconId(u32 id)
         gSaveBlock1Ptr->waldaPhrase.iconId = id;
 }
 
-u16 *GetWaldaWallpaperColorsPtr(void)
+u32 *GetWaldaWallpaperColorsPtr(void)
 {
     return gSaveBlock1Ptr->waldaPhrase.colors;
 }
 
-void SetWaldaWallpaperColors(u16 color1, u16 color2)
+void SetWaldaWallpaperColors(u32 color1, u32 color2)
 {
     gSaveBlock1Ptr->waldaPhrase.colors[0] = color1;
     gSaveBlock1Ptr->waldaPhrase.colors[1] = color2;
@@ -9825,8 +9825,8 @@ struct TilemapUtil_RectData
 {
     s16 x;
     s16 y;
-    u16 width;
-    u16 height;
+    u32 width;
+    u32 height;
     s16 destX;
     s16 destY;
 };
@@ -9837,22 +9837,22 @@ struct TilemapUtil
     struct TilemapUtil_RectData cur;
     const void *savedTilemap; // Only written in unused function
     const void *tilemap;
-    u16 altWidth;
-    u16 altHeight; // Never read
-    u16 width;
-    u16 height; // Never read
-    u16 rowSize; // Never read
+    u32 altWidth;
+    u32 altHeight; // Never read
+    u32 width;
+    u32 height; // Never read
+    u32 rowSize; // Never read
     u32 tileSize;
     u32 bg;
-    bool8 active;
+    bool32 active;
 };
 
 EWRAM_DATA static struct TilemapUtil *sTilemapUtil = NULL;
-EWRAM_DATA static u16 sNumTilemapUtilIds = 0;
+EWRAM_DATA static u32 sNumTilemapUtilIds = 0;
 
 static void TilemapUtil_Init(u32 count)
 {
-    u16 i;
+    u32 i;
 
     sTilemapUtil = Alloc(sizeof(*sTilemapUtil) * count);
     sNumTilemapUtilIds = (sTilemapUtil == NULL) ? 0 : count;
@@ -9881,8 +9881,8 @@ static void UNUSED TilemapUtil_UpdateAll(void)
 
 struct
 {
-    u16 width;
-    u16 height;
+    u32 width;
+    u32 height;
 } static const sTilemapDimensions[][4] =
 {
     [BG_TYPE_NORMAL] = {
@@ -9899,9 +9899,9 @@ struct
     },
 };
 
-static void TilemapUtil_SetMap(u32 id, u32 bg, const void *tilemap, u16 width, u16 height)
+static void TilemapUtil_SetMap(u32 id, u32 bg, const void *tilemap, u32 width, u32 height)
 {
-    u16 bgScreenSize, bgType;
+    u32 bgScreenSize, bgType;
 
     if (id >= sNumTilemapUtilIds)
         return;
@@ -9941,7 +9941,7 @@ static void UNUSED TilemapUtil_SetSavedMap(u32 id, const void *tilemap)
     sTilemapUtil[id].active = TRUE;
 }
 
-static void TilemapUtil_SetPos(u32 id, u16 x, u16 y)
+static void TilemapUtil_SetPos(u32 id, u32 x, u32 y)
 {
     if (id >= sNumTilemapUtilIds)
         return;
@@ -9951,7 +9951,7 @@ static void TilemapUtil_SetPos(u32 id, u16 x, u16 y)
     sTilemapUtil[id].active = TRUE;
 }
 
-static void TilemapUtil_SetRect(u32 id, u16 x, u16 y, u16 width, u16 height)
+static void TilemapUtil_SetRect(u32 id, u32 x, u32 y, u32 width, u32 height)
 {
     if (id >= sNumTilemapUtilIds)
         return;
@@ -9963,7 +9963,7 @@ static void TilemapUtil_SetRect(u32 id, u16 x, u16 y, u16 width, u16 height)
     sTilemapUtil[id].active = TRUE;
 }
 
-static void TilemapUtil_Move(u32 id, u32 mode, s8 val)
+static void TilemapUtil_Move(u32 id, u32 mode, s32 val)
 {
     if (id >= sNumTilemapUtilIds)
         return;
@@ -10059,8 +10059,8 @@ static void TilemapUtil_Draw(u32 id)
 
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
 {
-    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    bool8 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
+    u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
     u32 pid = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
 
     // Update front sprite

@@ -1000,8 +1000,8 @@ static bool32 ShouldSwitchIfBadChoiceLock(u32 battler)
 // AI should switch if it's become setup fodder and has something better to switch to
 static bool32 ShouldSwitchIfAttackingStatsLowered(u32 battler)
 {
-    s8 attackingStage = gBattleMons[battler].statStages[STAT_ATK];
-    s8 spAttackingStage = gBattleMons[battler].statStages[STAT_SPATK];
+    s32 attackingStage = gBattleMons[battler].statStages[STAT_ATK];
+    s32 spAttackingStage = gBattleMons[battler].statStages[STAT_SPATK];
 
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
     if (!(AI_THINKING_STRUCT->aiFlags[GetThinkingBattler(battler)] & AI_FLAG_SMART_SWITCHING))

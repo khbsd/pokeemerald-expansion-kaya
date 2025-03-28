@@ -27,34 +27,34 @@ static u32 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u32 
 static void InitTrainerApproachTask(struct ObjectEvent *trainerObj, u32 range);
 static void Task_RunTrainerSeeFuncList(u32 taskId);
 static void Task_EndTrainerApproach(u32 taskId);
-static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u32 spriteAnimNum);
+static void SetIconSpriteData(struct Sprite *sprite, u32 fldEffId, u32 spriteAnimNum);
 
 static u32 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
 static u32 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
 static u32 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
 static u32 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
 
-static bool8 TrainerSeeIdle(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 TrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 WaitTrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 TrainerMoveToPlayer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 PlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 WaitPlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 RevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 WaitRevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 RevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 PopOutOfAshBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 JumpInPlaceBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
-static bool8 WaitRevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 TrainerSeeIdle(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 TrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 WaitTrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 TrainerMoveToPlayer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 PlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 WaitPlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 RevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 WaitRevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 RevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 PopOutOfAshBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 JumpInPlaceBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool32 WaitRevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj);
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite);
 
 // IWRAM common
-COMMON_DATA u16 gWhichTrainerToFaceAfterBattle = 0;
+COMMON_DATA u32 gWhichTrainerToFaceAfterBattle = 0;
 COMMON_DATA u32 gPostBattleMovementScript[4] = {0};
 COMMON_DATA struct ApproachingTrainer gApproachingTrainers[2] = {0};
 COMMON_DATA u32 gNoOfApproachingTrainers = 0;
-COMMON_DATA bool8 gTrainerApproachedPlayer = 0;
+COMMON_DATA bool32 gTrainerApproachedPlayer = 0;
 
 // EWRAM
 EWRAM_DATA u32 gApproachingTrainerId = 0;
@@ -91,7 +91,7 @@ enum {
     TRSEE_REVEAL_BURIED_WAIT,
 };
 
-static bool8 (*const sTrainerSeeFuncList[])(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
+static bool32 (*const sTrainerSeeFuncList[])(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
 {
     [TRSEE_NONE]                 = TrainerSeeIdle,
     [TRSEE_EXCLAMATION]          = TrainerExclamationMark,
@@ -107,7 +107,7 @@ static bool8 (*const sTrainerSeeFuncList[])(u32 taskId, struct Task *task, struc
     [TRSEE_REVEAL_BURIED_WAIT]   = WaitRevealBuriedTrainer,
 };
 
-static bool8 (*const sTrainerSeeFuncList2[])(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
+static bool32 (*const sTrainerSeeFuncList2[])(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
 {
     RevealBuriedTrainer,
     PopOutOfAshBuriedTrainer,
@@ -356,7 +356,7 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
 };
 
 // code
-bool8 CheckForTrainersWantingBattle(void)
+bool32 CheckForTrainersWantingBattle(void)
 {
     u32 i;
 
@@ -651,13 +651,13 @@ static void Task_RunTrainerSeeFuncList(u32 taskId)
     }
 }
 
-static bool8 TrainerSeeIdle(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 TrainerSeeIdle(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     return FALSE;
 }
 
 // TRSEE_EXCLAMATION
-static bool8 TrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 TrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     u32 direction;
 
@@ -670,7 +670,7 @@ static bool8 TrainerExclamationMark(u32 taskId, struct Task *task, struct Object
 }
 
 // TRSEE_EXCLAMATION_WAIT
-static bool8 WaitTrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 WaitTrainerExclamationMark(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
     {
@@ -688,7 +688,7 @@ static bool8 WaitTrainerExclamationMark(u32 taskId, struct Task *task, struct Ob
 }
 
 // TRSEE_MOVE_TO_PLAYER
-static bool8 TrainerMoveToPlayer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 TrainerMoveToPlayer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (!ObjectEventIsMovementOverridden(trainerObj) || ObjectEventClearHeldMovementIfFinished(trainerObj))
     {
@@ -707,7 +707,7 @@ static bool8 TrainerMoveToPlayer(u32 taskId, struct Task *task, struct ObjectEve
 }
 
 // TRSEE_PLAYER_FACE
-static bool8 PlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 PlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     struct ObjectEvent *playerObj;
 
@@ -730,7 +730,7 @@ static bool8 PlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct 
 }
 
 // TRSEE_PLAYER_FACE_WAIT
-static bool8 WaitPlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 WaitPlayerFaceApproachingTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -741,7 +741,7 @@ static bool8 WaitPlayerFaceApproachingTrainer(u32 taskId, struct Task *task, str
 }
 
 // TRSEE_REVEAL_DISGUISE
-static bool8 RevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 RevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (!ObjectEventIsMovementOverridden(trainerObj)
      || ObjectEventClearHeldMovementIfFinished(trainerObj))
@@ -753,7 +753,7 @@ static bool8 RevealDisguisedTrainer(u32 taskId, struct Task *task, struct Object
 }
 
 // TRSEE_REVEAL_DISGUISE_WAIT
-static bool8 WaitRevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 WaitRevealDisguisedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (ObjectEventClearHeldMovementIfFinished(trainerObj))
         task->tFuncId = TRSEE_MOVE_TO_PLAYER;
@@ -762,7 +762,7 @@ static bool8 WaitRevealDisguisedTrainer(u32 taskId, struct Task *task, struct Ob
 }
 
 // TRSEE_REVEAL_BURIED
-static bool8 RevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 RevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (!ObjectEventIsMovementOverridden(trainerObj)
      || ObjectEventClearHeldMovementIfFinished(trainerObj))
@@ -774,7 +774,7 @@ static bool8 RevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEve
 }
 
 // TRSEE_BURIED_POP_OUT
-static bool8 PopOutOfAshBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 PopOutOfAshBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (ObjectEventCheckHeldMovementStatus(trainerObj))
     {
@@ -789,7 +789,7 @@ static bool8 PopOutOfAshBuriedTrainer(u32 taskId, struct Task *task, struct Obje
 }
 
 // TRSEE_BURIED_JUMP
-static bool8 JumpInPlaceBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 JumpInPlaceBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     struct Sprite *sprite;
 
@@ -809,7 +809,7 @@ static bool8 JumpInPlaceBuriedTrainer(u32 taskId, struct Task *task, struct Obje
 }
 
 // TRSEE_REVEAL_BURIED_WAIT
-static bool8 WaitRevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
+static bool32 WaitRevealBuriedTrainer(u32 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (!FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
         task->tFuncId = TRSEE_MOVE_TO_PLAYER;
@@ -828,7 +828,7 @@ static void Task_SetBuriedTrainerMovement(u32 taskId)
     struct Task *task = &gTasks[taskId];
     struct ObjectEvent *objEvent;
 
-    LoadWordFromTwoHalfwords((u16*) &task->tObjEvent, (u32 *)&objEvent);
+    LoadWordFromTwoHalfwords((u32*) &task->tObjEvent, (u32 *)&objEvent);
     if (!task->data[7])
     {
         ObjectEventClearHeldMovement(objEvent);
@@ -850,7 +850,7 @@ static void Task_SetBuriedTrainerMovement(u32 taskId)
 // Called when a buried Trainer has the reveal_trainer movement applied, from direct interaction
 void SetBuriedTrainerMovement(struct ObjectEvent *objEvent)
 {
-    StoreWordInTwoHalfwords((u16*) &gTasks[CreateTask(Task_SetBuriedTrainerMovement, 0)].tObjEvent, (u32)objEvent);
+    StoreWordInTwoHalfwords((u32*) &gTasks[CreateTask(Task_SetBuriedTrainerMovement, 0)].tObjEvent, (u32)objEvent);
 }
 
 void DoTrainerApproach(void)
@@ -968,7 +968,7 @@ u32 FldEff_XIcon(void)
     return 0;
 }
 
-static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u32 spriteAnimNum)
+static void SetIconSpriteData(struct Sprite *sprite, u32 fldEffId, u32 spriteAnimNum)
 {
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;

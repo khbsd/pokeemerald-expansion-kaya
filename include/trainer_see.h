@@ -13,10 +13,10 @@ extern u32 gWhichTrainerToFaceAfterBattle;
 extern u8 gPostBattleMovementScript[4];
 extern struct ApproachingTrainer gApproachingTrainers[2];
 extern u8 gNoOfApproachingTrainers;
-extern bool8 gTrainerApproachedPlayer;
+extern bool32 gTrainerApproachedPlayer;
 extern u8 gApproachingTrainerId;
 
-bool8 CheckForTrainersWantingBattle(void);
+bool32 CheckForTrainersWantingBattle(void);
 void SetBuriedTrainerMovement(struct ObjectEvent *var);
 void DoTrainerApproach(void);
 void TryPrepareSecondApproachingTrainer(void);

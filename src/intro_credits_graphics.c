@@ -34,41 +34,41 @@ struct IntroCreditsSpriteMetadata
     u32 x;
     u32 y;
     u32 subpriority;
-    u16 xOff;
+    u32 xOff;
 };
 
-static const u16 sGrass_Pal[]             = INCBIN_U16("graphics/intro/scene_2/grass.gbapal");
-static const u16 sGrassSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/grass_sunset.gbapal");
-static const u16 sGrassNight_Pal[]        = INCBIN_U16("graphics/intro/scene_2/grass_night.gbapal");
+static const u32 sGrass_Pal[]             = INCBIN_U16("graphics/intro/scene_2/grass.gbapal");
+static const u32 sGrassSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/grass_sunset.gbapal");
+static const u32 sGrassNight_Pal[]        = INCBIN_U16("graphics/intro/scene_2/grass_night.gbapal");
 static const u32 sGrass_Gfx[]             = INCBIN_U32("graphics/intro/scene_2/grass.4bpp.lz");
 static const u32 sGrass_Tilemap[]         = INCBIN_U32("graphics/intro/scene_2/grass_map.bin.lz");
-static const u16 sCloudsBg_Pal[]          = INCBIN_U16("graphics/intro/scene_2/clouds_bg.gbapal");
-static const u16 sCloudsBgSunset_Pal[]    = INCBIN_U16("graphics/intro/scene_2/clouds_bg_sunset.gbapal");
+static const u32 sCloudsBg_Pal[]          = INCBIN_U16("graphics/intro/scene_2/clouds_bg.gbapal");
+static const u32 sCloudsBgSunset_Pal[]    = INCBIN_U16("graphics/intro/scene_2/clouds_bg_sunset.gbapal");
 static const u32 sCloudsBg_Gfx[]          = INCBIN_U32("graphics/intro/scene_2/clouds_bg.4bpp.lz");
 static const u32 sCloudsBg_Tilemap[]      = INCBIN_U32("graphics/intro/scene_2/clouds_bg_map.bin.lz");
-static const u16 sClouds_Pal[]            = INCBIN_U16("graphics/intro/scene_2/clouds.gbapal");
-static const u16 sCloudsSunset_Pal[]      = INCBIN_U16("graphics/intro/scene_2/clouds_sunset.gbapal");
+static const u32 sClouds_Pal[]            = INCBIN_U16("graphics/intro/scene_2/clouds.gbapal");
+static const u32 sCloudsSunset_Pal[]      = INCBIN_U16("graphics/intro/scene_2/clouds_sunset.gbapal");
 static const u32 sClouds_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/clouds.4bpp.lz");
-static const u16 sTrees_Pal[]             = INCBIN_U16("graphics/intro/scene_2/trees.gbapal");
-static const u16 sTreesSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/trees_sunset.gbapal");
+static const u32 sTrees_Pal[]             = INCBIN_U16("graphics/intro/scene_2/trees.gbapal");
+static const u32 sTreesSunset_Pal[]       = INCBIN_U16("graphics/intro/scene_2/trees_sunset.gbapal");
 static const u32 sTrees_Gfx[]             = INCBIN_U32("graphics/intro/scene_2/trees.4bpp.lz");
 static const u32 sTrees_Tilemap[]         = INCBIN_U32("graphics/intro/scene_2/trees_map.bin.lz");
-static const u16 sTreesSmall_Pal[]        = INCBIN_U16("graphics/intro/scene_2/trees_small.gbapal");
+static const u32 sTreesSmall_Pal[]        = INCBIN_U16("graphics/intro/scene_2/trees_small.gbapal");
 static const u32 sTreesSmall_Gfx[]        = INCBIN_U32("graphics/intro/scene_2/trees_small.4bpp.lz");
-static const u16 sHouses_Pal[]            = INCBIN_U16("graphics/intro/scene_2/houses.gbapal");
+static const u32 sHouses_Pal[]            = INCBIN_U16("graphics/intro/scene_2/houses.gbapal");
 static const u32 sHouses_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/houses.4bpp.lz");
-static const u16 sHouseSilhouette_Pal[]   = INCBIN_U16("graphics/intro/scene_2/house_silhouette.gbapal");
+static const u32 sHouseSilhouette_Pal[]   = INCBIN_U16("graphics/intro/scene_2/house_silhouette.gbapal");
 static const u32 sHouses_Tilemap[]        = INCBIN_U32("graphics/intro/scene_2/houses_map.bin.lz");
 static const u32 sHouseSilhouette_Gfx[]   = INCBIN_U32("graphics/intro/scene_2/house_silhouette.4bpp.lz");
-static const u16 sBrendanCredits_Pal[]    = INCBIN_U16("graphics/intro/scene_2/brendan_credits.gbapal");
+static const u32 sBrendanCredits_Pal[]    = INCBIN_U16("graphics/intro/scene_2/brendan_credits.gbapal");
 static const u32 sBrendanCredits_Gfx[]    = INCBIN_U32("graphics/intro/scene_2/brendan_credits.4bpp.lz");
-static const u16 sMayCredits_Pal[]        = INCBIN_U16("graphics/intro/scene_2/may_credits.gbapal");
-static const u16 sUnused[0xF0]            = {0};
+static const u32 sMayCredits_Pal[]        = INCBIN_U16("graphics/intro/scene_2/may_credits.gbapal");
+static const u32 sUnused[0xF0]            = {0};
 static const u32 sMayCredits_Gfx[]        = INCBIN_U32("graphics/intro/scene_2/may_credits.4bpp.lz");
 static const u32 sBicycle_Gfx[]           = INCBIN_U32("graphics/intro/scene_2/bicycle.4bpp.lz");
-static const u16 sLatios_Pal[]            = INCBIN_U16("graphics/intro/scene_2/latios.gbapal");
+static const u32 sLatios_Pal[]            = INCBIN_U16("graphics/intro/scene_2/latios.gbapal");
 static const u32 sLatios_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/latios.4bpp.lz");
-static const u16 sLatias_Pal[]            = INCBIN_U16("graphics/intro/scene_2/latias.gbapal");
+static const u32 sLatias_Pal[]            = INCBIN_U16("graphics/intro/scene_2/latias.gbapal");
 static const u32 sLatias_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/latias.4bpp.lz");
 
 static void SpriteCB_MovingScenery(struct Sprite *sprite);
@@ -717,7 +717,7 @@ const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[] =
     {}
 };
 
-EWRAM_DATA u16 gIntroCredits_MovingSceneryVBase = 0;
+EWRAM_DATA u32 gIntroCredits_MovingSceneryVBase = 0;
 EWRAM_DATA s16 gIntroCredits_MovingSceneryVOffset = 0;
 EWRAM_DATA s16 gIntroCredits_MovingSceneryState = 0;
 
@@ -921,7 +921,7 @@ void SetCreditsSceneBgCnt(u32 scene)
 #define tBg3PosLo data[9]
 
 // Create task that manages the moving backgrounds during the bicycle ride
-u32 CreateBicycleBgAnimationTask(u32 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Speed)
+u32 CreateBicycleBgAnimationTask(u32 mode, u32 bg1Speed, u32 bg2Speed, u32 bg3Speed)
 {
     u32 taskId = CreateTask(Task_BicycleBgAnimation, 0);
 
@@ -950,8 +950,8 @@ static void Task_BicycleBgAnimation(u32 taskId)
     bg1Speed = gTasks[taskId].tBg1Speed;
     if (bg1Speed != 0)
     {
-        offset = (gTasks[taskId].tBg1PosHi << 16) + (u16)gTasks[taskId].tBg1PosLo;
-        offset -= (u16)bg1Speed << 4;
+        offset = (gTasks[taskId].tBg1PosHi << 16) + (u32)gTasks[taskId].tBg1PosLo;
+        offset -= (u32)bg1Speed << 4;
         gTasks[taskId].tBg1PosHi = offset >> 16;
         gTasks[taskId].tBg1PosLo = offset;
         SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBg1PosHi);
@@ -962,8 +962,8 @@ static void Task_BicycleBgAnimation(u32 taskId)
     bg2Speed = gTasks[taskId].tBg2Speed;
     if (bg2Speed != 0)
     {
-        offset = (gTasks[taskId].tBg2PosHi << 16) + (u16)gTasks[taskId].tBg2PosLo;
-        offset -= (u16)bg2Speed << 4;
+        offset = (gTasks[taskId].tBg2PosHi << 16) + (u32)gTasks[taskId].tBg2PosLo;
+        offset -= (u32)bg2Speed << 4;
         gTasks[taskId].tBg2PosHi = offset >> 16;
         gTasks[taskId].tBg2PosLo = offset;
         SetGpuReg(REG_OFFSET_BG2HOFS, gTasks[taskId].tBg2PosHi);
@@ -977,8 +977,8 @@ static void Task_BicycleBgAnimation(u32 taskId)
     bg3Speed = gTasks[taskId].tBg3Speed;
     if (bg3Speed != 0)
     {
-        offset = (gTasks[taskId].tBg3PosHi << 16) + (u16)gTasks[taskId].tBg3PosLo;
-        offset -= (u16)bg3Speed << 4;
+        offset = (gTasks[taskId].tBg3PosHi << 16) + (u32)gTasks[taskId].tBg3PosLo;
+        offset -= (u32)bg3Speed << 4;
         gTasks[taskId].tBg3PosHi = offset >> 16;
         gTasks[taskId].tBg3PosLo = offset;
         SetGpuReg(REG_OFFSET_BG3HOFS, gTasks[taskId].tBg3PosHi);
@@ -988,8 +988,8 @@ static void Task_BicycleBgAnimation(u32 taskId)
 
 void CycleSceneryPalette(u32 mode)
 {
-    u16 x;
-    u16 y;
+    u32 x;
+    u32 y;
     switch (mode)
     {
         case 0:
@@ -1047,7 +1047,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
             DestroySprite(sprite);
             break;
         case INTROCRED_SCENERY_NORMAL:
-            x = ((sprite->x << 16) | (u16)sprite->tXPos) + (u16)sprite->tXOffset;
+            x = ((sprite->x << 16) | (u32)sprite->tXPos) + (u32)sprite->tXOffset;
             sprite->x = x >> 16;
             sprite->tXPos = x;
             if (sprite->x > 255)
@@ -1061,7 +1061,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
     }
 }
 
-static void CreateMovingScenerySprites(bool8 hasVerticalMove, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u32 numSprites)
+static void CreateMovingScenerySprites(bool32 hasVerticalMove, const struct IntroCreditsSpriteMetadata *metadata, const union AnimCmd *const *anims, u32 numSprites)
 {
     u32 i;
 

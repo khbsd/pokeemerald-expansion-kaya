@@ -385,7 +385,7 @@ static void AnimConfuseRayBallSpiral(struct Sprite *sprite)
 
 static void AnimConfuseRayBallSpiral_Step(struct Sprite *sprite)
 {
-    u16 temp1;
+    u32 temp1;
     sprite->x2 = Sin(sprite->data[0], 32);
     sprite->y2 = Cos(sprite->data[0], 8);
     temp1 = sprite->data[0] - 65;
@@ -533,8 +533,8 @@ static void AnimLick(struct Sprite *sprite)
 
 static void AnimLick_Step(struct Sprite *sprite)
 {
-    bool8 r5 = FALSE;
-    bool8 r6 = FALSE;
+    bool32 r5 = FALSE;
+    bool32 r6 = FALSE;
 
     if (sprite->animEnded)
     {
@@ -698,12 +698,12 @@ static void AnimTask_SpiteTargetShadow_Step1(u32 taskId)
                 task->data[4] = OBJ_PLTT_ID2(gSprites[task->data[13]].oam.paletteNum);
                 if (position == 1)
                 {
-                    u16 mask = DISPCNT_BG1_ON;
+                    u32 mask = DISPCNT_BG1_ON;
                     mask2 = mask;
                 }
                 else
                 {
-                    u16 mask = DISPCNT_BG2_ON;
+                    u32 mask = DISPCNT_BG2_ON;
                     mask2 = mask;
                 }
                 ClearGpuRegBits(REG_OFFSET_DISPCNT, mask2);
@@ -942,7 +942,7 @@ void AnimTask_DestinyBondWhiteShadow(u32 taskId)
 
 static void AnimTask_DestinyBondWhiteShadow_Step(u32 taskId)
 {
-    u16 i;
+    u32 i;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -1058,8 +1058,8 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u32 taskId)
     s16 step;
     s16 leftDistance, rightDistance, topDistance, bottomDistance;
     s16 startX, startY;
-    u16 left, right, top, bottom;
-    u16 selectedPalettes;
+    u32 left, right, top, bottom;
+    u32 selectedPalettes;
 
     step = gTasks[taskId].data[0];
     gTasks[taskId].data[0]++;
@@ -1134,7 +1134,7 @@ static void AnimCurseNail(struct Sprite *sprite)
 
 static void AnimCurseNail_Step1(struct Sprite *sprite)
 {
-    u16 var0;
+    u32 var0;
 
     if (sprite->data[0] > 0)
     {
@@ -1201,8 +1201,8 @@ static void AnimCurseNail_End(struct Sprite *sprite)
 
 void AnimGhostStatusSprite(struct Sprite *sprite)
 {
-    u16 coeffB;
-    u16 coeffA;
+    u32 coeffB;
+    u32 coeffA;
 
     sprite->x2 = Sin(sprite->data[0], 12);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -1270,7 +1270,7 @@ void AnimTask_GrudgeFlames(u32 taskId)
 
 void AnimTask_GrudgeFlames_Step(u32 taskId)
 {
-    u16 i;
+    u32 i;
     u32 spriteId;
     struct Task *task = &gTasks[taskId];
 
@@ -1355,7 +1355,7 @@ void AnimTask_GrudgeFlames_Step(u32 taskId)
 
 static void AnimGrudgeFlame(struct Sprite *sprite)
 {
-    u16 index;
+    u32 index;
 
     if (sprite->data[1] == 0)
         sprite->data[2] += 2;

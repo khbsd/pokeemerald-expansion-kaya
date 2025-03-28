@@ -27,7 +27,7 @@ static void Task_DoFieldMove_RunFunc(u32 taskId);
 static void FieldCallback_RockSmash(void);
 static void FieldMove_RockSmash(void);
 
-boolu32CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
+boolu32CheckObjectGraphicsInFrontOfPlayer(u32 graphicsId)
 {
     u8 objEventId;
 
@@ -111,7 +111,7 @@ static void Task_DoFieldMove_WaitForMon(u8 taskId)
 static void Task_DoFieldMove_RunFunc(u8 taskId)
 {
     // The function for the field move to do is stored in halves across data[8] and data[9]
-    void (*fieldMoveFunc)(void) = (void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]);
+    void (*fieldMoveFunc)(void) = (void (*)(void))(((u32)gTasks[taskId].data[8] << 16) | (u32)gTasks[taskId].data[9]);
 
     fieldMoveFunc();
     gPlayerAvatar.preventStep = FALSE;
@@ -120,7 +120,7 @@ static void Task_DoFieldMove_RunFunc(u8 taskId)
 
 // Called when Rock Smash is used from the party menu
 // For interacting with a smashable rock in the field, see EventScript_RockSmash
-bool8 SetUpFieldMove_RockSmash(void)
+bool32 SetUpFieldMove_RockSmash(void)
 {
     // In Ruby and Sapphire, Regirock's tomb is opened by using Strength. In Emerald,
     // it is opened by using Rock Smash.

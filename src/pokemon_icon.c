@@ -15,7 +15,7 @@ struct MonIconSpriteTemplate
     const union AnimCmd *const *anims;
     const union AffineAnimCmd *const *affineAnims;
     void (*callback)(struct Sprite *);
-    u16 paletteTag;
+    u32 paletteTag;
 };
 
 static u32 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u32);
@@ -109,7 +109,7 @@ static const union AffineAnimCmd *const sMonIconAffineAnims[] =
     sAffineAnim_1,
 };
 
-static const u16 sSpriteImageSizes[3][4] =
+static const u32 sSpriteImageSizes[3][4] =
 {
     [ST_OAM_SQUARE] =
     {
@@ -134,7 +134,7 @@ static const u16 sSpriteImageSizes[3][4] =
     },
 };
 
-u32 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority, u32 personality)
+u32 CreateMonIcon(u32 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority, u32 personality)
 {
     u32 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -163,7 +163,7 @@ u32 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, 
 }
 
 
-u32 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority)
+u32 CreateMonIconNoPersonality(u32 species, void (*callback)(struct Sprite *), s16 x, s16 y, u32 subpriority)
 {
     u32 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
@@ -184,7 +184,7 @@ u32 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s
     return spriteId;
 }
 
-u16 GetIconSpecies(u16 species, u32 personality)
+u32 GetIconSpecies(u32 species, u32 personality)
 {
     species = SanitizeSpeciesId(species);
     if (species == SPECIES_UNOWN)
@@ -192,7 +192,7 @@ u16 GetIconSpecies(u16 species, u32 personality)
     return species;
 }
 
-u16 GetUnownLetterByPersonality(u32 personality)
+u32 GetUnownLetterByPersonality(u32 personality)
 {
     if (!personality)
         return 0;
@@ -200,7 +200,7 @@ u16 GetUnownLetterByPersonality(u32 personality)
         return GET_UNOWN_LETTER(personality);
 }
 
-u16 GetIconSpeciesNoPersonality(u16 species)
+u32 GetIconSpeciesNoPersonality(u32 species)
 {
     species = SanitizeSpeciesId(species);
 
@@ -209,7 +209,7 @@ u16 GetIconSpeciesNoPersonality(u16 species)
     return GetIconSpecies(species, 0);
 }
 
-const u32 *GetMonIconPtr(u16 species, u32 personality)
+const u32 *GetMonIconPtr(u32 species, u32 personality)
 {
     return GetMonIconTiles(GetIconSpecies(species, personality), personality);
 }
@@ -227,7 +227,7 @@ void LoadMonIconPalettes(void)
 }
 
 // unused
-void SafeLoadMonIconPalette(u16 species)
+void SafeLoadMonIconPalette(u32 species)
 {
     u32 palIndex;
     palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
@@ -235,14 +235,14 @@ void SafeLoadMonIconPalette(u16 species)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
-void LoadMonIconPalette(u16 species)
+void LoadMonIconPalette(u32 species)
 {
     u32 palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
     if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
-void LoadMonIconPalettePersonality(u16 species, u32 personality)
+void LoadMonIconPalettePersonality(u32 species, u32 personality)
 {
     u32 palIndex;
     species = SanitizeSpeciesId(species);
@@ -264,14 +264,14 @@ void FreeMonIconPalettes(void)
 }
 
 // unused
-void SafeFreeMonIconPalette(u16 species)
+void SafeFreeMonIconPalette(u32 species)
 {
     u32 palIndex;
     palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void FreeMonIconPalette(u16 species)
+void FreeMonIconPalette(u32 species)
 {
     u32 palIndex;
     palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
@@ -283,7 +283,7 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-const u32 *GetMonIconTiles(u16 species, u32 personality)
+const u32 *GetMonIconTiles(u32 species, u32 personality)
 {
     const u32 *iconSprite;
 
@@ -303,7 +303,7 @@ const u32 *GetMonIconTiles(u16 species, u32 personality)
     return iconSprite;
 }
 
-void TryLoadAllMonIconPalettesAtOffset(u16 offset)
+void TryLoadAllMonIconPalettesAtOffset(u32 offset)
 {
     s32 i;
     if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
@@ -316,17 +316,17 @@ void TryLoadAllMonIconPalettesAtOffset(u16 offset)
     }
 }
 
-u32 GetValidMonIconPalIndex(u16 species)
+u32 GetValidMonIconPalIndex(u32 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
 }
 
-u32 GetMonIconPaletteIndexFromSpecies(u16 species)
+u32 GetMonIconPaletteIndexFromSpecies(u32 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
 }
 
-const u16 *GetValidMonIconPalettePtr(u16 species)
+const u32 *GetValidMonIconPalettePtr(u32 species)
 {
     return gMonIconPaletteTable[gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex].data;
 }

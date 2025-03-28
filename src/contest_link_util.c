@@ -227,8 +227,8 @@ static void Task_LinkContest_CommunicateRngEm(u32 taskId)
 static void Task_LinkContest_CommunicateLeaderIdsEm(u32 taskId)
 {
     int i;
-    u16 data[CONTESTANT_COUNT];
-    u16 leaderId;
+    u32 data[CONTESTANT_COUNT];
+    u32 leaderId;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
@@ -266,8 +266,8 @@ static void Task_LinkContest_CommunicateLeaderIdsEm(u32 taskId)
 static void Task_LinkContest_CommunicateCategoryEm(u32 taskId)
 {
     int i;
-    u16 data[CONTESTANT_COUNT];
-    u16 category;
+    u32 data[CONTESTANT_COUNT];
+    u32 category;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;

@@ -7388,7 +7388,7 @@ void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPi
     sprite->y += gBattleAnimArgs[1];
 }
 
-static void InitSpritePosToAnimAttackersCentre(struct Sprite *sprite, bool8 respectMonPicOffsets)
+static void InitSpritePosToAnimAttackersCentre(struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     if (!respectMonPicOffsets)
     {
@@ -7538,7 +7538,7 @@ static void AnimBlastBurnTargetPlume_Step1(struct Sprite *sprite)
 
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite *sprite)
 {
-    bool8 var;
+    bool32 var;
 
     if (!sprite->data[0])
     {
@@ -7698,7 +7698,7 @@ static void SpriteCB_CoreEnforcerBeam(struct Sprite *sprite)
 
 static void SpriteCB_TranslateAnimSpriteToTargetMonLocationDoubles(struct Sprite *sprite)
 {
-    bool8 v1;
+    bool32 v1;
     u8 target;
     u8 coordType;
 
@@ -8029,8 +8029,8 @@ static void SpriteCB_LeftRightSliceStep0(struct Sprite *sprite)
 #define sMovingBackHorizontally sprite->data[2]
 static void SpriteCB_PyroBallRockBounceStep(struct Sprite *sprite)
 {
-    s8 initialVerticalVelocity;
-    s8 initialHorizontalVelocity;
+    s32 initialVerticalVelocity;
+    s32 initialHorizontalVelocity;
 
     if (sprite->y2 > 0) //Rock returned back down
     {
@@ -8460,7 +8460,7 @@ void AnimTask_AllBattlersInvisibleExceptAttackerAndTarget(u8 taskId)
 #define tInitialYPos data[3]
 #define tSide data[4]
 #define tAnimLengthTime data[5]
-static const s8 sHomerunEnemyHorizontalMovement[] =
+static const s32 sHomerunEnemyHorizontalMovement[] =
 {
     3, 3, 3, 3,
     3, 3, 2, 2,
@@ -8473,7 +8473,7 @@ static const s8 sHomerunEnemyHorizontalMovement[] =
     0, 0, 0, 1,
 };
 
-static const s8 sHomerunEnemyVerticalMovement[] =
+static const s32 sHomerunEnemyVerticalMovement[] =
 {
     -4, -4, -4, -4,
     -4, -3, -3, -2,
@@ -8508,7 +8508,7 @@ void AnimTask_TwinkleTackleLaunchStep(u8 taskId)
     }
     else if ((u32) task->tTimer < NELEMS(sHomerunEnemyHorizontalMovement))
     {
-        s8 movement = sHomerunEnemyHorizontalMovement[task->tTimer];
+        s32 movement = sHomerunEnemyHorizontalMovement[task->tTimer];
         if (task->tSide == B_SIDE_PLAYER)
             movement *= -1;
         sprite->x += movement;
@@ -8837,7 +8837,7 @@ void SpriteCB_HorizontalSliceStep(struct Sprite *sprite)
 //arg 2: flip
 static void SpriteCB_LashOutStrike(struct Sprite* sprite)
 {
-    bool8 flip = GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER;
+    bool32 flip = GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER;
 
     if (gBattleAnimArgs[2])
         flip ^= 1;

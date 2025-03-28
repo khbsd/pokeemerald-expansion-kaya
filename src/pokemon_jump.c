@@ -151,8 +151,8 @@ enum {
 
 struct PokemonJump_MonInfo
 {
-    u16 isShiny:1;
-    u16 species:15;
+    u32 isShiny:1;
+    u32 species:15;
     u32 otId;
     u32 personality;
 };
@@ -162,10 +162,10 @@ struct PokemonJump_Player
     int jumpOffset;
     int jumpOffsetIdx;
     u32 unused;
-    u16 monJumpType;
-    u16 jumpTimeStart;
-    u16 monState;
-    u16 prevMonState;
+    u32 monJumpType;
+    u32 jumpTimeStart;
+    u32 monState;
+    u32 prevMonState;
     int jumpState;
     bool32 funcFinished;
     u32 name[11];
@@ -174,7 +174,7 @@ struct PokemonJump_Player
 struct PokemonJumpGfx
 {
     bool32 funcFinished;
-    u16 mainState;
+    u32 mainState;
     u32 taskId;
     u32 unused1[3];
     u32 resetVineState;
@@ -183,15 +183,15 @@ struct PokemonJumpGfx
     u32 msgWindowState;
     u32 vinePalNumDownswing;
     u32 vinePalNumUpswing;
-    u16 unused2;
-    u16 msgWindowId;
-    u16 fanfare;
+    u32 unused2;
+    u32 msgWindowId;
+    u32 fanfare;
     u32 bonusTimer;
-    u16 nameWindowIds[MAX_RFU_PLAYERS];
+    u32 nameWindowIds[MAX_RFU_PLAYERS];
     u32 itemName[64];
     u32 itemQuantityStr[64];
     u32 prizeMsg[256];
-    u16 tilemapBuffer[0x4000];
+    u32 tilemapBuffer[0x4000];
     struct Sprite *monSprites[MAX_RFU_PLAYERS];
     struct Sprite *starSprites[MAX_RFU_PLAYERS];
     struct Sprite *vineSprites[VINE_SPRITES_PER_SIDE * 2];
@@ -203,8 +203,8 @@ struct PokemonJump_CommData
 {
     u32 funcId;
     u32 receivedBonusFlags;
-    u16 data; // Multi-use
-    u16 jumpsInRow;
+    u32 data; // Multi-use
+    u32 jumpsInRow;
     u32 jumpScore;
 };
 
@@ -215,10 +215,10 @@ struct PokemonJump
     u32 numPlayers;
     u32 multiplayerId;
     u32 startDelayTimer;
-    u16 mainState;
-    u16 helperState;
-    u16 excellentsInRow;
-    u16 excellentsInRowRecord;
+    u32 mainState;
+    u32 helperState;
+    u32 excellentsInRow;
+    u32 excellentsInRowRecord;
     bool32 gameOver;
     u32 vineState;
     u32 prevVineState;
@@ -228,24 +228,24 @@ struct PokemonJump
     u32 nextVineSpeed;
     int linkTimer;
     u32 linkTimerLimit;
-    u16 vineStateTimer;
-    bool16 ignoreJumpInput;
-    u16 unused1;
-    u16 unused2; // Set to 0, never read
-    u16 timer;
-    u16 prizeItemId;
-    u16 prizeItemQuantity;
-    u16 playAgainComm;
+    u32 vineStateTimer;
+    bool32 ignoreJumpInput;
+    u32 unused1;
+    u32 unused2; // Set to 0, never read
+    u32 timer;
+    u32 prizeItemId;
+    u32 prizeItemQuantity;
+    u32 playAgainComm;
     u32 unused3; // Set to 0, never read
     u32 playAgainState;
-    bool8 allowVineUpdates;
-    bool8 isLeader;
-    bool8 funcActive;
-    bool8 allPlayersReady;
-    u16 vineTimer;
+    bool32 allowVineUpdates;
+    bool32 isLeader;
+    bool32 funcActive;
+    bool32 allPlayersReady;
+    u32 vineTimer;
     u32 nextFuncId;
-    bool8 showBonus;
-    u16 vineSpeedDelay;
+    bool32 showBonus;
+    u32 vineSpeedDelay;
     u32 vineBaseSpeedIdx;
     u32 vineSpeedStage;
     int numPlayersAtPeak;
@@ -256,12 +256,12 @@ struct PokemonJump
     bool32 skipJumpUpdate;
     bool32 atMaxSpeedStage;
     struct PokemonJump_CommData comm;
-    bool8 atJumpPeak[MAX_RFU_PLAYERS];
-    bool8 atJumpPeak2[MAX_RFU_PLAYERS];
-    bool8 atJumpPeak3[MAX_RFU_PLAYERS];
+    bool32 atJumpPeak[MAX_RFU_PLAYERS];
+    bool32 atJumpPeak2[MAX_RFU_PLAYERS];
+    bool32 atJumpPeak3[MAX_RFU_PLAYERS];
     u32 memberFuncIds[MAX_RFU_PLAYERS];
-    u16 playAgainStates[MAX_RFU_PLAYERS];
-    u16 jumpTimeStarts[MAX_RFU_PLAYERS];
+    u32 playAgainStates[MAX_RFU_PLAYERS];
+    u32 jumpTimeStarts[MAX_RFU_PLAYERS];
     struct PokemonJumpGfx jumpGfx;
     struct PokemonJump_MonInfo monInfo[MAX_RFU_PLAYERS];
     struct PokemonJump_Player players[MAX_RFU_PLAYERS];
@@ -272,7 +272,7 @@ static void InitGame(struct PokemonJump *);
 static void ResetForNewGame(struct PokemonJump *);
 static void InitPlayerAndJumpTypes(void);
 static void ResetPlayersForNewGame(void);
-static s16 GetSpeciesPokemonJumpType(u16 species);
+static s16 GetSpeciesPokemonJumpType(u32 species);
 static void InitJumpMonInfo(struct PokemonJump_MonInfo *, struct Pokemon *);
 static void CB2_PokemonJump(void);
 static void Task_StartPokemonJump(u32);
@@ -314,7 +314,7 @@ static int PokeJumpRandom(void);
 static void ResetVineAfterHit(void);
 static void ResetPlayersJumpStates(void);
 static void ResetPlayersMonState(void);
-static bool32 IsPlayersMonState(u16);
+static bool32 IsPlayersMonState(u32);
 static void SetMonStateJump(void);
 static void UpdateGame(void);
 static void TryUpdateVineSwing(void);
@@ -333,13 +333,13 @@ static bool32 AreLinkQueuesEmpty(void);
 static int GetNumPlayersForBonus(u32 *);
 static void ClearUnreadField(void);
 static int GetScoreBonus(int);
-static void TryUpdateExcellentsRecord(u16);
+static void TryUpdateExcellentsRecord(u32);
 static bool32 HasEnoughScoreForPrize(void);
-static u16 GetPrizeData(void);
-static void UnpackPrizeData(u16, u16 *, u16 *);
-static u16 GetPrizeItemId(void);
-static u16 GetPrizeQuantity(void);
-static u16 GetQuantityLimitedByBag(u16, u16);
+static u32 GetPrizeData(void);
+static void UnpackPrizeData(u32, u32 *, u32 *);
+static u32 GetPrizeItemId(void);
+static u32 GetPrizeQuantity(void);
+static u32 GetQuantityLimitedByBag(u32, u32);
 static void SpriteCB_Star(struct Sprite *);
 static void SpriteCB_MonHitShake(struct Sprite *);
 static void SpriteCB_MonHitFlash(struct Sprite *);
@@ -352,18 +352,18 @@ static void SetUpPokeJumpGfxFuncById(int);
 static bool32 IsPokeJumpGfxFuncFinished(void);
 static void SetUpResetVineGfx(void);
 static bool32 ResetVineGfx(void);
-static void PrintPrizeMessage(u16, u16);
-static void PrintPrizeFilledBagMessage(u16);
-static void PrintNoRoomForPrizeMessage(u16);
+static void PrintPrizeMessage(u32, u32);
+static void PrintPrizeFilledBagMessage(u32);
+static void PrintNoRoomForPrizeMessage(u32);
 static bool32 DoPrizeMessageAndFanfare(void);
 static void ClearMessageWindow(void);
 static void SetMonSpriteY(u32, s16);
 static void StartMonHitShake(u32);
 static bool32 RemoveMessageWindow(void);
 static void PrintScore(int);
-static s8 HandlePlayAgainInput(void);
+static s32 HandlePlayAgainInput(void);
 static int DoSameJumpTimeBonus(u32);
-static void PrintJumpsInRow(u16);
+static void PrintJumpsInRow(u32);
 static void StartMonHitFlash(u32);
 static int IsMonHitShakeActive(int);
 static void StopMonHitFlash(void);
@@ -374,10 +374,10 @@ static void SendPacket_MonInfo(struct PokemonJump_MonInfo *);
 static bool32 RecvPacket_MonInfo(int, struct PokemonJump_MonInfo *);
 static void SendPacket_LeaderState(struct PokemonJump_Player *, struct PokemonJump_CommData *);
 static bool32 RecvPacket_LeaderState(struct PokemonJump_Player *, struct PokemonJump_CommData *);
-static void SendPacket_MemberState(struct PokemonJump_Player *, u32, u16);
-static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *, int, u32 *, u16 *);
+static void SendPacket_MemberState(struct PokemonJump_Player *, u32, u32);
+static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *, int, u32 *, u32 *);
 static bool32 RecvPacket_MemberStateToMember(struct PokemonJump_Player *, int);
-static bool32 TryUpdateRecords(u32, u16, u16);
+static bool32 TryUpdateRecords(u32, u32, u32);
 static void IncrementGamesWithMaxPlayers(void);
 static void Task_RunPokeJumpGfxFunc(u32);
 static void ShowBonus(u32);
@@ -391,7 +391,7 @@ static void DrawPlayerNameWindows(void);
 static void SetUpPokeJumpGfxFunc(void (*func)(void));
 static void PrintPokeJumpPlayerNames(bool32);
 static u32 AddMessageWindow(u32, u32, u32, u32);
-static void CreatePokeJumpYesNoMenu(u16, u16, u32);
+static void CreatePokeJumpYesNoMenu(u32, u32, u32);
 static void PrintPlayerNamesNoHighlight(void);
 static void PrintPlayerNamesWithHighlight(void);
 static void ErasePlayerNames(void);
@@ -402,13 +402,13 @@ static void Msg_SomeoneDroppedOut(void);
 static void DoPokeJumpCountdown(void);
 static void Msg_CommunicationStandby(void);
 static void Task_ShowPokemonJumpRecords(u32);
-static void PrintRecordsText(u16, int);
+static void PrintRecordsText(u32, int);
 static inline void TruncateToFirstWordOnly(u32 *);
 
 EWRAM_DATA static struct PokemonJump *sPokemonJump = NULL;
 EWRAM_DATA static struct PokemonJumpGfx *sPokemonJumpGfx = NULL;
 
-void StartPokemonJump(u16 partyId, MainCallback exitCallback)
+void StartPokemonJump(u32 partyId, MainCallback exitCallback)
 {
     u32 taskId;
 
@@ -520,7 +520,7 @@ static void ResetPlayersForNewGame(void)
     }
 }
 
-static s16 GetSpeciesPokemonJumpType(u16 species)
+static s16 GetSpeciesPokemonJumpType(u32 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].pokemonJumpType;
 }
@@ -649,9 +649,9 @@ static void RecvLinkData_Leader(void)
 {
     int i;
     int numReady;
-    u16 monState;
+    u32 monState;
     u32 funcId;
-    u16 playAgainState;
+    u32 playAgainState;
 
     for (i = 1, numReady = 0; i < sPokemonJump->numPlayers; i++)
     {
@@ -732,7 +732,7 @@ static void SetFunc_Member(u32 funcId)
 static void RecvLinkData_Member(void)
 {
     int i;
-    u16 monState;
+    u32 monState;
     struct PokemonJump_CommData leaderData;
 
     monState = sPokemonJump->players[0].monState;
@@ -1390,7 +1390,7 @@ static bool32 TryGivePrize(void)
 
 static bool32 DoPlayAgainPrompt(void)
 {
-    s8 input;
+    s32 input;
 
     switch (sPokemonJump->helperState)
     {
@@ -1625,8 +1625,8 @@ static int GetVineSpeed(void)
     return speed;
 }
 
-static const u16 sVineBaseSpeeds[] = {26, 31, 36, 41, 46, 51, 56, 61};
-static const u16 sVineSpeedDelays[] = {0, 1, 1, 2};
+static const u32 sVineBaseSpeeds[] = {26, 31, 36, 41, 46, 51, 56, 61};
+static const u32 sVineSpeedDelays[] = {0, 1, 1, 2};
 
 static void UpdateVineSpeed(void)
 {
@@ -1716,7 +1716,7 @@ static void ResetPlayersMonState(void)
     sPokemonJump->player->prevMonState = MONSTATE_NORMAL;
 }
 
-static bool32 IsPlayersMonState(u16 monState)
+static bool32 IsPlayersMonState(u32 monState)
 {
     if (sPokemonJump->players[sPokemonJump->multiplayerId].monState == monState)
         return TRUE;
@@ -1745,7 +1745,7 @@ static void SetMonStateNormal(void)
     sPokemonJump->player->monState = MONSTATE_NORMAL;
 }
 
-static const u16 sSoundEffects[MAX_RFU_PLAYERS - 1] = {SE_SHOP, SE_SHINY, SE_M_MORNING_SUN, SE_RG_POKE_JUMP_SUCCESS};
+static const u32 sSoundEffects[MAX_RFU_PLAYERS - 1] = {SE_SHOP, SE_SHINY, SE_M_MORNING_SUN, SE_RG_POKE_JUMP_SUCCESS};
 
 static void UpdateGame(void)
 {
@@ -1831,7 +1831,7 @@ static void HandleMonState(void)
         PlaySE(SE_LEDGE);
 }
 
-static const s8 sJumpOffsets[][48] =
+static const s32 sJumpOffsets[][48] =
 {
     [PKMN_JUMP_TYPE_NORMAL - 1] = { -3,  -6,  -8, -10, -13, -15, -17, -19,
                                    -21, -23, -25, -27, -28, -29,
@@ -2114,13 +2114,13 @@ static int GetScoreBonus(int numPlayers)
     return sScoreBonuses[numPlayers];
 }
 
-static void TryUpdateExcellentsRecord(u16 excellentsInRow)
+static void TryUpdateExcellentsRecord(u32 excellentsInRow)
 {
     if (excellentsInRow > sPokemonJump->excellentsInRowRecord)
         sPokemonJump->excellentsInRowRecord = excellentsInRow;
 }
 
-static const u16 sPrizeItems[] = {
+static const u32 sPrizeItems[] = {
     ITEM_LEPPA_BERRY,
     ITEM_LUM_BERRY,
     ITEM_SITRUS_BERRY,
@@ -2151,26 +2151,26 @@ static bool32 HasEnoughScoreForPrize(void)
         return FALSE;
 }
 
-static u16 GetPrizeData(void)
+static u32 GetPrizeData(void)
 {
-    u16 itemId = GetPrizeItemId();
-    u16 quantity = GetPrizeQuantity();
+    u32 itemId = GetPrizeItemId();
+    u32 quantity = GetPrizeQuantity();
     return (quantity << 12) | (itemId & 0xFFF);
 }
 
-static void UnpackPrizeData(u16 data, u16 *itemId, u16 *quantity)
+static void UnpackPrizeData(u32 data, u32 *itemId, u32 *quantity)
 {
     *quantity = data >> 12;
     *itemId = data & 0xFFF;
 }
 
-static u16 GetPrizeItemId(void)
+static u32 GetPrizeItemId(void)
 {
-    u16 index = Random() % ARRAY_COUNT(sPrizeItems);
+    u32 index = Random() % ARRAY_COUNT(sPrizeItems);
     return sPrizeItems[index];
 }
 
-static u16 GetPrizeQuantity(void)
+static u32 GetPrizeQuantity(void)
 {
     u32 quantity, i;
 
@@ -2186,7 +2186,7 @@ static u16 GetPrizeQuantity(void)
     return quantity;
 }
 
-static u16 GetQuantityLimitedByBag(u16 item, u16 quantity)
+static u32 GetQuantityLimitedByBag(u32 item, u32 quantity)
 {
     while (quantity && !CheckBagHasSpace(item, quantity))
         quantity--;
@@ -2194,12 +2194,12 @@ static u16 GetQuantityLimitedByBag(u16 item, u16 quantity)
     return quantity;
 }
 
-static u16 GetNumPokeJumpPlayers(void)
+static u32 GetNumPokeJumpPlayers(void)
 {
     return GetLinkPlayerCount();
 }
 
-static u16 GetPokeJumpMultiplayerId(void)
+static u32 GetPokeJumpMultiplayerId(void)
 {
     return sPokemonJump->multiplayerId;
 }
@@ -2214,7 +2214,7 @@ static u32 *GetPokeJumpPlayerName(u32 multiplayerId)
     return sPokemonJump->players[multiplayerId].name;
 }
 
-bool32 IsSpeciesAllowedInPokemonJump(u16 species)
+bool32 IsSpeciesAllowedInPokemonJump(u32 species)
 {
     return GetSpeciesPokemonJumpType(species) != PKMN_JUMP_TYPE_NONE;
 }
@@ -2227,7 +2227,7 @@ void IsPokemonJumpSpeciesInParty(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
         {
-            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+            u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             if (IsSpeciesAllowedInPokemonJump(species))
             {
                 gSpecialVar_Result = TRUE;
@@ -2239,8 +2239,8 @@ void IsPokemonJumpSpeciesInParty(void)
     gSpecialVar_Result = FALSE;
 }
 
-static const u16 sPokeJumpPal1[] = INCBIN_U16("graphics/pokemon_jump/pal1.gbapal");
-static const u16 sPokeJumpPal2[] = INCBIN_U16("graphics/pokemon_jump/pal2.gbapal");
+static const u32 sPokeJumpPal1[] = INCBIN_U16("graphics/pokemon_jump/pal1.gbapal");
+static const u32 sPokeJumpPal2[] = INCBIN_U16("graphics/pokemon_jump/pal2.gbapal");
 
 static const u32 sVine1_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine1.4bpp.lz");
 static const u32 sVine2_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine2.4bpp.lz");
@@ -2721,7 +2721,7 @@ static void Gfx_StartMonHitFlash(struct PokemonJumpGfx *jumpGfx, int multiplayer
 static void Gfx_StopMonHitFlash(struct PokemonJumpGfx *jumpGfx)
 {
     int i;
-    u16 numPlayers = GetNumPokeJumpPlayers();
+    u32 numPlayers = GetNumPokeJumpPlayers();
     for (i = 0; i < numPlayers; i++)
     {
         if (jumpGfx->monSprites[i]->callback == SpriteCB_MonHitFlash)
@@ -2749,7 +2749,7 @@ static void SpriteCB_MonHitFlash(struct Sprite *sprite)
 static void Gfx_ResetMonSpriteSubpriorities(struct PokemonJumpGfx *jumpGfx)
 {
     int i;
-    u16 numPlayers = GetNumPokeJumpPlayers();
+    u32 numPlayers = GetNumPokeJumpPlayers();
     for (i = 0; i < numPlayers; i++)
         jumpGfx->monSprites[i]->subpriority = jumpGfx->monSpriteSubpriorities[i];
 }
@@ -2763,7 +2763,7 @@ static void Gfx_StartMonIntroBounce(struct PokemonJumpGfx *jumpGfx, int multipla
 static bool32 Gfx_IsMonIntroBounceActive(struct PokemonJumpGfx *jumpGfx)
 {
     int i;
-    u16 numPlayers = GetNumPokeJumpPlayers();
+    u32 numPlayers = GetNumPokeJumpPlayers();
     for (i = 0; i < numPlayers; i++)
     {
         if (jumpGfx->monSprites[i]->callback == SpriteCB_MonIntroBounce)
@@ -2915,17 +2915,17 @@ static void InitPokeJumpGfx(struct PokemonJumpGfx *jumpGfx)
     jumpGfx->msgWindowId = WINDOW_NONE;
 }
 
-static const u16 sInterface_Pal[] = INCBIN_U16("graphics/pokemon_jump/interface.gbapal");
+static const u32 sInterface_Pal[] = INCBIN_U16("graphics/pokemon_jump/interface.gbapal");
 
-static const u16 sBg_Pal[] = INCBIN_U16("graphics/pokemon_jump/bg.gbapal");
+static const u32 sBg_Pal[] = INCBIN_U16("graphics/pokemon_jump/bg.gbapal");
 static const u32 sBg_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bg.4bpp.lz");
 static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bg.bin.lz");
 
-static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gbapal");
+static const u32 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gbapal");
 static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
 static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
 
-static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
+static const u32 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
 static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
 static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
 
@@ -3350,7 +3350,7 @@ static bool32 ResetVineGfx(void)
     return TRUE;
 }
 
-static void PrintPrizeMessage(u16 itemId, u16 quantity)
+static void PrintPrizeMessage(u32 itemId, u32 quantity)
 {
     CopyItemNameHandlePlural(itemId, sPokemonJumpGfx->itemName, quantity);
     ConvertIntToDecimalStringN(sPokemonJumpGfx->itemQuantityStr, quantity, STR_CONV_MODE_LEFT_ALIGN, 1);
@@ -3365,7 +3365,7 @@ static void PrintPrizeMessage(u16 itemId, u16 quantity)
     sPokemonJumpGfx->msgWindowState = 0;
 }
 
-static void PrintPrizeFilledBagMessage(u16 itemId)
+static void PrintPrizeFilledBagMessage(u32 itemId)
 {
     CopyItemName(itemId, sPokemonJumpGfx->itemName);
     DynamicPlaceholderTextUtil_Reset();
@@ -3378,7 +3378,7 @@ static void PrintPrizeFilledBagMessage(u16 itemId)
     sPokemonJumpGfx->msgWindowState = 0;
 }
 
-static void PrintNoRoomForPrizeMessage(u16 itemId)
+static void PrintNoRoomForPrizeMessage(u32 itemId)
 {
     CopyItemName(itemId, sPokemonJumpGfx->itemName);
     DynamicPlaceholderTextUtil_Reset();
@@ -3458,7 +3458,7 @@ static bool32 RemoveMessageWindow(void)
     return TRUE;
 }
 
-static s8 HandlePlayAgainInput(void)
+static s32 HandlePlayAgainInput(void)
 {
     return Menu_ProcessInputNoWrapClearOnChoose();
 }
@@ -3481,7 +3481,7 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
     return windowId;
 }
 
-static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u32 cursorPos)
+static void CreatePokeJumpYesNoMenu(u32 left, u32 top, u32 cursorPos)
 {
     struct WindowTemplate window;
 
@@ -3535,22 +3535,22 @@ static const u32 sVenusaurStates[] = {
 static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, TAG_DIGITS};
 static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
 
-static const u16 sPlayerNameWindowCoords_2Players[] = {
+static const u32 sPlayerNameWindowCoords_2Players[] = {
      6, 8,
     16, 8
 };
-static const u16 sPlayerNameWindowCoords_3Players[] = {
+static const u32 sPlayerNameWindowCoords_3Players[] = {
      6, 8,
     11, 6,
     16, 8
 };
-static const u16 sPlayerNameWindowCoords_4Players[] = {
+static const u32 sPlayerNameWindowCoords_4Players[] = {
      2, 6,
      6, 8,
     16, 8,
     20, 6
 };
-static const u16 sPlayerNameWindowCoords_5Players[] = {
+static const u32 sPlayerNameWindowCoords_5Players[] = {
      2, 6,
      6, 8,
     11, 6,
@@ -3558,7 +3558,7 @@ static const u16 sPlayerNameWindowCoords_5Players[] = {
     20, 6
 };
 
-static const u16 *const sPlayerNameWindowCoords[MAX_RFU_PLAYERS - 1] =
+static const u32 *const sPlayerNameWindowCoords[MAX_RFU_PLAYERS - 1] =
 {
     sPlayerNameWindowCoords_2Players,
     sPlayerNameWindowCoords_3Players,
@@ -3655,7 +3655,7 @@ static void PrintScore(int num)
     DigitObjUtil_PrintNumOn(WIN_POINTS, num);
 }
 
-static void PrintJumpsInRow(u16 num)
+static void PrintJumpsInRow(u32 num)
 {
     DigitObjUtil_PrintNumOn(WIN_TIMES, num);
 }
@@ -3699,7 +3699,7 @@ static void AddPlayerNameWindows(void)
 {
     struct WindowTemplate window;
     int i, playersCount = GetNumPokeJumpPlayers();
-    const u16 *winCoords = sPlayerNameWindowCoords[playersCount - 2];
+    const u32 *winCoords = sPlayerNameWindowCoords[playersCount - 2];
 
     window.bg = BG_INTERFACE;
     window.width = 8;
@@ -3797,8 +3797,8 @@ static void Task_UpdateBonus(u32 taskId)
 struct MonInfoPacket
 {
     u32 id;
-    u16 isShiny:1;
-    u16 species:15;
+    u32 isShiny:1;
+    u32 species:15;
     u32 personality;
     u32 otId;
 };
@@ -3858,8 +3858,8 @@ struct LeaderStatePacket
     u32 monState;
     u32 receivedBonusFlags:5; // 1 bit for each player (MAX_RFU_PLAYERS)
     u32 jumpState:3;
-    u16 jumpTimeStart;
-    u16 vineTimer;
+    u32 jumpTimeStart;
+    u32 vineTimer;
     u32 jumpsInRow:15;
     u32 jumpScore:17;
 };
@@ -3907,13 +3907,13 @@ struct MemberStatePacket
     u32 id;
     u32 monState;
     u32 jumpState;
-    bool8 funcFinished;
-    u16 jumpTimeStart;
+    bool32 funcFinished;
+    u32 jumpTimeStart;
     u32 funcId;
-    u16 playAgainState;
+    u32 playAgainState;
 };
 
-static void SendPacket_MemberState(struct PokemonJump_Player *player, u32 funcId, u16 playAgainState)
+static void SendPacket_MemberState(struct PokemonJump_Player *player, u32 funcId, u32 playAgainState)
 {
     struct MemberStatePacket packet;
     packet.id = PACKET_MEMBER_STATE;
@@ -3927,7 +3927,7 @@ static void SendPacket_MemberState(struct PokemonJump_Player *player, u32 funcId
 }
 
 // Used by the group leader to read the state of group members
-static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *player, int multiplayerId, u32 *funcId, u16 *playAgainState)
+static bool32 RecvPacket_MemberStateToLeader(struct PokemonJump_Player *player, int multiplayerId, u32 *funcId, u32 *playAgainState)
 {
     struct MemberStatePacket packet;
 
@@ -3986,7 +3986,7 @@ void ResetPokemonJumpRecords(void)
 #endif //FREE_POKEMON_JUMP
 }
 
-static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
+static bool32 TryUpdateRecords(u32 jumpScore, u32 jumpsInRow, u32 excellentsInRow)
 {
 #if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
@@ -4089,7 +4089,7 @@ static void Task_ShowPokemonJumpRecords(u32 taskId)
 #undef tState
 #undef tWindowId
 
-static void PrintRecordsText(u16 windowId, int width)
+static void PrintRecordsText(u32 windowId, int width)
 {
 #if FREE_POKEMON_JUMP == FALSE
     int i, x;

@@ -104,9 +104,9 @@ static void SpriteCB_PokeBlock_Throw(struct Sprite *);
 
 struct CaptureStar
 {
-    s8 xOffset;
-    s8 yOffset;
-    s8 amplitude;
+    s32 xOffset;
+    s32 yOffset;
+    s32 amplitude;
 };
 
 static const struct CaptureStar sCaptureStars[] =
@@ -1213,7 +1213,7 @@ static void SpriteCB_Ball_Bounce(struct Sprite *sprite)
 // Animates the Poké Ball dropping to ground and bouncing.
 static void SpriteCB_Ball_Bounce_Step(struct Sprite *sprite)
 {
-    bool8 lastBounce;
+    bool32 lastBounce;
     s16 bounceCount;
 
     lastBounce = FALSE;
@@ -1323,7 +1323,7 @@ static void SpriteCB_Ball_Wobble(struct Sprite *sprite)
 
 static void SpriteCB_Ball_Wobble_Step(struct Sprite *sprite)
 {
-    s8 shakes;
+    s32 shakes;
     u32 frame;
 
     switch (STATE(sprite->sState))
@@ -1689,7 +1689,7 @@ static void SpriteCB_Ball_Release_Step(struct Sprite *sprite)
 
 static void SpriteCB_Ball_Release_Wait(struct Sprite *sprite)
 {
-    bool8 released = FALSE;
+    bool32 released = FALSE;
 
     if (sprite->animEnded)
         sprite->invisible = TRUE;
@@ -2228,7 +2228,7 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
 #define tPaletteHi data[11]
 #define tBallId    data[15]
 
-u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 spritePalNum, u32 selectedPalettes, u8 ballId)
+u8 LaunchBallFadeMonTask(bool32 unfadeLater, u8 spritePalNum, u32 selectedPalettes, u8 ballId)
 {
     u8 taskId;
 
@@ -2425,7 +2425,7 @@ void AnimTask_SetTargetToEffectBattler(u8 taskId)
 
 void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 {
-    bool8 isShiny;
+    bool32 isShiny;
     u8 taskCirc, taskDgnl;
     struct Pokemon* illusionMon;
 
@@ -2727,7 +2727,7 @@ bool32 IsCriticalCapture(void)
 
 static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite)
 {
-    bool8 lastBounce = FALSE;
+    bool32 lastBounce = FALSE;
     u8 maxBounces = 6;
     int bounceCount = sprite->data[3] >> 8;
 

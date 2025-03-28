@@ -938,7 +938,7 @@ static void AnimHydroCannonCharge_Step(struct Sprite *sprite)
 // Flashing blue orbs move from the attacker to the target. Second stage of Hydro Cannon
 static void AnimHydroCannonBeam(struct Sprite *sprite)
 {
-    bool8 animType;
+    bool32 animType;
     u8 coordType;
     if (IsBattlerAlly(gBattleAnimAttacker, gBattleAnimTarget))
     {

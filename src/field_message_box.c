@@ -65,7 +65,7 @@ static void DestroyTask_DrawFieldMessage(void)
         DestroyTask(taskId);
 }
 
-bool8 ShowFieldMessage(const u32 *str)
+bool32 ShowFieldMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -83,7 +83,7 @@ static void Task_HidePokenavMessageWhenDone(u32 taskId)
     }
 }
 
-bool8 ShowPokenavFieldMessage(const u32 *str)
+bool32 ShowPokenavFieldMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -94,7 +94,7 @@ bool8 ShowPokenavFieldMessage(const u32 *str)
     return TRUE;
 }
 
-bool8 ShowFieldAutoScrollMessage(const u32 *str)
+bool32 ShowFieldAutoScrollMessage(const u32 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -103,7 +103,7 @@ bool8 ShowFieldAutoScrollMessage(const u32 *str)
     return TRUE;
 }
 
-static bool8 UNUSED ForceShowFieldAutoScrollMessage(const u32 *str)
+static bool32 UNUSED ForceShowFieldAutoScrollMessage(const u32 *str)
 {
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_AUTO_SCROLL;
     ExpandStringAndStartDrawFieldMessage(str, TRUE);
@@ -112,7 +112,7 @@ static bool8 UNUSED ForceShowFieldAutoScrollMessage(const u32 *str)
 
 // Same as ShowFieldMessage, but instead of accepting a
 // string arg it just prints whats already in gStringVar4
-bool8 ShowFieldMessageFromBuffer(void)
+bool32 ShowFieldMessageFromBuffer(void)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
@@ -146,7 +146,7 @@ u32 GetFieldMessageBoxMode(void)
     return sFieldMessageBoxMode;
 }
 
-bool8 IsFieldMessageBoxHidden(void)
+bool32 IsFieldMessageBoxHidden(void)
 {
     if (sFieldMessageBoxMode == FIELD_MESSAGE_BOX_HIDDEN)
         return TRUE;

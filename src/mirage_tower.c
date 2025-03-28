@@ -31,13 +31,13 @@ struct MetatileCoords
 {
     u32 x;
     u32 y;
-    u16 metatileId;
+    u32 metatileId;
 };
 
 struct BgRegOffsets
 {
-    u16 bgHOFS;
-    u16 bgVOFS;
+    u32 bgHOFS;
+    u32 bgVOFS;
 };
 
 struct FallAnim_Tower
@@ -51,8 +51,8 @@ struct FallAnim_Fossil
     u32 *frameImageTiles;
     struct SpriteFrameImage *frameImage;
     u32 spriteId;
-    u16 *disintegrateRand;
-    u16 disintegrateIdx;
+    u32 *disintegrateRand;
+    u32 disintegrateIdx;
 };
 
 #define TAG_CEILING_CRUMBLE 4000
@@ -74,15 +74,15 @@ static void DoMirageTowerDisintegration(u32);
 static void InitMirageTowerShake(u32);
 static void Task_FossilFallAndSink(u32);
 static void SpriteCB_FallingFossil(struct Sprite *);
-static void UpdateDisintegrationEffect(u32 *, u16, u32, u32, u32);
+static void UpdateDisintegrationEffect(u32 *, u32, u32, u32, u32);
 
 static const u32 ALIGNED(2) sBlankTile_Gfx[32] = {0};
 static const u32 sMirageTower_Gfx[] = INCBIN_u32("graphics/misc/mirage_tower.4bpp");
-static const u16 sMirageTowerTilemap[] = INCBIN_U16("graphics/misc/mirage_tower.bin");
-static const u16 sFossil_Pal[] = INCBIN_U16("graphics/object_events/pics/misc/fossil.gbapal"); // Unused
+static const u32 sMirageTowerTilemap[] = INCBIN_U16("graphics/misc/mirage_tower.bin");
+static const u32 sFossil_Pal[] = INCBIN_U16("graphics/object_events/pics/misc/fossil.gbapal"); // Unused
 static const u32 sFossil_Gfx[] = INCBIN_u32("graphics/object_events/pics/misc/fossil.4bpp"); // Duplicate of gObjectEventPic_Fossil
 static const u32 sMirageTowerCrumbles_Gfx[] = INCBIN_u32("graphics/misc/mirage_tower_crumbles.4bpp");
-static const u16 sMirageTowerCrumbles_Palette[] = INCBIN_U16("graphics/misc/mirage_tower_crumbles.gbapal");
+static const u32 sMirageTowerCrumbles_Palette[] = INCBIN_U16("graphics/misc/mirage_tower_crumbles.gbapal");
 
 static const s16 sCeilingCrumblePositions[][3] =
 {
@@ -262,9 +262,9 @@ EWRAM_DATA static struct MirageTowerPulseBlend *sMirageTowerPulseBlend = NULL;
 
 // Holds data about the disintegration effect for Mirage Tower / the unchosen fossil.
 // Never read, presumably for debugging
-static u16 sDebug_DisintegrationData[8];
+static u32 sDebug_DisintegrationData[8];
 
-bool8 IsMirageTowerVisible(void)
+bool32 IsMirageTowerVisible(void)
 {
     if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)))
         return FALSE;
@@ -319,8 +319,8 @@ void ClearMirageTowerPulseBlendEffect(void)
 
 void SetMirageTowerVisibility(void)
 {
-    u16 rand;
-    bool8 visible;
+    u32 rand;
+    bool32 visible;
 
     if (VarGet(VAR_MIRAGE_TOWER_STATE))
     {
@@ -432,7 +432,7 @@ void DoMirageTowerCeilingCrumble(void)
 
 static void WaitCeilingCrumble(u32 taskId)
 {
-    u16 *data = (u16*)gTasks[taskId].data;
+    u32 *data = (u32*)gTasks[taskId].data;
     data[1]++;
     // Either wait 1000 frames, or until all 16 crumble sprites and the one screen-shake task are completed.
     if (data[1] == 1000 || data[0] == 17)
@@ -579,7 +579,7 @@ static void InitMirageTowerShake(u32 taskId)
 static void DoMirageTowerDisintegration(u32 taskId)
 {
     u32 bgShakeTaskId, j;
-    u16 i;
+    u32 i;
     u32 index;
 
     switch (gTasks[taskId].tState)
@@ -662,7 +662,7 @@ static void DoMirageTowerDisintegration(u32 taskId)
 
 static void Task_FossilFallAndSink(u32 taskId)
 {
-    u16 i;
+    u32 i;
     u32 *buffer;
 
     switch (gTasks[taskId].tState)
@@ -671,7 +671,7 @@ static void Task_FossilFallAndSink(u32 taskId)
         sFallingFossil = AllocZeroed(sizeof(*sFallingFossil));
         sFallingFossil->frameImageTiles = AllocZeroed(sizeof(sFossil_Gfx));
         sFallingFossil->frameImage = AllocZeroed(sizeof(*sFallingFossil->frameImage));
-        sFallingFossil->disintegrateRand = AllocZeroed(FOSSIL_DISINTEGRATE_LENGTH * sizeof(u16));
+        sFallingFossil->disintegrateRand = AllocZeroed(FOSSIL_DISINTEGRATE_LENGTH * sizeof(u32));
         sFallingFossil->disintegrateIdx = 0;
         break;
     case 2:
@@ -747,10 +747,10 @@ static void SpriteCB_FallingFossil(struct Sprite *sprite)
     }
 }
 
-static void UpdateDisintegrationEffect(u32 *tiles, u16 randId, u32 c, u32 size, u32 offset)
+static void UpdateDisintegrationEffect(u32 *tiles, u32 randId, u32 c, u32 size, u32 offset)
 {
     u32 heightTiles, height, widthTiles, width;
-    u16 var, baseOffset;
+    u32 var, baseOffset;
     u32 col, row;
     u32 flag, tileMask;
 

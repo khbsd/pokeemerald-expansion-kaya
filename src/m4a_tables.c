@@ -44,7 +44,7 @@ void * const gMPlayJumpTableTemplate[] =
 };
 
 // This is a table of deltas between sample values in compressed PCM data.
-const s8 gDeltaEncodingTable[] =
+const s32 gDeltaEncodingTable[] =
 {
       0,
       1,
@@ -99,7 +99,7 @@ const u32 gFreqTable[] =
     4053909305u,
 };
 
-const u16 gPcmSamplesPerVBlankTable[] =
+const u32 gPcmSamplesPerVBlankTable[] =
 {
     96,
     132,

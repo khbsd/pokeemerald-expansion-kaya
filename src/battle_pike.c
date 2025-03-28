@@ -26,7 +26,7 @@
 
 struct PikeRoomNPC
 {
-    u16 graphicsId;
+    u32 graphicsId;
     u32 speechId1;
     u32 speechId2;
     u32 speechId3;
@@ -34,15 +34,15 @@ struct PikeRoomNPC
 
 struct PikeWildMon
 {
-    u16 species;
+    u32 species;
     u32 levelDelta;
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
 };
 
 // IWRAM bss
 static u32 sRoomType;
 static u32 sStatusMon;
-static bool8 sInWildMonRoom;
+static bool32 sInWildMonRoom;
 static u32 sStatusFlags;
 static u32 sNpcId;
 
@@ -77,17 +77,17 @@ static void SaveMonHeldItems(void);
 static void RestoreMonHeldItems(void);
 static void InitPikeChallenge(void);
 static u32 GetNextRoomType(void);
-static void PrepareOneTrainer(bool8 difficult);
-static u16 GetNPCRoomGraphicsId(void);
+static void PrepareOneTrainer(bool32 difficult);
+static u32 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u32 healCount);
 static void Task_DoStatusInflictionScreenFlash(u32 taskId);
-static bool8 AtLeastTwoAliveMons(void);
-static u32 SpeciesToPikeMonId(u16 species);
-static bool8 CanEncounterWildMon(u32 monLevel);
+static bool32 AtLeastTwoAliveMons(void);
+static u32 SpeciesToPikeMonId(u32 species);
+static bool32 CanEncounterWildMon(u32 monLevel);
 static u32 GetPikeQueenFightType(u32);
-static bool8 StatusInflictionFadeOut(struct Task *task);
-static bool8 StatusInflictionFadeIn(struct Task *task);
+static bool32 StatusInflictionFadeOut(struct Task *task);
+static bool32 StatusInflictionFadeIn(struct Task *task);
 
 // Const rom data.
 static const struct PikeWildMon sLvl50_Mons1[] =
@@ -418,7 +418,7 @@ static const struct PikeRoomNPC sNPCTable[] =
     }
 };
 
-static const u16 sNPCSpeeches[][EASY_CHAT_BATTLE_WORDS_COUNT] =
+static const u32 sNPCSpeeches[][EASY_CHAT_BATTLE_WORDS_COUNT] =
 {
     {EC_WORD_I_AM, EC_WORD_LOST, EC_WORD_I, EC_WORD_NEED, EC_WORD_A, EC_MOVE2(HELPING_HAND)},
     {EC_WORD_I_VE, EC_WORD_NO, EC_WORD_SENSE, EC_WORD_OF, EC_WORD_WHERE, EC_WORD_I_AM},
@@ -531,7 +531,7 @@ static const u32 sNumMonsToHealBeforePikeQueen[][3] =
     {0, 1, 2},
 };
 
-static bool8 (* const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
+static bool32 (* const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
 {
     StatusInflictionFadeOut, StatusInflictionFadeIn
 };
@@ -554,7 +554,7 @@ static void SetupRoomObjectEvents(void)
 {
     bool32 setObjGfx1, setObjGfx2;
     u32 objGfx1;
-    u16 objGfx2;
+    u32 objGfx2;
 
     VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LINK_RECEPTIONIST);
     VarSet(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_DUSCLOPS);
@@ -755,7 +755,7 @@ static void GetRoomInflictedStatusMon(void)
 
 static void HealOneOrTwoMons(void)
 {
-    u16 toHeal = (Random() % 2) + 1;
+    u32 toHeal = (Random() % 2) + 1;
     TryHealMons(toHeal);
     gSpecialVar_Result = toHeal;
 }
@@ -782,7 +782,7 @@ static void StatusInflictionScreenFlash(void)
 static void HealMon(struct Pokemon *mon)
 {
     u32 i;
-    u16 hp;
+    u32 hp;
     u32 ppBonuses;
     u32 data[4];
 
@@ -797,7 +797,7 @@ static void HealMon(struct Pokemon *mon)
     ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        u16 move = GetMonData(mon, MON_DATA_MOVE1 + i);
+        u32 move = GetMonData(mon, MON_DATA_MOVE1 + i);
         data[0] = CalculatePPWithBonus(move, ppBonuses, i);
         SetMonData(mon, MON_DATA_PP1 + i, data);
     }
@@ -809,10 +809,10 @@ static void HealMon(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_STATUS, data);
 }
 
-static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
+static bool32 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
 {
-    u16 ability = GetMonAbility(mon);
-    bool8 ret = FALSE;
+    u32 ability = GetMonAbility(mon);
+    bool32 ret = FALSE;
 
     if (ability == ABILITY_COMATOSE)
         return TRUE;
@@ -844,9 +844,9 @@ static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
     return ret;
 }
 
-static bool8 DoesTypePreventStatus(u16 species, u32 status)
+static bool32 DoesTypePreventStatus(u32 species, u32 status)
 {
-    bool8 ret = FALSE;
+    bool32 ret = FALSE;
 
     switch (status)
     {
@@ -875,14 +875,14 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
     return ret;
 }
 
-static bool8 TryInflictRandomStatus(void)
+static bool32 TryInflictRandomStatus(void)
 {
     u32 j, i;
     u32 count;
     u32 indices[FRONTIER_PARTY_SIZE];
     u32 status;
-    u16 species;
-    bool8 statusChosen;
+    u32 species;
+    bool32 statusChosen;
     struct Pokemon *mon;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -981,7 +981,7 @@ static bool8 TryInflictRandomStatus(void)
     return TRUE;
 }
 
-static bool8 AtLeastOneHealthyMon(void)
+static bool32 AtLeastOneHealthyMon(void)
 {
     u32 i;
     u32 healthyMonsCount;
@@ -1015,7 +1015,7 @@ static bool8 AtLeastOneHealthyMon(void)
 
 static u32 GetNextRoomType(void)
 {
-    bool8 roomTypesDisabled[NUM_PIKE_ROOM_TYPES - 1]; // excludes Brain room, which cant be disabled
+    bool32 roomTypesDisabled[NUM_PIKE_ROOM_TYPES - 1]; // excludes Brain room, which cant be disabled
     u32 i;
     u32 nextRoomType;
     u32 roomHint;
@@ -1093,18 +1093,18 @@ static u32 GetNextRoomType(void)
     return nextRoomType;
 }
 
-static u16 GetNPCRoomGraphicsId(void)
+static u32 GetNPCRoomGraphicsId(void)
 {
     sNpcId = Random() % ARRAY_COUNT(sNPCTable);
     return sNPCTable[sNpcId].graphicsId;
 }
 
-static bool8 UNUSED GetInWildMonRoom(void)
+static bool32 UNUSED GetInWildMonRoom(void)
 {
     return sInWildMonRoom;
 }
 
-bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
+bool32 TryGenerateBattlePikeWildMon(bool32 checkKeenEyeIntimidate)
 {
     s32 i;
     s32 monLevel;
@@ -1157,7 +1157,7 @@ u32 GetBattlePikeWildMonHeaderId(void)
 {
     u32 headerId;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
+    u32 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
 
     if (winStreak <= 20 * NUM_PIKE_ROOMS)
         headerId = 0;
@@ -1176,7 +1176,7 @@ static void DoStatusInflictionScreenFlash(u32 taskId)
     while (sStatusInflictionScreenFlashFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
 
-static bool8 StatusInflictionFadeOut(struct Task *task)
+static bool32 StatusInflictionFadeOut(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -1195,7 +1195,7 @@ static bool8 StatusInflictionFadeOut(struct Task *task)
     return FALSE;
 }
 
-static bool8 StatusInflictionFadeIn(struct Task *task)
+static bool32 StatusInflictionFadeIn(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -1233,7 +1233,7 @@ static void StartStatusInflictionScreenFlash(s16 fadeOutDelay, s16 fadeInDelay, 
     gTasks[taskId].data[6] = fadeOutDelay;
 }
 
-static bool8 IsStatusInflictionScreenFlashTaskFinished(void)
+static bool32 IsStatusInflictionScreenFlashTaskFinished(void)
 {
     if (FindTaskIdByFunc(DoStatusInflictionScreenFlash) == TASK_NONE)
         return TRUE;
@@ -1277,8 +1277,8 @@ static void TryHealMons(u32 healCount)
     {
         bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gPlayerParty[indices[i]];
-        u16 curr = GetMonData(mon, MON_DATA_HP);
-        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+        u32 curr = GetMonData(mon, MON_DATA_HP);
+        u32 max = GetMonData(mon, MON_DATA_MAX_HP);
         if (curr < max)
         {
             canBeHealed = TRUE;
@@ -1292,7 +1292,7 @@ static void TryHealMons(u32 healCount)
             u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
-                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                u32 move = GetMonData(mon, MON_DATA_MOVE1 + j);
                 max = CalculatePPWithBonus(move, ppBonuses, j);
                 curr = GetMonData(mon, MON_DATA_PP1 + j);
                 if (curr < max)
@@ -1317,7 +1317,7 @@ static void GetInBattlePike(void)
     gSpecialVar_Result = InBattlePike();
 }
 
-bool8 InBattlePike(void)
+bool32 InBattlePike(void)
 {
     return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM
         || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL
@@ -1378,13 +1378,13 @@ static void GetRoomTypeHint(void)
     gSpecialVar_Result = sRoomTypeHints[gSaveBlock2Ptr->frontier.pikeHintedRoomType];
 }
 
-static void PrepareOneTrainer(bool8 difficult)
+static void PrepareOneTrainer(bool32 difficult)
 {
     int i;
     u32 lvlMode;
     u32 battleNum;
-    u16 challengeNum;
-    u16 trainerId;
+    u32 challengeNum;
+    u32 trainerId;
 
     if (!difficult)
         battleNum = 1;
@@ -1413,9 +1413,9 @@ static void PrepareOneTrainer(bool8 difficult)
 static void PrepareTwoTrainers(void)
 {
     int i;
-    u16 trainerId;
+    u32 trainerId;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
+    u32 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
 
     gFacilityTrainers = gBattleFrontierTrainers;
     do
@@ -1473,7 +1473,7 @@ static void BufferTrainerIntro(void)
     }
 }
 
-static bool8 AtLeastTwoAliveMons(void)
+static bool32 AtLeastTwoAliveMons(void)
 {
     struct Pokemon *mon;
     u32 i, countDead;
@@ -1499,7 +1499,7 @@ static u32 GetPikeQueenFightType(u32 nextRoom)
     u32 facility = FRONTIER_FACILITY_PIKE;
     u32 ret = FRONTIER_BRAIN_NOT_READY;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
+    u32 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     winStreak += nextRoom;
     numPikeSymbols = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
 
@@ -1551,14 +1551,14 @@ static void IsPartyFullHealed(void)
     {
         bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gPlayerParty[i];
-        u16 curr = GetMonData(mon, MON_DATA_HP);
-        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+        u32 curr = GetMonData(mon, MON_DATA_HP);
+        u32 max = GetMonData(mon, MON_DATA_MAX_HP);
         if (curr >= max && GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE)
         {
             u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
-                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                u32 move = GetMonData(mon, MON_DATA_MOVE1 + j);
                 max = CalculatePPWithBonus(move, ppBonuses, j);
                 curr = GetMonData(mon, MON_DATA_PP1 + j);
                 if (curr < max)
@@ -1619,11 +1619,11 @@ static void InitPikeChallenge(void)
     gBattleOutcome = 0;
 }
 
-static bool8 CanEncounterWildMon(u32 enemyMonLevel)
+static bool32 CanEncounterWildMon(u32 enemyMonLevel)
 {
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
-        u16 monAbility = GetMonAbility(&gPlayerParty[0]);
+        u32 monAbility = GetMonAbility(&gPlayerParty[0]);
         if (monAbility == ABILITY_KEEN_EYE || monAbility == ABILITY_INTIMIDATE)
         {
             u32 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
@@ -1635,7 +1635,7 @@ static bool8 CanEncounterWildMon(u32 enemyMonLevel)
     return TRUE;
 }
 
-static u32 SpeciesToPikeMonId(u16 species)
+static u32 SpeciesToPikeMonId(u32 species)
 {
     u32 ret;
 

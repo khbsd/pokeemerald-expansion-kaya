@@ -13,50 +13,50 @@
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
 
-static u16 RenderText(struct TextPrinter *);
+static u32 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
-static u16 FontFunc_Small(struct TextPrinter *);
-static u16 FontFunc_Normal(struct TextPrinter *);
-static u16 FontFunc_Short(struct TextPrinter *);
-static u16 FontFunc_ShortCopy1(struct TextPrinter *);
-static u16 FontFunc_ShortCopy2(struct TextPrinter *);
-static u16 FontFunc_ShortCopy3(struct TextPrinter *);
-static u16 FontFunc_Narrow(struct TextPrinter *);
-static u16 FontFunc_SmallNarrow(struct TextPrinter *);
-static u16 FontFunc_Narrower(struct TextPrinter *);
-static u16 FontFunc_SmallNarrower(struct TextPrinter *);
-static u16 FontFunc_ShortNarrow(struct TextPrinter *);
-static u16 FontFunc_ShortNarrower(struct TextPrinter *);
-static void DecompressGlyph_Small(u16, bool32);
-static void DecompressGlyph_Normal(u16, bool32);
-static void DecompressGlyph_Short(u16, bool32);
-static void DecompressGlyph_Narrow(u16, bool32);
-static void DecompressGlyph_SmallNarrow(u16, bool32);
-static void DecompressGlyph_Bold(u16);
-static void DecompressGlyph_Narrower(u16, bool32);
-static void DecompressGlyph_SmallNarrower(u16, bool32);
-static void DecompressGlyph_ShortNarrow(u16, bool32);
-static void DecompressGlyph_ShortNarrower(u16, bool32);
-static u32 GetGlyphWidth_Small(u16, bool32);
-static u32 GetGlyphWidth_Normal(u16, bool32);
-static u32 GetGlyphWidth_Short(u16, bool32);
-static u32 GetGlyphWidth_Narrow(u16, bool32);
-static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
-static u32 GetGlyphWidth_Narrower(u16, bool32);
-static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
-static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
-static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
+static u32 FontFunc_Small(struct TextPrinter *);
+static u32 FontFunc_Normal(struct TextPrinter *);
+static u32 FontFunc_Short(struct TextPrinter *);
+static u32 FontFunc_ShortCopy1(struct TextPrinter *);
+static u32 FontFunc_ShortCopy2(struct TextPrinter *);
+static u32 FontFunc_ShortCopy3(struct TextPrinter *);
+static u32 FontFunc_Narrow(struct TextPrinter *);
+static u32 FontFunc_SmallNarrow(struct TextPrinter *);
+static u32 FontFunc_Narrower(struct TextPrinter *);
+static u32 FontFunc_SmallNarrower(struct TextPrinter *);
+static u32 FontFunc_ShortNarrow(struct TextPrinter *);
+static u32 FontFunc_ShortNarrower(struct TextPrinter *);
+static void DecompressGlyph_Small(u32, bool32);
+static void DecompressGlyph_Normal(u32, bool32);
+static void DecompressGlyph_Short(u32, bool32);
+static void DecompressGlyph_Narrow(u32, bool32);
+static void DecompressGlyph_SmallNarrow(u32, bool32);
+static void DecompressGlyph_Bold(u32);
+static void DecompressGlyph_Narrower(u32, bool32);
+static void DecompressGlyph_SmallNarrower(u32, bool32);
+static void DecompressGlyph_ShortNarrow(u32, bool32);
+static void DecompressGlyph_ShortNarrower(u32, bool32);
+static u32 GetGlyphWidth_Small(u32, bool32);
+static u32 GetGlyphWidth_Normal(u32, bool32);
+static u32 GetGlyphWidth_Short(u32, bool32);
+static u32 GetGlyphWidth_Narrow(u32, bool32);
+static u32 GetGlyphWidth_SmallNarrow(u32, bool32);
+static u32 GetGlyphWidth_Narrower(u32, bool32);
+static u32 GetGlyphWidth_SmallNarrower(u32, bool32);
+static u32 GetGlyphWidth_ShortNarrow(u32, bool32);
+static u32 GetGlyphWidth_ShortNarrower(u32, bool32);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
-static u16 sFontHalfRowLookupTable[0x51];
-static u16 sLastTextBgColor;
-static u16 sLastTextFgColor;
-static u16 sLastTextShadowColor;
+static u32 sFontHalfRowLookupTable[0x51];
+static u32 sLastTextBgColor;
+static u32 sLastTextFgColor;
+static u32 sLastTextShadowColor;
 
 COMMON_DATA const struct FontInfo *gFonts = NULL;
-COMMON_DATA bool8 gDisableTextPrinters = 0;
+COMMON_DATA bool32 gDisableTextPrinters = 0;
 COMMON_DATA struct TextGlyph gCurGlyph = {0};
 COMMON_DATA TextFlags gTextFlags = {0};
 
@@ -110,7 +110,7 @@ static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
 
 struct
 {
-    u16 tileOffset;
+    u32 tileOffset;
     u32 width;
     u32 height;
 } static const sKeypadIcons[] =
@@ -294,7 +294,7 @@ static const u32 sMenuCursorDimensions[][2] =
     [FONT_SHORT_NARROWER] = { 8,  14 },
 };
 
-static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
+static const u32 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -308,7 +308,7 @@ void DeactivateAllTextPrinters(void)
         sTextPrinters[printer].active = FALSE;
 }
 
-u16 AddTextPrinterParameterized(u32 windowId, u32 fontId, const u32 *str, u32 x, u32 y, u32 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+u32 AddTextPrinterParameterized(u32 windowId, u32 fontId, const u32 *str, u32 x, u32 y, u32 speed, void (*callback)(struct TextPrinterTemplate *, u32))
 {
     struct TextPrinterTemplate printerTemplate;
 
@@ -328,10 +328,10 @@ u16 AddTextPrinterParameterized(u32 windowId, u32 fontId, const u32 *str, u32 x,
     return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
-bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u32 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u32 speed, void (*callback)(struct TextPrinterTemplate *, u32))
 {
     int i;
-    u16 j;
+    u32 j;
 
     if (!gFonts)
         return FALSE;
@@ -386,7 +386,7 @@ void RunTextPrinters(void)
         {
             if (sTextPrinters[i].active)
             {
-                u16 renderCmd = RenderFont(&sTextPrinters[i]);
+                u32 renderCmd = RenderFont(&sTextPrinters[i]);
                 switch (renderCmd)
                 {
                 case RENDER_PRINT:
@@ -425,7 +425,7 @@ void GenerateFontHalfRowLookupTable(u32 fgColor, u32 bgColor, u32 shadowColor)
     u32 fg12, bg12, shadow12;
     u32 temp;
 
-    u16 *current = sFontHalfRowLookupTable;
+    u32 *current = sFontHalfRowLookupTable;
 
     sLastTextBgColor = bgColor;
     sLastTextFgColor = fgColor;
@@ -586,7 +586,7 @@ void RestoreTextColors(u32 *fgColor, u32 *bgColor, u32 *shadowColor)
 void DecompressGlyphTile(const void *src_, void *dest_)
 {
     u32 temp;
-    const u16 *src = src_;
+    const u32 *src = src_;
     u32 *dest = dest_;
 
     temp = *(src++);
@@ -733,7 +733,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
     }
 }
 
-static u16 FontFunc_Small(struct TextPrinter *textPrinter)
+static u32 FontFunc_Small(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -745,7 +745,7 @@ static u16 FontFunc_Small(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_Normal(struct TextPrinter *textPrinter)
+static u32 FontFunc_Normal(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -757,7 +757,7 @@ static u16 FontFunc_Normal(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_Short(struct TextPrinter *textPrinter)
+static u32 FontFunc_Short(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -769,7 +769,7 @@ static u16 FontFunc_Short(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_ShortCopy1(struct TextPrinter *textPrinter)
+static u32 FontFunc_ShortCopy1(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -781,7 +781,7 @@ static u16 FontFunc_ShortCopy1(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_ShortCopy2(struct TextPrinter *textPrinter)
+static u32 FontFunc_ShortCopy2(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -793,7 +793,7 @@ static u16 FontFunc_ShortCopy2(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_ShortCopy3(struct TextPrinter *textPrinter)
+static u32 FontFunc_ShortCopy3(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -805,7 +805,7 @@ static u16 FontFunc_ShortCopy3(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_Narrow(struct TextPrinter *textPrinter)
+static u32 FontFunc_Narrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -817,7 +817,7 @@ static u16 FontFunc_Narrow(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
+static u32 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -829,7 +829,7 @@ static u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_Narrower(struct TextPrinter *textPrinter)
+static u32 FontFunc_Narrower(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -841,7 +841,7 @@ static u16 FontFunc_Narrower(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
+static u32 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -853,7 +853,7 @@ static u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter)
+static u32 FontFunc_ShortNarrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -865,7 +865,7 @@ static u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_ShortNarrower(struct TextPrinter *textPrinter)
+static u32 FontFunc_ShortNarrower(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
@@ -1015,7 +1015,7 @@ bool32 TextPrinterWait(struct TextPrinter *textPrinter)
     return result;
 }
 
-void DrawDownArrow(u32 windowId, u16 x, u16 y, u32 bgColor, bool32 drawArrow, u32 *counter, u32 *yCoordIndex)
+void DrawDownArrow(u32 windowId, u32 x, u32 y, u32 bgColor, bool32 drawArrow, u32 *counter, u32 *yCoordIndex)
 {
     const u32 *arrowTiles;
 
@@ -1047,10 +1047,10 @@ void DrawDownArrow(u32 windowId, u16 x, u16 y, u32 bgColor, bool32 drawArrow, u3
     }
 }
 
-static u16 RenderText(struct TextPrinter *textPrinter)
+static u32 RenderText(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
-    u16 currChar;
+    u32 currChar;
     s32 width;
     s32 widthHelper;
 
@@ -1440,7 +1440,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u32 *str, u32 fontId, u32 l
     return (u32)(GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + letterSpacing) * width;
 }
 
-static u32 (*GetFontWidthFunc(u32 fontId))(u16, bool32)
+static u32 (*GetFontWidthFunc(u32 fontId))(u32, bool32)
 {
     u32 i;
 
@@ -1453,9 +1453,9 @@ static u32 (*GetFontWidthFunc(u32 fontId))(u16, bool32)
     return NULL;
 }
 
-s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u32 fontId)
+s32 GetGlyphWidth(u32 glyphId, bool32 isJapanese, u32 fontId)
 {
-    u32 (*func)(u16 fontId, bool32 isJapanese);
+    u32 (*func)(u32 fontId, bool32 isJapanese);
 
     func = GetFontWidthFunc(fontId);
     if (func == NULL)
@@ -1467,7 +1467,7 @@ s32 GetStringWidth(u32 fontId, const u32 *str, s16 letterSpacing)
 {
     bool32 isJapanese;
     int minGlyphWidth;
-    u32 (*func)(u16 fontId, bool32 isJapanese);
+    u32 (*func)(u32 fontId, bool32 isJapanese);
     int localLetterSpacing;
     u32 lineWidth;
     const u32 *bufferPointer;
@@ -1766,7 +1766,7 @@ u32 RenderTextHandleBold(u32 *pixels, u32 fontId, u32 *str)
     return 1;
 }
 
-u32 DrawKeypadIcon(u32 windowId, u32 keypadIconId, u16 x, u16 y)
+u32 DrawKeypadIcon(u32 windowId, u32 keypadIconId, u32 x, u32 y)
 {
     BlitBitmapRectToWindow(
         windowId,
@@ -1840,9 +1840,9 @@ u32 GetMenuCursorDimensionByFont(u32 fontId, u32 whichDimension)
     return sMenuCursorDimensions[fontId][whichDimension];
 }
 
-static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_Small(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == 1)
     {
@@ -1874,7 +1874,7 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_Small(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_Small(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -1882,9 +1882,9 @@ static u32 GetGlyphWidth_Small(u16 glyphId, bool32 isJapanese)
         return gFontSmallLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_Narrow(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -1916,7 +1916,7 @@ static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_Narrow(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_Narrow(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -1924,9 +1924,9 @@ static u32 GetGlyphWidth_Narrow(u16 glyphId, bool32 isJapanese)
         return gFontNarrowLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_SmallNarrow(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_SmallNarrow(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -1958,7 +1958,7 @@ static void DecompressGlyph_SmallNarrow(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_SmallNarrow(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_SmallNarrow(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -1966,9 +1966,9 @@ static u32 GetGlyphWidth_SmallNarrow(u16 glyphId, bool32 isJapanese)
         return gFontSmallNarrowLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_Short(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2002,7 +2002,7 @@ static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_Short(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_Short(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return gFontShortJapaneseGlyphWidths[glyphId];
@@ -2010,9 +2010,9 @@ static u32 GetGlyphWidth_Short(u16 glyphId, bool32 isJapanese)
         return gFontShortLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_Normal(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2044,7 +2044,7 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_Normal(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -2052,9 +2052,9 @@ static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
         return gFontNormalLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_Bold(u16 glyphId)
+static void DecompressGlyph_Bold(u32 glyphId)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     glyphs = sFontBoldJapaneseGlyphs + (0x100 * (glyphId >> 4)) + (0x8 * (glyphId & 0xF));
     DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
@@ -2063,9 +2063,9 @@ static void DecompressGlyph_Bold(u16 glyphId)
     gCurGlyph.height = 12;
 }
 
-static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_Narrower(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2097,7 +2097,7 @@ static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_Narrower(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_Narrower(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -2105,9 +2105,9 @@ static u32 GetGlyphWidth_Narrower(u16 glyphId, bool32 isJapanese)
         return gFontNarrowerLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_SmallNarrower(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_SmallNarrower(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2139,7 +2139,7 @@ static void DecompressGlyph_SmallNarrower(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_SmallNarrower(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_SmallNarrower(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return 8;
@@ -2147,9 +2147,9 @@ static u32 GetGlyphWidth_SmallNarrower(u16 glyphId, bool32 isJapanese)
         return gFontSmallNarrowerLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_ShortNarrow(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_ShortNarrow(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2183,7 +2183,7 @@ static void DecompressGlyph_ShortNarrow(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_ShortNarrow(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_ShortNarrow(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return gFontShortJapaneseGlyphWidths[glyphId];
@@ -2191,9 +2191,9 @@ static u32 GetGlyphWidth_ShortNarrow(u16 glyphId, bool32 isJapanese)
         return gFontShortNarrowLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_ShortNarrower(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_ShortNarrower(u32 glyphId, bool32 isJapanese)
 {
-    const u16 *glyphs;
+    const u32 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -2227,7 +2227,7 @@ static void DecompressGlyph_ShortNarrower(u16 glyphId, bool32 isJapanese)
     }
 }
 
-static u32 GetGlyphWidth_ShortNarrower(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_ShortNarrower(u32 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
         return gFontShortJapaneseGlyphWidths[glyphId];
@@ -2235,7 +2235,7 @@ static u32 GetGlyphWidth_ShortNarrower(u16 glyphId, bool32 isJapanese)
         return gFontShortNarrowerLatinGlyphWidths[glyphId];
 }
 
-static const s8 sNarrowerFontIds[] =
+static const s32 sNarrowerFontIds[] =
 {
     [FONT_SMALL] = FONT_SMALL_NARROW,
     [FONT_NORMAL] = FONT_NARROW,

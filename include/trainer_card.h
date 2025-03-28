@@ -23,9 +23,9 @@ struct TrainerCard
 {
     /*0x00*/ u8 gender;
     /*0x01*/ u8 stars;
-    /*0x02*/ bool8 hasPokedex;
-    /*0x03*/ bool8 caughtAllHoenn;
-    /*0x04*/ bool8 hasAllPaintings;
+    /*0x02*/ bool32 hasPokedex;
+    /*0x03*/ bool32 caughtAllHoenn;
+    /*0x04*/ bool32 hasAllPaintings;
     /*0x06*/ u32 hofDebutHours;
     /*0x08*/ u32 hofDebutMinutes;
     /*0x0A*/ u32 hofDebutSeconds;
@@ -44,13 +44,13 @@ struct TrainerCard
     /*0x28*/ u32 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x38*/ u8 version;
-    /*0x3A*/ bool16 linkHasAllFrontierSymbols;
+    /*0x3A*/ bool32 linkHasAllFrontierSymbols;
     /*0x3C*/ union {
                 u32 berryCrush;
                 u32 frontier;
              } linkPoints; // This field is used differently by FRLG vs Emerald
     /*0x40*/ u32 unionRoomNum;
-    /*0x4C*/ bool8 shouldDrawStickers; // FRLG only
+    /*0x4C*/ bool32 shouldDrawStickers; // FRLG only
     /*0x4D*/ u8 unused;
     /*0x4E*/ u8 monIconTint; // FRLG only
     /*0x4F*/ u8 unionRoomClass;
@@ -58,7 +58,7 @@ struct TrainerCard
     /*0x54*/ u32 monSpecies[PARTY_SIZE]; // FRLG only
              // Note: Link players use linkHasAllFrontierSymbols, not the field below,
              // which they use for a Wonder Card flag id instead (see CreateTrainerCardInBuffer)
-    /*0x60*/ bool16 hasAllFrontierSymbols;
+    /*0x60*/ bool32 hasAllFrontierSymbols;
     /*0x62*/ u32 frontierBP;
 };
 

@@ -28,20 +28,20 @@ enum
 
 typedef struct MatchCallTextDataStruct {
     const u32 *text;
-    u16 flag;
-    u16 flag2;
+    u32 flag;
+    u32 flag2;
 } match_call_text_data_t;
 
 struct MatchCallStructCommon {
     u32 type;
     u32 mapSec;
-    u16 flag;
+    u32 flag;
 };
 
 struct MatchCallStructNPC {
     u32 type;
     u32 mapSec;
-    u16 flag;
+    u32 flag;
     const u32 *desc;
     const u32 *name;
     const match_call_text_data_t *textData;
@@ -51,23 +51,23 @@ struct MatchCallStructNPC {
 struct MatchCallStructTrainer {
     u32 type;
     u32 mapSec;
-    u16 flag;
-    u16 rematchTableIdx;
+    u32 flag;
+    u32 rematchTableIdx;
     const u32 *desc;
     const u32 *name;
     const match_call_text_data_t *textData;
 };
 
 struct MatchCallLocationOverride {
-    u16 flag;
+    u32 flag;
     u32 mapSec;
 };
 
 struct MatchCallWally {
     u32 type;
     u32 mapSec;
-    u16 flag;
-    u16 rematchTableIdx;
+    u32 flag;
+    u32 rematchTableIdx;
     const u32 *desc;
     const match_call_text_data_t *textData;
     const struct MatchCallLocationOverride *locationData;
@@ -76,7 +76,7 @@ struct MatchCallWally {
 struct MatchCallBirch {
     u32 type;
     u32 mapSec;
-    u16 flag;
+    u32 flag;
     const u32 *desc;
     const u32 *name;
 };
@@ -84,7 +84,7 @@ struct MatchCallBirch {
 struct MatchCallRival {
     u32 type;
     u32 playerGender;
-    u16 flag;
+    u32 flag;
     const u32 *desc;
     const u32 *name;
     const match_call_text_data_t *textData;
@@ -101,8 +101,8 @@ typedef union {
 } match_call_t;
 
 struct MatchCallCheckPageOverride {
-    u16 idx;
-    u16 facilityClass;
+    u32 idx;
+    u32 facilityClass;
     u32 flag;
     const u32 *flavorTexts[CHECK_PAGE_ENTRY_COUNT];
 };
@@ -154,7 +154,7 @@ static void MatchCall_GetNameAndDesc_Birch(match_call_t, const u32 **, const u32
 static void MatchCall_GetNameAndDesc_Rival(match_call_t, const u32 **, const u32 **);
 
 static void MatchCall_BufferCallMessageText(const match_call_text_data_t *, u32 *);
-static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *, u16, u32 *);
+static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *, u32, u32 *);
 static void MatchCall_GetNameAndDescByRematchIdx(u32, const u32 **, const u32 **);
 
 // .rodata
@@ -1027,7 +1027,7 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
     StringExpandPlaceholders(dest, textData[i].text);
 }
 
-static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx, u32 *dest)
+static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u32 idx, u32 *dest)
 {
 #if FREE_MATCH_CALL == FALSE
     u32 i;

@@ -41,7 +41,7 @@ struct Pokenav_SearchResultsGfx
 {
     bool32 (*callback)(void);
     u32 loopedTaskId;
-    u16 winid;
+    u32 winid;
     bool32 fromGraph;
     u32 buff[BG_SCREEN_SIZE];
 }; // size: 0x810
@@ -79,10 +79,10 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
     ConvertConditionsToListRanks
 };
 
-static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
+static const u32 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
 static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
 static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
-static const u16 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
+static const u32 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
 
 static const struct BgTemplate sConditionSearchResultBgTemplates[] =
 {
@@ -244,7 +244,7 @@ static struct PokenavMonListItem * GetSearchResultsMonDataList(void)
     return menu->monList->monData;
 }
 
-static u16 GetSearchResultsMonListCount(void)
+static u32 GetSearchResultsMonListCount(void)
 {
     struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->listCount;
@@ -258,7 +258,7 @@ static s32 GetSearchResultsSelectedMonRank(void)
     return menu->monList->monData[i].data;
 }
 
-static u16 GetSearchResultsCurrentListIndex(void)
+static u32 GetSearchResultsCurrentListIndex(void)
 {
     struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->currIndex;

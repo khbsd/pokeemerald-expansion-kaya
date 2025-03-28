@@ -291,7 +291,7 @@ static const ContestAICmdFunc sContestAICmdTable[] =
 };
 
 static void ContestAI_DoAIProcessing(void);
-static bool8 GetContestantIdByTurn(u32);
+static bool32 GetContestantIdByTurn(u32);
 static void AIStackPushVar(const u32 *);
 static u32 AIStackPop(void);
 
@@ -394,7 +394,7 @@ static u32 GetContestantIdByTurn(u32 turn)
 
 static void ContestAICmd_score(void)
 {
-    s16 score = eContestAI.moveScores[eContestAI.nextMoveIndex] + (s8)gAIScriptPtr[1];
+    s16 score = eContestAI.moveScores[eContestAI.nextMoveIndex] + (s32)gAIScriptPtr[1];
 
     if (score > 255)
         score = 255;
@@ -718,7 +718,7 @@ static void ContestAICmd_if_move_excitement_less_than(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if (eContestAI.scriptResult < (s8)gAIScriptPtr[0])
+    if (eContestAI.scriptResult < (s32)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -728,7 +728,7 @@ static void ContestAICmd_if_move_excitement_more_than(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if (eContestAI.scriptResult > (s8)gAIScriptPtr[0])
+    if (eContestAI.scriptResult > (s32)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -738,7 +738,7 @@ static void ContestAICmd_if_move_excitement_eq(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if (eContestAI.scriptResult == (s8)gAIScriptPtr[0])
+    if (eContestAI.scriptResult == (s32)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -748,7 +748,7 @@ static void ContestAICmd_if_move_excitement_not_eq(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if (eContestAI.scriptResult != (s8)gAIScriptPtr[0])
+    if (eContestAI.scriptResult != (s32)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -756,7 +756,7 @@ static void ContestAICmd_if_move_excitement_not_eq(void)
 
 static void ContestAICmd_get_move_effect(void)
 {
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     eContestAI.scriptResult = GetMoveContestEffect(move);
     gAIScriptPtr += 1;
@@ -784,7 +784,7 @@ static void ContestAICmd_if_move_effect_not_eq(void)
 
 static void ContestAICmd_get_move_effect_type(void)
 {
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     eContestAI.scriptResult = gContestEffects[GetMoveContestEffect(move)].effectType;
     gAIScriptPtr += 1;
@@ -813,12 +813,12 @@ static void ContestAICmd_if_move_effect_type_not_eq(void)
 static void ContestAICmd_check_most_appealing_move(void)
 {
     int i;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
     u32 appeal = gContestEffects[GetMoveContestEffect(move)].appeal;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        u16 newMove = gContestMons[eContestAI.contestantId].moves[i];
+        u32 newMove = gContestMons[eContestAI.contestantId].moves[i];
         if (newMove != 0 && appeal < gContestEffects[GetMoveContestEffect(newMove)].appeal)
             break;
     }
@@ -844,12 +844,12 @@ static void ContestAICmd_if_most_appealing_move(void)
 static void ContestAICmd_check_most_jamming_move(void)
 {
     int i;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
     u32 jam = gContestEffects[GetMoveContestEffect(move)].jam;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        u16 newMove = gContestMons[eContestAI.contestantId].moves[i];
+        u32 newMove = gContestMons[eContestAI.contestantId].moves[i];
         if (newMove != MOVE_NONE && jam < gContestEffects[GetMoveContestEffect(newMove)].jam)
             break;
     }
@@ -874,7 +874,7 @@ static void ContestAICmd_if_most_jamming_move(void)
 
 static void ContestAICmd_get_num_move_hearts(void)
 {
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     eContestAI.scriptResult = gContestEffects[GetMoveContestEffect(move)].appeal / 10;
     gAIScriptPtr += 1;
@@ -922,7 +922,7 @@ static void ContestAICmd_if_num_move_hearts_not_eq(void)
 
 static void ContestAICmd_get_num_move_jam_hearts(void)
 {
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     eContestAI.scriptResult = gContestEffects[GetMoveContestEffect(move)].jam / 10;
     gAIScriptPtr += 1;
@@ -971,7 +971,7 @@ static void ContestAICmd_if_num_move_jam_hearts_not_eq(void)
 static void ContestAICmd_get_move_used_count(void)
 {
     s16 result;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     if (move != eContestantStatus[eContestAI.contestantId].prevMove)
         result = 0; // move is unique and not reused.
@@ -1026,7 +1026,7 @@ static void ContestAICmd_check_combo_starter(void)
 {
     u32 result = 0;
     int i;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1072,7 +1072,7 @@ static void ContestAICmd_check_combo_finisher(void)
 {
     u32 result = 0;
     int i;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1117,7 +1117,7 @@ static void ContestAICmd_if_not_combo_finisher(void)
 static void ContestAICmd_check_would_finish_combo(void)
 {
     u32 result = 0;
-    u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
+    u32 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     if (eContestantStatus[eContestAI.contestantId].prevMove)
         result = AreMovesContestCombo(eContestantStatus[eContestAI.contestantId].prevMove, move);
@@ -1199,7 +1199,7 @@ static void ContestAICmd_if_condition_not_eq(void)
 
 static void ContestAICmd_get_used_combo_starter(void)
 {
-    u16 result = FALSE;
+    u32 result = FALSE;
     u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
     if (IsContestantAllowedToCombo(contestant))
@@ -1407,7 +1407,7 @@ static void ContestAICmd_get_used_moves_effect(void)
 {
     u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
     u32 round = gAIScriptPtr[2];
-    u16 move = eContest.moveHistory[round][contestant];
+    u32 move = eContest.moveHistory[round][contestant];
 
     eContestAI.scriptResult = GetMoveContestEffect(move);
     gAIScriptPtr += 3;
@@ -1457,7 +1457,7 @@ static void ContestAICmd_get_used_moves_excitement(void)
 {
     u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
     u32 round = gAIScriptPtr[2];
-    s8 result = eContest.excitementHistory[round][contestant];
+    s32 result = eContest.excitementHistory[round][contestant];
 
     eContestAI.scriptResult = result;
     gAIScriptPtr += 3;
@@ -1507,7 +1507,7 @@ static void ContestAICmd_get_used_moves_effect_type(void)
 {
     u32 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
     u32 round = gAIScriptPtr[2];
-    u16 move = eContest.moveHistory[round][contestant];
+    u32 move = eContest.moveHistory[round][contestant];
 
     eContestAI.scriptResult = gContestEffects[GetMoveContestEffect(move)].effectType;
     gAIScriptPtr += 3;
@@ -1548,7 +1548,7 @@ static void ContestAICmd_setvar(void)
 static void ContestAICmd_add(void)
 {
     // wtf? shouldn't T1_READ_16 work here? why the signed 8 load by gAIScriptPtr[2]?
-    eContestAI.vars[gAIScriptPtr[1]] += ((s8)gAIScriptPtr[2] | gAIScriptPtr[3] << 8);
+    eContestAI.vars[gAIScriptPtr[1]] += ((s32)gAIScriptPtr[2] | gAIScriptPtr[3] << 8);
     gAIScriptPtr += 4;
 }
 
@@ -1677,7 +1677,7 @@ static void AIStackPushVar(const u32 *ptr)
     eContestAI.stack[eContestAI.stackSize++] = ptr;
 }
 
-static bool8 AIStackPop(void)
+static bool32 AIStackPop(void)
 {
     if (eContestAI.stackSize != 0)
     {
@@ -1743,14 +1743,14 @@ static void ContestAICmd_check_user_has_move(void)
 {
     int hasMove = FALSE;
     int i;
-    u16 targetMove = T1_READ_16(gAIScriptPtr + 1);
+    u32 targetMove = T1_READ_16(gAIScriptPtr + 1);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         #ifdef BUGFIX
-        u16 move = GetMoveContestEffect(gContestMons[eContestAI.contestantId].moves[i]);
+        u32 move = GetMoveContestEffect(gContestMons[eContestAI.contestantId].moves[i]);
         #else
-        u16 move = gContestMons[eContestAI.contestantId].moves[i];
+        u32 move = gContestMons[eContestAI.contestantId].moves[i];
         #endif
 
         if (move == targetMove)

@@ -10,7 +10,7 @@
 static void FieldCallback_Teleport(void);
 static void StartTeleportFieldEffect(void);
 
-bool8 SetUpFieldMove_Teleport(void)
+bool32 SetUpFieldMove_Teleport(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
@@ -28,7 +28,7 @@ static void FieldCallback_Teleport(void)
     gFieldEffectArguments[0] = (u32)GetCursorSelectionMonId();
 }
 
-bool8 FldEff_UseTeleport(void)
+bool32 FldEff_UseTeleport(void)
 {
     u32 taskId = CreateFieldMoveTask();
     gTasks[taskId].data[8] = (u32)StartTeleportFieldEffect >> 16;

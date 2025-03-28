@@ -19,7 +19,7 @@
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static void CB2_ReshowBlankBattleScreenAfterMenu(void);
-static bool8 LoadBattlerSpriteGfx(u32 battler);
+static bool32 LoadBattlerSpriteGfx(u32 battler);
 static void CreateHealthboxSprite(u32 battler);
 static void ClearBattleBgCntBaseBlocks(void);
 static void CreateCaughtMonSprite(void);
@@ -133,7 +133,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     case 19:
         {
             u32 opponentBattler;
-            u16 species;
+            u32 species;
 
             LoadAndCreateEnemyShadowSprites();
 
@@ -264,7 +264,7 @@ static void ClearBattleBgCntBaseBlocks(void)
     regBgcnt2->charBaseBlock = 0;
 }
 
-static bool8 LoadBattlerSpriteGfx(u32 battler)
+static bool32 LoadBattlerSpriteGfx(u32 battler)
 {
     if (battler < gBattlersCount)
     {

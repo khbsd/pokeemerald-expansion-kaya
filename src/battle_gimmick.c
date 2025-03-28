@@ -370,7 +370,7 @@ void UpdateIndicatorLevelData(u32 healthboxId, u32 level)
     gSprites[GetIndicatorSpriteId(healthboxId)].tLevelXDelta = xDelta;
 }
 
-static const s8 sIndicatorPositions[][2] =
+static const s32 sIndicatorPositions[][2] =
 {
     [B_POSITION_PLAYER_LEFT] = {49, -9},
     [B_POSITION_OPPONENT_LEFT] = {40, -9},

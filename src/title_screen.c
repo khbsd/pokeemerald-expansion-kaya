@@ -58,7 +58,7 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite);
 static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 
 // const rom data
-static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
+static const u32 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
 static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
 static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
@@ -69,7 +69,7 @@ static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clo
 
 // Used to blend "Emerald Version" as it passes over over the Pokémon banner.
 // Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
-const u16 gTitleScreenAlphaBlend[64] =
+const u32 gTitleScreenAlphaBlend[64] =
 {
     BLDALPHA_BLEND(16, 0),
     BLDALPHA_BLEND(16, 1),
@@ -472,7 +472,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
         // color will change, in addition to the shine sprite moving.
         if (sprite->sMode != SHINE_MODE_SINGLE_NO_BG_COLOR)
         {
-            u16 backgroundColor;
+            u32 backgroundColor;
 
             if (sprite->x < DISPLAY_WIDTH / 2)
             {
@@ -577,7 +577,7 @@ void CB2_InitTitleScreen(void)
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
-        *((u16 *)PLTT) = RGB_WHITE;
+        *((u32 *)PLTT) = RGB_WHITE;
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BG2CNT, 0);
         SetGpuReg(REG_OFFSET_BG1CNT, 0);
@@ -692,7 +692,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
 
     if (gTasks[taskId].tCounter != 0)
     {
-        u16 frameNum = gTasks[taskId].tCounter;
+        u32 frameNum = gTasks[taskId].tCounter;
         if (frameNum == 176)
             StartPokemonLogoShine(SHINE_MODE_DOUBLE);
         else if (frameNum == 64)
@@ -863,7 +863,7 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         s32 g = 31 - (intensity * 22 / 256);
         s32 b = 12;
 
-        u16 color = RGB(r, g, b);
+        u32 color = RGB(r, g, b);
         LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
    }
 }

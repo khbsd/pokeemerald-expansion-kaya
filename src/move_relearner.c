@@ -164,7 +164,7 @@ static EWRAM_DATA struct
 {
     u32 state;
     u32 heartSpriteIds[16];                                   /*0x001*/
-    u16 movesToLearn[MAX_RELEARNER_MOVES];                   /*0x01A*/
+    u32 movesToLearn[MAX_RELEARNER_MOVES];                   /*0x01A*/
     u32 partyMon;                                             /*0x044*/
     u32 moveSlot;                                             /*0x045*/
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];  /*0x0E8*/
@@ -173,19 +173,19 @@ static EWRAM_DATA struct
     u32 moveListMenuTask;                                     /*0x112*/
     u32 moveListScrollArrowTask;                              /*0x113*/
     u32 moveDisplayArrowTask;                                 /*0x114*/
-    u16 scrollOffset;                                        /*0x116*/
+    u32 scrollOffset;                                        /*0x116*/
     u32 categoryIconSpriteId;                                 /*0x117*/
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
-    u16 listOffset;
-    u16 listRow;
-    bool8 showContestInfo;
+    u32 listOffset;
+    u32 listRow;
+    bool32 showContestInfo;
 } sMoveRelearnerMenuSate = {0};
 
 EWRAM_DATA u32 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
 
-static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
+static const u32 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
 // The arrow sprites in this spritesheet aren't used. The scroll-arrow system provides its own
 // arrow sprites.
@@ -363,7 +363,7 @@ static void ShowTeachMoveText(u32);
 static s32 GetCurrentSelectedMove(void);
 static void FreeMoveRelearnerResources(void);
 static void RemoveScrollArrows(void);
-static void HideHeartSpritesAndShowTeachMoveText(bool8);
+static void HideHeartSpritesAndShowTeachMoveText(bool32);
 
 static void VBlankCB_MoveRelearner(void)
 {
@@ -524,7 +524,7 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_TEACH_MOVE_CONFIRM:
         {
-            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
+            s32 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -561,7 +561,7 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_GIVE_UP_CONFIRM:
         {
-            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
+            s32 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -594,7 +594,7 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
         {
-            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
+            s32 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -621,7 +621,7 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:
         {
-            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
+            s32 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -733,7 +733,7 @@ static void DoMoveRelearnerMain(void)
             }
             else
             {
-                u16 moveId = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);
+                u32 moveId = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);
                 u32 originalPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
 
                 StringCopy(gStringVar3, GetMoveName(moveId));
@@ -792,7 +792,7 @@ static void FreeMoveRelearnerResources(void)
 
 // Note: The hearts are already made invisible by MoveRelearnerShowHideHearts,
 // which is called whenever the cursor in either list changes.
-static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
+static void HideHeartSpritesAndShowTeachMoveText(bool32 onlyHideSprites)
 {
     s32 i;
 
@@ -807,7 +807,7 @@ static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
     }
 }
 
-static void HandleInput(bool8 showContest)
+static void HandleInput(bool32 showContest)
 {
     s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
     ListMenuGetScrollAndRow(sMoveRelearnerStruct->moveListMenuTask, &sMoveRelearnerMenuSate.listOffset, &sMoveRelearnerMenuSate.listRow);
@@ -868,7 +868,7 @@ static s32 GetCurrentSelectedMove(void)
 // "justShowHearts." The code for showing/hiding the heards was moved
 // to MoveRelearnerShowHideHearts, which is called whenever a new move is
 // selected and whenever the display mode changes.
-static void ShowTeachMoveText(bool8 shouldDoNothingInstead)
+static void ShowTeachMoveText(bool32 shouldDoNothingInstead)
 {
     if (shouldDoNothingInstead == FALSE)
     {
@@ -957,8 +957,8 @@ static void CreateLearnableMovesList(void)
 
 void MoveRelearnerShowHideHearts(s32 moveId)
 {
-    u16 numHearts;
-    u16 i;
+    u32 numHearts;
+    u32 i;
 
     if (!sMoveRelearnerMenuSate.showContestInfo || moveId == LIST_CANCEL)
     {

@@ -953,7 +953,7 @@ static void AnimSuperpowerRock_Step1(struct Sprite *sprite)
 
 static void AnimSuperpowerRock_Step2(struct Sprite *sprite)
 {
-    u16 edgeX;
+    u32 edgeX;
 
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];

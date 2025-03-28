@@ -29,7 +29,7 @@ static void AnimTask_BlendPalInAndOutSetup(struct Task *task);
 static void AnimTask_AlphaFadeIn_Step(u8 taskId);
 static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId);
 static void AnimTask_BlendMonInAndOut_Step(u8 taskId);
-static bool8 ShouldRotScaleSpeciesBeFlipped(void);
+static bool32 ShouldRotScaleSpeciesBeFlipped(void);
 static void CreateBattlerTrace(struct Task *task, u8 taskId);
 
 EWRAM_DATA static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
@@ -188,7 +188,7 @@ u8 GetBattlerElevation(u8 battlerId, u32 species)
     return ret;
 }
 
-u8 GetBattlerSpriteFinal_Y(u8 battlerId, u32 species, bool8 a3)
+u8 GetBattlerSpriteFinal_Y(u8 battlerId, u32 species, bool32 a3)
 {
     u32 offset;
     u8 y;
@@ -704,7 +704,7 @@ void InitAnimArcTranslation(struct Sprite *sprite)
     sprite->data[7] = 0;
 }
 
-bool8 TranslateAnimHorizontalArc(struct Sprite *sprite)
+bool32 TranslateAnimHorizontalArc(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         return TRUE;
@@ -713,7 +713,7 @@ bool8 TranslateAnimHorizontalArc(struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 TranslateAnimVerticalArc(struct Sprite *sprite)
+bool32 TranslateAnimVerticalArc(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         return TRUE;
@@ -730,7 +730,7 @@ void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite)
     sprite->y2 = 0;
 }
 
-void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 respectMonPicOffsets)
+void InitSpritePosToAnimTarget(struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     // Battle anim sprites are automatically created at the anim target's center, which
     // is why there is no else clause for the "respectMonPicOffsets" check.
@@ -743,7 +743,7 @@ void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 respectMonPicOffsets
     sprite->y += gBattleAnimArgs[1];
 }
 
-void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffsets)
+void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     if (!respectMonPicOffsets)
     {
@@ -759,7 +759,7 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     sprite->y += gBattleAnimArgs[1];
 }
 
-void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool8 respectMonPicOffsets)
+void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     if (!respectMonPicOffsets)
     {
@@ -775,7 +775,7 @@ void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool8 respectMonP
     sprite->y += gBattleAnimArgs[1];
 }
 
-bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets)
+bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     u32 battlerId = GetAnimBattlerId(animBattlerId);
     if (GetAnimBattlerSpriteId(animBattlerId) == 0xFF || !IsBattlerSpriteVisible(battlerId))
@@ -799,7 +799,7 @@ bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool
     return TRUE;
 }
 
-bool8 IsBattlerSpritePresent(u8 battlerId)
+bool32 IsBattlerSpritePresent(u8 battlerId)
 {
     if (IsContest())
     {
@@ -946,7 +946,7 @@ u8 GetBattleBgPaletteNum(void)
         return 2;
 }
 
-void UpdateAnimBg3ScreenSize(bool8 largeScreenSize)
+void UpdateAnimBg3ScreenSize(bool32 largeScreenSize)
 {
     if (!largeScreenSize || IsContest())
     {
@@ -983,8 +983,8 @@ void InitAnimLinearTranslation(struct Sprite *sprite)
 {
     int x = sprite->data[2] - sprite->data[1];
     int y = sprite->data[4] - sprite->data[3];
-    bool8 movingLeft = x < 0;
-    bool8 movingUp = y < 0;
+    bool32 movingLeft = x < 0;
+    bool32 movingUp = y < 0;
     u32 xDelta = abs(x) << 8;
     u32 yDelta = abs(y) << 8;
 
@@ -1025,7 +1025,7 @@ static void UNUSED StartAnimLinearTranslation_SetCornerVecX(struct Sprite *sprit
     sprite->callback(sprite);
 }
 
-bool8 AnimTranslateLinear(struct Sprite *sprite)
+bool32 AnimTranslateLinear(struct Sprite *sprite)
 {
     u32 v1, v2, x, y;
 
@@ -1089,8 +1089,8 @@ static void InitAnimFastLinearTranslation(struct Sprite *sprite)
 {
     int xDiff = sprite->data[2] - sprite->data[1];
     int yDiff = sprite->data[4] - sprite->data[3];
-    bool8 x_sign = xDiff < 0;
-    bool8 y_sign = yDiff < 0;
+    bool32 x_sign = xDiff < 0;
+    bool32 y_sign = yDiff < 0;
     u32 x2 = abs(xDiff) << 4;
     u32 y2 = abs(yDiff) << 4;
 
@@ -1122,7 +1122,7 @@ void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-bool8 AnimFastTranslateLinear(struct Sprite *sprite)
+bool32 AnimFastTranslateLinear(struct Sprite *sprite)
 {
     u32 v1, v2, x, y;
 
@@ -1194,7 +1194,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u32 rotation)
 }
 
 // Pokémon in Contests (except Unown) should be flipped.
-static bool8 ShouldRotScaleSpeciesBeFlipped(void)
+static bool32 ShouldRotScaleSpeciesBeFlipped(void)
 {
     if (IsContest())
     {
@@ -1245,7 +1245,7 @@ void SetBattlerSpriteYOffsetFromRotation(u8 spriteId)
     gSprites[spriteId].y2 = c >> 3;
 }
 
-void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 xScale, s16 yScale, u32 rotation)
+void TrySetSpriteRotScale(struct Sprite *sprite, bool32 recalcCenterVector, s16 xScale, s16 yScale, u32 rotation)
 {
     int i;
     struct ObjAffineSrcData src;
@@ -1288,7 +1288,7 @@ u32 ArcTan2Neg(s16 x, s16 y)
     return -var;
 }
 
-void SetGrayscaleOrOriginalPalette(u32 paletteNum, bool8 restoreOriginalColor)
+void SetGrayscaleOrOriginalPalette(u32 paletteNum, bool32 restoreOriginalColor)
 {
     int i;
     struct PlttData *originalColor;
@@ -1316,7 +1316,7 @@ void SetGrayscaleOrOriginalPalette(u32 paletteNum, bool8 restoreOriginalColor)
     }
 }
 
-u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2)
+u32 GetBattlePalettesMask(bool32 battleBackground, bool32 attacker, bool32 target, bool32 attackerPartner, bool32 targetPartner, bool32 anim1, bool32 anim2)
 {
     u32 selectedPalettes = 0;
     u32 shift;
@@ -1431,7 +1431,7 @@ static u8 UNUSED GetSpritePalIdxByPosition(u8 position)
 
 void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
-    bool8 var;
+    bool32 var;
 
     if (!sprite->data[0])
     {
@@ -1466,7 +1466,7 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
 // arg 5: lower 8 bits = location on attacking mon, upper 8 bits = location on target mon pick to target
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 {
-    bool8 respectMonPicOffsets;
+    bool32 respectMonPicOffsets;
     u8 coordType;
 
     if (!(gBattleAnimArgs[5] & 0xff00))
@@ -1517,7 +1517,7 @@ static void AnimThrowProjectile_Step(struct Sprite *sprite)
 
 void AnimTravelDiagonally(struct Sprite *sprite)
 {
-    bool8 r4;
+    bool32 r4;
     u8 battlerId, coordType;
 
     if (!gBattleAnimArgs[6])
@@ -1724,7 +1724,7 @@ void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union Aff
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
 }
 
-bool8 RunAffineAnimFromTaskData(struct Task *task)
+bool32 RunAffineAnimFromTaskData(struct Task *task)
 {
     sAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
     switch (sAnimTaskAffineAnim->type)
@@ -1997,7 +1997,7 @@ u8 GetBattlerSpriteBGPriorityRank(u8 battlerId)
 }
 
 // Create Pokémon sprite to be used for a move animation effect (e.g. Role Play / Snatch)
-u8 CreateAdditionalMonSpriteForMoveAnim(u32 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, bool8 isShiny, u32 battlerId)
+u8 CreateAdditionalMonSpriteForMoveAnim(u32 species, bool32 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, bool32 isShiny, u32 battlerId)
 {
     u8 spriteId;
     u32 sheet = LoadSpriteSheet(&sSpriteSheets_MoveEffectMons[id]);
@@ -2136,7 +2136,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     }
 }
 
-void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x, s16 *y)
+void SetAverageBattlerPositions(u8 battlerId, bool32 respectMonPicOffsets, s16 *x, s16 *y)
 {
     u8 xCoordType, yCoordType;
     s16 battlerX, battlerY;

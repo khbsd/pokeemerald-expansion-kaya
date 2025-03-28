@@ -85,7 +85,7 @@ int GameClear(void)
     return 0;
 }
 
-bool8 SetCB2WhiteOut(void)
+bool32 SetCB2WhiteOut(void)
 {
     SetMainCallback2(CB2_WhiteOut);
     return FALSE;

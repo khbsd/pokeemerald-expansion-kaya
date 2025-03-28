@@ -9,13 +9,13 @@ extern const struct CompressedSpritePalette gBerryCheckCirclePaletteTable;
 
 void RemoveBagSprite(u8 id);
 void AddBagVisualSprite(u8 bagPocketId);
-void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets);
+void SetBagVisualPocketId(u8 bagPocketId, bool32 isSwitchingPockets);
 void ShakeBagSprite(void);
 void AddSwitchPocketRotatingBallSprite(s16 rotationDirection);
 void AddBagItemIconSprite(u32 itemId, u8 id);
 void RemoveBagItemIconSprite(u8 id);
 void CreateItemMenuSwapLine(void);
-void SetItemMenuSwapLineInvisibility(bool8 invisible);
+void SetItemMenuSwapLineInvisibility(bool32 invisible);
 void UpdateItemMenuSwapLinePos(u8 y);
 
 // Note: Because of removing gDecompressionBuffer and allowing to create more than one berry sprite at a time, the memory for gfx is allocated dynamically.

@@ -22,7 +22,7 @@ struct RotatingTilePuzzle
 {
     struct RotatingTileObject objects[OBJECT_EVENTS_COUNT];
     u32 numObjects;
-    bool8 isTrickHouse;
+    bool32 isTrickHouse;
 };
 
 static const u32 sMovement_ShiftRight[] =
@@ -86,7 +86,7 @@ static void TurnUnsavedRotatingTileObject(u32, u32);
 
 EWRAM_DATA static struct RotatingTilePuzzle *sRotatingTilePuzzle = NULL;
 
-void InitRotatingTilePuzzle(bool8 isTrickHouse)
+void InitRotatingTilePuzzle(bool32 isTrickHouse)
 {
     if (sRotatingTilePuzzle == NULL)
         sRotatingTilePuzzle = AllocZeroed(sizeof(*sRotatingTilePuzzle));
@@ -105,11 +105,11 @@ void FreeRotatingTilePuzzle(void)
     ScriptMovement_UnfreezeObjectEvents();
 }
 
-u16 MoveRotatingTileObjects(u32 puzzleNumber)
+u32 MoveRotatingTileObjects(u32 puzzleNumber)
 {
     u32 i;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    u16 localId = 0;
+    u32 localId = 0;
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
@@ -117,7 +117,7 @@ u16 MoveRotatingTileObjects(u32 puzzleNumber)
         u32 puzzleTileNum;
         s16 x = objectEvents[i].x + MAP_OFFSET;
         s16 y = objectEvents[i].y + MAP_OFFSET;
-        u16 metatile = MapGridGetMetatileIdAt(x, y);
+        u32 metatile = MapGridGetMetatileIdAt(x, y);
 
         if (!sRotatingTilePuzzle->isTrickHouse)
             puzzleTileStart = METATILE_MossdeepGym_YellowArrow_Right;
@@ -142,8 +142,8 @@ u16 MoveRotatingTileObjects(u32 puzzleNumber)
         // First 4 puzzle tiles are the colored arrows
         if (puzzleTileNum < 4)
         {
-            s8 x = 0;
-            s8 y = 0;
+            s32 x = 0;
+            s32 y = 0;
             const u32 *movementScript;
 
             switch (puzzleTileNum)
@@ -205,11 +205,11 @@ void TurnRotatingTileObjects(void)
     for (i = 0; i < sRotatingTilePuzzle->numObjects; i++)
     {
         s32 rotation;
-        s8 tileDifference;
+        s32 tileDifference;
         u32 objectEventId;
         s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
         s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + MAP_OFFSET;
-        u16 metatile = MapGridGetMetatileIdAt(x, y);
+        u32 metatile = MapGridGetMetatileIdAt(x, y);
 
         // NOTE: The following 2 assignments and if else could all be replaced with rotation = ROTATE_COUNTERCLOCKWISE
         // For an object to be saved in sRotatingTilePuzzle->objects, it must have been on a colored arrow tile
@@ -313,14 +313,14 @@ static void SaveRotatingTileObject(u32 eventTemplateId, u32 puzzleTileNum)
 // Functionally unused
 static void TurnUnsavedRotatingTileObject(u32 eventTemplateId, u32 puzzleTileNum)
 {
-    s8 tileDifference;
+    s32 tileDifference;
     s32 rotation;
     s32 puzzleTileStart;
-    u16 movementType;
+    u32 movementType;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
     s16 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
-    u16 metatile = MapGridGetMetatileIdAt(x, y);
+    u32 metatile = MapGridGetMetatileIdAt(x, y);
 
     if (!sRotatingTilePuzzle->isTrickHouse)
         puzzleTileStart = METATILE_MossdeepGym_YellowArrow_Right;

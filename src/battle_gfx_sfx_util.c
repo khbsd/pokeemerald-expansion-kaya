@@ -30,10 +30,10 @@
 #include "constants/event_objects.h" // only for SHADOW_SIZE constants
 
 // this file's functions
-static u32 GetBattlePalaceMoveGroup(u32 battler, u16 move);
-static u16 GetBattlePalaceTarget(u32 battler);
+static u32 GetBattlePalaceMoveGroup(u32 battler, u32 move);
+static u32 GetBattlePalaceTarget(u32 battler);
 static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite);
-static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u32 animId);
+static bool32 ShouldAnimBeDoneRegardlessOfSubstitute(u32 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u32 taskId);
 static void Task_ClearBitWhenSpecialAnimDone(u32 taskId);
 static void ClearSpritesBattlerHealthboxAnimData(void);
@@ -143,7 +143,7 @@ void FreeBattleSpritesData(void)
 }
 
 // Pokémon chooses move to use in Battle Palace rather than player
-u16 ChooseMoveAndTargetInBattlePalace(u32 battler)
+u32 ChooseMoveAndTargetInBattlePalace(u32 battler)
 {
     s32 i, var1, var2;
     s32 chosenMoveId = -1;
@@ -321,7 +321,7 @@ u16 ChooseMoveAndTargetInBattlePalace(u32 battler)
 #undef numMultipleMoveGroups
 #undef randSelectGroup
 
-static u32 GetBattlePalaceMoveGroup(u32 battler, u16 move)
+static u32 GetBattlePalaceMoveGroup(u32 battler, u32 move)
 {
     switch (GetBattlerMoveTargetType(battler, move))
     {
@@ -345,7 +345,7 @@ static u32 GetBattlePalaceMoveGroup(u32 battler, u16 move)
     }
 }
 
-static u16 GetBattlePalaceTarget(u32 battler)
+static u32 GetBattlePalaceTarget(u32 battler)
 {
     if (IsDoubleBattle())
     {
@@ -406,7 +406,7 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     }
 }
 
-static void UNUSED UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 pointless)
+static void UNUSED UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool32 pointless)
 {
     sprite->animPaused = TRUE;
     sprite->callback = SpriteCallbackDummy;
@@ -493,7 +493,7 @@ void InitAndLaunchChosenStatusAnimation(u32 battler, bool32 isStatus2, u32 statu
 
 #define tBattlerId data[0]
 
-bool8 TryHandleLaunchBattleTableAnimation(u32 activeBattler, u32 atkBattler, u32 defBattler, u32 tableId, u16 argument)
+bool32 TryHandleLaunchBattleTableAnimation(u32 activeBattler, u32 atkBattler, u32 defBattler, u32 tableId, u32 argument)
 {
     u32 taskId;
 
@@ -540,7 +540,7 @@ static void Task_ClearBitWhenBattleTableAnimDone(u32 taskId)
 
 #undef tBattlerId
 
-static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u32 animId)
+static bool32 ShouldAnimBeDoneRegardlessOfSubstitute(u32 animId)
 {
     switch (animId)
     {
@@ -585,7 +585,7 @@ static void Task_ClearBitWhenSpecialAnimDone(u32 taskId)
 #undef tBattlerId
 
 // Check if SE has finished or 30 calls, whichever comes first
-bool8 IsBattleSEPlaying(u32 battler)
+bool32 IsBattleSEPlaying(u32 battler)
 {
     u32 zero = 0;
 
@@ -687,11 +687,11 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     }
 }
 
-void BattleGfxSfxDummy2(u16 species)
+void BattleGfxSfxDummy2(u32 species)
 {
 }
 
-void DecompressTrainerFrontPic(u16 frontPicId, u32 battler)
+void DecompressTrainerFrontPic(u32 frontPicId, u32 battler)
 {
     u32 position = GetBattlerPosition(battler);
     DecompressPicFromTable(&gTrainerSprites[frontPicId].frontPic,
@@ -699,7 +699,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u32 battler)
     LoadCompressedSpritePalette(&gTrainerSprites[frontPicId].palette);
 }
 
-void DecompressTrainerBackPic(u16 backPicId, u32 battler)
+void DecompressTrainerBackPic(u32 backPicId, u32 battler)
 {
     u32 position = GetBattlerPosition(battler);
     DecompressPicFromTable(&gTrainerBacksprites[backPicId].backPic,
@@ -708,7 +708,7 @@ void DecompressTrainerBackPic(u16 backPicId, u32 battler)
                           OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
 }
 
-void FreeTrainerFrontPicPalette(u16 frontPicId)
+void FreeTrainerFrontPicPalette(u32 frontPicId)
 {
     FreeSpritePaletteByTag(gTrainerSprites[frontPicId].palette.tag);
 }
@@ -739,9 +739,9 @@ void BattleLoadAllHealthBoxesGfxAtOnce(void)
         LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[GetBattlerPosition(i)]);
 }
 
-bool8 BattleLoadAllHealthBoxesGfx(u32 state)
+bool32 BattleLoadAllHealthBoxesGfx(u32 state)
 {
-    bool8 retVal = FALSE;
+    bool32 retVal = FALSE;
 
     if (state != 0)
     {
@@ -814,9 +814,9 @@ void LoadBattleBarGfx(u32 unused)
     LZDecompressWram(gBattleInterfaceGfx_BattleBar, gMonSpritesGfxPtr->barFontGfx);
 }
 
-bool8 BattleInitAllSprites(u32 *state1, u32 *battler)
+bool32 BattleInitAllSprites(u32 *state1, u32 *battler)
 {
-    bool8 retVal = FALSE;
+    bool32 retVal = FALSE;
 
     switch (*state1)
     {
@@ -918,7 +918,7 @@ void CopyBattleSpriteInvisibility(u32 battler)
     gBattleSpritesDataPtr->battlerData[battler].invisible = gSprites[gBattlerSpriteIds[battler]].invisible;
 }
 
-void HandleSpeciesGfxDataChange(u32 battlerAtk, u32 battlerDef, bool32 megaEvo, bool8 trackEnemyPersonality)
+void HandleSpeciesGfxDataChange(u32 battlerAtk, u32 battlerDef, bool32 megaEvo, bool32 trackEnemyPersonality)
 {
     u32 personalityValue, position, paletteOffset, targetSpecies;
     bool32 isShiny;
@@ -1013,7 +1013,7 @@ void HandleSpeciesGfxDataChange(u32 battlerAtk, u32 battlerDef, bool32 megaEvo, 
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], 0);
 }
 
-void BattleLoadSubstituteOrMonSpriteGfx(u32 battler, bool8 loadMonSprite)
+void BattleLoadSubstituteOrMonSpriteGfx(u32 battler, bool32 loadMonSprite)
 {
     s32 i, position, palOffset;
 
@@ -1046,7 +1046,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u32 battler, bool8 loadMonSprite)
     }
 }
 
-void LoadBattleMonGfxAndAnimate(u32 battler, bool8 loadMonSprite, u32 spriteId)
+void LoadBattleMonGfxAndAnimate(u32 battler, bool32 loadMonSprite, u32 spriteId)
 {
     BattleLoadSubstituteOrMonSpriteGfx(battler, loadMonSprite);
     StartSpriteAnim(&gSprites[spriteId], 0);
@@ -1057,7 +1057,7 @@ void LoadBattleMonGfxAndAnimate(u32 battler, bool8 loadMonSprite, u32 spriteId)
         gSprites[spriteId].y = GetBattlerSpriteDefault_Y(battler);
 }
 
-void TrySetBehindSubstituteSpriteBit(u32 battler, u16 move)
+void TrySetBehindSubstituteSpriteBit(u32 battler, u32 move)
 {
     u32 effect = GetMoveEffect(move);
     if (effect == EFFECT_SUBSTITUTE || effect == EFFECT_SHED_TAIL)
@@ -1071,8 +1071,8 @@ void ClearBehindSubstituteBit(u32 battler)
 
 void HandleLowHpMusicChange(struct Pokemon *mon, u32 battler)
 {
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    u32 hp = GetMonData(mon, MON_DATA_HP);
+    u32 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
 
     if (GetHPBarLevel(hp, maxHP) == HP_BAR_RED)
     {
@@ -1112,8 +1112,8 @@ void BattleStopLowHpSound(void)
 
 u32 GetMonHPBarLevel(struct Pokemon *mon)
 {
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    u32 hp = GetMonData(mon, MON_DATA_HP);
+    u32 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
 
     return GetHPBarLevel(hp, maxHP);
 }
@@ -1167,7 +1167,7 @@ void CreateEnemyShadowSprite(u32 battler)
 {
     if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
     {
-        u16 species = SanitizeSpeciesId(gBattleMons[battler].species);
+        u32 species = SanitizeSpeciesId(gBattleMons[battler].species);
         u32 size = gSpeciesInfo[species].enemyShadowSize;
 
         gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow,
@@ -1253,10 +1253,10 @@ void LoadAndCreateEnemyShadowSprites(void)
 
 void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
 {
-    bool8 invisible = FALSE;
+    bool32 invisible = FALSE;
     u32 battler = shadowSprite->tBattlerId;
     struct Sprite *battlerSprite = &gSprites[gBattlerSpriteIds[battler]];
-    u16 transformSpecies = SanitizeSpeciesId(gBattleSpritesDataPtr->battlerData[battler].transformSpecies);
+    u32 transformSpecies = SanitizeSpeciesId(gBattleSpritesDataPtr->battlerData[battler].transformSpecies);
 
     if (!battlerSprite->inUse || !IsBattlerSpritePresent(battler))
     {
@@ -1264,7 +1264,7 @@ void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
         return;
     }
 
-    s8 xOffset = 0, UNUSED yOffset = 0, size = SHADOW_SIZE_S;
+    s32 xOffset = 0, UNUSED yOffset = 0, size = SHADOW_SIZE_S;
     if (gAnimScriptActive || battlerSprite->invisible)
     {
         invisible = TRUE;
@@ -1281,7 +1281,7 @@ void SpriteCB_EnemyShadow(struct Sprite *shadowSprite)
     }
     else if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
     {
-        u16 species = SanitizeSpeciesId(gBattleMons[battler].species);
+        u32 species = SanitizeSpeciesId(gBattleMons[battler].species);
         xOffset = gSpeciesInfo[species].enemyShadowXOffset + (shadowSprite->tSpriteSide == SPRITE_SIDE_LEFT ? -16 : 16);
         yOffset = gSpeciesInfo[species].enemyShadowYOffset + 16;
         size = gSpeciesInfo[species].enemyShadowSize;
@@ -1308,7 +1308,7 @@ void SpriteCB_SetInvisible(struct Sprite *sprite)
     sprite->invisible = TRUE;
 }
 
-void SetBattlerShadowSpriteCallback(u32 battler, u16 species)
+void SetBattlerShadowSpriteCallback(u32 battler, u32 species)
 {
     if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
     {
@@ -1368,7 +1368,7 @@ void HideBattlerShadowSprite(u32 battler)
 // Color the background tiles surrounding the action selection and move windows
 void FillAroundBattleWindows(void)
 {
-    u16 *vramPtr = (u16 *)(VRAM + 0x240);
+    u32 *vramPtr = (u32 *)(VRAM + 0x240);
     s32 i;
     s32 j;
 

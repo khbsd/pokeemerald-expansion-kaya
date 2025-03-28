@@ -25,8 +25,8 @@ static u32id Task_BlendPalettesGradually(u8 taskId);
 
 // palette buffers require alignment with agbcc because
 // unaligned word reads are issued in BlendPalette otherwise
-ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfu32ed[PLTT_BUFFER_SIZE] = {0};
-ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
+ALIGNED(4) EWRAM_DATA u32 gPlttBufferUnfu32ed[PLTT_BUFFER_SIZE] = {0};
+ALIGNED(4) EWRAM_DATA u32 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 
@@ -96,7 +96,7 @@ void ResetPaletteFade(void)
     ResetPaletteFadeControl();
 }
 
-bool32 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u32 blendColor)
+bool32 BeginNormalPaletteFade(u32 selectedPalettes, s32 delay, u8 startY, u8 targetY, u32 blendColor)
 {
     u8 temp;
 
@@ -163,8 +163,8 @@ void ResetPaletteFadeControl(void)
 u32
 static u32 UpdateNormalPaletteFade(void)
 {
-    u16 paletteOffset;
-    u16 selectedPalettes;
+    u32 paletteOffset;
+    u32 selectedPalettes;
 
     if (!gPaletteFade.active)
         return PALETTE_FADE_STATUS_DONE;
@@ -220,7 +220,7 @@ static u32 UpdateNormalPaletteFade(void)
             }
             else
             {
-                s8 val;
+                s32 val;
 
                 if (!gPaletteFade.yDec)
                 {
@@ -249,7 +249,7 @@ static u32 UpdateNormalPaletteFade(void)
 
 void InvertPlttBuffer(u32 selectedPalettes)
 {
-    u16 paletteOffset = 0;
+    u32 paletteOffset = 0;
 
     while (selectedPalettes)
     {
@@ -264,9 +264,9 @@ void InvertPlttBuffer(u32 selectedPalettes)
     }
 }
 
-void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
+void TintPlttBuffer(u32 selectedPalettes, s32 r, s32 g, s32 b)
 {
-    u16 paletteOffset = 0;
+    u32 paletteOffset = 0;
 
     while (selectedPalettes)
     {
@@ -288,7 +288,7 @@ void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
 
 void UnfadePlttBuffer(u32 selectedPalettes)
 {
-    u16 paletteOffset = 0;
+    u32 paletteOffset = 0;
 
     while (selectedPalettes)
     {
@@ -328,14 +328,14 @@ static void BeginFastPaletteFadeInternal(u32 submode)
 static u32 UpdateFastPaletteFade(void)
 {
     u32 i;
-    u16 paletteOffsetStart;
-    u16 paletteOffsetEnd;
-    s8 r0;
-    s8 g0;
-    s8 b0;
-    s8 r;
-    s8 g;
-    s8 b;
+    u32 paletteOffsetStart;
+    u32 paletteOffsetEnd;
+    s32 r0;
+    s32 g0;
+    s32 b0;
+    s32 r;
+    s32 g;
+    s32 b;
 
     if (!gPaletteFade.active)
         return PALETTE_FADE_STATUS_DONE;
@@ -550,7 +550,7 @@ static u32 UpdateHardwarePaletteFade(void)
 
 static void UpdateBlendRegisters(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, (u16)gPaletteFade_blendCnt);
+    SetGpuReg(REG_OFFSET_BLDCNT, (u32)gPaletteFade_blendCnt);
     SetGpuReg(REG_OFFSET_BLDY, gPaletteFade.y);
     if (gPaletteFade.hardwareFadeFinishing)
     {
@@ -587,7 +587,7 @@ static bool32 IsSoftwarePaletteFadeFinishing(void)
 
 void BlendPalettes(u32 selectedPalettes, u8 coeff, u32 color)
 {
-    u16 paletteOffset;
+    u32 paletteOffset;
 
     for (paletteOffset = 0; selectedPalettes; paletteOffset += 16)
     {
@@ -605,7 +605,7 @@ void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u32 color)
     BlendPalettes(selectedPalettes, coeff, color);
 }
 
-void TintPalette_GrayScale(u16 *palette, u32 count)
+void TintPalette_GrayScale(u32 *palette, u32 count)
 {
     s32 r, g, b;
     u32 i, gray;
@@ -622,7 +622,7 @@ void TintPalette_GrayScale(u16 *palette, u32 count)
     }
 }
 
-void TintPalette_GrayScale2(u16 *palette, u32 count)
+void TintPalette_GrayScale2(u32 *palette, u32 count)
 {
     s32 r, g, b;
     u32 i, gray;
@@ -644,7 +644,7 @@ void TintPalette_GrayScale2(u16 *palette, u32 count)
     }
 }
 
-void TintPalette_SepiaTone(u16 *palette, u32 count)
+void TintPalette_SepiaTone(u32 *palette, u32 count)
 {
     s32 r, g, b;
     u32 i, gray;
@@ -657,9 +657,9 @@ void TintPalette_SepiaTone(u16 *palette, u32 count)
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        r = (u16)((Q_8_8(1.2) * gray)) >> 8;
-        g = (u16)((Q_8_8(1.0) * gray)) >> 8;
-        b = (u16)((Q_8_8(0.94) * gray)) >> 8;
+        r = (u32)((Q_8_8(1.2) * gray)) >> 8;
+        g = (u32)((Q_8_8(1.0) * gray)) >> 8;
+        b = (u32)((Q_8_8(0.94) * gray)) >> 8;
 
         if (r > 31)
             r = 31;
@@ -668,7 +668,7 @@ void TintPalette_SepiaTone(u16 *palette, u32 count)
     }
 }
 
-void TintPalette_CustomTone(u16 *palette, u32 count, u16 rTone, u16 gTone, u16 bTone)
+void TintPalette_CustomTone(u32 *palette, u32 count, u32 rTone, u32 gTone, u32 bTone)
 {
     s32 r, g, b;
     u32 i, gray;
@@ -681,9 +681,9 @@ void TintPalette_CustomTone(u16 *palette, u32 count, u16 rTone, u16 gTone, u16 b
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        r = (u16)((rTone * gray)) >> 8;
-        g = (u16)((gTone * gray)) >> 8;
-        b = (u16)((bTone * gray)) >> 8;
+        r = (u32)((rTone * gray)) >> 8;
+        g = (u32)((gTone * gray)) >> 8;
+        b = (u32)((bTone * gray)) >> 8;
 
         if (r > 31)
             r = 31;
@@ -708,7 +708,7 @@ void TintPalette_CustomTone(u16 *palette, u32 count, u16 rTone, u16 gTone, u16 b
 // Blend the selected palettes in a series of steps toward or away from the color.
 // Only used by the Groudon/Kyogre fight scene to flash the screen for lightning.
 // One call is used to fade the bg from white, while another fades the duo from black
-void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id)
+void BlendPalettesGradually(u32 selectedPalettes, s32 delay, u8 coeff, u8 coeffTarget, u32 color, u8 priority, u8 id)
 {
     u8 taskId;
 

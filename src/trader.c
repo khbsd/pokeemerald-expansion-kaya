@@ -115,7 +115,7 @@ void Task_BufferDecorSelectionAndCloseWindow(u32 taskId, u32 decorationId)
 void Task_HandleGetDecorationMenuInput(u32 taskId)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
-    s8 input = Menu_ProcessInput();
+    s32 input = Menu_ProcessInput();
 
     switch (input)
     {

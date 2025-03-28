@@ -1608,25 +1608,25 @@ u8 (*const gMovementActionFuncs_RunRightSlow[])(struct ObjectEvent *, struct Spr
     MovementAction_PauseSpriteAnim,
 };
 
-bool8 (*const gMovementActionFuncs_WalkSlowStairsUp[])(struct ObjectEvent *, struct Sprite *) = {
+bool32 (*const gMovementActionFuncs_WalkSlowStairsUp[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_WalkSlowStairsUp_Step0,
     MovementAction_WalkSlowStairsUp_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-bool8 (*const gMovementActionFuncs_WalkSlowStairsDown[])(struct ObjectEvent *, struct Sprite *) = {
+bool32 (*const gMovementActionFuncs_WalkSlowStairsDown[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_WalkSlowStairsDown_Step0,
     MovementAction_WalkSlowStairsDown_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-bool8 (*const gMovementActionFuncs_WalkSlowStairsLeft[])(struct ObjectEvent *, struct Sprite *) = {
+bool32 (*const gMovementActionFuncs_WalkSlowStairsLeft[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_WalkSlowStairsLeft_Step0,
     MovementAction_WalkSlowStairsLeft_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-bool8 (*const gMovementActionFuncs_WalkSlowStairsRight[])(struct ObjectEvent *, struct Sprite *) = {
+bool32 (*const gMovementActionFuncs_WalkSlowStairsRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_WalkSlowStairsRight_Step0,
     MovementAction_WalkSlowStairsRight_Step1,
     MovementAction_PauseSpriteAnim,

@@ -303,7 +303,7 @@ static bool32 GetCurrentLoopedTaskActive(void)
     return IsLoopedTaskActive(state->loopTaskId);
 }
 
-static bool8 ShouldOpenRegionMapZoomed(void)
+static bool32 ShouldOpenRegionMapZoomed(void)
 {
     if (GetZoomDisabled())
         return FALSE;

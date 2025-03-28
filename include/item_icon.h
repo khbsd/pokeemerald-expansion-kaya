@@ -6,7 +6,7 @@ extern u8 *gItemIcon4x4Buffer;
 
 extern const struct SpriteTemplate gItemIconSpriteTemplate;
 
-bool8 AllocItemIconTemporaryBuffers(void);
+bool32 AllocItemIconTemporaryBuffers(void);
 void FreeItemIconTemporaryBuffers(void);
 void CopyItemIconPicTo4x4Buffer(const void *src, void *dest);
 u8 AddItemIconSprite(u32 tilesTag, u32 paletteTag, u32 itemId);

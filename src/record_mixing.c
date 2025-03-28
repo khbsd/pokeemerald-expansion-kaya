@@ -58,8 +58,8 @@ struct PlayerRecordRS
     struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
     struct RecordMixingDaycareMail daycareMail;
     struct RSBattleTowerRecord battleTowerRecord;
-    u16 giftItem;
-    u16 filler[50];
+    u32 giftItem;
+    u32 filler[50];
 };
 
 struct PlayerRecordEmerald
@@ -71,7 +71,7 @@ struct PlayerRecordEmerald
     /* 0x1084 */ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
     /* 0x10AC */ struct RecordMixingDaycareMail daycareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
-    /* 0x1210 */ u16 giftItem;
+    /* 0x1210 */ u32 giftItem;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
     /* 0x12DC */ struct PlayerHallRecords hallRecords;
@@ -84,7 +84,7 @@ union PlayerRecord
     struct PlayerRecordEmerald emerald;
 };
 
-static bool8 sReadyToReceive;
+static bool32 sReadyToReceive;
 static struct SecretBase *sSecretBasesSave;
 static TVShow *sTvShowsSave;
 static PokeNews *sPokeNewsSave;
@@ -110,8 +110,8 @@ static void Task_MixingRecordsRecv(u32);
 static void Task_SendPacket(u32);
 static void Task_CopyReceiveBuffer(u32);
 static void Task_SendPacket_SwitchToReceive(u32);
-static void *LoadPtrFromTaskData(const u16 *);
-static void StorePtrInTaskData(void *, u16 *);
+static void *LoadPtrFromTaskData(const u32 *);
+static void StorePtrInTaskData(void *, u32 *);
 static u32 GetMultiplayerId_(void);
 static void *GetPlayerRecvBuffer(u32);
 static void ReceiveOldManData(OldMan *, size_t, u32);
@@ -119,7 +119,7 @@ static void ReceiveBattleTowerData(void *, size_t, u32);
 static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u32);
 static void CalculateDaycareMailRandSum(const u32 *);
 static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u32, TVShow *);
-static void ReceiveGiftItem(u16 *, u32 );
+static void ReceiveGiftItem(u32 *, u32 );
 static void Task_DoRecordMixing(u32);
 static void GetSavedApprentices(struct Apprentice *, struct Apprentice *);
 static void ReceiveApprenticeData(struct Apprentice *, size_t, u32);
@@ -462,20 +462,20 @@ static void Task_MixingRecordsRecv(u32 taskId)
             task->func = Task_SendPacket;
             if (Link_AnyPartnersPlayingRubyOrSapphire())
             {
-                StorePtrInTaskData(sSentRecord, (u16*) &task->tSentRecord);
+                StorePtrInTaskData(sSentRecord, (u32*) &task->tSentRecord);
                 subTaskId = CreateTask(Task_CopyReceiveBuffer, 80);
                 task->tCopyTaskId = subTaskId;
                 gTasks[subTaskId].tParentTaskId = taskId;
-                StorePtrInTaskData(sReceivedRecords, (u16*) &gTasks[subTaskId].tRecvRecords);
+                StorePtrInTaskData(sReceivedRecords, (u32*) &gTasks[subTaskId].tRecvRecords);
                 sRecordStructSize = sizeof(struct PlayerRecordRS);
             }
             else
             {
-                StorePtrInTaskData(sSentRecord, (u16*)  &task->tSentRecord);
+                StorePtrInTaskData(sSentRecord, (u32*)  &task->tSentRecord);
                 subTaskId = CreateTask(Task_CopyReceiveBuffer, 80);
                 task->tCopyTaskId = subTaskId;
                 gTasks[subTaskId].tParentTaskId = taskId;
-                StorePtrInTaskData(sReceivedRecords,(u16*) &gTasks[subTaskId].tRecvRecords);
+                StorePtrInTaskData(sReceivedRecords,(u32*) &gTasks[subTaskId].tRecvRecords);
                 sRecordStructSize = sizeof(struct PlayerRecordEmerald);
             }
         }
@@ -497,7 +497,7 @@ static void Task_SendPacket(u32 taskId)
     {
     case 0: // Copy record data chunk to send buffer
         {
-            void *recordData = LoadPtrFromTaskData((u16*)&task->tSentRecord) + task->tNumChunksSent * BUFFER_CHUNK_SIZE;
+            void *recordData = LoadPtrFromTaskData((u32*)&task->tSentRecord) + task->tNumChunksSent * BUFFER_CHUNK_SIZE;
 
             memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
             task->tState++;
@@ -539,7 +539,7 @@ static void Task_CopyReceiveBuffer(u32 taskId)
         {
             if ((status >> i) & 1)
             {
-                void *dest = LoadPtrFromTaskData((u16*) &task->tRecvRecords) + task->tNumChunksRecv(i) * BUFFER_CHUNK_SIZE + sRecordStructSize * i;
+                void *dest = LoadPtrFromTaskData((u32*) &task->tRecvRecords) + task->tNumChunksRecv(i) * BUFFER_CHUNK_SIZE + sRecordStructSize * i;
                 void *src = GetPlayerRecvBuffer(i);
                 if ((task->tNumChunksRecv(i) + 1) * BUFFER_CHUNK_SIZE > sRecordStructSize)
                     memcpy(dest, src, sRecordStructSize - task->tNumChunksRecv(i) * BUFFER_CHUNK_SIZE);
@@ -582,12 +582,12 @@ static void Task_SendPacket_SwitchToReceive(u32 taskId)
     sReadyToReceive = TRUE;
 }
 
-static void *LoadPtrFromTaskData(const u16 *asShort)
+static void *LoadPtrFromTaskData(const u32 *asShort)
 {
     return (void *)(asShort[0] | (asShort[1] << 16));
 }
 
-static void StorePtrInTaskData(void *records, u16 *asShort)
+static void StorePtrInTaskData(void *records, u32 *asShort)
 {
     asShort[0] = (u32)records;
     asShort[1] = ((u32)records >> 16);
@@ -631,7 +631,7 @@ static void ShufflePlayerIndices(u32 *data)
 static void ReceiveOldManData(OldMan *records, size_t recordSize, u32 multiplayerId)
 {
     u32 version;
-    u16 language;
+    u32 language;
     OldMan *oldMan;
     u32 mixIndices[MAX_LINK_PLAYERS];
 
@@ -761,13 +761,13 @@ static u32 GetDaycareMailRandSum(void)
 
 static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size_t recordSize, u32 multiplayerId, TVShow *shows)
 {
-    u16 i, j;
+    u32 i, j;
     u32 linkPlayerCount;
     u32 tableId;
     struct RecordMixingDaycareMail *mixMail;
     u32 playerSlot1, playerSlot2;
     void *ptr;
-    bool8 canHoldItem[MAX_LINK_PLAYERS][DAYCARE_MON_COUNT];
+    bool32 canHoldItem[MAX_LINK_PLAYERS][DAYCARE_MON_COUNT];
     u32 idxs[MAX_LINK_PLAYERS][2];
     u32 numDaycareCanHold;
     bool32 anyRS;
@@ -795,7 +795,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
 
         for (j = 0; j < mixMail->numDaycareMons; j++)
         {
-            u16 otNameLanguage, nicknameLanguage;
+            u32 otNameLanguage, nicknameLanguage;
             struct DaycareMail *daycareMail = &mixMail->mail[j];
 
             if (daycareMail->message.itemId == ITEM_NONE)
@@ -959,7 +959,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
 }
 
 
-static void ReceiveGiftItem(u16 *item, u32 multiplayerId)
+static void ReceiveGiftItem(u32 *item, u32 multiplayerId)
 {
     if (multiplayerId != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == POCKET_KEY_ITEMS)
     {

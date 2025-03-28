@@ -40,7 +40,7 @@ static void (* const sBattlePalaceFunctions[])(void) =
     [BATTLE_PALACE_FUNC_GIVE_PRIZE]         = GivePalacePrize,
 };
 
-static const u16 sBattlePalaceEarlyPrizes[] =
+static const u32 sBattlePalaceEarlyPrizes[] =
 {
     ITEM_HP_UP,
     ITEM_PROTEIN,
@@ -50,7 +50,7 @@ static const u16 sBattlePalaceEarlyPrizes[] =
     ITEM_ZINC
 };
 
-static const u16 sBattlePalaceLatePrizes[] =
+static const u32 sBattlePalaceLatePrizes[] =
 {
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,

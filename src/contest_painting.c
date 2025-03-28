@@ -21,26 +21,26 @@
 #include "window.h"
 #include "constants/rgb.h"
 
-COMMON_DATA u16 (*gContestMonPixels)[][32] = {0};
+COMMON_DATA u32 (*gContestMonPixels)[][32] = {0};
 COMMON_DATA struct ImageProcessingContext gImageProcessingContext = {0};
 COMMON_DATA struct ContestWinner *gContestPaintingWinner = {0};
-COMMON_DATA u16 *gContestPaintingMonPalette = NULL;
+COMMON_DATA u32 *gContestPaintingMonPalette = NULL;
 
 static u32 sHoldState;
-static u16 sMosaicVal;
-static u16 sFadeCounter;
-static bool8 sVarsInitialized;
+static u32 sMosaicVal;
+static u32 sFadeCounter;
+static bool32 sVarsInitialized;
 static u32 sWindowId;
 
 static void ShowContestPainting(void);
 static void HoldContestPainting(void);
 static void InitContestPaintingWindow(void);
 static void InitContestPaintingBg(void);
-static void InitContestPaintingVars(bool8);
+static void InitContestPaintingVars(bool32);
 static void CreateContestPaintingPicture(u32, u32);
 static void PrintContestPaintingCaption(u32, u32);
 static void VBlankCB_ContestPainting(void);
-static void _InitContestMonPixels(u32 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64]);
+static void _InitContestMonPixels(u32 *spriteGfx, u32 *palette, u32 (*destPixels)[64][64]);
 
 extern const u32 gContestHallPaintingCaption[];
 extern const u32 gContestCoolness[];
@@ -69,7 +69,7 @@ extern const u32 gContestPaintingTough1[];
 extern const u32 gContestPaintingTough2[];
 extern const u32 gContestPaintingTough3[];
 
-static const u16 sPictureFramePalettes[]         = INCBIN_U16("graphics/picture_frame/bg.gbapal");
+static const u32 sPictureFramePalettes[]         = INCBIN_U16("graphics/picture_frame/bg.gbapal");
 static const u32 sPictureFrameTiles_Cool[]        = INCBIN_u32("graphics/picture_frame/cool.4bpp.rl");
 static const u32 sPictureFrameTiles_Beauty[]      = INCBIN_u32("graphics/picture_frame/beauty.4bpp.rl");
 static const u32 sPictureFrameTiles_Cute[]        = INCBIN_u32("graphics/picture_frame/cute.4bpp.rl");
@@ -159,7 +159,7 @@ static const struct OamData sContestPaintingMonOamData =
     .paletteNum = 0,
 };
 
-static const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
+static const u32 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 
 void SetContestWinnerForPainting(int contestWinnerId)
 {
@@ -277,7 +277,7 @@ static void InitContestPaintingWindow(void)
     ShowBg(1);
 }
 
-static void PrintContestPaintingCaption(u32 contestType, bool8 isForArtist)
+static void PrintContestPaintingCaption(u32 contestType, bool32 isForArtist)
 {
     int x;
     u32 category;
@@ -321,7 +321,7 @@ static void InitContestPaintingBg(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
-static void InitContestPaintingVars(bool8 reset)
+static void InitContestPaintingVars(bool32 reset)
 {
     if (reset == FALSE)
     {
@@ -360,7 +360,7 @@ static void VBlankCB_ContestPainting(void)
     TransferPlttBuffer();
 }
 
-static void InitContestMonPixels(u16 species, bool8 backPic)
+static void InitContestMonPixels(u32 species, bool32 backPic)
 {
     const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gContestPaintingWinner->isShiny, gContestPaintingWinner->personality);
     LZDecompressVram(pal, gContestPaintingMonPalette);
@@ -382,9 +382,9 @@ static void InitContestMonPixels(u16 species, bool8 backPic)
     }
 }
 
-static void _InitContestMonPixels(u32 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
+static void _InitContestMonPixels(u32 *spriteGfx, u32 *palette, u32 (*destPixels)[64][64])
 {
-    u16 tileY, tileX, pixelY, pixelX;
+    u32 tileY, tileX, pixelY, pixelX;
     u32 colorIndex;
 
     for (tileY = 0; tileY < 8; tileY++)
@@ -411,9 +411,9 @@ static void _InitContestMonPixels(u32 *spriteGfx, u16 *palette, u16 (*destPixels
     }
 }
 
-#define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
+#define VRAM_PICTURE_DATA(x, y) (((u32 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
 
-static void LoadContestPaintingFrame(u32 contestWinnerId, bool8 isForArtist)
+static void LoadContestPaintingFrame(u32 contestWinnerId, bool32 isForArtist)
 {
     u32 x, y;
 
@@ -586,7 +586,7 @@ static void DoContestPaintingImageProcessing(u32 imageEffect)
     LoadPalette(gContestPaintingMonPalette, OBJ_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
 }
 
-static void CreateContestPaintingPicture(u32 contestWinnerId, bool8 isForArtist)
+static void CreateContestPaintingPicture(u32 contestWinnerId, bool32 isForArtist)
 {
     AllocPaintingResources();
     InitContestMonPixels(gContestPaintingWinner->species, FALSE);

@@ -433,7 +433,7 @@ static void AnimBite_Step2(struct Sprite *sprite)
 void AnimTearDrop(struct Sprite *sprite)
 {
     u8 battler;
-    s8 xOffset;
+    s32 xOffset;
 
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
         battler = gBattleAnimAttacker;
@@ -872,7 +872,7 @@ void AnimTask_InitMementoShadow(u8 taskId)
 
 void AnimTask_MementoHandleBg(u8 taskId)
 {
-    bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
+    bool32 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     ResetBattleAnimBg(toBG2);
 
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
@@ -1011,7 +1011,7 @@ void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId;
     u8 battler;
-    bool8 calcSpriteId = FALSE;
+    bool32 calcSpriteId = FALSE;
     u8 position = B_POSITION_PLAYER_LEFT;
 
     switch (gBattleAnimArgs[0])

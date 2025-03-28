@@ -1,10 +1,10 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
-extern bool8 gDifferentSaveFile;
+extern bool32 gDifferentSaveFile;
 // Shortcuts some randomness in berry_blender.c, and enables debug printing
 // in contest.c.
-extern bool8 gEnableContestDebugging;
+extern bool32 gEnableContestDebugging;
 
 void SetTrainerId(u32 trainerId, u8 *dst);
 u32 GetTrainerId(u8 *trainerId);

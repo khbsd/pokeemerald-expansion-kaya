@@ -8,7 +8,7 @@
 #include "trainer_see.h"
 #include "constants/event_objects.h"
 
-bool8 IsPlayerStandingStill(void)
+bool32 IsPlayerStandingStill(void)
 {
     if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         return FALSE;
@@ -26,7 +26,7 @@ static void Task_FreezePlayer(u32 taskId)
     }
 }
 
-bool8 IsFreezePlayerFinished(void)
+bool32 IsFreezePlayerFinished(void)
 {
     if (FuncIsActiveTask(Task_FreezePlayer))
     {
@@ -69,7 +69,7 @@ static void Task_FreezeSelectedObjectAndPlayer(u32 taskId)
         DestroyTask(taskId);
 }
 
-bool8 IsFreezeSelectedObjectAndPlayerFinished(void)
+bool32 IsFreezeSelectedObjectAndPlayerFinished(void)
 {
     if (FuncIsActiveTask(Task_FreezeSelectedObjectAndPlayer))
     {
@@ -193,7 +193,7 @@ void FreezeForApproachingTrainers(void)
         UnfreezeObjectEvent(followerObj);
 }
 
-bool8 IsFreezeObjectAndPlayerFinished(void)
+bool32 IsFreezeObjectAndPlayerFinished(void)
 {
     if (FuncIsActiveTask(Task_FreezeObjectAndPlayer))
     {

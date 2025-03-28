@@ -47,13 +47,13 @@ struct SiiRtcInfo
 void SiiRtcUnprotect(void);
 void SiiRtcProtect(void);
 u8 SiiRtcProbe(void);
-bool8 SiiRtcReset(void);
-bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc);
-bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc);
+bool32 SiiRtcReset(void);
+bool32 SiiRtcGetStatus(struct SiiRtcInfo *rtc);
+bool32 SiiRtcSetStatus(struct SiiRtcInfo *rtc);
+bool32 SiiRtcGetDateTime(struct SiiRtcInfo *rtc);
+bool32 SiiRtcSetDateTime(struct SiiRtcInfo *rtc);
+bool32 SiiRtcGetTime(struct SiiRtcInfo *rtc);
+bool32 SiiRtcSetTime(struct SiiRtcInfo *rtc);
+bool32 SiiRtcSetAlarm(struct SiiRtcInfo *rtc);
 
 #endif // GUARD_RTC_H

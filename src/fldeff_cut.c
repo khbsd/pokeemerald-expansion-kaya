@@ -28,7 +28,7 @@ extern struct MapPosition gPlayerFacingPosition;
 extern const u32 FarawayIsland_Interior_EventScript_HideMewWhenGrassCut[];
 
 extern const u32 gFieldEffectPic_CutGrass[];
-extern const u16 gFieldEffectPal_CutGrass[];
+extern const u32 gFieldEffectPal_CutGrass[];
 
 // cut 'square' defines
 #define CUT_NORMAL_SIDE 3
@@ -41,8 +41,8 @@ extern const u16 gFieldEffectPal_CutGrass[];
 
 struct HyperCutterUnk
 {
-    s8 x;
-    s8 y;
+    s32 x;
+    s32 y;
     u32 unk2[2];
 };
 
@@ -62,7 +62,7 @@ static void HandleLongGrassOnHyper(u8, s16, s16);
 static u32 sCutSquareSide;
 static u32 sTileCountFromPlayer_X;
 static u8 sTileCountFromPlayer_Y;
-static bool8 sHyperCutTiles[CUT_HYPER_AREA];
+static bool32 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variablesu32
 static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;
@@ -135,14 +135,14 @@ static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 };
 
 // code
-bool8 SetUpFieldMove_Cut(void)
+bool32 SetUpFieldMove_Cut(void)
 {
     u326 x, y;
     u32 i, j;
     u8 tileBehavior;
-    u16 userAbility;
-    bool8 cutTiles[CUT_NORMAL_AREA];
-    bool8 ret;
+    u32 userAbility;
+    bool32 cutTiles[CUT_NORMAL_AREA];
+    bool32 ret;
 
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE)
     {
@@ -224,7 +224,7 @@ bool8 SetUpFieldMove_Cut(void)
         }
         else
         {
-            bool8 tileCuttable;
+            bool32 tileCuttable;
             for (i = 0; i < 16; i++)
             {
                 x = gPlayerFacingPosition.x + sHyperCutStruct[i].x;
@@ -281,7 +281,7 @@ static void FieldCallback_CutGrass(void)
     ScriptContext_SetupScript(EventScript_UseCutGrass);
 }
 
-bool8 FldEff_UseCutOnGrass(void)
+bool32 FldEff_UseCutOnGrass(void)
 {u32
     u8 taskId = CreateFieldMoveTask();
 
@@ -297,7 +297,7 @@ static void FieldCallback_CutTree(void)
     ScriptContext_SetupScript(EventScript_UseCut);
 }
 
-bool8 FldEff_UseCutOnTree(void)
+bool32 FldEff_UseCutOnTree(void)
 {u32
     u8 taskId = CreateFieldMoveTask();
 
@@ -313,7 +313,7 @@ static void StartCutGrassFieldEffect(void)
     FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
-bool8 FldEff_CutGrass(void)
+bool32 FldEff_CutGrass(void)
 {
     u326 x, y;
     u8 i = 0;
@@ -324,8 +324,8 @@ bool8 FldEff_CutGrass(void)
     {
         if (sHyperCutTiles[i] == TRUE)
         {
-            s8 xAdd = (i % 5) - 2;
-            s8 yAdd = (i / 5) - 2;
+            s32 xAdd = (i % 5) - 2;
+            s32 yAdd = (i / 5) - 2;
 
             x = xAdd + gPlayerFacingPosition.x;
             y = yAdd + gPlayerFacingPosition.y;
@@ -402,7 +402,7 @@ enum
 u32
 static u8 GetLongGrassCaseAt(s16 x, s16 y)
 {
-    u16 metatileId = MapGridGetMetatileIdAt(x, y);
+    u32 metatileId = MapGridGetMetatileIdAt(x, y);
 
     if (metatileId == METATILE_General_Grass)
         return LONG_GRASS_FIELD;
@@ -465,7 +465,7 @@ u32
 static void HandleLongGrassOnHyper(u8 caseId, s16 x, s16 y)
 {
     s16 newX;
-    bool8 arr[3];
+    bool32 arr[3];
 
     if (caseId == 0)
     {

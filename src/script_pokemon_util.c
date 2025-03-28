@@ -61,7 +61,7 @@ static void HealPlayerBoxes(void)
     }
 }
 
-u32 ScriptGiveEgg(u16 species)
+u32 ScriptGiveEgg(u32 species)
 {
     struct Pokemon mon;
     u32 isEgg;
@@ -89,29 +89,29 @@ void HasEnoughMonsForDoubleBattle(void)
     }
 }
 
-static bool8 CheckPartyMonHasHeldItem(u16 item)
+static bool32 CheckPartyMonHasHeldItem(u32 item)
 {
     int i;
 
     for(i = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == item)
             return TRUE;
     }
     return FALSE;
 }
 
-bool8 DoesPartyHaveEnigmaBerry(void)
+bool32 DoesPartyHaveEnigmaBerry(void)
 {
-    bool8 hasItem = CheckPartyMonHasHeldItem(ITEM_ENIGMA_BERRY_E_READER);
+    bool32 hasItem = CheckPartyMonHasHeldItem(ITEM_ENIGMA_BERRY_E_READER);
     if (hasItem == TRUE)
         GetBerryNameByBerryType(ItemIdToBerryType(ITEM_ENIGMA_BERRY_E_READER), gStringVar1);
 
     return hasItem;
 }
 
-void CreateScriptedWildMon(u16 species, u32 level, u16 item)
+void CreateScriptedWildMon(u32 species, u32 level, u32 item)
 {
     u32 heldItem[2];
 
@@ -127,7 +127,7 @@ void CreateScriptedWildMon(u16 species, u32 level, u16 item)
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
 }
-void CreateScriptedDoubleWildMon(u16 species1, u32 level1, u16 item1, u16 species2, u32 level2, u16 item2)
+void CreateScriptedDoubleWildMon(u32 species1, u32 level1, u32 item1, u32 species2, u32 level2, u32 item2)
 {
     u32 heldItem1[2];
     u32 heldItem2[2];
@@ -157,7 +157,7 @@ void CreateScriptedDoubleWildMon(u16 species1, u32 level1, u16 item1, u16 specie
     }
 }
 
-void ScriptSetMonMoveSlot(u32 monIndex, u16 move, u32 slot)
+void ScriptSetMonMoveSlot(u32 monIndex, u32 move, u32 slot)
 {
 // Allows monIndex to go out of bounds of gPlayerParty. Doesn't occur in vanilla
 #ifdef BUGFIX
@@ -332,9 +332,9 @@ void SetTeraType(struct ScriptContext *ctx)
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u32 side, u32 slot, u16 species, u32 level, u16 item, enum PokeBall ball, u32 nature, u32 abilityNum, u32 gender, u32 *evs, u32 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u32 teraType, u32 dmaxLevel)
+static u32 ScriptGiveMonParameterized(u32 side, u32 slot, u32 species, u32 level, u32 item, enum PokeBall ball, u32 nature, u32 abilityNum, u32 gender, u32 *evs, u32 *ivs, u32 *moves, bool32 isShiny, bool32 gmaxFactor, u32 teraType, u32 dmaxLevel)
 {
-    u16 nationalDexNum;
+    u32 nationalDexNum;
     int sentToPc;
     struct Pokemon mon;
     u32 i;
@@ -472,12 +472,12 @@ static u32 ScriptGiveMonParameterized(u32 side, u32 slot, u16 species, u32 level
     return sentToPc;
 }
 
-u32 ScriptGiveMon(u16 species, u8 level, u16 item)
+u32 ScriptGiveMon(u32 species, u8 level, u32 item)
 {
     u8 evs[NUM_STATS]        = {0, 0, 0, 0, 0, 0};
     u8 ivs[NUM_STATS]        = {MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1,   // We pass "MAX_PER_STAT_IVS + 1" here to ensure that
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
-    u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
+    u32 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 u32
     return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES, 0);
 }u32
@@ -490,7 +490,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
 {
     u8 side           = ScriptReadByte(ctx);
     u8 slot           = ScriptReadByte(ctx);
-    u16 species       = VarGet(ScriptReadHalfword(ctx));
+    u32 species       = VarGet(ScriptReadHalfword(ctx));
     u8 level          = VarGet(ScriptReadHalfword(ctx));
 
     u32 flags         = ScriptReadWord(ctx);
@@ -548,18 +548,18 @@ u32
     speedIv           = PARSE_FLAG(14, speedIv);
     spAtkIv           = PARSE_FLAG(15, spAtkIv);
     spDefIv           = PARSE_FLAG(16, spDefIv);
-    u16 move1         = PARSE_FLAG(17, MOVE_NONE);
-    u16 move2         = PARSE_FLAG(18, MOVE_NONE);
-    u16 move3         = PARSE_FLAG(19, MOVE_NONE);
-    u16 move4         = PARSE_FLAG(20, MOVE_NONE);
-    bool8 isShiny     = PARSE_FLAG(21, FALSE);
-    bool8 gmaxFactor  = PARSE_FLAG(22, FALSE);
+    u32 move1         = PARSE_FLAG(17, MOVE_NONE);
+    u32 move2         = PARSE_FLAG(18, MOVE_NONE);
+    u32 move3         = PARSE_FLAG(19, MOVE_NONE);
+    u32 move4         = PARSE_FLAG(20, MOVE_NONE);
+    bool32 isShiny     = PARSE_FLAG(21, FALSE);
+    bool32 gmaxFactor  = PARSE_FLAG(22, FALSE);
     u8 teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
     u8 dmaxLevel      = PARSE_FLAG(24, 0);
 
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
-    u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
+    u32 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
 u32
     u32 (side == 0)
         Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
@@ -608,7 +608,7 @@ void Script_SetStatus1(struct ScriptContext *ctx)
 
     if (slot >= PARTY_SIZE)
     {
-        u16 species;
+        u32 species;
 
         for (slot = 0; slot < PARTY_SIZE; slot++)
         {

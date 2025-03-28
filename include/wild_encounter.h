@@ -28,21 +28,21 @@ struct WildPokemonHeader
 };
 
 extern const struct WildPokemonHeader gWildMonHeaders[];
-extern bool8 gIsFishingEncounter;
-extern bool8 gIsSurfingEncounter;
+extern bool32 gIsFishingEncounter;
+extern bool32 gIsSurfingEncounter;
 extern u8 gChainFishingDexNavStreak;
 
-void DisableWildEncounters(bool8 disabled);
+void DisableWildEncounters(bool32 disabled);
 u8 PickWildMonNature(void);
-bool8 StandardWildEncounter(u32 currMetaTileBehavior, u32 previousMetaTileBehavior);
-bool8 SweetScentWildEncounter(void);
-bool8 DoesCurrentMapHaveFishingMons(void);
+bool32 StandardWildEncounter(u32 currMetaTileBehavior, u32 previousMetaTileBehavior);
+bool32 SweetScentWildEncounter(void);
+bool32 DoesCurrentMapHaveFishingMons(void);
 void FishingWildEncounter(u8 rod);
-u32 GetLocalWildMon(bool8 *isWaterMon);
+u32 GetLocalWildMon(bool32 *isWaterMon);
 u32 GetLocalWaterMon(void);
-bool8 UpdateRepelCounter(void);
-bool8 TryDoDoubleWildBattle(void);
-bool8 StandardWildEncounter_Debug(void);
+bool32 UpdateRepelCounter(void);
+bool32 TryDoDoubleWildBattle(void);
+bool32 StandardWildEncounter_Debug(void);
 u32 CalculateChainFishingShinyRolls(void);
 void CreateWildMon(u32 species, u8 level);
 u32 GetCurrentMapWildMonHeaderId(void);

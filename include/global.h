@@ -158,8 +158,8 @@ static inline u32 CycleCountEnd()
 
 struct Coords8
 {
-    s8 x;
-    s8 y;
+    s32 x;
+    s32 y;
 };
 
 struct UCoords8
@@ -195,9 +195,9 @@ struct UCoords32
 struct Time
 {
     /*0x00*/ s16 days;
-    /*0x02*/ s8 hours;
-    /*0x03*/ s8 minutes;
-    /*0x04*/ s8 seconds;
+    /*0x02*/ s32 hours;
+    /*0x03*/ s32 minutes;
+    /*0x04*/ s32 seconds;
 };
 
 #include "constants/items.h"
@@ -583,7 +583,7 @@ struct SecretBaseParty
 struct SecretBase
 {
     /*0x1A9C*/ u8 secretBaseId;
-    /*0x1A9D*/ bool8 toRegister:4;
+    /*0x1A9D*/ bool32 toRegister:4;
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 battledOwnerToday:1;
     /*0x1A9D*/ u8 registryStatus:2;
@@ -607,9 +607,9 @@ struct SecretBase
 
 struct WarpData
 {
-    s8 mapGroup;
-    s8 mapNum;
-    s8 warpId;
+    s32 mapGroup;
+    s32 mapNum;
+    s32 warpId;
     //u8 padding;
     s16 x, y;
 };
@@ -644,7 +644,7 @@ struct Roamer
     /*0x10*/ u8 cute;
     /*0x11*/ u8 smart;
     /*0x12*/ u8 tough;
-    /*0x13*/ bool8 active;
+    /*0x13*/ bool32 active;
     /*0x14*/ u8 statusB; // Stores frostbite
     /*0x14*/ u8 filler[0x7];
 };
@@ -690,7 +690,7 @@ struct MauvilleManBard
     /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x22*/ u8 filler_2DB6[0x3];
     /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
-    /*0x29*/ bool8 hasChangedSong;
+    /*0x29*/ bool32 hasChangedSong;
     /*0x2A*/ u8 language;
     /*0x2B*/ //u8 padding2;
 }; /*size = 0x2C*/
@@ -698,7 +698,7 @@ struct MauvilleManBard
 struct MauvilleManStoryteller
 {
     u8 id;
-    bool8 alreadyRecorded;
+    bool32 alreadyRecorded;
     u8 filler2[2];
     u8 gameStatIDs[NUM_STORYTELLER_TALES];
     u8 trainerNames[NUM_STORYTELLER_TALES][PLAYER_NAME_LENGTH];
@@ -721,7 +721,7 @@ struct MauvilleManGiddy
 struct MauvilleManHipster
 {
     u8 id;
-    bool8 taughtWord;
+    bool32 taughtWord;
     u8 language;
 };
 
@@ -786,7 +786,7 @@ struct ContestWinner
     u8 monName[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u8 contestRank:7;
-    bool8 isShiny:1;
+    bool32 isShiny:1;
     //u8 padding;
 };
 
@@ -832,7 +832,7 @@ struct LilycoveLadyQuiz
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x020*/ u32 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x028*/ u32 prize;
-    /*0x02A*/ bool8 waitingForChallenger;
+    /*0x02A*/ bool32 waitingForChallenger;
     /*0x02B*/ u8 questionId;
     /*0x02C*/ u8 prevQuestionId;
     /*0x02D*/ u8 language;
@@ -842,7 +842,7 @@ struct LilycoveLadyFavor
 {
     /*0x000*/ u8 id;
     /*0x001*/ u8 state;
-    /*0x002*/ bool8 likedItem;
+    /*0x002*/ bool32 likedItem;
     /*0x003*/ u8 numItemsGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x00C*/ u8 favorId;
@@ -856,7 +856,7 @@ struct LilycoveLadyFavor
 struct LilycoveLadyContest
 {
     /*0x000*/ u8 id;
-    /*0x001*/ bool8 givenPokeblock;
+    /*0x001*/ bool32 givenPokeblock;
     /*0x002*/ u8 numGoodPokeblocksGiven;
     /*0x003*/ u8 numOtherPokeblocksGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -880,7 +880,7 @@ struct WaldaPhrase
     u8 text[16];
     u8 iconId;
     u8 patternId;
-    bool8 patternUnlocked;
+    bool32 patternUnlocked;
     //u8 padding;
 };
 
@@ -1129,7 +1129,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    s8 elevation;
+    s32 elevation;
 };
 
 #if T_SHOULD_RUN_MOVE_ANIM

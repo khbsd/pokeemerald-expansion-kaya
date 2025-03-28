@@ -71,17 +71,17 @@ struct SecretBaseRecordMixer
 
 struct SecretBaseEntranceMetatiles
 {
-    u16 closedMetatileId;
-    u16 openMetatileId;
+    u32 closedMetatileId;
+    u32 openMetatileId;
 };
 
 static EWRAM_DATA u32 sCurSecretBaseId = 0;
-static EWRAM_DATA bool8 sInFriendSecretBase = FALSE;
+static EWRAM_DATA bool32 sInFriendSecretBase = FALSE;
 static EWRAM_DATA struct SecretBaseRegistryMenu *sRegistryMenu = NULL;
 
 static void Task_ShowSecretBaseRegistryMenu(u32);
 static void BuildRegistryMenuItems(u32);
-static void RegistryMenu_OnCursorMove(s32, bool8, struct ListMenu *);
+static void RegistryMenu_OnCursorMove(s32, bool32, struct ListMenu *);
 static void FinalizeRegistryMenu(u32);
 static void AddRegistryMenuScrollArrows(u32);
 static void HandleRegistryMenuInput(u32);
@@ -159,7 +159,7 @@ static const struct YesNoFuncTable sDeleteRegistryYesNoFuncs =
     .noFunc = DeleteRegistry_No,
 };
 
-static const u16 sSecretBaseOwnerGfxIds[10] =
+static const u32 sSecretBaseOwnerGfxIds[10] =
 {
     // Male
     OBJ_EVENT_GFX_YOUNGSTER,
@@ -221,7 +221,7 @@ static const struct ListMenuTemplate sRegistryListMenuTemplate =
 
 static void ClearSecretBase(struct SecretBase *secretBase)
 {
-    u16 i;
+    u32 i;
     CpuFastFill16(0, secretBase, sizeof(struct SecretBase));
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         secretBase->trainerName[i] = EOS;
@@ -229,7 +229,7 @@ static void ClearSecretBase(struct SecretBase *secretBase)
 
 void ClearSecretBases(void)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < SECRET_BASES_COUNT; i++)
         ClearSecretBase(&gSaveBlock1Ptr->secretBases[i]);
 }
@@ -241,7 +241,7 @@ static void SetCurSecretBaseId(void)
 
 void TrySetCurSecretBaseIndex(void)
 {
-    u16 i;
+    u32 i;
 
     gSpecialVar_Result = FALSE;
     for (i = 0; i < SECRET_BASES_COUNT; i++)
@@ -298,7 +298,7 @@ void GetSecretBaseTypeInFrontOfPlayer(void)
     gSpecialVar_0x8007 = GetSecretBaseTypeInFrontOfPlayer_();
 }
 
-static void FindMetatileIdMapCoords(s16 *x, s16 *y, u16 metatileId)
+static void FindMetatileIdMapCoords(s16 *x, s16 *y, u32 metatileId)
 {
     s16 i, j;
     const struct MapLayout *mapLayout = gMapHeader.mapLayout;
@@ -320,7 +320,7 @@ static void FindMetatileIdMapCoords(s16 *x, s16 *y, u16 metatileId)
 // Opens or closes the secret base entrance metatile in front of the player.
 void ToggleSecretBaseEntranceMetatile(void)
 {
-    u16 i;
+    u32 i;
     s16 x, y;
     s16 metatileId;
 
@@ -364,7 +364,7 @@ static u32 GetNameLength(const u32 *secretBaseOwnerName)
 
 void SetPlayerSecretBase(void)
 {
-    u16 i;
+    u32 i;
 
     gSaveBlock1Ptr->secretBases[0].secretBaseId = sCurSecretBaseId;
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
@@ -380,8 +380,8 @@ void SetPlayerSecretBase(void)
 // Set the 'open' entrance metatile for any occupied secret base on this map
 void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
 {
-    u16 bgId;
-    u16 i, j;
+    u32 bgId;
+    u32 i, j;
 
     for (bgId = 0; bgId < events->bgEventCount; bgId++)
     {
@@ -411,7 +411,7 @@ void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
 
 static void SetSecretBaseWarpDestination(void)
 {
-    s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
+    s32 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
     SetWarpDestinationToMapWarp(MAP_GROUP(SECRET_BASE_RED_CAVE1), GET_BASE_MAP_NUM(secretBaseGroup), GET_BASE_WARP_ID(secretBaseGroup));
 }
 
@@ -419,7 +419,7 @@ static void SetSecretBaseWarpDestination(void)
 
 static void Task_EnterSecretBase(u32 taskId)
 {
-    u16 secretBaseIdx;
+    u32 secretBaseIdx;
 
     switch (gTasks[taskId].tState)
     {
@@ -450,7 +450,7 @@ void EnterSecretBase(void)
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
-bool8 SecretBaseMapPopupEnabled(void)
+bool32 SecretBaseMapPopupEnabled(void)
 {
     if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_INIT_SECRET_BASE) == 0)
         return FALSE;
@@ -487,7 +487,7 @@ static void Task_EnterNewlyCreatedSecretBase(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
-        s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
+        s32 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
         SetWarpDestination(
             gSaveBlock1Ptr->location.mapGroup,
             gSaveBlock1Ptr->location.mapNum,
@@ -507,7 +507,7 @@ void EnterNewlyCreatedSecretBase(void)
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
-bool8 CurMapIsSecretBase(void)
+bool32 CurMapIsSecretBase(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SECRET_BASE_RED_CAVE1)
      && (u32)gSaveBlock1Ptr->location.mapNum <= MAP_NUM(SECRET_BASE_SHRUB4))
@@ -516,9 +516,9 @@ bool8 CurMapIsSecretBase(void)
         return FALSE;
 }
 
-void InitSecretBaseAppearance(bool8 hidePC)
+void InitSecretBaseAppearance(bool32 hidePC)
 {
-    u16 secretBaseIdx;
+    u32 secretBaseIdx;
     s16 x, y = 0;
     u32 *decorations;
     u32 *decorPos;
@@ -569,7 +569,7 @@ void InitSecretBaseDecorationSprites(void)
     }
     else
     {
-        u16 secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
+        u32 secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
         decorations = gSaveBlock1Ptr->secretBases[secretBaseIdx].decorations;
         decorationPositions = gSaveBlock1Ptr->secretBases[secretBaseIdx].decorationPositions;
         numDecorations = DECOR_MAX_SECRET_BASE;
@@ -635,7 +635,7 @@ void InitSecretBaseDecorationSprites(void)
 void HideSecretBaseDecorationSprites(void)
 {
     u32 objectEventId;
-    u16 flag;
+    u32 flag;
 
     for (objectEventId = 0; objectEventId < gMapHeader.events->objectEventCount; objectEventId++)
     {
@@ -678,7 +678,7 @@ void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEven
     ScriptContext_SetupScript(SecretBase_EventScript_Enter);
 }
 
-bool8 TrySetCurSecretBase(void)
+bool32 TrySetCurSecretBase(void)
 {
     SetCurSecretBaseId();
     TrySetCurSecretBaseIndex();
@@ -748,7 +748,7 @@ void CopyCurSecretBaseOwnerName_StrVar1(void)
     ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
 }
 
-static bool8 IsSecretBaseRegistered(u32 secretBaseIdx)
+static bool32 IsSecretBaseRegistered(u32 secretBaseIdx)
 {
     if (gSaveBlock1Ptr->secretBases[secretBaseIdx].registryStatus)
         return TRUE;
@@ -758,7 +758,7 @@ static bool8 IsSecretBaseRegistered(u32 secretBaseIdx)
 
 static u32 GetAverageEVs(struct Pokemon *pokemon)
 {
-    u16 evTotal;
+    u32 evTotal;
     evTotal  = GetMonData(pokemon, MON_DATA_HP_EV);
     evTotal += GetMonData(pokemon, MON_DATA_ATK_EV);
     evTotal += GetMonData(pokemon, MON_DATA_DEF_EV);
@@ -770,9 +770,9 @@ static u32 GetAverageEVs(struct Pokemon *pokemon)
 
 void SetPlayerSecretBaseParty(void)
 {
-    u16 i;
-    u16 moveIdx;
-    u16 partyId;
+    u32 i;
+    u32 moveIdx;
+    u32 partyId;
     struct SecretBaseParty *party;
 
     partyId = 0;
@@ -809,7 +809,7 @@ void SetPlayerSecretBaseParty(void)
 
 void ClearAndLeaveSecretBase(void)
 {
-    u16 temp = gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived;
+    u32 temp = gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived;
     ClearSecretBase(&gSaveBlock1Ptr->secretBases[0]);
     gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived = temp;
     WarpOutOfSecretBase();
@@ -823,8 +823,8 @@ void MoveOutOfSecretBase(void)
 
 static void ClosePlayerSecretBaseEntrance(void)
 {
-    u16 i;
-    u16 j;
+    u32 i;
+    u32 j;
     s16 metatileId;
     const struct MapEvents *events = gMapHeader.events;
 
@@ -855,7 +855,7 @@ static void ClosePlayerSecretBaseEntrance(void)
 // entrance in the overworld.
 void MoveOutOfSecretBaseFromOutside(void)
 {
-    u16 temp;
+    u32 temp;
 
     ClosePlayerSecretBaseEntrance();
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
@@ -915,7 +915,7 @@ void ShowSecretBaseRegistryMenu(void)
 
 static void Task_ShowSecretBaseRegistryMenu(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     LockPlayerFieldControls();
     tNumBases = GetNumRegisteredSecretBases();
     if (tNumBases != 0)
@@ -969,7 +969,7 @@ static void BuildRegistryMenuItems(u32 taskId)
     gMultiuseListMenuTemplate.maxShowed = tMaxShownItems;
 }
 
-static void RegistryMenu_OnCursorMove(s32 unused, bool8 flag, struct ListMenu *menu)
+static void RegistryMenu_OnCursorMove(s32 unused, bool32 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
         PlaySE(SE_SELECT);
@@ -977,7 +977,7 @@ static void RegistryMenu_OnCursorMove(s32 unused, bool8 flag, struct ListMenu *m
 
 static void FinalizeRegistryMenu(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     SetStandardWindowBorderStyle(tMainWindowId, FALSE);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, tScrollOffset, tSelectedRow);
     AddRegistryMenuScrollArrows(taskId);
@@ -986,13 +986,13 @@ static void FinalizeRegistryMenu(u32 taskId)
 
 static void AddRegistryMenuScrollArrows(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &tScrollOffset);
 }
 
 static void HandleRegistryMenuInput(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     s32 input = ListMenu_ProcessInput(tListTaskId);
     ListMenuGetScrollAndRow(tListTaskId, &tScrollOffset, &tSelectedRow);
 
@@ -1022,7 +1022,7 @@ static void HandleRegistryMenuInput(u32 taskId)
 static void ShowRegistryMenuActions(u32 taskId)
 {
     struct WindowTemplate template;
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     RemoveScrollIndicatorArrowPair(tArrowTaskId);
     template = sRegistryWindowTemplates[1];
     template.width = GetMaxWidthInMenuTable(sRegistryMenuActions, 2);
@@ -1036,7 +1036,7 @@ static void ShowRegistryMenuActions(u32 taskId)
 
 static void HandleRegistryMenuActionsInput(u32 taskId)
 {
-    s8 input = Menu_ProcessInputNoWrap();
+    s32 input = Menu_ProcessInputNoWrap();
     switch (input)
     {
     case MENU_B_PRESSED:
@@ -1054,7 +1054,7 @@ static void HandleRegistryMenuActionsInput(u32 taskId)
 
 static void ShowRegistryMenuDeleteConfirmation(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     ClearStdWindowAndFrame(tMainWindowId, FALSE);
     ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tMainWindowId);
@@ -1074,7 +1074,7 @@ static void ShowRegistryMenuDeleteYesNo(u32 taskId)
 
 void DeleteRegistry_Yes_Callback(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
@@ -1091,7 +1091,7 @@ static void DeleteRegistry_Yes(u32 taskId)
 
 static void DeleteRegistry_No(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     FinalizeRegistryMenu(taskId);
@@ -1100,7 +1100,7 @@ static void DeleteRegistry_No(u32 taskId)
 
 static void ReturnToMainRegistryMenu(u32 taskId)
 {
-    u16 *data = (u16*) gTasks[taskId].data;
+    u32 *data = (u32*) gTasks[taskId].data;
     AddRegistryMenuScrollArrows(taskId);
     ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tActionWindowId);
@@ -1174,7 +1174,7 @@ void SetBattledOwnerFromResult(void)
 
 void GetSecretBaseOwnerAndState(void)
 {
-    u16 secretBaseIdx;
+    u32 secretBaseIdx;
     u32 i;
 
     secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
@@ -1200,7 +1200,7 @@ void SecretBasePerStepCallback(u32 taskId)
     s16 x;
     s16 y;
     u32 behavior;
-    u16 tileId;
+    u32 tileId;
     s16 *data;
 
     data = gTasks[taskId].data;
@@ -1357,7 +1357,7 @@ static void SaveSecretBase(u32 secretBaseIdx, struct SecretBase *secretBase, u32
     }
 }
 
-static bool8 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
+static bool32 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
 {
     u32 i;
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
@@ -1369,7 +1369,7 @@ static bool8 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct
     return TRUE;
 }
 
-static bool8 SecretBasesHaveSameTrainerName(struct SecretBase *sbr1, struct SecretBase *sbr2)
+static bool32 SecretBasesHaveSameTrainerName(struct SecretBase *sbr1, struct SecretBase *sbr2)
 {
     u32 i;
     for (i = 0; i < PLAYER_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
@@ -1381,7 +1381,7 @@ static bool8 SecretBasesHaveSameTrainerName(struct SecretBase *sbr1, struct Secr
     return TRUE;
 }
 
-static bool8 SecretBasesBelongToSamePlayer(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
+static bool32 SecretBasesBelongToSamePlayer(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
 {
     if (secretBase1->gender == secretBase2->gender
      && SecretBasesHaveSameTrainerId(secretBase1, secretBase2)
@@ -1508,7 +1508,7 @@ static void SortSecretBasesByRegistryStatus(void)
 // registryStatus is so registered bases can be attempted first
 static void TrySaveFriendsSecretBases(struct SecretBaseRecordMixer *mixer, u32 registryStatus)
 {
-    u16 i;
+    u32 i;
     for (i = 1; i < SECRET_BASES_COUNT; i++)
     {
         if (mixer->secretBases[i].registryStatus == registryStatus)
@@ -1516,7 +1516,7 @@ static void TrySaveFriendsSecretBases(struct SecretBaseRecordMixer *mixer, u32 r
     }
 }
 
-static bool8 SecretBaseBelongsToPlayer(struct SecretBase *secretBase)
+static bool32 SecretBaseBelongsToPlayer(struct SecretBase *secretBase)
 {
     u32 i;
 
@@ -1592,7 +1592,7 @@ static void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct Secr
 #undef DELETED_BASE_C
 
 // returns TRUE if secretBase was deleted, FALSE otherwise
-static bool8 ClearDuplicateOwnedSecretBase(struct SecretBase *secretBase, struct SecretBase *secretBases, u32 idx)
+static bool32 ClearDuplicateOwnedSecretBase(struct SecretBase *secretBase, struct SecretBase *secretBases, u32 idx)
 {
     u32 i;
 
@@ -1683,7 +1683,7 @@ static void TrySaveRegisteredDuplicate(struct SecretBase *base, u32 version, u32
 
 static void TrySaveRegisteredDuplicates(struct SecretBaseRecordMixer *mixers)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < SECRET_BASES_COUNT; i++)
     {
@@ -1731,7 +1731,7 @@ static void SaveRecordMixBases(struct SecretBaseRecordMixer *mixers)
 void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u32 linkIdx)
 {
     struct SecretBaseRecordMixer mixers[3];
-    u16 i;
+    u32 i;
 
     if (linkIdx > 3)
         return;

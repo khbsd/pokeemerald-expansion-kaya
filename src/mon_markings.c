@@ -16,13 +16,13 @@
 #define SELECTION_OK NUM_MON_MARKINGS
 #define SELECTION_CANCEL (SELECTION_OK + 1)
 
-static void CreateMonMarkingsMenuSprites(s16, s16, u16, u16);
+static void CreateMonMarkingsMenuSprites(s16, s16, u32, u32);
 static void SpriteCB_Dummy(struct Sprite *);
 static void SpriteCB_Marking(struct Sprite *);
 static void SpriteCB_Cursor(struct Sprite *);
-static struct Sprite *CreateMarkingComboSprite(u16, u16, const u16 *, u16);
+static struct Sprite *CreateMarkingComboSprite(u32, u32, const u32 *, u32);
 
-static const u16 sMonMarkings_Pal[] = INCBIN_U16("graphics/interface/mon_markings.gbapal");
+static const u32 sMonMarkings_Pal[] = INCBIN_U16("graphics/interface/mon_markings.gbapal");
 static const u32 sMonMarkings_Gfx[] = INCBIN_u32("graphics/interface/mon_markings.4bpp");
 
 static const struct OamData sOamData_MenuWindow =
@@ -301,9 +301,9 @@ static void BufferMenuWindowTiles(void)
     CpuFill16(0, sMenu->windowSpriteTiles, sizeof(sMenu->windowSpriteTiles));
 }
 
-static bool8 BufferMenuFrameTiles(void)
+static bool32 BufferMenuFrameTiles(void)
 {
-    u16 i;
+    u32 i;
     u32 *dest = sMenu->windowSpriteTiles + sMenu->tileLoadState * 0x100;
 
     switch (sMenu->tileLoadState)
@@ -347,7 +347,7 @@ void BufferMonMarkingsMenuTiles(void)
 
 void OpenMonMarkingsMenu(u32 markings, s16 x, s16 y)
 {
-    u16 i;
+    u32 i;
     sMenu->cursorPos = 0;
     sMenu->markings = markings;
     for (i = 0; i < NUM_MON_MARKINGS; i++)
@@ -357,7 +357,7 @@ void OpenMonMarkingsMenu(u32 markings, s16 x, s16 y)
 
 void FreeMonMarkingsMenu(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < 2; i++)
     {
@@ -390,9 +390,9 @@ void FreeMonMarkingsMenu(void)
     }
 }
 
-bool8 HandleMonMarkingsMenuInput(void)
+bool32 HandleMonMarkingsMenuInput(void)
 {
-    u16 i;
+    u32 i;
 
     if (JOY_NEW(DPAD_UP))
     {
@@ -441,9 +441,9 @@ bool8 HandleMonMarkingsMenuInput(void)
 #define sMarkingId data[0]
 #define sCursorYOffset data[0]
 
-static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
+static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u32 baseTileTag, u32 basePaletteTag)
 {
-    u16 i;
+    u32 i;
     u32 spriteId;
 
     struct SpriteSheet sheets[] =
@@ -567,7 +567,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
 #undef sCursorYOffset
 
 // Creates a mon marking combination sprite with a spritesheet that holds every possible combination, used by the summary screen / Pokénav
-struct Sprite *CreateMonMarkingAllCombosSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite *CreateMonMarkingAllCombosSprite(u32 tileTag, u32 paletteTag, const u32 *palette)
 {
     if (!palette)
         palette = sMonMarkings_Pal;
@@ -575,14 +575,14 @@ struct Sprite *CreateMonMarkingAllCombosSprite(u16 tileTag, u16 paletteTag, cons
 }
 
 // Creates a mon marking combination sprite with a spritesheet that holds only one combination, used for the currently selected PC mon
-struct Sprite *CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite *CreateMonMarkingComboSprite(u32 tileTag, u32 paletteTag, const u32 *palette)
 {
     if (!palette)
         palette = sMonMarkings_Pal;
     return CreateMarkingComboSprite(tileTag, paletteTag, palette, 1);
 }
 
-static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette, u16 size)
+static struct Sprite *CreateMarkingComboSprite(u32 tileTag, u32 paletteTag, const u32 *palette, u32 size)
 {
     u32 spriteId;
     struct SpriteTemplate template;

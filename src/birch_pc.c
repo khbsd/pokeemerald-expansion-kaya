@@ -4,7 +4,7 @@
 #include "pokedex.h"
 #include "strings.h"
 
-bool16 ScriptGetPokedexInfo(void)
+bool32 ScriptGetPokedexInfo(void)
 {
     if (gSpecialVar_0x8004 == 0) // is national dex not present?
     {

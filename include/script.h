@@ -3,7 +3,7 @@
 
 struct ScriptContext;
 
-typedef bool8 (*ScrCmdFunc)(struct ScriptContext *);
+typedef bool32 (*ScrCmdFunc)(struct ScriptContext *);
 typedef u8 Script[];
 
 struct ScriptContext
@@ -11,7 +11,7 @@ struct ScriptContext
     u8 stackDepth;
     u8 mode;
     u8 comparisonResult;
-    bool8 breakOnTrainerBattle;
+    bool32 breakOnTrainerBattle;
     u8 (*nativePtr)(void);
     const u8 *scriptPtr;
     const u8 *stack[20];
@@ -24,9 +24,9 @@ struct ScriptContext
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr);
-void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void));
+void SetupNativeScript(struct ScriptContext *ctx, bool32 (*ptr)(void));
 void StopScript(struct ScriptContext *ctx);
-bool8 RunScriptCommand(struct ScriptContext *ctx);
+bool32 RunScriptCommand(struct ScriptContext *ctx);
 void ScriptJump(struct ScriptContext *ctx, const u8 *ptr);
 void ScriptCall(struct ScriptContext *ctx, const u8 *ptr);
 void ScriptReturn(struct ScriptContext *ctx);
@@ -35,10 +35,10 @@ u32 ScriptReadWord(struct ScriptContext *ctx);
 u32 ScriptPeekWord(struct ScriptContext *ctx);
 void LockPlayerFieldControls(void);
 void UnlockPlayerFieldControls(void);
-bool8 ArePlayerFieldControlsLocked(void);
+bool32 ArePlayerFieldControlsLocked(void);
 void ScriptContext_Init(void);
-bool8 ScriptContext_IsEnabled(void);
-bool8 ScriptContext_RunScript(void);
+bool32 ScriptContext_IsEnabled(void);
+bool32 ScriptContext_RunScript(void);
 void ScriptContext_SetupScript(const u8 *ptr);
 void ScriptContext_ContinueScript(struct ScriptContext *ctx);
 void ScriptContext_Stop(void);
@@ -52,11 +52,11 @@ void RunOnTransitionMapScript(void);
 void RunOnResumeMapScript(void);
 void RunOnReturnToFieldMapScript(void);
 void RunOnDiveWarpMapScript(void);
-bool8 TryRunOnFrameMapScript(void);
+bool32 TryRunOnFrameMapScript(void);
 void TryRunOnWarpIntoMapScript(void);
 u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
-bool8 InitRamScript(const u8 *script, u32 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
+bool32 InitRamScript(const u8 *script, u32 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 const u8 *GetRamScript(u8 objectId, const u8 *script);
 bool32 ValidateSavedRamScript(void);
 u8 *GetSavedRamScriptIfValid(void);
@@ -160,7 +160,7 @@ static inline void Script_CheckEffectInstrumentedSpecial(u32 specialId)
         Script_GotoBreak_Internal();
 }
 
-static inline void Script_CheckEffectInstrumentedGotoNative(bool8 (*func)(void))
+static inline void Script_CheckEffectInstrumentedGotoNative(bool32 (*func)(void))
 {
     // In ROM mirror 1.
     if (Script_IsAnalyzingEffects() && (((uintptr_t)func) & 0xE000000) != 0xA000000)

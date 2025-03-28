@@ -3,12 +3,12 @@
 
 static void sio32intr_clock_master(void);
 static void sio32intr_clock_slave(void);
-static u16 handshake_wait(u16 slot);
+static u32 handshake_wait(u32 slot);
 static void STWI_set_timer_in_RAM(u32 count);
 static void STWI_stop_timer_in_RAM(void);
 static void STWI_init_slave(void);
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)());
-static void Callback_Dummy_S(u16 reqCommandId, void (*callbackS)(u16));
+static void Callback_Dummy_S(u32 reqCommandId, void (*callbackS)(u32));
 static void Callback_Dummy_ID(void (*callbackId)(void));
 
 void IntrSIO32(void)
@@ -321,7 +321,7 @@ static void sio32intr_clock_slave(void)
     }
 }
 
-static u16 handshake_wait(u16 slot)
+static u32 handshake_wait(u32 slot)
 {
     do
     {
@@ -394,7 +394,7 @@ static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)())
 }
 
 NAKED
-static void Callback_Dummy_S(u16 reqCommandId, void (*callbackS)(u16))
+static void Callback_Dummy_S(u32 reqCommandId, void (*callbackS)(u32))
 {
     asm("bx r1");
 }

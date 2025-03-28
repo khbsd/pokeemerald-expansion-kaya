@@ -21,13 +21,13 @@ bool32 CanResetRTC(void);
 u32 *GetVarPointer(u32 id);
 u32 VarGet(u32 id);
 u32 VarGetIfExist(u32 id);
-bool8 VarSet(u32 id, u32 value);
+bool32 VarSet(u32 id, u32 value);
 u32 VarGetObjectEventGraphicsId(u8 id);
 u8 *GetFlagPointer(u32 id);
 u8 FlagSet(u32 id);
 u8 FlagToggle(u32 id);
 u8 FlagClear(u32 id);
-bool8 FlagGet(u32 id);
+bool32 FlagGet(u32 id);
 
 extern u32 gSpecialVar_0x8000;
 extern u32 gSpecialVar_0x8001;

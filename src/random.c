@@ -9,7 +9,7 @@ COMMON_DATA rng_value_t gRngValue = {0};
 COMMON_DATA rng_value_t gRng2Value = {0};
 
 
-EWRAM_DATA static volatile bool8 sRngLoopUnlocked;
+EWRAM_DATA static volatile bool32 sRngLoopUnlocked;
 
 // Streams allow generators seeded the same to have separate outputs.
 #define STREAM1 1
@@ -109,7 +109,7 @@ void AdvanceRandom(void)
 
 #define LOOP_RANDOM_END sRngLoopUnlocked = TRUE;
 
-#define LOOP_RANDOM ((u16)(_SFC32_Next(state) >> 16))
+#define LOOP_RANDOM ((u32)(_SFC32_Next(state) >> 16))
 
 #define SHUFFLE_IMPL \
     u32 tmp; \
@@ -131,7 +131,7 @@ void Shuffle8(void *data_, size_t n)
 
 void Shuffle16(void *data_, size_t n)
 {
-    u16 *data = data_;
+    u32 *data = data_;
     SHUFFLE_IMPL;
 }
 
@@ -210,8 +210,8 @@ const void *RandomElementArrayDefault(enum RandomTag tag, const void *array, siz
 u32 RandomWeightedIndex(u32 *weights, u32 length)
 {
     u32 i;
-    u16 randomValue;
-    u16 weightSum = 0;
+    u32 randomValue;
+    u32 weightSum = 0;
     for (i = 0; i < length; i++)
         weightSum += weights[i];
     randomValue = weightSum > 0 ? Random() % weightSum : 0;

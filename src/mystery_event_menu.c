@@ -72,7 +72,7 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-static bool8 CheckLanguageMatch(void)
+static bool32 CheckLanguageMatch(void)
 {
     return (gLinkPlayers[0].language == gLinkPlayers[1].language);
 }
@@ -110,9 +110,9 @@ void CB2_InitMysteryEventMenu(void)
     }
 }
 
-static bool8 GetEventLoadMessage(u32 *dest, u32 status)
+static bool32 GetEventLoadMessage(u32 *dest, u32 status)
 {
-    bool8 retVal = TRUE;
+    bool32 retVal = TRUE;
 
     if (status == MEVENT_STATUS_LOAD_OK)
     {
@@ -257,7 +257,7 @@ static void CB2_MysteryEventMenu(void)
         {
             // No clue what is going on here, and from where gDecompressionBuffer gets actually populated with mystery event script.
             /*
-            u16 status = RunMysteryEventScript(gDecompressionBuffer);
+            u32 status = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
 
             if (!GetEventLoadMessage(gStringVar4, status))

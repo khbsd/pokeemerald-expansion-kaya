@@ -107,16 +107,16 @@ struct FactorySelectScreen
     u8 cursorPos;
     u8 cursorSpriteId;
     u8 selectingMonsState;
-    bool8 fromSummaryScreen;
+    bool32 fromSummaryScreen;
     u8 yesNoCursorPos;
     u8 unused;
     struct FactorySelectableMon mons[SELECTABLE_MONS_COUNT];
     struct FactoryMonPic monPics[FRONTIER_PARTY_SIZE]; // Array so all chosen mons can be shown at once
-    bool8 monPicAnimating;
+    bool32 monPicAnimating;
     u8 fadeSpeciesNameTaskId;
-    bool8 fadeSpeciesNameActive;
+    bool32 fadeSpeciesNameActive;
     u32 speciesNameColorBackup;
-    bool8 fadeSpeciesNameFadeOut;
+    bool32 fadeSpeciesNameFadeOut;
     u8 fadeSpeciesNameCoeffDelay;
     u8 fadeSpeciesNameCoeff;
     u8 faceSpeciesNameDelay;
@@ -140,29 +140,29 @@ struct FactorySwapScreen
     u8 cancelButtonSpriteIds[2][2];
     u8 playerMonId;
     u8 enemyMonId;
-    bool8 inEnemyScreen;
-    bool8 fromSummaryScreen;
+    bool32 inEnemyScreen;
+    bool32 fromSummaryScreen;
     u8 yesNoCursorPos;
     u8 actionsCount;
     const struct SwapScreenAction *actionsData;
     u8 unused[4];
-    bool8 monSwapped;
+    bool32 monSwapped;
     u8 fadeSpeciesNameTaskId;
-    bool8 fadeSpeciesNameActive;
+    bool32 fadeSpeciesNameActive;
     u32 speciesNameColorBackup;
-    bool8 fadeSpeciesNameFadeOut;
+    bool32 fadeSpeciesNameFadeOut;
     u8 fadeSpeciesNameCoeffDelay;
     u8 fadeSpeciesNameCoeff;
     u8 faceSpeciesNameDelay;
     struct FactoryMonPic monPic;
-    bool8 monPicAnimating;
+    bool32 monPicAnimating;
 };
 
 static void SpriteCB_Pokeball(struct Sprite *);
 static void SpriteCB_OpenMonPic(struct Sprite *);
-static void OpenMonPic(u8 *, bool8 *, bool8);
-static void HideMonPic(struct FactoryMonPic, bool8 *);
-static void CloseMonPic(struct FactoryMonPic, bool8 *, bool8);
+static void OpenMonPic(u8 *, bool32 *, bool32);
+static void HideMonPic(struct FactoryMonPic, bool32 *);
+static void CloseMonPic(struct FactoryMonPic, bool32 *, bool32);
 static void Task_OpenMonPic(u8);
 static void Task_CloseMonPic(u8);
 
@@ -204,8 +204,8 @@ static void Swap_DestroyAllSprites(void);
 static void Swap_ShowYesNoOptions(void);
 static void Swap_HideActionButtonHighlights(void);
 static void Swap_EraseSpeciesWindow(void);
-static void Swap_UpdateYesNoCursorPosition(s8);
-static void Swap_UpdateMenuCursorPosition(s8);
+static void Swap_UpdateYesNoCursorPosition(s32);
+static void Swap_UpdateMenuCursorPosition(s32);
 static void Swap_ErasePopupMenu(u8);
 static void Swap_Task_ScreenInfoTransitionIn(u8);
 static void Swap_Task_HandleChooseMons(u8);
@@ -223,8 +223,8 @@ static void Swap_PrintPkmnSwap(void);
 static void Swap_EraseSpeciesAtFadeWindow(void);
 static void Swap_EraseActionFadeWindow(void);
 static void Swap_ShowSummaryMonSprite(void);
-static void Swap_UpdateActionCursorPosition(s8);
-static void Swap_UpdateBallCursorPosition(s8);
+static void Swap_UpdateActionCursorPosition(s32);
+static void Swap_UpdateBallCursorPosition(s32);
 static void Swap_RunMenuOptionFunc(u8);
 static void Swap_OptionSwap(u8);
 static void Swap_OptionSummary(u8);
@@ -237,7 +237,7 @@ static void Swap_PrintActionStrings2(void);
 static void Swap_PrintOneActionString(u8);
 static void Swap_InitActions(u8);
 static void Swap_HighlightActionButton(u8);
-static bool8 Swap_AlreadyHasSameSpecies(u8);
+static bool32 Swap_AlreadyHasSameSpecies(u8);
 static void Swap_ActionMon(u8);
 static void Swap_ActionCancel(u8);
 static void Swap_ActionPkmnForSwap(u8);
@@ -1344,7 +1344,7 @@ static void Select_DestroyAllSprites(void)
     DestroySprite(&gSprites[sFactorySelectScreen->menuCursor2SpriteId]);
 }
 
-static void Select_UpdateBallCursorPosition(s8 direction)
+static void Select_UpdateBallCursorPosition(s32 direction)
 {
     u8 cursorPos;
     if (direction > 0) // Move cursor right.
@@ -1366,7 +1366,7 @@ static void Select_UpdateBallCursorPosition(s8 direction)
     gSprites[sFactorySelectScreen->cursorSpriteId].x = gSprites[sFactorySelectScreen->mons[cursorPos].ballSpriteId].x;
 }
 
-static void Select_UpdateMenuCursorPosition(s8 direction)
+static void Select_UpdateMenuCursorPosition(s32 direction)
 {
     if (direction > 0) // Move cursor down.
     {
@@ -1387,7 +1387,7 @@ static void Select_UpdateMenuCursorPosition(s8 direction)
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].y = (sFactorySelectScreen->menuCursorPos * 16) + 112;
 }
 
-static void Select_UpdateYesNoCursorPosition(s8 direction)
+static void Select_UpdateYesNoCursorPosition(s32 direction)
 {
     if (direction > 0) // Move cursor down.
     {
@@ -1996,7 +1996,7 @@ static void Select_CreateMonSprite(void)
     struct Pokemon *mon = &sFactorySelectScreen->mons[monId].monData;
     u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
     sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
@@ -2005,7 +2005,7 @@ static void Select_CreateMonSprite(void)
     sFactorySelectScreen->monPicAnimating = FALSE;
 }
 
-static void Select_SetMonPicAnimating(bool8 animating)
+static void Select_SetMonPicAnimating(bool32 animating)
 {
     sFactorySelectScreen->monPicAnimating = animating;
 }
@@ -2015,7 +2015,7 @@ static void Select_ReshowMonSprite(void)
     struct Pokemon *mon;
     u32 species;
     u32 personality;
-    bool8 isShiny;
+    bool32 isShiny;
 
     sFactorySelectScreen->monPics[1].bgSpriteId = CreateSprite(&sSpriteTemplate_Select_MonPicBgAnim, 120, 64, 1);
     StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[1].bgSpriteId], 2);
@@ -2045,7 +2045,7 @@ static void Select_CreateChosenMonsSprites(void)
                 struct Pokemon *mon = &sFactorySelectScreen->mons[j].monData;
                 u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                 u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-                bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+                bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
                 sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, (i * 72) + 16, 32, i + 13, TAG_NONE);
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecX = 0;
@@ -2766,9 +2766,9 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
 #define tBallCycled(i) data[(i) + 1]
 static void Swap_Task_SlideCycleBalls(u8 taskId)
 {
-    s8 i;
+    s32 i;
     u8 lastX;
-    bool8 finished;
+    bool32 finished;
 
     switch (gTasks[taskId].tState)
     {
@@ -2861,8 +2861,8 @@ static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
 {
     u8 i, j;
     s32 posX = 0;
-    s8 deltaX = gTasks[taskId].tXIncrement;
-    bool8 sliding;
+    s32 deltaX = gTasks[taskId].tXIncrement;
+    bool32 sliding;
     s16 currPosX;
     u8 prevTaskId;
 
@@ -3546,7 +3546,7 @@ static void Swap_HandleActionCursorChange(u8 cursorId)
     }
 }
 
-static void Swap_UpdateBallCursorPosition(s8 direction)
+static void Swap_UpdateBallCursorPosition(s32 direction)
 {
     u8 cursorPos;
     PlaySE(SE_SELECT);
@@ -3569,7 +3569,7 @@ static void Swap_UpdateBallCursorPosition(s8 direction)
     Swap_HandleActionCursorChange(cursorPos);
 }
 
-static void Swap_UpdateActionCursorPosition(s8 direction)
+static void Swap_UpdateActionCursorPosition(s32 direction)
 {
     u8 cursorPos;
     PlaySE(SE_SELECT);
@@ -3596,7 +3596,7 @@ static void Swap_UpdateActionCursorPosition(s8 direction)
     Swap_HandleActionCursorChange(cursorPos);
 }
 
-static void Swap_UpdateYesNoCursorPosition(s8 direction)
+static void Swap_UpdateYesNoCursorPosition(s32 direction)
 {
     if (direction > 0) // Move cursor down.
     {
@@ -3617,7 +3617,7 @@ static void Swap_UpdateYesNoCursorPosition(s8 direction)
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].y = (sFactorySwapScreen->yesNoCursorPos * 16) + 112;
 }
 
-static void Swap_UpdateMenuCursorPosition(s8 direction)
+static void Swap_UpdateMenuCursorPosition(s32 direction)
 {
     PlaySE(SE_SELECT);
     if (direction > 0) // Move cursor down.
@@ -4044,7 +4044,7 @@ static void Swap_ActionMon(u8 taskId)
 
 #define sIsSwapScreen data[7]
 
-static void OpenMonPic(u8 *spriteId, bool8 *animating, bool8 swapScreen)
+static void OpenMonPic(u8 *spriteId, bool32 *animating, bool32 swapScreen)
 {
     *spriteId = CreateSprite(&sSpriteTemplate_Swap_MonPicBgAnim, 120, 64, 1);
     gSprites[*spriteId].callback = SpriteCB_OpenMonPic;
@@ -4057,7 +4057,7 @@ static void Swap_ShowSummaryMonSprite(void)
     struct Pokemon *mon;
     u32 species;
     u32 personality;
-    bool8 isShiny;
+    bool32 isShiny;
 
     sFactorySwapScreen->monPic.bgSpriteId = CreateSprite(&sSpriteTemplate_Swap_MonPicBgAnim, 120, 64, 1);
     StartSpriteAffineAnim(&gSprites[sFactorySwapScreen->monPic.bgSpriteId], 2);
@@ -4074,7 +4074,7 @@ static void Swap_ShowSummaryMonSprite(void)
     gSprites[sFactorySwapScreen->monPic.bgSpriteId].invisible = TRUE;
 }
 
-static void CloseMonPic(struct FactoryMonPic pic, bool8 *animating, bool8 swapScreen)
+static void CloseMonPic(struct FactoryMonPic pic, bool32 *animating, bool32 swapScreen)
 {
     u8 taskId;
 
@@ -4086,7 +4086,7 @@ static void CloseMonPic(struct FactoryMonPic pic, bool8 *animating, bool8 swapSc
     *animating = TRUE;
 }
 
-static void HideMonPic(struct FactoryMonPic pic, bool8 *animating)
+static void HideMonPic(struct FactoryMonPic pic, bool32 *animating)
 {
     FreeAndDestroyMonPicSprite(pic.monSpriteId);
     FreeOamMatrix(gSprites[pic.bgSpriteId].oam.matrixNum);
@@ -4136,7 +4136,7 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
     }
 }
 
-static bool8 Swap_AlreadyHasSameSpecies(u8 monId)
+static bool32 Swap_AlreadyHasSameSpecies(u8 monId)
 {
     u8 i;
     u32 species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
@@ -4273,7 +4273,7 @@ static void Swap_CreateMonSprite(void)
     struct Pokemon *mon;
     u32 species;
     u32 personality;
-    bool8 isShiny;
+    bool32 isShiny;
 
     if (!sFactorySwapScreen->inEnemyScreen)
         mon = &gPlayerParty[sFactorySwapScreen->cursorPos];

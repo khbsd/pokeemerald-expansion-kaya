@@ -1142,8 +1142,8 @@ s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler, u32 moveConsidered)
 
     u32 predictedMove = AI_DATA->lastUsedMove[battler]; // TODO update for move prediction
 
-    s8 aiPriority = GetBattleMovePriority(battlerAI, moveConsidered);
-    s8 playerPriority = GetBattleMovePriority(battler, predictedMove);
+    s32 aiPriority = GetBattleMovePriority(battlerAI, moveConsidered);
+    s32 playerPriority = GetBattleMovePriority(battler, predictedMove);
 
     if (aiPriority > playerPriority)
         return AI_IS_FASTER;
@@ -3839,7 +3839,7 @@ bool32 SideHasMoveCategory(u32 battlerId, u32 category)
     return FALSE;
 }
 
-bool32 IsAbilityOfRating(u32 ability, s8 rating)
+bool32 IsAbilityOfRating(u32 ability, s32 rating)
 {
     if (gAbilitiesInfo[ability].aiRating >= rating)
         return TRUE;

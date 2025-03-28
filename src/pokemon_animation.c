@@ -38,7 +38,7 @@
 
 struct PokemonAnimData
 {
-    u16 delay;
+    u32 delay;
     s16 speed; // Only used by 2 sets of animations
     s16 runs; // Number of times to do the animation
     s16 rotation;
@@ -47,7 +47,7 @@ struct PokemonAnimData
 
 struct YellowFlashData
 {
-    bool8 isYellow;
+    bool32 isYellow;
     u32 time;
 };
 
@@ -451,7 +451,7 @@ static void MonAnimDummySpriteCallback(struct Sprite *sprite)
 {
 }
 
-static void SetPosForRotation(struct Sprite *sprite, u16 index, s16 amplitudeX, s16 amplitudeY)
+static void SetPosForRotation(struct Sprite *sprite, u32 index, s16 amplitudeX, s16 amplitudeY)
 {
     s16 xAdder, yAdder;
 
@@ -468,7 +468,7 @@ static void SetPosForRotation(struct Sprite *sprite, u16 index, s16 amplitudeX, 
     sprite->y2 = yAdder + amplitudeY;
 }
 
-u32 GetSpeciesBackAnimSet(u16 species)
+u32 GetSpeciesBackAnimSet(u32 species)
 {
     if (gSpeciesInfo[species].backAnimId != BACK_ANIM_NONE)
         return gSpeciesInfo[species].backAnimId - 1;
@@ -489,7 +489,7 @@ u32 GetSpeciesBackAnimSet(u16 species)
 // By dumb luck, this is not an issue in vanilla. However,
 // changing the link order revealed this bug.
 #if MODERN || defined(BUGFIX)
-#define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | ((u16)gTasks[taskId].tPtrLo)))
+#define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | ((u32)gTasks[taskId].tPtrLo)))
 #else
 #define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | (gTasks[taskId].tPtrLo)))
 #endif //MODERN || BUGFIX
@@ -570,7 +570,7 @@ void SetSpriteCB_MonAnimDummy(struct Sprite *sprite)
     sprite->callback = MonAnimDummySpriteCallback;
 }
 
-static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rotation)
+static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u32 rotation)
 {
     u32 matrixNum;
     struct ObjAffineSrcData affineSrcData;
@@ -606,7 +606,7 @@ static void HandleStartAffineAnim(struct Sprite *sprite)
     sprite->affineAnimPaused = TRUE;
 }
 
-static void HandleSetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rotation)
+static void HandleSetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u32 rotation)
 {
     if (!sprite->sDontFlip)
     {
@@ -705,7 +705,7 @@ static void Anim_HorizontalVibrate(struct Sprite *sprite)
     }
     else
     {
-        s8 sign;
+        s32 sign;
         if (!(sprite->data[2] & 1))
             sign = 1;
         else
@@ -876,7 +876,7 @@ static void Anim_GrowVibrate(struct Sprite *sprite)
 }
 
 // x delta, y delta, time
-static const s8 sZigzagData[][3] =
+static const s32 sZigzagData[][3] =
 {
     {-1, -1, 6},
     { 2,  0, 6},
@@ -988,7 +988,7 @@ static void Anim_CircularVibrate(struct Sprite *sprite)
     }
     else
     {
-        s8 sign;
+        s32 sign;
         s32 index, amplitude;
 
         if (!(sprite->data[2] & 1))
@@ -1501,7 +1501,7 @@ static void Anim_ShrinkGrow(struct Sprite *sprite)
     ShrinkGrow(sprite);
 }
 
-static const s8 sBounceRotateToSidesData[][8][3] =
+static const s32 sBounceRotateToSidesData[][8][3] =
 {
     {
         { 0,  8,  8},
@@ -1529,7 +1529,7 @@ static void BounceRotateToSides(struct Sprite *sprite)
 {
     s16 var;
     u32 structId;
-    s8 r9;
+    s32 r9;
     s16 r10;
     s16 r7;
     u32 arrId;
@@ -1558,7 +1558,7 @@ static void BounceRotateToSides(struct Sprite *sprite)
     }
     else
     {
-        u16 rotation;
+        u32 rotation;
 
         sprite->y2 = -(Sin(r7 * 128 / sBounceRotateToSidesData[arrId][sprite->data[4]][2], 10));
         sprite->x2 = (r10 * r7 / sBounceRotateToSidesData[arrId][sprite->data[4]][2]) + r9;
@@ -2486,7 +2486,7 @@ static void RotateToSides(struct Sprite *sprite)
     }
     else
     {
-        u16 rotation;
+        u32 rotation;
 
         sprite->x2 = -(Sin(sprite->data[7], 16));
         rotation = Sin(sprite->data[7], 32);
@@ -2524,7 +2524,7 @@ static void Anim_RotateUpToSides(struct Sprite *sprite)
     }
     else
     {
-        u16 rotation;
+        u32 rotation;
 
         sprite->x2 = -(Sin(sprite->data[7], 16));
         sprite->y2 = -(Sin(sprite->data[7] % 128, 16));
@@ -2626,7 +2626,7 @@ static void TipHopForward_2(struct Sprite *sprite)
 
 static void Anim_PivotShake(struct Sprite *sprite)
 {
-    u16 rotation;
+    u32 rotation;
 
     if (sprite->data[2] == 0)
     {
@@ -2762,7 +2762,7 @@ static void Anim_VibrateToCorners(struct Sprite *sprite)
     }
     else
     {
-        s8 sign;
+        s32 sign;
         if (!(sprite->data[2] & 1))
             sign = 1;
         else
@@ -3720,7 +3720,7 @@ static void Anim_HorizontalVibrate_Fast(struct Sprite *sprite)
     }
     else
     {
-        s8 sign;
+        s32 sign;
         if (!(sprite->data[2] & 1))
             sign = 1;
         else
@@ -3741,7 +3741,7 @@ static void Anim_HorizontalVibrate_Fastest(struct Sprite *sprite)
     }
     else
     {
-        s8 sign;
+        s32 sign;
         if (!(sprite->data[2] & 1))
             sign = 1;
         else
@@ -3918,7 +3918,7 @@ static void Anim_VerticalShakeHorizontalSlide_Fast(struct Sprite *sprite)
     TryFlipX(sprite);
 }
 
-static const s8 sTriangleDownData[][3] =
+static const s32 sTriangleDownData[][3] =
 {
 //   x    y   timer
     {1,   1, 12},
@@ -4430,7 +4430,7 @@ static void Anim_ConcaveArcSmall_Twice(struct Sprite *sprite)
 
 static void SetHorizontalDip(struct Sprite *sprite)
 {
-    u16 index = Sin((sprite->data[2] * 128) / sprite->data[7], sprite->data[5]);
+    u32 index = Sin((sprite->data[2] * 128) / sprite->data[7], sprite->data[5]);
     sprite->data[6] = -(index << 8);
     SetPosForRotation(sprite, index, sprite->data[4], 0);
     HandleSetAffineData(sprite, 256, 256, sprite->data[6]);
@@ -4558,9 +4558,9 @@ static void ShrinkGrowVibrate(struct Sprite *sprite)
     }
     else
     {
-        s8 sinY;
-        u16 y;
-        s16 index = ((u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
+        s32 sinY;
+        u32 y;
+        s16 index = ((u32)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
         if (sprite->data[2] % 2 == 0)
         {
             sprite->data[4] = Sin(index, 32) + 256;
@@ -4896,7 +4896,7 @@ enum {
 
 static void ShakeGlow_Blend(struct Sprite *sprite)
 {
-    static const u16 sColors[] =
+    static const u32 sColors[] =
     {
         [SHAKEGLOW_RED]   = RGB_RED,
         [SHAKEGLOW_GREEN] = RGB_GREEN,
@@ -4932,7 +4932,7 @@ static void ShakeGlow_Move(struct Sprite *sprite)
         }
         else
         {
-            s8 sign = 1 - (sprite->data[3] % 2 * 2);
+            s32 sign = 1 - (sprite->data[3] % 2 * 2);
             sprite->x2 = sign * Sin((sprite->data[5] * 384 / sprite->data[0]) % 256, 6);
             sprite->data[5]++;
         }

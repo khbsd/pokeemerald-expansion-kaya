@@ -94,38 +94,38 @@ enum {
 struct MatchCallState
 {
     u32 minutes;
-    u16 trainerId;
+    u32 trainerId;
     u32 stepCounter;
-    bool8 triggeredFromScript;
+    bool32 triggeredFromScript;
 };
 
 struct MatchCallTrainerTextInfo
 {
-    u16 trainerId;
-    u16 unused;
-    u16 battleTopicTextIds[3];
-    u16 generalTextId;
+    u32 trainerId;
+    u32 unused;
+    u32 battleTopicTextIds[3];
+    u32 generalTextId;
     u32 battleFrontierRecordStreakTextIndex;
-    u16 sameRouteMatchCallTextId;
-    u16 differentRouteMatchCallTextId;
+    u32 sameRouteMatchCallTextId;
+    u32 differentRouteMatchCallTextId;
 };
 
 struct MatchCallText
 {
     const u32 *text;
-    s8 stringVarFuncIds[NUM_STRVARS_IN_MSG];
+    s32 stringVarFuncIds[NUM_STRVARS_IN_MSG];
 };
 
 struct MultiTrainerMatchCallText
 {
-    u16 trainerId;
+    u32 trainerId;
     const u32 *text;
 };
 
 struct BattleFrontierStreakInfo
 {
-    u16 facilityId;
-    u16 streak;
+    u32 facilityId;
+    u32 streak;
 };
 
 static EWRAM_DATA struct MatchCallState sMatchCallState = {0};
@@ -135,7 +135,7 @@ static u32 GetCurrentTotalMinutes(struct Time *);
 static u32 GetNumRegisteredTrainers(void);
 static u32 GetActiveMatchCallTrainerId(u32);
 static int GetTrainerMatchCallId(int);
-static u16 GetRematchTrainerLocation(int);
+static u32 GetRematchTrainerLocation(int);
 static bool32 TrainerIsEligibleForRematch(int);
 static void StartMatchCall(void);
 static void ExecuteMatchCall(u32);
@@ -149,8 +149,8 @@ static const struct MatchCallText *GetBattleMatchCallText(int, u32 *);
 static const struct MatchCallText *GetGeneralMatchCallText(int, u32 *);
 static bool32 ShouldTrainerRequestBattle(int);
 static void BuildMatchCallString(int, const struct MatchCallText *, u32 *);
-static u16 GetFrontierStreakInfo(u16, u32 *);
-static void PopulateMatchCallStringVars(int, const s8 *);
+static u32 GetFrontierStreakInfo(u32, u32 *);
+static void PopulateMatchCallStringVars(int, const s32 *);
 static void PopulateMatchCallStringVar(int, int, u32 *);
 static bool32 MatchCall_LoadGfx(u32);
 static bool32 MatchCall_DrawWindow(u32);
@@ -1195,9 +1195,9 @@ static void StartMatchCall(void)u32
     CreateTask(ExecuteMatchCall, 1);
 }
 
-static const u16 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/window.gbapal");
+static const u32 sMatchCallWindow_Pal[] = INCBIN_U16("graphics/pokenav/match_call/window.gbapal");
 static const u8 sMatchCallWindow_Gfx[] = INCBIN_U8("graphics/pokenav/match_call/window.4bpp");
-static const u16 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/match_call/nav_icon.gbapal");
+static const u32 sPokenavIcon_Pal[] = INCBIN_U16("graphics/pokenav/match_call/nav_icon.gbapal");
 static const u32 sPokenavIcon_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/nav_icon.4bpp.lz");
 
 static const u8 sText_PokenavCallEllipsis[] = _("………………\p");
@@ -1225,7 +1225,7 @@ static void ExecuteMatchCall(u8 taskId)
     {
         tState++;
         data[1] = 0; // Never read
-        if ((u16)tState > 7)
+        if ((u32)tState > 7)
             DestroyTask(taskId);
     }
 }
@@ -1468,7 +1468,7 @@ static bool32 TrainerIsEligibleForRematch(int matchCallId)
 #endif //FREE_MATCH_CALL
 }
 
-static u16 GetRematchTrainerLocation(int matchCallId)
+static u32 GetRematchTrainerLocation(int matchCallId)
 {
     const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(gRematchTable[matchCallId].mapGroup, gRematchTable[matchCallId].mapNum);
     return mapHeader->regionMapSectionId;
@@ -1561,7 +1561,7 @@ static int GetTrainerMatchCallId(int trainerId)
 
 static const struct MatchCallText *GetSameRouteMatchCallText(int matchCallId, u8 *str)
 {
-    u16 textId = sMatchCallTrainers[matchCallId].sameRouteMatchCallTextId;
+    u32 textId = sMatchCallTrainers[matchCallId].sameRouteMatchCallTextId;
     int mask = 0xFF;
     u32 topic = (textId >> 8) - 1;
     u32 id = (textId & mask) - 1;
@@ -1570,7 +1570,7 @@ static const struct MatchCallText *GetSameRouteMatchCallText(int matchCallId, u8
 
 static const struct MatchCallText *GetDifferentRouteMatchCallText(int matchCallId, u8 *str)
 {
-    u16 textId = sMatchCallTrainers[matchCallId].differentRouteMatchCallTextIdu32
+    u32 textId = sMatchCallTrainers[matchCallId].differentRouteMatchCallTextIdu32
     int mask = 0xFF;
     u32 topic = (textId >> 8) - 1;
     u32 id = (textId & mask) - 1;
@@ -1598,7 +1598,7 @@ static const struct MatchCallText *GetGeneralMatchCallText(int matchCallId, u8 *
     int i;
     int count;
     u32 topic, id;
-    u16 rand;
+    u32 rand;
 
     rand = Random();
     if (!(rand & 1))
@@ -1646,7 +1646,7 @@ static void BuildMatchCallString(int matchCallId, const struct MatchCallText *ma
 
 static u8 *const sMatchCallTextStringVars[] = { gStringVar1, gStringVar2, gStringVar3 };
 
-static void PopulateMatchCallStringVars(int matchCallId, const s8 *stringVarFuncIds)
+static void PopulateMatchCallStringVars(int matchCallId, const s32 *stringVarFuncIds)
 {
     int i;
     for (i = 0; i < NUM_STRVARS_IN_MSG; i++)u32
@@ -1684,7 +1684,7 @@ static const struct MultiTrainerMatchCallText sMultiTrainerMatchCallTexts[] =
 static void PopulateTrainerName(int matchCallId, u8 *destStr)
 {
     u32 i;
-    u16 trainerId = sMatchCallTrainers[matchCallId].trainerId;
+    u32 trainerId = sMatchCallTrainers[matchCallId].trainerId;
     for (i = 0; i < ARRAY_COUNT(sMultiTrainerMatchCallTexts); i++)
     {
         if (sMultiTrainerMatchCallTexts[i].trainerId == trainerId)
@@ -1748,7 +1748,7 @@ static u8 GetWaterEncounterSlot(void)
 
 static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 {
-    u16 species[2];
+    u32 species[2];
     int numSpecies;
     u8 slot;
     int i = 0;
@@ -1794,7 +1794,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 
 static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
 {
-    u16 trainerId;
+    u32 trainerId;
     const struct TrainerMon *party;
     u8 monId;
     const u8 *speciesName;
@@ -1857,7 +1857,7 @@ static bool32 ShouldTrainerRequestBattle(int matchCallId)
 {
     int dayCount;
     int otId;
-    u16 dewfordRand;
+    u32 dewfordRand;
     int numRematchTrainersFought;
     int max, rand, n;
 
@@ -1881,11 +1881,11 @@ static bool32 ShouldTrainerRequestBattle(int matchCallId)
     return FALSE;
 }
 
-static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
+static u32 GetFrontierStreakInfo(u32 facilityId, u32 *topicTextId)
 {
     int i;
     int j;
-    u16 streak = 0;
+    u32 streak = 0;
 
     switch (facilityId)
     {

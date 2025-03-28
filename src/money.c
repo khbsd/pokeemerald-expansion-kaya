@@ -78,7 +78,7 @@ void SetMoney(u32 *moneyPtr, u32 newValue)
     *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
 }
 
-bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost)
+bool32 IsEnoughMoney(u32 *moneyPtr, u32 cost)
 {
     if (GetMoney(moneyPtr) >= cost)
         return TRUE;
@@ -119,7 +119,7 @@ void RemoveMoney(u32 *moneyPtr, u32 toSub)
     SetMoney(moneyPtr, toSet);
 }
 
-bool8 IsEnoughForCostInVar0x8005(void)
+bool32 IsEnoughForCostInVar0x8005(void)
 {
     return IsEnoughMoney(&gSaveBlock1Ptr->money, gSpecialVar_0x8005);
 }
@@ -161,7 +161,7 @@ void PrintMoneyAmount(u32 windowId, u32 x, u32 y, int amount, u32 speed)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
-void PrintMoneyAmountInMoneyBoxWithBorder(u32 windowId, u16 tileStart, u32 pallete, int amount)
+void PrintMoneyAmountInMoneyBoxWithBorder(u32 windowId, u32 tileStart, u32 pallete, int amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, pallete);
     PrintMoneyAmountInMoneyBox(windowId, amount, 0);
@@ -198,7 +198,7 @@ void HideMoneyBox(void)
     RemoveWindow(sMoneyBoxWindowId);
 }
 
-void AddMoneyLabelObject(u16 x, u16 y)
+void AddMoneyLabelObject(u32 x, u32 y)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_MoneyLabel);
     LoadCompressedSpritePalette(&sSpritePalette_MoneyLabel);

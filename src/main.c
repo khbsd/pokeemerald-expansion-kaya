@@ -62,17 +62,17 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-COMMON_DATA u16 gKeyRepeatStartDelay = 0;
-COMMON_DATA bool8 gLinkTransferringData = 0;
+COMMON_DATA u32 gKeyRepeatStartDelay = 0;
+COMMON_DATA bool32 gLinkTransferringData = 0;
 COMMON_DATA struct Main gMain = {0};
-COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
-COMMON_DATA bool8 gSoftResetDisabled = 0;
+COMMON_DATA u32 gKeyRepeatContinueDelay = 0;
+COMMON_DATA bool32 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u32 gLinkVSyncDisabled = 0;
-COMMON_DATA s8 gPcmDmaCounter = 0;
+COMMON_DATA s32 gPcmDmaCounter = 0;
 COMMON_DATA void *gAgbMainLoop_sp = NULL;
 
-static EWRAM_DATA u16 sTrainerId = 0;
+static EWRAM_DATA u32 sTrainerId = 0;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -225,14 +225,14 @@ void SeedRngAndSetTrainerId(void)
     sTrainerId = Random();
 }
 
-u16 GetGeneratedTrainerIdLower(void)
+u32 GetGeneratedTrainerIdLower(void)
 {
     return sTrainerId;
 }
 
 void EnableVCountIntrAtLine150(void)
 {
-    u16 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
+    u32 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
     SetGpuReg(REG_OFFSET_DISPSTAT, gpuReg | DISPSTAT_VCOUNT_INTR);
     EnableInterrupts(INTR_FLAG_VCOUNT);
 }
@@ -268,7 +268,7 @@ void InitKeys(void)
 
 static void ReadKeys(void)
 {
-    u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
+    u32 keyInput = REG_KEYINPUT ^ KEYS_MASK;
     gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
     gMain.newKeys = gMain.newKeysRaw;
     gMain.newAndRepeatedKeys = gMain.newKeysRaw;

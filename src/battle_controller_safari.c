@@ -315,7 +315,7 @@ static void SafariHandleStatusIconUpdate(u32 battler)
 // Player is not a pokemon, so it can't really faint in the Safari anyway.
 static void SafariHandleFaintingCry(u32 battler)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    u32 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
     PlayCry_Normal(species, 25);
     SafariBufferExecCompleted(battler);

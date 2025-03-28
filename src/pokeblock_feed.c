@@ -54,10 +54,10 @@ struct PokeblockFeed
     u32 animRunState;
     u32 animId;
     u32 unused2;
-    bool8 noMonFlip;
-    u16 species;
-    u16 monAnimLength;
-    u16 timer;
+    bool32 noMonFlip;
+    u32 species;
+    u32 monAnimLength;
+    u32 timer;
     u32 nature;
     u32 monSpriteId_; // Duplicated unnecessarily
     u32 unused3;
@@ -79,7 +79,7 @@ static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
 static void SetPokeblockSpritePal(u32);
 static void CalculateMonAnimLength(void);
-static void DoPokeblockCaseThrowEffect(u32, bool8);
+static void DoPokeblockCaseThrowEffect(u32, bool32);
 static void StartMonJumpForPokeblock(u32);
 static void Task_PrintAtePokeblockMessage(u32);
 static void Task_FadeOutPokeblockFeed(u32);
@@ -87,10 +87,10 @@ static void UpdateMonAnim(void);
 static void SpriteCB_MonJumpForPokeblock(struct Sprite *);
 static void CalculateMonAnimMovement(void);
 static void CalculateMonAnimMovementEnd(void);
-static bool8 InitMonAnimStage(void);
-static bool8 FreeMonSpriteOamMatrix(void);
-static bool8 DoMonAnimStep(void);
-static bool8 LoadMonAndSceneGfx(struct Pokemon *);
+static bool32 InitMonAnimStage(void);
+static bool32 FreeMonSpriteOamMatrix(void);
+static bool32 DoMonAnimStep(void);
+static bool32 LoadMonAndSceneGfx(struct Pokemon *);
 static u32 CreatePokeblockSprite(void);
 static u32 CreatePokeblockCaseSpriteForFeeding(void);
 static u32 CreateMonSprite(struct Pokemon *);
@@ -545,7 +545,7 @@ static void VBlankCB_PokeblockFeed(void)
     TransferPlttBuffer();
 }
 
-static bool8 LoadPokeblockFeedScene(void)
+static bool32 LoadPokeblockFeedScene(void)
 {
     switch (gMain.state)
     {
@@ -648,9 +648,9 @@ static void HandleInitBackgrounds(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
+static bool32 LoadMonAndSceneGfx(struct Pokemon *mon)
 {
-    u16 species;
+    u32 species;
     u32 personality;
     bool32 isShiny;
 
@@ -838,7 +838,7 @@ static void Task_FadeOutPokeblockFeed(u32 taskId)
 
 static u32 CreateMonSprite(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     u32 spriteId = CreateSprite(&gMultiuseSpriteTemplate, MON_X, MON_Y, 2);
 
     sPokeblockFeed->species = species;
@@ -892,7 +892,7 @@ static u32 CreatePokeblockCaseSpriteForFeeding(void)
     return spriteId;
 }
 
-static void DoPokeblockCaseThrowEffect(u32 spriteId, bool8 horizontalThrow)
+static void DoPokeblockCaseThrowEffect(u32 spriteId, bool32 horizontalThrow)
 {
     FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
@@ -1004,7 +1004,7 @@ static void UpdateMonAnim(void)
     }
 }
 
-static bool8 InitMonAnimStage(void)
+static bool32 InitMonAnimStage(void)
 {
     struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
     u32 i;
@@ -1034,10 +1034,10 @@ static bool8 InitMonAnimStage(void)
     }
 }
 
-static bool8 DoMonAnimStep(void)
+static bool32 DoMonAnimStep(void)
 {
     // Update mon's position
-    u16 time = sPokeblockFeed->maxAnimStageTime - sPokeblockFeed->animData[ANIMDATA_TIME];
+    u32 time = sPokeblockFeed->maxAnimStageTime - sPokeblockFeed->animData[ANIMDATA_TIME];
     sPokeblockFeed->monSpritePtr->x2 = sPokeblockFeed->monAnimX[time];
     sPokeblockFeed->monSpritePtr->y2 = sPokeblockFeed->monAnimY[time];
 
@@ -1049,7 +1049,7 @@ static bool8 DoMonAnimStep(void)
         return FALSE;
 }
 
-static bool8 FreeMonSpriteOamMatrix(void)
+static bool32 FreeMonSpriteOamMatrix(void)
 {
     FreeSpriteOamMatrix(sPokeblockFeed->monSpritePtr);
     return FALSE;
@@ -1058,9 +1058,9 @@ static bool8 FreeMonSpriteOamMatrix(void)
 static void CalculateMonAnimMovementEnd(void)
 {
     struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
-    u16 i;
-    u16 approachTime = pokeblockFeed->animData[ANIMDATA_APPR_TIME];
-    u16 time = pokeblockFeed->maxAnimStageTime - approachTime;
+    u32 i;
+    u32 approachTime = pokeblockFeed->animData[ANIMDATA_APPR_TIME];
+    u32 time = pokeblockFeed->maxAnimStageTime - approachTime;
     s16 x = pokeblockFeed->monX + pokeblockFeed->animData[ANIMDATA_TARGET_X];
     s16 y = pokeblockFeed->monY + pokeblockFeed->animData[ANIMDATA_TARGET_Y];
 
@@ -1080,15 +1080,15 @@ static void CalculateMonAnimMovementEnd(void)
 static void CalculateMonAnimMovement(void)
 {
     struct PokeblockFeed *pokeblockFeed = sPokeblockFeed;
-    bool8 negative = FALSE;
+    bool32 negative = FALSE;
     s16 x = pokeblockFeed->monX - pokeblockFeed->monInitX;
     s16 y = pokeblockFeed->monY - pokeblockFeed->monInitY;
 
     while (1)
     {
-        u16 amplitude;
-        u16 time;
-        u16 acceleration;
+        u32 amplitude;
+        u32 time;
+        u32 acceleration;
 
         acceleration = abs(pokeblockFeed->animData[ANIMDATA_ROT_ACCEL]);
         amplitude = acceleration + pokeblockFeed->animData[ANIMDATA_COS_AMPLITUDE];

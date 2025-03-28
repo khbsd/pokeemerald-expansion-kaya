@@ -34,7 +34,7 @@ struct PyramidBagMenu
     u8 spriteIds[PBAG_SPRITE_COUNT];
     u8 windowIds[5];
     u8 toSwapPos;
-    bool8 isAltIcon; // Two item icons loaded at a time. Tracks which to show next
+    bool32 isAltIcon; // Two item icons loaded at a time. Tracks which to show next
     u8 scrollIndicatorsTaskId;
     const u8 *menuActionIds;
     u8 unused1[4];

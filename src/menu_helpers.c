@@ -121,7 +121,7 @@ void SetVBlankHBlankCallbacksToNull(void)
     SetHBlankCallback(NULL);
 }
 
-void DisplayMessageAndContinueTask(u32 taskId, u32 windowId, u16 tileNum, u32 paletteNum, u32 fontId, u32 textSpeed, const u32 *string, void *taskFunc)
+void DisplayMessageAndContinueTask(u32 taskId, u32 windowId, u32 tileNum, u32 paletteNum, u32 fontId, u32 textSpeed, const u32 *string, void *taskFunc)
 {
     sMessageWindowId = windowId;
     DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
@@ -135,7 +135,7 @@ void DisplayMessageAndContinueTask(u32 taskId, u32 windowId, u16 tileNum, u32 pa
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
-bool16 RunTextPrintersRetIsActive(u32 textPrinterId)
+bool32 RunTextPrintersRetIsActive(u32 textPrinterId)
 {
     RunTextPrinters();
     return IsTextPrinterActive(textPrinterId);
@@ -153,7 +153,7 @@ void DoYesNoFuncWithChoice(u32 taskId, const struct YesNoFuncTable *data)
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-void CreateYesNoMenuWithCallbacks(u32 taskId, const struct WindowTemplate *template, u32 unused1, u32 unused2, u32 unused3, u16 tileStart, u32 palette, const struct YesNoFuncTable *yesNo)
+void CreateYesNoMenuWithCallbacks(u32 taskId, const struct WindowTemplate *template, u32 unused1, u32 unused2, u32 unused3, u32 tileStart, u32 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, tileStart, palette, 0);
     sYesNo = *yesNo;
@@ -177,7 +177,7 @@ static void Task_CallYesOrNoCallback(u32 taskId)
 }
 
 // Returns TRUE if the quantity was changed, FALSE if it remained the same
-bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
+bool32 AdjustQuantityAccordingToDPadInput(s16 *quantity, u32 max)
 {
     s16 valBefore = *quantity;
 
@@ -275,7 +275,7 @@ u32 GetLRKeysPressedAndHeld(void)
     return 0;
 }
 
-bool8 IsHoldingItemAllowed(u16 itemId)
+bool32 IsHoldingItemAllowed(u32 itemId)
 {
     // e-Reader Enigma Berry can't be held in link areas
     if (itemId == ITEM_ENIGMA_BERRY_E_READER
@@ -287,7 +287,7 @@ bool8 IsHoldingItemAllowed(u16 itemId)
         return TRUE;
 }
 
-bool8 IsWritingMailAllowed(u16 itemId)
+bool32 IsWritingMailAllowed(u32 itemId)
 {
     if ((IsOverworldLinkActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
         return FALSE;
@@ -295,7 +295,7 @@ bool8 IsWritingMailAllowed(u16 itemId)
         return TRUE;
 }
 
-bool8 MenuHelpers_IsLinkActive(void)
+bool32 MenuHelpers_IsLinkActive(void)
 {
     if (IsOverworldLinkActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
@@ -303,7 +303,7 @@ bool8 MenuHelpers_IsLinkActive(void)
         return FALSE;
 }
 
-static bool8 IsActiveOverworldLinkBusy(void)
+static bool32 IsActiveOverworldLinkBusy(void)
 {
     if (!MenuHelpers_IsLinkActive())
         return FALSE;
@@ -311,7 +311,7 @@ static bool8 IsActiveOverworldLinkBusy(void)
         return Overworld_IsRecvQueueAtMax();
 }
 
-bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
+bool32 MenuHelpers_ShouldWaitForLinkRecv(void)
 {
     if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE )
         return TRUE;
@@ -321,7 +321,7 @@ bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
 
 void SetItemListPerPageCount(struct ItemSlot *slots, u32 slotsCount, u32 *pageItems, u32 *totalItems, u32 maxPerPage)
 {
-    u16 i;
+    u32 i;
     struct ItemSlot *slots_ = slots;
 
     // Count the number of non-empty item slots
@@ -340,7 +340,7 @@ void SetItemListPerPageCount(struct ItemSlot *slots, u32 slotsCount, u32 *pageIt
         *pageItems = *totalItems;
 }
 
-void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u32 maxShownItems, u32 totalItems)
+void SetCursorWithinListBounds(u32 *scrollOffset, u32 *cursorPos, u32 maxShownItems, u32 totalItems)
 {
     if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
         *scrollOffset = totalItems - maxShownItems;
@@ -354,7 +354,7 @@ void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u32 maxShownIt
     }
 }
 
-void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u32 shownItems, u32 totalItems, u32 maxShownItems)
+void SetCursorScrollWithinListBounds(u32 *scrollOffset, u32 *cursorPos, u32 shownItems, u32 totalItems, u32 maxShownItems)
 {
     u32 i;
 
@@ -423,7 +423,7 @@ void DestroySwapLineSprites(u32 *spriteIds, u32 count)
     }
 }
 
-void SetSwapLineSpritesInvisibility(u32 *spriteIds, u32 count, bool8 invisible)
+void SetSwapLineSpritesInvisibility(u32 *spriteIds, u32 count, bool32 invisible)
 {
     u32 i;
 
@@ -431,10 +431,10 @@ void SetSwapLineSpritesInvisibility(u32 *spriteIds, u32 count, bool8 invisible)
         gSprites[spriteIds[i]].invisible = invisible;
 }
 
-void UpdateSwapLineSpritesPos(u32 *spriteIds, u32 count, s16 x, u16 y)
+void UpdateSwapLineSpritesPos(u32 *spriteIds, u32 count, s16 x, u32 y)
 {
     u32 i;
-    bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
+    bool32 hasMargin = count & SWAP_LINE_HAS_MARGIN;
     count &= ~SWAP_LINE_HAS_MARGIN;
 
     for (i = 0; i < count; i++)

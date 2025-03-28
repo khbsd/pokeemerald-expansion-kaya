@@ -46,8 +46,8 @@
 
 // Function Declarations
 static void ZMoveSelectionDisplayPpNumber(u32 battler);
-static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
-static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler);
+static void ZMoveSelectionDisplayPower(u32 move, u32 zMove);
+static void ZMoveSelectionDisplayMoveType(u32 zMove, u32 battler);
 
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
@@ -148,7 +148,7 @@ u32 GetUsableZMove(u32 battler, u32 move)
 
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     {
-        u16 zMove = GetSignatureZMove(move, gBattleMons[battler].species, item);
+        u32 zMove = GetSignatureZMove(move, gBattleMons[battler].species, item);
         if (zMove != MOVE_NONE)
             return zMove;  // Signature z move exists
 
@@ -192,7 +192,7 @@ bool32 IsViableZMove(u32 battler, u32 move)
     // Check for signature Z-Move or type-based Z-Move.
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     {
-        u16 zMove = GetSignatureZMove(move, gBattleMons[battler].species, item);
+        u32 zMove = GetSignatureZMove(move, gBattleMons[battler].species, item);
         if (zMove != MOVE_NONE)
             return TRUE;
 
@@ -203,7 +203,7 @@ bool32 IsViableZMove(u32 battler, u32 move)
     return FALSE;
 }
 
-void AssignUsableZMoves(u32 battler, u16 *moves)
+void AssignUsableZMoves(u32 battler, u32 *moves)
 {
     u32 i;
     gBattleStruct->zmove.possibleZMoves[battler] = 0;
@@ -259,11 +259,11 @@ u32 GetTypeBasedZMove(u32 move)
     return gTypesInfo[moveType].zMove;
 }
 
-bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
+bool32 MoveSelectionDisplayZMove(u32 zmove, u32 battler)
 {
     u32 i;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    u16 move = moveInfo->moves[gMoveSelectionCursor[battler]];
+    u32 move = moveInfo->moves[gMoveSelectionCursor[battler]];
 
     PlaySE(SE_SELECT);
     gBattleStruct->zmove.viewing = TRUE;
@@ -387,10 +387,10 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
     return FALSE;
 }
 
-static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
+static void ZMoveSelectionDisplayPower(u32 move, u32 zMove)
 {
     u8 *txtPtr;
-    u16 power = GetZMovePower(move);
+    u32 power = GetZMovePower(move);
 
     if (zMove >= MOVE_CATASTROPIKA)
         power = GetMovePower(zMove);
@@ -417,7 +417,7 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
-static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
+static void ZMoveSelectionDisplayMoveType(u32 zMove, u32 battler)
 {
     u8 *txtPtr, *end;
     u32 zMoveType = GetBattleMoveType(zMove);

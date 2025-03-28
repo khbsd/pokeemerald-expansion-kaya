@@ -160,7 +160,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Volt Absorb if it has been affected by Elec
 {
     u32 move;
     u32 item = ITEM_LIECHI_BERRY;
-    bool8 shouldTriggerAbility = TRUE;
+    bool32 shouldTriggerAbility = TRUE;
 
     PARAMETRIZE { move = MOVE_CELEBRATE; shouldTriggerAbility = FALSE; }
     PARAMETRIZE { move = MOVE_ELECTRIFY; }
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
 {
     u32 move;
     u32 item = ITEM_LIECHI_BERRY;
-    bool8 shouldTriggerAbility = TRUE;
+    bool32 shouldTriggerAbility = TRUE;
 
     PARAMETRIZE { move = MOVE_CELEBRATE; shouldTriggerAbility = FALSE; }
     PARAMETRIZE { move = MOVE_ELECTRIFY; }
@@ -235,7 +235,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
 {
     u32 move;
     u32 item= ITEM_LIECHI_BERRY;
-    bool8 shouldTriggerAbility = TRUE;
+    bool32 shouldTriggerAbility = TRUE;
 
     PARAMETRIZE { move = MOVE_CELEBRATE; shouldTriggerAbility = FALSE; }
     PARAMETRIZE { move = MOVE_ELECTRIFY; }

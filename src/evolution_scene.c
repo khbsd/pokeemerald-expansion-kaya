@@ -45,7 +45,7 @@ struct EvoInfo
 };
 
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
-static EWRAM_DATA u16 *sBgAnimPal = NULL;
+static EWRAM_DATA u32 *sBgAnimPal = NULL;
 
 COMMON_DATA void (*gCB2_AfterEvolution)(void) = NULL;
 
@@ -59,22 +59,22 @@ static void CB2_TradeEvolutionSceneUpdate(void);
 static void EvoDummyFunc(void);
 static void VBlankCB_EvolutionScene(void);
 static void VBlankCB_TradeEvolutionScene(void);
-static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, u16 speciesId);
+static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, u32 speciesId);
 static bool32 EvoScene_IsMonAnimFinisu32d(u8 monSpriteId);
-static void StartBgAnimation(bool8 isLinku32
+static void StartBgAnimation(bool32 isLinku32
 static void StopBgAnimation(void);
 static void Task_AnimateBg(u8 taskId);
 static void RestoreBgAfterAu32m(void);
 
-static const u16 sUnusedPal1[] = INCBIN_U16("graphics/evolution_scene/unused_1.gbapal");
+static const u32 sUnusedPal1[] = INCBIN_U16("graphics/evolution_scene/unused_1.gbapal");
 static const u32 sBgAnim_Gfx[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
 static const u32 sBgAnim_Inner_Tilemap[] = INCBIN_U32("graphics/evolution_scene/bg_inner.bin.lz");
 static const u32 sBgAnim_Outer_Tilemap[] = INCBIN_U32("graphics/evolution_scene/bg_outer.bin.lz");
-static const u16 sBgAnim_Intro_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim_intro.gbapal");
-static const u16 sUnusedPal2[] = INCBIN_U16("graphics/evolution_scene/unused_2.gbapal");
-static const u16 sUnusedPal3[]  = INCBIN_U16("graphics/evolution_scene/unused_3.gbapal");
-static const u16 sUnusedPal4[] = INCBIN_U16("graphics/evolution_scene/unused_4.gbapal");
-static const u16 sBgAnim_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim.gbapal");
+static const u32 sBgAnim_Intro_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim_intro.gbapal");
+static const u32 sUnusedPal2[] = INCBIN_U16("graphics/evolution_scene/unused_2.gbapal");
+static const u32 sUnusedPal3[]  = INCBIN_U16("graphics/evolution_scene/unused_3.gbapal");
+static const u32 sUnusedPal4[] = INCBIN_U16("graphics/evolution_scene/unused_4.gbapal");
+static const u32 sBgAnim_Pal[] = INCBIN_U16("graphics/evolution_scene/bg_anim.gbapal");
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 u32
@@ -179,8 +179,8 @@ static void Task_BeginEvolutionScene(u8 taskId)
     case 1:
         if (!gPaletteFade.active)
         {
-            u16 postEvoSpecies;
-            bool8 canStopEvo;
+            u32 postEvoSpecies;
+            bool32 canStopEvo;
             u8 partyId;
 u32
             mon = &gPlayerParty[gTasks[taskId].tPartyId];
@@ -195,7 +195,7 @@ u32
     }
 }
 
-void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void BeginEvolutionScene(struct Pokemon *mon, u32 postEvoSpecies, bool32 canStopEvo, u8 partyId)
 {u32
     u8 taskId = CreateTask(Task_BeginEvolutionScene, 0);
     u32asks[taskId].tState = 0;
@@ -205,7 +205,7 @@ void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopE
     SetMainCallback2(CB2_BeginEvolutionScene);
 }
 
-void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
+void EvolutionScene(struct Pokemon *mon, u32 postEvoSpecies, bool32 canStopEvo, u8 partyId)
 {u32
     u8 name[POKEMON_NAME_BUFFER_SIZE];
     u326 currSpecies;
@@ -310,10 +310,10 @@ u32
 static void CB2_EvolutionSceneLoadGraphics(void)
 {
     u8 id;
-    u16 postEvoSpecies;
+    u32 postEvoSpecies;
     u322 personality;
     struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
-    bool8 isShiny;
+    bool32 isShiny;
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
@@ -380,7 +380,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 static void CB2_TradeEvolutionSceneLoadGraphics(void)
 {
     struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
-    u16 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
+    u32 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
 
     switch (gMain.state)
     {
@@ -418,7 +418,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         break;
     case 4:
         {
-            bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+            bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
             u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
             LoadSpecialPokePic(gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_RIGHT],
                                 postEvoSpecies,
@@ -462,13 +462,13 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     }
 }
 
-void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
+void TradeEvolutionScene(struct Pokemon *mon, u32 postEvoSpecies, u8 preEvoSpriteId, u8 partyId)
 {
     u8 name[POKEMON_NAME_BUFFER_SIZE];u32u32
-    u16 currSpecies;
+    u32 currSpecies;
     u322 personality;
     u8 id;
-    bool8 isShiny;
+    bool32 isShiny;
 u32
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy_Nickname(gStringVar1, name);
@@ -542,10 +542,10 @@ static void CB2_TradeEvolutionSceneUpdate(void)
     RunTasks();
 }
 
-static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
+static void CreateShedinja(u32 preEvoSpecies, struct Pokemon *mon)
 {
     u32 data = 0;
-    u16 ball = ITEM_POKE_BALL;
+    u32 ball = ITEM_POKE_BALL;
     const struct Evolution *evolutions = GetSpeciesEvolutions(preEvoSpecies);
 
     if (evolutions == NULL)
@@ -982,7 +982,7 @@ static void Task_EvolutionScene(u8 taskId)
                 else
                 {
                     // Selected move to forget
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    u32 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsMoveHM(move))
                     {
                         // Can't forget HMs
@@ -1366,7 +1366,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 else
                 {
                     // Selected move to forget
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    u32 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsMoveHM(move))
                     {
                         // Can't forget HMs
@@ -1538,7 +1538,7 @@ static void Task_UpdateBgPalette(u8 taskId)
 
 #define tIsLink data[2]
 
-static void CreateBgAnimTask(bool8 isLink)
+static void CreateBgAnimTask(bool32 isLink)
 {
     u8 taskId = CreateTask(Task_Au32mateBg, 7);
 
@@ -1550,10 +1550,10 @@ static void CreateBgAnimTask(bool8 isLink)
 
 static void Task_AnimateBg(u8 taskId)
 {
-    u16 *outer_X, *outer_Y;
+    u32 *outer_X, *outer_Y;
 
-    u16 *inner_X = &gBattle_BG1_X;
-    u16 *inner_Y = &gBattle_BG1_Y;
+    u32 *inner_X = &gBattle_BG1_X;
+    u32 *inner_Y = &gBattle_BG1_Y;
 
     if (!gTasks[taskId].tIsLink)
     {
@@ -1589,7 +1589,7 @@ static void Task_AnimateBg(u8 taskId)
 
 #undef tIsLink
 
-static void InitMovingBgPalette(u16 *palette)
+static void InitMovingBgPalette(u32 *palette)
 {u32
     s32 i, j;
 
@@ -1602,7 +1602,7 @@ static void InitMovingBgPalette(u16 *palette)
     }
 }
 
-static void StartBgAnimation(bool8 isLink)
+static void StartBgAnimation(bool32 isLink)
 {
     u8 innerBgId, outerBgId;
 
@@ -1682,7 +1682,7 @@ static void RestoreBgAfterAnim(void)
     Free(sBgAnimPal);
 }
 
-static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, u16 speciesId)
+static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, u32 speciesId)
 {
     DoMonFrontSpriteAnimation(&gSprites[monSpriteId], speciesId, FALSE, 0);
 }

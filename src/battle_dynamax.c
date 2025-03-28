@@ -27,9 +27,9 @@ static u32 GetMaxPowerTier(u32 move);
 
 struct GMaxMove
 {
-    u16 species;
+    u32 species;
     u32 moveType;
-    u16 gmaxMove;
+    u32 gmaxMove;
 };
 
 static const struct GMaxMove sGMaxMoveTable[] =
@@ -73,8 +73,8 @@ static const struct GMaxMove sGMaxMoveTable[] =
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(u32 battler)
 {
-    u16 species = gBattleMons[battler].species;
-    u16 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    u32 species = gBattleMons[battler].species;
+    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
     // Prevents Zigzagoon from dynamaxing in vanilla.
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
@@ -145,7 +145,7 @@ void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 }
 
 // Returns the non-Dynamax HP of a Pokemon.
-u16 GetNonDynamaxHP(u32 battler)
+u32 GetNonDynamaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].hp;
@@ -159,7 +159,7 @@ u16 GetNonDynamaxHP(u32 battler)
 }
 
 // Returns the non-Dynamax Max HP of a Pokemon.
-u16 GetNonDynamaxMaxHP(u32 battler)
+u32 GetNonDynamaxMaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].maxHP;
@@ -248,7 +248,7 @@ bool32 IsMoveBlockedByDynamax(u32 move)
     return FALSE;
 }
 
-static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
+static u32 GetTypeBasedMaxMove(u32 battler, u32 type)
 {
     // Gigantamax check
     u32 i;
@@ -277,7 +277,7 @@ static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
-u16 GetMaxMove(u32 battler, u32 baseMove)
+u32 GetMaxMove(u32 battler, u32 baseMove)
 {
     u32 moveType;
     SetTypeBeforeUsingMove(baseMove, battler);

@@ -64,28 +64,28 @@ enum {
 
 struct CreditsData
 {
-    u16 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
-    u16 imgCounter; //how many mon images have been shown
-    u16 nextImgPos; //if the next image spawns left/center/right
-    u16 currShownMon; //index into monToShow
-    u16 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
-    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
-    u16 numCaughtMon; //count of filled spaces in caughtMonIds
-    u16 unused[7];
+    u32 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
+    u32 imgCounter; //how many mon images have been shown
+    u32 nextImgPos; //if the next image spawns left/center/right
+    u32 currShownMon; //index into monToShow
+    u32 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
+    u32 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
+    u32 numCaughtMon; //count of filled spaces in caughtMonIds
+    u32 unused[7];
 };
 
 struct CreditsEntry
 {
     u32 unk; // Never read
-    bool8 isTitle;
+    bool32 isTitle;
     const u32 *text;
 };
 
-static EWRAM_DATA u16 sSavedTaskId = 0;
-EWRAM_DATA bool8 gHasHallOfFameRecords = 0;
+static EWRAM_DATA u32 sSavedTaskId = 0;
+EWRAM_DATA bool32 gHasHallOfFameRecords = 0;
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
-static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
+static const u32 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
 static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
@@ -108,13 +108,13 @@ static u32 CheckChangeScene(u32, u32);
 static void Task_ShowMons(u32);
 static void Task_CycleSceneryPalette(u32);
 static void Task_BikeScene(u32);
-static bool8 LoadBikeScene(u32 data, u32);
+static bool32 LoadBikeScene(u32 data, u32);
 static void ResetCreditsTasks(u32);
-static void LoadTheEndScreen(u16, u16, u16);
-static void DrawTheEnd(u16, u16);
+static void LoadTheEndScreen(u32, u32, u32);
+static void DrawTheEnd(u32, u32);
 static void SpriteCB_Player(struct Sprite *);
 static void SpriteCB_Rival(struct Sprite *);
-static u32 CreateCreditsMonSprite(u16, s16, s16, u16);
+static u32 CreateCreditsMonSprite(u32, s16, s16, u32);
 static void DeterminePokemonToShow(void);
 
 static const u32 sTheEnd_LetterMap_T[] =
@@ -370,7 +370,7 @@ static void FreeCreditsBgsAndWindows(void)
         Free(ptr);
 }
 
-static void PrintCreditsText(const u32 *string, u32 y, bool8 isTitle)
+static void PrintCreditsText(const u32 *string, u32 y, bool32 isTitle)
 {
     u32 x;
     u32 color[3];
@@ -454,7 +454,7 @@ static void Task_WaitPaletteFade(u32 taskId)
 
 static void Task_CreditsMain(u32 taskId)
 {
-    u16 mode;
+    u32 mode;
 
     if (gTasks[taskId].tEndCredits)
     {
@@ -529,10 +529,10 @@ static void Task_LoadShowMons(u32 taskId)
     case 0:
     {
         s32 i;
-        u16 *temp;
+        u32 *temp;
         u32 *buffer = Alloc(MONBG_OFFSET + PLTT_SIZEOF(16));
         struct SpriteSheet bgSheet = { buffer, MONBG_OFFSET, TAG_MON_BG };
-        struct SpritePalette bgPalette = { (u16 *) &buffer[MONBG_OFFSET], TAG_MON_BG };
+        struct SpritePalette bgPalette = { (u32 *) &buffer[MONBG_OFFSET], TAG_MON_BG };
 
         ResetSpriteData();
         ResetAllPicSprites();
@@ -549,7 +549,7 @@ static void Task_LoadShowMons(u32 taskId)
             (buffer + MON_PIC_SIZE * 2)[i] = 0x33;
         }
 
-        temp = (u16 *)(&buffer[MONBG_OFFSET]);
+        temp = (u32 *)(&buffer[MONBG_OFFSET]);
         temp[0] = RGB_BLACK;
         temp[1] = RGB(31, 31, 20); // light yellow
         temp[2] = RGB(31, 20, 20); // light red
@@ -1171,7 +1171,7 @@ static void SetBikeScene(u32 scene, u32 taskId)
 #undef tRival
 #undef tPlayer
 
-static bool8 LoadBikeScene(u32 scene, u32 taskId)
+static bool32 LoadBikeScene(u32 scene, u32 taskId)
 {
     u32 spriteId;
 
@@ -1277,10 +1277,10 @@ static void ResetCreditsTasks(u32 taskId)
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_DESTROY;
 }
 
-static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOffset)
+static void LoadTheEndScreen(u32 tileOffsetLoad, u32 tileOffsetWrite, u32 palOffset)
 {
-    u16 baseTile;
-    u16 i;
+    u32 baseTile;
+    u32 i;
 
     LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
@@ -1288,12 +1288,12 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     baseTile = (palOffset / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
+        ((u32 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
 }
 
-static u16 GetLetterMapTile(u32 baseTiles)
+static u32 GetLetterMapTile(u32 baseTiles)
 {
-    u16 out = (baseTiles & 0x3F) + 80;
+    u32 out = (baseTiles & 0x3F) + 80;
 
     if (baseTiles == 0xFF)
         return 1;
@@ -1306,25 +1306,25 @@ static u16 GetLetterMapTile(u32 baseTiles)
     return out;
 }
 
-static void DrawLetterMapTiles(const u32 baseTiles[], u32 baseX, u32 baseY, u16 offset, u16 palette)
+static void DrawLetterMapTiles(const u32 baseTiles[], u32 baseX, u32 baseY, u32 offset, u32 palette)
 {
     u32 y, x;
-    const u16 tileOffset = (palette / 16) << 12;
+    const u32 tileOffset = (palette / 16) << 12;
 
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 3; x++)
-            ((u16 *) (VRAM + offset + (baseY + y) * 64))[baseX + x] = tileOffset + GetLetterMapTile(baseTiles[y * 3 + x]);
+            ((u32 *) (VRAM + offset + (baseY + y) * 64))[baseX + x] = tileOffset + GetLetterMapTile(baseTiles[y * 3 + x]);
     }
 }
 
-static void DrawTheEnd(u16 offset, u16 palette)
+static void DrawTheEnd(u32 offset, u32 palette)
 {
-    u16 pos;
-    u16 baseTile = (palette / 16) << 12;
+    u32 pos;
+    u32 baseTile = (palette / 16) << 12;
 
     for (pos = 0; pos < 32 * 32; pos++)
-        ((u16 *) (VRAM + offset))[pos] = baseTile + 1;
+        ((u32 *) (VRAM + offset))[pos] = baseTile + 1;
 
     DrawLetterMapTiles(sTheEnd_LetterMap_T, 3, 7, offset, palette);
     DrawLetterMapTiles(sTheEnd_LetterMap_H, 7, 7, offset, palette);
@@ -1502,7 +1502,7 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
 
 #define sMonSpriteId data[0]
 
-static u32 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
+static u32 CreateCreditsMonSprite(u32 nationalDexNum, s16 x, s16 y, u32 position)
 {
     u32 monSpriteId;
     u32 bgSpriteId;
@@ -1542,10 +1542,10 @@ static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 
 static void DeterminePokemonToShow(void)
 {
-    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
-    u16 page;
-    u16 dexNum;
-    u16 j;
+    u32 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+    u32 page;
+    u32 dexNum;
+    u32 j;
 
     // Go through the Pokédex, and anything that has gotten caught we put into our massive array.
     // This basically packs all of the caught Pokémon into the front of the array

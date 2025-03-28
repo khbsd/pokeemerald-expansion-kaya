@@ -406,13 +406,13 @@ static void AnimSimplePaletteBlend(struct Sprite *sprite)
 //   6: F_PAL_ANIM_2, BG palette 9
 u32 UnpackSelectedBattlePalettes(s16 selector)
 {
-    bool8 battleBackground = selector & 1;
-    bool8 attacker = (selector >> 1) & 1;
-    bool8 target = (selector >> 2) & 1;
-    bool8 attackerPartner = (selector >> 3) & 1;
-    bool8 targetPartner = (selector >> 4) & 1;
-    bool8 anim1 = (selector >> 5) & 1;
-    bool8 anim2 = (selector >> 6) & 1;
+    bool32 battleBackground = selector & 1;
+    bool32 attacker = (selector >> 1) & 1;
+    bool32 target = (selector >> 2) & 1;
+    bool32 attackerPartner = (selector >> 3) & 1;
+    bool32 targetPartner = (selector >> 4) & 1;
+    bool32 anim1 = (selector >> 5) & 1;
+    bool32 anim2 = (selector >> 6) & 1;
     u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gAnimMoveIndex);
 
     switch (moveTarget)

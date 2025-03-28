@@ -107,13 +107,13 @@ enum {
 struct FrontierPassData
 {
     void (*callback)(void);
-    u16 state;
-    u16 battlePoints;
+    u32 state;
+    u32 battlePoints;
     s16 cursorX;
     s16 cursorY;
     u32 cursorArea;
     u32 previousCursorArea;
-    bool8 hasBattleRecord:1;
+    bool32 hasBattleRecord:1;
     u32 areaToShow:3;
     u32 trainerStars:4;
     u32 facilitySymbols[NUM_FRONTIER_FACILITIES]; // 0: no symbol, 1: silver, 2: gold
@@ -127,7 +127,7 @@ struct FrontierPassGfx
     u32 *mapAndCardZoomTilemap;
     u32 *mapAndCardTilemap;
     u32 *battleRecordTilemap;
-    bool8 zooming;
+    bool32 zooming;
     s16 scaleX;
     s16 scaleY;
     u32 tilemapBuff1[BG_SCREEN_SIZE * 2];
@@ -173,11 +173,11 @@ static void Task_HandleFrontierPassInput(u32);
 static void Task_PassAreaZoom(u32);
 static void UpdateAreaHighlight(u32, u32);
 static void PrintAreaDescription(u32);
-static void ShowHideZoomingArea(bool8, bool8);
+static void ShowHideZoomingArea(bool32, bool32);
 static void SpriteCB_PlayerHead(struct Sprite *);
 
-static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
-static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
+static const u32 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
+static const u32 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
 static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
 static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
 static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier_pass/map_heads.4bpp.lz");
@@ -1194,7 +1194,7 @@ static void PrintAreaDescription(u32 cursorArea)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void ShowHideZoomingArea(bool8 show, bool8 zoomedIn)
+static void ShowHideZoomingArea(bool32 show, bool32 zoomedIn)
 {
     switch (sPassData->areaToShow)
     {
@@ -1577,7 +1577,7 @@ static void Task_HandleFrontierMap(u32 taskId)
     tState++;
 }
 
-static u32 MapNumToFrontierFacilityId(u16 mapNum) // id + 1, zero means not a frontier map number
+static u32 MapNumToFrontierFacilityId(u32 mapNum) // id + 1, zero means not a frontier map number
 {
     // In Battle Tower
     if ((mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_LOBBY) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM))
@@ -1655,7 +1655,7 @@ static void InitFrontierMapSprites(void)
     id = GetCurrentRegionMapSectionId();
     if (id == MAPSEC_BATTLE_FRONTIER || id == MAPSEC_ARTISAN_CAVE)
     {
-        s8 mapNum = gSaveBlock1Ptr->location.mapNum;
+        s32 mapNum = gSaveBlock1Ptr->location.mapNum;
 
         if (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST)
             || (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST) && (x = 55)))

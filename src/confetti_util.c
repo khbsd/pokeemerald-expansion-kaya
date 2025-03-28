@@ -91,7 +91,7 @@ bool32 ConfettiUtil_Update(void)
 
 static bool32 SetAnimAndTileNum(struct ConfettiUtil *structPtr, u32 animNum)
 {
-    u16 tileStart;
+    u32 tileStart;
 
     if (structPtr == NULL)
         return FALSE;
@@ -127,7 +127,7 @@ u32 ConfettiUtil_SetData(u32 id, u32 dataArrayId, s16 dataValue)
     return id;
 }
 
-u32 ConfettiUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u32 animNum, u32 priority)
+u32 ConfettiUtil_AddNew(const struct OamData *oam, u32 tileTag, u32 palTag, s16 x, s16 y, u32 animNum, u32 priority)
 {
     struct ConfettiUtil *structPtr = NULL;
     u32 i;

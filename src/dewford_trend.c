@@ -61,16 +61,16 @@ enum {
     SORT_MODE_FULL,
 };
 
-static void SortTrends(struct DewfordTrend *, u16, u32);
-static bool8 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u32);
+static void SortTrends(struct DewfordTrend *, u32, u32);
+static bool32 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u32);
 static void SeedTrendRng(struct DewfordTrend *);
-static bool8 IsPhraseInSavedTrends(u16 *);
-static bool8 IsEasyChatPairEqual(u16 *, u16 *);
-static s16 GetSavedTrendIndex(struct DewfordTrend *, struct DewfordTrend *, u16);
+static bool32 IsPhraseInSavedTrends(u32 *);
+static bool32 IsEasyChatPairEqual(u32 *, u32 *);
+static s16 GetSavedTrendIndex(struct DewfordTrend *, struct DewfordTrend *, u32);
 
 void InitDewfordTrend(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < SAVED_TRENDS_COUNT; i++)
     {
@@ -87,9 +87,9 @@ void InitDewfordTrend(void)
     SortTrends(gSaveBlock1Ptr->dewfordTrends, SAVED_TRENDS_COUNT, SORT_MODE_NORMAL);
 }
 
-void UpdateDewfordTrendPerDay(u16 days)
+void UpdateDewfordTrendPerDay(u32 days)
 {
-    u16 i;
+    u32 i;
 
     if (days != 0)
     {
@@ -105,7 +105,7 @@ void UpdateDewfordTrendPerDay(u16 days)
             {
                 // This trend is "boring"
                 // Lose trendiness until it becomes 0
-                if (trend->trendiness >= (u16)rand)
+                if (trend->trendiness >= (u32)rand)
                 {
                     trend->trendiness -= rand;
                     if (trend->trendiness == 0)
@@ -118,7 +118,7 @@ void UpdateDewfordTrendPerDay(u16 days)
             }
 
             trendiness = trend->trendiness + rand;
-            if ((u16)trendiness > trend->maxTrendiness)
+            if ((u32)trendiness > trend->maxTrendiness)
             {
                 // Reached limit, reset trendiness
                 u32 newTrendiness = trendiness % trend->maxTrendiness;
@@ -148,10 +148,10 @@ void UpdateDewfordTrendPerDay(u16 days)
 // Returns FALSE otherwise
 // Regardless of whether or not the current trendy phrase was changed, the submitted
 // phrase is always saved in gSaveBlock1Ptr->dewfordTrends
-bool8 TrySetTrendyPhrase(u16 *phrase)
+bool32 TrySetTrendyPhrase(u32 *phrase)
 {
     struct DewfordTrend trend = {0};
-    u16 i;
+    u32 i;
 
     if (!IsPhraseInSavedTrends(phrase))
     {
@@ -182,7 +182,7 @@ bool8 TrySetTrendyPhrase(u16 *phrase)
             {
                 // New trend is "trendier" than dewfordTrend[i]
                 // Shift other trends back to insert new trend
-                u16 j = SAVED_TRENDS_COUNT - 1;
+                u32 j = SAVED_TRENDS_COUNT - 1;
                 while (j > i)
                 {
                     gSaveBlock1Ptr->dewfordTrends[j] = gSaveBlock1Ptr->dewfordTrends[j - 1];
@@ -206,12 +206,12 @@ bool8 TrySetTrendyPhrase(u16 *phrase)
 }
 
 
-static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u32 mode)
+static void SortTrends(struct DewfordTrend *trends, u32 numTrends, u32 mode)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < numTrends; i++)
     {
-        u16 j;
+        u32 j;
         for (j = i + 1; j < numTrends; j++)
         {
             if (CompareTrends(&trends[j], &trends[i], mode))
@@ -228,7 +228,7 @@ static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u32 mode)
 
 void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u32 unused)
 {
-    u16 i, j, numTrends, players;
+    u32 i, j, numTrends, players;
     struct DewfordTrend *linkedTrendsBuffer, *savedTrendsBuffer, *src, *dst, *temp;
 
     // Exit if alloc fails
@@ -297,7 +297,7 @@ void BufferTrendyPhraseString(void)
 // This only influences the comment of an NPC inside the Dewford Town Hall
 void IsTrendyPhraseBoring(void)
 {
-    bool16 result = FALSE;
+    bool32 result = FALSE;
 
     do
     {
@@ -325,7 +325,7 @@ void GetDewfordHallPaintingNameIndex(void)
 // Returns TRUE if a > b (a is "trendier" than b), FALSE if a < b (b is "trendier" than a)
 // How one trend is compared to the other depends on the mode
 // In SORT_MODE_FULL if the trends are equal then TRUE is always returned, otherwise TRUE or FALSE is returned randomly
-static bool8 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u32 mode)
+static bool32 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u32 mode)
 {
     switch (mode)
     {
@@ -368,7 +368,7 @@ static bool8 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u32 m
 
 static void SeedTrendRng(struct DewfordTrend *trend)
 {
-    u16 rand;
+    u32 rand;
 
     rand = Random() % 98;
     if (rand > 50)
@@ -382,9 +382,9 @@ static void SeedTrendRng(struct DewfordTrend *trend)
     trend->rand = Random();
 }
 
-static bool8 IsPhraseInSavedTrends(u16 *phrase)
+static bool32 IsPhraseInSavedTrends(u32 *phrase)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < SAVED_TRENDS_COUNT; i++)
     {
@@ -394,9 +394,9 @@ static bool8 IsPhraseInSavedTrends(u16 *phrase)
     return FALSE;
 }
 
-static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
+static bool32 IsEasyChatPairEqual(u32 *words1, u32 *words2)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < 2; i++)
     {
@@ -406,7 +406,7 @@ static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
     return TRUE;
 }
 
-static s16 GetSavedTrendIndex(struct DewfordTrend *savedTrends, struct DewfordTrend *trend, u16 numSaved)
+static s16 GetSavedTrendIndex(struct DewfordTrend *savedTrends, struct DewfordTrend *trend, u32 numSaved)
 {
     s16 i;
     for (i = 0; i < numSaved; i++)

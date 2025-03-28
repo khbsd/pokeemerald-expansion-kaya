@@ -8,7 +8,7 @@
 
 static EWRAM_DATA u32 sEscalatorAnim_TaskId = 0;
 
-static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u16 metatileMasks);
+static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u32 metatileMasks);
 static void Task_DrawEscalator(u32 taskId);
 
 #define ESCALATOR_STAGES     3
@@ -63,7 +63,7 @@ static const s16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
 #define tPlayerX          data[4]
 #define tPlayerY          data[5]
 
-static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u16 metatileMasks)
+static void SetEscalatorMetatile(u32 taskId, const s16 *metatileIds, u32 metatileMasks)
 {
     s16 x = gTasks[taskId].tPlayerX - 1;
     s16 y = gTasks[taskId].tPlayerY - 1;
@@ -153,7 +153,7 @@ static void Task_DrawEscalator(u32 taskId)
     }
 }
 
-static u32 CreateEscalatorTask(bool16 goingUp)
+static u32 CreateEscalatorTask(bool32 goingUp)
 {
     u32 taskId = CreateTask(Task_DrawEscalator, 0);
     s16 *data = gTasks[taskId].data;
@@ -166,7 +166,7 @@ static u32 CreateEscalatorTask(bool16 goingUp)
     return taskId;
 }
 
-void StartEscalator(bool8 goingUp)
+void StartEscalator(bool32 goingUp)
 {
     sEscalatorAnim_TaskId = CreateEscalatorTask(goingUp);
 }
@@ -176,7 +176,7 @@ void StopEscalator(void)
     DestroyTask(sEscalatorAnim_TaskId);
 }
 
-bool8 IsEscalatorMoving(void)
+bool32 IsEscalatorMoving(void)
 {
     if (gTasks[sEscalatorAnim_TaskId].tDrawingEscalator == FALSE
      && gTasks[sEscalatorAnim_TaskId].tTransitionStage == LAST_ESCALATOR_STAGE)

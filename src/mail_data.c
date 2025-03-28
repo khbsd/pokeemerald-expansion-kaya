@@ -33,20 +33,20 @@ void ClearMail(struct Mail *mail)
     mail->itemId = ITEM_NONE;
 }
 
-bool8 MonHasMail(struct Pokemon *mon)
+bool32 MonHasMail(struct Pokemon *mon)
 {
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u32 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     if (ItemIsMail(heldItem) && GetMonData(mon, MON_DATA_MAIL) != MAIL_NONE)
         return TRUE;
     else
         return FALSE;
 }
 
-u32 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
+u32 GiveMailToMonByItemId(struct Pokemon *mon, u32 itemId)
 {
     u32 heldItem[2];
     u32 id, i;
-    u16 species;
+    u32 species;
     u32 personality;
 
     heldItem[0] = itemId;
@@ -80,7 +80,7 @@ u32 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
     return MAIL_NONE;
 }
 
-u16 SpeciesToMailSpecies(u16 species, u32 personality)
+u32 SpeciesToMailSpecies(u32 species, u32 personality)
 {
     if (species == SPECIES_UNOWN)
     {
@@ -91,9 +91,9 @@ u16 SpeciesToMailSpecies(u16 species, u32 personality)
     return species;
 }
 
-u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
+u32 MailSpeciesToSpecies(u32 mailSpecies, u32 *buffer)
 {
-    u16 result;
+    u32 result;
 
     if (mailSpecies >= UNOWN_OFFSET && mailSpecies < UNOWN_OFFSET + NUM_UNOWN_FORMS)
     {
@@ -111,7 +111,7 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
 u32 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
 {
     u32 heldItem[2];
-    u16 itemId = mail->itemId;
+    u32 itemId = mail->itemId;
     u32 mailId = GiveMailToMonByItemId(mon, itemId);
 
     if (mailId == MAIL_NONE)
@@ -182,7 +182,7 @@ u32 TakeMailFromMonAndSave(struct Pokemon *mon)
     return MAIL_NONE;
 }
 
-bool8 ItemIsMail(u16 itemId)
+bool32 ItemIsMail(u32 itemId)
 {
     switch (itemId)
     {

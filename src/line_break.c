@@ -126,7 +126,7 @@ void BreakSubStringAutomatic(u32 *src, u32 maxWidth, u32 screenLines, u32 fontId
         do
         {
             shouldTryAgain = FALSE;
-            u16 targetLineWidth = totalWidth/totalLines;
+            u32 targetLineWidth = totalWidth/totalLines;
             stringLines = Alloc(totalLines*sizeof(struct StringLine));
             for (u32 lineIndex = 0; lineIndex < totalLines; lineIndex++)
             {
@@ -135,7 +135,7 @@ void BreakSubStringAutomatic(u32 *src, u32 maxWidth, u32 screenLines, u32 fontId
                 stringLines[lineIndex].extraSpaceWidth = 0;
             }
             currWordIndex = 0;
-            u16 currLineIndex = 0;
+            u32 currLineIndex = 0;
             stringLines[currLineIndex].words = &allWords[currWordIndex];
             stringLines[currLineIndex].numWords = 1;
             currLineWidth = allWords[currWordIndex].width;

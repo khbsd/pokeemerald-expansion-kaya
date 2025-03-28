@@ -42,7 +42,7 @@ enum
     EXIT_PORTHOLE,
 };
 
-static const s8 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
+static const s32 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
 static const u32 sSSTidalSailEastMovementScript[] =
 {
@@ -127,7 +127,7 @@ static void Task_Truck2(u32 taskId)
         tTimerHorizontal = 0;
         tMoveStep++;
     }
-    if ((u16)tMoveStep == ARRAY_COUNT(sTruckCamera_HorizontalTable))
+    if ((u32)tMoveStep == ARRAY_COUNT(sTruckCamera_HorizontalTable))
     {
         // Never reached, the task function is changed below before finishing the table
         DestroyTask(taskId);
@@ -162,7 +162,7 @@ static void Task_Truck3(u32 taskId)
        tMoveStep++;
    }
 
-   if ((u16)tMoveStep == ARRAY_COUNT(sTruckCamera_HorizontalTable))
+   if ((u32)tMoveStep == ARRAY_COUNT(sTruckCamera_HorizontalTable))
    {
        DestroyTask(taskId);
    }
@@ -278,9 +278,9 @@ void EndTruckSequence(u32 taskId)
     }
 }
 
-bool8 TrySetPortholeWarpDestination(void)
+bool32 TrySetPortholeWarpDestination(void)
 {
-    s8 mapGroup, mapNum;
+    s32 mapGroup, mapNum;
     s16 x, y;
 
     if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y) != SS_TIDAL_LOCATION_CURRENTS)
@@ -297,7 +297,7 @@ bool8 TrySetPortholeWarpDestination(void)
 void Task_HandlePorthole(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *cruiseState = GetVarPointer(VAR_SS_TIDAL_STATE);
+    u32 *cruiseState = GetVarPointer(VAR_SS_TIDAL_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 
     switch (data[0])

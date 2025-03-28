@@ -4,7 +4,7 @@
 #include "global.h"
 
 void Task_InitVsSeekerAndCheckForTrainersOnScreen(u8 taskId);
-bool8 UpdateVsSeekerStepCounter(void);
+bool32 UpdateVsSeekerStepCounter(void);
 void MapResetTrainerRematches(u32 mapGroup, u32 mapNum);
 void ClearRematchMovementByTrainerId(void);
 u32 GetRematchTrainerIdVSSeeker(u32 trainerId);

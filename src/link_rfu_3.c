@@ -34,7 +34,7 @@ EWRAM_DATA u32 gWirelessStatusIndicatorSpriteId = 0;
 
 static u32 sSequenceArrayValOffset;
 
-static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
+static const u32 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
 static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/link/wireless_icon.4bpp.lz");
 
 // Most of the below two tables won't make sense with ASCII encoding.
@@ -361,7 +361,7 @@ static void UNUSED RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u32 *data)
 {
     s32 i;
-    u16 imeBak;
+    u32 imeBak;
     u32 count;
 
     if (queue->count < RECV_QUEUE_NUM_SLOTS)
@@ -397,7 +397,7 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u32 *data)
 void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u32 *data)
 {
     s32 i;
-    u16 imeBak;
+    u32 imeBak;
 
     if (queue->count < SEND_QUEUE_NUM_SLOTS)
     {
@@ -427,9 +427,9 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u32 *data)
     }
 }
 
-bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u32 *src)
+bool32 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u32 *src)
 {
-    u16 imeBak;
+    u32 imeBak;
     s32 i;
 
     imeBak = REG_IME;
@@ -453,10 +453,10 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u32 *src)
     return TRUE;
 }
 
-bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u32 *src)
+bool32 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u32 *src)
 {
     s32 i;
-    u16 imeBak;
+    u32 imeBak;
 
     if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
@@ -496,7 +496,7 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u32 *data)
     }
 }
 
-bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u32 *src)
+bool32 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u32 *src)
 {
     s32 i;
 
@@ -533,7 +533,7 @@ static void UNUSED RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u32 *dat
     }
 }
 
-static bool8 UNUSED RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u32 *dest)
+static bool32 UNUSED RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u32 *dest)
 {
     s32 i;
 
@@ -556,7 +556,7 @@ static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
 {
     s32 i;
     u32 rval;
-    u16 total = 0;
+    u32 total = 0;
     switch (mode)
     {
     case 0:
@@ -567,7 +567,7 @@ static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
             arr[i] = i + 1;
             total += i + 1;
         }
-        *((u16 *)(arr + i)) = total;
+        *((u32 *)(arr + i)) = total;
         break;
     case 1:
         // Populate with numbers 1-100
@@ -577,7 +577,7 @@ static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
             arr[i] = i + 1;
             total += i + 1;
         }
-        *((u16 *)(arr + SEQ_ARRAY_MAX_SIZE)) = total;
+        *((u32 *)(arr + SEQ_ARRAY_MAX_SIZE)) = total;
         break;
     case 2:
         // Populate with random numbers 0-255
@@ -588,7 +588,7 @@ static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
             arr[i] = rval;
             total += rval;
         }
-        *((u16 *)(arr + i)) = total;
+        *((u32 *)(arr + i)) = total;
         break;
     case 3:
         // Populate with numbers 1-200 + sSequenceArrayValOffset
@@ -598,7 +598,7 @@ static void UNUSED PopulateArrayWithSequence(u32 *arr, u32 mode)
             arr[i] = i + 1 + sSequenceArrayValOffset;
             total += (i + 1 + sSequenceArrayValOffset) & 0xFF;
         }
-        *((u16 *)(arr + i)) = total;
+        *((u32 *)(arr + i)) = total;
         sSequenceArrayValOffset++;
         break;
     }
@@ -681,9 +681,9 @@ void InitHostRfuGameData(struct RfuGameData *data, u32 activity, bool32 startedA
     data->compatibility.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
+bool32 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
 {
-    bool8 retVal;
+    bool32 retVal;
 
     if (lman.parent_child == MODE_PARENT)
     {
@@ -716,9 +716,9 @@ bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u32 *username, u
     return retVal;
 }
 
-bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
+bool32 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u32 *username, u32 idx)
 {
-    bool8 retVal = FALSE;
+    bool32 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_WONDER_DISTRIBUTOR)
     {
         memcpy(gameData, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
@@ -920,7 +920,7 @@ void SaveLinkTrainerNames(void)
             connectedTrainerRecordIndices[i] = -1;
             for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); j++)
             {
-                if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
+                if ((u32)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
                     connectedTrainerRecordIndices[i] = j;
             }
         }
@@ -931,7 +931,7 @@ void SaveLinkTrainerNames(void)
         {
             if (i != GetMultiplayerId() && gLinkPlayers[i].language != LANGUAGE_JAPANESE)
             {
-                CopyTrainerRecord(&newRecords[nextSpace], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
+                CopyTrainerRecord(&newRecords[nextSpace], (u32)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
 
                 // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
                 if (connectedTrainerRecordIndices[i] >= 0)
@@ -958,7 +958,7 @@ void SaveLinkTrainerNames(void)
     }
 }
 
-bool32 PlayerHasMetTrainerBefore(u16 id, u32 *name)
+bool32 PlayerHasMetTrainerBefore(u32 id, u32 *name)
 {
     s32 i;
 

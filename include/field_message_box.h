@@ -9,12 +9,12 @@ enum
     FIELD_MESSAGE_BOX_AUTO_SCROLL,
 };
 
-bool8 ShowFieldMessage(const u8 *message);
-bool8 ShowPokenavFieldMessage(const u8 *message);
-bool8 ShowFieldMessageFromBuffer(void);
-bool8 ShowFieldAutoScrollMessage(const u8 *message);
+bool32 ShowFieldMessage(const u8 *message);
+bool32 ShowPokenavFieldMessage(const u8 *message);
+bool32 ShowFieldMessageFromBuffer(void);
+bool32 ShowFieldAutoScrollMessage(const u8 *message);
 void HideFieldMessageBox(void);
-bool8 IsFieldMessageBoxHidden(void);
+bool32 IsFieldMessageBoxHidden(void);
 u8 GetFieldMessageBoxMode(void);
 void StopFieldMessage(void);
 void InitFieldMessageBox(void);

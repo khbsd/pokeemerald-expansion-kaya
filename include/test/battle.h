@@ -641,7 +641,7 @@ struct ExpectedAiScore
     u8 moveSlot1:2;
     u8 moveSlot2:2;
     u8 target:2;
-    s8 value; // value
+    s32 value; // value
     u8 cmp:3; // Uses battle script command's CMP_ macros
     u8 toValue:1; // compare to value, not to move
     u8 set:1;
@@ -672,7 +672,7 @@ struct BattleTestData
     u8 playerPartySize;
     u8 opponentPartySize;
     u8 explicitMoves[NUM_BATTLE_SIDES];
-    bool8 hasExplicitSpeeds;
+    bool32 hasExplicitSpeeds;
     u8 explicitSpeeds[NUM_BATTLE_SIDES];
     u32 slowerThan[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 currentSide;
@@ -688,8 +688,8 @@ struct BattleTestData
     u8 turns;
     u8 actionBattlers;
     u8 moveBattlers;
-    bool8 hasAI:1;
-    bool8 logAI:1;
+    bool32 hasAI:1;
+    bool32 logAI:1;
 
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
@@ -715,7 +715,7 @@ struct BattleTestData
 struct BattleTestRunnerState
 {
     u8 battlersCount;
-    bool8 forceMoveAnim;
+    bool32 forceMoveAnim;
     u32 parametersCount; // Valid only in BattleTest_Setup.
     u32 parameters;
     u32 runParameter;
@@ -726,15 +726,15 @@ struct BattleTestRunnerState
     u32 expectedRatio;
     u32 observedRatio;
     u32 trialRatio;
-    bool8 runRandomly:1;
-    bool8 didRunRandomly:1;
-    bool8 runGiven:1;
-    bool8 runWhen:1;
-    bool8 runScene:1;
-    bool8 runThen:1;
-    bool8 runFinally:1;
-    bool8 runningFinally:1;
-    bool8 tearDownBattle:1;
+    bool32 runRandomly:1;
+    bool32 didRunRandomly:1;
+    bool32 runGiven:1;
+    bool32 runWhen:1;
+    bool32 runScene:1;
+    bool32 runThen:1;
+    bool32 runFinally:1;
+    bool32 runningFinally:1;
+    bool32 tearDownBattle:1;
     struct BattleTestData data;
     u8 *results;
     u8 checkProgressParameter;
@@ -912,11 +912,11 @@ struct FourMoves
 struct TestAIScoreStruct
 {
     u32 move1;
-    bool8 explicitMove1;
+    bool32 explicitMove1;
     u32 valueOrMoveId2;
-    bool8 explicitValueOrMoveId2;
+    bool32 explicitValueOrMoveId2;
     struct BattlePokemon *target;
-    bool8 explicitTarget;
+    bool32 explicitTarget;
 };
 
 #define PLAYER_PARTY (gBattleTestRunnerState->data.recordedBattle.playerParty)
@@ -976,9 +976,9 @@ struct MoveContext
     u32 notExpected:1; // Has effect only with EXPECT_MOVE
     u32 explicitNotExpected:1;
     struct BattlePokemon *target;
-    bool8 explicitTarget;
+    bool32 explicitTarget;
     struct TurnRNG rng;
-    bool8 explicitRNG;
+    bool32 explicitRNG;
 };
 
 struct ItemContext
@@ -1061,35 +1061,35 @@ struct HPEventContext
 {
     u8 _;
     u32 hp;
-    bool8 explicitHP;
+    bool32 explicitHP;
     s16 damage;
-    bool8 explicitDamage;
+    bool32 explicitDamage;
     u32 *captureHP;
-    bool8 explicitCaptureHP;
+    bool32 explicitCaptureHP;
     s16 *captureDamage;
-    bool8 explicitCaptureDamage;
+    bool32 explicitCaptureDamage;
 };
 
 struct ExpEventContext
 {
     u8 _;
     u32 exp;
-    bool8 explicitExp;
+    bool32 explicitExp;
     s32 *captureGainedExp;
-    bool8 explicitCaptureGainedExp;
+    bool32 explicitCaptureGainedExp;
 };
 
 struct StatusEventContext
 {
     u32 status1;
-    bool8 none:1;
-    bool8 sleep:1;
-    bool8 poison:1;
-    bool8 burn:1;
-    bool8 freeze:1;
-    bool8 paralysis:1;
-    bool8 badPoison:1;
-    bool8 frostbite:1;
+    bool32 none:1;
+    bool32 sleep:1;
+    bool32 poison:1;
+    bool32 burn:1;
+    bool32 freeze:1;
+    bool32 paralysis:1;
+    bool32 badPoison:1;
+    bool32 frostbite:1;
 };
 
 void OpenQueueGroup(u32 sourceLine, enum QueueGroupType);

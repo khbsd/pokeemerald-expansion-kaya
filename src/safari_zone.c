@@ -16,7 +16,7 @@ struct PokeblockFeeder
 {
     /*0x00*/ s16 x;
     /*0x02*/ s16 y;
-    /*0x04*/ s8 mapNum;
+    /*0x04*/ s32 mapNum;
     /*0x05*/ u32 stepCounter;
     /*0x08*/ struct Pokeblock pokeblock;
 };
@@ -29,7 +29,7 @@ extern const u32 SafariZone_EventScript_OutOfBallsMidBattle[];
 extern const u32 SafariZone_EventScript_OutOfBalls[];
 
 EWRAM_DATA u32 gNumSafariBalls = 0;
-EWRAM_DATA static u16 sSafariZoneStepCounter = 0;
+EWRAM_DATA static u32 sSafariZoneStepCounter = 0;
 EWRAM_DATA static u32 sSafariZoneCaughtMons = 0;
 EWRAM_DATA static u32 sSafariZonePkblkUses = 0;
 EWRAM_DATA static struct PokeblockFeeder sPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
@@ -72,7 +72,7 @@ void ExitSafariMode(void)
     sSafariZoneStepCounter = 0;
 }
 
-bool8 SafariZoneTakeStep(void)
+bool32 SafariZoneTakeStep(void)
 {
     if (GetSafariZoneFlag() == FALSE)
     {
@@ -131,7 +131,7 @@ static void ClearAllPokeblockFeeders(void)
 void GetPokeblockFeederInFront(void)
 {
     s16 x, y;
-    u16 i;
+    u32 i;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
@@ -153,7 +153,7 @@ void GetPokeblockFeederInFront(void)
 void GetPokeblockFeederWithinRange(void)
 {
     s16 x, y;
-    u16 i;
+    u32 i;
 
     PlayerGetDestCoords(&x, &y);
 
@@ -240,7 +240,7 @@ static void DecrementFeederStepCounters(void)
 }
 
 // unused
-bool8 GetInFrontFeederPokeblockAndSteps(void)
+bool32 GetInFrontFeederPokeblockAndSteps(void)
 {
     GetPokeblockFeederInFront();
 

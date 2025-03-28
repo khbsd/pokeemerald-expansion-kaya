@@ -26,8 +26,8 @@ struct PlayerInfo
     u32 trainerId;
     u32 name[PLAYER_NAME_LENGTH + 1];
     u32 gender;
-    u16 battlerId;
-    u16 language;
+    u32 battlerId;
+    u32 language;
 };
 
 // Save data using TryWriteSpecialSaveSector is allowed to exceed SECTOR_DATA_SIZE (up to the counter field)
@@ -36,9 +36,9 @@ STATIC_ASSERT(sizeof(struct RecordedBattleSave) <= SECTOR_COUNTER_OFFSET, Record
 EWRAM_DATA rng_value_t gRecordedBattleRngSeed = RNG_VALUE_EMPTY;
 EWRAM_DATA rng_value_t gBattlePalaceMoveSelectionRngValue = RNG_VALUE_EMPTY;
 EWRAM_DATA static u32 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};
-EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u32 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u32 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u32 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u32 sRecordMode = 0;
 EWRAM_DATA static u32 sLvlMode = 0;
 EWRAM_DATA static u32 sFrontierFacility = 0;
@@ -52,13 +52,13 @@ EWRAM_DATA static u32 sBattleFlags = 0;
 EWRAM_DATA static u32 sAI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
-EWRAM_DATA static u16 sPlayerMonMoves[MAX_BATTLERS_COUNT / 2][MAX_MON_MOVES] = {0};
+EWRAM_DATA static u32 sPlayerMonMoves[MAX_BATTLERS_COUNT / 2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_LINK_PLAYERS] = {0};
-EWRAM_DATA static bool8 sIsPlaybackFinished = 0;
+EWRAM_DATA static bool32 sIsPlaybackFinished = 0;
 EWRAM_DATA static u32 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
 EWRAM_DATA static u32 sRecordMixFriendClass = 0;
 EWRAM_DATA static u32 sApprenticeId = 0;
-EWRAM_DATA static u16 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
+EWRAM_DATA static u32 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
 EWRAM_DATA static u32 sBattleOutcome = 0;
 
 static u32 sRecordMixFriendLanguage;
@@ -507,7 +507,7 @@ void SetPartiesFromRecordedSave(struct RecordedBattleSave *src)
 
 void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 {
-    bool8 var;
+    bool32 var;
     s32 i, j;
 
     SetPartiesFromRecordedSave(src);
@@ -642,7 +642,7 @@ void RecordedBattle_ClearFrontierPassFlag(void)
 }
 
 // Set sFrontierPassFlag to received state of FLAG_SYS_FRONTIER_PASS
-void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags)
+void RecordedBattle_SetFrontierPassFlagFromHword(u32 flags)
 {
     sFrontierPassFlag |= (flags & (1 << 15)) >> 15;
 }
@@ -796,7 +796,7 @@ void RecordedBattle_SetPlaybackFinished(void)
     sIsPlaybackFinished = TRUE;
 }
 
-bool8 RecordedBattle_CanStopPlayback(void)
+bool32 RecordedBattle_CanStopPlayback(void)
 {
     return (sIsPlaybackFinished == FALSE);
 }
@@ -836,7 +836,7 @@ void RecordedBattle_SaveBattleOutcome(void)
     sBattleOutcome = gBattleOutcome;
 }
 
-u16 *GetRecordedBattleEasyChatSpeech(void)
+u32 *GetRecordedBattleEasyChatSpeech(void)
 {
     return sEasyChatSpeech;
 }

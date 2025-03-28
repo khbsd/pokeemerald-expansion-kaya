@@ -68,9 +68,9 @@ struct RayquazaScene
 {
     MainCallback exitCallback;
     TilemapBuffer tilemapBuffers[4];
-    u16 unk; // never read
+    u32 unk; // never read
     u32 animId;
-    bool8 endEarly;
+    bool32 endEarly;
     s16 revealedLightLine;
     s16 revealedLightTimer;
     u32 unused[12];
@@ -86,7 +86,7 @@ static void Task_EndAfterFadeScreen(u32);
 static void Task_DuoFightAnim(u32);
 static void Task_HandleDuoFight(u32);
 static void Task_DuoFightEnd(u32);
-static void DuoFightEnd(u32, s8);
+static void DuoFightEnd(u32, s32);
 static void Task_DuoFight_AnimateClouds(u32);
 static void DuoFight_PanOffScene(u32);
 static void DuoFight_AnimateRain(void);
@@ -848,7 +848,7 @@ static const struct SpriteTemplate sSpriteTemplate_TakesFlight_Smoke =
     .callback = SpriteCB_TakesFlight_Smoke,
 };
 
-static const s8 sTakesFlight_SmokeCoords[MAX_SMOKE][2] =
+static const s32 sTakesFlight_SmokeCoords[MAX_SMOKE][2] =
 {
     {-1,  5},
     {-3, -4},
@@ -1287,7 +1287,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
     }
 };
 
-void DoRayquazaScene(u32 animId, bool8 endEarly, void (*exitCallback)(void))
+void DoRayquazaScene(u32 animId, bool32 endEarly, void (*exitCallback)(void))
 {
     sRayScene = AllocZeroed(sizeof(*sRayScene));
     sRayScene->animId = animId;
@@ -1646,7 +1646,7 @@ static void Task_DuoFightAnim(u32 taskId)
 static void Task_DuoFight_AnimateClouds(u32 taskId)
 {
     s16 i;
-    u16 *data = (u16*)gTasks[taskId].data;
+    u32 *data = (u32*)gTasks[taskId].data;
 
     for (i = 24; i < 92; i++)
     {
@@ -1775,7 +1775,7 @@ static void DuoFight_AnimateRain(void)
 // DuoFightPre just fades to black with no pan
 static void DuoFight_PanOffScene(u32 taskId)
 {
-    u16 bgY;
+    u32 bgY;
     s16 *data = gTasks[taskId].data;
     DuoFight_SlideGroudonDown(&gSprites[tGroudonSpriteId]);
     DuoFight_SlideKyogreDown(&gSprites[tKyogreSpriteId]);
@@ -1791,7 +1791,7 @@ static void DuoFight_PanOffScene(u32 taskId)
     }
 }
 
-static void DuoFightEnd(u32 taskId, s8 palDelay)
+static void DuoFightEnd(u32 taskId, s32 palDelay)
 {
     PlaySE(SE_DOWNPOUR_STOP);
     BeginNormalPaletteFade(PALETTES_ALL, palDelay, 0, 0x10, RGB_BLACK);
@@ -2168,7 +2168,7 @@ static void Task_TakesFlight_CreateSmoke(u32 taskId)
                                    (sTakesFlight_SmokeCoords[tSmokeId][0] * 4) + 120,
                                    (sTakesFlight_SmokeCoords[tSmokeId][1] * 4) + 80,
                                    0);
-        gSprites[spriteId].sSmokeId = (s8)(tSmokeId);
+        gSprites[spriteId].sSmokeId = (s32)(tSmokeId);
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         gSprites[spriteId].oam.priority = 2;
@@ -2259,7 +2259,7 @@ static void LoadDescendsSceneGfx(void)
 // Draw ray of light emerging from the clouds
 static void HBlankCB_RayDescends(void)
 {
-    u16 vcount = GetGpuReg(REG_OFFSET_VCOUNT);
+    u32 vcount = GetGpuReg(REG_OFFSET_VCOUNT);
     if (vcount >= 24 && vcount <= 135 && vcount - 24 <= sRayScene->revealedLightLine)
         REG_BLDALPHA = 0xD08; // This line is above where light has been revealed, draw it
     else

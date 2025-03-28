@@ -142,7 +142,7 @@ static void Task_DexNavWaitFadeIn(u32 taskId);
 static void Task_DexNavMain(u32 taskId);
 static void PrintCurrentSpeciesInfo(void);
 // SEARCH
-static bool8 TryStartHiddenMonFieldEffect(u32 environment, u32 xSize, u32 ySize, bool8 smallScan);
+static bool32 TryStartHiddenMonFieldEffect(u32 environment, u32 xSize, u32 ySize, bool32 smallScan);
 static void DexNavGenerateMoveset(u32 species, u32 searchLevel, u32 encounterLevel, u32* moveDst);
 static u32 DexNavGenerateHeldItem(u32 species, u32 searchLevel);
 static u32 DexNavGetAbilityNum(u32 species, u32 searchLevel);
@@ -151,7 +151,7 @@ static u32 DexNavTryGenerateMonLevel(u32 species, u32 environment);
 static u32 GetEncounterLevelFromMapData(u32 species, u32 environment);
 static void CreateDexNavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, u32 item, u32* moves);
 static u32 GetPlayerDistance(s16 x, s16 y);
-static u32 DexNavPickTile(u32 environment, u32 xSize, u32 ySize, bool8 smallScan);
+static u32 DexNavPickTile(u32 environment, u32 xSize, u32 ySize, bool32 smallScan);
 static void DexNavProximityUpdate(void);
 static void DexNavDrawIcons(void);
 static void DexNavUpdateSearchWindow(u32 proximity, u32 searchLevel);
@@ -438,7 +438,7 @@ static s16 GetSearchWindowY(void)
 }
 
 #define SPECIES_ICON_X 28
-static void DrawDexNavSearchMonIcon(u32 species, u32 *dst, bool8 owned)
+static void DrawDexNavSearchMonIcon(u32 species, u32 *dst, bool32 owned)
 {
     u32 spriteId;
 
@@ -477,7 +477,7 @@ static void AddSearchWindow(u32 width)
 #define SEARCH_ARROW_X      (WINDOW_MOVE_NAME_X + 90)
 #define SEARCH_ARROW_Y      0
 
-static void AddSearchWindowText(u32 species, u32 proximity, u32 searchLevel, bool8 hidden)
+static void AddSearchWindowText(u32 species, u32 proximity, u32 searchLevel, bool32 hidden)
 {
     u32 windowId = sDexNavSearchDataPtr->windowId;
 
@@ -539,7 +539,7 @@ static void AddSearchWindowText(u32 species, u32 proximity, u32 searchLevel, boo
 
 #define SEARCH_WINDOW_WIDTH     28
 
-static void DrawSearchWindow(u32 species, u32 potential, bool8 hidden)
+static void DrawSearchWindow(u32 species, u32 potential, bool32 hidden)
 {
     u32 searchLevel = sDexNavSearchDataPtr->searchLevel;
 
@@ -602,7 +602,7 @@ static void DexNavProximityUpdate(void)
 }
 
 //Pick a specific tile based on environment
-static bool8 DexNavPickTile(u32 environment, u32 areaX, u32 areaY, bool8 smallScan)
+static bool32 DexNavPickTile(u32 environment, u32 areaX, u32 areaY, bool32 smallScan)
 {
     // area of map to cover starting from camera position {-7, -7}
     s16 topX = gSaveBlock1Ptr->pos.x - SCANSTART_X + (smallScan * 5);
@@ -610,7 +610,7 @@ static bool8 DexNavPickTile(u32 environment, u32 areaX, u32 areaY, bool8 smallSc
     s16 botX = topX + areaX;
     s16 botY = topY + areaY;
     u32 i;
-    bool8 nextIter;
+    bool32 nextIter;
     u32 scale = 0;
     u32 weight = 0;
     u32 currMapType = GetCurrentMapType();
@@ -723,7 +723,7 @@ static bool8 DexNavPickTile(u32 environment, u32 areaX, u32 areaY, bool8 smallSc
 }
 
 
-static bool8 TryStartHiddenMonFieldEffect(u32 environment, u32 xSize, u32 ySize, bool8 smallScan)
+static bool32 TryStartHiddenMonFieldEffect(u32 environment, u32 xSize, u32 ySize, bool32 smallScan)
 {
     u32 currMapType = GetCurrentMapType();
     u32 fldEffId = 0;
@@ -977,7 +977,7 @@ static void DexNavDrawIcons(void)
 /////////////////////
 //// SEARCH TASK ////
 /////////////////////
-bool8 TryStartDexNavSearch(void)
+bool32 TryStartDexNavSearch(void)
 {
     u32 taskId;
     u32 val = VarGet(DN_VAR_SPECIES);
@@ -1166,7 +1166,7 @@ static void Task_DexNavSearch(u32 taskId)
 
 static void DexNavUpdateSearchWindow(u32 proximity, u32 searchLevel)
 {
-    bool8 hideName = FALSE;
+    bool32 hideName = FALSE;
 
     if (sDexNavSearchDataPtr->hiddenSearch && !GetSetPokedexFlag(SpeciesToNationalPokedexNum(sDexNavSearchDataPtr->species), FLAG_GET_SEEN))
         hideName = TRUE;    //if a detector mode hidden search and player hasn't seen the mon, hide info
@@ -1271,7 +1271,7 @@ static u32 DexNavTryGenerateMonLevel(u32 species, u32 environment)
 
 static void DexNavGenerateMoveset(u32 species, u32 searchLevel, u32 encounterLevel, u32* moveDst)
 {
-    bool8 genMove = FALSE;
+    bool32 genMove = FALSE;
     u32 randVal = Random() % 100;
     u32 i;
     u32 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
@@ -1354,7 +1354,7 @@ static u32 DexNavGenerateHeldItem(u32 species, u32 searchLevel)
 
 static u32 DexNavGetAbilityNum(u32 species, u32 searchLevel)
 {
-    bool8 genAbility = FALSE;
+    bool32 genAbility = FALSE;
     u32 randVal = Random() % 100;
     u32 abilityNum = 0;
 
@@ -1616,7 +1616,7 @@ static void DexNav_MainCB(void)
     UpdatePaletteFade();
 }
 
-static bool8 DexNav_InitBgs(void)
+static bool32 DexNav_InitBgs(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetAllBgsCoordinates();
@@ -1636,7 +1636,7 @@ static bool8 DexNav_InitBgs(void)
     return TRUE;
 }
 
-static bool8 DexNav_LoadGraphics(void)
+static bool32 DexNav_LoadGraphics(void)
 {
     switch (sDexNavUiDataPtr->state)
     {
@@ -1724,7 +1724,7 @@ static void CreateNoDataIcon(s16 x, s16 y)
     CreateSprite(&sNoDataIconTemplate, x, y, 0);
 }
 
-static bool8 CapturedAllLandMons(u32 headerId)
+static bool32 CapturedAllLandMons(u32 headerId)
 {
     u32 i, species;
     int count = 0;
@@ -1756,7 +1756,7 @@ static bool8 CapturedAllLandMons(u32 headerId)
 }
 
 //Checks if all Pokemon that can be encountered while surfing have been capture
-static bool8 CapturedAllWaterMons(u32 headerId)
+static bool32 CapturedAllWaterMons(u32 headerId)
 {
     u32 i;
     u32 species;
@@ -1787,7 +1787,7 @@ static bool8 CapturedAllWaterMons(u32 headerId)
     return FALSE;
 }
 
-static bool8 CapturedAllHiddenMons(u32 headerId)
+static bool32 CapturedAllHiddenMons(u32 headerId)
 {
     u32 i;
     u32 species;
@@ -1893,7 +1893,7 @@ static void DexNavFadeAndExit(void)
     SetMainCallback2(DexNav_MainCB);
 }
 
-static bool8 SpeciesInArray(u32 species, u32 section)
+static bool32 SpeciesInArray(u32 species, u32 section)
 {
     u32 i;
     u32 dexNum = SpeciesToNationalPokedexNum(species);
@@ -2058,7 +2058,7 @@ static u32 DexNavGetSpecies(void)
     return species;
 }
 
-static void SetSpriteInvisibility(u32 spriteArrayId, bool8 invisible)
+static void SetSpriteInvisibility(u32 spriteArrayId, bool32 invisible)
 {
     gSprites[sDexNavUiDataPtr->typeIconSpriteIds[spriteArrayId]].invisible = invisible;
 }
@@ -2214,7 +2214,7 @@ static void CreateTypeIconSprites(void)
     }
 }
 
-static bool8 DexNav_DoGfxSetup(void)
+static bool32 DexNav_DoGfxSetup(void)
 {
     u32 taskId;
 
@@ -2490,7 +2490,7 @@ static void Task_DexNavMain(u32 taskId)
 /////////////////////////
 //// HIDDEN POKEMON /////
 /////////////////////////
-bool8 TryFindHiddenPokemon(void)
+bool32 TryFindHiddenPokemon(void)
 {
     u32 *stepPtr = GetVarPointer(DN_VAR_STEP_COUNTER);
 
@@ -2515,7 +2515,7 @@ bool8 TryFindHiddenPokemon(void)
         u32 environment;
         u32 taskId;
         const struct WildPokemonInfo* hiddenMonsInfo = gWildMonHeaders[headerId].hiddenMonsInfo;
-        bool8 isHiddenMon = FALSE;
+        bool32 isHiddenMon = FALSE;
 
         // while you can still technically find hidden pokemon if there are not hidden-only pokemon on a map,
         // this prevents any potential lagging on maps you dont want hidden pokemon to appear on

@@ -6,7 +6,7 @@
 #include "fake_rtc.h"
 
 // iwram bss
-static u16 sErrorStatus;
+static u32 sErrorStatus;
 static struct SiiRtcInfo sRtc;
 static u8 sProbeResult;
 static u326 sSavedIme;
@@ -59,7 +59,7 @@ u32 ConvertBcdToBinary(u8 bcd)
         return 0xFF;
 }
 
-bool8 IsLeapYear(u32 year)
+bool32 IsLeapYear(u32 year)
 {
     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
         return TRUE;
@@ -67,10 +67,10 @@ bool8 IsLeapYear(u32 year)
     return FALSE;
 }
 
-u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
+u32 ConvertDateToDayCount(u8 year, u8 month, u8 day)
 {u32u32u32
     s32 i;
-    u16 dayCount = 0;
+    u32 dayCount = 0;
 
     for (i = year - 1; i >= 0; i--)
     {
@@ -91,7 +91,7 @@ u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
     return dayCount;
 }
 
-u16 RtcGetDayCount(struct SiiRtcInfo *rtc)
+u32 RtcGetDayCount(struct SiiRtcInfo *rtc)
 {
     u8 year, month, day;
 u32
@@ -131,7 +131,7 @@ void RtcInit(void)
     sErrorStatus = RtcCheckInfo(&sRtc);
 }
 
-u16 RtcGetErrorStatus(void)
+u32 RtcGetErrorStatus(void)
 {
     return (OW_USE_FAKE_RTC) ? 0 : sErrorStatus;
 }
@@ -166,9 +166,9 @@ void RtcGetRawInfo(struct SiiRtcInfo *rtc)
     RtcGetDateTime(rtc);
 }
 
-u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
+u32 RtcCheckInfo(struct SiiRtcInfo *rtc)
 {
-    u16 errorFlags = 0;
+    u32 errorFlags = 0;
     s32 year;
     s32 month;
     s32 value;
@@ -286,7 +286,7 @@ void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
 
 void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t)
 {
-    u16 days = RtcGetDayCount(rtc);
+    u32 days = RtcGetDayCount(rtc);
     result->seconds = ConvertBcdToBinary(rtc->second) - t->seconds;
     result->minutes = ConvertBcdToBinary(rtc->minute) - t->minutes;
     result->hours = ConvertBcdToBinary(rtc->hour) - t->hours;
@@ -317,7 +317,7 @@ void RtcCalcLocalTime(void)
     RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
 }
 
-bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
+bool32 IsBetweenHours(s32 hours, s32 begin, s32 end)
 {
     if (end < begin)
         return hours >= begin || hours < end;
@@ -389,7 +389,7 @@ u32 RtcGetLocalDayCount(void)
     return RtcGetDayCount(&sRtc);
 }
 
-void FormatDecimalTimeWithoutSeconds(u32 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
+void FormatDecimalTimeWithoutSeconds(u32 *txtPtr, s32 hour, s32 minute, bool32 is24Hour)
 {
     if (is24Hour)
     {

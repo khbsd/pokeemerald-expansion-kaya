@@ -979,7 +979,7 @@ void BtlController_EmitLoadMonSprite(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitSwitchInAnim(u32 battler, u32 bufferId, u8 partyId, bool8 dontClearTransform, bool8 dontClearSubstituteBit)
+void BtlController_EmitSwitchInAnim(u32 battler, u32 bufferId, u8 partyId, bool32 dontClearTransform, bool32 dontClearSubstituteBit)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_SWITCHINANIM;
     gBattleResources->transferBuffer[1] = partyId;
@@ -988,7 +988,7 @@ void BtlController_EmitSwitchInAnim(u32 battler, u32 bufferId, u8 partyId, bool8
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitReturnMonToBall(u32 battler, u32 bufferId, bool8 skipAnim)
+void BtlController_EmitReturnMonToBall(u32 battler, u32 bufferId, bool32 skipAnim)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_RETURNMONTOBALL;
     gBattleResources->transferBuffer[1] = skipAnim;
@@ -1179,7 +1179,7 @@ void BtlController_EmitYesNoBox(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitChooseMove(u32 battler, u32 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData)
+void BtlController_EmitChooseMove(u32 battler, u32 bufferId, bool32 isDoubleBattle, bool32 NoPpNumber, struct ChooseMoveStruct *movePpData)
 {
     s32 i;
 
@@ -1260,7 +1260,7 @@ void BtlController_EmitStatusIconUpdate(u32 battler, u32 bufferId, u32 status1, 
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 9);
 }
 
-void BtlController_EmitStatusAnimation(u32 battler, u32 bufferId, bool8 status2, u32 status)
+void BtlController_EmitStatusAnimation(u32 battler, u32 bufferId, bool32 status2, u32 status)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_STATUSANIMATION;
     gBattleResources->transferBuffer[1] = status2;
@@ -1401,7 +1401,7 @@ void BtlController_EmitPlaySE(u32 battler, u32 bufferId, u32 songId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitPlayFanfareOrBGM(u32 battler, u32 bufferId, u32 songId, bool8 playBGM)
+void BtlController_EmitPlayFanfareOrBGM(u32 battler, u32 bufferId, u32 songId, bool32 playBGM)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_PLAYFANFAREORBGM;
     gBattleResources->transferBuffer[1] = songId;
@@ -1466,7 +1466,7 @@ void BtlController_EmitEndBounceEffect(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitSpriteInvisibility(u32 battler, u32 bufferId, bool8 isInvisible)
+void BtlController_EmitSpriteInvisibility(u32 battler, u32 bufferId, bool32 isInvisible)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_SPRITEINVISIBILITY;
     gBattleResources->transferBuffer[1] = isInvisible;
@@ -2066,7 +2066,7 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
 }
 
 // In normal singles, if follower pokemon is out, have it slide in instead of being thrown
-static bool8 ShouldDoSlideInAnim(void)
+static bool32 ShouldDoSlideInAnim(void)
 {
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
@@ -2753,7 +2753,7 @@ void BtlController_HandleHitAnimation(u32 battler)
 
 void BtlController_HandlePlaySE(u32 battler)
 {
-    s8 pan = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
+    s32 pan = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8), pan);
     BattleControllerComplete(battler);
@@ -2777,7 +2777,7 @@ void BtlController_HandlePlayFanfareOrBGM(u32 battler)
 void BtlController_HandleFaintingCry(u32 battler)
 {
     struct Pokemon *party;
-    s8 pan;
+    s32 pan;
 
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {

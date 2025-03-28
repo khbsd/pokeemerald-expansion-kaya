@@ -31,7 +31,7 @@ struct RfuPlayer
     struct RfuPlayerData rfu;
     u32 timeoutCounter;
     u8 groupScheduledAnim:2;
-    bool8 useRedText:1; // Never set
+    bool32 useRedText:1; // Never set
     u8 newPlayerCountdown;
     u8 unused;
 };
@@ -44,7 +44,7 @@ struct RfuPlayerList
 struct RfuIncomingPlayer
 {
     struct RfuPlayerData rfu;
-    bool8 active:1;
+    bool32 active:1;
 };
 
 struct RfuIncomingPlayerList
@@ -87,8 +87,8 @@ struct WirelessLink_Group
     u8 leaderId;
     u8 unused;
     u8 listenTaskId;
-    bool8 isWonderNews;
-    bool8 showListMenu; // Never set
+    bool32 isWonderNews;
+    bool32 showListMenu; // Never set
     u8 refreshTimer;
     u8 delayBeforePrint;
 };
@@ -97,7 +97,7 @@ struct UnionRoomObject
 {
     u8 state;
     u8 gfxId;
-    s8 animState;
+    s32 animState;
     u8 schedAnim;
 };
 

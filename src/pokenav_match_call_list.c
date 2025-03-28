@@ -16,12 +16,12 @@
 
 struct Pokenav_MatchCallMenu
 {
-    u16 optionCursorPos;
-    u16 maxOptionId;
+    u32 optionCursorPos;
+    u32 maxOptionId;
     const u32 *matchCallOptions;
-    u16 headerId;
-    u16 numRegistered;
-    u16 numSpecialTrainers;
+    u32 headerId;
+    u32 numRegistered;
+    u32 numSpecialTrainers;
     bool32 initFinished;
     u32 loopedTaskId;
     u32 (*callback)(struct Pokenav_MatchCallMenu *);
@@ -308,7 +308,7 @@ struct PokenavMatchCallEntry *GetMatchCallList(void)
     return state->matchCallEntries;
 }
 
-u16 GetMatchCallMapSec(int index)
+u32 GetMatchCallMapSec(int index)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     return state->matchCallEntries[index].mapSec;
@@ -354,7 +354,7 @@ int GetMatchCallTrainerPic(int index)
     return gFacilityClassToPicIndex[index];
 }
 
-const u32 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)
+const u32 *GetMatchCallMessageText(int index, bool32 *newRematchRequest)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     *newRematchRequest = FALSE;
@@ -387,13 +387,13 @@ const u32 *GetMatchCallFlavorText(int index, int checkPageEntry)
     return gMatchCallFlavorTexts[rematchId][checkPageEntry];
 }
 
-u16 GetMatchCallOptionCursorPos(void)
+u32 GetMatchCallOptionCursorPos(void)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     return state->optionCursorPos;
 }
 
-u16 GetMatchCallOptionId(int optionId)
+u32 GetMatchCallOptionId(int optionId)
 {
     struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
     if (state->maxOptionId < optionId)

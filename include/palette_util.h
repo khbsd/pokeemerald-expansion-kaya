@@ -8,10 +8,10 @@ struct PulseBlendSettings
     u8 numColors;
     u8 delay;
     u8 numFadeCycles;
-    s8 maxBlendCoeff:4;
-    s8 fadeType:2;
-    s8 restorePaletteOnUnload:1;
-    s8 unk7_7:1;
+    s32 maxBlendCoeff:4;
+    s32 fadeType:2;
+    s32 restorePaletteOnUnload:1;
+    s32 unk7_7:1;
 };
 
 struct PulseBlendPalette
@@ -19,8 +19,8 @@ struct PulseBlendPalette
     u8 paletteSelector;
     u8 blendCoeff:4;
     u8 fadeDirection:1;
-    s8 unk1_5:1;
-    s8 available:1;
+    s32 unk1_5:1;
+    s32 available:1;
     u32 inUse:1;
     u8 delayCounter;
     u8 fadeCycleCounter;
@@ -42,19 +42,19 @@ struct RouletteFlashSettings
     u32 paletteOffset;
     u8 numColors;
     u8 delay;
-    s8 unk6;      // Set but never used
-    s8 numFadeCycles:5;
-    s8 unk7_5:2;  // Set but never used
-    s8 colorDeltaDir:1;
+    s32 unk6;      // Set but never used
+    s32 numFadeCycles:5;
+    s32 unk7_5:2;  // Set but never used
+    s32 colorDeltaDir:1;
 };
 
 struct RouletteFlashPalette
 {
     u8 state:7;
-    bool8 available:1;
+    bool32 available:1;
     u8 delayCounter;
-    s8 fadeCycleCounter;
-    s8 colorDelta;
+    s32 fadeCycleCounter;
+    s32 colorDelta;
     struct RouletteFlashSettings settings;
 };
 

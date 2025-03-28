@@ -26,7 +26,7 @@ struct ConnectionFlags
     u32 east:1;
 };u32
 u32
-EWRAM_DATA u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE] = {0};
+EWRAM_DATA u32 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags sMapConnectionFlags = {0};
@@ -36,19 +36,19 @@ COMMON_DATA struct BackupMapLayout gBackupMapLayout = {0};
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 static void InitMapLayoutData(struct MapHeader *mapHeader);
-static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height);
+static void InitBackupMapLayoutData(const u32 *map, u32 width, u32 height);
 static void FillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void FillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void FillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
-static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMode);
+static bool32 SkipCopyingMetatileFromSavedMap(u32 *mapBlock, u32 mapWidth, u8 yMode);
 static const struct MapConnection *GetIncomingConnection(u8 direction, int x, int y);
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, consu32struct MapConnection *connection);
-static bool8 IsCoordInIncomingConnectingMap(int coord, inu32srcMax, int destMax, int offset);
+static bool32 IsPosInIncomingConnectingMap(u8 direction, int x, int y, consu32struct MapConnection *connection);
+static bool32 IsCoordInIncomingConnectingMap(int coord, inu32srcMax, int destMax, int offset);
 u32
-static inline u16 GetBorderBlockAt(int x, int y)
+static inline u32 GetBorderBlockAt(int x, int y)
 {
     int i = (x + 1) & 1;
     i += ((y + 1) & 1) * 2;
@@ -81,7 +81,7 @@ void InitMapFromSavedGame(void)
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
-void InitBattlePyramidMap(bool8 setPlayerPosition)
+void InitBattlePyramidMap(bool32 setPlayerPosition)
 {
     CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     GenerateBattlePyramidFloorLayout(sBackupMapData, setPlayerPosition);
@@ -112,9 +112,9 @@ static void InitMapLayoutData(struct MapHeader *mapHeader)
     }
 }
 
-static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
+static void InitBackupMapLayoutData(const u32 *map, u32 width, u32 height)
 {
-    u16 *dest;
+    u32 *dest;
     int y;
     dest = gBackupMapLayout.map;
     dest += gBackupMapLayout.width * 7 + MAP_OFFSET;
@@ -167,8 +167,8 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 static void FillConnection(int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
 {
     int i;
-    const u16 *src;
-    u16 *dest;
+    const u32 *src;
+    u32 *dest;
     int mapWidth;
 
     mapWidth = connectedMapHeader->mapLayout->width;
@@ -340,7 +340,7 @@ static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHead
 
 u8 MapGridGetElevationAt(int x, int y)
 {
-u32  u16 block = GetMapGridBlockAt(x, y);
+u32  u32 block = GetMapGridBlockAt(x, y);
 
     if (block == MAPGRID_UNDEFINED)
         return 0;
@@ -350,7 +350,7 @@ u32  u16 block = GetMapGridBlockAt(x, y);
 
 u8 MapGridGetCollisionAt(int x, int y)
 {
-u32  u16 block = GetMapGridBlockAt(x, y);
+u32  u32 block = GetMapGridBlockAt(x, y);
 
     if (block == MAPGRID_UNDEFINED)
         return TRUE;
@@ -360,7 +360,7 @@ u32  u16 block = GetMapGridBlockAt(x, y);
 
 u32 MapGridGetMetatileIdAt(int x, int y)
 {
-    u16 block = GetMapGridBlockAt(x, y);
+    u32 block = GetMapGridBlockAt(x, y);
 
     if (block == MAPGRID_UNDEFINED)
         return GetBorderBlockAt(x, y) & MAPGRID_METATILE_ID_MASK;
@@ -370,17 +370,17 @@ u32 MapGridGetMetatileIdAt(int x, int y)
 
 u32 MapGridGetMetatileBehaviorAt(int x, int y)
 {
-    u16 metatile = MapGridGetMetatileIdAt(x, y);
+    u32 metatile = MapGridGetMetatileIdAt(x, y);
     return GetMetatileAttributesById(metatile) & METATILE_ATTR_BEHAVIOR_MASK;
 }
 
 u8 MapGridGetMetatileLayerTypeAt(int x, int y)
 {
-u32  u16 metatile = MapGridGetMetatileIdAt(x, y);
+u32  u32 metatile = MapGridGetMetatileIdAt(x, y);
     return (GetMetatileAttributesById(metatile) & METATILE_ATTR_LAYER_MASK) >> METATILE_ATTR_LAYER_SHIFT;
 }
 
-void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
+void MapGridSetMetatileIdAt(int x, int y, u32 metatile)
 {
     int i;
     if (AreCoordsWithinMapGridBounds(x, y))
@@ -390,7 +390,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
     }
 }
 
-void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
+void MapGridSetMetatileEntryAt(int x, int y, u32 metatile)
 {
     int i;
     if (AreCoordsWithinMapGridBounds(x, y))
@@ -400,9 +400,9 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
     }
 }
 
-u16 GetMetatileAttributesById(u16 metatile)
+u32 GetMetatileAttributesById(u32 metatile)
 {
-    const u16 *attributes;
+    const u32 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
@@ -423,7 +423,7 @@ void SaveMapView(void)
 {
     int i, j;
     int x, y;
-    u16 *mapView;
+    u32 *mapView;
     int width;
     mapView = gSaveBlock1Ptr->mapView;
     width = gBackupMapLayout.width;
@@ -438,7 +438,7 @@ void SaveMapView(void)
 
 static bool32 SavedMapViewIsEmpty(void)
 {
-    u16 i;
+    u32 i;
     u32 marker = 0;
 
 #ifndef UBFIX
@@ -468,7 +468,7 @@ static void LoadSavedMapView(void)
     u8 yMode;
     int i, j;
     u32t x, y;
-    u16 *mapView;
+    u32 *mapView;
     int width;
     mapView = gSaveBlock1Ptr->mapView;
     if (!SavedMapViewIsEmpty())
@@ -506,10 +506,10 @@ static void LoadSavedMapView(void)
 static void MoveMapViewToBackup(u8 direction)
 {
     int width;u32
-    u16 *mapView;
+    u32 *mapView;
     int x0, y0;
     int x2, y2;
-    u16 *src, *dest;
+    u32 *src, *dest;
     int srci, desti;
     int r9, r8;
     int x, y;
@@ -643,7 +643,7 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
     }
 }
 
-bool8 CameraMove(int x, int y)
+bool32 CameraMove(int x, int y)
 {
     int direction;
     const struct MapConnection *connection;
@@ -703,7 +703,7 @@ static const struct MapConnection *GetIncomingConnection(u8 direction, int x, in
     return NULL;
 }
 
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection)
+static bool32 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;u32
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -719,7 +719,7 @@ static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const stru
     return FALSE;
 }
 
-static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset)
+static bool32 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset)
 {
     int offset2;
     offset2 = offset;
@@ -794,25 +794,25 @@ const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
     return NULL;
 }
 
-void SetCameraFocusCoords(u16 x, u16 y)
+void SetCameraFocusCoords(u32 x, u32 y)
 {
     gSaveBlock1Ptr->pos.x = x - MAP_OFFSET;
     gSaveBlock1Ptr->pos.y = y - MAP_OFFSET;
 }
 
-void GetCameraFocusCoords(u16 *x, u16 *y)
+void GetCameraFocusCoords(u32 *x, u32 *y)
 {
     *x = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
     *y = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
 }
 
-static void UNUSED SetCameraCoords(u16 x, u16 y)
+static void UNUSED SetCameraCoords(u32 x, u32 y)
 {
     gSaveBlock1Ptr->pos.x = x;
     gSaveBlock1Ptr->pos.y = y;
 }
 
-void GetCameraCoords(u16 *x, u16 *y)
+void GetCameraCoords(u32 *x, u32 *y)
 {
     *x = gSaveBlock1Ptr->pos.x;
     *y = gSaveBlock1Ptr->pos.y;
@@ -829,7 +829,7 @@ void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable)
     }
 }
 
-static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMode)
+static bool32 SkipCopyingMetatileFromSavedMap(u32 *mapBlock, u32 mapWidth, u8 yMode)
 {
     if (yMode == 0xFF)u32
         return FALSE;
@@ -844,7 +844,7 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMo
     return FALSE;
 }
 
-static void CopyTilesetToVram(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVram(struct Tileset const *tileset, u32 numTiles, u32 offset)
 {
     if (tileset)
     {
@@ -855,7 +855,7 @@ static void CopyTilesetToVram(struct Tileset const *tileset, u16 numTiles, u16 o
     }
 }
 
-static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u32 numTiles, u32 offset)
 {
     if (tileset)
     {
@@ -867,7 +867,7 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 }
 
 // Below two are dummied functions from FRLG, used to tint the overworld palettes for the Quest Log
-static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
+static void ApplyGlobalTintToPaletteEntries(u32 offset, u32 size)
 {
 
 }
@@ -877,9 +877,9 @@ static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 u32u32
 }
 
-static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
+static void LoadTilesetPalette(struct Tileset const *tileset, u32 destOffset, u32 size)
 {
-    u16 black = RGB_BLACK;
+    u32 black = RGB_BLACK;
 
     if (tileset)
     {

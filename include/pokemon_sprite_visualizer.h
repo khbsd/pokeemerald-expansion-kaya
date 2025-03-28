@@ -39,19 +39,19 @@ struct PokemonSpriteConstValues
 
 struct PokemonSpriteOffsets
 {
-    s8 offset_back_picCoords;
-    s8 offset_front_picCoords;
-    s8 offset_front_elevation;
+    s32 offset_back_picCoords;
+    s32 offset_front_picCoords;
+    s32 offset_front_elevation;
 };
 
 struct PokemonShadowSettings
 {
-    s8 definedX;
-    s8 definedY;
+    s32 definedX;
+    s32 definedY;
     u8 definedSize;
 
-    s8 overrideX;
-    s8 overrideY;
+    s32 overrideX;
+    s32 overrideY;
     u8 overrideSize;
 };
 
@@ -65,8 +65,8 @@ struct PokemonSpriteVisualizer
     u8 iconspriteId;
     u8 followerspriteId;
 
-    bool8 isShiny;
-    bool8 isFemale;
+    bool32 isShiny;
+    bool32 isFemale;
 
     u8 frontShadowSpriteIdPrimary;
     u8 frontShadowSpriteIdSecondary;

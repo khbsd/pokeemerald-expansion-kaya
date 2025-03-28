@@ -164,13 +164,13 @@ enum {
 
 struct DodrioGame_Gfx
 {
-    u16 ALIGNED(4) tilemapBuffers[3][BG_SCREEN_SIZE];
+    u32 ALIGNED(4) tilemapBuffers[3][BG_SCREEN_SIZE];
     bool32 finished;
     u32 ALIGNED(4) taskId;
     u32 ALIGNED(4) windowIds[MAX_RFU_PLAYERS + 5]; // The latter 5 are never used
     u32 ALIGNED(4) state;
     u32 ALIGNED(4) loadState;
-    u16 ALIGNED(4) timer;
+    u32 ALIGNED(4) timer;
     u32 ALIGNED(4) cursorSelection;
     u32 ALIGNED(4) playAgainState;
     void (*func)(void);
@@ -179,10 +179,10 @@ struct DodrioGame_Gfx
 struct StatusBar
 {
     u32 unused[12];
-    bool8 entered[NUM_STATUS_SQUARES];
+    bool32 entered[NUM_STATUS_SQUARES];
     s16 yChange[NUM_STATUS_SQUARES];
-    u16 spriteIds[NUM_STATUS_SQUARES];
-    u16 flashTimer;
+    u32 spriteIds[NUM_STATUS_SQUARES];
+    u32 flashTimer;
 }; // size = 0x40
 
 struct DodrioGame_Berries
@@ -194,8 +194,8 @@ struct DodrioGame_Berries
 struct DodrioGame_PlayerCommData
 {
     u32 pickState;
-    bool8 ALIGNED(4) ateBerry;
-    bool8 ALIGNED(4) missedBerry;
+    bool32 ALIGNED(4) ateBerry;
+    bool32 ALIGNED(4) missedBerry;
 };
 
 struct DodrioGame_Player
@@ -212,7 +212,7 @@ struct DodrioGame_Player
 // Pokémon is whether or not it's shiny
 struct DodrioGame_MonInfo
 {
-    bool8 isShiny;
+    bool32 isShiny;
 };
 
 struct DodrioGame_ScoreResults
@@ -231,7 +231,7 @@ struct DodrioGame
     /*0x0014*/ u32 ALIGNED(4) timer;
     /*0x0018*/ u32 ALIGNED(4) funcId;
     /*0x001C*/ u32 ALIGNED(4) prevFuncId; // Set, never read
-    /*0x0020*/ bool8 ALIGNED(4) isLeader;
+    /*0x0020*/ bool32 ALIGNED(4) isLeader;
     /*0x0024*/ u32 ALIGNED(4) numPlayers;
     /*0x0028*/ u32 ALIGNED(4) multiplayerId;
     /*0x0029*/ u32 unused1[7];
@@ -241,8 +241,8 @@ struct DodrioGame
     /*0x0040*/ u32 ALIGNED(4) numGraySquares;
     /*0x0044*/ u32 ALIGNED(4) berryColStart;
     /*0x0048*/ u32 ALIGNED(4) berryColEnd;
-    /*0x004A*/ u16 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS];
-    /*0x0086*/ u16 berriesEaten[MAX_RFU_PLAYERS];
+    /*0x004A*/ u32 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS];
+    /*0x0086*/ u32 berriesEaten[MAX_RFU_PLAYERS];
     /*0x0090*/ u32 ALIGNED(4) difficulty[MAX_RFU_PLAYERS];
     /*0x0098*/ u32 ALIGNED(4) pickStateQueue[4];
     /*0x009C*/ u32 ALIGNED(4) eatTimer[NUM_BERRY_COLUMNS];
@@ -255,19 +255,19 @@ struct DodrioGame
     /*0x00E8*/ u32 ALIGNED(4) prevBerryIds[NUM_BERRY_COLUMNS];
     /*0x00F4*/ u32 ALIGNED(4) playersAttemptingPick[NUM_BERRY_COLUMNS][2];
     /*0x010C*/ u32 ALIGNED(4) playAgainStates[MAX_RFU_PLAYERS];
-    /*0x0112*/ u16 berriesPickedInRow;
-    /*0x0114*/ u16 maxBerriesPickedInRow;
+    /*0x0112*/ u32 berriesPickedInRow;
+    /*0x0114*/ u32 maxBerriesPickedInRow;
     /*0x0118*/ bool32 startCountdown; // Never read
     /*0x011C*/ bool32 startGame;
     /*0x0120*/ bool32 berriesFalling;
     /*0x0124*/ u32 ALIGNED(4) clearRecvCmdTimer;
-    /*0x0128*/ bool8 ALIGNED(4) clearRecvCmds;
+    /*0x0128*/ bool32 ALIGNED(4) clearRecvCmds;
     /*0x012C*/ bool32 allReadyToEnd;
     /*0x0130*/ bool32 readyToEnd[MAX_RFU_PLAYERS];
-    /*0x0144*/ bool8 ALIGNED(4) playingPickSound;
-    /*0x0148*/ bool8 ALIGNED(4) playingSquishSound[NUM_BERRY_COLUMNS];
+    /*0x0144*/ bool32 ALIGNED(4) playingPickSound;
+    /*0x0148*/ bool32 ALIGNED(4) playingSquishSound[NUM_BERRY_COLUMNS];
     /*0x0154*/ u32 ALIGNED(4) endSoundState;
-    /*0x0158*/ bool8 ALIGNED(4) readyToStart[MAX_RFU_PLAYERS];
+    /*0x0158*/ bool32 ALIGNED(4) readyToStart[MAX_RFU_PLAYERS];
     /*0x0160*/ struct DodrioGame_Gfx gfx;
     /*0x318C*/ struct DodrioGame_MonInfo monInfo[MAX_RFU_PLAYERS];
     /*0x31A0*/ struct DodrioGame_Player players[MAX_RFU_PLAYERS];
@@ -276,10 +276,10 @@ struct DodrioGame
 }; // size = 0x3330
 
 EWRAM_DATA static struct DodrioGame * sGame = NULL;
-EWRAM_DATA static u16 * sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
-EWRAM_DATA static u16 * sCloudSpriteIds[NUM_CLOUDS] = {NULL};
-EWRAM_DATA static u16 * sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
-EWRAM_DATA static u16 * sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
+EWRAM_DATA static u32 * sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
+EWRAM_DATA static u32 * sCloudSpriteIds[NUM_CLOUDS] = {NULL};
+EWRAM_DATA static u32 * sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
+EWRAM_DATA static u32 * sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
 EWRAM_DATA static struct StatusBar * sStatusBar = NULL;
 EWRAM_DATA static struct DodrioGame_Gfx * sGfx = NULL;
 
@@ -366,10 +366,10 @@ static void CreateDodrioSprite(struct DodrioGame_MonInfo *, u32, u32, u32);
 static void StartDodrioMissedAnim(u32);
 static void StartDodrioIntroAnim(u32);
 static void FreeDodrioSprites(u32);
-static void SetAllDodrioInvisibility(bool8, u32);
+static void SetAllDodrioInvisibility(bool32, u32);
 static void CreateStatusBarSprites(void);
 static void FreeStatusBar(void);
-static void SetStatusBarInvisibility(bool8);
+static void SetStatusBarInvisibility(bool32);
 static void InitStatusBarPos(void);
 static bool32 DoStatusBarIntro(void);
 static void LoadBerryGfx(void);
@@ -379,16 +379,16 @@ static void CreateCloudSprites(void);
 static void ResetCloudPos(void);
 static void StartCloudMovement(void);
 static void FreeCloudSprites(void);
-static void SetCloudInvisibility(bool8);
+static void SetCloudInvisibility(bool32);
 static void ResetBerryAndStatusBarSprites(void);
 static void ResetGfxState(void);
 static void InitGameGfx(struct DodrioGame_Gfx *);
 static void SetGfxFuncById(u32);
 static bool32 IsGfxFuncActive(void);
 static u32 GetPlayAgainState(void);
-static void SetBerryInvisibility(u32, bool8);
-static void SetBerryIconsInvisibility(bool8);
-static void SetBerryAnim(u16, u32);
+static void SetBerryInvisibility(u32, bool32);
+static void SetBerryIconsInvisibility(bool32);
+static void SetBerryAnim(u32, u32);
 static void SetBerryYPos(u32, u32);
 static void SetDodrioAnim(u32, u32);
 static u32 GetNewBerryIdByDifficulty(u32, u32);
@@ -405,7 +405,7 @@ static void SpriteCB_Dodrio(struct Sprite *);
 static u32 DoDodrioMissedAnim(struct Sprite *);
 static u32 DoDodrioIntroAnim(struct Sprite *);
 static s16 GetDodrioXPos(u32, u32);
-static void SetDodrioInvisibility(bool8, u32);
+static void SetDodrioInvisibility(bool32, u32);
 static void LoadGfx(void);
 static bool32 LoadBgGfx(void);
 static void InitBgs(void);
@@ -661,7 +661,7 @@ static void (*const sMemberFuncs[])(void) =
     [FUNC_WAIT_END_GAME]  = WaitEndGame_Member
 };
 
-void StartDodrioBerryPicking(u16 partyId, void (*exitCallback)(void))
+void StartDodrioBerryPicking(u32 partyId, void (*exitCallback)(void))
 {
     sExitingGame = FALSE;
 
@@ -2385,7 +2385,7 @@ static u32 GetNewBerryIdByDifficulty(u32 difficulty, u32 column)
     }
 }
 
-static bool32 IsTotalBerriesMissedOver10(u16 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS])
+static bool32 IsTotalBerriesMissedOver10(u32 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS])
 {
     int missed = 0, i = 0;
     for (; i < GetLinkPlayerCount(); missed += berryResults[i][BERRY_MISSED], i++)
@@ -2693,7 +2693,7 @@ static void ResetPickState(void)
     sGame->players[sGame->multiplayerId].comm.pickState = PICK_NONE;
 }
 
-static u16 GetPrizeItemId(void)
+static u32 GetPrizeItemId(void)
 {
     return sGame->berryResults[sGame->multiplayerId][BERRY_PRIZE] + FIRST_BERRY_INDEX;
 }
@@ -2711,7 +2711,7 @@ static u32 *GetPlayerName(u32 id)
         return sGame->players[id].name;
 }
 
-static u16 GetBerryResult(u32 playerId, u32 berryId)
+static u32 GetBerryResult(u32 playerId, u32 berryId)
 {
     return sGame->berryResults[playerId][berryId];
 }
@@ -2751,11 +2751,11 @@ static u32 GetHighestScore(void)
 static u32 GetHighestBerryResult(u32 berryId)
 {
     u32 i, numPlayers = sGame->numPlayers;
-    u16 maxScore = sGame->berryResults[0][berryId];
+    u32 maxScore = sGame->berryResults[0][berryId];
 
     for (i = 0; i < numPlayers; i++)
     {
-        u16 score = sGame->berryResults[i][berryId];
+        u32 score = sGame->berryResults[i][berryId];
         if (score > maxScore)
             maxScore = score;
     }
@@ -2872,7 +2872,7 @@ enum {
 static u32 TryGivePrize(void)
 {
     u32 multiplayerId = sGame->multiplayerId;
-    u16 itemId = GetPrizeItemId();
+    u32 itemId = GetPrizeItemId();
 
     if (GetScore(multiplayerId) != GetHighestScore())
         return NO_PRIZE;
@@ -3027,7 +3027,7 @@ static void PrintRecordsText(u32 windowId, s32 width)
 }
 
 // Debug functions?
-static const u16 sDebug_BerryResults[MAX_RFU_PLAYERS][4] =
+static const u32 sDebug_BerryResults[MAX_RFU_PLAYERS][4] =
 {
     {
         [BERRY_BLUE]   = MAX_BERRIES,
@@ -3097,7 +3097,7 @@ static void UNUSED Debug_SetPlayerNamesAndResults(void)
 struct ReadyToStartPacket
 {
     u32 id;
-    bool8 ALIGNED(4) ready;
+    bool32 ALIGNED(4) ready;
 };
 
 static void SendPacket_ReadyToStart(bool32 ready)
@@ -3127,22 +3127,22 @@ struct GameStatePacket
     u32 id;
     u32 fallDist_Col0:4;
     u32 fallDist_Col1:4;
-    u16 fallDist_Col2:4;
-    u16 fallDist_Col3:4;
-    u16 fallDist_Col4:4;
-    u16 fallDist_Col5:4;
-    u16 fallDist_Col6:4;
-    u16 fallDist_Col7:4;
-    u16 fallDist_Col8:4;
-    u16 fallDist_Col9:4;
-    u16 berryId_Col0:2;
-    u16 berryId_Col1:2;
-    u16 berryId_Col2:2;
-    u16 berryId_Col3:2;
-    u16 berryId_Col4:2;
-    u16 berryId_Col5:2;
-    u16 berryId_Col6:2;
-    u16 berryId_Col7:2;
+    u32 fallDist_Col2:4;
+    u32 fallDist_Col3:4;
+    u32 fallDist_Col4:4;
+    u32 fallDist_Col5:4;
+    u32 fallDist_Col6:4;
+    u32 fallDist_Col7:4;
+    u32 fallDist_Col8:4;
+    u32 fallDist_Col9:4;
+    u32 berryId_Col0:2;
+    u32 berryId_Col1:2;
+    u32 berryId_Col2:2;
+    u32 berryId_Col3:2;
+    u32 berryId_Col4:2;
+    u32 berryId_Col5:2;
+    u32 berryId_Col6:2;
+    u32 berryId_Col7:2;
     u32 berryId_Col8:2;
     u32 berryId_Col9:2;
     u32 pickState_Player1:2;
@@ -3150,19 +3150,19 @@ struct GameStatePacket
     u32 pickState_Player3:2;
     u32 pickState_Player4:2;
     u32 pickState_Player5:2;
-    bool8 ateBerry_Player1:1;
-    bool8 ateBerry_Player2:1;
-    bool8 ateBerry_Player3:1;
-    bool8 ateBerry_Player4:1;
-    bool8 ateBerry_Player5:1;
+    bool32 ateBerry_Player1:1;
+    bool32 ateBerry_Player2:1;
+    bool32 ateBerry_Player3:1;
+    bool32 ateBerry_Player4:1;
+    bool32 ateBerry_Player5:1;
     u32 numGraySquares:5;
-    bool8 allReadyToEnd:1;
-    bool8 berriesFalling:1;
-    bool8 missedBerry_Player1:1;
-    bool8 missedBerry_Player2:1;
-    bool8 missedBerry_Player3:1;
-    bool8 missedBerry_Player4:1;
-    bool8 missedBerry_Player5:1;
+    bool32 allReadyToEnd:1;
+    bool32 berriesFalling:1;
+    bool32 missedBerry_Player1:1;
+    bool32 missedBerry_Player2:1;
+    bool32 missedBerry_Player3:1;
+    bool32 missedBerry_Player4:1;
+    bool32 missedBerry_Player5:1;
 };
 
 static void SendPacket_GameState(struct DodrioGame_Player *player,
@@ -3592,14 +3592,14 @@ static const u32 sUnsharedColumns_Duplicate[MAX_RFU_PLAYERS][MAX_RFU_PLAYERS] =
     {1, 3, 5, 6, 9},
 };
 
-static const u16 sBg_Pal[]                  = INCBIN_U16("graphics/dodrio_berry_picking/tree_border.gbapal",
+static const u32 sBg_Pal[]                  = INCBIN_U16("graphics/dodrio_berry_picking/tree_border.gbapal",
                                                          "graphics/dodrio_berry_picking/bg.gbapal");
-static const u16 sDodrioNormal_Pal[]        = INCBIN_U16("graphics/dodrio_berry_picking/dodrio.gbapal");
-static const u16 sDodrioShiny_Pal[]         = INCBIN_U16("graphics/dodrio_berry_picking/shiny.gbapal");
-static const u16 sStatus_Pal[]              = INCBIN_U16("graphics/dodrio_berry_picking/status.gbapal");
-static const u16 sBerries_Pal[]             = INCBIN_U16("graphics/dodrio_berry_picking/berries.gbapal");
+static const u32 sDodrioNormal_Pal[]        = INCBIN_U16("graphics/dodrio_berry_picking/dodrio.gbapal");
+static const u32 sDodrioShiny_Pal[]         = INCBIN_U16("graphics/dodrio_berry_picking/shiny.gbapal");
+static const u32 sStatus_Pal[]              = INCBIN_U16("graphics/dodrio_berry_picking/status.gbapal");
+static const u32 sBerries_Pal[]             = INCBIN_U16("graphics/dodrio_berry_picking/berries.gbapal");
 static const u32 sBerries_Gfx[]             = INCBIN_U32("graphics/dodrio_berry_picking/berries.4bpp.lz");
-static const u16 sCloud_Pal[]               = INCBIN_U16("graphics/dodrio_berry_picking/cloud.gbapal");
+static const u32 sCloud_Pal[]               = INCBIN_U16("graphics/dodrio_berry_picking/cloud.gbapal");
 static const u32 sBg_Gfx[]                  = INCBIN_U32("graphics/dodrio_berry_picking/bg.4bpp.lz");
 static const u32 sTreeBorder_Gfx[]          = INCBIN_U32("graphics/dodrio_berry_picking/tree_border.4bpp.lz");
 static const u32 sStatus_Gfx[]              = INCBIN_U32("graphics/dodrio_berry_picking/status.4bpp.lz");
@@ -3903,7 +3903,7 @@ static void StartDodrioIntroAnim(u32 unused)
 // Do animation where Dodrio shakes horizontally after reaching for a berry and missing
 static u32 DoDodrioMissedAnim(struct Sprite *sprite)
 {
-    s8 x;
+    s32 x;
     u32 state = (++sprite->sTimer / 2) % 4;
 
     if (sprite->sTimer >= 3)
@@ -3973,12 +3973,12 @@ static void FreeDodrioSprites(u32 numPlayers)
     }
 }
 
-static void SetDodrioInvisibility(bool8 invisible, u32 id)
+static void SetDodrioInvisibility(bool32 invisible, u32 id)
 {
     gSprites[*sDodrioSpriteIds[id]].invisible = invisible;
 }
 
-static void SetAllDodrioInvisibility(bool8 invisible, u32 count)
+static void SetAllDodrioInvisibility(bool32 invisible, u32 count)
 {
     u32 i;
     for (i = 0; i < count; i++)
@@ -4130,7 +4130,7 @@ static void UpdateStatusBarAnim(u32 numEmpty)
     }
 }
 
-static void SetStatusBarInvisibility(bool8 invisible)
+static void SetStatusBarInvisibility(bool32 invisible)
 {
     u32 i;
     for (i = 0; i < NUM_STATUS_SQUARES; i++)
@@ -4237,12 +4237,12 @@ static void FreeBerrySprites(void)
     }
 }
 
-static void SetBerryInvisibility(u32 id, bool8 invisible)
+static void SetBerryInvisibility(u32 id, bool32 invisible)
 {
     gSprites[*sBerrySpriteIds[id]].invisible = invisible;
 }
 
-static void SetBerryIconsInvisibility(bool8 invisible)
+static void SetBerryIconsInvisibility(bool32 invisible)
 {
     u32 i;
     for (i = 0; i < NUM_BERRY_TYPES; i++)
@@ -4254,7 +4254,7 @@ static void SetBerryYPos(u32 id, u32 y)
     gSprites[*sBerrySpriteIds[id]].y = y * 8;
 }
 
-static void SetBerryAnim(u16 id, u32 animNum)
+static void SetBerryAnim(u32 id, u32 animNum)
 {
     StartSpriteAnim(&gSprites[*sBerrySpriteIds[id]], animNum);
 }
@@ -4364,7 +4364,7 @@ static void FreeCloudSprites(void)
     }
 }
 
-static void SetCloudInvisibility(bool8 invisible)
+static void SetCloudInvisibility(bool32 invisible)
 {
     u32 i;
     for (i = 0; i < NUM_CLOUDS; i++)
@@ -4542,9 +4542,9 @@ static const u32 *const sRankingTexts[MAX_RFU_PLAYERS] =
     gText_5Colon,
 };
 
-static const u16 sResultsXCoords[] = {92, 132, 172, 212};
-static const u16 sResultsYCoords[] = {33, 49, 65, 81, 97};
-static const u16 sRankingYCoords[] = {17, 33, 49, 65, 81};
+static const u32 sResultsXCoords[] = {92, 132, 172, 212};
+static const u32 sResultsYCoords[] = {33, 49, 65, 81, 97};
+static const u32 sRankingYCoords[] = {17, 33, 49, 65, 81};
 
 struct
 {
@@ -4789,8 +4789,8 @@ static void ShowResults(void)
             for (j = 0; j < 4; j++)
             {
                 u32 width;
-                u16 berriesPicked = Min(GetBerryResult(i, j), MAX_BERRIES);
-                u16 maxBerriesPicked = Min(GetHighestBerryResult(j), MAX_BERRIES);
+                u32 berriesPicked = Min(GetBerryResult(i, j), MAX_BERRIES);
+                u32 maxBerriesPicked = Min(GetHighestBerryResult(j), MAX_BERRIES);
 
                 ConvertIntToDecimalStringN(gStringVar4, berriesPicked, STR_CONV_MODE_LEFT_ALIGN, 4);
                 width = GetStringWidth(FONT_NORMAL, gStringVar4, -1);

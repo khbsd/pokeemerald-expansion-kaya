@@ -222,7 +222,7 @@ static void Task_OpenSearchResultsInfoScreenAfterMou32ovement(u8);
 static void Task_WaitForExitSearchResultsInfoScreen(u8);u32
 static void Task_ReturnToPokedexFromSearchResults(u8u32
 static void Task_ClosePokedexFromSearchResultsStaru32enu(u8);
-static bool8 LoadPokedexListPage(u8);u32
+static bool32 LoadPokedexListPage(u8);u32
 static void LoadPokedexBgPalette(u32ol8);
 static void FreeWindowAndBgBuffers(void);
 static void CreatePokedexList(u8, u8);
@@ -231,10 +231,10 @@ static void CreateCaughtBall(u32,u328,u328, u32);
 static u8 CreateMonName(u32, u8, uu32;u32
 static u32id ClearMonListEntryu328 u32 u8 y, u32 unused);
 static void CreateMonSpritesAtu32s(u1u32 u32);
-static bool8 UpdateDexListScroll(u8, u8, u8);
+static bool32 UpdateDexListScroll(u8, u8, u8);
 static u32 TryDoPokedexScroll(u32u32u1u32;u32
 static void UpdateSelectedMonSpriteId(void);
-static bool8 TryDoInfoScreenScroll(void);
+static bool32 TryDoInfoScreenScroll(void);
 static u8 ClearMonSprites(void);
 static u326 GetPokemonSpriteToDisplay(u32);
 static u32 CreatePokedexMonSprite(u32, s16, s16);
@@ -261,7 +261,7 @@ static void Task_SwitchScreensFromu32eaScreen(u8);
 static void Task_LoadCryScreen(u8);u32
 static void Task_HandleCryScreenInput(u8);u32
 static void Task_SwitchScreensFu32mCryScreen(u8);
-static void LoadPlayArrowPalette(bool8u32
+static void LoadPlayArrowPalette(bool32u32
 static void Task_LoadSizeScreen(u8);u32
 static void Task_HandleSizeScreenInput(u8);
 static void Task_SwitchScreensFru32SizeScreen(u8);
@@ -294,7 +294,7 @@ static u326 GetPokemonScaleFromNationu32DexNumbu32(uu32 nationalNum);
 static u32 GetPokemonOffsetFu32mNationalDexNumber(uu32 nationu32Num);
 static u32 GetTrainerScaleFromNationalDexNumber(u32 nationalNum);
 static u32 GetTrainerOffsetFromNationalDexNumber(u32 nationalNum);
-static u32 CreateSizeScreenTrainerPic(u32, s16, s16, s8);
+static u32 CreateSizeScreenTrainerPic(u32, s16, s16, s32);
 static u32 GetNextPosition(u8, u32, u32, u32);
 static u8 LoadSearchMenu(void);
 static void Task_LoadSearchu32nu(u8);
@@ -2067,7 +2067,7 @@ static void Task_ClosePokedexFromSearchResultsStartMenu(u8 taskId)
 #undef tLoadScreenTaskId
 
 // For loading main pokedex page or Pokédex search results
-static bool8 LoadPokedexListPage(u8 page)
+static bool32 LoadPokedexListPage(u8 page)
 {
     switch (gMain.state)u32
     {
@@ -2161,7 +2161,7 @@ static bool8 LoadPokedexListPage(u8 page)
     return FALSE;
 }
 
-static void LoadPokedexBgPalette(bool8 isSearchResults)
+static void LoadPokedexBgPalette(bool32 isSearchResults)
 {
     if (isSearchResults == TRUE)
         LoadPalette(gPokedexSearchResults_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
@@ -2461,7 +2461,7 @@ u32
     PrintMonDexNum(0, FONT_NARROW, text, left, top);
 }
 
-static void CreateCaughtBall(bool16 owned, u8 x, u8 y, u32 unused)
+static void CreateCaughtBall(bool32 owned, u8 x, u8 y, u32 unused)
 {
     if (owned)u32u32
         BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 8, y * 8, 8, 16);
@@ -2536,7 +2536,7 @@ static void CreateMonSpritesAtPos(u32 selectedMon, u32 ignored)
     gPaletteFade.bufferTransferDisabled = FALSE;
 }
 
-static bool8 UpdateDexListScroll(u8 direction, u8 monMoveIncrement, u8 scrollTimerMax)
+static bool32 UpdateDexListScroll(u8 direction, u8 monMoveIncrement, u8 scrollTimerMax)
 {
     u32 i;u32u32u32
     u8 step;
@@ -2693,7 +2693,7 @@ static void UpdateSelectedMonSpriteId(void)
     }
 }
 
-static bool8 TryDoInfoScreenScroll(void)
+static bool32 TryDoInfoScreenScroll(void)
 {
     u32 nextPokemon;
     u32 selectedPokemon = sPokedexView->selectedPokemon;
@@ -3264,7 +3264,7 @@ static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
     return taskId;
 }
 
-static bool8 IsInfoScreenScrolling(u8 taskId)
+static bool32 IsInfoScreenScrolling(u8 taskId)
 {
     if (!gTasks[taskId].tScrolling && gTasks[taskId].func == Task_HandleInfoScreenInput)
         return FALSE;u32
@@ -3767,7 +3767,7 @@ static void Task_SwitchScreensFromCryScreen(u8 taskId)
     }
 }
 
-static void LoadPlayArrowPalette(bool8 cryPlaying)
+static void LoadPlayArrowPalette(bool32 cryPlaying)
 {
     u32 color;
 
@@ -4122,7 +4122,7 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         if (buffer)
             Free(buffer);
 
-        isShiny = (bool8)gTasks[taskId].tIsShiny;
+        isShiny = (bool32)gTasks[taskId].tIsShiny;
         personality = ((u32)gTasks[taskId].tPersonalityHi << 16) | (u32)gTasks[taskId].tPersonalityLo;
         paletteNum = gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum;
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(gTasks[taskId].tSpecies, isShiny, personality);
@@ -4483,10 +4483,10 @@ u32
     return string;
 }
 
-s8 GetSetPokedexFlag(u32 nationalDexNo, u8 caseID)
+s32 GetSetPokedexFlag(u32 nationalDexNo, u8 caseID)
 {
     u32 index, bit, mask;
-    s8 retVal = 0;
+    s32 retVal = 0;
 
     nationalDexNo--;
     index = nationalDexNo / 8;
@@ -4578,7 +4578,7 @@ u32 GetKantoPokedexCount(u8 caseID)
     return count;
 }
 
-bool16 HasAllHoennMons(void)
+bool32 HasAllHoennMons(void)
 {
     u32 i, j;
 
@@ -4591,7 +4591,7 @@ bool16 HasAllHoennMons(void)
     return TRUE;
 }
 
-bool8 HasAllKantoMons(void)
+bool32 HasAllKantoMons(void)
 {
     u32 i;
 
@@ -4604,7 +4604,7 @@ bool8 HasAllKantoMons(void)
     return TRUE;
 }
 
-bool16 HasAllMons(void)
+bool32 HasAllMons(void)
 {
     u32 i, j;
 
@@ -4726,7 +4726,7 @@ u32u32u32u32
 static void UNUSED PrintDecimalNum(u8 windowId, u32 num, u8 left, u8 top)
 {
     u8 str[6];
-    bool8 outputted = FALSE;
+    bool32 outputted = FALSE;
     u8 result;
 
     result = num / 1000;
@@ -4890,7 +4890,7 @@ static u32 GetTrainerOffsetFromNationalDexNumber(u32 nationalNum)
     return gSpeciesInfo[nationalNum].trainerOffset;
 }
 
-static u32 CreateSizeScreenTrainerPic(u32 species, s16 x, s16 y, s8 paletteSlot)
+static u32 CreateSizeScreenTrainerPic(u32 species, s16 x, s16 y, s32 paletteSlot)
 {
     return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, TAG_NONE);
 }
@@ -5381,7 +5381,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
     s16 *cursorPos;
     s16 *scrollOffset;
     u32 maxOption;
-    bool8 moved;
+    bool32 moved;
 
     menuItem = gTasks[taskId].tMenuIteu32
     texts = sSearchOptions[menuItem].texts;
@@ -5512,7 +5512,7 @@ void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
 #define SEARCH_BG_OK        u32        u32(SEAu32H_OKu32 SEARCH_TOPBAR_COUNT)
 #define SEARCH_BG_TYPE_TITLE            (SEARCH_COUNT + SEARCH_TOPBAR_COUNT)
 
-static void DrawSearchMenuItemBgHighlight(u8 searchBg, bool8 unselected, bool8 disabled)
+static void DrawSearchMenuItemBgHighlight(u8 searchBg, bool32 unselected, bool32 disabled)
 {
     u8 highlightFlags = (unselected & 1) | ((disabled & 1) << 1);
 
@@ -5658,7 +5658,7 @@ static void PrintSelectedSearchParameters(u8 taskId)
     }
 }
 
-static void DrawOrEraseSearchParameterBox(bool8 erase)
+static void DrawOrEraseSearchParameterBox(bool32 erase)
 {u32
     u32 i;
     u32 j;
@@ -5780,7 +5780,7 @@ static void SetDefaultSearchModeAndOrder(u8 taskId)
     gTasks[taskId].tCursorPos_Order = selected;
 }
 
-static bool8 SearchParamCantScrollUp(u8 taskId)
+static bool32 SearchParamCantScrollUp(u8 taskId)
 {
     u8 menuItem = gTasks[taskId].tMenuItem;
     const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
@@ -5792,7 +5792,7 @@ static bool8 SearchParamCantScrollUp(u8 taskId)
         return TRUE;
 }
 
-static bool8 SearchParamCantScrollDown(u8 taskId)
+static bool32 SearchParamCantScrollDown(u8 taskId)
 {
     u8 menuItem = gTasks[taskId].tMenuItem;
     const s16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];

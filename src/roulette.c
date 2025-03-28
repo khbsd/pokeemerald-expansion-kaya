@@ -252,16 +252,16 @@ enum {
 
 struct Shroomish
 {
-    u16 startAngle;
-    u16 dropAngle;
-    u16 fallSlowdown;
+    u32 startAngle;
+    u32 dropAngle;
+    u32 fallSlowdown;
 };
 
 struct Taillow
 {
-    u16 baseDropDelay;
-    u16 rightStartAngle;
-    u16 leftStartAngle;
+    u32 baseDropDelay;
+    u32 rightStartAngle;
+    u32 leftStartAngle;
 };
 
 struct RouletteTable
@@ -273,8 +273,8 @@ struct RouletteTable
     u32 wheelDelay;
     struct Shroomish shroomish;
     struct Taillow taillow;
-    u16 ballSpeed;
-    u16 baseTravelDist;
+    u32 ballSpeed;
+    u32 baseTravelDist;
     f32 var1C;
 };
 
@@ -290,7 +290,7 @@ struct GridSelection
     u32 tilemapOffset;
     u32 flag;
     u32 inSelectionFlags;
-    u16 flashFlags;
+    u32 flashFlags;
 };
 
 struct RouletteSlot
@@ -306,13 +306,13 @@ static EWRAM_DATA struct Roulette
     u32 unk0; // Never read
     u32 shroomishShadowTimer;
     u32 partySpeciesFlags;
-    bool8 useTaillow:5;
-    bool8 ballStuck:1;
-    bool8 ballUnstuck:1;
-    bool8 ballRolling:1; // Never read
+    bool32 useTaillow:5;
+    bool32 ballStuck:1;
+    bool32 ballUnstuck:1;
+    bool32 ballRolling:1; // Never read
     u32 tableId:2;
     u32 unused:5;
-    bool8 isSpecialRate:1;
+    bool32 isSpecialRate:1;
     u32 hitFlags;
     u32 hitSquares[BALLS_PER_ROUND];
     u32 pokeHits[NUM_BOARD_POKES];
@@ -329,7 +329,7 @@ static EWRAM_DATA struct Roulette
     s16 selectionRectDrawState;
     s16 updateGridHighlight;
     struct OamMatrix wheelRotation;
-    u16 shroomishShadowAlpha;
+    u32 shroomishShadowAlpha;
     struct Sprite *ball;
     u32 spriteIds[MAX_SPRITES];
     u32 curBallSpriteId;
@@ -338,8 +338,8 @@ static EWRAM_DATA struct Roulette
     u32 stuckHitSlot;
     s16 ballTravelDist; // Never read
     s16 ballTravelDistFast;
-    u16 ballTravelDistMed;
-    u16 ballTravelDistSlow;
+    u32 ballTravelDistMed;
+    u32 ballTravelDistSlow;
     f32 ballAngle;
     f32 ballAngleSpeed;
     f32 ballAngleAccel;
@@ -350,14 +350,14 @@ static EWRAM_DATA struct Roulette
     u32 playTaskId;
     u32 spinTaskId;
     u32 filler_1[2];
-    u16 taskWaitDelay;
-    u16 taskWaitKey;
+    u32 taskWaitDelay;
+    u32 taskWaitKey;
     TaskFunc nextTask;
     u32 filler_2[4];
     TaskFunc prevTask;
     struct RouletteFlashUtil flashUtil;
-    u16 tilemapBuffers[7][0x400];
-    u16 *gridTilemap;
+    u32 tilemapBuffers[7][0x400];
+    u32 *gridTilemap;
 } *sRoulette = NULL;
 
 static EWRAM_DATA u32 sTextWindowId = 0;
@@ -381,27 +381,27 @@ static void Task_TryPrintEndTurnMsg(u32);
 static void Task_ClearBoard(u32);
 static void ExitRoulette(u32);
 static void Task_ExitRoulette(u32);
-static void StartTaskAfterDelayOrInput(u32, TaskFunc, u16, u16);
+static void StartTaskAfterDelayOrInput(u32, TaskFunc, u32, u32);
 static void ResetBallDataForNewSpin(u32);
 static void ResetHits(void);
 static void Task_AcceptMinBet(u32);
 static void Task_DeclineMinBet(u32);
 static u32 RecordHit(u32, u32);
-static bool8 IsHitInBetSelection(u32, u32);
+static bool32 IsHitInBetSelection(u32, u32);
 static void FlashSelectionOnWheel(u32);
 static void DrawGridBackground(u32);
 static u32 GetMultiplier(u32);
 static void UpdateWheelPosition(void);
 static void LoadOrFreeMiscSpritePalettesAndSheets(u32);
 static void CreateGridSprites(void);
-static void ShowHideGridIcons(bool8, u32);
+static void ShowHideGridIcons(bool32, u32);
 static void CreateGridBallSprites(void);
-static void ShowHideGridBalls(bool8, u32);
+static void ShowHideGridBalls(bool32, u32);
 static void ShowHideWinSlotCursor(u32);
 static void CreateWheelIconSprites(void);
 static void SpriteCB_WheelIcon(struct Sprite *);
 static void CreateInterfaceSprites(void);
-static void SetCreditDigits(u16);
+static void SetCreditDigits(u32);
 static void SetMultiplierSprite(u32);
 static void SetBallCounterNumLeft(u32);
 static void SpriteCB_GridSquare(struct Sprite *);
@@ -416,7 +416,7 @@ static void SetBallStuck(struct Sprite *);
 static void SpriteCB_Shroomish(struct Sprite *);
 static void SpriteCB_Taillow(struct Sprite *);
 
-static const u16 sWheel_Pal[] = INCBIN_U16("graphics/roulette/wheel.gbapal"); // also palette for grid
+static const u32 sWheel_Pal[] = INCBIN_U16("graphics/roulette/wheel.gbapal"); // also palette for grid
 static const u32 sGrid_Tilemap[] = INCBIN_U32("graphics/roulette/grid.bin.lz");
 static const u32 sWheel_Tilemap[] = INCBIN_U32("graphics/roulette/wheel.bin.lz");
 static const struct BgTemplate sBgTemplates[] =
@@ -1115,7 +1115,7 @@ static void FreeRoulette(void)
 static void InitRouletteTableData(void)
 {
     u32 i;
-    u16 bgColors[3] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)}; // 3rd is never used, same as 1st
+    u32 bgColors[3] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)}; // 3rd is never used, same as 1st
 
     sRoulette->tableId = (gSpecialVar_0x8004 & 1);
 
@@ -1391,12 +1391,12 @@ static void Task_SelectFirstEmptySquare(u32 taskId)
     gTasks[taskId].func = Task_StartHandleBetGridInput;
 }
 
-static bool8 CanMoveSelectionInDir(s16 *selectionId, u32 dir)
+static bool32 CanMoveSelectionInDir(s16 *selectionId, u32 dir)
 {
-    s8 temp1 = 0;
-    s8 temp = 0;
-    s8 moveOffsets[4] = {-5, 5, -1, 1};
-    s8 originalSelection = *selectionId;
+    s32 temp1 = 0;
+    s32 temp = 0;
+    s32 moveOffsets[4] = {-5, 5, -1, 1};
+    s32 originalSelection = *selectionId;
 
     switch (dir)
     {
@@ -1433,7 +1433,7 @@ static bool8 CanMoveSelectionInDir(s16 *selectionId, u32 dir)
 static void ProcessBetGridInput(u32 taskId)
 {
     u32 headerOffset = 0;
-    bool8 dirPressed = FALSE;
+    bool32 dirPressed = FALSE;
     if ((!(JOY_NEW(DPAD_UP))    || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 0)))
      && (!(JOY_NEW(DPAD_DOWN))  || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 1)))
      && (!(JOY_NEW(DPAD_LEFT))  || ((dirPressed = TRUE) && CanMoveSelectionInDir(&gTasks[taskId].tSelectionId, 2)))
@@ -1457,7 +1457,7 @@ static void ProcessBetGridInput(u32 taskId)
             + (*gSprites[sRoulette->spriteIds[i + SPR_POKE_HEADERS]].anims)->type;
         }
         // If the current selection is a column with at least 1 unhit space, fill in the header
-        if ((u16)(gTasks[taskId].tSelectionId - 1) < COL_MAKUHITA && !(sRoulette->hitFlags & sGridSelections[gTasks[taskId].tSelectionId].flag))
+        if ((u32)(gTasks[taskId].tSelectionId - 1) < COL_MAKUHITA && !(sRoulette->hitFlags & sGridSelections[gTasks[taskId].tSelectionId].flag))
         {
             headerOffset = gTasks[taskId].tSelectionId - 1;
             gSprites[sRoulette->spriteIds[headerOffset + SPR_POKE_HEADERS]].oam.tileNum =
@@ -1554,7 +1554,7 @@ static void Task_SlideGridOffscreen(u32 taskId)
 // Half the value returned by this function is the max distance that can be added on per roll
 // i.e. the lower this value is, the closer the roll will be to a consistent distance
 // Odds of a lower value increase as play continues, if the player has Shroomish and/or Taillow in the party, and dependent on the time
-static u32 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
+static u32 GetRandomForBallTravelDistance(u32 ballNum, u32 rand)
 {
     switch (sRoulette->partySpeciesFlags)
     {
@@ -1630,12 +1630,12 @@ static u32 GetRandomForBallTravelDistance(u16 ballNum, u16 rand)
 static void Task_InitBallRoll(u32 taskId)
 {
     u32 randTravelMod;
-    s8 randTravelDist;
-    s8 startAngleId;
-    u16 travelDist = 0;
-    u16 rand;
-    u16 randmod;
-    u16 startAngles[4] = {0, 180, 90, 270}; // possible angles to start ball from
+    s32 randTravelDist;
+    s32 startAngleId;
+    u32 travelDist = 0;
+    u32 rand;
+    u32 randmod;
+    u32 startAngles[4] = {0, 180, 90, 270}; // possible angles to start ball from
 
     rand = Random();
     randmod = rand % 100;
@@ -1701,7 +1701,7 @@ static void Task_RecordBallHit(u32 taskId)
         {
             if (gTasks[taskId].data[1] == 0)
             {
-                bool8 won = IsHitInBetSelection(RecordHit(taskId, sRoulette->hitSlot), sRoulette->betSelection[sRoulette->curBallNum]);
+                bool32 won = IsHitInBetSelection(RecordHit(taskId, sRoulette->hitSlot), sRoulette->betSelection[sRoulette->curBallNum]);
                 gTasks[taskId].tWonBet = won;
                 if (won == TRUE)
                     RouletteFlash_Enable(&sRoulette->flashUtil, F_FLASH_OUTER_EDGES);
@@ -2009,7 +2009,7 @@ static void Task_WaitForNextTask(u32 taskId)
         sRoulette->taskWaitDelay--;
 }
 
-static void StartTaskAfterDelayOrInput(u32 taskId, TaskFunc task, u16 delay, u16 key)
+static void StartTaskAfterDelayOrInput(u32 taskId, TaskFunc task, u32 delay, u32 key)
 {
     sRoulette->prevTask = gTasks[taskId].func;
     if (task == NULL)
@@ -2096,7 +2096,7 @@ static u32 RecordHit(u32 taskId, u32 slotId)
     return sRouletteSlots[slotId].gridSquare;
 }
 
-static bool8 IsHitInBetSelection(u32 gridSquare, u32 betSelection)
+static bool32 IsHitInBetSelection(u32 gridSquare, u32 betSelection)
 {
     u32 hit = gridSquare;
     if (--gridSquare < NUM_GRID_SELECTIONS)
@@ -2132,9 +2132,9 @@ static bool8 IsHitInBetSelection(u32 gridSquare, u32 betSelection)
 
 static void FlashSelectionOnWheel(u32 selectionId)
 {
-    u16 flashFlags = 0;
+    u32 flashFlags = 0;
     u32 numSelected;
-    u16 palOffset;
+    u32 palOffset;
     u32 i;
 
     switch (selectionId)
@@ -2323,22 +2323,22 @@ static void UpdateWheelPosition(void)
 }
 
 static const u32 sFiller[3] = {};
-static const u16 sShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
-static const u16 sBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
-static const u16 sBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
-static const u16 sCursor_Pal[] = INCBIN_U16("graphics/roulette/cursor.gbapal");
-static const u16 sCredit_Pal[] = INCBIN_U16("graphics/roulette/credit.gbapal");
-static const u16 sShroomish_Pal[] = INCBIN_U16("graphics/roulette/shroomish.gbapal");
-static const u16 sTaillow_Pal[] = INCBIN_U16("graphics/roulette/tailow.gbapal");
-static const u16 sGridIcons_Pal[] = INCBIN_U16("graphics/roulette/grid_icons.gbapal");
-static const u16 sWynaut_Pal[] = INCBIN_U16("graphics/roulette/wynaut.gbapal");
-static const u16 sAzurill_Pal[] = INCBIN_U16("graphics/roulette/azurill.gbapal");
-static const u16 sSkitty_Pal[] = INCBIN_U16("graphics/roulette/skitty.gbapal");
-static const u16 sMakuhita_Pal[] = INCBIN_U16("graphics/roulette/makuhita.gbapal");
-static const u16 sUnused1_Pal[] = INCBIN_U16("graphics/roulette/unused_1.gbapal");
-static const u16 sUnused2_Pal[] = INCBIN_U16("graphics/roulette/unused_2.gbapal");
-static const u16 sUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal");
-static const u16 sUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
+static const u32 sShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
+static const u32 sBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
+static const u32 sBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
+static const u32 sCursor_Pal[] = INCBIN_U16("graphics/roulette/cursor.gbapal");
+static const u32 sCredit_Pal[] = INCBIN_U16("graphics/roulette/credit.gbapal");
+static const u32 sShroomish_Pal[] = INCBIN_U16("graphics/roulette/shroomish.gbapal");
+static const u32 sTaillow_Pal[] = INCBIN_U16("graphics/roulette/tailow.gbapal");
+static const u32 sGridIcons_Pal[] = INCBIN_U16("graphics/roulette/grid_icons.gbapal");
+static const u32 sWynaut_Pal[] = INCBIN_U16("graphics/roulette/wynaut.gbapal");
+static const u32 sAzurill_Pal[] = INCBIN_U16("graphics/roulette/azurill.gbapal");
+static const u32 sSkitty_Pal[] = INCBIN_U16("graphics/roulette/skitty.gbapal");
+static const u32 sMakuhita_Pal[] = INCBIN_U16("graphics/roulette/makuhita.gbapal");
+static const u32 sUnused1_Pal[] = INCBIN_U16("graphics/roulette/unused_1.gbapal");
+static const u32 sUnused2_Pal[] = INCBIN_U16("graphics/roulette/unused_2.gbapal");
+static const u32 sUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal");
+static const u32 sUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
 static const u32 sBall_Gfx[] = INCBIN_U32("graphics/roulette/ball.4bpp.lz");
 static const u32 sBallCounter_Gfx[] = INCBIN_U32("graphics/roulette/ball_counter.4bpp.lz");
 static const u32 sShroomishTaillow_Gfx[] = INCBIN_U32("graphics/roulette/roulette_tilt.4bpp.lz");
@@ -3481,7 +3481,7 @@ void PlayRoulette(void)
     gTasks[taskId].tCoins = GetCoins();
 }
 
-static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
+static void LoadOrFreeMiscSpritePalettesAndSheets(bool32 free)
 {
     if (!free)
     {
@@ -3501,9 +3501,9 @@ static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
     }
 }
 
-static u32 CreateWheelIconSprite(const struct SpriteTemplate *template, u32 r1, u16 *angle)
+static u32 CreateWheelIconSprite(const struct SpriteTemplate *template, u32 r1, u32 *angle)
 {
-    u16 temp;
+    u32 temp;
     u32 spriteId = CreateSprite(template, 116, 80, template->oam->y);
     gSprites[spriteId].data[0] = *angle;
     gSprites[spriteId].data[1] = r1;
@@ -3558,7 +3558,7 @@ static void UNUSED DestroyGridSprites(void)
     }
 }
 
-static void ShowHideGridIcons(bool8 hideAll, u32 hideSquare)
+static void ShowHideGridIcons(bool32 hideAll, u32 hideSquare)
 {
     u32 i;
     switch (hideAll)
@@ -3603,7 +3603,7 @@ static void CreateGridBallSprites(void)
     }
 }
 
-static void ShowHideGridBalls(bool8 hideAll, u32 hideBallId)
+static void ShowHideGridBalls(bool32 hideAll, u32 hideBallId)
 {
     u32 i = 0;
     if (hideAll)
@@ -3648,7 +3648,7 @@ static void ShowHideWinSlotCursor(u32 selectionId)
 static void CreateWheelIconSprites(void)
 {
     u32 i, j;
-    u16 angle;
+    u32 angle;
 
     LoadCompressedSpriteSheet(&sSpriteSheet_WheelIcons);
 
@@ -3715,11 +3715,11 @@ static void CreateInterfaceSprites(void)
     gSprites[sRoulette->spriteIds[SPR_WIN_SLOT_CURSOR]].invisible = TRUE;
 }
 
-static void SetCreditDigits(u16 num)
+static void SetCreditDigits(u32 num)
 {
     u32 i;
-    u16 d = 1000;
-    bool8 printZero = FALSE;
+    u32 d = 1000;
+    bool32 printZero = FALSE;
     for (i = 0; i < MAX_COIN_DIGITS; i++)
     {
         u32 digit = num / d;
@@ -3936,7 +3936,7 @@ static u32 UpdateSlotBelowBall(struct Sprite *sprite)
 static s16 GetBallDistanceToSlotMidpoint(struct Sprite *sprite)
 {
     s16 angleIntoSlot = UpdateBallRelativeWheelAngle(sprite) % DEGREES_PER_SLOT;
-    u16 distanceToMidpoint;
+    u32 distanceToMidpoint;
     if (angleIntoSlot == SLOT_MIDPOINT)
     {
         // Ball is at midpoint, ok to drop into slot
@@ -4326,7 +4326,7 @@ static void SpriteCB_RollBall_Start(struct Sprite *sprite)
 
 static void CreateShroomishSprite(struct Sprite *ball)
 {
-    u16 t;
+    u32 t;
     u32 i;
     s16 coords[2][2] = {
         {116, 44},
@@ -4387,14 +4387,14 @@ static void CreateTaillowSprite(struct Sprite *ball)
 static void SetBallStuck(struct Sprite *sprite)
 {
     u32 slotId;
-    u16 angle;
+    u32 angle;
     u32 numCandidates = 0;
     u32 maxSlotToCheck = 5;
     u32 betSlotId = 0;
     u32 i = 0;
     u32 slotsToSkip;
     u32 slotCandidates[NUM_ROULETTE_SLOTS - 2] = {}; // - 2 because we know at least 2 are already occupied
-    u16 rand = Random();
+    u32 rand = Random();
 
     sRoulette->ballState = BALL_STATE_STUCK;
     sRoulette->ballStuck = TRUE;
@@ -4477,7 +4477,7 @@ static void SetBallStuck(struct Sprite *sprite)
     sprite->callback = SpriteCB_UnstickBall;
 }
 
-static const u16 sShroomishShadowAlphas[] = {
+static const u32 sShroomishShadowAlphas[] = {
     0x907,
     0x808,
     0x709,
@@ -4511,7 +4511,7 @@ static void SpriteCB_ShroomishExit(struct Sprite *sprite)
 static void SpriteCB_ShroomishShakeScreen(struct Sprite *sprite)
 {
     int screenShakeIdx;
-    u16 screenShakeOffsets[][4] = {
+    u32 screenShakeOffsets[][4] = {
         {-1, 0, 1, 0},
         {-2, 0, 2, 0},
         {-3, 0, 3, 0},
@@ -4665,8 +4665,8 @@ static void SpriteCB_Taillow_PickUpBall(struct Sprite *sprite)
 
 static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
 {
-    s8 xMoveOffsets[2] = {-1, 1};
-    s8 yMoveOffsets[][2] = {
+    s32 xMoveOffsets[2] = {-1, 1};
+    s32 yMoveOffsets[][2] = {
         {2, 0},
         {2, 0},
         {2, -1},
@@ -4682,7 +4682,7 @@ static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
         sprite->x += xMoveOffsets[sRoulette->ball->sStuckOnWheelLeft] * 2;
         if (IsSEPlaying())
         {
-            s8 pan = -((116 - sprite->x) / 2);
+            s32 pan = -((116 - sprite->x) / 2);
             m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
             m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
         }
@@ -4710,7 +4710,7 @@ static void SpriteCB_Taillow_FlyIn(struct Sprite *sprite)
 
 static void SpriteCB_TaillowShadow_FlyIn(struct Sprite *sprite)
 {
-    s8 moveDir[2] = {-1, 1};
+    s32 moveDir[2] = {-1, 1};
 
     if (sprite->data[1]-- >= 0)
     {

@@ -695,7 +695,7 @@ static void AnimDefensiveWall_Step5(struct Sprite *sprite)
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
         int var0 = 1;
-        bool8 toBG2 = (rank ^ var0) != 0;
+        bool32 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
             ResetBattleAnimBg(toBG2);
@@ -714,7 +714,7 @@ static void AnimWallSparkle(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         bool32 ignoreOffsets = gBattleAnimArgs[3];
-        bool8 respectMonPicOffsets = FALSE;
+        bool32 respectMonPicOffsets = FALSE;
         if (!ignoreOffsets)
             respectMonPicOffsets = TRUE;
 

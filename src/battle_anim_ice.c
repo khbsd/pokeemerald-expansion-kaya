@@ -43,7 +43,7 @@ static void AnimIceBallParticle(struct Sprite *);
 static void AnimTask_HazeScrollingFog_Step(u8);
 static void AnimTask_MistBallFog_Step(u8);
 static void AnimTask_Hail2(u8);
-static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c);
+static bool32 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c);
 static void AvalancheAnim_Step(struct Sprite *sprite);
 static void AvalancheAnim_Step2(struct Sprite *sprite);
 static void AnimSnowflakes(struct Sprite *sprite);
@@ -1497,13 +1497,13 @@ static void AnimTask_Hail2(u8 taskId)
     }
 }
 
-static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c)
+static bool32 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c)
 {
     u8 id;
     s16 battlerX, battlerY;
     s16 spriteX;
-    bool8 possibleBool = FALSE;
-    s8 unk = sHailCoordData[hailStructId].unk3;
+    bool32 possibleBool = FALSE;
+    s32 unk = sHailCoordData[hailStructId].unk3;
 
     if (unk != 2)
     {

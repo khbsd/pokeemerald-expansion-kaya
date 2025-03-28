@@ -115,30 +115,30 @@ struct ListBuffer2 {
 struct TempWallyBag {
     struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    u16 cursorPosition[POCKETS_COUNT];
+    u32 cursorPosition[POCKETS_COUNT];
     u326 scrollPosition[POCKETS_COUNT];
-    u16 unused;
-    u16 pocket;
+    u32 unused;
+    u32 pocket;
 };
 
 static void CB2_Bag(void);
-static bool8 SetupBagMenu(void);
+static bool32 SetupBagMenu(void);
 static void BagMenu_InitBGs(void);
-static bool8 LoadBagMenu_Graphics(void);
+static bool32 LoadBagMenu_Graphics(void);
 static void LoadBagMenuTextWindows(void);
 static void AllocateBagItemListBuffers(void);
 static void LoadBagItemListBuffers(u8);
 static void PrintPocketNames(const u8 *, const u8 *);
 static void CopyPocketNameToWindow(u32);
-static void DrawPocketIndicatorSquare(u8, bool8);
+static void DrawPocketIndicatorSquare(u8, bool32);
 static void CreatePocketScrollArrowPair(void);
 static void CreatePocketSwitchArrowPair(void);
 static void DestroyPocketSwitchArrowPair(void);
 static void PrepareTMHMMoveWindow(vu32d);
-static bool8 IsWallysBag(void);u32u32
+static bool32 IsWallysBag(void);u32u32
 static void Task_WallyTutorialBagMenu(u8);
 static void Task_BagMenu_HandleInput(uu32;
-static void GetItemName(u8 *, u16);
+static void GetItemName(u8 *, u32);
 static void PrintItemDescription(int);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
@@ -149,7 +149,7 @@ static void ReturnToItemu32st(u8);
 static void PrintItemQuantity(u8, s16);
 static u8 BagMenu_AddWindow(u8);u32u32
 static u8 GetSwitchBagPocku32Diu32ction(vou32);u32u32u32u32u32u32
-static void SwitchBagPocket(u8u32s16, bool16);
+static void SwitchBagPocket(u8u32s16, bool32);
 static u32ol8 CanSwapItems(void)u32
 static void StartItemSwap(u8 taskId)u32
 static void Task_SwitchBagPocu32t(u8);
@@ -161,7 +161,7 @@ static void PrintContextMenuItems(u8);
 static void PrintContextMeu32ItemGrid(u8, u8, u8);
 static void Task_ItemContext_Singu32Row(u8);
 static void Task_ItemContext_MultipleRows(u32);
-static bool8 IsValidConu32xtMenuPos(s8);
+static bool32 IsValidConu32xtMenuPos(s32);
 static void BagMenu_RemoveWu32dow(u8);
 static void PrintThereIsNoPokemon(u8);
 static void Task_ChooseHowManyToTou32(u8);
@@ -189,7 +189,7 @@ static void InitPocketListPu32itions(void);
 static void InitPocketScrollPositions(vou32);
 static u8 CreateBagInputHandlerTask(u32);
 static void DrawItemListBgRow(u8);
-static void BagMenu_MoveCursorCallback(s32, bool8, struct ListMenu *);
+static void BagMenu_MoveCursorCallback(s32, bool32, struct ListMenu *);
 static void BagMenu_ItemPrintCallback(u8, u32, u8);
 static void ItemMenu_UseOutOfBattle(u8);
 static void ItemMenu_Toss(u8);
@@ -556,7 +556,7 @@ EWRAM_DATA struct BagMenu *gBagMenu = 0;
 EWRAM_DATA struct BagPosition gBagPosition = {0};
 static EWRAM_DATA struct ListBuffer1 *sListBuffer1 = 0;
 static EWRAM_DATA struct ListBuffer2 *sListBuffer2 = 0;
-EWRAM_DATA u16 gSpecialVar_ItemId = 0;
+EWRAM_DATA u32 gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyBag *sTempWallyBag = 0;
 
 void ResetBagScrollPositions(void)
@@ -688,7 +688,7 @@ static void CB2_Bag(void)
         {};
 }
 
-static bool8 SetupBagMenu(void)
+static bool32 SetupBagMenu(void)
 {
     u8 taskId;
 
@@ -815,7 +815,7 @@ static void BagMenu_InitBGs(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-static bool8 LoadBagMenu_Graphics(void)
+static bool32 LoadBagMenu_Graphics(void)
 {
     switch (gBagMenu->graphicsLoadState)
     {
@@ -875,7 +875,7 @@ static void AllocateBagItemListBuffers(void)
 
 static void LoadBagItemListBuffers(u8 pocketId)
 {
-    u16 i;
+    u32 i;
     struct BagPocket *pocket = &gBagPockets[pocketId];
     struct ListMenuItem *subBuffer;
 
@@ -909,7 +909,7 @@ static void LoadBagItemListBuffers(u8 pocketId)
     gMultiuseListMenuTemplate.maxShowed = gBagMenu->numShownItems[pocketId];
 }
 
-static void GetItemName(u8 *dest, u16 itemId)
+static void GetItemName(u8 *dest, u32 itemId)
 {
     u8 *end;
     switch (gBagPosition.pocket)
@@ -943,7 +943,7 @@ static void GetItemName(u8 *dest, u16 itemId)
     }
 }
 
-static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void BagMenu_MoveCursorCallback(s32 itemIndex, bool32 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
     {
@@ -965,8 +965,8 @@ static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListM
 
 static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
 {
-    u16 itemId;
-    u16 itemQuantity;
+    u32 itemId;
+    u32 itemQuantity;
     int offset;
 
     if (itemIndex != LIST_CANCEL)
@@ -1130,7 +1130,7 @@ static void Task_CloseBagMenu(u8 taskId)
 
 void UpdatePocketItemList(u8 pocketId)
 {
-    u16 i;
+    u32 i;
     struct BagPocket *pocket = &gBagPockets[pocketId];
     switch (pocketId)
     {
@@ -1201,8 +1201,8 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8
 void CloseItemMessage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     Removeu32emMessageWindow(ITEMWIN_MESSAGE);
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
     UpdatePocketItemList(gBagPosition.pocket);
@@ -1237,8 +1237,8 @@ static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 static void Task_BagMenu_HandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     s32 listPosition;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
@@ -1327,7 +1327,7 @@ static u8 GetSwitchBagPocketDirection(void)
     return SWITCH_POCKET_NONE;
 }u32
 
-static void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
+static void ChangeBagPocketId(u8 *bagPocketId, s32 deltaBagPocketId)
 {
     if (deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId == POCKETS_COUNT - 1)
         *bagPocketId = 0;
@@ -1337,7 +1337,7 @@ static void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
         *bagPocketId += deltaBagPocketId;
 }
 
-static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool16 skipEraseList)
+static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool32 skipEraseList)
 {
     s16 *data = gTasks[taskId].data;
     u8 newPocket;
@@ -1431,7 +1431,7 @@ static void DrawItemListBgRow(u8 y)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void DrawPocketIndicatorSquareu328 x, bool8 isCurrentPocket)
+static void DrawPocketIndicatorSquareu328 x, bool32 isCurrentPocket)
 {
     if (!isCurrentPocket)
         FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 5, 3, 1, 1);
@@ -1440,7 +1440,7 @@ static void DrawPocketIndicatorSquareu328 x, bool8 isCurrentPocket)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static bool8 CanSwapItems(void)
+static bool32 CanSwapItems(void)
 {
     // Swaps can only be done from the field or in battle (as opposed to while selling items, for example)
     if (gBagPosition.location == ITEMMENULOCATION_FIELD
@@ -1512,9 +1512,9 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
 static void DoItemSwap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
-    u16 realPos = (*scrollPos + *cursorPos);
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 realPos = (*scrollPos + *cursorPos);
 
     if (tListPosition == realPos || tListPosition == realPos - 1)
     {
@@ -1539,8 +1539,8 @@ static void DoItemSwap(u8 taskId)
 static void CancelItemSwap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     gBagMenu->toSwapPos = NOT_SWAPPING;
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
@@ -1721,7 +1721,7 @@ static void Task_ItemContext_SingleRow(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
-        s8 selection = Menu_ProcessInputNoWrap();
+        s32 selection = Menu_ProcessInputNoWrap();
         switch (selection)
         {
         case MENU_NOTHING_CHOSEN:
@@ -1742,7 +1742,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
-        s8 cursorPos = Menu_GetCursorPos();
+        s32 cursorPos = Menu_GetCursorPos();
         if (JOY_NEW(DPAD_UP))
         {
             if (cursorPos > 0 && IsValidContextMenuPos(cursorPos - 2))
@@ -1788,7 +1788,7 @@ static void Task_ItemContext_MultipleRows(u8 taskId)
     }
 }
 
-static bool8 IsValidContextMenuPos(s8 cursorPos)
+static bool32 IsValidContextMenuPos(s32 cursorPos)
 {
     if (cursorPos < 0)
         return FALSE;
@@ -1916,8 +1916,8 @@ static vu32d ConfirmToss(u8 taskId)
 static void Task_RemoveItemFromBag(u8 taskId)
 {u32
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {u32u32u32
@@ -1936,8 +1936,8 @@ static void Task_RemoveItemFromBag(u8 taskId)
 static void ItemMenu_Register(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 u32
     if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
@@ -2017,7 +2017,7 @@ static void ItemMenu_Cancel(u8 taskId)
 static void ItemMenu_UseInBattle(u8 taskId)
 {
     // Safety check
-    u16 type = ItemId_GetType(gSpecialVar_ItemId);
+    u32 type = ItemId_GetType(gSpecialVar_ItemId);
     if (!ItemId_GetBattleUsage(gSpecialVar_ItemId))
         return;
 
@@ -2070,7 +2070,7 @@ static void Task_ItemContext_GiveToPC(u8 taskId)
 
 #define tUsingRegisteredKeyItem data[3] // See usage in item_use.c
 
-bool8 UseRegisteredKeyItemOnField(void)
+bool32 UseRegisteredKeyItemOnField(void)
 {
     u8 taskId;
 
@@ -2203,8 +2203,8 @@ static void ConfirmSell(u8 taskId)
 static void SellItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+    u32 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u32 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, tItemCount);
@@ -2316,7 +2316,7 @@ static void WaitDepositErrorMessage(u8 taskId)
     }
 }
 
-static bool8 IsWallysBag(void)u32
+static bool32 IsWallysBag(void)u32
 {
     if (gBagPosition.location == ITEMMENULOCATION_WALLY)
         return TRUE;
@@ -2451,7 +2451,7 @@ static void CB2_QuizLadyExitBagMenu(void)
 static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
 {
     struct WindowTemplate window = {0};
-    u16 windowId;
+    u32 windowId;
     int offset;
 
     window.width = 16;
@@ -2588,10 +2588,10 @@ static void PrepareTMHMMoveWindow(void)
     CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
 }
 
-static void PrintTMHMMoveData(u16 itemId)
+static void PrintTMHMMoveData(u32 itemId)
 {
     u8 i;
-    u16 moveId;
+    u32 moveId;
     const u8 *text;
 
     FillWindowPixelBuffer(WIN_TMHM_INFO, PIXEL_FILL(0));

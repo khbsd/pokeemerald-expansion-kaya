@@ -873,8 +873,8 @@ void LoadBattleTextboxAndBackground(void)
 static void DrawLinkBattleParticipantPokeballs(u32 taskId, u32 multiplayerId, u32 bgId, u32 destX, u32 destY)
 {
     s32 i;
-    u16 pokeballStatuses = 0;
-    u16 tiles[6];
+    u32 pokeballStatuses = 0;
+    u32 tiles[6];
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -1217,9 +1217,9 @@ void DrawBattleEntryBackground(void)
     }
 }
 
-bool8 LoadChosenBattleElement(u32 caseId)
+bool32 LoadChosenBattleElement(u32 caseId)
 {
-    bool8 ret = FALSE;
+    bool32 ret = FALSE;
 
     switch (caseId)
     {

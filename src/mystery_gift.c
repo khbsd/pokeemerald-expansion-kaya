@@ -73,7 +73,7 @@ struct WonderNewsMetadata *GetSavedWonderNewsMetadata(void)
 #endif //FREE_MYSTERY_GIFT
 }
 
-u16 *GetQuestionnaireWordsPtr(void)
+u32 *GetQuestionnaireWordsPtr(void)
 {
 #if FREE_MYSTERY_GIFT == FALSE
     return gSaveBlock1Ptr->mysteryGift.questionnaireWords;
@@ -272,7 +272,7 @@ static void ClearSavedWonderCardMetadata(void)
 }
 #endif //FREE_MYSTERY_GIFT
 
-u16 GetWonderCardFlagID(void)
+u32 GetWonderCardFlagID(void)
 {
 #if FREE_MYSTERY_GIFT == FALSE
     if (ValidateSavedWonderCard())
@@ -288,7 +288,7 @@ void DisableWonderCardSending(struct WonderCard *card)
         card->sendType = SEND_TYPE_DISALLOWED;
 }
 
-static bool32 IsWonderCardFlagIDInValidRange(u16 flagId)
+static bool32 IsWonderCardFlagIDInValidRange(u32 flagId)
 {
     if (flagId >= WONDER_CARD_FLAG_OFFSET && flagId < WONDER_CARD_FLAG_OFFSET + NUM_WONDER_CARD_FLAGS)
         return TRUE;
@@ -296,7 +296,7 @@ static bool32 IsWonderCardFlagIDInValidRange(u16 flagId)
     return FALSE;
 }
 
-static const u16 sReceivedGiftFlags[] =
+static const u32 sReceivedGiftFlags[] =
 {
     FLAG_RECEIVED_AURORA_TICKET,
     FLAG_RECEIVED_MYSTIC_TICKET,
@@ -322,7 +322,7 @@ static const u16 sReceivedGiftFlags[] =
 
 bool32 IsSavedWonderCardGiftNotReceived(void)
 {
-    u16 value = GetWonderCardFlagID();
+    u32 value = GetWonderCardFlagID();
     if (!IsWonderCardFlagIDInValidRange(value))
         return FALSE;
 
@@ -346,7 +346,7 @@ static int GetNumStampsInMetadata(const struct WonderCardMetadata *data, int siz
     return numStamps;
 }
 
-static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const u16 *stamp, int maxStamps)
+static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const u32 *stamp, int maxStamps)
 {
     int i;
     for (i = 0; i < maxStamps; i++)
@@ -361,7 +361,7 @@ static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const
 }
 
 #if FREE_MYSTERY_GIFT == FALSE
-static bool32 ValidateStamp(const u16 *stamp)
+static bool32 ValidateStamp(const u32 *stamp)
 {
     if (stamp[STAMP_ID] == 0)
         return FALSE;
@@ -386,7 +386,7 @@ static int GetNumStampsInSavedCard(void)
 }
 #endif //FREE_MYSTERY_GIFT
 
-bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
+bool32 MysteryGift_TrySaveStamp(const u32 *stamp)
 {
 #if FREE_MYSTERY_GIFT == FALSE
     struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
@@ -486,7 +486,7 @@ bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *da
     return TRUE;
 }
 
-u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLinkGameData *data, const void *unused)
+u32 MysteryGift_CompareCardFlags(const u32 *flagId, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
     // Has a Wonder Card already?
     if (data->flagId == 0)
@@ -502,7 +502,7 @@ u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLink
 
 // This is referenced by the Mystery Gift server, but the instruction it's referenced in is never used,
 // so the return values here are never checked by anything.
-u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
+u32 MysteryGift_CheckStamps(const u32 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
     int stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
 
@@ -522,7 +522,7 @@ u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameDa
     return 2;
 }
 
-bool32 MysteryGift_DoesQuestionnaireMatch(const struct MysteryGiftLinkGameData *data, const u16 *words)
+bool32 MysteryGift_DoesQuestionnaireMatch(const struct MysteryGiftLinkGameData *data, const u32 *words)
 {
     int i;
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
@@ -539,7 +539,7 @@ static int GetNumStampsInLinkData(const struct MysteryGiftLinkGameData *data)
     return GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
 }
 
-u16 MysteryGift_GetCardStatFromLinkData(const struct MysteryGiftLinkGameData *data, u32 stat)
+u32 MysteryGift_GetCardStatFromLinkData(const struct MysteryGiftLinkGameData *data, u32 stat)
 {
     switch (stat)
     {
@@ -565,7 +565,7 @@ static void IncrementCardStat(u32 statType)
     struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
     if (card->type == CARD_TYPE_LINK_STAT)
     {
-        u16 *stat = NULL;
+        u32 *stat = NULL;
         switch (statType)
         {
         case CARD_STAT_BATTLES_WON:
@@ -594,7 +594,7 @@ static void IncrementCardStat(u32 statType)
 }
 #endif //FREE_MYSTERY_GIFT
 
-u16 MysteryGift_GetCardStat(u32 stat)
+u32 MysteryGift_GetCardStat(u32 stat)
 {
 #if FREE_MYSTERY_GIFT == FALSE
     switch (stat)
@@ -655,7 +655,7 @@ void MysteryGift_DisableStats(void)
     sStatsEnabled = FALSE;
 }
 
-bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId)
+bool32 MysteryGift_TryEnableStatsByFlagId(u32 flagId)
 {
     sStatsEnabled = FALSE;
     if (flagId == 0)

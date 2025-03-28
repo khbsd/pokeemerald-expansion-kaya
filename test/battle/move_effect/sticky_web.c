@@ -190,7 +190,7 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - no o
 
 DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - no one has their Speed lowered if the set upper fainted")
 {
-    bool8 hasReplacement;
+    bool32 hasReplacement;
 
     // We need to make sure Sticky Web user saves for both sides, so it doesn't matter who sets it first.
     PARAMETRIZE {hasReplacement = TRUE;}

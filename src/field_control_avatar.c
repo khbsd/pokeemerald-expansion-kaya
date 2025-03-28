@@ -48,7 +48,7 @@ COMMON_DATA u32 gSelectedObjectEvent = 0;
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u32 GetPlayerCurMetatileBehavior(int);
-static bool8 TryStartInteractionScript(struct MapPosition *, u32, u32);
+static bool32 TryStartInteractionScript(struct MapPosition *, u32, u32);
 static const u32 *GetInteractionScript(struct MapPosition *, u32, u32);
 static const u32 *GetInteractedObjectEventScript(struct MapPosition *, u32, u32);
 static const u32 *GetInteractedBackgroundEventScript(struct MapPosition *, u32, u32);
@@ -56,25 +56,25 @@ static const u32 *GetInteractedMetatileScript(struct MapPosition *, u32, u32);
 static const u32 *GetInteractedWaterScript(struct MapPosition *, u32, u32);
 static bool32 TrySetupDiveDownScript(void);
 static bool32 TrySetupDiveEmergeScript(void);
-static bool8 TryStartStepBasedScript(struct MapPosition *, u32, u32);
-static bool8 CheckStandardWildEncounter(u32);
-static bool8 TryArrowWarp(struct MapPosition *, u32, u32);
-static bool8 IsWarpMetatileBehavior(u32);
-static bool8 IsArrowWarpMetatileBehavior(u32, u32);
-static s8 GetWarpEventAtMapPosition(struct MapHeader *, struct MapPosition *);
-static void SetupWarp(struct MapHeader *, s8, struct MapPosition *);
-static bool8 TryDoorWarp(struct MapPosition *, u32, u32);
-static s8 GetWarpEventAtPosition(struct MapHeader *, u32, u32, u32);
+static bool32 TryStartStepBasedScript(struct MapPosition *, u32, u32);
+static bool32 CheckStandardWildEncounter(u32);
+static bool32 TryArrowWarp(struct MapPosition *, u32, u32);
+static bool32 IsWarpMetatileBehavior(u32);
+static bool32 IsArrowWarpMetatileBehavior(u32, u32);
+static s32 GetWarpEventAtMapPosition(struct MapHeader *, struct MapPosition *);
+static void SetupWarp(struct MapHeader *, s32, struct MapPosition *);
+static bool32 TryDoorWarp(struct MapPosition *, u32, u32);
+static s32 GetWarpEventAtPosition(struct MapHeader *, u32, u32, u32);
 static const u32 *GetCoordEventScriptAtPosition(struct MapHeader *, u32, u32, u32);
 static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u32, u32, u32);
-static bool8 TryStartCoordEventScript(struct MapPosition *);
-static bool8 TryStartWarpEventScript(struct MapPosition *, u32);
-static bool8 TryStartMiscWalkingScripts(u32);
-static bool8 TryStartStepCountScript(u32);
+static bool32 TryStartCoordEventScript(struct MapPosition *);
+static bool32 TryStartWarpEventScript(struct MapPosition *, u32);
+static bool32 TryStartMiscWalkingScripts(u32);
+static bool32 TryStartStepCountScript(u32);
 static void UpdateFriendshipStepCounter(void);
 static void UpdateFollowerStepCounter(void);
 #if OW_POISON_DAMAGE < GEN_5
-static bool8 UpdatePoisonStepCounter(void);
+static bool32 UpdatePoisonStepCounter(void);
 #endif // OW_POISON_DAMAGE
 static bool32 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u32 metatileBehavior, u32 playerDirection);
 static void SetMsgSignPostAndVarFacing(u32 playerDirection);
@@ -103,7 +103,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u32 newKeys, u32 heldKeys)
 {
     u32 tileTransitionState = gPlayerAvatar.tileTransitionState;
     u32 runningState = gPlayerAvatar.runningState;
-    bool8 forcedMove = MetatileBehavior_IsForcedMovementTile(GetPlayerCurMetatileBehavior(runningState));
+    bool32 forcedMove = MetatileBehavior_IsForcedMovementTile(GetPlayerCurMetatileBehavior(runningState));
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
@@ -272,7 +272,7 @@ static u32 GetPlayerCurMetatileBehavior(int runningState)
     return MapGridGetMetatileBehaviorAt(x, y);
 }
 
-static bool8 TryStartInteractionScript(struct MapPosition *position, u32 metatileBehavior, u32 direction)
+static bool32 TryStartInteractionScript(struct MapPosition *position, u32 metatileBehavior, u32 direction)
 {
     const u32 *script = GetInteractionScript(position, metatileBehavior, direction);
     if (script == NULL || Script_HasNoEffect(script))
@@ -455,7 +455,7 @@ static const u32 *GetInteractedBackgroundEventScript(struct MapPosition *positio
 
 static const u32 *GetInteractedMetatileScript(struct MapPosition *position, u32 metatileBehavior, u32 direction)
 {
-    s8 elevation;
+    s32 elevation;
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
         return EventScript_TV;
@@ -583,7 +583,7 @@ static bool32 TrySetupDiveEmergeScript(void)
     return FALSE;
 }
 
-static bool8 TryStartStepBasedScript(struct MapPosition *position, u32 metatileBehavior, u32 direction)
+static bool32 TryStartStepBasedScript(struct MapPosition *position, u32 metatileBehavior, u32 direction)
 {
     if (TryStartCoordEventScript(position) == TRUE)
         return TRUE;
@@ -598,7 +598,7 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u32 metatileB
     return FALSE;
 }
 
-static bool8 TryStartCoordEventScript(struct MapPosition *position)
+static bool32 TryStartCoordEventScript(struct MapPosition *position)
 {
     const u32 *script = GetCoordEventScriptAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 
@@ -613,7 +613,7 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
     return TRUE;
 }
 
-static bool8 TryStartMiscWalkingScripts(u32 metatileBehavior)
+static bool32 TryStartMiscWalkingScripts(u32 metatileBehavior)
 {
     s16 x, y;
 
@@ -641,7 +641,7 @@ static bool8 TryStartMiscWalkingScripts(u32 metatileBehavior)
     return FALSE;
 }
 
-static bool8 TryStartStepCountScript(u32 metatileBehavior)
+static bool32 TryStartStepCountScript(u32 metatileBehavior)
 {
     if (InUnionRoom() == TRUE)
     {
@@ -757,7 +757,7 @@ void ClearPoisonStepCounter(void)
 }
 
 #if OW_POISON_DAMAGE < GEN_5
-static bool8 UpdatePoisonStepCounter(void)
+static bool32 UpdatePoisonStepCounter(void)
 {
     u32 *ptr;
 
@@ -789,7 +789,7 @@ void RestartWildEncounterImmunitySteps(void)
     sWildEncounterImmunitySteps = 0;
 }
 
-static bool8 CheckStandardWildEncounter(u32 metatileBehavior)
+static bool32 CheckStandardWildEncounter(u32 metatileBehavior)
 {
     if (FlagGet(OW_FLAG_NO_ENCOUNTER))
         return FALSE;
@@ -818,7 +818,7 @@ static void StorePlayerStateAndSetupWarp(struct MapPosition *position, s32 warpE
     SetupWarp(&gMapHeader, warpEventId, position);
 }
 
-static bool8 TryArrowWarp(struct MapPosition *position, u32 metatileBehavior, u32 direction)
+static bool32 TryArrowWarp(struct MapPosition *position, u32 metatileBehavior, u32 direction)
 {
     s32 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
     u32 delay;
@@ -848,9 +848,9 @@ static bool8 TryArrowWarp(struct MapPosition *position, u32 metatileBehavior, u3
     return FALSE;
 }
 
-static bool8 TryStartWarpEventScript(struct MapPosition *position, u32 metatileBehavior)
+static bool32 TryStartWarpEventScript(struct MapPosition *position, u32 metatileBehavior)
 {
-    s8 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
+    s32 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
 
     if (warpEventId != WARP_ID_NONE && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
     {
@@ -897,7 +897,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u32 metatileB
     return FALSE;
 }
 
-static bool8 IsWarpMetatileBehavior(u32 metatileBehavior)
+static bool32 IsWarpMetatileBehavior(u32 metatileBehavior)
 {
     if (MetatileBehavior_IsWarpDoor(metatileBehavior) != TRUE
      && MetatileBehavior_IsLadder(metatileBehavior) != TRUE
@@ -913,7 +913,7 @@ static bool8 IsWarpMetatileBehavior(u32 metatileBehavior)
     return TRUE;
 }
 
-static bool8 IsArrowWarpMetatileBehavior(u32 metatileBehavior, u32 direction)
+static bool32 IsArrowWarpMetatileBehavior(u32 metatileBehavior, u32 direction)
 {
     switch (direction)
     {
@@ -929,12 +929,12 @@ static bool8 IsArrowWarpMetatileBehavior(u32 metatileBehavior, u32 direction)
     return FALSE;
 }
 
-static s8 GetWarpEventAtMapPosition(struct MapHeader *mapHeader, struct MapPosition *position)
+static s32 GetWarpEventAtMapPosition(struct MapHeader *mapHeader, struct MapPosition *position)
 {
     return GetWarpEventAtPosition(mapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 }
 
-static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPosition *position)
+static void SetupWarp(struct MapHeader *unused, s32 warpEventId, struct MapPosition *position)
 {
     const struct WarpEvent *warpEvent;
 
@@ -979,9 +979,9 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
     }
 }
 
-static bool8 TryDoorWarp(struct MapPosition *position, u32 metatileBehavior, u32 direction)
+static bool32 TryDoorWarp(struct MapPosition *position, u32 metatileBehavior, u32 direction)
 {
-    s8 warpEventId;
+    s32 warpEventId;
 
     if (direction == DIR_NORTH)
     {
@@ -1006,7 +1006,7 @@ static bool8 TryDoorWarp(struct MapPosition *position, u32 metatileBehavior, u32
     return FALSE;
 }
 
-static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u32 x, u32 y, u32 elevation)
+static s32 GetWarpEventAtPosition(struct MapHeader *mapHeader, u32 x, u32 y, u32 elevation)
 {
     s32 i;
     const struct WarpEvent *warpEvent = mapHeader->events->warps;
@@ -1096,7 +1096,7 @@ static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapH
     return NULL;
 }
 
-bool8 TryDoDiveWarp(struct MapPosition *position, u32 metatileBehavior)
+bool32 TryDoDiveWarp(struct MapPosition *position, u32 metatileBehavior)
 {
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsUnableToEmerge(metatileBehavior))
     {

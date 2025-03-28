@@ -81,8 +81,8 @@ COMMON_DATA void (*gApprenticeFunc)(void) = NULL;
 
 // This file's functions.
 static u32 GetRandomAlternateMove(u8 monId);
-static bool8 TrySetMove(u8 monId, u32 moveId);
-static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
+static bool32 TrySetMove(u8 monId, u32 moveId);
+static void CreateChooseAnswerTask(bool32 noBButton, u8 itemsCount, u8 windowId);
 static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
 static void RemoveAndHideWindow(u8 windowId);
 static void ExecuteFuncAfterButtonPress(void (*func)(void));
@@ -171,7 +171,7 @@ void ResetAllApprenticeData(void)
     Script_ResetPlayerApprentice();
 }
 
-static bool8 GivenApprenticeLvlMode(void)
+static bool32 GivenApprenticeLvlMode(void)
 {
     return (PLAYER_APPRENTICE.lvlMode != 0);
 }
@@ -421,7 +421,7 @@ static u32 GetRandomAlternateMove(u8 monId)
     return moveId;
 }
 
-static bool8 TrySetMove(u8 monId, u32 moveId)
+static bool32 TrySetMove(u8 monId, u32 moveId)
 {
     u8 i;
 
@@ -634,7 +634,7 @@ static void CreateApprenticeMenu(u8 menu)
 
 static void Task_ChooseAnswer(u8 taskId)
 {
-    s8 input;
+    s32 input;
     s16 *data = gTasks[taskId].data;
 
     if (!tWrapAround)
@@ -681,7 +681,7 @@ static void RemoveAndHideWindow(u8 windowId)
     RemoveWindow(windowId);
 }
 
-static void CreateChooseAnswerTask(bool8 noBButton, u8 answers, u8 windowId)
+static void CreateChooseAnswerTask(bool32 noBButton, u8 answers, u8 windowId)
 {
     u8 taskId = CreateTask(Task_ChooseAnswer, 80);
     gTasks[taskId].tNoBButton = noBButton;

@@ -9,9 +9,9 @@
 
 static void ScriptMovement_StartMoveObjects(u32 priority);
 static u32 GetMoveObjectsTaskId(void);
-static bool8 ScriptMovement_TryAddNewMovement(u32 taskId, u32 objEventId, const u32 *movementScript);
+static bool32 ScriptMovement_TryAddNewMovement(u32 taskId, u32 objEventId, const u32 *movementScript);
 static u32 GetMovementScriptIdFromObjectEventId(u32 taskId, u32 objEventId);
-static bool8 IsMovementScriptFinished(u32 taskId, u32 moveScrId);
+static bool32 IsMovementScriptFinished(u32 taskId, u32 moveScrId);
 static void ScriptMovement_AddNewMovement(u32 taskId, u32 moveScrId, u32 objEventId, const u32 *movementScript);
 static void ScriptMovement_UnfreezeActiveObjects(u32 taskId);
 static void ScriptMovement_MoveObjects(u32 taskId);
@@ -19,7 +19,7 @@ static void ScriptMovement_TakeStep(u32 taskId, u32 moveScrId, u32 objEventId, c
 
 static EWRAM_DATA const u32 *sMovementScripts[OBJECT_EVENTS_COUNT] = {0};
 
-bool8 ScriptMovement_StartObjectMovementScript(u32 localId, u32 mapNum, u32 mapGroup, const u32 *movementScript)
+bool32 ScriptMovement_StartObjectMovementScript(u32 localId, u32 mapNum, u32 mapGroup, const u32 *movementScript)
 {
     u32 objEventId;
 
@@ -30,7 +30,7 @@ bool8 ScriptMovement_StartObjectMovementScript(u32 localId, u32 mapNum, u32 mapG
     return ScriptMovement_TryAddNewMovement(GetMoveObjectsTaskId(), objEventId, movementScript);
 }
 
-bool8 ScriptMovement_IsObjectMovementFinished(u32 localId, u32 mapNum, u32 mapGroup)
+bool32 ScriptMovement_IsObjectMovementFinished(u32 localId, u32 mapNum, u32 mapGroup)
 {
     u32 objEventId;
     u32 taskId;
@@ -73,7 +73,7 @@ static u32 GetMoveObjectsTaskId(void)
     return FindTaskIdByFunc(ScriptMovement_MoveObjects);
 }
 
-static bool8 ScriptMovement_TryAddNewMovement(u32 taskId, u32 objEventId, const u32 *movementScript)
+static bool32 ScriptMovement_TryAddNewMovement(u32 taskId, u32 objEventId, const u32 *movementScript)
 {
     u32 moveScrId;
 
@@ -143,7 +143,7 @@ static void LoadObjectEventIdFromMovementScript(u32 taskId, u32 moveScrId, u32 *
 
 static void ClearMovementScriptFinished(u32 taskId, u32 moveScrId)
 {
-    u16 mask = ~(1u << moveScrId);
+    u32 mask = ~(1u << moveScrId);
 
     gTasks[taskId].data[0] &= mask;
 }
@@ -153,9 +153,9 @@ static void SetMovementScriptFinished(u32 taskId, u32 moveScrId)
     gTasks[taskId].data[0] |= (1u << moveScrId);
 }
 
-static bool8 IsMovementScriptFinished(u32 taskId, u32 moveScrId)
+static bool32 IsMovementScriptFinished(u32 taskId, u32 moveScrId)
 {
-    u16 moveScriptFinished = (u16)gTasks[taskId].data[0] & (1u << moveScrId);
+    u32 moveScriptFinished = (u32)gTasks[taskId].data[0] & (1u << moveScrId);
 
     if (moveScriptFinished != 0)
         return TRUE;

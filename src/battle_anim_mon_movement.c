@@ -182,7 +182,7 @@ static void AnimTask_ShakeMon_Step(u8 taskId)
 void AnimTask_ShakeMon2(u8 taskId)
 {
     u8 spriteId;
-    bool8 abort = FALSE;
+    bool32 abort = FALSE;
     u8 battlerId;
 
     if (gBattleAnimArgs[0] < MAX_BATTLERS_COUNT)
@@ -571,7 +571,7 @@ static void SlideMonToOriginalPosPartner(struct Sprite *sprite)
 
 static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
 {
-    s8 monSpriteId;
+    s32 monSpriteId;
     u8 lo;
     struct Sprite *monSprite;
 
@@ -593,8 +593,8 @@ static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
         sprite->data[0]--;
         sprite->data[3] += sprite->data[1];
         sprite->data[4] += sprite->data[2];
-        monSprite->x2 = (s8)(sprite->data[3] >> 8) + sprite->data[5];
-        monSprite->y2 = (s8)(sprite->data[4] >> 8) + sprite->data[6];
+        monSprite->x2 = (s32)(sprite->data[3] >> 8) + sprite->data[5];
+        monSprite->y2 = (s32)(sprite->data[4] >> 8) + sprite->data[6];
     }
 }
 

@@ -57,8 +57,8 @@ enum {
 struct ResetRtcInputMap
 {
     /*0x0*/ u32 dataIndex;
-    /*0x2*/ u16 minVal;
-    /*0x4*/ u16 maxVal;
+    /*0x2*/ u32 minVal;
+    /*0x4*/ u32 maxVal;
     /*0x6*/ u32 left;
     /*0x7*/ u32 right;
     /*0x8*/ u32 unk; // never read
@@ -178,7 +178,7 @@ static const struct OamData sOamData_Arrow =
 
 static const u32 sArrowDown_Gfx[] = INCBIN_u32("graphics/reset_rtc_screen/arrow_down.4bpp");
 static const u32 sArrowRight_Gfx[] = INCBIN_u32("graphics/reset_rtc_screen/arrow_right.4bpp");
-static const u16 sArrow_Pal[] = INCBIN_U16("graphics/reset_rtc_screen/arrow.gbapal");
+static const u32 sArrow_Pal[] = INCBIN_U16("graphics/reset_rtc_screen/arrow.gbapal");
 
 static const struct SpriteFrameImage sPicTable_Arrow[] =
 {
@@ -363,7 +363,7 @@ static void HideChooseTimeWindow(u32 windowId)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void PrintTime(u32 windowId, u32 x, u32 y, u16 days, u32 hours, u32 minutes, u32 seconds)
+static void PrintTime(u32 windowId, u32 x, u32 y, u32 days, u32 hours, u32 minutes, u32 seconds)
 {
     u32 *dest = gStringVar4;
 
@@ -389,7 +389,7 @@ static void PrintTime(u32 windowId, u32 x, u32 y, u16 days, u32 hours, u32 minut
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void ShowChooseTimeWindow(u32 windowId, u16 days, u32 hours, u32 minutes, u32 seconds)
+static void ShowChooseTimeWindow(u32 windowId, u32 days, u32 hours, u32 minutes, u32 seconds)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
@@ -397,7 +397,7 @@ static void ShowChooseTimeWindow(u32 windowId, u16 days, u32 hours, u32 minutes,
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
+static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u32 keys)
 {
     if (keys & DPAD_DOWN)
     {

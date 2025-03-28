@@ -60,14 +60,14 @@ struct UsePokeblockSession
     u32 condition;
     u32 numEnhancements;
     u32 unused2;
-    bool8 monInTopHalf;
+    bool32 monInTopHalf;
     u32 conditionsBeforeBlock[CONDITION_COUNT];
     u32 conditionsAfterBlock[CONDITION_COUNT];
     u32 enhancements[CONDITION_COUNT];
     s16 pokeblockStatBoosts[CONDITION_COUNT];
     u32 numSelections; // num in party + 1 (for Cancel)
     u32 curSelection;
-    bool8 (*loadNewSelection)(void);
+    bool32 (*loadNewSelection)(void);
     u32 helperState;
     u32 unused3;
     u32 natureText[34];
@@ -81,21 +81,21 @@ struct UsePokeblockMenuPokemon
 {
     u32 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
     u32 monId;
-    u16 data; // never read
+    u32 data; // never read
 };
 
 struct UsePokeblockMenu
 {
     u32 unused;
-    u16 partyPalettes[PARTY_SIZE][0x40];
+    u32 partyPalettes[PARTY_SIZE][0x40];
     u32 partySheets[NUM_SELECTIONS_LOADED][MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u32 unusedBuffer[0x1000];
     u32 tilemapBuffer[BG_SCREEN_SIZE + 2];
     u32 selectionIconSpriteIds[PARTY_SIZE + 1];
     s16 curMonXOffset;
     u32 curMonSpriteId;
-    u16 curMonPalette;
-    u16 curMonSheet;
+    u32 curMonPalette;
+    u32 curMonSheet;
     u32 *curMonTileStart;
     struct Sprite *sparkles[MAX_CONDITION_SPARKLES];
     struct Sprite *condition[2];
@@ -104,10 +104,10 @@ struct UsePokeblockMenu
     u32 monNameStrings[NUM_SELECTIONS_LOADED][64];
     struct ConditionGraph graph;
     u32 numSparkles[NUM_SELECTIONS_LOADED];
-    s8 curLoadId;
-    s8 nextLoadId;
-    s8 prevLoadId;
-    s8 toLoadId;
+    s32 curLoadId;
+    s32 nextLoadId;
+    s32 prevLoadId;
+    s32 toLoadId;
     struct UsePokeblockMenuPokemon party[PARTY_SIZE];
     struct UsePokeblockSession info;
 };
@@ -122,16 +122,16 @@ static void ShowUsePokeblockMenuForResults(void);
 static void LoadPartyInfo(void);
 static void LoadAndCreateSelectionIcons(void);
 static u32 GetSelectionIdFromPartyId(u32);
-static bool8 LoadConditionTitle(void);
-static bool8 LoadUsePokeblockMenuGfx(void);
+static bool32 LoadConditionTitle(void);
+static bool32 LoadUsePokeblockMenuGfx(void);
 static void UpdateMonPic(u32);
-static void UpdateMonInfoText(u16, bool8);
+static void UpdateMonInfoText(u32, bool32);
 static void UsePokeblockMenu(void);
-static void UpdateSelection(bool8);
+static void UpdateSelection(bool32);
 static void CloseUsePokeblockMenu(void);
 static void AskUsePokeblock(void);
-static s8 HandleAskUsePokeblockInput(void);
-static bool8 IsSheenMaxed(void);
+static s32 HandleAskUsePokeblockInput(void);
+static bool32 IsSheenMaxed(void);
 static void PrintWontEatAnymore(void);
 static void FeedPokeblockToMon(void);
 static void EraseMenuWindow(void);
@@ -141,23 +141,23 @@ static void CalculateConditionEnhancements(void);
 static void LoadAndCreateUpDownSprites(void);
 static void CalculateNumAdditionalSparkles(u32);
 static void PrintFirstEnhancement(void);
-static bool8 TryPrintNextEnhancement(void);
+static bool32 TryPrintNextEnhancement(void);
 static void BufferEnhancedText(u32 *, u32, s16);
 static void PrintMenuWindowText(const u32 *);
 static void CalculatePokeblockEffectiveness(struct Pokeblock *, struct Pokemon *);
 static void SpriteCB_UpDown(struct Sprite *);
 static void LoadInitialMonInfo(void);
 static void LoadMonInfo(s16, u32);
-static bool8 LoadNewSelection_CancelToMon(void);
-static bool8 LoadNewSelection_MonToCancel(void);
-static bool8 LoadNewSelection_MonToMon(void);
+static bool32 LoadNewSelection_CancelToMon(void);
+static bool32 LoadNewSelection_MonToCancel(void);
+static bool32 LoadNewSelection_MonToMon(void);
 static void SpriteCB_SelectionIconPokeball(struct Sprite *);
 static void SpriteCB_SelectionIconCancel(struct Sprite *);
 static void SpriteCB_MonPic(struct Sprite *);
 static void SpriteCB_Condition(struct Sprite *);
 
-extern const u16 gConditionGraphData_Pal[];
-extern const u16 gConditionText_Pal[];
+extern const u32 gConditionGraphData_Pal[];
+extern const u32 gConditionText_Pal[];
 
 // The below 3 are saved for returning to the screen after feeding a pokeblock to a mon
 // so that the rest of the data can be freed
@@ -606,7 +606,7 @@ enum {
 
 static void UsePokeblockMenu(void)
 {
-    bool8 loading;
+    bool32 loading;
 
     switch (sInfo->mainState)
     {
@@ -716,7 +716,7 @@ static void FeedPokeblockToMon(void)
 
 static void ShowUsePokeblockMenuForResults(void)
 {
-    bool8 loading;
+    bool32 loading;
 
     switch (sInfo->mainState)
     {
@@ -879,9 +879,9 @@ static void AskUsePokeblock(void)
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
 }
 
-static s8 HandleAskUsePokeblockInput(void)
+static s32 HandleAskUsePokeblockInput(void)
 {
-    s8 menuItem = Menu_ProcessInputNoWrapClearOnChoose();
+    s32 menuItem = Menu_ProcessInputNoWrapClearOnChoose();
 
     switch (menuItem)
     {
@@ -919,7 +919,7 @@ static void PrintFirstEnhancement(void)
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
 
-static bool8 TryPrintNextEnhancement(void)
+static bool32 TryPrintNextEnhancement(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
 
@@ -975,7 +975,7 @@ static void BufferEnhancedText(u32 *dest, u32 condition, s16 enhancement)
         // fallthrough
     case -32768 ... -1: // if < 0
         if (enhancement)
-            dest[(u16)enhancement] += 0; // something you can't imagine
+            dest[(u32)enhancement] += 0; // something you can't imagine
         StringCopy(dest, sConditionNames[condition]);
         StringAppend(dest, gText_WasEnhanced);
         break;
@@ -987,7 +987,7 @@ static void BufferEnhancedText(u32 *dest, u32 condition, s16 enhancement)
 
 static void GetMonConditions(struct Pokemon *mon, u32 *data)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < CONDITION_COUNT; i++)
         data[i] = GetMonData(mon, sConditionToMonData[i]);
@@ -995,7 +995,7 @@ static void GetMonConditions(struct Pokemon *mon, u32 *data)
 
 static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
-    u16 i;
+    u32 i;
     s16 stat;
     u32 data;
 
@@ -1025,7 +1025,7 @@ static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon
 
 static void CalculateConditionEnhancements(void)
 {
-    u16 i;
+    u32 i;
     struct Pokemon *mon = gPlayerParty;
     mon += sMenu->party[sMenu->info.curSelection].monId;
 
@@ -1038,7 +1038,7 @@ static void CalculateConditionEnhancements(void)
 
 static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
-    s8 i, direction, flavor;
+    s32 i, direction, flavor;
 
     sInfo->pokeblockStatBoosts[CONDITION_COOL] = pokeblock->spicy;
     sInfo->pokeblockStatBoosts[CONDITION_TOUGH] = pokeblock->sour;
@@ -1056,7 +1056,7 @@ static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct 
     for (i = 0; i < CONDITION_COUNT; i++)
     {
         s16 amount = sInfo->pokeblockStatBoosts[i];
-        s8 boost = amount / 10;
+        s32 boost = amount / 10;
 
         if (amount % 10 >= 5) // round to the nearest
             boost++;
@@ -1067,7 +1067,7 @@ static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct 
     }
 }
 
-static bool8 IsSheenMaxed(void)
+static bool32 IsSheenMaxed(void)
 {
     if (GetBoxOrPartyMonData(sMenu->party[sMenu->info.curSelection].boxId,
                              sMenu->party[sMenu->info.curSelection].monId,
@@ -1115,7 +1115,7 @@ static u32 UNUSED GetPartyIdFromSelectionId_(u32 selectionId)
 
 static void LoadAndCreateUpDownSprites(void)
 {
-    u16 i;
+    u32 i;
 
     LoadSpriteSheet(&sSpriteSheet_UpDown);
     LoadSpritePalette(&sSpritePalette_UpDown);
@@ -1125,7 +1125,7 @@ static void LoadAndCreateUpDownSprites(void)
     {
         if (sInfo->enhancements[i] != 0)
         {
-            u16 spriteId = CreateSprite(&sSpriteTemplate_UpDown, sUpDownCoordsOnGraph[i][0], sUpDownCoordsOnGraph[i][1], 0);
+            u32 spriteId = CreateSprite(&sSpriteTemplate_UpDown, sUpDownCoordsOnGraph[i][0], sUpDownCoordsOnGraph[i][1], 0);
             if (spriteId != MAX_SPRITES)
             {
                 if (sInfo->enhancements[i] != 0) // Always true here
@@ -1156,8 +1156,8 @@ static void SpriteCB_UpDown(struct Sprite *sprite)
 
 static void LoadPartyInfo(void)
 {
-    u16 i;
-    u16 numMons;
+    u32 i;
+    u32 numMons;
 
     for (i = 0, numMons = 0; i < CalculatePlayerPartyCount(); i++)
     {
@@ -1201,7 +1201,7 @@ static void LoadMonInfo(s16 partyId, u32 loadId)
     u32 boxId = sMenu->party[partyId].boxId;
     u32 monId = sMenu->party[partyId].monId;
     u32 numSelections = sMenu->info.numSelections;
-    bool8 excludesCancel = FALSE; // whether or not numSelections excludes Cancel from the count
+    bool32 excludesCancel = FALSE; // whether or not numSelections excludes Cancel from the count
 
     GetConditionMenuMonNameAndLocString(sMenu->locationStrings[loadId], sMenu->monNameStrings[loadId], boxId, monId, partyId, numSelections, excludesCancel);
     GetConditionMenuMonConditions(&sMenu->graph, sMenu->numSparkles, boxId, monId, partyId, loadId, numSelections, excludesCancel);
@@ -1248,7 +1248,7 @@ static void UpdateMonPic(u32 loadId)
 
 static void LoadAndCreateSelectionIcons(void)
 {
-    u16 i, spriteId;
+    u32 i, spriteId;
     struct SpriteSheet spriteSheets[4];
     struct SpriteTemplate spriteTemplate;
     struct SpritePalette spritePals[3];
@@ -1311,7 +1311,7 @@ static void LoadAndCreateSelectionIcons(void)
     LoadSpritePalette(&spritePal2);
 }
 
-static bool8 LoadUsePokeblockMenuGfx(void)
+static bool32 LoadUsePokeblockMenuGfx(void)
 {
     switch (sMenu->info.helperState)
     {
@@ -1379,7 +1379,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
     return TRUE;
 }
 
-static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
+static void UpdateMonInfoText(u32 loadId, bool32 firstPrint)
 {
     u32 partyIndex;
     u32 nature;
@@ -1409,9 +1409,9 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
     }
 }
 
-static void UpdateSelection(bool8 up)
+static void UpdateSelection(bool32 up)
 {
-    u16 newLoadId;
+    u32 newLoadId;
     bool32 startedOnMon, endedOnMon;
 
     if (up)
@@ -1474,7 +1474,7 @@ static void UpdateSelection(bool8 up)
         sMenu->info.loadNewSelection = LoadNewSelection_MonToMon;
 }
 
-static bool8 LoadNewSelection_CancelToMon(void)
+static bool32 LoadNewSelection_CancelToMon(void)
 {
     switch (sMenu->info.helperState)
     {
@@ -1509,7 +1509,7 @@ static bool8 LoadNewSelection_CancelToMon(void)
     return TRUE;
 }
 
-static bool8 LoadNewSelection_MonToCancel(void)
+static bool32 LoadNewSelection_MonToCancel(void)
 {
     switch (sMenu->info.helperState)
     {
@@ -1533,7 +1533,7 @@ static bool8 LoadNewSelection_MonToCancel(void)
     return TRUE;
 }
 
-static bool8 LoadNewSelection_MonToMon(void)
+static bool32 LoadNewSelection_MonToMon(void)
 {
     switch (sMenu->info.helperState)
     {
@@ -1620,7 +1620,7 @@ static void LoadConditionGfx(void)
 
 static void CreateConditionSprite(void)
 {
-    u16 i;
+    u32 i;
     s16 xDiff, xStart;
     int yStart = 17;
     int speed = 8;
@@ -1641,7 +1641,7 @@ static void CreateConditionSprite(void)
     }
 }
 
-static bool8 LoadConditionTitle(void)
+static bool32 LoadConditionTitle(void)
 {
     switch (sMenu->info.helperState)
     {

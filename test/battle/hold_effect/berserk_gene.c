@@ -116,7 +116,7 @@ SINGLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but s
 DOUBLE_BATTLE_TEST("Berserk Gene does not confuse a Pokemon with Own Tempo but still raises attack sharply in a double battle", s16 damage)
 {
     u32 item;
-    bool8 positionLeft = FALSE;
+    bool32 positionLeft = FALSE;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_BERSERK_GENE; positionLeft = TRUE; }

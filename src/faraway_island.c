@@ -10,12 +10,12 @@
 #include "constants/metatile_behaviors.h"
 
 static u32 GetValidMewMoveDirection(u32);
-static bool8 ShouldMewMoveNorth(struct ObjectEvent *, u32);
-static bool8 ShouldMewMoveSouth(struct ObjectEvent *, u32);
-static bool8 ShouldMewMoveEast(struct ObjectEvent *, u32);
-static bool8 ShouldMewMoveWest(struct ObjectEvent *, u32);
+static bool32 ShouldMewMoveNorth(struct ObjectEvent *, u32);
+static bool32 ShouldMewMoveSouth(struct ObjectEvent *, u32);
+static bool32 ShouldMewMoveEast(struct ObjectEvent *, u32);
+static bool32 ShouldMewMoveWest(struct ObjectEvent *, u32);
 static u32 GetRandomMewDirectionCandidate(u32);
-static bool8 CanMewMoveToCoords(s16, s16);
+static bool32 CanMewMoveToCoords(s16, s16);
 
 static EWRAM_DATA u32 sGrassSpriteId = 0;
 
@@ -267,7 +267,7 @@ u32 GetMewMoveDirection(void)
 }
 
 // Mew can move to any Tall/Long Grass metatile the player isn't currently on
-static bool8 CanMewMoveToCoords(s16 x, s16 y)
+static bool32 CanMewMoveToCoords(s16 x, s16 y)
 {
     if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x == x
      && gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y == y)
@@ -320,7 +320,7 @@ static u32 GetValidMewMoveDirection(u32 ignoredDir)
 
 void UpdateFarawayIslandStepCounter(void)
 {
-    u16 steps = VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER);
+    u32 steps = VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER);
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(FARAWAY_ISLAND_INTERIOR)
      && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FARAWAY_ISLAND_INTERIOR))
     {
@@ -332,7 +332,7 @@ void UpdateFarawayIslandStepCounter(void)
     }
 }
 
-bool8 ObjectEventIsFarawayIslandMew(struct ObjectEvent *objectEvent)
+bool32 ObjectEventIsFarawayIslandMew(struct ObjectEvent *objectEvent)
 {
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(FARAWAY_ISLAND_INTERIOR)
      && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FARAWAY_ISLAND_INTERIOR))
@@ -344,7 +344,7 @@ bool8 ObjectEventIsFarawayIslandMew(struct ObjectEvent *objectEvent)
     return FALSE;
 }
 
-bool8 IsMewPlayingHideAndSeek(void)
+bool32 IsMewPlayingHideAndSeek(void)
 {
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(FARAWAY_ISLAND_INTERIOR)
      && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FARAWAY_ISLAND_INTERIOR))
@@ -358,7 +358,7 @@ bool8 IsMewPlayingHideAndSeek(void)
 
 // Every 4th step Mew will shake the grass it steps into
 // Otherwise its movement leaves grass undisturbed
-bool8 ShouldMewShakeGrass(struct ObjectEvent *objectEvent)
+bool32 ShouldMewShakeGrass(struct ObjectEvent *objectEvent)
 {
     if (VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) != 0xFFFF
      && VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) % 4 == 0)
@@ -414,7 +414,7 @@ void DestroyMewEmergingGrassSprite(void)
         DestroySprite(&gSprites[sGrassSpriteId]);
 }
 
-static bool8 ShouldMewMoveNorth(struct ObjectEvent *mew, u32 index)
+static bool32 ShouldMewMoveNorth(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaY > 0 && CanMewMoveToCoords(mew->currentCoords.x, mew->currentCoords.y - 1))
     {
@@ -425,7 +425,7 @@ static bool8 ShouldMewMoveNorth(struct ObjectEvent *mew, u32 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveEast(struct ObjectEvent *mew, u32 index)
+static bool32 ShouldMewMoveEast(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaX < 0 && CanMewMoveToCoords(mew->currentCoords.x + 1, mew->currentCoords.y))
     {
@@ -436,7 +436,7 @@ static bool8 ShouldMewMoveEast(struct ObjectEvent *mew, u32 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveSouth(struct ObjectEvent *mew, u32 index)
+static bool32 ShouldMewMoveSouth(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaY < 0 && CanMewMoveToCoords(mew->currentCoords.x, mew->currentCoords.y + 1))
     {
@@ -447,7 +447,7 @@ static bool8 ShouldMewMoveSouth(struct ObjectEvent *mew, u32 index)
     return FALSE;
 }
 
-static bool8 ShouldMewMoveWest(struct ObjectEvent *mew, u32 index)
+static bool32 ShouldMewMoveWest(struct ObjectEvent *mew, u32 index)
 {
     if (sPlayerToMewDeltaX > 0 && CanMewMoveToCoords(mew->currentCoords.x - 1, mew->currentCoords.y))
     {

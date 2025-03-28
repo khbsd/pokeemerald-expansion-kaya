@@ -676,7 +676,7 @@ void AnimRaiseSprite(struct Sprite *sprite)
 
 void AnimTask_Rollout(u32 taskId)
 {
-    u16 var0, var1, var2, var3;
+    u32 var0, var1, var2, var3;
     u32 rolloutCounter;
     s16 pan1, pan2;
     struct Task *task;
@@ -722,7 +722,7 @@ void AnimTask_Rollout(u32 taskId)
 
 void AnimTask_TectonicRageRollout(u32 taskId)
 {
-    u16 var0, var1, var2, var3;
+    u32 var0, var1, var2, var3;
     int var5;
     s16 pan1, pan2;
     struct Task *task;
@@ -837,7 +837,7 @@ static void CreateRolloutDirtSprite(struct Task *task)
 {
     const struct SpriteTemplate *spriteTemplate;
     int tileOffset;
-    u16 x, y;
+    u32 x, y;
     u32 spriteId;
 
     switch (task->data[1])

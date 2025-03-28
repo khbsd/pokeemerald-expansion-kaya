@@ -54,7 +54,7 @@ static void Task_EnableScriptAfterMusicFade(u32 taskId);
 static void ExitStairsMovement(s16*, s16*, s16*, s16*, s16*);
 static void GetStairsMovementDirection(u32, s16*, s16*);
 static void Task_ExitStairs(u32);
-static bool8 WaitStairExitMovementFinished(s16*, s16*, s16*, s16*, s16*);
+static bool32 WaitStairExitMovementFinished(s16*, s16*, s16*, s16*, s16*);
 static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
 static void Task_StairWarp(u32);
 static void ForceStairsMovement(u32, s16*, s16*);
@@ -63,7 +63,7 @@ static void ForceStairsMovement(u32, s16*, s16*);
 #define tState       data[0]
 
 // Smaller flash level -> larger flash radius
-static const u16 sFlashLevelToRadius[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
+static const u32 sFlashLevelToRadius[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
 const s32 gMaxFlashLevel = ARRAY_COUNT(sFlashLevelToRadius) - 1;
 
 static const struct ScanlineEffectParams sFlashEffectParams =
@@ -124,7 +124,7 @@ void WarpFadeOutScreen(void)
     }
 }
 
-static void SetPlayerVisibility(bool8 visible)
+static void SetPlayerVisibility(bool32 visible)
 {
     SetPlayerInvisibility(!visible);
 }
@@ -454,7 +454,7 @@ void ReturnToFieldOpenStartMenu(void)
     LockPlayerFieldControls();
 }
 
-bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
+bool32 FieldCB_ReturnToFieldOpenStartMenu(void)
 {
     ShowReturnToFieldStartMenu();
     return FALSE;
@@ -787,7 +787,7 @@ void DoContestHallWarp(void)
     CreateTask(Task_DoContestHallWarp, 10);
 }
 
-static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetFlashScanlineEffectWindowBoundary(u32 *dest, u32 y, s32 left, s32 right)
 {
     if (y <= 160)
     {
@@ -803,7 +803,7 @@ static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32
     }
 }
 
-static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetFlashScanlineEffectWindowBoundaries(u32 *dest, s32 centerX, s32 centerY, s32 radius)
 {
     s32 r = radius;
     s32 v2 = radius;
@@ -824,7 +824,7 @@ static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 c
     }
 }
 
-static void SetOrbFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetOrbFlashScanlineEffectWindowBoundary(u32 *dest, u32 y, s32 left, s32 right)
 {
     if (y <= 160)
     {
@@ -840,7 +840,7 @@ static void SetOrbFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, 
     }
 }
 
-static void SetOrbFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetOrbFlashScanlineEffectWindowBoundaries(u32 *dest, s32 centerX, s32 centerY, s32 radius)
 {
     s32 r = radius;
     s32 v2 = radius;
@@ -998,7 +998,7 @@ static u32 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashR
 void AnimateFlash(u32 newFlashLevel)
 {
     u32 curFlashLevel = GetFlashLevel();
-    bool8 fullBrightness = FALSE;
+    bool32 fullBrightness = FALSE;
     if (newFlashLevel == 0)
         fullBrightness = TRUE;
     StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelToRadius[curFlashLevel], sFlashLevelToRadius[newFlashLevel], fullBrightness, 1);
@@ -1092,10 +1092,10 @@ void DoSpinExitWarp(void)
     CreateTask(Task_SpinExitWarp, 10);
 }
 
-static void LoadOrbEffectPalette(bool8 blueOrb)
+static void LoadOrbEffectPalette(bool32 blueOrb)
 {
     int i;
-    u16 color[1];
+    u32 color[1];
 
     if (!blueOrb)
         color[0] = RGB_RED;
@@ -1106,7 +1106,7 @@ static void LoadOrbEffectPalette(bool8 blueOrb)
         LoadPalette(color, BG_PLTT_ID(15) + i, PLTT_SIZEOF(1));
 }
 
-static bool8 UpdateOrbEffectBlend(u16 shakeDir)
+static bool32 UpdateOrbEffectBlend(u32 shakeDir)
 {
     u32 lo = REG_BLDALPHA & 0xFF;
     u32 hi = REG_BLDALPHA >> 8;
@@ -1429,7 +1429,7 @@ static void GetStairsMovementDirection(u32 metatileBehavior, s16 *speedX, s16 *s
     }
 }
 
-static bool8 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
+static bool32 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)
 {
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if (*timer != 0)
@@ -1599,7 +1599,7 @@ static void Task_StairWarp(u8 taskId)
     }
 }
 
-void DoStairWarp(u16 metatileBehavior, u16 delay)
+void DoStairWarp(u32 metatileBehavior, u32 delay)
 {
     u8 taskId = CreateTask(Task_StairWarp, 10);
     gTasks[taskId].tMetatileBehavior = metatileBehavior;
@@ -1615,7 +1615,7 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
 #undef tTimer
 #undef tDelay
 
-bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection)
+bool32 IsDirectionalStairWarpMetatileBehavior(u32 metatileBehavior, u8 playerDirection)
 {
     if (playerDirection == DIR_WEST)u32
     {

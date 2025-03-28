@@ -38,7 +38,7 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-static const u16 sDiplomaPalettes[][16] =
+static const u32 sDiplomaPalettes[][16] =
 {
     INCBIN_U16("graphics/diploma/national.gbapal"),
     INCBIN_U16("graphics/diploma/hoenn.gbapal"),

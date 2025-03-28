@@ -80,7 +80,7 @@ enum
 };
 
 // IWRAM common
-COMMON_DATA bool8 (*gMenuCallback)(void) = NULL;
+COMMON_DATA bool32 (*gMenuCallback)(void) = NULL;
 
 // EWRAM
 EWRAM_DATA static u32 sSafariBallsWindowId = 0;
@@ -88,36 +88,36 @@ EWRAM_DATA static u32 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u32 sStartMenuCursorPos = 0;
 EWRAM_DATA static u32 sNumStartMenuActions = 0;
 EWRAM_DATA static u32 sCurrentStartMenuActions[9] = {0};
-EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
+EWRAM_DATA static s32 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u32 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u32 sSaveDialogTimer = 0;
-EWRAM_DATA static bool8 sSavingComplete = FALSE;
+EWRAM_DATA static bool32 sSavingComplete = FALSE;
 EWRAM_DATA static u32 sSaveInfoWindowId = 0;
 
 // Menu action callbacks
-static bool8 StartMenuPokedexCallback(void);
-static bool8 StartMenuPokemonCallback(void);
-static bool8 StartMenuBagCallback(void);
-static bool8 StartMenuPokeNavCallback(void);
-static bool8 StartMenuPlayerNameCallback(void);
-static bool8 StartMenuSaveCallback(void);
-static bool8 StartMenuOptionCallback(void);
-static bool8 StartMenuExitCallback(void);
-static bool8 StartMenuSafariZoneRetireCallback(void);
-static bool8 StartMenuLinkModePlayerNameCallback(void);
-static bool8 StartMenuBattlePyramidRetireCallback(void);
-static bool8 StartMenuBattlePyramidBagCallback(void);
-static bool8 StartMenuDebugCallback(void);
-static bool8 StartMenuDexNavCallback(void);
+static bool32 StartMenuPokedexCallback(void);
+static bool32 StartMenuPokemonCallback(void);
+static bool32 StartMenuBagCallback(void);
+static bool32 StartMenuPokeNavCallback(void);
+static bool32 StartMenuPlayerNameCallback(void);
+static bool32 StartMenuSaveCallback(void);
+static bool32 StartMenuOptionCallback(void);
+static bool32 StartMenuExitCallback(void);
+static bool32 StartMenuSafariZoneRetireCallback(void);
+static bool32 StartMenuLinkModePlayerNameCallback(void);
+static bool32 StartMenuBattlePyramidRetireCallback(void);
+static bool32 StartMenuBattlePyramidBagCallback(void);
+static bool32 StartMenuDebugCallback(void);
+static bool32 StartMenuDexNavCallback(void);
 
 // Menu callbacks
-static bool8 SaveStartCallback(void);
-static bool8 SaveCallback(void);
-static bool8 BattlePyramidRetireStartCallback(void);
-static bool8 BattlePyramidRetireReturnCallback(void);
-static bool8 BattlePyramidRetireCallback(void);
-static bool8 HandleStartMenuInput(void);
+static bool32 SaveStartCallback(void);
+static bool32 SaveCallback(void);
+static bool32 BattlePyramidRetireStartCallback(void);
+static bool32 BattlePyramidRetireReturnCallback(void);
+static bool32 BattlePyramidRetireCallback(void);
+static bool32 HandleStartMenuInput(void);
 
 // Save dialog callbacks
 static u32 SaveConfirmSaveCallback(void);
@@ -142,7 +142,7 @@ static void StartMenuTask(u32 taskId);
 static void SaveGameTask(u32 taskId);
 static void Task_SaveAfterLinkBattle(u32 taskId);
 static void Task_WaitForBattleTowerLinkSave(u32 taskId);
-static bool8 FieldCB_ReturnToFieldStartMenu(void);
+static bool32 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .bg = 0,
@@ -258,7 +258,7 @@ static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
-static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
+static bool32 PrintStartMenuActions(s32 *pIndex, u32 count);
 static bool32 InitStartMenuStep(void);
 static void InitStartMenu(void);
 static void CreateStartMenuTask(TaskFunc followupFunc);
@@ -268,8 +268,8 @@ static void ShowSaveMessage(const u32 *message, u32 (*saveCallback)(void));
 static void HideSaveMessageWindow(void);
 static void HideSaveInfoWindow(void);
 static void SaveStartTimer(void);
-static bool8 SaveSuccesTimer(void);
-static bool8 SaveErrorTimer(void);
+static bool32 SaveSuccesTimer(void);
+static bool32 SaveErrorTimer(void);
 static void InitBattlePyramidRetire(void);
 static void VBlankCB_LinkBattleSave(void);
 static bool32 InitSaveWindowAfterLinkBattle(u32 *par1);
@@ -475,9 +475,9 @@ static void RemoveExtraStartMenuWindows(void)
     }
 }
 
-static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
+static bool32 PrintStartMenuActions(s32 *pIndex, u32 count)
 {
-    s8 index = *pIndex;
+    s32 index = *pIndex;
 
     do
     {
@@ -508,7 +508,7 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
 static bool32 InitStartMenuStep(void)
 {
-    s8 state = sInitStartMenuData[0];
+    s32 state = sInitStartMenuData[0];
 
     switch (state)
     {
@@ -569,7 +569,7 @@ static void CreateStartMenuTask(TaskFunc followupFunc)
     SetTaskFuncWithFollowupFunc(taskId, StartMenuTask, followupFunc);
 }
 
-static bool8 FieldCB_ReturnToFieldStartMenu(void)
+static bool32 FieldCB_ReturnToFieldStartMenu(void)
 {
     if (InitStartMenuStep() == FALSE)
     {
@@ -619,7 +619,7 @@ void ShowStartMenu(void)
     LockPlayerFieldControls();
 }
 
-static bool8 HandleStartMenuInput(void)
+static bool32 HandleStartMenuInput(void)
 {
     if (JOY_NEW(DPAD_UP))
     {
@@ -669,7 +669,7 @@ static bool8 HandleStartMenuInput(void)
     return FALSE;
 }
 
-bool8 StartMenuPokedexCallback(void)
+bool32 StartMenuPokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -685,7 +685,7 @@ bool8 StartMenuPokedexCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokemonCallback(void)
+static bool32 StartMenuPokemonCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -700,7 +700,7 @@ static bool8 StartMenuPokemonCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuBagCallback(void)
+static bool32 StartMenuBagCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -715,7 +715,7 @@ static bool8 StartMenuBagCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokeNavCallback(void)
+static bool32 StartMenuPokeNavCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -730,7 +730,7 @@ static bool8 StartMenuPokeNavCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPlayerNameCallback(void)
+static bool32 StartMenuPlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -751,7 +751,7 @@ static bool8 StartMenuPlayerNameCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuSaveCallback(void)
+static bool32 StartMenuSaveCallback(void)
 {
     if (InBattlePyramid())
         RemoveExtraStartMenuWindows();
@@ -761,7 +761,7 @@ static bool8 StartMenuSaveCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuOptionCallback(void)
+static bool32 StartMenuOptionCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -777,7 +777,7 @@ static bool8 StartMenuOptionCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuExitCallback(void)
+static bool32 StartMenuExitCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
@@ -785,7 +785,7 @@ static bool8 StartMenuExitCallback(void)
     return TRUE;
 }
 
-static bool8 StartMenuDebugCallback(void)
+static bool32 StartMenuDebugCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
@@ -799,7 +799,7 @@ static bool8 StartMenuDebugCallback(void)
 return TRUE;
 }
 
-static bool8 StartMenuSafariZoneRetireCallback(void)
+static bool32 StartMenuSafariZoneRetireCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu();
@@ -815,7 +815,7 @@ static void HideStartMenuDebug(void)
     RemoveStartMenuWindow();
 }
 
-static bool8 StartMenuLinkModePlayerNameCallback(void)
+static bool32 StartMenuLinkModePlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -829,7 +829,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuBattlePyramidRetireCallback(void)
+static bool32 StartMenuBattlePyramidRetireCallback(void)
 {
     gMenuCallback = BattlePyramidRetireStartCallback; // Confirm retire
 
@@ -845,7 +845,7 @@ void ShowBattlePyramidStartMenu(void)
     LockPlayerFieldControls();
 }
 
-static bool8 StartMenuBattlePyramidBagCallback(void)
+static bool32 StartMenuBattlePyramidBagCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -860,7 +860,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void)
     return FALSE;
 }
 
-static bool8 SaveStartCallback(void)
+static bool32 SaveStartCallback(void)
 {
     InitSave();
     gMenuCallback = SaveCallback;
@@ -868,7 +868,7 @@ static bool8 SaveStartCallback(void)
     return FALSE;
 }
 
-static bool8 SaveCallback(void)
+static bool32 SaveCallback(void)
 {
     switch (RunSaveCallback())
     {
@@ -891,7 +891,7 @@ static bool8 SaveCallback(void)
     return FALSE;
 }
 
-static bool8 BattlePyramidRetireStartCallback(void)
+static bool32 BattlePyramidRetireStartCallback(void)
 {
     InitBattlePyramidRetire();
     gMenuCallback = BattlePyramidRetireCallback;
@@ -899,7 +899,7 @@ static bool8 BattlePyramidRetireStartCallback(void)
     return FALSE;
 }
 
-static bool8 BattlePyramidRetireReturnCallback(void)
+static bool32 BattlePyramidRetireReturnCallback(void)
 {
     InitStartMenu();
     gMenuCallback = HandleStartMenuInput;
@@ -907,7 +907,7 @@ static bool8 BattlePyramidRetireReturnCallback(void)
     return FALSE;
 }
 
-static bool8 BattlePyramidRetireCallback(void)
+static bool32 BattlePyramidRetireCallback(void)
 {
     switch (RunSaveCallback())
     {
@@ -998,7 +998,7 @@ static void SaveStartTimer(void)
     sSaveDialogTimer = 60;
 }
 
-static bool8 SaveSuccesTimer(void)
+static bool32 SaveSuccesTimer(void)
 {
     sSaveDialogTimer--;
 
@@ -1015,7 +1015,7 @@ static bool8 SaveSuccesTimer(void)
     return FALSE;
 }
 
-static bool8 SaveErrorTimer(void)
+static bool32 SaveErrorTimer(void)
 {
     if (sSaveDialogTimer != 0)
     {
@@ -1492,7 +1492,7 @@ void AppendToList(u32 *list, u32 *pos, u32 newEntry)
     (*pos)++;
 }
 
-static bool8 StartMenuDexNavCallback(void)
+static bool32 StartMenuDexNavCallback(void)
 {
     CreateTask(Task_OpenDexNavFromStartMenu, 0);
     return TRUE;

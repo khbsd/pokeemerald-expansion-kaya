@@ -106,7 +106,7 @@ struct ContestPokemon
     u8 tough;
     u8 sheen;
     u8 highestRank;
-    bool8 gameCleared;
+    bool32 gameCleared;
     u8 isShiny:1;
     u8 unused1:7;
     u32 personality;
@@ -126,7 +126,7 @@ struct ContestMoveAnimData
 {
     u32 species;
     u32 targetSpecies;
-    bool8 hasTargetAnim:1;
+    bool32 hasTargetAnim:1;
     u8 isShiny:1;
     u8 targetIsShiny:1;
     u8 contestant;
@@ -140,17 +140,17 @@ struct Contest
     u8 playerMoveChoice;
     u8 appealNumber;
     u8 unk[CONTESTANT_COUNT]; // never read
-    bool16 unused1:1;
-    bool16 unused2:1;
-    bool16 unused3:1;
-    bool16 unused4:1;
-    bool16 waitForJudgeSpeechBubble:1;
-    bool16 isShowingApplauseMeter:1;
-    bool16 applauseMeterIsMoving:1;
-    bool16 animatingAudience:1;
-    bool16 waitForAudienceBlend:1;
-    bool16 sliderHeartsAnimating:1; // When the slider heart is appearing/disappearing
-    bool16 waitForLink:1;
+    bool32 unused1:1;
+    bool32 unused2:1;
+    bool32 unused3:1;
+    bool32 unused4:1;
+    bool32 waitForJudgeSpeechBubble:1;
+    bool32 isShowingApplauseMeter:1;
+    bool32 applauseMeterIsMoving:1;
+    bool32 animatingAudience:1;
+    bool32 waitForAudienceBlend:1;
+    bool32 sliderHeartsAnimating:1; // When the slider heart is appearing/disappearing
+    bool32 waitForLink:1;
     u8 mainTaskId;
     u8 filler1[4];
     u8 judgeAttentionTaskId;
@@ -159,7 +159,7 @@ struct Contest
     u8 turnNumber;
     u8 currentContestant;
     u8 judgeSpeechBubbleSpriteId;
-    s8 applauseLevel;
+    s32 applauseLevel;
     u8 prevTurnOrder[CONTESTANT_COUNT];
     u32 unusedRng;
     u32 moveHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
@@ -180,37 +180,37 @@ struct ContestantStatus
     u8 ranking:2;
     u8 unused1:2;
     u8 moveRepeatCount:3;
-    bool8 noMoreTurns:1;  // used a one-time move?
-    bool8 nervous:1;
+    bool32 noMoreTurns:1;  // used a one-time move?
+    bool32 nervous:1;
     u8 numTurnsSkipped:2;
-    s8 condition;
+    s32 condition;
     u8 jam;
     u8 jamReduction;
 
     // Flags set by move effect
-    bool8 resistant:1;
-    bool8 immune:1;
-    bool8 moreEasilyStartled:1;
-    bool8 usedRepeatableMove:1;
+    bool32 resistant:1;
+    bool32 immune:1;
+    bool32 moreEasilyStartled:1;
+    bool32 usedRepeatableMove:1;
     u8 conditionMod:2; // 1: just raised condition; 2: appeal greatly improved by condition
     u8 turnOrderMod:2; // 1: defined; 2: random
     u8 turnOrderModAction:2; // 1: made first; 2: made last; 3: made random
-    bool8 turnSkipped:1;
-    bool8 exploded:1;
-    bool8 overrideCategoryExcitementMod:1;
-    bool8 appealTripleCondition:1;
+    bool32 turnSkipped:1;
+    bool32 exploded:1;
+    bool32 overrideCategoryExcitementMod:1;
+    bool32 appealTripleCondition:1;
 
     u8 jamSafetyCount;
     u8 effectStringId;   // status action?
     u8 effectStringId2;
-    bool8 repeatedMove:1;
-    bool8 unused2:1;
-    bool8 repeatedPrevMove:1; // never read
-    bool8 completedComboFlag:1;
-    bool8 hasJudgesAttention:1;
-    bool8 judgesAttentionWasRemoved:1;
-    bool8 usedComboMove:1;
-    bool8 completedCombo;
+    bool32 repeatedMove:1;
+    bool32 unused2:1;
+    bool32 repeatedPrevMove:1; // never read
+    bool32 completedComboFlag:1;
+    bool32 hasJudgesAttention:1;
+    bool32 judgesAttentionWasRemoved:1;
+    bool32 usedComboMove:1;
+    bool32 completedCombo;
     u8 comboAppealBonus;
     u8 repeatJam;
     u8 nextTurnOrder;  // turn position
@@ -247,19 +247,19 @@ struct ContestAIInfo
 
 struct ContestExcitement
 {
-    s8 moveExcitement;
+    s32 moveExcitement;
     u8 frozen:1;
     u8 freezer:3;
-    s8 excitementAppealBonus;
+    s32 excitementAppealBonus;
 };
 
 struct ContestGraphicsState
 {
     u8 sliderHeartSpriteId;
     u8 nextTurnSpriteId;
-    bool8 sliderUpdating:1;
-    bool8 boxBlinking:1;
-    bool8 updatingAppealHearts:1;
+    bool32 sliderUpdating:1;
+    bool32 boxBlinking:1;
+    bool32 updatingAppealHearts:1;
 };
 
 struct ContestFinalStandings
@@ -276,8 +276,8 @@ struct ContestTV
     s16 move;
     u8 winnerFlags;
     u8 loserFlags;
-    bool8 madeAppeal:1;
-    bool8 madeExcitingAppeal:1;
+    bool32 madeAppeal:1;
+    bool32 madeExcitingAppeal:1;
 };
 
 struct ContestUnused
@@ -343,20 +343,20 @@ void SetContestants(u8 contestType, u8 rank);
 void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
 void CalculateRound1Points(u8 contestCategory);
-bool8 IsSpeciesNotUnown(u32 species);
-bool8 Contest_IsMonsTurnDisabled(u8 contestant);
+bool32 IsSpeciesNotUnown(u32 species);
+bool32 Contest_IsMonsTurnDisabled(u8 contestant);
 void SaveLinkContestResults(void);
-void SortContestants(bool8 useRanking);
+void SortContestants(bool32 useRanking);
 void SetContestantEffectStringID(u8 contestant, u8 effectStringId);
 void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
-s8 Contest_GetMoveExcitement(u32 move);
-bool8 IsContestantAllowedToCombo(u8 contestant);
+s32 Contest_GetMoveExcitement(u32 move);
+bool32 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);
-bool8 SaveContestWinner(u8 rank);
-u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift);
+bool32 SaveContestWinner(u8 rank);
+u8 GetContestWinnerSaveIdx(u8 rank, bool32 shift);
 void ClearContestWinnerPicsInContestHall(void);
 void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
 

@@ -12,14 +12,14 @@ struct Dma3Request
 {
     const u32 *src;
     u32 *dest;
-    u16 size;
-    u16 mode;
+    u32 size;
+    u32 mode;
     u32 value;
 };
 
 static struct Dma3Request sDma3Requests[MAX_DMA_REQUESTS];
 
-static vbool8 sDma3ManagerLocked;
+static vbool32 sDma3ManagerLocked;
 static u32 sDma3RequestCursor;
 
 void ClearDma3Requests(void)
@@ -41,7 +41,7 @@ void ClearDma3Requests(void)
 
 void ProcessDma3Requests(void)
 {
-    u16 bytesTransferred;
+    u32 bytesTransferred;
 
     if (sDma3ManagerLocked)
         return;
@@ -95,7 +95,7 @@ void ProcessDma3Requests(void)
     }
 }
 
-s16 RequestDma3Copy(const void *src, void *dest, u16 size, u32 mode)
+s16 RequestDma3Copy(const void *src, void *dest, u32 size, u32 mode)
 {
     int cursor;
     int i = 0;
@@ -127,7 +127,7 @@ s16 RequestDma3Copy(const void *src, void *dest, u16 size, u32 mode)
     return -1;  // no free DMA request was found
 }
 
-s16 RequestDma3Fill(s32 value, void *dest, u16 size, u32 mode)
+s16 RequestDma3Fill(s32 value, void *dest, u32 size, u32 mode)
 {
     int cursor;
     int i = 0;

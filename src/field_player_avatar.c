@@ -41,30 +41,30 @@ EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 // static declarations
 
 static u32 ObjectEventCB2_NoMovement2();
-static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *, u32);
+static bool32 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *, u32);
 static void npc_clear_strange_bits(struct ObjectEvent *);
 static void MovePlayerAvatarUsingKeypadInput(u32, u32, u32);
 static void PlayerAllowForcedMovementIfMovingSameDirection();
-static bool8 TryDoMetatileBehaviorForcedMovement();
+static bool32 TryDoMetatileBehaviorForcedMovement();
 static u32 GetForcedMovementByMetatileBehavior();
 
-static bool8 ForcedMovement_None(void);
-static bool8 ForcedMovement_Slip(void);
-static bool8 ForcedMovement_WalkSouth(void);
-static bool8 ForcedMovement_WalkNorth(void);
-static bool8 ForcedMovement_WalkWest(void);
-static bool8 ForcedMovement_WalkEast(void);
-static bool8 ForcedMovement_PushedSouthByCurrent(void);
-static bool8 ForcedMovement_PushedNorthByCurrent(void);
-static bool8 ForcedMovement_PushedWestByCurrent(void);
-static bool8 ForcedMovement_PushedEastByCurrent(void);
-static bool8 ForcedMovement_SlideSouth(void);
-static bool8 ForcedMovement_SlideNorth(void);
-static bool8 ForcedMovement_SlideWest(void);
-static bool8 ForcedMovement_SlideEast(void);
-static bool8 ForcedMovement_MatJump(void);
-static bool8 ForcedMovement_MatSpin(void);
-static bool8 ForcedMovement_MuddySlope(void);
+static bool32 ForcedMovement_None(void);
+static bool32 ForcedMovement_Slip(void);
+static bool32 ForcedMovement_WalkSouth(void);
+static bool32 ForcedMovement_WalkNorth(void);
+static bool32 ForcedMovement_WalkWest(void);
+static bool32 ForcedMovement_WalkEast(void);
+static bool32 ForcedMovement_PushedSouthByCurrent(void);
+static bool32 ForcedMovement_PushedNorthByCurrent(void);
+static bool32 ForcedMovement_PushedWestByCurrent(void);
+static bool32 ForcedMovement_PushedEastByCurrent(void);
+static bool32 ForcedMovement_SlideSouth(void);
+static bool32 ForcedMovement_SlideNorth(void);
+static bool32 ForcedMovement_SlideWest(void);
+static bool32 ForcedMovement_SlideEast(void);
+static bool32 ForcedMovement_MatJump(void);
+static bool32 ForcedMovement_MatSpin(void);
+static bool32 ForcedMovement_MuddySlope(void);
 
 static void MovePlayerNotOnBike(u32, u32);
 static u32 CheckMovementInputNotOnBike(u32);
@@ -74,9 +74,9 @@ static void PlayerNotOnBikeMoving(u32, u32);
 static u32 CheckForPlayerAvatarCollision(u32);
 static u32 CheckForPlayerAvatarStaticCollision(u32);
 static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *, s16, s16, u32, u32);
-static bool8 CanStopSurfing(s16, s16, u32);
-static bool8 ShouldJumpLedge(s16, s16, u32);
-static bool8 TryPushBoulder(s16, s16, u32);
+static bool32 CanStopSurfing(s16, s16, u32);
+static bool32 ShouldJumpLedge(s16, s16, u32);
+static bool32 TryPushBoulder(s16, s16, u32);
 static void CheckAcroBikeCollision(s16, s16, u32, u32 *);
 
 static void DoPlayerAvatarTransition(void);
@@ -88,10 +88,10 @@ static void PlayerAvatarTransition_Surfing(struct ObjectEvent *);
 static void PlayerAvatarTransition_Underwater(struct ObjectEvent *);
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent *);
 
-static bool8 PlayerAnimIsMultiFrameStationary(void);
-static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
-static bool8 PlayerIsAnimActive(void);
-static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
+static bool32 PlayerAnimIsMultiFrameStationary(void);
+static bool32 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
+static bool32 PlayerIsAnimActive(void);
+static bool32 PlayerCheckIfAnimFinishedOrInactive(void);
 
 static void PlayerWalkSlowStairs(u32 direction);
 static void UNUSED PlayerWalkSlow(u32 direction);
@@ -106,9 +106,9 @@ static void HideShowWarpArrow(struct ObjectEvent *);
 
 static void StartStrengthAnim(u32, u32);
 static void Task_PushBoulder(u32);
-static bool8 PushBoulder_Start(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
-static bool8 PushBoulder_Move(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
-static bool8 PushBoulder_End(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
+static bool32 PushBoulder_Start(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
+static bool32 PushBoulder_Move(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
+static bool32 PushBoulder_End(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
 
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u32);
@@ -116,10 +116,10 @@ static u32 PlayerAvatar_DoSecretBaseMatJump(struct Task *, struct ObjectEvent *)
 
 static void DoPlayerMatSpin(void);
 static void PlayerAvatar_DoSecretBaseMatSpin(u32);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *, struct ObjectEvent *);
+static bool32 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *, struct ObjectEvent *);
+static bool32 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *, struct ObjectEvent *);
+static bool32 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *, struct ObjectEvent *);
+static bool32 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *, struct ObjectEvent *);
 
 static void CreateStopSurfingTask(u32);
 static void Task_StopSurfingInit(u32);
@@ -161,7 +161,7 @@ static bool32 IsMetatileLand(s16, s16, u32);
 
 static u32 TrySpinPlayerForWarp(struct ObjectEvent *, s16 *);
 
-static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u32) =
+static bool32 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u32) =
 {
     MetatileBehavior_IsTrickHouseSlipperyFloor,
     MetatileBehavior_IsIce_2,
@@ -184,7 +184,7 @@ static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u32) =
 };
 
 // + 1 for ForcedMovement_None, which is excluded above
-static bool8 (*const sForcedMovementFuncs[NUM_FORCED_MOVEMENTS + 1])(void) =
+static bool32 (*const sForcedMovementFuncs[NUM_FORCED_MOVEMENTS + 1])(void) =
 {
     ForcedMovement_None,
     ForcedMovement_Slip,
@@ -214,7 +214,7 @@ static void (*const sPlayerNotOnBikeFuncs[])(u32, u32) =
     [MOVING]         = PlayerNotOnBikeMoving,
 };
 
-static bool8 (*const sAcroBikeTrickMetatiles[NUM_ACRO_BIKE_COLLISIONS])(u32) =
+static bool32 (*const sAcroBikeTrickMetatiles[NUM_ACRO_BIKE_COLLISIONS])(u32) =
 {
     MetatileBehavior_IsBumpySlope,
     MetatileBehavior_IsIsolatedVerticalRail,
@@ -243,7 +243,7 @@ static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) =
     [PLAYER_AVATAR_STATE_WATERING]   = PlayerAvatarTransition_Dummy,
 };
 
-static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u32) =
+static bool32 (*const sArrowWarpMetatileBehaviorChecks[])(u32) =
 {
     [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
     [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
@@ -309,7 +309,7 @@ static const u32 sPlayerAvatarGfxToStateFlag[GENDER_COUNT][5][2] =
     }
 };
 
-static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u32) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
+static bool32 (*const sArrowWarpMetatileBehaviorChecks2[])(u32) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
 {
     [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
     [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
@@ -317,19 +317,19 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u32) =  //Duplicate of
     [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
 };
 
-static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
+static bool32 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
 {
     PushBoulder_Start,
     PushBoulder_Move,
     PushBoulder_End,
 };
 
-static bool8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct ObjectEvent *) =
+static bool32 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct ObjectEvent *) =
 {
     PlayerAvatar_DoSecretBaseMatJump,
 };
 
-static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct ObjectEvent *) =
+static bool32 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct ObjectEvent *) =
 {
     PlayerAvatar_SecretBaseMatSpinStep0,
     PlayerAvatar_SecretBaseMatSpinStep1,
@@ -368,7 +368,7 @@ void PlayerStep(u32 direction, u32 newKeys, u32 heldKeys)
     }
 }
 
-static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u32 direction)
+static bool32 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u32 direction)
 {
     if (ObjectEventIsMovementOverridden(playerObjEvent)
      && !ObjectEventClearHeldMovementIfFinished(playerObjEvent))
@@ -422,7 +422,7 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
 }
 
-static bool8 TryDoMetatileBehaviorForcedMovement(void)
+static bool32 TryDoMetatileBehaviorForcedMovement(void)
 {
     return sForcedMovementFuncs[GetForcedMovementByMetatileBehavior()]();
 }
@@ -444,7 +444,7 @@ static u32 GetForcedMovementByMetatileBehavior(void)
     return 0;
 }
 
-static bool8 ForcedMovement_None(void)
+static bool32 ForcedMovement_None(void)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE)
     {
@@ -458,7 +458,7 @@ static bool8 ForcedMovement_None(void)
     return FALSE;
 }
 
-static bool8 DoForcedMovement(u32 direction, void (*moveFunc)(u32))
+static bool32 DoForcedMovement(u32 direction, void (*moveFunc)(u32))
 {
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u32 collision;
@@ -503,7 +503,7 @@ static bool8 DoForcedMovement(u32 direction, void (*moveFunc)(u32))
     }
 }
 
-static bool8 DoForcedMovementInCurrentDirection(void (*moveFunc)(u32))
+static bool32 DoForcedMovementInCurrentDirection(void (*moveFunc)(u32))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -511,52 +511,52 @@ static bool8 DoForcedMovementInCurrentDirection(void (*moveFunc)(u32))
     return DoForcedMovement(playerObjEvent->movementDirection, moveFunc);
 }
 
-static bool8 ForcedMovement_Slip(void)
+static bool32 ForcedMovement_Slip(void)
 {
     return DoForcedMovementInCurrentDirection(PlayerWalkFast);
 }
 
-static bool8 ForcedMovement_WalkSouth(void)
+static bool32 ForcedMovement_WalkSouth(void)
 {
     return DoForcedMovement(DIR_SOUTH, PlayerWalkNormal);
 }
 
-static bool8 ForcedMovement_WalkNorth(void)
+static bool32 ForcedMovement_WalkNorth(void)
 {
     return DoForcedMovement(DIR_NORTH, PlayerWalkNormal);
 }
 
-static bool8 ForcedMovement_WalkWest(void)
+static bool32 ForcedMovement_WalkWest(void)
 {
     return DoForcedMovement(DIR_WEST, PlayerWalkNormal);
 }
 
-static bool8 ForcedMovement_WalkEast(void)
+static bool32 ForcedMovement_WalkEast(void)
 {
     return DoForcedMovement(DIR_EAST, PlayerWalkNormal);
 }
 
-static bool8 ForcedMovement_PushedSouthByCurrent(void)
+static bool32 ForcedMovement_PushedSouthByCurrent(void)
 {
     return DoForcedMovement(DIR_SOUTH, PlayerRideWaterCurrent);
 }
 
-static bool8 ForcedMovement_PushedNorthByCurrent(void)
+static bool32 ForcedMovement_PushedNorthByCurrent(void)
 {
     return DoForcedMovement(DIR_NORTH, PlayerRideWaterCurrent);
 }
 
-static bool8 ForcedMovement_PushedWestByCurrent(void)
+static bool32 ForcedMovement_PushedWestByCurrent(void)
 {
     return DoForcedMovement(DIR_WEST, PlayerRideWaterCurrent);
 }
 
-static bool8 ForcedMovement_PushedEastByCurrent(void)
+static bool32 ForcedMovement_PushedEastByCurrent(void)
 {
     return DoForcedMovement(DIR_EAST, PlayerRideWaterCurrent);
 }
 
-static bool8 ForcedMovement_Slide(u32 direction, void (*moveFunc)(u32))
+static bool32 ForcedMovement_Slide(u32 direction, void (*moveFunc)(u32))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -565,39 +565,39 @@ static bool8 ForcedMovement_Slide(u32 direction, void (*moveFunc)(u32))
     return DoForcedMovement(direction, moveFunc);
 }
 
-static bool8 ForcedMovement_SlideSouth(void)
+static bool32 ForcedMovement_SlideSouth(void)
 {
     return ForcedMovement_Slide(DIR_SOUTH, PlayerWalkFast);
 }
 
-static bool8 ForcedMovement_SlideNorth(void)
+static bool32 ForcedMovement_SlideNorth(void)
 {
     return ForcedMovement_Slide(DIR_NORTH, PlayerWalkFast);
 }
 
-static bool8 ForcedMovement_SlideWest(void)
+static bool32 ForcedMovement_SlideWest(void)
 {
     return ForcedMovement_Slide(DIR_WEST, PlayerWalkFast);
 }
 
-static bool8 ForcedMovement_SlideEast(void)
+static bool32 ForcedMovement_SlideEast(void)
 {
     return ForcedMovement_Slide(DIR_EAST, PlayerWalkFast);
 }
 
-static bool8 ForcedMovement_MatJump(void)
+static bool32 ForcedMovement_MatJump(void)
 {
     DoPlayerMatJump();
     return TRUE;
 }
 
-static bool8 ForcedMovement_MatSpin(void)
+static bool32 ForcedMovement_MatSpin(void)
 {
     DoPlayerMatSpin();
     return TRUE;
 }
 
-static bool8 ForcedMovement_MuddySlope(void)
+static bool32 ForcedMovement_MuddySlope(void)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -771,7 +771,7 @@ static u32 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s
     return collision;
 }
 
-static bool8 CanStopSurfing(s16 x, s16 y, u32 direction)
+static bool32 CanStopSurfing(s16 x, s16 y, u32 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetElevationAt(x, y) == 3
@@ -786,7 +786,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u32 direction)
     }
 }
 
-static bool8 ShouldJumpLedge(s16 x, s16 y, u32 direction)
+static bool32 ShouldJumpLedge(s16 x, s16 y, u32 direction)
 {
     if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
@@ -794,7 +794,7 @@ static bool8 ShouldJumpLedge(s16 x, s16 y, u32 direction)
         return FALSE;
 }
 
-static bool8 TryPushBoulder(s16 x, s16 y, u32 direction)
+static bool32 TryPushBoulder(s16 x, s16 y, u32 direction)
 {
     if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
@@ -830,7 +830,7 @@ static void CheckAcroBikeCollision(s16 x, s16 y, u32 metatileBehavior, u32 *coll
     }
 }
 
-bool8 IsPlayerCollidingWithFarawayIslandMew(u32 direction)
+bool32 IsPlayerCollidingWithFarawayIslandMew(u32 direction)
 {
     u32 mewObjectId;
     struct ObjectEvent *object;
@@ -961,7 +961,7 @@ void UpdatePlayerAvatarTransitionState(void)
     }
 }
 
-static bool8 PlayerAnimIsMultiFrameStationary(void)
+static bool32 PlayerAnimIsMultiFrameStationary(void)
 {
     u32 movementActionId = gObjectEvents[gPlayerAvatar.objectEventId].movementActionId;
 
@@ -975,7 +975,7 @@ static bool8 PlayerAnimIsMultiFrameStationary(void)
         return FALSE;
 }
 
-static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void)
+static bool32 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void)
 {
     if (PlayerAnimIsMultiFrameStationary() && gPlayerAvatar.runningState != TURN_DIRECTION)
         return TRUE;
@@ -983,12 +983,12 @@ static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void)
         return FALSE;
 }
 
-static bool8 PlayerIsAnimActive(void)
+static bool32 PlayerIsAnimActive(void)
 {
     return ObjectEventIsMovementOverridden(&gObjectEvents[gPlayerAvatar.objectEventId]);
 }
 
-static bool8 PlayerCheckIfAnimFinishedOrInactive(void)
+static bool32 PlayerCheckIfAnimFinishedOrInactive(void)
 {
     return ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]);
 }
@@ -1340,7 +1340,7 @@ u32 GetPlayerAvatarGenderByGraphicsId(u32 gfxId)
     }
 }
 
-bool8 PartyHasMonWithSurf(void)
+bool32 PartyHasMonWithSurf(void)
 {
     u32 i;
 
@@ -1357,7 +1357,7 @@ bool8 PartyHasMonWithSurf(void)
     return FALSE;
 }
 
-bool8 IsPlayerSurfingNorth(void)
+bool32 IsPlayerSurfingNorth(void)
 {
     if (GetPlayerMovementDirection() == DIR_NORTH && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return TRUE;
@@ -1365,7 +1365,7 @@ bool8 IsPlayerSurfingNorth(void)
         return FALSE;
 }
 
-bool8 IsPlayerFacingSurfableFishableWater(void)
+bool32 IsPlayerFacingSurfableFishableWater(void)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     s16 x = playerObjEvent->currentCoords.x;
@@ -1456,7 +1456,7 @@ void InitPlayerAvatar(s16 x, s16 y, u32 direction, u32 gender)
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
-void SetPlayerInvisibility(bool8 invisible)
+void SetPlayerInvisibility(bool32 invisible)
 {
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = invisible;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -1533,7 +1533,7 @@ static void Task_PushBoulder(u32 taskId)
         ;
 }
 
-static bool8 PushBoulder_Start(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
+static bool32 PushBoulder_Start(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
 {
     LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
@@ -1541,7 +1541,7 @@ static bool8 PushBoulder_Start(struct Task *task, struct ObjectEvent *player, st
     return FALSE;
 }
 
-static bool8 PushBoulder_Move(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
+static bool32 PushBoulder_Move(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
 {
     if (ObjectEventIsHeldMovementActive(player))
         ObjectEventClearHeldMovementIfFinished(player);
@@ -1567,7 +1567,7 @@ static bool8 PushBoulder_Move(struct Task *task, struct ObjectEvent *player, str
     return FALSE;
 }
 
-static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
+static bool32 PushBoulder_End(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
 {
     if (ObjectEventCheckHeldMovementStatus(player)
      && ObjectEventCheckHeldMovementStatus(boulder))
@@ -1632,7 +1632,7 @@ static void PlayerAvatar_DoSecretBaseMatSpin(u32 taskId)
         ;
 }
 
-static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct ObjectEvent *objectEvent)
 {
     task->data[0]++;
     task->data[1] = objectEvent->movementDirection;
@@ -1642,7 +1642,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct Objec
     return TRUE;
 }
 
-static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct ObjectEvent *objectEvent)
 {
     u32 directions[] = {DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
 
@@ -1660,7 +1660,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct Objec
     return FALSE;
 }
 
-static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct ObjectEvent *objectEvent)
 {
     const u32 actions[] = {
         MOVEMENT_ACTION_DELAY_1,
@@ -1678,7 +1678,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct Objec
     return FALSE;
 }
 
-static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct ObjectEvent *objectEvent)
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
@@ -2572,7 +2572,7 @@ u32 GetLeftSideStairsDirection(u32 direction)
     }
 }
 
-bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u32 direction)
+bool32 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u32 direction)
 {
     #if SLOW_MOVEMENT_ON_STAIRS == TRUE
         s16 x = objectEvent->currentCoords.x;

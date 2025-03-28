@@ -135,12 +135,12 @@ static const u32 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_ROCK_STAIRS]                        = TILE_FLAG_UNUSED,
 };
 
-bool8 MetatileBehavior_IsATile(u8 metatileBehavior)
+bool32 MetatileBehavior_IsATile(u8 metatileBehavior)
 {
     return TRUE;
 }
 
-bool8 MetatileBehavior_IsEncounterTile(u8 metatileBehavior)
+bool32 MetatileBehavior_IsEncounterTile(u8 metatileBehavior)
 {
     if ((sTileBitAttributes[metatileBehavior] & TILE_FLAG_HAS_ENCOUNTERS))
         return TRUE;
@@ -148,7 +148,7 @@ bool8 MetatileBehavior_IsEncounterTile(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsJumpEast(u8 metatileBehavior)
+bool32 MetatileBehavior_IsJumpEast(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_JUMP_EAST)
         return TRUE;
@@ -156,7 +156,7 @@ bool8 MetatileBehavior_IsJumpEast(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsJumpWest(u8 metatileBehavior)
+bool32 MetatileBehavior_IsJumpWest(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_JUMP_WEST)
         return TRUE;
@@ -164,7 +164,7 @@ bool8 MetatileBehavior_IsJumpWest(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsJumpNorth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsJumpNorth(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_JUMP_NORTH)
         return TRUE;
@@ -172,7 +172,7 @@ bool8 MetatileBehavior_IsJumpNorth(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsJumpSouth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsJumpSouth(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_JUMP_SOUTH)
         return TRUE;
@@ -180,7 +180,7 @@ bool8 MetatileBehavior_IsJumpSouth(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TALL_GRASS || metatileBehavior == MB_LONG_GRASS)
         return TRUE;
@@ -188,7 +188,7 @@ bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SAND || metatileBehavior == MB_DEEP_SAND)
         return TRUE;
@@ -196,7 +196,7 @@ bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsDeepSand(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDeepSand(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_DEEP_SAND)
         return TRUE;
@@ -204,7 +204,7 @@ bool8 MetatileBehavior_IsDeepSand(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
+bool32 MetatileBehavior_IsReflective(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_PUDDLE
@@ -217,7 +217,7 @@ bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsIce(u8 metatileBehavior)
+bool32 MetatileBehavior_IsIce(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_ICE)
         return TRUE;
@@ -225,7 +225,7 @@ bool8 MetatileBehavior_IsIce(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWarpDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWarpDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_ANIu32TED_DOOR)
         return TRUE;
@@ -233,7 +233,7 @@ bool8 MetatileBehavior_IsWarpDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PETALu32RG_GYM_DOOR
      || metatileBehavior == MB_ANIMATED_DOOR)
@@ -242,7 +242,7 @@ bool8 MetatileBehavior_IsDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsEscalator(u8 metatileBehavior)
+bool32 MetatileBehavior_IsEscalator(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_UP_ESCALATOR
      || metatileBehavior == MB_DOWN_ESCALATOR)
@@ -251,7 +251,7 @@ bool8 MetatileBehavior_IsEscalator(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 Unref_MetatileBehavior_IsUnused04(u8 metatileBehavior)
+bool32 Unref_MetatileBehavior_IsUnused04(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_UNUSED_04)
         return TRUE;
@@ -259,7 +259,7 @@ bool8 Unref_MetatileBehavior_IsUnused04(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsLadder(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLadder(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LADDER)
         return TRUE;
@@ -267,7 +267,7 @@ bool8 MetatileBehavior_IsLadder(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NON_ANIMATED_DOOR
      || metatileBehavior == MB_WATER_DOOR
@@ -277,7 +277,7 @@ bool8 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDeepSouthWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDeepSouthWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_DEEP_SOUTH_WARP)
         return TRUE;
@@ -285,7 +285,7 @@ bool8 MetatileBehavior_IsDeepSouthWarp(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 metatileBehavior)
 {
     if ((sTileBitAttributes[metatileBehavior] & TILE_FLAG_SURFABLE))
         return TRUE;
@@ -293,7 +293,7 @@ bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsEastArrowWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsEastArrowWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_EAST_ARROW_WARP)
         return TRUE;
@@ -301,7 +301,7 @@ bool8 MetatileBehavior_IsEastArrowWarp(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsWestArrowWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWestArrowWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WEST_ARROW_WARP)
         return TRUE;
@@ -309,7 +309,7 @@ bool8 MetatileBehavior_IsWestArrowWarp(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsNorthArrowWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsNorthArrowWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NORTH_ARROW_WARP
      || metatileBehavior == MB_STAIRS_OUTSIDE_ABANDONED_SHIP)
@@ -318,7 +318,7 @@ bool8 MetatileBehavior_IsNorthArrowWarp(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SOUTH_ARROW_WARP
      || metatileBehavior == MB_WATER_SOUTH_ARROW_WARP
@@ -328,7 +328,7 @@ bool8 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsArrowWarp(u8 metatileBehavior)
+bool32 Unref_MetatileBehavior_IsArrowWarp(u8 metatileBehavior)
 {
     u8 isArrowWarp = FALSE;
 
@@ -343,7 +343,7 @@ bool8 Unref_MetatileBehavior_IsArrowWarp(u8 metatileBehavior)
     return isArrowWarp;u32
 }
 
-bool8 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
+bool32 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
 {
     if ((metatileBehavior >= MB_WALK_EAST && metatileBehavior <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR)
      || (metatileBehavior >= MB_EASTWARD_CURRENT && metatileBehavior <= MB_SOUTHWARD_CURRENT)
@@ -358,7 +358,7 @@ bool8 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsIce_2(u8 metatileBehavior)
+bool32 MetatileBehavior_IsIce_2(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_ICE)
     u32  return TRUE;
@@ -366,7 +366,7 @@ bool8 MetatileBehavior_IsIce_2(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsTrickHouseSlipperyFloor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsTrickHouseSlipperyFloor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRICK_HOUSE_PUZZLE_8_FLOOR)
         return TRUE;
@@ -374,7 +374,7 @@ bool8 MetatileBehavior_IsTrickHouseSlipperyFloor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsUnused05(u8 mu32atileBehavior)
+bool32 Unref_MetatileBehavior_IsUnused05(u8 mu32atileBehavior)
 {
     if (metatileBehavior == MB_UNUSED_05)
         return TRUE;
@@ -382,7 +382,7 @@ bool8 Unref_MetatileBehavior_IsUnused05(u8 mu32atileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWalkNorth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWalkNorth(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WALK_NORTH)
         return TRUE;
@@ -390,7 +390,7 @@ bool8 MetatileBehavior_IsWalkNorth(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsWalkSouth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWalkSouth(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WALK_SOUTH)
         return TRUE;
@@ -398,7 +398,7 @@ bool8 MetatileBehavior_IsWalkSouth(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsWalkWest(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWalkWest(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WALK_WEST)
         return TRUE;
@@ -406,7 +406,7 @@ bool8 MetatileBehavior_IsWalkWest(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsWalkEast(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWalkEast(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WALK_EAST)
         return TRUE;
@@ -414,7 +414,7 @@ bool8 MetatileBehavior_IsWalkEast(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsNorthwardCurrent(u8 metatileBehavior)
+bool32 MetatileBehavior_IsNorthwardCurrent(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NORTHWARD_CURRENT)
         return TRUE;
@@ -422,7 +422,7 @@ bool8 MetatileBehavior_IsNorthwardCurrent(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSouthwardCurrent(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSouthwardCurrent(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SOUTHWARD_CURRENT)
         return TRUE;
@@ -430,7 +430,7 @@ bool8 MetatileBehavior_IsSouthwardCurrent(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsWestwardCurrent(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWestwardCurrent(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WESTWARD_CURRENT)
         return TRUE;
@@ -438,7 +438,7 @@ bool8 MetatileBehavior_IsWestwardCurrent(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsEastwardCurrent(u8 metatileBehavior)
+bool32 MetatileBehavior_IsEastwardCurrent(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_EASTWARD_CURRENT)
         return TRUE;
@@ -446,7 +446,7 @@ bool8 MetatileBehavior_IsEastwardCurrent(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSlideNorth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSlideNorth(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SLIDE_NORTH)
         return TRUE;
@@ -454,7 +454,7 @@ bool8 MetatileBehavior_IsSlideNorth(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSlideSouth(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSlideSouth(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SLIDE_SOUTH)
         return TRUE;
@@ -462,7 +462,7 @@ bool8 MetatileBehavior_IsSlideSouth(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSlideWest(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSlideWest(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SLIDE_WEST)
         return TRUE;
@@ -470,7 +470,7 @@ bool8 MetatileBehavior_IsSlideWest(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSlideEast(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSlideEast(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SLIDE_EAST)
         return TRUE;
@@ -478,7 +478,7 @@ bool8 MetatileBehavior_IsSlideEast(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsCounter(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCounter(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_COUNTER)
         return TRUE;
@@ -486,7 +486,7 @@ bool8 MetatileBehavior_IsCounter(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 metatileBehavior, u8 playerDir)
+bool32 MetatileBehavior_IsPlayerFacingTVScreen(u8 metatileBehavior, u8 playerDir)
 {
     if (playerDir != DIR_NORTH)
         return FALSE;
@@ -496,7 +496,7 @@ bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 metatileBehavior, u8 playerDir)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPC(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PC)
         return TRUE;
@@ -504,7 +504,7 @@ bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsCableBoxResults1(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCableBoxResults1(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CABLE_BOX_RESULTS_1)
         return TRUE;
@@ -512,7 +512,7 @@ bool8 MetatileBehavior_IsCableBoxResults1(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN
@@ -526,7 +526,7 @@ bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSecretBaseCave(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseCave(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE
      || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE
@@ -537,7 +537,7 @@ bool8 MetatileBehavior_IsSecretBaseCave(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPOT_TREE_LEFT
      || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT)
@@ -546,7 +546,7 @@ bool8 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsSecretBaseShrub(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseShrub(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB)
         return TRUE;
@@ -554,7 +554,7 @@ bool8 MetatileBehavior_IsSecretBaseShrub(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSecretBasePC(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBasePC(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_PC)
         return TRUE;u32
@@ -562,7 +562,7 @@ bool8 MetatileBehavior_IsSecretBasePC(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
+bool32 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_REGISTER_PC)
         return TRUE;
@@ -571,7 +571,7 @@ bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
 }u32
 
 // Used by the rock/grass floor spaces that the secret base trainer is not standing on
-bool8 MetatileBehavior_IsSecretBaseScenery1(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseScenery1(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SCENERY)
         return TRUE;
@@ -580,7 +580,7 @@ bool8 MetatileBehavior_IsSecretBaseScenery1(u8 metatileBehavior)
 }u32
 
 // Used by the rock/grass floor space that the secret base trainer stands on
-bool8 MetatileBehavior_IsSecretBaseTrainerSpot(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseTrainerSpot(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_TRAINER_SPOT)
         return TRUE;
@@ -588,7 +588,7 @@ bool8 MetatileBehavior_IsSecretBaseTrainerSpot(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsSecretBaseImpassable(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseImpassable(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_IMPASSABLE)
         return TRUE;
@@ -596,7 +596,7 @@ bool8 MetatileBehavior_IsSecretBaseImpassable(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseDecorationBase(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_DECORATION_BASE)
         return TRUE;
@@ -604,7 +604,7 @@ bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSecretBasePoster(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBasePoster(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_POSTER)
         return TRUE;
@@ -612,7 +612,7 @@ bool8 MetatileBehavior_IsSecretBasePoster(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsNormal(u8 metatileBehavior)
+bool32 MetatileBehavior_IsNormal(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NORMAL)
         return TRUE;
@@ -620,7 +620,7 @@ bool8 MetatileBehavior_IsNormal(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseNorthWall(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseNorthWall(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_NORTH_WALL)
         return TRUE;
@@ -628,7 +628,7 @@ bool8 MetatileBehavior_IsSecretBaseNorthWall(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseScenery2(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseScenery2(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SCENERY)
         return TRUE;
@@ -636,7 +636,7 @@ bool8 MetatileBehavior_IsSecretBaseScenery2(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_HoldsSmallDecoration(u8 metatileBehavior)
+bool32 MetatileBehavior_HoldsSmallDecoration(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_HOLDS_SMALL_DECORATION)
         return TRUE;
@@ -644,7 +644,7 @@ bool8 MetatileBehavior_HoldsSmallDecoration(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
+bool32 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_HOLDS_LARGE_DECORATION)
         return TRUE;
@@ -652,7 +652,7 @@ bool8 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseHole(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseHole(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_HOLE)
         return TRUE;
@@ -660,7 +660,7 @@ bool8 MetatileBehavior_IsSecretBaseHole(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseBalloon(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseBalloon(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_BALLOON)
         return TRUE;
@@ -668,7 +668,7 @@ bool8 MetatileBehavior_IsSecretBaseBalloon(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseBreakableDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseBreakableDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
         return TRUE;
@@ -676,7 +676,7 @@ bool8 MetatileBehavior_IsSecretBaseBreakableDoor(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseSoundMat(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseSoundMat(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SOUND_MAT)
         return TRUE;
@@ -684,7 +684,7 @@ bool8 MetatileBehavior_IsSecretBaseSoundMat(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseGlitterMat(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseGlitterMat(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_GLITTER_MAT)
         return TRUE;
@@ -692,7 +692,7 @@ bool8 MetatileBehavior_IsSecretBaseGlitterMat(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseSandOrnament(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseSandOrnament(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SAND_ORNAMENT)
         return TRUE;
@@ -700,7 +700,7 @@ bool8 MetatileBehavior_IsSecretBaseSandOrnament(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseShieldOrToyTV(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseShieldOrToyTV(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_TV_SHIELD)
         return TRUE;
@@ -708,7 +708,7 @@ bool8 MetatileBehavior_IsSecretBaseShieldOrToyTV(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPlayerRoomPCOn(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPlayerRoomPCOn(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PLAYER_ROOM_PC_ON)
         return TRUE;
@@ -716,7 +716,7 @@ bool8 MetatileBehavior_IsPlayerRoomPCOn(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
+bool32 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_PUDDLE
@@ -726,7 +726,7 @@ bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsPuddle(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPuddle(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PUDDLE)
         return TRUE;
@@ -734,7 +734,7 @@ bool8 MetatileBehavior_IsPuddle(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsTallGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsTallGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TALL_GRASS)
         return TRUE;
@@ -742,7 +742,7 @@ bool8 MetatileBehavior_IsTallGrass(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsLongGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLongGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LONG_GRASS)
         return TRUE;
@@ -750,7 +750,7 @@ bool8 MetatileBehavior_IsLongGrass(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsBerryTreeSoil(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBerryTreeSoil(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BERRY_TREE_SOIL)
         return TRUE;
@@ -758,7 +758,7 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsAshGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsAshGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_ASHGRASS)
         return TRUE;
@@ -766,7 +766,7 @@ bool8 MetatileBehavior_IsAshGrass(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsFootprints(u8 metatileBehavior)
+bool32 MetatileBehavior_IsFootprints(u8 metatileBehavior)
 {
     // MB_FOOTPRINTS is not used by any metatiles.
     if (metatileBehavior == MB_FOOTPRINTS)
@@ -778,7 +778,7 @@ bool8 MetatileBehavior_IsFootprints(u8 metatileBehavior)
 // For the sections of log bridges that span water / water's edge.
 // Note that the rest of the metatiles for these bridges use MB_NORMAL.
 // This is used to allow encounters on the water below the bridge.
-bool8 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
 {
     if ((metatileBehavior == MB_BRIDGE_OVER_OCEAN
       || metatileBehavior == MB_BRIDGE_u32ER_POND_LOW
@@ -815,7 +815,7 @@ u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
 }
 
 // Used to allow fishing below the bridge metatiles.
-bool8 MetatileBehavior_IsBridgeOverWaterNoEdge(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBridgeOverWaterNoEdge(u8 metatileBehavior)
 {
     if (metatileBehavior >= MB_BRIDGE_OVER_OCEAN
      && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
@@ -833,7 +833,7 @@ u32ol8 MetatileBehavior_IsLandWildEu32ounter(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior)
 {
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == TRUE
      && MetatileBehavior_IsEncounterTile(metatileBehavior) == TRUE)
@@ -842,7 +842,7 @@ bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsIndoorEncounter(u8 metatileBehavior)
+bool32 MetatileBehavior_IsIndoorEncounter(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_INDOOR_ENCOUNTER)
         return TRUE;
@@ -850,7 +850,7 @@ bool8 MetatileBehavior_IsIndoorEncounter(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
+bool32 MetatileBehavior_IsMountain(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_MOUNTAIN_TOP)
         return TRUE;
@@ -858,7 +858,7 @@ bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_INTERIOR_DEEP_WATER
      || metatileBehavior == MB_DEEP_WATER
@@ -868,7 +868,7 @@ bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
+bool32 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
 {
     // BUG: The player is unintentionally able to emerge on water doors.
     // Also the narrower underwater door in the underwater tileset has the wrong metatile behavior. This causes the dive glitch.
@@ -884,7 +884,7 @@ bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsShallowFlowingWater(u8 metatileBehavior)
+bool32 MetatileBehavior_IsShallowFlowingWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SHALLOW_WATER
      || metatileBehavior == MB_STAIRS_OUTSIDE_ABANDONED_SHIP
@@ -894,7 +894,7 @@ bool8 MetatileBehavior_IsShallowFlowingWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsThinIce(u8 metatileBehavior)
+bool32 MetatileBehavior_IsThinIce(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_THIN_ICE)
         return TRUE;
@@ -902,7 +902,7 @@ bool8 MetatileBehavior_IsThinIce(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CRACKED_ICE)
         return TRUE;
@@ -910,7 +910,7 @@ bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_OCEAN_WATER
      || metatileBehavior == MB_INTERIOR_DEEP_WATER
@@ -920,7 +920,7 @@ bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 Unref_MetatileBehavior_IsUnusedSootopolisWater(u8 metatileBehavior)
+bool32 Unref_MetatileBehavior_IsUnusedSootopolisWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER
      || metatileBehavior == MB_UNUSED_SOOTOPOLIS_DEEP_WATER_2)
@@ -929,7 +929,7 @@ bool8 Unref_MetatileBehavior_IsUnusedSootopolisWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSurfableAndNotWaterfall(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSurfableAndNotWaterfall(u8 metatileBehavior)
 {
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior)
      && MetatileBehavior_IsWaterfall(metatileBehavior) == FALSE)
@@ -938,7 +938,7 @@ bool8 MetatileBehavior_IsSurfableAndNotWaterfall(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsEastBlocked(u8 metatileBehavior)
+bool32 MetatileBehavior_IsEastBlocked(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_IMPASSABLE_EAST
      || metatileBehavior == MB_IMPASSABLE_u32RTHEAST
@@ -950,7 +950,7 @@ bool8 MetatileBehavior_IsEastBlocked(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWestBlocked(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWestBlocked(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_IMPASSABLE_WEST
      || metatileBehavior == MB_IMPASSABLE_NORTHWEST
@@ -962,7 +962,7 @@ bool8 MetatileBehavior_IsWestBlocked(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsNorthBlocked(u8 metatileBehavior)
+bool32 MetatileBehavior_IsNorthBlocked(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_IMPASSABLE_NORTH
      || metatileBehavior == MB_IMPASSABLE_NORTHEAST
@@ -973,7 +973,7 @@ bool8 MetatileBehavior_IsNorthBlocked(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSouthBlocked(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSouthBlocked(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_IMPASSABLE_SOUTH
      || metatileBehavior == MB_IMPASSABLE_SOUTHEAST
@@ -984,7 +984,7 @@ bool8 MetatileBehavior_IsSouthBlocked(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsShortGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsShortGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SHORT_GRASS)
         return TRUE;
@@ -992,7 +992,7 @@ bool8 MetatileBehavior_IsShortGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsHotSprings(u8 metatileBehavior)
+bool32 MetatileBehavior_IsHotSprings(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_HOT_SPRINGS)
         return TRUE;
@@ -1000,7 +1000,7 @@ bool8 MetatileBehavior_IsHotSprings(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWaterfall(u8 metatileBehavior)
+bool32 MetatileBehavior_IsWaterfall(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_WATERFALL)
         return TRUE;
@@ -1008,7 +1008,7 @@ bool8 MetatileBehavior_IsWaterfall(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsFortreeBridge(u8 metatileBehavior)
+bool32 MetatileBehavior_IsFortreeBridge(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_FORTREE_BRIDGE)
         return TRUE;
@@ -1016,7 +1016,7 @@ bool8 MetatileBehavior_IsFortreeBridge(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPacifidlogVerticalLogTop(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPacifidlogVerticalLogTop(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_TOP)
         return TRUE;
@@ -1024,7 +1024,7 @@ bool8 MetatileBehavior_IsPacifidlogVerticalLogTop(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPacifidlogVerticalLogBottom(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPacifidlogVerticalLogBottom(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_BOTTOM)
         return TRUE;
@@ -1032,7 +1032,7 @@ bool8 MetatileBehavior_IsPacifidlogVerticalLogBottom(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPacifidlogHorizontalLogLeft(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPacifidlogHorizontalLogLeft(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_LEFT)
         return TRUE;
@@ -1040,7 +1040,7 @@ bool8 MetatileBehavior_IsPacifidlogHorizontalLogLeft(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPacifidlogHorizontalLogRight(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPacifidlogHorizontalLogRight(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PACIFIDLOG_HORIZONTAL_LOG_RIGHT)
         return TRUE;
@@ -1048,7 +1048,7 @@ bool8 MetatileBehavior_IsPacifidlogHorizontalLogRight(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_TOP
      || metatileBehavior == MB_PACIFIDLOG_VERTICAL_LOG_BOTTOM
@@ -1059,7 +1059,7 @@ bool8 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsTrickHousePuzzleDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsTrickHousePuzzleDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRICK_HOUSE_PUZZLE_DOOR)
         return TRUE;
@@ -1067,7 +1067,7 @@ bool8 MetatileBehavior_IsTrickHousePuzzleDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
+bool32 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_REGION_MAP)
         return TRUE;
@@ -1075,7 +1075,7 @@ bool8 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CLOSED_SOOTOPOLIS_DOOR)
         return TRUE;
@@ -1083,7 +1083,7 @@ bool8 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SKY_PILLAR_CLOSED_DOOR)
         return TRUE;
@@ -1091,7 +1091,7 @@ bool8 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
+bool32 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
 {
     if (metatileBehavior == MB_ROULETTE)
         return TRUE;
@@ -1099,7 +1099,7 @@ bool8 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsPokeblockFeeder(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPokeblockFeeder(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POKEBLOCK_FEEDER)
         return TRUE;
@@ -1107,7 +1107,7 @@ bool8 MetatileBehavior_IsPokeblockFeeder(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_JUMP_MAT)
         return TRUE;
@@ -1115,7 +1115,7 @@ bool8 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPIN_MAT)
         return TRUE;
@@ -1123,7 +1123,7 @@ bool8 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsLavaridgeB1FWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLavaridgeB1FWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LAVARIDGE_GYM_B1F_WARP)
         return TRUE;
@@ -1131,7 +1131,7 @@ bool8 MetatileBehavior_IsLavaridgeB1FWarp(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsLavaridge1FWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLavaridge1FWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LAVARIDGE_GYM_1F_WARP)
         return TRUE;
@@ -1139,7 +1139,7 @@ bool8 MetatileBehavior_IsLavaridge1FWarp(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_AQUA_HIDEOUT_WARP)
         return TRUE;
@@ -1147,7 +1147,7 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
 {
     // This metatile behavior is re-used for some reason by
     // the Union Room exit metatile. This function is used to
@@ -1158,7 +1158,7 @@ bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_MOSSDEEP_GYM_WARP)
         return TRUE;
@@ -1167,7 +1167,7 @@ bool8 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
 }
 
 
-bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_OCEAN_WATEu32
@@ -1183,7 +1183,7 @@ bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMtPyreHole(u8 metatileBehavior)
+bool32 MetatileBehavior_IsMtPyreHole(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_MT_PYRE_HOLE)
         return TRUE;
@@ -1191,7 +1191,7 @@ bool8 MetatileBehavior_IsMtPyreHole(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsCrackedFloorHole(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCrackedFloorHole(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CRACKED_FLOOR_HOLE)
         return TRUE;
@@ -1199,7 +1199,7 @@ bool8 MetatileBehavior_IsCrackedFloorHole(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsCrackedFloor(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCrackedFloor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CRACKED_FLOOR)
         return TRUE;
@@ -1207,7 +1207,7 @@ bool8 MetatileBehavior_IsCrackedFloor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMuddySlope(u8 metatileBehavior)
+bool32 MetatileBehavior_IsMuddySlope(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_MUDDY_SLOPE)
         return TRUE;
@@ -1215,7 +1215,7 @@ bool8 MetatileBehavior_IsMuddySlope(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsBumpySlope(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBumpySlope(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BUMPY_SLOPE)
         return TRUE;
@@ -1223,7 +1223,7 @@ bool8 MetatileBehavior_IsBumpySlope(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 metatileBehavior)
+bool32 MetatileBehavior_IsIsolatedVerticalRail(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_ISOLATED_VERTICAL_RAIL)
         return TRUE;
@@ -1231,7 +1231,7 @@ bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsIsolatedHorizontalRail(u8 metatileBehavior)
+bool32 MetatileBehavior_IsIsolatedHorizontalRail(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_ISOLATED_HORIZONTAL_RAIL)
         return TRUE;
@@ -1239,7 +1239,7 @@ bool8 MetatileBehavior_IsIsolatedHorizontalRail(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsVerticalRail(u8 metatileBehavior)
+bool32 MetatileBehavior_IsVerticalRail(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_VERTICAL_RAIL)
         return TRUE;
@@ -1247,7 +1247,7 @@ bool8 MetatileBehavior_IsVerticalRail(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior)
+bool32 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_HORIZONTAL_RAIL)
         return TRUE;
@@ -1255,7 +1255,7 @@ bool8 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SEAWEED || metatileBehavior == MB_SEAWEED_NO_SURFACING)
         return TRUE;
@@ -1263,7 +1263,7 @@ bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
         return FALSE;
 }
 u32
-bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
+bool32 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_NO_RUNNING
      || metatileBehavior == MB_LONG_GRASS
@@ -1274,7 +1274,7 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TALL_GRASS
      || metatileBehavior == MB_LONG_GRASS
@@ -1285,7 +1285,7 @@ bool8 MetatileBehavior_IsCuttableGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRunningShoesManual(u8 metatileBehavior)
+bool32 MetatileBehavior_IsRunningShoesManual(u8 metatileBehavior)
 {u32
     if (metatileBehavior == MB_RUNNING_SHOES_INSTRUCTION)
         return TRUE;
@@ -1293,7 +1293,7 @@ bool8 MetatileBehavior_IsRunningShoesManual(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPictureBookShelf(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPictureBookShelf(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_PICTURE_BOOKu32HELF)
         return TRUE;
@@ -1301,7 +1301,7 @@ bool8 MetatileBehavior_IsPictureBookShelf(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsBookShelf(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBookShelf(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BOOKSHELF)
         return TRUE;
@@ -1309,7 +1309,7 @@ bool8 MetatileBehavior_IsBookShelf(u8 metatileBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsPokeCenterBookShelf(u8 metatileBehavior)
+bool32 MetatileBehavior_IsPokeCenterBookShelf(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POKEMON_CENTER_BOOKSHELF)
         return TRUE;
@@ -1317,7 +1317,7 @@ bool8 MetatileBehavior_IsPokeCenterBookShelf(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsVase(u8 metatileBehu32ior)
+bool32 MetatileBehavior_IsVase(u8 metatileBehu32ior)
 {
     if (metatileBehavior == MB_VASE)
         return TRUE;
@@ -1325,7 +1325,7 @@ bool8 MetatileBehavior_IsVase(u8 metatileBehu32ior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsTrashCan(u8 metatu32eBehavior)
+bool32 MetatileBehavior_IsTrashCan(u8 metatu32eBehavior)
 {
     if (metatileBehavior == MB_TRASH_CAN)
         return TRUE;
@@ -1333,7 +1333,7 @@ bool8 MetatileBehavior_IsTrashCan(u8 metatu32eBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsShopShelf(u32 metatileBehavior)
+bool32 MetatileBehavior_IsShopShelf(u32 metatileBehavior)
 {
     if (metatileBehavior == MB_SHOP_SHELF)
         return TRUE;
@@ -1341,7 +1341,7 @@ bool8 MetatileBehavior_IsShopShelf(u32 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsBlueprint(u8 metatilu32ehavior)
+bool32 MetatileBehavior_IsBlueprint(u8 metatilu32ehavior)
 {
     if (metatileBehavior == MB_BLUEPRINT)
         return TRUE;
@@ -1349,7 +1349,7 @@ bool8 MetatileBehavior_IsBlueprint(u8 metatilu32ehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsBattlu32yramidWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsBattlu32yramidWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_BATTLE_PYRAMID_WARP)
         return TRUE;
@@ -1357,7 +1357,7 @@ bool8 MetatileBehavior_IsBattlu32yramidWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPlayerFacu32gWirelessBoxResults(u8 tile, u8 playerDir)
+bool32 MetatileBehavior_IsPlayerFacu32gWirelessBoxResults(u8 tile, u8 playerDir)
 {
     if (playerDir != CONNECTION_NORTH) // if the player isn't facing north, forget about it.
         return FALSE;
@@ -1367,7 +1367,7 @@ bool8 MetatileBehavior_IsPlayerFacu32gWirelessBoxResults(u8 tile, u8 playerDir)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsCableBoxResults2(u8 tile, u8 playerDir)
+bool32 MetatileBehavior_IsCableBoxResults2(u8 tile, u8 playerDir)
 {
     if (playerDir != CONNECTION_NORTH) // if the player isn't facing north, forget about it.
         return FALSE;
@@ -1377,7 +1377,7 @@ bool8 MetatileBehavior_IsCableBoxResults2(u8 tile, u8 playerDir)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
+bool32 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_QUESTIONNAIRE)
         return TRUE;
@@ -1385,7 +1385,7 @@ bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LONG_GRASS)
         return TRUE;
@@ -1393,7 +1393,7 @@ bool8 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
+bool32 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LONG_GRASS_SOUTH_EDGE)
         return TRUE;
@@ -1401,7 +1401,7 @@ bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
         return FALSE;
 }u32u32
 
-bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
+bool32 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRAINER_HILL_TIMER)
         return TRUE;
@@ -1409,7 +1409,7 @@ bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDirectionalUpRu32htStairWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDirectionalUpRu32htStairWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_UP_RIGHT_STAIR_WARP)
         return TRUE;
@@ -1417,7 +1417,7 @@ bool8 MetatileBehavior_IsDirectionalUpRu32htStairWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDirectionalUpLeftStau32Warp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDirectionalUpLeftStau32Warp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_UP_LEFT_STAIR_WARP)
         return TRUE;
@@ -1425,7 +1425,7 @@ bool8 MetatileBehavior_IsDirectionalUpLeftStau32Warp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDirectionalDownRighu32tairWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDirectionalDownRighu32tairWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_DOWN_RIGHT_STAIR_WARP)
         return TRUE;
@@ -1433,7 +1433,7 @@ bool8 MetatileBehavior_IsDirectionalDownRighu32tairWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDirectionalDownLeu32StairWarp(u8 metatileBehavior)
+bool32 MetatileBehavior_IsDirectionalDownLeu32StairWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_DOWN_LEFT_STAIR_WARP)
         return TRUE;
@@ -1441,7 +1441,7 @@ bool8 MetatileBehavior_IsDirectionalDownLeu32StairWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDirectionalStairWarp(u8 metau32leBehavior)
+bool32 MetatileBehavior_IsDirectionalStairWarp(u8 metau32leBehavior)
 {
     if (metatileBehavior == MB_UP_RIGHT_STAIR_WARP
      || metatileBehavior == MB_UP_LEFT_STAIR_WARP
@@ -1452,22 +1452,22 @@ bool8 MetatileBehavior_IsDirectionalStairWarp(u8 metau32leBehavior)
         return FALSE;u32
 }
 
-bool8 MetatileBehavior_IsSignpost(u32 metatileBehavior)
+bool32 MetatileBehavior_IsSignpost(u32 metatileBehavior)
 {
     return (metatileBehavior == MB_SIGNPOST);
 }
 
-bool8 MetatileBehavior_IsPokemonCenterSign(u32 metatileu32havior)
+bool32 MetatileBehavior_IsPokemonCenterSign(u32 metatileu32havior)
 {
     return (metatileBehavior == MB_POKEMON_CENTER_SIGN);
 }
 
-bool8 MetatileBehavior_IsPokeMartSign(u32 metatileBehavior)
+bool32 MetatileBehavior_IsPokeMartSign(u32 metatileBehavior)
 {
     return (metatileBehavior == MB_POKEMART_SIGN);
 }u32
 
-bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM)
         return TRUE;
@@ -1475,7 +1475,7 @@ bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsLeftSide(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM)
         return TRUE;
@@ -1483,7 +1483,7 @@ bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSidewaysStairsRightSideTop(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsRightSideTop(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_TOP)
         return TRUE;
@@ -1491,7 +1491,7 @@ bool8 MetatileBehavior_IsSidewaysStairsRightSideTop(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSidewaysStairsLeftSideTop(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsLeftSideTop(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_TOP)
         return TRUE;
@@ -1499,7 +1499,7 @@ bool8 MetatileBehavior_IsSidewaysStairsLeftSideTop(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSidewaysStairsRightSideBu32tom(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsRightSideBu32tom(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM)
         return TRUE;
@@ -1507,7 +1507,7 @@ bool8 MetatileBehavior_IsSidewaysStairsRightSideBu32tom(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSidewaysStairsLeftSideBu32tom(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsLeftSideBu32tom(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM)
         return TRUE;
@@ -1515,7 +1515,7 @@ bool8 MetatileBehavior_IsSidewaysStairsLeftSideBu32tom(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u32 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsRightSideAny(u32 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE
      || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM
@@ -1525,7 +1525,7 @@ bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u32 metatileBehavior)
         return FALSE;
 }u32
 
-bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior)
+bool32 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE
      || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM
@@ -1535,7 +1535,7 @@ bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsRockStairs(u8 metatileBehavior)
+bool32 MetatileBehavior_IsRockStairs(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_ROCK_STAIRS)
         return TRUE;

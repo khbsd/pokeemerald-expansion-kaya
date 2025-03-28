@@ -37,10 +37,10 @@ void ClearDecorationInventories(void)
         ClearDecorationInventory(category);
 }
 
-s8 GetFirstEmptyDecorSlot(u32 category)
+s32 GetFirstEmptyDecorSlot(u32 category)
 {
-    s8 i;
-    for (i = 0; i < (s8)gDecorationInventories[category].size; i++)
+    s32 i;
+    for (i = 0; i < (s32)gDecorationInventories[category].size; i++)
     {
         if (gDecorationInventories[category].items[i] == DECOR_NONE)
             return i;
@@ -49,7 +49,7 @@ s8 GetFirstEmptyDecorSlot(u32 category)
     return -1;
 }
 
-bool8 CheckHasDecoration(u32 decor)
+bool32 CheckHasDecoration(u32 decor)
 {
     u32 i;
     u32 category;
@@ -64,10 +64,10 @@ bool8 CheckHasDecoration(u32 decor)
     return FALSE;
 }
 
-bool8 DecorationAdd(u32 decor)
+bool32 DecorationAdd(u32 decor)
 {
     u32 category;
-    s8 idx;
+    s32 idx;
 
     if (decor == DECOR_NONE)
         return FALSE;
@@ -79,7 +79,7 @@ bool8 DecorationAdd(u32 decor)
     return TRUE;
 }
 
-bool8 DecorationCheckSpace(u32 decor)
+bool32 DecorationCheckSpace(u32 decor)
 {
     if (decor == DECOR_NONE)
         return FALSE;
@@ -88,7 +88,7 @@ bool8 DecorationCheckSpace(u32 decor)
     return TRUE;
 }
 
-s8 DecorationRemove(u32 decor)
+s32 DecorationRemove(u32 decor)
 {
     u32 i;
     u32 category;

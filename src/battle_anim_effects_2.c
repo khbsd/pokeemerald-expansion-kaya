@@ -840,7 +840,7 @@ const struct SpriteTemplate gSpeedDustSpriteTemplate =
     .callback = AnimSpeedDust,
 };
 
-const s8 gSpeedDustPosTable[][2] =
+const s32 gSpeedDustPosTable[][2] =
 {
     {30, 28},
     {-20, 24},

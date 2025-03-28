@@ -273,13 +273,13 @@ enum BerryFunctionsMenu
 // *******************************
 struct DebugMonData
 {
-    u16 species;
+    u32 species;
     u32 level;
-    bool8 isShiny:1;
+    bool32 isShiny:1;
     u32 nature:5;
     u32 abilityNum:2;
     u32 monIVs[NUM_STATS];
-    u16 monMoves[MAX_MON_MOVES];
+    u32 monMoves[MAX_MON_MOVES];
     u32 monEVs[NUM_STATS];
     u32 teraType;
     u32 dynamaxLevel:7;
@@ -298,14 +298,14 @@ struct DebugBattleData
     u32 submenu;
     u32 battleType;
     u32 battleTerrain;
-    bool8 aiFlags[AI_FLAG_COUNT];
+    bool32 aiFlags[AI_FLAG_COUNT];
 };
 
 // EWRAM
 static EWRAM_DATA struct DebugMonData *sDebugMonData = NULL;
 static EWRAM_DATA struct DebugMenuListData *sDebugMenuListData = NULL;
 static EWRAM_DATA struct DebugBattleData *sDebugBattleData = NULL;
-EWRAM_DATA bool8 gIsDebugBattle = FALSE;
+EWRAM_DATA bool32 gIsDebugBattle = FALSE;
 EWRAM_DATA u32 gDebugAIFlags = 0;
 
 // *******************************
@@ -1142,7 +1142,7 @@ static void DebugAction_DestroyExtraWindow(u32 taskId)
 }
 
 
-static const u16 sLocationFlags[] =
+static const u32 sLocationFlags[] =
 {
     FLAG_VISITED_LITTLEROOT_TOWN,
     FLAG_VISITED_OLDALE_TOWN,
@@ -1269,7 +1269,7 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
     {
         if (sDebugMenuListData->listId == 1 && sDebugBattleData->submenu > 1)
         {
-            u16 species;
+            u32 species;
             if (i == 6)
             {
                 name = sDebugText_Continue;
@@ -1370,7 +1370,7 @@ static void Debug_RefreshListMenu(u32 taskId)
 static void Debug_RedrawListMenu(u32 taskId)
 {
     u32 listTaskId = gTasks[taskId].tMenuTaskId;
-    u16 scrollOffset, selectedRow;
+    u32 scrollOffset, selectedRow;
     ListMenuGetScrollAndRow(listTaskId, &scrollOffset, &selectedRow);
 
     DestroyListMenuTask(gTasks[taskId].tMenuTaskId, &scrollOffset, &selectedRow);
@@ -1509,7 +1509,7 @@ static void DebugTask_HandleBattleMenuReDraw(u32 taskId)
 
 static void DebugTask_HandleMenuInput_Battle(u32 taskId)
 {
-    u16 idx;
+    u32 idx;
     u32 listTaskId = gTasks[taskId].tMenuTaskId;
     ListMenu_ProcessInput(listTaskId);
 
@@ -2379,7 +2379,7 @@ static void DebugAction_FlagsVars_SetValue(u32 taskId)
 
 static void DebugAction_FlagsVars_PokedexFlags_All(u32 taskId)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < NATIONAL_DEX_COUNT; i++)
     {
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
@@ -2392,7 +2392,7 @@ static void DebugAction_FlagsVars_PokedexFlags_All(u32 taskId)
 static void DebugAction_FlagsVars_PokedexFlags_Reset(u32 taskId)
 {
     int boxId, boxPosition, partyId;
-    u16 species;
+    u32 species;
 
     // Reset Pokedex to emtpy
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
@@ -2984,7 +2984,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u32 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        u16 abilityId;
+        u32 abilityId;
         sDebugMonData->nature = gTasks[taskId].tInput;
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
@@ -3010,7 +3010,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u32 taskId)
 
 static void DebugAction_Give_Pokemon_SelectAbility(u32 taskId)
 {
-    u16 abilityId;
+    u32 abilityId;
     u32 abilityCount = NUM_ABILITY_SLOTS - 1; //-1 for proper iteration
     u32 i = 0;
 
@@ -3270,7 +3270,7 @@ static void Debug_Display_MoveInfo(u32 moveId, u32 iteration, u32 digit, u32 win
 
 static void DebugAction_Give_Pokemon_SelectEVs(u32 taskId)
 {
-    u16 totalEV = GetDebugPokemonTotalEV();
+    u32 totalEV = GetDebugPokemonTotalEV();
 
     if (JOY_NEW(DPAD_ANY))
     {
@@ -3374,18 +3374,18 @@ static void DebugAction_Give_Pokemon_Move(u32 taskId)
 
 static void DebugAction_Give_Pokemon_ComplexCreateMon(u32 taskId) //https://github.com/ghoulslash/pokeemerald/tree/custom-givemon
 {
-    u16 nationalDexNum;
+    u32 nationalDexNum;
     int sentToPc;
     struct Pokemon mon;
     u32 i;
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
     u32 IVs[NUM_STATS];
     u32 iv_val;
     u32 EVs[NUM_STATS];
     u32 ev_val;
-    u16 species     = sDebugMonData->species;
+    u32 species     = sDebugMonData->species;
     u32 level        = sDebugMonData->level;
-    bool8 isShiny   = sDebugMonData->isShiny;
+    bool32 isShiny   = sDebugMonData->isShiny;
     u32 nature       = sDebugMonData->nature;
     u32 abilityNum   = sDebugMonData->abilityNum;
     u32 teraType    = sDebugMonData->teraType;
@@ -3544,7 +3544,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Fast(u32 taskId) //Credit: Sierraffin
     int boxId, boxPosition;
     u32 personality;
     struct BoxPokemon boxMon;
-    u16 species = SPECIES_BULBASAUR;
+    u32 species = SPECIES_BULBASAUR;
     u32 speciesName[POKEMON_NAME_LENGTH + 1];
 
     personality = Random32();
@@ -3577,7 +3577,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u32 taskId)
     int boxId, boxPosition;
     struct BoxPokemon boxMon;
     u32 species = SPECIES_BULBASAUR;
-    bool8 spaceAvailable = FALSE;
+    bool32 spaceAvailable = FALSE;
 
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
     {
@@ -3605,7 +3605,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PCItemStorage(u32 taskId)
 {
-    u16 itemId;
+    u32 itemId;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {
@@ -3616,7 +3616,7 @@ static void DebugAction_PCBag_Fill_PCItemStorage(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PocketItems(u32 taskId)
 {
-    u16 itemId;
+    u32 itemId;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {
@@ -3627,7 +3627,7 @@ static void DebugAction_PCBag_Fill_PocketItems(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u32 taskId)
 {
-    u16 ballId;
+    u32 ballId;
 
     for (ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
     {
@@ -3638,7 +3638,7 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PocketTMHM(u32 taskId)
 {
-    u16 itemId;
+    u32 itemId;
 
     for (itemId = ITEM_TM01; itemId <= ITEM_HM08; itemId++)
     {
@@ -3649,7 +3649,7 @@ static void DebugAction_PCBag_Fill_PocketTMHM(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PocketBerries(u32 taskId)
 {
-    u16 itemId;
+    u32 itemId;
 
     for (itemId = FIRST_BERRY_INDEX; itemId < LAST_BERRY_INDEX; itemId++)
     {
@@ -3660,7 +3660,7 @@ static void DebugAction_PCBag_Fill_PocketBerries(u32 taskId)
 
 static void DebugAction_PCBag_Fill_PocketKeyItems(u32 taskId)
 {
-    u16 itemId;
+    u32 itemId;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {

@@ -17,7 +17,7 @@
 // Equivalent to MysteryGiftTaskData
 struct EReaderTaskData
 {
-    u16 timer;
+    u32 timer;
     u32 state;
     u32 textState;
     u32 status;
@@ -26,7 +26,7 @@ struct EReaderTaskData
 
 struct EReaderData
 {
-    u16 status;
+    u32 status;
     u32 size;
     u32 *data;
 };
@@ -40,7 +40,7 @@ extern const u32 gMultiBootProgram_EReader_End[];
 
 static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 {
-    volatile u16 backupIME = REG_IME;
+    volatile u32 backupIME = REG_IME;
     REG_IME = 0;
     gIntrTable[1] = EReaderHelper_SerialCallback;
     gIntrTable[2] = EReaderHelper_Timer3Callback;
@@ -55,7 +55,7 @@ static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 
 static void EReader_Reset(struct EReaderData *eReader)
 {
-    volatile u16 backupIME = REG_IME;
+    volatile u32 backupIME = REG_IME;
     REG_IME = 0;
     EReaderHelper_ClearSendRecvMgr();
     EReaderHelper_RestoreRegsState();
@@ -98,8 +98,8 @@ static void OpenEReaderLink(void)
 
 static bool32 ValidateEReaderConnection(void)
 {
-    volatile u16 backupIME;
-    u16 handshakes[MAX_LINK_PLAYERS];
+    volatile u32 backupIME;
+    u32 handshakes[MAX_LINK_PLAYERS];
 
     backupIME = REG_IME;
     REG_IME = 0;
@@ -145,7 +145,7 @@ enum {
     RECV_TIMEOUT,
 };
 
-static u32 TryReceiveCard(u32 *state, u16 *timer)
+static u32 TryReceiveCard(u32 *state, u32 *timer)
 {
     if (*state >= RECV_STATE_EXCHANGE
      && *state <= RECV_STATE_WAIT_DISCONNECT
@@ -248,12 +248,12 @@ void CreateEReaderTask(void)
     data->buffer = AllocZeroed(0x2000);
 }
 
-static void ResetTimer(u16 *timer)
+static void ResetTimer(u32 *timer)
 {
     *timer = 0;
 }
 
-static bool32 UpdateTimer(u16 *timer, u16 time)
+static bool32 UpdateTimer(u32 *timer, u32 time)
 {
     if (++(*timer) > time)
     {

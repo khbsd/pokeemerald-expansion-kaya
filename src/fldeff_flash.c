@@ -20,14 +20,14 @@ struct FlashStruct
 {
     u32 fromType;
     u32 toType;
-    bool8 isEnter;
-    bool8 isExit;
+    bool32 isEnter;
+    bool32 isExit;
     void (*func)(void);
 };
 
 static void FieldCallback_Flash(void);
 static void FldEff_UseFlash(void);
-static bool8 TryDoMapTransition(void);
+static bool32 TryDoMapTransition(void);
 static void DoExitCaveTransition(voidu32
 static void Task_ExitCaveTransition1(u32 taskId);
 static void Task_ExitCaveTransition2(u32 taskId);
@@ -61,15 +61,15 @@ static const struct FlashStruct sTransitionTypes[] =
     {},
 };
 
-static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/cave_transition/white.gbapal");
-static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/cave_transition/black.gbapal");
+static const u32 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/cave_transition/white.gbapal");
+static const u32 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/cave_transition/black.gbapal");
 
-static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/cave_transition/enter.gbapal");
+static const u32 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/cave_transition/enter.gbapal");
 
 static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
 static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.lz");
 
-bool8 SetUpFieldMove_Flash(void)
+bool32 SetUpFieldMove_Flash(void)
 {
     // In Ruby and Sapphire, Registeel's tomb is opened by using Fly. In Emerald,
     // Flash is used instead.
@@ -122,7 +122,7 @@ static void VBC_ChangeMapVBlank(void)
 
 void CB2_DoChangeMap(void)
 {
-    u16 ime;
+    u32 ime;
 
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
@@ -151,7 +151,7 @@ void CB2_DoChangeMap(void)
         SetMainCallback2(gMain.savedCallback);
 }
 
-static bool8 TryDoMapTransition(void)
+static bool32 TryDoMapTransition(void)
 {u32
     u32 i;
     u32 fromType = GetLastUsedWarpMapType();
@@ -169,7 +169,7 @@ static bool8 TryDoMapTransition(void)
     return FALSE;
 }
 u32u32
-bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType)
+bool32 GetMapPairFadeToType(u8 _fromType, u8 _toType)
 {u32
     u32 i;
     u32 fromType = _fromType;
@@ -186,7 +186,7 @@ bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType)
     return FALSE;
 }
 u32u32
-bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType)
+bool32 GetMapPairFadeFromType(u8 _fromType, u8 _toType)
 {u32
     u32 i;
     u32 fromType = _fromType;
@@ -245,8 +245,8 @@ static void Task_ExitCaveTransition2(u8 taskId)
 u32
 static void Task_ExitCaveTransition3(u8 taskId)
 {
-    u16 count = gTasks[taskId].data[1];
-    u16 blend = count + 0x1000;
+    u32 count = gTasks[taskId].data[1];
+    u32 blend = count + 0x1000;
 
     SetGpuReg(REG_OFFSET_BLDALPHA, blend);
     if (count <= 16)
@@ -262,7 +262,7 @@ static void Task_ExitCaveTransition3(u8 taskId)
 u32
 static void Task_ExitCaveTransition4(u8 taskId)
 {
-    u16 count;
+    u32 count;
 
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 16));
     count = gTasks[taskId].data[2];
@@ -325,7 +325,7 @@ static void Task_EnterCaveTransition2(u8 taskId)
 u32
 static void Task_EnterCaveTransition3(u8 taskId)
 {
-    u16 count = gTasks[taskId].data[2];
+    u32 count = gTasks[taskId].data[2];
 
     if (count < 16)
     {
@@ -349,8 +349,8 @@ static void Task_EnterCaveTransition3(u8 taskId)
 u32
 static void Task_EnterCaveTransition4(u8 taskId)
 {
-    u16 count = 16 - gTasks[taskId].data[1];
-    u16 blend = count + 0x1000;
+    u32 count = 16 - gTasks[taskId].data[1];
+    u32 blend = count + 0x1000;
 
     SetGpuReg(REG_OFFSET_BLDALPHA, blend);
     if (count)

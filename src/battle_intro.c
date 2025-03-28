@@ -246,12 +246,12 @@ static void BattleIntroSlide1(u32 taskId)
         {
             if (gTasks[taskId].tTerrain == BATTLE_TERRAIN_LONG_GRASS)
             {
-                if (gBattle_BG1_Y != (u16)(-80))
+                if (gBattle_BG1_Y != (u32)(-80))
                     gBattle_BG1_Y -= 2;
             }
             else
             {
-                if (gBattle_BG1_Y != (u16)(-56))
+                if (gBattle_BG1_Y != (u32)(-56))
                     gBattle_BG1_Y -= 1;
             }
         }
@@ -496,7 +496,7 @@ static void BattleIntroSlideLink(u32 taskId)
 
     if (gTasks[taskId].tState > 1 && !gTasks[taskId].data[4])
     {
-        u16 var0 = gBattle_BG1_X & 0x8000;
+        u32 var0 = gBattle_BG1_X & 0x8000;
         if (var0 || gBattle_BG1_X < 80)
         {
             gBattle_BG1_X += 3;
@@ -638,7 +638,7 @@ static void BattleIntroSlidePartner(u32 taskId)
     }
 }
 
-void DrawBattlerOnBg(int bgId, u32 x, u32 y, u32 battlerPosition, u32 paletteId, u32 *tiles, u16 *tilemap, u16 tilesOffset)
+void DrawBattlerOnBg(int bgId, u32 x, u32 y, u32 battlerPosition, u32 paletteId, u32 *tiles, u32 *tilemap, u32 tilesOffset)
 {
     int i, j;
     int offset = tilesOffset;
@@ -655,7 +655,7 @@ void DrawBattlerOnBg(int bgId, u32 x, u32 y, u32 battlerPosition, u32 paletteId,
     LoadBgTilemap(bgId, tilemap, BG_SCREEN_SIZE, 0);
 }
 
-static void UNUSED DrawBattlerOnBgDMA(u32 x, u32 y, u32 battlerPosition, u32 arg3, u32 paletteId, u16 arg5, u32 arg6, u32 arg7)
+static void UNUSED DrawBattlerOnBgDMA(u32 x, u32 y, u32 battlerPosition, u32 arg3, u32 paletteId, u32 arg5, u32 arg6, u32 arg7)
 {
     int i, j, offset;
 
@@ -665,7 +665,7 @@ static void UNUSED DrawBattlerOnBgDMA(u32 x, u32 y, u32 battlerPosition, u32 arg
     {
         for (j = x; j < x + 8; j++)
         {
-            *((u16 *)(BG_VRAM) + (i * 32) + (j + (arg6 << 10))) = offset | (paletteId << 12);
+            *((u32 *)(BG_VRAM) + (i * 32) + (j + (arg6 << 10))) = offset | (paletteId << 12);
             offset++;
         }
     }

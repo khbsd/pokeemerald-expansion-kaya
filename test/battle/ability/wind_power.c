@@ -187,7 +187,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
 
 DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
 {
-    bool8 opponentSide;
+    bool32 opponentSide;
 
     PARAMETRIZE {opponentSide = TRUE;}
     PARAMETRIZE {opponentSide = FALSE;}

@@ -2,9 +2,9 @@
 #include "gba/gba.h"
 #include "multiboot.h"
 
-static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
+static u32 MultiBoot_required_data[MULTIBOOT_NCHILD];
 
-static int MultiBootSend(struct MultiBootParam *mp, u16 data);
+static int MultiBootSend(struct MultiBootParam *mp, u32 data);
 static int MultiBootHandShake(struct MultiBootParam *mp);
 static void MultiBootWaitCycles(u32 cycles);
 static void MultiBootWaitSendDone(void);
@@ -287,7 +287,7 @@ output_burst:
     }
 }
 
-static int MultiBootSend(struct MultiBootParam *mp, u16 data)
+static int MultiBootSend(struct MultiBootParam *mp, u32 data)
 {
     int i;
 
@@ -317,7 +317,7 @@ void MultiBootStartProbe(struct MultiBootParam *mp)
     mp->probe_count = 1;
 }
 
-void MultiBootStartMaster(struct MultiBootParam *mp, const u32 *srcp, int length, u32 palette_color, s8 palette_speed)
+void MultiBootStartMaster(struct MultiBootParam *mp, const u32 *srcp, int length, u32 palette_color, s32 palette_speed)
 {
     int i = 0;
 

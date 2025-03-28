@@ -472,12 +472,12 @@ const struct SpriteTemplate gWillOWispFireSpriteTemplate =
 // Directions for shaking up/down or left/right in AnimTask_ShakeTargetInPattern
 // Only first 10 values are ever accessed.
 // First pattern results in larger shakes, second results in faster oscillation
-static const s8 sShakeDirsPattern0[16] =
+static const s32 sShakeDirsPattern0[16] =
 {
     -1, -1, 0, 1, 1, 0, 0, -1, -1, 1, 1, 0, 0, -1, 0, 1,
 };
 
-static const s8 sShakeDirsPattern1[16] =
+static const s32 sShakeDirsPattern1[16] =
 {
     -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
 };
@@ -1016,7 +1016,7 @@ static void AnimTask_EruptionLaunchRocks_Step(u8 taskId)
 static void CreateEruptionLaunchRocks(u8 spriteId, u8 taskId, u8 activeSpritesIdx)
 {
     u32 i, j;
-    s8 sign;
+    s32 sign;
 
     u32 y = GetEruptionLaunchRockInitialYPos(spriteId);
     u32 x = gSprites[spriteId].x;
@@ -1437,7 +1437,7 @@ void AnimTask_BlendBackground(u8 taskId)
 // Shakes target horizontally or vertically tMaxShakes times, following a set pattern of alternations
 void AnimTask_ShakeTargetInPattern(u8 taskId)
 {
-    s8 dir;
+    s32 dir;
     u8 spriteId;
 
     if (gTasks[taskId].tShakeNum == 0)

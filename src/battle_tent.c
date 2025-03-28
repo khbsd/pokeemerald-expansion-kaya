@@ -56,7 +56,7 @@ static void GenerateInitialRentalMons(void);
  *
  */
 
-static u16 sRandMonId;
+static u32 sRandMonId;
 
 void static (*const sVerdanturfTentFuncs[])(void) =
 {
@@ -70,7 +70,7 @@ void static (*const sVerdanturfTentFuncs[])(void) =
     [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
-static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
+static const u32 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
@@ -83,7 +83,7 @@ void static (*const sFallarborTentFuncs[])(void) =
     [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
-static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
+static const u32 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
@@ -99,7 +99,7 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
-static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
+static const u32 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
 void CallVerdanturfTentFunction(void)
@@ -283,7 +283,7 @@ static void SwapRentalMons(void)
     DoBattleFactorySwapScreen();
 }
 
-bool8 InSlateportBattleTent(void)
+bool32 InSlateportBattleTent(void)
 {
     return gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
            && (gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_CORRIDOR || gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_BATTLE_ROOM);
@@ -293,11 +293,11 @@ static void GenerateInitialRentalMons(void)
 {
     s32 i, j;
     u32 firstMonId;
-    u16 monSetId;
-    u16 currSpecies;
-    u16 species[PARTY_SIZE];
-    u16 monIds[PARTY_SIZE];
-    u16 heldItems[PARTY_SIZE];
+    u32 monSetId;
+    u32 currSpecies;
+    u32 species[PARTY_SIZE];
+    u32 monIds[PARTY_SIZE];
+    u32 heldItems[PARTY_SIZE];
 
     firstMonId = 0;
     gFacilityTrainers = gSlateportBattleTentTrainers;
@@ -352,11 +352,11 @@ static void GenerateInitialRentalMons(void)
 
 static void GenerateOpponentMons(void)
 {
-    u16 trainerId;
+    u32 trainerId;
     s32 i, j, k;
-    const u16 *monSet;
-    u16 species[FRONTIER_PARTY_SIZE];
-    u16 heldItems[FRONTIER_PARTY_SIZE];
+    const u32 *monSet;
+    u32 species[FRONTIER_PARTY_SIZE];
+    u32 heldItems[FRONTIER_PARTY_SIZE];
     s32 numMons = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;

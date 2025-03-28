@@ -18,7 +18,7 @@ extern const u32 gText_ClearingData[];
 static void Task_DoClearSaveDataScreenYesNo(u32);
 static void Task_ClearSaveDataScreenYesNoChoice(u32);
 static void Task_ClearSaveData(u32);
-static bool8 SetupClearSaveDataScreen(void);
+static bool32 SetupClearSaveDataScreen(void);
 static void CB2_FadeAndDoReset(void);
 static void InitClearSaveDataScreenWindows(void);
 
@@ -120,9 +120,9 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-static bool8 SetupClearSaveDataScreen(void)
+static bool32 SetupClearSaveDataScreen(void)
 {
-    u16 i;
+    u32 i;
 
     switch(gMain.state)
     {
@@ -150,10 +150,10 @@ static bool8 SetupClearSaveDataScreen(void)
         gPlttBufferUnfaded[1] = RGB(5, 10, 14);
         gPlttBufferFaded[1] = RGB(5, 10, 14);
         for (i = 0; i < 0x10; i++)
-            ((u16 *)(VRAM + 0x20))[i] = 0x1111;
+            ((u32 *)(VRAM + 0x20))[i] = 0x1111;
 
         for (i = 0; i < 0x400; i++)
-            ((u16 *)(BG_SCREEN_ADDR(30)))[i] = 0x0001;
+            ((u32 *)(BG_SCREEN_ADDR(30)))[i] = 0x0001;
         ResetTasks();
         ResetSpriteData();
         ResetBgsAndClearDma3BusyFlags(0);

@@ -100,7 +100,7 @@ static void AnimTask_RolePlaySilhouette_Step2(u8);
 static void AnimTask_AcidArmor_Step(u8);
 static void AnimTask_DeepInhale_Step(u8);
 static void AnimTask_SquishAndSweatDroplets_Step(u8);
-static void CreateSweatDroplets(u8, bool8);
+static void CreateSweatDroplets(u8, bool32);
 static void AnimTask_FacadeColorBlend_Step(u8);
 static void AnimTask_GlareEyeDots_Step(u8);
 static void GetGlareEyeDotCoords(s16, s16, s16, s16, u8, u8, s16 *, s16 *);
@@ -592,7 +592,7 @@ const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-const s8 gMorningSunLightBeamCoordsTable[] =
+const s32 gMorningSunLightBeamCoordsTable[] =
 {
     0xE8,
     0x18,
@@ -637,7 +637,7 @@ const struct SpriteTemplate gGreenStarSpriteTemplate =
     .callback = AnimGreenStar,
 };
 
-const s8 gDoomDesireLightBeamCoordTable[] =
+const s32 gDoomDesireLightBeamCoordTable[] =
 {
     0x78,
     0x50,
@@ -2284,7 +2284,7 @@ static void AnimWishStar_Step(struct Sprite *sprite)
 static void AnimMiniTwinklingStar(struct Sprite *sprite)
 {
     u8 rand;
-    s8 y;
+    s32 y;
 
     rand = Random2() & 3;
     if (rand == 0)
@@ -3401,7 +3401,7 @@ static void AnimReversalOrb_Step(struct Sprite *sprite)
 // Copies the target mon's sprite, and makes a white silhouette that shrinks away.
 void AnimTask_RolePlaySilhouette(u8 taskId)
 {
-    bool8 isBackPic, isShiny;
+    bool32 isBackPic, isShiny;
     u32 personality;
     u32 species;
     s16 xOffset;
@@ -3992,10 +3992,10 @@ static void AnimTask_SquishAndSweatDroplets_Step(u8 taskId)
     }
 }
 
-static void CreateSweatDroplets(u8 taskId, bool8 lowerDroplets)
+static void CreateSweatDroplets(u8 taskId, bool32 lowerDroplets)
 {
     u8 i;
-    s8 xOffset, yOffset;
+    s32 xOffset, yOffset;
     struct Task *task;
     s16 xCoords[4];
     s16 yCoords[2];
@@ -5271,7 +5271,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     int personality;
     u32 species;
     u8 subpriority;
-    bool8 isBackPic, isShiny;
+    bool32 isBackPic, isShiny;
     s16 x;
 
     switch (gTasks[taskId].data[0])

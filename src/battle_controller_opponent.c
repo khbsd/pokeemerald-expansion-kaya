@@ -147,8 +147,8 @@ static void Intro_DelayAndEnd(u32 battler)
 
 static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
-    bool8 healthboxAnimDone = FALSE;
-    bool8 twoMons;
+    bool32 healthboxAnimDone = FALSE;
+    bool32 twoMons;
 
     twoMons = TwoOpponentIntroMons(battler);
     if (!twoMons || ((twoMons && (gBattleTypeFlags & BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT) || (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)))

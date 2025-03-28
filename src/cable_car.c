@@ -38,8 +38,8 @@ struct CableCar
     u32 bgTaskId;
     u32 state;
     u32 weather;
-    u16 weatherDelay;
-    u16 timer;
+    u32 weatherDelay;
+    u32 timer;
     u32 bg0HorizontalOffset;
     u32 bg0VerticalOffset;
     u32 unused0[2];
@@ -58,14 +58,14 @@ struct CableCar
     u32 groundYOffset;
     u32 groundXBase;
     u32 groundYBase;
-    u16 groundTileBuffer[9][12];
+    u32 groundTileBuffer[9][12];
     u32 unused3[2];
-    u16 bgTilemapBuffers[4][BG_SCREEN_SIZE];
-    u16 *groundTilemap;
-    u16 *treesTilemap;
-    u16 *bgMountainsTilemap;
-    const u16 *pylonTopTilemap;
-    u16 *pylonPoleTilemap;
+    u32 bgTilemapBuffers[4][BG_SCREEN_SIZE];
+    u32 *groundTilemap;
+    u32 *treesTilemap;
+    u32 *bgMountainsTilemap;
+    const u32 *pylonTopTilemap;
+    u32 *pylonPoleTilemap;
 };
 
 static EWRAM_DATA struct CableCar *sCableCar = NULL;
@@ -77,9 +77,9 @@ static EWRAM_DATA u32 sGroundY_Down = 0;
 static EWRAM_DATA u32 sGroundSegmentY_Down = 0;
 
 static void CB2_LoadCableCar(void);
-static void SetBgRegs(bool8);
+static void SetBgRegs(bool32);
 static void CreateCableCarSprites(void);
-static void InitGroundTilemapData(bool8);
+static void InitGroundTilemapData(bool32);
 static void Task_CableCar(u32);
 static void Task_AnimateBgGoingUp(u32);
 static void Task_AnimateBgGoingDown(u32);
@@ -131,11 +131,11 @@ static const struct BgTemplate sBgTemplates[4] = {
     },
 };
 
-static const u16 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.lz");
-static const u16 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.lz");
-static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.lz");
-static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
-static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
+static const u32 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.lz");
+static const u32 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.lz");
+static const u32 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.lz");
+static const u32 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
+static const u32 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
@@ -242,7 +242,7 @@ void CableCar(void)
 
 static void CB2_LoadCableCar(void)
 {
-    u16 imebak;
+    u32 imebak;
     u32 i = 0;
     u32 sizeOut = 0;
 
@@ -712,7 +712,7 @@ static void SpriteCB_HikerGoingDown(struct Sprite *sprite)
 
 #undef sTimer
 
-static void SetBgRegs(bool8 active)
+static void SetBgRegs(bool32 active)
 {
     switch (active)
     {
@@ -790,12 +790,12 @@ static void CreateCableCarSprites(void)
     u32 spriteId;
     u32 i;
 
-    u16 playerGraphicsIds[2] = {
+    u32 playerGraphicsIds[2] = {
         [MALE]   = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
         [FEMALE] = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
-    u16 rval = Random();
-    u16 hikerGraphicsIds[4] = {
+    u32 rval = Random();
+    u32 hikerGraphicsIds[4] = {
         OBJ_EVENT_GFX_HIKER,
         OBJ_EVENT_GFX_CAMPER,
         OBJ_EVENT_GFX_PICNICKER,
@@ -1037,7 +1037,7 @@ static void DrawNextGroundSegmentGoingDown(void)
     }
 }
 
-static void InitGroundTilemapData(bool8 goingDown)
+static void InitGroundTilemapData(bool32 goingDown)
 {
     switch (goingDown)
     {

@@ -14,7 +14,7 @@ extern const u32 gText_Peekaboo[];
 
 static void CB2_HandleGivenWaldaPhrase(void);
 static u32 GetWaldaPhraseInputCase(u32 *);
-static bool32 TryCalculateWallpaper(u16 *, u16 *, u32 *, u32 *, u16, u32 *);
+static bool32 TryCalculateWallpaper(u32 *, u32 *, u32 *, u32 *, u32, u32 *);
 static void SetWallpaperDataFromLetter(u32 *, u32 *, u32, u32, u32);
 static u32 GetWallpaperDataBits(u32 *, u32, u32);
 static void RotateWallpaperDataLeft(u32 *, s32, s32);
@@ -38,7 +38,7 @@ enum
     PHRASE_EMPTY
 };
 
-u16 TryBufferWaldaPhrase(void)
+u32 TryBufferWaldaPhrase(void)
 {
     if (IsWaldaPhraseEmpty())
         return FALSE;
@@ -93,11 +93,11 @@ static u32 GetWaldaPhraseInputCase(u32 *inputPtr)
     return PHRASE_CHANGED;
 }
 
-u16 TryGetWallpaperWithWaldaPhrase(void)
+u32 TryGetWallpaperWithWaldaPhrase(void)
 {
-    u16 backgroundClr, foregroundClr;
+    u32 backgroundClr, foregroundClr;
     u32 patternId, iconId;
-    u16 trainerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
+    u32 trainerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
     gSpecialVar_Result = TryCalculateWallpaper(&backgroundClr, &foregroundClr, &iconId, &patternId, trainerId, GetWaldaPhrasePtr());
 
     if (gSpecialVar_Result)
@@ -108,7 +108,7 @@ u16 TryGetWallpaperWithWaldaPhrase(void)
     }
 
     SetWaldaWallpaperLockedOrUnlocked(gSpecialVar_Result);
-    return (bool8)gSpecialVar_Result;
+    return (bool32)gSpecialVar_Result;
 }
 
 static u32 GetLetterTableId(u32 letter)
@@ -140,12 +140,12 @@ static u32 GetLetterTableId(u32 letter)
 #define KEY          data[8]
 #define NUM_WALLPAPER_DATA_BYTES 9
 #define TO_BIT_OFFSET(i)  (3 + (8 * (i))) // Convert a position in the phrase to a bit number into the wallpaper data array
-static bool32 TryCalculateWallpaper(u16 *backgroundClr, u16 *foregroundClr, u32 *iconId, u32 *patternId, u16 trainerId, u32 *phrase)
+static bool32 TryCalculateWallpaper(u32 *backgroundClr, u32 *foregroundClr, u32 *iconId, u32 *patternId, u32 trainerId, u32 *phrase)
 {
     s32 i;
     ALIGNED(2) u32 data[NUM_WALLPAPER_DATA_BYTES];
     u32 charsByTableId[WALDA_PHRASE_LENGTH];
-    u16 *ptr;
+    u32 *ptr;
 
     // Reject any phrase that does not use the full length
     if (StringLength(phrase) != WALDA_PHRASE_LENGTH)
@@ -186,10 +186,10 @@ static bool32 TryCalculateWallpaper(u16 *backgroundClr, u16 *foregroundClr, u32 
         return FALSE;
 
     // Successful phrase, save resulting wallpaper
-    ptr = (u16 *) &BG_COLOR_LO;
+    ptr = (u32 *) &BG_COLOR_LO;
     *backgroundClr = *ptr;
 
-    ptr = (u16 *) &FG_COLOR_LO;
+    ptr = (u32 *) &FG_COLOR_LO;
     *foregroundClr = *ptr;
 
     *iconId = ICON_ID;
@@ -227,7 +227,7 @@ static void MaskWallpaperData(u32 *data, u32 size, u32 mask)
         data[i] ^= mask;
 }
 
-static bool8 GetWallpaperDataBit(u32 *data, u32 bitNum)
+static bool32 GetWallpaperDataBit(u32 *data, u32 bitNum)
 {
     u32 i = bitNum / 8;
     u32 flag = (1 << 7) >> (bitNum % 8);

@@ -83,7 +83,7 @@ void RecordedBattle_CopyBattlerMoves(u32 battler);
 void RecordedBattle_CheckMovesetChanges(u8 mode);
 u32 GetAiScriptsInRecordedBattle(void);
 void RecordedBattle_SetPlaybackFinished(void);
-bool8 RecordedBattle_CanStopPlayback(void);
+bool32 RecordedBattle_CanStopPlayback(void);
 void GetRecordedBattleRecordMixFriendName(u8 *dst);
 u8 GetRecordedBattleRecordMixFriendClass(void);
 u8 GetRecordedBattleApprenticeId(void);

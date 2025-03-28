@@ -19,36 +19,36 @@
     This file handles category 3. Functions for the other two are handled in battle_transition.c
 */
 
-typedef bool8 (*TransitionStateFunc)(struct Task *task);
+typedef bool32 (*TransitionStateFunc)(struct Task *task);
 
 static void SpriteCB_LogoCircleSlide(struct Sprite *sprite);
 static void SpriteCB_LogoCircleSpiral(struct Sprite *sprite);
-static bool8 WaitForLogoCirclesAnim(struct Task *task);
-static bool8 FadeInCenterLogoCircle(struct Task *task);
-static bool8 Circles_Init(struct Task *task);
-static bool8 CirclesMeet_CreateSprites(struct Task *task);
-static bool8 CirclesMeet_End(struct Task *task);
-static bool8 CirclesCross_CreateSprites(struct Task *task);
-static bool8 CirclesCross_End(struct Task *task);
-static bool8 CirclesAsymmetricSpiral_CreateSprites(struct Task *task);
-static bool8 CirclesAsymmetricSpiral_End(struct Task *task);
-static bool8 CirclesSymmetricSpiral_CreateSprites(struct Task *task);
-static bool8 CirclesSymmetricSpiral_End(struct Task *task);
-static bool8 CirclesMeetInSeq_CreateSprites(struct Task *task);
-static bool8 CirclesMeetInSeq_End(struct Task *task);
-static bool8 CirclesCrossInSeq_CreateSprites(struct Task *task);
-static bool8 CirclesCrossInSeq_End(struct Task *task);
-static bool8 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task);
-static bool8 CirclesAsymmetricSpiralInSeq_End(struct Task *task);
-static bool8 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task);
-static bool8 CirclesSymmetricSpiralInSeq_End(struct Task *task);
+static bool32 WaitForLogoCirclesAnim(struct Task *task);
+static bool32 FadeInCenterLogoCircle(struct Task *task);
+static bool32 Circles_Init(struct Task *task);
+static bool32 CirclesMeet_CreateSprites(struct Task *task);
+static bool32 CirclesMeet_End(struct Task *task);
+static bool32 CirclesCross_CreateSprites(struct Task *task);
+static bool32 CirclesCross_End(struct Task *task);
+static bool32 CirclesAsymmetricSpiral_CreateSprites(struct Task *task);
+static bool32 CirclesAsymmetricSpiral_End(struct Task *task);
+static bool32 CirclesSymmetricSpiral_CreateSprites(struct Task *task);
+static bool32 CirclesSymmetricSpiral_End(struct Task *task);
+static bool32 CirclesMeetInSeq_CreateSprites(struct Task *task);
+static bool32 CirclesMeetInSeq_End(struct Task *task);
+static bool32 CirclesCrossInSeq_CreateSprites(struct Task *task);
+static bool32 CirclesCrossInSeq_End(struct Task *task);
+static bool32 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task);
+static bool32 CirclesAsymmetricSpiralInSeq_End(struct Task *task);
+static bool32 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task);
+static bool32 CirclesSymmetricSpiralInSeq_End(struct Task *task);
 
 #define PALTAG_LOGO_CIRCLES 0x2E90
 
 static const u32 sLogoCenter_Gfx[] = INCBIN_U32("graphics/battle_transitions/frontier_logo_center.4bpp.lz");
 static const u32 sLogoCenter_Tilemap[] = INCBIN_U32("graphics/battle_transitions/frontier_logo_center.bin.lz");
 static const u32 sLogoCircles_Gfx[] = INCBIN_U32("graphics/battle_transitions/frontier_logo_circles.4bpp.lz");
-static const u16 sLogo_Pal[] = INCBIN_U16("graphics/battle_transitions/frontier_logo_circles.gbapal");
+static const u32 sLogo_Pal[] = INCBIN_U16("graphics/battle_transitions/frontier_logo_circles.gbapal");
 
 static const struct OamData sOamData_LogoCircles =
 {
@@ -218,7 +218,7 @@ static const TransitionStateFunc sFrontierCirclesSymmetricSpiralInSeq_Funcs[] =
 
 static void LoadLogoGfx(void)
 {
-    u16 *tilemap, *tileset;
+    u32 *tilemap, *tileset;
 
     GetBg0TilesDst(&tilemap, &tileset);
     LZ77UnCompVram(sLogoCenter_Gfx, tileset);
@@ -228,7 +228,7 @@ static void LoadLogoGfx(void)
     LoadSpritePalette(&sSpritePalette_LogoCircles);
 }
 
-static u32 CreateSlidingLogoCircleSprite(s16 x, s16 y, u32 delayX, u32 delayY, s8 speedX, s8 speedY, u32 spriteAnimNum)
+static u32 CreateSlidingLogoCircleSprite(s16 x, s16 y, u32 delayX, u32 delayY, s32 speedX, s32 speedY, u32 spriteAnimNum)
 {
     u32 spriteId = CreateSprite(&sSpriteTemplate_LogoCircles, x, y, 0);
 
@@ -349,7 +349,7 @@ static void DestroyLogoCirclesGfx(struct Task *task)
     DestroySprite(&gSprites[task->tCircle3SpriteId]);
 }
 
-static bool8 IsLogoCirclesAnimFinished(struct Task *task)
+static bool32 IsLogoCirclesAnimFinished(struct Task *task)
 {
     if (gSprites[task->tCircle1SpriteId].callback == SpriteCallbackDummy
      && gSprites[task->tCircle2SpriteId].callback == SpriteCallbackDummy
@@ -359,7 +359,7 @@ static bool8 IsLogoCirclesAnimFinished(struct Task *task)
         return FALSE;
 }
 
-static bool8 Circles_Init(struct Task *task)
+static bool32 Circles_Init(struct Task *task)
 {
     if (task->tTimer == 0)
     {
@@ -385,7 +385,7 @@ static bool8 Circles_Init(struct Task *task)
     }
 }
 
-static bool8 FadeInCenterLogoCircle(struct Task *task)
+static bool32 FadeInCenterLogoCircle(struct Task *task)
 {
     if (task->tBlend == 0)
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
@@ -404,7 +404,7 @@ static bool8 FadeInCenterLogoCircle(struct Task *task)
     }
     else
     {
-        u16 blnd;
+        u32 blnd;
 
         task->tBlend++;
         blnd = task->tBlend;
@@ -414,7 +414,7 @@ static bool8 FadeInCenterLogoCircle(struct Task *task)
     return FALSE;
 }
 
-static bool8 WaitForLogoCirclesAnim(struct Task *task)
+static bool32 WaitForLogoCirclesAnim(struct Task *task)
 {
     if (IsLogoCirclesAnimFinished(task) == TRUE)
         task->tState++;
@@ -427,7 +427,7 @@ void Task_FrontierCirclesMeet(u32 taskId)
     while (sFrontierCirclesMeet_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesMeet_CreateSprites(struct Task *task)
+static bool32 CirclesMeet_CreateSprites(struct Task *task)
 {
     task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, -51, 0, 0, 0,   2, 0);
     task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(-7,  193, 0, 0, 2,  -2, 1);
@@ -437,7 +437,7 @@ static bool8 CirclesMeet_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesMeet_End(struct Task *task)
+static bool32 CirclesMeet_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -453,7 +453,7 @@ void Task_FrontierCirclesCross(u32 taskId)
     while (sFrontierCirclesCross_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesCross_CreateSprites(struct Task *task)
+static bool32 CirclesCross_CreateSprites(struct Task *task)
 {
     task->tCircle1SpriteId = CreateSlidingLogoCircleSprite(120, 197, 0, 0, 0, -4, 0);
     task->tCircle2SpriteId = CreateSlidingLogoCircleSprite(241, 59,  0, 1, -4, 2, 1);
@@ -463,7 +463,7 @@ static bool8 CirclesCross_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesCross_End(struct Task *task)
+static bool32 CirclesCross_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -479,7 +479,7 @@ void Task_FrontierCirclesAsymmetricSpiral(u32 taskId)
     while (sFrontierCirclesAsymmetricSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesAsymmetricSpiral_CreateSprites(struct Task *task)
+static bool32 CirclesAsymmetricSpiral_CreateSprites(struct Task *task)
 {
     task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 45, 12,  4, 128, 0, -4, 0);
     task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(89,  97, 252, 4, 128, 0, -4, 1);
@@ -489,7 +489,7 @@ static bool8 CirclesAsymmetricSpiral_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesAsymmetricSpiral_End(struct Task *task)
+static bool32 CirclesAsymmetricSpiral_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -505,7 +505,7 @@ void Task_FrontierCirclesSymmetricSpiral(u32 taskId)
     while (sFrontierCirclesSymmetricSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesSymmetricSpiral_CreateSprites(struct Task *task)
+static bool32 CirclesSymmetricSpiral_CreateSprites(struct Task *task)
 {
     task->tCircle1SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 284, 8, 131, 35, -3, 0);
     task->tCircle2SpriteId = CreateSpiralingLogoCircleSprite(120, 80, 44,  8, 131, 35, -3, 1);
@@ -515,7 +515,7 @@ static bool8 CirclesSymmetricSpiral_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesSymmetricSpiral_End(struct Task *task)
+static bool32 CirclesSymmetricSpiral_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -531,7 +531,7 @@ void Task_FrontierCirclesMeetInSeq(u32 taskId)
     while (sFrontierCirclesMeetInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesMeetInSeq_CreateSprites(struct Task *task)
+static bool32 CirclesMeetInSeq_CreateSprites(struct Task *task)
 {
     if (task->tTimer == 0)
     {
@@ -551,7 +551,7 @@ static bool8 CirclesMeetInSeq_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesMeetInSeq_End(struct Task *task)
+static bool32 CirclesMeetInSeq_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -567,7 +567,7 @@ void Task_FrontierCirclesCrossInSeq(u32 taskId)
     while (sFrontierCirclesCrossInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesCrossInSeq_CreateSprites(struct Task *task)
+static bool32 CirclesCrossInSeq_CreateSprites(struct Task *task)
 {
     if (task->tTimer == 0)
     {
@@ -587,7 +587,7 @@ static bool8 CirclesCrossInSeq_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesCrossInSeq_End(struct Task *task)
+static bool32 CirclesCrossInSeq_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -603,7 +603,7 @@ void Task_FrontierCirclesAsymmetricSpiralInSeq(u32 taskId)
     while (sFrontierCirclesAsymmetricSpiralInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task)
+static bool32 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task)
 {
     if (task->tTimer == 0)
     {
@@ -623,7 +623,7 @@ static bool8 CirclesAsymmetricSpiralInSeq_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesAsymmetricSpiralInSeq_End(struct Task *task)
+static bool32 CirclesAsymmetricSpiralInSeq_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -639,7 +639,7 @@ void Task_FrontierCirclesSymmetricSpiralInSeq(u32 taskId)
     while (sFrontierCirclesSymmetricSpiralInSeq_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static bool8 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task)
+static bool32 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task)
 {
     if (task->tTimer == 0)
     {
@@ -659,7 +659,7 @@ static bool8 CirclesSymmetricSpiralInSeq_CreateSprites(struct Task *task)
     return FALSE;
 }
 
-static bool8 CirclesSymmetricSpiralInSeq_End(struct Task *task)
+static bool32 CirclesSymmetricSpiralInSeq_End(struct Task *task)
 {
     if (!gPaletteFade.active)
     {

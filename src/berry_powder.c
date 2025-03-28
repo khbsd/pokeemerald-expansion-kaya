@@ -141,7 +141,7 @@ void ApplyNewEncryptionKeyToBerryPowder(u32 encryptionKey)
     ApplyNewEncryptionKeyToWord(powder, encryptionKey);
 }
 
-static bool8 HasEnoughBerryPowder_(u32 cost)
+static bool32 HasEnoughBerryPowder_(u32 cost)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (DecryptBerryPowder(powder) < cost)
@@ -150,7 +150,7 @@ static bool8 HasEnoughBerryPowder_(u32 cost)
         return TRUE;
 }
 
-bool8 HasEnoughBerryPowder(void)
+bool32 HasEnoughBerryPowder(void)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (DecryptBerryPowder(powder) < gSpecialVar_0x8004)
@@ -159,7 +159,7 @@ bool8 HasEnoughBerryPowder(void)
         return TRUE;
 }
 
-bool8 GiveBerryPowder(u32 amountToAdd)
+bool32 GiveBerryPowder(u32 amountToAdd)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     u32 amount = DecryptBerryPowder(powder) + amountToAdd;
@@ -175,7 +175,7 @@ bool8 GiveBerryPowder(u32 amountToAdd)
     }
 }
 
-static bool8 UNUSED TakeBerryPowder_(u32 cost)
+static bool32 UNUSED TakeBerryPowder_(u32 cost)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (!HasEnoughBerryPowder_(cost))
@@ -185,7 +185,7 @@ static bool8 UNUSED TakeBerryPowder_(u32 cost)
     return TRUE;
 }
 
-bool8 TakeBerryPowder(void)
+bool32 TakeBerryPowder(void)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (!HasEnoughBerryPowder_(gSpecialVar_0x8004))
@@ -207,7 +207,7 @@ static void PrintBerryPowderAmount(u32 windowId, int amount, u32 x, u32 y, u32 s
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, y, speed, NULL);
 }
 
-static void DrawPlayerPowderAmount(u32 windowId, u16 baseTileOffset, u32 paletteNum, u32 amount)
+static void DrawPlayerPowderAmount(u32 windowId, u32 baseTileOffset, u32 paletteNum, u32 amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, baseTileOffset, paletteNum);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Powder, 0, 1, TEXT_SKIP_DRAW, NULL);

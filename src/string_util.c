@@ -112,9 +112,9 @@ u32 *StringAppendN(u32 *dest, const u32 *src, u32 n)
     return StringCopyN(dest, src, n);
 }
 
-u16 StringLength(const u32 *str)
+u32 StringLength(const u32 *str)
 {
-    u16 length = 0;
+    u32 length = 0;
 
     while (str[length] != EOS)
         length++;
@@ -122,9 +122,9 @@ u16 StringLength(const u32 *str)
     return length;
 }
 
-u16 StringLineLength(const u32 *str)
+u32 StringLineLength(const u32 *str)
 {
-    u16 i = 0, length = 0;
+    u32 i = 0, length = 0;
 
     while (str[length] != EOS)
     {
@@ -172,7 +172,7 @@ s32 StringCompareN(const u32 *str1, const u32 *str2, u32 n)
     return *str1 - *str2;
 }
 
-bool8 IsStringLengthAtLeast(const u32 *str, s32 n)
+bool32 IsStringLengthAtLeast(const u32 *str, s32 n)
 {
     u32 i;
 
@@ -200,7 +200,7 @@ u32 *ConvertIntToDecimalStringN(u32 *dest, s32 value, enum StringConvertMode mod
     for (powerOfTen = largestPowerOfTen; powerOfTen > 0; powerOfTen /= 10)
     {
         u32 c;
-        u16 digit = value / powerOfTen;
+        u32 digit = value / powerOfTen;
         s32 temp = value - (powerOfTen * digit);
 
         if (state == WRITING_DIGITS)
@@ -256,7 +256,7 @@ u32 *ConvertUIntToDecimalStringN(u32 *dest, u32 value, enum StringConvertMode mo
     for (powerOfTen = largestPowerOfTen; powerOfTen > 0; powerOfTen /= 10)
     {
         u32 c;
-        u16 digit = value / powerOfTen;
+        u32 digit = value / powerOfTen;
         u32 temp = value - (powerOfTen * digit);
 
         if (state == WRITING_DIGITS)
@@ -547,7 +547,7 @@ const u32 *GetExpandedPlaceholder(u32 id)
         return funcs[id]();
 }
 
-u32 *StringFill(u32 *dest, u32 c, u16 n)
+u32 *StringFill(u32 *dest, u32 c, u32 n)
 {
     u32 i;
 
@@ -558,7 +558,7 @@ u32 *StringFill(u32 *dest, u32 c, u16 n)
     return dest;
 }
 
-u32 *StringCopyPadded(u32 *dest, const u32 *src, u32 c, u16 n)
+u32 *StringCopyPadded(u32 *dest, const u32 *src, u32 c, u32 n)
 {
     while (*src != EOS)
     {
@@ -570,7 +570,7 @@ u32 *StringCopyPadded(u32 *dest, const u32 *src, u32 c, u16 n)
 
     n--;
 
-    while (n != (u16)-1)
+    while (n != (u32)-1)
     {
         *dest++ = c;
         n--;
@@ -580,7 +580,7 @@ u32 *StringCopyPadded(u32 *dest, const u32 *src, u32 c, u16 n)
     return dest;
 }
 
-u32 *StringFillWithTerminator(u32 *dest, u16 n)
+u32 *StringFillWithTerminator(u32 *dest, u32 n)
 {
     return StringFill(dest, EOS, n);
 }
@@ -786,8 +786,8 @@ void ConvertInternationalString(u32 *s, u32 language)
 
 void StripExtCtrlCodes(u32 *str)
 {
-    u16 srcIndex = 0;
-    u16 destIndex = 0;
+    u32 srcIndex = 0;
+    u32 destIndex = 0;
     while (str[srcIndex] != EOS)
     {
         if (str[srcIndex] == EXT_CTRL_CODE_BEGIN)

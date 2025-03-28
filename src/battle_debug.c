@@ -74,7 +74,7 @@ struct BattleDebugMenu
 
     struct BattleDebugModifyArrows modifyArrows;
     const struct BitfieldInfo *bitfield;
-    bool8 battlerWasChanged[MAX_BATTLERS_COUNT];
+    bool32 battlerWasChanged[MAX_BATTLERS_COUNT];
 
     u8 aiViewState;
 
@@ -817,7 +817,7 @@ static const u8 sBitsToMaxDigit[] =
     [8] = 3, // max 255
 };
 
-static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
+static const bool32 sHasChangeableEntries[LIST_ITEM_COUNT] =
 {
     [LIST_ITEM_MOVES] = TRUE,
     [LIST_ITEM_AI_MOVES_PTS] = TRUE,
@@ -1778,7 +1778,7 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         *(u8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_S8:
-        *(s8 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(s32 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_u32:
         *(u32 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;

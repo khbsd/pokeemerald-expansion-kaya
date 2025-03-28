@@ -20,7 +20,7 @@ STATIC_ASSERT(sizeof(struct TrainerHillChallenge) <= SECTOR_COUNTER_OFFSET, Trai
 
 struct SendRecvMgr
 {
-    bool8 isParent;
+    bool32 isParent;
     u32 state;              // EREADER_XFR_STATE_*
     u32 xferState;          // EREADER_XFER_*
     u32 checksumResult;     // EREADER_CHECKSUM_*
@@ -32,23 +32,23 @@ struct SendRecvMgr
 };
 
 static void GetKeyInput(void);
-static u16 DetermineSendRecvState(u32);
+static u32 DetermineSendRecvState(u32);
 static void EnableSio(void);
 static void DisableTm3(void);
 static void SetUpTransferManager(size_t, const void *, void *);
 static void StartTm3(void);
 
 static struct SendRecvMgr sSendRecvMgr;
-static u16 sJoyNewOrRepeated;
-static u16 sJoyNew;
-static u16 sSendRecvStatus;
-static u16 sCounter1;
+static u32 sJoyNewOrRepeated;
+static u32 sJoyNew;
+static u32 sSendRecvStatus;
+static u32 sCounter1;
 static u32 sCounter2;
-static u16 sSavedIme;
-static u16 sSavedIe;
-static u16 sSavedTm3Cnt;
-static u16 sSavedSioCnt;
-static u16 sSavedRCnt;
+static u32 sSavedIme;
+static u32 sSavedIe;
+static u32 sSavedTm3Cnt;
+static u32 sSavedSioCnt;
+static u32 sSavedRCnt;
 
 static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [0] = {
@@ -391,7 +391,7 @@ static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTra
     return TRUE;
 }
 
-bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
+bool32 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
 {
     u32 i;
     u32 checksum;
@@ -706,9 +706,9 @@ int EReaderHandleTransfer(u32 mode, size_t size, const void * data, void * recvB
          | (sSendRecvMgr.checksumResult << EREADER_CHECKSUM_SHIFT);
 }
 
-static u16 DetermineSendRecvState(u32 mode)
+static u32 DetermineSendRecvState(u32 mode)
 {
-    bool16 resp;
+    bool32 resp;
     if ((*(vu32 *)REG_ADDR_SIOCNT & (SIO_MULTI_SI | SIO_MULTI_SD)) == SIO_MULTI_SD && mode)
         resp = sSendRecvMgr.isParent = TRUE;
     else
@@ -750,9 +750,9 @@ void EReaderHelper_Timer3Callback(void)
 
 void EReaderHelper_SerialCallback(void)
 {
-    u16 i, cnt1, cnt2;
+    u32 i, cnt1, cnt2;
     u32 recv32;
-    u16 recv[4];
+    u32 recv[4];
 
     switch (sSendRecvMgr.state)
     {

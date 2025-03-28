@@ -98,8 +98,8 @@ static void LoadDefaultBg(void);
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
-EWRAM_DATA static s8 sAnimFramesToWait = 0;
-EWRAM_DATA bool8 gAnimScriptActive = FALSE;
+EWRAM_DATA static s32 sAnimFramesToWait = 0;
+EWRAM_DATA bool32 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
 EWRAM_DATA u8 gAnimSoundTaskCount = 0;
 EWRAM_DATA struct DisableStruct *gAnimDisableStructPtr = NULL;
@@ -118,7 +118,7 @@ EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u32 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gAnimCustomPanning = 0;
-EWRAM_DATA static bool8 sAnimHideHpBoxes = FALSE;
+EWRAM_DATA static bool32 sAnimHideHpBoxes = FALSE;
 
 #include "data/battle_anim.h"
 
@@ -588,7 +588,7 @@ static s16 GetSubpriorityForMoveAnim(u8 argVar)
         else
             argVar *= -1;
 
-        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s32)(argVar);
     }
     else
     {
@@ -597,7 +597,7 @@ static s16 GetSubpriorityForMoveAnim(u8 argVar)
         else
             argVar *= -1;
 
-        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s32)(argVar);
     }
 
     if (subpriority < 3)
@@ -952,7 +952,7 @@ static void Task_InitUpdateMonBg(u8 taskId)
 
 static void Cmd_monbg(void)
 {
-    bool8 toBG_2;
+    bool32 toBG_2;
     u8 taskId;
     u8 battlerId;
     u8 animBattler;
@@ -1026,7 +1026,7 @@ u8 GetAnimBattlerId(u8 wantedBattler)
     }
 }
 
-bool8 IsBattlerSpriteVisible(u8 battlerId)
+bool32 IsBattlerSpriteVisible(u8 battlerId)
 {
     if (IsContest())
     {
@@ -1045,7 +1045,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
     return FALSE;
 }
 
-void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
+void MoveBattlerSpriteToBG(u8 battlerId, bool32 toBG_2, bool32 setSpriteInvisible)
 {
     struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
@@ -1154,7 +1154,7 @@ static void FlipBattlerBgTiles(void)
     }
 }
 
-void RelocateBattleBgPal(u32 paletteNum, u32 *dest, u32 offset, bool8 largeScreen)
+void RelocateBattleBgPal(u32 paletteNum, u32 *dest, u32 offset, bool32 largeScreen)
 {
     s32 i, j;
     s32 size;
@@ -1171,7 +1171,7 @@ void RelocateBattleBgPal(u32 paletteNum, u32 *dest, u32 offset, bool8 largeScree
     }
 }
 
-void ResetBattleAnimBg(bool8 toBG2)
+void ResetBattleAnimBg(bool32 toBG2)
 {
     struct BattleAnimBgData animBg;
     GetBattleAnimBg1Data(&animBg);
@@ -1293,7 +1293,7 @@ static void Task_ClearMonBg(u8 taskId)
 // Equivalent to Cmd_monbg but never creates Task_InitUpdateMonBg / Task_UpdateMonBg
 static void Cmd_monbg_static(void)
 {
-    bool8 toBG_2;
+    bool32 toBG_2;
     u8 battlerId;
     u8 animBattlerId;
 
@@ -1375,7 +1375,7 @@ static void Task_ClearMonBgStatic(u8 taskId)
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
-        bool8 toBG_2;
+        bool32 toBG_2;
         u8 battlerId = gTasks[taskId].data[2];
         u8 position = GetBattlerPosition(battlerId);
         if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
@@ -1479,7 +1479,7 @@ static void Cmd_goto(void)
 
 // Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior.
 // As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
-bool8 IsContest(void)
+bool32 IsContest(void)
 {
     if (!gMain.inBattle)
         return TRUE;
@@ -1640,7 +1640,7 @@ static void Cmd_changebg(void)
     sBattleAnimScriptPtr++;
 }
 
-s8 BattleAnimAdjustPanning(s8 pan)
+s32 BattleAnimAdjustPanning(s32 pan)
 {
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
@@ -1682,7 +1682,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
     return pan;
 }
 
-s8 BattleAnimAdjustPanning2(s8 pan)
+s32 BattleAnimAdjustPanning2(s32 pan)
 {
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
@@ -1728,7 +1728,7 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan)
 static void Cmd_playsewithpan(void)
 {
     u32 songId;
-    s8 pan;
+    s32 pan;
 
     sBattleAnimScriptPtr++;
     songId = T1_READ_16(sBattleAnimScriptPtr);
@@ -1739,7 +1739,7 @@ static void Cmd_playsewithpan(void)
 
 static void Cmd_setpan(void)
 {
-    s8 pan;
+    s32 pan;
 
     sBattleAnimScriptPtr++;
     pan = sBattleAnimScriptPtr[0];
@@ -1757,7 +1757,7 @@ static void Cmd_setpan(void)
 static void Cmd_panse(void)
 {
     u32 songNum;
-    s8 currentPanArg, incrementPan, incrementPanArg, currentPan, targetPan;
+    s32 currentPanArg, incrementPan, incrementPanArg, currentPan, targetPan;
     u8 framesToWait;
     u8 taskId;
 
@@ -1830,7 +1830,7 @@ void Task_PanFromInitialToTarget(u8 taskId)
 static void Cmd_panse_adjustnone(void)
 {
     u32 songId;
-    s8 currentPan, targetPan, incrementPan;
+    s32 currentPan, targetPan, incrementPan;
     u8 framesToWait;
     u8 taskId;
 
@@ -1857,7 +1857,7 @@ static void Cmd_panse_adjustnone(void)
 static void Cmd_panse_adjustall(void)
 {
     u32 songId;
-    s8 targetPanArg, incrementPanArg, currentPanArg, currentPan, targetPan, incrementPan;
+    s32 targetPanArg, incrementPanArg, currentPanArg, currentPan, targetPan, incrementPan;
     u8 framesToWait;
     u8 taskId;
 
@@ -1901,7 +1901,7 @@ static void Cmd_panse_adjustall(void)
 static void Cmd_loopsewithpan(void)
 {
     u32 songId;
-    s8 panningArg, panning;
+    s32 panningArg, panning;
     u8 framesToWait, numberOfPlays;
     u8 taskId;
 
@@ -1929,7 +1929,7 @@ static void Task_LoopAndPlaySE(u8 taskId)
     if (gTasks[taskId].tFrameCounter++ >= gTasks[taskId].tFramesToWait)
     {
         u32 songId;
-        s8 panning;
+        s32 panning;
         u8 numberOfPlays;
 
         gTasks[taskId].tFrameCounter = 0;
@@ -1958,7 +1958,7 @@ static void Task_LoopAndPlaySE(u8 taskId)
 static void Cmd_waitplaysewithpan(void)
 {
     u32 songId;
-    s8 panningArg, panning;
+    s32 panningArg, panning;
     u8 framesToWait;
     u8 taskId;
 

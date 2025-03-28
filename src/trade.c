@@ -149,18 +149,18 @@ enum {
 
 struct InGameTrade {
     u32 nickname[POKEMON_NAME_LENGTH + 1];
-    u16 species;
+    u32 species;
     u32 ivs[NUM_STATS];
     u32 abilityNum;
     u32 otId;
     u32 conditions[CONTEST_CATEGORIES_COUNT];
     u32 personality;
-    u16 heldItem;
+    u32 heldItem;
     u32 mailNum;
     u32 otName[TRAINER_NAME_LENGTH + 1];
     u32 otGender;
     u32 sheen;
-    u16 requestedSpecies;
+    u32 requestedSpecies;
 };
 
 static EWRAM_DATA u32 *sMenuTextTileBuffer = NULL;
@@ -182,15 +182,15 @@ static EWRAM_DATA struct {
     u32 cursorSpriteId;
     u32 cursorPosition;
     u32 partyCounts[2];
-    bool8 optionsActive[PARTY_SIZE * 2 + 1];
-    bool8 isLiveMon[2][PARTY_SIZE];
-    bool8 isEgg[2][PARTY_SIZE];
+    bool32 optionsActive[PARTY_SIZE * 2 + 1];
+    bool32 isLiveMon[2][PARTY_SIZE];
+    bool32 isEgg[2][PARTY_SIZE];
     u32 hpBarLevels[2][PARTY_SIZE];
     u32 bufferPartyState;
     u32 filler_6A[5];
     u32 callbackId;
     u32 neverRead_70;
-    u16 bottomTextTileStart;
+    u32 bottomTextTileStart;
     u32 drawSelectedMonState[2];
     u32 selectedMonIdx[2];
     u32 playerSelectStatus;
@@ -199,16 +199,16 @@ static EWRAM_DATA struct {
     u32 partnerConfirmStatus;
     u32 filler_7C[2];
     u32 partnerCursorPosition;
-    u16 linkData[20];
+    u32 linkData[20];
     u32 timer;
     u32 giftRibbons[GIFT_RIBBONS_COUNT];
     u32 filler_B4[0x81C];
     struct {
-        bool8 active;
-        u16 delay;
+        bool32 active;
+        u32 delay;
         u32 actionId;
     } queuedActions[4];
-    u16 tilemapBuffer[BG_SCREEN_SIZE / 2];
+    u32 tilemapBuffer[BG_SCREEN_SIZE / 2];
 } *sTradeMenu = NULL;
 
 static EWRAM_DATA struct {
@@ -218,39 +218,39 @@ static EWRAM_DATA struct {
     u32 filler_70[2];
     u32 playerFinishStatus;
     u32 partnerFinishStatus;
-    u16 linkData[10];
+    u32 linkData[10];
     u32 linkTimeoutZero1;
     u32 linkTimeoutZero2;
-    u16 linkTimeoutTimer;
-    u16 neverRead_8C;
+    u32 linkTimeoutTimer;
+    u32 neverRead_8C;
     u32 monSpriteIds[2];
     u32 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
     u32 connectionSpriteId2;
     u32 cableEndSpriteId;
     u32 scheduleLinkTransfer;
-    u16 state;
+    u32 state;
     u32 filler_96[0x3C];
     u32 releasePokeballSpriteId;
     u32 bouncingPokeballSpriteId;
-    u16 texX;
-    u16 texY;
-    u16 neverRead_D8;
-    u16 neverRead_DA;
-    u16 scrX;
-    u16 scrY;
+    u32 texX;
+    u32 texY;
+    u32 neverRead_D8;
+    u32 neverRead_DA;
+    u32 scrX;
+    u32 scrY;
     s16 bg1vofs;
     s16 bg1hofs;
     s16 bg2vofs;
     s16 bg2hofs;
-    u16 sXY;
-    u16 gbaScale;
-    u16 alpha;
-    bool8 isLinkTrade;
-    u16 monSpecies[2];
-    u16 cachedMapMusic;
+    u32 sXY;
+    u32 gbaScale;
+    u32 alpha;
+    bool32 isLinkTrade;
+    u32 monSpecies[2];
+    u32 cachedMapMusic;
     u32 textColors[3];
     u32 filler_F9;
-    bool8 isCableTrade;
+    bool32 isCableTrade;
     u32 wirelessWinLeft;
     u32 wirelessWinTop;
     u32 wirelessWinRight;
@@ -263,7 +263,7 @@ static void VBlankCB_TradeMenu(void);
 static void CB2_TradeMenu(void);
 static void LoadTradeBgGfx(u32);
 static void SetActiveMenuOptions(void);
-static bool8 BufferTradeParties(void);
+static bool32 BufferTradeParties(void);
 static void CB1_UpdateLink(void);
 static void RunTradeMenuCallback(void);
 static void SetSelectedMon(u32);
@@ -277,11 +277,11 @@ static void PrintTradePartnerPartyNicknames(void);
 static void RedrawPartyWindow(u32);
 static void Task_DrawSelectionSummary(u32);
 static void Task_DrawSelectionTrade(u32);
-static void QueueAction(u16, u32);
+static void QueueAction(u32, u32);
 static u32 GetNumQueuedActions(void);
 static void DoQueuedActions(void);
 static void PrintTradeMessage(u32);
-static bool8 LoadUISpriteGfx(void);
+static bool32 LoadUISpriteGfx(void);
 static void DrawBottomRowText(const u32 *, u32 *, u32);
 static void ComputePartyTradeableFlags(u32);
 static void ComputePartyHPBarLevels(u32);
@@ -298,9 +298,9 @@ static void CB2_InGameTrade(void);
 static void SetTradeSequenceBgGpuRegs(u32);
 static void LoadTradeSequenceSpriteSheetsAndPalettes(void);
 static void BufferTradeSceneStrings(void);
-static bool8 DoTradeAnim(void);
-static bool8 DoTradeAnim_Cable(void);
-static bool8 DoTradeAnim_Wireless(void);
+static bool32 DoTradeAnim(void);
+static bool32 DoTradeAnim_Cable(void);
+static bool32 DoTradeAnim_Wireless(void);
 static void SpriteCB_BouncingPokeball(struct Sprite *);
 static void SpriteCB_BouncingPokeballDepart(struct Sprite *);
 static void SpriteCB_BouncingPokeballDepartEnd(struct Sprite *);
@@ -320,7 +320,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 #include "data/trade.h"
 
-static bool8 SendLinkData(const void *linkData, u32 size)
+static bool32 SendLinkData(const void *linkData, u32 size)
 {
     if (gPlayerCurrActivity == ACTIVITY_29)
     {
@@ -1043,7 +1043,7 @@ static void Trade_Memcpy(void *dest, const void *src, u32 size)
         _dest[i] = _src[i];
 }
 
-static bool8 BufferTradeParties(void)
+static bool32 BufferTradeParties(void)
 {
     u32 id = GetMultiplayerId();
     int i;
@@ -1156,7 +1156,7 @@ static bool8 BufferTradeParties(void)
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
         {
             u32 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+            u32 species = GetMonData(mon, MON_DATA_SPECIES);
 
             if (species != SPECIES_NONE)
             {
@@ -1358,14 +1358,14 @@ static void Leader_HandleCommunication(void)
     }
 }
 
-static void _SetLinkData(u16 *linkData, u16 linkCmd, u16 cursorPosition)
+static void _SetLinkData(u32 *linkData, u32 linkCmd, u32 cursorPosition)
 {
     linkData[0] = linkCmd;
     linkData[1] = cursorPosition;
     QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
 }
 
-static void SetLinkData(u16 linkCmd, u16 cursorPosition)
+static void SetLinkData(u32 linkCmd, u32 cursorPosition)
 {
     _SetLinkData(sTradeMenu->linkData, linkCmd, cursorPosition);
 }
@@ -1558,7 +1558,7 @@ static void CB_ShowTradeMonSummaryScreen(void)
 static u32 CheckValidityOfTradeMons(u32 *aliveMons, u32 playerPartyCount, u32 playerMonIdx, u32 partnerMonIdx)
 {
     int i;
-    u16 partnerSpecies;
+    u32 partnerSpecies;
     u32 hasLiveMon = 0;
 
     // Make sure mon to be traded isn't player's last alive mon
@@ -1856,7 +1856,7 @@ static void SetSelectedMon(u32 cursorPosition)
 
 static void DrawSelectedMonScreen(u32 whichParty)
 {
-    s8 nameStringWidth;
+    s32 nameStringWidth;
     u32 nickname[POKEMON_NAME_BUFFER_SIZE];
     u32 movesString[56];
     u32 i;
@@ -1956,8 +1956,8 @@ static u32 GetMonNicknameWidth(u32 *str, u32 whichParty, u32 partyIdx)
 
 static void BufferMovesString(u32 *str, u32 whichParty, u32 partyIdx)
 {
-    u16 moves[MAX_MON_MOVES];
-    u16 i;
+    u32 moves[MAX_MON_MOVES];
+    u32 i;
 
     if (!sTradeMenu->isEgg[whichParty][partyIdx])
     {
@@ -2134,7 +2134,7 @@ static void Task_DrawSelectionTrade(u32 taskId)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void QueueAction(u16 delay, u32 actionId)
+static void QueueAction(u32 delay, u32 actionId)
 {
     int i;
 
@@ -2219,7 +2219,7 @@ static void PrintTradeMessage(u32 messageId)
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
-static bool8 LoadUISpriteGfx(void)
+static bool32 LoadUISpriteGfx(void)
 {
     struct SpriteSheet sheet;
 
@@ -2331,7 +2331,7 @@ static void ComputePartyTradeableFlags(u32 whichParty)
 
 static void ComputePartyHPBarLevels(u32 whichParty)
 {
-    u16 i, curHp, maxHp;
+    u32 i, curHp, maxHp;
 
     switch (whichParty)
     {
@@ -2446,7 +2446,7 @@ s32 GetGameProgressForLinkTrade(void)
     // The usage of this value is a little unusual given it's treated as a bool,
     // but it's the result of its usage in FRLG, where 0 is FRLG, 1 is RS, and 2 is Emerald.
     s32 versionId; // 0: RSE, 2: FRLG
-    u16 version;
+    u32 version;
 
     if (gReceivedRemoteLinkPlayers)
     {
@@ -2482,12 +2482,12 @@ s32 GetGameProgressForLinkTrade(void)
     return TRADE_BOTH_PLAYERS_READY;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u32 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u32 playerSpecies2, u32 partnerSpecies, u32 requestedType, u32 playerSpecies, bool32 isModernFatefulEncounter)
 {
-    bool8 playerHasNationalDex = player.hasNationalDex;
-    bool8 playerCanLinkNationally = player.canLinkNationally;
-    bool8 partnerHasNationalDex = partner.hasNationalDex;
-    bool8 partnerCanLinkNationally = partner.canLinkNationally;
+    bool32 playerHasNationalDex = player.hasNationalDex;
+    bool32 playerCanLinkNationally = player.canLinkNationally;
+    bool32 partnerHasNationalDex = partner.hasNationalDex;
+    bool32 partnerCanLinkNationally = partner.canLinkNationally;
     u32 partnerVersion = partner.version;
 
     // If partner is not using Emerald, both players must have progressed the story
@@ -2544,9 +2544,9 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isModernFatefulEncounter)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u32 species2, u32 species, bool32 isModernFatefulEncounter)
 {
-    bool8 hasNationalDex = player.hasNationalDex;
+    bool32 hasNationalDex = player.hasNationalDex;
 
     // Can't trade specific species
     if (gSpeciesInfo[species].cannotBeTraded)
@@ -2567,7 +2567,7 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
 
 // Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
 // Unlike later generations, this version of Spin Trade isnt only for Eggs
-int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
+int CanSpinTradeMon(struct Pokemon *mon, u32 monIdx)
 {
     int i, version, versions, canTradeAnyMon, numMonsLeft;
     int speciesArray[PARTY_SIZE];
@@ -2705,7 +2705,7 @@ static void SetTradeBGAffine(void)
 
 static void SetTradeGpuRegs(void)
 {
-    u16 dispcnt;
+    u32 dispcnt;
 
     SetGpuReg(REG_OFFSET_BG1VOFS, sTradeAnim->bg1vofs);
     SetGpuReg(REG_OFFSET_BG1HOFS, sTradeAnim->bg1hofs);
@@ -2767,7 +2767,7 @@ static void LoadTradeMonPic(u32 whichParty, u32 state)
 {
     int pos = 0;
     struct Pokemon *mon = NULL;
-    u16 species = SPECIES_NONE;
+    u32 species = SPECIES_NONE;
     u32 personality;
 
     if (whichParty == TRADE_PLAYER)
@@ -3055,7 +3055,7 @@ static void UpdatePokedexForReceivedMon(u32 partyIdx)
 
     if (!GetMonData(mon, MON_DATA_IS_EGG))
     {
-        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
         species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
@@ -3077,10 +3077,10 @@ static void TradeMons(u32 playerPartyIdx, u32 partnerPartyIdx)
     u32 friendship;
 
     struct Pokemon *playerMon = &gPlayerParty[playerPartyIdx];
-    u16 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
+    u32 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
 
     struct Pokemon *partnerMon = &gEnemyParty[partnerPartyIdx];
-    u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
+    u32 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
 
     // The mail attached to the sent Pokémon no longer exists in your file.
     if (playerMail != MAIL_NONE)
@@ -3326,7 +3326,7 @@ static void BufferTradeSceneStrings(void)
 }
 
 // returns TRUE if it finished a link trade, FALSE if it finished an in-game trade or if sequence is still going
-static bool8 DoTradeAnim(void)
+static bool32 DoTradeAnim(void)
 {
     if (sTradeAnim->isCableTrade)
         return DoTradeAnim_Cable();
@@ -3408,9 +3408,9 @@ enum {
     STATE_WAIT_FOR_MON_CRY = 267,
 };
 
-static bool8 DoTradeAnim_Cable(void)
+static bool32 DoTradeAnim_Cable(void)
 {
-    u16 evoTarget;
+    u32 evoTarget;
 
     switch (sTradeAnim->state)
     {
@@ -3881,9 +3881,9 @@ static bool8 DoTradeAnim_Cable(void)
 #define tCounter           data[1]
 #define tSignalComingBack  data[2]
 
-static bool8 DoTradeAnim_Wireless(void)
+static bool32 DoTradeAnim_Wireless(void)
 {
-    u16 evoTarget;
+    u32 evoTarget;
 
     switch (sTradeAnim->state)
     {
@@ -4377,7 +4377,7 @@ static bool8 DoTradeAnim_Wireless(void)
 // In-game trades resolve evolution during the trade sequence, in STATE_TRY_EVOLUTION
 static void CB2_TryLinkTradeEvolution(void)
 {
-    u16 evoTarget;
+    u32 evoTarget;
     switch (gMain.state)
     {
     case 0:
@@ -4502,7 +4502,7 @@ static void SpriteCB_BouncingPokeballArrive(struct Sprite *sprite)
     }
 }
 
-u16 GetInGameTradeSpeciesInfo(void)
+u32 GetInGameTradeSpeciesInfo(void)
 {
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
     StringCopy(gStringVar1, GetSpeciesName(inGameTrade->requestedSpecies));
@@ -4585,7 +4585,7 @@ static void GetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trad
     mail->itemId = trade->heldItem;
 }
 
-u16 GetTradeSpecies(void)
+u32 GetTradeSpecies(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
         return SPECIES_NONE;
@@ -4862,7 +4862,7 @@ static void Task_AnimateWirelessSignal(u32 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    u16 paletteIdx = sWirelessSignalAnimParams[tIdx][0] * 16;
+    u32 paletteIdx = sWirelessSignalAnimParams[tIdx][0] * 16;
 
     if (!tSignalComingBack)
     {

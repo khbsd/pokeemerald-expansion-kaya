@@ -32,7 +32,7 @@ static void Task_ViewClock_WaitFadeIn(u32 taskId);
 static void Task_ViewClock_HandleInput(u32 taskId);
 static void Task_ViewClock_FadeOut(u32 taskId);
 static void Task_ViewClock_Exit(u32 taskId);
-static u16 CalcNewMinHandAngle(u16 angle, u32 direction, u32 speed);
+static u32 CalcNewMinHandAngle(u32 angle, u32 direction, u32 speed);
 static bool32 AdvanceClock(u32 taskId, u32 direction);
 static void UpdateClockPeriod(u32 taskId, u32 direction);
 static void InitClockWithRtc(u32 taskId);
@@ -72,7 +72,7 @@ enum {
 };
 
 static const u32 sHand_Gfx[] = INCBIN_U32("graphics/wallclock/hand.4bpp.lz");
-static const u16 sTextPrompt_Pal[] = INCBIN_U16("graphics/wallclock/text_prompt.gbapal"); // for "Cancel" or "Confirm"
+static const u32 sTextPrompt_Pal[] = INCBIN_U16("graphics/wallclock/text_prompt.gbapal"); // for "Cancel" or "Confirm"
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
@@ -254,7 +254,7 @@ static const struct SpriteTemplate sSpriteTemplate_AM =
     .callback = SpriteCB_AMIndicator
 };
 
-static const s8 sClockHandCoords[][2] =
+static const s32 sClockHandCoords[][2] =
 {
     { 0x00, -0x18},
     { 0x01, -0x19},
@@ -689,7 +689,7 @@ void CB2_StartWallClock(void)
     u32 spriteId;
 
     LoadWallClockGraphics();
-    LZ77UnCompVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
+    LZ77UnCompVram(gWallClockStart_Tilemap, (u32 *)BG_SCREEN_ADDR(7));
 
     taskId = CreateTask(Task_SetClock_WaitFadeIn, 0);
     gTasks[taskId].tHours = 10;
@@ -733,7 +733,7 @@ void CB2_ViewWallClock(void)
     u32 angle2;
 
     LoadWallClockGraphics();
-    LZ77UnCompVram(gWallClockView_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
+    LZ77UnCompVram(gWallClockView_Tilemap, (u32 *)BG_SCREEN_ADDR(7));
 
     taskId = CreateTask(Task_ViewClock_WaitFadeIn, 0);
     InitClockWithRtc(taskId);
@@ -899,7 +899,7 @@ static void Task_ViewClock_Exit(u32 taskId)
         SetMainCallback2(gMain.savedCallback);
 }
 
-static u32 CalcMinHandDelta(u16 speed)
+static u32 CalcMinHandDelta(u32 speed)
 {
     if (speed > 60)
         return 6;
@@ -911,7 +911,7 @@ static u32 CalcMinHandDelta(u16 speed)
     return 1;
 }
 
-static u16 CalcNewMinHandAngle(u16 angle, u32 direction, u32 speed)
+static u32 CalcNewMinHandAngle(u32 angle, u32 direction, u32 speed)
 {
     u32 delta = CalcMinHandDelta(speed);
     switch (direction)
@@ -1020,10 +1020,10 @@ static void InitClockWithRtc(u32 taskId)
 
 static void SpriteCB_MinuteHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->sTaskId].tMinuteHandAngle;
+    u32 angle = gTasks[sprite->sTaskId].tMinuteHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
-    u16 x, y;
+    u32 x, y;
 
     SetOamMatrix(0, cos, sin, -sin, cos);
     x = sClockHandCoords[angle][0];
@@ -1040,10 +1040,10 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
 
 static void SpriteCB_HourHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->sTaskId].tHourHandAngle;
+    u32 angle = gTasks[sprite->sTaskId].tHourHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
-    u16 x, y;
+    u32 x, y;
 
     SetOamMatrix(1, cos, sin, -sin, cos);
     x = sClockHandCoords[angle][0];

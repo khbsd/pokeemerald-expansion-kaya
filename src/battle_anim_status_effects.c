@@ -269,7 +269,7 @@ static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
     .callback = AnimFlashingCircleImpact,
 };
 
-static u8 UNUSED Task_FlashingCircleImpacts(u8 battlerId, bool8 red)
+static u8 UNUSED Task_FlashingCircleImpacts(u8 battlerId, bool32 red)
 {
     u8 battlerSpriteId = gBattlerSpriteIds[battlerId];
     u8 taskId = CreateTask(Task_UpdateFlashingCircleImpacts, 10);
@@ -529,9 +529,9 @@ static void AnimTask_FrozenIceCube_Step4(u8 taskId)
 
 void AnimTask_StatsChange(u8 taskId)
 {
-    bool16 goesDown = FALSE;
+    bool32 goesDown = FALSE;
     s16 animStatId = 0;
-    bool16 sharply = FALSE;
+    bool32 sharply = FALSE;
 
     switch (gBattleSpritesDataPtr->animationData->animArg)
     {

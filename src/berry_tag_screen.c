@@ -41,12 +41,12 @@ enum
 
 struct BerryTagScreenStruct
 {
-    u16 tilemapBuffers[3][0x400];
-    u16 berryId;
-    u16 currentSpriteBerryId;
+    u32 tilemapBuffers[3][0x400];
+    u32 berryId;
+    u32 currentSpriteBerryId;
     u32 berrySpriteId;
     u32 flavorCircleIds[FLAVOR_COUNT];
-    u16 gfxState;
+    u32 gfxState;
 };
 
 // EWRAM vars
@@ -93,7 +93,7 @@ static const struct BgTemplate sBackgroundTemplates[] =
   }
 };
 
-static const u16 sFontPalette[] = INCBIN_U16("graphics/bag/berry_tag_screen.gbapal");
+static const u32 sFontPalette[] = INCBIN_U16("graphics/bag/berry_tag_screen.gbapal");
 
 static const u32 sTextColors[2][3] =
 {
@@ -166,13 +166,13 @@ static void PrintBerrySize(void);
 static void PrintBerryFirmness(void);
 static void PrintBerryDescription1(void);
 static void PrintBerryDescription2(void);
-static bool8 InitBerryTagScreen(void);
-static bool8 LoadBerryTagGfx(void);
+static bool32 InitBerryTagScreen(void);
+static bool32 LoadBerryTagGfx(void);
 static void Task_HandleInput(u32 taskId);
 static void Task_CloseBerryTagScreen(u32 taskId);
 static void Task_DisplayAnotherBerry(u32 taskId);
-static void TryChangeDisplayedBerry(u32 taskId, s8 toMove);
-static void HandleBagCursorPositionChange(s8 toMove);
+static void TryChangeDisplayedBerry(u32 taskId, s32 toMove);
+static void HandleBagCursorPositionChange(s32 toMove);
 
 static const u32 sText_SizeSlash[] = _("SIZE /");
 static const u32 sText_FirmSlash[] = _("FIRM /");
@@ -218,7 +218,7 @@ static void CB2_InitBerryTagScreen(void)
     }
 }
 
-static bool8 InitBerryTagScreen(void)
+static bool32 InitBerryTagScreen(void)
 {
     switch (gMain.state)
     {
@@ -321,9 +321,9 @@ static void HandleInitBackgrounds(void)
 
 #define BG_TILE 0x42
 
-static bool8 LoadBerryTagGfx(void)
+static bool32 LoadBerryTagGfx(void)
 {
-    u16 i;
+    u32 i;
 
     switch (sBerryTag->gfxState)
     {
@@ -375,7 +375,7 @@ static bool8 LoadBerryTagGfx(void)
 
 static void HandleInitWindows(void)
 {
-    u16 i;
+    u32 i;
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
@@ -517,7 +517,7 @@ static void SetFlavorCirclesVisiblity(void)
 
 static void DestroyFlavorCircleSprites(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < FLAVOR_COUNT; i++)
         DestroySprite(&gSprites[sBerryTag->flavorCircleIds[i]]);
@@ -547,7 +547,7 @@ static void Task_HandleInput(u32 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u16 arrowKeys = JOY_REPEAT(DPAD_ANY);
+        u32 arrowKeys = JOY_REPEAT(DPAD_ANY);
         if (arrowKeys == DPAD_UP)
             TryChangeDisplayedBerry(taskId, -1);
         else if (arrowKeys == DPAD_DOWN)
@@ -560,7 +560,7 @@ static void Task_HandleInput(u32 taskId)
 #define tBerryY data[0]
 #define tBgOp   data[1]
 
-static void TryChangeDisplayedBerry(u32 taskId, s8 toMove)
+static void TryChangeDisplayedBerry(u32 taskId, s32 toMove)
 {
     s16 *data = gTasks[taskId].data;
     s16 currPocketPosition = gBagPosition.scrollPosition[BERRIES_POCKET] + gBagPosition.cursorPosition[BERRIES_POCKET];
@@ -579,10 +579,10 @@ static void TryChangeDisplayedBerry(u32 taskId, s8 toMove)
     }
 }
 
-static void HandleBagCursorPositionChange(s8 toMove)
+static void HandleBagCursorPositionChange(s32 toMove)
 {
-    u16 *scrollPos = &gBagPosition.scrollPosition[BERRIES_POCKET];
-    u16 *cursorPos = &gBagPosition.cursorPosition[BERRIES_POCKET];
+    u32 *scrollPos = &gBagPosition.scrollPosition[BERRIES_POCKET];
+    u32 *cursorPos = &gBagPosition.cursorPosition[BERRIES_POCKET];
     if (toMove > 0)
     {
         if (*cursorPos < 4 || BagGetItemIdByPocketPosition(POCKET_BERRIES, *scrollPos + 8) == 0)
@@ -605,7 +605,7 @@ static void HandleBagCursorPositionChange(s8 toMove)
 
 static void Task_DisplayAnotherBerry(u32 taskId)
 {
-    u16 i;
+    u32 i;
     s16 y;
     s16 *data = gTasks[taskId].data;
     tBerryY += DISPLAY_SPEED;

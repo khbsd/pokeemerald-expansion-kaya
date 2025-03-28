@@ -8,10 +8,10 @@
 #include "text.h"
 #include "pokemon_storage_system.h"
 
-static EWRAM_DATA u16 sWinNumberDigit = 0;
-static EWRAM_DATA u16 sOtIdDigit = 0;
+static EWRAM_DATA u32 sWinNumberDigit = 0;
+static EWRAM_DATA u32 sOtIdDigit = 0;
 
-static const u16 sLotteryPrizes[] =
+static const u32 sLotteryPrizes[] =
 {
     ITEM_PP_UP,
     ITEM_EXP_SHARE,
@@ -19,7 +19,7 @@ static const u16 sLotteryPrizes[] =
     ITEM_MASTER_BALL,
 };
 
-static u32 GetMatchingDigits(u16, u16);
+static u32 GetMatchingDigits(u32, u32);
 
 void ResetLotteryCorner(void)
 {
@@ -27,7 +27,7 @@ void ResetLotteryCorner(void)
     VarSet(VAR_POKELOT_PRIZE_ITEM, 0);
 }
 
-void SetRandomLotteryNumber(u16 i)
+void SetRandomLotteryNumber(u32 i)
 {
     u32 var = Random();
 
@@ -39,14 +39,14 @@ void SetRandomLotteryNumber(u16 i)
 
 void RetrieveLotteryNumber(void)
 {
-    u16 lottoNumber = GetLotteryNumber();
+    u32 lottoNumber = GetLotteryNumber();
     gSpecialVar_Result = lottoNumber;
 }
 
 void PickLotteryCornerTicket(void)
 {
-    u16 i;
-    u16 j;
+    u32 i;
+    u32 j;
     u32 box;
     u32 slot;
 
@@ -117,7 +117,7 @@ void PickLotteryCornerTicket(void)
     }
 }
 
-static u32 GetMatchingDigits(u16 winNumber, u16 otId)
+static u32 GetMatchingDigits(u32 winNumber, u32 otId)
 {
     u32 i;
     u32 matchingDigits = 0;
@@ -141,11 +141,11 @@ static u32 GetMatchingDigits(u16 winNumber, u16 otId)
     return matchingDigits;
 }
 
-// lottery numbers go from 0 to 99999, not 65535 (0xFFFF). interestingly enough, the function that calls GetLotteryNumber shifts to u16, so it cant be anything above 65535 anyway.
+// lottery numbers go from 0 to 99999, not 65535 (0xFFFF). interestingly enough, the function that calls GetLotteryNumber shifts to u32, so it cant be anything above 65535 anyway.
 void SetLotteryNumber(u32 lotteryNum)
 {
-    u16 lowNum = lotteryNum >> 16;
-    u16 highNum = lotteryNum;
+    u32 lowNum = lotteryNum >> 16;
+    u32 highNum = lotteryNum;
 
     VarSet(VAR_POKELOT_RND1, highNum);
     VarSet(VAR_POKELOT_RND2, lowNum);
@@ -153,14 +153,14 @@ void SetLotteryNumber(u32 lotteryNum)
 
 u32 GetLotteryNumber(void)
 {
-    u16 highNum = VarGet(VAR_POKELOT_RND1);
-    u16 lowNum = VarGet(VAR_POKELOT_RND2);
+    u32 highNum = VarGet(VAR_POKELOT_RND1);
+    u32 lowNum = VarGet(VAR_POKELOT_RND2);
 
     return (lowNum << 16) | highNum;
 }
 
-// interestingly, this may have been the original lottery number set function, but GF tried to change it to 32-bit later but didnt finish changing all calls as one GetLotteryNumber still shifts to u16.
-void SetLotteryNumber16_Unused(u16 lotteryNum)
+// interestingly, this may have been the original lottery number set function, but GF tried to change it to 32-bit later but didnt finish changing all calls as one GetLotteryNumber still shifts to u32.
+void SetLotteryNumber16_Unused(u32 lotteryNum)
 {
     SetLotteryNumber(lotteryNum);
 }

@@ -42,7 +42,7 @@ static const u32 sSpriteDimensions[3][4][2] =
     },
 };
 
-static const u16 sCrc16Table[] =
+static const u32 sCrc16Table[] =
 {
     0x0000, 0x1189, 0x2312, 0x329B, 0x4624, 0x57AD, 0x6536, 0x74BF,
     0x8C48, 0x9DC1, 0xAF5A, 0xBED3, 0xCA6C, 0xDBE5, 0xE97E, 0xF8F7,
@@ -88,18 +88,18 @@ u32 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
     return sprite;
 }
 
-void StoreWordInTwoHalfwords(u16 *h, u32 w)
+void StoreWordInTwoHalfwords(u32 *h, u32 w)
 {
-    h[0] = (u16)(w);
-    h[1] = (u16)(w >> 16);
+    h[0] = (u32)(w);
+    h[1] = (u32)(w >> 16);
 }
 
-void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
+void LoadWordFromTwoHalfwords(u32 *h, u32 *w)
 {
     *w = h[0] | (s16)h[1] << 16;
 }
 
-void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
+void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u32 alpha)
 {
     src->texX = texX;
     src->texY = texY;
@@ -110,7 +110,7 @@ void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX
     src->alpha = alpha;
 }
 
-void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
+void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u32 alpha)
 {
     struct BgAffineSrcData src;
 
@@ -118,10 +118,10 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
     BgAffineSet(&src, dest, 1);
 }
 
-void CopySpriteTiles(u32 shape, u32 size, u32 *tiles, u16 *tilemap, u32 *output)
+void CopySpriteTiles(u32 shape, u32 size, u32 *tiles, u32 *tilemap, u32 *output)
 {
     u32 x, y;
-    s8 i, j;
+    s32 i, j;
     u32 ALIGNED(4) xflip[32];
     u32 h = sSpriteDimensions[shape][size][1];
     u32 w = sSpriteDimensions[shape][size][0];
@@ -183,10 +183,10 @@ int CountTrailingZeroBits(u32 value)
     return 0;
 }
 
-u16 CalcCRC16(const u32 *data, s32 length)
+u32 CalcCRC16(const u32 *data, s32 length)
 {
-    u16 i, j;
-    u16 crc = 0x1121;
+    u32 i, j;
+    u32 crc = 0x1121;
 
     for (i = 0; i < length; i++)
     {
@@ -202,10 +202,10 @@ u16 CalcCRC16(const u32 *data, s32 length)
     return ~crc;
 }
 
-u16 CalcCRC16WithTable(const u32 *data, u32 length)
+u32 CalcCRC16WithTable(const u32 *data, u32 length)
 {
-    u16 i;
-    u16 crc = 0x1121;
+    u32 i;
+    u32 crc = 0x1121;
     u32 byte;
 
     for (i = 0; i < length; i++)
@@ -225,16 +225,16 @@ u32 CalcByteArraySum(const u32 *data, u32 length)
     return sum;
 }
 
-void BlendPalette(u16 palOffset, u16 numEntries, u32 coeff, u32 blendColor)
+void BlendPalette(u32 palOffset, u32 numEntries, u32 coeff, u32 blendColor)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < numEntries; i++)
     {
-        u16 index = i + palOffset;
+        u32 index = i + palOffset;
         struct PlttData *data1 = (struct PlttData *)&gPlttBufferUnfaded[index];
-        s8 r = data1->r;
-        s8 g = data1->g;
-        s8 b = data1->b;
+        s32 r = data1->r;
+        s32 g = data1->g;
+        s32 b = data1->b;
         struct PlttData *data2 = (struct PlttData *)&blendColor;
         gPlttBufferFaded[index] = RGB(r + (((data2->r - r) * coeff) >> 4),
                                       g + (((data2->g - g) * coeff) >> 4),

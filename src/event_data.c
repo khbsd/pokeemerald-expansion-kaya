@@ -210,7 +210,7 @@ u32 VarGetIfExist(u32 id)
     return *ptr;
 }
 
-bool8 VarSet(u32 id, u32 value)
+bool32 VarSet(u32 id, u32 value)
 {
     u32 *ptr = GetVarPointer(id);
     if (!ptr)
@@ -262,7 +262,7 @@ u32 FlagClear(u32 id)
     return 0;
 }
 
-bool8 FlagGet(u32 id)
+bool32 FlagGet(u32 id)
 {
     u32 *ptr = GetFlagPointer(id);
 

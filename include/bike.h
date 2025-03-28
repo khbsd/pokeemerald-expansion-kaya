@@ -64,14 +64,14 @@ enum
 };
 
 // Exported RAM declarations
-extern bool8 gUnusedBikeCameraAheadPanback;
+extern bool32 gUnusedBikeCameraAheadPanback;
 
 // Exported ROM declarations
 void MovePlayerOnBike(u8 direction, u32 newKeys, u32 heldKeys);
 void Bike_TryAcroBikeHistoryUpdate(u32 newKeys, u32 heldKeys);
-bool8 RS_IsRunningDisallowed(u8 tile);
-bool8 IsBikingDisallowedByPlayer(void);
-bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void);
+bool32 RS_IsRunningDisallowed(u8 tile);
+bool32 IsBikingDisallowedByPlayer(void);
+bool32 IsPlayerNotUsingAcroBikeOnBumpySlope(void);
 void GetOnOffBike(u8 transitionFlags);
 void BikeClearState(int newDirHistory, int newAbStartHistory);
 void Bike_UpdateBikeCounterSpeed(u8 counter);

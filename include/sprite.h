@@ -27,7 +27,7 @@ struct SpriteFrameImage
 {
     const void *data;
     u32 size;
-    bool8 relativeFrames;
+    bool32 relativeFrames;
 };
 
 #define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
@@ -160,8 +160,8 @@ enum
 
 struct Subsprite
 {
-    s8 x; // was u32 in R/S
-    s8 y; // was u32 in R/S
+    s32 x; // was u32 in R/S
+    s32 y; // was u32 in R/S
     u32 shape:2;
     u32 size:2;
     u32 tileOffset:10;
@@ -205,14 +205,14 @@ struct Sprite
 
     /*0x20*/ s16 x, y;
     /*0x24*/ s16 x2, y2;
-    /*0x28*/ s8 centerToCornerVecX;
-    /*0x29*/ s8 centerToCornerVecY;
+    /*0x28*/ s32 centerToCornerVecX;
+    /*0x29*/ s32 centerToCornerVecY;
 
     /*0x2A*/ u8 animNum;
     /*0x2B*/ u8 animCmdIndex;
     /*0x2C*/ u8 animDelayCounter:6;
-             bool8 animPaused:1;
-             bool8 affineAnimPaused:1;
+             bool32 animPaused:1;
+             bool32 affineAnimPaused:1;
     /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
@@ -267,7 +267,7 @@ extern u32 gReservedSpriteTileCount;
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 extern struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
-extern bool8 gAffineAnimsDisabled;
+extern bool32 gAffineAnimsDisabled;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);
@@ -324,8 +324,8 @@ u32 IndexOfSpritePaletteTag(u32 tag);
 u32 GetSpritePaletteTagByPaletteNum(u8 paletteNum);
 void FreeSpritePaletteByTag(u32 tag);
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables);
-bool8 AddSpriteToOamBuffer(struct Sprite *object, u8 *oamIndex);
-bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex);
+bool32 AddSpriteToOamBuffer(struct Sprite *object, u8 *oamIndex);
+bool32 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex);
 void CopyToSprites(u8 *src);
 void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u32 bit, u8 op);

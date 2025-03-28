@@ -68,10 +68,10 @@ struct TrainerMon
     u8 ball;
     u8 friendship;
     u8 nature:5;
-    bool8 gender:2;
-    bool8 isShiny:1;
+    bool32 gender:2;
+    bool32 isShiny:1;
     u8 teraType:5;
-    bool8 gigantamaxFactor:1;
+    bool32 gigantamaxFactor:1;
     u8 shouldUseDynamax:1;
     u8 padding1:1;
     u8 dynamaxLevel:4;
@@ -90,8 +90,8 @@ struct Trainer
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender
     /*0x12*/ u8 trainerPic;
     /*0x13*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
-    /*0x1E*/ bool8 doubleBattle:1;
-             bool8 padding:1;
+    /*0x1E*/ bool32 doubleBattle:1;
+             bool32 padding:1;
              u8 startingStatus:6;    // this trainer starts a battle with a given status. see include/constants/battle.h for values
     /*0x1F*/ u8 mugshotColor;
     /*0x20*/ u8 partySize;

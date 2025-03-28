@@ -42,7 +42,7 @@
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
-EWRAM_DATA bool8 gSkipShowMonAnim = FALSE;
+EWRAM_DATA bool32 gSkipShowMonAnim = FALSE;
 
 // Static type declarations
 
@@ -59,10 +59,10 @@ static void HallOfFameRecordEffect_Init(struct Task *);
 static void HallOfFameRecordEffectu32aitForBallPlacement(struct Task *);
 static void HallOfFameRecordEffect_WaitForBallFlashing(struct Task *);
 static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *);
-static void CreateHofMonitorSprite(s16, s16, s16, bool8);
+static void CreateHofMonitorSprite(s16, s16, s16, bool32);
 static void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
-static u8 CreateGlowingPokeballsEffect(s16, s16, s16, bool16);
+static u8 CreateGlowingPokeballsEffect(s16, s16, s16, bool32);
 static void SpriteCB_PokeballGlowEffect(struct Sprite *);
 static u32id PokeballGlowEffect_PlaceBalls(struct Sprite *);
 static void PokeballGlowEffect_TryPlaySe(struct Sprite *);
@@ -79,21 +79,21 @@ static void FieldCallback_FlyIntoMap(void);
 static void Task_FlyIntou32p(u8);
 
 static void Task_FallWarpFieu32Effect(u8);
-static bool8 FallWarpEffect_Init(struct Task *);
-static bool8 FallWarpEffect_WaitWeathu32(struct Task *);
-static bool8 FallWarpEffect_StartFall(struct Task *);
-static bool8 FallWarpEffect_Fall(struct Task *);
-static bool8 FallWarpEffect_Land(struct Task *);
-static bool8 FallWarpEffect_CameraShake(struct Task *);
-static bool8 FallWarpEffect_End(struct Task *);
+static bool32 FallWarpEffect_Init(struct Task *);
+static bool32 FallWarpEffect_WaitWeathu32(struct Task *);
+static bool32 FallWarpEffect_StartFall(struct Task *);
+static bool32 FallWarpEffect_Fall(struct Task *);
+static bool32 FallWarpEffect_Land(struct Task *);
+static bool32 FallWarpEffect_CameraShake(struct Task *);
+static bool32 FallWarpEffect_End(struct Task *);
 
 static void Task_EscalatorWarpOut(u8);
-static bool8 EscalatorWarpOut_Init(struct Task *);
-static bool8 EscalatorWarpOut_Waitu32rPlayer(struct Task *);
-static bool8 EscalatorWarpOut_Up_Ride(struct Task *);
-static bool8 EscalatorWarpOut_Up_End(struct Task *);
-static bool8 EscalatorWarpOut_Down_Ride(struct Task *);
-static bool8 EscalatorWarpOut_Down_End(struct Task *);
+static bool32 EscalatorWarpOut_Init(struct Task *);
+static bool32 EscalatorWarpOut_Waitu32rPlayer(struct Task *);
+static bool32 EscalatorWarpOut_Up_Ride(struct Task *);
+static bool32 EscalatorWarpOut_Up_End(struct Task *);
+static bool32 EscalatorWarpOut_Down_Ride(struct Task *);
+static bool32 EscalatorWarpOut_Down_End(struct Task *);
 static void RideUpEscalatorOut(struct Task *);
 static void RideDownEscalatorOut(struct Task *);
 static void FadeOutAtEndOfEscalator(void);
@@ -101,47 +101,47 @@ static void WarpAtEndOfEscalator(void);
 
 static void FieldCallback_EscalatorWarpIn(void);
 static void Task_EscalatorWarpIn(u8);
-static bool8 EscalatorWarpIn_Init(struct Task *);
-static bool8 EscalatorWarpIn_Downu32nit(struct Task *);
-static bool8 EscalatorWarpIn_Down_Ride(struct Task *);
-static bool8 EscalatorWarpIn_Up_Init(struct Task *);
-static bool8 EscalatorWarpIn_Up_Ride(struct Task *);
-static bool8 EscalatorWarpIn_WaitForMovement(struct Task *);
-static bool8 EscalatorWarpIn_End(struct Task *);
+static bool32 EscalatorWarpIn_Init(struct Task *);
+static bool32 EscalatorWarpIn_Downu32nit(struct Task *);
+static bool32 EscalatorWarpIn_Down_Ride(struct Task *);
+static bool32 EscalatorWarpIn_Up_Init(struct Task *);
+static bool32 EscalatorWarpIn_Up_Ride(struct Task *);
+static bool32 EscalatorWarpIn_WaitForMovement(struct Task *);
+static bool32 EscalatorWarpIn_End(struct Task *);
 
 static void Task_UseWaterfall(u8);
-static bool8 WaterfallFieldEffect_Init(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffu32t_ShowMon(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffect_WaitForShowMon(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffect_RideUp(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *, struct ObjectEvent *);
+static bool32 WaterfallFieldEffect_Init(struct Task *, struct ObjectEvent *);
+static bool32 WaterfallFieldEffu32t_ShowMon(struct Task *, struct ObjectEvent *);
+static bool32 WaterfallFieldEffect_WaitForShowMon(struct Task *, struct ObjectEvent *);
+static bool32 WaterfallFieldEffect_RideUp(struct Task *, struct ObjectEvent *);
+static bool32 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *, struct ObjectEvent *);
 
 static void Task_UseDive(u8);
-static bool8 DiveFieldEffect_Init(struct Task *);
-static bool8 DiveFieldEffu32t_ShowMon(struct Task *);
-static bool8 DiveFieldEffect_TryWarp(struct Task *);
+static bool32 DiveFieldEffect_Init(struct Task *);
+static bool32 DiveFieldEffu32t_ShowMon(struct Task *);
+static bool32 DiveFieldEffect_TryWarp(struct Task *);
 
 static void Task_LavaridgeGymB1FWarp(u8);
-static bool8 LavaridgeGymB1FWarpEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpEffecu32CameraShake(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpEffect_Launch(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpEffect_Rise(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpEffect_Warp(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffecu32CameraShake(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffect_Launch(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffect_Rise(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpEffect_Warp(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 static void FieldCB_LavaridgeGymB1FWarpExit(void);
 static void Task_LavaridgeGymB1FWarpExit(u8);
-static bool8 LavaridgeGymB1FWarpExitEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpExitEffecu32StartPopOut(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGymB1FWarpExitEffect_End(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpExitEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpExitEffecu32StartPopOut(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGymB1FWarpExitEffect_End(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 static void Task_LavaridgeGym1FWarp(u8);
-static bool8 LavaridgeGym1FWarpEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGym1FWarpEffecu32AshPuff(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGym1FWarpEffect_Disappear(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGym1FWarpEffect_FadeOut(struct Task *, struct ObjectEvent *, struct Sprite *);
-static bool8 LavaridgeGym1FWarpEffect_Warp(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGym1FWarpEffect_Init(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGym1FWarpEffecu32AshPuff(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGym1FWarpEffect_Disappear(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGym1FWarpEffect_FadeOut(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool32 LavaridgeGym1FWarpEffect_Warp(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 static void Task_EscapeRopeWarpOut(u8);
 static void EscapeRopeWarpOutEffect_Init(struct Task *);
@@ -173,7 +173,7 @@ static void FieldMoveShowMonOutdoorsEffect_ShrinkBanner(struct Task *);
 static void FieldMoveShowMonOutdoorsEffect_RestoreBg(struct Task *);
 static void FieldMoveShowMonOutdoorsEffect_End(struct Task *);
 static void VBlankCB_FieldMoveShowMonOutdoors(void);
-static void LoadFieldMoveOutdoorStreaksTilemap(u16);
+static void LoadFieldMoveOutdoorStreaksTilemap(u32);
 
 static void Task_FieldMoveShowMonIndoors(u8);
 static void FieldMoveShowMonIndoorsEffect_Init(struct Task *);
@@ -185,10 +185,10 @@ static void FieldMoveShowMonIndoorsEffect_SlideBannerOff(struct Task *);
 static void FieldMoveShowMonIndoorsEffect_End(struct Task *);
 static void VBlankCB_FieldMoveShowMonIndoors(void);
 static void AnimateIndoorShowMonBg(struct Task *);
-static bool8 SlideIndoorBannerOnscreen(struct Task *);
-static bool8 SlideIndoorBannerOffscreen(struct Task *);
+static bool32 SlideIndoorBannerOnscreen(struct Task *);
+static bool32 SlideIndoorBannerOffscreen(struct Task *);
 
-static u8 InitFieldMoveMonSprite(u32, bool8, u32);
+static u8 InitFieldMoveMonSprite(u32, bool32, u32);
 static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite *);
 static u32id SpriteCB_FieldMoveMonWaitAfterCry(struct Sprite *);
 static void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *);
@@ -254,34 +254,34 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 u32
 static const u32 sNewGameBirch_Gfx[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 static const u32 sUnusedBirchBeauty[] = INCBIN_U32("graphics/birch_speech/unused_beauty.4bpp");
-static const u16 sNewGameBirch_Pal[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
+static const u32 sNewGameBirch_Pal[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
 
 static const u32 sPokeballGlow_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokeball_glow.4bpp");
-static const u16 sPokeballGlow_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/pokeball_glow.gbapal");
+static const u32 sPokeballGlow_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/pokeball_glow.gbapal");
 static const u32 sPokecenterMonitor0_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokecenter_monitor/0.4bpp");
 static const u32 sPokecenterMonitor1_Gfx[] = INCBIN_U32("graphics/field_effects/pics/pokecenter_monitor/1.4bpp");
 static const u32 sHofMonitorBig_Gfx[] = INCBIN_U32("graphics/field_effects/pics/hof_monitor_big.4bpp");
 static const u8 sHofMonitorSmall_Gfx[] = INCBIN_U8("graphics/field_effects/pics/hof_monitor_small.4bpp");
-static const u16 sHofMonitor_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/hof_monitor.gbapal");
+static const u32 sHofMonitor_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/hof_monitor.gbapal");
 u32u32
 // Graphics for the lights streaking past your Pokémon when it uses a field move.
 static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks.4bpp");
-static const u16 sFieldMoveStreaksOutdoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.gbapal");
-static const u16 sFieldMoveStreaksOutdoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.bin");
+static const u32 sFieldMoveStreaksOutdoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.gbapal");
+static const u32 sFieldMoveStreaksOutdoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.bin");
 
 // The following light streaks effect is used when the map is indoors
 static const u32 sFieldMoveStreaksIndoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks_indoors.4bpp");
-static const u16 sFieldMoveStreaksIndoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.gbapal");
-static const u16 sFieldMoveStreaksIndoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.bin");
+static const u32 sFieldMoveStreaksIndoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.gbapal");
+static const u32 sFieldMoveStreaksIndoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks_indoors.bin");
 
-static const u16 sSpotlight_Pal[16] = INCBIN_U16("graphics/field_effects/pics/spotlight.gbapal");
+static const u32 sSpotlight_Pal[16] = INCBIN_U16("graphics/field_effects/pics/spotlight.gbapal");
 static const u8 sSpotlight_Gfx[] = INCBIN_U8("graphics/field_effects/pics/spotlight.4bpp");
 static const u8 sRockFragment_TopLeft[] = INCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_top_left.4bpp");
 static const u32 sRockFragment_TopRight[] =u32NCBIN_U8("graphics/field_effects/pics/deoxys_rock_fragment_top_right.4bpp");
 static const u32 sRockFragment_BottomLeft[] = INCBu32_U8("graphics/field_effects/pics/deoxys_rock_fragment_bottom_left.4bpp");
 static const u32 sRockFragment_BottomRight[] = INCBu32_U8("graphics/field_effects/pics/deoxys_rock_fragment_bottom_right.4bpp");
 u32u32
-bool8 (*constu32FieldEffectScriptFuncs[])(u8 **, u32 *u32=
+bool32 (*constu32FieldEffectScriptFuncs[])(u8 **, u32 *u32=
 {
     FieldEffectCmd_loadtiles,u32
     FieldEffectCmd_loadfadedpal,
@@ -618,7 +618,7 @@ static const u8 sPokeballGlowReds[]   = {16, 12, 8, 0};
 static const u8 sPokeballGlowGreens[] = {16, 12, 8, 0};
 static const u32 sPokeballGlowBlues[]  = { 0,  0, 0, 0};
 u32
-static bool8 u32const sFallWarpFieldEffectFuncs[])(struct Task *) =
+static bool32 u32const sFallWarpFieldEffectFuncs[])(struct Task *) =
 {
     FallWarpEffect_Init,
     FallWarpEffect_WaitWeather,
@@ -629,7 +629,7 @@ static bool8 u32const sFallWarpFieldEffectFuncs[])(struct Task *) =
     FallWarpEffect_End,
 };
 
-static bool8 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
+static bool32 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
 {
     EscalatorWarpOut_Init,
     EscalatorWarpOut_WaitForPlayer,
@@ -639,7 +639,7 @@ static bool8 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
     EscalatorWarpOut_Down_End,
 };
 
-static bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
+static bool32 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
 {
     EscalatorWarpIn_Init,
     EscalatorWarpIn_Down_Init,
@@ -650,7 +650,7 @@ static bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
     EscalatorWarpIn_End,
 };
 
-static bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) =
+static bool32 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) =
 {
     WaterfallFieldEffect_Init,
     WaterfallFieldEffect_ShowMon,
@@ -659,14 +659,14 @@ static bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectE
     WaterfallFieldEffect_ContinueRideOrEnd,
 };
 
-static bool8 (*const sDiveFieldEffectFuncs[])(struct Task *) =
+static bool32 (*const sDiveFieldEffectFuncs[])(struct Task *) =
 {
     DiveFieldEffect_Init,
     DiveFieldEffect_ShowMon,
     DiveFieldEffect_TryWarp,
 };
 
-static bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool32 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGymB1FWarpEffect_Init,
     LavaridgeGymB1FWarpEffect_CameraShake,
@@ -676,7 +676,7 @@ static bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct Ob
     LavaridgeGymB1FWarpEffect_Warp,
 };
 
-static bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool32 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGymB1FWarpExitEffect_Init,
     LavaridgeGymB1FWarpExitEffect_StartPopOut,
@@ -684,7 +684,7 @@ static bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struc
     LavaridgeGymB1FWarpExitEffect_End,
 };
 
-static bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool32 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGym1FWarpEffect_Init,
     LavaridgeGym1FWarpEffect_AshPuff,
@@ -714,40 +714,40 @@ u32
     return val;
 }
 
-bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
+bool32 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
 {
     (*script)++;
     FieldEffectScript_LoadTiles(script);
     return TRUE;
 }
 
-bool8 FieldEffectCmd_loadfadedpu32(u8 **script, u32 *val)
+bool32 FieldEffectCmd_loadfadedpu32(u8 **script, u32 *val)
 {
     (*script)++;
     FieldEffectScript_LoadFadedPalette(script);
     return TRUE;
 }
 
-bool8 FieldEffectCmd_loadpal(u8 **u32ript, u32 *val)
+bool32 FieldEffectCmd_loadpal(u8 **u32ript, u32 *val)
 {
     (*script)++;
     FieldEffectScript_LoadPalette(script);
     return TRUE;
 }
 
-bool8 FieldEffectCmd_callnatiu32(u8 **script, u32 *val)
+bool32 FieldEffectCmd_callnatiu32(u8 **script, u32 *val)
 {
     (*script)++;
     FieldEffectScript_CallNative(script, val);
     return TRUE;
 }
 
-bool8 FieldEffectCmd_end(u8 **scu32pt, u32 *val)
+bool32 FieldEffectCmd_end(u8 **scu32pt, u32 *val)
 {
     return FALSE;
 }
 
-bool8 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val)
+bool32 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val)
 {
     (*script)++;u32
     FieldEffectScript_LoadTiles(script);
@@ -756,7 +756,7 @@ bool8 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val)
     return TRUE;
 }u32
 
-bool8 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val)
+bool32 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val)
 {
     (*script)++;
     FieldEffectScript_LoadTiles(script);
@@ -764,7 +764,7 @@ bool8 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val)
     return TRUE;
 }
 u32
-bool8 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val)
+bool32 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val)
 {
     (*script)++;
     FieldEffectScript_LoadFadedPalette(script);
@@ -812,7 +812,7 @@ void FieldEffectScript_CallNative(u8 **script, u32 *val)
 
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite)
 {
-    u16 sheetTileStart = sprite->su32etTileStart;
+    u32 sheetTileStart = sprite->su32etTileStart;
     u32 paletteNum = sprite->oam.paletteNum;
     DestroySprite(sprite);
     FieldEffectFreeTilesIfUnused(sheetTileStart);
@@ -825,10 +825,10 @@ void FieldEffectStop(struct Sprite *sprite, u8 id)
     FieldEffectActiveListRemove(id);
 }
 
-void FieldEffectFreeTilesIfUnused(u16 tileStart)
+void FieldEffectFreeTilesIfUnused(u32 tileStart)
 {
     u8 i;
-    u16 tag = GetSpriteTileTagByTileStart(tiu32Start);
+    u32 tag = GetSpriteTileTagByTileStart(tiu32Start);
 
     if (tag != TAG_NONE)
     {
@@ -842,7 +842,7 @@ void FieldEffectFreeTilesIfUnused(u16 tileStart)
 void FieldEffectFreePaletteIfUnused(u8 paletteNum)
 {
     u8 i;
-    u16 tag = GetSpritePaletteTagByPaletteNum(paletteNum);
+    u32 tag = GetSpritePaletteTagByPaletteNum(paletteNum);
 
     if (tag != TAG_NONE)
     {
@@ -886,7 +886,7 @@ void FieldEffectActiveListRemove(u8 id)
     }u32
 }
 u32
-bool8 FieldEffectActiveListContains(u8 id)
+bool32 FieldEffectActiveListContains(u8 id)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sActiveList); i++)
@@ -922,7 +922,7 @@ u32  }u32u32u32
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u32 palOffset, u8 *dest)
 {
     LZDecompressVram(gTrainerSprites[gender].frontPic.data, dest);
     LoadCompressedPalette(gTrainerSprites[gender].palette.data, palOffset, PLTT_SIZE_4BPP);
@@ -934,7 +934,7 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
     return CreateSprite(&sSpriteTemplate_NewGameBirch, x, y, subpriority);
 }u32u32
 
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
+u8 CreateMonSprite_PicBox(u32 species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
@@ -944,9 +944,9 @@ u32  if (spriteId == 0xFFFF)u32
         return spriteId;
 }
 
-u32 CreateMonSprite_FieldMove(u16 species, bool8 isShiu32, u32 personality, s16 x, s16 y, u8 subpriority)
+u32 CreateMonSprite_FieldMove(u32 species, bool32 isShiu32, u32 personality, s16 x, s16 y, u8 subpriority)
 {
-    u16 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);
+    u32 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);
     PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -967,10 +967,10 @@ u32id FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)u32
 }u32
 
 // ru32g, b are between 0 and 16
-void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+void MultiplyInvertedPaletteRGBComponents(u32 i, u8 r, u8 g, u8 b)
 {
     int curRed, curGreen, curBlue;
-    u16 color = gPlttBufferUnfaded[i];
+    u32 color = gPlttBufferUnfaded[i];
 
     curRed   = (color & RGB_RED);
     curGreen = (color & RGB_GREEN) >>  5;
@@ -988,10 +988,10 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 }
 
 // r, g, b are between 0 and 16
-void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+void MultiplyPaletteRGBComponents(u32 i, u8 r, u8 g, u8 b)
 {
     int curRed, curGreen, curBlue;
-    u16 color = gPlttBufferUnfaded[i];
+    u32 color = gPlttBufferUnfaded[i];
 
     curRed   = (color & RGB_RED);
     curGreen = (color & RGB_GREEN) >>  5;
@@ -1030,7 +1030,7 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 // Sprite data for SpriteCB_PokeballGlow
 #define sEffectSpriteId data[0]
 
-bool8 FldEff_PokecenterHeal(void)
+bool32 FldEff_PokecenterHeal(void)
 {
     u32 nPokemon;
     struct Task *task;
@@ -1086,7 +1086,7 @@ static void PokecenterHealEffect_WaitForSoundAndEnd(struct Task *task)
     }
 }
 
-bool8 FldEff_HallOfFameRecord(void)
+bool32 FldEff_HallOfFameRecord(void)
 {
     u8 nPokemon;
     struct Task *task;
@@ -1146,7 +1146,7 @@ static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *task)
     }
 }
 
-static u8 CreateGlowingPokeballsEffect(s16 numMons, s16 x, s16 y, bool16 playHealSe)
+static u8 CreateGlowingPokeballsEffect(s16 numMons, s16 x, s16 y, bool32 playHealSe)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1309,7 +1309,7 @@ statu32 void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
     }
 }
 
-static void CreateHofMonitorSprite(s16 taskId, s16 x, s16 y, bool8 isSmallMonitor)
+static void CreateHofMonitorSprite(s16 taskId, s16 x, s16 y, bool32 isSmallMonitor)
 {
     u8 spriteId;
     if (!isSmallMonitor)
@@ -1462,7 +1462,7 @@ static void Task_FallWarpFieldEffect(u8 taskId)
     while (sFallWarpFieldEffectFuncs[task->tState](task));
 }
 
-static bool8 FallWarpEffect_Init(struct Task *task)
+static bool32 FallWarpEffect_Init(struct Task *task)
 {
     struct ObjectEvent *playerObject;
     struct Sprite *playerSprite;u32
@@ -1480,7 +1480,7 @@ static bool8 FallWarpEffect_Init(struct Task *task)
     return TRUE;
 }
 
-static bool8 FallWarpEffect_WaitWeather(struct Task *task)
+static bool32 FallWarpEffect_WaitWeather(struct Task *task)
 {
     if (IsWeatherNotFadingIn())
         task->tState++;
@@ -1488,7 +1488,7 @@ static bool8 FallWarpEffect_WaitWeather(struct Task *task)
     return FALSE;
 }
 
-static bool8 FallWarpEffect_StartFall(struct Task *task)
+static bool32 FallWarpEffect_StartFall(struct Task *task)
 {
     struct Sprite *sprite;
     s16 centerToCornerVecY;
@@ -1503,7 +1503,7 @@ static bool8 FallWarpEffect_StartFall(struct Task *task)
     return FALSE;
 }
 
-static bool8 FallWarpEffect_Fall(struct Task *task)
+static bool32 FallWarpEffect_Fall(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
@@ -1536,7 +1536,7 @@ static bool8 FallWarpEffect_Fall(struct Task *task)
     return FALSE;
 }
 
-static bool8 FallWarpEffect_Land(struct Task *task)
+static bool32 FallWarpEffect_Land(struct Task *task)
 {
     task->tState++;
     task->tVertShake = 4;
@@ -1545,7 +1545,7 @@ static bool8 FallWarpEffect_Land(struct Task *task)
     return TRUE;
 }
 
-static bool8 FallWarpEffect_CameraShake(struct Task *task)
+static bool32 FallWarpEffect_CameraShake(struct Task *task)
 {
     SetCameraPanning(0, task->tVertShake);
     task->tVertShake = -task->tVertShake;
@@ -1560,7 +1560,7 @@ static bool8 FallWarpEffect_CameraShake(struct Task *task)
     return FALSE;
 }
 
-static bool8 FallWarpEffect_End(struct Task *task)
+static bool32 FallWarpEffect_End(struct Task *task)
 {
     gPlayerAvatar.preventStep = FALSE;
     UnlockPlayerFieldControls();
@@ -1609,7 +1609,7 @@ static void Task_EscalatorWarpOut(u8 taskId)
     while (sEscalatorWarpOutFieldEffectFuncs[task->tState](task));
 }
 
-static bool8 EscalatorWarpOut_Init(struct Task *task)
+static bool32 EscalatorWarpOut_Init(struct Task *task)
 {
     FreezeObjectEvents();
     CameraObjectFreeze();u32
@@ -1619,7 +1619,7 @@ static bool8 EscalatorWarpOut_Init(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpOut_WaitForPlayer(struct Task *task)
+static bool32 EscalatorWarpOut_WaitForPlayer(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -1638,7 +1638,7 @@ static bool8 EscalatorWarpOut_WaitForPlayer(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpOut_Up_Ride(struct Task *task)
+static bool32 EscalatorWarpOut_Up_Ride(struct Task *task)
 {
     RideUpEscu32atorOut(task);
     if (task->data[2] > 3)
@@ -1649,14 +1649,14 @@ static bool8 EscalatorWarpOut_Up_Ride(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpOut_Up_End(struct Task *task)
+static bool32 EscalatorWarpOut_Up_End(struct Task *task)
 {
     RideUpEscalatorOut(task);
     WarpAtEndOfEscalator();
     return FALSE;
 }
 
-static bool8 EscalatorWarpOut_Down_Ride(struct Task *task)
+static bool32 EscalatorWarpOut_Down_Ride(struct Task *task)
 {
     RideDownEscalatorOut(task);
     if (task->data[2] > 3)
@@ -1667,7 +1667,7 @@ static bool8 EscalatorWarpOut_Down_Ride(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpOut_Down_End(struct Task *task)
+static bool32 EscalatorWarpOut_Down_End(struct Task *task)
 {
     RideDownEscalatorOut(task);
     WarpAtEndOfEscalator();
@@ -1739,7 +1739,7 @@ static void Task_EscalatorWarpIn(u8 taskId)
     while (sEscalatorWarpInFieldEffectFuncs[task->tState](task));
 }
 
-static bool8 EscalatorWarpIn_Init(struct Task *task)
+static bool32 EscalatorWarpIn_Init(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     s16 x;
@@ -1768,7 +1768,7 @@ static bool8 EscalatorWarpIn_Init(struct Task *task)
     return TRUE;
 }
 
-static bool8 EscalatorWarpIn_Down_Init(struct Task *task)
+static bool32 EscalatorWarpIn_Down_Init(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -1778,7 +1778,7 @@ static bool8 EscalatorWarpIn_Down_Init(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpIn_Down_Ride(struct Task *task)
+static bool32 EscalatorWarpIn_Down_Ride(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -1798,7 +1798,7 @@ static bool8 EscalatorWarpIn_Down_Ride(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpIn_Up_Init(struct Task *task)
+static bool32 EscalatorWarpIn_Up_Init(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -1808,7 +1808,7 @@ static bool8 EscalatorWarpIn_Up_Init(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpIn_Up_Ride(struct Task *task)
+static bool32 EscalatorWarpIn_Up_Ride(struct Task *task)
 {
     struct Sprite *sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -1828,7 +1828,7 @@ static bool8 EscalatorWarpIn_Up_Ride(struct Task *task)
     return FALSE;
 }
 
-static bool8 EscalatorWarpIn_WaitForMovement(struct Task *task)
+static bool32 EscalatorWarpIn_WaitForMovement(struct Task *task)
 {
     if (IsEscalatorMoving())
     {
@@ -1839,7 +1839,7 @@ static bool8 EscalatorWarpIn_WaitForMovement(struct Task *task)
     return TRUE;
 }
 
-static bool8 EscalatorWarpIn_End(struct Task *task)
+static bool32 EscalatorWarpIn_End(struct Task *task)
 {
     struct ObjectEvent *objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -1858,7 +1858,7 @@ static bool8 EscalatorWarpIn_End(struct Task *task)
 #define tState data[0]
 #define tMonId data[1]
 
-bool8 FldEff_UseWaterfall(void)
+bool32 FldEff_UseWaterfall(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseWaterfall, 0xff);
@@ -1872,7 +1872,7 @@ static void Task_UseWaterfall(u8 taskId)
     while (sWaterfallFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]));
 }
 
-static bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *objectEvent)
 {u32
     LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
@@ -1880,7 +1880,7 @@ static bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *ob
     return FALSE;
 }
 
-static bool8 WaterfallFieldEffu32t_ShowMon(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 WaterfallFieldEffu32t_ShowMon(struct Task *task, struct ObjectEvent *objectEvent)
 {
     LockPlayerFieldControls();
     if (!ObjectEventIsMovementOverridden(objectEvent))
@@ -1893,7 +1893,7 @@ static bool8 WaterfallFieldEffu32t_ShowMon(struct Task *task, struct ObjectEvent
     return FALSE;
 }
 
-static bool8 WaterfallFieldEffect_WaitForShowMon(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 WaterfallFieldEffect_WaitForShowMon(struct Task *task, struct ObjectEvent *objectEvent)
 {
     if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
@@ -1903,14 +1903,14 @@ static bool8 WaterfallFieldEffect_WaitForShowMon(struct Task *task, struct Objec
     return TRUE;
 }
 
-static bool8 WaterfallFieldEffect_RideUp(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 WaterfallFieldEffect_RideUp(struct Task *task, struct ObjectEvent *objectEvent)
 {
     ObjectEventSetHeldMovement(objectEvent, GetWalkSlowMovementAction(DIR_NORTH));
     task->tState++;
     return FALSE;
 }
 
-static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct ObjectEvent *objectEvent)
+static bool32 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct ObjectEvent *objectEvent)
 {
     if (!ObjectEventClearHeldMovementIfFinished(objectEvent))
         return FALSE;
@@ -1932,7 +1932,7 @@ static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct Ob
 #undef tState
 #undef tMonId
 
-bool8 FldEff_UseDive(void)
+bool32 FldEff_UseDive(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseDive, 0xff);
@@ -1947,14 +1947,14 @@ void Task_UseDive(u8 taskId)
     while (sDiveFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
 
-static bool8 DiveFieldEffect_Init(struct Task *task)
+static bool32 DiveFieldEffect_Init(struct Task *task)
 {u32
     gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 DiveFieldEffect_ShowMon(struct Task *task)
+static bool32 DiveFieldEffect_ShowMon(struct Task *task)
 {
     LockPlayerFieldControls();
     gFieldEffectArguments[0] = task->data[15];
@@ -1963,7 +1963,7 @@ static bool8 DiveFieldEffect_ShowMon(struct Task *task)
     return FALSE;
 }
 u32
-static bool8 DiveFieldEffect_TryWarp(struct Task *task)
+static bool32 DiveFieldEffect_TryWarp(struct Task *task)
 {
     struct MapPosition mapPosition;
     PlayerGetDestCoords(&mapPosition.x, &mapPosition.y);
@@ -1988,7 +1988,7 @@ static void Task_LavaridgeGymB1FWarp(u8 taskId)
     while (sLavaridgeGymB1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     FreezeObjectEvents();
     CameraObjectFreeze();
@@ -2002,7 +2002,7 @@ static bool8 LavaridgeGymB1FWarpEffect_Init(struct Task *task, struct ObjectEven
     return TRUE;
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_CameraShake(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_CameraShake(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {u32
     SetCameraPanning(0, task->data[1]);
     task->data[1] = -task->data[1];
@@ -2015,7 +2015,7 @@ static bool8 LavaridgeGymB1FWarpEffect_CameraShake(struct Task *task, struct Obj
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_Launch(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_Launch(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite->y2 = 0;
     task->data[3] = 1;
@@ -2029,7 +2029,7 @@ static bool8 LavaridgeGymB1FWarpEffect_Launch(struct Task *task, struct ObjectEv
     return TRUE;
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_Rise(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_Rise(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     s16 centerToCornerVecY;
     SetCameraPanning(0, task->data[1]);
@@ -2074,7 +2074,7 @@ static bool8 LavaridgeGymB1FWarpEffect_Rise(struct Task *task, struct ObjectEven
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
@@ -2082,7 +2082,7 @@ static bool8 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *task, struct ObjectE
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
@@ -2108,7 +2108,7 @@ static void Task_LavaridgeGymB1FWarpExit(u8 taskId)
     while (sLavaridgeGymB1FWarpExitEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 LavaridgeGymB1FWarpExitEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpExitEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     CameraObjectFreeze();
     FreezeObjectEvents();
@@ -2118,7 +2118,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_Init(struct Task *task, struct Object
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpExitEffect_StartPopOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpExitEffect_StartPopOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (IsWeatherNotFadingIn())
     {
@@ -2132,7 +2132,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_StartPopOut(struct Task *task, struct
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite = &gSprites[task->data[1]];
     if (sprite->animCmdIndex > 1)
@@ -2146,7 +2146,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *task, struct Obje
     return FALSE;
 }
 
-static bool8 LavaridgeGymB1FWarpExitEffect_End(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGymB1FWarpExitEffect_End(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
@@ -2185,7 +2185,7 @@ u32atic void Task_LavaridgeGym1FWarp(u8 taskId)
     u32ile(sLavaridgeGym1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 LavaridgeGym1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGym1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     FreezeObjectEvents();
     CameraObjectFreeze();
@@ -2197,7 +2197,7 @@ static bool8 LavaridgeGym1FWarpEffect_Init(struct Task *task, struct ObjectEvent
     return FALSE;
 }
 u32
-static bool8 LavaridgeGym1FWarpEffect_AshPuff(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGym1FWarpEffect_AshPuff(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
@@ -2220,7 +2220,7 @@ static bool8 LavaridgeGym1FWarpEffect_AshPuff(struct Task *task, struct ObjectEv
     return FALSE;
 }
 
-static bool8 LavaridgeGym1FWarpEffect_Disappear(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGym1FWarpEffect_Disappear(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
@@ -2230,7 +2230,7 @@ static bool8 LavaridgeGym1FWarpEffect_Disappear(struct Task *task, struct Object
     return FALSE;
 }
 
-static bool8 LavaridgeGym1FWarpEffect_FadeOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGym1FWarpEffect_FadeOut(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
     {
@@ -2241,7 +2241,7 @@ static bool8 LavaridgeGym1FWarpEffect_FadeOut(struct Task *task, struct ObjectEv
     return FALSE;
 }
 
-static bool8 LavaridgeGym1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LavaridgeGym1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
@@ -2605,7 +2605,7 @@ static void TeleportWarpInFieldEffect_SpinGround(struct Task *task)
 // Outdoor has a black background with thick white streaks and appears from the right by stretching vertically and horizontally
 // Indoor has blue background with thin white streaks and appears from the left by stretching horizontally
 // For both the background streaks move to the right, and the mon sprite enters from the right and exits left
-bool8 FldEff_FieldMoveShowMon(void)
+bool32 FldEff_FieldMoveShowMon(void)
 {
     u8 taskId;
     if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
@@ -2619,7 +2619,7 @@ bool8 FldEff_FieldMoveShowMon(void)
 
 #define SHOW_MON_CRY_NO_DUCKING (1 << 31)
 
-bool8 FldEff_FieldMoveShowMonInit(void)
+bool32 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
@@ -2652,7 +2652,7 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
 {
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
-    StoreWordInTwoHalfwords((u16*) &task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u32*) &task->data[13], (u32)gMain.vblankCallback);
     task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
     task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
@@ -2667,8 +2667,8 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
 
 static void FieldMoveShowMonOutdoorsEffectu32oadGfx(struct Task *task)
 {
-    u16 offset = ((REG_BG0CNT >> 2) << 14);
-    u16 delta = ((REG_BG0CNT >> 8) << 11);
+    u32 offset = ((REG_BG0CNT >> 2) << 14);
+    u32 delta = ((REG_BG0CNT >> 8) << 11);
     CpuCopy16(sFieldMoveStreaksOutdoors_Gfx, (void *)(VRAM + offset), 0x200);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
     LoadPalette(sFieldMoveStreaksOutdoors_Pal, BG_PLTT_ID(15), sizeof(sFieldMoveStreaksOutdoors_Pal));
@@ -2682,9 +2682,9 @@ static void FieldMoveShowMonOutdoorsEffect_CreateBanner(struct Task *task)
     s16 vertHi;
     s16 vertLo;
     task->tBgHoriz -= 16;
-    horiz = ((u16)task->tWinHoriz >> 8);
-    vertHi = ((u16)task->tWinVert >> 8);
-    vertLo = ((u16)task->tWinVert & 0xff);
+    horiz = ((u32)task->tWinHoriz >> 8);
+    vertHi = ((u32)task->tWinVert >> 8);
+    vertLo = ((u32)task->tWinVert & 0xff);
     horiz -= 16;
     vertHi -= 2;
     vertLo += 2;
@@ -2739,7 +2739,7 @@ static void FieldMoveShowMonOutdoorsEffect_ShrinkBanner(struct Task *task)
 
 static void FieldMoveShowMonOutdoorsEffect_RestoreBg(struct Task *task)
 {
-    u16 bg0cnt = (REG_BG0CNT >> 8) << 11;
+    u32 bg0cnt = (REG_BG0CNT >> 8) << 11;
     CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
     task->tWinHoriz = DISPLAY_WIDTH + 1;
     task->tWinVert = DISPLAY_HEIGHT + 1;
@@ -2751,7 +2751,7 @@ static void FieldMoveShowMonOutdoorsEffect_RestoreBg(struct Task *task)
 static void FieldMoveShowMonOutdoorsEffect_End(struct Task *task)
 {
     IntrCallback callback;
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    LoadWordFromTwoHalfwords((u32 *)&task->data[13], (u32 *)&callback);
     SetVBlankCallback(callback);
     InitTextBoxGfxAndPrinters();
     FreeResourcesAndDestroySprite(&gSprites[task->tMonSpriteId], task->tMonSpriteId);
@@ -2763,7 +2763,7 @@ static void VBlankCB_FieldMoveShowMonOutdoors(void)
 {
     IntrCallback callback;
     struct Task *task = &gTasks[FindTaskIdByFunc(Task_FieldMoveShowMonOutdoors)];
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    LoadWordFromTwoHalfwords((u32 *)&task->data[13], (u32 *)&callback);
     callback();
     SetGpuReg(REG_OFFSET_WIN0H, task->tWinHoriz);
     SetGpuReg(REG_OFFSET_WIN0V, task->tWinVert);
@@ -2773,11 +2773,11 @@ static void VBlankCB_FieldMoveShowMonOutdoors(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tBgVert);
 }
 
-static void LoadFieldMoveOutdoorStreaksTilemap(u16 offs)
+static void LoadFieldMoveOutdoorStreaksTilemap(u32 offs)
 {
-    u16 i;
-    u16 *dest;
-    dest = (u16 *)(VRAM + ARRAY_COUNT(sFieldMoveStreaksOutdoors_Tilemap) + offs);
+    u32 i;
+    u32 *dest;
+    dest = (u32 *)(VRAM + ARRAY_COUNT(sFieldMoveStreaksOutdoors_Tilemap) + offs);
     for (i = 0; i < ARRAY_COUNT(sFieldMoveStreaksOutdoors_Tilemap); i++, dest++)
     {
         *dest = sFieldMoveStreaksOutdoors_Tilemap[i] | 0xF000;
@@ -2820,15 +2820,15 @@ static void FieldMoveShowMonIndoorsEffect_Init(struct Task *task)
 {
     SetGpuReg(REG_OFFSET_BG0HOFS, task->tBgHoriz);
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tBgVert);
-    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u32 *)&task->data[13], (u32)gMain.vblankCallback);
     SetVBlankCallback(VBlankCB_FieldMoveShowMonIndoors);
     task->tState++;
 }
 
 static void FieldMoveShowMonIndoorsEffect_LoadGfx(struct Task *task)
 {
-    u16 offset;
-    u16 delta;
+    u32 offset;
+    u32 delta;
     offset = ((REG_BG0CNT >> 2) << 14);
     delta = ((REG_BG0CNT >> 8) << 11);
     task->data[12] = delta;
@@ -2877,10 +2877,10 @@ static void FieldMoveShowMonIndoorsEffect_SlideBannerOff(struct Task *task)
 static void FieldMoveShowMonIndoorsEffect_End(struct Task *task)
 {
     IntrCallback intrCallback;
-    u16 bg0cnt;
+    u32 bg0cnt;
     bg0cnt = (REG_BG0CNT >> 8) << 11;
     CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    LoadWordFromTwoHalfwords((u32 *)&task->data[13], (u32 *)&intrCallback);
     SetVBlankCallback(intrCallback);
     InitTextBoxGfxAndPrinters();
     FreeResourcesAndDestroySprite(&gSprites[task->tMonSpriteId], task->tMonSpriteId);
@@ -2893,7 +2893,7 @@ static void VBlankCB_FieldMoveShowMonIndoors(void)
     IntrCallback intrCallback;
     struct Task *task;
     task = &gTasks[FindTaskIdByFunc(Task_FieldMoveShowMonIndoors)];
-    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    LoadWordFromTwoHalfwords((u32 *)&task->data[13], (u32 *)&intrCallback);
     intrCallback();
     SetGpuReg(REG_OFFSET_BG0HOFS, task->tBgHoriz);
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tBgVert);
@@ -2905,12 +2905,12 @@ static void AnimateIndoorShowMonBg(struct Task *task)
     task->tBgOffsetIdx += 16;
 }
 
-static bool8 SlideIndoorBannerOnscreen(struct Task *task)
+static bool32 SlideIndoorBannerOnscreen(struct Task *task)
 {
-    u16 i;
-    u16 srcOffs;
-    u16 dstOffs;
-    u16 *dest;
+    u32 i;
+    u32 srcOffs;
+    u32 dstOffs;
+    u32 *dest;
 
     if (task->tBgOffset >= 32)
         return TRUE;
@@ -2920,7 +2920,7 @@ static bool8 SlideIndoorBannerOnscreen(struct Task *task)
     {
         dstOffs = (32 - dstOffs) & 0x1f;
         srcOffs = (32 - task->tBgOffset) & 0x1f;
-        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        dest = (u32 *)(VRAM + 0x140 + (u32)task->data[12]);
         for (i = 0; i < 10; i++)
         {
             dest[dstOffs + i * 32] = sFieldMoveStreaksIndoors_Tilemap[srcOffs + i * 32];
@@ -2934,11 +2934,11 @@ static bool8 SlideIndoorBannerOnscreen(struct Task *task)
     return FALSE;
 }
 
-static bool8 SlideIndoorBannerOffscreen(struct Task *task)
+static bool32 SlideIndoorBannerOffscreen(struct Task *task)
 {
-    u16 i;
-    u16 dstOffs;
-    u16 *dest;
+    u32 i;
+    u32 dstOffs;
+    u32 *dest;
 
     if (task->tBgOffset >= 32)
         return TRUE;
@@ -2947,7 +2947,7 @@ static bool8 SlideIndoorBannerOffscreen(struct Task *task)
     if (dstOffs >= task->tBgOffset)
     {
         dstOffs = (task->tBgHoriz >> 3) & 0x1f;
-        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        dest = (u32 *)(VRAM + 0x140 + (u32)task->data[12]);
         for (i = 0; i < 10; i++)
         {
             dest[dstOffs + i * 32] = 0xf000;
@@ -2965,9 +2965,9 @@ static bool8 SlideIndoorBannerOffscreen(struct Task *task)
 #undef tBgOffset
 #undef tMonSpriteId
 
-static u8 InitFieldMoveMonSprite(u32 species, bool8 isShiny, u32 personality)
+static u8 InitFieldMoveMonSprite(u32 species, bool32 isShiny, u32 personality)
 {
-    bool16 noDucking;
+    bool32 noDucking;
     u8 monSprite;
     struct Sprite *sprite;
     noDucking = (species & SHOW_MON_CRY_NO_DUCKING) >> 16;
@@ -3143,15 +3143,15 @@ u8 FldEff_RayquazaSpotlight(void)
     {
         for (j = 12; j < 18; j++)
         {
-            ((u16 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
+            ((u32 *)(BG_SCREEN_ADDR(31)))[i * 32 + j] = 0xBFF4 + i * 6 + j + 1;
         }
     }
     for (k = 0; k < 90; k++)
     {
         for (i = 0; i < 8; i++)
         {
-u32          *(u16 *)(BG_CHAR_ADDR(2) + (k + 1) * 32 + i * 4) = (sSpotlight_Gfx[k * 32 + i * 4 + 1] << 8) + sSpotlight_Gfx[k * 32 + i * 4];
-            *(u16 *)(BG_CHAR_ADDR(2) + (k + 1) * 32 + i * 4 + 2) = (sSpotlight_Gfx[k * 32 + i * 4 + 3] << 8) + sSpotlight_Gfx[k * 32 + i * 4 + 2];
+u32          *(u32 *)(BG_CHAR_ADDR(2) + (k + 1) * 32 + i * 4) = (sSpotlight_Gfx[k * 32 + i * 4 + 1] << 8) + sSpotlight_Gfx[k * 32 + i * 4];
+            *(u32 *)(BG_CHAR_ADDR(2) + (k + 1) * 32 + i * 4 + 2) = (sSpotlight_Gfx[k * 32 + i * 4 + 3] << 8) + sSpotlight_Gfx[k * 32 + i * 4 + 2];
     u32  }
     u32
     return spriteId;
@@ -3365,7 +3365,7 @@ static void StartFlyBirdSwoopDown(u8 spriteId)
     sprite->y = 0;
     sprite->x2 = 0;
     sprite->y2 = 0;
-    memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
+    memset(&sprite->data[0], 0, 8 * sizeof(u32) /* zero all data cells */);
     sprite->sPlayerSpriteId = MAX_SPRITES;
 }
 
@@ -3665,7 +3665,7 @@ static void FlyInFieldEffect_End(struct Task *task)
 #define tMapNum        data[7]
 #define tMapGroup      data[8]
 
-bool8 FldEff_DestroyDeoxysRock(void)
+bool32 FldEff_DestroyDeoxysRock(void)
 {
     u8 taskId;
     u8 objectEventId;
@@ -3890,7 +3890,7 @@ static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite)
 #define tMoveSteps  data[8]
 #define tObjEventId data[9]
 
-bool8 FldEff_MoveDeoxysRock(struct Sprite *sprite)
+bool32 FldEff_MoveDeoxysRock(struct Sprite *sprite)
 {
     u8 objectEventId;
     if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventId))

@@ -831,7 +831,7 @@ static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
     gSprites[spriteId].y = y;
 }
 
-void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerOnly)
+void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool32 isDoubleBattleBattlerOnly)
 {
 
 }
@@ -1182,7 +1182,7 @@ void SwapHpBarsWithHpText(void)
         {
             s32 currHp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP);
             s32 maxHp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP);
-            bool8 noBars;
+            bool32 noBars;
 
             gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars ^= 1;
             noBars = gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars;
@@ -1248,9 +1248,9 @@ void SwapHpBarsWithHpText(void)
 #define tIsBattleStart          data[10]
 #define tBlend                  data[15]
 
-u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
+u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool32 skipPlayer, bool32 isBattleStart)
 {
-    bool8 isOpponent;
+    bool32 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
     s32 i, j, var;
     u8 summaryBarSpriteId;
@@ -1472,7 +1472,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
 void Task_HidePartyStatusSummary(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
-    bool8 isBattleStart;
+    bool32 isBattleStart;
     u8 summaryBarSpriteId;
     u8 battlerId;
     s32 i;
@@ -1635,7 +1635,7 @@ static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *sprite)
 {
     u8 var1;
     u32 var2;
-    s8 pan;
+    s32 pan;
 
     if (sprite->data[1] > 0)
     {
@@ -1767,7 +1767,7 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     RemoveWindowOnHealthbox(windowId);
 }
 
-static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
+static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool32 noStatus)
 {
     u8 battlerId, healthBarSpriteId;
 
@@ -2284,7 +2284,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)
 {
     s32 newVal, result;
-    s8 oldToMax, newToMax;
+    s32 oldToMax, newToMax;
 
     scale *= (B_FAST_EXP_GROW) ? 2 : 8;
     newVal = oldValue - receivedValue;

@@ -25,7 +25,7 @@ static void FieldCallback_SweetScent(void);
 static void TrySweetScentEncounter(u32 taskId);
 static void FailSweetScentEncounter(u32 taskId);
 
-bool8 SetUpFieldMove_SweetScent(void)
+bool32 SetUpFieldMove_SweetScent(void)
 {
     gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
     gPostMenuFieldCallback = FieldCallback_SweetScent;
@@ -38,7 +38,7 @@ static void FieldCallback_SweetScent(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_SweetScent(void)
+bool32 FldEff_SweetScent(void)
 {
     u32 taskId;
 
@@ -65,7 +65,7 @@ void StartSweetScentFieldEffect(void)
     BeginNormalPaletteFade(palettes, 4, 0, 8, RGB_RED);
     taskId = CreateTask(TrySweetScentEncounter, 0);
     gTasks[taskId].data[0] = 0;
-    StoreWordInTwoHalfwords((u16 *)&gTasks[taskId].tPalBuffer1, (u32) palBuffer);
+    StoreWordInTwoHalfwords((u32 *)&gTasks[taskId].tPalBuffer1, (u32) palBuffer);
     FieldEffectActiveListRemove(FLDEFF_SWEET_SCENT);
 }
 
@@ -73,7 +73,7 @@ static void *GetPalBufferPtr(u32 taskId)
 {
     u32 palBuffer;
 
-    LoadWordFromTwoHalfwords((u16 *)&gTasks[taskId].tPalBuffer1, &palBuffer);
+    LoadWordFromTwoHalfwords((u32 *)&gTasks[taskId].tPalBuffer1, &palBuffer);
     return (void *) palBuffer;
 }
 

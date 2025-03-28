@@ -44,16 +44,16 @@ static void Task_DeclineStarter(u32 taskId);
 static void Task_MoveStarterChooseCursor(u32 taskId);
 static void Task_CreateStarterLabel(u32 taskId);
 static void CreateStarterPokemonLabel(u32 selection);
-static u32 CreatePokemonFrontSprite(u16 species, u32 x, u32 y);
+static u32 CreatePokemonFrontSprite(u32 species, u32 x, u32 y);
 static void SpriteCB_SelectionHand(struct Sprite *sprite);
 static void SpriteCB_Pokeball(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon(struct Sprite *sprite);
 
-static u16 sStarterLabelWindowId;
+static u32 sStarterLabelWindowId;
 
-const u16 gBirchBagGrass_Pal[] = INCBIN_U16("graphics/starter_choose/tiles.gbapal");
-static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
-static const u16 sStarterCircle_Pal[] = INCBIN_U16("graphics/starter_choose/starter_circle.gbapal");
+const u32 gBirchBagGrass_Pal[] = INCBIN_U16("graphics/starter_choose/tiles.gbapal");
+static const u32 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
+static const u32 sStarterCircle_Pal[] = INCBIN_U16("graphics/starter_choose/starter_circle.gbapal");
 const u32 gBirchBagTilemap[] = INCBIN_U32("graphics/starter_choose/birch_bag.bin.lz");
 const u32 gBirchGrassTilemap[] = INCBIN_U32("graphics/starter_choose/birch_grass.bin.lz");
 const u32 gBirchBagGrass_Gfx[] = INCBIN_U32("graphics/starter_choose/tiles.4bpp.lz");
@@ -110,7 +110,7 @@ static const u32 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {8, 4},
 };
 
-static const u16 sStarterMon[STARTER_MON_COUNT] =
+static const u32 sStarterMon[STARTER_MON_COUNT] =
 {
     SPECIES_TREECKO,
     SPECIES_TORCHIC,
@@ -348,7 +348,7 @@ static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 };
 
 // .text
-u16 GetStarterPokemon(u16 chosenStarterId)
+u32 GetStarterPokemon(u32 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
@@ -575,7 +575,7 @@ static void CreateStarterPokemonLabel(u32 selection)
     s32 width;
     u32 labelLeft, labelRight, labelTop, labelBottom;
 
-    u16 species = GetStarterPokemon(selection);
+    u32 species = GetStarterPokemon(selection);
     CopyMonCategoryText(species, categoryText);
     speciesName = GetSpeciesName(species);
 
@@ -626,7 +626,7 @@ static void Task_CreateStarterLabel(u32 taskId)
     gTasks[taskId].func = Task_HandleStarterChooseInput;
 }
 
-static u32 CreatePokemonFrontSprite(u16 species, u32 x, u32 y)
+static u32 CreatePokemonFrontSprite(u32 species, u32 x, u32 y)
 {
     u32 spriteId;
 

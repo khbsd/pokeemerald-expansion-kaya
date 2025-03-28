@@ -21,32 +21,32 @@
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
 
-static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
-static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-static const u32 *ItemId_GetPluralName(u16);
-static bool32 DoesItemHavePluralName(u16);
+static bool32 CheckPyramidBagHasItem(u32 itemId, u32 count);
+static bool32 CheckPyramidBagHasSpace(u32 itemId, u32 count);
+static const u32 *ItemId_GetPluralName(u32);
+static bool32 DoesItemHavePluralName(u32);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
 
-static u16 GetBagItemQuantity(u16 *quantity)
+static u32 GetBagItemQuantity(u32 *quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;
 }
 
-static void SetBagItemQuantity(u16 *quantity, u16 newValue)
+static void SetBagItemQuantity(u32 *quantity, u32 newValue)
 {
     *quantity =  newValue ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-static u16 GetPCItemQuantity(u16 *quantity)
+static u32 GetPCItemQuantity(u32 *quantity)
 {
     return *quantity;
 }
 
-static void SetPCItemQuantity(u16 *quantity, u16 newValue)
+static void SetPCItemQuantity(u32 *quantity, u32 newValue)
 {
     *quantity = newValue;
 }
@@ -84,14 +84,14 @@ void SetBagItemsPointers(void)
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
 }
 
-u32 *CopyItemName(u16 itemId, u32 *dst)
+u32 *CopyItemName(u32 itemId, u32 *dst)
 {
     return StringCopy(dst, ItemId_GetName(itemId));
 }
 
 const u32 sText_s[] =_("s");
 
-u32 *CopyItemNameHandlePlural(u16 itemId, u32 *dst, u32 quantity)
+u32 *CopyItemNameHandlePlural(u32 itemId, u32 *dst, u32 quantity)
 {
     if (quantity == 1)
     {
@@ -108,7 +108,7 @@ u32 *CopyItemNameHandlePlural(u16 itemId, u32 *dst, u32 quantity)
     }
 }
 
-bool8 IsBagPocketNonEmpty(u32 pocket)
+bool32 IsBagPocketNonEmpty(u32 pocket)
 {
     u32 i;
 
@@ -120,7 +120,7 @@ bool8 IsBagPocketNonEmpty(u32 pocket)
     return FALSE;
 }
 
-bool8 CheckBagHasItem(u16 itemId, u16 count)
+bool32 CheckBagHasItem(u32 itemId, u32 count)
 {
     u32 i;
     u32 pocket;
@@ -135,7 +135,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
     {
         if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
         {
-            u16 quantity;
+            u32 quantity;
             // Does this item slot contain enough of the item?
             quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
             if (quantity >= count)
@@ -149,9 +149,9 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-bool8 HasAtLeastOneBerry(void)
+bool32 HasAtLeastOneBerry(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = FIRST_BERRY_INDEX; i <= LAST_BERRY_INDEX; i++)
     {
@@ -165,9 +165,9 @@ bool8 HasAtLeastOneBerry(void)
     return FALSE;
 }
 
-bool8 HasAtLeastOnePokeBall(void)
+bool32 HasAtLeastOnePokeBall(void)
 {
-    u16 ballId;
+    u32 ballId;
 
     for (ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
     {
@@ -177,7 +177,7 @@ bool8 HasAtLeastOnePokeBall(void)
     return FALSE;
 }
 
-bool8 CheckBagHasSpace(u16 itemId, u16 count)
+bool32 CheckBagHasSpace(u32 itemId, u32 count)
 {
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
@@ -188,11 +188,11 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     return GetFreeSpaceForItemInBag(itemId) >= count;
 }
 
-u32 GetFreeSpaceForItemInBag(u16 itemId)
+u32 GetFreeSpaceForItemInBag(u32 itemId)
 {
     u32 i;
     u32 pocket = ItemId_GetPocket(itemId) - 1;
-    u16 ownedCount;
+    u32 ownedCount;
     u32 spaceForItem = 0;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
@@ -214,7 +214,7 @@ u32 GetFreeSpaceForItemInBag(u16 itemId)
     return spaceForItem;
 }
 
-bool8 AddBagItem(u16 itemId, u16 count)
+bool32 AddBagItem(u32 itemId, u32 count)
 {
     u32 i;
 
@@ -230,7 +230,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
     {
         struct BagPocket *itemPocket;
         struct ItemSlot *newItems;
-        u16 ownedCount;
+        u32 ownedCount;
         u32 pocket = ItemId_GetPocket(itemId) - 1;
 
         itemPocket = &gBagPockets[pocket];
@@ -315,10 +315,10 @@ bool8 AddBagItem(u16 itemId, u16 count)
     }
 }
 
-bool8 RemoveBagItem(u16 itemId, u16 count)
+bool32 RemoveBagItem(u32 itemId, u32 count)
 {
     u32 i;
-    u16 totalQuantity = 0;
+    u32 totalQuantity = 0;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
         return FALSE;
@@ -332,7 +332,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     {
         u32 pocket;
         u32 var;
-        u16 ownedCount;
+        u32 ownedCount;
         struct BagPocket *itemPocket;
 
         pocket = ItemId_GetPocket(itemId) - 1;
@@ -403,14 +403,14 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     }
 }
 
-u32 GetPocketByItemId(u16 itemId)
+u32 GetPocketByItemId(u32 itemId)
 {
     return ItemId_GetPocket(itemId);
 }
 
 void ClearItemSlots(struct ItemSlot *itemSlots, u32 itemCount)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < itemCount; i++)
     {
@@ -421,7 +421,7 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u32 itemCount)
 
 static s32 FindFreePCItemSlot(void)
 {
-    s8 i;
+    s32 i;
 
     for (i = 0; i < PC_ITEMS_COUNT; i++)
     {
@@ -444,7 +444,7 @@ u32 CountUsedPCItemSlots(void)
     return usedSlots;
 }
 
-bool8 CheckPCHasItem(u16 itemId, u16 count)
+bool32 CheckPCHasItem(u32 itemId, u32 count)
 {
     u32 i;
 
@@ -456,11 +456,11 @@ bool8 CheckPCHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-bool8 AddPCItem(u16 itemId, u16 count)
+bool32 AddPCItem(u32 itemId, u32 count)
 {
     u32 i;
-    s8 freeSlot;
-    u16 ownedCount;
+    s32 freeSlot;
+    u32 ownedCount;
     struct ItemSlot *newItems;
 
     // Copy PC items
@@ -513,7 +513,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
     return TRUE;
 }
 
-void RemovePCItem(u32 index, u16 count)
+void RemovePCItem(u32 index, u32 count)
 {
     gSaveBlock1Ptr->pcItems[index].quantity -= count;
     if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
@@ -525,8 +525,8 @@ void RemovePCItem(u32 index, u16 count)
 
 void CompactPCItems(void)
 {
-    u16 i;
-    u16 j;
+    u32 i;
+    u32 j;
 
     for (i = 0; i < PC_ITEMS_COUNT - 1; i++)
     {
@@ -555,12 +555,12 @@ void SwapRegisteredBike(void)
     }
 }
 u32
-u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos)
+u32 BagGetItemIdByPocketPosition(u8 pocketId, u32 pocketPos)
 {
     return gBagPockets[pocketId - 1].itemSlots[pocketPos].itemId;
 }
 u32
-u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 pocketPos)
+u32 BagGetQuantityByPocketPosition(u8 pocketId, u32 pocketPos)
 {
     return GetBagItemQuantity(&gBagPockets[pocketId - 1].itemSlots[pocketPos].quantity);
 }
@@ -573,7 +573,7 @@ static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 
 void CompactItemsInBagPocket(struct BagPocket *bagPocket)
 {
-    u16 i, j;
+    u32 i, j;
 
     for (i = 0; i < bagPocket->capacity - 1; i++)
     {
@@ -587,7 +587,7 @@ void CompactItemsInBagPocket(struct BagPocket *bagPocket)
 
 void SortBerriesOrTMHMs(struct BagPocket *bagPocket)
 {
-    u16 i, j;
+    u32 i, j;
 
     for (i = 0; i < bagPocket->capacity - 1; i++)
     {
@@ -633,7 +633,7 @@ void MoveItemSlotInList(struct ItemSlot* itemSlots_, u32 from, u32 to_)
 
 void ClearBag(void)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < POCKETS_COUNT; i++)
     {
@@ -641,10 +641,10 @@ void ClearBag(void)
     }
 }
 
-u16 CountTotalItemQuantityInBag(u16 itemId)
+u32 CountTotalItemQuantityInBag(u32 itemId)
 {
-    u16 i;
-    u16 ownedCount = 0;
+    u32 i;
+    u32 ownedCount = 0;
     struct BagPocket *bagPocket = &gBagPockets[ItemId_GetPocket(itemId) - 1];
 
     for (i = 0; i < bagPocket->capacity; i++)
@@ -656,12 +656,12 @@ u16 CountTotalItemQuantityInBag(u16 itemId)
     return ownedCount;
 }
 
-static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
+static bool32 CheckPyramidBagHasItem(u32 itemId, u32 count)
 {u32
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-    u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #elsu32
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
@@ -682,12 +682,12 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
+static bool32 CheckPyramidBagHasSpace(u32 itemId, u32 count)
 {u32
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-    u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #elsu32
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
@@ -708,16 +708,16 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
     return FALSE;
 }
 
-bool8 AddPyramidBagItem(u16 itemId, u16 count)
+bool32 AddPyramidBagItem(u32 itemId, u32 count)
 {
-    u16 i;
+    u32 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
-    u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+    u32 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
 
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-    u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
-    u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
 #elsu32
     u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
     u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
@@ -786,13 +786,13 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
     }
 }
 
-bool8 RemovePyramidBagItem(u16 itemId, u16 count)
+bool32 RemovePyramidBagItem(u32 itemId, u32 count)
 {
-    u16 i;
+    u32 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-    u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
+    u32 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #elsu32
     u8 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #endif
@@ -807,9 +807,9 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     }
     else
     {
-        u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+        u32 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
     #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-        u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+        u32 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
     #elsu32
         u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
     #endif
@@ -857,7 +857,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     }
 }
 
-static u16 SanitizeItemId(u16 itemId)
+static u32 SanitizeItemId(u32 itemId)
 {
     if (itemId >= ITEMS_COUNT)
         return ITEM_NONE;
@@ -865,22 +865,22 @@ static u16 SanitizeItemId(u16 itemId)
         return itemId;
 }
 u32
-const u8 *ItemId_GetName(u16 itemId)
+const u8 *ItemId_GetName(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].name;
 }
 
-u32 ItemId_GetPrice(u16 itemId)
+u32 ItemId_GetPrice(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].price;
 }
 
-static bool32 DoesItemHavePluralName(u16 itemId)
+static bool32 DoesItemHavePluralName(u32 itemId)
 {
     return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
 }
 u32
-static const u8 *ItemId_GetPluralName(u16 itemId)
+static const u8 *ItemId_GetPluralName(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].pluralName;
 }
@@ -907,40 +907,40 @@ u32 ItemId_GetHoldEffectParam(u32 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].holdEffectParam;
 }
 u32
-const u8 *ItemId_GetDescription(u16 itemId)
+const u8 *ItemId_GetDescription(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 u32
-u8 ItemId_GetImportance(u16 itemId)
+u8 ItemId_GetImportance(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].importance;
 }
 u32
-u8 ItemId_GetConsumability(u16 itemId)
+u8 ItemId_GetConsumability(u32 itemId)
 {
     return !gItemsInfo[SanitizeItemId(itemId)].notConsumed;
 }
 u32
-u8 ItemId_GetPocket(u16 itemId)
+u8 ItemId_GetPocket(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].pocket;
 }
 u32
-u8 ItemId_GetType(u16 itemId)
+u8 ItemId_GetType(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].type;
 }
 
-ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
+ItemUseFunc ItemId_GetFieldFunc(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
 u32 Returns an item's battle effect script ID.
-u8 ItemId_GetBattleUsage(u16 itemId)
+u8 ItemId_GetBattleUsage(u32 itemId)
 {
-    u16 item = SanitizeItemId(itemId);
+    u32 item = SanitizeItemId(itemId);
     // Handle E-Reader berries.
     if (item == ITEM_ENIGMA_BERRY_E_READER)
     {
@@ -980,7 +980,7 @@ u32 ItemId_GetFlingPower(u32 itemId)
 }
 
 
-u32 GetItemStatus1Mask(u16 itemId)
+u32 GetItemStatus1Mask(u32 itemId)
 {u32
     const u8 *effect = ItemId_GetEffect(itemId);
     switch (effect[3])
@@ -1001,7 +1001,7 @@ u32 GetItemStatus1Mask(u16 itemId)
     return 0;
 }
 
-u32 GetItemStatus2Mask(u16 itemId)
+u32 GetItemStatus2Mask(u32 itemId)
 {u32
     const u8 *effect = ItemId_GetEffect(itemId);
     if (effect[3] & ITEM3_STATUS_ALL)

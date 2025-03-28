@@ -18,11 +18,11 @@ struct RHHRomHeader
     /*0x07*/ u32 expansionVersionMinor;
     /*0x08*/ u32 expansionVersionPatch;
     /*0x09*/ u32 expansionVersionFlags;
-    /*0x0A*/ u16 movesCount;
-    /*0x0C*/ u16 numSpecies;
-    /*0x0E*/ u16 abilitiesCount;
+    /*0x0A*/ u32 movesCount;
+    /*0x0C*/ u32 numSpecies;
+    /*0x0E*/ u32 abilitiesCount;
     /*0x10*/ const struct Ability *abilities;
-    /*0x14*/ u16 itemsCount;
+    /*0x14*/ u32 itemsCount;
     /*0x16*/ u32 itemNameLength;
     /*0x17*/ u32 padding;
 };

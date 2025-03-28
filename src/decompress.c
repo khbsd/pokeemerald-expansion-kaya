@@ -91,7 +91,7 @@ u32 LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
     return LoadCompressedSpritePaletteWithTag(src->data, src->tag);
 }
 
-u32 LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
+u32 LoadCompressedSpritePaletteWithTag(const u32 *pal, u32 tag)
 {
     u32 index;
     struct SpritePalette dest;
@@ -124,7 +124,7 @@ void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 pe
     LoadSpecialPokePic(dest, species, personality, isFrontPic);
 }
 
-void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic)
+void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool32 isFrontPic)
 {
     species = SanitizeSpeciesId(species);
     if (species == SPECIES_UNOWN)
@@ -322,7 +322,7 @@ u32 GetDecompressedDataSize(const u32 *ptr)
     return (ptr8[3] << 16) | (ptr8[2] << 8) | (ptr8[1]);
 }
 
-bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src)
+bool32 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
     void *buffer;
@@ -339,7 +339,7 @@ bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src
     return FALSE;
 }
 
-bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette *src)
+bool32 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette *src)
 {
     struct SpritePalette dest;
     void *buffer;

@@ -24,7 +24,7 @@ static u32 IsUnionRoomPlayerInvisible(u32, u32);
 static void SetUnionRoomObjectFacingDirection(s32, s32, u32);
 
 // Graphics ids should correspond with the classes in gUnionRoomFacilityClasses
-static const u16 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
+static const u32 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
     [MALE] = {
         OBJ_EVENT_GFX_MAN_3,
         OBJ_EVENT_GFX_BLACK_BELT,
@@ -62,7 +62,7 @@ static const s16 sUnionRoomPlayerCoords[MAX_UNION_ROOM_LEADERS][2] = {
 // leader will be at one of the positions above and each member in the group
 // will be at one of the offsets from that position below. The leader will
 // be at the first offset (0,0), as they're at the center.
-static const s8 sUnionRoomGroupOffsets[MAX_RFU_PLAYERS][2] = {
+static const s32 sUnionRoomGroupOffsets[MAX_RFU_PLAYERS][2] = {
     { 0,  0}, // Center
     { 1,  0}, // Left
     { 0, -1}, // Top
@@ -100,7 +100,7 @@ static const u32 sUnionRoomLocalIds[] = {
 };
 
 // Unused
-static const u16 sHidePlayerFlags[] = {
+static const u32 sHidePlayerFlags[] = {
     FLAG_HIDE_UNION_ROOM_PLAYER_1,
     FLAG_HIDE_UNION_ROOM_PLAYER_2,
     FLAG_HIDE_UNION_ROOM_PLAYER_3,
@@ -130,7 +130,7 @@ static bool32 IsPlayerStandingStill(void)
 }
 
 // Gender and trainer id are used to determine which sprite a player appears as
-static u16 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
+static u32 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
 {
     return sUnionRoomObjGfxIds[gender][id % NUM_UNION_ROOM_CLASSES];
 }
@@ -228,7 +228,7 @@ u32 InitUnionRoomPlayerObjects(struct UnionRoomObject * players)
     return CreateTask_AnimateUnionRoomPlayers();
 }
 
-static bool32 AnimateUnionRoomPlayerDespawn(s8 * state, u32 leaderId, struct UnionRoomObject * object)
+static bool32 AnimateUnionRoomPlayerDespawn(s32 * state, u32 leaderId, struct UnionRoomObject * object)
 {
     switch (*state)
     {
@@ -252,7 +252,7 @@ static bool32 AnimateUnionRoomPlayerDespawn(s8 * state, u32 leaderId, struct Uni
     return FALSE;
 }
 
-static bool32 AnimateUnionRoomPlayerSpawn(s8 * state, u32 leaderId, struct UnionRoomObject * object)
+static bool32 AnimateUnionRoomPlayerSpawn(s32 * state, u32 leaderId, struct UnionRoomObject * object)
 {
     s16 x, y;
 
@@ -441,7 +441,7 @@ static bool32 IsUnionRoomPlayerInvisible(u32 leaderId, u32 memberId)
     return IsVirtualObjectInvisible(UR_PLAYER_SPRITE_ID(leaderId, memberId) - UR_SPRITE_START_ID);
 }
 
-static void SpawnGroupMember(u32 leaderId, u32 memberId, u16 graphicsId, struct RfuGameData * gameData)
+static void SpawnGroupMember(u32 leaderId, u32 memberId, u32 graphicsId, struct RfuGameData * gameData)
 {
     s32 x, y;
     s32 id = UR_PLAYER_SPRITE_ID(leaderId, memberId);

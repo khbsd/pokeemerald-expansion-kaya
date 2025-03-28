@@ -76,7 +76,7 @@ static EWRAM_DATA struct {
     struct RegionMap regionMap;
     u32 tileBuffer[0x1c0];
     u32 nameBuffer[0x26]; // never read
-    bool8 choseFlyLocation;
+    bool32 choseFlyLocation;
 } *sFlyMap = NULL;
 
 static bool32 sDrawFlyDestTextWindow;
@@ -96,7 +96,7 @@ static u32 GetTerraOrMarineCaveMapSecId(void);
 static void GetMarineCaveCoords(u32 *x, u32 *y);
 static bool32 IsPlayerInAquaHideout(u32 mapSecId);
 static void GetPositionOfCursorWithinMapSec(void);
-static bool8 RegionMap_IsMapSecIdInNextRow(u32 y);
+static bool32 RegionMap_IsMapSecIdInNextRow(u32 y);
 static void SpriteCB_CursorMapFull(struct Sprite *sprite);
 static void FreeRegionMapCursorSprite(void);
 static void HideRegionMapPlayerIcon(void);
@@ -505,13 +505,13 @@ static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
     .callback = SpriteCallbackDummy
 };
 
-void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
+void InitRegionMap(struct RegionMap *regionMap, bool32 zoomed)
 {
     InitRegionMapData(regionMap, NULL, zoomed);
     while (LoadRegionMapGfx());
 }
 
-void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool8 zoomed)
+void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool32 zoomed)
 {
     sRegionMap = regionMap;
     sRegionMap->initStep = 0;
@@ -541,7 +541,7 @@ void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap)
     sRegionMap->playerIconSpritePosY = sRegionMap->cursorPosY;
 }
 
-bool8 LoadRegionMapGfx(void)
+bool32 LoadRegionMapGfx(void)
 {
     switch (sRegionMap->initStep)
     {
@@ -844,9 +844,9 @@ void SetRegionMapDataForZoom(void)
     HideRegionMapPlayerIcon();
 }
 
-bool8 UpdateRegionMapZoom(void)
+bool32 UpdateRegionMapZoom(void)
 {
-    bool8 retVal;
+    bool32 retVal;
 
     if (sRegionMap->unk_06e >= 16)
     {
@@ -1132,8 +1132,8 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
 {
     u32 y;
     u32 x;
-    s8 mapGroup;
-    s8 mapNum;
+    s32 mapGroup;
+    s32 mapNum;
     u32 dimensionScale;
     s16 xOnMap;
     s16 yOnMap;
@@ -1347,7 +1347,7 @@ static void GetPositionOfCursorWithinMapSec(void)
     sRegionMap->posWithinMapSec = posWithinMapSec;
 }
 
-static bool8 RegionMap_IsMapSecIdInNextRow(u32 y)
+static bool32 RegionMap_IsMapSecIdInNextRow(u32 y)
 {
     u32 x;
 
@@ -1635,7 +1635,7 @@ static void GetMapSecDimensions(u32 mapSecId, u32 *x, u32 *y, u32 *width, u32 *h
     *height = gRegionMapEntries[mapSecId].height;
 }
 
-bool8 IsRegionMapZoomed(void)
+bool32 IsRegionMapZoomed(void)
 {
     return sRegionMap->zoomed;
 }

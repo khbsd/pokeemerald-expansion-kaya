@@ -65,10 +65,10 @@
 
 void EndDexNavSearch(u32 taskId);
 void Task_OpenDexNavFromStartMenu(u32 taskId);
-bool8 TryStartDexNavSearch(void);
+bool32 TryStartDexNavSearch(void);
 void TryIncrementSpeciesSearchLevel(void);
 void ResetDexNavSearch(void);
-bool8 TryFindHiddenPokemon(void);
+bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
 

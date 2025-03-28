@@ -15,20 +15,20 @@
 #include "constants/event_object_movement.h"
 #include "constants/items.h"
 
-static u16 BerryTypeToItemId(u16 berry);
+static u32 BerryTypeToItemId(u32 berry);
 static u32 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
 static u32 GetNumStagesWateredByBerryTreeId(u32 id);
-static u32 CalcBerryYieldInternal(u16 max, u16 min, u32 water);
+static u32 CalcBerryYieldInternal(u32 max, u32 min, u32 water);
 static u32 CalcBerryYield(struct BerryTree *tree);
 static u32 GetBerryCountByBerryTreeId(u32 id);
-static u16 GetStageDurationByBerryType(u32);
+static u32 GetStageDurationByBerryType(u32);
 static u32 GetDrainRateByBerryType(u32);
 static u32 GetWaterBonusByBerryType(u32);
 static u32 GetWeedingBonusByBerryType(u32);
 static u32 GetPestsBonusByBerryType(u32);
 static void SetTreeMutations(u32 id, u32 berry);
 static u32 GetTreeMutationValue(u32 id);
-static u16 GetBerryPestSpecies(u32 berryId);
+static u32 GetBerryPestSpecies(u32 berryId);
 static void TryForWeeds(struct BerryTree *tree);
 static void TryForPests(struct BerryTree *tree);
 static void AddTreeBonus(struct BerryTree *tree, u32 bonus);
@@ -1792,7 +1792,7 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
     return TRUE;
 }
 
-bool8 IsPlayerFacingEmptyBerryTreePatch(void)
+bool32 IsPlayerFacingEmptyBerryTreePatch(void)
 {
     if (GetObjectEventScriptPointerPlayerFacing() == BerryTreeScript
      && GetStageByBerryTreeId(GetObjectEventBerryTreeId(gSelectedObjectEvent)) == BERRY_STAGE_NO_BERRY)
@@ -1801,7 +1801,7 @@ bool8 IsPlayerFacingEmptyBerryTreePatch(void)
         return FALSE;
 }
 
-bool8 TryToWaterBerryTree(void)
+bool32 TryToWaterBerryTree(void)
 {
     if (GetObjectEventScriptPointerPlayerFacing() != BerryTreeScript)
         return FALSE;
@@ -1857,7 +1857,7 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
     return TRUE;
 }
 
-static u16 GetMulchAffectedGrowthRate(u16 berryDuration, u32 mulch, u32 stage)
+static u32 GetMulchAffectedGrowthRate(u32 berryDuration, u32 mulch, u32 stage)
 {
     if (stage == BERRY_STAGE_BERRIES)
         return berryDuration;
@@ -1952,7 +1952,7 @@ void BerryTreeTimeUpdate(s32 minutes)
     }
 }
 
-void PlantBerryTree(u32 id, u32 berry, u32 stage, bool8 allowGrowth)
+void PlantBerryTree(u32 id, u32 berry, u32 stage, bool32 allowGrowth)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
 
@@ -1996,9 +1996,9 @@ u32 GetMulchByBerryTreeId(u32 id)
     return gSaveBlock1Ptr->berryTrees[id].mulch;
 }
 
-u32 ItemIdToBerryType(u16 item)
+u32 ItemIdToBerryType(u32 item)
 {
-    u16 berry = item - FIRST_BERRY_INDEX;
+    u32 berry = item - FIRST_BERRY_INDEX;
 
     if (berry > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
         return ITEM_TO_BERRY(FIRST_BERRY_INDEX);
@@ -2006,9 +2006,9 @@ u32 ItemIdToBerryType(u16 item)
         return ITEM_TO_BERRY(item);
 }
 
-static u16 BerryTypeToItemId(u16 berry)
+static u32 BerryTypeToItemId(u32 berry)
 {
-    u16 item = berry - 1;
+    u32 item = berry - 1;
 
     if (item > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
         return FIRST_BERRY_INDEX;
@@ -2056,7 +2056,7 @@ static u32 GetNumStagesWateredByBerryTreeId(u32 id)
 //
 // See resulting yields: https://gist.github.com/hondew/2a099dbe54aa91414decdbfaa524327d,
 // and bug fix: https://gist.github.com/hondew/0f0164e5b9dadfd72d24f30f2c049a0b.
-static u32 CalcBerryYieldInternal(u16 max, u16 min, u32 water)
+static u32 CalcBerryYieldInternal(u32 max, u32 min, u32 water)
 {
     u32 randMin;
     u32 randMax;
@@ -2105,7 +2105,7 @@ static u32 GetBerryCountByBerryTreeId(u32 id)
     return gSaveBlock1Ptr->berryTrees[id].berryYield;
 }
 
-static u16 GetStageDurationByBerryType(u32 berry)
+static u32 GetStageDurationByBerryType(u32 berry)
 {
     return GetBerryInfo(berry)->growthDuration * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
@@ -2132,7 +2132,7 @@ static u32 GetPestsBonusByBerryType(u32 berry)
     return (bonus == 0) ? 2 : bonus * 5;
 }
 
-bool8 CanWaterBerryPlot(void)
+bool32 CanWaterBerryPlot(void)
 {
     if (!OW_BERRY_MOISTURE || OW_BERRY_ALWAYS_WATERABLE)
         return TRUE;
@@ -2257,19 +2257,19 @@ void ObjectEventInteractionClearBerryPests(void)
     AddTreeBonus(tree, GetPestsBonusByBerryType(tree->berry));
 }
 
-bool8 PlayerHasBerries(void)
+bool32 PlayerHasBerries(void)
 {
     return IsBagPocketNonEmpty(POCKET_BERRIES);
 }
 
-bool8 ObjectEventInteractionBerryHasWeed(void)
+bool32 ObjectEventInteractionBerryHasWeed(void)
 {
     return gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds;
 }
 
-bool8 ObjectEventInteractionBerryHasPests(void)
+bool32 ObjectEventInteractionBerryHasPests(void)
 {
-    u16 species;
+    u32 species;
     if (!OW_BERRY_PESTS || !gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
         return FALSE;
     species = GetBerryPestSpecies(gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].berry);
@@ -2284,8 +2284,8 @@ bool8 ObjectEventInteractionBerryHasPests(void)
 // For all berry trees on screen, allow normal growth
 void SetBerryTreesSeen(void)
 {
-    u16 cam_left;
-    u16 cam_top;
+    u32 cam_left;
+    u32 cam_top;
     s16 left;
     s16 top;
     s16 right;
@@ -2309,7 +2309,7 @@ void SetBerryTreesSeen(void)
     }
 }
 
-bool8 PlayerHasMulch(void)
+bool32 PlayerHasMulch(void)
 {
     if (!OW_BERRY_MULCH_USAGE)
         return FALSE;
@@ -2442,7 +2442,7 @@ static void SetTreeMutations(u32 id, u32 berry)
 #endif
 }
 
-static u16 GetBerryPestSpecies(u32 berryId)
+static u32 GetBerryPestSpecies(u32 berryId)
 {
 #if OW_BERRY_PESTS == TRUE
     const struct Berry *berry = GetBerryInfo(berryId);

@@ -49,7 +49,7 @@ static u8 CreateGameFreakLogoSprites(s16, s16, s16);
 static u32id Task_BlendLogoIn(u8);
 static void Task_BlendLogoOutu328);
 static void Task_CreateSparkleu32u8);
-static u8 CreateWaterDrop(s16, su32, u16, u16, u16, u8);
+static u8 CreateWaterDrop(s16, su32, u32, u32, u32, u8);
 static u32id SpriteCB_WaterDrop(struct Sprite *spritu32;
 static void SpriteCB_WaterDrop_Slide(struct Sprite *);
 static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *);
@@ -175,31 +175,31 @@ enum {
 #define TIMER_POKEBALL_FADE              28
 #define TIMER_START_LEGENDARIES          43
 
-static EWRAM_DATA u16 sIntroCharacterGender = 0;
-static EWRAM_DATA u16 sFlygonYOffset = 0;
+static EWRAM_DATA u32 sIntroCharacterGender = 0;
+static EWRAM_DATA u32 sFlygonYOffset = 0;
 
 COMMON_DATA u32 gIntroFrameCounter = 0;
 COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
 
-static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
-static const u16 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
+static const u32 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
+static const u32 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
 static const u32 sIntroDropsLogo_Gfx[]        = INCBIN_U32("graphics/intro/scene_1/drops_logo.4bpp.lz");
-static const u16 sIntro1Bg_Pal[]              = INCBIN_U16("graphics/intro/scene_1/bg.gbapal"); // 16 x 16
+static const u32 sIntro1Bg_Pal[]              = INCBIN_U16("graphics/intro/scene_1/bg.gbapal"); // 16 x 16
 static const u32 sIntro1Bg0_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg0_map.bin.lz");
 static const u32 sIntro1Bg1_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg1_map.bin.lz");
 static const u32 sIntro1Bg2_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg2_map.bin.lz");
 static const u32 sIntro1Bg3_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg3_map.bin.lz");
 static const u32 sIntro1Bg_Gfx[]              = INCBIN_U32("graphics/intro/scene_1/bg.4bpp.lz");
-static const u16 sIntroPokeball_Pal[]         = INCBIN_U16("graphics/intro/scene_3/pokeball.gbapal");
+static const u32 sIntroPokeball_Pal[]         = INCBIN_U16("graphics/intro/scene_3/pokeball.gbapal");
 static const u32 sIntroPokeball_Tilemap[]     = INCBIN_U32("graphics/intro/scene_3/pokeball_map.bin.lz");
 static const u32 sIntroPokeball_Gfx[]         = INCBIN_U32("graphics/intro/scene_3/pokeball.8bpp.lz");
-static const u16 sIntroStreaks_Pal[]          = INCBIN_U16("graphics/intro/scene_3/streaks.gbapal"); // Unused
+static const u32 sIntroStreaks_Pal[]          = INCBIN_U16("graphics/intro/scene_3/streaks.gbapal"); // Unused
 static const u32 sIntroStreaks_Gfx[]          = INCBIN_U32("graphics/intro/scene_3/streaks.4bpp.lz"); // Unused
 static const u32 sIntroStreaks_Tilemap[]      = INCBIN_U32("graphics/intro/scene_3/streaks_map.bin.lz"); // Unused
-static const u16 sIntroRayquzaOrb_Pal[]       = INCBIN_U16("graphics/intro/scene_3/rayquaza_orb.gbapal");
-static const u16 sIntroMisc_Pal[]             = INCBIN_U16("graphics/intro/scene_3/misc.gbapal"); // Unused
+static const u32 sIntroRayquzaOrb_Pal[]       = INCBIN_U16("graphics/intro/scene_3/rayquaza_orb.gbapal");
+static const u32 sIntroMisc_Pal[]             = INCBIN_U16("graphics/intro/scene_3/misc.gbapal"); // Unused
 static const u32 sIntroMisc_Gfx[]             = INCBIN_U32("graphics/intro/scene_3/misc.4bpp.lz"); // Rayquza orb, and misc unused gfx
-static const u16 sIntroFlygonSilhouette_Pal[] = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
+static const u32 sIntroFlygonSilhouette_Pal[] = INCBIN_U16("graphics/intro/scene_1/flygon.gbapal");
 static const u32 sIntroLati_Gfx[]             = INCBIN_U32("graphics/intro/scene_1/lati.4bpp.lz"); // Unused
 static const u8 sUnusedData[] = {
     0x02, 0x0u32 0x04, 0x05, 0x01, 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x02, 0x0D,
@@ -877,7 +877,7 @@ static const union AffineAnimCmd *const sAffineAnims_GameFreak[] =
     sAffineAnim_GameFreak_GrowBig,       // For letters disappearing
     sAffineAnim_GameFreak_GrowMedium,    // For logo disappearing
 };
-static const u16 sGameFreakLettersMoveSpeed[NUM_GF_LETTERS] =
+static const u32 sGameFreakLettersMoveSpeed[NUM_GF_LETTERS] =
 {
     256, // G
     192, // A
@@ -1057,7 +1057,7 @@ static void MainCB2_EndIntro(void)
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
-static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
+static void LoadCopyrightGraphics(u32 tilesetAddress, u32 tilemapAddress, u32 paletteOffset)
 {
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
     LZ77UnCompVram(gIntroCopyright_Tilemap, (void *)(VRAM + tilemapAddress));
@@ -1078,7 +1078,7 @@ static u8 SetUpCopyrightScreen(void)
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
-        *(u16 *)PLTT = RGB_WHITE;
+        *(u32 *)PLTT = RGB_WHITE;
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
@@ -1319,21 +1319,21 @@ static void Task_Scene1_PanUp(u8 taskId)
         s32 offset;
 u32
         // Slide bg 2 downward
-        offset = (gTasks[taskId].tBg2PosHi << 16) + (u16)gTasks[taskId].tBg2PosLo;
+        offset = (gTasks[taskId].tBg2PosHi << 16) + (u32)gTasks[taskId].tBg2PosLo;
         offset -= 0x6000;
         gTasks[taskId].tBg2PosHi = offset >> 16;
         gTasks[taskId].tBg2PosLo = offset;
         SetGpuReg(REG_OFFSET_BG2VOFS, gTasks[taskId].tBg2PosHi);
 
         // Slide bg 1 downward
-        offset = (gTasks[taskId].tBg1PosHi << 16) + (u16)gTasks[taskId].tBg1PosLo;
+        offset = (gTasks[taskId].tBg1PosHi << 16) + (u32)gTasks[taskId].tBg1PosLo;
         offset -= 0x8000;
         gTasks[taskId].tBg1PosHi = offset >> 16;
         gTasks[taskId].tBg1PosLo = offset;
         SetGpuReg(REG_OFFSET_BG1VOFS, gTasks[taskId].tBg1PosHi);
 
         // Slide bg 3 downward
-        offset = (gTasks[taskId].tBg3PosHi << 16) + (u16)gTasks[taskId].tBg3PosLo;
+        offset = (gTasks[taskId].tBg3PosHi << 16) + (u32)gTasks[taskId].tBg3PosLo;
         offset -= 0xC000;
         gTasks[taskId].tBg3PosHi = offset >> 16;
         gTasks[taskId].tBg3PosLo = offset;
@@ -1428,7 +1428,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
 
 static void Task_Scene2_BikeRide(u8 taskId)
 {
-    u16 offset;
+    u32 offset;
 
     if (gIntroFrameCounter == TIMER_TORCHIC_EXIT)
     {u32
@@ -1880,7 +1880,7 @@ static void Task_Scene3_Groudon(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     tTimer++;
-    if ((u16)(tState - 1) < 7 &&u32Timer % 2 == 0)
+    if ((u32)(tState - 1) < 7 &&u32Timer % 2 == 0)
         tYShake ^= 3;
     PanFadeAndZoomScreen(tScreenX, tScreenY + tYShake, tZoom, 0);
     switch (tState)
@@ -2320,7 +2320,7 @@ static void SpriteCB_KyogreBubbles(struct Sprite *sprite)
         else
             sprite->y += 3;
 
-        if ((u16)(sprite->y - 20) > DISPLAY_HEIGHT - 20)
+        if ((u32)(sprite->y - 20) > DISPLAY_HEIGHT - 20)
             DestroySprite(sprite);
         break;
     }
@@ -2813,7 +2813,7 @@ static void Task_BlendLogoOut(u8 taskId)
     }
 }
 
-void PanFadeAndZoomScreen(u16 screenX, u16 screenY, u16 zoom, u16 alpha)
+void PanFadeAndZoomScreen(u32 screenX, u32 screenY, u32 zoom, u32 alpha)
 {
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
@@ -2907,9 +2907,9 @@ static void SpriteCB_WaterDrop_Slide(struct Sprite *sprite)
     }
     else
     {
-        u16 data2;
-        u16 data3;
-        u16 data4;
+        u32 data2;
+        u32 data3;
+        u32 data4;
         s16 sin1;
         s16 sin2;
         s16 sin3;
@@ -2950,7 +2950,7 @@ static void SpriteCB_WaterDrop_ReachLeafEnd(struct Sprite *sprite)
     SetOamMatrix(sprite->data[1] + 2, sprite->data[6] + 64, 0, 0, sprite->data[6] + 64);
     if (sprite->data[4] != MAX_SPRITES)
     {
-        u16 sinIdx;
+        u32 sinIdx;
         sprite->data[4] -= 8;
         sinIdx = sprite->data[4];
         sprite->x2 = gSineTable[(u8)(sinIdx + 64)] / 64;
@@ -3026,7 +3026,7 @@ static void SpriteCB_WaterDropShort(struct Sprite *sprite)
     }
 }
 
-static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
+static u8 CreateWaterDrop(s16 x, s16 y, u32 c, u32 d, u32 e, u8 fallImmediately)
 {
     u8 spriteId;
     u8 oldSpriteId;
@@ -3305,7 +3305,7 @@ static void SpriteCB_GameFreakLogo(struct Sprite *sprite)
 
 static u8 CreateGameFreakLogoSprites(s16 x, s16 y, s16 unused)
 {
-    u16 i;
+    u32 i;
     u8 spriteId;
 
     // u32eate "Game Freak" letters
@@ -3410,7 +3410,7 @@ static void SpriteCB_FlygonSilhouette(struct Sprite *sprite)
 
 static void SpriteCB_RayquazaOrb(struct Sprite *sprite)
 {
-    u16 foo;
+    u32 foo;
     switch (sprite->sState)
     {
     case 0:

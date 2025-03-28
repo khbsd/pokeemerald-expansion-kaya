@@ -7,7 +7,7 @@
 
 #define OAM_MATRIX_COUNT 32
 
-EWRAM_DATA static u16 sSpritePriorities[MAX_SPRITES] = {0};
+EWRAM_DATA static u32 sSpritePriorities[MAX_SPRITES] = {0};
 EWRAM_DATA static u32 sSpriteOrder[MAX_SPRITES] = {0};
 
 static void Old_BuildOamBuffer(void);
@@ -149,11 +149,11 @@ static void UpdateOamCoords(void)
 
 static void BuildSpritePriorities(void)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        u16 priority = sprite->subpriority | (sprite->oam.priority << 8);
+        u32 priority = sprite->subpriority | (sprite->oam.priority << 8);
         sSpritePriorities[i] = priority;
     }
 }
@@ -166,8 +166,8 @@ static void SortSprites(void)
         u32 j = i;
         struct Sprite *sprite1 = &gSprites[sSpriteOrder[i - 1]];
         struct Sprite *sprite2 = &gSprites[sSpriteOrder[i]];
-        u16 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
-        u16 sprite2Priority = sSpritePriorities[sSpriteOrder[i]];
+        u32 sprite1Priority = sSpritePriorities[sSpriteOrder[i - 1]];
+        u32 sprite2Priority = sSpritePriorities[sSpriteOrder[i]];
         s16 sprite1Y = sprite1->oam.y;
         s16 sprite2Y = sprite2->oam.y;
 

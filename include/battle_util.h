@@ -337,8 +337,8 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
 bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 void GetBattlerTypes(u32 battler, bool32 ignoreTera, u32 types[static 3]);
 u32 GetBattlerType(u32 battler, u32 typeIndex, bool32 ignoreTera);
-bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
-bool8 IsMonBannedFromSkyBattles(u32 species);
+bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon);
+bool32 IsMonBannedFromSkyBattles(u32 species);
 void RemoveBattlerType(u32 battler, u8 type);
 u32 GetBattleMoveType(u32 move);
 void TryActivateSleepClause(u32 battler, u32 indexInParty);

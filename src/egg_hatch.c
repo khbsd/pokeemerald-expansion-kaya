@@ -59,7 +59,7 @@ struct EggHatchData
     u32 windowId;
     u32 unused_9;
     u32 unused_A;
-    u16 species;
+    u32 species;
     u32 textColor[3];
 };
 
@@ -83,7 +83,7 @@ static void CreateEggShardSprite(u32, u32, s16, s16, s16, u32);
 
 static struct EggHatchData *sEggHatchData;
 
-static const u16 sEggPalette[]  = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
+static const u32 sEggPalette[]  = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
 static const u32 sEggHatchTiles[] = INCBIN_u32("graphics/pokemon/egg/hatch.4bpp");
 static const u32 sEggShardTiles[] = INCBIN_u32("graphics/pokemon/egg/shard.4bpp");
 
@@ -312,11 +312,11 @@ static const s16 sEggShardVelocities[][2] =
 
 static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 {
-    u16 species;
+    u32 species;
     u32 personality, pokerus;
     enum PokeBall ball;
     u32 i, friendship, language, gameMet, markings, isModernFatefulEncounter;
-    u16 moves[MAX_MON_MOVES];
+    u32 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
     species = GetMonData(egg, MON_DATA_SPECIES);
@@ -362,9 +362,9 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 static void AddHatchedMonToParty(u32 id)
 {
     u32 isEgg = 0x46; // ?
-    u16 species;
+    u32 species;
     u32 name[POKEMON_NAME_LENGTH + 1];
-    u16 metLevel;
+    u32 metLevel;
     u32 metLocation;
     struct Pokemon *mon = &gPlayerParty[id];
 
@@ -397,7 +397,7 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u32 daycareId)
+static bool32 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u32 daycareId)
 {
     u32 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
@@ -415,17 +415,17 @@ static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u32 daycareId
     return FALSE;
 }
 
-bool8 CheckDaycareMonReceivedMail(void)
+bool32 CheckDaycareMonReceivedMail(void)
 {
     return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
-static u32 EggHatchCreateMonSprite(u32 useAlt, u32 state, u32 partyId, u16 *speciesLoc)
+static u32 EggHatchCreateMonSprite(u32 useAlt, u32 state, u32 partyId, u32 *speciesLoc)
 {
     u32 position = 0;
     u32 spriteId = 0;
     struct Pokemon *mon = NULL;
-    u16 species = SPECIES_NONE;
+    u32 species = SPECIES_NONE;
 
     if (useAlt == FALSE)
     {
@@ -606,7 +606,7 @@ static void Task_EggHatchPlayBGM(u32 taskId)
 
 static void CB2_EggHatch(void)
 {
-    u16 species;
+    u32 species;
     u32 gender;
     u32 personality;
 
@@ -782,7 +782,7 @@ static void SpriteCB_Egg_Shake3(struct Sprite *sprite)
     {
         if (++sprite->sTimer > 38)
         {
-            u16 UNUSED species;
+            u32 UNUSED species;
             sprite->callback = SpriteCB_Egg_WaitHatch;
             sprite->sTimer = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);
@@ -894,7 +894,7 @@ static void SpriteCB_EggShard(struct Sprite *sprite)
 
 static void CreateRandomEggShardSprite(void)
 {
-    u16 spriteAnimIndex;
+    u32 spriteAnimIndex;
 
     s16 velocityX = sEggShardVelocities[sEggHatchData->eggShardVelocityId][0];
     s16 velocityY = sEggShardVelocities[sEggHatchData->eggShardVelocityId][1];
@@ -931,7 +931,7 @@ u32 GetEggCyclesToSubtract(void)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))
         {
-            u16 ability = GetMonAbility(&gPlayerParty[i]);
+            u32 ability = GetMonAbility(&gPlayerParty[i]);
             if (ability == ABILITY_MAGMA_ARMOR
              || ability == ABILITY_FLAME_BODY
              || ability == ABILITY_STEAM_ENGINE)
@@ -941,9 +941,9 @@ u32 GetEggCyclesToSubtract(void)
     return 1;
 }
 
-u16 CountPartyAliveNonEggMons(void)
+u32 CountPartyAliveNonEggMons(void)
 {
-    u16 aliveNonEggMonsCount = CountStorageNonEggMons();
+    u32 aliveNonEggMonsCount = CountStorageNonEggMons();
     aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(PARTY_SIZE);
     return aliveNonEggMonsCount;
 }

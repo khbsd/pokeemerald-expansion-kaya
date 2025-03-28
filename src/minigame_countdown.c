@@ -48,7 +48,7 @@ static void Task_StaticCountdown_Free(u32 taskId);
 static void Task_StaticCountdown_Start(u32 taskId);
 static void Task_StaticCountdown_Run(u32 taskId);
 
-static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
+static const u32 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
 static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_static.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheet_321Start_Static[] =
@@ -311,7 +311,7 @@ static void Task_StaticCountdown_Start(u32 taskId)
 // them to read and use.
 static void Task_StaticCountdown_Run(u32 taskId)
 {
-    u16 packet[RFU_PACKET_SIZE];
+    u32 packet[RFU_PACKET_SIZE];
     s16 *data = gTasks[taskId].data;
 
     if (gReceivedRemoteLinkPlayers)
@@ -367,13 +367,13 @@ static void Task_StaticCountdown_Run(u32 taskId)
 static void Task_MinigameCountdown(u32 taskId);
 static bool32 RunMinigameCountdownDigitsAnim(u32 spriteId);
 static bool32 IsStartGraphicAnimRunning(u32 spriteId);
-static void Load321StartGfx(u16 tileTag, u16 palTag);
-static u32 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority);
-static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2);
+static void Load321StartGfx(u32 tileTag, u32 palTag);
+static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority);
+static void CreateStartSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2);
 static void InitStartGraphic(u32 spriteId1, u32 spriteId2, u32 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
-static const u16 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
+static const u32 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 
 #define tState       data[0]
@@ -386,7 +386,7 @@ static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 #define tSpriteId2   data[8]
 #define tSpriteId3   data[9]
 
-void StartMinigameCountdown(u16 tilesTag, u16 palTag, s16 x, s16 y, u32 subpriority)
+void StartMinigameCountdown(u32 tilesTag, u32 palTag, s16 x, s16 y, u32 subpriority)
 {
     u32 taskId = CreateTask(Task_MinigameCountdown, 80);
     gTasks[taskId].tTilesTag = tilesTag;
@@ -600,7 +600,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
 #undef sYSpeed
 #undef sY
 
-static void Load321StartGfx(u16 tileTag, u16 palTag)
+static void Load321StartGfx(u32 tileTag, u32 palTag)
 {
     struct CompressedSpriteSheet spriteSheet = {s321Start_Gfx, 0xE00, 0};
     struct SpritePalette spritePalette = {s321Start_Pal, 0};
@@ -724,7 +724,7 @@ static const union AffineAnimCmd *const sAffineAnimTable_Numbers[] =
     sAffineAnim_Numbers_Land     // Land after the jump
 };
 
-static u32 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority)
+static u32 CreateNumberSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority)
 {
     struct SpriteTemplate spriteTemplate =
     {
@@ -739,7 +739,7 @@ static u32 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subprio
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2)
+static void CreateStartSprite(u32 tileTag, u32 palTag, s16 x, s16 y, u32 subpriority, s16 *spriteId1, s16 *spriteId2)
 {
     struct SpriteTemplate spriteTemplate =
     {

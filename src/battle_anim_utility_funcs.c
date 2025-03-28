@@ -16,7 +16,7 @@ struct AnimStatsChangeData
 {
     u8 battler1;
     u8 battler2;
-    bool8 hidBattler2;
+    bool32 hidBattler2;
     s16 data[8];
     u32 species;
 };
@@ -791,7 +791,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u32 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u32 scrollSpeed, u8 battler, bool32 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
     u32 species;
     u8 spriteId, spriteId2;

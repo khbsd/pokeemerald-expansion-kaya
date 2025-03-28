@@ -23,11 +23,11 @@ static void AnimElectricChargingParticles(struct Sprite *);
 static void AnimElectricChargingParticles_Step(struct Sprite *);
 static void AnimVoltTackleOrbSlide(struct Sprite *);
 static void AnimVoltTackleOrbSlide_Step(struct Sprite *);
-static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId);
+static bool32 CreateVoltTackleBolt(struct Task *task, u8 taskId);
 static void AnimVoltTackleBolt(struct Sprite *);
-static bool8 CreateShockWaveBoltSprite(struct Task *task, u8 taskId);
+static bool32 CreateShockWaveBoltSprite(struct Task *task, u8 taskId);
 static void AnimShockWaveProgressingBolt(struct Sprite *);
-static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId);
+static bool32 CreateShockWaveLightningSprite(struct Task *task, u8 taskId);
 static void AnimShockWaveLightning(struct Sprite *sprite);
 static void AnimIon(struct Sprite *);
 static void AnimIon_Step(struct Sprite *);
@@ -247,7 +247,7 @@ const struct SpriteTemplate gAnchorShotChainTemplate =
     .callback = AnimThunderWave
 };
 
-static const s8 sElectricChargingParticleCoordOffsets[][2] =
+static const s32 sElectricChargingParticleCoordOffsets[][2] =
 {
     { 58, -60},
     {-56, -36},
@@ -1253,7 +1253,7 @@ void AnimTask_VoltTackleBolt(u8 taskId)
     }
 }
 
-static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId)
+static bool32 CreateVoltTackleBolt(struct Task *task, u8 taskId)
 {
     u32 spriteId;
     bool32 isFairyLock = (gAnimMoveIndex == MOVE_FAIRY_LOCK);
@@ -1400,7 +1400,7 @@ void AnimTask_ShockWaveProgressingBolt(u8 taskId)
     }
 }
 
-static bool8 CreateShockWaveBoltSprite(struct Task *task, u8 taskId)
+static bool32 CreateShockWaveBoltSprite(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gShockWaveProgressingBoltSpriteTemplate, task->data[6], task->data[7], 35);
     if (spriteId != MAX_SPRITES)
@@ -1481,7 +1481,7 @@ void AnimTask_ShockWaveLightning(u8 taskId)
     }
 }
 
-static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId)
+static bool32 CreateShockWaveLightningSprite(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gLightningSpriteTemplate, task->data[13], task->data[14], task->data[12]);
 

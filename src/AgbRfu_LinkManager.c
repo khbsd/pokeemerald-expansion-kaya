@@ -49,7 +49,7 @@ u32 rfu_LMAN_REQBN_softReset_and_checkID(void)
     return id;
 }
 
-void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag)
+void rfu_LMAN_REQ_sendData(bool32 clockChangeFlag)
 {
     if (gRfuLinkStatus->parentChild == MODE_CHILD)
     {
@@ -329,7 +329,7 @@ void rfu_LMAN_stopManager(u8 forced_stop_and_RFU_reset_flag)
     }
 }
 
-static bool8 rfu_LMAN_linkWatcher(u32 REQ_commandID)
+static bool32 rfu_LMAN_linkWatcher(u32 REQ_commandID)
 {
     u8 i;
     u8 bm_linkLossSlot;
@@ -337,7 +337,7 @@ static bool8 rfu_LMAN_linkWatcher(u32 REQ_commandID)
     u8 bm_linkRecoverySlot;
     u8 bm_disconnectSlot;
 
-    bool8 disconnect_occure_flag = FALSE;
+    bool32 disconnect_occure_flag = FALSE;
     rfu_REQBN_watchLink(REQ_commandID, &bm_linkLossSlot, &reason, &bm_linkRecoverySlot);
     if (bm_linkLossSlot)
     {

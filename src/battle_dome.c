@@ -109,10 +109,10 @@ static u8 GetDomeTrainerMonIvs(u32);
 static void SwapDomeTrainers(int, int, u32 *);
 static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
 static void CreateDomeOpponentMons(u32);
-static int SelectOpponentMons_Good(u32, bool8);
-static int SelectOpponentMons_Bad(u32, bool8);
+static int SelectOpponentMons_Good(u32, bool32);
+static int SelectOpponentMons_Bad(u32, bool32);
 static int GetTypeEffectivenessPoints(int, int, int);
-static int SelectOpponentMonsFromParty(int *, bool8);
+static int SelectOpponentMonsFromParty(int *, bool32);
 static void Task_ShowTourneyInfoCard(u8);
 static void Task_HandleInfoCardInput(u8);
 static u8 Task_GetInfoCardInput(u8);
@@ -2268,7 +2268,7 @@ int GetDomeTrainerSelectedMons(u32 tournamentTrainerId)
     return selectedMonBits;
 }
 
-static int SelectOpponentMons_Good(u32 tournamentTrainerId, bool8 allowRandom)
+static int SelectOpponentMons_Good(u32 tournamentTrainerId, bool32 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2297,7 +2297,7 @@ static int SelectOpponentMons_Good(u32 tournamentTrainerId, bool8 allowRandom)
 }
 
 // Identical to function above, but uses EFFECTIVENESS_MODE_BAD
-static int SelectOpponentMons_Bad(u32 tournamentTrainerId, bool8 allowRandom)
+static int SelectOpponentMons_Bad(u32 tournamentTrainerId, bool32 allowRandom)
 {
     int i, moveId, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
@@ -2325,7 +2325,7 @@ static int SelectOpponentMons_Bad(u32 tournamentTrainerId, bool8 allowRandom)
     return SelectOpponentMonsFromParty(partyMovePoints, allowRandom);
 }
 
-static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
+static int SelectOpponentMonsFromParty(int *partyMovePoints, bool32 allowRandom)
 {
     int i, j;
     int selectedMonBits = 0;

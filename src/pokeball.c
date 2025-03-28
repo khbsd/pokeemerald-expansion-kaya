@@ -44,7 +44,7 @@ static void SpriteCB_TradePokeballEnd(struct Sprite *sprite);
 static void SpriteCB_HealthboxSlideInDelayed(struct Sprite *sprite);
 static void SpriteCB_HealthboxSlideIn(struct Sprite *sprite);
 static void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite);
-static u16 GetBattlerPokeballItemId(u32 battlerId);
+static u32 GetBattlerPokeballItemId(u32 battlerId);
 
 // rom const data
 
@@ -653,7 +653,7 @@ static void SpriteCB_BallThrow(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
-        u16 ballId;
+        u32 ballId;
         u32 taskId = sprite->oam.affineParam;
         u32 opponentBattler = gTasks[taskId].tOpponentBattler;
         u32 noOfShakes = gTasks[taskId].tThrowId;
@@ -737,7 +737,7 @@ static void SpriteCB_BallThrow_Close(struct Sprite *sprite)
 
 static void SpriteCB_BallThrow_FallToGround(struct Sprite *sprite)
 {
-    bool8 r5 = FALSE;
+    bool32 r5 = FALSE;
 
     switch (sprite->data[3] & 0xFF)
     {
@@ -893,11 +893,11 @@ static void SpriteCB_BallThrow_Shake(struct Sprite *sprite)
 static void Task_PlayCryWhenReleasedFromBall(u32 taskId)
 {
     u32 wantedCry = gTasks[taskId].tCryTaskWantedCry;
-    s8 pan = gTasks[taskId].tCryTaskPan;
-    u16 species = gTasks[taskId].tCryTaskSpecies;
+    s32 pan = gTasks[taskId].tCryTaskPan;
+    u32 species = gTasks[taskId].tCryTaskSpecies;
     u32 battlerId = gTasks[taskId].tCryTaskBattler;
     u32 monSpriteId = gTasks[taskId].tCryTaskMonSpriteId;
-    struct Pokemon *mon = (void *)(u32)((gTasks[taskId].tCryTaskMonPtr1 << 16) | (u16)(gTasks[taskId].tCryTaskMonPtr2));
+    struct Pokemon *mon = (void *)(u32)((gTasks[taskId].tCryTaskMonPtr1 << 16) | (u32)(gTasks[taskId].tCryTaskMonPtr2));
 
     switch (gTasks[taskId].tCryTaskState)
     {
@@ -989,8 +989,8 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     if (gMain.inBattle)
     {
         struct Pokemon *mon, *illusionMon;
-        s8 pan;
-        u16 wantedCryCase;
+        s32 pan;
+        u32 wantedCryCase;
         u32 taskId;
 
         mon = GetPartyBattlerData(battlerId);
@@ -1071,7 +1071,7 @@ static void SpriteCB_BallThrow_StartCaptureMon(struct Sprite *sprite)
 
 static void HandleBallAnimEnd(struct Sprite *sprite)
 {
-    bool8 affineAnimEnded = FALSE;
+    bool32 affineAnimEnded = FALSE;
     u32 battlerId = sprite->sBattler;
 
     if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN)
@@ -1253,7 +1253,7 @@ static u32 AnimateBallOpenParticlesForPokeball(u32 x, u32 y, u32 kindOfStars, u3
     return AnimateBallOpenParticles(x, y, kindOfStars, subpriority, BALL_POKE);
 }
 
-static u32 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u32 spritePalNum, u32 selectedPalettes)
+static u32 LaunchBallFadeMonTaskForPokeball(bool32 unFadeLater, u32 spritePalNum, u32 selectedPalettes)
 {
     return LaunchBallFadeMonTask(unFadeLater, spritePalNum, selectedPalettes, BALL_POKE);
 }
@@ -1272,7 +1272,7 @@ static u32 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u32 spritePalNum,
 #define sTrigIdx     data[7]
 
 // Poké Ball in Birch intro, and when receiving via trade
-void CreatePokeballSpriteToReleaseMon(u32 monSpriteId, u32 monPalNum, u32 x, u32 y, u32 oamPriority, u32 subpriority, u32 delay, u32 fadePalettes, u16 species)
+void CreatePokeballSpriteToReleaseMon(u32 monSpriteId, u32 monPalNum, u32 x, u32 y, u32 oamPriority, u32 subpriority, u32 delay, u32 fadePalettes, u32 species)
 {
     u32 spriteId;
 
@@ -1305,7 +1305,7 @@ static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
         u32 subpriority;
         u32 spriteId = sprite->sMonSpriteId;
         u32 monPalNum = sprite->sMonPalNum;
-        u32 selectedPalettes = (u16)sprite->sFadePalsLo | ((u16)sprite->sFadePalsHi << 16);
+        u32 selectedPalettes = (u32)sprite->sFadePalsLo | ((u32)sprite->sFadePalsHi << 16);
 
         if (sprite->subpriority != 0)
             subpriority = sprite->subpriority - 1;
@@ -1331,10 +1331,10 @@ static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
 
 static void SpriteCB_ReleasedMonFlyOut(struct Sprite *sprite)
 {
-    bool8 emergeAnimFinished = FALSE;
-    bool8 atFinalPosition = FALSE;
+    bool32 emergeAnimFinished = FALSE;
+    bool32 atFinalPosition = FALSE;
     u32 monSpriteId = sprite->sMonSpriteId;
-    u16 x, y;
+    u32 x, y;
 
     if (sprite->animEnded)
         sprite->invisible = TRUE;
@@ -1408,7 +1408,7 @@ static void SpriteCB_TradePokeball(struct Sprite *sprite)
         u32 subpriority;
         u32 monSpriteId = sprite->sMonSpriteId;
         u32 monPalNum = sprite->sMonPalNum;
-        u32 selectedPalettes = (u16)sprite->sFadePalsLo | ((u16)sprite->sFadePalsHi << 16);
+        u32 selectedPalettes = (u32)sprite->sFadePalsLo | ((u32)sprite->sFadePalsHi << 16);
 
         if (sprite->subpriority != 0)
             subpriority = sprite->subpriority - 1;
@@ -1552,7 +1552,7 @@ static void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite)
 
 void LoadBallGfx(u32 ballId)
 {
-    u16 var;
+    u32 var;
 
     if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == 0xFFFF)
     {
@@ -1578,7 +1578,7 @@ void FreeBallGfx(u32 ballId)
     FreeSpritePaletteByTag(gBallSpritePalettes[ballId].tag);
 }
 
-static u16 GetBattlerPokeballItemId(u32 battlerId)
+static u32 GetBattlerPokeballItemId(u32 battlerId)
 {
     struct Pokemon *illusionMon;
     struct Pokemon *mon = GetPartyBattlerData(battlerId);

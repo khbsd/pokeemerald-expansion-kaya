@@ -18,21 +18,21 @@ struct PokenavListMenuWindow {
     u32 y;
     u32 width;
     u32 fontId;
-    u16 tileOffset;
-    u16 windowId;
-    u16 unkA;
-    u16 numPrinted;
-    u16 numToPrint;
+    u32 tileOffset;
+    u32 windowId;
+    u32 unkA;
+    u32 numPrinted;
+    u32 numToPrint;
 };
 
 struct PokenavListWindowState {
     // The index of the element at the top of the window.
-    u16 windowTopIndex;
-    u16 listLength;
-    u16 entriesOffscreen;
+    u32 windowTopIndex;
+    u32 listLength;
+    u32 entriesOffscreen;
     // The index of the cursor, relative to the top of the window.
-    u16 selectedIndexOffset;
-    u16 entriesOnscreen;
+    u32 selectedIndexOffset;
+    u32 entriesOnscreen;
     u32 listItemSize;
     void * listPtr;
 };
@@ -50,7 +50,7 @@ struct PokenavListSub
     s32 moveDelta;
     u32 bgMoveType;
     PokenavListBufferItemFunc bufferItemFunc;
-    void (*iconDrawFunc)(u16, u32, u32);
+    void (*iconDrawFunc)(u32, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
     struct Sprite *downArrow;
@@ -93,7 +93,7 @@ static u32 LoopedTask_EraseListForCheckPage(s32);
 static u32 LoopedTask_ReshowListFromCheckPage(s32);
 static u32 LoopedTask_PrintCheckPageInfo(s32);
 
-static const u16 sListArrow_Pal[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
+static const u32 sListArrow_Pal[] = INCBIN_U16("graphics/pokenav/list_arrows.gbapal");
 static const u32 sListArrow_Gfx[] = INCBIN_U32("graphics/pokenav/list_arrows.4bpp.lz");
 
 static const u32 gText_PokenavMatchCall_Strategy[] = _("STRATEGY");
@@ -169,7 +169,7 @@ static u32 LoopedTask_CreatePokenavList(s32 state)
 
 static void InitPokenavListBg(struct PokenavList *list)
 {
-    u16 tileNum = (list->sub.listWindow.fillValue << 12) | list->sub.listWindow.tileOffset;
+    u32 tileNum = (list->sub.listWindow.fillValue << 12) | list->sub.listWindow.tileOffset;
     BgDmaFill(list->sub.listWindow.bg, PIXEL_FILL(1), list->sub.listWindow.tileOffset, 1);
     BgDmaFill(list->sub.listWindow.bg, PIXEL_FILL(4), list->sub.listWindow.tileOffset + 1, 1);
     SetBgTilemapBuffer(list->sub.listWindow.bg, list->tilemapBuffer);
@@ -697,8 +697,8 @@ static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset,
 // Pointless
 static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 draw)
 {
-    u16 var;
-    u16 *tilemapBuffer = (u16 *)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
+    u32 var;
+    u32 *tilemapBuffer = (u32 *)GetBgTilemapBuffer(GetWindowAttribute(listWindow->windowId, WINDOW_BG));
     tilemapBuffer += (listWindow->unkA << 6) + listWindow->x - 1;
 
     if (draw)

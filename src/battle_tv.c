@@ -11,14 +11,14 @@
 #include "constants/battle_move_effects.h"
 
 // this file's functions
-static bool8 IsNotSpecialBattleString(u16 stringId);
-static void AddMovePoints(u32 caseId, u16 arg1, u32 arg2, u32 arg3);
+static bool32 IsNotSpecialBattleString(u32 stringId);
+static void AddMovePoints(u32 caseId, u32 arg1, u32 arg2, u32 arg3);
 static void TrySetBattleSeminarShow(void);
-static void AddPointsOnFainting(bool8 targetFainted);
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u32 moveSlot);
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride);
+static void AddPointsOnFainting(bool32 targetFainted);
+static void AddPointsBasedOnWeather(u32 weatherFlags, u32 moveId, u32 moveSlot);
+static bool32 ShouldCalculateDamage(u32 moveId, s32 *dmg, u32 *powerOverride);
 
-#define TABLE_END ((u16)-1)
+#define TABLE_END ((u32)-1)
 
 enum {
     PTS_MOVE_EFFECT,
@@ -71,7 +71,7 @@ enum {
 };
 
 // const rom data
-static const u16 sVariableDmgMoves[] =
+static const u32 sVariableDmgMoves[] =
 {
     MOVE_COUNTER, MOVE_FISSURE, MOVE_BIDE, MOVE_MIRROR_COAT,
     MOVE_HORN_DRILL, MOVE_FLAIL, MOVE_REVERSAL, MOVE_HIDDEN_POWER,
@@ -84,13 +84,13 @@ static const u16 sVariableDmgMoves[] =
     MOVE_MAGNITUDE, MOVE_PSYWAVE, TABLE_END
 };
 
-static const u16 sPoints_Effectiveness[] =
+static const u32 sPoints_Effectiveness[] =
 {
     4,  // Super Effective
     -3, // Not Very Effective
     -6  // No Effect
 };
-static const u16 sPoints_SetUp[] =
+static const u32 sPoints_SetUp[] =
 {
     4, // Future Sight
     4, // Doom Desire
@@ -100,7 +100,7 @@ static const u16 sPoints_SetUp[] =
     6,
     2  // Ingrain
 };
-static const u16 sPoints_RainMoves[] =
+static const u32 sPoints_RainMoves[] =
 {
     MOVE_BUBBLE, 3,
     MOVE_WHIRLPOOL, 3,
@@ -137,7 +137,7 @@ static const u16 sPoints_RainMoves[] =
     MOVE_SOLAR_BEAM, -4, // Repeated
     TABLE_END, 0
 };
-static const u16 sPoints_SunMoves[] =
+static const u32 sPoints_SunMoves[] =
 {
     MOVE_OVERHEAT, 3,
     MOVE_FLAME_WHEEL, 3,
@@ -158,19 +158,19 @@ static const u16 sPoints_SunMoves[] =
     MOVE_WEATHER_BALL, 3,
     TABLE_END, 0
 };
-static const u16 sPoints_SandstormMoves[] =
+static const u32 sPoints_SandstormMoves[] =
 {
     MOVE_WEATHER_BALL, 3,
     MOVE_SOLAR_BEAM, -3,
     TABLE_END, 0
 };
-static const u16 sPoints_HailMoves[] =
+static const u32 sPoints_HailMoves[] =
 {
     MOVE_WEATHER_BALL, 3,
     MOVE_SOLAR_BEAM, -3,
     TABLE_END, 0
 };
-static const u16 sPoints_ElectricMoves[] =
+static const u32 sPoints_ElectricMoves[] =
 {
     MOVE_THUNDERBOLT, 3,
     MOVE_THUNDER_PUNCH, 3,
@@ -183,7 +183,7 @@ static const u16 sPoints_ElectricMoves[] =
     MOVE_VOLT_TACKLE, 3,
     TABLE_END, 0
 };
-static const u16 sPoints_StatusDmg[] =
+static const u32 sPoints_StatusDmg[] =
 {
     5, // Curse
     3, // Leech Seed
@@ -193,7 +193,7 @@ static const u16 sPoints_StatusDmg[] =
     3, // Nightmare
     3  // Wrap (Trapping move)
 };
-static const u16 sPoints_Status[] =
+static const u32 sPoints_Status[] =
 {
     5, // Attraction
     5, // Confusion
@@ -202,19 +202,19 @@ static const u16 sPoints_Status[] =
     5  // Freeze
 };
 
-static const u16 sPoints_Spikes[] = { 4 };
-static const u16 sPoints_WaterSport[] = { 5 };
-static const u16 sPoints_MudSport[] = { 5 };
-static const u16 sPoints_Reflect[] = { 3 };
-static const u16 sPoints_LightScreen[] = { 3 };
-static const u16 sPoints_Safeguard[] = { 4 };
-static const u16 sPoints_Mist[] = { 3 };
-static const u16 sPoints_BreakWall[] = { 6 };
-static const u16 sPoints_CriticalHit[] = { 6 };
-static const u16 sPoints_Faint[] = { 6 };
-static const u16 sPoints_Flinched[] = { 4 };
+static const u32 sPoints_Spikes[] = { 4 };
+static const u32 sPoints_WaterSport[] = { 5 };
+static const u32 sPoints_MudSport[] = { 5 };
+static const u32 sPoints_Reflect[] = { 3 };
+static const u32 sPoints_LightScreen[] = { 3 };
+static const u32 sPoints_Safeguard[] = { 4 };
+static const u32 sPoints_Mist[] = { 3 };
+static const u32 sPoints_BreakWall[] = { 6 };
+static const u32 sPoints_CriticalHit[] = { 6 };
+static const u32 sPoints_Faint[] = { 6 };
+static const u32 sPoints_Flinched[] = { 4 };
 
-static const u16 sPoints_StatIncrease1[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatIncrease1[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = 2,
     [STAT_DEF - 1]     = 2,
@@ -224,7 +224,7 @@ static const u16 sPoints_StatIncrease1[NUM_BATTLE_STATS - 1] =
     [STAT_ACC - 1]     = 2,
     [STAT_EVASION - 1] = 2
 };
-static const u16 sPoints_StatIncrease2[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatIncrease2[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = 4,
     [STAT_DEF - 1]     = 4,
@@ -234,7 +234,7 @@ static const u16 sPoints_StatIncrease2[NUM_BATTLE_STATS - 1] =
     [STAT_ACC - 1]     = 4,
     [STAT_EVASION - 1] = 4
 };
-static const u16 sPoints_StatDecreaseSelf[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatDecreaseSelf[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = -1,
     [STAT_DEF - 1]     = -1,
@@ -244,7 +244,7 @@ static const u16 sPoints_StatDecreaseSelf[NUM_BATTLE_STATS - 1] =
     [STAT_ACC - 1]     = -1,
     [STAT_EVASION - 1] = -1
 };
-static const u16 sPoints_StatDecrease1[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatDecrease1[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = 2,
     [STAT_DEF - 1]     = 2,
@@ -254,7 +254,7 @@ static const u16 sPoints_StatDecrease1[NUM_BATTLE_STATS - 1] =
     [STAT_ACC - 1]     = 2,
     [STAT_EVASION - 1] = 2
 };
-static const u16 sPoints_StatDecrease2[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatDecrease2[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = 4,
     [STAT_DEF - 1]     = 4,
@@ -264,7 +264,7 @@ static const u16 sPoints_StatDecrease2[NUM_BATTLE_STATS - 1] =
     [STAT_ACC - 1]     = 4,
     [STAT_EVASION - 1] = 4
 };
-static const u16 sPoints_StatIncreaseNotSelf[NUM_BATTLE_STATS - 1] =
+static const u32 sPoints_StatIncreaseNotSelf[NUM_BATTLE_STATS - 1] =
 {
     [STAT_ATK - 1]     = -2,
     [STAT_DEF - 1]     = -2,
@@ -275,7 +275,7 @@ static const u16 sPoints_StatIncreaseNotSelf[NUM_BATTLE_STATS - 1] =
     [STAT_EVASION - 1] = -2
 };
 
-static const u16 *const sPointsArray[] =
+static const u32 *const sPointsArray[] =
 {
     [PTS_EFFECTIVENESS]          = sPoints_Effectiveness,
     [PTS_SET_UP]                 = sPoints_SetUp,
@@ -308,7 +308,7 @@ static const u16 *const sPointsArray[] =
 
 // Points will always be calculated for these messages
 // even if current Pokémon does not have corresponding move
-static const u16 sSpecialBattleStrings[] =
+static const u32 sSpecialBattleStrings[] =
 {
     STRINGID_PKMNPERISHCOUNTFELL, STRINGID_PKMNWISHCAMETRUE, STRINGID_PKMNLOSTPPGRUDGE,
     STRINGID_PKMNTOOKFOE, STRINGID_PKMNABSORBEDNUTRIENTS, STRINGID_PKMNANCHOREDITSELF,
@@ -319,7 +319,7 @@ static const u16 sSpecialBattleStrings[] =
 };
 
 // code
-void BattleTv_SetDataBasedOnString(u16 stringId)
+void BattleTv_SetDataBasedOnString(u32 stringId)
 {
     struct BattleTv *tvPtr;
     u32 atkSide, defSide, effSide, scriptingSide;
@@ -327,7 +327,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     u32 moveSlot;
     u32 atkFlank, defFlank, effFlank;
     u32 *perishCount;
-    u16 *statStringId, *finishedMoveId;
+    u32 *statStringId, *finishedMoveId;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && stringId != STRINGID_ITDOESNTAFFECT && stringId != STRINGID_NOTVERYEFFECTIVE)
         return;
@@ -349,8 +349,8 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     }
 
     perishCount = (u32 *)(gBattleTextBuff1 + 4);
-    statStringId = (u16 *)(gBattleTextBuff2 + 2);
-    finishedMoveId = (u16 *)(gBattleTextBuff1 + 2);
+    statStringId = (u32 *)(gBattleTextBuff2 + 2);
+    finishedMoveId = (u32 *)(gBattleTextBuff1 + 2);
 
     atkFlank = GetBattlerPosition(gBattlerAttacker) / 2;
     defFlank = GetBattlerPosition(gBattlerTarget) / 2;
@@ -723,7 +723,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
     }
 }
 
-static bool8 IsNotSpecialBattleString(u16 stringId)
+static bool32 IsNotSpecialBattleString(u32 stringId)
 {
     s32 i = 0;
 
@@ -740,7 +740,7 @@ static bool8 IsNotSpecialBattleString(u16 stringId)
         return FALSE;
 }
 
-void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruct *disableStructPtr)
+void BattleTv_SetDataBasedOnMove(u32 move, u32 weatherFlags, struct DisableStruct *disableStructPtr)
 {
     struct BattleTv *tvPtr;
     u32 atkSide, defSide;
@@ -822,14 +822,14 @@ void BattleTv_SetDataBasedOnAnimation(u32 animationId)
 
 void TryPutLinkBattleTvShowOnAir(void)
 {
-    u16 playerBestSpecies = 0, opponentBestSpecies = 0;
+    u32 playerBestSpecies = 0, opponentBestSpecies = 0;
     s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
     u32 playerBestMonId = 0, opponentBestMonId = 0;
     struct BattleTvMovePoints *movePoints = NULL;
     u32 countPlayer = 0, countOpponent = 0;
     s16 sum = 0;
-    u16 species = 0;
-    u16 moveId = 0;
+    u32 species = 0;
+    u32 moveId = 0;
     s32 i, j;
     int zero = 0, one = 1; //needed for matching
 
@@ -916,13 +916,13 @@ void TryPutLinkBattleTvShowOnAir(void)
     }
 }
 
-static void AddMovePoints(u32 caseId, u16 arg1, u32 arg2, u32 arg3)
+static void AddMovePoints(u32 caseId, u32 arg1, u32 arg2, u32 arg3)
 {
     struct BattleTvMovePoints *movePoints = &gBattleStruct->tvMovePoints;
     struct BattleTv *tvPtr = &gBattleStruct->tv;
     u32 atkSide = GetBattlerSide(gBattlerAttacker);
     u32 defSide = GetBattlerSide(gBattlerTarget);
-    const u16 *ptr;
+    const u32 *ptr;
     s32 i;
 
     switch (caseId)
@@ -1058,7 +1058,7 @@ static void AddMovePoints(u32 caseId, u16 arg1, u32 arg2, u32 arg3)
     }
 }
 
-static void AddPointsOnFainting(bool8 targetFainted)
+static void AddPointsOnFainting(bool32 targetFainted)
 {
     struct BattleTv *tvPtr = &gBattleStruct->tv;
     u32 atkSide = GetBattlerSide(gBattlerAttacker);
@@ -1213,8 +1213,8 @@ static void TrySetBattleSeminarShow(void)
 {
     s32 i;
     s32 dmgByMove[MAX_MON_MOVES];
-    u16 powerOverride;
-    u16 currMoveSaved;
+    u32 powerOverride;
+    u32 currMoveSaved;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
@@ -1270,7 +1270,7 @@ static void TrySetBattleSeminarShow(void)
     {
         if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[gMoveSelectionCursor[gBattlerAttacker]])
         {
-            u16 opponentSpecies, playerSpecies;
+            u32 opponentSpecies, playerSpecies;
             s32 bestMoveId;
 
             if (gMoveSelectionCursor[gBattlerAttacker] != 0)
@@ -1295,7 +1295,7 @@ static void TrySetBattleSeminarShow(void)
     gCurrentMove = currMoveSaved;
 }
 
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
+static bool32 ShouldCalculateDamage(u32 moveId, s32 *dmg, u32 *powerOverride)
 {
     if (IsBattleMoveStatus(moveId))
     {
@@ -1358,7 +1358,7 @@ void BattleTv_ClearExplosionFaintCause(void)
     }
 }
 
-u32 GetBattlerMoveSlotId(u32 battlerId, u16 moveId)
+u32 GetBattlerMoveSlotId(u32 battlerId, u32 moveId)
 {
     s32 i;
     struct Pokemon *party;
@@ -1377,7 +1377,7 @@ u32 GetBattlerMoveSlotId(u32 battlerId, u16 moveId)
     return i;
 }
 
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u32 moveSlot)
+static void AddPointsBasedOnWeather(u32 weatherFlags, u32 moveId, u32 moveSlot)
 {
     if (weatherFlags & B_WEATHER_RAIN)
         AddMovePoints(PTS_RAIN, moveId, moveSlot, 0);

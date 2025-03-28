@@ -77,7 +77,7 @@ static u32 GetTimerValue(u32 *src);
 #endif //FREE_TRAINER_HILL
 static void SetTrainerHillMonLevel(struct Pokemon *mon, u32 level);
 #if FREE_TRAINER_HILL == FALSE
-static u16 GetPrizeItemId(void);
+static u32 GetPrizeItemId(void);
 #endif //FREE_TRAINER_HILL
 
 // const data
@@ -145,29 +145,29 @@ struct
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const u16 sPrizeListRareCandy1[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListLuxuryBall1[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxRevive1[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxEther1[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListElixir1[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListRoar[]        = {ITEM_TM_ROAR,          ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListSludgeBomb[]  = {ITEM_TM_SLUDGE_BOMB,   ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListToxic[]       = {ITEM_TM_TOXIC,         ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListSunnyDay[]    = {ITEM_TM_SUNNY_DAY,     ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListEarthQuake[]  = {ITEM_TM_EARTHQUAKE,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListRareCandy1[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListLuxuryBall1[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListMaxRevive1[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListMaxEther1[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListElixir1[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListRoar[]        = {ITEM_TM_ROAR,          ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListSludgeBomb[]  = {ITEM_TM_SLUDGE_BOMB,   ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListToxic[]       = {ITEM_TM_TOXIC,         ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListSunnyDay[]    = {ITEM_TM_SUNNY_DAY,     ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListEarthQuake[]  = {ITEM_TM_EARTHQUAKE,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 
-static const u16 sPrizeListRareCandy2[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListLuxuryBall2[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxRevive2[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxEther2[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListBrickBreak[]  = {ITEM_TM_BRICK_BREAK,   ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListTorment[]     = {ITEM_TM_TORMENT,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListSkillSwap[]   = {ITEM_TM_SKILL_SWAP,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListGigaDrain[]   = {ITEM_TM_GIGA_DRAIN,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListAttract[]     = {ITEM_TM_ATTRACT,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListRareCandy2[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListLuxuryBall2[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListMaxRevive2[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListMaxEther2[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListBrickBreak[]  = {ITEM_TM_BRICK_BREAK,   ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListTorment[]     = {ITEM_TM_TORMENT,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListSkillSwap[]   = {ITEM_TM_SKILL_SWAP,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListGigaDrain[]   = {ITEM_TM_GIGA_DRAIN,    ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u32 sPrizeListAttract[]     = {ITEM_TM_ATTRACT,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 
-static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
+static const u32 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
     sPrizeListRareCandy1,
     sPrizeListLuxuryBall1,
@@ -181,7 +181,7 @@ static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
     sPrizeListEarthQuake
 };
 
-static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
+static const u32 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
     sPrizeListRareCandy2,
     sPrizeListLuxuryBall2,
@@ -195,13 +195,13 @@ static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
     sPrizeListAttract
 };
 
-static const u16 *const *const sPrizeListSets[] =
+static const u32 *const *const sPrizeListSets[] =
 {
     sPrizeLists1,
     sPrizeLists2
 };
 
-static const u16 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
+static const u32 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
 static const u32 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_MODES] =
@@ -309,14 +309,14 @@ static u32 GetFloorId(void)
     return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 }
 
-u32 GetTrainerHillOpponentClass(u16 trainerId)
+u32 GetTrainerHillOpponentClass(u32 trainerId)
 {
     u32 id = trainerId - 1;
 
     return gFacilityClassToTrainerClass[sFloorTrainers->facilityClass[id]];
 }
 
-void GetTrainerHillTrainerName(u32 *dst, u16 trainerId)
+void GetTrainerHillTrainerName(u32 *dst, u32 trainerId)
 {
     s32 i;
     u32 id = trainerId - 1;
@@ -325,7 +325,7 @@ void GetTrainerHillTrainerName(u32 *dst, u16 trainerId)
         dst[i] = sFloorTrainers->name[id][i];
 }
 
-u32 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
+u32 GetTrainerHillTrainerFrontSpriteId(u32 trainerId)
 {
     u32 id, facilityClass;
 
@@ -380,7 +380,7 @@ static void FreeDataStruct(void)
     TRY_FREE_AND_SET_NULL(sHillData);
 }
 
-void CopyTrainerHillTrainerText(u32 which, u16 trainerId)
+void CopyTrainerHillTrainerText(u32 which, u32 trainerId)
 {
     u32 id, floorId;
 
@@ -445,7 +445,7 @@ static void GetOwnerState(void)
 static void GiveChallengePrize(void)
 {
 #if FREE_TRAINER_HILL == FALSE
-    u16 itemId = GetPrizeItemId();
+    u32 itemId = GetPrizeItemId();
 
     if (sHillData->challenge.numFloors != NUM_TRAINER_HILL_FLOORS || gSaveBlock1Ptr->trainerHill.receivedPrize)
     {
@@ -581,7 +581,7 @@ static void GetInEReaderMode(void)
     FreeDataStruct();
 }
 
-bool8 InTrainerHillChallenge(void)
+bool32 InTrainerHillChallenge(void)
 {
 #if FREE_TRAINER_HILL == FALSE
     if (VarGet(VAR_TRAINER_HILL_IS_ACTIVE) == 0)
@@ -707,11 +707,11 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 GetMetatileForFloor(u32 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
+static u32 GetMetatileForFloor(u32 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
-    bool8 impassable;
-    u16 metatile;
-    u16 elevation;
+    bool32 impassable;
+    u32 metatile;
+    u32 elevation;
 
     impassable = (sHillData->floors[floorId].map.collisionData[y] >> (15 - x) & 1);
     metatile = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
@@ -720,11 +720,11 @@ static u16 GetMetatileForFloor(u32 floorId, u32 x, u32 y, u32 floorWidth) // flo
     return ((impassable << MAPGRID_COLLISION_SHIFT) & MAPGRID_COLLISION_MASK) | elevation | (metatile & MAPGRID_METATILE_ID_MASK);
 }
 
-void GenerateTrainerHillFloorLayout(u16 *mapArg)
+void GenerateTrainerHillFloorLayout(u32 *mapArg)
 {
     s32 y, x;
-    const u16 *src;
-    u16 *dst;
+    const u32 *src;
+    u32 *dst;
     u32 mapId = GetCurrentTrainerHillMapId();
 
     if (mapId == TRAINER_HILL_ENTRANCE)
@@ -844,12 +844,12 @@ const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u32 warpEventId)
     return &header->events->warps[0];
 }
 
-u16 LocalIdToHillTrainerId(u32 localId)
+u32 LocalIdToHillTrainerId(u32 localId)
 {
     return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
-bool8 GetHillTrainerFlag(u32 objectEventId)
+bool32 GetHillTrainerFlag(u32 objectEventId)
 {
     u32 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
     u32 bitId = gObjectEvents[objectEventId].localId - 1 + trainerIndexStart;
@@ -895,7 +895,7 @@ static void ShowTrainerHillPostBattleText(void)
     ShowFieldMessageFromBuffer();
 }
 
-static void CreateNPCTrainerHillParty(u16 trainerId, u32 firstMonId)
+static void CreateNPCTrainerHillParty(u32 trainerId, u32 firstMonId)
 {
     u32 trId, level;
     s32 i, floorId, partySlot;
@@ -940,7 +940,7 @@ u32 GetTrainerHillAIFlags(void)
     return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
 }
 
-u32 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
+u32 GetTrainerEncounterMusicIdInTrainerHill(u32 trainerId)
 {
     s32 i;
     u32 trId, facilityClass;
@@ -961,7 +961,7 @@ u32 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 
 static void SetTrainerHillMonLevel(struct Pokemon *mon, u32 level)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
 
     SetMonData(mon, MON_DATA_EXP, &exp);
@@ -1040,7 +1040,7 @@ static void TrainerHillSetMode(void)
 
 // Determines which prize list to use from the set of prize lists.
 #if FREE_TRAINER_HILL == FALSE
-static u32 GetPrizeListId(bool8 allowTMs)
+static u32 GetPrizeListId(bool32 allowTMs)
 {
     u32 prizeListId, i, modBy;
 
@@ -1066,10 +1066,10 @@ static u32 GetPrizeListId(bool8 allowTMs)
     return prizeListId;
 }
 
-static u16 GetPrizeItemId(void)
+static u32 GetPrizeItemId(void)
 {
     u32 i;
-    const u16 *prizeList;
+    const u32 *prizeList;
     s32 trainerNumSum = 0, prizeListSetId, minutes, id;
 
     // First determine which set of prize lists to use. The sets of lists only differ in

@@ -8,7 +8,7 @@
 
 struct DigitPrinter
 {
-    bool8 isActive;
+    bool32 isActive;
     u32 firstOamId;
     u32 strConvMode;
     u32 oamCount;
@@ -18,11 +18,11 @@ struct DigitPrinter
     u32 priority;
     u32 xDelta;
     u32 tilesPerImage;
-    u16 tileStart;
+    u32 tileStart;
     s16 x;
     s16 y;
-    u16 tileTag;
-    u16 palTag;
+    u32 tileTag;
+    u32 palTag;
     u32 pow10;
     s32 lastPrinted;
 };
@@ -369,7 +369,7 @@ void DigitObjUtil_HideOrShow(u32 id, bool32 hide)
 static u32 GetFirstOamId(u32 oamCount)
 {
     u32 i;
-    u16 firstOamId = 64;
+    u32 firstOamId = 64;
 
     for (i = 0; i < sOamWork->count; i++)
     {

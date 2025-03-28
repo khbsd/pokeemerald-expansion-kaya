@@ -3,7 +3,7 @@
 
 void InitDewfordTrend(void);
 void UpdateDewfordTrendPerDay(u32 days);
-bool8 TrySetTrendyPhrase(u32 *phrase);
+bool32 TrySetTrendyPhrase(u32 *phrase);
 void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 unused);
 
 

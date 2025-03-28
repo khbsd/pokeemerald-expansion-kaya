@@ -97,8 +97,8 @@ struct ContestResultsInternal
     u32 winnerMonSlidingState;
     u32 confettiCount;
     u32 winnerMonSpriteId;
-    bool8 destroyConfetti;
-    bool8 pointsFlashing;
+    bool32 destroyConfetti;
+    bool32 pointsFlashing;
     s16 barLength[CONTESTANT_COUNT];
     u32 numBarsUpdating;
 };
@@ -109,7 +109,7 @@ struct ContestMonResults
     int relativeRound2Points;
     u32 barLengthPreliminary;
     u32 barLengthRound2;
-    bool8 lostPoints;
+    bool32 lostPoints;
     u32 numStars;
     u32 numHearts;
 };
@@ -127,8 +127,8 @@ static EWRAM_DATA struct ContestResults *sContestResults = NULL;
 
 static void LoadAllContestMonIconPalettes(void);
 static void LoadContestResultsTitleBarTilemaps(void);
-static u32 GetNumPreliminaryPoints(u32, bool8);
-static s8 GetNumRound2Points(u32, bool8);
+static u32 GetNumPreliminaryPoints(u32, bool32);
+static s32 GetNumRound2Points(u32, bool32);
 static void AddContestTextPrinter(int, u32 *, int);
 static void AddContestTextPrinterFitWidth(int, u32 *, int, int);
 static void AllocContestResults(void);
@@ -164,10 +164,10 @@ static void CalculateContestantsResultData(void);
 static void ShowLinkResultsTextBox(const u32 *);
 static void HideLinkResultsTextBox(void);
 static s32 DrawResultsTextWindow(const u32 *, u32);
-static void StartTextBoxSlideIn(s16, u16, u16, u16);
-static void UpdateContestResultBars(bool8, u32);
+static void StartTextBoxSlideIn(s16, u32, u32, u32);
+static void UpdateContestResultBars(bool32, u32);
 static void Task_UpdateContestResultBar(u32);
-static void StartTextBoxSlideOut(u16);
+static void StartTextBoxSlideOut(u32);
 static void BounceMonIconInBox(u32, u32);
 static void Task_BounceMonIconInBox(u32);
 static void SpriteCB_WinnerMonSlideIn(struct Sprite *);
@@ -188,9 +188,9 @@ static void SpriteCB_Confetti(struct Sprite *sprite);
 static void Task_ShowContestEntryMonPic(u32 taskId);
 static void Task_LinkContestWaitForConnection(u32 taskId);
 
-static const u16 sResultsTextWindow_Pal[] = INCBIN_U16("graphics/contest/results_screen/text_window.gbapal");
+static const u32 sResultsTextWindow_Pal[] = INCBIN_U16("graphics/contest/results_screen/text_window.gbapal");
 static const u32 sResultsTextWindow_Gfx[] = INCBIN_u32("graphics/contest/results_screen/text_window.4bpp");
-static const u16 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
+static const u32 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
 
 static const struct OamData sOamData_ResultsTextWindow =
 {
@@ -449,8 +449,8 @@ static void InitContestResultsDisplay(void)
 static void LoadContestResultsBgGfx(void)
 {
     int i, j;
-    s8 numStars, round2Points;
-    u16 tile1, tile2;
+    s32 numStars, round2Points;
+    u32 tile1, tile2;
 
     LZDecompressVram(gContestResults_Gfx, (void *)BG_CHAR_ADDR(0));
     CopyToBgTilemapBuffer(3, gContestResults_Bg_Tilemap, 0, 0);
@@ -592,7 +592,7 @@ static void VBlankCB_ShowContestResults(void)
 
 static void Task_ShowContestResults(u32 taskId)
 {
-    u16 var;
+    u32 var;
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
@@ -879,8 +879,8 @@ static void Task_ShowWinnerMonBanner(u32 taskId)
 {
     int i;
     u32 spriteId;
-    u16 species;
-    bool8 isShiny;
+    u32 species;
+    bool32 isShiny;
     u32 personality;
 
     switch (gTasks[taskId].tState)
@@ -1091,10 +1091,10 @@ static void Task_FlashStarsAndHearts(u32 taskId)
         sContestResults->data->pointsFlashing = TRUE;
 }
 
-static void LoadContestMonIcon(u16 species, u32 monIndex, u32 srcOffset, u32 useDmaNow, u32 personality)
+static void LoadContestMonIcon(u32 species, u32 monIndex, u32 srcOffset, u32 useDmaNow, u32 personality)
 {
     const u32 *iconPtr;
-    u16 var0, var1;
+    u32 var0, var1;
 
     iconPtr = GetMonIconPtr(species, personality);
     iconPtr += srcOffset * 0x200 + 0x80;
@@ -1111,7 +1111,7 @@ static void LoadContestMonIcon(u16 species, u32 monIndex, u32 srcOffset, u32 use
     }
 }
 
-static void LoadAllContestMonIcons(u32 srcOffset, bool8 useDmaNow)
+static void LoadAllContestMonIcons(u32 srcOffset, bool32 useDmaNow)
 {
     int i;
 
@@ -1132,7 +1132,7 @@ static void LoadAllContestMonIconPalettes(void)
 
 static void TryCreateWirelessSprites(void)
 {
-    u16 sheet;
+    u32 sheet;
     u32 spriteId;
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
@@ -1149,7 +1149,7 @@ static void TryCreateWirelessSprites(void)
 
 static s32 DrawResultsTextWindow(const u32 *text, u32 spriteId)
 {
-    u16 windowId;
+    u32 windowId;
     int tileWidth;
     int strWidth;
     u32 *spriteTilePtrs[4];
@@ -1252,7 +1252,7 @@ static void CreateResultsTextWindowSprites(void)
 #define sDistance       data[7]
 
 // If slideOutTimer is -1, it will not automatically slide out
-static void StartTextBoxSlideIn(s16 x, u16 y, u16 slideOutTimer, u16 slideIncrement)
+static void StartTextBoxSlideIn(s16 x, u32 y, u32 slideOutTimer, u32 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
     sprite->x = TEXT_BOX_X;
@@ -1267,7 +1267,7 @@ static void StartTextBoxSlideIn(s16 x, u16 y, u16 slideOutTimer, u16 slideIncrem
     sContestResults->data->slidingTextBoxState = SLIDING_TEXT_ENTERING;
 }
 
-static void StartTextBoxSlideOut(u16 slideIncrement)
+static void StartTextBoxSlideOut(u32 slideIncrement)
 {
     struct Sprite *sprite = &gSprites[sContestResults->data->slidingTextBoxSpriteId];
     sprite->x += sprite->x2;
@@ -1316,7 +1316,7 @@ static void SpriteCB_TextBoxSlideIn(struct Sprite *sprite)
 static void SpriteCB_EndTextBoxSlideIn(struct Sprite *sprite)
 {
     sContestResults->data->slidingTextBoxState = SLIDING_TEXT_ARRIVED;
-    if ((u16)sprite->sSlideOutTimer != 0xFFFF)
+    if ((u32)sprite->sSlideOutTimer != 0xFFFF)
     {
         if (--sprite->sSlideOutTimer == -1)
             StartTextBoxSlideOut(sprite->sSlideIncrement);
@@ -1345,7 +1345,7 @@ static void SpriteCB_TextBoxSlideOut(struct Sprite *sprite)
 static void ShowLinkResultsTextBox(const u32 *text)
 {
     int i;
-    u16 x;
+    u32 x;
     struct Sprite *sprite;
 
     x = DrawResultsTextWindow(text, sContestResults->data->linkTextBoxSpriteId);
@@ -1449,7 +1449,7 @@ static void LoadContestResultsTitleBarTilemaps(void)
 }
 
 // Represented on results board as stars
-static u32 GetNumPreliminaryPoints(u32 monIndex, bool8 capPoints)
+static u32 GetNumPreliminaryPoints(u32 monIndex, bool32 capPoints)
 {
     u32 condition = gContestMonRound1Points[monIndex] << 16;
     u32 numStars = condition / 0x3F;
@@ -1468,11 +1468,11 @@ static u32 GetNumPreliminaryPoints(u32 monIndex, bool8 capPoints)
 }
 
 // Represented on results board as hearts
-static s8 GetNumRound2Points(u32 monIndex, bool8 capPoints)
+static s32 GetNumRound2Points(u32 monIndex, bool32 capPoints)
 {
     u32 r4, numHearts;
     s16 results;
-    s8 points;
+    s32 points;
 
     results = gContestMonRound2Points[monIndex];
     if (results < 0)
@@ -1503,7 +1503,7 @@ static s8 GetNumRound2Points(u32 monIndex, bool8 capPoints)
 
 static void Task_DrawFinalStandingNumber(u32 taskId)
 {
-    u16 firstTileNum;
+    u32 firstTileNum;
 
     if (gTasks[taskId].tState == 0)
     {
@@ -1678,7 +1678,7 @@ static void CalculateContestantsResultData(void)
     int i, relativePoints;
     u32 barLength;
     s16 highestPoints;
-    s8 round2Points;
+    s32 round2Points;
 
     highestPoints = gContestMonTotalPoints[0];
     for (i = 1; i < CONTESTANT_COUNT; i++)
@@ -1749,7 +1749,7 @@ static void CalculateContestantsResultData(void)
 #define tTarget     data[1]
 #define tDecreasing data[2]
 
-static void UpdateContestResultBars(bool8 isRound2, u32 numUpdates)
+static void UpdateContestResultBars(bool32 isRound2, u32 numUpdates)
 {
     int i, taskId;
     u32 target;
@@ -1780,7 +1780,7 @@ static void UpdateContestResultBars(bool8 isRound2, u32 numUpdates)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            s8 numHearts = (*sContestResults->monResults)[i].numHearts;
+            s32 numHearts = (*sContestResults->monResults)[i].numHearts;
             u32 tile = (*sContestResults->monResults)[i].lostPoints ? 0x60A5 : 0x60A3;
             if (numUpdates < numHearts)
             {
@@ -1857,7 +1857,7 @@ static void Task_UpdateContestResultBar(u32 taskId)
     if (!minMaxReached && !targetReached)
     {
         u32 tileOffset;
-        u16 tileNum;
+        u32 tileNum;
         for (i = 0; i < NUM_BAR_SEGMENTS; i++)
         {
             if (sContestResults->data->barLength[monId] >= (i + 1) * BAR_SEGMENT_LENGTH)
@@ -1956,9 +1956,9 @@ void TryEnterContestMon(void)
     gSpecialVar_Result = eligibility;
 }
 
-u16 HasMonWonThisContestBefore(void)
+u32 HasMonWonThisContestBefore(void)
 {
-    u16 hasRankRibbon = FALSE;
+    u32 hasRankRibbon = FALSE;
     struct Pokemon *mon = &gPlayerParty[gContestMonPartyIndex];
     switch (gSpecialVar_ContestCategory)
     {
@@ -2288,7 +2288,7 @@ void SetContestTrainerGfxIds(void)
 // Unused
 void GetNpcContestantLocalId(void)
 {
-    u16 localId;
+    u32 localId;
     u32 contestant = gSpecialVar_0x8005;
     switch (contestant)
     {
@@ -2385,7 +2385,7 @@ void GetContestantNamesAtRank(void)
     s16 conditions[CONTESTANT_COUNT];
     int i, j;
     s16 condition;
-    s8 numAtCondition;
+    s32 numAtCondition;
     u32 contestantOffset;
     u32 tieRank;
     u32 rank;
@@ -2528,7 +2528,7 @@ void LoadLinkContestPlayerPalettes(void)
     }
 }
 
-bool8 GiveMonArtistRibbon(void)
+bool32 GiveMonArtistRibbon(void)
 {
     u32 hasArtistRibbon;
 
@@ -2551,7 +2551,7 @@ bool8 GiveMonArtistRibbon(void)
     }
 }
 
-bool8 IsContestDebugActive(void)
+bool32 IsContestDebugActive(void)
 {
     return FALSE; // gUnknown_0203856C in pokeruby
 }
@@ -2559,7 +2559,7 @@ bool8 IsContestDebugActive(void)
 void ShowContestEntryMonPic(void)
 {
     u32 personality;
-    u16 species;
+    u32 species;
     u32 spriteId;
     u32 taskId;
     u32 left, top;
@@ -2657,8 +2657,8 @@ void GetContestMultiplayerId(void)
 
 void GenerateContestRand(void)
 {
-    u16 random;
-    u16 *result;
+    u32 random;
+    u32 *result;
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
@@ -2673,12 +2673,12 @@ void GenerateContestRand(void)
     *result = random % *result;
 }
 
-u16 GetContestRand(void)
+u32 GetContestRand(void)
 {
     return LocalRandom(&gContestRngValue);
 }
 
-bool8 LinkContestWaitForConnection(void)
+bool32 LinkContestWaitForConnection(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
@@ -2736,7 +2736,7 @@ void LinkContestTryHideWirelessIndicator(void)
     }
 }
 
-bool8 IsContestWithRSPlayer(void)
+bool32 IsContestWithRSPlayer(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
         return TRUE;
@@ -2749,7 +2749,7 @@ void ClearLinkContestFlags(void)
     gLinkContestFlags = 0;
 }
 
-bool8 IsWirelessContest(void)
+bool32 IsWirelessContest(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         return TRUE;

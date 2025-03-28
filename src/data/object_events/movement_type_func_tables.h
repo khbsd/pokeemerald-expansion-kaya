@@ -387,7 +387,7 @@ u8 (*const gMovementTypeFuncs_CopyPlayer[])(struct ObjectEvent *, struct Sprite 
     MovementType_CopyPlayer_Step2,
 };
 
-bool8 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
+bool32 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool32(u8)) = {
     [COPY_MOVE_NONE]          = CopyablePlayerMovement_None,
     [COPY_MOVE_FACE]          = CopyablePlayerMovement_FaceDirection,
     [COPY_MOVE_WALK]          = CopyablePlayerMovement_WalkNormal,
@@ -407,7 +407,7 @@ u8 (*const gMovementTypeFuncs_FollowPlayer[])(struct ObjectEvent *, struct Sprit
     MovementType_FollowPlayer_Moving,
 };
 
-bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
+bool32 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool32(u8)) = {
     [COPY_MOVE_NONE] = FollowablePlayerMovement_Idle,
     [COPY_MOVE_FACE] = FollowablePlayerMovement_Idle,
     [COPY_MOVE_WALK] = FollowablePlayerMovement_Step,

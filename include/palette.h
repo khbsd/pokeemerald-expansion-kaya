@@ -39,16 +39,16 @@ struct PaletteFadeControl
     u32 y:5; // blend coefficient
     u32 targetY:5; // target blend coefficient
     u32 blendColor:15;
-    bool16 active:1;
+    bool32 active:1;
     u32 multipurpose2:6;
-    bool16 yDec:1; // whether blend coefficient is decreasing
-    bool16 bufferTransferDisabled:1;
+    bool32 yDec:1; // whether blend coefficient is decreasing
+    bool32 bufferTransferDisabled:1;
     u32 mode:2;
-    bool16 shouldResetBlendRegisters:1;
-    bool16 hardwareFadeFinishing:1;
+    bool32 shouldResetBlendRegisters:1;
+    bool32 hardwareFadeFinishing:1;
     u32 softwareFadeFinishingCounter:5;
-    bool16 softwareFadeFinishing:1;
-    bool16 objPaletteToggle:1;
+    bool32 softwareFadeFinishing:1;
+    bool32 objPaletteToggle:1;
     u8 deltaY:4; // rate of change of blend coefficient
 };
 
@@ -63,16 +63,16 @@ void FillPalette(u32 value, u32 offset, u32 size);
 void TransferPlttBuffer(void);
 u32 UpdatePaletteFade(void);
 void ResetPaletteFade(void);
-bool32 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u32 blendColor);
+bool32 BeginNormalPaletteFade(u32 selectedPalettes, s32 delay, u8 startY, u8 targetY, u32 blendColor);
 void ResetPaletteFadeControl(void);
 void InvertPlttBuffer(u32 selectedPalettes);
-void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b);
+void TintPlttBuffer(u32 selectedPalettes, s32 r, s32 g, s32 b);
 void UnfadePlttBuffer(u32 selectedPalettes);
 void BeginFastPaletteFade(u32 submode);
 void BeginHardwarePaletteFade(u32 blendCnt, u32 delay, u32 y, u32 targetY, u32 shouldResetBlendRegisters);
 void BlendPalettes(u32 selectedPalettes, u8 coeff, u32 color);
 void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u32 color);
-void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u32 color, u8 priority, u8 id);
+void BlendPalettesGradually(u32 selectedPalettes, s32 delay, u8 coeff, u8 coeffTarget, u32 color, u8 priority, u8 id);
 void TintPalette_GrayScale(u32 *palette, u32 count);
 void TintPalette_GrayScale2(u32 *palette, u32 count);
 void TintPalette_SepiaTone(u32 *palette, u32 count);

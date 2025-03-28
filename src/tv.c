@@ -63,22 +63,22 @@ enum {
     ROULETTE,
 };
 
-COMMON_DATA s8 sCurTVShowSlot = 0;
-COMMON_DATA u16 sTV_SecretBaseVisitMovesTemp[8] = {0};
+COMMON_DATA s32 sCurTVShowSlot = 0;
+COMMON_DATA u32 sTV_SecretBaseVisitMovesTemp[8] = {0};
 COMMON_DATA u32 sTV_DecorationsBuffer[DECOR_MAX_SECRET_BASE] = {0};
 COMMON_DATA struct {
     u32 level;
-    u16 species;
-    u16 move;
+    u32 species;
+    u32 move;
 } sTV_SecretBaseVisitMonsTemp[10] = {0};
 
 static u32 sTVShowMixingNumPlayers;
 static u32 sTVShowNewsMixingNumPlayers;
-static s8 sTVShowMixingCurSlot;
+static s32 sTVShowMixingCurSlot;
 
-static EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
-static EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
-static EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
+static EWRAM_DATA u32 sPokemonAnglerSpecies = 0;
+static EWRAM_DATA u32 sPokemonAnglerAttemptCounters = 0;
+static EWRAM_DATA u32 sFindThatGamerCoinsSpent = 0;
 static EWRAM_DATA u32 sFindThatGamerWhichGame = SLOT_MACHINE;
 static EWRAM_DATA ALIGNED(4) u32 sRecordMixingPartnersWithoutShowsToShare = 0;
 static EWRAM_DATA ALIGNED(4) u32 sTVShowState = 0;
@@ -87,23 +87,23 @@ static EWRAM_DATA u32 sTVSecretBaseSecretsRandomValues[3] = {};
 static void ClearPokeNews(void);
 static u32 GetTVGroupByShowId(u32);
 static u32 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
-static void SetTVMetatilesOnMap(int, int, u16);
+static void SetTVMetatilesOnMap(int, int, u32);
 static u32 FindAnyPokeNewsOnTheAir(void);
 static void TakeGabbyAndTyOffTheAir(void);
-static bool8 BernoulliTrial(u16 ratio);
-static s8 FindFirstEmptyRecordMixTVShowSlot(TVShow *);
-static bool8 IsRecordMixShowAlreadySpawned(u32, bool8);
+static bool32 BernoulliTrial(u32 ratio);
+static s32 FindFirstEmptyRecordMixTVShowSlot(TVShow *);
+static bool32 IsRecordMixShowAlreadySpawned(u32, bool32);
 static void StorePlayerIdInRecordMixShow(TVShow *);
 static void DeleteTVShowInArrayByIdx(TVShow *, u32);
-static s8 FindFirstEmptyNormalTVShowSlot(TVShow *);
+static s32 FindFirstEmptyNormalTVShowSlot(TVShow *);
 static void TryReplaceOldTVShowOfKind(u32);
 static void InterviewBefore_BravoTrainerPkmnProfile(void);
 static void InterviewBefore_NameRater(void);
-static u16 GetRandomDifferentSpeciesSeenByPlayer(u16);
+static u32 GetRandomDifferentSpeciesSeenByPlayer(u32);
 static void Script_FindFirstEmptyNormalTVShowSlot(void);
 static void CompactTVShowArray(TVShow *);
-static s8 GetFirstEmptyPokeNewsSlot(PokeNews *);
-static bool8 IsAddingPokeNewsDisallowed(u32);
+static s32 GetFirstEmptyPokeNewsSlot(PokeNews *);
+static bool32 IsAddingPokeNewsDisallowed(u32);
 static void ClearPokeNewsBySlot(u32);
 static void TranslateRubyShows(TVShow *);
 static void TranslateJapaneseEmeraldShows(TVShow *);
@@ -111,19 +111,19 @@ static void SetMixedTVShows(TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT], TVSh
 static void DeleteExcessMixedShows(void);
 static void DeactivateShowsWithUnseenSpecies(void);
 static void DeactivateGameCompleteShowsIfNotUnlocked(void);
-static s8 FindInactiveShowInArray(TVShow *);
-static bool8 TryMixTVShow(TVShow *[TV_SHOWS_COUNT], TVShow *[TV_SHOWS_COUNT], u32);
-static bool8 TryMixNormalTVShow(TVShow *, TVShow *, u32);
-static bool8 TryMixRecordMixTVShow(TVShow *, TVShow *, u32);
-static bool8 TryMixOutbreakTVShow(TVShow *, TVShow *, u32);
+static s32 FindInactiveShowInArray(TVShow *);
+static bool32 TryMixTVShow(TVShow *[TV_SHOWS_COUNT], TVShow *[TV_SHOWS_COUNT], u32);
+static bool32 TryMixNormalTVShow(TVShow *, TVShow *, u32);
+static bool32 TryMixRecordMixTVShow(TVShow *, TVShow *, u32);
+static bool32 TryMixOutbreakTVShow(TVShow *, TVShow *, u32);
 static void DeactivateShow(u32 showIdx);
-static void DeactivateShowIfNotSeenSpecies(u16, u32);
+static void DeactivateShowIfNotSeenSpecies(u32, u32);
 static void SetMixedPokeNews(PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT]);
 static void ClearInvalidPokeNews(void);
 static void ClearPokeNewsIfGameNotComplete(void);
-static s8 GetPokeNewsSlotIfActive(PokeNews *, u32);
+static s32 GetPokeNewsSlotIfActive(PokeNews *, u32);
 static void InitTryMixPokeNewsShow(PokeNews *[POKE_NEWS_COUNT], PokeNews *[POKE_NEWS_COUNT]);
-static bool8 TryMixPokeNewsShow(PokeNews *, PokeNews *, s8);
+static bool32 TryMixPokeNewsShow(PokeNews *, PokeNews *, s32);
 static void TVShowDone(void);
 static void InterviewAfter_FanClubLetter(void);
 static void InterviewAfter_RecentHappenings(void);
@@ -136,15 +136,15 @@ static void TryPutPokemonTodayFailedOnTheAir(void);
 static void TryStartRandomMassOutbreak(void);
 static void TryPutRandomPokeNewsOnAir(void);
 static void SortPurchasesByQuantity(void);
-static void UpdateMassOutbreakTimeLeft(u16);
-static void TryEndMassOutbreak(u16);
-static void UpdatePokeNewsCountdown(u16);
-static void ResolveWorldOfMastersShow(u16);
-static void ResolveNumberOneShow(u16);
+static void UpdateMassOutbreakTimeLeft(u32);
+static void TryEndMassOutbreak(u32);
+static void UpdatePokeNewsCountdown(u32);
+static void ResolveWorldOfMastersShow(u32);
+static void ResolveNumberOneShow(u32);
 static void TryPutFishingAdviceOnAir(void);
 static u32 MonDataIdxToRibbon(u32);
 static void TryPutNumberOneOnAir(u32);
-static bool8 ShouldApplyPokeNewsEffect(u32);
+static bool32 ShouldApplyPokeNewsEffect(u32);
 static void TryPutWorldOfMastersOnAir(void);
 static void InterviewBefore_FanClubLetter(void);
 static void InterviewBefore_RecentHappenings(void);
@@ -189,8 +189,8 @@ static void DoTVShowSafariFanClub(void);
 static void DoTVShowLilycoveContestLady(void);
 
 static const struct {
-    u16 species;
-    u16 moves[MAX_MON_MOVES];
+    u32 species;
+    u32 moves[MAX_MON_MOVES];
     u32 level;
     u32 location;
 } sPokeOutbreakSpeciesList[] = {
@@ -226,7 +226,7 @@ static const struct {
     }
 };
 
-static const u16 sGoldSymbolFlags[NUM_FRONTIER_FACILITIES] = {
+static const u32 sGoldSymbolFlags[NUM_FRONTIER_FACILITIES] = {
     [FRONTIER_FACILITY_TOWER]   = FLAG_SYS_TOWER_GOLD,
     [FRONTIER_FACILITY_DOME]    = FLAG_SYS_DOME_GOLD,
     [FRONTIER_FACILITY_PALACE]  = FLAG_SYS_PALACE_GOLD,
@@ -236,7 +236,7 @@ static const u16 sGoldSymbolFlags[NUM_FRONTIER_FACILITIES] = {
     [FRONTIER_FACILITY_PYRAMID] = FLAG_SYS_PYRAMID_GOLD
 };
 
-static const u16 sSilverSymbolFlags[NUM_FRONTIER_FACILITIES] = {
+static const u32 sSilverSymbolFlags[NUM_FRONTIER_FACILITIES] = {
     [FRONTIER_FACILITY_TOWER]   = FLAG_SYS_TOWER_SILVER,
     [FRONTIER_FACILITY_DOME]    = FLAG_SYS_DOME_SILVER,
     [FRONTIER_FACILITY_PALACE]  = FLAG_SYS_PALACE_SILVER,
@@ -246,7 +246,7 @@ static const u16 sSilverSymbolFlags[NUM_FRONTIER_FACILITIES] = {
     [FRONTIER_FACILITY_PYRAMID] = FLAG_SYS_PYRAMID_SILVER
 };
 
-static const u16 sNumberOneVarsAndThresholds[][2] = {
+static const u32 sNumberOneVarsAndThresholds[][2] = {
     {VAR_DAILY_SLOTS, 100},
     {VAR_DAILY_ROULETTE,  50},
     {VAR_DAILY_WILDS, 100},
@@ -850,7 +850,7 @@ void UpdateTVScreensOnMap(int width, int height)
     }
 }
 
-static void SetTVMetatilesOnMap(int width, int height, u16 metatileId)
+static void SetTVMetatilesOnMap(int width, int height, u32 metatileId)
 {
     int x;
     int y;
@@ -991,12 +991,12 @@ u32 GabbyAndTyGetBattleNum(void)
     return gSaveBlock1Ptr->gabbyAndTyData.battleNum;
 }
 
-bool8 IsGabbyAndTyShowOnTheAir(void)
+bool32 IsGabbyAndTyShowOnTheAir(void)
 {
     return gSaveBlock1Ptr->gabbyAndTyData.onAir;
 }
 
-bool8 GabbyAndTyGetLastQuote(void)
+bool32 GabbyAndTyGetLastQuote(void)
 {
     if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == EC_EMPTY_WORD)
     {
@@ -1093,10 +1093,10 @@ void InterviewAfter(void)
 void TryPutPokemonTodayOnAir(void)
 {
     u32 i;
-    u16 ballsUsed;
+    u32 ballsUsed;
     TVShow *show;
     u32 language2;
-    u16 itemLastUsed;
+    u32 itemLastUsed;
 
     ballsUsed = 0;
     TryPutRandomPokeNewsOnAir();
@@ -1164,7 +1164,7 @@ static void InitWorldOfMastersShowAttempt(void)
 
 static void TryPutPokemonTodayFailedOnTheAir(void)
 {
-    u16 ballsUsed;
+    u32 ballsUsed;
     u32 i;
     TVShow *show;
 
@@ -1244,7 +1244,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
     }
 }
 
-void PutBattleUpdateOnTheAir(u32 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent)
+void PutBattleUpdateOnTheAir(u32 opponentLinkPlayerId, u32 move, u32 speciesPlayer, u32 speciesOpponent)
 {
     TVShow *show;
     u32 name[32];
@@ -1283,7 +1283,7 @@ void PutBattleUpdateOnTheAir(u32 opponentLinkPlayerId, u16 move, u16 speciesPlay
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u32 *partnersName, u32 flavor, u32 color, u32 sheen, u32 language)
+bool32 Put3CheersForPokeblocksOnTheAir(const u32 *partnersName, u32 flavor, u32 color, u32 sheen, u32 language)
 {
     TVShow *show;
     u32 name[32];
@@ -1375,7 +1375,7 @@ void ContestLiveUpdates_SetWinnerAppealFlag(u32 flag)
         show->contestLiveUpdates.winnerAppealFlag = flag;
 }
 
-void ContestLiveUpdates_SetWinnerMoveUsed(u16 move)
+void ContestLiveUpdates_SetWinnerMoveUsed(u32 move)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1432,7 +1432,7 @@ static void InterviewAfter_BravoTrainerPokemonProfile(void)
     }
 }
 
-void BravoTrainerPokemonProfile_BeforeInterview1(u16 move)
+void BravoTrainerPokemonProfile_BeforeInterview1(u32 move)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     InterviewBefore_BravoTrainerPkmnProfile();
@@ -1626,7 +1626,7 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
 static void TryStartRandomMassOutbreak(void)
 {
     u32 i;
-    u16 outbreakIdx;
+    u32 outbreakIdx;
     TVShow *show;
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR))
@@ -1684,7 +1684,7 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakDaysLeft = 0;
 }
 
-void UpdateTVShowsPerDay(u16 days)
+void UpdateTVShowsPerDay(u32 days)
 {
     UpdateMassOutbreakTimeLeft(days);
     TryEndMassOutbreak(days);
@@ -1693,7 +1693,7 @@ void UpdateTVShowsPerDay(u16 days)
     ResolveNumberOneShow(days);
 }
 
-static void UpdateMassOutbreakTimeLeft(u16 days)
+static void UpdateMassOutbreakTimeLeft(u32 days)
 {
     u32 i;
     TVShow *show;
@@ -1716,7 +1716,7 @@ static void UpdateMassOutbreakTimeLeft(u16 days)
     }
 }
 
-static void TryEndMassOutbreak(u16 days)
+static void TryEndMassOutbreak(u32 days)
 {
     if (gSaveBlock1Ptr->outbreakDaysLeft <= days)
         EndMassOutbreak();
@@ -1724,7 +1724,7 @@ static void TryEndMassOutbreak(u16 days)
         gSaveBlock1Ptr->outbreakDaysLeft -= days;
 }
 
-void RecordFishingAttemptForTV(bool8 caughtFish)
+void RecordFishingAttemptForTV(bool32 caughtFish)
 {
     if (caughtFish)
     {
@@ -1765,7 +1765,7 @@ static void TryPutFishingAdviceOnAir(void)
     }
 }
 
-void SetPokemonAnglerSpecies(u16 species)
+void SetPokemonAnglerSpecies(u32 species)
 {
     sPokemonAnglerSpecies = species;
 }
@@ -1774,7 +1774,7 @@ void SetPokemonAnglerSpecies(u16 species)
 // If enough Pokémon were caught during the day the show can be put on air (and will
 // be moved out of the last slot).
 // Either way the temporary version of the show in the last slot is deleted.
-static void ResolveWorldOfMastersShow(u16 days)
+static void ResolveWorldOfMastersShow(u32 days)
 {
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     if (show->worldOfMasters.kind == TVSHOW_WORLD_OF_MASTERS)
@@ -1855,7 +1855,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
     }
 }
 
-void TryPutTrendWatcherOnAir(const u16 *words)
+void TryPutTrendWatcherOnAir(const u32 *words)
 {
     TVShow *show;
 
@@ -1893,11 +1893,11 @@ void TryPutTreasureInvestigatorsOnAir(void)
     }
 }
 
-void TryPutFindThatGamerOnAir(u16 nCoinsPaidOut)
+void TryPutFindThatGamerOnAir(u32 nCoinsPaidOut)
 {
     TVShow *show;
-    bool8 flag;
-    u16 nCoinsWon;
+    bool32 flag;
+    u32 nCoinsWon;
 
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_FIND_THAT_GAMER, FALSE) != TRUE)
@@ -1946,13 +1946,13 @@ void TryPutFindThatGamerOnAir(u16 nCoinsPaidOut)
     }
 }
 
-void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedSlotMachine(u32 nCoinsSpent)
 {
     sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedRoulette(u32 nCoinsSpent)
 {
     sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
@@ -2018,11 +2018,11 @@ static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
 static void SecretBaseVisit_CalculatePartyData(TVShow *show)
 {
     u32 i;
-    u16 move;
-    u16 j;
+    u32 move;
+    u32 j;
     u32 numMoves;
     u32 numPokemon;
-    u16 sum;
+    u32 sum;
 
     for (i = 0, numPokemon = 0; i < PARTY_SIZE; i++)
     {
@@ -2096,7 +2096,7 @@ void TryPutBreakingNewsOnAir(void)
 {
     TVShow *show;
     u32 i;
-    u16 balls;
+    u32 balls;
 
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1 && IsRecordMixShowAlreadySpawned(TVSHOW_BREAKING_NEWS, FALSE) != TRUE)
@@ -2169,7 +2169,7 @@ void TryPutLotteryWinnerReportOnAir(void)
     }
 }
 
-void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u32 moveIdx, const u16 *movePtr, u16 betterMove)
+void TryPutBattleSeminarOnAir(u32 foeSpecies, u32 species, u32 moveIdx, const u32 *movePtr, u32 betterMove)
 {
     TVShow *show;
     u32 i;
@@ -2307,7 +2307,7 @@ void TryPutTrainerFanClubOnAir(void)
     }
 }
 
-bool8 ShouldHideFanClubInterviewer(void)
+bool32 ShouldHideFanClubInterviewer(void)
 {
     sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot == -1)
@@ -2325,7 +2325,7 @@ bool8 ShouldHideFanClubInterviewer(void)
     return FALSE;
 }
 
-bool8 ShouldAirFrontierTVShow(void)
+bool32 ShouldAirFrontierTVShow(void)
 {
     u32 playerId;
     u32 showIdx;
@@ -2352,7 +2352,7 @@ bool8 ShouldAirFrontierTVShow(void)
     return TRUE;
 }
 
-void TryPutFrontierTVShowOnAir(u16 winStreak, u32 facilityAndMode)
+void TryPutFrontierTVShowOnAir(u32 winStreak, u32 facilityAndMode)
 {
     TVShow *show;
 
@@ -2434,7 +2434,7 @@ void TryPutSecretBaseSecretsOnAir(void)
 
 // Check var thresholds required to trigger the Number One show
 // The vars are reset afterwards regardless
-static void ResolveNumberOneShow(u16 days)
+static void ResolveNumberOneShow(u32 days)
 {
     u32 i;
 
@@ -2500,7 +2500,7 @@ void IncrementDailyPickedBerries(void)
     VarSet(VAR_DAILY_PICKED_BERRIES, VarGet(VAR_DAILY_PICKED_BERRIES) + gSpecialVar_0x8006);
 }
 
-void IncrementDailyBattlePoints(u16 delta)
+void IncrementDailyBattlePoints(u32 delta)
 {
     VarSet(VAR_DAILY_BP, VarGet(VAR_DAILY_BP) + delta);
 }
@@ -2525,9 +2525,9 @@ static void TryPutRandomPokeNewsOnAir(void)
     }
 }
 
-static s8 GetFirstEmptyPokeNewsSlot(PokeNews *pokeNews)
+static s32 GetFirstEmptyPokeNewsSlot(PokeNews *pokeNews)
 {
-    s8 i;
+    s32 i;
 
     for (i = 0; i < POKE_NEWS_COUNT; i++)
     {
@@ -2609,7 +2609,7 @@ void DoPokeNews(void)
         else
         {
             // News event is upcoming, make comment about countdown to event
-            u16 dayCountdown = gSaveBlock1Ptr->pokeNews[i].dayCountdown;
+            u32 dayCountdown = gSaveBlock1Ptr->pokeNews[i].dayCountdown;
             ConvertIntToDecimalStringN(gStringVar1, dayCountdown, STR_CONV_MODE_LEFT_ALIGN, 1);
 
             // Mark as inactive so the countdown TV airing doesn't repeat
@@ -2621,7 +2621,7 @@ void DoPokeNews(void)
     }
 }
 
-bool8 IsPokeNewsActive(u32 newsKind)
+bool32 IsPokeNewsActive(u32 newsKind)
 {
     u32 i;
 
@@ -2645,7 +2645,7 @@ bool8 IsPokeNewsActive(u32 newsKind)
 // For POKENEWS_SLATEPORT / POKENEWS_LILYCOVE, only apply the effect if
 // the player is talking to the Energy Guru / at the Dept Store Rooftop.
 // For any other type of PokeNews this is always TRUE.
-static bool8 ShouldApplyPokeNewsEffect(u32 newsKind)
+static bool32 ShouldApplyPokeNewsEffect(u32 newsKind)
 {
     switch (newsKind)
     {
@@ -2664,7 +2664,7 @@ static bool8 ShouldApplyPokeNewsEffect(u32 newsKind)
     return TRUE;
 }
 
-static bool8 IsAddingPokeNewsDisallowed(u32 newsKind)
+static bool32 IsAddingPokeNewsDisallowed(u32 newsKind)
 {
     u32 i;
     if (newsKind == POKENEWS_NONE)
@@ -2679,7 +2679,7 @@ static bool8 IsAddingPokeNewsDisallowed(u32 newsKind)
     return FALSE;
 }
 
-static void UpdatePokeNewsCountdown(u16 days)
+static void UpdatePokeNewsCountdown(u32 days)
 {
     u32 i;
 
@@ -2786,7 +2786,7 @@ static void SmartShopper_BufferPurchaseTotal(u32 varIdx, TVShow *show)
         ConvertIntToDecimalString(varIdx, price);
 }
 
-static bool8 IsRecordMixShowAlreadySpawned(u32 kind, bool8 delete)
+static bool32 IsRecordMixShowAlreadySpawned(u32 kind, bool32 delete)
 {
     u32 playerId;
     TVShow *shows;
@@ -2821,8 +2821,8 @@ static void SortPurchasesByQuantity(void)
         {
             if (gMartPurchaseHistory[i].quantity < gMartPurchaseHistory[j].quantity)
             {
-                u16 tempItemId = gMartPurchaseHistory[i].itemId;
-                u16 tempQuantity = gMartPurchaseHistory[i].quantity;
+                u32 tempItemId = gMartPurchaseHistory[i].itemId;
+                u32 tempQuantity = gMartPurchaseHistory[i].quantity;
                 gMartPurchaseHistory[i].itemId = gMartPurchaseHistory[j].itemId;
                 gMartPurchaseHistory[i].quantity = gMartPurchaseHistory[j].quantity;
                 gMartPurchaseHistory[j].itemId = tempItemId;
@@ -2975,7 +2975,7 @@ static void InterviewBefore_FanClubSpecial(void)
                         ARRAY_COUNT(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanClubSpecial.words));
 }
 
-static bool8 IsPartyMonNicknamedOrNotEnglish(u32 monIdx)
+static bool32 IsPartyMonNicknamedOrNotEnglish(u32 monIdx)
 {
     struct Pokemon *pokemon;
     u32 language;
@@ -2989,7 +2989,7 @@ static bool8 IsPartyMonNicknamedOrNotEnglish(u32 monIdx)
     return TRUE;
 }
 
-bool8 IsLeadMonNicknamedOrNotEnglish(void)
+bool32 IsLeadMonNicknamedOrNotEnglish(void)
 {
     return IsPartyMonNicknamedOrNotEnglish(GetLeadMonIndex());
 }
@@ -3044,17 +3044,17 @@ static void CompactTVShowArray(TVShow *shows)
     }
 }
 
-static u16 GetRandomDifferentSpeciesAndNameSeenByPlayer(u32 varIdx, u16 excludedSpecies)
+static u32 GetRandomDifferentSpeciesAndNameSeenByPlayer(u32 varIdx, u32 excludedSpecies)
 {
-    u16 species = GetRandomDifferentSpeciesSeenByPlayer(excludedSpecies);
+    u32 species = GetRandomDifferentSpeciesSeenByPlayer(excludedSpecies);
     StringCopy(gTVStringVarPtrs[varIdx], GetSpeciesName(species));
     return species;
 }
 
-static u16 GetRandomDifferentSpeciesSeenByPlayer(u16 excludedSpecies)
+static u32 GetRandomDifferentSpeciesSeenByPlayer(u32 excludedSpecies)
 {
-    u16 species = Random() % (NUM_SPECIES - 1) + 1;
-    u16 initSpecies = species;
+    u32 species = Random() % (NUM_SPECIES - 1) + 1;
+    u32 initSpecies = species;
 
     while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) != TRUE || species == excludedSpecies)
     {
@@ -3083,7 +3083,7 @@ static void Script_FindFirstEmptyNormalTVShowSlot(void)
         gSpecialVar_Result = FALSE; // Found empty slot
 }
 
-static s8 FindFirstEmptyNormalTVShowSlot(TVShow *shows)
+static s32 FindFirstEmptyNormalTVShowSlot(TVShow *shows)
 {
     u32 i;
 
@@ -3095,9 +3095,9 @@ static s8 FindFirstEmptyNormalTVShowSlot(TVShow *shows)
     return -1;
 }
 
-static s8 FindFirstEmptyRecordMixTVShowSlot(TVShow *shows)
+static s32 FindFirstEmptyRecordMixTVShowSlot(TVShow *shows)
 {
-    s8 i;
+    s32 i;
 
     for (i = NUM_NORMAL_TVSHOW_SLOTS; i < LAST_TVSHOW_IDX; i++)
     {
@@ -3107,7 +3107,7 @@ static s8 FindFirstEmptyRecordMixTVShowSlot(TVShow *shows)
     return -1;
 }
 
-static bool8 BernoulliTrial(u16 ratio)
+static bool32 BernoulliTrial(u32 ratio)
 {
     if (Random() <= ratio)
         return FALSE;
@@ -3139,7 +3139,7 @@ static void GetRandomWordFromShow(TVShow *show)
 static u32 GetRandomNameRaterStateFromName(TVShow *show)
 {
     u32 i;
-    u16 nameSum;
+    u32 nameSum;
 
     nameSum = 0;
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
@@ -3152,11 +3152,11 @@ static u32 GetRandomNameRaterStateFromName(TVShow *show)
     return nameSum & 7;
 }
 
-static void GetNicknameSubstring(u32 varIdx, u32 whichPosition, u32 charParam, u16 whichString, u16 species, TVShow *show)
+static void GetNicknameSubstring(u32 varIdx, u32 whichPosition, u32 charParam, u32 whichString, u32 species, TVShow *show)
 {
     u32 buff[16];
     u32 i;
-    u16 strlen;
+    u32 strlen;
 
     for (i = 0; i < 3; i++)
         buff[i] = EOS;
@@ -3233,7 +3233,7 @@ static void GetNicknameSubstring(u32 varIdx, u32 whichPosition, u32 charParam, u
 }
 
 // Unused script special
-bool8 IsTVShowAlreadyInQueue(void)
+bool32 IsTVShowAlreadyInQueue(void)
 {
     u32 i;
 
@@ -3245,7 +3245,7 @@ bool8 IsTVShowAlreadyInQueue(void)
     return FALSE;
 }
 
-bool8 TryPutNameRaterShowOnTheAir(void)
+bool32 TryPutNameRaterShowOnTheAir(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
 
@@ -3417,7 +3417,7 @@ void HideBattleTowerReporter(void)
 void ReceiveTvShowsData(void *src, u32 size, u32 playersLinkId)
 {
     u32 i;
-    u16 version;
+    u32 version;
     TVShow (*rmBuffer2)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
     TVShow (*rmBuffer)[MAX_LINK_PLAYERS][TV_SHOWS_COUNT];
 
@@ -3504,9 +3504,9 @@ static void SetMixedTVShows(TVShow player1[TV_SHOWS_COUNT], TVShow player2[TV_SH
     }
 }
 
-static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COUNT], u32 idx)
+static bool32 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COUNT], u32 idx)
 {
-    bool8 success;
+    bool32 success;
     u32 type;
     TVShow *tv1 = *dest;
     TVShow *tv2 = *src;
@@ -3535,7 +3535,7 @@ static bool8 TryMixTVShow(TVShow *dest[TV_SHOWS_COUNT], TVShow *src[TV_SHOWS_COU
     return FALSE;
 }
 
-static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u32 idx)
+static bool32 TryMixNormalTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3552,7 +3552,7 @@ static bool8 TryMixNormalTVShow(TVShow *dest, TVShow *src, u32 idx)
     return TRUE;
 }
 
-static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u32 idx)
+static bool32 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3573,7 +3573,7 @@ static bool8 TryMixRecordMixTVShow(TVShow *dest, TVShow *src, u32 idx)
     return TRUE;
 }
 
-static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u32 idx)
+static bool32 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u32 idx)
 {
     u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
 
@@ -3591,7 +3591,7 @@ static bool8 TryMixOutbreakTVShow(TVShow *dest, TVShow *src, u32 idx)
     return TRUE;
 }
 
-static s8 FindInactiveShowInArray(TVShow *tvShows)
+static s32 FindInactiveShowInArray(TVShow *tvShows)
 {
     u32 i;
 
@@ -3606,8 +3606,8 @@ static s8 FindInactiveShowInArray(TVShow *tvShows)
 
 static void DeactivateShowsWithUnseenSpecies(void)
 {
-    u16 i;
-    u16 species;
+    u32 i;
+    u32 species;
 
     for (i = 0; i < LAST_TVSHOW_IDX; i++)
     {
@@ -3753,7 +3753,7 @@ static void DeactivateShow(u32 showIdx)
     gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
 }
 
-static void DeactivateShowIfNotSeenSpecies(u16 species, u32 showIdx)
+static void DeactivateShowIfNotSeenSpecies(u32 species, u32 showIdx)
 {
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
         gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
@@ -3761,7 +3761,7 @@ static void DeactivateShowIfNotSeenSpecies(u16 species, u32 showIdx)
 
 static void DeactivateGameCompleteShowsIfNotUnlocked(void)
 {
-    u16 i;
+    u32 i;
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != TRUE)
     {
@@ -3789,8 +3789,8 @@ void DeactivateAllNormalTVShows(void)
 // Ensures a minimum of 5 empty record mixed show slots
 static void DeleteExcessMixedShows(void)
 {
-    s8 i;
-    s8 numEmptyMixSlots = 0;
+    s32 i;
+    s32 numEmptyMixSlots = 0;
     for (i = NUM_NORMAL_TVSHOW_SLOTS; i < LAST_TVSHOW_IDX; i++)
     {
         if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_OFF_AIR)
@@ -3872,7 +3872,7 @@ static void InitTryMixPokeNewsShow(PokeNews *dest[POKE_NEWS_COUNT], PokeNews *sr
     TryMixPokeNewsShow(ptr1, ptr2, sCurTVShowSlot);
 }
 
-static bool8 TryMixPokeNewsShow(PokeNews *dest, PokeNews *src, s8 slot)
+static bool32 TryMixPokeNewsShow(PokeNews *dest, PokeNews *src, s32 slot)
 {
     u32 i;
 
@@ -3890,7 +3890,7 @@ static bool8 TryMixPokeNewsShow(PokeNews *dest, PokeNews *src, s8 slot)
     return TRUE;
 }
 
-static s8 GetPokeNewsSlotIfActive(PokeNews *pokeNews, u32 idx)
+static s32 GetPokeNewsSlotIfActive(PokeNews *pokeNews, u32 idx)
 {
     if (pokeNews[idx].kind == POKENEWS_NONE)
         return -1;
@@ -4740,7 +4740,7 @@ static void DoTVShowPokemonFanClubLetter(void)
 {
     TVShow *show;
     u32 state;
-    u16 rval;
+    u32 rval;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6565,7 +6565,7 @@ static void DoTVShowSecretBaseSecrets(void)
     TVShow *show;
     u32 state;
     u32 numActions;
-    u16 i;
+    u32 i;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;

@@ -408,7 +408,7 @@ static void WallyHandlePlaySE(u32 battler)
 // Wally's Pokémon during the tutorial is never intended to faint, so that's probably why it's different here.
 static void WallyHandleFaintingCry(u32 battler)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    u32 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
     PlayCry_Normal(species, 25);
     WallyBufferExecCompleted(battler);

@@ -26,7 +26,7 @@ static void SoundTask_SeVolumeChange(u8 taskId);
 // arg 1: ending sound effect
 void SoundTask_FireBlast(u8 taskId)
 {
-    s8 pan1, pan2, panIncrement;
+    s32 pan1, pan2, panIncrement;
 
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
@@ -46,7 +46,7 @@ void SoundTask_FireBlast(u8 taskId)
 static void SoundTask_FireBlast_Step1(u8 taskId)
 {
     s16 pan = gTasks[taskId].data[2];
-    s8 panIncrement = gTasks[taskId].data[4];
+    s32 panIncrement = gTasks[taskId].data[4];
     if (++gTasks[taskId].data[11] == 111)
     {
         gTasks[taskId].data[10] = 5;
@@ -69,7 +69,7 @@ static void SoundTask_FireBlast_Step2(u8 taskId)
 {
     if (++gTasks[taskId].data[10] == 6)
     {
-        s8 pan;
+        s32 pan;
 
         gTasks[taskId].data[10] = 0;
         pan = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
@@ -82,12 +82,12 @@ static void SoundTask_FireBlast_Step2(u8 taskId)
 void SoundTask_LoopSEAdjustPanning(u8 taskId)
 {
     u32 songId = gBattleAnimArgs[0];
-    s8 targetPan = gBattleAnimArgs[2];
-    s8 panIncrement = gBattleAnimArgs[3];
+    s32 targetPan = gBattleAnimArgs[2];
+    s32 panIncrement = gBattleAnimArgs[3];
     u8 r10 = gBattleAnimArgs[4];
     u8 r7 = gBattleAnimArgs[5];
     u8 r9 = gBattleAnimArgs[6];
-    s8 sourcePan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
+    s32 sourcePan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
 
     targetPan = BattleAnimAdjustPanning(targetPan);
     panIncrement = CalculatePanIncrement(sourcePan, targetPan, panIncrement);
@@ -134,7 +134,7 @@ static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
 void SoundTask_PlayCryHighPitch(u8 taskId)
 {
     u32 species = 0;
-    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    s32 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
@@ -179,7 +179,7 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
 void SoundTask_PlayDoubleCry(u8 taskId)
 {
     u32 species = 0;
-    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    s32 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
@@ -237,7 +237,7 @@ void SoundTask_PlayDoubleCry(u8 taskId)
 static void SoundTask_PlayDoubleCry_Step(u8 taskId)
 {
     u32 species = gTasks[taskId].data[1];
-    s8 pan = gTasks[taskId].data[2];
+    s32 pan = gTasks[taskId].data[2];
 
     if (gTasks[taskId].data[9] < 2)
     {
@@ -292,7 +292,7 @@ void SoundTask_PlayNormalCry(u8 taskId)
 void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u32 species;
-    s8 pan;
+    s32 pan;
 
     gTasks[taskId].tLastCry = gBattleAnimArgs[0];
     pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
@@ -314,7 +314,7 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
 static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
     u32 species = gTasks[taskId].tSpecies;
-    s8 pan = gTasks[taskId].tPan;
+    s32 pan = gTasks[taskId].tPan;
 
     // Note the cases are not in order of execution
     switch (gTasks[taskId].tState)
@@ -354,7 +354,7 @@ static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 void SoundTask_PlaySE1WithPanning(u8 taskId)
 {
     u32 songId = gBattleAnimArgs[0];
-    s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
+    s32 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
 
     PlaySE1WithPanning(songId, pan);
     DestroyAnimVisualTask(taskId);
@@ -363,7 +363,7 @@ void SoundTask_PlaySE1WithPanning(u8 taskId)
 void SoundTask_PlaySE2WithPanning(u8 taskId)
 {
     u32 songId = gBattleAnimArgs[0];
-    s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
+    s32 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
 
     PlaySE2WithPanning(songId, pan);
     DestroyAnimVisualTask(taskId);
@@ -373,10 +373,10 @@ void SoundTask_PlaySE2WithPanning(u8 taskId)
 // Used by Confuse Ray and Will-O-Wisp (see uses of gAnimCustomPanning)
 void SoundTask_AdjustPanningVar(u8 taskId)
 {
-    s8 targetPan = gBattleAnimArgs[1];
-    s8 panIncrement = gBattleAnimArgs[2];
+    s32 targetPan = gBattleAnimArgs[1];
+    s32 panIncrement = gBattleAnimArgs[2];
     u32 r9 = gBattleAnimArgs[3];
-    s8 sourcePan = BattleAnimAdjustPanning(gBattleAnimArgs[0]);
+    s32 sourcePan = BattleAnimAdjustPanning(gBattleAnimArgs[0]);
 
     targetPan = BattleAnimAdjustPanning(targetPan);
     panIncrement = CalculatePanIncrement(sourcePan, targetPan, panIncrement);

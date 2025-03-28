@@ -48,7 +48,7 @@ extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadowsSized;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2];
 extern const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] ;
-static const u16 sBgColor[] = {RGB_WHITE};
+static const u32 sBgColor[] = {RGB_WHITE};
 
 static struct PokemonSpriteVisualizer *GetStructPtr(u32 taskId)
 {
@@ -412,7 +412,7 @@ static void UpdateBattlerValue(struct PokemonSpriteVisualizer *data);
 static void ValueToCharDigits(u32 *charDigits, u32 newValue, u32 maxDigits);
 static bool32 TryMoveDigit(struct PokemonSpriteVisualizerModifyArrows *modArrows, bool32 moveUp);
 static void CB2_PokemonSpriteVisualizerRunner(void);
-static void ResetBGs_PokemonSpriteVisualizer(u16);
+static void ResetBGs_PokemonSpriteVisualizer(u32);
 static void HandleInput_PokemonSpriteVisualizer(u32);
 static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data);
 static void Exit_PokemonSpriteVisualizer(u32);
@@ -456,7 +456,7 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
     u32 textBottomForms[] = _("BACK:\nFRONT:\nBG:\nFORMS:$");
     u32 textBottomSubmenuTwo[] = _("B coords:\nF coords:\nF elev:");
     u32 textBottomSubmenuThree[] = _("X coords:\nY coords:\nSize:");
-    u16 species = data->modifyArrows.currValue;
+    u32 species = data->modifyArrows.currValue;
 
     u32 textL[] = _("{L_BUTTON}");
     u32 textR[] = _("{R_BUTTON}");
@@ -533,7 +533,7 @@ static void SetStructPtr(u32 taskId, void *ptr)
 static void PrintDigitChars(struct PokemonSpriteVisualizer *data)
 {
     s32 i;
-    u16 species = data->modifyArrows.currValue;
+    u32 species = data->modifyArrows.currValue;
     u32 text[MODIFY_DIGITS_MAX + POKEMON_NAME_LENGTH + 8];
 
     for (i = 0; i < data->modifyArrows.maxDigits; i++)
@@ -734,15 +734,15 @@ static void UpdateBattlerValue(struct PokemonSpriteVisualizer *data)
     switch (data->modifyArrows.typeOfVal)
     {
     case VAL_U16:
-        *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(u32*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     }
 }
 
-static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u32 battlerId)
+static void BattleLoadOpponentMonSpriteGfxCustom(u32 species, bool32 isFemale, bool32 isShiny, u32 battlerId)
 {
     const u32 *lzPaletteData = GetMonSpritePalFromSpecies(species, isShiny, isFemale);
-    u16 paletteOffset = OBJ_PLTT_ID(battlerId);
+    u32 paletteOffset = OBJ_PLTT_ID(battlerId);
     void *buffer = malloc_and_decompress(lzPaletteData, NULL);
 
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
@@ -752,7 +752,7 @@ static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bo
 
 static void SetConstSpriteValues(struct PokemonSpriteVisualizer *data)
 {
-    u16 species = data->currentmonId;
+    u32 species = data->currentmonId;
     data->constSpriteValues.frontPicCoords = gSpeciesInfo[species].frontPicYOffset;
     data->constSpriteValues.frontElevation = gSpeciesInfo[species].enemyMonElevation;
     data->constSpriteValues.backPicCoords = gSpeciesInfo[species].backPicYOffset;
@@ -765,7 +765,7 @@ static void ResetOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
     data->offsetsSpriteValues.offset_front_elevation = 0;
 }
 
-static void ResetShadowSettings(struct PokemonSpriteVisualizer *data, u16 species)
+static void ResetShadowSettings(struct PokemonSpriteVisualizer *data, u32 species)
 {
     if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
         return;
@@ -779,9 +779,9 @@ static void ResetShadowSettings(struct PokemonSpriteVisualizer *data, u16 specie
     data->shadowSettings.overrideSize = data->shadowSettings.definedSize;
 }
 
-static u32 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 offset_elevation)
+static u32 GetBattlerSpriteFinal_YCustom(u32 species, s32 offset_picCoords, s32 offset_elevation)
 {
-    u16 offset;
+    u32 offset;
     u32 y;
     species = SanitizeSpeciesId(species);
 
@@ -825,7 +825,7 @@ static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
     u32 frontSpriteId = shadowSprite->tFrontSpriteId;
     struct Sprite *battlerSprite = &gSprites[frontSpriteId];
 
-    s8 xOffset = 0, yOffset = 0;
+    s32 xOffset = 0, yOffset = 0;
     if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
     {
         xOffset = shadowSprite->tShadowXOffset + (shadowSprite->tSpriteSide == SPRITE_SIDE_LEFT ? -16 : 16);
@@ -866,9 +866,9 @@ static void SpriteCB_Follower(struct Sprite *sprite)
         sprite->animDelayCounter--;
     }
 }
-static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer *data, u16 species)
+static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer *data, u32 species)
 {
-    bool8 invisible = FALSE;
+    bool32 invisible = FALSE;
     species = SanitizeSpeciesId(species);
 
     if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
@@ -879,8 +879,8 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer 
         LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
         u32 x = sBattlerCoords[0][1].x;
         u32 y = sBattlerCoords[0][1].y;
-        s8 xOffset = data->shadowSettings.overrideX;
-        s8 yOffset = data->shadowSettings.overrideY;
+        s32 xOffset = data->shadowSettings.overrideX;
+        s32 yOffset = data->shadowSettings.overrideY;
         u32 size = data->shadowSettings.overrideSize;
 
         data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 0xC8);
@@ -1012,7 +1012,7 @@ static void PrintBattleBgName(u32 taskId)
         StringCopy(text, gBattleBackgroundNames[data->battleBgType]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 0, 24, 0, NULL);
 }
-static void UpdateBattleBg(u32 taskId, bool8 increment)
+static void UpdateBattleBg(u32 taskId, bool32 increment)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
 
@@ -1108,9 +1108,9 @@ static void UpdateYPosOffsetText(struct PokemonSpriteVisualizer *data)
     u32 frontPicCoords   = data->constSpriteValues.frontPicCoords;
     u32 frontElevation   = data->constSpriteValues.frontElevation;
 
-    s8 offset_back_picCoords    = data->offsetsSpriteValues.offset_back_picCoords;
-    s8 offset_front_picCoords   = data->offsetsSpriteValues.offset_front_picCoords;
-    s8 offset_front_elevation   = data->offsetsSpriteValues.offset_front_elevation;
+    s32 offset_back_picCoords    = data->offsetsSpriteValues.offset_back_picCoords;
+    s32 offset_front_picCoords   = data->offsetsSpriteValues.offset_front_picCoords;
+    s32 offset_front_elevation   = data->offsetsSpriteValues.offset_front_elevation;
 
     u32 newBackPicCoords    = backPicCoords   +  offset_back_picCoords;
     u32 newFrontPicCoords   = frontPicCoords  +  offset_front_picCoords;
@@ -1216,7 +1216,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
     u32 taskId;
     const u32 *palette;
     struct PokemonSpriteVisualizer *data;
-    u16 species;
+    u32 species;
     s16 offset_y;
     u32 front_x = sBattlerCoords[0][1].x;
     u32 front_y;
@@ -1356,7 +1356,7 @@ static void CB2_PokemonSpriteVisualizerRunner(void)
     UpdatePaletteFade();
 }
 
-static void ResetBGs_PokemonSpriteVisualizer(u16 a)
+static void ResetBGs_PokemonSpriteVisualizer(u32 a)
 {
     if (!(a & DISPCNT_BG0_ON))
     {
@@ -1397,7 +1397,7 @@ static void ResetBGs_PokemonSpriteVisualizer(u16 a)
 
 static void ApplyOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
 {
-    u16 species = data->currentmonId;
+    u32 species = data->currentmonId;
     //Back
     gSprites[data->backspriteId].y = VISUALIZER_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + data->offsetsSpriteValues.offset_back_picCoords;
     //Front
@@ -1407,7 +1407,7 @@ static void ApplyOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
         UpdateShadowSpriteInvisible(data);
 }
 
-static void UpdateSubmenuOneOptionValue(u32 taskId, bool8 increment)
+static void UpdateSubmenuOneOptionValue(u32 taskId, bool32 increment)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u32 option = data->submenuYpos[1];
@@ -1456,7 +1456,7 @@ static void UpdateSubmenuOneOptionValue(u32 taskId, bool8 increment)
         {
             struct PokemonSpriteVisualizerModifyArrows *modArrows = &data->modifyArrows;
             u32 formId = GetFormIdFromFormSpeciesId(data->currentmonId);
-            const u16 *formTable = GetSpeciesFormTable(data->currentmonId);
+            const u32 *formTable = GetSpeciesFormTable(data->currentmonId);
             if (increment)
             {
                 if (formTable[formId + 1] != FORM_SPECIES_END)
@@ -1496,12 +1496,12 @@ static void UpdateSubmenuOneOptionValue(u32 taskId, bool8 increment)
     }
 }
 
-static void UpdateSubmenuTwoOptionValue(u32 taskId, bool8 increment)
+static void UpdateSubmenuTwoOptionValue(u32 taskId, bool32 increment)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
-    u16 species = data->currentmonId;
+    u32 species = data->currentmonId;
     u32 option = data->submenuYpos[2];
-    s8 offset;
+    s32 offset;
     u32 y;
 
     switch (option)
@@ -1571,14 +1571,14 @@ static void UpdateSubmenuTwoOptionValue(u32 taskId, bool8 increment)
     UpdateYPosOffsetText(data);
 }
 
-static void UpdateShadowSettingsValue(u32 taskId, bool8 increment)
+static void UpdateShadowSettingsValue(u32 taskId, bool32 increment)
 {
     if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
         return;
 
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u32 option = data->submenuYpos[2];
-    s8 *offset;
+    s32 *offset;
     s16 *leftTarget, *rightTarget;
     if (option == 0)
     {
@@ -1604,13 +1604,13 @@ static void UpdateShadowSettingsValue(u32 taskId, bool8 increment)
     *rightTarget = (s16)*offset;
 }
 
-static void UpdateShadowSizeValue(u32 taskId, bool8 increment)
+static void UpdateShadowSizeValue(u32 taskId, bool32 increment)
 {
     if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
         return;
 
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
-    s8 update;
+    s32 update;
 
     if (increment)
     {
@@ -1646,8 +1646,8 @@ static void UpdateShadowSizeValue(u32 taskId, bool8 increment)
 
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
     (void *)(                                                   \
-    ((u16)(gTasks[taskId].data[dataId]) |                       \
-    ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
+    ((u32)(gTasks[taskId].data[dataId]) |                       \
+    ((u32)(gTasks[taskId].data[dataId + 1]) << 16)))
 
 #define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
 {                                                              \
@@ -1944,7 +1944,7 @@ static void HandleInput_PokemonSpriteVisualizer(u32 taskId)
 static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 {
     const u32 *palette;
-    u16 species = data->currentmonId;
+    u32 species = data->currentmonId;
     s16 offset_y;
     u32 front_x = sBattlerCoords[0][1].x;
     u32 front_y;
@@ -2002,7 +2002,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
-    u16 graphicsId = species + OBJ_EVENT_MON;
+    u32 graphicsId = species + OBJ_EVENT_MON;
     if (data->isShiny)
         graphicsId += OBJ_EVENT_MON_SHINY;
     if (data->isFemale)

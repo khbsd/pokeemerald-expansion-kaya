@@ -12,7 +12,7 @@
 #include "sprite.h"
 #include "text.h"
 
-//EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;   //  Old EWRAM variable that was never set to anything other than false
+//EWRAM_DATA bool32 gUnusedBikeCameraAheadPanback = FALSE;   //  Old EWRAM variable that was never set to anything other than false
 
 struct FieldCameraOffset
 {
@@ -20,7 +20,7 @@ struct FieldCameraOffset
     u32 yPixelOffset;
     u32 xTileOffset;
     u32 yTileOffset;
-    bool8 copyBGToVRAM;
+    bool32 copyBGToVRAM;
 };
 
 static void RedrawMapSliceNorth(struct FieldCameraOffset *, const struct MapLayout *);
@@ -29,19 +29,19 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *, const struct MapLayou
 static void RedrawMapSliceWest(struct FieldCameraOffset *, const struct MapLayout *);
 static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset *, s32, s32);
 static void DrawWholeMapViewInternal(int, int, const struct MapLayout *);
-static void DrawMetatileAt(const struct MapLayout *, u16, int, int);
-static void DrawMetatile(s32, const u16 *, u16);
+static void DrawMetatileAt(const struct MapLayout *, u32, int, int);
+static void DrawMetatile(s32, const u32 *, u32);
 static void CameraPanningCB_PanAhead(void);
 
 static struct FieldCameraOffset sFieldCameraOffset;
 static s16 sHorizontalCameraPan;
 static s16 sVerticalCameraPan;
-static bool8 sBikeCameraPanFlag;
+static bool32 sBikeCameraPanFlag;
 static void (*sFieldCameraPanningCallback)(void);
 
 COMMON_DATA struct CameraObject gFieldCamera = {0};
-COMMON_DATA u16 gTotalCameraPixelOffsetY = 0;
-COMMON_DATA u16 gTotalCameraPixelOffsetX = 0;
+COMMON_DATA u32 gTotalCameraPixelOffsetY = 0;
+COMMON_DATA u32 gTotalCameraPixelOffsetX = 0;
 
 static void ResetCameraOffset(struct FieldCameraOffset *cameraOffset)
 {
@@ -212,7 +212,7 @@ void CurrentMapDrawMetatileAt(int x, int y)
     }
 }
 
-void DrawDoorMetatileAt(int x, int y, u16 *tiles)
+void DrawDoorMetatileAt(int x, int y, u32 *tiles)
 {
     int offset = MapPosToBgTilemapOffset(&sFieldCameraOffset, x, y);
 
@@ -223,10 +223,10 @@ void DrawDoorMetatileAt(int x, int y, u16 *tiles)
     }
 }
 
-static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x, int y)
+static void DrawMetatileAt(const struct MapLayout *mapLayout, u32 offset, int x, int y)
 {
-    u16 metatileId = MapGridGetMetatileIdAt(x, y);
-    const u16 *metatiles;
+    u32 metatileId = MapGridGetMetatileIdAt(x, y);
+    const u32 *metatiles;
 
     if (metatileId > NUM_METATILES_TOTAL)
         metatileId = 0;
@@ -242,7 +242,7 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * NUM_TILES_PER_METATILE, offset);
 }
 
-static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
+static void DrawMetatile(s32 metatileLayerType, const u32 *tiles, u32 offset)
 {
     switch (metatileLayerType)
     {

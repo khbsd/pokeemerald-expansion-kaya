@@ -31,10 +31,10 @@
 EWRAM_DATA static u32 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
+static void MailboxMenu_MoveCursorFunc(s32, bool32, struct ListMenu *);
 static void ConditionGraph_CalcRightHalf(struct ConditionGraph *);
 static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *);
-static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
+static void MoveRelearnerCursorCallback(s32, bool32, struct ListMenu *);
 static void MoveRelearnerDummy(void);
 static void SetNextConditionSparkle(struct Sprite *);
 static void SpriteCB_ConditionSparkle(struct Sprite *);
@@ -195,7 +195,7 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
 // Mailbox menu
 //--------------
 
-bool8 MailboxMenu_Alloc(u32 count)
+bool32 MailboxMenu_Alloc(u32 count)
 {
     u32 i;
 
@@ -245,7 +245,7 @@ static u32 UNUSED MailboxMenu_GetWindowId(u32 windowIdx)
 static void MailboxMenu_ItemPrintFunc(u32 windowId, u32 itemId, u32 y)
 {
     u32 buffer[30];
-    u16 length;
+    u32 length;
 
     if (itemId == LIST_CANCEL)
         return;
@@ -260,7 +260,7 @@ static void MailboxMenu_ItemPrintFunc(u32 windowId, u32 itemId, u32 y)
 
 u32 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < page->count; i++)
     {
         sMailboxList[i].name = sEmptyItemName;
@@ -291,7 +291,7 @@ u32 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
     return ListMenuInit(&gMultiuseListMenuTemplate, page->itemsAbove, page->cursorPos);
 }
 
-static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool32 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -351,7 +351,7 @@ void ConditionGraph_Init(struct ConditionGraph *graph)
 // old and new for the graph transition when switching between Pokémon.
 void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new)
 {
-    u16 i, j;
+    u32 i, j;
     s32 coord, increment;
 
     for (i = 0; i < CONDITION_COUNT; i++)
@@ -378,7 +378,7 @@ void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords
     graph->updateCounter = 0;
 }
 
-bool8 ConditionGraph_TryUpdate(struct ConditionGraph *graph)
+bool32 ConditionGraph_TryUpdate(struct ConditionGraph *graph)
 {
     if (graph->updateCounter < CONDITION_GRAPH_UPDATE_STEPS)
     {
@@ -396,7 +396,7 @@ void ConditionGraph_InitResetScanline(struct ConditionGraph *graph)
     graph->scanlineResetState = 0;
 }
 
-bool8 ConditionGraph_ResetScanline(struct ConditionGraph *graph)
+bool32 ConditionGraph_ResetScanline(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
@@ -418,7 +418,7 @@ bool8 ConditionGraph_ResetScanline(struct ConditionGraph *graph)
 
 void ConditionGraph_Draw(struct ConditionGraph *graph)
 {
-    u16 i;
+    u32 i;
 
     if (!graph->needsDraw)
         return;
@@ -460,17 +460,17 @@ void ConditionGraph_InitWindow(u32 bg)
 
 void ConditionGraph_Update(struct ConditionGraph *graph)
 {
-    u16 i;
+    u32 i;
     for (i = 0; i < CONDITION_COUNT; i++)
         graph->curPositions[i] = graph->newPositions[graph->updateCounter][i];
 
     graph->needsDraw = TRUE;
 }
 
-static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline, struct UCoords16 *pos1, struct UCoords16 *pos2, bool8 dir, u16 *overflowScanline)
+static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u32 *scanline, struct UCoords16 *pos1, struct UCoords16 *pos2, bool32 dir, u32 *overflowScanline)
 {
-    u16 i, height, top, bottom, x2;
-    u16 *ptr;
+    u32 i, height, top, bottom, x2;
+    u32 *ptr;
     s32 x, xIncrement = 0;
 
     if (pos1->y < pos2->y)
@@ -570,7 +570,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
 
 static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
 {
-    u16 i, y, bottom;
+    u32 i, y, bottom;
 
     // Calculate Cool -> Beauty line
     if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_BEAUTY].y)
@@ -669,8 +669,8 @@ static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *graph)
 void ConditionGraph_CalcPositions(u32 *conditions, struct UCoords16 *positions)
 {
     u32 lineLength, sinIdx;
-    s8 posIdx;
-    u16 i;
+    s32 posIdx;
+    u32 i;
 
     // Cool is straight up-and-down (not angled), so no need for Sin
     lineLength = sConditionToLineLength[*(conditions++)];
@@ -701,7 +701,7 @@ void ConditionGraph_CalcPositions(u32 *conditions, struct UCoords16 *positions)
 // Move relearner
 //----------------
 
-void InitMoveRelearnerWindows(bool8 useContestWindow)
+void InitMoveRelearnerWindows(bool32 useContestWindow)
 {
     u32 i;
 
@@ -736,7 +736,7 @@ static void MoveRelearnerDummy(void)
 
 }
 
-u32 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
+u32 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u32 numChoices)
 {
     gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
     gMultiuseListMenuTemplate.totalItems = numChoices;
@@ -845,7 +845,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPYWIN_GFX);
 }
 
-static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MoveRelearnerCursorCallback(s32 itemIndex, bool32 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -863,7 +863,7 @@ void MoveRelearnerPrintMessage(u32 *str)
     AddTextPrinterParameterized2(RELEARNERWIN_MSG, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
 }
 
-bool16 MoveRelearnerRunTextPrinters(void)
+bool32 MoveRelearnerRunTextPrinters(void)
 {
     RunTextPrinters();
     return IsTextPrinterActive(RELEARNERWIN_MSG);
@@ -878,7 +878,7 @@ void MoveRelearnerCreateYesNoMenu(void)
 // Condition menu
 //----------------
 
-s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u32 *dst)
+s32 GetBoxOrPartyMonData(u32 boxId, u32 monId, s32 request, u32 *dst)
 {
     s32 ret;
 
@@ -901,9 +901,9 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u32 *dst)
 }
 
 // Gets the name/gender/level string for the condition menu
-static u32 *GetConditionMenuMonString(u32 *dst, u16 boxId, u16 monId)
+static u32 *GetConditionMenuMonString(u32 *dst, u32 boxId, u32 monId)
 {
-    u16 box, mon, species, level, gender;
+    u32 box, mon, species, level, gender;
     struct BoxPokemon *boxMon;
     u32 *str;
 
@@ -996,11 +996,11 @@ static u32 *BufferConditionMenuSpacedStringN(u32 *dst, const u32 *src, s16 n)
     return dst;
 }
 
-void GetConditionMenuMonNameAndLocString(u32 *locationDst, u32 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonNameAndLocString(u32 *locationDst, u32 *nameDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel)
 {
-    u16 i;
-    u16 box = boxId;
-    u16 mon = monId;
+    u32 i;
+    u32 box = boxId;
+    u32 mon = monId;
 
     // In this and the below 2 functions, numMons is passed as the number of menu selections (which includes Cancel)
     // To indicate that the Cancel needs to be subtracted they pass an additional bool
@@ -1032,9 +1032,9 @@ void GetConditionMenuMonNameAndLocString(u32 *locationDst, u32 *nameDst, u16 box
     }
 }
 
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u32 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u32 *numSparkles, u32 boxId, u32 monId, u32 partyId, u32 id, u32 numMons, bool32 excludesCancel)
 {
-    u16 i;
+    u32 i;
 
     if (!excludesCancel)
         numMons--;
@@ -1062,15 +1062,15 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u32 *numSparkle
     }
 }
 
-void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u32 boxId, u32 monId, u32 partyId, u32 numMons, bool32 excludesCancel)
 {
     if (!excludesCancel)
         numMons--;
 
     if (partyId != numMons)
     {
-        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES_OR_EGG, NULL);
-        bool8 isShiny = GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_SHINY, NULL);
+        u32 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES_OR_EGG, NULL);
+        bool32 isShiny = GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_SHINY, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
 
         LoadSpecialPokePic(tilesDst, species, personality, TRUE);
@@ -1078,7 +1078,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
     }
 }
 
-bool8 MoveConditionMonOnscreen(s16 *x)
+bool32 MoveConditionMonOnscreen(s16 *x)
 {
     *x += 24;
     if (*x > 0)
@@ -1087,7 +1087,7 @@ bool8 MoveConditionMonOnscreen(s16 *x)
     return (*x != 0);
 }
 
-bool8 MoveConditionMonOffscreen(s16 *x)
+bool32 MoveConditionMonOffscreen(s16 *x)
 {
     *x -= 24;
     if (*x < -80)
@@ -1096,25 +1096,25 @@ bool8 MoveConditionMonOffscreen(s16 *x)
     return (*x != -80);
 }
 
-bool8 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
+bool32 ConditionMenu_UpdateMonEnter(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
-    bool8 monUpdating = MoveConditionMonOnscreen(x);
+    bool32 graphUpdating = ConditionGraph_TryUpdate(graph);
+    bool32 monUpdating = MoveConditionMonOnscreen(x);
 
     return (graphUpdating || monUpdating);
 }
 
-bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
+bool32 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 graphUpdating = ConditionGraph_TryUpdate(graph);
-    bool8 monUpdating = MoveConditionMonOffscreen(x);
+    bool32 graphUpdating = ConditionGraph_TryUpdate(graph);
+    bool32 monUpdating = MoveConditionMonOffscreen(x);
 
     return (graphUpdating || monUpdating);
 }
 
 static const u32 sConditionPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball.4bpp");
 static const u32 sConditionPokeballPlaceholder_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball_placeholder.4bpp");
-static const u16 sConditionSparkle_Gfx[] = INCBIN_U16("graphics/pokenav/condition/sparkle.gbapal");
+static const u32 sConditionSparkle_Gfx[] = INCBIN_U16("graphics/pokenav/condition/sparkle.gbapal");
 static const u32 sConditionSparkle_Pal[] = INCBIN_U32("graphics/pokenav/condition/sparkle.4bpp");
 
 static const struct OamData sOam_ConditionMonPic =
@@ -1342,9 +1342,9 @@ static void SetConditionSparklePosition(struct Sprite *sprite)
     }
 }
 
-static void InitConditionSparkles(u32 count, bool8 allowFirstShowAll, struct Sprite **sprites)
+static void InitConditionSparkles(u32 count, bool32 allowFirstShowAll, struct Sprite **sprites)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
@@ -1371,7 +1371,7 @@ static void InitConditionSparkles(u32 count, bool8 allowFirstShowAll, struct Spr
 
 static void SetNextConditionSparkle(struct Sprite *sprite)
 {
-    u16 i;
+    u32 i;
     u32 id = sprite->sNextSparkleSpriteId;
     for (i = 0; i < sprite->sNumExtraSparkles + 1; i++)
     {
@@ -1391,7 +1391,7 @@ void ResetConditionSparkleSprites(struct Sprite **sprites)
 
 void CreateConditionSparkleSprites(struct Sprite **sprites, u32 monSpriteId, u32 _count)
 {
-    u16 i, spriteId, firstSpriteId = 0;
+    u32 i, spriteId, firstSpriteId = 0;
     u32 count = _count;
 
     for (i = 0; i < count + 1; i++)
@@ -1419,7 +1419,7 @@ void CreateConditionSparkleSprites(struct Sprite **sprites, u32 monSpriteId, u32
 
 void DestroyConditionSparkleSprites(struct Sprite **sprites)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
@@ -1508,9 +1508,9 @@ static const u32 *const sLvlUpStatStrings[NUM_STATS] =
     gText_Speed
 };
 
-void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u32 bgClr, u32 fgClr, u32 shadowClr)
+void DrawLevelUpWindowPg1(u32 windowId, u32 *statsBefore, u32 *statsAfter, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
-    u16 i, x;
+    u32 i, x;
     s16 statsDiff[NUM_STATS];
     u32 text[12];
     u32 color[3];
@@ -1563,9 +1563,9 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u32 b
     }
 }
 
-void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u32 bgClr, u32 fgClr, u32 shadowClr)
+void DrawLevelUpWindowPg2(u32 windowId, u32 *currStats, u32 bgClr, u32 fgClr, u32 shadowClr)
 {
-    u16 i, numDigits, x;
+    u32 i, numDigits, x;
     s16 stats[NUM_STATS];
     u32 text[12];
     u32 color[3];
@@ -1613,7 +1613,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u32 bgClr, u32 fgClr, u3
     }
 }
 
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats)
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u32 *currStats)
 {
     currStats[STAT_HP]    = GetMonData(mon, MON_DATA_MAX_HP);
     currStats[STAT_ATK]   = GetMonData(mon, MON_DATA_ATK);

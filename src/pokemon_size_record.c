@@ -12,9 +12,9 @@ static u32* ReturnHeightStringNoWhitespace(u32 size);
 
 struct UnknownStruct
 {
-    u16 unk0;
+    u32 unk0;
     u32 unk2;
-    u16 unk4;
+    u32 unk4;
 };
 
 static const struct UnknownStruct sBigMonSizeTable[] =
@@ -50,20 +50,20 @@ extern const u32 gText_Marco[];
 
 static u32 GetMonSizeHash(struct Pokemon *pkmn)
 {
-    u16 personality = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    u16 hpIV = GetMonData(pkmn, MON_DATA_HP_IV) & 0xF;
-    u16 attackIV = GetMonData(pkmn, MON_DATA_ATK_IV) & 0xF;
-    u16 defenseIV = GetMonData(pkmn, MON_DATA_DEF_IV) & 0xF;
-    u16 speedIV = GetMonData(pkmn, MON_DATA_SPEED_IV) & 0xF;
-    u16 spAtkIV = GetMonData(pkmn, MON_DATA_SPATK_IV) & 0xF;
-    u16 spDefIV = GetMonData(pkmn, MON_DATA_SPDEF_IV) & 0xF;
+    u32 personality = GetMonData(pkmn, MON_DATA_PERSONALITY);
+    u32 hpIV = GetMonData(pkmn, MON_DATA_HP_IV) & 0xF;
+    u32 attackIV = GetMonData(pkmn, MON_DATA_ATK_IV) & 0xF;
+    u32 defenseIV = GetMonData(pkmn, MON_DATA_DEF_IV) & 0xF;
+    u32 speedIV = GetMonData(pkmn, MON_DATA_SPEED_IV) & 0xF;
+    u32 spAtkIV = GetMonData(pkmn, MON_DATA_SPATK_IV) & 0xF;
+    u32 spDefIV = GetMonData(pkmn, MON_DATA_SPDEF_IV) & 0xF;
     u32 hibyte = ((attackIV ^ defenseIV) * hpIV) ^ (personality & 0xFF);
     u32 lobyte = ((spAtkIV ^ spDefIV) * speedIV) ^ (personality >> 8);
 
     return (hibyte << 8) + lobyte;
 }
 
-static u32 TranslateBigMonSizeTableIndex(u16 a)
+static u32 TranslateBigMonSizeTableIndex(u32 a)
 {
     u32 i;
 
@@ -75,7 +75,7 @@ static u32 TranslateBigMonSizeTableIndex(u16 a)
     return i;
 }
 
-static u32 GetMonSize(u16 species, u16 b)
+static u32 GetMonSize(u32 species, u32 b)
 {
     u64 unk2;
     u64 unk4;
@@ -114,7 +114,7 @@ static u32* ReturnHeightStringNoWhitespace(u32 size)
     return heightStr;
 }
 
-static u32 CompareMonSize(u16 species, u16 *sizeRecord)
+static u32 CompareMonSize(u32 species, u32 *sizeRecord)
 {
     if (gSpecialVar_Result == 0xFF)
     {
@@ -132,7 +132,7 @@ static u32 CompareMonSize(u16 species, u16 *sizeRecord)
         {
             u32 oldSize;
             u32 newSize;
-            u16 sizeParams;
+            u32 sizeParams;
 
             *(&sizeParams) = GetMonSizeHash(pkmn);
             newSize = GetMonSize(species, sizeParams);
@@ -152,7 +152,7 @@ static u32 CompareMonSize(u16 species, u16 *sizeRecord)
 }
 
 // Stores species name in gStringVar1, trainer's name in gStringVar2, and size in gStringVar3
-static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
+static void GetMonSizeRecordInfo(u32 species, u32 *sizeRecord)
 {
     u32 size = GetMonSize(species, *sizeRecord);
 
@@ -171,14 +171,14 @@ void InitSeedotSizeRecord(void)
 
 void GetSeedotSizeRecordInfo(void)
 {
-    u16 *sizeRecord = GetVarPointer(VAR_SEEDOT_SIZE_RECORD);
+    u32 *sizeRecord = GetVarPointer(VAR_SEEDOT_SIZE_RECORD);
 
     GetMonSizeRecordInfo(SPECIES_SEEDOT, sizeRecord);
 }
 
 void CompareSeedotSize(void)
 {
-    u16 *sizeRecord = GetVarPointer(VAR_SEEDOT_SIZE_RECORD);
+    u32 *sizeRecord = GetVarPointer(VAR_SEEDOT_SIZE_RECORD);
 
     gSpecialVar_Result = CompareMonSize(SPECIES_SEEDOT, sizeRecord);
 }
@@ -190,14 +190,14 @@ void InitLotadSizeRecord(void)
 
 void GetLotadSizeRecordInfo(void)
 {
-    u16 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
+    u32 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
 
     GetMonSizeRecordInfo(SPECIES_LOTAD, sizeRecord);
 }
 
 void CompareLotadSize(void)
 {
-    u16 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
+    u32 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
 
     gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
 }

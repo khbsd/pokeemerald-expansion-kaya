@@ -10,10 +10,10 @@ static const struct FlashSetupInfo * const sSetupInfos[] =
     &DefaultFlash
 };
 
-u16 IdentifyFlash(void)
+u32 IdentifyFlash(void)
 {
-    u16 result;
-    u16 flashId;
+    u32 result;
+    u32 flashId;
     const struct FlashSetupInfo * const *setupInfo;
 
     REG_WAITCNT = (REG_WAITCNT & ~WAITCNT_SRAM_MASK) | WAITCNT_SRAM_8;
@@ -48,9 +48,9 @@ u16 IdentifyFlash(void)
     return result;
 }
 
-u16 WaitForFlashWrite_Common(u32 phase, u32 *addr, u32 lastData)
+u32 WaitForFlashWrite_Common(u32 phase, u32 *addr, u32 lastData)
 {
-    u16 result = 0;
+    u32 result = 0;
     u32 status;
 
     StartFlashTimer(phase);

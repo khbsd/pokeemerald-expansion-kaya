@@ -28,7 +28,7 @@ void InitMirageRnd(void)
     SetMirageRnd(Random32());
 }
 
-void UpdateMirageRnd(u16 days)
+void UpdateMirageRnd(u32 days)
 {
     s32 rnd = GetMirageRnd();
     while (days)
@@ -39,9 +39,9 @@ void UpdateMirageRnd(u16 days)
     SetMirageRnd(rnd);
 }
 
-bool8 IsMirageIslandPresent(void)
+bool32 IsMirageIslandPresent(void)
 {
-    u16 rnd = GetMirageRnd() >> 16;
+    u32 rnd = GetMirageRnd() >> 16;
     int i;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -110,9 +110,9 @@ void InitBirchState(void)
     *GetVarPointer(VAR_BIRCH_STATE) = 0;
 }
 
-void UpdateBirchState(u16 days)
+void UpdateBirchState(u32 days)
 {
-    u16 *state = GetVarPointer(VAR_BIRCH_STATE);
+    u32 *state = GetVarPointer(VAR_BIRCH_STATE);
     *state += days;
     *state %= 7;
 }

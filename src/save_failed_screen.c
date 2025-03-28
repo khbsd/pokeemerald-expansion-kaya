@@ -40,8 +40,8 @@ enum
     CLOCK_WIN_ID
 };
 
-static EWRAM_DATA u16 sSaveFailedType = {0};
-static EWRAM_DATA u16 sClockInfo[2] = {0};
+static EWRAM_DATA u32 sSaveFailedType = {0};
+static EWRAM_DATA u32 sClockInfo[2] = {0};
 static EWRAM_DATA u32 sWindowIds[2] = {0};
 
 static const struct OamData sClockOamData =
@@ -141,8 +141,8 @@ static void CB2_GameplayCannotBeContinued(void);
 static void CB2_FadeAndReturnToTitleScreen(void);
 static void CB2_ReturnToTitleScreen(void);
 static void VBlankCB_UpdateClockGraphics(void);
-static bool8 VerifySectorWipe(u16 sector);
-static bool8 WipeSectors(u32);
+static bool32 VerifySectorWipe(u32 sector);
+static bool32 WipeSectors(u32);
 
 // Although this is a general text printer, it's only used in this file.
 static void SaveFailedScreenTextPrint(const u32 *text, u32 x, u32 y)
@@ -366,10 +366,10 @@ static void VBlankCB_UpdateClockGraphics(void)
         sClockInfo[DEBUG_TIMER]--;
 }
 
-static bool8 VerifySectorWipe(u16 sector)
+static bool32 VerifySectorWipe(u32 sector)
 {
     u32 *ptr = (u32 *)&gSaveDataBuffer;
-    u16 i;
+    u32 i;
 
     ReadFlash(sector, 0, (u32 *)ptr, SECTOR_SIZE);
 
@@ -381,10 +381,10 @@ static bool8 VerifySectorWipe(u16 sector)
     return FALSE;
 }
 
-static bool8 WipeSector(u16 sector)
+static bool32 WipeSector(u32 sector)
 {
-    u16 i, j;
-    bool8 failed = TRUE;
+    u32 i, j;
+    bool32 failed = TRUE;
 
     // Attempt to wipe sector with an arbitrary attempt limit of 130
     for (i = 0; failed && i < 130; i++)
@@ -398,9 +398,9 @@ static bool8 WipeSector(u16 sector)
     return failed;
 }
 
-static bool8 WipeSectors(u32 sectorBits)
+static bool32 WipeSectors(u32 sectorBits)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < SECTORS_COUNT; i++)
         if ((sectorBits & (1 << i)) && !WipeSector(i))
@@ -459,7 +459,7 @@ void CB2_FlashNotDetectedScreen(void)
         "does not have a working flash chip.");
     SaveFailedScreenTextPrint(saveFailedMessage, 1, 0);
     TransferPlttBuffer();
-    *(u16*)PLTT = RGB(17, 18, 31);
+    *(u32*)PLTT = RGB(17, 18, 31);
     ShowBg(0);
     gMain.state++;
 }

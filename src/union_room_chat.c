@@ -126,10 +126,10 @@ enum {
 struct UnionRoomChat
 {
     u32 filler1;
-    u16 funcId;
-    u16 funcState;
-    u16 filler2;
-    u16 exitDelayTimer;
+    u32 funcId;
+    u32 funcState;
+    u32 filler2;
+    u32 exitDelayTimer;
     u32 filler3;
     u32 linkPlayerCount;
     u32 handleInputTask;
@@ -142,7 +142,7 @@ struct UnionRoomChat
     u32 bufferCursorPos;
     u32 receivedPlayerIndex;
     u32 exitType; // CHAT_EXIT_*
-    bool8 changedRegisteredTexts;
+    bool32 changedRegisteredTexts;
     u32 afterSaveTimer;
     u32 messageEntryBuffer[2 * MAX_MESSAGE_LENGTH + 1];
     u32 receivedMessage[64];
@@ -150,23 +150,23 @@ struct UnionRoomChat
     u32 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     u32 filler4[5];
     u32 sendMessageBuffer[40];
-    u16 tryQuitAgainTimer;
+    u32 tryQuitAgainTimer;
 };
 
 struct UnionRoomChatDisplay_Subtask
 {
     bool32 (* callback)(u32 *);
-    bool8 active;
+    bool32 active;
     u32 state;
 };
 
 struct UnionRoomChatDisplay
 {
     struct UnionRoomChatDisplay_Subtask subtasks[3];
-    u16 yesNoMenuWindowId;
-    u16 currLine;
-    u16 scrollCount;
-    u16 messageWindowId;
+    u32 yesNoMenuWindowId;
+    u32 currLine;
+    u32 scrollCount;
+    u32 messageWindowId;
     s16 bg1hofs;
     u32 expandedPlaceholdersBuffer[0x106];
     u32 bg0Buffer[BG_SCREEN_SIZE];
@@ -183,12 +183,12 @@ struct UnionRoomChatSprites
     struct Sprite *textEntryCursor;
     struct Sprite *rButtonIcon;
     struct Sprite *rButtonLabel;
-    u16 cursorBlinkTimer;
+    u32 cursorBlinkTimer;
 };
 
 struct SubtaskInfo
 {
-    u16 idx;
+    u32 idx;
     bool32 (* callback)(u32 *);
 };
 
@@ -200,8 +200,8 @@ struct MessageWindowInfo
     u32 y;
     u32 letterSpacing;
     u32 lineSpacing;
-    bool8 hasPlaceholders;
-    bool8 useWiderBox;
+    bool32 hasPlaceholders;
+    bool32 useWiderBox;
 };
 
 static void InitUnionRoomChat(struct UnionRoomChat *);
@@ -219,7 +219,7 @@ static void Chat_Disbanded(void);
 static void Chat_SendMessage(void);
 static void Chat_Register(void);
 static void Chat_SaveAndExit(void);
-static void SetChatFunction(u16);
+static void SetChatFunction(u32);
 static bool32 HandleDPadInput(void);
 static void AppendTextToMessage(void);
 static void DeleteLastMessageCharacter(void);
@@ -238,13 +238,13 @@ static void PrepareSendBuffer_Drop(u32 *);
 static void PrepareSendBuffer_Disband(u32 *);
 static u32 *GetLimitedMessageStartPtr(void);
 static void Task_ReceiveChatMessage(u32 taskId);
-static bool8 TryAllocDisplay(void);
+static bool32 TryAllocDisplay(void);
 static bool32 IsDisplaySubtask0Active(void);
 static void FreeDisplay(void);
 static void RunDisplaySubtasks(void);
-static void StartDisplaySubtask(u16, u32);
-static bool8 IsDisplaySubtaskActive(u32);
-static s8 ProcessMenuInput(void);
+static void StartDisplaySubtask(u32, u32);
+static bool32 IsDisplaySubtaskActive(u32);
+static s32 ProcessMenuInput(void);
 static bool32 TryAllocSprites(void);
 static void InitScanlineEffect(void);
 static void InitDisplay(struct UnionRoomChatDisplay *);
@@ -271,16 +271,16 @@ static void PrintCurrentKeyboardPage(void);
 static bool32 SlideKeyboardPageIn(void);
 static void MoveKeyboardCursor(void);
 static void UpdateRButtonLabel(void);
-static void AddStdMessageWindow(int, u16);
+static void AddStdMessageWindow(int, u32);
 static void AddYesNoMenuAt(u32, u32, u32);
 static void HideStdMessageWindow(void);
 static void HideYesNoMenuWindow(void);
 static void DestroyStdMessageWindow(void);
 static void DestroyYesNoMenuWindow(void);
-static void FillTextEntryWindow(u16, u16, u32);
-static void DrawTextEntryMessage(u16, u32 *, u32, u32, u32);
+static void FillTextEntryWindow(u32, u32, u32);
+static void DrawTextEntryMessage(u32, u32 *, u32, u32, u32);
 static void SetRegisteredTextPalette(bool32);
-static void PrintChatMessage(u16, u32 *, u32);
+static void PrintChatMessage(u32, u32 *, u32);
 static void StartKeyboardCursorAnim(void);
 static bool32 TryKeyboardCursorReopen(void);
 static void UpdateSlidingKeyboard(s16);
@@ -526,8 +526,8 @@ static const u32 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNI
     }
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
-static const u16 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
+static const u32 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
+static const u32 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -751,7 +751,7 @@ static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT 
     [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, {NULL}},
 };
 
-static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
+static const u32 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
 static const u32 sKeyboardCursorTiles[] = INCBIN_U32("graphics/union_room_chat/keyboard_cursor.4bpp.lz");
 static const u32 sTextEntryCursorTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_cursor.4bpp.lz");
 static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_arrow.4bpp.lz");
@@ -1043,7 +1043,7 @@ static void Chat_Join(void)
 
 static void Chat_HandleInput(void)
 {
-    bool8 updateMsgActive, cursorBlinkActive;
+    bool32 updateMsgActive, cursorBlinkActive;
 
     switch (sChat->funcState)
     {
@@ -1168,7 +1168,7 @@ static void Chat_Switch(void)
 
 static void Chat_AskQuitChatting(void)
 {
-    s8 input;
+    s32 input;
 
     switch (sChat->funcState)
     {
@@ -1499,7 +1499,7 @@ static void Chat_Register(void)
 
 static void Chat_SaveAndExit(void)
 {
-    s8 input;
+    s32 input;
 
     switch (sChat->funcState)
     {
@@ -1612,7 +1612,7 @@ static void Chat_SaveAndExit(void)
     }
 }
 
-static void SetChatFunction(u16 funcId)
+static void SetChatFunction(u32 funcId)
 {
     sChat->funcId = funcId;
     sChat->funcState = 0;
@@ -1804,7 +1804,7 @@ static u32 *GetLastCharOfMessagePtr(void)
     return lastChar;
 }
 
-static u16 GetNumOverflowCharsInMessage(void)
+static u32 GetNumOverflowCharsInMessage(void)
 {
     u32 *str;
     u32 i, numChars, strLength;
@@ -1954,7 +1954,7 @@ static void GetBufferSelectionRegion(u32 *x, u32 *width)
 static u32 *GetLimitedMessageStartPtr(void)
 {
     int i;
-    u16 numChars = GetNumOverflowCharsInMessage();
+    u32 numChars = GetNumOverflowCharsInMessage();
     u32 *str = sChat->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
@@ -1967,11 +1967,11 @@ static u32 *GetLimitedMessageStartPtr(void)
     return str;
 }
 
-static u16 GetLimitedMessageStartPos(void)
+static u32 GetLimitedMessageStartPos(void)
 {
-    u16 count;
+    u32 count;
     u32 i;
-    u16 numChars = GetNumOverflowCharsInMessage();
+    u32 numChars = GetNumOverflowCharsInMessage();
     u32 *str = sChat->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
@@ -2153,7 +2153,7 @@ static void Task_ReceiveChatMessage(u32 taskId)
 #undef tI
 #undef tState
 
-static bool8 TryAllocDisplay(void)
+static bool32 TryAllocDisplay(void)
 {
     sDisplay = Alloc(sizeof(*sDisplay));
     if (sDisplay && TryAllocSprites())
@@ -2224,7 +2224,7 @@ static void RunDisplaySubtasks(void)
     }
 }
 
-static void StartDisplaySubtask(u16 subtaskId, u32 assignId)
+static void StartDisplaySubtask(u32 subtaskId, u32 assignId)
 {
     u32 i;
 
@@ -2241,7 +2241,7 @@ static void StartDisplaySubtask(u16 subtaskId, u32 assignId)
     }
 }
 
-static bool8 IsDisplaySubtaskActive(u32 id)
+static bool32 IsDisplaySubtaskActive(u32 id)
 {
     return sDisplay->subtasks[id].active;
 }
@@ -2427,9 +2427,9 @@ static bool32 Display_UpdateMessageBuffer(u32 *state)
 
 static bool32 Display_AskRegisterText(u32 *state)
 {
-    u16 x;
+    u32 x;
     u32 *str;
-    u16 length;
+    u32 length;
 
     switch (*state)
     {
@@ -2468,9 +2468,9 @@ static bool32 Display_AskRegisterText(u32 *state)
 
 static bool32 Display_CancelRegister(u32 *state)
 {
-    u16 x;
+    u32 x;
     u32 *str;
-    u16 length;
+    u32 length;
 
     switch (*state)
     {
@@ -2533,7 +2533,7 @@ static bool32 Display_ReturnToKeyboard(u32 *state)
 
 static bool32 Display_ScrollChat(u32 *state)
 {
-    u16 row;
+    u32 row;
     u32 *str;
     u32 colorIdx;
 
@@ -2786,12 +2786,12 @@ static void DestroyYesNoMenuWindow(void)
     }
 }
 
-static s8 ProcessMenuInput(void)
+static s32 ProcessMenuInput(void)
 {
     return Menu_ProcessInput();
 }
 
-static void AddStdMessageWindow(int msgId, u16 bg0vofs)
+static void AddStdMessageWindow(int msgId, u32 bg0vofs)
 {
     const u32 *str;
     int windowId;
@@ -2879,12 +2879,12 @@ static void DestroyStdMessageWindow(void)
     }
 }
 
-static void FillTextEntryWindow(u16 x, u16 width, u32 fillValue)
+static void FillTextEntryWindow(u32 x, u32 width, u32 fillValue)
 {
     FillWindowPixelRect(WIN_TEXT_ENTRY, fillValue, x * 8, 1, width * 8, 14);
 }
 
-static void DrawTextEntryMessage(u16 x, u32 *str, u32 bgColor, u32 fgColor, u32 shadowColor)
+static void DrawTextEntryMessage(u32 x, u32 *str, u32 bgColor, u32 fgColor, u32 shadowColor)
 {
     u32 color[3];
     u32 strBuffer[35];
@@ -2905,8 +2905,8 @@ static void PrintCurrentKeyboardPage(void)
 {
     u32 page;
     int i;
-    u16 left;
-    u16 top;
+    u32 left;
+    u32 top;
     u32 color[3];
     u32 str[45];
     u32 *str2;
@@ -3019,7 +3019,7 @@ static void HideKeyboardSwapMenu(void)
     ClearWindowTilemap(WIN_SWAP_MENU);
 }
 
-static void PrintChatMessage(u16 row, u32 *str, u32 colorIdx)
+static void PrintChatMessage(u32 row, u32 *str, u32 colorIdx)
 {
     // colorIdx: 0 = gray, 1 = red, 2 = green, 3 = blue
     u32 color[3];
@@ -3219,7 +3219,7 @@ static void MoveKeyboardCursor(void)
 
 static void SetRegisteredTextPalette(bool32 registering)
 {
-    const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
+    const u32 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
     u32 index = IndexOfSpritePaletteTag(PALTAG_INTERFACE);
     LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }

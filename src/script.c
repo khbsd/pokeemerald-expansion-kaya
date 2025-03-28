@@ -29,7 +29,7 @@ extern const u32 *gRamScriptRetAddr;
 static u32 sGlobalScriptContextStatus;
 static struct ScriptContext sGlobalScriptContext;
 static struct ScriptContext sImmediateScriptContext;
-static bool8 sLockFieldControls;
+static bool32 sLockFieldControls;
 EWRAM_DATA u32 gMsgIsSignPost = FALSE;
 EWRAM_DATA u32 gMsgBoxIsCancelable = FALSE;
 
@@ -64,7 +64,7 @@ u32 SetupBytecodeScript(struct ScriptContext *ctx, const u32 *ptr)
     return 1;
 }
 
-void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
+void SetupNativeScript(struct ScriptContext *ctx, bool32 (*ptr)(void))
 {
     ctx->mode = SCRIPT_MODE_NATIVE;
     ctx->nativePtr = ptr;
@@ -76,7 +76,7 @@ void StopScript(struct ScriptContext *ctx)
     ctx->scriptPtr = NULL;
 }
 
-bool8 RunScriptCommand(struct ScriptContext *ctx)
+bool32 RunScriptCommand(struct ScriptContext *ctx)
 {
     if (ctx->mode == SCRIPT_MODE_STOPPED)
         return FALSE;
@@ -132,7 +132,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
     return TRUE;
 }
 
-static bool8 ScriptPush(struct ScriptContext *ctx, const u32 *ptr)
+static bool32 ScriptPush(struct ScriptContext *ctx, const u32 *ptr)
 {
     if (ctx->stackDepth + 1 >= (int)ARRAY_COUNT(ctx->stack))
     {
@@ -171,9 +171,9 @@ void ScriptReturn(struct ScriptContext *ctx)
     ctx->scriptPtr = ScriptPop(ctx);
 }
 
-u16 ScriptReadHalfword(struct ScriptContext *ctx)
+u32 ScriptReadHalfword(struct ScriptContext *ctx)
 {
-    u16 value = *(ctx->scriptPtr++);
+    u32 value = *(ctx->scriptPtr++);
     value |= *(ctx->scriptPtr++) << 8;
     return value;
 }
@@ -206,7 +206,7 @@ void UnlockPlayerFieldControls(void)
     sLockFieldControls = FALSE;
 }
 
-bool8 ArePlayerFieldControlsLocked(void)
+bool32 ArePlayerFieldControlsLocked(void)
 {
     return sLockFieldControls;
 }
@@ -215,7 +215,7 @@ bool8 ArePlayerFieldControlsLocked(void)
 // which yields control back to native code should the script make a wait call.
 
 // Checks if the global script context is able to be run right now.
-bool8 ScriptContext_IsEnabled(void)
+bool32 ScriptContext_IsEnabled(void)
 {
     if (sGlobalScriptContextStatus == CONTEXT_RUNNING)
         return TRUE;
@@ -234,7 +234,7 @@ void ScriptContext_Init(void)
 // there's more script to run, or false if the script has hit the end.
 // This function also returns false if the context is finished
 // or waiting (after a call to _Stop)
-bool8 ScriptContext_RunScript(void)
+bool32 ScriptContext_RunScript(void)
 {
     if (sGlobalScriptContextStatus == CONTEXT_SHUTDOWN)
         return FALSE;
@@ -332,8 +332,8 @@ const u32 *MapHeaderCheckScriptTable(u32 tag)
 
     while (1)
     {
-        u16 varIndex1;
-        u16 varIndex2;
+        u32 varIndex1;
+        u32 varIndex2;
 
         // Read first var (or .2byte terminal value)
         varIndex1 = T1_READ_16(ptr);
@@ -382,7 +382,7 @@ void RunOnDiveWarpMapScript(void)
     MapHeaderRunScriptType(MAP_SCRIPT_ON_DIVE_WARP);
 }
 
-bool8 TryRunOnFrameMapScript(void)
+bool32 TryRunOnFrameMapScript(void)
 {
     const u32 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_FRAME_TABLE);
 
@@ -416,7 +416,7 @@ void ClearRamScript(void)
 #endif //FREE_MYSTERY_EVENT_BUFFERS
 }
 
-bool8 InitRamScript(const u32 *script, u16 scriptSize, u32 mapGroup, u32 mapNum, u32 objectId)
+bool32 InitRamScript(const u32 *script, u32 scriptSize, u32 mapGroup, u32 mapNum, u32 objectId)
 {
 #if FREE_MYSTERY_EVENT_BUFFERS == FALSE
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
@@ -516,7 +516,7 @@ u32 *GetSavedRamScriptIfValid(void)
 #endif //FREE_MYSTERY_EVENT_BUFFERS
 }
 
-void InitRamScript_NoObjectEvent(u32 *script, u16 scriptSize)
+void InitRamScript_NoObjectEvent(u32 *script, u32 scriptSize)
 {
 #if FREE_MYSTERY_EVENT_BUFFERS == FALSE
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
@@ -525,7 +525,7 @@ void InitRamScript_NoObjectEvent(u32 *script, u16 scriptSize)
 #endif //FREE_MYSTERY_EVENT_BUFFERS
 }
 
-bool8 LoadTrainerObjectScript(void)
+bool32 LoadTrainerObjectScript(void)
 {
     sGlobalScriptContext.scriptPtr = gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr;
     return TRUE;
