@@ -514,7 +514,7 @@
 #define P_FAMILY_EISCUE                  P_GEN_8_POKEMON
 #define P_FAMILY_INDEEDEE                P_GEN_8_POKEMON
 #define P_FAMILY_MORPEKO                 P_GEN_8_POKEMON
-#define P_FAMILY_CUFANT                  P_GEN_8_POKEMON
+// #define P_FAMILY_CUFANT               P_GEN_8_POKEMON
 #define P_FAMILY_DRACOZOLT               P_GEN_8_POKEMON
 #define P_FAMILY_ARCTOZOLT               P_GEN_8_POKEMON
 #define P_FAMILY_DRACOVISH               P_GEN_8_POKEMON
@@ -712,6 +712,7 @@
 #define P_FAMILY_CLOBBOPUS               TRUE
 #define P_FAMILY_PINCURCHIN              TRUE
 #define P_FAMILY_SNOM                    TRUE
+#define P_FAMILY_CUFANT                  TRUE
 #define P_FAMILY_DREEPY                  TRUE
 #define P_FAMILY_REGIELEKI               TRUE
 #define P_FAMILY_REGIDRAGO               TRUE
