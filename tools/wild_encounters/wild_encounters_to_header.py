@@ -1,4 +1,7 @@
 import json
+import re
+
+IS_ENABLED            = False
 
 
 #C string vars
@@ -132,6 +135,9 @@ def ImportWildEncounterFile():
     global tabStr
     tabStr = "    "
 
+    global IS_ENABLED
+    IS_ENABLED = IsConfigEnabled()
+
     wFile = open("src/data/wild_encounters.json")
     wData = json.load(wFile)
 
@@ -194,7 +200,10 @@ def ImportWildEncounterFile():
 
             headersArray = []
 
-            if TIME_MORNING_LABEL in structLabel:
+            if not IS_ENABLED:
+                structTime = TIME_MORNING_LABEL
+                structLabel = structLabel + "_Morning"
+            elif TIME_MORNING_LABEL in structLabel:
                 structTime = TIME_MORNING_LABEL
             elif TIME_DAY_LABEL in structLabel:
                 structTime = TIME_DAY_LABEL
@@ -203,8 +212,8 @@ def ImportWildEncounterFile():
             elif TIME_NIGHT_LABEL in structLabel:
                 structTime = TIME_NIGHT_LABEL
             else:
-                structTime = TIME_DAY_LABEL
-                structLabel = structLabel + "_Day"
+                structTime = TIME_MORNING_LABEL
+                structLabel = structLabel + "_Morning"
 
             landMonsInfo      = ""
             waterMonsInfo     = ""
@@ -252,8 +261,8 @@ def ImportWildEncounterFile():
                     infoStructString = f"{baseStruct}{structInfo} {structLabel}_{structMonType}{structInfo} = {{ {infoStructRate}, {structLabel}_{structMonType} }};"
                     print(infoStructString)
 
-            AssembleMonHeaderContent()
-                
+            AssembleMonHeaderContent()  
+
         headerIndex += 1
     PrintWildMonHeadersContent()
 
@@ -299,10 +308,12 @@ def AssembleMonHeaderContent():
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounterTotalCount"] = encounterTotalCount[headerIndex]
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"] = []
 
-        i = TIME_MORNING_INDEX
-        while i <= TIME_NIGHT_INDEX:
+        timeStart = TIME_MORNING_INDEX
+        timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_MORNING_INDEX
+
+        while timeStart <= timeEnd:
             headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"].append([])
-            i += 1
+            timeStart += 1
 
     headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"][tempHeaderTimeIndex].append(landMonsInfo)
     headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"][tempHeaderTimeIndex].append(waterMonsInfo)
@@ -390,8 +401,10 @@ def PrintWildMonHeadersContent():
                     PrintEncounterHeaders(f"{TabStr(2)}.mapGroup = {GetMapGroupEnum(MAP_UNDEFINED)},")
                     PrintEncounterHeaders(f"{TabStr(2)}.mapNum = {GetMapGroupEnum(MAP_UNDEFINED, labelCount + 1)},")
 
+                    timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_MORNING_INDEX
+
                     nullCount = 0
-                    while nullCount <= TIME_NIGHT_INDEX:
+                    while nullCount <= timeEnd:
                         if nullCount == 0:
                             PrintEncounterHeaders(f"{TabStr(2)}.encounterTypes =")
                             PrintEncounterHeaders(TabStr(2)+ "{")
@@ -544,6 +557,15 @@ def PrintGeneratedWarningText():
     print("\n")
 
     # get copied lhea :^ )
+
+
+def IsConfigEnabled():
+    CONFIG_ENABLED_PAT = re.compile(r"#define OW_TIME_OF_DAY_ENCOUNTERS\s+(?P<cfg_val>[^ ]*)")
+
+    with open("./include/config/overworld.h", "r") as overworld_config_file:
+        config_overworld = overworld_config_file.read()
+        config_setting = CONFIG_ENABLED_PAT.search(config_overworld)
+        return config_setting is not None and config_setting.group("cfg_val") in ("TRUE", "1")
 
 
 def TabStr(amount):

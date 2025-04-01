@@ -40,7 +40,12 @@ struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
+
+#if OW_TIME_OF_DAY_ENCOUNTERS
     const struct WildEncounterTypes encounterTypes[TIME_NIGHT + 1];
+#else
+    const struct WildEncounterTypes encounterTypes[TIME_DAY];
+#endif
 };
 
 

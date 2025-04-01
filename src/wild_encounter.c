@@ -433,8 +433,8 @@ u32 GetTimeOfDayForEncounters(u32 headerId, u32 area)
     const struct WildPokemonInfo *wildMonInfo;
     u32 timeOfDay = GetTimeOfDay();
 
-    if (OW_TIME_OF_DAY_ENCOUNTERS == FALSE)
-        return TIME_DAY;
+    if (!OW_TIME_OF_DAY_ENCOUNTERS)
+        return TIME_MORNING;
 
     if (InBattlePike()) 
     {
@@ -504,7 +504,7 @@ u32 GetTimeOfDayForEncounters(u32 headerId, u32 area)
     }
 
     if (wildMonInfo == NULL && !OW_TIME_OF_DAY_NO_FALLBACK) 
-        return TIME_DAY;
+        return TIME_MORNING;
     else
         return timeOfDay;
 }
