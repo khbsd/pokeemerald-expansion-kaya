@@ -9830,6 +9830,10 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         if (moveType == TYPE_FIRE && gDisableStructs[battlerAtk].flashFireBoosted)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
+    case ABILITY_BRINEBLOOD:
+        if (moveType == TYPE_WATER)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+        break;
     case ABILITY_SWARM:
         if (moveType == TYPE_BUG && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
@@ -10913,7 +10917,8 @@ uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, u8 moveType)
                                        ||  abilityDef == ABILITY_EARTH_EATER))
          || (moveType == TYPE_WATER    && (abilityDef == ABILITY_WATER_ABSORB
                                        ||  abilityDef == ABILITY_DRY_SKIN
-                                       ||  abilityDef == ABILITY_STORM_DRAIN))
+                                       ||  abilityDef == ABILITY_STORM_DRAIN
+                                       ||  abilityDef == ABILITY_BRINEBLOOD))
          || (moveType == TYPE_ELECTRIC && (abilityDef == ABILITY_LIGHTNING_ROD // TODO: Add Gen 3/4 config check
                                        ||  abilityDef == ABILITY_VOLT_ABSORB
                                        ||  abilityDef == ABILITY_MOTOR_DRIVE

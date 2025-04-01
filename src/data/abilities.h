@@ -2458,4 +2458,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Poison/paralyze on contact."),
         .aiRating = 4,
     },
+
+    [ABILITY_BRINEBLOOD] =
+    {
+        .name = _("Brineblood"),
+        .description = COMPOUND_STRING("Heals, powers up with water."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };
