@@ -9322,11 +9322,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_TYNAMO
     [SPECIES_TYNAMO] =
     {
-        .baseHP        = 35,
-        .baseAttack    = 55,
+        .baseHP        = 55,
+        .baseAttack    = 75,
         .baseDefense   = 40,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 45,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 55,
         .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
         .catchRate = 190,
@@ -9349,7 +9349,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "These Pokémon move in schools.\n"
             "One alone can emit only a trickle of\n"
             "electricity, so a group of them gathers\n"
-            "to unleash a powerful electric shock."),
+            "to unleash a powerful electric cock."),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,
@@ -9400,16 +9400,16 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .tmIlliterate = TRUE,
         .levelUpLearnset = sTynamoLevelUpLearnset,
         .teachableLearnset = sTynamoTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_EELEKTRIK}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_EELEKTRIK}),
     },
 
     [SPECIES_EELEKTRIK] =
     {
         .baseHP        = 65,
-        .baseAttack    = 85,
+        .baseAttack    = 90,
         .baseDefense   = 70,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 75,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 80,
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
         .catchRate = 60,
@@ -9476,10 +9476,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_EELEKTROSS] =
     {
-        .baseHP        = 90,
+        .baseHP        = 95,
         .baseAttack    = 120,
         .baseDefense   = 80,
-        .baseSpeed     = 75,
+        .baseSpeed     = 85,
         .baseSpAttack  = 105,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
@@ -9503,7 +9503,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "They crawl out of the ocean using their\n"
             "arms. They will attack prey on shore and\n"
             "immediately drag it into the ocean, with\n"
-            "their sucker mouths."),
+            "their fucker mouths."),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 365,

@@ -9832,7 +9832,11 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         break;
     case ABILITY_BRINEBLOOD:
         if (moveType == TYPE_WATER)
-            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
+        break;
+    case ABILITY_SHIELD_DUST:
+        if (moveType == TYPE_BUG)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SWARM:
         if (moveType == TYPE_BUG && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))

@@ -898,12 +898,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_ROOKIDEE
     [SPECIES_ROOKIDEE] =
     {
-        .baseHP        = 38,
-        .baseAttack    = 47,
-        .baseDefense   = 35,
-        .baseSpeed     = 57,
-        .baseSpAttack  = 33,
-        .baseSpDefense = 35,
+        .baseHP        = 45,
+        .baseAttack    = 70,
+        .baseDefense   = 55,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_FLYING),
         .catchRate = 255,
         .expYield = 49,
@@ -971,12 +971,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
     [SPECIES_CORVISQUIRE] =
     {
-        .baseHP        = 68,
-        .baseAttack    = 67,
-        .baseDefense   = 55,
-        .baseSpeed     = 77,
-        .baseSpAttack  = 43,
-        .baseSpDefense = 55,
+        .baseHP        = 95,
+        .baseAttack    = 90,
+        .baseDefense   = 65,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_FLYING),
         .catchRate = 120,
         .expYield = 128,
@@ -1044,12 +1044,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
     [SPECIES_CORVIKNIGHT] =
     {
-        .baseHP        = 98,
-        .baseAttack    = 87,
-        .baseDefense   = 105,
-        .baseSpeed     = 67,
-        .baseSpAttack  = 53,
-        .baseSpDefense = 85,
+        .baseHP        = 110,
+        .baseAttack    = 105,
+        .baseDefense   = 135,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_FLYING, TYPE_STEEL),
         .catchRate = 45,
         .expYield = 248,
@@ -5063,11 +5063,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     [SPECIES_PINCURCHIN] =
     {
         .baseHP        = 50,
-        .baseAttack    = 90,
-        .baseDefense   = 70,
-        .baseSpeed     = 75,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 45,
+        .baseAttack    = 70,
+        .baseDefense   = 55,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_POISON, TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = 152,
@@ -6356,11 +6356,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_DREEPY
     [SPECIES_DREEPY] =
     {
-        .baseHP        = 28,
-        .baseAttack    = 60,
-        .baseDefense   = 30,
-        .baseSpeed     = 82,
-        .baseSpAttack  = 40,
+        .baseHP        = 40,
+        .baseAttack    = 70,
+        .baseDefense   = 35,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 50,
         .baseSpDefense = 30,
         .types = MON_TYPES(TYPE_DRAGON, TYPE_GHOST),
         .catchRate = 45,
@@ -6422,11 +6422,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
     [SPECIES_DRAKLOAK] =
     {
-        .baseHP        = 68,
-        .baseAttack    = 80,
-        .baseDefense   = 50,
-        .baseSpeed     = 102,
-        .baseSpAttack  = 60,
+        .baseHP        = 70,
+        .baseAttack    = 85,
+        .baseDefense   = 55,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 55,
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_DRAGON, TYPE_GHOST),
         .catchRate = 45,
@@ -6486,10 +6486,10 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
     [SPECIES_DRAGAPULT] =
     {
-        .baseHP        = 88,
+        .baseHP        = 90,
         .baseAttack    = 120,
         .baseDefense   = 75,
-        .baseSpeed     = 142,
+        .baseSpeed     = 145,
         .baseSpAttack  = 100,
         .baseSpDefense = 75,
         .types = MON_TYPES(TYPE_DRAGON, TYPE_GHOST),

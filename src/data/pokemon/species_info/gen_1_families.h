@@ -4330,11 +4330,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_NIDORAN_F] =
     {
         .baseHP        = 55,
-        .baseAttack    = 47,
+        .baseAttack    = 67,
         .baseDefense   = 52,
         .baseSpeed     = 41,
         .baseSpAttack  = 40,
-        .baseSpDefense = 40,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_POISON),
         .catchRate = 235,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 55 : 59,
@@ -4409,11 +4409,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_NIDORINA] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 62,
-        .baseDefense   = 67,
+        .baseHP        = 80,
+        .baseAttack    = 72,
+        .baseDefense   = 77,
         .baseSpeed     = 56,
-        .baseSpAttack  = 55,
+        .baseSpAttack  = 75,
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_POISON),
         .catchRate = 120,
@@ -4480,12 +4480,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_NIDOQUEEN] =
     {
-        .baseHP        = 90,
-        .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 92 : 82,
-        .baseDefense   = 87,
-        .baseSpeed     = 76,
+        .baseHP        = 110,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
+        .baseSpeed     = 80,
         .baseSpAttack  = 75,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_2 ? 85 : 75,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_POISON, TYPE_GROUND),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
@@ -4558,12 +4558,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_NIDORAN_M] =
     {
-        .baseHP        = 46,
-        .baseAttack    = 57,
-        .baseDefense   = 40,
-        .baseSpeed     = 50,
+        .baseHP        = 55,
+        .baseAttack    = 67,
+        .baseDefense   = 52,
+        .baseSpeed     = 41,
         .baseSpAttack  = 40,
-        .baseSpDefense = 40,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_POISON),
         .catchRate = 235,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 55 : 60,
@@ -4631,11 +4631,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_NIDORINO] =
     {
-        .baseHP        = 61,
+        .baseHP        = 80,
         .baseAttack    = 72,
-        .baseDefense   = 57,
-        .baseSpeed     = 65,
-        .baseSpAttack  = 55,
+        .baseDefense   = 77,
+        .baseSpeed     = 56,
+        .baseSpAttack  = 75,
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_POISON),
         .catchRate = 120,
@@ -4703,12 +4703,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_NIDOKING] =
     {
-        .baseHP        = 81,
-        .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 102 : 92,
-        .baseDefense   = 77,
-        .baseSpeed     = 85,
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_2 ? 85 : 75,
-        .baseSpDefense = 75,
+        .baseHP        = 110,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_POISON, TYPE_GROUND),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
@@ -11875,12 +11875,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_GENGAR] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 65,
-        .baseDefense   = 60,
-        .baseSpeed     = 110,
+        .baseHP        = 70,
+        .baseAttack    = 75,
+        .baseDefense   = 85,
+        .baseSpeed     = 115,
         .baseSpAttack  = 130,
-        .baseSpDefense = 75,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_GHOST, TYPE_POISON),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8

@@ -1666,12 +1666,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
 #if P_FAMILY_FLABEBE
 #define FLABEBE_MISC_INFO(Form, FORM, iconPal)                                  \
-        .baseHP        = 44,                                                    \
-        .baseAttack    = 38,                                                    \
-        .baseDefense   = 39,                                                    \
-        .baseSpeed     = 42,                                                    \
-        .baseSpAttack  = 61,                                                    \
-        .baseSpDefense = 79,                                                    \
+        .baseHP        = 45,                                                    \
+        .baseAttack    = 40,                                                    \
+        .baseDefense   = 40,                                                    \
+        .baseSpeed     = 45,                                                    \
+        .baseSpAttack  = 60,                                                    \
+        .baseSpDefense = 80,                                                    \
         .types = MON_TYPES(TYPE_FAIRY),                                         \
         .catchRate = 225,                                                       \
         .expYield = 61,                                                         \
@@ -1812,12 +1812,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .formSpeciesIdTable = sFloetteFormSpeciesIdTable
 
 #define FLOETTE_NORMAL_INFO(form, FORM, iconPal)                                                \
-        .baseHP        = 54,                                                                    \
-        .baseAttack    = 45,                                                                    \
-        .baseDefense   = 47,                                                                    \
-        .baseSpeed     = 52,                                                                    \
-        .baseSpAttack  = 75,                                                                    \
-        .baseSpDefense = 98,                                                                    \
+        .baseHP        = 55,                                                    \
+        .baseAttack    = 70,                                                    \
+        .baseDefense   = 50,                                                    \
+        .baseSpeed     = 55,                                                    \
+        .baseSpAttack  = 80,                                                    \
+        .baseSpDefense = 85,                                                    \
         .expYield = 130,                                                                        \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),                                           \
         .cryId = CRY_FLOETTE,                                                                   \
@@ -1907,12 +1907,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     },
 
 #define FLORGES_MISC_INFO(Form, iconPal)                                        \
-        .baseHP        = 78,                                                    \
-        .baseAttack    = 65,                                                    \
-        .baseDefense   = 68,                                                    \
+        .baseHP        = 85,                                                    \
+        .baseAttack    = 70,                                                    \
+        .baseDefense   = 80,                                                    \
         .baseSpeed     = 75,                                                    \
-        .baseSpAttack  = 112,                                                   \
-        .baseSpDefense = 154,                                                   \
+        .baseSpAttack  = 110,                                                   \
+        .baseSpDefense = 150,                                                   \
         .types = MON_TYPES(TYPE_FAIRY),                                         \
         .catchRate = 45,                                                        \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 276 : 248,                \

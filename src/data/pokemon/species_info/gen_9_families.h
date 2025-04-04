@@ -71,13 +71,13 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_FLORAGATO] =
     {
-        .baseHP        = 61,
+        .baseHP        = 65,
         .baseAttack    = 80,
-        .baseDefense   = 63,
-        .baseSpeed     = 83,
+        .baseDefense   = 65,
+        .baseSpeed     = 85,
         .baseSpAttack  = 60,
         .baseSpDefense = 63,
-        .types = MON_TYPES(TYPE_GRASS),
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DARK),
         .catchRate = 45,
         .expYield = 144,
         .evYield_Speed = 2,
@@ -135,11 +135,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_MEOWSCARADA] =
     {
-        .baseHP        = 76,
+        .baseHP        = 80,
         .baseAttack    = 110,
         .baseDefense   = 70,
-        .baseSpeed     = 123,
-        .baseSpAttack  = 81,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 85,
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_GRASS, TYPE_DARK),
         .catchRate = 45,
@@ -1043,12 +1043,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_PAWMI
     [SPECIES_PAWMI] =
     {
-        .baseHP        = 45,
-        .baseAttack    = 50,
-        .baseDefense   = 20,
+        .baseHP        = 65,
+        .baseAttack    = 60,
+        .baseDefense   = 45,
         .baseSpeed     = 60,
         .baseSpAttack  = 40,
-        .baseSpDefense = 25,
+        .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_ELECTRIC),
         .catchRate = 190,
         .expYield = 48,
@@ -1108,12 +1108,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_PAWMO] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 75,
-        .baseDefense   = 40,
-        .baseSpeed     = 85,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 40,
+        .baseHP        = 75,
+        .baseAttack    = 90,
+        .baseDefense   = 50,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
         .catchRate = 80,
         .expYield = 123,
@@ -1172,12 +1172,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_PAWMOT] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 115,
-        .baseDefense   = 70,
-        .baseSpeed     = 105,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 60,
+        .baseHP        = 85,
+        .baseAttack    = 120,
+        .baseDefense   = 80,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = 245,
@@ -3647,12 +3647,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_TINKATINK
     [SPECIES_TINKATINK] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 45,
+        .baseHP        = 65,
+        .baseAttack    = 55,
         .baseDefense   = 55,
-        .baseSpeed     = 68,
+        .baseSpeed     = 70,
         .baseSpAttack  = 35,
-        .baseSpDefense = 64,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_FAIRY, TYPE_STEEL),
         .catchRate = 190,
         .expYield = 59,
@@ -3707,17 +3707,17 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .levelUpLearnset = sTinkatinkLevelUpLearnset,
         .teachableLearnset = sTinkatinkTeachableLearnset,
         .eggMoveLearnset = sTinkatinkEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_TINKATUFF}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_TINKATUFF}),
     },
 
     [SPECIES_TINKATUFF] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 55,
-        .baseDefense   = 55,
-        .baseSpeed     = 78,
+        .baseHP        = 75,
+        .baseAttack    = 65,
+        .baseDefense   = 65,
+        .baseSpeed     = 80,
         .baseSpAttack  = 45,
-        .baseSpDefense = 82,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_FAIRY, TYPE_STEEL),
         .catchRate = 90,
         .expYield = 133,
@@ -3771,7 +3771,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         )
         .levelUpLearnset = sTinkatuffLevelUpLearnset,
         .teachableLearnset = sTinkatuffTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TINKATON}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TINKATON}),
     },
 
     [SPECIES_TINKATON] =

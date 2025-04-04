@@ -5058,11 +5058,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     [SPECIES_QWILFISH_HISUI] =
     {
         .baseHP        = 65,
-        .baseAttack    = 95,
-        .baseDefense   = P_UPDATED_STATS >= GEN_7 ? 85 : 75,
-        .baseSpeed     = 85,
-        .baseSpAttack  = 75,
-        .baseSpDefense = 55,
+        .baseAttack    = 90,
+        .baseDefense   = 60,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
         .catchRate = 45,
         .expYield = QWILFISH_EXP_YIELD,
@@ -5125,12 +5125,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_OVERQWIL] =
     {
-        .baseHP        = 85,
+        .baseHP        = 75,
         .baseAttack    = 115,
-        .baseDefense   = 95,
+        .baseDefense   = 85,
         .baseSpeed     = 95,
-        .baseSpAttack  = 115,
-        .baseSpDefense = 70,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 105,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
         .catchRate = 45,
         .expYield = 179,
@@ -6181,12 +6181,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_SWINUB
     [SPECIES_SWINUB] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 50,
-        .baseDefense   = 40,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 30,
-        .baseSpDefense = 30,
+        .baseHP        = 70,
+        .baseAttack    = 70,
+        .baseDefense   = 60,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_ICE, TYPE_GROUND),
         .catchRate = 225,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 50 : 78,
@@ -6256,11 +6256,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     [SPECIES_PILOSWINE] =
     {
         .baseHP        = 100,
-        .baseAttack    = 100,
+        .baseAttack    = 105,
         .baseDefense   = 80,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 60,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_ICE, TYPE_GROUND),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 158 : 160,
@@ -6347,8 +6347,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseAttack    = 130,
         .baseDefense   = 80,
         .baseSpeed     = 80,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 60,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 75,
         .types = MON_TYPES(TYPE_ICE, TYPE_GROUND),
         .catchRate = 50,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
