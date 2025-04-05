@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_setup.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -10,6 +11,7 @@
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "random.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -25,6 +27,7 @@
 #include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3
+#define STARTER_MON_POOL_COUNT   24
 
 // Position of the sprite of the selected starter Pokémon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
@@ -48,6 +51,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
 static void SpriteCB_SelectionHand(struct Sprite *sprite);
 static void SpriteCB_Pokeball(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon(struct Sprite *sprite);
+void GenerateRandomStarters(void);
 
 static u16 sStarterLabelWindowId;
 
@@ -110,11 +114,34 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {8, 4},
 };
 
-static const u16 sStarterMon[STARTER_MON_COUNT] =
+u32 sStarterMon[STARTER_MON_COUNT];
+
+static const u16 sStarterMonPool[STARTER_MON_POOL_COUNT] =
 {
     SPECIES_TREECKO,
     SPECIES_TORCHIC,
     SPECIES_MUDKIP,
+    SPECIES_ZIGZAGOON_GALAR,
+    SPECIES_PAWMI,
+    SPECIES_TINKATINK,
+    SPECIES_BELDUM,
+    SPECIES_SMOLIV,
+    SPECIES_SPRIGATITO,
+    SPECIES_DREEPY,
+    SPECIES_PINCURCHIN,
+    SPECIES_ROOKIDEE,
+    SPECIES_WURMPLE,
+    SPECIES_FLABEBE_WHITE,
+    SPECIES_SPHEAL,
+    SPECIES_RALTS,
+    SPECIES_NIDORAN_F,
+    SPECIES_NIDORAN_M,
+    SPECIES_TRAPINCH,
+    SPECIES_ROLYCOLY,
+    SPECIES_SHINX,
+    SPECIES_GASTLY,
+    SPECIES_SWINUB,
+    SPECIES_LILLIPUP,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -435,6 +462,9 @@ void CB2_ChooseStarter(void)
     SetGpuReg(REG_OFFSET_BLDY, 7);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 
+    GenerateRandomStarters();
+    sChoosingStarter = TRUE;
+
     ShowBg(0);
     ShowBg(2);
     ShowBg(3);
@@ -460,6 +490,33 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sBallId = 2;
 
     sStarterLabelWindowId = WINDOW_NONE;
+}
+
+void GenerateRandomStarters(void)
+{
+    u32 i;
+    u32 tempSpecies = SPECIES_NONE;
+
+    for (i = 0; i < STARTER_MON_COUNT; i++)
+    {
+        u32 j;
+        tempSpecies = RandomElement(RNG_STARTER, sStarterMonPool);
+ 
+        if (i == 0)
+            sStarterMon[i] = tempSpecies;
+        else
+        {
+            for (j = 0; j < STARTER_MON_COUNT; j++)
+            {
+                while (sStarterMon[j] == tempSpecies)
+                    tempSpecies = RandomElement(RNG_STARTER, sStarterMonPool);
+            }
+
+            sStarterMon[i] = tempSpecies;
+        }
+
+    }
+        
 }
 
 static void CB2_StarterChoose(void)

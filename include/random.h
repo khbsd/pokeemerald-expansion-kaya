@@ -197,6 +197,7 @@ enum RandomTag
     RNG_HEALER,
     RNG_PARTY_SIZE,
     RNG_DEXNAV_ENCOUNTER_LEVEL,
+    RNG_STARTER,
 };
 
 #define RandomWeighted(tag, ...) \

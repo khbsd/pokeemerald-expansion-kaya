@@ -312,7 +312,7 @@
 // #define P_FAMILY_TEPIG                P_GEN_5_POKEMON
 // #define P_FAMILY_OSHAWOTT             P_GEN_5_POKEMON
 #define P_FAMILY_PATRAT                  P_GEN_5_POKEMON
-#define P_FAMILY_LILLIPUP                P_GEN_5_POKEMON
+// #define P_FAMILY_LILLIPUP             P_GEN_5_POKEMON
 #define P_FAMILY_PURRLOIN                P_GEN_5_POKEMON
 #define P_FAMILY_PANSAGE                 P_GEN_5_POKEMON
 #define P_FAMILY_PANSEAR                 P_GEN_5_POKEMON
@@ -629,6 +629,7 @@
 #define P_FAMILY_SNIVY                   TRUE
 #define P_FAMILY_TEPIG                   TRUE
 #define P_FAMILY_OSHAWOTT                TRUE
+#define P_FAMILY_LILLIPUP                TRUE
 #define P_FAMILY_ROGGENROLA              TRUE
 #define P_FAMILY_TIMBURR                 TRUE
 #define P_FAMILY_TYMPOLE                 TRUE

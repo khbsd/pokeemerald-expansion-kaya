@@ -1562,12 +1562,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_SMOLIV
     [SPECIES_SMOLIV] =
     {
-        .baseHP        = 45,
+        .baseHP        = 55,
         .baseAttack    = 35,
-        .baseDefense   = 45,
+        .baseDefense   = 65,
         .baseSpeed     = 30,
         .baseSpAttack  = 60,
-        .baseSpDefense = 55,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_GRASS, TYPE_WATER),
         .catchRate = 255,
         .expYield = 52,
@@ -1627,12 +1627,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_DOLLIV] =
     {
-        .baseHP        = 60,
+        .baseHP        = 70,
         .baseAttack    = 55,
-        .baseDefense   = 60,
-        .baseSpeed     = 35,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 80,
+        .baseDefense   = 80,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_GRASS, TYPE_WATER),
         .catchRate = 120,
         .expYield = 124,
@@ -1691,7 +1691,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_ARBOLIVA] =
     {
-        .baseHP        = 85,
+        .baseHP        = 95,
         .baseAttack    = 70,
         .baseDefense   = 100,
         .baseSpeed     = 50,

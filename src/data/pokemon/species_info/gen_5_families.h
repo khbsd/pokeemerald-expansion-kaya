@@ -939,13 +939,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_LILLIPUP
     [SPECIES_LILLIPUP] =
     {
-        .baseHP        = 45,
-        .baseAttack    = 60,
-        .baseDefense   = 45,
+        .baseHP        = 55,
+        .baseAttack    = 70,
+        .baseDefense   = 55,
         .baseSpeed     = 55,
         .baseSpAttack  = 25,
-        .baseSpDefense = 45,
-        .types = MON_TYPES(TYPE_NORMAL),
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_GROUND, TYPE_FAIRY),
         .catchRate = 255,
         .expYield = 55,
         .evYield_Attack = 1,
@@ -1012,13 +1012,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_HERDIER] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 80,
-        .baseDefense   = 65,
-        .baseSpeed     = 60,
+        .baseHP        = 75,
+        .baseAttack    = 85,
+        .baseDefense   = 75,
+        .baseSpeed     = 65,
         .baseSpAttack  = 35,
-        .baseSpDefense = 65,
-        .types = MON_TYPES(TYPE_NORMAL),
+        .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_GROUND, TYPE_FAIRY),
         .catchRate = 120,
         .expYield = 130,
         .evYield_Attack = 2,
@@ -1083,13 +1083,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_STOUTLAND] =
     {
-        .baseHP        = 85,
-        .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 110 : 100,
-        .baseDefense   = 90,
-        .baseSpeed     = 80,
+        .baseHP        = 105,
+        .baseAttack    = 110,
+        .baseDefense   = 105,
+        .baseSpeed     = 85,
         .baseSpAttack  = 45,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_NORMAL),
+        .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_GROUND, TYPE_FAIRY),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 250,
