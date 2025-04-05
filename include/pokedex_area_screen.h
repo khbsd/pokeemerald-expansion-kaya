@@ -1,7 +1,9 @@
 #ifndef GUARD_POKEDEX_AREA_SCREEN_H
 #define GUARD_POKEDEX_AREA_SCREEN_H
 
-extern u32 gAreaTimeOfDay;
+#include "rtc.h"
+
+extern u8 gAreaTimeOfDay;
 
 enum PokedexAreaScreenState
 {
@@ -9,6 +11,6 @@ enum PokedexAreaScreenState
     DEX_UPDATE_AREA_SCREEN
 };
 
-void DisplayPokedexAreaScreen(u16 species, u8 *screenSwitchState, u32 timeOfDay, u32 areaState);
+void DisplayPokedexAreaScreen(u16 species, u8 *screenSwitchState, enum TimeOfDay timeOfDay, enum PokedexAreaScreenState areaState);
 
 #endif // GUARD_POKEDEX_AREA_SCREEN_H

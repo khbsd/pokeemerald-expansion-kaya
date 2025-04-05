@@ -1,5 +1,6 @@
 import json
 import re
+import os
 
 IS_ENABLED            = False
 
@@ -45,6 +46,9 @@ SUPER_ROD             = "super_rod"
 SUPER_ROD_FIRST_INDEX = 5
 SUPER_ROD_LAST_INDEX  = 9
 
+TIME_DEFAULT       = "OW_TIME_OF_DAY_DEFAULT"
+TIME_DEFAULT_LABEL = ""
+TIME_DEFAULT_INDEX = 0
 TIME_MORNING       = "time_morning"
 TIME_MORNING_LABEL = "Morning"
 TIME_MORNING_INDEX = 0
@@ -141,6 +145,10 @@ def ImportWildEncounterFile():
     wFile = open("src/data/wild_encounters.json")
     wData = json.load(wFile)
 
+    if not os.path.exists("Makefile"):
+        print("Please run this script from your root folder.")
+        quit()
+
     encounterTotalCount = []
     encounterCount = []
     groupCount = 0
@@ -201,8 +209,8 @@ def ImportWildEncounterFile():
             headersArray = []
 
             if not IS_ENABLED:
-                structTime = TIME_MORNING_LABEL
-                structLabel = structLabel + "_Morning"
+                structTime = TIME_DEFAULT_LABEL
+                #structLabel = structLabel + "_Morning"
             elif TIME_MORNING_LABEL in structLabel:
                 structTime = TIME_MORNING_LABEL
             elif TIME_DAY_LABEL in structLabel:
@@ -276,6 +284,7 @@ def PrintStructContent(contentList):
 def GetStructLabelWithoutTime(label):
     labelLength = len(label)
     timeLength = 0
+
     if TIME_MORNING_LABEL in label:
         timeLength = len(TIME_MORNING_LABEL)
     elif TIME_DAY_LABEL in label:
@@ -308,8 +317,8 @@ def AssembleMonHeaderContent():
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounterTotalCount"] = encounterTotalCount[headerIndex]
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"] = []
 
-        timeStart = TIME_MORNING_INDEX
-        timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_MORNING_INDEX
+        timeStart = TIME_DEFAULT_INDEX
+        timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_DEFAULT_INDEX
 
         while timeStart <= timeEnd:
             headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"].append([])
@@ -401,7 +410,7 @@ def PrintWildMonHeadersContent():
                     PrintEncounterHeaders(f"{TabStr(2)}.mapGroup = {GetMapGroupEnum(MAP_UNDEFINED)},")
                     PrintEncounterHeaders(f"{TabStr(2)}.mapNum = {GetMapGroupEnum(MAP_UNDEFINED, labelCount + 1)},")
 
-                    timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_MORNING_INDEX
+                    timeEnd = TIME_NIGHT_INDEX if IS_ENABLED else TIME_DEFAULT_INDEX
 
                     nullCount = 0
                     while nullCount <= timeEnd:
@@ -506,6 +515,8 @@ def PrintEncounterRateMacros():
 
 
 def GetTimeStrFromIndex(index):
+    if not IS_ENABLED:
+        return TIME_DEFAULT
     if index == TIME_MORNING_INDEX:
         return TIME_MORNING.upper()
     elif index == TIME_DAY_INDEX:
@@ -518,6 +529,8 @@ def GetTimeStrFromIndex(index):
 
 
 def GetTimeIndexFromString(string):
+    if not IS_ENABLED:
+        return TIME_DEFAULT_INDEX
     if string.lower() == TIME_MORNING or string == TIME_MORNING_LABEL:
         return TIME_MORNING_INDEX
     elif string.lower() == TIME_DAY or string == TIME_DAY_LABEL:

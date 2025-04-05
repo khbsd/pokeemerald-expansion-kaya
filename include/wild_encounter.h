@@ -1,7 +1,6 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
-#include "rtc.h"
 #include "constants/wild_encounter.h"
 
 #define HEADER_NONE 0xFFFF
@@ -42,9 +41,9 @@ struct WildPokemonHeader
     u8 mapNum;
 
 #if OW_TIME_OF_DAY_ENCOUNTERS
-    const struct WildEncounterTypes encounterTypes[TIME_NIGHT + 1];
+    const struct WildEncounterTypes encounterTypes[TIMES_OF_DAY_COUNT];
 #else
-    const struct WildEncounterTypes encounterTypes[TIME_DAY];
+    const struct WildEncounterTypes encounterTypes[1];
 #endif
 };
 
@@ -73,6 +72,6 @@ u8 ChooseWildMonIndex_Land(void);
 u8 ChooseWildMonIndex_WaterRock(void);
 u8 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
-u32 GetTimeOfDayForEncounters(u32 headerId, u32 area);
+enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea);
 
 #endif // GUARD_WILD_ENCOUNTER_H

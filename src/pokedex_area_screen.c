@@ -104,11 +104,11 @@ struct
     /*0xF70*/ u8 charBuffer[64];
     /*0xFB0*/ struct Sprite * areaUnknownSprites[3];
     /*0xFBC*/ u8 areaUnknownGraphicsBuffer[0x600];
-    /*0xFC0*/ u32 areaScreenLabelIds[NUM_LABEL_WINDOWS];
-    /*0xFC8*/ u32 areaState;
+    /*0xFC0*/ u8 areaScreenLabelIds[NUM_LABEL_WINDOWS];
+    /*0xFC8*/ u8 areaState;
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
 
-EWRAM_DATA u32 gAreaTimeOfDay = 0;
+EWRAM_DATA u8 gAreaTimeOfDay = 0;
 
 static void FindMapsWithMon(u16);
 static void BuildAreaGlowTilemap(void);
@@ -708,7 +708,7 @@ bool32 ShouldShowAreaUnknownLabel(void)
 
 #define tState data[0]
 
-void DisplayPokedexAreaScreen(u16 species, u8 *screenSwitchState, u32 timeOfDay, u32 areaState)
+void DisplayPokedexAreaScreen(u16 species, u8 *screenSwitchState, enum TimeOfDay timeOfDay, enum PokedexAreaScreenState areaState)
 {
     u8 taskId;
 

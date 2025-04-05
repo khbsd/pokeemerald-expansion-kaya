@@ -51,7 +51,7 @@ static void UpdateChainFishingStreak();
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
-static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, u32 area);
+static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, enum WildPokemonArea area);
 #ifdef BUGFIX
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex, u32 size);
 #else
@@ -301,7 +301,7 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
-static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, u32 area)
+static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
 {
     u8 min;
     u8 max;
@@ -382,59 +382,13 @@ u16 GetCurrentMapWildMonHeaderId(void)
     return HEADER_NONE;
 }
 
-u32 GetHeaderIdForMetatileBehavior(void)
-{
-    // not sure why GetPlayerCurMetatileBehavior needs an arg but we feed it one anyways
-    int num = 0;
-    u16 curMetatileBehavior = GetPlayerCurMetatileBehavior(num);
-
-    if (curMetatileBehavior == MB_WATERFALL && OW_FLAG_AUTO_USE_WATERFALL && CanAutoUseFieldMove(MOVE_WATERFALL))
-        return 0;
-
-    switch (curMetatileBehavior)
-    {
-    case MB_TALL_GRASS_2:
-    case MB_INDOOR_ENCOUNTER_2:
-    case MB_CAVE_2:
-    case MB_PUDDLE_2:
-    case MB_SAND_2:
-    case MB_POND_WATER_2:
-    case MB_OCEAN_WATER_2:
-    case MB_SEAWEED_NO_SURFACING_2:
-    case MB_SEAWEED_2:
-    case MB_LONG_GRASS_2:
-    case MB_DEEP_SAND_2:
-    case MB_ASHGRASS_2:
-    case MB_DEEP_WATER_2:
-        return 1;
-
-    case MB_TALL_GRASS_3:
-    case MB_INDOOR_ENCOUNTER_3:
-    case MB_CAVE_3:
-    case MB_PUDDLE_3:
-    case MB_SAND_3:
-    case MB_POND_WATER_3:
-    case MB_OCEAN_WATER_3:
-    case MB_SEAWEED_NO_SURFACING_3:
-    case MB_SEAWEED_3:
-    case MB_LONG_GRASS_3:
-    case MB_DEEP_SAND_3:
-    case MB_ASHGRASS_3:
-    case MB_DEEP_WATER_3:
-        return 2;
-
-    default:
-        return 0;
-    }
-}
-
-u32 GetTimeOfDayForEncounters(u32 headerId, u32 area)
+enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area)
 {
     const struct WildPokemonInfo *wildMonInfo;
     u32 timeOfDay = GetTimeOfDay();
 
     if (!OW_TIME_OF_DAY_ENCOUNTERS)
-        return TIME_MORNING;
+        return OW_TIME_OF_DAY_DEFAULT;
 
     if (InBattlePike()) 
     {
@@ -503,8 +457,8 @@ u32 GetTimeOfDayForEncounters(u32 headerId, u32 area)
         }
     }
 
-    if (wildMonInfo == NULL && !OW_TIME_OF_DAY_NO_FALLBACK) 
-        return TIME_MORNING;
+    if (wildMonInfo == NULL && !OW_TIME_OF_DAY_DISABLE_FALLBACK) 
+        return OW_TIME_OF_DAY_FALLBACK;
     else
         return timeOfDay;
 }
@@ -584,7 +538,7 @@ void CreateWildMon(u16 species, u8 level)
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr)
 #endif
 
-static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u32 area, u8 flags)
+static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags)
 {
     u8 wildMonIndex = 0;
     u8 level;
@@ -625,6 +579,10 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u32 a
         break;
     case WILD_AREA_ROCKS:
         wildMonIndex = ChooseWildMonIndex_WaterRock();
+        break;
+    default:
+    case WILD_AREA_FISHING:
+    case WILD_AREA_HIDDEN:
         break;
     }
 
@@ -1213,7 +1171,7 @@ static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u
 
 #include "data.h"
 
-static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, u32 area)
+static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, enum WildPokemonArea area)
 {
     u8 i, maxLevel = 0, numMon = 0;
 
@@ -1228,6 +1186,9 @@ static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16
     case WILD_AREA_ROCKS:
         numMon = ROCK_WILD_COUNT;
         break;
+    default:
+    case WILD_AREA_FISHING:
+    case WILD_AREA_HIDDEN:
     }
 
     for (i = 0; i < numMon; i++)
