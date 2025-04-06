@@ -36111,7 +36111,9 @@
       "MOVE_ROAR",
       "MOVE_CHARGE",
       "MOVE_DOUBLE_EDGE",
-      "MOVE_ELECTROWEB"
+      "MOVE_ELECTROWEB",
+      "MOVE_PSYCHIC",
+      "MOVE_ZEN_HEADBUTT"
     ],
     "EggMoves": [
       "MOVE_BABY_DOLL_EYES",
@@ -36222,7 +36224,9 @@
       "MOVE_ROAR",
       "MOVE_CHARGE",
       "MOVE_DOUBLE_EDGE",
-      "MOVE_ELECTROWEB"
+      "MOVE_ELECTROWEB",
+      "MOVE_PSYCHIC",
+      "MOVE_ZEN_HEADBUTT"
     ],
     "EggMoves": [
       "MOVE_BABY_DOLL_EYES",
@@ -36343,7 +36347,9 @@
       "MOVE_DOUBLE_EDGE",
       "MOVE_SUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
-      "MOVE_THROAT_CHOP"
+      "MOVE_THROAT_CHOP",
+      "MOVE_PSYCHIC",
+      "MOVE_ZEN_HEADBUTT"
     ],
     "EggMoves": [
       "MOVE_BABY_DOLL_EYES",
@@ -71797,7 +71803,11 @@
       "MOVE_SUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_THROAT_CHOP",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_ACID_SPRAY",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_SLUDGE_WAVE",
+      "MOVE_TOXIC"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
@@ -75074,7 +75084,11 @@
       "MOVE_DOUBLE_EDGE",
       "MOVE_SLUDGE_WAVE",
       "MOVE_THROAT_CHOP",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_THUNDER_WAVE",
+      "MOVE_ELECTROWEB",
+      "MOVE_WILD_CHARGE",
+      "MOVE_THUNDER_FANG"
     ],
     "EggMoves": [
       "MOVE_ACID_SPRAY",
@@ -93111,7 +93125,11 @@
       "MOVE_PAIN_SPLIT",
       "MOVE_DOUBLE_EDGE",
       "MOVE_THROAT_CHOP",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_THUNDER_WAVE",
+      "MOVE_ELECTROWEB",
+      "MOVE_WILD_CHARGE",
+      "MOVE_THUNDER_FANG"
     ],
     "EggMoves": [
       "MOVE_ACID_SPRAY",

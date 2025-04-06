@@ -5971,10 +5971,11 @@ static const struct LevelUpMove sQwilfishLevelUpLearnset[] = {
     LEVEL_UP_MOVE(56, MOVE_DESTINY_BOND),
     LEVEL_UP_END
 };
+#endif //P_FAMILY_QWILFISH
 
 #if P_FAMILY_PINCURCHIN
 static const struct LevelUpMove sPincurchinLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_NUZZLE),
     LEVEL_UP_MOVE( 1, MOVE_THUNDER_SHOCK),
     LEVEL_UP_MOVE( 1, MOVE_BARB_BARRAGE),
     LEVEL_UP_MOVE( 1, MOVE_ELECTRIC_TERRAIN),
@@ -5991,9 +5992,7 @@ static const struct LevelUpMove sPincurchinLevelUpLearnset[] = {
     LEVEL_UP_MOVE(60, MOVE_DISCHARGE),
     LEVEL_UP_END
 };
-#endif //P_FAMILY_PINCURCHIN
 
-#if P_HISUIAN_FORMS
 static const struct LevelUpMove sQwilfishHisuiLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_NUZZLE),
     LEVEL_UP_MOVE( 1, MOVE_POISON_STING),
@@ -6016,6 +6015,7 @@ static const struct LevelUpMove sQwilfishHisuiLevelUpLearnset[] = {
     LEVEL_UP_MOVE(48, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(52, MOVE_ACUPRESSURE),
     LEVEL_UP_MOVE(56, MOVE_DESTINY_BOND),
+    LEVEL_UP_MOVE(60, MOVE_WILD_CHARGE),
     LEVEL_UP_END
 };
 
@@ -6041,10 +6041,10 @@ static const struct LevelUpMove sOverqwilLevelUpLearnset[] = {
     LEVEL_UP_MOVE(48, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(52, MOVE_ACUPRESSURE),
     LEVEL_UP_MOVE(56, MOVE_DESTINY_BOND),
+    LEVEL_UP_MOVE(60, MOVE_WILD_CHARGE),
     LEVEL_UP_END
 };
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_QWILFISH
+#endif //P_FAMILY_PINCURCHIN
 
 #if P_FAMILY_SHUCKLE
 static const struct LevelUpMove sShuckleLevelUpLearnset[] = {
@@ -10266,7 +10266,6 @@ static const struct LevelUpMove sLuxrayLevelUpLearnset[] = {
     LEVEL_UP_MOVE(60, MOVE_THUNDER_FANG),
     LEVEL_UP_MOVE(64, MOVE_PSYCHIC_FANGS),
     LEVEL_UP_MOVE(72, MOVE_MIRACLE_EYE),
-    LEVEL_UP_MOVE(80, MOVE_WILD_CHARGE),
     LEVEL_UP_MOVE(80, MOVE_WILD_CHARGE),
     LEVEL_UP_END
 };
