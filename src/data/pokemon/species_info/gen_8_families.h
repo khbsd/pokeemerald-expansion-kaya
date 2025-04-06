@@ -259,9 +259,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     [SPECIES_SCORBUNNY] =
     {
         .baseHP        = 50,
-        .baseAttack    = 71,
+        .baseAttack    = 72,
         .baseDefense   = 40,
-        .baseSpeed     = 69,
+        .baseSpeed     = 73,
         .baseSpAttack  = 40,
         .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_FIRE),
@@ -324,9 +324,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
     [SPECIES_RABOOT] =
     {
         .baseHP        = 65,
-        .baseAttack    = 86,
+        .baseAttack    = 90,
         .baseDefense   = 60,
-        .baseSpeed     = 94,
+        .baseSpeed     = 95,
         .baseSpAttack  = 55,
         .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_FIRE, TYPE_FAIRY),
@@ -386,12 +386,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
     [SPECIES_CINDERACE] =
     {
-        .baseHP        = 80,
-        .baseAttack    = 116,
-        .baseDefense   = 75,
-        .baseSpeed     = 119,
+        .baseHP        = 90,
+        .baseAttack    = 120,
+        .baseDefense   = 80,
+        .baseSpeed     = 120,
         .baseSpAttack  = 65,
-        .baseSpDefense = 75,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_FIRE, TYPE_FAIRY),
         .catchRate = 45,
         .expYield = 265,
@@ -5123,7 +5123,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggMoveLearnset = sPincurchinEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_QWILFISH_HISUI}),
     },
-    
+
     [SPECIES_QWILFISH_HISUI] =
     {
         .baseHP        = 65,

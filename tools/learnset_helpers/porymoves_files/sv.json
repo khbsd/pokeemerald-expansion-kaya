@@ -67868,7 +67868,9 @@
       "MOVE_SUPER_FANG",
       "MOVE_BURNING_JEALOUSY",
       "MOVE_DOUBLE_EDGE",
-      "MOVE_TEMPER_FLARE"
+      "MOVE_TEMPER_FLARE",
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_DRAINING_KISS"
     ],
     "EggMoves": [
       "MOVE_HI_JUMP_KICK",
@@ -67966,7 +67968,9 @@
       "MOVE_WEATHER_BALL",
       "MOVE_BURNING_JEALOUSY",
       "MOVE_DOUBLE_EDGE",
-      "MOVE_TEMPER_FLARE"
+      "MOVE_TEMPER_FLARE",
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_DRAINING_KISS"
     ],
     "EggMoves": [
       "MOVE_HI_JUMP_KICK",
@@ -68090,7 +68094,9 @@
       "MOVE_DOUBLE_EDGE",
       "MOVE_TEMPER_FLARE",
       "MOVE_COACHING",
-      "MOVE_SCORCHING_SANDS"
+      "MOVE_SCORCHING_SANDS",
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_DRAINING_KISS"
     ],
     "EggMoves": [
       "MOVE_HI_JUMP_KICK",
