@@ -29500,7 +29500,10 @@
       "MOVE_TERA_BLAST",
       "MOVE_SAND_TOMB",
       "MOVE_BUG_BITE",
-      "MOVE_SCORCHING_SANDS"
+      "MOVE_SCORCHING_SANDS",
+      "MOVE_X_SCISSOR",
+      "MOVE_LEECH_LIFE",
+      "MOVE_LUNGE"
     ],
     "EggMoves": [
       "MOVE_GUST",
@@ -29648,7 +29651,10 @@
       "MOVE_UPROAR",
       "MOVE_DUAL_WINGBEAT",
       "MOVE_SCORCHING_SANDS",
-      "MOVE_THROAT_CHOP"
+      "MOVE_THROAT_CHOP",
+      "MOVE_X_SCISSOR",
+      "MOVE_LEECH_LIFE",
+      "MOVE_LUNGE"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -29815,7 +29821,10 @@
       "MOVE_BREAKING_SWIPE",
       "MOVE_DRAGON_CHEER",
       "MOVE_ALLURING_VOICE",
-      "MOVE_PSYCHIC_NOISE"
+      "MOVE_PSYCHIC_NOISE",
+      "MOVE_X_SCISSOR",
+      "MOVE_LEECH_LIFE",
+      "MOVE_LUNGE"
     ],
     "EggMoves": [],
     "TutorMoves": []
