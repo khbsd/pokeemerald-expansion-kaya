@@ -6,11 +6,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_CHESPIN
     [SPECIES_CHESPIN] =
     {
-        .baseHP        = 56,
-        .baseAttack    = 61,
+        .baseHP        = 55,
+        .baseAttack    = 65,
         .baseDefense   = 65,
-        .baseSpeed     = 38,
-        .baseSpAttack  = 48,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 50,
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_GRASS),
         .catchRate = 45,
@@ -78,12 +78,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_QUILLADIN] =
     {
         .baseHP        = 61,
-        .baseAttack    = 78,
+        .baseAttack    = 80,
         .baseDefense   = 95,
         .baseSpeed     = 57,
-        .baseSpAttack  = 56,
-        .baseSpDefense = 58,
-        .types = MON_TYPES(TYPE_GRASS),
+        .baseSpAttack  = 57,
+        .baseSpDefense = 59,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = 142,
         .evYield_Defense = 2,
@@ -147,12 +147,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_CHESNAUGHT] =
     {
-        .baseHP        = 88,
-        .baseAttack    = 107,
-        .baseDefense   = 122,
-        .baseSpeed     = 64,
-        .baseSpAttack  = 74,
-        .baseSpDefense = 75,
+        .baseHP        = 90,
+        .baseAttack    = 110,
+        .baseDefense   = 125,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_GRASS, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 265 : 239,

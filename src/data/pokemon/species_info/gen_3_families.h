@@ -9791,7 +9791,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_DUSKULL] =
     {
         .baseHP        = 25,
-        .baseAttack    = 45,
+        .baseAttack    = 50,
         .baseDefense   = 90,
         .baseSpeed     = 20,
         .baseSpAttack  = 35,
@@ -9863,17 +9863,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sDuskullLevelUpLearnset,
         .teachableLearnset = sDuskullTeachableLearnset,
         .eggMoveLearnset = sDuskullEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_DUSCLOPS}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_DUSCLOPS}),
     },
 
     [SPECIES_DUSCLOPS] =
     {
         .baseHP        = 45,
-        .baseAttack    = 77,
-        .baseDefense   = 133,
+        .baseAttack    = 80,
+        .baseDefense   = 100,
         .baseSpeed     = 25,
-        .baseSpAttack  = 67,
-        .baseSpDefense = 133,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_GHOST, TYPE_ICE),
         .catchRate = 90,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 159 : 179,
@@ -9950,7 +9950,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseHP        = 55,
         .baseAttack    = 110,
         .baseDefense   = 140,
-        .baseSpeed     = 45,
+        .baseSpeed     = 40,
         .baseSpAttack  = 70,
         .baseSpDefense = 140,
         .types = MON_TYPES(TYPE_GHOST, TYPE_ICE),

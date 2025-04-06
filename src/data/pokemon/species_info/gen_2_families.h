@@ -1865,9 +1865,9 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_MAREEP
     [SPECIES_MAREEP] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 40,
-        .baseDefense   = 40,
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 50,
         .baseSpeed     = 35,
         .baseSpAttack  = 65,
         .baseSpDefense = 45,
@@ -1938,13 +1938,13 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_FLAAFFY] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 55,
-        .baseDefense   = 55,
+        .baseHP        = 90,
+        .baseAttack    = 65,
+        .baseDefense   = 65,
         .baseSpeed     = 45,
-        .baseSpAttack  = 80,
+        .baseSpAttack  = 90,
         .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_DRAGON),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 128 : 117,
         .evYield_SpAttack = 2,
@@ -2012,7 +2012,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     {
         .baseHP        = 80,
         .baseAttack    = 90,
-        .baseDefense   = AMPHAROS_DEFENSE,
+        .baseDefense   = 95,
         .baseSpeed     = 60,
         .baseSpAttack  = 125,
         .baseSpDefense = 95,

@@ -15250,7 +15250,10 @@
       "MOVE_CHARGE",
       "MOVE_DOUBLE_EDGE",
       "MOVE_ENDEAVOR",
-      "MOVE_ELECTROWEB"
+      "MOVE_ELECTROWEB",
+      "MOVE_DRAGON_PULSE",
+      "MOVE_DRACO_METEOR",
+      "MOVE_DRAGON_TAIL"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",
@@ -15368,7 +15371,10 @@
       "MOVE_FOCUS_PUNCH",
       "MOVE_DOUBLE_EDGE",
       "MOVE_ENDEAVOR",
-      "MOVE_ELECTROWEB"
+      "MOVE_ELECTROWEB",
+      "MOVE_DRAGON_PULSE",
+      "MOVE_DRACO_METEOR",
+      "MOVE_DRAGON_TAIL"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",
@@ -15518,7 +15524,10 @@
       "MOVE_ELECTROWEB",
       "MOVE_METEOR_BEAM",
       "MOVE_BREAKING_SWIPE",
-      "MOVE_DRAGON_CHEER"
+      "MOVE_DRAGON_CHEER",
+      "MOVE_DRAGON_PULSE",
+      "MOVE_DRACO_METEOR",
+      "MOVE_DRAGON_TAIL"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",
