@@ -77766,7 +77766,10 @@
       "MOVE_SOLAR_BEAM",
       "MOVE_TERA_BLAST",
       "MOVE_SOLAR_BLADE",
-      "MOVE_WEATHER_BALL"
+      "MOVE_WEATHER_BALL",
+      "MOVE_RAIN_DANCE",
+      "MOVE_WATER_PULSE",
+      "MOVE_MUDDY_WATER"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
@@ -77856,7 +77859,10 @@
       "MOVE_SOLAR_BEAM",
       "MOVE_TERA_BLAST",
       "MOVE_SOLAR_BLADE",
-      "MOVE_WEATHER_BALL"
+      "MOVE_WEATHER_BALL",
+      "MOVE_RAIN_DANCE",
+      "MOVE_WATER_PULSE",
+      "MOVE_MUDDY_WATER"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
@@ -77975,7 +77981,10 @@
       "MOVE_WEATHER_BALL",
       "MOVE_PSYCH_UP",
       "MOVE_PETAL_BLIZZARD",
-      "MOVE_ALLURING_VOICE"
+      "MOVE_ALLURING_VOICE",
+      "MOVE_RAIN_DANCE",
+      "MOVE_WATER_PULSE",
+      "MOVE_MUDDY_WATER"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",

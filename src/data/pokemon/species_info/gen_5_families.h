@@ -3133,10 +3133,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_TYMPOLE
     [SPECIES_TYMPOLE] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 50,
+        .baseHP        = 60,
+        .baseAttack    = 60,
         .baseDefense   = 40,
-        .baseSpeed     = 64,
+        .baseSpeed     = 65,
         .baseSpAttack  = 50,
         .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_WATER),
@@ -3201,13 +3201,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_PALPITOAD] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 65,
+        .baseHP        = 85,
+        .baseAttack    = 80,
         .baseDefense   = 55,
-        .baseSpeed     = 69,
+        .baseSpeed     = 70,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
-        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND),
+        .types = MON_TYPES(TYPE_WATER, TYPE_ELECTRIC),
         .catchRate = 120,
         .expYield = 134,
         .evYield_HP = 2,
@@ -3216,7 +3216,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
-        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_WATER_ABSORB },
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_VOLT_ABSORB },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Palpitoad"),
         .cryId = CRY_PALPITOAD,
@@ -3272,12 +3272,12 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SEISMITOAD] =
     {
         .baseHP        = 105,
-        .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 95 : 85,
-        .baseDefense   = 75,
-        .baseSpeed     = 74,
+        .baseAttack    = 105,
+        .baseDefense   = 95,
+        .baseSpeed     = 75,
         .baseSpAttack  = 85,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND),
+        .baseSpDefense = 95,
+        .types = MON_TYPES(TYPE_WATER, TYPE_ELECTRIC),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 255,
@@ -3292,7 +3292,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
-        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_POISON_TOUCH, ABILITY_WATER_ABSORB },
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_POISON_TOUCH, ABILITY_VOLT_ABSORB },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Seismitoad"),
         .cryId = CRY_SEISMITOAD,
@@ -3303,7 +3303,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .description = COMPOUND_STRING(
             "It increases the power of its punches\n"
             "by vibrating the bumps on its fists.\n"
-            "They can also shoot paralyzing liquid\n"
+            "They can also shoot electrified liquid\n"
             "from their head bumps."),
         .pokemonScale = 268,
         .pokemonOffset = 2,

@@ -55582,7 +55582,9 @@
       "MOVE_SUBSTITUTE",
       "MOVE_WILD_CHARGE",
       "MOVE_ROCK_SMASH",
-      "MOVE_SNARL"
+      "MOVE_SNARL",
+      "MOVE_EARTHQUAKE",
+      "MOVE_SAND_TOMB"
     ],
     "EggMoves": [
       "MOVE_CHARM",
@@ -55693,7 +55695,10 @@
       "MOVE_ROCK_SMASH",
       "MOVE_SNARL",
       "MOVE_SURF",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_EARTHQUAKE",
+      "MOVE_SAND_TOMB"
+
     ],
     "EggMoves": [
       "MOVE_CHARM",
@@ -55818,7 +55823,10 @@
       "MOVE_ROCK_SMASH",
       "MOVE_SNARL",
       "MOVE_SURF",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_EARTHQUAKE",
+      "MOVE_SAND_TOMB"
+
     ],
     "EggMoves": [
       "MOVE_CHARM",
@@ -58864,7 +58872,9 @@
       "MOVE_SWAGGER",
       "MOVE_SUBSTITUTE",
       "MOVE_ROCK_SMASH",
-      "MOVE_SURF"
+      "MOVE_SURF",
+      "MOVE_THUNDERBOLT",
+      "MOVE_THUNDER"
     ],
     "EggMoves": [
       "MOVE_EARTH_POWER",
@@ -58989,7 +58999,9 @@
       "MOVE_SUBSTITUTE",
       "MOVE_ROCK_SMASH",
       "MOVE_SURF",
-      "MOVE_STRENGTH"
+      "MOVE_STRENGTH",
+      "MOVE_THUNDERBOLT",
+      "MOVE_THUNDER"
     ],
     "EggMoves": [
       "MOVE_EARTH_POWER",
