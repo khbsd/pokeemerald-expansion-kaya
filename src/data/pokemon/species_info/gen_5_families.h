@@ -3157,10 +3157,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 45,
         .description = COMPOUND_STRING(
-            "By vibrating its cheeks, it emits sound\n"
+            "By vibrating its cheeks, it emits static\n"
             "waves imperceptible to humans. It uses\n"
-            "the rhythm of these sounds to talk and\n"
-            "warns others of danger."),
+            "the frequency of these sounds to talk\n"
+            "and warn others of danger."),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3227,7 +3227,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .description = COMPOUND_STRING(
             "It lives in the water and on land.\n"
             "When they vibrate the bumps on their\n"
-            "heads, they can make waves in water\n"
+            "heads, the static makes waves in water\n"
             "or earthquake-like vibrations on land."),
         .pokemonScale = 366,
         .pokemonOffset = 10,
