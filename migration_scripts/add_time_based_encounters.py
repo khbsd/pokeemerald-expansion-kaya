@@ -1,7 +1,13 @@
 import json
 import sys
 
-# you can change these if you're adding seasons/days of the week, etc
+
+"""
+- you can change/add to these if you're adding seasons/days of the week, etc
+- if you're just adding times of the day, make sure they are in the same order
+as the `TimeOfDay` enum in include/rtc.h.
+- you don't need to add an entry for `TIMES_OF_DAY_COUNT`
+"""
 ENCOUNTER_GROUP_SUFFIX = [
     "Morning",
     "Day",
@@ -9,19 +15,24 @@ ENCOUNTER_GROUP_SUFFIX = [
     "Night"
 ]
 
-
 ARGS = [
     "--copy",
 ]
 
+"""
+- make sure this number is the same as `OW_TIME_OF_DAY_DEFAULT` in config/overworld.h.
+- by default in config/overworld.h it is set to `TIME_MORNING`, which is 0 in the
+`TimeOfDay` enum in include/rtc.h
+"""
+OW_TIME_OF_DAY_DEFAULT = 0
+
 
 def GetWildEncounterFile():
-    wFile = open("../src/data/wild_encounters.json")
+    wFile = open("src/data/wild_encounters.json")
     wData = json.load(wFile)
 
     wBackupData = json.dumps(wData, indent=2)
-    wBackupFile = open("../src/data/wild_encounters.json.bak", mode="w", encoding="utf-8")
-
+    wBackupFile = open("src/data/wild_encounters.json.bak", mode="w", encoding="utf-8")
     wBackupFile.write(wBackupData)
 
     global COPY_FULL_ENCOUNTER
@@ -51,21 +62,21 @@ def GetWildEncounterFile():
             if editMap:
                 k = 0
                 for suffix in ENCOUNTER_GROUP_SUFFIX:
-                    tempLabel = map["base_label"] + "_" + suffix
-                    tempMapLabel = ""
-                    if k == 1 or COPY_FULL_ENCOUNTER:
+                    tempDict = dict()
+                    if k == OW_TIME_OF_DAY_DEFAULT or COPY_FULL_ENCOUNTER:
                         tempDict = map.copy()
-                    else:
-                        tempDict = dict()
-                    
+
+                    tempMapLabel = ""
                     if "map" in map:
                         tempMapLabel = map["map"]
                         tempDict["map"] = tempMapLabel
 
+                    tempLabel = map["base_label"] + "_" + suffix
                     tempDict["base_label"] = tempLabel
                     wEncounters_New.append(tempDict)
                     if map["base_label"] in wEncounters_New:
                         wEncounters_New[map["base_label"]].pop()
+
                     print(tempLabel + " added")
                     k += 1
 
@@ -76,28 +87,8 @@ def GetWildEncounterFile():
         j += 1
 
     wNewData = json.dumps(wData, indent=2)
-    wNewFile = open("../src/data/wild_encounters.json", mode="w", encoding="utf-8")
-
+    wNewFile = open("src/data/wild_encounters.json", mode="w", encoding="utf-8")
     wNewFile.write(wNewData)
-    
-
-def GetMonTable(mons):
-    tempArr = []
-    i = 0
-
-    for monTable in mons:
-        if IsMonTable(monTable):
-            tempArr.append({ monTable: mons[monTable] })
-        i += 1
-    
-    return tempArr
-
-
-def IsMonTable(monTable):
-    return (monTable == "land_mons" 
-        or monTable ==  "water_mons" 
-        or monTable ==  "rock_smash_mons"
-        or monTable ==  "fishing_mons")
 
 
 GetWildEncounterFile()
