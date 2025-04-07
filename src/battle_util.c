@@ -9578,6 +9578,12 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
         if (IsSoundMove(move))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_SOUNDPROOF:
+        u32 isWhismur = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_WHISMUR;
+        u32 isLoudred = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_LOUDRED;
+        u32 isExploud = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_EXPLOUD;
+        if (IsSoundMove(move) && (isWhismur || isLoudred || isExploud))
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     case ABILITY_STEELY_SPIRIT:
         if (moveType == TYPE_STEEL)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
@@ -10411,6 +10417,10 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(u32 move, u32 moveType, u32 
     case ABILITY_PRISM_ARMOR:
         if (typeEffectivenessModifier >= UQ_4_12(2.0))
             return UQ_4_12(0.75);
+        break;
+    case ABILITY_BURN_ENTRY:
+        if (IsMoveMakingContact(move, battlerAtk))
+            return UQ_4_12(0.85);
         break;
     case ABILITY_FLUFFY:
         if (!IsMoveMakingContact(move, battlerAtk) && moveType == TYPE_FIRE)

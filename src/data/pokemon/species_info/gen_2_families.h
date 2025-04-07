@@ -5617,11 +5617,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_TEDDIURSA
     [SPECIES_TEDDIURSA] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 80,
+        .baseHP        = 55,
+        .baseAttack    = 75,
         .baseDefense   = 50,
         .baseSpeed     = 40,
-        .baseSpAttack  = 50,
+        .baseSpAttack  = 45,
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_NORMAL),
         .catchRate = 120,
@@ -5686,18 +5686,18 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sTeddiursaLevelUpLearnset,
         .teachableLearnset = sTeddiursaTeachableLearnset,
         .eggMoveLearnset = sTeddiursaEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_URSARING}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_URSARING}),
     },
 
     [SPECIES_URSARING] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 130,
-        .baseDefense   = 75,
-        .baseSpeed     = 55,
-        .baseSpAttack  = 75,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_NORMAL),
+        .baseHP        = 75,
+        .baseAttack    = 90,
+        .baseDefense   = 70,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_NORMAL, TYPE_GROUND),
         .catchRate = 60,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 175 : 189,
         .evYield_Attack = 2,
@@ -5771,7 +5771,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sUrsaringLevelUpLearnset,
         .teachableLearnset = sUrsaringTeachableLearnset,
         .evolutions = EVOLUTION({EVO_ITEM_NIGHT, ITEM_PEAT_BLOCK, SPECIES_URSALUNA},
-                                {EVO_NONE, 0, SPECIES_URSALUNA_BLOODMOON}),
+                                {EVO_NONE, 0, SPECIES_URSALUNA_BLOODMOON}), // moon stone, while holding peat block at night
     },
 
 #if P_GEN_8_CROSS_EVOS
@@ -5780,7 +5780,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseHP        = 130,
         .baseAttack    = 140,
         .baseDefense   = 105,
-        .baseSpeed     = 50,
+        .baseSpeed     = 55,
         .baseSpAttack  = 45,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_GROUND, TYPE_NORMAL),
