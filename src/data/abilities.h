@@ -2466,4 +2466,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
+    [ABILITY_BURN_ENTRY] =
+    {
+        .name = _("Burn Entry"),
+        .description = COMPOUND_STRING("Weakens contact attacks."),
+        .aiRating = 6,
+    },
 };
