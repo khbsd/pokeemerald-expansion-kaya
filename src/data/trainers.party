@@ -4635,6 +4635,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
 - Slash
 
+Gothitelle @ Sitrus Berry
+Level: 51
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Psychic
+- Hypnosis
+- Nasty Plot
+- Psybeam
+
 === TRAINER_PHOEBE ===
 Name: PHOEBE
 Class: Elite Four
@@ -4678,13 +4686,21 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Thunderbolt
 - Facade
 
-Dusclops @ Sitrus Berry
+Dusknoir @ Sitrus Berry
 Level: 52
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shadow Ball
 - Ice Beam
 - Rock Slide
 - Earthquake
+
+Marowak @ Sitrus Berry
+Level: 53
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bonemerang
+- Shadow Bone
+- Focus Energy
+- Shadow Claw
 
 === TRAINER_GLACIA ===
 Name: GLACIA
@@ -4737,6 +4753,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Ice Beam
 - Sheer Cold
 
+Dusknoir @ Sitrus Berry
+Level: 57
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Avalanche
+- Haze
+- Ice Ball
+- Shadow Claw
+
 === TRAINER_DRAKE ===
 Name: DRAKE
 Class: Elite Four
@@ -4748,13 +4772,13 @@ Double Battle: No
 AI: Smart Trainer
 Mugshot: Blue
 
-Shelgon
+Ampharos @ Sitrus Berry
 Level: 53
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Rock Tomb
-- Dragon Claw
+- Thunder Punch
+- Dragon Pulse
 - Protect
-- Double Edge
+- Power Gem
 
 Altaria
 Level: 54
@@ -4788,13 +4812,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Crunch
 
+Sceptile @ Sitrus Berry
+Level: 56
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Giga Drain
+- Dragon Claw
+- Quick Guard
+- Grassy Terrain
+
 === TRAINER_ROXANNE_1 ===
 Name: ROXANNE
 Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Potion / Potion
+Items: Potion / Potion / Potion / Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -4806,12 +4838,13 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Rock Throw
 - Rock Tomb
 
-Geodude
-Level: 14
+Archen @ Sitrus Berry
+Ability: Blood Feather
+Level: 16
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Tackle
-- Defense Curl
-- Rock Throw
+- Aerial Ace
+- Roost
+- Ancient Power
 - Rock Tomb
 
 Nosepass @ Oran Berry
@@ -4822,13 +4855,21 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Tackle
 - Rock Tomb
 
+Graveler @ Oran Berry
+Level: 18
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Rollout
+- Harden
+- Tackle
+- Rock Tomb
+
 === TRAINER_BRAWLY_1 ===
 Name: BRAWLY
 Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Super Potion / Super Potion
+Items: Super Potion / Super Potion / Super Potion / Super Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -4856,13 +4897,21 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Reversal
 - Bulk Up
 
+Pawmo @ Sitrus Berry
+Level: 20
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Arm Thrust
+- Nuzzle
+- Quick Attack
+- Bulk Up
+
 === TRAINER_WATTSON_1 ===
 Name: WATTSON
 Class: Leader
 Pic: Leader Wattson
 Gender: Male
 Music: Male
-Items: Super Potion / Super Potion
+Items: Super Potion / Super Potion / Super Potion / Super Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -4879,6 +4928,14 @@ Level: 20
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Shock Wave
 - Leer
+- Quick Attack
+- Howl
+
+Palpitoad @ Oran Berry
+Level: 22
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Spark
+- Bubblebeam
 - Quick Attack
 - Howl
 
@@ -4904,7 +4961,7 @@ Class: Leader
 Pic: Leader Flannery
 Gender: Female
 Music: Female
-Items: Hyper Potion / Hyper Potion
+Items: Hyper Potion / Hyper Potion / Hyper Potion / Hyper Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -4940,13 +4997,21 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Body Slam
 - Attract
 
+Ninetails @ Sitrus Berry
+Level: 31
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Overheat
+- Calm Mind
+- Flamethrower
+- Shadow Ball
+
 === TRAINER_NORMAN_1 ===
 Name: NORMAN
 Class: Leader
 Pic: Leader Norman
 Gender: Male
 Music: Male
-Items: Hyper Potion / Hyper Potion
+Items: Hyper Potion / Hyper Potion / Hyper Potion / Hyper Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -4982,6 +5047,14 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Facade
 - Feint Attack
 
+Ursaluna @ Sitrus Berry
+Level: 33
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Hammer Arm
+- Swords Dance
+- Facade
+- Aerial Ace
+
 === TRAINER_WINONA_1 ===
 Name: WINONA
 Class: Leader
@@ -5000,12 +5073,12 @@ IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 - Safeguard
 - Aerial Ace
 
-Tropius
-Level: 30
+Tropius @ Sitrus Berry
+Level: 34
 IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
-- Sunny Day
+- Dragon Dance
 - Aerial Ace
-- Solar Beam
+- Giga Drain
 - Synthesis
 
 Pelipper
@@ -5031,6 +5104,15 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Breath
 - Dragon Dance
 - Aerial Ace
+
+Swellow @ Flame Orb
+Level: 36
+Ability: Guts
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Facade
+- Aerial Ace
+- Brave Bird
+- Roost
 
 === TRAINER_TATE_AND_LIZA_1 ===
 Name: TATE&LIZA
@@ -5074,13 +5156,29 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Psychic
 - Flamethrower
 
+Luxray @ Sitrus Berry
+Level: 46
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Calm Mind
+- Play Rough
+- Psychic
+- Thunder Fang
+
+Milotic @ Chesto Berry
+Level: 47
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Psychic
+- Calm Mind
+- Dragon Pulse
+- Aqua Ring
+
 === TRAINER_JUAN_1 ===
 Name: JUAN
 Class: Leader
 Pic: Leader Juan
 Gender: Male
 Music: Male
-Items: Hyper Potion / Hyper Potion
+Items: Hyper Potion / Hyper Potion / Hyper Potion / Hyper Potion
 Double Battle: No
 AI: Smart Trainer
 
@@ -5123,6 +5221,15 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Double Team
 - Ice Beam
 - Rest
+
+Arboliva @ Chesto Berry
+Level: 48
+Ability: Brineblood
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Water Pulse
+- Aqua Ring
+- Ice Beam
+- Leech Seed
 
 === TRAINER_JERRY_1 ===
 Name: JERRY
@@ -6292,11 +6399,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Surf
 
 Milotic @ Sitrus Berry
-Level: 61
+Level: 63
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Recover
-- Surf
-- Ice Beam
+- Dragon Dance
+- Dragon Pulse
 - Toxic
 
 === TRAINER_ANDREW ===
@@ -15871,12 +15978,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Spikes
 - Steel Wing
 
-Claydol
+Corviknight
+Ability: Mirror Armor
 Level: 75
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Reflect
-- Light Screen
-- Ancient Power
+- Iron Head
+- Air Slash
+- Hone Claws
 - Earthquake
 
 Aggron
@@ -15887,13 +15995,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Solar Beam
 - Dragon Claw
 
-Cradily
+Obstagoon @ Sitrus Berry
+Ability: Prism Armor
 Level: 76
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Giga Drain
-- Ancient Power
-- Ingrain
-- Confuse Ray
+- Obstruct
+- Iron Tail
+- Embargo
+- Throat Chop
 
 Armaldo
 Level: 76
