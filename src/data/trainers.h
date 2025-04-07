@@ -1175,7 +1175,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 540
-            .species = SPECIES_GOLBAT,
+            .species = SPECIES_CROBAT,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 542
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
@@ -15277,7 +15277,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 6167
-            .species = SPECIES_DUSCLOPS,
+            .species = SPECIES_DUSKNOIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6169
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
@@ -23696,7 +23696,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 9489
-            .species = SPECIES_GOLBAT,
+            .species = SPECIES_CROBAT,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9491
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
