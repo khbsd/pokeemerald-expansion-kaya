@@ -528,6 +528,7 @@ struct RankingHall2P
     //u8 padding;
 };
 
+//TODO: u8 filler for saving player mon faints?
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
