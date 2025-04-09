@@ -1,4 +1,6 @@
 #include "global.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "string_util.h"

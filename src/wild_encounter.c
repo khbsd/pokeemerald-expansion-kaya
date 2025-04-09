@@ -510,6 +510,87 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
         return timeOfDay;
 }
 
+enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area)
+{
+    const struct WildPokemonInfo *wildMonInfo;
+    enum TimeOfDay timeOfDay = GetTimeOfDay();
+
+    if (!OW_TIME_OF_DAY_ENCOUNTERS)
+        return OW_TIME_OF_DAY_DEFAULT;
+
+    if (InBattlePike()) 
+    {
+        switch (area)
+        {
+        default:
+        case WILD_AREA_LAND:
+            wildMonInfo = gBattlePikeWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+            break;
+        case WILD_AREA_WATER:
+            wildMonInfo = gBattlePikeWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+            break;
+        case WILD_AREA_ROCKS:
+            wildMonInfo = gBattlePikeWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+            break;
+        case WILD_AREA_FISHING:
+            wildMonInfo = gBattlePikeWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+            break;
+        case WILD_AREA_HIDDEN:
+            wildMonInfo = gBattlePikeWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+            break;
+        }
+    }
+    else if (InBattlePyramid())
+    {
+        switch (area)
+        {
+        default:
+        case WILD_AREA_LAND:
+            wildMonInfo = gBattlePyramidWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+            break;
+        case WILD_AREA_WATER:
+            wildMonInfo = gBattlePyramidWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+            break;
+        case WILD_AREA_ROCKS:
+            wildMonInfo = gBattlePyramidWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+            break;
+        case WILD_AREA_FISHING:
+            wildMonInfo = gBattlePyramidWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+            break;
+        case WILD_AREA_HIDDEN:
+            wildMonInfo = gBattlePyramidWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+            break;
+        }
+    }
+    else 
+    {
+        switch (area)
+        {
+        default:
+        case WILD_AREA_LAND:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+            break;
+        case WILD_AREA_WATER:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+            break;
+        case WILD_AREA_ROCKS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+            break;
+        case WILD_AREA_FISHING:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+            break;
+        case WILD_AREA_HIDDEN:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+            break;
+        }
+    }
+
+    if (wildMonInfo == NULL && !OW_TIME_OF_DAY_DISABLE_FALLBACK) 
+        return OW_TIME_OF_DAY_FALLBACK;
+    else
+        return timeOfDay;
+}
+
 u8 PickWildMonNature(void)
 {
     u8 i;

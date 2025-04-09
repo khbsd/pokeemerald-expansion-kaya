@@ -83,7 +83,6 @@ def GetWildEncounterFile():
 
                     print(tempLabel + " added")
                     k += 1
-
             else:
                 wEncounters_New.append(map.copy())
 
