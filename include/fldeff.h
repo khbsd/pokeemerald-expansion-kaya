@@ -59,4 +59,8 @@ void FieldCallback_RockSmash(void);
 bool8 SetUpFieldMove_Defog(void);
 bool8 FldEff_Defog(void);
 
+// defog
+bool8 SetUpFieldMove_Defog(void);
+bool8 FldEff_Defog(void);
+
 #endif // GUARD_FLDEFF_H
