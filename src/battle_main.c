@@ -75,6 +75,7 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "cable_club.h"
+//#include "gba/isagbprint.h"
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -428,6 +429,33 @@ const u8 *const gStatusConditionStringsTable[][2] =
     {gStatusConditionString_ConfusionJpn, gText_Confusion},
     {gStatusConditionString_LoveJpn, gText_Love}
 };
+
+u32 GetAdjustedLevel(u32 level)
+{
+    u32 newLevel = level;
+
+    if (!B_MON_FAINT_SCALING)
+        return level;
+
+    if (level + gSaveBlock2Ptr->playerFaintCounter > MAX_LEVEL)
+        return MAX_LEVEL;
+
+    if (B_MON_FAINT_SCALING_RATE == 1)
+    {
+        newLevel = level + gSaveBlock2Ptr->playerFaintCounter;
+    }
+    else if (B_MON_FAINT_SCALING_RATE > 1)
+    {
+        if (gSaveBlock2Ptr->playerFaintCounter % B_MON_FAINT_SCALING_RATE == 1)
+            newLevel = level + (gSaveBlock2Ptr->playerFaintCounter * B_MON_FAINT_SCALING_AMOUNT);
+
+        if (newLevel > MAX_LEVEL)
+            newLevel = MAX_LEVEL;
+    }
+        
+    
+    return newLevel;
+}
 
 void CB2_InitBattle(void)
 {
@@ -1995,7 +2023,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
             // TODO: player mon faint count add to .lvl here
-            CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            CreateMon(&party[i], partyData[monIndex].species, GetAdjustedLevel(partyData[monIndex].lvl), 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);

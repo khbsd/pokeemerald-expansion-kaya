@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_main.h"
 #include "event_data.h"
 #include "pokemon.h"
 #include "random.h"
@@ -100,7 +101,7 @@ void MoveAllRoamers(void)
 static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
 {
     ClearRoamerLocationHistory(index);
-    CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gEnemyParty[0], species, GetAdjustedLevel(level), USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     ROAMER(index)->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
     ROAMER(index)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;
@@ -242,7 +243,7 @@ void CreateRoamerMonInstance(u32 roamerIndex)
     u32 status = ROAMER(roamerIndex)->statusA + (ROAMER(roamerIndex)->statusB << 8);
     struct Pokemon *mon = &gEnemyParty[0];
     ZeroEnemyPartyMons();
-    CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, ROAMER(roamerIndex)->level, ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
+    CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, GetAdjustedLevel(ROAMER(roamerIndex)->level), ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
     // The roamer's status field is u16, but SetMonData expects status to be u32, so will set the roamer's status
     // using the status field and the following 3 bytes (cool, beauty, and cute).
     SetMonData(mon, MON_DATA_STATUS, &status);
