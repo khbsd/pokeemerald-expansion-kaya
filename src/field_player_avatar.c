@@ -851,7 +851,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if (((heldKeys & B_BUTTON) || (gRunToggled)) && FlagGet(FLAG_SYS_B_DASH)
+    if (((heldKeys & B_BUTTON) || gRunToggled) && FlagGet(FLAG_SYS_B_DASH)
         && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))

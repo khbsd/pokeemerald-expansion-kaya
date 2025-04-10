@@ -328,7 +328,7 @@
 // #define P_FAMILY_TYMPOLE              P_GEN_5_POKEMON
 #define P_FAMILY_THROH                   P_GEN_5_POKEMON
 #define P_FAMILY_SAWK                    P_GEN_5_POKEMON
-#define P_FAMILY_SEWADDLE                P_GEN_5_POKEMON
+// #define P_FAMILY_SEWADDLE             P_GEN_5_POKEMON
 // #define P_FAMILY_VENIPEDE             P_GEN_5_POKEMON
 // #define P_FAMILY_COTTONEE             P_GEN_5_POKEMON
 #define P_FAMILY_PETILIL                 P_GEN_5_POKEMON
@@ -633,6 +633,7 @@
 #define P_FAMILY_ROGGENROLA              TRUE
 #define P_FAMILY_TIMBURR                 TRUE
 #define P_FAMILY_TYMPOLE                 TRUE
+#define P_FAMILY_SEWADDLE                TRUE
 #define P_FAMILY_LITWICK                 TRUE
 #define P_FAMILY_VENIPEDE                TRUE
 #define P_FAMILY_COTTONEE                TRUE

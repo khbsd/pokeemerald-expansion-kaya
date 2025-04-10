@@ -3492,12 +3492,12 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SEWADDLE] =
     {
         .baseHP        = 45,
-        .baseAttack    = 53,
+        .baseAttack    = 55,
         .baseDefense   = 70,
-        .baseSpeed     = 42,
+        .baseSpeed     = 45,
         .baseSpAttack  = 40,
         .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
+        .types = MON_TYPES(TYPE_BUG, TYPE_GHOST),
         .catchRate = 255,
         .expYield = 62,
         .evYield_Defense = 1,
@@ -3512,14 +3512,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .speciesName = _("Sewaddle"),
         .cryId = CRY_SEWADDLE,
         .natDexNum = NATIONAL_DEX_SEWADDLE,
-        .categoryName = _("Sewing"),
+        .categoryName = _("Cloth Leaf"),
         .height = 3,
         .weight = 25,
         .description = COMPOUND_STRING(
-            "It chews up leaves and sews them with\n"
-            "sticky thread extruded from its mouth.\n"
-            "Since this Pokémon makes its own clothes,\n"
-            "it is a mascot for fashion designers."),
+            "It gives the cloth it makes to lost\n"
+            "baby Pokémon it meets to keep them warm.\n"
+            "It takes comfort knowing it can keep\n"
+            "others company even if it's lonely."),
         .pokemonScale = 530,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3563,13 +3563,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_SWADLOON] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 63,
+        .baseHP        = 65,
+        .baseAttack    = 75,
         .baseDefense   = 90,
-        .baseSpeed     = 42,
+        .baseSpeed     = 45,
         .baseSpAttack  = 50,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
+        .baseSpDefense = 90,
+        .types = MON_TYPES(TYPE_BUG, TYPE_GHOST),
         .catchRate = 120,
         .expYield = 133,
         .evYield_Defense = 2,
@@ -3584,14 +3584,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .speciesName = _("Swadloon"),
         .cryId = CRY_SWADLOON,
         .natDexNum = NATIONAL_DEX_SWADLOON,
-        .categoryName = _("Leaf-Wrapped"),
+        .categoryName = _("Leaf Shroud"),
         .height = 5,
         .weight = 73,
         .description = COMPOUND_STRING(
-            "Forests where Swadloon live have\n"
-            "superb foliage because the nutrients\n"
-            "they make from fallen leaves nourish\n"
-            "the plant life."),
+            "Swadloon live in groups of two or three.\n"
+            "The forests they inhabit grow lush\n"
+            "from the positive energy they get from\n"
+            "wrapping others in their soft silk."),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3633,13 +3633,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_LEAVANNY] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 103,
+        .baseHP        = 90,
+        .baseAttack    = 125,
         .baseDefense   = 80,
-        .baseSpeed     = 92,
+        .baseSpeed     = 110,
         .baseSpAttack  = 70,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_BUG, TYPE_GHOST),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 250,
@@ -3660,14 +3660,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .speciesName = _("Leavanny"),
         .cryId = CRY_LEAVANNY,
         .natDexNum = NATIONAL_DEX_LEAVANNY,
-        .categoryName = _("Nurturing"),
+        .categoryName = _("Kind Shroud"),
         .height = 12,
         .weight = 205,
         .description = COMPOUND_STRING(
-            "It keeps its eggs warm with heat from\n"
-            "fermenting leaves. It also uses leaves to\n"
-            "weave warm wrappings for Sewaddle by\n"
-            "using the silk secreted from its mouth."),
+            "It keeps itself and its friends warm\n"
+            "with warm wrappings made of leaves and\n"
+            "its own silk. It also cares for baby\n"
+            "Pokémon it finds in the same way."),
         .pokemonScale = 282,
         .pokemonOffset = 3,
         .trainerScale = 256,
