@@ -733,13 +733,9 @@ static void UpdateBlendRegisters(void)
         u16 bldAlpha = GetGpuReg(REG_OFFSET_BLDALPHA);
         u8 tgt1 = BLDALPHA_TGT1(bldAlpha);
         u8 tgt2 = BLDALPHA_TGT2(bldAlpha);
-        u8 mode = (gPaletteFade_blendCnt & BLDCNT_EFFECT_EFF_MASK) == BLDCNT_EFFECT_LIGHTEN ? FADE_FROM_WHITE : FADE_FROM_BLACK;
-        if (!gPaletteFade.yDec)
-            mode++;
+        u8 bldFade;
 
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
-
-        switch (mode)
+        switch (gPaletteFade_blendCnt & BLDCNT_EFFECT_EFF_MASK)
         {
         // FADE_TO_BLACK
         case BLDCNT_EFFECT_DARKEN:
