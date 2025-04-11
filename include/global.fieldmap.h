@@ -38,7 +38,7 @@ typedef void (*TilesetCB)(void);
 struct Tileset
 {
     /*0x00*/ u8 isCompressed:1;
-    /*0x00*/ u8 swapPalettes:7; // bitmask determining whether palette has an alternate, night-time palette
+    /*0x00*/ u8 swapPalettes:7; // Bitmask determining whether palette has an alternate, night-time palette
     /*0x01*/ bool8 isSecondary;
     /*0x02*/ u8 lightPalettes; // Bitmask determining whether a palette should be time-blended as a light
     /*0x03*/ u8 customLightColor; // Bitmask determining which light palettes have custom light colors (color 15)
@@ -198,7 +198,8 @@ struct ObjectEvent
              u32 fixedPriority:1;
              u32 hideReflection:1;
              u32 shiny:1; // OW mon shininess
-             u32 padding:3;
+             u32 jumpDone:1;
+             u32 padding:2;
     /*0x04*/ u16 graphicsId; // 12 bits for species; high 4 bits for form
     /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;

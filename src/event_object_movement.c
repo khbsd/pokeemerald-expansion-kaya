@@ -5723,7 +5723,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         direction = gObjectEvents[gPlayerAvatar.objectEventId].movementDirection;
         objectEvent->facingDirectionLocked = TRUE;
     }
-    
+
     MoveCoords(direction, &x, &y);
     GetCollisionAtCoords(objectEvent, x, y, direction); // Sets directionOverwrite for stairs
     if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
@@ -7240,6 +7240,8 @@ static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 
 
 static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
+    if (OW_OBJECT_VANILLA_SHADOWS)
+        SetUpShadow(objectEvent);
     // For follower only, match the anim duration of the player's movement, whether dashing, walking or jumping
     if (objectEvent->localId == OBJ_EVENT_ID_FOLLOWER
       && type == JUMP_TYPE_HIGH
@@ -7278,6 +7280,10 @@ static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite,
         objectEvent->triggerGroundEffectsOnStop = TRUE;
         objectEvent->landingJump = TRUE;
         sprite->animPaused = TRUE;
+        if (OW_OBJECT_VANILLA_SHADOWS)
+            //  Somewhat ugly workaround, the shadow is disabled in UpdateShadowFieldEffect,
+            //  but due to code changes from DNS, it needs new signaling
+            objectEvent->jumpDone = TRUE;
     }
     return result;
 }
@@ -8271,7 +8277,7 @@ bool8 MovementAction_JumpDown_Step1(struct ObjectEvent *objectEvent, struct Spri
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8288,7 +8294,7 @@ bool8 MovementAction_JumpUp_Step1(struct ObjectEvent *objectEvent, struct Sprite
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8305,7 +8311,7 @@ bool8 MovementAction_JumpLeft_Step1(struct ObjectEvent *objectEvent, struct Spri
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8322,7 +8328,7 @@ bool8 MovementAction_JumpRight_Step1(struct ObjectEvent *objectEvent, struct Spr
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8339,7 +8345,7 @@ bool8 MovementAction_JumpInPlaceDown_Step1(struct ObjectEvent *objectEvent, stru
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8356,7 +8362,7 @@ bool8 MovementAction_JumpInPlaceUp_Step1(struct ObjectEvent *objectEvent, struct
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8373,7 +8379,7 @@ bool8 MovementAction_JumpInPlaceLeft_Step1(struct ObjectEvent *objectEvent, stru
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8390,7 +8396,7 @@ bool8 MovementAction_JumpInPlaceRight_Step1(struct ObjectEvent *objectEvent, str
 {
     if (DoJumpAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8407,7 +8413,7 @@ bool8 MovementAction_JumpInPlaceDownUp_Step1(struct ObjectEvent *objectEvent, st
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8424,7 +8430,7 @@ bool8 MovementAction_JumpInPlaceUpDown_Step1(struct ObjectEvent *objectEvent, st
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8441,7 +8447,7 @@ bool8 MovementAction_JumpInPlaceLeftRight_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -8458,7 +8464,7 @@ bool8 MovementAction_JumpInPlaceRightLeft_Step1(struct ObjectEvent *objectEvent,
 {
     if (DoJumpInPlaceAnim(objectEvent, sprite))
     {
-        objectEvent->noShadow = 0;
+        objectEvent->noShadow = FALSE;
         sprite->sActionFuncId = 2;
         return TRUE;
     }
@@ -10213,11 +10219,6 @@ static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct S
     GroundEffect_Seaweed                // GROUND_EFFECT_FLAG_SEAWEED
 };
 
-static void GroundEffect_Shadow(struct ObjectEvent *objEvent, struct Sprite *sprite)
-{
-    SetUpShadow(objEvent, sprite);
-}
-
 static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 flags)
 {
     u32 i;
@@ -10227,8 +10228,10 @@ static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *
     for (i = 0; i < ARRAY_COUNT(sGroundEffectFuncs); i++, flags >>= 1)
         if (flags & 1)
             sGroundEffectFuncs[i](objEvent, sprite);
-    if (!(gWeatherPtr->noShadows || objEvent->inHotSprings || objEvent->inSandPile || MetatileBehavior_IsPuddle(objEvent->currentMetatileBehavior)))
-        GroundEffect_Shadow(objEvent, sprite);
+    if (!OW_OBJECT_VANILLA_SHADOWS && CurrentMapHasShadows() && !(gWeatherPtr->noShadows || objEvent->inHotSprings || objEvent->inSandPile || MetatileBehavior_IsPuddle(objEvent->currentMetatileBehavior)))
+    {
+        SetUpShadow(objEvent);
+    }
 }
 
 void filters_out_some_ground_effects(struct ObjectEvent *objEvent, u32 *flags)
