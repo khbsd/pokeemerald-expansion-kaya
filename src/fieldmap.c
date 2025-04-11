@@ -12,10 +12,8 @@
 #include "pokenav.h"
 #include "script.h"
 #include "secret_base.h"
-#include "sound.h"
 #include "trainer_hill.h"
 #include "tv.h"
-#include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
 #include "wild_encounter.h"
@@ -889,11 +887,8 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         if (tileset->isSecondary == FALSE)
         {
             if (skipFaded)
-            {
                 CpuFastCopy(tileset->palettes, &gPlttBufferUnfaded[destOffset], size); // always word-aligned
-            }
             else
-            {
                 LoadPaletteFast(tileset->palettes, destOffset, size);
             gPlttBufferFaded[destOffset] = gPlttBufferUnfaded[destOffset] = RGB_BLACK;
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
