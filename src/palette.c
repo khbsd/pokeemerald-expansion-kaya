@@ -130,9 +130,9 @@ bool32 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targ
             delay = 0;
         }
 
-        gPaletteFade_selectedPalettes = selectedPalettes;
+        gPaletteFadeSelectedPalettes = selectedPalettes;
         gPaletteFade.delayCounter = delay;
-        gPaletteFade_delay = delay;
+        gPaletteFadeDelay = delay;
         gPaletteFade.y = startY;
         gPaletteFade.targetY = targetY;
         gPaletteFade.blendColor = blendColor;
@@ -173,9 +173,9 @@ bool32 BeginTimeOfDayPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 t
         delay = 0;
     }
 
-    gPaletteFade_selectedPalettes = selectedPalettes;
+    gPaletteFadeSelectedPalettes = selectedPalettes;
     gPaletteFade.delayCounter = delay;
-    gPaletteFade_delay = delay;
+    gPaletteFadeDelay = delay;
     gPaletteFade.y = startY;
     gPaletteFade.targetY = targetY;
     gPaletteFade.active = 1;
@@ -241,7 +241,7 @@ static u8 UpdateTimeOfDayPaletteFade(void)
 
     if (!gPaletteFade.objPaletteToggle)
     {
-        if (gPaletteFade.delayCounter < gPaletteFade_delay)
+        if (gPaletteFade.delayCounter < gPaletteFadeDelay)
         {
             gPaletteFade.delayCounter++;
             return PALETTE_FADE_STATUS_DELAY;
@@ -253,11 +253,11 @@ static u8 UpdateTimeOfDayPaletteFade(void)
 
     if (!gPaletteFade.objPaletteToggle)
     {
-        selectedPalettes = gPaletteFade_selectedPalettes;
+        selectedPalettes = gPaletteFadeSelectedPalettes;
     }
     else
     {
-        selectedPalettes = gPaletteFade_selectedPalettes >> 16;
+        selectedPalettes = gPaletteFadeSelectedPalettes >> 16;
         paletteOffset = 256;
     }
 
@@ -305,7 +305,7 @@ static u8 UpdateTimeOfDayPaletteFade(void)
     {
         if ((gPaletteFade.yDec && gPaletteFade.y == 0) || (!gPaletteFade.yDec && gPaletteFade.y == gPaletteFade.targetY))
         {
-            gPaletteFade_selectedPalettes = 0;
+            gPaletteFadeSelectedPalettes = 0;
             gPaletteFade.softwareFadeFinishing = 1;
         }
         else
@@ -350,7 +350,7 @@ static u32 UpdateNormalPaletteFade(void)
     {
         if (!gPaletteFade.objPaletteToggle)
         {
-            if (gPaletteFade.delayCounter < gPaletteFade_delay)
+            if (gPaletteFade.delayCounter < gPaletteFadeDelay)
             {
                 gPaletteFade.delayCounter++;
                 return PALETTE_FADE_STATUS_DELAY;
@@ -362,11 +362,11 @@ static u32 UpdateNormalPaletteFade(void)
 
         if (!gPaletteFade.objPaletteToggle)
         {
-            selectedPalettes = gPaletteFade_selectedPalettes;
+            selectedPalettes = gPaletteFadeSelectedPalettes;
         }
         else
         {
-            selectedPalettes = gPaletteFade_selectedPalettes >> 16;
+            selectedPalettes = gPaletteFadeSelectedPalettes >> 16;
             paletteOffset = OBJ_PLTT_OFFSET;
         }
 
@@ -388,7 +388,7 @@ static u32 UpdateNormalPaletteFade(void)
         {
             if (gPaletteFade.y == gPaletteFade.targetY)
             {
-                gPaletteFade_selectedPalettes = 0;
+                gPaletteFadeSelectedPalettes = 0;
                 gPaletteFade.softwareFadeFinishing = TRUE;
             }
             else
@@ -485,7 +485,7 @@ void BeginFastPaletteFade(u32 submode)
 static void BeginFastPaletteFadeInternal(u32 submode)
 {
     gPaletteFade.y = 31;
-    gPaletteFade_submode = submode & 0x3F;
+    gPaletteFadeSubmode = submode & 0x3F;
     gPaletteFade.active = TRUE;
     gPaletteFade.mode = FAST_FADE;
 
@@ -528,7 +528,7 @@ static u32 UpdateFastPaletteFade(void)
         paletteOffsetEnd = OBJ_PLTT_OFFSET;
     }
 
-    switch (gPaletteFade_submode)
+    switch (gPaletteFadeSubmode)
     {
     case FAST_FADE_IN_FROM_WHITE:
         for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
@@ -633,7 +633,7 @@ static u32 UpdateFastPaletteFade(void)
 
     if (gPaletteFade.y == 0)
     {
-        switch (gPaletteFade_submode)
+        switch (gPaletteFadeSubmode)
         {
         case FAST_FADE_IN_FROM_WHITE:
         case FAST_FADE_IN_FROM_BLACK:
@@ -658,9 +658,9 @@ static u32 UpdateFastPaletteFade(void)
 
 void BeginHardwarePaletteFade(u32 blendCnt, u32 delay, u32 y, u32 targetY, u32 shouldResetBlendRegisters)
 {
-    gPaletteFade_blendCnt = blendCnt;
+    gPaletteFadeBlendCnt = blendCnt;
     gPaletteFade.delayCounter = delay;
-    gPaletteFade_delay = delay;
+    gPaletteFadeDelay = delay;
     gPaletteFade.y = y;
     gPaletteFade.targetY = targetY;
     gPaletteFade.active = TRUE;
@@ -679,7 +679,7 @@ static u32 UpdateHardwarePaletteFade(void)
     if (!gPaletteFade.active)
         return PALETTE_FADE_STATUS_DONE;
 
-    if (gPaletteFade.delayCounter < gPaletteFade_delay)
+    if (gPaletteFade.delayCounter < gPaletteFadeDelay)
     {
         gPaletteFade.delayCounter++;
         return PALETTE_FADE_STATUS_DELAY;
@@ -711,7 +711,7 @@ static u32 UpdateHardwarePaletteFade(void)
         if (gPaletteFade.shouldResetBlendRegisters)
         {
             // clear TGT1
-            gPaletteFade_blendCnt &= ~0xFF;
+            gPaletteFadeBlendCnt &= ~0xFF;
             gPaletteFade.y = 0;
         }
         gPaletteFade.shouldResetBlendRegisters = FALSE;
@@ -725,7 +725,7 @@ static u32 UpdateHardwarePaletteFade(void)
 // Only called for hardware fades
 static void UpdateBlendRegisters(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, (u16)gPaletteFade_blendCnt);
+    SetGpuReg(REG_OFFSET_BLDCNT, (u16)gPaletteFadeBlendCnt);
     SetGpuReg(REG_OFFSET_BLDY, gPaletteFade.y);
     // If fade-out, also adjust BLDALPHA and DISPCNT
     if (!gPaletteFade.yDec)
@@ -735,7 +735,7 @@ static void UpdateBlendRegisters(void)
         u8 tgt2 = BLDALPHA_TGT2(bldAlpha);
         u8 bldFade;
 
-        switch (gPaletteFade_blendCnt & BLDCNT_EFFECT_EFF_MASK)
+        switch (gPaletteFadeBlendCnt & BLDCNT_EFFECT_EFF_MASK)
         {
         // FADE_TO_BLACK
         case BLDCNT_EFFECT_DARKEN:
@@ -763,7 +763,7 @@ static void UpdateBlendRegisters(void)
     {
         gPaletteFade.hardwareFadeFinishing = FALSE;
         gPaletteFade.mode = 0;
-        gPaletteFade_blendCnt = 0;
+        gPaletteFadeBlendCnt = 0;
         gPaletteFade.y = 0;
         gPaletteFade.active = FALSE;
     }

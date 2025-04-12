@@ -879,9 +879,6 @@ static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 
 static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size, bool8 skipFaded)
 {
-    u32 low = 0;
-    u32 high = 0;
-
     if (tileset)
     {
         if (tileset->isSecondary == FALSE)
@@ -892,8 +889,6 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
                 LoadPaletteFast(tileset->palettes, destOffset, size);
             gPlttBufferFaded[destOffset] = gPlttBufferUnfaded[destOffset] = RGB_BLACK;
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
-            low = 0;
-            high = NUM_PALS_IN_PRIMARY;
         }
         else if (tileset->isSecondary == TRUE)
         {
@@ -903,31 +898,11 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
                 CpuCopy16(tileset->palettes[NUM_PALS_IN_PRIMARY], &gPlttBufferUnfaded[destOffset], size);
             else
                 LoadPaletteFast(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
-            low = NUM_PALS_IN_PRIMARY;
-            high = NUM_PALS_TOTAL;
         }
         else
         {
             LoadCompressedPalette((const u32 *)tileset->palettes, destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
-        }
-        // convert legacy light palette system to current
-        if (tileset->lightPalettes)
-        {
-            u32 i, j, color;
-            for (i = low; i < high; i++)
-            {
-                if (tileset->lightPalettes & (1 << (i - low))) // Mark light colors
-                {
-                    for (j = 1, color = gPlttBufferUnfaded[PLTT_ID(i)]; j < 16 && color; j++, color >>= 1)
-                    {
-                        if (color & 1)
-                            gPlttBufferFaded[PLTT_ID(i)+j] = gPlttBufferUnfaded[PLTT_ID(i)+j] |= RGB_ALPHA;
-                    }
-                    if (tileset->customLightColor & (1 << (i - low))) // Copy old custom light color to index 0
-                        gPlttBufferFaded[PLTT_ID(i)] = gPlttBufferUnfaded[PLTT_ID(i)] = gPlttBufferUnfaded[PLTT_ID(i) + 15] | RGB_ALPHA;
-                }
-            }
         }
     }
 }
