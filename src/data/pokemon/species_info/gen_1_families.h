@@ -2969,7 +2969,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
         .formChangeTable = sPikachuFormChangeTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
-                                {EVO_MAPSEC, MAPSEC_MOSSDEEP_CITY, SPECIES_RAICHU_ALOLA}),
+                                {EVO_LEVEL, 0, SPECIES_RAICHU_ALOLA, CONDITIONS({IF_IN_MAPSEC, MAPSEC_MOSSDEEP_CITY})}),
     },
 
 #if P_COSPLAY_PIKACHU_FORMS
@@ -4115,7 +4115,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sSandshrewEggMoveLearnset,
         .formSpeciesIdTable = sSandshrewFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_SANDSLASH},
-                                {EVO_MAPSEC, MAPSEC_SHOAL_CAVE, SPECIES_SANDSLASH_ALOLA}),
+                                {EVO_LEVEL, 0, SPECIES_SANDSLASH_ALOLA, CONDITIONS({IF_IN_MAPSEC, MAPSEC_SHOAL_CAVE})}),
     },
 
     [SPECIES_SANDSLASH] =
@@ -5097,9 +5097,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sVulpixFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLA},
-                                {EVO_MAPSEC, MAPSEC_FIERY_PATH, SPECIES_NINETALES},
-                                {EVO_MAPSEC, MAPSEC_FIERY_PATH2, SPECIES_NINETALES},
-                                {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_NINETALES_ALOLA}),
+                                {EVO_LEVEL, 0, SPECIES_NINETALES, CONDITIONS({IF_IN_MAPSEC, MAPSEC_FIERY_PATH})},
+                                {EVO_LEVEL, 0, SPECIES_NINETALES, CONDITIONS({IF_IN_MAPSEC, MAPSEC_FIERY_PATH2})},
+                                {EVO_LEVEL, 0, SPECIES_NINETALES_ALOLA, CONDITIONS({IF_IN_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM})}),
     },
 
     [SPECIES_NINETALES] =
@@ -5242,9 +5242,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sVulpixFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLA},
-                                {EVO_MAPSEC, MAPSEC_FIERY_PATH, SPECIES_NINETALES},
-                                {EVO_MAPSEC, MAPSEC_FIERY_PATH2, SPECIES_NINETALES},
-                                {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_NINETALES_ALOLA}),
+                                {EVO_LEVEL, 0, SPECIES_NINETALES, CONDITIONS({IF_IN_MAPSEC, MAPSEC_FIERY_PATH})},
+                                {EVO_LEVEL, 0, SPECIES_NINETALES, CONDITIONS({IF_IN_MAPSEC, MAPSEC_FIERY_PATH2})},
+                                {EVO_LEVEL, 0, SPECIES_NINETALES_ALOLA, CONDITIONS({IF_IN_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM})}),
     },
 
     [SPECIES_NINETALES_ALOLA] =
@@ -13046,7 +13046,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sExeggcuteTeachableLearnset,
         .eggMoveLearnset = sExeggcuteEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_EXEGGUTOR},
-                                {EVO_MAPSEC, MAPSEC_METEOR_FALLS, SPECIES_EXEGGUTOR_ALOLA}),
+                                {EVO_LEVEL, 0, SPECIES_EXEGGUTOR_ALOLA, CONDITIONS({IF_IN_MAPSEC, MAPSEC_METEOR_FALLS})}),
     },
 
 #if P_UPDATED_EXP_YIELDS >= GEN_7

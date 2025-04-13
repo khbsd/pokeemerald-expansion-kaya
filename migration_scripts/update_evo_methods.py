@@ -273,12 +273,12 @@ species_files = [
     "gen_9_families.h",
 ]
 
-PATH = "species_info/"
+PATH = "src/data/pokemon/species_info/"
 
 for source in species_files:
     with open(PATH + source, 'r') as file:
         data = file.readlines()
 
     # when shipping this needs to be changed to PATH so all files are replaced
-    with open('output/' + source, 'w') as file:
+    with open(PATH + source, 'w') as file:
         file.write(convert_methods(data))

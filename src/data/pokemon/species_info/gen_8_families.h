@@ -5303,7 +5303,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sPincurchinLevelUpLearnset,
         .teachableLearnset = sPincurchinTeachableLearnset,
         .eggMoveLearnset = sPincurchinEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_QWILFISH_HISUI}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_QWILFISH_HISUI, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD}, {IF_NOT_TIME, TIME_NIGHT})}),
     },
 
     [SPECIES_QWILFISH_HISUI] =
@@ -5371,7 +5371,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sQwilfishHisuiLevelUpLearnset,
         .teachableLearnset = sQwilfishHisuiTeachableLearnset,
         .formSpeciesIdTable = sQwilfishFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_BARB_BARRAGE, SPECIES_OVERQWIL}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_OVERQWIL, CONDITIONS({IF_KNOWS_MOVE, MOVE_BARB_BARRAGE})}),
     },
 
     [SPECIES_OVERQWIL] =

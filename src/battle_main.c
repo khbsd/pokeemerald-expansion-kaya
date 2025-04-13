@@ -718,12 +718,13 @@ static void PlayerTryEvolution(void)
     u32 RIGHT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
     u16 species;
     u8 taskId;
+    bool32 canStopEvo = TRUE;
     if (gLeveledUpInBattle & (1u << LEFT_PKMN) && !gPlayerDoesNotWantToEvolveLeft)
     {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, CHECK_EVO);
+        species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
         if (species != SPECIES_NONE)
         {
-            GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, DO_EVO);
+            GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gBattleMainFunc = WaitForEvolutionThenTryAnother;
             taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
@@ -734,10 +735,10 @@ static void PlayerTryEvolution(void)
     }
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gLeveledUpInBattle & (1u << RIGHT_PKMN) && !gPlayerDoesNotWantToEvolveRight)
     {
-        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, CHECK_EVO);
+        species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
         if (species != SPECIES_NONE)
         {
-            GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, DO_EVO);
+            GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gBattleMainFunc = WaitForEvolutionThenTryAnother;
             taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);

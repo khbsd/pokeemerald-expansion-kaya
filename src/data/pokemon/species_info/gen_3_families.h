@@ -1304,7 +1304,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sZigzagoonGalarTeachableLearnset,
         .eggMoveLearnset = sZigzagoonGalarEggMoveLearnset,
         .formSpeciesIdTable = sZigzagoonFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 16, SPECIES_LINOONE_GALAR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_LINOONE_GALAR, CONDITIONS({IF_TIME, TIME_NIGHT})}),
     },
 
     [SPECIES_LINOONE_GALAR] =
@@ -3576,7 +3576,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sVigorothLevelUpLearnset,
         .teachableLearnset = sVigorothTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_USE_MOVE_TWENTY_TIMES, MOVE_SLACK_OFF, SPECIES_SLAKING}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_SLAKING, CONDITIONS({IF_USED_MOVE_X_TIMES, MOVE_SLACK_OFF, 20})}),
     },
 
     [SPECIES_SLAKING] =
@@ -12887,7 +12887,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .formSpeciesIdTable = sRayquazaFormSpeciesIdTable,
         .formChangeTable = sRayquazaFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_DRAGON_ASCENT, SPECIES_RAYQUAZA_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_RAYQUAZA_MEGA, CONDITIONS({IF_KNOWS_MOVE, MOVE_DRAGON_ASCENT})}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 

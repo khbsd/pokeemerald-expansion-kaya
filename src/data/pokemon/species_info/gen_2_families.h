@@ -365,7 +365,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sQuilavaLevelUpLearnset,
         .teachableLearnset = sQuilavaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TYPHLOSION},
-                                {EVO_MAPSEC, MAPSEC_MT_PYRE, SPECIES_TYPHLOSION_HISUI}),
+                                {EVO_LEVEL, 0, SPECIES_TYPHLOSION_HISUI, CONDITIONS({IF_IN_MAPSEC, MAPSEC_MT_PYRE})}),
     },
 
 #if P_UPDATED_EXP_YIELDS >= GEN_8
@@ -5836,7 +5836,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sUrsalunaLevelUpLearnset,
         .teachableLearnset = sUrsalunaTeachableLearnset,
         .formSpeciesIdTable = sUrsalunaFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 60, SPECIES_URSARING}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_URSARING, CONDITIONS({IF_TIME, TIME_NIGHT})}),
     },
 
     [SPECIES_URSALUNA_BLOODMOON] =
