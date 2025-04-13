@@ -1,4 +1,5 @@
 import re
+import os
 
 METHOD = 0
 CONDTION = 1
@@ -7,6 +8,11 @@ SPECIES = 2
 def convert_methods(data):
     new_data = ""
     pattern = r'\{([^{}]+)\}'
+
+    # make sure we're in the right directory before anything else
+    if not os.path.exists("Makefile"):
+        print("Please run this script from the project's root folder.")
+        quit()
 
     for line in data:
         if "EVO_FRIENDSHIP," in line:
