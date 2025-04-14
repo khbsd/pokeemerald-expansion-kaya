@@ -10433,6 +10433,10 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(u32 move, u32 moveType, u32 
         break;
     case ABILITY_BURN_ENTRY:
         if (IsMoveMakingContact(move, battlerAtk))
+            return UQ_4_12(0.75);
+        break;
+    case ABILITY_THICK_FAT:
+        if (IsMoveMakingContact(move, battlerAtk))
             return UQ_4_12(0.85);
         break;
     case ABILITY_FLUFFY:
