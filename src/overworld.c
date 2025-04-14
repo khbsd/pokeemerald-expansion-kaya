@@ -1172,6 +1172,7 @@ void AutoUseSurf(void)
 {
     if (CanAutoUseFieldMove(MOVE_SURF) && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
+        LockPlayerFieldControls();
         if (!FlagGet(FLAG_SYS_USE_SURF))
         {
             FlagSet(FLAG_SYS_USE_SURF);
@@ -1182,7 +1183,8 @@ void AutoUseSurf(void)
             gSkipShowMonAnim = TRUE;
         }
 
-        FieldCallback_Surf();
+        ScriptContext_SetupScript(EventScript_AutoUseSurf);
+        
     }
 }
 

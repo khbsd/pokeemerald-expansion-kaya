@@ -913,7 +913,11 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) && OW_FLAG_AUTO_USE_ROCK_SMASH)
         AutoUseRockSmash();
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
+    {
+        LockPlayerFieldControls();
         AutoUseSurf();
+    }
+        
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
         AutoUseStrength(GetObjectEventIdByXY(x, y), direction);
 

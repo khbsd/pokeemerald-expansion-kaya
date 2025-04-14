@@ -217,7 +217,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetInFrontOfPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
-    if (input->heldDirection && (input->dpadDirection == playerDirection) && (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE))
+    if (input->heldDirection && (input->dpadDirection == playerDirection) 
+        && (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE) 
+        && !ArePlayerFieldControlsLocked())
         return TRUE;
 
     if (input->pressedAButton && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
