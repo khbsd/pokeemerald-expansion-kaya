@@ -68,6 +68,8 @@
 // Changing GEN_LATEST's value to a different Generation will change every default setting that uses it at once.
 #define GEN_LATEST GEN_9
 
+#define GEN_3_REDUX 423
+
 // General settings
 #define EXPANSION_INTRO              FALSE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 #define POKEDEX_PLUS_HGSS            TRUE   // If TRUE, enables the custom HGSS style Pokedex.

@@ -71,7 +71,7 @@
 
     #define NIGHT_HOUR_BEGIN   18
     #define NIGHT_HOUR_END     6
-#elif OW_TIMES_OF_DAY >= GEN_8
+#elif OW_TIMES_OF_DAY == GEN_8 || OW_TIMES_OF_DAY == GEN_9
     #define MORNING_HOUR_BEGIN 6
     #define MORNING_HOUR_END   10
 
@@ -83,7 +83,20 @@
 
     #define NIGHT_HOUR_BEGIN   20
     #define NIGHT_HOUR_END     6
+#elif OW_TIMES_OF_DAY == GEN_3_REDUX
+    #define MORNING_HOUR_BEGIN 6
+    #define MORNING_HOUR_END   10
+
+    #define DAY_HOUR_BEGIN     10
+    #define DAY_HOUR_END       17
+
+    #define EVENING_HOUR_BEGIN 17
+    #define EVENING_HOUR_END   21
+
+    #define NIGHT_HOUR_BEGIN   21
+    #define NIGHT_HOUR_END     6
 #endif
+
 
 // TIMES_OF_DAY_COUNT must be last
 enum TimeOfDay 
