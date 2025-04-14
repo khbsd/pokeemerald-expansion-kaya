@@ -6436,9 +6436,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .teachableLearnset = sDiancieTeachableLearnset,
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
         .formChangeTable = sDiancieFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DIANCITE, SPECIES_DIANCIE_MEGA}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 90, SPECIES_DIANCIE_MEGA,
+                                CONDITIONS(
+                                    {IF_HOLD_ITEM, ITEM_FAIRY_GEM},
+                                    {IF_IN_MAPSEC, MAPSEC_RUSTURF_TUNNEL}
+                            )}),
+#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -6462,7 +6466,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
         .abilities = { ABILITY_MAGIC_BOUNCE, ABILITY_MAGIC_BOUNCE, ABILITY_MAGIC_BOUNCE },
         .bodyColor = BODY_COLOR_PINK,
-        .speciesName = _("Diancie"),
+        .speciesName = _("Alemystal"),
         .cryId = CRY_DIANCIE_MEGA,
         .natDexNum = NATIONAL_DEX_DIANCIE,
         .categoryName = _("Jewel"),

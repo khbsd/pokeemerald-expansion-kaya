@@ -230,7 +230,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
         .formChangeTable = sVenusaurFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_VENUSAURITE, SPECIES_VENUSAUR_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_VENUSAUR_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_LEAF_STONE},
+                                        {IF_IN_MAPSEC, MAPSEC_ROUTE_101}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -255,7 +259,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),
         .abilities = { ABILITY_OVERGROW, ABILITY_THICK_FAT, ABILITY_CHLOROPHYLL },
         .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Venusaur"),
+        .speciesName = _("Florasaur"),
         .cryId = CRY_VENUSAUR_MEGA,
         .natDexNum = NATIONAL_DEX_VENUSAUR,
         .categoryName = _("Seed"),
@@ -577,8 +581,17 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
         .formChangeTable = sCharizardFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-                .evolutions = EVOLUTION({EVO_ITEM, ITEM_CHARIZARDITE_X, SPECIES_CHARIZARD_MEGA_X},
-                                        {EVO_ITEM, ITEM_CHARIZARDITE_Y, SPECIES_CHARIZARD_MEGA_Y}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_CHARIZARD_MEGA_Y,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_FIRE_STONE},
+                                        {IF_IN_MAPSEC, MAPSEC_FORTREE_CITY}
+                                    )},
+                                {EVO_LEVEL, 80, SPECIES_CHARIZARD_MEGA_X, 
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_DRAGON_FANG},
+                                        {IF_IN_MAP, MAP_METEOR_FALLS_B1F_2R}
+                                    )}
+                                ),
     #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -602,7 +615,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS },
         .bodyColor = BODY_COLOR_BLACK,
-        .speciesName = _("Charizard"),
+        .speciesName = _("Charyvern"),
         .cryId = CRY_CHARIZARD_MEGA_X,
         .natDexNum = NATIONAL_DEX_CHARIZARD,
         .categoryName = _("Flame"),
@@ -669,7 +682,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_DROUGHT, ABILITY_DROUGHT, ABILITY_DROUGHT },
         .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Charizard"),
+        .speciesName = _("Ignizard"),
         .cryId = CRY_CHARIZARD_MEGA_Y,
         .natDexNum = NATIONAL_DEX_CHARIZARD,
         .categoryName = _("Flame"),
@@ -995,7 +1008,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
         .formChangeTable = sBlastoiseFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_BLASTOISINITE, SPECIES_BLASTOISE_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BLASTOISE_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_WATER_STONE},
+                                        {IF_IN_MAP, MAP_MARINE_CAVE_ENTRANCE}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -1019,7 +1036,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
         .abilities = { ABILITY_MEGA_LAUNCHER, ABILITY_MEGA_LAUNCHER, ABILITY_MEGA_LAUNCHER },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Blastoise"),
+        .speciesName = _("Chelcannon"),
         .cryId = CRY_BLASTOISE_MEGA,
         .natDexNum = NATIONAL_DEX_BLASTOISE,
         .categoryName = _("Shellfish"),
@@ -1678,7 +1695,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,
         .formChangeTable = sBeedrillFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_BEEDRILLITE, SPECIES_BEEDRILL_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BEEDRILL_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_POISON_BARB},
+                                        {IF_IN_MAPSEC, MAPSEC_PETALBURG_WOODS}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
         
     },
@@ -1705,7 +1726,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY },
         .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Beedrill"),
+        .speciesName = _("Apoxita"),
         .cryId = CRY_BEEDRILL_MEGA,
         .natDexNum = NATIONAL_DEX_BEEDRILL,
         .categoryName = _("Poison Bee"),
@@ -1989,7 +2010,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sPidgeotFormSpeciesIdTable,
         .formChangeTable = sPidgeotFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_PIDGEOTITE, SPECIES_PIDGEOT_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_PIDGEOT_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_SWIFT_FEATHER},
+                                        {IF_IN_MAPSEC, MAPSEC_FORTREE_CITY}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
         
     },
@@ -2014,7 +2039,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_NO_GUARD, ABILITY_NO_GUARD, ABILITY_NO_GUARD },
         .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Pidgeot"),
+        .speciesName = _("Pidgeon"),
         .cryId = CRY_PIDGEOT_MEGA,
         .natDexNum = NATIONAL_DEX_PIDGEOT,
         .categoryName = _("Bird"),
@@ -8529,7 +8554,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,
         .formChangeTable = sAlakazamFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ALAKAZITE, SPECIES_ALAKAZAM_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ALAKAZAM_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_TWISTED_SPOON},
+                                        {IF_IN_MAP, MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
          
     },
@@ -8555,7 +8584,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
         .abilities = { ABILITY_TRACE, ABILITY_TRACE, ABILITY_TRACE },
         .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Alakazam"),
+        .speciesName = _("Shazamen"),
         .cryId = CRY_ALAKAZAM_MEGA,
         .natDexNum = NATIONAL_DEX_ALAKAZAM,
         .categoryName = _("Psi"),
@@ -10150,7 +10179,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sSlowbroFormSpeciesIdTable,
         .formChangeTable = sSlowbroFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_SLOWBRONITE, SPECIES_SLOWBRO_MEGA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SLOWBRO_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_SHELL_BELL},
+                                        {IF_IN_MAPSEC, MAPSEC_ROUTE_132}
+                                )}),
     #endif // P_MEGA_STONES_AS_EVO_STONES
 
     },
@@ -10248,7 +10281,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
         .abilities = { ABILITY_SHELL_ARMOR, ABILITY_SHELL_ARMOR, ABILITY_SHELL_ARMOR },
         .bodyColor = BODY_COLOR_PINK,
-        .speciesName = _("Slowbro"),
+        .speciesName = _("Slowbruh"),
         .cryId = CRY_SLOWBRO,
         .natDexNum = NATIONAL_DEX_SLOWBRO,
         .categoryName = _("Hermit Crab"),
@@ -11947,7 +11980,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sGengarFormSpeciesIdTable,
         .formChangeTable = sGengarFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_GENGARITE, SPECIES_GENGAR_MEGA}),
+            .evolutions = EVOLUTION(
+                            {EVO_LEVEL, 80, SPECIES_GENGAR_MEGA,
+                                CONDITIONS(
+                                    {IF_IN_MAP, MAP_MT_PYRE_SUMMIT},
+                                    {IF_HOLD_ITEM, ITEM_REAPER_CLOTH}
+                            )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -12237,7 +12275,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_STEELIXITE, SPECIES_STEELIX_MEGA}),
+            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_STEELIX_MEGA, 
+                CONDITIONS(
+                    {IF_IN_MAPSEC, MAPSEC_VICTORY_ROAD},
+                    {IF_HOLD_ITEM, ITEM_METAL_COAT}
+                )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -12262,7 +12304,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
         .abilities = { ABILITY_SAND_FORCE, ABILITY_SAND_FORCE, ABILITY_SAND_FORCE },
         .bodyColor = BODY_COLOR_GRAY,
-        .speciesName = _("Steelix"),
+        .speciesName = _("Titanix"),
         .cryId = CRY_STEELIX_MEGA,
         .natDexNum = NATIONAL_DEX_STEELIX,
         .categoryName = _("Iron Snake"),
@@ -15961,7 +16003,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
         .formChangeTable = sScizorFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_SCIZORITE, SPECIES_SCIZOR_MEGA}),
+            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SCIZOR_MEGA,
+                                        CONDITIONS(
+                                            {IF_HOLD_ITEM, ITEM_METAL_COAT},
+                                            {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
+                                    )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -15989,7 +16035,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .abilities = { ABILITY_SWARM, ABILITY_NONE, ABILITY_LIGHT_METAL },
     #endif
         .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Scizor"),
+        .speciesName = _("Scawzor"),
         .cryId = CRY_SCIZOR_MEGA,
         .natDexNum = NATIONAL_DEX_SCIZOR,
         .categoryName = _("Pincer"),
@@ -16775,10 +16821,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPinsirEggMoveLearnset,
         .formSpeciesIdTable = sPinsirFormSpeciesIdTable,
         .formChangeTable = sPinsirFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_PINSIRITE, SPECIES_PINSIR_MEGA}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
-    },
+        #if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_PINSIR_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_FIGHTING_GEM},
+                                        {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
+                                )}),
+#endif //P_MEGA_STONES_AS_EVO_STONES
+},
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_PINSIR_MEGA] =
@@ -16800,7 +16850,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_AERILATE, ABILITY_AERILATE, ABILITY_AERILATE },
         .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Pinsir"),
+        .speciesName = _("Pinsent"),
         .cryId = CRY_PINSIR_MEGA,
         .natDexNum = NATIONAL_DEX_PINSIR,
         .categoryName = _("Stag Beetle"),
@@ -17299,9 +17349,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGyaradosTeachableLearnset,
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
         .formChangeTable = sGyaradosFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_GYARADOSITE, SPECIES_GYARADOS_MEGA}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GYARADOS_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_DARK_GEM},
+                                        {IF_IN_MAPSEC, MAPSEC_SEAFLOOR_CAVERN}
+                                )}),
+#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -17324,7 +17378,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Gyarados"),
+        .speciesName = _("Gyaradast"),
         .cryId = CRY_GYARADOS_MEGA,
         .natDexNum = NATIONAL_DEX_GYARADOS,
         .categoryName = _("Atrocious"),
@@ -18961,9 +19015,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sAerodactylEggMoveLearnset,
         .formSpeciesIdTable = sAerodactylFormSpeciesIdTable,
         .formChangeTable = sAerodactylFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_AERODACTYLITE, SPECIES_AERODACTYL_MEGA}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AERODACTYL_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_ROCK_GEM},
+                                        {IF_IN_MAPSEC, MAPSEC_DESERT_UNDERPASS}
+                                )}),
+#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -18975,7 +19033,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 135,
         .baseSpAttack  = 70,
         .baseSpDefense = 95,
-        .types = MON_TYPES(TYPE_ROCK, TYPE_FLYING),
+        .types = MON_TYPES(TYPE_ROCK, TYPE_DRAGON),
         .catchRate = 45,
         .expYield = 215,
         .evYield_Speed = 2,
@@ -18986,7 +19044,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS },
         .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Aerodactyl"),
+        .speciesName = _("Dactyladon"),
         .cryId = CRY_AERODACTYL_MEGA,
         .natDexNum = NATIONAL_DEX_AERODACTYL,
         .categoryName = _("Fossil"),
@@ -20020,10 +20078,20 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
         .formChangeTable = sMewtwoFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_MEWTWONITE_X, SPECIES_MEWTWO_MEGA_X},
-                                    {EVO_ITEM, ITEM_MEWTWONITE_Y, SPECIES_MEWTWO_MEGA_Y}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = 
+            EVOLUTION({EVO_LEVEL, 100, SPECIES_MEWTWO_MEGA_Y,
+                        CONDITIONS(
+                            {IF_HOLD_ITEM, ITEM_POWER_LENS},
+                            {IF_IN_MAPSEC, MAPSEC_GRANITE_CAVE}
+                        )},
+                       {EVO_LEVEL, 100, SPECIES_MEWTWO_MEGA_X,
+                        CONDITIONS(
+                            {IF_HOLD_ITEM, ITEM_POWER_BRACER},
+                            {IF_IN_MAPSEC, MAPSEC_MIRAGE_TOWER}
+                        )}
+                    ),
+#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES

@@ -2085,7 +2085,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .formSpeciesIdTable = sAmpharosFormSpeciesIdTable,
         .formChangeTable = sAmpharosFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_AMPHAROSITE, SPECIES_AMPHAROS_MEGA}),
+            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AMPHAROS_MEGA,
+                                        CONDITIONS(
+                                            {IF_HOLD_ITEM, ITEM_DRAGON_SCALE},
+                                            {IF_IN_MAPSEC, MAPSEC_NEW_MAUVILLE}
+                                    )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -2109,7 +2113,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
         .abilities = { ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER },
         .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Ampharos"),
+        .speciesName = _("Amparoden"),
         .cryId = CRY_AMPHAROS_MEGA,
         .natDexNum = NATIONAL_DEX_AMPHAROS,
         .categoryName = _("Light"),
@@ -5241,7 +5245,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_SWARM, ABILITY_GUTS, ABILITY_MOXIE },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Heracross"),
+        .speciesName = _("Heracrush"),
         .cryId = CRY_HERACROSS_MEGA,
         .natDexNum = NATIONAL_DEX_HERACROSS,
         .categoryName = _("Single Horn"),
@@ -7111,7 +7115,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,
         .formChangeTable = sHoundoomFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_HOUNDOOMINITE, SPECIES_HOUNDOOM_MEGA}),
+            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_HOUNDOOM_MEGA,
+                                        CONDITIONS(
+                                            {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
+                                            {IF_IN_MAP, MAP_SKY_PILLAR_TOP}
+                                        )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -7135,7 +7143,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_SOLAR_POWER, ABILITY_SOLAR_POWER, ABILITY_SOLAR_POWER },
         .bodyColor = BODY_COLOR_BLACK,
-        .speciesName = _("Houndoom"),
+        .speciesName = _("Houndeath"),
         .cryId = CRY_HOUNDOOM_MEGA,
         .natDexNum = NATIONAL_DEX_HOUNDOOM,
         .categoryName = _("Dark"),
@@ -8088,7 +8096,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .formSpeciesIdTable = sTyranitarFormSpeciesIdTable,
         .formChangeTable = sTyranitarFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_TYRANITARITE, SPECIES_TYRANITAR_MEGA}),
+            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_TYRANITAR_MEGA,
+                                        CONDITIONS(
+                                            {IF_HOLD_ITEM, ITEM_KINGS_ROCK},
+                                            {IF_IN_MAPSEC, MAPSEC_SLATEPORT_CITY}
+                                        )}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
@@ -8112,7 +8124,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),
         .abilities = { ABILITY_SAND_STREAM, ABILITY_SAND_STREAM, ABILITY_SAND_STREAM },
         .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Tyranitar"),
+        .speciesName = _("Imperatar"),
         .cryId = CRY_TYRANITAR_MEGA,
         .natDexNum = NATIONAL_DEX_TYRANITAR,
         .categoryName = _("Armor"),

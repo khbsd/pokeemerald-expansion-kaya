@@ -3449,6 +3449,13 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LOPUNNY_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_LUCKY_PUNCH},
+                                        {IF_IN_MAPSEC, MAPSEC_ROUTE_120}
+                                )}),
+#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -3471,7 +3478,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_HUMAN_LIKE),
         .abilities = { ABILITY_CUTE_CHARM, ABILITY_KLUTZ, ABILITY_LIMBER },
         .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Lopunny"),
+        .speciesName = _("Maridae"),
         .cryId = CRY_LOPUNNY_MEGA,
         .natDexNum = NATIONAL_DEX_LOPUNNY,
         .categoryName = _("Rabbit"),
@@ -3517,9 +3524,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LOPUNNITE, SPECIES_LOPUNNY_MEGA}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 #endif //P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
 #endif //P_FAMILY_BUNEARY
@@ -4575,9 +4579,13 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLucarioTeachableLearnset,
         .formSpeciesIdTable = sLucarioFormSpeciesIdTable,
         .formChangeTable = sLucarioFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LUCARIONITE, SPECIES_LUCARIO_MEGA}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LUCARIO_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_YELLOW_SCARF},
+                                        {IF_IN_MAPSEC, MAPSEC_CAVE_OF_ORIGIN}
+                                )}),
+#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -4601,7 +4609,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_HUMAN_LIKE),
         .abilities = { ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Lucario"),
+        .speciesName = _("Nubaris"),
         .cryId = CRY_LUCARIO_MEGA,
         .natDexNum = NATIONAL_DEX_LUCARIO,
         .categoryName = _("Aura"),
@@ -5560,9 +5568,13 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sAbomasnowTeachableLearnset,
         .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,
         .formChangeTable = sAbomasnowFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ABOMASITE, SPECIES_ABOMASNOW_MEGA}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+#if P_MEGA_STONES_AS_EVO_STONES
+    .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABOMASNOW_MEGA,
+                                CONDITIONS(
+                                    {IF_HOLD_ITEM, ITEM_ICE_GEM},
+                                    {IF_IN_MAPSEC, MAPSEC_ROUTE_119}
+                            )}),
+#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5587,7 +5599,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),
         .abilities = { ABILITY_SNOW_WARNING, ABILITY_SNOW_WARNING, ABILITY_SNOW_WARNING },
         .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Abomasnow"),
+        .speciesName = _("Anihlanch"),
         .cryId = CRY_ABOMASNOW_MEGA,
         .natDexNum = NATIONAL_DEX_ABOMASNOW,
         .categoryName = _("Frost Tree"),
