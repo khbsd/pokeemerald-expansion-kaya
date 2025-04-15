@@ -14132,7 +14132,7 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_ROCKRUFF_OWN_TEMPO"
+                "species": "SPECIES_ROCKRUFF"
               },
               {
                 "min_level": 15,
@@ -14316,7 +14316,7 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_ROCKRUFF_OWN_TEMPO"
+                "species": "SPECIES_ROCKRUFF"
               },
               {
                 "min_level": 15,
@@ -14684,7 +14684,7 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_ROCKRUFF_OWN_TEMPO"
+                "species": "SPECIES_ROCKRUFF"
               },
               {
                 "min_level": 15,
@@ -26357,17 +26357,17 @@
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_TENTACRUEL"
+                "species": "SPECIES_DHELMISE"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_TENTACRUEL"
+                "species": "SPECIES_DHELMISE"
               },
               {
                 "min_level": 20,
                 "max_level": 25,
-                "species": "SPECIES_TENTACRUEL"
+                "species": "SPECIES_DHELMISE"
               }
             ]
           }
@@ -37642,12 +37642,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_LINOONE_GALAR"
+                "species": "SPECIES_LINOONE"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_LINOONE_GALAR"
+                "species": "SPECIES_LINOONE"
               },
               {
                 "min_level": 25,
@@ -37796,12 +37796,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_LINOONE_GALAR"
+                "species": "SPECIES_LINOONE"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_LINOONE_GALAR"
+                "species": "SPECIES_LINOONE"
               },
               {
                 "min_level": 25,
@@ -85247,7 +85247,7 @@
               {
                 "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_CLAMPERL"
+                "species": "SPECIES_CHINCHOU"
               },
               {
                 "min_level": 20,
@@ -85262,12 +85262,12 @@
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_TIRTOUGA"
+                "species": "SPECIES_CHINCHOU"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_CHEWTLE"
+                "species": "SPECIES_CHINCHOU"
               }
             ]
           }
@@ -85349,17 +85349,17 @@
               {
                 "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_CLAMPERL"
+                "species": "SPECIES_CHINCHOU"
               },
               {
                 "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_CHINCHOU"
+                "species": "SPECIES_LILEEP"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_CLAMPERL"
+                "species": "SPECIES_ANORITH"
               },
               {
                 "min_level": 30,
@@ -85383,17 +85383,17 @@
               {
                 "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_CLAMPERL"
+                "species": "SPECIES_CHINCHOU"
               },
               {
                 "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_CHINCHOU"
+                "species": "SPECIES_LILEEP"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_CLAMPERL"
+                "species": "SPECIES_ANORITH"
               },
               {
                 "min_level": 30,
