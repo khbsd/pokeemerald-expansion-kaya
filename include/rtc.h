@@ -101,6 +101,7 @@
 // TIMES_OF_DAY_COUNT must be last
 enum TimeOfDay 
 {
+    TIME_DAYBREAK,
     TIME_MORNING,
     TIME_DAY,
     TIME_EVENING,
@@ -108,7 +109,8 @@ enum TimeOfDay
     TIMES_OF_DAY_COUNT,
 };
 
-STATIC_ASSERT(OW_TIME_OF_DAY_DEFAULT == 0, TimeOfDayDefaultMustBeFirstElementInTimeOfDayEnum)
+//
+#define TIME_OF_DAY_DEFAULT    0
 
 extern struct Time gLocalTime;
 extern const s32 sNumDaysInMonths[12];
