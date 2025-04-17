@@ -1,4 +1,3 @@
-import enum
 import json
 import re
 import os
@@ -21,9 +20,9 @@ MON_HEADERS = []
 # mon encounter group types
 fieldData = []
 fieldInfoStrings = []
+fieldStrings = []
 
 # time of day encounter data
-# if you adjust your TimeOfDay Enum, these need to reflect that
 TIME_DEFAULT       = ""
 TIME_DEFAULT_LABEL = "TIME_OF_DAY_DEFAULT"
 TIME_DEFAULT_INDEX = 0
@@ -55,12 +54,15 @@ hLabel       = ""
 hForMaps     = True
 headersArray = [headerIndex]
 
+
+
 # debug output control
-printWarningAndInclude          = True
-printEncounterHeaders           = True
-printEncounterRateMacros        = True
-printEncounterStructsInfoString = True
-printEncounterStructs           = True
+mainSwitch                      = False
+printWarningAndInclude          = mainSwitch
+printEncounterHeaders           = mainSwitch
+printEncounterRateMacros        = mainSwitch
+printEncounterStructsInfoString = mainSwitch
+printEncounterStructs           = mainSwitch
 
 
 class TimeOfDay():
@@ -90,6 +92,7 @@ class TimeOfDay():
             for time in tvals:
                 if val in time:
                     return i
+
                 i += 1
         return -1
 
@@ -101,11 +104,18 @@ def ImportWildEncounterFile():
         quit()
 
     global MON_HEADERS
+
     global TIME_OF_DAY
-    global TIMES_OF_DAY_COUNT
+    TIME_OF_DAY = SetupUserTimeEnum(TimeOfDay())
+
     global IS_ENABLED
+    global TIMES_OF_DAY_COUNT
+    if IsConfigEnabled():
+        IS_ENABLED = True
+        TIMES_OF_DAY_COUNT = len(TIME_OF_DAY)
 
     global fieldInfoStrings
+    global fieldStrings
     global structLabel
     global structMonType
     global structTime
@@ -121,13 +131,9 @@ def ImportWildEncounterFile():
     global encounterTotalCount
     global encounterCount
     global headerIndex
-    global tabStr
     global fieldData
+    global tabStr
     tabStr = "    "
-
-    IS_ENABLED = IsConfigEnabled()
-
-    SetupUserTimeEnum()
 
     wFile = open("src/data/wild_encounters.json")
     wData = json.load(wFile)
@@ -172,11 +178,11 @@ def ImportWildEncounterFile():
                     fieldData[fieldCounter + 1]["name"] = "hidden_mons"
                     fieldData[fieldCounter + 1]["pascalName"] = GetPascalCase("hidden_mons")
                     fieldData[fieldCounter + 1]["snakeName"] = GetSnakeCase("hidden_mons")
+
                 fieldCounter += 1
 
             if printWarningAndInclude:
                 PrintGeneratedWarningText()
-
                 print('#include "rtc.h"')
                 print("\n")
 
@@ -187,10 +193,12 @@ def ImportWildEncounterFile():
                 structMap = encounter["map"]
             else:
                 structMap = encounter["base_label"]
+
             structLabel = encounter["base_label"]
-            
+
             if encounterTotalCount[headerIndex] != len(wEncounters):
                 encounterTotalCount[headerIndex] = len(wEncounters)
+
             encounterCount[headerIndex] += 1
             headersArray = []
             
@@ -198,17 +206,18 @@ def ImportWildEncounterFile():
             if IS_ENABLED:
                 timeCounter = 0
                 while timeCounter < TIMES_OF_DAY_COUNT:
-                    tempTime = TIME_OF_DAY.fvals[timeCounter]
-                    if tempTime in structLabel:
-                        structTime = TIME_OF_DAY.indexOf(tempTime)
-                    timeCounter += 1
+                    tempfTime = f"_{TIME_OF_DAY.fvals[timeCounter]}"
+                    tempTime = TIME_OF_DAY.vals[timeCounter]
+                    if tempfTime in structLabel or tempTime in structLabel:
+                        structTime = timeCounter
 
-                structLabel += "_" + TIME_OF_DAY.fvals[structTime]
+                    timeCounter += 1
                     
             fieldCounter = 0
             fieldInfoStrings = []
             while fieldCounter < len(fieldData):
                 fieldInfoStrings.append("")
+                fieldStrings.append("")
                 fieldCounter += 1
 
             fieldCounter = 0
@@ -216,7 +225,12 @@ def ImportWildEncounterFile():
                 for areaTable in encounter:
                     if fieldData[fieldCounter]["name"] in areaTable:
                         structMonType = fieldData[fieldCounter]["pascalName"]
-                        fieldInfoStrings[fieldCounter] = f"{structLabel}_{structMonType}{structInfo}"
+                        if f"_{TIME_OF_DAY.fvals[structTime]}" in structLabel:
+                            fieldInfoStrings[fieldCounter] = f"{structLabel}_{structMonType}{structInfo}"
+                            fieldStrings[fieldCounter] = f"{structLabel}_{structMonType}"
+                        else:
+                            fieldInfoStrings[fieldCounter] = f"{structLabel}_{TIME_OF_DAY.fvals[structTime]}_{structMonType}{structInfo}"
+                            fieldStrings[fieldCounter] = f"{structLabel}_{TIME_OF_DAY.fvals[structTime]}_{structMonType}"
                     else:
                         structMonType = ""
                         continue
@@ -230,7 +244,7 @@ def ImportWildEncounterFile():
                         if "encounter_rate" in group:
                             infoStructRate = encounter[areaTable][group]
                     
-                    baseStructLabel = f"{baseStruct} {structLabel}_{structMonType}{structArrayAssign}"
+                    baseStructLabel = f"{baseStruct} {fieldStrings[fieldCounter]}{structArrayAssign}"
                     if printEncounterStructs:
                         print()
                         print(baseStructLabel)
@@ -239,7 +253,7 @@ def ImportWildEncounterFile():
                         print("};")
 
                     if printEncounterStructsInfoString:
-                        infoStructString = f"{baseStruct}{structInfo} {structLabel}_{structMonType}{structInfo} = {{ {infoStructRate}, {structLabel}_{structMonType} }};"
+                        infoStructString = f"{baseStruct}{structInfo} {fieldInfoStrings[fieldCounter]} = {{ {infoStructRate}, {fieldStrings[fieldCounter]} }};"
                         print(infoStructString)
 
                 fieldCounter += 1
@@ -257,8 +271,6 @@ def PrintStructContent(contentList):
 def GetStructLabelWithoutTime(label):
     labelLength = len(label)
     timeLength = 0
-    global TIMES_OF_DAY
-    global TIMES_OF_DAY_COUNT
 
     if not IS_ENABLED:
         return label
@@ -268,35 +280,27 @@ def GetStructLabelWithoutTime(label):
         tempTime = TIME_OF_DAY.fvals[timeCounter]
         if tempTime in label:
             timeLength = len(tempTime)
-        
-        timeCounter += 1
+            return label[:(labelLength - (timeLength + 1))]
 
-    return label[:(labelLength - (timeLength + 1))]
+        timeCounter += 1
+    return label
 
 
 def GetStructTimeWithoutLabel(label):
-    global TIME_OF_DAY
-    global TIMES_OF_DAY_COUNT
-
     if not IS_ENABLED:
         return TIME_DEFAULT_INDEX
     
     timeCounter = 0
     while timeCounter < TIMES_OF_DAY_COUNT:
-        tempTime = TIME_OF_DAY.fvals[timeCounter]
+        tempTime = f"_{TIME_OF_DAY.fvals[timeCounter]}"
         if tempTime in label:
             return timeCounter
+
         timeCounter += 1
-        
     return TIME_DEFAULT_INDEX
 
 
 def AssembleMonHeaderContent():
-    global structLabel
-    global fieldInfoStrings
-    global TIMES_OF_DAY
-    global TIMES_OF_DAY_COUNT
-
     SetupMonInfoVars()
 
     tempHeaderLabel = GetWildMonHeadersLabel()
@@ -327,9 +331,6 @@ def AssembleMonHeaderContent():
 
 
 def SetupMonInfoVars():
-    global fieldData
-    global fieldInfoStrings
-
     i = 0
     while i < len(fieldData):
         fieldData[i]["infoStringBase"] = "." + fieldData[i]["snakeName"] + structInfo
@@ -342,10 +343,6 @@ def SetupMonInfoVars():
 
 
 def PrintWildMonHeadersContent():
-    global tabStr
-    global TIMES_OF_DAY
-    global TIMES_OF_DAY_COUNT
-
     groupCount = 0
     for group in headerStructTable:
         labelCount = 0
@@ -467,7 +464,6 @@ def PrintEncounterRateMacros():
                     continue
 
                 for i, methodPercentIndex in enumerate(method_indices):
-                    
                     if methodPercentIndex < 0 or methodPercentIndex >= len(rates):
                         print(f"#error Invalid fishing encounter rate index {methodPercentIndex} for {method.upper()}")
                         continue
@@ -541,30 +537,33 @@ def GetTimeEnum():
         return include_enum.group("rtc_val")
 
 
-def SetupUserTimeEnum():
+def SetupUserTimeEnum(timeOfDay):
     enum_string = GetTimeEnum()
     enum_string = enum_string.split(",")
-    global TIMES_OF_DAY
-    global TIMES_OF_DAY_COUNT
 
-    global TIME_OF_DAY
-    TIME_OF_DAY = TimeOfDay()
+    # check for extra element from trailing comma
+    if enum_string[-1] == "" or enum_string[-1].isspace():
+        enum_string.pop(-1)
 
+    # we don't need the `TIMES_OF_DAY_COUNT` value, so - 1 from the value of len(enum_string)
     strCount = 0
-    while strCount < len(enum_string) - 2: # we dont need the `TIMES_OF_DAY_COUNT` value
-        tempstr = enum_string[strCount].strip("\n ")
-        if "=" in tempstr:
-            tempstr = tempstr[0:tempstr.index("=")]
-            tempstr = tempstr.strip(" ")
+    while strCount < len(enum_string) - 1:
+        tempStr = enum_string[strCount].strip("\n ")
 
+        """
+        we need to ignore any value assignments, as the times will need to correspond
+        with the elements in the array.
+        """
+        if "=" in tempStr:
+            tempStr = tempStr[0:tempStr.index("=")]
+            tempStr = tempStr.strip(" ")
+
+        #double check we didn't catch any empty values
         if not enum_string[strCount].isspace() and enum_string[strCount] != "":
-            TIME_OF_DAY.add(tempstr)
+            timeOfDay.add(tempStr)
 
         strCount += 1
-
-    if IS_ENABLED:
-        TIMES_OF_DAY_COUNT = len(TIME_OF_DAY)
-    
+    return timeOfDay
 
 
 def TabStr(amount):
@@ -578,8 +577,8 @@ def GetPascalCase(string):
 
     for string in stringArray:
         pascalString += string.capitalize()
-
     return pascalString
+
 
 def GetSnakeCase(string):
     stringArray = string.split("_")
@@ -593,11 +592,15 @@ def GetSnakeCase(string):
             snakeString += string.capitalize()
 
         i += 1
-
     return snakeString
 
 
-ImportWildEncounterFile()
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    ImportWildEncounterFile()
 
 
 """
