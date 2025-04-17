@@ -56,11 +56,11 @@ hForMaps     = True
 headersArray = [headerIndex]
 
 # debug output control
-printWarningAndInclude          = False
-printEncounterHeaders           = False
-printEncounterRateMacros        = False
-printEncounterStructsInfoString = False
-printEncounterStructs           = False
+printWarningAndInclude          = True
+printEncounterHeaders           = True
+printEncounterRateMacros        = True
+printEncounterStructsInfoString = True
+printEncounterStructs           = True
 
 
 class TimeOfDay():

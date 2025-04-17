@@ -203,9 +203,6 @@ bool32 IsViableZMove(u32 battler, u32 move)
         if (move != MOVE_NONE && GetMoveType(move) == ItemId_GetSecondaryId(item))
             return TRUE;
     }
-
-        return FALSE;
-    }
     return FALSE;
 }
 

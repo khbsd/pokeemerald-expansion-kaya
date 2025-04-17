@@ -4508,14 +4508,15 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     u32 defense = GetMonData(mon, MON_DATA_DEF, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
     u16 upperPersonality = personality >> 16;
-    enum ItemHoldEffect holdEffect;
-    u32 currentMap, partnerSpecies, partnerHeldItem, partnerHoldEffect;
-    bool32 consumeItem = FALSE;
-    u16 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
-    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+    u32 weather = GetCurrentWeather();
+    u32 nature = GetNature(mon);
+    bool32 removeHoldItem = FALSE;
+    u32 removeBagItem = ITEM_NONE;
+    u32 removeBagItemCount = 0;
+    u32 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
 
-    if (evolutions == NULL)
-        return SPECIES_NONE;
+    enum ItemHoldEffect partnerHoldEffect;
+    u32 partnerSpecies, partnerHeldItem;
 
     if (tradePartner != NULL)
     {
