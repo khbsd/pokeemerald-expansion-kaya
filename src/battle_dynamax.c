@@ -74,7 +74,7 @@ static const struct GMaxMove sGMaxMoveTable[] =
 bool32 CanDynamax(u32 battler)
 {
     u16 species = gBattleMons[battler].species;
-    u16 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
     if (B_DYNAMAX_BAND)
     {
         // Prevents Zigzagoon from dynamaxing in vanilla.
@@ -246,6 +246,8 @@ bool32 IsMoveBlockedByDynamax(u32 move)
         case EFFECT_HEAT_CRASH:
         case EFFECT_LOW_KICK:
             return TRUE;
+        default:
+            break;
     }
     return FALSE;
 }
@@ -429,6 +431,8 @@ static u32 GetMaxPowerTier(u32 move)
                 default:
                 case 21 ... 25:   return MAX_POWER_TIER_5;
             }
+        default:
+            break;
     }
 
     switch (GetMovePower(move))

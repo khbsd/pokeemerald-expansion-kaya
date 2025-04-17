@@ -115,7 +115,7 @@ bool32 CanUseZMove(u32 battler)
 {
     if (B_Z_POWER_RING)
     {
-        u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+        enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
         // Check if Player has Z-Power Ring.
         if (!TESTING && (battler == B_POSITION_PLAYER_LEFT
@@ -148,7 +148,7 @@ bool32 CanUseZMove(u32 battler)
 u32 GetUsableZMove(u32 battler, u32 move)
 {
     u32 item = gBattleMons[battler].item;
-    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     {
@@ -171,11 +171,9 @@ void ActivateZMove(u32 battler)
 
 bool32 IsViableZMove(u32 battler, u32 move)
 {
-    if (B_Z_POWER_RING)
-    {
-        u32 item;
-        u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-        int moveSlotIndex;
+    u32 item;
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    int moveSlotIndex;
 
         item = gBattleMons[battler].item;
 

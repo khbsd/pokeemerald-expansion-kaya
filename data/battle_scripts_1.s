@@ -9812,7 +9812,7 @@ BattleScript_DamageNonTypesContinues::
 	printfromtable gDamageNonTypesDmgStringIds
 	waitmessage B_WAIT_TIME_LONG
 	effectivenesssound
-	hitanimation BS_SCRIPTING
+	hitanimation BS_ATTACKER
 	goto BattleScript_DoTurnDmg
 
 BattleScript_EffectTryReducePP::
