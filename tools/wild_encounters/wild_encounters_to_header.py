@@ -57,7 +57,7 @@ headersArray = [headerIndex]
 
 
 # debug output control
-mainSwitch                      = False
+mainSwitch                      = True
 printWarningAndInclude          = mainSwitch
 printEncounterHeaders           = mainSwitch
 printEncounterRateMacros        = mainSwitch
