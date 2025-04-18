@@ -75,6 +75,7 @@ class TimeOfDay():
     def __len__(self):
         return self.count
     
+    # for debugging purposes
     def __str__(self):
         return str([self.vals, self.lvals, self.fvals, self.count])
 
@@ -94,6 +95,7 @@ class TimeOfDay():
                     return i
 
                 i += 1
+        # return -1 here so it returns a consistent type and can be checked against < 0
         return -1
 
 
@@ -319,10 +321,10 @@ def AssembleMonHeaderContent():
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounterTotalCount"] = encounterTotalCount[headerIndex]
         headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"] = []
 
-        timeStart = TIME_DEFAULT_INDEX
-        while timeStart < TIMES_OF_DAY_COUNT:
+        timeCounter = 0
+        while timeCounter < TIMES_OF_DAY_COUNT:
             headerStructTable[tempHeaderLabel][structLabelNoTime]["encounter_types"].append([])
-            timeStart += 1
+            timeCounter += 1
 
     fieldCounter = 0
     while fieldCounter < len(fieldData):
@@ -334,7 +336,7 @@ def SetupMonInfoVars():
     i = 0
     while i < len(fieldData):
         fieldData[i]["infoStringBase"] = "." + fieldData[i]["snakeName"] + structInfo
-        if fieldInfoStrings[i] == "":
+        if CheckEmpty(fieldInfoStrings[i]):
             fieldInfoStrings[i] = NULL
         else:
             fieldInfoStrings[i] = "&" + fieldInfoStrings[i]
@@ -459,7 +461,6 @@ def PrintEncounterRateMacros():
 
             for method in groups:
                 method_indices = groups[method]
-
                 if not method_indices:
                     continue
 
@@ -479,7 +480,7 @@ def PrintEncounterRateMacros():
                         print(f"{define} {ENCOUNTER_CHANCE}_{tempName}_{method.upper()}_{TOTAL} ({ENCOUNTER_CHANCE}_{tempName}_{method.upper()}_{SLOT}_{methodPercentIndex})")
 
         fieldCounter += 1
-    print("\n")
+    print()
 
 
 def GetTimeLabelFromString(string):
@@ -537,12 +538,16 @@ def GetTimeEnum():
         return include_enum.group("rtc_val")
 
 
+def CheckEmpty(string):
+    return string == "" or string.isspace() or string == "\n"
+
+
 def SetupUserTimeEnum(timeOfDay):
     enum_string = GetTimeEnum()
     enum_string = enum_string.split(",")
 
     # check for extra element from trailing comma
-    if enum_string[-1] == "" or enum_string[-1].isspace():
+    if CheckEmpty(enum_string[-1]):
         enum_string.pop(-1)
 
     # we don't need the `TIMES_OF_DAY_COUNT` value, so - 1 from the value of len(enum_string)
@@ -559,7 +564,7 @@ def SetupUserTimeEnum(timeOfDay):
             tempStr = tempStr.strip(" ")
 
         #double check we didn't catch any empty values
-        if not enum_string[strCount].isspace() and enum_string[strCount] != "":
+        if not CheckEmpty(enum_string[strCount]):
             timeOfDay.add(tempStr)
 
         strCount += 1
@@ -567,7 +572,6 @@ def SetupUserTimeEnum(timeOfDay):
 
 
 def TabStr(amount):
-    global tabStr
     return tabStr * amount
 
 
