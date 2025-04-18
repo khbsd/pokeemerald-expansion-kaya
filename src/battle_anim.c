@@ -1756,7 +1756,7 @@ static void Cmd_setpan(void)
 
 static void Cmd_panse(void)
 {
-    u16 songNum;
+    u32 songNum;
     s8 currentPanArg, incrementPan, incrementPanArg, currentPan, targetPan;
     u8 framesToWait;
     u8 taskId;

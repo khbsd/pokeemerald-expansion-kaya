@@ -1367,7 +1367,7 @@ void Overworld_PlaySpecialMapMusic(void)
         PlayNewMapMusic(music);
 }
 
-void Overworld_SetSavedMusic(u16 songNum)
+void Overworld_SetSavedMusic(u32 songNum)
 {
     gSaveBlock1Ptr->savedMusic = songNum;
 }

@@ -198,6 +198,7 @@ enum RandomTag
     RNG_PARTY_SIZE,
     RNG_DEXNAV_ENCOUNTER_LEVEL,
     RNG_STARTER,
+    RNG_MUSIC,
 };
 
 #define RandomWeighted(tag, ...) \

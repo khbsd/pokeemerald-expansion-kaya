@@ -5,6 +5,8 @@
 #include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
+#include "random.h"
+#include "rtc.h"
 #include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
@@ -12,7 +14,7 @@
 
 struct Fanfare
 {
-    u16 songNum;
+    u32 songNum;
     u16 duration;
 };
 
@@ -170,7 +172,7 @@ u16 GetCurrentMapMusic(void)
     return sCurrentMapMusic;
 }
 
-void PlayNewMapMusic(u16 songNum)
+void PlayNewMapMusic(u32 songNum)
 {
     sCurrentMapMusic = songNum;
     sNextMapMusic = 0;
@@ -193,7 +195,7 @@ void FadeOutMapMusic(u8 speed)
     sMapMusicState = 5;
 }
 
-void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed)
+void FadeOutAndPlayNewMapMusic(u32 songNum, u8 speed)
 {
     FadeOutMapMusic(speed);
     sCurrentMapMusic = 0;
@@ -201,7 +203,7 @@ void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed)
     sMapMusicState = 6;
 }
 
-void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
+void FadeOutAndFadeInNewMapMusic(u32 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
 {
     FadeOutMapMusic(fadeOutSpeed);
     sCurrentMapMusic = 0;
@@ -210,7 +212,7 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
+static void UNUSED FadeInNewMapMusic(u32 songNum, u8 speed)
 {
     FadeInNewBGM(songNum, speed);
     sCurrentMapMusic = songNum;
@@ -232,7 +234,7 @@ bool8 IsNotWaitingForBGMStop(void)
 
 void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
-    u16 songNum;
+    u32 songNum;
     m4aMPlayStop(&gMPlayInfo_BGM);
     songNum = sFanfares[fanfareNum].songNum;
     sFanfareCounter = sFanfares[fanfareNum].duration;
@@ -263,7 +265,7 @@ void StopFanfareByFanfareNum(u8 fanfareNum)
     m4aSongNumStop(sFanfares[fanfareNum].songNum);
 }
 
-void PlayFanfare(u16 songNum)
+void PlayFanfare(u32 songNum)
 {
     s32 i;
     for (i = 0; (u32)i < ARRAY_COUNT(sFanfares); i++)
@@ -315,7 +317,7 @@ static void CreateFanfareTask(void)
         CreateTask(Task_Fanfare, 80);
 }
 
-void FadeInNewBGM(u16 songNum, u8 speed)
+void FadeInNewBGM(u32 songNum, u8 speed)
 {
     if (gDisableMusic)
         songNum = 0;
@@ -594,21 +596,44 @@ static void RestoreBGMVolumeAfterPokemonCry(void)
         CreateTask(Task_DuckBGMForPokemonCry, 80);
 }
 
-void PlayBGM(u16 songNum)
+u32 GetRandomGen4Song(u32 songNum)
 {
-    if (gDisableMusic)
+    switch (songNum)
+    {
+    case MUS_ROUTE122:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_ROWAN;
+        break;
+    case MUS_LITTLEROOT:
+        enum TimeOfDay timeOfDay = GetTimeOfDay();
+        if (RandomPercentage(RNG_MUSIC, 50))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_TWINLEAF_NIGHT;
+            return MUS_DP_TWINLEAF_DAY;
+        }
+        break;
+    default:
+        break;
+    }
+    return songNum;
+}
+
+void PlayBGM(u32 songNum)
+{
+    if (gDisableMusic || songNum == MUS_NONE)
         songNum = 0;
-    if (songNum == MUS_NONE)
-        songNum = 0;
+    else
+        songNum = GetRandomGen4Song(songNum);
     m4aSongNumStart(songNum);
 }
 
-void PlaySE(u16 songNum)
+void PlaySE(u32 songNum)
 {
     m4aSongNumStart(songNum);
 }
 
-void PlaySE12WithPanning(u16 songNum, s8 pan)
+void PlaySE12WithPanning(u32 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
@@ -617,14 +642,14 @@ void PlaySE12WithPanning(u16 songNum, s8 pan)
     m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
 }
 
-void PlaySE1WithPanning(u16 songNum, s8 pan)
+void PlaySE1WithPanning(u32 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
 }
 
-void PlaySE2WithPanning(u16 songNum, s8 pan)
+void PlaySE2WithPanning(u32 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
