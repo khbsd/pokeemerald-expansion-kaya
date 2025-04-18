@@ -184,9 +184,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING)))
     {
         if (gRunToggled)
+        {
+            PlaySE(SE_WALL_HIT);
             gRunToggled = FALSE;
+        }
         else
+        {
+            PlaySE(SE_FLEE);
             gRunToggled = TRUE;
+        }
+            
     }
     if (input->tookStep)
     {
