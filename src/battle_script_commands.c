@@ -10399,6 +10399,7 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         if (GetIllusionMonPtr(battler) != NULL)
         {
+            gBattleScripting.battler = battler;
             gBattlescriptCurrInstr = cmd->nextInstr;
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_IllusionOff;
