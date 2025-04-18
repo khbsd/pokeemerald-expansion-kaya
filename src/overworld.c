@@ -464,6 +464,8 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 0);
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
+    if (isGen4BattleBGM)
+        isGen4BattleBGM = FALSE;
 }
 
 static void UpdateMiscOverworldStates(void)
