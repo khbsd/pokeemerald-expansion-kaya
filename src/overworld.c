@@ -395,6 +395,8 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_SYS_USE_SURF);
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -407,6 +409,8 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_SYS_USE_SURF);
     RunScriptImmediately(EventScript_ResetMrBriney);
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -418,6 +422,8 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_SYS_USE_SURF);
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
@@ -464,8 +470,8 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 0);
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
-    if (isGen4BattleBGM)
-        isGen4BattleBGM = FALSE;
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -475,6 +481,8 @@ static void UpdateMiscOverworldStates(void)
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 void ResetGameStats(void)
@@ -897,6 +905,9 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
          || gMapHeader.regionMapSectionId != sLastMapSectionId)
             ShowMapNamePopup();
     }
+
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 static void LoadMapFromWarp(bool32 a1)
@@ -962,9 +973,10 @@ static void LoadMapFromWarp(bool32 a1)
     }
 
     if (OW_FLAG_AUTO_USE_FLASH)
-    {
         AutoUseFlash();
-    }
+
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -2135,9 +2147,10 @@ void CB2_ContinueSavedGame(void)
     }
 
     if (OW_FLAG_AUTO_USE_FLASH)
-    {
         AutoUseFlash();
-    }
+        
+    if (isGen4BGM)
+        isGen4BGM = FALSE;
     DEBUG_SetAllHMFlags(); // remember to delete this once you're done!
     DEBUG_SetAllBadges(); // remember to delete this once you're done!
 }

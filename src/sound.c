@@ -20,7 +20,7 @@ struct Fanfare
 
 EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
-EWRAM_DATA u8 isGen4BattleBGM = FALSE;
+EWRAM_DATA u8 isGen4BGM = FALSE;
 
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
@@ -600,15 +600,77 @@ static void RestoreBGMVolumeAfterPokemonCry(void)
 u32 GetRandomGen4Song(u32 songNum)
 {
     enum TimeOfDay timeOfDay = GetTimeOfDay();
+
     switch (songNum)
     {
+    // General location music
     case MUS_ROUTE122:
         if (RandomPercentage(RNG_MUSIC, 50))
             return MUS_DP_ROWAN;
         break;
+    case MUS_ROUTE101:
+        if (RandomPercentage(RNG_MUSIC, 10))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_ROUTE201_NIGHT;
+            return MUS_DP_ROUTE201_DAY;
+        }
+        break;
+    case MUS_ROUTE110:
+        if (RandomPercentage(RNG_MUSIC, 20))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_ROUTE225_NIGHT;
+            return MUS_DP_ROUTE225_DAY;
+        }
+        break;
+    case MUS_ROUTE113:
+        if (RandomPercentage(RNG_MUSIC, 20))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_ROUTE203_NIGHT;
+            return MUS_DP_ROUTE203_DAY;
+        }
+        break;
+    case MUS_ROUTE119:
+        if (RandomPercentage(RNG_MUSIC, 20))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_ROUTE206_NIGHT;
+            return MUS_DP_ROUTE206_DAY;
+        }
+        break;
+    case MUS_ROUTE120:
+        if (RandomPercentage(RNG_MUSIC, 20))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_ROUTE209_NIGHT;
+            return MUS_DP_ROUTE209_DAY;
+        }
+        break;
+    case MUS_GAME_CORNER:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_GAME_CORNER;
+        break;
     case MUS_BIRCH_LAB:
         if (RandomPercentage(RNG_MUSIC, 50))
             return MUS_DP_ROWAN_LAB;
+        break;
+    case MUS_CONTEST:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_CONTEST;
+        break;
+    case MUS_CONTEST_LOBBY:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_CONTEST_LOBBY;
+        break;
+    case MUS_CONTEST_WINNER:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_CONTEST_WINNER;
+        break;
+    case MUS_SURF:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_SURF;
         break;
     case MUS_POKE_MART:
         if (RandomPercentage(RNG_MUSIC, 50))
@@ -617,10 +679,15 @@ u32 GetRandomGen4Song(u32 songNum)
     case MUS_POKE_CENTER:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
+            isGen4BGM = TRUE;
             if (timeOfDay >= TIME_EVENING)
                 return MUS_DP_POKE_CENTER_NIGHT;
             return MUS_DP_POKE_CENTER_DAY;
         }
+        break;
+    case MUS_HEAL:
+        if (isGen4BGM)
+            return MUS_DP_HEAL;
         break;
     case MUS_LITTLEROOT:
         if (RandomPercentage(RNG_MUSIC, 50))
@@ -636,6 +703,22 @@ u32 GetRandomGen4Song(u32 songNum)
             if (timeOfDay >= TIME_EVENING)
                 return MUS_DP_SANDGEM_NIGHT;
             return MUS_DP_SANDGEM_DAY;
+        }
+        break;
+    case MUS_PETALBURG:
+        if (RandomPercentage(RNG_MUSIC, 50))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_HEARTHOME_NIGHT;
+            return MUS_DP_HEARTHOME_DAY;
+        }
+        break;
+    case MUS_PETALBURG_WOODS:
+        if (RandomPercentage(RNG_MUSIC, 50))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_DP_OLD_CHATEAU;
+            return MUS_DP_ETERNA_FOREST;
         }
         break;
     case MUS_RUSTBORO:
@@ -654,13 +737,9 @@ u32 GetRandomGen4Song(u32 songNum)
             return MUS_DP_CANALAVE_DAY;
         }
         break;
-    case MUS_MAUVILLE:
-        if (RandomPercentage(RNG_MUSIC, 50))
-        {
-            if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_SUNYSHORE_NIGHT;
-            return MUS_DP_SUNYSHORE_DAY;
-        }
+    case MUS_DP_SUNYSHORE_DAY: // Mauville
+        if (timeOfDay >= TIME_EVENING)
+            return MUS_DP_SUNYSHORE_NIGHT;
         break;
     case MUS_VERDANTURF:
         if (RandomPercentage(RNG_MUSIC, 50))
@@ -670,13 +749,9 @@ u32 GetRandomGen4Song(u32 songNum)
             return MUS_DP_FLOAROMA_DAY;
         }
         break;
-    case MUS_LAVARIDGE:
-        if (RandomPercentage(RNG_MUSIC, 50))
-        {
-            if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_SOLACEON_NIGHT;
-            return MUS_DP_SOLACEON_DAY;
-        }
+    case MUS_DP_SOLACEON_DAY: // Lavaridge
+        if (timeOfDay >= TIME_EVENING)
+            return MUS_DP_SOLACEON_NIGHT;
         break;
     case MUS_FALLARBOR:
         if (RandomPercentage(RNG_MUSIC, 50))
@@ -694,18 +769,25 @@ u32 GetRandomGen4Song(u32 songNum)
             return MUS_DP_ROUTE228_DAY;
         }
         break;
+    case MUS_MT_PYRE_EXTERIOR:
+        if (RandomPercentage(RNG_MUSIC, 5))
+            return MUS_RG_LAVENDER;
+        break;
+    case MUS_MT_PYRE:
+        if (RandomPercentage(RNG_MUSIC, 5))
+            return MUS_RG_POKE_TOWER;
+        break;
     case MUS_LILYCOVE:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
             if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_HEARTHOME_NIGHT;
-            return MUS_DP_HEARTHOME_DAY;
+                return MUS_DP_VEILSTONE_NIGHT;
+            return MUS_DP_VEILSTONE_DAY;
         }
         break;
     case MUS_DP_ETERNA_DAY: // Mossdeep got shafted :(
         if (timeOfDay >= TIME_EVENING)
             return MUS_DP_ETERNA_NIGHT;
-        return songNum;
         break;
     case MUS_SOOTOPOLIS:
         if (RandomPercentage(RNG_MUSIC, 50))
@@ -715,35 +797,19 @@ u32 GetRandomGen4Song(u32 songNum)
             return MUS_DP_SNOWPOINT_DAY;
         }
         break;
-    case MUS_DP_ROUTE206_DAY:
+    case MUS_DP_VALOR_LAKEFRONT_DAY: // Pacifidlog
         if (timeOfDay >= TIME_EVENING)
-            return MUS_DP_ROUTE206_NIGHT;
-        return songNum;
+            return MUS_DP_VALOR_LAKEFRONT_NIGHT;
         break;
     case MUS_EVER_GRANDE:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
             if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_VEILSTONE_NIGHT;
-            return MUS_DP_VEILSTONE_DAY;
+                return MUS_DP_POKEMON_LEAGUE_NIGHT;
+            return MUS_DP_POKEMON_LEAGUE_DAY;
         }
         break;
-    case MUS_ROUTE101:
-        if (RandomPercentage(RNG_MUSIC, 10))
-        {
-            if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_ROUTE201_NIGHT;
-            return MUS_DP_ROUTE201_DAY;
-        }
-        break;
-    case MUS_ROUTE110:
-        if (RandomPercentage(RNG_MUSIC, 10))
-        {
-            if (timeOfDay >= TIME_EVENING)
-                return MUS_DP_ROUTE225_NIGHT;
-            return MUS_DP_ROUTE225_DAY;
-        }
-        break;
+    // Battle music
     case MUS_GYM:
         if (RandomPercentage(RNG_MUSIC, 20))
             return MUS_DP_GYM;
@@ -751,85 +817,69 @@ u32 GetRandomGen4Song(u32 songNum)
     case MUS_VS_WILD:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
-            isGen4BattleBGM = TRUE;
+            isGen4BGM = TRUE;
             return MUS_DP_VS_WILD;
         }
         break;
     case MUS_VICTORY_WILD:
-        if (isGen4BattleBGM)
+        if (isGen4BGM)
         {
-            isGen4BattleBGM = FALSE;
+            isGen4BGM = FALSE;
             return MUS_DP_VICTORY_WILD;
-        }
-        else
-        {
-            return songNum;
         }
         break;
     case MUS_VS_TRAINER:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
-            isGen4BattleBGM = TRUE;
+            isGen4BGM = TRUE;
             return MUS_DP_VS_TRAINER;
         }
         break;
     case MUS_VICTORY_TRAINER:
-        if (isGen4BattleBGM)
+        if (isGen4BGM)
         {
-            isGen4BattleBGM = FALSE;
+            isGen4BGM = FALSE;
             return MUS_DP_VICTORY_TRAINER;
-        }
-        else
-        {
-            return songNum;
         }
         break;
     case MUS_VS_GYM_LEADER:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
-            isGen4BattleBGM = TRUE;
+            isGen4BGM = TRUE;
             return MUS_DP_VS_GYM_LEADER;
         }
         break;
     case MUS_VICTORY_GYM_LEADER:
-        if (isGen4BattleBGM)
+        if (isGen4BGM)
         {
-            isGen4BattleBGM = FALSE;
+            isGen4BGM = FALSE;
             return MUS_DP_VICTORY_GYM_LEADER;
-        }
-        else
-        {
-            return songNum;
         }
         break;
     case MUS_ENCOUNTER_AQUA:
     case MUS_ENCOUNTER_MAGMA:
         if (RandomPercentage(RNG_MUSIC, 50))
         {
-            isGen4BattleBGM = TRUE;
+            isGen4BGM = TRUE;
             return MUS_DP_VS_GALACTIC;
         }
     case MUS_VS_AQUA_MAGMA:
-        if (isGen4BattleBGM)
+        if (isGen4BGM)
             return MUS_DP_VS_GALACTIC;
         else 
             return songNum;
         break;
     case MUS_VICTORY_AQUA_MAGMA:
-        if (isGen4BattleBGM)
+        if (isGen4BGM)
         {
-            isGen4BattleBGM = FALSE;
+            isGen4BGM = FALSE;
             return MUS_DP_VICTORY_GALACTIC;
-        }
-        else
-        {
-            return songNum;
         }
         break;
     case MUS_VS_AQUA_MAGMA_LEADER :
         if (RandomPercentage(RNG_MUSIC, 50))
         {
-            isGen4BattleBGM = TRUE;
+            isGen4BGM = TRUE;
             return MUS_DP_VS_GALACTIC_COMMANDER;
         }
         break;
