@@ -46,9 +46,9 @@ bool8 IsSEPlaying(void);
 bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
 void Task_DuckBGMForPokemonCry(u8 taskId);
-u32 GetRandomGen4Song(u32 songNum);
+u32 GetRandomAlternateSong(u32 songNum);
 
 extern u8 isGen4BGM;
-extern u8 isGen1BattleBGM;
+extern u8 isGen1BGM;
 
 #endif // GUARD_SOUND_H

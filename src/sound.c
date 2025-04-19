@@ -597,7 +597,7 @@ static void RestoreBGMVolumeAfterPokemonCry(void)
         CreateTask(Task_DuckBGMForPokemonCry, 80);
 }
 
-u32 GetRandomGen4Song(u32 songNum)
+u32 GetRandomAlternateSong(u32 songNum)
 {
     enum TimeOfDay timeOfDay = GetTimeOfDay();
 
@@ -894,7 +894,7 @@ void PlayBGM(u32 songNum)
     if (gDisableMusic || songNum == MUS_NONE)
         songNum = 0;
     else
-        songNum = GetRandomGen4Song(songNum);
+        songNum = GetRandomAlternateSong(songNum);
     m4aSongNumStart(songNum);
 }
 
