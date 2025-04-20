@@ -2473,4 +2473,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Weakens contact attacks."),
         .aiRating = 6,
     },
+
+    [ABILITY_LOVESTRUCK] =
+    {
+        .name = _("Lovestruck"),
+        .description = COMPOUND_STRING("Enemies swoon on contact."),
+        .aiRating = 7,
+    },
 };

@@ -4715,6 +4715,38 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
             }
             break;
+        case ABILITY_LOVESTRUCK:
+            if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_LOVESTRUCK, 100) : RandomChance(RNG_LOVESTRUCK, 1, 1))
+            {
+                if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
+                && IsBattlerAlive(gBattlerAttacker)
+                && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                && IsBattlerTurnDamaged(gBattlerTarget)
+                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
+                && IsMoveMakingContact(move, gBattlerAttacker))
+                {
+                    if (CanBeParalyzed(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker)))
+                    {
+                        gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_PARALYSIS;
+                        PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                        gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
+                        effect++;
+                    }
+
+                    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
+                    && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
+                    && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
+                    {
+                        gBattleMons[gBattlerAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattlerTarget);
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
+                        effect++;
+                    }
+                }
+            }
+            break;
         case ABILITY_KLUTZ:
             if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 30) : RandomChance(RNG_KLUTZ, 1, 3))
             {
@@ -4760,7 +4792,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsBattlerAlive(gBattlerTarget)
              && (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
              && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
-             && AreBattlersOfSameGender(gBattlerAttacker, gBattlerTarget)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker)
