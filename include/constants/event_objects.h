@@ -364,10 +364,14 @@
 #define OBJ_EVENT_PAL_TAG_NPC_2                   0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_3                   0x1105
 #define OBJ_EVENT_PAL_TAG_NPC_4                   0x1106
+#define OBJ_EVENT_PAL_TAG_NPC_5                   0x116B
+#define OBJ_EVENT_PAL_TAG_NPC_6                   0x116D
 #define OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION        0x1107
 #define OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION        0x1108
 #define OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION        0x1109
 #define OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION        0x110A
+#define OBJ_EVENT_PAL_TAG_NPC_5_REFLECTION        0x116C
+#define OBJ_EVENT_PAL_TAG_NPC_6_REFLECTION        0x116E
 #define OBJ_EVENT_PAL_TAG_QUINTY_PLUMP            0x110B
 #define OBJ_EVENT_PAL_TAG_QUINTY_PLUMP_REFLECTION 0x110C
 #define OBJ_EVENT_PAL_TAG_TRUCK                   0x110D
