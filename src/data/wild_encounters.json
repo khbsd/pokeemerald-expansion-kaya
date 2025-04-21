@@ -24575,7 +24575,19 @@
         },
         {
           "map": "MAP_VICTORY_ROAD_1F",
-          "base_label": "gVictoryRoad_1F_Day",
+          "base_label": "gVictoryRoad_1F_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_1_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24587,7 +24599,7 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_HARIYAMA"
+                "species": "SPECIES_MACHOKE"
               },
               {
                 "min_level": 40,
@@ -24602,17 +24614,17 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_ZUBAT"
+                "species": "SPECIES_NOIBAT"
               },
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_MAKUHITA"
+                "species": "SPECIES_MACHOP"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_NOIBAT"
               },
               {
                 "min_level": 38,
@@ -24622,29 +24634,41 @@
               {
                 "min_level": 36,
                 "max_level": 36,
+                "species": "SPECIES_GIBLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GIBLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
                 "species": "SPECIES_ARON"
               },
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_WHISMUR"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_WHISMUR"
+                "species": "SPECIES_GIBLE"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_1F",
-          "base_label": "gVictoryRoad_1F_Evening",
+          "base_label": "gVictoryRoad_1F_1_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_1_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_1_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_2_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -24656,7 +24680,7 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_HARIYAMA"
+                "species": "SPECIES_ELECTABUZZ"
               },
               {
                 "min_level": 40,
@@ -24676,7 +24700,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_MAKUHITA"
+                "species": "SPECIES_MAGMAR"
               },
               {
                 "min_level": 38,
@@ -24686,7 +24710,17 @@
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_HARIYAMA"
+                "species": "SPECIES_BRELOOM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_AXEW"
               },
               {
                 "min_level": 36,
@@ -24696,89 +24730,22 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_WHISMUR"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_WHISMUR"
+                "species": "SPECIES_AXEW"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_1F",
-          "base_label": "gVictoryRoad_1F_Night",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_HARIYAMA"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LOUDRED"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_ZUBAT"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_MAKUHITA"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_HARIYAMA"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_WHISMUR"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_ARON"
-              },
-              {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_WHISMUR"
-              }
-            ]
-          }
+          "base_label": "gVictoryRoad_1F_2_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_2_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_1F",
+          "base_label": "gVictoryRoad_1F_2_Night"
         },
         {
           "map": "MAP_SAFARI_ZONE_SOUTH",
@@ -70701,7 +70668,19 @@
         },
         {
           "map": "MAP_VICTORY_ROAD_B1F",
-          "base_label": "gVictoryRoad_B1F_Day",
+          "base_label": "gVictoryRoad_B1F_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_1_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -70718,47 +70697,47 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_ONIX"
               },
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_ONIX"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_NOIVERN"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_HARIYAMA"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_NOIVERN"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_HARIYAMA"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_STEELIX"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_STEELIX"
               },
               {
                 "min_level": 38,
@@ -70773,34 +70752,46 @@
               {
                 "min_level": 30,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 30,
                 "max_level": 40,
-                "species": "SPECIES_GEODUDE"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE_ALOLA"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GRAVELER_ALOLA"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_B1F",
-          "base_label": "gVictoryRoad_B1F_Evening",
+          "base_label": "gVictoryRoad_B1F_1_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_1_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_1_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_2_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -70817,12 +70808,12 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_BRONZOR"
               },
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_BRONZOR"
               },
               {
                 "min_level": 38,
@@ -70847,22 +70838,22 @@
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_BRONZONG"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_FRAXURE"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_BRONZONG"
               },
               {
                 "min_level": 38,
                 "max_level": 38,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_FRAXURE"
               }
             ]
           },
@@ -70872,129 +70863,42 @@
               {
                 "min_level": 30,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 30,
                 "max_level": 40,
-                "species": "SPECIES_GEODUDE"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_CARKOL"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE_ALOLA"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GRAVELER_ALOLA"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_B1F",
-          "base_label": "gVictoryRoad_B1F_Night",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_HARIYAMA"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_HARIYAMA"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_HARIYAMA"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_MAWILE"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_MAWILE"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 40,
-                "species": "SPECIES_GRAVELER"
-              },
-              {
-                "min_level": 30,
-                "max_level": 40,
-                "species": "SPECIES_GEODUDE"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GRAVELER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GRAVELER"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GRAVELER"
-              }
-            ]
-          }
+          "base_label": "gVictoryRoad_B1F_2_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_2_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B1F",
+          "base_label": "gVictoryRoad_B1F_2_Night"
         },
         {
           "map": "MAP_VICTORY_ROAD_B2F",
@@ -71152,7 +71056,19 @@
         },
         {
           "map": "MAP_VICTORY_ROAD_B2F",
-          "base_label": "gVictoryRoad_B2F_Day",
+          "base_label": "gVictoryRoad_B2F_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_1_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -71164,57 +71080,57 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_SABLEYE"
+                "species": "SPECIES_DUNSPARCE"
               },
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_DUNSPARCE"
               },
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_DUNSPARCE"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_LARVITAR"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_SABLEYE"
+                "species": "SPECIES_LARVITAR"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_FRIGIBAX"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_SABLEYE"
+                "species": "SPECIES_PUPITAR"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_ARCTIBAX"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_FRIGIBAX"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_PUPITAR"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_ARCTIBAX"
               }
             ]
           },
@@ -71224,17 +71140,17 @@
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_ARAQUANID"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_ARAQUANID"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_ARAQUANID"
               },
               {
                 "min_level": 35,
@@ -71264,12 +71180,12 @@
               {
                 "min_level": 10,
                 "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 10,
                 "max_level": 30,
-                "species": "SPECIES_GOLDEEN"
+                "species": "SPECIES_SEAKING"
               },
               {
                 "min_level": 10,
@@ -71279,41 +71195,53 @@
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_BARBOACH"
+                "species": "SPECIES_TYNAMO"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_BARBOACH"
+                "species": "SPECIES_TYNAMO"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_EELEKTRIK"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_EELEKTRIK"
               },
               {
                 "min_level": 40,
                 "max_level": 45,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_GOOMY"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_B2F",
-          "base_label": "gVictoryRoad_B2F_Evening",
+          "base_label": "gVictoryRoad_B2F_1_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_1_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_1_Night"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_2_Morning",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_LINOONE_GALAR"
               },
               {
                 "min_level": 40,
@@ -71328,32 +71256,32 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_ARCTIBAX"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_CROAGUNK"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_SABLEYE"
+                "species": "SPECIES_ARCTIBAX"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_CROAGUNK"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_SABLEYE"
+                "species": "SPECIES_TOXICROAK"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_TOXICROAK"
               },
               {
                 "min_level": 42,
@@ -71363,12 +71291,12 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_DUDUNSPARCE_TWO_SEGMENT"
               },
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_DUDUNSPARCE_THREE_SEGMENT"
               }
             ]
           },
@@ -71378,27 +71306,27 @@
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_CLOBBOPUS"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_CLOBBOPUS"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_GOLDUCK"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_GOLDUCK"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_GOLBAT"
+                "species": "SPECIES_GRAPPLOCT"
               }
             ]
           },
@@ -71408,209 +71336,67 @@
               {
                 "min_level": 5,
                 "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_FRILLISH"
               },
               {
                 "min_level": 5,
                 "max_level": 10,
+                "species": "SPECIES_JELLICENT"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
+                "species": "SPECIES_FRILLISH"
+              },
+              {
+                "min_level": 10,
+                "max_level": 30,
                 "species": "SPECIES_GOLDEEN"
               },
               {
                 "min_level": 10,
                 "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
+                "species": "SPECIES_ARROKUDA"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_BARBOACH"
+                "species": "SPECIES_ARROKUDA"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_BARBOACH"
+                "species": "SPECIES_BARRASKEWDA"
               },
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 40,
                 "max_level": 45,
-                "species": "SPECIES_WHISCASH"
+                "species": "SPECIES_INKAY"
               }
             ]
           }
         },
         {
           "map": "MAP_VICTORY_ROAD_B2F",
-          "base_label": "gVictoryRoad_B2F_Night",
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 40,
-                "max_level": 40,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 44,
-                "max_level": 44,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 44,
-                "max_level": 44,
-                "species": "SPECIES_SABLEYE"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 42,
-                "max_level": 42,
-                "species": "SPECIES_MAWILE"
-              },
-              {
-                "min_level": 44,
-                "max_level": 44,
-                "species": "SPECIES_LAIRON"
-              },
-              {
-                "min_level": 44,
-                "max_level": 44,
-                "species": "SPECIES_MAWILE"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_GOLBAT"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 30,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_MAGIKARP"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_GOLDEEN"
-              },
-              {
-                "min_level": 10,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_BARBOACH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 35,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_WHISCASH"
-              },
-              {
-                "min_level": 40,
-                "max_level": 45,
-                "species": "SPECIES_WHISCASH"
-              }
-            ]
-          }
+          "base_label": "gVictoryRoad_B2F_2_Day"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_2_Evening"
+        },
+        {
+          "map": "MAP_VICTORY_ROAD_B2F",
+          "base_label": "gVictoryRoad_B2F_2_Night"
         },
         {
           "map": "MAP_METEOR_FALLS_1F_1R",
