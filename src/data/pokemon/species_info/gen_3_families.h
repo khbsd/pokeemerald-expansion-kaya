@@ -9767,7 +9767,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .formSpeciesIdTable = sBanetteFormSpeciesIdTable,
         .formChangeTable = sBanetteFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BANETTE_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_BANETTE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_REAPER_CLOTH},
                                         {IF_IN_MAP, MAP_MT_PYRE_1F}
