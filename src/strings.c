@@ -163,6 +163,7 @@ const u8 gText_PressAnyDpadKey[] = _("Press any {DPAD_NONE} key\nto register ite
 const u8 gText_DadsAdvice[] = _("DAD's advice…\n{PLAYER}, there's a time and place for\leverything!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PlayerUsedVar2[] = _("{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 const u8 gText_RepelEffectsLingered[] = _("But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}");
+const u8 gText_RepelEffectsDissipated[] = _("The effects of the REPEL\ndissipated.{PAUSE_UNTIL_PRESS}");
 const u8 gText_LureEffectsLingered[] = _("But the effects of a Lure\nlingered from earlier.{PAUSE_UNTIL_PRESS}");
 const u8 gText_BoxFull[] = _("The BOX is full.{PAUSE_UNTIL_PRESS}");
 const u8 gText_TheField[] = _("the field");

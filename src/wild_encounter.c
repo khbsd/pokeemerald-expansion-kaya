@@ -1134,7 +1134,8 @@ bool8 UpdateRepelCounter(void)
 
     if (steps != 0)
     {
-        steps--;
+        if (!FlagGet(FLAG_SYS_PERMA_REPEL))
+            steps--;
         if (!isLure)
         {
             VarSet(VAR_REPEL_STEP_COUNT, steps);

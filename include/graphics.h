@@ -523,6 +523,7 @@ extern const u32 gItemIconPalette_YellowMint[];
 // Candy
 extern const u32 gItemIcon_RareCandy[];
 extern const u32 gItemIconPalette_RareCandy[];
+extern const u32 gItemIconPalette_PermaRareCandy[];
 extern const u32 gItemIcon_ExpCandyXS[];
 extern const u32 gItemIcon_ExpCandyS[];
 extern const u32 gItemIcon_ExpCandyM[];
@@ -544,6 +545,7 @@ extern const u32 gItemIcon_Repel[];
 extern const u32 gItemIconPalette_Repel[];
 extern const u32 gItemIconPalette_SuperRepel[];
 extern const u32 gItemIconPalette_MaxRepel[];
+extern const u32 gItemIconPalette_PermaRepel[];
 extern const u32 gItemIcon_Lure[];
 extern const u32 gItemIconPalette_Lure[];
 extern const u32 gItemIconPalette_SuperLure[];

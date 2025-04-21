@@ -689,6 +689,30 @@ u32 GetRandomAlternateSong(u32 songNum)
         if (isGen4BGM)
             return MUS_DP_HEAL;
         break;
+    case MUS_B_FRONTIER:
+        if (RandomPercentage(RNG_MUSIC, 50))
+        {
+            if (timeOfDay >= TIME_EVENING)
+                return MUS_PL_FIGHT_AREA_NIGHT;
+            return MUS_PL_FIGHT_AREA_DAY;
+        }
+        break;
+    case MUS_B_TOWER:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_DP_B_TOWER;
+        break;
+    case MUS_B_FACTORY:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_PL_B_FACTORY;
+        break;
+    case MUS_B_HALL:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_PL_B_PALACE;
+        break;
+    case MUS_B_PIKE:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_PL_B_CASTLE;
+        break;
     case MUS_LITTLEROOT:
         if (RandomPercentage(RNG_MUSIC, 50))
         {

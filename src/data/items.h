@@ -1938,6 +1938,24 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_RareCandy,
     },
 
+    [ITEM_PERMA_RARE_CANDY] =
+    {
+        .name = _("Perma Rare Candy"),
+        .pluralName = _("Perma Rare Candies"),
+        .price = (I_PRICE >= GEN_7) ? 10000 : 4800,
+        .description = COMPOUND_STRING(
+            "Raises level by\n"
+            "one. Reforms\n"
+            "over time."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
+        .effect = gItemEffect_RareCandy,
+        .flingPower = 30,
+        .iconPic = gItemIcon_RareCandy,
+        .iconPalette = gItemIconPalette_PermaRareCandy,
+    },
+
     [ITEM_EXP_CANDY_XS] =
     {
         .name = _("Exp. Candy XS"),
@@ -2197,6 +2215,22 @@ const struct Item gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Repel,
         .iconPalette = gItemIconPalette_MaxRepel,
+    },
+
+    [ITEM_PERMA_REPEL] =
+    {
+        .name = _("Perma Repel"),
+        .price = (I_PRICE >= GEN_7) ? 400 : 350,
+        .holdEffectParam = 250,
+        .description = COMPOUND_STRING(
+            "Permanently repels\n"
+            "weak wild Pokémon.\n"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_PermaRepel,
+        .flingPower = 30,
+        .iconPic = gItemIcon_Repel,
+        .iconPalette = gItemIconPalette_PermaRepel,
     },
 
     [ITEM_LURE] =
