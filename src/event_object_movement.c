@@ -218,14 +218,11 @@ static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite 
 const u8 gReflectionEffectPaletteMap[16] = {
         [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,
         [PALSLOT_PLAYER_REFLECTION]      = PALSLOT_PLAYER_REFLECTION,
-        [PALSLOT_NPC_1]                  = PALSLOT_NPC_1_REFLECTION,
-        [PALSLOT_NPC_2]                  = PALSLOT_NPC_2_REFLECTION,
-        [PALSLOT_NPC_3]                  = PALSLOT_NPC_3_REFLECTION,
-        [PALSLOT_NPC_4]                  = PALSLOT_NPC_4_REFLECTION,
-        [PALSLOT_NPC_1_REFLECTION]       = PALSLOT_NPC_1_REFLECTION,
-        [PALSLOT_NPC_2_REFLECTION]       = PALSLOT_NPC_2_REFLECTION,
-        [PALSLOT_NPC_3_REFLECTION]       = PALSLOT_NPC_3_REFLECTION,
-        [PALSLOT_NPC_4_REFLECTION]       = PALSLOT_NPC_4_REFLECTION,
+        [PALSLOT_NPC_1]                  = PALSLOT_NPC_SPECIAL_REFLECTION,
+        [PALSLOT_NPC_2]                  = PALSLOT_NPC_SPECIAL_REFLECTION,
+        [PALSLOT_NPC_3]                  = PALSLOT_NPC_SPECIAL_REFLECTION,
+        [PALSLOT_NPC_4]                  = PALSLOT_NPC_SPECIAL_REFLECTION,
+        [PALSLOT_KECLEON_REFLECTION]     = PALSLOT_KECLEON_REFLECTION,
         [PALSLOT_NPC_SPECIAL]            = PALSLOT_NPC_SPECIAL_REFLECTION,
         [PALSLOT_NPC_SPECIAL_REFLECTION] = PALSLOT_NPC_SPECIAL_REFLECTION
 };
@@ -487,13 +484,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Npc5,                  OBJ_EVENT_PAL_TAG_NPC_5},
     {gObjectEventPal_Npc6,                  OBJ_EVENT_PAL_TAG_NPC_6},
     {gObjectEventPal_Npc7,                  OBJ_EVENT_PAL_TAG_NPC_7},
-    {gObjectEventPal_Npc1Reflection,        OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION},
-    {gObjectEventPal_Npc2Reflection,        OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION},
-    {gObjectEventPal_Npc3Reflection,        OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION},
-    {gObjectEventPal_Npc4Reflection,        OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION},
-    {gObjectEventPal_Npc5Reflection,        OBJ_EVENT_PAL_TAG_NPC_5_REFLECTION},
-    {gObjectEventPal_Npc6Reflection,        OBJ_EVENT_PAL_TAG_NPC_6_REFLECTION},
-    {gObjectEventPal_Npc7Reflection,        OBJ_EVENT_PAL_TAG_NPC_7_REFLECTION},
+    {gObjectEventPal_KecleonReflection,     OBJ_EVENT_PAL_TAG_KECLEON_REFLECTION},
     {gObjectEventPal_Brendan,               OBJ_EVENT_PAL_TAG_BRENDAN},
     {gObjectEventPal_BrendanReflection,     OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION},
     {gObjectEventPal_BridgeReflection,      OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION},
@@ -658,10 +649,10 @@ static const u16 sReflectionPaletteTags_Groudon[] = {
 };
 
 static const u16 sReflectionPaletteTags_Npc3[] = { // Only used by the Route 120 bridge Kecleon
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
+    OBJ_EVENT_PAL_TAG_KECLEON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_KECLEON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_KECLEON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_KECLEON_REFLECTION,
 };
 
 static const u16 sReflectionPaletteTags_RedLeaf[] = {
@@ -695,10 +686,9 @@ static const u16 sObjectPaletteTags0[] = {
     [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
     [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
     [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
-    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_NPC_5]             = OBJ_EVENT_PAL_TAG_NPC_5,
+    [PALSLOT_NPC_6]             = OBJ_EVENT_PAL_TAG_NPC_6,
+    [PALSLOT_NPC_7]             = OBJ_EVENT_PAL_TAG_NPC_7,
 };
 
 static const u16 sObjectPaletteTags1[] = {
@@ -708,10 +698,9 @@ static const u16 sObjectPaletteTags1[] = {
     [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
     [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
     [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
-    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_NPC_5]             = OBJ_EVENT_PAL_TAG_NPC_5,
+    [PALSLOT_NPC_6]             = OBJ_EVENT_PAL_TAG_NPC_6,
+    [PALSLOT_NPC_7]             = OBJ_EVENT_PAL_TAG_NPC_7,
 };
 
 static const u16 sObjectPaletteTags2[] = {
@@ -721,10 +710,9 @@ static const u16 sObjectPaletteTags2[] = {
     [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
     [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
     [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
-    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_NPC_5]             = OBJ_EVENT_PAL_TAG_NPC_5,
+    [PALSLOT_NPC_6]             = OBJ_EVENT_PAL_TAG_NPC_6,
+    [PALSLOT_NPC_7]             = OBJ_EVENT_PAL_TAG_NPC_7,
 };
 
 static const u16 sObjectPaletteTags3[] = {
@@ -734,10 +722,9 @@ static const u16 sObjectPaletteTags3[] = {
     [PALSLOT_NPC_2]             = OBJ_EVENT_PAL_TAG_NPC_2,
     [PALSLOT_NPC_3]             = OBJ_EVENT_PAL_TAG_NPC_3,
     [PALSLOT_NPC_4]             = OBJ_EVENT_PAL_TAG_NPC_4,
-    [PALSLOT_NPC_1_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION,
-    [PALSLOT_NPC_2_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION,
-    [PALSLOT_NPC_3_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION,
-    [PALSLOT_NPC_4_REFLECTION]  = OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION,
+    [PALSLOT_NPC_5]             = OBJ_EVENT_PAL_TAG_NPC_5,
+    [PALSLOT_NPC_6]             = OBJ_EVENT_PAL_TAG_NPC_6,
+    [PALSLOT_NPC_7]             = OBJ_EVENT_PAL_TAG_NPC_7,
 };
 
 static const u16 *const sObjectPaletteTagSets[] = {
@@ -3694,7 +3681,7 @@ void InitObjectEventPalettes(u8 reflectionType)
     }
     else
     {
-        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_4_REFLECTION + 1);
+        PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_SPECIAL_REFLECTION + 1);
     }
 }
 
