@@ -693,7 +693,7 @@ u32 GetRandomAlternateSong(u32 songNum)
         if (RandomPercentage(RNG_MUSIC, 50))
         {
             if (timeOfDay >= TIME_EVENING)
-                return MUS_PL_FIGHT_AREA_NIGHT;
+                return MUS_DP_FIGHT_AREA_NIGHT;
             return MUS_PL_FIGHT_AREA_DAY;
         }
         break;
@@ -705,13 +705,17 @@ u32 GetRandomAlternateSong(u32 songNum)
         if (RandomPercentage(RNG_MUSIC, 50))
             return MUS_PL_B_FACTORY;
         break;
-    case MUS_B_HALL:
+    case MUS_B_PALACE:
         if (RandomPercentage(RNG_MUSIC, 50))
-            return MUS_PL_B_PALACE;
+            return MUS_PL_B_HALL;
         break;
     case MUS_B_PIKE:
         if (RandomPercentage(RNG_MUSIC, 50))
             return MUS_PL_B_CASTLE;
+        break;
+    case MUS_B_PYRAMID:
+        if (RandomPercentage(RNG_MUSIC, 50))
+            return MUS_PL_B_ARCADE;
         break;
     case MUS_LITTLEROOT:
         if (RandomPercentage(RNG_MUSIC, 50))
