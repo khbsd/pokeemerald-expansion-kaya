@@ -230,10 +230,10 @@ Route120_EventScript_StevenGiveDeconScope::
 	delay 15
 	removeobject LOCALID_STEVEN
 	waitfieldeffect FLDEFF_NPCFLY_OUT
-	setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
-	setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
-	setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
-	setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
+	@setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
+	@setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
+	@setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
+	@setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
 	special DrawWholeMapView
 	release
 	end
