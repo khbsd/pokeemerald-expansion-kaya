@@ -95,6 +95,7 @@ struct MoveInfo
     bool32 pulseMove:1;
     bool32 soundMove:1;
     bool32 ballisticMove:1;
+    bool32 hydrostatMove:1;
     bool32 powderMove:1;
     bool32 danceMove:1;
     bool32 windMove:1;
@@ -103,8 +104,8 @@ struct MoveInfo
     bool32 minimizeDoubleDamage:1;
     bool32 ignoresTargetAbility:1;
     bool32 ignoresTargetDefenseEvasionStages:1;
-    bool32 damagesUnderground:1;
     // end of word
+    bool32 damagesUnderground:1;
     bool32 damagesUnderwater:1;
     bool32 damagesAirborne:1;
     bool32 damagesAirborneDoubleDamage:1;
@@ -129,7 +130,7 @@ struct MoveInfo
     bool32 sketchBanned:1;
     //Other
     bool32 validApprenticeMove:1;
-    u32 padding:10;
+    u32 padding:9;
     // end of word
 
     union {
@@ -301,6 +302,11 @@ static inline bool32 IsSoundMove(u32 moveId)
 static inline bool32 IsBallisticMove(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].ballisticMove;
+}
+
+static inline bool32 IsHydrostatMove(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].hydrostatMove;
 }
 
 static inline bool32 IsPowderMove(u32 moveId)

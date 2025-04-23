@@ -2480,4 +2480,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Enemies swoon on contact."),
         .aiRating = 7,
     },
+
+    [ABILITY_BALLISTOSPORE] =
+    {
+        .name = _("Ballistospore"),
+        .description = COMPOUND_STRING("Sporulate when damaged."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_LUSH_LEAVES] =
+    {
+        .name = _("Lush Leaves"),
+        .description = COMPOUND_STRING("Heat-and-cold protection."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };

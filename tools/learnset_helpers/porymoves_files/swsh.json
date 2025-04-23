@@ -9698,7 +9698,9 @@
       "MOVE_ENERGY_BALL",
       "MOVE_LEAF_STORM",
       "MOVE_POWER_WHIP",
-      "MOVE_GRASS_KNOT"
+      "MOVE_GRASS_KNOT",
+      "MOVE_ROCK_SLIDE",
+      "MOVE_STEALTH_ROCK"
     ],
     "EggMoves": [
       "MOVE_CONFUSION",
@@ -36616,7 +36618,9 @@
       "MOVE_ENERGY_BALL",
       "MOVE_LEAF_STORM",
       "MOVE_POWER_WHIP",
-      "MOVE_GRASS_KNOT"
+      "MOVE_GRASS_KNOT",
+      "MOVE_ROCK_SLIDE",
+      "MOVE_STEALTH_ROCK"
     ],
     "EggMoves": [
       "MOVE_CONFUSION",

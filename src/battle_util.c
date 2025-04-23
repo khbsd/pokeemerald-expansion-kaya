@@ -1693,7 +1693,8 @@ bool32 BattleArenaTurnEnd(void)
 // Ingrain, Leech Seed, Strength Sap and Aqua Ring
 s32 GetDrainedBigRootHp(u32 battler, s32 hp)
 {
-    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_BIG_ROOT)
+    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_BIG_ROOT
+        || GetBattlerAbility(battler) == ABILITY_BALLISTOSPORE)
         hp = (hp * 1300) / 1000;
     if (hp == 0)
         hp = 1;
@@ -4753,6 +4754,24 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     }
                 }
             }
+            break;
+        case ABILITY_BALLISTOSPORE:
+            if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
+                && IsBattlerAlive(gBattlerAttacker)
+                && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                && IsBattlerTurnDamaged(gBattlerTarget)
+                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
+                && !(gStatuses3[gBattlerTarget] & STATUS3_LEECHSEED)
+                && RandomPercentage(RNG_BALLISTOSPORE, 30))
+                {
+                    gStatuses3[gBattlerAttacker] |= STATUS3_LEECHSEED;
+                    gStatuses3[gBattlerTarget] |= STATUS3_LEECHSEED_BATTLER;
+                    gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_LEECH_SEED;
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AbilityBallistosporeActivates;
+                }
+            effect++;
             break;
         case ABILITY_KLUTZ:
             if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 30) : RandomChance(RNG_KLUTZ, 1, 3))
@@ -8664,6 +8683,10 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         if (moveType == TYPE_WATER)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_LUSH_LEAVES:
+        if (IsHydrostatMove(move))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
+        break;
     case ABILITY_SHIELD_DUST:
         if (moveType == TYPE_BUG)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
@@ -8763,11 +8786,11 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         break;
     case ABILITY_ORICHALCUM_PULSE:
         if ((weather & B_WEATHER_SUN) && HasWeatherEffect() && IsBattleMovePhysical(move))
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
         break;
     case ABILITY_HADRON_ENGINE:
         if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && IsBattleMoveSpecial(move))
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
         break;
     }
 
@@ -8780,6 +8803,14 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.5));
             if (damageCalcData->updateFlags)
                 RecordAbilityBattle(battlerDef, ABILITY_THICK_FAT);
+        }
+        break;
+    case ABILITY_LUSH_LEAVES:
+        if (moveType == TYPE_FIRE || moveType == TYPE_ICE)
+        {
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.667));
+            if (damageCalcData->updateFlags)
+                RecordAbilityBattle(battlerDef, ABILITY_LUSH_LEAVES);
         }
         break;
     }

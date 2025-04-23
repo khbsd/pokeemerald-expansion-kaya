@@ -970,6 +970,15 @@ BattleScript_MoveEffectLeechSeed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_AbilityBallistosporeActivates::
+	waitstate
+	call BattleScript_AbilityPopUp
+	playanimation BS_ATTACKER, B_ANIM_MON_SEEDED
+	printstring STRINGID_PKMNATKSEEDED
+	setseeded
+	attackanimation
+	return
+
 BattleScript_MoveEffectReflect::
 	printfromtable gReflectLightScreenSafeguardStringIds
 	waitmessage B_WAIT_TIME_LONG
