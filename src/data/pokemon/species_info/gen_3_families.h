@@ -255,7 +255,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 552,
         .description = COMPOUND_STRING(
             "Thanks to the power in its quick legs,\n"
-            "Mega Sceptile can be on its opponent in a\n"
+            "Dendryle can be on its opponent in a\n"
             "flash. It can cut off a portion of its tail\n"
             "to fire it like a missile at an opponent."),
         .pokemonScale = 256,
@@ -2935,7 +2935,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 16,
         .weight = 484,
         .description = COMPOUND_STRING(
-            "By opening its heart, Mega Gardevoir\n"
+            "By opening its heart, Naitolanx\n"
             "becomes able to use tremendous psychic\n"
             "power. The red plate in its chest is said to\n"
             "be a physical manifestation of its heart."),
@@ -3091,7 +3091,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 16,
         .weight = 564,
         .description = COMPOUND_STRING(
-            "Mega Gallade has a knightly appearance.\n"
+            "Naitogard has a knightly appearance.\n"
             "It can use its psychic power to reshape\n"
             "both arms into blades simultaneously and\n"
             "fight using a dual-wielding style."),
@@ -4985,7 +4985,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 50,
         .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
+        .types = MON_TYPES(TYPE_STEEL, TYPE_DRAGON),
         .catchRate = 90,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 151 : 152,
         .evYield_Defense = 2,
@@ -5056,7 +5056,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 60,
         .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
+        .types = MON_TYPES(TYPE_STEEL, TYPE_DRAGON),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
@@ -5140,7 +5140,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 60,
         .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_STEEL),
+        .types = MON_TYPES(TYPE_STEEL, TYPE_DRAGON),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 315 : 284,
         .evYield_Defense = 3,
@@ -5160,9 +5160,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 3950,
         .description = COMPOUND_STRING(
             "When Aggron Mega Evolves into\n"
-            "Mega Aggron, the destructive ability of\n"
+            "Iraton, the destructive ability of\n"
             "its fearsome horns can turn a steel-clad\n"
-            "tank into so much scrap metal."),
+            "tank into scrap metal with ease."),
         .pokemonScale = 256,
         .pokemonOffset = -1,
         .trainerScale = 350,
@@ -6596,9 +6596,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 1303,
         .description = COMPOUND_STRING(
             "The yellow patterns it bears are old scars.\n"
-            "The energy from Mega Evolution runs\n"
-            "through them, causing it sharp pain and\n"
-            "suffering."),
+            "The energy from Mega Evolution courses\n"
+            "visibly below the surface."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 317,
@@ -10671,7 +10670,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_INNER_FOCUS, ABILITY_ICE_BODY, ABILITY_REFRIGERATE },
+        .abilities = { ABILITY_STRONG_JAW, ABILITY_ICE_BODY, ABILITY_REFRIGERATE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Arctidolia"),
         .cryId = CRY_GLALIE_MEGA,
@@ -10681,8 +10680,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 3502,
         .description = COMPOUND_STRING(
             "The power of Mega Evolution was so strong\n"
-            "that it smashed Glalie's jaw. Its inability\n"
-            "to eat very well leaves Glalie irritated."),
+            "Arctidolia's jaw calcified, giving it\n"
+            "much stronger bite attacks."),
         .pokemonScale = 256,
         .pokemonOffset = 3,
         .trainerScale = 344,
@@ -11665,8 +11664,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 18,
         .weight = 1126,
         .description = COMPOUND_STRING(
-            "Mega Evolution fuels its brutality, and it\n"
-            "may even turn on the Trainer who raised it.\n"
+            "Mega Evolution fuels its brutality, but it\n"
+            "will never turn on the Trainer who raised it.\n"
             "It's been dubbed the blood-soaked.\n"
             "crescent."),
         .pokemonScale = 256,
@@ -12365,7 +12364,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 18,
         .weight = 520,
         .description = COMPOUND_STRING(
-            "Its body is smaller than Mega Latios's\n"
+            "Its body is smaller than Sonios'\n"
             "body. It is more agile and can make very\n"
             "sharp turns. When it Mega Evolves, its\n"
             "defensive strength grows substantially."),
@@ -12527,7 +12526,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 23,
         .weight = 700,
         .description = COMPOUND_STRING(
-            "It's larger than Mega Latias, and can\n"
+            "It's larger than Sonias, and can\n"
             "achieve higher speeds in flight.\n"
             "This Pokémon can use its speed in battle\n"
             "to unleash a flurry of attacks."),
