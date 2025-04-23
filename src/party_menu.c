@@ -1155,6 +1155,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             break;
         case 2: // Evolution stone
             if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
@@ -5635,9 +5636,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         sFinalLevel = 0;
 
         if (holdEffectParam == 0) // Rare Candy
-        {
             targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
-        }
 
         if (targetSpecies != SPECIES_NONE)
         {
