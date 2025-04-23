@@ -6125,6 +6125,7 @@ static const u16 sTangelaTeachableLearnset[] = {
     MOVE_PSYCH_UP,
     MOVE_REFLECT,
     MOVE_REST,
+    MOVE_ROCK_SLIDE,
     MOVE_ROCK_SMASH,
     MOVE_SHOCK_WAVE,
     MOVE_SLEEP_TALK,
