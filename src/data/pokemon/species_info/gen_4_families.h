@@ -4398,9 +4398,9 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .weight = 950,
         .description = COMPOUND_STRING(
             "Excess energy melted its arms and wings\n"
-            "into giant scythes, sending it mad with\n"
-            "rage. It swings its scythes wildly and\n"
-            "slices the ground to pieces."),
+            "into giant scythes. It swings its\n"
+            "scythes wildly and slices the ground\n"
+            "to pieces."),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,

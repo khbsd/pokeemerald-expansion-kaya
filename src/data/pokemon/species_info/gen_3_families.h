@@ -5371,7 +5371,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .formSpeciesIdTable = sMedichamFormSpeciesIdTable,
         .formChangeTable = sMedichamFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_MEDICHAM_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_MEDICHAM_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAP, MAP_MT_PYRE_SUMMIT}
@@ -5627,8 +5627,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 18,
         .weight = 440,
         .description = COMPOUND_STRING(
-            "Too much electricity has built up in its\n"
-            "body, irritating Manectric. Its explosive\n"
+            "Electricity has built up in its\n"
+            "body, energizing Electrion. Its explosive\n"
             "speed is equal to that of a lightning bolt."),
         .pokemonScale = 256,
         .pokemonOffset = 3,
@@ -6961,7 +6961,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .formSpeciesIdTable = sCameruptFormSpeciesIdTable,
         .formChangeTable = sCameruptFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_CAMERUPT_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 70, SPECIES_CAMERUPT_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_MAGMARIZER},
                                         {IF_IN_MAPSEC, MAPSEC_SCORCHED_SLAB}
@@ -7115,6 +7115,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sTorkoalLevelUpLearnset,
         .teachableLearnset = sTorkoalTeachableLearnset,
         .eggMoveLearnset = sTorkoalEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_TURTONATOR,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_SHELL_BELL},
+                                        {IF_IN_MAP, MAP_METEOR_FALLS_B1F_1R}
+                                )}),
     },
 #endif //P_FAMILY_TORKOAL
 
@@ -9804,7 +9809,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .description = COMPOUND_STRING(
             "Extraordinary energy amplifies its\n"
             "cursing magnet fields to such an extent that it\n"
-            "can't help but curse its own Trainer."),
+            "can't help but curse its own Trainer. It is\n"
+            "quick to reverse the curses."),
         .pokemonScale = 262,
         .pokemonOffset = 9,
         .trainerScale = 256,
