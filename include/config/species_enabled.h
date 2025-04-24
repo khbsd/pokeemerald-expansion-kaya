@@ -431,7 +431,7 @@
 // #define P_FAMILY_ROWLET               P_GEN_7_POKEMON
 // #define P_FAMILY_LITTEN               P_GEN_7_POKEMON
 // #define P_FAMILY_POPPLIO              P_GEN_7_POKEMON
-#define P_FAMILY_PIKIPEK                 P_GEN_7_POKEMON
+// #define P_FAMILY_PIKIPEK              P_GEN_7_POKEMON
 #define P_FAMILY_YUNGOOS                 P_GEN_7_POKEMON
 // #define P_FAMILY_GRUBBIN              P_GEN_7_POKEMON
 #define P_FAMILY_CRABRAWLER              P_GEN_7_POKEMON
@@ -544,7 +544,7 @@
 #define P_FAMILY_FIDOUGH                 P_GEN_9_POKEMON
 // #define P_FAMILY_SMOLIV               P_GEN_9_POKEMON
 #define P_FAMILY_SQUAWKABILLY            P_GEN_9_POKEMON
-#define P_FAMILY_NACLI                   P_GEN_9_POKEMON
+// #define P_FAMILY_NACLI                   P_GEN_9_POKEMON
 // #define P_FAMILY_CHARCADET            P_GEN_9_POKEMON
 // #define P_FAMILY_TADBULB              P_GEN_9_POKEMON
 // #define P_FAMILY_WATTREL              P_GEN_9_POKEMON
@@ -683,6 +683,7 @@
 #define P_FAMILY_ROWLET                  TRUE
 #define P_FAMILY_LITTEN                  TRUE
 #define P_FAMILY_POPPLIO                 TRUE
+#define P_FAMILY_PIKIPEK                 TRUE
 #define P_FAMILY_GRUBBIN                 TRUE
 #define P_FAMILY_ROCKRUFF                TRUE
 #define P_FAMILY_FOMANTIS                TRUE
@@ -728,6 +729,7 @@
 #define P_FAMILY_QUAXLY                  TRUE
 #define P_FAMILY_PAWMI                   TRUE
 #define P_FAMILY_SMOLIV                  TRUE
+#define P_FAMILY_NACLI                   TRUE
 #define P_FAMILY_CHARCADET               TRUE
 #define P_FAMILY_TADBULB                 TRUE
 #define P_FAMILY_WATTREL                 TRUE
