@@ -166,6 +166,19 @@ const u32 gItemIconPalette_SweetHeart[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_MaxHoney[] = INCBIN_U32("graphics/items/icons/max_honey.4bpp.lz");
 const u32 gItemIconPalette_MaxHoney[] = INCBIN_U32("graphics/items/icon_palettes/max_honey.gbapal.lz");
 
+const u32 gItemIcon_Pokevial0[] = INCBIN_U32("graphics/items/icons/pokevial0.4bpp.lz");
+const u32 gItemIcon_Pokevial1[] = INCBIN_U32("graphics/items/icons/pokevial1.4bpp.lz");
+const u32 gItemIcon_Pokevial2[] = INCBIN_U32("graphics/items/icons/pokevial2.4bpp.lz");
+const u32 gItemIcon_Pokevial3[] = INCBIN_U32("graphics/items/icons/pokevial3.4bpp.lz");
+const u32 gItemIcon_Pokevial4[] = INCBIN_U32("graphics/items/icons/pokevial4.4bpp.lz");
+const u32 gItemIcon_Pokevial5[] = INCBIN_U32("graphics/items/icons/pokevial5.4bpp.lz");
+const u32 gItemIcon_Pokevial6[] = INCBIN_U32("graphics/items/icons/pokevial6.4bpp.lz");
+const u32 gItemIcon_Pokevial7[] = INCBIN_U32("graphics/items/icons/pokevial7.4bpp.lz");
+const u32 gItemIcon_Pokevial8[] = INCBIN_U32("graphics/items/icons/pokevial8.4bpp.lz");
+const u32 gItemIcon_Pokevial9[] = INCBIN_U32("graphics/items/icons/pokevial9.4bpp.lz");
+const u32 gItemIcon_Pokevial[] = INCBIN_U32("graphics/items/icons/pokevial.4bpp.lz");
+const u32 gItemIconPalette_Pokevial[] = INCBIN_U32("graphics/items/icon_palettes/pokevial.gbapal.lz");
+
 // Regional Specialties
 
 const u32 gItemIcon_PewterCrunchies[] = INCBIN_U32("graphics/items/icons/pewter_crunchies.4bpp.lz");

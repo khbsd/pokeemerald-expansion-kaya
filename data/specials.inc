@@ -564,4 +564,7 @@ gSpecials::
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback
+	def_special PokevialGetDose
+    def_special PokevialGetSize
+    def_special PokevialRefill
 	def_special CheckIfPlayerIsKaya

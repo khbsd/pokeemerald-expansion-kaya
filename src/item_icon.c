@@ -7,6 +7,7 @@
 #include "malloc.h"
 #include "move.h"
 #include "palette.h"
+#include "pokevial.h"
 #include "sprite.h"
 #include "window.h"
 #include "constants/items.h"
@@ -202,6 +203,8 @@ const void *GetItemIconPic(u16 itemId)
             return gItemIcon_TM;
         return gItemIcon_HM;
     }
+    if (itemId == ITEM_POKEVIAL)
+        return PokevialGetDoseIcon();
 
     return gItemsInfo[itemId].iconPic;
 }

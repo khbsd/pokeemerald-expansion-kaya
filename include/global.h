@@ -4,6 +4,7 @@
 #include <string.h>
 #include <limits.h>
 #include "config/general.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
+#include "config/item.h"
 #include "gba/gba.h"
 #include "siirtc.h"
 #include "fpmath.h"
@@ -1013,6 +1014,12 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
+struct Pokevial
+{
+    u8 Size : 4;
+    u8 Dose : 4;
+};
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -1128,6 +1135,7 @@ struct SaveBlock1
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3???
+               struct Pokevial pokevial;
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
