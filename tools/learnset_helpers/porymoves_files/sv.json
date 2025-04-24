@@ -62317,7 +62317,9 @@
       "MOVE_UPROAR",
       "MOVE_DUAL_WINGBEAT",
       "MOVE_ENDEAVOR",
-      "MOVE_FEATHER_DANCE"
+      "MOVE_FEATHER_DANCE",
+      "MOVE_FIRE_BLAST",
+      "MOVE_FLAMETHROWER"
     ],
     "EggMoves": [
       "MOVE_SKY_ATTACK",
@@ -62420,7 +62422,9 @@
       "MOVE_UPROAR",
       "MOVE_DUAL_WINGBEAT",
       "MOVE_ENDEAVOR",
-      "MOVE_FEATHER_DANCE"
+      "MOVE_FEATHER_DANCE",
+      "MOVE_FIRE_BLAST",
+      "MOVE_FLAMETHROWER"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -62534,7 +62538,9 @@
       "MOVE_ENDEAVOR",
       "MOVE_TEMPER_FLARE",
       "MOVE_FEATHER_DANCE",
-      "MOVE_THROAT_CHOP"
+      "MOVE_THROAT_CHOP",
+      "MOVE_FIRE_BLAST",
+      "MOVE_FLAMETHROWER"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -78236,7 +78242,10 @@
       "MOVE_TERA_BLAST",
       "MOVE_SMACK_DOWN",
       "MOVE_METEOR_BEAM",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_TOXIC",
+      "MOVE_GUNK_SHOT"
     ],
     "EggMoves": [
       "MOVE_ANCIENT_POWER",

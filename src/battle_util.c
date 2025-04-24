@@ -8341,8 +8341,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_BARREL_BORE:
-        if (IsBallisticMove(move) || moveType == TYPE_FIRE)
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        if (IsBallisticMove(move))
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        if (moveType == TYPE_FIRE)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_MEGA_LAUNCHER:
         if (IsPulseMove(move))
