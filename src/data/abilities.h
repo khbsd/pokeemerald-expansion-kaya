@@ -2496,9 +2496,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_BULLETPROOF] =
+    [ABILITY_BARREL_BORE] =
     {
-        .name = _("BARREL BORE"),
+        .name = _("Barrel Bore"),
         .description = COMPOUND_STRING("Ballistics are stronger."),
         .aiRating = 7,
     },
