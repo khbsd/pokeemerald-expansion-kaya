@@ -1041,12 +1041,12 @@ STATIC_ASSERT(NUM_NATURES <= (1 << 5), BoxPokemon_hiddenNatureModifier_TooSmall)
 
 u32 GetShinyOddsBoost(void)
 {
-    u32 oddsBoost = 0;
+    u32 oddsBoost;
     u32 badgeBoost;
     u32 badgeCounter;
 
     badgeBoost = P_BADGE_BOOST_SHINY_AMOUNT + (GetNumOwnedBadges() / 2);
-    oddsBoost += GetNumOwnedBadges() * badgeBoost;
+    oddsBoost = GetNumOwnedBadges();
 
     if (P_E4_BOOST_SHINY_ODDS)
     {
@@ -1063,7 +1063,7 @@ u32 GetShinyOddsBoost(void)
     if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN) && P_STEVEN_BOOST_SHINY_ODDS)
         oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
 
-    return oddsBoost;
+    return oddsBoost * badgeBoost;
 }
 
 u32 GetAdjustedShinyOdds(void)

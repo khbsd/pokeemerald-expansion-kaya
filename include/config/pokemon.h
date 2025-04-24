@@ -70,7 +70,7 @@
 #define P_E4_BOOST_SHINY_ODDS            TRUE        // If TRUE, each Elite 4 member plus the Champion you get boosts your shiny odds.
 #define P_STEVEN_BOOST_SHINY_ODDS        TRUE        // If TRUE, defeating Steven in Meteor Falls also boosts your shiny odds.
 #define P_ADD_SHINY_ODDS_TO_ROLLS        TRUE        // If TRUE, adds the adjusted shiny odds to the amount of rolls for shininess
-#define P_BADGE_BOOST_SHINY_AMOUNT       2           // The amount that SHINY_ODDS is increased by.
+#define P_BADGE_BOOST_SHINY_AMOUNT       1           // The amount that SHINY_ODDS is increased by.
 
 // Learnset helper toggles
 #define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.
