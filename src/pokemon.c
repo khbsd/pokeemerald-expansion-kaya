@@ -24,6 +24,7 @@
 #include "caps.h"
 #include "link.h"
 #include "main.h"
+#include "match_call.h"
 #include "overworld.h"
 #include "m4a.h"
 #include "party_menu.h"
@@ -1038,6 +1039,38 @@ STATIC_ASSERT(MAX_DYNAMAX_LEVEL < (1 << 4), PokemonSubstruct3_dynamaxLevel_TooSm
 STATIC_ASSERT(MAX_PER_STAT_IVS < (1 << 5), PokemonSubstruct3_ivs_TooSmall);
 STATIC_ASSERT(NUM_NATURES <= (1 << 5), BoxPokemon_hiddenNatureModifier_TooSmall);
 
+u32 GetShinyOddsBoost(void)
+{
+    u32 oddsBoost = 0;
+    u32 badgeCounter;
+
+    oddsBoost += GetNumOwnedBadges() * P_BADGE_BOOST_SHINY_AMOUNT;
+
+    if (P_E4_BOOST_SHINY_ODDS)
+    {
+        for (badgeCounter = FLAG_DEFEATED_ELITE_4_SIDNEY; badgeCounter <= FLAG_DEFEATED_ELITE_4_DRAKE; badgeCounter++)
+        {
+            if (FlagGet(badgeCounter))
+                oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
+        }
+    }
+
+    if (FlagGet(FLAG_IS_CHAMPION) && P_E4_BOOST_SHINY_ODDS)
+        oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
+    
+    if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN) && P_STEVEN_BOOST_SHINY_ODDS)
+        oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
+
+    return oddsBoost;
+}
+
+u32 GetAdjustedShinyOdds(void)
+{
+    if (P_BADGE_BOOST_SHINY_ODDS)
+        return SHINY_ODDS + GetShinyOddsBoost();
+    return SHINY_ODDS;
+}
+
 static u32 CompressStatus(u32 status)
 {
     s32 i;
@@ -1118,6 +1151,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 availableIVs[NUM_STATS];
     u8 selectedIvs[NUM_STATS];
     bool32 isShiny;
+    u32 adjustedShinyOdds = GetAdjustedShinyOdds();
 
     ZeroBoxMonData(boxMon);
 
@@ -1135,7 +1169,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     else if (otIdType == OT_ID_PRESET)
     {
         value = fixedOtId;
-        isShiny = GET_SHINY_VALUE(value, personality) < SHINY_ODDS;
+        isShiny = GET_SHINY_VALUE(value, personality) < GetAdjustedShinyOdds();
     }
     else // Player is the OT
     {
@@ -1171,16 +1205,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 totalRerolls += CalculateChainFishingShinyRolls();
             if (gDexNavSpecies)
                 totalRerolls += CalculateDexNavShinyRolls();
-            if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) && P_EGG_INCREASED_SHINY_ODDS)
+            if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) && P_EGG_INCREASED_SHINY_ROLLS)
                 totalRerolls += 2;
+            if (P_ADD_SHINY_ODDS_TO_ROLLS)
+                totalRerolls += adjustedShinyOdds; // :)
 
-            while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
+            while (GET_SHINY_VALUE(value, personality) >= adjustedShinyOdds && totalRerolls > 0)
             {
                 personality = Random32();
                 totalRerolls--;
             }
 
-            isShiny = GET_SHINY_VALUE(value, personality) < SHINY_ODDS;
+            isShiny = GET_SHINY_VALUE(value, personality) < adjustedShinyOdds;
         }
     }
 
@@ -1224,6 +1260,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     {
         u32 iv;
         u32 ivRandom = Random32();
+        u32 numPerfectIvs;
         value = (u16)ivRandom;
 
         iv = value & MAX_IV_MASK;
@@ -1242,7 +1279,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
-        if (gSpeciesInfo[species].perfectIVCount != 0)
+        numPerfectIvs = gSpeciesInfo[species].perfectIVCount + P_WILD_PERFECT_IVS;
+
+        if (numPerfectIvs != 0)
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
@@ -1252,13 +1291,13 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             }
 
             // Select the IVs that will be perfected.
-            for (i = 0; i < NUM_STATS && i < gSpeciesInfo[species].perfectIVCount; i++)
+            for (i = 0; i < NUM_STATS && i < numPerfectIvs; i++)
             {
                 u8 index = Random() % (NUM_STATS - i);
                 selectedIvs[i] = availableIVs[index];
                 RemoveIVIndexFromList(availableIVs, index);
             }
-            for (i = 0; i < NUM_STATS && i < gSpeciesInfo[species].perfectIVCount; i++)
+            for (i = 0; i < NUM_STATS && i < numPerfectIvs; i++)
             {
                 switch (selectedIvs[i])
                 {

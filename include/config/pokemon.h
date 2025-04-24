@@ -53,6 +53,7 @@
 // Other settings
 #define P_CRIES_ENABLED                  TRUE        // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
 #define P_LEGENDARY_PERFECT_IVS          6           // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
+#define P_WILD_PERFECT_IVS               3           // Number of perfect IVs each wild mon has.
 #define P_EV_CAP                         GEN_LATEST  // Since Gen 6, the max EVs per stat is 252 instead of 255.
 #define P_SHOW_TERA_TYPE                 GEN_8       // Since Gen 9, the Tera Type is shown on the summary screen.
 #define P_TM_LITERACY                    GEN_LATEST  // Since Gen 6, TM illiterate Pokémon can learn TMs that teach moves that are in their level-up learnsets.
@@ -61,9 +62,14 @@
 #define P_ONLY_OBTAINABLE_SHINIES        FALSE       // If TRUE, Pokémon encountered in the Battle Pyramid won't be shiny.
 #define P_NO_SHINIES_WITHOUT_POKEBALLS   FALSE       // If TRUE, Pokémon encountered when the player is out of Poké Balls won't be shiny
 #define P_SHOW_DYNAMIC_TYPES             FALSE       // If TRUE, all moves with dynamic type changes will be reflected as their current type in battle/summary screens instead of just select ones like in vanilla.
-#define P_EGG_INCREASED_SHINY_ODDS       TRUE        // If TRUE, eggs will have slightly increased odds of being shiny.
-#define P_STARTER_MAX_IVS                FALSE        // If TRUE, your starter will have IVs of 31 in each slot
-#define P_STARTER_SHINY                  FALSE        // If TRUE, your starter will be shiny
+#define P_EGG_INCREASED_SHINY_ROLLS      TRUE        // If TRUE, eggs will have slightly increased odds of being shiny.
+#define P_STARTER_MAX_IVS                TRUE        // If TRUE, your starter will have IVs of 31 in each slot.
+#define P_STARTER_SHINY                  FALSE       // If TRUE, your starter will be shiny.
+#define P_BADGE_BOOST_SHINY_ODDS         TRUE        // If TRUE, each badge you get boosts your shiny odds.
+#define P_E4_BOOST_SHINY_ODDS            TRUE        // If TRUE, each Elite 4 member plus the Champion you get boosts your shiny odds.
+#define P_STEVEN_BOOST_SHINY_ODDS        TRUE        // If TRUE, defeating Steven in Meteor Falls also boosts your shiny odds.
+#define P_ADD_SHINY_ODDS_TO_ROLLS        TRUE        // If TRUE, adds the adjusted shiny odds to the amount of rolls for shininess
+#define P_BADGE_BOOST_SHINY_AMOUNT       2           // The amount that SHINY_ODDS is increased by.
 
 // Learnset helper toggles
 #define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.

@@ -361,10 +361,7 @@ enum EvoSpinDirections {
 // Used as a signal for givemon to generate a default ability by personality.
 #define NUM_ABILITY_PERSONALITY 0xFF
 
-#if P_LEGENDARY_PERFECT_IVS >= GEN_6
 #define LEGENDARY_PERFECT_IV_COUNT 6
-#else
-#define LEGENDARY_PERFECT_IV_COUNT 0
-#endif
+
 
 #endif // GUARD_CONSTANTS_POKEMON_H

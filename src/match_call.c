@@ -1853,7 +1853,7 @@ static void PopulateBattleFrontierStreak(int matchCallId, u8 *destStr)
     ConvertIntToDecimalStringN(destStr, sBattleFrontierStreakInfo.streak, STR_CONV_MODE_LEFT_ALIGN, i);
 }
 
-static int GetNumOwnedBadges(void)
+u32 GetNumOwnedBadges(void)
 {
     u32 i;
 
