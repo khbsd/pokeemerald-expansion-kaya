@@ -1042,9 +1042,11 @@ STATIC_ASSERT(NUM_NATURES <= (1 << 5), BoxPokemon_hiddenNatureModifier_TooSmall)
 u32 GetShinyOddsBoost(void)
 {
     u32 oddsBoost = 0;
+    u32 badgeBoost;
     u32 badgeCounter;
 
-    oddsBoost += GetNumOwnedBadges() * P_BADGE_BOOST_SHINY_AMOUNT;
+    badgeBoost = P_BADGE_BOOST_SHINY_AMOUNT + (GetNumOwnedBadges() / 2);
+    oddsBoost += GetNumOwnedBadges() * badgeBoost;
 
     if (P_E4_BOOST_SHINY_ODDS)
     {
@@ -1069,6 +1071,28 @@ u32 GetAdjustedShinyOdds(void)
     if (P_BADGE_BOOST_SHINY_ODDS)
         return SHINY_ODDS + GetShinyOddsBoost();
     return SHINY_ODDS;
+}
+
+u32 GetPerfectIvBoost(void)
+{
+    u32 badgeBoost = 0;
+
+    if (FlagGet(FLAG_BADGE02_GET))
+        badgeBoost++;
+
+    if (FlagGet(FLAG_BADGE05_GET))
+        badgeBoost++;
+
+    if (FlagGet(FLAG_BADGE08_GET))
+        badgeBoost++;
+
+    if (FlagGet(FLAG_IS_CHAMPION))
+        badgeBoost++;
+
+    if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN))
+        badgeBoost++;
+
+    return badgeBoost;
 }
 
 static u32 CompressStatus(u32 status)
@@ -1210,13 +1234,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             if (P_ADD_SHINY_ODDS_TO_ROLLS)
                 totalRerolls += adjustedShinyOdds; // :)
 
+            u32 usedRolls = 0;
             while (GET_SHINY_VALUE(value, personality) >= adjustedShinyOdds && totalRerolls > 0)
             {
                 personality = Random32();
                 totalRerolls--;
+                usedRolls++;
             }
 
             isShiny = GET_SHINY_VALUE(value, personality) < adjustedShinyOdds;
+            MgbaPrintf(MGBA_LOG_WARN, "odds: %u", adjustedShinyOdds);
+            MgbaPrintf(MGBA_LOG_WARN, "value: %u", GET_SHINY_VALUE(value, personality));
+            MgbaPrintf(MGBA_LOG_WARN, "rolls: %u", usedRolls);
         }
     }
 
@@ -1280,6 +1309,11 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 
         numPerfectIvs = gSpeciesInfo[species].perfectIVCount + P_WILD_PERFECT_IVS;
+        if (P_SCALE_PERFECT_IVS)
+            numPerfectIvs += GetPerfectIvBoost();
+
+        if (numPerfectIvs > NUM_STATS)
+            numPerfectIvs = NUM_STATS;
 
         if (numPerfectIvs != 0)
         {

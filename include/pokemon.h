@@ -826,5 +826,6 @@ bool32 IsSpeciesForeignRegionalForm(u32 species, u32 currentRegion);
 u32 GetTeraTypeFromPersonality(struct Pokemon *mon);
 u32 GetShinyOddsBoost(void);
 u32 GetAdjustedShinyOdds(void);
+u32 GetPerfectIvBoost(void);
 
 #endif // GUARD_POKEMON_H
