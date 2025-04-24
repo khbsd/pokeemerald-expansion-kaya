@@ -2423,4 +2423,9 @@ extern const u8 gText_Rename[]; // change nickname from summary screen
 // Switch Caught Mon into Party
 extern const u8 gText_CannotSendMonToBoxHM[];
 
+// pokevial
+extern const u8 gText_PokevialHasDoses[];
+extern const u8 gText_PokevialIsEmpty[];
+extern const u8 gText_YourPkmnWereRestored[];
+
 #endif // GUARD_STRINGS_H

@@ -18,6 +18,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "pokevial.h"
 #include "random.h"
 #include "script.h"
 #include "sprite.h"
@@ -35,6 +36,10 @@ static void HealPlayerBoxes(void);
 void HealPlayerParty(void)
 {
     u32 i;
+
+    if (I_ENABLE_POKEVIAL)
+        PokevialRefill();
+    
     for (i = 0; i < gPlayerPartyCount; i++)
         HealPokemon(&gPlayerParty[i]);
     if (OW_PC_HEAL >= GEN_8)

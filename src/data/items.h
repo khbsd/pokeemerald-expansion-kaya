@@ -138,6 +138,9 @@ static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
                                           "is unsuitable for\n"
                                           "local soil.");
 
+static const u8 sPokevialDesc[]       = _("Restores all\n"
+                                          "POKéMON to full\n"
+                                          "health.");
 const struct Item gItemsInfo[] =
 {
     [ITEM_NONE] =
@@ -14117,5 +14120,18 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
+    },
+
+    [ITEM_POKEVIAL] =
+    {
+        .name = _("POKéVIAL"),
+        .price = 0,
+        .description = sPokevialDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokevial,
+        .iconPic = gItemIcon_Pokevial,
+        .iconPalette = gItemIconPalette_Pokevial,
     },
 };

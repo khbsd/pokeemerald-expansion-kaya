@@ -36,6 +36,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "pokemon_storage_system.h"
+#include "pokevial.h"
 #include "random.h"
 #include "overworld.h"
 #include "rotating_tile_puzzle.h"
@@ -3144,4 +3145,51 @@ void Script_EndTrainerCanSeeIf(struct ScriptContext *ctx)
     u8 condition = ScriptReadByte(ctx);
     if (ctx->breakOnTrainerBattle && sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         StopScript(ctx);
+}
+
+bool8 ScrCmd_pokevial(struct ScriptContext *ctx)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u8 parameter = ScriptReadByte(ctx);
+    u8 amount = ScriptReadByte(ctx);
+
+    switch (mode) {
+        case VIAL_GET:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialGetSize();
+                    break;
+                case VIAL_DOSE:
+                    PokevialGetDose();
+                    break;
+            }
+            break;
+
+        case VIAL_UP:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialSizeUp(amount);
+                    break;
+                case VIAL_DOSE:
+                    PokevialDoseUp(amount);
+                    break;
+            }
+            break;
+
+        case VIAL_DOWN:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialSizeDown(amount);
+                    break;
+                case VIAL_DOSE:
+                    PokevialDoseDown(amount);
+                    break;
+            }
+            break;
+
+        case VIAL_REFILL:
+            PokevialRefill();
+            break;
+    }
+    return TRUE;
 }

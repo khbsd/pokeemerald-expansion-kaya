@@ -35,6 +35,7 @@
 #define ITEM4_PP_UP             0x20
 #define ITEM4_REVIVE            0x40
 #define ITEM4_EVO_STONE         0x80
+#define ITEM0_POKEVIAL          0xC0
 
 // field 5 masks
 #define ITEM5_EV_DEF            0x1
@@ -91,6 +92,7 @@
 #define ITEM_EFFECT_PP_UP 19
 #define ITEM_EFFECT_PP_MAX 20
 #define ITEM_EFFECT_HEAL_PP 21
-#define ITEM_EFFECT_NONE 22
+#define ITEM_EFFECT_POKEVIAL 22
+#define ITEM_EFFECT_NONE 23
 
 #endif // GUARD_CONSTANTS_ITEM_EFFECTS_H
