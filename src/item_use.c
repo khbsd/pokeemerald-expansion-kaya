@@ -1722,11 +1722,18 @@ void PokevialPrintPartyHealed(bool32 isPlayerUsingRegisteredKeyItem, u8 taskId)
     if (isPlayerUsingRegisteredKeyItem)
         DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
     else
-        DisplayItemMessage(taskId,FONT_NORMAL,gStringVar4,CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
 }
 
 void PokevialPrintDosesAndConfirmMessage(u32 currentDoses, bool32 isPlayerUsingRegisteredKeyItem, u8 taskId)
 {
+    if (!FlagGet(I_ENABLE_POKEVIAL_FLAG))
+    {
+        StringExpandPlaceholders(gStringVar4, gText_PokevialDisabled);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+        return;
+    }
+
     u32 numDigits = CountDigits(currentDoses);
 
     ConvertIntToDecimalStringN(gStringVar2, currentDoses, STR_CONV_MODE_LEFT_ALIGN, numDigits);
@@ -1746,7 +1753,7 @@ void PokevialPrintNoDosesMessage(bool32 isPlayerUsingRegisteredKeyItem, u8 taskI
     if (isPlayerUsingRegisteredKeyItem)
         DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
     else
-        DisplayItemMessage(taskId,FONT_NORMAL,gStringVar4,CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
 }
 
 void ItemUseOutOfBattle_Pokevial(u8 taskId)

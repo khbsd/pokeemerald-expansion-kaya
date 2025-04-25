@@ -12,9 +12,9 @@
 
 // Experience settings
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, Pokémon get experience from catching.
-#define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, trainer battles no longer give a 1.5 multiplier to EXP gain.
+#define B_TRAINER_EXP_MULTIPLIER    GEN_3 // In Gen7+, trainer battles no longer give a 1.5 multiplier to EXP gain.
 #define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all participating mon get full experience.
-#define B_SCALED_EXP                GEN_LATEST // In Gen5 and Gen7+, experience is weighted by level difference.
+#define B_SCALED_EXP                GEN_3 // In Gen5 and Gen7+, experience is weighted by level difference.
 #define B_UNEVOLVED_EXP_MULTIPLIER  GEN_LATEST // In Gen6+, if the Pokémon is at or past the level where it would be able to evolve, but it has not, it gets a ~1.2 multiplier to EXP gain. Only applies to Pokémon with EVO_LEVEL method.
 #define B_LEVEL_UP_NOTIFICATION     GEN_LATEST // In Gen9+, if the Pokémon gets enough experience to level up multiple times, the message is only displayed once.
 
@@ -252,19 +252,20 @@
 #define B_ABILITY_POP_UP            TRUE  // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
 #define B_FAST_INTRO_PKMN_TEXT      TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
 #define B_FAST_INTRO_NO_SLIDE       FALSE // If set to TRUE, the slide animation that happens at the beginning of the battle is skipped.
-#define B_FAST_HP_DRAIN             TRUE  // If set to TRUE, HP bars will move faster.
-#define B_FAST_EXP_GROW             TRUE  // If set to TRUE, EXP bars will move faster.
-#define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
-#define B_SHOW_CATEGORY_ICON        TRUE  // If set to TRUE, it will show an icon in the summary and move relearner showing the move's category.
-#define B_HIDE_HEALTHBOX_IN_ANIMS   TRUE  // If set to TRUE, hides healthboxes during move animations.
-#define B_EXPANDED_MOVE_NAMES       TRUE  // If set to FALSE, move names are decreased from 16 characters to 12 characters.
-#define B_WAIT_TIME_MULTIPLIER      12    // This determines how long text pauses in battle last. Vanilla is 16. Lower values result in faster battles.
-#define B_QUICK_MOVE_CURSOR_TO_RUN  FALSE // If set to TRUE, pushing B in the battle options against a wild encounter will move the cursor to the run option
-#define B_RUN_TRAINER_BATTLE        TRUE  // If set to TRUE, players can run from Trainer battles. This is treated as a whiteout.
+#define B_FAST_HP_DRAIN             TRUE     // If set to TRUE, HP bars will move faster.
+#define B_FAST_EXP_GROW             TRUE     // If set to TRUE, EXP bars will move faster.
+#define B_SHOW_TARGETS              TRUE     // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
+#define B_SHOW_CATEGORY_ICON        TRUE     // If set to TRUE, it will show an icon in the summary and move relearner showing the move's category.
+#define B_HIDE_HEALTHBOX_IN_ANIMS   TRUE     // If set to TRUE, hides healthboxes during move animations.
+#define B_EXPANDED_MOVE_NAMES       TRUE     // If set to FALSE, move names are decreased from 16 characters to 12 characters.
+#define B_WAIT_TIME_MULTIPLIER      12       // This determines how long text pauses in battle last. Vanilla is 16. Lower values result in faster battles.
+#define B_QUICK_MOVE_CURSOR_TO_RUN  FALSE    // If set to TRUE, pushing B in the battle options against a wild encounter will move the cursor to the run option
+#define B_RUN_TRAINER_BATTLE        TRUE     // If set to TRUE, players can run from Trainer battles. This is treated as a whiteout.
 #define B_MOVE_DESCRIPTION_BUTTON   L_BUTTON // If set to a button other than B_LAST_USED_BALL_BUTTON, pressing this button will open the move description menu
-#define B_SHOW_USELESS_Z_MOVE_INFO  FALSE // If set to TRUE, Z-moves without additional effects like newer gen status moves will say "no additional effect"
-#define B_ANIMATE_MON_AFTER_KO      TRUE // If set to TRUE, if a Pokémon on the opposite site faints, the non-fainted Pokemon will display a victory animation.
-#define B_SHOW_DYNAMAX_MESSAGE      FALSE // If set to TRUE, an additional battle message is shown after completing Dynamaxing/Gigantamaxing.
+#define B_SHOW_USELESS_Z_MOVE_INFO  FALSE    // If set to TRUE, Z-moves without additional effects like newer gen status moves will say "no additional effect"
+#define B_ANIMATE_MON_AFTER_KO      TRUE     // If set to TRUE, if a Pokémon on the opposite site faints, the non-fainted Pokemon will display a victory animation.
+#define B_SHOW_DYNAMAX_MESSAGE      FALSE    // If set to TRUE, an additional battle message is shown after completing Dynamaxing/Gigantamaxing.
+#define B_ALL_TRAINERS_HAVE_MUGSHOT TRUE     // If TRUE, all trainer battles will be in mugshot style
 
 // Catching settings
 #define B_SEMI_INVULNERABLE_CATCH       GEN_LATEST // In Gen4+, you cannot throw a ball against a Pokemon that is in a semi-invulnerable state (dig/fly/etc)

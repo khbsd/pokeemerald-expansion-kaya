@@ -764,7 +764,7 @@ u8 GetTrainerBattleTransition(void)
     u32 trainerId = SanitizeTrainerId(TRAINER_BATTLE_PARAM.opponentA);
     u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
-    if (DoesTrainerHaveMugshot(trainerId))
+    if (DoesTrainerHaveMugshot(trainerId) || B_ALL_TRAINERS_HAVE_MUGSHOT)
         return B_TRANSITION_MUGSHOT;
 
     if (trainerClass == TRAINER_CLASS_TEAM_MAGMA

@@ -38,8 +38,7 @@ void HealPlayerParty(void)
 {
     u32 i;
 
-    if (I_ENABLE_POKEVIAL)
-        PokevialRefill();
+    PokevialRefill();
     
     for (i = 0; i < gPlayerPartyCount; i++)
         HealPokemon(&gPlayerParty[i]);

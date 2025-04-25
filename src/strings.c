@@ -2,6 +2,7 @@
 #include "strings.h"
 #include "battle_pyramid_bag.h"
 #include "item_menu.h"
+#include <strings.h>
 
 ALIGNED(4)
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -1301,4 +1302,5 @@ const u8 gText_Rename[] = _("RENAME");
 const u8 gText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PokevialHasDoses[] =_("The {STR_VAR_1} has {STR_VAR_2} doses remaining.\nUse the {STR_VAR_1}?");
 const u8 gText_PokevialIsEmpty[] =_("The {STR_VAR_1} is empty!\nRefill it by healing at a {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PokevialDisabled[] =_("The {STR_VAR_1} is disabled!\nBlame Kaya. {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
 const u8 gText_YourPkmnWereRestored[] =_("Your POKéMON were restored\nto full health.{PAUSE_UNTIL_PRESS}");

@@ -7873,12 +7873,12 @@ void IsLastMonThatKnowsSurf(void)
 static bool32 IsMonNotFullyHealed(void)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 currentHP = GetMonData(mon,MON_DATA_HP);
-    u16 maxHP = GetMonData(mon,MON_DATA_MAX_HP);
+    u32 currentHP = GetMonData(mon,MON_DATA_HP);
+    u32 maxHP = GetMonData(mon,MON_DATA_MAX_HP);
     u32 status = GetMonData(mon,MON_DATA_STATUS);
 
-    u8 currentPP = 0, maxPP = 0;
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    u32 currentPP = 0, maxPP = 0;
+    u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
 
     s32 j;
 
@@ -7941,7 +7941,7 @@ void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task)
 
 static void Task_UsePokevialFromField(u8 taskId)
 {
-    PokevialStartVariablesAndRun(taskId,NULL);
+    PokevialStartVariablesAndRun(taskId, NULL);
 }
 
 void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task)
@@ -7964,15 +7964,9 @@ void InitPartyMenuForPokevialFromField(u8 taskId)
 void UsePokevial(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 hp = 0, maxHP = 0;
+    u32 hp = 0, maxHP = 0;
 
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
-    {
-        gTasks[taskId].func = Task_PokevialLoop;
-        return;
-    }
-
-    if (!IsMonNotFullyHealed())
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE|| !IsMonNotFullyHealed())
     {
         gTasks[taskId].func = Task_PokevialLoop;
         return;
@@ -7990,8 +7984,8 @@ void UsePokevial(u8 taskId)
     AnimatePartySlot(gPartyMenu.slotId, 1);
     if (hp != maxHP)
     {
-    PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_PokevialLoop);
-    ResetHPTaskData(taskId, 0, hp);
+        PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_PokevialLoop);
+        ResetHPTaskData(taskId, 0, hp);
     }
 
     sPartyMenuInternal->tUsedOnSlot = TRUE;
@@ -8023,7 +8017,9 @@ void Task_PokevialLoop(u8 taskId)
         DisplayPartyMenuMessage(gText_YourPkmnWereRestored, FALSE);
     }
     else
+    {
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+    }
 
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;

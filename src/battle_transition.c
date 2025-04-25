@@ -14,6 +14,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
+#include "rtc.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -2276,14 +2277,34 @@ static bool8 Mugshot_SetGfx(struct Task *task)
 {
     s16 i, j;
     u16 *tilemap, *tileset;
+    enum TimeOfDay timeOfDay = GetTimeOfDay();
     const u16 *mugshotsMap = sMugshotsTilemap;
-    u8 mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
+    u32 mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
 
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sEliteFour_Tileset, tileset, 0xF0);
 
     if (mugshotColor >= ARRAY_COUNT(sOpponentMugshotsPals))
         mugshotColor = MUGSHOT_COLOR_PURPLE;
+
+    if (mugshotColor == MUGSHOT_COLOR_NONE && B_ALL_TRAINERS_HAVE_MUGSHOT)
+    {
+        switch(timeOfDay)
+        {
+        case TIME_MORNING:
+            mugshotColor = MUGSHOT_COLOR_PINK;
+            break;
+        case TIME_DAY:
+            mugshotColor = MUGSHOT_COLOR_YELLOW;
+            break;
+        case TIME_EVENING:
+            mugshotColor = MUGSHOT_COLOR_PURPLE;
+        case TIME_NIGHT:
+            mugshotColor = MUGSHOT_COLOR_BLUE;
+        default:
+            mugshotColor = RandomUniform(RNG_MUGSHOT, 1, MUGSHOT_COLOR_COUNT - 1);
+        }
+    }
 
     LoadPalette(sOpponentMugshotsPals[mugshotColor], 0xF0, 0x20);
     LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(6));

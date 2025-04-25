@@ -201,6 +201,7 @@ enum RandomTag
     RNG_DEXNAV_ENCOUNTER_LEVEL,
     RNG_STARTER,
     RNG_MUSIC,
+    RNG_MUGSHOT,
 };
 
 #define RandomWeighted(tag, ...) \
