@@ -874,14 +874,22 @@ static const u16 sMugshotPal_Blue[]   = INCBIN_U16("graphics/battle_transitions/
 static const u16 sMugshotPal_Yellow[] = INCBIN_U16("graphics/battle_transitions/yellow_bg.gbapal");
 static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
 static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+static const u16 sMugshotPal_Sunrise[]   = INCBIN_U16("graphics/battle_transitions/sunrise_bg.gbapal");
+static const u16 sMugshotPal_Daytime[]   = INCBIN_U16("graphics/battle_transitions/daytime_bg.gbapal");
+static const u16 sMugshotPal_Sunset[] = INCBIN_U16("graphics/battle_transitions/sunset_bg.gbapal");
+static const u16 sMugshotPal_Night[] = INCBIN_U16("graphics/battle_transitions/night_bg.gbapal");
 
 static const u16 *const sOpponentMugshotsPals[MUGSHOT_COLOR_COUNT] =
 {
-    [MUGSHOT_COLOR_PURPLE] = sMugshotPal_Purple,
-    [MUGSHOT_COLOR_GREEN]  = sMugshotPal_Green,
-    [MUGSHOT_COLOR_PINK]   = sMugshotPal_Pink,
-    [MUGSHOT_COLOR_BLUE]   = sMugshotPal_Blue,
-    [MUGSHOT_COLOR_YELLOW] = sMugshotPal_Yellow
+    [MUGSHOT_COLOR_PURPLE]  = sMugshotPal_Purple,
+    [MUGSHOT_COLOR_GREEN]   = sMugshotPal_Green,
+    [MUGSHOT_COLOR_PINK]    = sMugshotPal_Pink,
+    [MUGSHOT_COLOR_BLUE]    = sMugshotPal_Blue,
+    [MUGSHOT_COLOR_YELLOW]  = sMugshotPal_Yellow,
+    [MUGSHOT_COLOR_SUNRISE] = sMugshotPal_Sunrise,
+    [MUGSHOT_COLOR_DAYTIME] = sMugshotPal_Daytime,
+    [MUGSHOT_COLOR_SUNSET]  = sMugshotPal_Sunset,
+    [MUGSHOT_COLOR_NIGHT]   = sMugshotPal_Night
 };
 
 static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
@@ -2292,15 +2300,15 @@ static bool8 Mugshot_SetGfx(struct Task *task)
         switch(timeOfDay)
         {
         case TIME_MORNING:
-            mugshotColor = MUGSHOT_COLOR_PINK;
+            mugshotColor = MUGSHOT_COLOR_SUNRISE;
             break;
         case TIME_DAY:
-            mugshotColor = MUGSHOT_COLOR_YELLOW;
+            mugshotColor = MUGSHOT_COLOR_DAYTIME;
             break;
         case TIME_EVENING:
-            mugshotColor = MUGSHOT_COLOR_PURPLE;
+            mugshotColor = MUGSHOT_COLOR_SUNSET;
         case TIME_NIGHT:
-            mugshotColor = MUGSHOT_COLOR_BLUE;
+            mugshotColor = MUGSHOT_COLOR_NIGHT;
         default:
             mugshotColor = RandomUniform(RNG_MUGSHOT, 1, MUGSHOT_COLOR_COUNT - 1);
         }
