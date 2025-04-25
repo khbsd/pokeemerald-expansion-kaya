@@ -78,5 +78,8 @@ extern bool8 gRunToggled;
 // auto field moves
 bool8 TryPushBoulder(s16, s16, u8);
 void StartStrengthAnim(u8 objectEventId, u8 direction);
+void AlignFishingAnimationFrames(void);
+void ResetPlayerAvatar(u8 gfxId);
+void Task_Fishing(u8);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H
