@@ -2,9 +2,9 @@
 #define GUARD_FISHING_GAME_H
 
 // Easily Changed Constants
-#define OLD_ROD_BAR_WIDTH               40   // Default pixel width of the fishing bar. Cannot be below 33 or above 64.
-#define GOOD_ROD_BAR_WIDTH              50   // Fishing bar pixel width for the Good Rod. FG_BAR_WIDTH_FROM_ROD_TYPE must be TRUE. Cannot be below 33 or above 64.
-#define SUPER_ROD_BAR_WIDTH             60   // Fishing bar pixel width for the Super Rod. FG_BAR_WIDTH_FROM_ROD_TYPE must be TRUE. Cannot be below 33 or above 64.
+#define OLD_ROD_BAR_WIDTH               33   // Default pixel width of the fishing bar. Cannot be below 33 or above 64.
+#define GOOD_ROD_BAR_WIDTH              40   // Fishing bar pixel width for the Good Rod. FG_BAR_WIDTH_FROM_ROD_TYPE must be TRUE. Cannot be below 33 or above 64.
+#define SUPER_ROD_BAR_WIDTH             48   // Fishing bar pixel width for the Super Rod. FG_BAR_WIDTH_FROM_ROD_TYPE must be TRUE. Cannot be below 33 or above 64.
 #define FISHING_BAR_MAX_SPEED           50   // The greater the number, the faster the bar is allowed to go.
 #define FISHING_BAR_BOUNCINESS          1.3  // The greater the number, the less the bar will bounce when it hits the left side. (Decimals are encouraged, as a little goes a long way.)
 #define BAR_SPEED_SLOWING               2.0  // The greater the value, the slower the bar changes speed. (Decimals are encouraged, as a little goes a long way.) (Can affect the max speed.)
@@ -175,17 +175,17 @@ enum {
 
 struct FishValues
 {
-    u8 min;
-    u8 max;
+    u32 min;
+    u32 max;
 };
 
 struct FishBehaviorData
 {
-    u16 species;
+    u32 species;
     struct FishValues speed;
     struct FishValues distance;
     struct FishValues delay;
-    u8 idleMovement;
+    u32 idleMovement;
 };
 
 #define treasure_score_frame(ptr, frame) {.data = (u8 *)ptr + (TREASURE_TILE_SIZE * TREASURE_TILE_SIZE * frame * 64)/2, .size = (TREASURE_TILE_SIZE * TREASURE_TILE_SIZE * 64)/2}

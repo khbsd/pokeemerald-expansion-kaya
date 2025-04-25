@@ -22,6 +22,7 @@
 #include "item_menu.h"
 #include "main.h"
 #include "malloc.h"
+#include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
@@ -878,6 +879,9 @@ static void CreateMinigameSprites(u8 taskId)
             break;
         }
     }
+
+    spriteData.sBarWidth += GetNumOwnedBadges() * 2;
+
     if (spriteData.sBarWidth > FISHING_BAR_WIDTH_MAX)
         spriteData.sBarWidth = FISHING_BAR_WIDTH_MAX;
     else if (spriteData.sBarWidth < FISHING_BAR_WIDTH_MIN)
