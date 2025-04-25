@@ -2307,10 +2307,13 @@ static bool8 Mugshot_SetGfx(struct Task *task)
             break;
         case TIME_EVENING:
             mugshotColor = MUGSHOT_COLOR_SUNSET;
+            break;
         case TIME_NIGHT:
             mugshotColor = MUGSHOT_COLOR_NIGHT;
+            break;
         default:
             mugshotColor = RandomUniform(RNG_MUGSHOT, 1, MUGSHOT_COLOR_COUNT - 1);
+            break;
         }
     }
 
