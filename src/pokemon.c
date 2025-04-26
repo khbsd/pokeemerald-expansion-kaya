@@ -1233,22 +1233,17 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             if (gDexNavSpecies)
                 totalRerolls += CalculateDexNavShinyRolls();
             if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) && P_EGG_INCREASED_SHINY_ROLLS)
-                totalRerolls += 2;
+                totalRerolls += GetNumOwnedBadges();
             if (P_ADD_SHINY_ODDS_TO_ROLLS)
                 totalRerolls += adjustedShinyOdds; // :)
 
-            u32 usedRolls = 0;
             while (GET_SHINY_VALUE(value, personality) >= adjustedShinyOdds && totalRerolls > 0)
             {
                 personality = Random32();
                 totalRerolls--;
-                usedRolls++;
             }
 
             isShiny = GET_SHINY_VALUE(value, personality) < adjustedShinyOdds;
-            MgbaPrintf(MGBA_LOG_WARN, "odds: %u", adjustedShinyOdds);
-            MgbaPrintf(MGBA_LOG_WARN, "value: %u", GET_SHINY_VALUE(value, personality));
-            MgbaPrintf(MGBA_LOG_WARN, "rolls: %u", usedRolls);
         }
     }
 

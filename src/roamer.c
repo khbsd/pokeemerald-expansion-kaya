@@ -4,6 +4,8 @@
 #include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 // Despite having a variable to track it, the roamer is
 // hard-coded to only ever be in map group 0
@@ -102,6 +104,8 @@ static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
 {
     ClearRoamerLocationHistory(index);
     CreateMon(&gEnemyParty[0], species, GetAdjustedLevel(level), USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    if (GetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY))
+        PlaySE(SE_SHINY);
     ROAMER(index)->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
     ROAMER(index)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;
@@ -150,9 +154,20 @@ void InitRoamer(void)
 {
     DeactivateAllRoamers();
 
-    u32 randomFirstSpecies = RandomUniform(RNG_ROAMER, 0, ARRAY_COUNT(sRoamerSpeciesList));
+    u32 randomFirstSpecies = RandomUniform(RNG_ROAMER, 0, ROAMER_SPECIES_POOL_COUNT);
     gSaveBlock1Ptr->currentRoamerIndex = randomFirstSpecies;
     TryAddRoamer(sRoamerSpeciesList[randomFirstSpecies], ROAMER_LEVEL);
+}
+
+void InitNextRoamer(void)
+{
+    u32 currentRoamerIndex = gSaveBlock1Ptr->currentRoamerIndex;
+
+    currentRoamerIndex++;
+    currentRoamerIndex = (currentRoamerIndex >= ROAMER_SPECIES_POOL_COUNT) ? 0 : currentRoamerIndex;
+    gSaveBlock1Ptr->currentRoamerIndex = currentRoamerIndex;
+
+    CreateInitialRoamerMon(0, sRoamerSpeciesList[currentRoamerIndex], ROAMER_LEVEL);
 }
 
 void UpdateLocationHistoryForRoamer(void)
@@ -199,8 +214,6 @@ void RoamerMove(u32 roamerIndex)
 {
     u8 locSet = 0;
 
-    MgbaPrintf(MGBA_LOG_WARN, "roamer: %u", sRoamerSpeciesList[gSaveBlock1Ptr->currentRoamerIndex]);
-
     if ((Random() % 16) == 0)
     {
         RoamerMoveToOtherLocationSet(roamerIndex);
@@ -226,7 +239,6 @@ void RoamerMove(u32 roamerIndex)
                         || mapNum == MAP_NUM(UNDEFINED));
                 sRoamerLocation[roamerIndex][MAP_NUM] = mapNum;
 
-                MgbaPrintf(MGBA_LOG_WARN, "mapNum: %u", mapNum);
                 return;
             }
             locSet++;
@@ -288,16 +300,7 @@ void UpdateRoamerHPStatus(struct Pokemon *mon)
 
 void SetRoamerInactive(u32 roamerIndex)
 {
-    u32 totalRoamerCount = ARRAY_COUNT(sRoamerSpeciesList);
-    u32 currentRoamerIndex = gSaveBlock1Ptr->currentRoamerIndex;
-
     ROAMER(roamerIndex)->active = FALSE;
-
-    currentRoamerIndex++;
-    currentRoamerIndex = (currentRoamerIndex >= totalRoamerCount) ? 0 : currentRoamerIndex;
-    gSaveBlock1Ptr->currentRoamerIndex = currentRoamerIndex;
-
-    CreateInitialRoamerMon(roamerIndex, sRoamerSpeciesList[currentRoamerIndex], ROAMER_LEVEL);
 }
 
 void GetRoamerLocation(u32 roamerIndex, u8 *mapGroup, u8 *mapNum)
