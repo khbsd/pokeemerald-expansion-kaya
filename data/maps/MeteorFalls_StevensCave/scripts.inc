@@ -19,6 +19,7 @@ MeteorFalls_StevensCave_EventScript_Steven::
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_METEOR_FALLS_STEVEN
 	pokevialadddose
+	setvar B_LEVEL_CAP_VARIABLE, 100
 	release
 	end
 

@@ -272,6 +272,7 @@ LittlerootTown_EventScript_GoSaveBirch::
 	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	setvar B_LEVEL_CAP_VARIABLE, 17
 	release
 	end
 

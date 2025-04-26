@@ -34,6 +34,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
 	pokevialadddose
+	setvar B_LEVEL_CAP_VARIABLE, 47
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce

@@ -382,6 +382,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
 	pokevialadddose
+	setvar B_LEVEL_CAP_VARIABLE, 36
 	special ResetHealLocationFromDewford
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON

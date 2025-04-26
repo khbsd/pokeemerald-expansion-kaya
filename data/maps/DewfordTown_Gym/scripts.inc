@@ -150,6 +150,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
 	pokevialadddose
+	setvar B_LEVEL_CAP_VARIABLE, 23
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
