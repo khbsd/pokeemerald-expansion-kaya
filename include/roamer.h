@@ -1,6 +1,8 @@
 #ifndef GUARD_ROAMER_H
 #define GUARD_ROAMER_H
 
+#include "pokemon.h"
+
 void DeactivateAllRoamers(void);
 void InitRoamer(void);
 void UpdateLocationHistoryForRoamer(void);
@@ -15,6 +17,37 @@ void GetRoamerLocation(u32 roamerIndex, u8 *mapGroup, u8 *mapNum);
 bool8 TryAddRoamer(u16 species, u8 level);
 void MoveAllRoamersToOtherLocationSets(void);
 void MoveAllRoamers(void);
+
+#define ROAMER_LEVEL 80
+
+static const u32 sRoamerSpeciesList[] = 
+{
+    SPECIES_ARTICUNO,
+    SPECIES_ARTICUNO_GALAR,
+    SPECIES_ZAPDOS,
+    SPECIES_ZAPDOS_GALAR,
+    SPECIES_MOLTRES,
+    SPECIES_MOLTRES_GALAR,
+    SPECIES_MEW,
+    SPECIES_MEWTWO,
+    SPECIES_HO_OH,
+    SPECIES_LUGIA,
+    SPECIES_RAIKOU,
+    SPECIES_ENTEI,
+    SPECIES_SUICUNE,
+    SPECIES_CELEBI,
+    SPECIES_LATIOS,
+    SPECIES_LATIAS,
+    SPECIES_DIALGA,
+    SPECIES_PALKIA,
+    SPECIES_GIRATINA,
+    SPECIES_UXIE,
+    SPECIES_MESPRIT,
+    SPECIES_AZELF,
+    SPECIES_SHAYMIN,
+    SPECIES_HEATRAN,
+
+};
 
 extern u8 gEncounteredRoamerIndex;
 

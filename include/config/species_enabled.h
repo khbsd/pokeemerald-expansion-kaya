@@ -293,18 +293,18 @@
 #define P_FAMILY_FINNEON                 P_GEN_4_POKEMON
 // #define P_FAMILY_SNOVER               P_GEN_4_POKEMON
 // #define P_FAMILY_ROTOM                P_GEN_4_POKEMON
-#define P_FAMILY_UXIE                    P_GEN_4_POKEMON
-#define P_FAMILY_MESPRIT                 P_GEN_4_POKEMON
-#define P_FAMILY_AZELF                   P_GEN_4_POKEMON
-#define P_FAMILY_DIALGA                  P_GEN_4_POKEMON
-#define P_FAMILY_PALKIA                  P_GEN_4_POKEMON
-#define P_FAMILY_HEATRAN                 P_GEN_4_POKEMON
+// #define P_FAMILY_UXIE                 P_GEN_4_POKEMON
+// #define P_FAMILY_MESPRIT              P_GEN_4_POKEMON
+// #define P_FAMILY_AZELF                P_GEN_4_POKEMON
+// #define P_FAMILY_DIALGA               P_GEN_4_POKEMON
+// #define P_FAMILY_PALKIA               P_GEN_4_POKEMON
+// #define P_FAMILY_HEATRAN              P_GEN_4_POKEMON
 // #define P_FAMILY_REGIGIGAS            P_GEN_4_POKEMON
-#define P_FAMILY_GIRATINA                P_GEN_4_POKEMON
-#define P_FAMILY_CRESSELIA               P_GEN_4_POKEMON
-#define P_FAMILY_MANAPHY                 P_GEN_4_POKEMON
-#define P_FAMILY_DARKRAI                 P_GEN_4_POKEMON
-#define P_FAMILY_SHAYMIN                 P_GEN_4_POKEMON
+// #define P_FAMILY_GIRATINA             P_GEN_4_POKEMON
+// #define P_FAMILY_CRESSELIA            P_GEN_4_POKEMON
+// #define P_FAMILY_MANAPHY              P_GEN_4_POKEMON
+// #define P_FAMILY_DARKRAI              P_GEN_4_POKEMON
+// #define P_FAMILY_SHAYMIN              P_GEN_4_POKEMON
 #define P_FAMILY_ARCEUS                  P_GEN_4_POKEMON
 
 #define P_FAMILY_VICTINI                 P_GEN_5_POKEMON
@@ -624,6 +624,17 @@
 #define P_FAMILY_CROAGUNK                TRUE
 #define P_FAMILY_SNOVER                  TRUE
 #define P_FAMILY_ROTOM					 TRUE
+#define P_FAMILY_UXIE                    TRUE
+#define P_FAMILY_MESPRIT                 TRUE
+#define P_FAMILY_AZELF                   TRUE
+#define P_FAMILY_DIALGA                  TRUE
+#define P_FAMILY_PALKIA                  TRUE
+#define P_FAMILY_HEATRAN                 TRUE
+#define P_FAMILY_GIRATINA                TRUE
+#define P_FAMILY_CRESSELIA               TRUE
+#define P_FAMILY_MANAPHY                 TRUE
+#define P_FAMILY_DARKRAI                 TRUE
+#define P_FAMILY_SHAYMIN                 TRUE
 #define P_FAMILY_REGIGIGAS				 TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_4_POKEMON
 

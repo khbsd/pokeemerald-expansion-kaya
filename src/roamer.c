@@ -146,13 +146,13 @@ bool8 TryAddRoamer(u16 species, u8 level)
     return FALSE;
 }
 
-// gSpecialVar_0x8004 here corresponds to the options in the multichoice MULTI_TV_LATI (0 for 'Red', 1 for 'Blue')
 void InitRoamer(void)
 {
-    if (gSpecialVar_0x8004 == 0) // Red
-        TryAddRoamer(SPECIES_LATIAS, 40);
-    else
-        TryAddRoamer(SPECIES_LATIOS, 40);
+    DeactivateAllRoamers();
+
+    u32 randomFirstSpecies = RandomUniform(RNG_ROAMER, 0, ARRAY_COUNT(sRoamerSpeciesList));
+    gSaveBlock1Ptr->currentRoamerIndex = randomFirstSpecies;
+    TryAddRoamer(sRoamerSpeciesList[randomFirstSpecies], ROAMER_LEVEL);
 }
 
 void UpdateLocationHistoryForRoamer(void)
@@ -199,6 +199,8 @@ void RoamerMove(u32 roamerIndex)
 {
     u8 locSet = 0;
 
+    MgbaPrintf(MGBA_LOG_WARN, "roamer: %u", sRoamerSpeciesList[gSaveBlock1Ptr->currentRoamerIndex]);
+
     if ((Random() % 16) == 0)
     {
         RoamerMoveToOtherLocationSet(roamerIndex);
@@ -223,6 +225,8 @@ void RoamerMove(u32 roamerIndex)
                         && sLocationHistory[roamerIndex][2][MAP_NUM] == mapNum)
                         || mapNum == MAP_NUM(UNDEFINED));
                 sRoamerLocation[roamerIndex][MAP_NUM] = mapNum;
+
+                MgbaPrintf(MGBA_LOG_WARN, "mapNum: %u", mapNum);
                 return;
             }
             locSet++;
@@ -284,7 +288,16 @@ void UpdateRoamerHPStatus(struct Pokemon *mon)
 
 void SetRoamerInactive(u32 roamerIndex)
 {
+    u32 totalRoamerCount = ARRAY_COUNT(sRoamerSpeciesList);
+    u32 currentRoamerIndex = gSaveBlock1Ptr->currentRoamerIndex;
+
     ROAMER(roamerIndex)->active = FALSE;
+
+    currentRoamerIndex++;
+    currentRoamerIndex = (currentRoamerIndex >= totalRoamerCount) ? 0 : currentRoamerIndex;
+    gSaveBlock1Ptr->currentRoamerIndex = currentRoamerIndex;
+
+    CreateInitialRoamerMon(roamerIndex, sRoamerSpeciesList[currentRoamerIndex], ROAMER_LEVEL);
 }
 
 void GetRoamerLocation(u32 roamerIndex, u8 *mapGroup, u8 *mapNum)
