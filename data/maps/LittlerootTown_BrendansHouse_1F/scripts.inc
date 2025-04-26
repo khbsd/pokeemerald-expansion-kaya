@@ -442,4 +442,6 @@ PlayersHouse_1F_Text_WhatColorDidTheySay:
 
 PlayersHouse_1F_Text_StillUnknownPokemon:
 	.string "MOM: Well, isn't that something!\n"
-	.string "There are still unknown POKéMON.$"
+	.string "There are still unknown POKéMON.\p"
+	.string "Your choice will have no impact\n"
+	.string "on the roamer you encounter. {EMOJI_BIGSMILE}$"
