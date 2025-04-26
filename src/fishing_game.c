@@ -29,6 +29,7 @@
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "random.h"
+#include "rtc.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -52,8 +53,8 @@ static void Task_UnableToUseOW(u8 taskId);
 static void LoadFishingSpritesheets(void);
 static void CreateMinigameSprites(u8 taskId);
 static void CreateTreasureSprite(u8 taskId);
-static void SetFishingTreasureItem(u8 rod);
-static void SetFishingSpeciesBehavior(u8 spriteId, u16 species);
+static void SetFishingTreasureItem(u32 rod);
+static void SetFishingSpeciesBehavior(u32 spriteId, u32 species);
 static void CB2_FishingGame(void);
 static void Task_FishingGame(u8 taskId);
 static void Task_FishingPauseUntilFadeIn(u8 taskId);
@@ -63,8 +64,8 @@ static void Task_HandleConfirmQuitInput(u8 taskId);
 static void Task_ReeledInFish(u8 taskId);
 static void Task_FishGotAway(u8 taskId);
 static void Task_QuitFishing(u8 taskId);
-static u8 CalculateInitialScoreMeterInterval(void);
-static void ChangeScoreMeterColor(u8 interval, u8 pal);
+static u32 CalculateInitialScoreMeterInterval(void);
+static void ChangeScoreMeterColor(u32 interval, u32 pal);
 static void UpdateHelpfulTextHigher(u8 taskId);
 static void UpdateHelpfulTextLower(u8 taskId);
 static void HandleScore(u8 taskId);
@@ -99,7 +100,7 @@ static const u32 gFishingGameOWBG_Tilemap[] = INCBIN_U32("graphics/fishing_game/
 static const u32 gFishingGameOWBGEnd_Tilemap[] = INCBIN_U32("graphics/fishing_game/fishing_bg_ow_end.bin.lz");
 static const u32 gScoreMeterOWBehind_Gfx[] = INCBIN_U32("graphics/fishing_game/score_meter_ow_behind.4bpp.lz");
 
-static const u16 gBarColors[] =
+static const u32 gBarColors[] =
 {
     // The colors of the fishing bar when the fish is inside it.
     [INSIDE_1] = RGB(13, 23, 6),
@@ -720,7 +721,7 @@ static void VblankCB_FishingGame(void)
 void CB2_InitFishingMinigame(void)
 {
     u8 taskId;
-    u8 oldTaskId;
+    u32 oldTaskId;
 
     SetVBlankCallback(NULL);
 
@@ -842,12 +843,13 @@ static void LoadFishingSpritesheets(void)
 
 static void CreateMinigameSprites(u8 taskId)
 {
-    u8 spriteId;
-    u8 y;
-    u8 i;
-    u8 sections = NUM_SCORE_SECTIONS;
-    u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
-    u8 iconPalSlot = LoadMonIconPaletteGetIndex(species, GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY));
+    u32 spriteId;
+    u32 y;
+    u32 i;
+    u32 sections = NUM_SCORE_SECTIONS;
+    u32 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+    u32 iconPalSlot = LoadMonIconPaletteGetIndex(species, GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY));
+    u32 treasureChance;
 
     taskData.tPaused = TRUE; // Pause the sprite animations/movements until the game starts.
     taskData.tScore = STARTING_SCORE; // Set the starting score.
@@ -980,24 +982,17 @@ static void CreateMinigameSprites(u8 taskId)
         }
     }
 
+    treasureChance = GetNumOwnedBadges() * 10;
+
     // Create treasure sprite.
-    if (FG_VAR_TREASURE_CHANCE != 0)
-    {
-        if ((Random() % 100) < VarGet(FG_VAR_TREASURE_CHANCE))
-        {
-            CreateTreasureSprite(taskId);
-        }
-    }
-    else if ((Random() % 100) < DEFAULT_TREASURE_CHANCE)
-    {
+    if (RandomPercentage(RNG_FISHING, treasureChance))
         CreateTreasureSprite(taskId);
-    }
 }
 
 static void CreateTreasureSprite(u8 taskId)
 {
-    u8 spriteId;
-    u8 y;
+    u32 spriteId;
+    u32 y;
 
     y = FISH_ICON_Y;
     if (taskData.tSeparateScreen)
@@ -1012,15 +1007,17 @@ static void CreateTreasureSprite(u8 taskId)
     spriteData.sTreasScoreFrame = 0;
     spriteData.sTreasureState = TREASURE_NOT_SPAWNED;
     spriteData.sTreasureStartTime = (TREASURE_SPAWN_MIN + (Random() % ((TREASURE_SPAWN_MAX - TREASURE_SPAWN_MIN) + 1)));
-    SetFishingTreasureItem((u8)taskData.tRodType);
+    SetFishingTreasureItem((u32)taskData.tRodType);
 }
 
-static void SetFishingTreasureItem(u8 rod)
+static void SetFishingTreasureItem(u32 rod)
 {
-    u8 offset = 0;
-    u8 arrayCount = (u8)ARRAY_COUNT(sTreasureItems);
-    u8 random = Random() % TREASURE_ITEM_POOL_SIZE;
-    u8 item;
+    u32 offset = 0;
+    u32 random = Random() % TREASURE_ITEM_POOL_SIZE;
+    u32 item;
+    enum TimeOfDay timeOfDay = GetTimeOfDay();
+    u32 arrayCount = ARRAY_COUNT(sTreasureArrays[timeOfDay]);
+
 
     if (FG_VAR_ITEM_RARITY != 0)
     {
@@ -1054,12 +1051,13 @@ static void SetFishingTreasureItem(u8 rod)
     }
 
     item = random + offset;
-    gSpecialVar_ItemId = sTreasureItems[item];
+
+    gSpecialVar_ItemId = sTreasureArrays[timeOfDay][item];
 }
 
-static void SetFishingSpeciesBehavior(u8 spriteId, u16 species)
+static void SetFishingSpeciesBehavior(u32 spriteId, u32 species)
 {
-    u8 i;
+    u32 i;
 
     for (i = NUM_DEFAULT_BEHAVIORS; i < ARRAY_COUNT(sFishBehavior); i++)
     {
@@ -1174,7 +1172,7 @@ static void Task_ReeledInFish(u8 taskId)
     {
         if (gSprites[taskData.tScoreMeterSpriteId].sPerfectCatch == TRUE) // If it was a perfect catch.
         {
-            u8 spriteId;
+            u32 spriteId;
 
             PlaySE(SE_RG_POKE_JUMP_SUCCESS);
             LoadCompressedSpriteSheet(&sSpriteSheets_FishingGame[PERFECT]);
@@ -1261,12 +1259,12 @@ static void Task_QuitFishing(u8 taskId)
 
 #define palStart       OBJ_PLTT_ID(IndexOfSpritePaletteTag(TAG_FISHING_BAR))
 
-static u8 CalculateInitialScoreMeterInterval(void)
+static u32 CalculateInitialScoreMeterInterval(void)
 {
-    u8 i;
-    u8 startColorInterval = 0;
-    u8 r = 31; // Max out the red level.
-    u8 g = 0;
+    u32 i;
+    u32 startColorInterval = 0;
+    u32 r = 31; // Max out the red level.
+    u32 g = 0;
 
     for (i = 0; i <= (STARTING_SCORE / SCORE_INTERVAL); i += SCORE_COLOR_INTERVAL) // Set the starting color interval based on the starting score.
     {
@@ -1288,10 +1286,10 @@ static u8 CalculateInitialScoreMeterInterval(void)
     return startColorInterval;
 }
 
-static void ChangeScoreMeterColor(u8 interval, u8 pal)
+static void ChangeScoreMeterColor(u32 interval, u32 pal)
 {
-    u8 r = 31;
-    u8 g = 0;
+    u32 r = 31;
+    u32 g = 0;
 
     if (interval > NUM_COLOR_INTERVALS) // Cannot exceed the maximum color interval.
         interval = NUM_COLOR_INTERVALS;
@@ -1393,6 +1391,7 @@ static void SetFishingBarPosition(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_HELD(A_BUTTON)) // If the A Button is pressed.
     {
+        // this has to be a u8 for some reason
         u8 increment;
 
         if (barData.sBarDirection == FISH_DIR_LEFT) // If the bar is traveling to left.
@@ -1539,9 +1538,9 @@ static void SetMonIconPosition(u8 taskId)
     }
     else // Fish is idle.
     {
-        u8 rand;
-        u16 leftProbability;
-        u16 distance;
+        u32 rand;
+        u32 leftProbability;
+        u32 distance;
 
         if (taskData.tFrameCounter == sFishIconData.sTimeToNextMove) // Begin new movement.
         {
@@ -1616,10 +1615,10 @@ static void SetMonIconPosition(u8 taskId)
 
 static void SetTreasureLocation(struct Sprite *sprite, u8 taskId)
 {
-    u8 monSpriteX = gSprites[gTasks[taskId].tFishIconSpriteId].x; // Fish's current X position.
-    u16 interval = ((FISH_ICON_MAX_POS - FISH_ICON_MIN_POS) / POSITION_ADJUSTMENT) / 3; // A third of the area the fish is allowed to go.
-    u8 i;
-    u8 random;
+    u32 monSpriteX = gSprites[gTasks[taskId].tFishIconSpriteId].x; // Fish's current X position.
+    u32 interval = ((FISH_ICON_MAX_POS - FISH_ICON_MIN_POS) / POSITION_ADJUSTMENT) / 3; // A third of the area the fish is allowed to go.
+    u32 i;
+    u32 random;
 
     for (i = 1; i <= 3; i++) // Determine the fish's current interval.
     {
@@ -1937,7 +1936,7 @@ static void SpriteCB_Treasure(struct Sprite *sprite)
 
 static void SpriteCB_TreasureSurfBobbing(struct Sprite *sprite)
 {
-    if (((u16)(++sprite->sTimer) & 3) == 0)
+    if (((u32)(++sprite->sTimer) & 3) == 0)
             sprite->y2 += sprite->sVelocity;
 
         // Reverse bob direction
@@ -1996,7 +1995,7 @@ static void CB2_FishingBattleStart(void)
 
 void Task_DoReturnToFieldFishTreasure(u8 taskId)
 {
-    u8 spriteId;
+    u32 spriteId;
 
     switch (TaskState)
     {

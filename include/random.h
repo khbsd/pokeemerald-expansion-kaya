@@ -202,6 +202,7 @@ enum RandomTag
     RNG_STARTER,
     RNG_MUSIC,
     RNG_MUGSHOT,
+    RNG_FISHING,
 };
 
 #define RandomWeighted(tag, ...) \

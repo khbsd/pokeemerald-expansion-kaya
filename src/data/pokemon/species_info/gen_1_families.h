@@ -14906,7 +14906,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sKangaskhanFormSpeciesIdTable,
         .formChangeTable = sKangaskhanFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_KANGASKHANITE, SPECIES_KANGASKHAN_MEGA}),
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_LUCKY_EGG, SPECIES_KANGASKHAN_MEGA}),
     #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
