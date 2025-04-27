@@ -6470,7 +6470,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Alemystal"),
         .cryId = CRY_DIANCIE_MEGA,
-        .natDexNum = NATIONAL_DEX_DIANCIE,
+        .natDexNum = NATIONAL_DEX_DIANCIE_MEGA,
         .categoryName = _("Jewel"),
         .height = 11,
         .weight = 278,
@@ -6510,9 +6510,6 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             gShinyOverworldPalette_DiancieMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMythical = TRUE,
-        .isMegaEvolution = TRUE,
-        .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sDiancieLevelUpLearnset,
         .teachableLearnset = sDiancieTeachableLearnset,

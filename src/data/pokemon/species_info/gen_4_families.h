@@ -3449,13 +3449,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LOPUNNY_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_LUCKY_PUNCH},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_120}
                                 )}),
-#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -3480,7 +3478,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Maridae"),
         .cryId = CRY_LOPUNNY_MEGA,
-        .natDexNum = NATIONAL_DEX_LOPUNNY,
+        .natDexNum = NATIONAL_DEX_LOPUNNY_MEGA,
         .categoryName = _("Rabbit"),
         .height = 13,
         .weight = 283,
@@ -3519,7 +3517,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gShinyOverworldPalette_LopunnyMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sLopunnyLevelUpLearnset,
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
@@ -4365,9 +4362,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sGarchompTeachableLearnset,
         .formSpeciesIdTable = sGarchompFormSpeciesIdTable,
         .formChangeTable = sGarchompFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_GARCHOMPITE, SPECIES_GARCHOMP_MEGA}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GARCHOMP_MEGA,
+                                    CONDITIONS({IF_IN_MAP, MAP_METEOR_FALLS_STEVENS_CAVE},
+                                               {IF_HOLD_ITEM, ITEM_DRAGON_SCALE}
+                                            )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -4392,7 +4390,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Garchomp"),
         .cryId = CRY_GARCHOMP_MEGA,
-        .natDexNum = NATIONAL_DEX_GARCHOMP,
+        .natDexNum = NATIONAL_DEX_GARCHOMP_MEGA,
         .categoryName = _("Mach"),
         .height = 19,
         .weight = 950,
@@ -4432,7 +4430,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gShinyOverworldPalette_GarchompMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGarchompLevelUpLearnset,
         .teachableLearnset = sGarchompTeachableLearnset,
         .formSpeciesIdTable = sGarchompFormSpeciesIdTable,
@@ -4579,13 +4576,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLucarioTeachableLearnset,
         .formSpeciesIdTable = sLucarioFormSpeciesIdTable,
         .formChangeTable = sLucarioFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LUCARIO_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_YELLOW_SCARF},
                                         {IF_IN_MAPSEC, MAPSEC_CAVE_OF_ORIGIN}
                                 )}),
-#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -4611,7 +4606,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Nubaris"),
         .cryId = CRY_LUCARIO_MEGA,
-        .natDexNum = NATIONAL_DEX_LUCARIO,
+        .natDexNum = NATIONAL_DEX_LUCARIO_MEGA,
         .categoryName = _("Aura"),
         .height = 13,
         .weight = 575,
@@ -4651,7 +4646,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gShinyOverworldPalette_LucarioMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sLucarioLevelUpLearnset,
         .teachableLearnset = sLucarioTeachableLearnset,
         .formSpeciesIdTable = sLucarioFormSpeciesIdTable,
@@ -5568,13 +5562,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sAbomasnowTeachableLearnset,
         .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,
         .formChangeTable = sAbomasnowFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
     .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABOMASNOW_MEGA,
                                 CONDITIONS(
                                     {IF_HOLD_ITEM, ITEM_ICE_GEM},
                                     {IF_IN_MAPSEC, MAPSEC_ROUTE_119}
                             )}),
-#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5601,7 +5593,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Anihlanch"),
         .cryId = CRY_ABOMASNOW_MEGA,
-        .natDexNum = NATIONAL_DEX_ABOMASNOW,
+        .natDexNum = NATIONAL_DEX_ABOMASNOW_MEGA,
         .categoryName = _("Frost Tree"),
         .height = 27,
         .weight = 1850,
@@ -5641,7 +5633,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gShinyOverworldPalette_AbomasnowMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAbomasnowLevelUpLearnset,
         .teachableLearnset = sAbomasnowTeachableLearnset,
         .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,

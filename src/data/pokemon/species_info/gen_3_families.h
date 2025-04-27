@@ -218,13 +218,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSceptileTeachableLearnset,
         .formSpeciesIdTable = sSceptileFormSpeciesIdTable,
         .formChangeTable = sSceptileFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SCEPTILE_MEGA,
                                     CONDITIONS(
                                         {IF_IN_MAP, MAP_PETALBURG_WOODS},
                                         {IF_HOLD_ITEM, ITEM_MIRACLE_SEED}
                                 )}),
-#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -249,7 +247,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Dendryle"),
         .cryId = CRY_SCEPTILE_MEGA,
-        .natDexNum = NATIONAL_DEX_SCEPTILE,
+        .natDexNum = NATIONAL_DEX_SCEPTILE_MEGA,
         .categoryName = _("Forest"),
         .height = 19,
         .weight = 552,
@@ -289,7 +287,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_SceptileMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSceptileLevelUpLearnset,
         .teachableLearnset = sSceptileTeachableLearnset,
         .formSpeciesIdTable = sSceptileFormSpeciesIdTable,
@@ -553,13 +550,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sBlazikenTeachableLearnset,
         .formSpeciesIdTable = sBlazikenFormSpeciesIdTable,
         .formChangeTable = sBlazikenFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BLAZIKEN_MEGA,
                                     CONDITIONS(
                                         {IF_IN_MAP, MAP_FIERY_PATH},
                                         {IF_HOLD_ITEM, ITEM_CHARCOAL}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -584,7 +579,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Inferniken"),
         .cryId = CRY_BLAZIKEN_MEGA,
-        .natDexNum = NATIONAL_DEX_BLAZIKEN,
+        .natDexNum = NATIONAL_DEX_BLAZIKEN_MEGA,
         .categoryName = _("Blaze"),
         .height = 19,
         .weight = 520,
@@ -624,7 +619,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_BlazikenMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlazikenLevelUpLearnset,
         .teachableLearnset = sBlazikenTeachableLearnset,
         .formSpeciesIdTable = sBlazikenFormSpeciesIdTable,
@@ -854,13 +848,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSwampertTeachableLearnset,
         .formSpeciesIdTable = sSwampertFormSpeciesIdTable,
         .formChangeTable = sSwampertFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SWAMPERT_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_MYSTIC_WATER},
                                         {IF_IN_MAPSEC, MAPSEC_ABANDONED_SHIP}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -885,7 +877,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Brixolotl"),
         .cryId = CRY_SWAMPERT_MEGA,
-        .natDexNum = NATIONAL_DEX_SWAMPERT,
+        .natDexNum = NATIONAL_DEX_SWAMPERT_MEGA,
         .categoryName = _("Mud Fish"),
         .height = 19,
         .weight = 1020,
@@ -925,7 +917,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_SwampertMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSwampertLevelUpLearnset,
         .teachableLearnset = sSwampertTeachableLearnset,
         .formSpeciesIdTable = sSwampertFormSpeciesIdTable,
@@ -2899,13 +2890,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGardevoirTeachableLearnset,
         .formSpeciesIdTable = sGardevoirFormSpeciesIdTable,
         .formChangeTable = sGardevoirFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
+    
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GARDEVOIR_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_102}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+    
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -2930,7 +2921,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Naitolanx"),
         .cryId = CRY_GARDEVOIR_MEGA,
-        .natDexNum = NATIONAL_DEX_GARDEVOIR,
+        .natDexNum = NATIONAL_DEX_GARDEVOIR_MEGA,
         .categoryName = _("Embrace"),
         .height = 16,
         .weight = 484,
@@ -2970,7 +2961,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_GardevoirMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGardevoirLevelUpLearnset,
         .teachableLearnset = sGardevoirTeachableLearnset,
         .formSpeciesIdTable = sGardevoirFormSpeciesIdTable,
@@ -3055,13 +3045,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGalladeTeachableLearnset,
         .formSpeciesIdTable = sGalladeFormSpeciesIdTable,
         .formChangeTable = sGalladeFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GALLADE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_FIGHTING_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_DEWFORD_TOWN}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -3086,7 +3074,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Naitogard"),
         .cryId = CRY_GALLADE_MEGA,
-        .natDexNum = NATIONAL_DEX_GALLADE,
+        .natDexNum = NATIONAL_DEX_GALLADE_MEGA,
         .categoryName = _("Blade"),
         .height = 16,
         .weight = 564,
@@ -3126,7 +3114,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_GalladeMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGalladeLevelUpLearnset,
         .teachableLearnset = sGalladeTeachableLearnset,
         .formSpeciesIdTable = sGalladeFormSpeciesIdTable,
@@ -4660,13 +4647,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .eggMoveLearnset = sSableyeEggMoveLearnset,
         .formSpeciesIdTable = sSableyeFormSpeciesIdTable,
         .formChangeTable = sSableyeFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SABLEYE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_GHOST_GEM},
                                         {IF_IN_MAP, MAP_GRANITE_CAVE_B2F}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -4692,7 +4677,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Martenire"),
         .cryId = CRY_SABLEYE_MEGA,
-        .natDexNum = NATIONAL_DEX_SABLEYE,
+        .natDexNum = NATIONAL_DEX_SABLEYE_MEGA,
         .categoryName = _("Darkness"),
         .height = 5,
         .weight = 1610,
@@ -4731,7 +4716,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_SableyeMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSableyeLevelUpLearnset,
         .teachableLearnset = sSableyeTeachableLearnset,
         .eggMoveLearnset = sSableyeEggMoveLearnset,
@@ -4822,13 +4806,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .eggMoveLearnset = sMawileEggMoveLearnset,
         .formSpeciesIdTable = sMawileFormSpeciesIdTable,
         .formChangeTable = sMawileFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_MAWILE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
                                         {IF_IN_MAP, MAP_GRANITE_CAVE_B2F}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -4854,7 +4836,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Jawile"),
         .cryId = CRY_MAWILE_MEGA,
-        .natDexNum = NATIONAL_DEX_MAWILE,
+        .natDexNum = NATIONAL_DEX_MAWILE_MEGA,
         .categoryName = _("Deceiver"),
         .height = 10,
         .weight = 235,
@@ -4894,7 +4876,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_MawileMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sMawileLevelUpLearnset,
         .teachableLearnset = sMawileTeachableLearnset,
         .eggMoveLearnset = sMawileEggMoveLearnset,
@@ -5122,13 +5103,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sAggronTeachableLearnset,
         .formSpeciesIdTable = sAggronFormSpeciesIdTable,
         .formChangeTable = sAggronFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AGGRON_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_HARD_STONE},
                                         {IF_IN_MAP, MAP_GRANITE_CAVE_STEVENS_ROOM}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5154,7 +5133,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Iraton"),
         .cryId = CRY_AGGRON_MEGA,
-        .natDexNum = NATIONAL_DEX_AGGRON,
+        .natDexNum = NATIONAL_DEX_AGGRON_MEGA,
         .categoryName = _("Iron Armor"),
         .height = 22,
         .weight = 3950,
@@ -5194,7 +5173,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_AggronMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAggronLevelUpLearnset,
         .teachableLearnset = sAggronTeachableLearnset,
         .formSpeciesIdTable = sAggronFormSpeciesIdTable,
@@ -5370,13 +5348,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sMedichamTeachableLearnset,
         .formSpeciesIdTable = sMedichamFormSpeciesIdTable,
         .formChangeTable = sMedichamFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_MEDICHAM_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAP, MAP_MT_PYRE_SUMMIT}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5401,7 +5377,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Medideva"),
         .cryId = CRY_MEDICHAM_MEGA,
-        .natDexNum = NATIONAL_DEX_MEDICHAM,
+        .natDexNum = NATIONAL_DEX_MEDICHAM_MEGA,
         .categoryName = _("Meditate"),
         .height = 13,
         .weight = 315,
@@ -5441,7 +5417,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_MedichamMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sMedichamLevelUpLearnset,
         .teachableLearnset = sMedichamTeachableLearnset,
         .formSpeciesIdTable = sMedichamFormSpeciesIdTable,
@@ -5591,13 +5566,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sManectricTeachableLearnset,
         .formSpeciesIdTable = sManectricFormSpeciesIdTable,
         .formChangeTable = sManectricFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_MANECTRIC_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_WACAN_BERRY},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_110}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5622,7 +5595,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Electrion"),
         .cryId = CRY_MANECTRIC_MEGA,
-        .natDexNum = NATIONAL_DEX_MANECTRIC,
+        .natDexNum = NATIONAL_DEX_MANECTRIC_MEGA,
         .categoryName = _("Discharge"),
         .height = 18,
         .weight = 440,
@@ -5661,7 +5634,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_ManectricMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sManectricLevelUpLearnset,
         .teachableLearnset = sManectricTeachableLearnset,
         .formSpeciesIdTable = sManectricFormSpeciesIdTable,
@@ -6558,13 +6530,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSharpedoTeachableLearnset,
         .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,
         .formChangeTable = sSharpedoFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SHARPEDO_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DEEP_SEA_TOOTH},
                                         {IF_IN_MAP, MAP_UNDERWATER_ROUTE129}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -6590,7 +6560,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Seraychii"),
         .cryId = CRY_SHARPEDO_MEGA,
-        .natDexNum = NATIONAL_DEX_SHARPEDO,
+        .natDexNum = NATIONAL_DEX_SHARPEDO_MEGA,
         .categoryName = _("Brutal"),
         .height = 25,
         .weight = 1303,
@@ -6630,7 +6600,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_SharpedoMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSharpedoLevelUpLearnset,
         .teachableLearnset = sSharpedoTeachableLearnset,
         .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,
@@ -6960,13 +6929,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sCameruptTeachableLearnset,
         .formSpeciesIdTable = sCameruptFormSpeciesIdTable,
         .formChangeTable = sCameruptFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 70, SPECIES_CAMERUPT_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_MAGMARIZER},
                                         {IF_IN_MAPSEC, MAPSEC_SCORCHED_SLAB}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -6992,7 +6959,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Ungulera"),
         .cryId = CRY_CAMERUPT_MEGA,
-        .natDexNum = NATIONAL_DEX_CAMERUPT,
+        .natDexNum = NATIONAL_DEX_CAMERUPT_MEGA,
         .categoryName = _("Eruption"),
         .height = 25,
         .weight = 3205,
@@ -7032,7 +6999,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_CameruptMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sCameruptLevelUpLearnset,
         .teachableLearnset = sCameruptTeachableLearnset,
         .formSpeciesIdTable = sCameruptFormSpeciesIdTable,
@@ -7894,13 +7860,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sAltariaTeachableLearnset,
         .formSpeciesIdTable = sAltariaFormSpeciesIdTable,
         .formChangeTable = sAltariaFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ALTARIA_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_FAIRY_FEATHER},
                                         {IF_IN_MAP, MAP_MT_PYRE_EXTERIOR}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -7925,7 +7889,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Choryvyrm"),
         .cryId = CRY_ALTARIA_MEGA,
-        .natDexNum = NATIONAL_DEX_ALTARIA,
+        .natDexNum = NATIONAL_DEX_ALTARIA_MEGA,
         .categoryName = _("Humming"),
         .height = 15,
         .weight = 206,
@@ -7966,7 +7930,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_AltariaMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAltariaLevelUpLearnset,
         .teachableLearnset = sAltariaTeachableLearnset,
         .formSpeciesIdTable = sAltariaFormSpeciesIdTable,
@@ -9770,13 +9733,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sBanetteTeachableLearnset,
         .formSpeciesIdTable = sBanetteFormSpeciesIdTable,
         .formChangeTable = sBanetteFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_BANETTE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_REAPER_CLOTH},
                                         {IF_IN_MAP, MAP_MT_PYRE_1F}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -9802,7 +9763,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Posette"),
         .cryId = CRY_BANETTE_MEGA,
-        .natDexNum = NATIONAL_DEX_BANETTE,
+        .natDexNum = NATIONAL_DEX_BANETTE_MEGA,
         .categoryName = _("Marionette"),
         .height = 12,
         .weight = 130,
@@ -9843,7 +9804,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_BanetteMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sBanetteLevelUpLearnset,
         .teachableLearnset = sBanetteTeachableLearnset,
         .formSpeciesIdTable = sBanetteFormSpeciesIdTable,
@@ -10414,13 +10374,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .eggMoveLearnset = sAbsolEggMoveLearnset,
         .formSpeciesIdTable = sAbsolFormSpeciesIdTable,
         .formChangeTable = sAbsolFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABSOL_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_BLACKGLASSES},
                                         {IF_IN_MAP, MAP_CAVE_OF_ORIGIN_ENTRANCE}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -10446,7 +10404,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .noFlip = TRUE,
         .speciesName = _("Abvant"),
         .cryId = CRY_ABSOL_MEGA,
-        .natDexNum = NATIONAL_DEX_ABSOL,
+        .natDexNum = NATIONAL_DEX_ABSOL_MEGA,
         .categoryName = _("Disaster"),
         .height = 12,
         .weight = 490,
@@ -10486,7 +10444,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_AbsolMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAbsolLevelUpLearnset,
         .teachableLearnset = sAbsolTeachableLearnset,
         .eggMoveLearnset = sAbsolEggMoveLearnset,
@@ -10649,13 +10606,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGlalieTeachableLearnset,
         .formSpeciesIdTable = sGlalieFormSpeciesIdTable,
         .formChangeTable = sGlalieFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GLALIE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_ICY_ROCK},
                                         {IF_IN_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -10680,7 +10635,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Arctidolia"),
         .cryId = CRY_GLALIE_MEGA,
-        .natDexNum = NATIONAL_DEX_GLALIE,
+        .natDexNum = NATIONAL_DEX_GLALIE_MEGA,
         .categoryName = _("Face"),
         .height = 21,
         .weight = 3502,
@@ -10720,7 +10675,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_GlalieMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGlalieLevelUpLearnset,
         .teachableLearnset = sGlalieTeachableLearnset,
         .formSpeciesIdTable = sGlalieFormSpeciesIdTable,
@@ -11633,13 +11587,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSalamenceTeachableLearnset,
         .formSpeciesIdTable = sSalamenceFormSpeciesIdTable,
         .formChangeTable = sSalamenceFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SALAMENCE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DEEP_SEA_TOOTH},
                                         {IF_IN_MAPSEC, MAPSEC_METEOR_FALLS}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -11665,7 +11617,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Crediscent"),
         .cryId = CRY_SALAMENCE_MEGA,
-        .natDexNum = NATIONAL_DEX_SALAMENCE,
+        .natDexNum = NATIONAL_DEX_SALAMENCE_MEGA,
         .categoryName = _("Dragon"),
         .height = 18,
         .weight = 1126,
@@ -11705,7 +11657,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_SalamenceMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSalamenceLevelUpLearnset,
         .teachableLearnset = sSalamenceTeachableLearnset,
         .formSpeciesIdTable = sSalamenceFormSpeciesIdTable,
@@ -11935,13 +11886,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sMetagrossTeachableLearnset,
         .formSpeciesIdTable = sMetagrossFormSpeciesIdTable,
         .formChangeTable = sMetagrossFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_METAGROSS_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_UPGRADE},
                                         {IF_IN_MAP, MAP_METEOR_FALLS_STEVENS_CAVE}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -11967,7 +11916,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Netakre"),
         .cryId = CRY_METAGROSS_MEGA,
-        .natDexNum = NATIONAL_DEX_METAGROSS,
+        .natDexNum = NATIONAL_DEX_METAGROSS_MEGA,
         .categoryName = _("Iron Leg"),
         .height = 25,
         .weight = 9429,
@@ -12007,7 +11956,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gShinyOverworldPalette_MetagrossMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sMetagrossLevelUpLearnset,
         .teachableLearnset = sMetagrossTeachableLearnset,
         .formSpeciesIdTable = sMetagrossFormSpeciesIdTable,
@@ -12334,13 +12282,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sLatiasTeachableLearnset,
         .formSpeciesIdTable = sLatiasFormSpeciesIdTable,
         .formChangeTable = sLatiasFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_LATIAS_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_SOUL_DEW},
                                         {IF_IN_MAP, MAP_SOUTHERN_ISLAND_EXTERIOR}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -12365,7 +12311,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Sonias"),
         .cryId = CRY_LATIAS_MEGA,
-        .natDexNum = NATIONAL_DEX_LATIAS,
+        .natDexNum = NATIONAL_DEX_LATIAS_MEGA,
         .categoryName = _("Eon"),
         .height = 18,
         .weight = 520,
@@ -12407,7 +12353,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
     #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
-        .isMegaEvolution = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sLatiasLevelUpLearnset,
         .teachableLearnset = sLatiasTeachableLearnset,
@@ -12496,13 +12441,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sLatiosTeachableLearnset,
         .formSpeciesIdTable = sLatiosFormSpeciesIdTable,
         .formChangeTable = sLatiosFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_LATIOS_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_SOUL_DEW},
                                         {IF_IN_MAP, MAP_SOUTHERN_ISLAND_INTERIOR}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -12527,7 +12470,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Sonios"),
         .cryId = CRY_LATIOS_MEGA,
-        .natDexNum = NATIONAL_DEX_LATIOS,
+        .natDexNum = NATIONAL_DEX_LATIOS_MEGA,
         .categoryName = _("Eon"),
         .height = 23,
         .weight = 700,
@@ -12569,7 +12512,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
     #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
-        .isMegaEvolution = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sLatiosLevelUpLearnset,
         .teachableLearnset = sLatiosTeachableLearnset,
@@ -12659,13 +12601,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sKyogreTeachableLearnset,
         .formSpeciesIdTable = sKyogreFormSpeciesIdTable,
         .formChangeTable = sKyogreFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
+    
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_KYOGRE_PRIMAL,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_BLUE_ORB},
                                         {IF_IN_MAP, MAP_MARINE_CAVE_END}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+    
     },
 #if P_PRIMAL_REVERSIONS
     [SPECIES_KYOGRE_PRIMAL] =
@@ -12689,7 +12631,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Kyogre"),
         .cryId = CRY_KYOGRE_PRIMAL,
-        .natDexNum = NATIONAL_DEX_KYOGRE,
+        .natDexNum = NATIONAL_DEX_KYOGRE_PRIMAL,
         .categoryName = _("Sea Basin"),
         .height = 98,
         .weight = 4300,
@@ -12820,13 +12762,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGroudonTeachableLearnset,
         .formSpeciesIdTable = sGroudonFormSpeciesIdTable,
         .formChangeTable = sGroudonFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
+    
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_GROUDON_PRIMAL,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_RED_ORB},
                                         {IF_IN_MAP, MAP_TERRA_CAVE_END}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
+    
     },
 
 #if P_PRIMAL_REVERSIONS
@@ -12851,7 +12793,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Groudon"),
         .cryId = CRY_GROUDON,
-        .natDexNum = NATIONAL_DEX_GROUDON,
+        .natDexNum = NATIONAL_DEX_GROUDON_PRIMAL,
         .categoryName = _("Continent"),
         .height = 50,
         .weight = 9997,
@@ -12985,14 +12927,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sRayquazaTeachableLearnset,
         .formSpeciesIdTable = sRayquazaFormSpeciesIdTable,
         .formChangeTable = sRayquazaFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_RAYQUAZA_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DRAGON_FANG},
                                         {IF_KNOWS_MOVE, MOVE_DRAGON_ASCENT},
                                         {IF_IN_MAP, MAP_SKY_PILLAR_TOP}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -13018,7 +12958,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Vecquaza"),
         .cryId = CRY_RAYQUAZA,
-        .natDexNum = NATIONAL_DEX_RAYQUAZA,
+        .natDexNum = NATIONAL_DEX_RAYQUAZA_MEGA,
         .categoryName = _("Sky High"),
         .height = 108,
         .weight = 3920,
@@ -13060,7 +13000,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
     #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
-        .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sRayquazaLevelUpLearnset,
