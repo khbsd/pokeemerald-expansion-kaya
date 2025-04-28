@@ -5562,11 +5562,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sAbomasnowTeachableLearnset,
         .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,
         .formChangeTable = sAbomasnowFormChangeTable,
-    .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABOMASNOW_MEGA,
-                                CONDITIONS(
-                                    {IF_HOLD_ITEM, ITEM_ICE_GEM},
-                                    {IF_IN_MAPSEC, MAPSEC_ROUTE_119}
-                            )}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABOMASNOW_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_ICE_GEM},
+                                        {IF_IN_MAPSEC, MAPSEC_ROUTE_119}
+                                )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES

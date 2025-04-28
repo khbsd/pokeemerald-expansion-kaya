@@ -2890,13 +2890,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGardevoirTeachableLearnset,
         .formSpeciesIdTable = sGardevoirFormSpeciesIdTable,
         .formChangeTable = sGardevoirFormChangeTable,
-    
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GARDEVOIR_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_102}
                                 )}),
-    
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES

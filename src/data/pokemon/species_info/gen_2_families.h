@@ -2084,13 +2084,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .teachableLearnset = sAmpharosTeachableLearnset,
         .formSpeciesIdTable = sAmpharosFormSpeciesIdTable,
         .formChangeTable = sAmpharosFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AMPHAROS_MEGA,
-                                        CONDITIONS(
-                                            {IF_HOLD_ITEM, ITEM_DRAGON_SCALE},
-                                            {IF_IN_MAPSEC, MAPSEC_NEW_MAUVILLE}
-                                    )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AMPHAROS_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_DRAGON_SCALE},
+                                        {IF_IN_MAPSEC, MAPSEC_NEW_MAUVILLE}
+                                )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -2155,7 +2153,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_AmpharosMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAmpharosLevelUpLearnset,
         .teachableLearnset = sAmpharosTeachableLearnset,
         .formSpeciesIdTable = sAmpharosFormSpeciesIdTable,
@@ -5220,9 +5217,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggMoveLearnset = sHeracrossEggMoveLearnset,
         .formSpeciesIdTable = sHeracrossFormSpeciesIdTable,
         .formChangeTable = sHeracrossFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_HERACRONITE, SPECIES_HERACROSS_MEGA}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_HERACRONITE, SPECIES_HERACROSS_MEGA}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -5286,7 +5281,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_HeracrossMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sHeracrossLevelUpLearnset,
         .teachableLearnset = sHeracrossTeachableLearnset,
         .eggMoveLearnset = sHeracrossEggMoveLearnset,
@@ -7113,13 +7107,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .teachableLearnset = sHoundoomTeachableLearnset,
         .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,
         .formChangeTable = sHoundoomFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_HOUNDOOM_MEGA,
-                                        CONDITIONS(
-                                            {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
-                                            {IF_IN_MAP, MAP_SKY_PILLAR_TOP}
-                                        )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_HOUNDOOM_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
+                                        {IF_IN_MAP, MAP_SKY_PILLAR_TOP}
+                                    )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -7183,7 +7175,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_HoundoomMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sHoundoomLevelUpLearnset,
         .teachableLearnset = sHoundoomTeachableLearnset,
         .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,
@@ -8094,13 +8085,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .teachableLearnset = sTyranitarTeachableLearnset,
         .formSpeciesIdTable = sTyranitarFormSpeciesIdTable,
         .formChangeTable = sTyranitarFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_TYRANITAR_MEGA,
-                                        CONDITIONS(
-                                            {IF_HOLD_ITEM, ITEM_KINGS_ROCK},
-                                            {IF_IN_MAPSEC, MAPSEC_SLATEPORT_CITY}
-                                        )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_TYRANITAR_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_KINGS_ROCK},
+                                        {IF_IN_MAPSEC, MAPSEC_SLATEPORT_CITY}
+                                    )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -8165,7 +8154,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_TyranitarMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sTyranitarLevelUpLearnset,
         .teachableLearnset = sTyranitarTeachableLearnset,
         .formSpeciesIdTable = sTyranitarFormSpeciesIdTable,

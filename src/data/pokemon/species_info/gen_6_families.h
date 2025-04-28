@@ -6438,13 +6438,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .teachableLearnset = sDiancieTeachableLearnset,
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
         .formChangeTable = sDiancieFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 90, SPECIES_DIANCIE_MEGA,
                                 CONDITIONS(
                                     {IF_HOLD_ITEM, ITEM_FAIRY_GEM},
                                     {IF_IN_MAPSEC, MAPSEC_RUSTURF_TUNNEL}
                             )}),
-#endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES

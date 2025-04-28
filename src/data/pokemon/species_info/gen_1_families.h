@@ -229,13 +229,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sVenusaurTeachableLearnset,
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
         .formChangeTable = sVenusaurFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_VENUSAUR_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_LEAF_STONE},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_101}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -261,7 +259,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Florasaur"),
         .cryId = CRY_VENUSAUR_MEGA,
-        .natDexNum = NATIONAL_DEX_VENUSAUR,
+        .natDexNum = NATIONAL_DEX_VENUSAUR_MEGA,
         .categoryName = _("Seed"),
         .height = 24,
         .weight = 1555,
@@ -300,7 +298,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_VenusaurMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sVenusaurLevelUpLearnset,
         .teachableLearnset = sVenusaurTeachableLearnset,
         .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,
@@ -580,7 +577,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sCharizardTeachableLearnset,
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
         .formChangeTable = sCharizardFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_CHARIZARD_MEGA_Y,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_FIRE_STONE},
@@ -592,7 +588,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                                         {IF_IN_MAP, MAP_METEOR_FALLS_B1F_2R}
                                     )}
                                 ),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -724,7 +719,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_CharizardMegaY
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sCharizardLevelUpLearnset,
         .teachableLearnset = sCharizardTeachableLearnset,
         .formSpeciesIdTable = sCharizardFormSpeciesIdTable,
@@ -1007,13 +1001,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sBlastoiseTeachableLearnset,
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
         .formChangeTable = sBlastoiseFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BLASTOISE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_WATER_STONE},
                                         {IF_IN_MAP, MAP_MARINE_CAVE_ENTRANCE}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -1078,7 +1070,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_BlastoiseMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sBlastoiseLevelUpLearnset,
         .teachableLearnset = sBlastoiseTeachableLearnset,
         .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,
@@ -1694,14 +1685,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sBeedrillTeachableLearnset,
         .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,
         .formChangeTable = sBeedrillFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_BEEDRILL_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_POISON_BARB},
                                         {IF_IN_MAPSEC, MAPSEC_PETALBURG_WOODS}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
-        
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -1769,7 +1757,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_BeedrillMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sBeedrillLevelUpLearnset,
         .teachableLearnset = sBeedrillTeachableLearnset,
         .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,
@@ -2009,14 +1996,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sPidgeotTeachableLearnset,
         .formSpeciesIdTable = sPidgeotFormSpeciesIdTable,
         .formChangeTable = sPidgeotFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_PIDGEOT_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_SWIFT_FEATHER},
                                         {IF_IN_MAPSEC, MAPSEC_FORTREE_CITY}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
-        
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -8558,14 +8542,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sAlakazamTeachableLearnset,
         .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,
         .formChangeTable = sAlakazamFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ALAKAZAM_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_TWISTED_SPOON},
                                         {IF_IN_MAP, MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F}
                                 )}),
-    #endif // P_MEGA_STONES_AS_EVO_STONES
-         
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -8631,7 +8612,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_AlakazamMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAlakazamLevelUpLearnset,
         .teachableLearnset = sAlakazamTeachableLearnset,
         .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,
@@ -10328,7 +10308,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_SlowbroMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSlowbroLevelUpLearnset,
         .teachableLearnset = sSlowbroTeachableLearnset,
         .formSpeciesIdTable = sSlowbroFormSpeciesIdTable,
@@ -11984,14 +11963,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGengarTeachableLearnset,
         .formSpeciesIdTable = sGengarFormSpeciesIdTable,
         .formChangeTable = sGengarFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
             .evolutions = EVOLUTION(
                             {EVO_LEVEL, 80, SPECIES_GENGAR_MEGA,
                                 CONDITIONS(
                                     {IF_IN_MAP, MAP_MT_PYRE_SUMMIT},
                                     {IF_HOLD_ITEM, ITEM_REAPER_CLOTH}
                             )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -12056,7 +12033,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_GengarMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGengarLevelUpLearnset,
         .teachableLearnset = sGengarTeachableLearnset,
         .formSpeciesIdTable = sGengarFormSpeciesIdTable,
@@ -12279,13 +12255,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSteelixTeachableLearnset,
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_STEELIX_MEGA, 
-                CONDITIONS(
-                    {IF_IN_MAPSEC, MAPSEC_VICTORY_ROAD},
-                    {IF_HOLD_ITEM, ITEM_METAL_COAT}
-                )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_STEELIX_MEGA, 
+            CONDITIONS(
+                {IF_IN_MAPSEC, MAPSEC_VICTORY_ROAD},
+                {IF_HOLD_ITEM, ITEM_METAL_COAT}
+            )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -12351,7 +12325,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_SteelixMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sSteelixLevelUpLearnset,
         .teachableLearnset = sSteelixTeachableLearnset,
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
@@ -14905,9 +14878,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sKangaskhanEggMoveLearnset,
         .formSpeciesIdTable = sKangaskhanFormSpeciesIdTable,
         .formChangeTable = sKangaskhanFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_ITEM, ITEM_LUCKY_EGG, SPECIES_KANGASKHAN_MEGA}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LUCKY_EGG, SPECIES_KANGASKHAN_MEGA}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -14972,7 +14943,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_KangaskhanMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sKangaskhanLevelUpLearnset,
         .teachableLearnset = sKangaskhanTeachableLearnset,
         .eggMoveLearnset = sKangaskhanEggMoveLearnset,
@@ -16010,13 +15980,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sScizorTeachableLearnset,
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
         .formChangeTable = sScizorFormChangeTable,
-    #if P_MEGA_STONES_AS_EVO_STONES
-            .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SCIZOR_MEGA,
-                                        CONDITIONS(
-                                            {IF_HOLD_ITEM, ITEM_METAL_COAT},
-                                            {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
-                                    )}),
-    #endif //P_MEGA_STONES_AS_EVO_STONES
+        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SCIZOR_MEGA,
+                                    CONDITIONS(
+                                        {IF_HOLD_ITEM, ITEM_METAL_COAT},
+                                        {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
+                                )}),
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -16085,7 +16053,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_ScizorMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sScizorLevelUpLearnset,
         .teachableLearnset = sScizorTeachableLearnset,
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
@@ -16829,13 +16796,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPinsirEggMoveLearnset,
         .formSpeciesIdTable = sPinsirFormSpeciesIdTable,
         .formChangeTable = sPinsirFormChangeTable,
-        #if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_PINSIR_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_FIGHTING_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
                                 )}),
-#endif //P_MEGA_STONES_AS_EVO_STONES
 },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -16901,7 +16866,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_PinsirMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sPinsirLevelUpLearnset,
         .teachableLearnset = sPinsirTeachableLearnset,
         .eggMoveLearnset = sPinsirEggMoveLearnset,
@@ -17357,13 +17321,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGyaradosTeachableLearnset,
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
         .formChangeTable = sGyaradosFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GYARADOS_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DARK_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_SEAFLOOR_CAVERN}
                                 )}),
-#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -17429,7 +17391,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_GyaradosMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sGyaradosLevelUpLearnset,
         .teachableLearnset = sGyaradosTeachableLearnset,
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
@@ -19023,13 +18984,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sAerodactylEggMoveLearnset,
         .formSpeciesIdTable = sAerodactylFormSpeciesIdTable,
         .formChangeTable = sAerodactylFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_AERODACTYL_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_ROCK_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_DESERT_UNDERPASS}
                                 )}),
-#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -19094,7 +19053,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_AerodactylMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAerodactylLevelUpLearnset,
         .teachableLearnset = sAerodactylTeachableLearnset,
         .eggMoveLearnset = sAerodactylEggMoveLearnset,
@@ -20086,7 +20044,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
         .formChangeTable = sMewtwoFormChangeTable,
-#if P_MEGA_STONES_AS_EVO_STONES
         .evolutions = 
             EVOLUTION({EVO_LEVEL, 100, SPECIES_MEWTWO_MEGA_Y,
                         CONDITIONS(
@@ -20099,7 +20056,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                             {IF_IN_MAPSEC, MAPSEC_MIRAGE_TOWER}
                         )}
                     ),
-#endif //P_MEGA_STONES_AS_EVO_STONES
     },
 
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
@@ -20237,7 +20193,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         )
     #endif //OW_BATTLE_ONLY_FORMS
         .isLegendary = TRUE,
-        .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMewtwoLevelUpLearnset,
