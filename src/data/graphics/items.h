@@ -177,7 +177,7 @@ const u32 gItemIcon_Pokevial7[] = INCBIN_U32("graphics/items/icons/pokevial7.4bp
 const u32 gItemIcon_Pokevial8[] = INCBIN_U32("graphics/items/icons/pokevial8.4bpp.lz");
 const u32 gItemIcon_Pokevial9[] = INCBIN_U32("graphics/items/icons/pokevial9.4bpp.lz");
 const u32 gItemIcon_Pokevial[] = INCBIN_U32("graphics/items/icons/pokevial.4bpp.lz");
-const u32 gItemIconPalette_Pokevial[] = INCBIN_U32("graphics/items/icon_palettes/pokevial.gbapal.lz");
+const u16 gItemIconPalette_Pokevial[] = INCBIN_U16("graphics/items/icon_palettes/pokevial.gbapal");
 
 // Regional Specialties
 
@@ -269,7 +269,7 @@ const u16 gItemIconPalette_YellowMint[] = INCBIN_U16("graphics/items/icon_palett
 
 const u32 gItemIcon_RareCandy[] = INCBIN_U32("graphics/items/icons/rare_candy.4bpp.lz");
 const u16 gItemIconPalette_RareCandy[] = INCBIN_U16("graphics/items/icon_palettes/rare_candy.gbapal");
-const u32 gItemIconPalette_PermaRareCandy[] = INCBIN_U32("graphics/items/icon_palettes/perma_rare_candy.gbapal.lz");
+const u16 gItemIconPalette_PermaRareCandy[] = INCBIN_U16("graphics/items/icon_palettes/perma_rare_candy.gbapal");
 
 const u32 gItemIcon_ExpCandyXS[] = INCBIN_U32("graphics/items/icons/exp_candy_xs.4bpp.lz");
 const u32 gItemIcon_ExpCandyS[] = INCBIN_U32("graphics/items/icons/exp_candy_s.4bpp.lz");
@@ -300,10 +300,9 @@ const u16 gItemIconPalette_WhiteFlute[] = INCBIN_U16("graphics/items/icon_palett
 
 const u32 gItemIcon_Repel[] = INCBIN_U32("graphics/items/icons/repel.4bpp.lz");
 const u16 gItemIconPalette_Repel[] = INCBIN_U16("graphics/items/icon_palettes/repel.gbapal");
-
 const u16 gItemIconPalette_SuperRepel[] = INCBIN_U16("graphics/items/icon_palettes/super_repel.gbapal");
-
 const u16 gItemIconPalette_MaxRepel[] = INCBIN_U16("graphics/items/icon_palettes/max_repel.gbapal");
+const u16 gItemIconPalette_PermaRepel[] = INCBIN_U16("graphics/items/icon_palettes/perma_repel.gbapal");
 
 const u32 gItemIcon_Lure[] = INCBIN_U32("graphics/items/icons/lure.4bpp.lz");
 const u16 gItemIconPalette_Lure[] = INCBIN_U16("graphics/items/icon_palettes/lure.gbapal");

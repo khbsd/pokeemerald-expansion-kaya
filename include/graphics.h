@@ -523,7 +523,7 @@ extern const u16 gItemIconPalette_YellowMint[];
 // Candy
 extern const u32 gItemIcon_RareCandy[];
 extern const u16 gItemIconPalette_RareCandy[];
-extern const u32 gItemIconPalette_PermaRareCandy[];
+extern const u16 gItemIconPalette_PermaRareCandy[];
 extern const u32 gItemIcon_ExpCandyXS[];
 extern const u32 gItemIcon_ExpCandyS[];
 extern const u32 gItemIcon_ExpCandyM[];
@@ -545,7 +545,7 @@ extern const u32 gItemIcon_Repel[];
 extern const u16 gItemIconPalette_Repel[];
 extern const u16 gItemIconPalette_SuperRepel[];
 extern const u16 gItemIconPalette_MaxRepel[];
-extern const u32 gItemIconPalette_PermaRepel[];
+extern const u16 gItemIconPalette_PermaRepel[];
 extern const u32 gItemIcon_Lure[];
 extern const u16 gItemIconPalette_Lure[];
 extern const u16 gItemIconPalette_SuperLure[];
@@ -1755,7 +1755,7 @@ extern const u32 gItemIcon_Pokevial8[];
 extern const u32 gItemIcon_Pokevial9[];
 extern const u32 gItemIcon_Pokevial[];
 
-extern const u32 gItemIconPalette_Pokevial[];
+extern const u16 gItemIconPalette_Pokevial[];
 
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];

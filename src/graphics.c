@@ -590,7 +590,7 @@ const u16 gBattleAnimSpritePal_MusicNotes[] = INCBIN_U16("graphics/battle_anims/
 
 #if B_PSYDUCK_CONFUSION_DUCKS
 const u32 gBattleAnimSpriteGfx_Duck[] = INCBIN_U32("graphics/battle_anims/sprites/psyduck_confusion.4bpp.lz");
-const u32 gBattleAnimSpritePal_Duck[] = INCBIN_U32("graphics/battle_anims/sprites/psyduck_confusion.gbapal.lz");
+const u16 gBattleAnimSpritePal_Duck[] = INCBIN_U16("graphics/battle_anims/sprites/psyduck_confusion.gbapal");
 #else
 const u32 gBattleAnimSpriteGfx_Duck[] = INCBIN_U32("graphics/battle_anims/sprites/duck.4bpp.lz");
 const u16 gBattleAnimSpritePal_Duck[] = INCBIN_U16("graphics/battle_anims/sprites/duck.gbapal");
