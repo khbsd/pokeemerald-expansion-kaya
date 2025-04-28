@@ -36,6 +36,10 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame::
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames, MSGBOX_DEFAULT
 	closemessage
+	pokevialincreasesize
+	setvar B_LEVEL_CAP_VARIABLE, 80
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0

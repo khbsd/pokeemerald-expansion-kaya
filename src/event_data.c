@@ -48,6 +48,18 @@ const u16 gBadgeFlags[NUM_BADGES] =
     FLAG_BADGE08_GET,
 };
 
+const u16 gDefeatedGymFlags[NUM_BADGES] = 
+{
+    FLAG_DEFEATED_RUSTBORO_GYM,
+    FLAG_DEFEATED_DEWFORD_GYM,
+    FLAG_DEFEATED_MAUVILLE_GYM,
+    FLAG_DEFEATED_LAVARIDGE_GYM,
+    FLAG_DEFEATED_PETALBURG_GYM,
+    FLAG_DEFEATED_FORTREE_GYM,
+    FLAG_DEFEATED_MOSSDEEP_GYM,
+    FLAG_DEFEATED_SOOTOPOLIS_GYM,
+};
+
 void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
@@ -292,3 +304,62 @@ bool8 FlagGet(u16 id)
 
     return TRUE;
 }
+
+u32 GetNumOwnedBadges(void)
+{
+    u32 i;
+
+    for (i = 0; i < NUM_BADGES; i++)
+    {
+        if (!FlagGet(gBadgeFlags[i]))
+            break;
+    }
+
+    return i;
+}
+
+u32 IsPlayerInGym(void)
+{
+    switch ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum)
+    {
+    case MAP_RUSTBORO_CITY_GYM:
+        return GYM_RUSTBORO;
+    case MAP_DEWFORD_TOWN_GYM:
+        return GYM_DEWFORD;
+    case MAP_MAUVILLE_CITY_GYM:
+        return GYM_MAUVILLE;
+    case MAP_LAVARIDGE_TOWN_GYM_1F:
+    case MAP_LAVARIDGE_TOWN_GYM_B1F:
+        return GYM_LAVARIDGE;
+    case MAP_PETALBURG_CITY_GYM:
+        return GYM_PETALBURG;
+    case MAP_FORTREE_CITY_GYM:
+        return GYM_FORTREE;
+    case MAP_MOSSDEEP_CITY_GYM:
+        return GYM_MOSSDEEP;
+    case MAP_SOOTOPOLIS_CITY_GYM_1F:
+    case MAP_SOOTOPOLIS_CITY_GYM_B1F:
+        return GYM_SOOTOPOLIS;
+    default:
+        return GYM_NONE; 
+    }
+}
+
+bool32 IsPlayerInGymGauntlet(void)
+{
+    u32 gym = IsPlayerInGym();
+
+    MgbaPrintf(MGBA_LOG_WARN, "gym: %u", gym);
+
+    if (gym > GYM_NONE)
+    {
+        if (gym == GYM_PETALBURG 
+            && VarGet(VAR_PETALBURG_GYM_STATE) <= 1 
+            && GetNumOwnedBadges() == (gym - 1))
+            return FALSE;
+        else
+            return (!FlagGet(gBadgeFlags[gym - 1]) && !FlagGet(gDefeatedGymFlags[gym - 1]));
+    }
+    return FALSE;
+}
+ 

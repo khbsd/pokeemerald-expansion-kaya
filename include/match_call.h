@@ -19,6 +19,5 @@ void BufferPokedexRatingForMatchCall(u8 *destStr);
 bool32 SelectMatchCallMessage(int, u8 *);
 void LoadMatchCallWindowGfx(u32 windowId, u32 destOffset, u32 paletteId);
 void DrawMatchCallTextBoxBorder(u32 windowId, u32 tileOffset, u32 paletteId);
-u32 GetNumOwnedBadges(void);
 
 #endif //GUARD_MATCH_CALL_H

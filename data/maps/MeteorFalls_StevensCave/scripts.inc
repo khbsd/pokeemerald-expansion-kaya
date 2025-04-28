@@ -16,10 +16,12 @@ MeteorFalls_StevensCave_EventScript_Steven::
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_STEVEN, MeteorFalls_StevensCave_Text_StevenDefeat
-	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_METEOR_FALLS_STEVEN
-	pokevialadddose
+	pokevialincreasesize
 	setvar B_LEVEL_CAP_VARIABLE, 100
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	release
 	end
 

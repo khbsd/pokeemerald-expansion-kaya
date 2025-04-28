@@ -1853,19 +1853,6 @@ static void PopulateBattleFrontierStreak(int matchCallId, u8 *destStr)
     ConvertIntToDecimalStringN(destStr, sBattleFrontierStreakInfo.streak, STR_CONV_MODE_LEFT_ALIGN, i);
 }
 
-u32 GetNumOwnedBadges(void)
-{
-    u32 i;
-
-    for (i = 0; i < NUM_BADGES; i++)
-    {
-        if (!FlagGet(gBadgeFlags[i]))
-            break;
-    }
-
-    return i;
-}
-
 // Whether or not a trainer calling the player from a different route should request a battle
 static bool32 ShouldTrainerRequestBattle(int matchCallId)
 {

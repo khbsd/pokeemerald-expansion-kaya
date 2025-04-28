@@ -61,12 +61,14 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
-	pokevialadddose
+	pokevialincreasesize
 	setvar B_LEVEL_CAP_VARIABLE, 33
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 4

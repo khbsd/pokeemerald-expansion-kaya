@@ -30,11 +30,13 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	message FortreeCity_Gym_Text_ReceivedFeatherBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
-	pokevialadddose
+	pokevialincreasesize
 	setvar B_LEVEL_CAP_VARIABLE, 47
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce

@@ -377,12 +377,14 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
-	pokevialadddose
+	pokevialincreasesize
 	setvar B_LEVEL_CAP_VARIABLE, 36
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT
 	special ResetHealLocationFromDewford
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON

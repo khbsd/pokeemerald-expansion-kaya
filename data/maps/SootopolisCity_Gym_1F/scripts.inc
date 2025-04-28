@@ -93,11 +93,13 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
-	pokevialadddose
+	pokevialincreasesize
 	setvar B_LEVEL_CAP_VARIABLE, 65
+	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
+	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE

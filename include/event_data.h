@@ -28,6 +28,9 @@ u8 FlagSet(u16 id);
 u8 FlagToggle(u16 id);
 u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
+u32 GetNumOwnedBadges(void);
+u32 IsPlayerInGym(void);
+bool32 IsPlayerInGymGauntlet(void);
 
 //daily item refresh
 void ClearOverworldItemFlags(void);
@@ -52,5 +55,18 @@ extern u16 gSpecialVar_MonBoxPos;
 extern u16 gSpecialVar_Unused_0x8014;
 
 extern const u16 gBadgeFlags[NUM_BADGES];
+
+enum Gyms
+{
+    GYM_NONE, // not in a gym. also equivalent to 0 for boolean reasons.
+    GYM_RUSTBORO,
+    GYM_DEWFORD,
+    GYM_MAUVILLE,
+    GYM_LAVARIDGE,
+    GYM_PETALBURG,
+    GYM_FORTREE,
+    GYM_MOSSDEEP,
+    GYM_SOOTOPOLIS,
+};
 
 #endif // GUARD_EVENT_DATA_H

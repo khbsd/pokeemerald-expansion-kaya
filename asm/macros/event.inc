@@ -2602,7 +2602,7 @@
     @ When parameter is empty, it assumes VIAL_SIZE.
     @ When amount is empty, it assumes 1.
 	.macro pokevial mode:req, parameter=VIAL_SIZE, amount=1
-	.byte 0xe3
+	.byte 0xe5
     .byte \mode
     .byte \parameter
     .byte \amount

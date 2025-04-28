@@ -275,7 +275,8 @@ static void SetUpWarpExitTask(void)
 
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (MetatileBehavior_IsDoor(behavior) == TRUE) // gauntlet code checks for if in gym mapsec and defeated
+
+    if (MetatileBehavior_IsDoor(behavior) == TRUE)
         func = Task_ExitDoor;
     else if (MetatileBehavior_IsDirectionalStairWarp(behavior) == TRUE && !gExitStairsMovementDisabled)
         func = Task_ExitStairs;

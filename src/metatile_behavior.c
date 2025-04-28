@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "overworld.h"
 #include "metatile_behavior.h"
 #include "constants/metatile_behaviors.h"
@@ -353,9 +354,10 @@ bool8 MetatileBehavior_IsNorthArrowWarp(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SOUTH_ARROW_WARP
+    if ((metatileBehavior == MB_SOUTH_ARROW_WARP
      || metatileBehavior == MB_WATER_SOUTH_ARROW_WARP
      || metatileBehavior == MB_SHOAL_CAVE_ENTRANCE)
+     && !IsPlayerInGymGauntlet())
         return TRUE;
     else
         return FALSE;
