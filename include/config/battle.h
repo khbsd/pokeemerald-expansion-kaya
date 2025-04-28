@@ -297,6 +297,8 @@
 #define B_MON_FAINT_SCALING             TRUE       // If TRUE, will add a level to all enemy mons when a player's mon faints. can be scaled with B_MON_FAINT_SCALING_RATE
 #define B_MON_FAINT_SCALING_RATE        2          // How often a level will be added to each enemy mon, ie 1: every level, 2: every other level, etc
 #define B_MON_FAINT_SCALING_AMOUNT      1          // How much each faint counts when adjusting enemy level
+#define B_BADGE_EXP_BOOST               TRUE       // If TRUE, you get more experience based on how many badges you have.
+#define B_BADGE_EXP_BOOST_AMOUNT        3          // What % of extra experience each badge counts for when B_BADGE_EXP_BOOST is TRUE.
 
 // Gimmicks
 #define B_MEGA_RING                     FALSE

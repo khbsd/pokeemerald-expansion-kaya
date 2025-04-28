@@ -19,6 +19,7 @@
 #include "window.h"
 #include "reshow_battle_screen.h"
 #include "main.h"
+#include "match_call.h"
 #include "palette.h"
 #include "money.h"
 #include "malloc.h"
@@ -17229,6 +17230,8 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = (*expAmount * 4915) / 4096;
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
+    if (B_BADGE_EXP_BOOST)
+        *expAmount = (*expAmount * (100 + (GetNumOwnedBadges() * B_BADGE_EXP_BOOST_AMOUNT))) / 100;
 
     if (B_SCALED_EXP >= GEN_5 && B_SCALED_EXP != GEN_6)
     {
