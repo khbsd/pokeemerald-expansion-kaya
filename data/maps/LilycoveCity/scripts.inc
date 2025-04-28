@@ -483,23 +483,23 @@ LilycoveCity_Text_MayYouGoingToBattleFrontier:
 	.string "See you!$"
 
 LilycoveCity_Text_BrendanShoppingLetsBattle:
-	.string "BRENDAN: Oh, hey, it's {PLAYER}.\p"
+	.string "Brenda: Oh, hey, it's {PLAYER}.\p"
 	.string "I'm running an errand for my dad.\n"
-	.string "No, I'm not buying any DOLLS.\p"
+	.string "And buying some DOLLS!\p"
 	.string "Anyways, it's been a while.\p"
 	.string "Want to have a battle to see who's been\n"
 	.string "raising POKéMON better?$"
 
 LilycoveCity_Text_BrendanNoConfidence:
-	.string "BRENDAN: Oh, what's the matter?\n"
+	.string "Brenda: Oh, what's the matter?\n"
 	.string "Don't have the confidence?$"
 
 LilycoveCity_Text_BrendanBattleMe:
-	.string "BRENDAN: Want to battle to see who's\n"
+	.string "Brenda: Want to battle to see who's\n"
 	.string "been raising POKéMON better?$"
 
 LilycoveCity_Text_BrendanWontBeBeaten:
-	.string "BRENDAN: Aww, but you know I'm not\n"
+	.string "Brenda: Aww, but you know I'm not\n"
 	.string "going to lose to no {PLAYER}.$"
 
 LilycoveCity_Text_BrendanDefeat:
@@ -509,7 +509,7 @@ LilycoveCity_Text_BrendanDefeat:
 	.string "on you as a TRAINER…$"
 
 LilycoveCity_Text_BrendanGoingBackToLittleroot:
-	.string "BRENDAN: I…\n"
+	.string "Brenda: I…\n"
 	.string "I plan on going home to LITTLEROOT.\p"
 	.string "You know I'm helping out my dad on his\n"
 	.string "POKéDEX. It's coming together pretty\l"
@@ -527,7 +527,7 @@ LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
 	.string "Since you're that strong, are you\n"
 	.string "taking the POKéMON LEAGUE challenge?\p"
 	.string "Heh, even me--if I trained my POKéMON\n"
-	.string "a bit more, I should be stronger than\l"
+	.string "a bit more, I might be stronger than\l"
 	.string "you, {PLAYER}.\p"
 	.string "Well, anyway, hang in there!$"
 

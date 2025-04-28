@@ -485,24 +485,22 @@ RivalsHouse_2F_Text_MayGettingReady:
 	.string "Items ready, and…$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou:
-	.string "Hey!\n"
+	.string "Oh!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
-	.string "I didn't know that you're a girl.\p"
-	.string "I want to be a girl too.\n"
-	.string "My dad only gives me POKéMON eggs.\l"
-	.string "What does that mean?\p"
-	.string "My name's BRENDAN.\n"
+	.string "Dad, PROF. BIRCH, said that our new\n"
+	.string "next-door neighbor is a GYM LEADER's\l"
+	.string "kid. You already look strong.\p"
+	.string "My name's BRENDA!\n"
 	.string "So, hi, neighbor!\p"
 	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKéMON?\p"
-	.string "Do you want me to go catch you one?\p"
+	.string "a POKéMON? You could have fooled me!\p"
 	.string "Aw, darn, I forgot…\p"
-	.string "You've been catching POKéMON longer\n"
-	.string "than I've been alive. Oopies!\p"
-	.string "Some other time, okay?$"
+	.string "I'm supposed to go help my dad catch\n"
+	.string "some wild POKéMON.\p"
+	.string "We'll talk later, okay?$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "POKéMON fully restored…\n"
@@ -529,7 +527,7 @@ RivalsHouse_2F_Text_MayWhereShouldIGoNext:
 	.string "other, {PLAYER}{KUN}?$"
 
 RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
-	.string "BRENDAN: Hey, it's {PLAYER}.\p"
+	.string "Brenda: Hey, it's {PLAYER}.\p"
 	.string "I was just checking out my POKéDEX.\p"
 	.string "There are still many POKéMON that\n"
 	.string "I need to catch, I know, but this\l"
@@ -538,7 +536,7 @@ RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
 	.string "the urge to hit the road again.$"
 
 RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:
-	.string "BRENDAN: I'm having a hard time deciding\n"
+	.string "Brenda: I'm having a hard time deciding\n"
 	.string "where I should catch POKéMON next.\p"
 	.string "Hey, {PLAYER}, if I see you while I'm out\n"
 	.string "catching POKéMON, I can pitch you a\l"

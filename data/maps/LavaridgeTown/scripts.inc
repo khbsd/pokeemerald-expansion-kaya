@@ -299,15 +299,15 @@ LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
 	.string "See you again!$"
 
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
-	.string "BRENDAN: {PLAYER}, hey, it's been a while.\n"
+	.string "Brenda: {PLAYER}, hey, it's been a while.\n"
 	.string "How's it going?\p"
 	.string "Hmm…\n"
-	.string "That's a decent collection of BADGES.\p"
+	.string "That's a great collection of BADGES.\p"
 	.string "All right, then.\n"
-	.string "You may as well have this.$"
+	.string "You should have this!$"
 
 LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
-	.string "BRENDAN: Keep those with you if you're\n"
+	.string "Brenda: Keep those with you if you're\n"
 	.string "planning on going into that desert near\l"
 	.string "ROUTE 111.\p"
 	.string "There should be some POKéMON that\n"
@@ -316,8 +316,8 @@ LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
 	.string "As for me…\n"
 	.string "I'm considering challenging NORMAN,\l"
 	.string "the GYM LEADER of PETALBURG.\p"
-	.string "Unlike you, {PLAYER}, your dad looks like\n"
-	.string "he really is tough.\p"
+	.string "Like you, {PLAYER}, your dad looks\n"
+	.string "really tough.\p"
 	.string "See you around!$"
 
 LavaridgeTown_Text_HaveEggWillYouTakeIt:
