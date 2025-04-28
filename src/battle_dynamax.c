@@ -73,54 +73,54 @@ static const struct GMaxMove sGMaxMoveTable[] =
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(u32 battler)
 {
+    if (!B_DYNAMAX_BAND)
+        return FALSE;
+    
     u16 species = gBattleMons[battler].species;
     enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
-    if (B_DYNAMAX_BAND)
+
+    // Prevents Zigzagoon from dynamaxing in vanilla.
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        return FALSE;
+
+    // Check if Player has a Dynamax Band.
+    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
+        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
     {
-        // Prevents Zigzagoon from dynamaxing in vanilla.
-        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
             return FALSE;
-
-        // Check if Player has a Dynamax Band.
-        if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-            || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
-        {
-            if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
-                return FALSE;
-            if (B_FLAG_DYNAMAX_BATTLE == 0 || (B_FLAG_DYNAMAX_BATTLE != 0 && !FlagGet(B_FLAG_DYNAMAX_BATTLE)))
-                return FALSE;
-        }
-
-        // Check if species isn't allowed to Dynamax.
-        if (GET_BASE_SPECIES_ID(species) == SPECIES_ZACIAN
-            || GET_BASE_SPECIES_ID(species) == SPECIES_ZAMAZENTA
-            || GET_BASE_SPECIES_ID(species) == SPECIES_ETERNATUS)
+        if (B_FLAG_DYNAMAX_BATTLE == 0 || (B_FLAG_DYNAMAX_BATTLE != 0 && !FlagGet(B_FLAG_DYNAMAX_BATTLE)))
             return FALSE;
-
-        // Check if Trainer has already Dynamaxed.
-        if (HasTrainerUsedGimmick(battler, GIMMICK_DYNAMAX))
-            return FALSE;
-
-        // Check if AI battler is intended to Dynamaxed.
-        if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_DYNAMAX))
-            return FALSE;
-
-        // Check if battler has another gimmick active.
-        if (GetActiveGimmick(battler) != GIMMICK_NONE)
-            return FALSE;
-
-        // Check if battler is holding a Z-Crystal or Mega Stone.
-        if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE))  // tests make this check already
-            return FALSE;
-
-        // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
-        // if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battler)
-        //    return FALSE;
-
-        // No checks failed, all set!
-        return TRUE;
     }
-    return FALSE;
+
+    // Check if species isn't allowed to Dynamax.
+    if (GET_BASE_SPECIES_ID(species) == SPECIES_ZACIAN
+        || GET_BASE_SPECIES_ID(species) == SPECIES_ZAMAZENTA
+        || GET_BASE_SPECIES_ID(species) == SPECIES_ETERNATUS)
+        return FALSE;
+
+    // Check if Trainer has already Dynamaxed.
+    if (HasTrainerUsedGimmick(battler, GIMMICK_DYNAMAX))
+        return FALSE;
+
+    // Check if AI battler is intended to Dynamaxed.
+    if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_DYNAMAX))
+        return FALSE;
+
+    // Check if battler has another gimmick active.
+    if (GetActiveGimmick(battler) != GIMMICK_NONE)
+        return FALSE;
+
+    // Check if battler is holding a Z-Crystal or Mega Stone.
+    if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE))  // tests make this check already
+        return FALSE;
+
+    // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
+    // if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battler)
+    //    return FALSE;
+
+    // No checks failed, all set!
+    return TRUE;
 }
 
 // Returns whether a battler is transformed into a Gigantamax form.

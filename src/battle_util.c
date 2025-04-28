@@ -9958,34 +9958,35 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
 
 bool32 CanMegaEvolve(u32 battler)
 {
+    if (!B_MEGA_RING)
+        return FALSE;
+
     enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
-    if (B_MEGA_RING)
-    {
-        // Check if Player has a Mega Ring.
-        if (!TESTING
-            && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-            && !CheckBagHasItem(ITEM_MEGA_RING, 1))
-            return FALSE;
+    // Check if Player has a Mega Ring.
+    if (!TESTING
+        && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+        && !CheckBagHasItem(ITEM_MEGA_RING, 1))
+        return FALSE;
 
-        if (P_MEGA_STONES_AS_EVO_STONES)
-            return FALSE;
+    if (P_MEGA_STONES_AS_EVO_STONES)
+        return FALSE;
 
-        // Check if Trainer has already Mega Evolved.
-        if (HasTrainerUsedGimmick(battler, GIMMICK_MEGA))
-            return FALSE;
+    // Check if Trainer has already Mega Evolved.
+    if (HasTrainerUsedGimmick(battler, GIMMICK_MEGA))
+        return FALSE;
 
-        // Check if battler has another gimmick active.
-        if (GetActiveGimmick(battler) != GIMMICK_NONE)
-            return FALSE;
+    // Check if battler has another gimmick active.
+    if (GetActiveGimmick(battler) != GIMMICK_NONE)
+        return FALSE;
 
-        // Check if battler is currently held by Sky Drop.
-        if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
-            return FALSE;
+    // Check if battler is currently held by Sky Drop.
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
 
-        // Check if battler is holding a Z-Crystal.
-        if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-            return FALSE;
+    // Check if battler is holding a Z-Crystal.
+    if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+        return FALSE;
 
     // Check if there is an entry in the form change table for regular Mega Evolution and battler is holding Mega Stone.
     if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != gBattleMons[battler].species && holdEffect == HOLD_EFFECT_MEGA_STONE)
@@ -9995,43 +9996,40 @@ bool32 CanMegaEvolve(u32 battler)
     if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != gBattleMons[battler].species)
         return TRUE;
 
-        // No checks passed, the mon CAN'T mega evolve.
-        return FALSE;
-    }
+    // No checks passed, the mon CAN'T mega evolve.
     return FALSE;
 }
 
 bool32 CanUltraBurst(u32 battler)
 {
+    if (!B_Z_POWER_RING)
+        return FALSE;
+
     enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
-    if (B_Z_POWER_RING) 
-    {
-        // Check if Player has a Z-Ring
-        if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-            || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-            && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
-            return FALSE;
+    // Check if Player has a Z-Ring
+    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
+        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
 
-        // Check if Trainer has already Ultra Bursted.
-        if (HasTrainerUsedGimmick(battler, GIMMICK_ULTRA_BURST))
-            return FALSE;
+    // Check if Trainer has already Ultra Bursted.
+    if (HasTrainerUsedGimmick(battler, GIMMICK_ULTRA_BURST))
+        return FALSE;
 
-        // Check if battler has another gimmick active.
-        if (GetActiveGimmick(battler) != GIMMICK_NONE)
-            return FALSE;
+    // Check if battler has another gimmick active.
+    if (GetActiveGimmick(battler) != GIMMICK_NONE)
+        return FALSE;
 
-        // Check if mon is currently held by Sky Drop
-        if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
-            return FALSE;
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
 
     // Check if there is an entry in the form change table for Ultra Burst and battler is holding a Z-Crystal.
     if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != gBattleMons[battler].species && holdEffect == HOLD_EFFECT_Z_CRYSTAL)
         return TRUE;
 
-        // No checks passed, the mon CAN'T ultra burst.
-        return FALSE;
-    }
+    // No checks passed, the mon CAN'T ultra burst.
     return FALSE;
 }
 

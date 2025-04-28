@@ -2153,6 +2153,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_AmpharosMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
+        .isMegaEvolution = TRUE,
         .levelUpLearnset = sAmpharosLevelUpLearnset,
         .teachableLearnset = sAmpharosTeachableLearnset,
         .formSpeciesIdTable = sAmpharosFormSpeciesIdTable,
@@ -5281,6 +5282,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_HeracrossMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
+        .isMegaEvolution = TRUE,
         .levelUpLearnset = sHeracrossLevelUpLearnset,
         .teachableLearnset = sHeracrossTeachableLearnset,
         .eggMoveLearnset = sHeracrossEggMoveLearnset,
@@ -5857,7 +5859,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Ursaluna"),
         .cryId = CRY_URSALUNA,
-        .natDexNum = NATIONAL_DEX_URSALUNA,
+        .natDexNum = NATIONAL_DEX_URSALUNA_BLOODMOON,
         .categoryName = _("Peat"),
         .height = 27,
         .weight = 3330,
@@ -7175,6 +7177,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_HoundoomMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
+        .isMegaEvolution = TRUE,
         .levelUpLearnset = sHoundoomLevelUpLearnset,
         .teachableLearnset = sHoundoomTeachableLearnset,
         .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,
@@ -8154,6 +8157,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_TyranitarMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
+        .isMegaEvolution = TRUE,
         .levelUpLearnset = sTyranitarLevelUpLearnset,
         .teachableLearnset = sTyranitarTeachableLearnset,
         .formSpeciesIdTable = sTyranitarFormSpeciesIdTable,

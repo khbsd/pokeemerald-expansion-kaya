@@ -6508,6 +6508,9 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             gShinyOverworldPalette_DiancieMega
         )
     #endif //OW_BATTLE_ONLY_FORMS
+        .isMythical = TRUE,
+        .isMegaEvolution = TRUE,
+        .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sDiancieLevelUpLearnset,
         .teachableLearnset = sDiancieTeachableLearnset,

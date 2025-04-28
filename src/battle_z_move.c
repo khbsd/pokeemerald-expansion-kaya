@@ -113,36 +113,35 @@ bool32 IsZMove(u32 move)
 
 bool32 CanUseZMove(u32 battler)
 {
-    if (B_Z_POWER_RING)
-    {
-        enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    if (!B_Z_POWER_RING)
+        return FALSE;
+    
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
-        // Check if Player has Z-Power Ring.
-        if (!TESTING && (battler == B_POSITION_PLAYER_LEFT
-            || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
-            && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
-            return FALSE;
+    // Check if Player has Z-Power Ring.
+    if (!TESTING && (battler == B_POSITION_PLAYER_LEFT
+        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
+        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
 
-        // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
-        if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
-            return FALSE;
+    // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
+    if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
+        return FALSE;
 
-        // Check if Trainer has already used a Z-Move.
-        if (HasTrainerUsedGimmick(battler, GIMMICK_Z_MOVE))
-            return FALSE;
+    // Check if Trainer has already used a Z-Move.
+    if (HasTrainerUsedGimmick(battler, GIMMICK_Z_MOVE))
+        return FALSE;
 
-        // Check if battler has another gimmick active.
-        if (GetActiveGimmick(battler) != GIMMICK_NONE && GetActiveGimmick(battler) != GIMMICK_ULTRA_BURST)
-            return FALSE;
+    // Check if battler has another gimmick active.
+    if (GetActiveGimmick(battler) != GIMMICK_NONE && GetActiveGimmick(battler) != GIMMICK_ULTRA_BURST)
+        return FALSE;
 
-        // Check if battler isn't holding a Z-Crystal.
-        if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
-            return FALSE;
+    // Check if battler isn't holding a Z-Crystal.
+    if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
+        return FALSE;
 
-        // All checks passed!
-        return TRUE;
-    }
-    return FALSE;
+    // All checks passed!
+    return TRUE;
 }
 
 u32 GetUsableZMove(u32 battler, u32 move)

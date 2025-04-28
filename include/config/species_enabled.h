@@ -26,7 +26,7 @@
 #define P_KAYAS_CHOICE					 TRUE
 
 // Battle gimmick specific Forms.
-#define P_MEGA_EVOLUTIONS                FALSE
+#define P_MEGA_EVOLUTIONS                TRUE
 #define P_PRIMAL_REVERSIONS              TRUE   // Groudon and Kyogre only.
 #define P_ULTRA_BURST_FORMS              FALSE  // Ultra Necrozma only.
 #define P_GIGANTAMAX_FORMS               FALSE
@@ -403,7 +403,7 @@
 #define P_FAMILY_FURFROU                 P_GEN_6_POKEMON
 #define P_FAMILY_ESPURR                  P_GEN_6_POKEMON
 #define P_FAMILY_HONEDGE                 P_GEN_6_POKEMON
-#define P_FAMILY_SPRITZEE                P_GEN_6_POKEMON
+// #define P_FAMILY_SPRITZEE             P_GEN_6_POKEMON
 #define P_FAMILY_SWIRLIX                 P_GEN_6_POKEMON
 // #define P_FAMILY_INKAY                P_GEN_6_POKEMON
 // #define P_FAMILY_BINACLE              P_GEN_6_POKEMON
@@ -419,7 +419,7 @@
 #define P_FAMILY_KLEFKI                  P_GEN_6_POKEMON
 // #define P_FAMILY_PHANTUMP             P_GEN_6_POKEMON
 // #define P_FAMILY_PUMPKABOO            P_GEN_6_POKEMON
-#define P_FAMILY_BERGMITE                P_GEN_6_POKEMON
+// #define P_FAMILY_BERGMITE                P_GEN_6_POKEMON
 // #define P_FAMILY_NOIBAT               P_GEN_6_POKEMON
 #define P_FAMILY_XERNEAS                 P_GEN_6_POKEMON
 #define P_FAMILY_YVELTAL                 P_GEN_6_POKEMON
@@ -524,7 +524,7 @@
 #define P_FAMILY_ZACIAN                  P_GEN_8_POKEMON
 #define P_FAMILY_ZAMAZENTA               P_GEN_8_POKEMON
 #define P_FAMILY_ETERNATUS               P_GEN_8_POKEMON
-#define P_FAMILY_KUBFU                   P_GEN_8_POKEMON
+// #define P_FAMILY_KUBFU                P_GEN_8_POKEMON
 #define P_FAMILY_ZARUDE                  P_GEN_8_POKEMON
 // #define P_FAMILY_REGIELEKI            P_GEN_8_POKEMON
 // #define P_FAMILY_REGIDRAGO            P_GEN_8_POKEMON
@@ -557,7 +557,7 @@
 #define P_FAMILY_RELLOR                  P_GEN_9_POKEMON
 #define P_FAMILY_FLITTLE                 P_GEN_9_POKEMON
 // #define P_FAMILY_TINKATINK            P_GEN_9_POKEMON
-#define P_FAMILY_WIGLETT                 P_GEN_9_POKEMON
+#define P_FAMILY_WIGLETT                 P_PALDEAN_FORMS
 #define P_FAMILY_BOMBIRDIER              P_GEN_9_POKEMON
 #define P_FAMILY_FINIZEN                 P_GEN_9_POKEMON
 #define P_FAMILY_VAROOM                  P_GEN_9_POKEMON
@@ -583,7 +583,7 @@
 #define P_FAMILY_IRON_MOTH               P_GEN_9_POKEMON
 #define P_FAMILY_IRON_THORNS             P_GEN_9_POKEMON
 // #define P_FAMILY_FRIGIBAX             P_GEN_9_POKEMON
-#define P_FAMILY_GIMMIGHOUL              P_GEN_9_POKEMON
+// #define P_FAMILY_GIMMIGHOUL           P_GEN_9_POKEMON
 #define P_FAMILY_WO_CHIEN                P_GEN_9_POKEMON
 #define P_FAMILY_CHIEN_PAO               P_GEN_9_POKEMON
 #define P_FAMILY_TING_LU                 P_GEN_9_POKEMON
@@ -649,6 +649,7 @@
 #define P_FAMILY_SCATTERBUG              TRUE
 #define P_FAMILY_FLABEBE                 TRUE
 #define P_FAMILY_PANCHAM                 TRUE
+#define P_FAMILY_SPRITZEE                TRUE
 #define P_FAMILY_SKIDDO                  TRUE
 #define P_FAMILY_INKAY                   TRUE
 #define P_FAMILY_BINACLE                 TRUE
@@ -658,6 +659,7 @@
 #define P_FAMILY_GOOMY                   TRUE
 #define P_FAMILY_PHANTUMP                TRUE
 #define P_FAMILY_PUMPKABOO               TRUE
+#define P_FAMILY_BERGMITE                TRUE
 #define P_FAMILY_NOIBAT                  TRUE
 #define P_FAMILY_DIANCIE                 TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_6_POKEMON
@@ -704,6 +706,7 @@
 #define P_FAMILY_SNOM                    TRUE
 #define P_FAMILY_CUFANT                  TRUE
 #define P_FAMILY_DREEPY                  TRUE
+#define P_FAMILY_KUBFU                   TRUE
 #define P_FAMILY_REGIELEKI               TRUE
 #define P_FAMILY_REGIDRAGO               TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_8_POKEMON
@@ -722,6 +725,7 @@
 #define P_FAMILY_GREAVARD                TRUE
 #define P_FAMILY_CETODDLE                TRUE
 #define P_FAMILY_FRIGIBAX                TRUE
+#define P_FAMILY_GIMMIGHOUL              TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_9_POKEMON
 
 #endif // GUARD_CONFIG_SPECIES_ENABLED_H

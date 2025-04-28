@@ -212,8 +212,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	message LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational
 	waitmessage
 	waitfanfare
-	setflag FLAG_SYS_NATIONAL_DEX
-	special EnableNationalPokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
@@ -869,8 +867,8 @@ LittlerootTown_ProfessorBirchsLab_Text_OkayAllDone:
 	.string "PROF. BIRCH: Okay, all done!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational:
-	.string "{PLAYER}'s POKéDEX was upgraded\n"
-	.string "to the NATIONAL Mode!$"
+	.string "{PLAYER}'s POKéDEX wasn't upgraded\n"
+	.string "to the NATIONAL Mode. {EMOJI_BIGSMILE}$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2:
 	.string "PROF. BIRCH: But listen.\n"

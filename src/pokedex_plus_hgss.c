@@ -4663,7 +4663,11 @@ static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum)
     if (!nationalNum)
         return 0;
 
-    if (sPokedexView->formSpecies != 0)
+    u32 species = NationalPokedexNumToSpecies(nationalNum);
+
+    if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isPrimalReversion)
+        return NationalPokedexNumToSpecies(nationalNum);
+    else if (sPokedexView->formSpecies != 0)
         return sPokedexView->formSpecies;
     else
         return NationalPokedexNumToSpecies(nationalNum);
@@ -6330,11 +6334,13 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
 
-    u16 baseFormSpecies;
-    sPokedexView->sEvoScreenData.isMega = FALSE;
+    //u16 baseFormSpecies;
+    sPokedexView->sEvoScreenData.isMega = gSpeciesInfo[species].isMegaEvolution;
 
     //Check if it's a mega
-    baseFormSpecies = GetFormSpeciesId(species, 0);
+
+    // baseFormSpecies = GetFormSpeciesId(species, 0);
+    /*
     if (baseFormSpecies != species)
     {
         const struct FormChange *formChanges = GetSpeciesFormChanges(baseFormSpecies);
@@ -6355,7 +6361,7 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
                 return numPreEvolutions;
             }
         }
-    }
+    }*/
 
     //Calculate previous evolution
     for (i = 0; i < NUM_SPECIES; i++)
