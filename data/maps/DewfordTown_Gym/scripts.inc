@@ -148,10 +148,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
-	pokevialincreasesize
-	setvar B_LEVEL_CAP_VARIABLE, 23
-	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
-	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	call Common_Gym_Defeated_Upgrade_Vial_And_Cap
 	msgbox DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis, MSGBOX_DEFAULT
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle

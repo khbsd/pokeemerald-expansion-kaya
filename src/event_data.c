@@ -353,13 +353,16 @@ bool32 IsPlayerInGymGauntlet(void)
 
     if (gym > GYM_NONE)
     {
+        FlagClear(FLAG_SYS_BAG_USE);
         if (gym == GYM_PETALBURG 
             && VarGet(VAR_PETALBURG_GYM_STATE) <= 1 
             && GetNumOwnedBadges() == (gym - 1))
             return FALSE;
         else
+        {
+            MgbaPrintf(MGBA_LOG_WARN, "cleared gym: %u, has badge: %u", FlagGet(gBadgeFlags[gym - 1]), FlagGet(gDefeatedGymFlags[gym - 1]));
             return (!FlagGet(gBadgeFlags[gym - 1]) && !FlagGet(gDefeatedGymFlags[gym - 1]));
+        }
     }
     return FALSE;
 }
- 

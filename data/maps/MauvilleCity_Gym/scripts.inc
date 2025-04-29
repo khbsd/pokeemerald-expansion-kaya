@@ -92,10 +92,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
-	pokevialincreasesize
-	setvar B_LEVEL_CAP_VARIABLE, 31
-	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
-	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	call Common_Gym_Defeated_Upgrade_Vial_And_Cap
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle

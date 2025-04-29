@@ -68,10 +68,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
-	pokevialincreasesize
-	setvar B_LEVEL_CAP_VARIABLE, 49
-	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
-	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	call Common_Gym_Defeated_Upgrade_Vial_And_Cap
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY

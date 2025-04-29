@@ -9,15 +9,15 @@ u32 GetCurrentLevelCap(void)
 {
     static const u32 sLevelCapFlagMap[][2] =
     {
-        {FLAG_BADGE01_GET, 15},
-        {FLAG_BADGE02_GET, 19},
-        {FLAG_BADGE03_GET, 24},
-        {FLAG_BADGE04_GET, 29},
-        {FLAG_BADGE05_GET, 31},
-        {FLAG_BADGE06_GET, 33},
-        {FLAG_BADGE07_GET, 42},
-        {FLAG_BADGE08_GET, 46},
-        {FLAG_IS_CHAMPION, 58},
+        {FLAG_BADGE01_GET, 20},
+        {FLAG_BADGE02_GET, 23},
+        {FLAG_BADGE03_GET, 31},
+        {FLAG_BADGE04_GET, 33},
+        {FLAG_BADGE05_GET, 36},
+        {FLAG_BADGE06_GET, 47},
+        {FLAG_BADGE07_GET, 49},
+        {FLAG_BADGE08_GET, 65},
+        {FLAG_IS_CHAMPION, 80},
     };
 
     u32 i;
@@ -36,6 +36,11 @@ u32 GetCurrentLevelCap(void)
     }
 
     return MAX_LEVEL;
+}
+
+void GetCurrentLevelCap_callnative(void)
+{
+    VarSet(VAR_LEVEL_CAP, GetCurrentLevelCap());
 }
 
 u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)

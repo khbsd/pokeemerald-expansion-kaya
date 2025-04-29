@@ -2158,8 +2158,8 @@ void CB2_ContinueSavedGame(void)
         
     if (isGen4BGM)
         isGen4BGM = FALSE;
-    DEBUG_SetAllHMFlags(); // remember to delete this once you're done!
-    DEBUG_SetAllBadges(); // remember to delete this once you're done!
+    // DEBUG_SetAllHMFlags(); // remember to delete this once you're done!
+    // DEBUG_SetAllBadges(); // remember to delete this once you're done!
 }
 
 static void FieldClearVBlankHBlankCallbacks(void)

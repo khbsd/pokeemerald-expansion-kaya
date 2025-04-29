@@ -64,10 +64,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
-	pokevialincreasesize
-	setvar B_LEVEL_CAP_VARIABLE, 33
-	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
-	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	call Common_Gym_Defeated_Upgrade_Vial_And_Cap
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle

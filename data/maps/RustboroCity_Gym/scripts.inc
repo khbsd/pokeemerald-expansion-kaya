@@ -16,10 +16,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
-	pokevialincreasesize
-	setvar B_LEVEL_CAP_VARIABLE, 20
-	buffernumberstring STR_VAR_1, B_LEVEL_CAP_VARIABLE
-	msgbox Gym_Text_Upgrades, MSGBOX_DEFAULT
+	call Common_Gym_Defeated_Upgrade_Vial_And_Cap
 	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setvar VAR_RUSTBORO_CITY_STATE, 1
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -203,10 +200,6 @@ RustboroCity_Gym_Text_RoxanneDefeat:
 RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "{PLAYER} received the STONE BADGE\n"
 	.string "from ROXANNE.$"
-
-Gym_Text_Upgrades::
-	.string "Your PokéVial can now carry one more\n"
-	.string "dose, and your level cap is set to {STR_VAR_1}.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "The STONE BADGE heightens the ATTACK\n"
