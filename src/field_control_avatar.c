@@ -182,7 +182,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
     if (input->pressedBButton && B_TOGGLES_RUN
-        && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING)))
+        && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING))
+        && FlagGet(FLAG_RECEIVED_RUNNING_SHOES))
     {
         if (gRunToggled)
         {
@@ -601,9 +602,10 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
     if (OW_FLAG_AUTO_USE_SURF)
         return NULL;
 
-    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE
-     && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
-     )
+    if (FlagGet(FLAG_BADGE05_GET) == TRUE 
+        && PartyHasMonWithSurf() == TRUE 
+        && IsPlayerFacingSurfableFishableWater() == TRUE 
+        && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF))
         return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE

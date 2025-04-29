@@ -1103,31 +1103,6 @@ u8 GetFlashLevel(void)
     return gSaveBlock1Ptr->flashLevel;
 }
 
-void DEBUG_SetAllHMFlags(void) 
-{
-    FlagSet(FLAG_RECEIVED_HM_CUT);
-    FlagSet(FLAG_RECEIVED_HM_FLASH);
-    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
-    FlagSet(FLAG_RECEIVED_HM_STRENGTH);
-    FlagSet(FLAG_RECEIVED_HM_SURF);
-    FlagSet(FLAG_RECEIVED_HM_FLY);
-    FlagSet(FLAG_RECEIVED_HM_DIVE);
-    FlagSet(FLAG_RECEIVED_HM_WATERFALL);
-}
-
-void DEBUG_SetAllBadges(void)
-{
-    FlagSet(FLAG_BADGE01_GET);
-    FlagSet(FLAG_BADGE02_GET);
-    FlagSet(FLAG_BADGE03_GET);
-    FlagSet(FLAG_BADGE04_GET);
-    FlagSet(FLAG_BADGE05_GET);
-    FlagSet(FLAG_BADGE06_GET);
-    FlagSet(FLAG_BADGE07_GET);
-    FlagSet(FLAG_BADGE08_GET);
-
-}
-
 bool32 CanAutoUseFieldMove(u16 move) {
     switch (move)
     {
@@ -1202,7 +1177,7 @@ void AutoUseSurf(void)
         }
 
         ScriptContext_SetupScript(EventScript_AutoUseSurf);
-        
+        UnlockPlayerFieldControls();
     }
 }
 
@@ -2158,8 +2133,6 @@ void CB2_ContinueSavedGame(void)
         
     if (isGen4BGM)
         isGen4BGM = FALSE;
-    // DEBUG_SetAllHMFlags(); // remember to delete this once you're done!
-    // DEBUG_SetAllBadges(); // remember to delete this once you're done!
 }
 
 static void FieldClearVBlankHBlankCallbacks(void)

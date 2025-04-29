@@ -355,7 +355,7 @@ bool8 MetatileBehavior_IsNorthArrowWarp(u8 metatileBehavior)
 bool8 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
 {
     if (IsPlayerInGym() && metatileBehavior == MB_SOUTH_ARROW_WARP)
-        return IsPlayerInGymGauntlet();
+        return !IsPlayerInGymGauntlet();
 
     if (metatileBehavior == MB_SOUTH_ARROW_WARP
      || metatileBehavior == MB_WATER_SOUTH_ARROW_WARP

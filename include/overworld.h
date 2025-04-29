@@ -171,8 +171,6 @@ void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
 void ResetAllMultiplayerState(void);
-void DEBUG_SetAllHMFlags(void);
-void DEBUG_SetAllBadges(void);
 u32 GetCableClubPartnersReady(void);
 u16 SetInCableClubSeat(void);
 u16 SetLinkWaitingForScript(void);
