@@ -284,7 +284,7 @@ PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
 	.string "downstairs, too.\p"
 	.string "POKéMON movers are so convenient!\p"
 	.string "Oh, you should make sure that\n"
-	.string "everything's all there in your PC."
+	.string "everything's all there in your PC.$"
 
 PlayersHouse_2F_Text_Notebook:
 	.string "{PLAYER} flipped open the notebook.\p"

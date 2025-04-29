@@ -398,7 +398,7 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "Dad, PROF. BIRCH, said that our new\n"
 	.string "next-door neighbor is a GYM LEADER's\l"
 	.string "kid. You already look strong.\p"
-	.string "My name's BRENDAN.\n"
+	.string "My name's BRENDA.\n"
 	.string "So, hi, neighbor!\p"
 	.string "Huh? Hey, {PLAYER}, don't you have\n"
 	.string "a POKéMON? You could have fooled me!\p"
