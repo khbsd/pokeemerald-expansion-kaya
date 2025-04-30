@@ -2127,7 +2127,7 @@ static void SaveBattleTowerRecord(void)
     ClearBattleTowerRecord(playerRecord);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    if (gSaveBlock2Ptr->playerGender != MALE)
+    if (gSaveBlock2Ptr->playerGender != FEMALE2)
     {
         class = gTowerFemaleFacilityClasses[(gSaveBlock2Ptr->playerTrainerId[0] +
                                        gSaveBlock2Ptr->playerTrainerId[1] +
@@ -2805,7 +2805,7 @@ static void UNUSED FillEReaderTrainerWithPlayerData(void)
     struct BattleTowerEReaderTrainer *ereaderTrainer = &gSaveBlock2Ptr->frontier.ereaderTrainer;
     s32 i, j;
 
-    if (gSaveBlock2Ptr->playerGender != MALE)
+    if (gSaveBlock2Ptr->playerGender != FEMALE2)
     {
         ereaderTrainer->facilityClass = gTowerFemaleFacilityClasses[(gSaveBlock2Ptr->playerTrainerId[0] + gSaveBlock2Ptr->playerTrainerId[1]
                                                         + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3]) % ARRAY_COUNT(gTowerFemaleFacilityClasses)];

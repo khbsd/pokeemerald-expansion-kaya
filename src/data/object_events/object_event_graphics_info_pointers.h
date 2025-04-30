@@ -91,6 +91,11 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayAcroBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Truck;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothCarryingBox;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothFacingAway;
@@ -110,6 +115,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFie
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaUnderwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist2;
@@ -136,6 +142,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wally;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireLittleBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaFishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HotSpringsOldWoman;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSTidal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SubmarineShadow;
@@ -190,8 +197,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GameboyKid;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ContestJudge;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanWatering;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaWatering;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanDecorating;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayDecorating;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KayaDecorating;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Archie;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maxie;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KyogreFront;
@@ -346,6 +355,11 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_MAY_ACRO_BIKE] =            &gObjectEventGraphicsInfo_MayAcroBike,
     [OBJ_EVENT_GFX_MAY_SURFING] =              &gObjectEventGraphicsInfo_MaySurfing,
     [OBJ_EVENT_GFX_MAY_FIELD_MOVE] =           &gObjectEventGraphicsInfo_MayFieldMove,
+    [OBJ_EVENT_GFX_KAYA_NORMAL] =              &gObjectEventGraphicsInfo_KayaNormal,
+    [OBJ_EVENT_GFX_KAYA_MACH_BIKE] =           &gObjectEventGraphicsInfo_KayaMachBike,
+    [OBJ_EVENT_GFX_KAYA_ACRO_BIKE] =           &gObjectEventGraphicsInfo_KayaAcroBike,
+    [OBJ_EVENT_GFX_KAYA_SURFING] =             &gObjectEventGraphicsInfo_KayaSurfing,
+    [OBJ_EVENT_GFX_KAYA_FIELD_MOVE] =          &gObjectEventGraphicsInfo_KayaFieldMove,
     [OBJ_EVENT_GFX_TRUCK] =                    &gObjectEventGraphicsInfo_Truck,
     [OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX] =    &gObjectEventGraphicsInfo_VigorothCarryingBox,
     [OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY] =     &gObjectEventGraphicsInfo_VigorothFacingAway,
@@ -365,6 +379,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CAMERAMAN] =                &gObjectEventGraphicsInfo_Cameraman,
     [OBJ_EVENT_GFX_BRENDAN_UNDERWATER] =       &gObjectEventGraphicsInfo_BrendanUnderwater,
     [OBJ_EVENT_GFX_MAY_UNDERWATER] =           &gObjectEventGraphicsInfo_MayUnderwater,
+    [OBJ_EVENT_GFX_KAYA_UNDERWATER] =           &gObjectEventGraphicsInfo_KayaUnderwater,
     [OBJ_EVENT_GFX_MOVING_BOX] =               &gObjectEventGraphicsInfo_MovingBox,
     [OBJ_EVENT_GFX_CABLE_CAR] =                &gObjectEventGraphicsInfo_CableCar,
     [OBJ_EVENT_GFX_SCIENTIST_2] =              &gObjectEventGraphicsInfo_Scientist2,
@@ -391,6 +406,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_LITTLE_BOY_3] =             &gObjectEventGraphicsInfo_RubySapphireLittleBoy,
     [OBJ_EVENT_GFX_BRENDAN_FISHING] =          &gObjectEventGraphicsInfo_BrendanFishing,
     [OBJ_EVENT_GFX_MAY_FISHING] =              &gObjectEventGraphicsInfo_MayFishing,
+    [OBJ_EVENT_GFX_KAYA_FISHING] =              &gObjectEventGraphicsInfo_KayaFishing,
     [OBJ_EVENT_GFX_HOT_SPRINGS_OLD_WOMAN] =    &gObjectEventGraphicsInfo_HotSpringsOldWoman,
     [OBJ_EVENT_GFX_SS_TIDAL] =                 &gObjectEventGraphicsInfo_SSTidal,
     [OBJ_EVENT_GFX_SUBMARINE_SHADOW] =         &gObjectEventGraphicsInfo_SubmarineShadow,

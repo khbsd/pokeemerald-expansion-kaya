@@ -279,7 +279,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
 static const struct MatchCallRival sMayMatchCallHeader =
 {
     .type = MC_TYPE_RIVAL,
-    .playerGender = MALE,
+    .playerGender = FEMALE2,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
     .desc = gText_MayBrendanMatchCallDesc,
     .name = gText_ExpandedPlaceholder_May,

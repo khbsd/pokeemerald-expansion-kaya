@@ -19,7 +19,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts::
 BattleFrontier_BattleFactoryBattleRoom_OnTransition:
 	frontier_settrainers
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale
+	call_if_eq VAR_RESULT, FEMALE2, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale
 	call_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale
 	frontier_getbrainstatus
 	copyvar VAR_TEMP_F, VAR_RESULT

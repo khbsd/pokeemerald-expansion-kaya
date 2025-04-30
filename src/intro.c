@@ -1182,7 +1182,7 @@ void Task_Scene1_Load(u8 taskId)
     if (INTRO_GENDER_MATCH_SAVE)
         sIntroCharacterGender = gSaveBlock2Ptr->playerGender;
     else
-        sIntroCharacterGender = MOD(Random(), GENDER_COUNT);
+        sIntroCharacterGender = MOD(Random(), 1);
 
     IntroResetGpuRegs();
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
@@ -1391,7 +1391,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     u8 spriteId;
 
     // Load sprite sheets
-    if (sIntroCharacterGender == MALE)
+    if (sIntroCharacterGender == FEMALE2)
         LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
     else
         LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
@@ -1410,7 +1410,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     CreateSprite(&sSpriteTemplate_Manectric, DISPLAY_WIDTH + 32, 128, 0);
     CreateSprite(&sSpriteTemplate_Torchic, DISPLAY_WIDTH + 48, 110, 1);
 
-    if (sIntroCharacterGender == MALE)
+    if (sIntroCharacterGender == FEMALE2)
         spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
     else
         spriteId = CreateIntroMaySprite(DISPLAY_WIDTH + 32, 100);

@@ -111,7 +111,7 @@
 #define TRAINER_PIC_KAYA                  93
 #define TRAINER_PIC_COUNT                 94
 
-// The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
+// The player back pics are assumed to alternate according to the gender values (FEMALE2/FEMALE)
 #define TRAINER_BACK_PIC_BRENDAN                0
 #define TRAINER_BACK_PIC_MAY                    1
 #define TRAINER_BACK_PIC_RED                    2

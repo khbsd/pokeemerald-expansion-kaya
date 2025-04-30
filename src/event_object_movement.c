@@ -3165,7 +3165,7 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     switch (gender)
     {
         default:
-        case MALE:
+        case FEMALE2:
             if (FlagGet(FLAG_IS_KAYA))
                 paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
             else

@@ -646,7 +646,7 @@ static void LoadWallClockGraphics(void)
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
     LZ77UnCompVram(gWallClock_Gfx, (void *)VRAM);
 
-    if (gSpecialVar_0x8004 == MALE)
+    if (gSpecialVar_0x8004 == FEMALE2)
         LoadPalette(gWallClockMale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     else
         LoadPalette(gWallClockFemale_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);

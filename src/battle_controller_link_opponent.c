@@ -410,7 +410,7 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
             if ((gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_FIRE_RED
             || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_LEAF_GREEN)
             {
-                if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != MALE)
+                if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != FEMALE2)
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
                 else
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
@@ -418,7 +418,7 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
             else if ((gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_RUBY
                      || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_SAPPHIRE)
             {
-                if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != MALE)
+                if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != FEMALE2)
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
                 else
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_BRENDAN];
@@ -439,7 +439,7 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
-            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
+            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != FEMALE2)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
             else
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
@@ -447,7 +447,7 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
-            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
+            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != FEMALE2)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
             else
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_BRENDAN];

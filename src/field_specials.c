@@ -926,7 +926,7 @@ u8 GetPlayerTrainerIdOnesDigit(void)
 
 void GetPlayerBigGuyGirlString(void)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
+    if (gSaveBlock2Ptr->playerGender == FEMALE2)
         StringCopy(gStringVar1, sText_BigGuy);
     else
         StringCopy(gStringVar1, sText_BigGirl);
@@ -2804,7 +2804,7 @@ void SetBattleTowerLinkPlayerGfx(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        if (gLinkPlayers[i].gender == MALE)
+        if (gLinkPlayers[i].gender == FEMALE2)
             VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
         else
             VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);

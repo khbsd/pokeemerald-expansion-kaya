@@ -27,7 +27,7 @@ BattleFrontier_BattleDomeBattleRoom_OnTransition:
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMALE2, BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale
 	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 

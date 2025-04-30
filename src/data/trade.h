@@ -996,7 +996,7 @@ static const struct InGameTrade sIngameTrades[] =
         .heldItem = ITEM_CHESTO_BERRY,
         .mailNum = -1,
         .otName = _("KOBE"),
-        .otGender = MALE,
+        .otGender = FEMALE2,
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
@@ -1012,7 +1012,7 @@ static const struct InGameTrade sIngameTrades[] =
         .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
         .otName = _("ROMAN"),
-        .otGender = MALE,
+        .otGender = FEMALE2,
         .sheen = 10,
         .requestedSpecies = SPECIES_VOLBEAT
     },
@@ -1028,7 +1028,7 @@ static const struct InGameTrade sIngameTrades[] =
         .heldItem = ITEM_WAVE_MAIL,
         .mailNum = 1,
         .otName = _("SKYLAR"),
-        .otGender = MALE,
+        .otGender = FEMALE2,
         .sheen = 10,
         .requestedSpecies = SPECIES_BAGON
     },

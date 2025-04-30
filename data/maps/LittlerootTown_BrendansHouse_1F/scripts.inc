@@ -20,7 +20,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_SetMovingBoxes::
 
 LittlerootTown_BrendansHouse_1F_EventScript_CheckShowShoesManual::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual
+	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual::
@@ -77,13 +77,13 @@ LittlerootTown_BrendansHouse_1F_Movement_PushTowardStairs:
 LittlerootTown_BrendansHouse_1F_EventScript_EnterHouseMovingIn::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, MALE
+	setvar VAR_0x8005, FEMALE2
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_PetalburgGymReport::
 	lockall
-	setvar VAR_0x8004, MALE
+	setvar VAR_0x8004, FEMALE2
 	setvar VAR_0x8005, LOCALID_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportMale
 	end
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_1F_Movement_RivalMomApproach:
 LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, MALE
+	setvar VAR_0x8005, FEMALE2
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
