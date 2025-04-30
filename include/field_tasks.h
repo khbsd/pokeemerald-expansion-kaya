@@ -2,6 +2,7 @@
 #define GUARD_FIELD_TASKS_H
 
 void CheckIfPlayerIsKaya(void);
+void CheckIfNameIsKaya(u8 *str);
 void SetUpFieldTasks(void);
 void ActivatePerStepCallback(u8 callbackId);
 void ResetFieldTasksArgs(void);

@@ -144,6 +144,14 @@ void CheckIfPlayerIsKaya(void)
         FlagSet(FLAG_IS_KAYA);       
 }
 
+void CheckIfNameIsKaya(u8 *str)
+{
+    const u8 *kayaName = COMPOUND_STRING("Kaya");
+  
+    if (StringCompare(kayaName, str) == 0)
+        FlagSet(FLAG_IS_KAYA);
+}
+
 static void Task_RunPerStepCallback(u8 taskId)
 {
     int idx = gTasks[taskId].tCallbackId;

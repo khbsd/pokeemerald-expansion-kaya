@@ -8,6 +8,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "field_effect.h"
+#include "field_tasks.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -1280,6 +1281,7 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 #define tDugtrioSpriteId data[9]
 #define tBrendanSpriteId data[10]
 #define tMaySpriteId data[11]
+#define tKayaSpriteId data[12]
 
 static void Task_NewGameBirchSpeech_Init(u8 taskId)
 {
@@ -1731,10 +1733,13 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
             gTasks[taskId].tTimer--;
             return;
         }
-        if (gSaveBlock2Ptr->playerGender != MALE)
+        CheckIfNameIsKaya(gStringVar4);
+        if (FlagGet(FLAG_IS_KAYA))
+            spriteId = gTasks[taskId].tKayaSpriteId;
+        else if (gSaveBlock2Ptr->playerGender != MALE)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
-            spriteId = gTasks[taskId].tMaySpriteId;
+            spriteId = gTasks[taskId].tBrendanSpriteId;
         gSprites[spriteId].x = 120;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -1904,6 +1909,7 @@ static void AddBirchSpeechObjects(u8 taskId)
     u8 dugtrioSpriteId;
     u8 brendanSpriteId;
     u8 maySpriteId;
+    u8 kayaSpriteId;
 
     birchSpriteId = AddNewGameBirchObject(0x88, 0x3C, 1);
     gSprites[birchSpriteId].callback = SpriteCB_Null;
@@ -1925,6 +1931,11 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
     gTasks[taskId].tMaySpriteId = maySpriteId;
+    kayaSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_KAYA), 120, 60, 0, NULL);
+    gSprites[kayaSpriteId].callback = SpriteCB_Null;
+    gSprites[kayaSpriteId].invisible = TRUE;
+    gSprites[kayaSpriteId].oam.priority = 0;
+    gTasks[taskId].tKayaSpriteId = kayaSpriteId;
 }
 
 #undef tPlayerSpriteId

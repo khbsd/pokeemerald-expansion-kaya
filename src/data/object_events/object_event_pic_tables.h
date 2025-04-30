@@ -453,6 +453,49 @@ static const struct SpriteFrameImage sPicTable_MayFieldMove[] = {
     overworld_ascending_frames(gObjectEventPic_MayFieldMove, 4, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_KayaNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_KayaNormalRunning, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaMachBike[] = {
+    overworld_ascending_frames(gObjectEventPic_KayaMachBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaAcroBike[] = {
+    overworld_ascending_frames(gObjectEventPic_KayaAcroBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaSurfing[] = {
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 3),
+    overworld_frame(gObjectEventPic_KayaSurfing, 4, 4, 5),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaUnderwater[] = {
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaUnderwater, 4, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaFieldMove[] = {
+    overworld_ascending_frames(gObjectEventPic_KayaFieldMove, 4, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_Cameraman[] = {
     overworld_ascending_frames(gObjectEventPic_Cameraman, 2, 4),
 };
@@ -650,6 +693,10 @@ static const struct SpriteFrameImage sPicTable_BrendanFishing[] = {
 
 static const struct SpriteFrameImage sPicTable_MayFishing[] = {
     overworld_ascending_frames(gObjectEventPic_MayFishing, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaFishing[] = {
+    overworld_ascending_frames(gObjectEventPic_KayaFishing, 4, 4),
 };
 
 static const struct SpriteFrameImage sPicTable_HotSpringsOldWoman[] = {
@@ -912,12 +959,28 @@ static const struct SpriteFrameImage sPicTable_MayWatering[] = {
     overworld_frame(gObjectEventPic_MayWatering, 4, 4, 5),
 };
 
+static const struct SpriteFrameImage sPicTable_KayaWatering[] = {
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 0),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 2),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 4),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 1),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 3),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 5),
+    overworld_frame(gObjectEventPic_KayaWatering, 4, 4, 5),
+};
+
 static const struct SpriteFrameImage sPicTable_BrendanDecorating[] = {
     obj_frame_tiles(gObjectEventPic_BrendanDecorating),
 };
 
 static const struct SpriteFrameImage sPicTable_MayDecorating[] = {
     obj_frame_tiles(gObjectEventPic_MayDecorating),
+};
+
+static const struct SpriteFrameImage sPicTable_KayaDecorating[] = {
+    obj_frame_tiles(gObjectEventPic_KayaDecorating),
 };
 
 static const struct SpriteFrameImage sPicTable_Archie[] = {
