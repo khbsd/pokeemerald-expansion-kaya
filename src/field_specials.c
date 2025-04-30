@@ -926,10 +926,7 @@ u8 GetPlayerTrainerIdOnesDigit(void)
 
 void GetPlayerBigGuyGirlString(void)
 {
-    if (gSaveBlock2Ptr->playerGender == FEMALE2)
-        StringCopy(gStringVar1, sText_BigGuy);
-    else
-        StringCopy(gStringVar1, sText_BigGirl);
+    StringCopy(gStringVar1, sText_BigGirl);
 }
 
 void GetRivalSonDaughterString(void)

@@ -141,7 +141,9 @@ void CheckIfPlayerIsKaya(void)
     const u8 *kayaName = COMPOUND_STRING("Kaya");
   
     if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0)
-        FlagSet(FLAG_IS_KAYA);       
+        FlagSet(FLAG_IS_KAYA);
+    else
+        FlagClear(FLAG_IS_KAYA);  
 }
 
 void CheckIfNameIsKaya(u8 *str)
@@ -150,6 +152,8 @@ void CheckIfNameIsKaya(u8 *str)
   
     if (StringCompare(kayaName, str) == 0)
         FlagSet(FLAG_IS_KAYA);
+    else
+        FlagClear(FLAG_IS_KAYA);  
 }
 
 static void Task_RunPerStepCallback(u8 taskId)

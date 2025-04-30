@@ -784,18 +784,8 @@ static void Task_DisplayMainMenu(u8 taskId)
         palette = RGB(26, 26, 25);
         LoadPalette(&palette, BG_PLTT_ID(15) + 12, PLTT_SIZEOF(1));
 
-        // Note: If there is no save file, the save block is zeroed out,
-        // so the default gender is FEMALE2.
-        if (gSaveBlock2Ptr->playerGender == FEMALE2)
-        {
-            palette = RGB(4, 16, 31);
-            LoadPalette(&palette, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
-        }
-        else
-        {
-            palette = RGB(31, 3, 21);
-            LoadPalette(&palette, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
-        }
+        palette = RGB(31, 3, 21);
+        LoadPalette(&palette, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
 
         switch (gTasks[taskId].tMenuType)
         {
@@ -1683,6 +1673,7 @@ static void Task_NewGameBirchSpeech_ReshowBirchDugtrio(u8 taskId)
     {
         gSprites[gTasks[taskId].tBrendanSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tMaySpriteId].invisible = TRUE;
+        gSprites[gTasks[taskId].tKayaSpriteId].invisible = TRUE;
         spriteId = gTasks[taskId].tBirchSpriteId;
         gSprites[spriteId].x = 136;
         gSprites[spriteId].y = 60;
@@ -1693,6 +1684,7 @@ static void Task_NewGameBirchSpeech_ReshowBirchDugtrio(u8 taskId)
         gSprites[spriteId].y = 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        CheckIfNameIsKaya(gStringVar4);
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
@@ -1734,6 +1726,7 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
             return;
         }
         CheckIfNameIsKaya(gStringVar4);
+        MgbaPrintf(MGBA_LOG_WARN, "is kaya: %u", FlagGet(FLAG_IS_KAYA));
         if (FlagGet(FLAG_IS_KAYA))
             spriteId = gTasks[taskId].tKayaSpriteId;
         else if (gSaveBlock2Ptr->playerGender != FEMALE2)
@@ -1847,7 +1840,12 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
     AddBirchSpeechObjects(taskId);
-    if (gSaveBlock2Ptr->playerGender != FEMALE2)
+    if (FlagGet(FLAG_IS_KAYA))
+    {
+        gTasks[taskId].tPlayerGender = FEMALE;
+        spriteId = gTasks[taskId].tKayaSpriteId;
+    }
+    else if (gSaveBlock2Ptr->playerGender != FEMALE2)
     {
         gTasks[taskId].tPlayerGender = FEMALE;
         spriteId = gTasks[taskId].tMaySpriteId;
@@ -1855,7 +1853,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     else
     {
         gTasks[taskId].tPlayerGender = FEMALE2;
-        spriteId = gTasks[taskId].tMaySpriteId;
+        spriteId = gTasks[taskId].tBrendanSpriteId;
     }
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;

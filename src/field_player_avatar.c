@@ -1526,8 +1526,8 @@ u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    if (gender == FEMALE2)
-        return sPlayerAvatarGfxIds[state][gender + FlagGet(FLAG_IS_KAYA)];
+    if (gender == FEMALE2 && FlagGet(FLAG_IS_KAYA))
+        return sPlayerAvatarGfxIds[state][KAYA - 1];
     return sPlayerAvatarGfxIds[state][gender];
 }
 
@@ -1567,7 +1567,6 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_KAYA_UNDERWATER:
     case OBJ_EVENT_GFX_KAYA_FISHING:
     case OBJ_EVENT_GFX_KAYA_WATERING:
-        return KAYA;
     default:
         return FEMALE2;
     }
