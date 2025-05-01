@@ -1,6 +1,5 @@
 .set LOCALID_MOM, 1
 .set LOCALID_RIVAL_MOM, 4
-.set LOCALID_RIVAL, 7
 
 LittlerootTown_MaysHouse_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_MaysHouse_1F_OnLoad
@@ -183,14 +182,19 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival2::
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	playse SE_EXIT
 	delay 10
-	addobject LOCALID_RIVAL
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_SetRivalBrendan
+	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_UnhideMay
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_UnhideBrendan
+	addobject VAR_LOCALID_RIVAL
 	delay 30
 	playse SE_PIN
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	applymovement VAR_LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	applymovement VAR_LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	call_if_ne VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
+	call LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
 	playbgm MUS_ENCOUNTER_MAY, TRUE
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
@@ -201,8 +205,10 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
 	playse SE_EXIT
-	removeobject LOCALID_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
+	removeobject VAR_LOCALID_RIVAL
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_HideBrendan
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_HideMay
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
@@ -219,17 +225,17 @@ LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay::
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2
 	waitmovement 0
 	return
 
@@ -261,19 +267,19 @@ LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2:
 
 LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit1
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2::
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit2
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2
+	applymovement VAR_LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2
 	waitmovement 0
 	return
 

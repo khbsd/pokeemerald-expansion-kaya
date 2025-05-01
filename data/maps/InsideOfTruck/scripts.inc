@@ -16,6 +16,9 @@ InsideOfTruck_OnResume:
 InsideOfTruck_EventScript_SetIntroFlags::
 	lockall
 	setflag FLAG_HIDE_MAP_NAME_POPUP
+	msgbox InsideOfTruck_Text_ChooseHouse, MSGBOX_DEFAULT
+	multichoice 2, 3, MULTI_LEFTRIGHT, TRUE
+	callnative SetPlayerHouse
 	callnative GetPlayerHouse
 	goto_if_eq VAR_RESULT, HOUSE_LEFT, InsideOfTruck_EventScript_SetIntroFlagsMale
 	goto_if_eq VAR_RESULT, HOUSE_RIGHT, InsideOfTruck_EventScript_SetIntroFlagsFemale
@@ -55,4 +58,8 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 	.string "The box is printed with a POKéMON logo.\p"
 	.string "It's a POKéMON brand moving and\n"
 	.string "delivery service.$"
+
+InsideOfTruck_Text_ChooseHouse:
+	.string "Hiya {PLAYER}!\n"
+	.string "Which house do you want?$"
 

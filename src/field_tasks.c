@@ -163,6 +163,10 @@ bool32 GetPlayerHouse(void)
     return house;
 }
 
+void SetPlayerHouse(void)
+{
+    gSaveBlock2Ptr->playerHouse = gSpecialVar_Result;
+}
 
 void SetPlayerAsKaya(void)
 {

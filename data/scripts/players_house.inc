@@ -167,7 +167,9 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_ByTheWayRunningShoes, MSGBOX_DEFAULT
 	closemessage
+	call LittlerootTown_EventScript_GiveRunningShoesAfterBroadcast
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatMale
 	waitmovement 0
@@ -485,6 +487,54 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
 	releaseall
 	end
+
+LittlerootTown_BrendansHouse_1F_SetRivalMay::
+	setvar VAR_LOCALID_RIVAL, 8
+	return
+
+LittlerootTown_BrendansHouse_1F_SetRivalBrendan::
+	setvar VAR_LOCALID_RIVAL, 7
+	return
+
+LittlerootTown_MaysHouse_1F_SetRivalMay::
+	setvar VAR_LOCALID_RIVAL, 7
+	return
+
+LittlerootTown_MaysHouse_1F_SetRivalBrendan::
+	setvar VAR_LOCALID_RIVAL, 8
+	return
+
+LittlerootTown_BrendansHouse_1F_HideBrendan::
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
+	return
+
+LittlerootTown_BrendansHouse_1F_HideMay::
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MAY
+	return
+
+LittlerootTown_MaysHouse_1F_HideBrendan::
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
+	return
+
+LittlerootTown_MaysHouse_1F_HideMay::
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
+	return
+
+LittlerootTown_BrendansHouse_1F_UnhideBrendan::
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
+	return
+
+LittlerootTown_BrendansHouse_1F_UnhideMay::
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MAY
+	return
+
+LittlerootTown_MaysHouse_1F_UnhideBrendan::
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
+	return
+
+LittlerootTown_MaysHouse_1F_UnhideMay::
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
+	return
 
 @ Never called.
 PlayersHouse_1F_EventScript_AirLatiBroadcast::

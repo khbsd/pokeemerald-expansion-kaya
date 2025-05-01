@@ -6,6 +6,7 @@ void CheckIfNameIsKaya(u8 *str);
 void SetPlayerAsKaya(void);
 void UnsetPlayerAsKaya(void);
 bool32 GetPlayerHouse(void);
+void SetPlayerHouse(void);
 void SetUpFieldTasks(void);
 void ActivatePerStepCallback(u8 callbackId);
 void ResetFieldTasksArgs(void);

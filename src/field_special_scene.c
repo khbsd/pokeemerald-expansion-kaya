@@ -49,26 +49,6 @@ enum
     EXIT_PORTHOLE,
 };
 
-static const struct WindowTemplate sChooseWhichHouseWindow[] =
-{
-    {
-        .bg = 0,
-        .tilemapLeft = 3,
-        .tilemapTop = 5,
-        .width = 6,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0x6D
-    }
-};
-
-static const struct MenuAction sMenuActions_HouseChoice[] = {
-    {COMPOUND_STRING("Left"), {NULL}},
-    {COMPOUND_STRING("Right"), {NULL}}
-};
-
-static const u8 gText_ChooseYourHouse[] = _("Hiya {PLAYER}! Which house do you want?");
-
 static const s8 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
 static const u8 sSSTidalSailEastMovementScript[] =
@@ -208,11 +188,10 @@ static void Task_Truck3(u8 taskId)
 #undef tMoveStep
 #undef tTimerVertical
 
-#define tState         data[0]
-#define tTimer         data[1]
-#define tTaskId1       data[2]
-#define tTaskId2       data[3]
-#define tHouseWindowId data[4]
+#define tState          data[0]
+#define tTimer          data[1]
+#define tTaskId1        data[2]
+#define tTaskId2        data[3]
 
 static void Task_HandleTruckSequence(u8 taskId)
 {
@@ -272,25 +251,6 @@ static void Task_HandleTruckSequence(u8 taskId)
         }
         break;
     case 5:
-        if (!tHouseWindowId)
-        {
-            tHouseWindowId = AddWindow(&sChooseWhichHouseWindow[0]);
-            ShowHouseChoiceWindow(tHouseWindowId);
-        }
-        else
-        {
-            input = Menu_ProcessInputNoWrap();
-            if (input == HOUSE_LEFT || input == HOUSE_RIGHT)
-            {
-                house = input;
-                gSaveBlock2Ptr->playerHouse = house;
-                MgbaPrintf(MGBA_LOG_WARN, "house chosen: %u", house);
-                PlaySE(SE_SELECT);
-                tState++;
-            }
-        }
-        break;
-    case 6:
         tTimer++;
         if (tTimer == 120)
         {
@@ -304,20 +264,6 @@ static void Task_HandleTruckSequence(u8 taskId)
         }
         break;
     }
-}
-
-void ShowHouseChoiceWindow(u32 windowId)
-{
-    // DrawMainMenuWindowBorder(&sChooseWhichHouseWindow[0], 0xF3);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    InitMenuInUpperLeftCornerNormal(windowId, ARRAY_COUNT(sMenuActions_HouseChoice), 0);
-    PrintMenuTable(windowId, ARRAY_COUNT(sMenuActions_HouseChoice), sMenuActions_HouseChoice);
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-    //InitStandardTextBoxWindows();
-    LoadMessageBoxAndBorderGfx();
-    StringExpandPlaceholders(gStringVar4, gText_ChooseYourHouse);
-    AddTextPrinterForMessage(TRUE);
 }
 
 void ExecuteTruckSequence(void)

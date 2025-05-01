@@ -32,7 +32,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_Ret::
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan::
 	callnative GetPlayerHouse
-	goto_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan
+	goto_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan::

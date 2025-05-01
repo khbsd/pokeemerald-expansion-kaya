@@ -1846,8 +1846,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     CheckIfPlayerIsKaya();
     if (playerIsKaya)
     {
-        gTasks[taskId].tPlayerGender = FEMALE;
-        gSaveBlock2Ptr->playerGender = FEMALE;
+        gSaveBlock2Ptr->playerGender = FEMALE2;
         spriteId = gTasks[taskId].tKayaSpriteId;
     }
     else if (gSaveBlock2Ptr->playerGender != FEMALE2)
