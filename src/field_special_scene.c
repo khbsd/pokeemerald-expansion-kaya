@@ -1,4 +1,5 @@
 #include "global.h"
+#include "field_special_scene.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
@@ -6,13 +7,19 @@
 #include "field_specials.h"
 #include "fieldmap.h"
 #include "main.h"
+#include "main_menu.h"
+#include "menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "script.h"
 #include "script_movement.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
+#include "window.h"
+#include "text.h"
+#include "text_window.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_specials.h"
@@ -41,6 +48,26 @@ enum
     EXECUTE_MOVEMENT,
     EXIT_PORTHOLE,
 };
+
+static const struct WindowTemplate sChooseWhichHouseWindow[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 5,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x6D
+    }
+};
+
+static const struct MenuAction sMenuActions_HouseChoice[] = {
+    {COMPOUND_STRING("Left"), {NULL}},
+    {COMPOUND_STRING("Right"), {NULL}}
+};
+
+static const u8 gText_ChooseYourHouse[] = _("Hiya {PLAYER}! Which house do you want?");
 
 static const s8 sTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 
@@ -189,6 +216,8 @@ static void Task_Truck3(u8 taskId)
 static void Task_HandleTruckSequence(u8 taskId)
 {
    s16 *data = gTasks[taskId].data;
+    u32 house = 0;
+    u32 input;
 
     switch (tState)
     {
@@ -242,6 +271,18 @@ static void Task_HandleTruckSequence(u8 taskId)
         }
         break;
     case 5:
+        ShowHouseChoiceWindow();
+        //LockPlayerFieldControls();
+        input = Menu_ProcessInputNoWrap() + 1;
+        if (input > 0)
+        {
+            house = input;
+            UnlockPlayerFieldControls();
+            tState++;
+        }
+
+        break;
+    case 6:
         tTimer++;
         if (tTimer == 120)
         {
@@ -251,10 +292,23 @@ static void Task_HandleTruckSequence(u8 taskId)
             DrawWholeMapView();
             PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
-            UnlockPlayerFieldControls();
         }
         break;
     }
+}
+
+void ShowHouseChoiceWindow(void)
+{
+    u32 houseWindowId = AddWindow(&sChooseWhichHouseWindow[0]);
+
+    // DrawMainMenuWindowBorder(&sChooseWhichHouseWindow[0], 0xF3);
+    FillWindowPixelBuffer(houseWindowId, PIXEL_FILL(0));
+    InitMenuInUpperLeftCornerNormal(houseWindowId, ARRAY_COUNT(sMenuActions_HouseChoice), 0);
+    PrintMenuTable(houseWindowId, ARRAY_COUNT(sMenuActions_HouseChoice), sMenuActions_HouseChoice);
+    PutWindowTilemap(houseWindowId);
+    CopyWindowToVram(houseWindowId, COPYWIN_FULL);
+    StringExpandPlaceholders(gStringVar4, gText_ChooseYourHouse);
+    AddTextPrinterForMessage(TRUE);
 }
 
 void ExecuteTruckSequence(void)

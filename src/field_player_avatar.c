@@ -8,6 +8,7 @@
 #include "field_effect_helpers.h"
 #include "field_screen_effect.h"
 #include "field_player_avatar.h"
+#include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "follower_npc.h"
@@ -1526,7 +1527,8 @@ u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    if (gender == FEMALE2 && FlagGet(FLAG_IS_KAYA))
+    CheckIfPlayerIsKaya();
+    if (FlagGet(FLAG_IS_KAYA))
         return sPlayerAvatarGfxIds[state][KAYA - 1];
     return sPlayerAvatarGfxIds[state][gender];
 }
@@ -1558,7 +1560,6 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_MAY_UNDERWATER:
     case OBJ_EVENT_GFX_MAY_FISHING:
     case OBJ_EVENT_GFX_MAY_WATERING:
-        return FEMALE;
     case OBJ_EVENT_GFX_KAYA_NORMAL:
     case OBJ_EVENT_GFX_KAYA_MACH_BIKE:
     case OBJ_EVENT_GFX_KAYA_ACRO_BIKE:
@@ -1567,6 +1568,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_KAYA_UNDERWATER:
     case OBJ_EVENT_GFX_KAYA_FISHING:
     case OBJ_EVENT_GFX_KAYA_WATERING:
+        return FEMALE;
     default:
         return FEMALE2;
     }

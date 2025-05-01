@@ -3,6 +3,8 @@
 
 void CheckIfPlayerIsKaya(void);
 void CheckIfNameIsKaya(u8 *str);
+void SetPlayerAsKaya(void);
+void UnsetPlayerAsKaya(void);
 void SetUpFieldTasks(void);
 void ActivatePerStepCallback(u8 callbackId);
 void ResetFieldTasksArgs(void);

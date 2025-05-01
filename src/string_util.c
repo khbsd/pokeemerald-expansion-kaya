@@ -470,10 +470,7 @@ static const u8 *ExpandPlaceholder_StringVar3(void)
 
 static const u8 *ExpandPlaceholder_KunChan(void)
 {
-    if (gSaveBlock2Ptr->playerGender == FEMALE2)
-        return gText_ExpandedPlaceholder_Kun;
-    else
-        return gText_ExpandedPlaceholder_Chan;
+    return gText_ExpandedPlaceholder_Chan;
 }
 
 static const u8 *ExpandPlaceholder_RivalName(void)

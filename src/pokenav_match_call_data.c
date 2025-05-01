@@ -784,8 +784,6 @@ static bool32 MatchCall_GetEnabled_Wally(match_call_t matchCall)
 
 static bool32 MatchCall_GetEnabled_Rival(match_call_t matchCall)
 {
-    if (matchCall.rival->playerGender != gSaveBlock2Ptr->playerGender)
-        return FALSE;
     if (matchCall.rival->flag == 0xFFFF)
         return TRUE;
     return FlagGet(matchCall.rival->flag);

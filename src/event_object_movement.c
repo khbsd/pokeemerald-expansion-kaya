@@ -3166,15 +3166,14 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     {
         default:
         case FEMALE2:
-            if (FlagGet(FLAG_IS_KAYA))
-                paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
-            else
                 paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN;
             break;
         case FEMALE:
                 paletteTag = OBJ_EVENT_PAL_TAG_MAY;
             break;
     }
+    if (FlagGet(FLAG_IS_KAYA))
+        paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
     return LoadObjectEventPalette(paletteTag);
 }
 

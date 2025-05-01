@@ -6778,12 +6778,16 @@ u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId)
 
 u16 FacilityClassToPicIndex(u16 facilityClass)
 {
+    if (gSaveBlock2Ptr->playerIsKaya)
+        return gFacilityClassToPicIndex[FACILITY_CLASS_KAYA];
     return gFacilityClassToPicIndex[facilityClass];
 }
 
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
-    if (playerGender != FEMALE2)
+    if (gSaveBlock2Ptr->playerIsKaya)
+        return FacilityClassToPicIndex(FACILITY_CLASS_KAYA);
+    else if (playerGender != FEMALE2)
         return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     else
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);

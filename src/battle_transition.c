@@ -874,6 +874,7 @@ static const u16 sMugshotPal_Blue[]   = INCBIN_U16("graphics/battle_transitions/
 static const u16 sMugshotPal_Yellow[] = INCBIN_U16("graphics/battle_transitions/yellow_bg.gbapal");
 static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
 static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+static const u16 sMugshotPal_Kaya[] = INCBIN_U16("graphics/battle_transitions/kaya_bg.gbapal");
 static const u16 sMugshotPal_Sunrise[]   = INCBIN_U16("graphics/battle_transitions/sunrise_bg.gbapal");
 static const u16 sMugshotPal_Daytime[]   = INCBIN_U16("graphics/battle_transitions/daytime_bg.gbapal");
 static const u16 sMugshotPal_Sunset[] = INCBIN_U16("graphics/battle_transitions/sunset_bg.gbapal");
@@ -895,7 +896,8 @@ static const u16 *const sOpponentMugshotsPals[MUGSHOT_COLOR_COUNT] =
 static const u16 *const sPlayerMugshotsPals[KAYA] =
 {
     [FEMALE2] = sMugshotPal_Brendan,
-    [FEMALE] = sMugshotPal_May
+    [FEMALE] = sMugshotPal_May,
+    [KAYA - 1] = sMugshotPal_Kaya
 };
 
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
@@ -2318,7 +2320,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     }
 
     LoadPalette(sOpponentMugshotsPals[mugshotColor], 0xF0, 0x20);
-    LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(6));
+    LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->playerIsKaya], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(6));
 
     for (i = 0; i < 20; i++)
     {

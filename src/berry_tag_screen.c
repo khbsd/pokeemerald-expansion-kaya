@@ -344,17 +344,8 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 3:
-        // Palette of the bg tiles changes depending on the player's gender
-        if (gSaveBlock2Ptr->playerGender == FEMALE2)
-        {
-            for (i = 0; i < ARRAY_COUNT(sBerryTag->tilemapBuffers[1]); i++)
-                sBerryTag->tilemapBuffers[1][i] = (4 << 12) | BG_TILE;
-        }
-        else
-        {
-            for (i = 0; i < ARRAY_COUNT(sBerryTag->tilemapBuffers[1]); i++)
-                sBerryTag->tilemapBuffers[1][i] = (5 << 12) | BG_TILE;
-        }
+        for (i = 0; i < ARRAY_COUNT(sBerryTag->tilemapBuffers[1]); i++)
+            sBerryTag->tilemapBuffers[1][i] = (5 << 12) | BG_TILE;
         sBerryTag->gfxState++;
         break;
     case 4:

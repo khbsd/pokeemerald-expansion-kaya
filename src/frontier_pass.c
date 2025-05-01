@@ -95,6 +95,7 @@ enum {
     TAG_MEDAL_GOLD,
     TAG_HEAD_MALE,
     TAG_HEAD_FEMALE,
+    TAG_HEAD_KAYA,
 };
 
 // Error return codes. Never read
@@ -178,6 +179,7 @@ static void SpriteCB_PlayerHead(struct Sprite *);
 
 static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
 static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
+static const u16 sKayaHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads_kaya.gbapal");
 static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
 static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
 static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier_pass/map_heads.4bpp.lz");
@@ -381,6 +383,7 @@ static const struct SpritePalette sSpritePalettes[] =
     {gFrontierPassMedalsGold_Pal,   TAG_MEDAL_GOLD},
     {sMaleHead_Pal,                 TAG_HEAD_MALE},
     {sFemaleHead_Pal,               TAG_HEAD_FEMALE},
+    {sKayaHead_Pal,                 TAG_HEAD_KAYA},
     {}
 };
 
@@ -1693,7 +1696,7 @@ static void InitFrontierMapSprites(void)
 
         LoadCompressedSpriteSheet(sHeadsSpriteSheet);
         sprite = sSpriteTemplate_PlayerHead;
-        sprite.paletteTag = gSaveBlock2Ptr->playerGender + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMALE
+        sprite.paletteTag = gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->playerIsKaya + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMALE
         if (id != 0)
         {
             spriteId = CreateSprite(&sprite, x, y, 0);
@@ -1707,8 +1710,7 @@ static void InitFrontierMapSprites(void)
 
         sMapData->playerHeadSprite = &gSprites[spriteId];
         sMapData->playerHeadSprite->oam.priority = 0;
-        if (gSaveBlock2Ptr->playerGender != FEMALE2)
-            StartSpriteAnim(sMapData->playerHeadSprite, 1);
+        StartSpriteAnim(sMapData->playerHeadSprite, 1);
     }
 }
 

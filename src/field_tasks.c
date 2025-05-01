@@ -140,20 +140,34 @@ void CheckIfPlayerIsKaya(void)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
   
-    if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0)
-        FlagSet(FLAG_IS_KAYA);
+    if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0 || gSaveBlock2Ptr->playerIsKaya)
+        SetPlayerAsKaya();
     else
-        FlagClear(FLAG_IS_KAYA);  
+        UnsetPlayerAsKaya();
 }
 
 void CheckIfNameIsKaya(u8 *str)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
   
-    if (StringCompare(kayaName, str) == 0)
-        FlagSet(FLAG_IS_KAYA);
+    if (StringCompare(kayaName, str) == 0 || gSaveBlock2Ptr->playerIsKaya)
+        SetPlayerAsKaya();
     else
-        FlagClear(FLAG_IS_KAYA);  
+        UnsetPlayerAsKaya();
+}
+
+void SetPlayerAsKaya(void)
+{
+    FlagSet(FLAG_IS_KAYA);
+    gSaveBlock2Ptr->playerIsKaya = TRUE;
+    playerIsKaya = TRUE;
+}
+
+void UnsetPlayerAsKaya(void)
+{
+    FlagClear(FLAG_IS_KAYA);
+    gSaveBlock2Ptr->playerIsKaya = FALSE;
+    playerIsKaya = FALSE;
 }
 
 static void Task_RunPerStepCallback(u8 taskId)

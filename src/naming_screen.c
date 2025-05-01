@@ -11,6 +11,7 @@
 #include "pokemon.h"
 #include "field_specials.h"
 #include "field_player_avatar.h"
+#include "field_tasks.h"
 #include "event_object_movement.h"
 #include "event_data.h"
 #include "constants/songs.h"
@@ -1882,6 +1883,7 @@ static void SaveInputText(void)
             break;
         }
     }
+    CheckIfNameIsKaya(sNamingScreen->destBuffer);
 }
 
 static void LoadGfx(void)

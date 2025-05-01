@@ -474,8 +474,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
 };
 
 static const struct MenuAction sMenuActions_Gender[] = {
-    {COMPOUND_STRING("SHORT"), {NULL}},
-    {COMPOUND_STRING("LONG"), {NULL}}
+    {COMPOUND_STRING("Butchy"), {NULL}},
+    {COMPOUND_STRING("Femme"), {NULL}}
 };
 
 static const u8 *const sMalePresetNames[] = {
@@ -548,6 +548,8 @@ enum
 };
 
 #define MAIN_MENU_BORDER_TILE   0x1D5
+
+EWRAM_DATA bool8 playerIsKaya;
 
 static void CB2_MainMenu(void)
 {
@@ -1496,6 +1498,7 @@ static void Task_NewGameBirchSpeech_BoyOrGirl(u8 taskId)
 {
     NewGameBirchSpeech_ClearWindow(0);
     StringExpandPlaceholders(gStringVar4, gText_Birch_BoyOrGirl);
+    UnsetPlayerAsKaya();
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_WaitToShowGenderMenu;
 }
@@ -1620,6 +1623,7 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
 static void Task_NewGameBirchSpeech_SoItsPlayerName(u8 taskId)
 {
     NewGameBirchSpeech_ClearWindow(0);
+    MgbaPrintf(MGBA_LOG_WARN, "so its kaya?: %u", playerIsKaya);
     StringExpandPlaceholders(gStringVar4, gText_Birch_SoItsPlayer);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
@@ -1684,7 +1688,7 @@ static void Task_NewGameBirchSpeech_ReshowBirchDugtrio(u8 taskId)
         gSprites[spriteId].y = 75;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-        CheckIfNameIsKaya(gStringVar4);
+        CheckIfPlayerIsKaya();
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
@@ -1725,9 +1729,8 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
             gTasks[taskId].tTimer--;
             return;
         }
-        CheckIfNameIsKaya(gStringVar4);
-        MgbaPrintf(MGBA_LOG_WARN, "is kaya: %u", FlagGet(FLAG_IS_KAYA));
-        if (FlagGet(FLAG_IS_KAYA))
+        MgbaPrintf(MGBA_LOG_WARN, "2) is kaya: %u", playerIsKaya);
+        if (playerIsKaya)
             spriteId = gTasks[taskId].tKayaSpriteId;
         else if (gSaveBlock2Ptr->playerGender != FEMALE2)
             spriteId = gTasks[taskId].tMaySpriteId;
@@ -1840,9 +1843,11 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     FreeAllSpritePalettes();
     ResetAllPicSprites();
     AddBirchSpeechObjects(taskId);
-    if (FlagGet(FLAG_IS_KAYA))
+    CheckIfPlayerIsKaya();
+    if (playerIsKaya)
     {
         gTasks[taskId].tPlayerGender = FEMALE;
+        gSaveBlock2Ptr->playerGender = FEMALE;
         spriteId = gTasks[taskId].tKayaSpriteId;
     }
     else if (gSaveBlock2Ptr->playerGender != FEMALE2)
@@ -1855,6 +1860,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
         gTasks[taskId].tPlayerGender = FEMALE2;
         spriteId = gTasks[taskId].tBrendanSpriteId;
     }
+    MgbaPrintf(MGBA_LOG_WARN, "1) is kaya: %u", playerIsKaya);
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;
@@ -2225,7 +2231,7 @@ static void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
     LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
 }
 
-static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTileNum)
+void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTileNum)
 {
     u16 r9 = 1 + baseTileNum;
     u16 r10 = 2 + baseTileNum;

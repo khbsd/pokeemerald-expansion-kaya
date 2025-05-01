@@ -350,7 +350,9 @@ u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
 {
     if (getClass == TRUE)
     {
-        if (gender != FEMALE2)
+        if (gSaveBlock2Ptr->playerIsKaya)
+            return gFacilityClassToPicIndex[FACILITY_CLASS_KAYA];
+        else if (gender != FEMALE2)
             return gFacilityClassToPicIndex[FACILITY_CLASS_MAY];
         else
             return gFacilityClassToPicIndex[FACILITY_CLASS_BRENDAN];

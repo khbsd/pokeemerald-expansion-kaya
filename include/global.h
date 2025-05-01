@@ -579,7 +579,8 @@ struct SaveBlock2
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
     /*0x20*/ u8 playerFaintCounter;
-    /*0x90*/ u8 filler_90[0x7];
+             u8 playerIsKaya:1;
+    /*0x90*/ u8 filler_90[0x6];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD
@@ -1175,6 +1176,8 @@ struct MapPosition
     s16 y;
     s8 elevation;
 };
+
+extern bool8 playerIsKaya;
 
 #if T_SHOULD_RUN_MOVE_ANIM
 extern bool32 gLoadFail;
