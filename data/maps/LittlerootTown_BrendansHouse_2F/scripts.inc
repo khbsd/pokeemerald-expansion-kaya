@@ -31,8 +31,8 @@ LittlerootTown_BrendansHouse_2F_EventScript_Ret::
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan::
@@ -44,8 +44,8 @@ LittlerootTown_BrendansHouse_2F_OnWarp:
 	.2byte 0
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, SecretBase_EventScript_InitDecorations
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_LEFT, SecretBase_EventScript_InitDecorations
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_RivalsPokeBall::
@@ -237,9 +237,9 @@ LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanEast:
 
 LittlerootTown_BrendansHouse_2F_EventScript_PC::
 	lockall
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC
+	goto_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC::

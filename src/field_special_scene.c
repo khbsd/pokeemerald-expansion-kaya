@@ -208,16 +208,17 @@ static void Task_Truck3(u8 taskId)
 #undef tMoveStep
 #undef tTimerVertical
 
-#define tState   data[0]
-#define tTimer   data[1]
-#define tTaskId1 data[2]
-#define tTaskId2 data[3]
+#define tState         data[0]
+#define tTimer         data[1]
+#define tTaskId1       data[2]
+#define tTaskId2       data[3]
+#define tHouseWindowId data[4]
 
 static void Task_HandleTruckSequence(u8 taskId)
 {
-   s16 *data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u32 house = 0;
-    u32 input;
+    s32 input;
 
     switch (tState)
     {
@@ -271,16 +272,23 @@ static void Task_HandleTruckSequence(u8 taskId)
         }
         break;
     case 5:
-        ShowHouseChoiceWindow();
-        //LockPlayerFieldControls();
-        input = Menu_ProcessInputNoWrap() + 1;
-        if (input > 0)
+        if (!tHouseWindowId)
         {
-            house = input;
-            UnlockPlayerFieldControls();
-            tState++;
+            tHouseWindowId = AddWindow(&sChooseWhichHouseWindow[0]);
+            ShowHouseChoiceWindow(tHouseWindowId);
         }
-
+        else
+        {
+            input = Menu_ProcessInputNoWrap();
+            if (input == HOUSE_LEFT || input == HOUSE_RIGHT)
+            {
+                house = input;
+                gSaveBlock2Ptr->playerHouse = house;
+                MgbaPrintf(MGBA_LOG_WARN, "house chosen: %u", house);
+                PlaySE(SE_SELECT);
+                tState++;
+            }
+        }
         break;
     case 6:
         tTimer++;
@@ -291,22 +299,23 @@ static void Task_HandleTruckSequence(u8 taskId)
             MapGridSetMetatileIdAt(4 + MAP_OFFSET, 3 + MAP_OFFSET, METATILE_InsideOfTruck_ExitLight_Bottom);
             DrawWholeMapView();
             PlaySE(SE_TRUCK_DOOR);
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
     }
 }
 
-void ShowHouseChoiceWindow(void)
+void ShowHouseChoiceWindow(u32 windowId)
 {
-    u32 houseWindowId = AddWindow(&sChooseWhichHouseWindow[0]);
-
     // DrawMainMenuWindowBorder(&sChooseWhichHouseWindow[0], 0xF3);
-    FillWindowPixelBuffer(houseWindowId, PIXEL_FILL(0));
-    InitMenuInUpperLeftCornerNormal(houseWindowId, ARRAY_COUNT(sMenuActions_HouseChoice), 0);
-    PrintMenuTable(houseWindowId, ARRAY_COUNT(sMenuActions_HouseChoice), sMenuActions_HouseChoice);
-    PutWindowTilemap(houseWindowId);
-    CopyWindowToVram(houseWindowId, COPYWIN_FULL);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    InitMenuInUpperLeftCornerNormal(windowId, ARRAY_COUNT(sMenuActions_HouseChoice), 0);
+    PrintMenuTable(windowId, ARRAY_COUNT(sMenuActions_HouseChoice), sMenuActions_HouseChoice);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+    //InitStandardTextBoxWindows();
+    LoadMessageBoxAndBorderGfx();
     StringExpandPlaceholders(gStringVar4, gText_ChooseYourHouse);
     AddTextPrinterForMessage(TRUE);
 }

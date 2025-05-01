@@ -156,9 +156,16 @@ void NewGameInitData(void)
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
 
+    struct Pokevial pokevial;
+    pokevial.Dose = 0;
+    pokevial.Size = 0;
+
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     gSaveBlock2Ptr->playerFaintCounter = 0;
+    gSaveBlock2Ptr->playerIsKaya = 0;
+    gSaveBlock2Ptr->playerHouse = HOUSE_LEFT;
+    gSaveBlock1Ptr->pokevial = pokevial;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetPokedex();

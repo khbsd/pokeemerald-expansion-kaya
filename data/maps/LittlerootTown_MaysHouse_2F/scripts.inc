@@ -32,8 +32,8 @@ LittlerootTown_MaysHouse_2F_EventScript_Ret::
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay::
@@ -45,8 +45,8 @@ LittlerootTown_MaysHouse_2F_OnWarp:
 	.2byte 0
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, SecretBase_EventScript_InitDecorations
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_RIGHT, SecretBase_EventScript_InitDecorations
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall::
@@ -285,9 +285,9 @@ RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext::
 
 LittlerootTown_MaysHouse_2F_EventScript_PC::
 	lockall
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
+	goto_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC::

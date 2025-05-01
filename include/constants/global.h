@@ -136,8 +136,8 @@
 
 #define KAYA 3
 
-#define HOUSE_LEFT 1
-#define HOUSE_RIGHT 2
+#define HOUSE_LEFT 0
+#define HOUSE_RIGHT 1
 
 #define NUM_BARD_SONG_WORDS    6
 #define NUM_STORYTELLER_TALES  4

@@ -94,9 +94,9 @@ LittlerootTown_EventScript_SetTwinGuardingRoutePos::
 LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_DOWN
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_SetMomInFrontOfDoorMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetMomInFrontOfDoorFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_SetMomInFrontOfDoorMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_SetMomInFrontOfDoorFemale
 	return
 
 LittlerootTown_EventScript_SetMomInFrontOfDoorMale::
@@ -404,9 +404,9 @@ LittlerootTown_EventScript_BirchsLabSign::
 
 LittlerootTown_EventScript_BrendansHouseSign::
 	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_PlayersHouseSignMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_BirchsHouseSignFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_PlayersHouseSignMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_BirchsHouseSignFemale
 	releaseall
 	end
 
@@ -420,9 +420,9 @@ LittlerootTown_EventScript_BirchsHouseSignFemale::
 
 LittlerootTown_EventScript_MaysHouseSign::
 	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_BirchsHouseSignMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_PlayersHouseSignFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_BirchsHouseSignMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_PlayersHouseSignFemale
 	releaseall
 	end
 
@@ -473,21 +473,21 @@ LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger5::
 	end
 
 LittlerootTown_EventScript_GiveGoodbyeEncouragementTrigger::
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_MomNoticePlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_SetHomeDoorCoordsMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_MomNoticePlayerMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_MomNoticePlayerFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_SetHomeDoorCoordsMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
 	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
 	closemessage
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_MomApproachPlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomApproachPlayerFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_MomApproachPlayerMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_MomApproachPlayerFemale
 	call LittlerootTown_EventScript_GiveGoodByeEncouragement
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_MomReturnHomeMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_MomReturnHomeMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_MomReturnHomeFemale
 	end
 
 LittlerootTown_EventScript_SetHomeDoorCoordsMale::
@@ -877,9 +877,9 @@ LittlerootTown_Movement_MomExitThroughDoor:
 LittlerootTown_EventScript_Mom::
 	lock
 	faceplayer
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_SetHomeDoorCoordsMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_SetHomeDoorCoordsMale
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
 	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_EventScript_GiveGoodByeEncouragement
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0

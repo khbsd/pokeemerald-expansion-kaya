@@ -19,8 +19,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_SetMovingBoxes::
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_CheckShowShoesManual::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual
+	callnative GetPlayerHouse
+	goto_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual::

@@ -156,6 +156,14 @@ void CheckIfNameIsKaya(u8 *str)
         UnsetPlayerAsKaya();
 }
 
+bool32 GetPlayerHouse(void)
+{
+    bool32 house = gSaveBlock2Ptr->playerHouse;
+    gSpecialVar_Result = house;
+    return house;
+}
+
+
 void SetPlayerAsKaya(void)
 {
     FlagSet(FLAG_IS_KAYA);
