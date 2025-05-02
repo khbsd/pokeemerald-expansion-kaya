@@ -22018,6 +22018,7 @@ static const u16 sGigalithTeachableLearnset[] = {
     MOVE_ENDURE,
     MOVE_EXPLOSION,
     MOVE_FACADE,
+    MOVE_FIRE_PUNCH,
     MOVE_HYPER_BEAM,
     MOVE_MUD_SLAP,
     MOVE_PROTECT,

@@ -14305,17 +14305,17 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Coalossal @ Kings Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Double Team
-- Explosion
-- Protect
-- Rock Slide
+- Tar Shot
+- Incinerate
+- Gyro Ball
+- Rock Blast
 
 Glimmora @ Black Sludge
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stealth Rock
-- Explosion
-- Protect
+- Acid Armor
+- Spiky Shield
 - Rock Slide
 
 === TRAINER_ROXANNE_3 ===
@@ -14336,15 +14336,16 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Surf
 
-Golem
+Golem Alola @ Shuca Berry
+Ability: Galvanize
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Protect
-- Rollout
-- Magnitude
-- Explosion
+- Rock Slide
+- Stone Edge
+- Electroweb
+- Giga Impact
 
-Kabutops @ Sitrus Berry
+Cradily @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
@@ -14352,21 +14353,32 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Surf
 - Rock Slide
 
-Onix
+Garganacl @ Leftovers
+Ability: Purifying Salt
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Iron Tail
-- Explosion
+- Recover
+- Salt Cure
 - Roar
 - Rock Slide
 
-Nosepass @ Sitrus Berry
+Gigalith @ Sitrus Berry
 Level: 100
+Ability: Rolling Stone
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Double Team
-- Explosion
+- Fire Punch
+- Solar Beam
 - Protect
 - Rock Slide
+
+Bastiodon
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Ancient Power
+- Iron Tail
+- Metal Burst
+- Rock Slide
+
 
 === TRAINER_ROXANNE_4 ===
 Name: ROXANNE
@@ -14378,45 +14390,55 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Omastar
+Archeops
+Ability: Blood Feather
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Aerial Ace
+- Pluck
+- Rock Slide
+- Focus Blast
+
+Aerodactyl Mega @ Lucky Punch
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Aerial Ace
+- Dragon Dance
+- Rock Polish
+- Stone Edge
+
+Armaldo
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Metal Claw
+- X-Scissor
+- Brick Break
+- Rock Slide
+
+Arcanine Hisui @ Quick Claw
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Fire Fang
+- Thunder Fang
+- Extremespeed
+- Rock Slide
+
+Tyranitar @ BlackGlasses
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Aerial Ace
+- Taunt
+- Lash Out
+- Stone Edge
+
+Rampardos @ Rock Gem
+Ability: Sheer Force
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Head Smash
+- Zen Headbutt
+- Thunder Punch
 - Protect
-- Ice Beam
-- Rock Slide
-- Surf
-
-Golem
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Protect
-- Rollout
-- Earthquake
-- Explosion
-
-Kabutops @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Swords Dance
-- Ice Beam
-- Surf
-- Rock Slide
-
-Onix
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Iron Tail
-- Explosion
-- Roar
-- Rock Slide
-
-Nosepass @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Double Team
-- Explosion
-- Protect
-- Rock Slide
 
 === TRAINER_ROXANNE_5 ===
 Name: ROXANNE
@@ -14428,53 +14450,57 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Aerodactyl
+Aerodactyl Mega @ Lucky Punch
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rock Slide
-- Hyper Beam
-- Supersonic
-- Protect
+- Stone Edge
+- Sky Attack
+- Dragon Dance
+- Slash
 
-Golem
+Glimmora @ Black Sludge
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Focus Punch
-- Rollout
-- Earthquake
-- Explosion
-
-Omastar
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Protect
-- Ice Beam
-- Rock Slide
-- Surf
-
-Kabutops @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Swords Dance
-- Ice Beam
-- Surf
+- Stealth Rock
+- Acid Armor
+- Spiky Shield
 - Rock Slide
 
-Steelix
+Aggron Mega @ Kings Rock
+Ability: Filter
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Iron Tail
-- Explosion
-- Roar
+- Metal Claw
+- Dragon Rush
 - Rock Slide
+- Avalanche
 
-Nosepass @ Sitrus Berry
+Tyranitar Mega @ Flying Gem
+Ability: Sand Stream
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Double Team
-- Explosion
-- Protect
-- Rock Slide
+- Aerial Ace
+- Stomping Tantrum
+- Smack Down
+- Crunch
+
+Tyrantrum @ Kings Rock
+Ability: Strong Jaw
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Ancient Power
+- Crunch
+- Fire Fang
+- Rock Blast
+
+Diancie Mega @ Power Herb
+Ability: Magic Bounce
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Draining Kiss
+- Play Rough
+- Meteor Beam
 
 === TRAINER_BRAWLY_2 ===
 Name: BRAWLY
