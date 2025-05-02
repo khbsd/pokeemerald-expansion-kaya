@@ -4830,12 +4830,12 @@ Items: Potion / Potion / Potion / Potion
 Double Battle: No
 AI: Smart Trainer
 
-Geodude
+Amaurus
 Level: 14
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Tackle
-- Defense Curl
-- Rock Throw
+- Ancient Power
+- Icy Wind
+- Echoed Voice
 - Rock Tomb
 
 Archen @ Sitrus Berry
@@ -14286,18 +14286,34 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Surf
 - Rock Slide
 
-Onix
+Tyrantrum @ Rock Gem
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Iron Tail
+- Dragon Tail
+- Psychic Fangs
+- Fire Fang
+- Head Smash
+
+Probopass @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Magnet Rise
 - Explosion
-- Roar
+- Wide Guard
 - Rock Slide
 
-Nosepass @ Sitrus Berry
+Coalossal @ King's Claw
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Double Team
+- Explosion
+- Protect
+- Rock Slide
+
+Glimmora @ Black Sludge
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stealth Rock
 - Explosion
 - Protect
 - Rock Slide

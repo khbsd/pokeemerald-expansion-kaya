@@ -3861,10 +3861,10 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_TYRUNT
     [SPECIES_TYRUNT] =
     {
-        .baseHP        = 58,
-        .baseAttack    = 89,
-        .baseDefense   = 77,
-        .baseSpeed     = 48,
+        .baseHP        = 60,
+        .baseAttack    = 90,
+        .baseDefense   = 80,
+        .baseSpeed     = 50,
         .baseSpAttack  = 45,
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_ROCK, TYPE_DRAGON),
@@ -3931,12 +3931,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_TYRANTRUM] =
     {
-        .baseHP        = 82,
-        .baseAttack    = 121,
-        .baseDefense   = 119,
-        .baseSpeed     = 71,
-        .baseSpAttack  = 69,
-        .baseSpDefense = 59,
+        .baseHP        = 85,
+        .baseAttack    = 125,
+        .baseDefense   = 120,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_ROCK, TYPE_DRAGON),
         .catchRate = 45,
         .expYield = 182,
@@ -3999,12 +3999,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_AMAURA
     [SPECIES_AMAURA] =
     {
-        .baseHP        = 77,
-        .baseAttack    = 59,
+        .baseHP        = 80,
+        .baseAttack    = 60,
         .baseDefense   = 50,
-        .baseSpeed     = 46,
-        .baseSpAttack  = 67,
-        .baseSpDefense = 63,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_ROCK, TYPE_ICE),
         .catchRate = 45,
         .expYield = 72,
@@ -4075,13 +4075,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_AURORUS] =
     {
-        .baseHP        = 123,
-        .baseAttack    = 77,
-        .baseDefense   = 72,
-        .baseSpeed     = 58,
-        .baseSpAttack  = 99,
-        .baseSpDefense = 92,
-        .types = MON_TYPES(TYPE_ROCK, TYPE_ICE),
+        .baseHP        = 125,
+        .baseAttack    = 80,
+        .baseDefense   = 75,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 95,
+        .types = MON_TYPES(TYPE_DRAGON, TYPE_ICE),
         .catchRate = 45,
         .expYield = 104,
         .evYield_HP = 2,

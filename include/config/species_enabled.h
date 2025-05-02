@@ -563,7 +563,7 @@
 #define P_FAMILY_VAROOM                  P_GEN_9_POKEMON
 #define P_FAMILY_CYCLIZAR                P_GEN_9_POKEMON
 #define P_FAMILY_ORTHWORM                P_GEN_9_POKEMON
-#define P_FAMILY_GLIMMET                 P_GEN_9_POKEMON
+//#define P_FAMILY_GLIMMET               P_GEN_9_POKEMON
 // #define P_FAMILY_GREAVARD             P_GEN_9_POKEMON
 #define P_FAMILY_FLAMIGO                 P_GEN_9_POKEMON
 // #define P_FAMILY_CETODDLE             P_GEN_9_POKEMON
@@ -722,6 +722,7 @@
 #define P_FAMILY_TADBULB                 TRUE
 #define P_FAMILY_WATTREL                 TRUE
 #define P_FAMILY_TINKATINK               TRUE
+#define P_FAMILY_GLIMMET                 TRUE
 #define P_FAMILY_GREAVARD                TRUE
 #define P_FAMILY_CETODDLE                TRUE
 #define P_FAMILY_FRIGIBAX                TRUE

@@ -360,4 +360,8 @@
 #define B_POOL_RULE_ITEM_CLAUSE             FALSE    // Only allow each item to be picked once
 #define B_POOL_RULES_USE_ITEM_EXCLUSIONS    FALSE    // Exclude items listed in poolItemClauseExclusions
 
+// Rematch battle settings
+#define B_WILD_COUNT_REMATCH                40       // Amount of wild battles it takes to get a chance to rematch. Vanilla is 60.
+#define B_TRAINER_COUNT_REMATCH             13       // Amount of trainer battles it takes to get a chance to rematch. Vanilla is 20.
+
 #endif // GUARD_CONFIG_BATTLE_H
