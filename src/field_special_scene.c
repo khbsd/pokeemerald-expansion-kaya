@@ -196,8 +196,6 @@ static void Task_Truck3(u8 taskId)
 static void Task_HandleTruckSequence(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u32 house = 0;
-    s32 input;
 
     switch (tState)
     {

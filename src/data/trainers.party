@@ -14520,7 +14520,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Focus Punch
 - Bulk Up
 
-Meditite
+Medicham
+Ability: Pure Power
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Psychic
@@ -14531,18 +14532,35 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Hitmontop
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Pursuit
-- Counter
-- Protect
+- Bulk Up
+- Close Combat
+- Detect
 - Triple Kick
 
-Hariyama @ Sitrus Berry
+Hitmonchan
+Ability: Iron Fist
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
-- Focus Punch
+- Throat Chop
+- Thunder Punch
+- Mach Punch
+- Detect
+
+Hitmonlee @ Focus Sash
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Lunge
+- Counter
+- Detect
+- Triple Kick
+
+Hariyama @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Ice Punch
+- Drain Punch
 - Belly Drum
-- Earthquake
+- Bulldoze
 
 === TRAINER_BRAWLY_3 ===
 Name: BRAWLY
@@ -14554,37 +14572,55 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Machamp @ Sitrus Berry
+Annihilape @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Karate Chop
-- Rock Slide
-- Focus Punch
+- Rage Fist
+- Ice Punch
+- Phantom Force
 - Bulk Up
 
-Medicham
+Lucario @ Quick Claw
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Psychic
-- Light Screen
-- Reflect
-- Focus Punch
+- Life Dew
+- Vacuum Wave
+- Aura Sphere
+- Work Up
 
-Hitmontop
+Conkeldurr 
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Pursuit
-- Counter
-- Protect
-- Triple Kick
+- Stone Edge
+- Focus Energy
+- Low Sweep
+- Bulk Up
 
-Hariyama @ Sitrus Berry
+Electivire
+Ability: Synergetic
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
-- Focus Punch
-- Belly Drum
-- Earthquake
+- Thunderbolt
+- Charge
+- Low Sweep
+- Charge Beam
+
+Tauros Paldea Blaze
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Raging Bull
+- Flame Charge
+- Zen Headbutt
+- Rest
+
+Blaziken @ Quick Claw
+Ability: Speed Boost
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Blaze Kick
+- Double Kick
+- Detect
+- Thunder Punch
 
 === TRAINER_BRAWLY_4 ===
 Name: BRAWLY
@@ -14596,45 +14632,57 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Hitmonchan
+Poliwrath @ Wacan Berry
+Ability: Swift Swim
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sky Uppercut
-- Protect
-- Fire Punch
+- Rain Dance
+- Chilling Water
+- Dynamic Punch
 - Ice Punch
 
-Machamp @ Sitrus Berry
+Tauros Paldea Aqua @ Wacan Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Karate Chop
-- Rock Slide
-- Focus Punch
+- Raging Bull
+- Aqua Jet
+- Rain Dance
+- Double Kick
+
+Toxicroak @ Life Orb
+Ability: Dry Skin
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Poison Jab
+- Venoshock
+- Knock Off
+- Swords Dance
+
+Feraligatr @ Quick Claw
+Ability: Capillarate
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Ice Fang
+- Brick Break
+- Waterfall
+- Crunch
+
+Urshifu Rapid Strike @ Muscle Band
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bulk Up
+- Surging Strikes
+- Dynamic Punch
+- Rock Smash
 
-Medicham
+Chesnaught @ Miracle Seed
+Ability: Bulletproof
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Focus Punch
-- Light Screen
-- Reflect
-- Psychic
-
-Hitmontop
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Pursuit
-- Counter
-- Protect
-- Triple Kick
-
-Hariyama @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
-- Focus Punch
-- Belly Drum
-- Earthquake
+- Stomping Tantrum
+- Hammer Arm
+- Bulk Up
+- Seed Bomb
 
 === TRAINER_BRAWLY_5 ===
 Name: BRAWLY
@@ -14646,53 +14694,57 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Hitmonlee
+Mewtwo Mega X @ Quick Claw
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Mega Kick
-- Focus Punch
-- Earthquake
+- Aura Sphere
+- Psycho Cut
+- Power Swap
+- Recover
+
+Medicham Mega
+Ability: Pure Power
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Axe Kick
+- Thunder Punch
+- Zen Headbutt
 - Bulk Up
 
-Hitmonchan
+Lopunny Mega @ Kings Rock
+Ability: Klutz
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sky Uppercut
-- Protect
-- Fire Punch
-- Ice Punch
+- Drain Punch
+- Double Kick
+- Double Hit
+- Charm
 
-Machamp @ Sitrus Berry
+Zapdos Galar @ Muscle Band
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Cross Chop
-- Rock Slide
-- Focus Punch
-- Bulk Up
+- Ancient Power
+- Thunderous Kick
+- Detect
+- Throat Chop
 
-Medicham
+Heracross Mega @ Flame Orb
+Ability: Guts
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Focus Punch
-- Light Screen
-- Reflect
-- Psychic
+- Pin Missile
+- Brick Break
+- Swords Dance
+- Facade
 
-Hitmontop
+Lucario Mega
+Ability: Adaptability
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Pursuit
-- Counter
-- Protect
-- Triple Kick
-
-Hariyama @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
-- Focus Punch
-- Belly Drum
-- Earthquake
+- Meteor Mash
+- Force Palm
+- Work Up
+- Life Dew
 
 === TRAINER_WATTSON_2 ===
 Name: WATTSON
