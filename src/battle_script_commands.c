@@ -1641,6 +1641,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     // Target's ability
     switch (defAbility)
     {
+    case ABILITY_ELECTROLYTIC_MUCUS:
+        calc = (calc * 90) / 100;
+        break;
     case ABILITY_SAND_VEIL:
         if (HasWeatherEffect() && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss

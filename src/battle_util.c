@@ -8320,6 +8320,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
             && weather & B_WEATHER_SANDSTORM)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_ELECTROLYTIC_MUCUS:
+        if (moveType == TYPE_ELECTRIC)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+        break;
     case ABILITY_RIVALRY:
         if (IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].types[0])
             || IS_BATTLER_OF_TYPE(battlerDef, gBattleMons[battlerAtk].types[1]))

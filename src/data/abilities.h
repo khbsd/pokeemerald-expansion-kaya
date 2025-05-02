@@ -2502,4 +2502,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Ballistics are stronger."),
         .aiRating = 7,
     },
+
+    [ABILITY_ELECTROLYTIC_MUCUS] =
+    {
+        .name = _("Electrolitic Mucus"),
+        .description = COMPOUND_STRING("Ups evasion and zappies."),
+        .aiRating = 3,
+        .breakable = TRUE,
+    },
 };
