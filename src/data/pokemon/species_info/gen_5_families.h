@@ -9401,7 +9401,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .tmIlliterate = TRUE,
         .levelUpLearnset = sTynamoLevelUpLearnset,
         .teachableLearnset = sTynamoTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_EELEKTRIK}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_EELEKTRIK}),
     },
 
     [SPECIES_EELEKTRIK] =
@@ -9409,8 +9409,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseHP        = 65,
         .baseAttack    = 90,
         .baseDefense   = 70,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 80,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 90,
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_DRAGON),
         .catchRate = 60,
@@ -9472,15 +9472,16 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sEelektrikLevelUpLearnset,
         .teachableLearnset = sEelektrikTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_EELEKTROSS}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_EELEKTROSS, 
+                        CONDITIONS({IF_IN_MAP, MAP_SCORCHED_SLAB})}),
     },
 
     [SPECIES_EELEKTROSS] =
     {
-        .baseHP        = 95,
+        .baseHP        = 105,
         .baseAttack    = 120,
         .baseDefense   = 80,
-        .baseSpeed     = 85,
+        .baseSpeed     = 110,
         .baseSpAttack  = 105,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_DRAGON),
