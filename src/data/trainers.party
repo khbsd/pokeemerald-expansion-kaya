@@ -14756,37 +14756,55 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Mareep
+Seismitoad
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
-- Protect
-- Thunder Wave
-- Light Screen
+- Rainy Dance
+- Mud Shot
+- Hydro Pump
 
-Electrode
+Lanturn
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rollout
+- Eerie Impulse
 - Thunder
-- Explosion
+- Water Pulse
 - Rain Dance
 
-Magneton @ Sitrus Berry
+Alolan Raichu @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Supersonic
-- Protect
+- Nuzzle
+- Psychic
 - Thunder
-- Rain Dance
+- Surf
 
-Manectric @ Sitrus Berry
+Helioptile @ Sitrus Berry
+Ability: Dry Skin
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Bite
-- Thunder Wave
+- Bulldoze
+- Parabolic Charge
 - Thunder
-- Protect
+- Electrify
+
+Electrode Hisui @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Energy Ball
+- Seed Bomb
+- Thunder
+- Grassy Terrain
+
+Manectric @ Quick Claw
+Ability: Cotton Down
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Rain Dance
+- Giga Drain
+- Thunder
+- Electro Ball
 
 === TRAINER_WATTSON_3 ===
 Name: WATTSON
@@ -14798,45 +14816,57 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Pikachu
+Eelektross
+Ability: Levitate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder
-- Slam
+- Dragon Claw
+- Ion Deluge
+- Hyper Beam
+- Thunder Fang
+
+Magnezone @ Red Air Balloon
+Ability: Sturdy
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Magnet Rise
+- Flash Cannon
+- Zap Cannon
+- Tri Attack
+
+Overqwil @ Red Air Balloon
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Barb Barrage
+- Fell Stinger
+- Electric Terrain
+- Wild Charge
+
+Heat Rotom @ White Herb
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Overheat
+- Electroweb
+- Pain Split
 - Rain Dance
-- Shock Wave
 
-Flaaffy
+Togedemaru @ Red Air Balloon
+Ability: Iron Barbs
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder
-- Protect
-- Thunder Wave
-- Light Screen
+- Zing Zap
+- Electroweb
+- Spiky Shield
+- Iron Tail
 
-Electrode
+Golem Alola @ Red Air Balloon
+Ability: Galvanize
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rollout
-- Thunder
-- Explosion
-- Rain Dance
-
-Magneton @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Supersonic
-- Protect
-- Thunder
-- Rain Dance
-
-Manectric @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Bite
-- Thunder Wave
-- Thunder
-- Protect
+- Stone Edge
+- Electroweb
+- Stealth Rock
+- Giga Impact
 
 === TRAINER_WATTSON_4 ===
 Name: WATTSON
@@ -14887,6 +14917,24 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder Wave
 - Thunder
 - Protect
+
+Manectric @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bite
+- Thunder Wave
+- Thunder
+- Protect
+
+Arcanine @ Red Air Balloon
+Ability: Intimidate
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Parabolic Charge
+- Extremespeed
+- Wild Charge
+- Magnet Rise
+
 
 === TRAINER_WATTSON_5 ===
 Name: WATTSON
