@@ -1642,7 +1642,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     switch (defAbility)
     {
     case ABILITY_SALTY_MUCUS:
-        calc = (calc * 90) / 100;
+        calc = (calc * 85) / 100;
         break;
     case ABILITY_SAND_VEIL:
         if (HasWeatherEffect() && gBattleWeather & B_WEATHER_SANDSTORM)
