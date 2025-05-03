@@ -14760,7 +14760,7 @@ Seismitoad
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
-- Rainy Dance
+- Rain Dance
 - Mud Shot
 - Hydro Pump
 
@@ -14772,7 +14772,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Water Pulse
 - Rain Dance
 
-Alolan Raichu @ Sitrus Berry
+Raichu Alola @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Nuzzle
@@ -14825,7 +14825,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hyper Beam
 - Thunder Fang
 
-Magnezone @ Red Air Balloon
+Magnezone @ Air Balloon
 Ability: Sturdy
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -14834,7 +14834,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zap Cannon
 - Tri Attack
 
-Overqwil @ Red Air Balloon
+Overqwil @ Air Balloon
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Barb Barrage
@@ -14842,7 +14842,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Electric Terrain
 - Wild Charge
 
-Heat Rotom @ White Herb
+Rotom Heat @ White Herb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
@@ -14850,7 +14850,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Pain Split
 - Rain Dance
 
-Togedemaru @ Red Air Balloon
+Togedemaru @ Air Balloon
 Ability: Iron Barbs
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -14859,7 +14859,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Spiky Shield
 - Iron Tail
 
-Golem Alola @ Red Air Balloon
+Golem Alola @ Air Balloon
 Ability: Galvanize
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -14926,7 +14926,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
 - Protect
 
-Arcanine @ Red Air Balloon
+Arcanine @ Air Balloon
 Ability: Intimidate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe

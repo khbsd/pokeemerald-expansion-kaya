@@ -131,8 +131,6 @@ u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDes
     if (!AllocItemIconTemporaryBuffers())
         return 16;
 
-    void * paletteBuffer = Alloc(PLTT_SIZE_4BPP);
-
     LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
     CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
     BlitBitmapToWindow(windowId, gItemIcon4x4Buffer, x, y, 32, 32);
@@ -141,8 +139,7 @@ u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDes
     // otherwise, loads the compressed palette into the windowId's BG palette ID
     if (paletteDest) 
     {
-        LZDecompressWram(GetItemIconPalette(itemId), paletteBuffer);
-        CpuCopy16(paletteBuffer, paletteDest, PLTT_SIZE_4BPP);
+        CpuCopy16(GetItemIconPalette(itemId), paletteDest, PLTT_SIZE_4BPP);
     } 
     else 
     {
@@ -150,7 +147,6 @@ u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDes
     }
 
     FreeItemIconTemporaryBuffers();
-    Free(paletteBuffer);
     return 0;
 }
 

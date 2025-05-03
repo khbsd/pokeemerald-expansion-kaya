@@ -139,7 +139,7 @@ static void CB2_SetUpReshowBattleScreenAfterEvolution(void);
 
 EWRAM_DATA bool8 gPlayerDoesNotWantToEvolveLeft = FALSE;
 EWRAM_DATA bool8 gPlayerDoesNotWantToEvolveRight = FALSE;
-EWRAM_DATA u8 gBattleTerrainBackup = 0;
+EWRAM_DATA u8 gBattleEnvironmentBackup = 0;
 
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
@@ -698,7 +698,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void CB2_SetUpReshowBattleScreenAfterEvolution(void)
 {
-    gBattleTerrain = gBattleTerrainBackup;
+    gBattleEnvironment = gBattleEnvironmentBackup;
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 #define tSpeciesToEvolveInto data[0]
@@ -711,7 +711,7 @@ static void Task_BeginBattleEvolutionScene(u8 taskId)
         u16 SpeciesToEvolveInto;
         FreeAllWindowBuffers();
         gCB2_AfterEvolution = CB2_SetUpReshowBattleScreenAfterEvolution;
-        gBattleTerrainBackup = gBattleTerrain; // Store the battle terrain to be reloaded later
+        gBattleEnvironmentBackup = gBattleEnvironment; // Store the battle terrain to be reloaded later
         battlerPosition = gTasks[taskId].tBattlerPosition;
         SpeciesToEvolveInto = gTasks[taskId].tSpeciesToEvolveInto;
         DestroyTask(taskId);
