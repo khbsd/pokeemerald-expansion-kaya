@@ -2503,9 +2503,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
     },
 
-    [ABILITY_ELECTROLYTIC_MUCUS] =
+    [ABILITY_SALTY_MUCUS] =
     {
-        .name = _("Electrolitic Mucus"),
+        .name = _("Salty Mucus"),
         .description = COMPOUND_STRING("Ups evasion and zappies."),
         .aiRating = 3,
         .breakable = TRUE,
