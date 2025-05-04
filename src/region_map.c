@@ -1460,7 +1460,7 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
         sheet.data = sRegionMapPlayerIcon_KayaGfx;
         palette.data = sRegionMapPlayerIcon_KayaPal;
     }
-    else if (gSaveBlock2Ptr->playerGender == FEMALE)
+    else if (gSaveBlock2Ptr->playerGender == FEMME)
     {
         sheet.data = sRegionMapPlayerIcon_MayGfx;
         palette.data = sRegionMapPlayerIcon_MayPal;

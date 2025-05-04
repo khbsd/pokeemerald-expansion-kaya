@@ -77,13 +77,13 @@ LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs:
 LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE
+	setvar VAR_0x8005, FEMME
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport::
 	lockall
-	setvar VAR_0x8004, FEMALE
+	setvar VAR_0x8004, FEMME
 	setvar VAR_0x8005, LOCALID_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportFemale
 	end
@@ -155,7 +155,7 @@ LittlerootTown_MaysHouse_1F_CheckIsKaya_ShowDoll::
 LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE
+	setvar VAR_0x8005, FEMME
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
@@ -183,10 +183,10 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	playse SE_EXIT
 	delay 10
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_SetRivalMay
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_SetRivalBrendan
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_UnhideMay
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_UnhideBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_MaysHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_MaysHouse_1F_SetRivalBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_MaysHouse_1F_UnhideMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_MaysHouse_1F_UnhideBrendan
 	addobject VAR_LOCALID_RIVAL
 	delay 30
 	playse SE_PIN
@@ -199,16 +199,17 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
-	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
+	checkplayergender 
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
 	playse SE_EXIT
 	removeobject VAR_LOCALID_RIVAL
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_MaysHouse_1F_HideBrendan
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_HideMay
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_MaysHouse_1F_HideBrendan
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_MaysHouse_1F_HideMay
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30

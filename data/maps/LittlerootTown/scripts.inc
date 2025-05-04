@@ -225,6 +225,16 @@ LittlerootTown_EventScript_BeginDexUpgradeScene::
 	releaseall
 	end
 
+LittlerootTown_EventScript_MeetMay::
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	closemessage
+	return
+
+LittlerootTown_EventScript_MeetBrenda::
+	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
+	closemessage
+	return
+
 LittlerootTown_OnWarp:
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade
 	.2byte 0
@@ -233,7 +243,7 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade::
 	addobject LOCALID_BIRCH
 	addobject LOCALID_RIVAL
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale
+	goto_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale
 	goto LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale
 	end
 

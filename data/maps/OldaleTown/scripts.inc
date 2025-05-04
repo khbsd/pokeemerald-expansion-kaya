@@ -259,8 +259,8 @@ OldaleTown_EventScript_RivalTrigger3::
 
 OldaleTown_EventScript_ShowRivalMessage::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, OldaleTown_EventScript_ShowMayMessage
-	goto_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
+	goto_if_eq VAR_RESULT, BUTCHY, OldaleTown_EventScript_ShowMayMessage
+	goto_if_eq VAR_RESULT, FEMME, OldaleTown_EventScript_ShowBrendanMessage
 	end
 
 OldaleTown_EventScript_ShowMayMessage::

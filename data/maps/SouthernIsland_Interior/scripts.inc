@@ -33,8 +33,8 @@ SouthernIsland_Interior_EventScript_SetUpLatias::
 
 SouthernIsland_Interior_EventScript_SetUpPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, SouthernIsland_Interior_EventScript_SetBrendanGfx
-	goto_if_eq VAR_RESULT, FEMALE, SouthernIsland_Interior_EventScript_SetMayGfx
+	goto_if_eq VAR_RESULT, BUTCHY, SouthernIsland_Interior_EventScript_SetBrendanGfx
+	goto_if_eq VAR_RESULT, FEMME, SouthernIsland_Interior_EventScript_SetMayGfx
 	end
 
 SouthernIsland_Interior_EventScript_SetBrendanGfx::

@@ -1378,19 +1378,19 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
 {
     u8 i;
     u8 symbolsCount[GENDER_COUNT];
-    symbolsCount[FEMALE2] = symbolsCount[FEMALE] = 0;
+    symbolsCount[BUTCHY] = symbolsCount[FEMME] = 0;
 
     for (i = 0; name[i] != EOS; i++)
     {
         if (name[i] == CHAR_MALE)
-            symbolsCount[FEMALE2]++;
+            symbolsCount[BUTCHY]++;
         if (name[i] == CHAR_FEMALE)
-            symbolsCount[FEMALE]++;
+            symbolsCount[FEMME]++;
     }
 
-    if (genderRatio == MON_MALE   && symbolsCount[FEMALE2] != 0 && symbolsCount[FEMALE] == 0)
+    if (genderRatio == MON_MALE   && symbolsCount[BUTCHY] != 0 && symbolsCount[FEMME] == 0)
         return TRUE;
-    if (genderRatio == MON_FEMALE && symbolsCount[FEMALE] != 0 && symbolsCount[FEMALE2] == 0)
+    if (genderRatio == MON_FEMALE && symbolsCount[FEMME] != 0 && symbolsCount[BUTCHY] == 0)
         return TRUE;
 
     return FALSE;

@@ -3331,7 +3331,7 @@ u8 CheckForPlayersHouseNews(void)
         return PLAYERS_HOUSE_TV_NONE;
 
     // Check if not in player's house (dependent on gender)
-    if (gSaveBlock2Ptr->playerGender == FEMALE2)
+    if (gSaveBlock2Ptr->playerGender == BUTCHY)
     {
         if (gSaveBlock1Ptr->location.mapNum != MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             return PLAYERS_HOUSE_TV_NONE;
@@ -3356,7 +3356,7 @@ void GetMomOrDadStringForTVMessage(void)
     // If the player is checking the TV in their house it will only refer to their Mom.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
-        if (gSaveBlock2Ptr->playerGender == FEMALE2)
+        if (gSaveBlock2Ptr->playerGender == BUTCHY)
         {
             if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
@@ -5638,7 +5638,7 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
     case TRENDWATCHER_STATE_INTRO:
         CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
         CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-        if (show->trendWatcher.gender == FEMALE2)
+        if (show->trendWatcher.gender == BUTCHY)
             sTVShowState = TRENDWATCHER_STATE_TAUGHT_MALE;
         else
             sTVShowState = TRENDWATCHER_STATE_TAUGHT_FEMALE;
@@ -5653,7 +5653,7 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
     case TRENDWATCHER_STATE_PHRASE_HOPELESS:
         CopyEasyChatWord(gStringVar1, show->trendWatcher.words[0]);
         CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
-        if (show->trendWatcher.gender == FEMALE2)
+        if (show->trendWatcher.gender == BUTCHY)
             sTVShowState = TRENDWATCHER_STATE_BIGGER_MALE;
         else
             sTVShowState = TRENDWATCHER_STATE_BIGGER_FEMALE;

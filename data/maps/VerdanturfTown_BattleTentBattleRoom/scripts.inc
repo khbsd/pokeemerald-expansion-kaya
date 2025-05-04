@@ -18,8 +18,8 @@ VerdanturfTown_BattleTentBattleRoom_OnTransition:
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, BUTCHY, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMME, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::

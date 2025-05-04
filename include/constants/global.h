@@ -130,8 +130,8 @@
 
 #define MAX_STAMP_CARD_STAMPS 7
 
-#define FEMALE2 0
-#define FEMALE 1
+#define BUTCHY 0
+#define FEMME 1
 #define GENDER_COUNT 2
 
 #define KAYA 3

@@ -241,8 +241,8 @@ Route101_EventScript_BirchsBag::
 	setvar VAR_ROUTE101_STATE, 3
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, Route101_EventScript_HideMayInBedroom
-	call_if_eq VAR_RESULT, FEMALE, Route101_EventScript_HideBrendanInBedroom
+	call_if_eq VAR_RESULT, BUTCHY, Route101_EventScript_HideMayInBedroom
+	call_if_eq VAR_RESULT, FEMME, Route101_EventScript_HideBrendanInBedroom
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 5
 	waitstate
 	release

@@ -2890,7 +2890,7 @@ void CreateContestMonFromParty(u8 partyIndex)
     memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
     if (gSaveBlock2Ptr->playerIsKaya)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_KAYA;
-    else if (gSaveBlock2Ptr->playerGender == FEMALE2)
+    else if (gSaveBlock2Ptr->playerGender == BUTCHY)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_MAY;

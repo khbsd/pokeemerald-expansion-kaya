@@ -327,19 +327,19 @@ static const u8 sPlayerAvatarGfxIds[][KAYA] =
 
 static const u8 sFRLGAvatarGfxIds[GENDER_COUNT] =
 {
-    [FEMALE2]   = OBJ_EVENT_GFX_RED,
-    [FEMALE] = OBJ_EVENT_GFX_LEAF
+    [BUTCHY]   = OBJ_EVENT_GFX_RED,
+    [FEMME] = OBJ_EVENT_GFX_LEAF
 };
 
 static const u8 sRSAvatarGfxIds[GENDER_COUNT] =
 {
-    [FEMALE2]   = OBJ_EVENT_GFX_LINK_RS_BRENDAN,
-    [FEMALE] = OBJ_EVENT_GFX_LINK_RS_MAY
+    [BUTCHY]   = OBJ_EVENT_GFX_LINK_RS_BRENDAN,
+    [FEMME] = OBJ_EVENT_GFX_LINK_RS_MAY
 };
 
 static const u8 sPlayerAvatarGfxToStateFlag[][5][2] =
 {
-    [FEMALE2] =
+    [BUTCHY] =
     {
         {OBJ_EVENT_GFX_BRENDAN_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
         {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
@@ -347,7 +347,7 @@ static const u8 sPlayerAvatarGfxToStateFlag[][5][2] =
         {OBJ_EVENT_GFX_BRENDAN_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
         {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
     },
-    [FEMALE] =
+    [FEMME] =
     {
         {OBJ_EVENT_GFX_MAY_NORMAL,         PLAYER_AVATAR_FLAG_ON_FOOT},
         {OBJ_EVENT_GFX_MAY_MACH_BIKE,      PLAYER_AVATAR_FLAG_MACH_BIKE},
@@ -1568,9 +1568,9 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_KAYA_UNDERWATER:
     case OBJ_EVENT_GFX_KAYA_FISHING:
     case OBJ_EVENT_GFX_KAYA_WATERING:
-        return FEMALE;
+        return FEMME;
     default:
-        return FEMALE2;
+        return BUTCHY;
     }
 }
 

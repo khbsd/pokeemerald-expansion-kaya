@@ -335,8 +335,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest::
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall::
 	lockall
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
-	call_if_eq VAR_RESULT, FEMALE, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
+	call_if_eq VAR_RESULT, BUTCHY, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
+	call_if_eq VAR_RESULT, FEMME, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
 	closemessage
 	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	releaseall

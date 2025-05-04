@@ -11,8 +11,8 @@ PlayersHouse_1F_EventScript_EnterHouseMovingIn::
 	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	waitmovement 0
-	call_if_eq VAR_0x8005, FEMALE2, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale
-	call_if_eq VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale
+	call_if_eq VAR_0x8005, BUTCHY, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale
+	call_if_eq VAR_0x8005, FEMME, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale
 	msgbox PlayersHouse_1F_Text_MoversPokemonGoSetClock, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
@@ -47,13 +47,13 @@ PlayersHouse_1F_EventScript_MomGoSeeRoom::
 
 LittlerootTown_BrendansHouse_2F_EventScript_WallClock::
 	lockall
-	setvar VAR_0x8004, FEMALE2
+	setvar VAR_0x8004, BUTCHY
 	goto PlayersHouse_2F_EventScript_WallClock
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_WallClock::
 	lockall
-	setvar VAR_0x8004, FEMALE
+	setvar VAR_0x8004, FEMME
 	goto PlayersHouse_2F_EventScript_WallClock
 	end
 
@@ -427,8 +427,8 @@ PlayersHouse_1F_Movement_MovePlayerAwayFromDoor:
 PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	lockall
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale
-	call_if_eq VAR_RESULT, FEMALE, PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale
+	call_if_eq VAR_RESULT, BUTCHY, PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale
+	call_if_eq VAR_RESULT, FEMME, PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale
 	call_if_eq VAR_0x8008, HOUSE_LEFT, PlayersHouse_1F_EventScript_PlayerEnterRoomMale
 	call_if_eq VAR_0x8008, HOUSE_RIGHT, PlayersHouse_1F_EventScript_PlayerEnterRoomFemale
 	applymovement VAR_0x8009, Common_Movement_FacePlayer
@@ -542,13 +542,13 @@ PlayersHouse_1F_EventScript_AirLatiBroadcast::
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
-	setvar VAR_0x8008, FEMALE2
+	setvar VAR_0x8008, BUTCHY
 	setvar VAR_0x8009, LOCALID_DAD
 	setvar VAR_0x800A, LOCALID_MOM
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale::
-	setvar VAR_0x8008, FEMALE
+	setvar VAR_0x8008, FEMME
 	setvar VAR_0x8009, LOCALID_DAD
 	setvar VAR_0x800A, LOCALID_MOM
 	return

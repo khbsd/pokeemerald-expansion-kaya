@@ -1478,7 +1478,7 @@ static void Task_NewGameBirchSpeech_StartPlayerFadeIn(u8 taskId)
             gSprites[spriteId].invisible = FALSE;
             gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             gTasks[taskId].tPlayerSpriteId = spriteId;
-            gTasks[taskId].tPlayerGender = FEMALE2;
+            gTasks[taskId].tPlayerGender = BUTCHY;
             NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
             NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForPlayerFadeIn;
@@ -1520,13 +1520,13 @@ static void Task_NewGameBirchSpeech_ChooseGender(u8 taskId)
 
     switch (gender)
     {
-        case FEMALE2:
+        case BUTCHY:
             PlaySE(SE_SELECT);
             gSaveBlock2Ptr->playerGender = gender;
             NewGameBirchSpeech_ClearGenderWindow(1, 1);
             gTasks[taskId].func = Task_NewGameBirchSpeech_WhatsYourName;
             break;
-        case FEMALE:
+        case FEMME:
             PlaySE(SE_SELECT);
             gSaveBlock2Ptr->playerGender = gender;
             NewGameBirchSpeech_ClearGenderWindow(1, 1);
@@ -1553,7 +1553,7 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
     else
     {
         gSprites[spriteId].invisible = TRUE;
-        if (gTasks[taskId].tPlayerGender != FEMALE)
+        if (gTasks[taskId].tPlayerGender != FEMME)
             spriteId = gTasks[taskId].tBrendanSpriteId;
         else
             spriteId = gTasks[taskId].tMaySpriteId;
@@ -1733,7 +1733,7 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         MgbaPrintf(MGBA_LOG_WARN, "2) is kaya: %u", playerIsKaya);
         if (playerIsKaya)
             spriteId = gTasks[taskId].tKayaSpriteId;
-        else if (gSaveBlock2Ptr->playerGender != FEMALE2)
+        else if (gSaveBlock2Ptr->playerGender != BUTCHY)
             spriteId = gTasks[taskId].tMaySpriteId;
         else
             spriteId = gTasks[taskId].tBrendanSpriteId;
@@ -1847,17 +1847,17 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     CheckIfPlayerIsKaya();
     if (playerIsKaya)
     {
-        gSaveBlock2Ptr->playerGender = FEMALE2;
+        gSaveBlock2Ptr->playerGender = BUTCHY;
         spriteId = gTasks[taskId].tKayaSpriteId;
     }
-    else if (gSaveBlock2Ptr->playerGender != FEMALE2)
+    else if (gSaveBlock2Ptr->playerGender != BUTCHY)
     {
-        gTasks[taskId].tPlayerGender = FEMALE;
+        gTasks[taskId].tPlayerGender = FEMME;
         spriteId = gTasks[taskId].tMaySpriteId;
     }
     else
     {
-        gTasks[taskId].tPlayerGender = FEMALE2;
+        gTasks[taskId].tPlayerGender = BUTCHY;
         spriteId = gTasks[taskId].tBrendanSpriteId;
     }
     MgbaPrintf(MGBA_LOG_WARN, "1) is kaya: %u", playerIsKaya);
@@ -2142,7 +2142,7 @@ void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     const u8 *name;
     u8 i;
 
-    if (gSaveBlock2Ptr->playerGender == FEMALE2)
+    if (gSaveBlock2Ptr->playerGender == BUTCHY)
         name = sMalePresetNames[nameId];
     else
         name = sFemalePresetNames[nameId];

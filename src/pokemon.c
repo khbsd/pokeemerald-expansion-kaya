@@ -1073,14 +1073,14 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 #define NUM_SECRET_BASE_CLASSES 5
 static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
 {
-    [FEMALE2] = {
+    [BUTCHY] = {
         FACILITY_CLASS_YOUNGSTER,
         FACILITY_CLASS_BUG_CATCHER,
         FACILITY_CLASS_RICH_BOY,
         FACILITY_CLASS_CAMPER,
         FACILITY_CLASS_COOLTRAINER_M
     },
-    [FEMALE] = {
+    [FEMME] = {
         FACILITY_CLASS_LASS,
         FACILITY_CLASS_SCHOOL_KID_F,
         FACILITY_CLASS_LADY,
@@ -6788,7 +6788,7 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
     if (gSaveBlock2Ptr->playerIsKaya)
         return FacilityClassToPicIndex(FACILITY_CLASS_KAYA);
-    else if (playerGender != FEMALE2)
+    else if (playerGender != BUTCHY)
         return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     else
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);

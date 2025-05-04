@@ -1,6 +1,5 @@
 .set LOCALID_MOM, 1
 .set LOCALID_RIVAL_MOM, 4
-checkplayergender
 
 LittlerootTown_BrendansHouse_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_BrendansHouse_1F_OnLoad
@@ -77,13 +76,13 @@ LittlerootTown_BrendansHouse_1F_Movement_PushTowardStairs:
 LittlerootTown_BrendansHouse_1F_EventScript_EnterHouseMovingIn::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE2
+	setvar VAR_0x8005, BUTCHY
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_PetalburgGymReport::
 	lockall
-	setvar VAR_0x8004, FEMALE2
+	setvar VAR_0x8004, BUTCHY
 	setvar VAR_0x8005, LOCALID_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportMale
 	end
@@ -117,7 +116,7 @@ LittlerootTown_BrendansHouse_1F_Movement_RivalMomApproach:
 LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE2
+	setvar VAR_0x8005, BUTCHY
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
@@ -145,10 +144,10 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	playse SE_EXIT
 	delay 10
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_1F_SetRivalMay
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_1F_UnhideMay
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_BrendansHouse_1F_UnhideBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_UnhideMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_UnhideBrendan
 	addobject VAR_LOCALID_RIVAL
 	delay 30
 	playse SE_PIN
@@ -161,16 +160,17 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2
-	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	closemessage
+	checkplayergender 
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
 	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2
 	playse SE_EXIT
 	removeobject VAR_LOCALID_RIVAL
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE2, LittlerootTown_BrendansHouse_1F_HideMay
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_BrendansHouse_1F_HideBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_HideMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_HideBrendan
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30

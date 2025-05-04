@@ -128,8 +128,8 @@ static const u8 sTextColors[] = {
 // Background is alternating bars of a dark/light color.
 // Either blue or red depending on player's gender
 static const u16 sBgColors[GENDER_COUNT][2] = {
-    [FEMALE2]   = { RGB(13, 22, 26), RGB(5, 13, 20) },
-    [FEMALE] = { RGB(28, 15, 17), RGB(20, 6, 14) }
+    [BUTCHY]   = { RGB(13, 22, 26), RGB(5, 13, 20) },
+    [FEMME] = { RGB(28, 15, 17), RGB(20, 6, 14) }
 };
 
 static const struct MailGraphics sMailGraphics[] = {
@@ -571,10 +571,10 @@ static bool8 MailReadBuildGraphics(void)
             gPlttBufferFaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
 
             LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-            gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sBgColors[FEMALE][0];
-            gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sBgColors[FEMALE][0];
-            gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sBgColors[FEMALE][1];
-            gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sBgColors[FEMALE][1];
+            gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sBgColors[FEMME][0];
+            gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sBgColors[FEMME][0];
+            gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sBgColors[FEMME][1];
+            gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sBgColors[FEMME][1];
             break;
         case 13:
             if (sMailRead->hasText)

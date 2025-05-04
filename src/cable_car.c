@@ -791,8 +791,8 @@ static void CreateCableCarSprites(void)
     u8 i;
 
     u16 playerGraphicsIds[KAYA] = {
-        [FEMALE2]   = OBJ_EVENT_GFX_BRENDAN_NORMAL,
-        [FEMALE] = OBJ_EVENT_GFX_MAY_NORMAL,
+        [BUTCHY]   = OBJ_EVENT_GFX_BRENDAN_NORMAL,
+        [FEMME] = OBJ_EVENT_GFX_MAY_NORMAL,
         [KAYA - 1] = OBJ_EVENT_GFX_KAYA_NORMAL
     };
     u16 rval = Random();

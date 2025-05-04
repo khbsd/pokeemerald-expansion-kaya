@@ -25,7 +25,7 @@ static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
 
 // Graphics ids should correspond with the classes in gUnionRoomFacilityClasses
 static const u16 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
-    [FEMALE2] = {
+    [BUTCHY] = {
         OBJ_EVENT_GFX_MAN_3,
         OBJ_EVENT_GFX_BLACK_BELT,
         OBJ_EVENT_GFX_CAMPER,
@@ -35,7 +35,7 @@ static const u16 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES] = {
         OBJ_EVENT_GFX_MAN_4,
         OBJ_EVENT_GFX_MAN_5
     },
-    [FEMALE] = {
+    [FEMME] = {
         OBJ_EVENT_GFX_WOMAN_5,
         OBJ_EVENT_GFX_HEX_MANIAC,
         OBJ_EVENT_GFX_PICNICKER,

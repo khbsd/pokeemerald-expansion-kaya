@@ -18,8 +18,8 @@ FallarborTown_BattleTentBattleRoom_OnTransition:
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, BUTCHY, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, FEMME, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::

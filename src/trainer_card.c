@@ -288,13 +288,13 @@ static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
 {
     // Kanto
     {
-        [FEMALE2]   = {13, 4},
-        [FEMALE] = {13, 4}
+        [BUTCHY]   = {13, 4},
+        [FEMME] = {13, 4}
     },
     // Hoenn
     {
-        [FEMALE2]   = {1, 0},
-        [FEMALE] = {1, 0}
+        [BUTCHY]   = {1, 0},
+        [FEMME] = {1, 0}
     },
 };
 
@@ -302,18 +302,18 @@ static const u8 sTrainerPicFacilityClass[][GENDER_COUNT] =
 {
     [CARD_TYPE_FRLG] =
     {
-        [FEMALE2]   = FACILITY_CLASS_RED,
-        [FEMALE] = FACILITY_CLASS_LEAF
+        [BUTCHY]   = FACILITY_CLASS_RED,
+        [FEMME] = FACILITY_CLASS_LEAF
     },
     [CARD_TYPE_RS] =
     {
-        [FEMALE2]   = FACILITY_CLASS_RS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_RS_MAY
+        [BUTCHY]   = FACILITY_CLASS_RS_BRENDAN,
+        [FEMME] = FACILITY_CLASS_RS_MAY
     },
     [CARD_TYPE_EMERALD] =
     {
-        [FEMALE2]   = FACILITY_CLASS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_MAY
+        [BUTCHY]   = FACILITY_CLASS_BRENDAN,
+        [FEMME] = FACILITY_CLASS_MAY
     }
 };
 
@@ -767,7 +767,7 @@ static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
     if (trainerCard->hasAllFrontierSymbols)
         trainerCard->stars++;
 
-    if (trainerCard->gender == FEMALE)
+    if (trainerCard->gender == FEMME)
         trainerCard->unionRoomClass = gUnionRoomFacilityClasses[(trainerCard->trainerId % NUM_UNION_ROOM_CLASSES) + NUM_UNION_ROOM_CLASSES];
     else
         trainerCard->unionRoomClass = gUnionRoomFacilityClasses[trainerCard->trainerId % NUM_UNION_ROOM_CLASSES];
@@ -783,7 +783,7 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
     if (trainerCard->linkHasAllFrontierSymbols)
         trainerCard->stars++;
 
-    if (trainerCard->gender == FEMALE)
+    if (trainerCard->gender == FEMME)
         trainerCard->unionRoomClass = gUnionRoomFacilityClasses[(trainerCard->trainerId % NUM_UNION_ROOM_CLASSES) + NUM_UNION_ROOM_CLASSES];
     else
         trainerCard->unionRoomClass = gUnionRoomFacilityClasses[trainerCard->trainerId % NUM_UNION_ROOM_CLASSES];
@@ -1433,14 +1433,14 @@ static u8 SetCardBgsAndPals(void)
         {
             LoadPalette(sHoennTrainerCardPals[sData->trainerCard.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
             LoadPalette(sHoennTrainerCardBadges_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
-            if (sData->trainerCard.gender != FEMALE2)
+            if (sData->trainerCard.gender != BUTCHY)
                 LoadPalette(sHoennTrainerCardFemaleBg_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
         else
         {
             LoadPalette(sKantoTrainerCardPals[sData->trainerCard.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
             LoadPalette(sKantoTrainerCardBadges_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
-            if (sData->trainerCard.gender != FEMALE2)
+            if (sData->trainerCard.gender != BUTCHY)
                 LoadPalette(sKantoTrainerCardFemaleBg_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
         LoadPalette(sTrainerCardStar_Pal, BG_PLTT_ID(4), PLTT_SIZE_4BPP);

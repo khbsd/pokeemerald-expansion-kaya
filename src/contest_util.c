@@ -2479,7 +2479,7 @@ void SetLinkContestPlayerGfx(void)
             int version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
-                if (gLinkPlayers[i].gender == FEMALE2)
+                if (gLinkPlayers[i].gender == BUTCHY)
                     gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
                 else
                     gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_MAY;
@@ -2512,14 +2512,14 @@ void LoadLinkContestPlayerPalettes(void)
             version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
-                if (gLinkPlayers[i].gender == FEMALE2)
+                if (gLinkPlayers[i].gender == BUTCHY)
                     sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_RS_BRENDAN);
                 else
                     sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_RS_MAY);
             }
             else
             {
-                if (gLinkPlayers[i].gender == FEMALE2)
+                if (gLinkPlayers[i].gender == BUTCHY)
                     sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN);
                 else
                     sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_MAY);

@@ -22,8 +22,8 @@ Route103_EventScript_OpenAlteringCave::
 Route103_EventScript_Rival::
 	lockall
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE2, Route103_EventScript_RivalMay
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
+	goto_if_eq VAR_RESULT, BUTCHY, Route103_EventScript_RivalMay
+	goto_if_eq VAR_RESULT, FEMME, Route103_EventScript_RivalBrendan
 	end
 
 Route103_EventScript_RivalMay::

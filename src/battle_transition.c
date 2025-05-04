@@ -895,8 +895,8 @@ static const u16 *const sOpponentMugshotsPals[MUGSHOT_COLOR_COUNT] =
 
 static const u16 *const sPlayerMugshotsPals[KAYA] =
 {
-    [FEMALE2] = sMugshotPal_Brendan,
-    [FEMALE] = sMugshotPal_May,
+    [BUTCHY] = sMugshotPal_Brendan,
+    [FEMME] = sMugshotPal_May,
     [KAYA - 1] = sMugshotPal_Kaya
 };
 
