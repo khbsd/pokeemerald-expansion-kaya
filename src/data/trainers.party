@@ -14878,63 +14878,58 @@ Items: Full Restore / Full Restore / Full Restore
 Double Battle: Yes
 AI: Smart Trainer
 
-Raichu
+Raichu @ Fairy Gem
+Ability: Lovestruck
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
 - Slam
-- Rain Dance
-- Protect
+- Volt Tackle
+- Quick Attack
 
-Ampharos
+Ampharos @ Leftovers
+Ability: Static
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder
-- Protect
-- Thunder Wave
-- Light Screen
+- Body Slam
+- Dragon Cheer
+- Charge Beam
+- Cotton Guard
 
-Electrode
+Bellibolt @ Leftovers
+Ability: Electromorphosis
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rollout
-- Thunder
-- Explosion
-- Rain Dance
-
-Magneton @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Supersonic
-- Protect
-- Thunder
-- Rain Dance
-
-Manectric @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Bite
-- Thunder Wave
-- Thunder
-- Protect
-
-Manectric @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Bite
-- Thunder Wave
-- Thunder
-- Protect
-
-Arcanine @ Air Balloon
-Ability: Intimidate
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Body Slam
 - Parabolic Charge
-- Extremespeed
+- Slack Off
 - Wild Charge
-- Magnet Rise
 
+Golem Alola @ Air Balloon
+Ability: Galvanize
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Electroweb
+- Stealth Rock
+- Explosion
+
+Manectric @ Sitrus Berry
+Ability: Cotton Down
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Solar Beam
+- Thunder
+- Grassy Terrain
+
+Electrode Hisui @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Giga Drain
+- Electro Ball
+- Grassy Terrain
 
 === TRAINER_WATTSON_5 ===
 Name: WATTSON
