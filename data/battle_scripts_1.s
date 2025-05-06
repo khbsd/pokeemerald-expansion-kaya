@@ -5242,7 +5242,6 @@ BattleScript_FaintTarget::
 	dofaintanimation BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	cleareffectsonfaint BS_TARGET
-	tryactivatefellstinger BS_ATTACKER
 	tryactivatesoulheart
 	tryactivatereceiver BS_TARGET
 	trytrainerslidefirstdownmsg BS_TARGET
