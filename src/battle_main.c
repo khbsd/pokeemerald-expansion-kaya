@@ -4834,7 +4834,9 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, enum ItemHoldEffect h
     speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
 
     // player's badge boost
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE03_GET, battler) && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
+        && ShouldGetStatBadgeBoost(B_FLAG_BADGE_BOOST_SPEED, battler)
+        && GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         speed = (speed * 120) / 100;
     }
