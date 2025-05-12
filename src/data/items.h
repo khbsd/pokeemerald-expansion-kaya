@@ -1950,6 +1950,7 @@ const struct Item gItemsInfo[] =
             "Raises level by\n"
             "one. Reforms\n"
             "over time."),
+        .notConsumed = TRUE,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
@@ -2228,6 +2229,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Permanently repels\n"
             "weak wild Pokémon.\n"),
+        .notConsumed = TRUE,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_PermaRepel,
