@@ -4838,7 +4838,7 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, enum ItemHoldEffect h
         && ShouldGetStatBadgeBoost(B_FLAG_BADGE_BOOST_SPEED, battler)
         && GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
-        speed = (speed * 120) / 100;
+        speed = (speed * (B_BADGE_BOOST_AMOUNT * 100)) / 100;
     }
 
     // item effects
