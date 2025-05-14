@@ -87,7 +87,7 @@ void RecordedBattle_Init(u8 mode)
             for (j = 0; j < BATTLER_RECORD_SIZE; j++)
                 sBattleRecords[i][j] = 0xFF;
             sBattleFlags = gBattleTypeFlags;
-            sAI_Scripts = gBattleResources->ai->aiFlags[B_POSITION_OPPONENT_LEFT];
+            sAI_Scripts = gAiThinkingStruct->aiFlags[B_POSITION_OPPONENT_LEFT];
         }
     }
 }
@@ -666,7 +666,7 @@ void RecordedBattle_CopyBattlerMoves(u32 battler)
 {
     s32 i;
 
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    if (!IsOnPlayerSide(battler))
         return;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
@@ -691,7 +691,7 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
     for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
     {
         // Player's side only
-        if (GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
+        if (IsOnPlayerSide(battlerId))
         {
             if (mode == B_RECORD_MODE_RECORDING)
             {

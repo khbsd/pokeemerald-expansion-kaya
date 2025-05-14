@@ -1518,7 +1518,7 @@ static void Cmd_fadetobgfromset(void)
 
     if (IsContest())
         gTasks[taskId].tBackgroundId = bg3;
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+    else if (IsOnPlayerSide(gBattleAnimTarget))
         gTasks[taskId].tBackgroundId = bg2;
     else
         gTasks[taskId].tBackgroundId = bg1;
@@ -1645,7 +1645,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
 {
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        if (!IsOnPlayerSide(gBattleAnimAttacker))
             pan = SOUND_PAN_TARGET;
         else
             pan = SOUND_PAN_ATTACKER;
@@ -1655,9 +1655,9 @@ s8 BattleAnimAdjustPanning(s8 pan)
         if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != SOUND_PAN_TARGET)
             pan *= -1;
     }
-    else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    else if (IsOnPlayerSide(gBattleAnimAttacker))
     {
-        if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+        if (IsOnPlayerSide(gBattleAnimTarget))
         {
             if (pan == SOUND_PAN_TARGET)
                 pan = SOUND_PAN_ATTACKER;
@@ -1665,7 +1665,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
                 pan *= -1;
         }
     }
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
+    else if (!IsOnPlayerSide(gBattleAnimTarget))
     {
         if (pan == SOUND_PAN_ATTACKER)
             pan = SOUND_PAN_TARGET;
@@ -1687,14 +1687,14 @@ s8 BattleAnimAdjustPanning2(s8 pan)
 {
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        if (!IsOnPlayerSide(gBattleAnimAttacker))
             pan = SOUND_PAN_TARGET;
         else
             pan = SOUND_PAN_ATTACKER;
     }
     else
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
+        if (!IsOnPlayerSide(gBattleAnimAttacker) || IsContest())
             pan = -pan;
     }
     return pan;
@@ -2262,7 +2262,7 @@ static void Cmd_createdragondartsprite(void)
         else
             template.paletteTag = ANIM_TAG_DREEPY;
         template.oam = &gOamData_AffineOff_ObjNormal_32x32;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+        if (!IsOnPlayerSide(gBattleAnimAttacker))
             template.anims = gAnims_DreepyMissileOpponent;
         else
             template.anims = gAnims_DreepyMissilePlayer;
@@ -2272,7 +2272,7 @@ static void Cmd_createdragondartsprite(void)
         template.tileTag = ANIM_TAG_AIR_WAVE;
         template.paletteTag = ANIM_TAG_DREEPY;
         template.oam = &gOamData_AffineOff_ObjNormal_32x16;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+        if (!IsOnPlayerSide(gBattleAnimAttacker))
             template.anims = gAnims_DreepyMissileOpponentNotDrag;
         else
             template.anims = gAnims_DreepyMissilePlayer;

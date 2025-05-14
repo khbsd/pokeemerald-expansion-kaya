@@ -282,16 +282,17 @@ struct AiPartyMon
     u16 item;
     u16 heldEffect;
     u16 ability;
-    u16 gender;
     u16 level;
     u16 moves[MAX_MON_MOVES];
     u32 status;
-    bool8 isFainted;
-    bool8 wasSentInBattle;
     u8 switchInCount; // Counts how many times this Pokemon has been sent out or switched into in a battle.
+    u8 gender:2;
+    u8 isFainted:1;
+    u8 wasSentInBattle:1;
+    u8 padding:4;
 };
 
-struct AIPartyData // Opposing battlers - party mons.
+struct AiPartyData // Opposing battlers - party mons.
 {
     struct AiPartyMon mons[NUM_BATTLE_SIDES][PARTY_SIZE]; // 2 parties(player, opponent). Used to save information on opposing party.
     u8 count[NUM_BATTLE_SIDES];
@@ -331,15 +332,17 @@ struct AiLogicData
     u8 weatherHasEffect:1; // The same as HasWeatherEffect(). Stored here, so it's called only once.
     u8 ejectButtonSwitch:1; // Tracks whether current switch out was from Eject Button
     u8 ejectPackSwitch:1; // Tracks whether current switch out was from Eject Pack
-    u8 predictingSwitch:1; // Determines whether AI will use predictions this turn or not
-    u8 aiSwitchPredictionInProgress:1; // Tracks whether the AI is in the middle of running prediction calculations
-    u8 padding:3;
+    u8 predictingSwitch:1; // Determines whether AI will use switch predictions this turn or not
+    u8 predictingMove:1; // Determines whether AI will use move predictions this turn or not
+    u8 aiPredictionInProgress:1; // Tracks whether the AI is in the middle of running prediction calculations
+    u8 padding:2;
     u8 shouldSwitch; // Stores result of ShouldSwitch, which decides whether a mon should be switched out
     u8 aiCalcInProgress:1;
     u8 battlerDoingPrediction; // Stores which battler is currently running its prediction calcs
+    u16 predictedMove[MAX_BATTLERS_COUNT];
 };
 
-struct AI_ThinkingStruct
+struct AiThinkingStruct
 {
     u8 aiState;
     u8 movesetIndex;
@@ -390,19 +393,10 @@ struct BattleResources
     struct BattleScriptsStack* battleScriptsStack;
     struct BattleCallbacksStack* battleCallbackStack;
     struct StatsArray* beforeLvlUp;
-    struct AI_ThinkingStruct *ai;
-    struct AiLogicData *aiData;
-    struct AIPartyData *aiParty;
-    struct BattleHistory *battleHistory;
     u8 bufferA[MAX_BATTLERS_COUNT][0x200];
     u8 bufferB[MAX_BATTLERS_COUNT][0x200];
     u8 transferBuffer[0x100];
 };
-
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
-#define AI_DATA ((struct AiLogicData *)(gBattleResources->aiData))
-#define AI_PARTY ((struct AIPartyData *)(gBattleResources->aiParty))
-#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
 
 struct BattleResults
 {
@@ -583,7 +577,6 @@ struct BattlerState
     u32 multipleSwitchInBattlers:1;
     u32 alreadyStatusedMoveAttempt:1; // For example when using Thunder Wave on an already paralyzed Pokémon.
     u32 activeAbilityPopUps:1;
-    u32 lastMoveFailed:1; // For Stomping Tantrum
     u32 forcedSwitch:1;
     u32 storedHealingWish:1;
     u32 storedLunarDance:1;
@@ -591,8 +584,9 @@ struct BattlerState
     u32 sleepClauseEffectExempt:1; // Stores whether effect should be exempt from triggering Sleep Clause (Effect Spore)
     u32 usedMicleBerry:1;
     u32 pursuitTarget:1;
+    u32 stompingTantrumTimer:2;
     u32 canPickupItem:1;
-    u32 padding:17;
+    u32 padding:16;
     // End of Word
 };
 
@@ -785,7 +779,6 @@ struct BattleStruct
     u8 noTargetPresent:1;
     struct MessageStatus slideMessageStatus;
     u8 trainerSlideSpriteIds[MAX_BATTLERS_COUNT];
-    u8 storeBattlerSpriteId;
     u16 opponentMonCanTera:6;
     u16 opponentMonCanDynamax:6;
     u16 padding:4;
@@ -1113,6 +1106,10 @@ extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;
 extern struct BattleStruct *gBattleStruct;
 extern struct AiBattleData *gAiBattleData;
+extern struct AiThinkingStruct *gAiThinkingStruct;
+extern struct AiLogicData *gAiLogicData;
+extern struct AiPartyData *gAiPartyData;
+extern struct BattleHistory *gBattleHistory;
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
 extern struct BattleResources *gBattleResources;
@@ -1204,9 +1201,14 @@ static inline u32 GetBattlerSide(u32 battler)
     return GetBattlerPosition(battler) & BIT_SIDE;
 }
 
+static inline u32 IsOnPlayerSide(u32 battler)
+{
+    return GetBattlerSide(battler) == B_SIDE_PLAYER;
+}
+
 static inline bool32 IsBattlerAlly(u32 battlerAtk, u32 battlerDef)
 {
-    return (GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef));
+    return GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef);
 }
 
 static inline u32 GetOpposingSideBattler(u32 battler)
@@ -1217,12 +1219,12 @@ static inline u32 GetOpposingSideBattler(u32 battler)
 static inline struct Pokemon* GetBattlerMon(u32 battler)
 {
     u32 index = gBattlerPartyIndexes[battler];
-    return (GetBattlerSide(battler) == B_SIDE_OPPONENT) ? &gEnemyParty[index] : &gPlayerParty[index];
+    return !IsOnPlayerSide(battler) ? &gEnemyParty[index] : &gPlayerParty[index];
 }
 
 static inline struct Pokemon *GetSideParty(u32 side)
 {
-    return (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    return side == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
 }
 
 static inline struct Pokemon *GetBattlerParty(u32 battler)
