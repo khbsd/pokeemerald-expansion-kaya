@@ -320,7 +320,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     u8 i;
     u16 totalQuantity = 0;
 
-    if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
+    if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE || ItemId_GetConsumability(itemId))
         return FALSE;
 
     // check Battle Pyramid Bag

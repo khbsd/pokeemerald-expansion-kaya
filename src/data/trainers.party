@@ -15011,13 +15011,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Light Screen
 - Rock Slide
 
-Ponyta
+Rapidash @ Fairy Feather
+Ability: Pixilate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flamethrower
 - Attract
 - Solar Beam
-- Bounce
+- Fury Attack
 
 Camerupt @ White Herb
 Level: 100
@@ -15027,13 +15028,30 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
 - Attract
 
-Torkoal @ White Herb
+Turtonator @ White Herb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
 - Sunny Day
 - Explosion
 - Attract
+
+Cinderace @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Overheat
+- Sunny Day
+- Explosion
+- Attract
+
+Magmortar @ Kings Rock
+Ability: Synergetic
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heat Wave
+- Flash Cannon
+- Gear Up
+- Smokescreen
 
 === TRAINER_FLANNERY_3 ===
 Name: FLANNERY
