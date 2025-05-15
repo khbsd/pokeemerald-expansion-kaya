@@ -4660,10 +4660,10 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_SABLEYE_MEGA] =
     {
-        .baseHP        = 50,
+        .baseHP        = 90,
         .baseAttack    = 85,
         .baseDefense   = 125,
-        .baseSpeed     = 20,
+        .baseSpeed     = 50,
         .baseSpAttack  = 85,
         .baseSpDefense = 115,
         .types = MON_TYPES(TYPE_DARK, TYPE_GHOST),
@@ -5267,7 +5267,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sMedititeLevelUpLearnset,
         .teachableLearnset = sMedititeTeachableLearnset,
         .eggMoveLearnset = sMedititeEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_MEDICHAM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_MEDICHAM}),
     },
 
     [SPECIES_MEDICHAM] =
@@ -5354,7 +5354,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sMedichamTeachableLearnset,
         .formSpeciesIdTable = sMedichamFormSpeciesIdTable,
         .formChangeTable = sMedichamFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_MEDICHAM_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_MEDICHAM_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAP, MAP_MT_PYRE_SUMMIT}
@@ -5501,7 +5501,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sElectrikeLevelUpLearnset,
         .teachableLearnset = sElectrikeTeachableLearnset,
         .eggMoveLearnset = sElectrikeEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_MANECTRIC}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_MANECTRIC}),
     },
 
     [SPECIES_MANECTRIC] =
@@ -5573,7 +5573,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sManectricTeachableLearnset,
         .formSpeciesIdTable = sManectricFormSpeciesIdTable,
         .formChangeTable = sManectricFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_MANECTRIC_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 56, SPECIES_MANECTRIC_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_WACAN_BERRY},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_110}
@@ -6538,7 +6538,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSharpedoTeachableLearnset,
         .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,
         .formChangeTable = sSharpedoFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SHARPEDO_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_SHARPEDO_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DEEP_SEA_TOOTH},
                                         {IF_IN_MAP, MAP_UNDERWATER_ROUTE129}
@@ -6938,7 +6938,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sCameruptTeachableLearnset,
         .formSpeciesIdTable = sCameruptFormSpeciesIdTable,
         .formChangeTable = sCameruptFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 70, SPECIES_CAMERUPT_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 55, SPECIES_CAMERUPT_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_MAGMARIZER},
                                         {IF_IN_MAPSEC, MAPSEC_SCORCHED_SLAB}
@@ -7870,7 +7870,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sAltariaTeachableLearnset,
         .formSpeciesIdTable = sAltariaFormSpeciesIdTable,
         .formChangeTable = sAltariaFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ALTARIA_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 55, SPECIES_ALTARIA_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_FAIRY_FEATHER},
                                         {IF_IN_MAP, MAP_MT_PYRE_EXTERIOR}
@@ -9664,7 +9664,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sShuppetLevelUpLearnset,
         .teachableLearnset = sShuppetTeachableLearnset,
         .eggMoveLearnset = sShuppetEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BANETTE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_BANETTE}),
     },
 
     [SPECIES_BANETTE] =
@@ -9744,7 +9744,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sBanetteTeachableLearnset,
         .formSpeciesIdTable = sBanetteFormSpeciesIdTable,
         .formChangeTable = sBanetteFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_BANETTE_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 55, SPECIES_BANETTE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_REAPER_CLOTH},
                                         {IF_IN_MAP, MAP_MT_PYRE_1F}
@@ -10386,7 +10386,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .eggMoveLearnset = sAbsolEggMoveLearnset,
         .formSpeciesIdTable = sAbsolFormSpeciesIdTable,
         .formChangeTable = sAbsolFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABSOL_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_ABSOL_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_BLACKGLASSES},
                                         {IF_IN_MAP, MAP_CAVE_OF_ORIGIN_ENTRANCE}
@@ -10619,7 +10619,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGlalieTeachableLearnset,
         .formSpeciesIdTable = sGlalieFormSpeciesIdTable,
         .formChangeTable = sGlalieFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GLALIE_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 65, SPECIES_GLALIE_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_ICY_ROCK},
                                         {IF_IN_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM}

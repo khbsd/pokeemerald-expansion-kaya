@@ -10096,7 +10096,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSlowpokeTeachableLearnset,
         .eggMoveLearnset = sSlowpokeEggMoveLearnset,
         .formSpeciesIdTable = sSlowpokeFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_SLOWBRO},
+        .evolutions = EVOLUTION({EVO_LEVEL, 19, SPECIES_SLOWBRO},
                                 {EVO_TRADE, 0, SPECIES_SLOWKING, CONDITIONS({IF_HOLD_ITEM, ITEM_KINGS_ROCK})},
                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}),
     },
@@ -10169,7 +10169,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sSlowbroFormSpeciesIdTable,
         .formChangeTable = sSlowbroFormChangeTable,
     #if P_MEGA_STONES_AS_EVO_STONES
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SLOWBRO_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_SLOWBRO_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_SHELL_BELL},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_132}
@@ -12262,7 +12262,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSteelixTeachableLearnset,
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_STEELIX_MEGA, 
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_STEELIX_MEGA, 
             CONDITIONS(
                 {IF_IN_MAPSEC, MAPSEC_VICTORY_ROAD},
                 {IF_HOLD_ITEM, ITEM_METAL_COAT}
@@ -15989,7 +15989,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sScizorTeachableLearnset,
         .formSpeciesIdTable = sScizorFormSpeciesIdTable,
         .formChangeTable = sScizorFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_SCIZOR_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_SCIZOR_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_METAL_COAT},
                                         {IF_IN_MAPSEC, MAPSEC_SAFARI_ZONE}
@@ -17332,7 +17332,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sGyaradosTeachableLearnset,
         .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,
         .formChangeTable = sGyaradosFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_GYARADOS_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GYARADOS_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DARK_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_SEAFLOOR_CAVERN}

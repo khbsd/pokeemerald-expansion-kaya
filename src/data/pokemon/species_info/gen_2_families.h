@@ -7027,7 +7027,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sHoundourLevelUpLearnset,
         .teachableLearnset = sHoundourTeachableLearnset,
         .eggMoveLearnset = sHoundourEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HOUNDOOM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_HOUNDOOM}),
     },
 
     [SPECIES_HOUNDOOM] =
@@ -7109,7 +7109,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .teachableLearnset = sHoundoomTeachableLearnset,
         .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,
         .formChangeTable = sHoundoomFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_HOUNDOOM_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_HOUNDOOM_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
                                         {IF_IN_MAP, MAP_SKY_PILLAR_TOP}

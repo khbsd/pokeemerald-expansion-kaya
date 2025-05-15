@@ -3379,7 +3379,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .levelUpLearnset = sBunearyLevelUpLearnset,
         .teachableLearnset = sBunearyTeachableLearnset,
         .eggMoveLearnset = sBunearyEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_LOPUNNY, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD})}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_LOPUNNY, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD})}),
     },
 
     [SPECIES_LOPUNNY] =
@@ -3449,7 +3449,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LOPUNNY_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_LOPUNNY_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_LUCKY_PUNCH},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_120}
@@ -4508,7 +4508,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .levelUpLearnset = sRioluLevelUpLearnset,
         .teachableLearnset = sRioluTeachableLearnset,
         .eggMoveLearnset = sRioluEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_LUCARIO, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD},{IF_NOT_TIME, TIME_NIGHT})}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LUCARIO, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD},{IF_NOT_TIME, TIME_NIGHT})}),
     },
 
     [SPECIES_LUCARIO] =
@@ -4578,7 +4578,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLucarioTeachableLearnset,
         .formSpeciesIdTable = sLucarioFormSpeciesIdTable,
         .formChangeTable = sLucarioFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_LUCARIO_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_LUCARIO_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_YELLOW_SCARF},
                                         {IF_IN_MAPSEC, MAPSEC_CAVE_OF_ORIGIN}
@@ -5565,7 +5565,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sAbomasnowTeachableLearnset,
         .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,
         .formChangeTable = sAbomasnowFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 80, SPECIES_ABOMASNOW_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_ABOMASNOW_MEGA,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_ICE_GEM},
                                         {IF_IN_MAPSEC, MAPSEC_ROUTE_119}
@@ -5592,7 +5592,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),
-        .abilities = { ABILITY_SNOW_WARNING, ABILITY_SNOW_WARNING, ABILITY_SNOW_WARNING },
+        .abilities = { ABILITY_THICK_FAT, ABILITY_SNOW_WARNING, ABILITY_SNOW_CLOAK },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Anihlanch"),
         .cryId = CRY_ABOMASNOW_MEGA,
