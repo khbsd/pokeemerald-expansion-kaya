@@ -16703,6 +16703,7 @@ static bool32 CriticalCapture(u32 odds)
 {
     u32 numCaught;
     u32 totalDexCount;
+    u32 oddsAdjust = 0;
 
     if (B_CRITICAL_CAPTURE == FALSE)
         return FALSE;
@@ -16728,8 +16729,14 @@ static bool32 CriticalCapture(u32 odds)
         odds = (odds * 250) / 100;
 
     if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
-        odds = (odds * (100 + B_CATCHING_CHARM_BOOST)) / 100;
+        oddsAdjust += B_CATCHING_CHARM_BOOST;
 
+    if (B_CRITICAL_CAPTURE_GYM_BOOST)
+        oddsAdjust += GetNumOwnedBadges() * 4;
+
+    if (oddsAdjust > 0)
+        odds = (odds * (100 + oddsAdjust)) / 100;
+    
     odds /= 6;
 
     if ((Random() % 255) < odds)

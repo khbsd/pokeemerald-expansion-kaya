@@ -485,21 +485,22 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
 
 u32 ScriptGiveMon(u16 species, u8 level, u16 item)
 {
-    u32 ivAdjust = P_STARTER_MAX_IVS && sChoosingStarter ? 0 : 1;
-    bool32 isShiny = P_STARTER_SHINY && sChoosingStarter;
+    bool32 ivAdjust = P_STARTER_MAX_IVS && sChoosingStarter;
+    bool32 isShiny = (P_STARTER_SHINY || gSaveBlock2Ptr->playerIsKaya) && sChoosingStarter;
 
     if (sChoosingStarter)
         sChoosingStarter = FALSE;
 
     u8 evs[NUM_STATS]        = {0, 0, 0, 0, 0, 0};
+    // We pass "MAX_PER_STAT_IVS + ivAdjust" here to ensure that ScriptGiveMonParameterized won't touch the stats' IV.
     u8 ivs[NUM_STATS]        = {
-                                MAX_PER_STAT_IVS + ivAdjust, 
-                                MAX_PER_STAT_IVS + ivAdjust, 
-                                MAX_PER_STAT_IVS + ivAdjust,   // We pass "MAX_PER_STAT_IVS + 1" here to ensure that
-                                MAX_PER_STAT_IVS + ivAdjust, 
-                                MAX_PER_STAT_IVS + ivAdjust, 
+                                MAX_PER_STAT_IVS + ivAdjust,
+                                MAX_PER_STAT_IVS + ivAdjust,
+                                MAX_PER_STAT_IVS + ivAdjust,
+                                MAX_PER_STAT_IVS + ivAdjust,
+                                MAX_PER_STAT_IVS + ivAdjust,
                                 MAX_PER_STAT_IVS + ivAdjust
-                               };  // ScriptGiveMonParameterized won't touch the stats' IV.
+                               };
 
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
