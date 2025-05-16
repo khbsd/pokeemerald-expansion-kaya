@@ -4002,8 +4002,8 @@ void CopyPartyMonToBattleData(u32 battler, u32 partyIndex, bool32 resetStats)
     struct Pokemon *party = GetSideParty(side);
     PokemonToBattleMon(&party[partyIndex], &gBattleMons[battler]);
     gBattleStruct->hpOnSwitchout[side] = gBattleMons[battler].hp;
-    UpdateSentPokesToOpponentValue(battlerId);
-    ClearTemporarySpeciesSpriteData(battlerId, FALSE, FALSE);
+    UpdateSentPokesToOpponentValue(battler);
+    ClearTemporarySpeciesSpriteData(battler, FALSE, FALSE);
 }
 
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
@@ -4313,8 +4313,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                         dataUnsigned = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
 
-                                    if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT)
-                                        CopyPartyMonToBattleData(battlerId, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battlerId]), TRUE);
+                                    if (gMain.inBattle && battler != MAX_BATTLERS_COUNT)
+                                        CopyPartyMonToBattleData(battler, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]), TRUE);
                                     retVal = FALSE;
                                 }
                             }
