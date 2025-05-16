@@ -1589,6 +1589,51 @@ bool32 IsHazardClearingMove(u32 move)
     return FALSE;
 }
 
+bool32 IsAllyProtectingFromMove(u32 battlerAtk, u32 attackerMove, u32 allyMove)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(allyMove);
+
+    if (effect != EFFECT_PROTECT)
+    {
+        return FALSE;
+    }
+    else
+    {
+        enum ProtectMethod protectMethod = GetMoveProtectMethod(allyMove);
+        
+        if (protectMethod == PROTECT_QUICK_GUARD)
+        {
+            u32 priority = GetBattleMovePriority(battlerAtk, gAiLogicData->abilities[battlerAtk], attackerMove);
+            return (priority > 0);
+        }
+
+        if (IsBattleMoveStatus(attackerMove))
+        {
+            switch (protectMethod)
+            {
+            case PROTECT_NORMAL:
+            case PROTECT_CRAFTY_SHIELD:
+            case PROTECT_MAX_GUARD:
+            case PROTECT_WIDE_GUARD:
+                return TRUE;
+
+            default:
+                return FALSE;
+            }
+        }
+        else
+        {
+            switch (protectMethod)
+            {
+            case PROTECT_CRAFTY_SHIELD:
+                return FALSE;
+            default:
+                return TRUE;
+            }
+        }
+    }
+}
+
 bool32 IsMoveRedirectionPrevented(u32 battlerAtk, u32 move, u32 atkAbility)
 {
     if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_NEGATE_UNAWARE)
@@ -1722,7 +1767,7 @@ bool32 ShouldSetHail(u32 battler, u32 ability, enum ItemHoldEffect holdEffect)
       || ability == ABILITY_OVERCOAT
       || holdEffect == HOLD_EFFECT_SAFETY_GOGGLES
       || IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
-      || HasMoveThatAlwaysHitsInHailSnow(battler)
+      || HasMoveWithFlag(battler, MoveAlwaysHitsInHailSnow)
       || HasMoveEffect(battler, EFFECT_AURORA_VEIL)
       || HasMoveEffect(battler, EFFECT_WEATHER_BALL))
     {
@@ -1743,7 +1788,7 @@ bool32 ShouldSetRain(u32 battlerAtk, u32 atkAbility, enum ItemHoldEffect holdEff
       || atkAbility == ABILITY_HYDRATION
       || atkAbility == ABILITY_RAIN_DISH
       || atkAbility == ABILITY_DRY_SKIN
-      || HasMoveThatAlwaysHitsInRain(battlerAtk)
+      || HasMoveWithFlag(battlerAtk, MoveAlwaysHitsInRain)
       || HasMoveEffect(battlerAtk, EFFECT_WEATHER_BALL)
       || HasMoveWithType(battlerAtk, TYPE_WATER)))
     {
@@ -1789,7 +1834,7 @@ bool32 ShouldSetSnow(u32 battler, u32 ability, enum ItemHoldEffect holdEffect)
       || ability == ABILITY_FORECAST
       || ability == ABILITY_SLUSH_RUSH
       || IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
-      || HasMoveThatAlwaysHitsInHailSnow(battler)
+      || HasMoveWithFlag(battler, MoveAlwaysHitsInHailSnow)
       || HasMoveEffect(battler, EFFECT_AURORA_VEIL)
       || HasMoveEffect(battler, EFFECT_WEATHER_BALL))
     {
@@ -2603,87 +2648,17 @@ bool32 HasDamagingMoveOfType(u32 battlerId, u32 type)
     return FALSE;
 }
 
-bool32 HasSubstituteIgnoringMove(u32 battler)
+bool32 HasMoveWithFlag(u32 battler, MoveFlag getFlag)
 {
-    s32 i;
     u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    u32 moveLimitations = gAiLogicData->moveLimitations[battler];
+
+    for (s32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveIgnoresSubstitute(moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
+        if (IsMoveUnusable(moveIndex, moves[moveIndex], moveLimitations))
+            continue;
 
-bool32 HasHighCritRatioMove(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetMoveCriticalHitStage(moves[i]) > 0)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-bool32 HasMagicCoatAffectedMove(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveCanBeBouncedBack(moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 HasSnatchAffectedMove(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveCanBeSnatched(moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 HasMoveThatAlwaysHitsInRain(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveAlwaysHitsInRain(moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 HasMoveThatHas50AccuracyInSun(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveHas50AccuracyInSun(moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 HasMoveThatAlwaysHitsInHailSnow(u32 battler)
-{
-    s32 i;
-    u16 *moves = GetMovesArray(battler);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && MoveAlwaysHitsInHailSnow(moves[i]))
+        if (getFlag(moves[moveIndex]))
             return TRUE;
     }
     return FALSE;
@@ -4565,6 +4540,78 @@ bool32 HasBattlerSideAbility(u32 battler, u32 ability, struct AiLogicData *aiDat
     if (IsDoubleBattle() && gAiLogicData->abilities[BATTLE_PARTNER(battler)] == ability)
         return TRUE;
     return FALSE;
+}
+
+u32 GetFriendlyFireKOThreshold(u32 battler)
+{
+    if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_RISKY)
+        return FRIENDLY_FIRE_RISKY_THRESHOLD;
+    if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_CONSERVATIVE)
+        return FRIENDLY_FIRE_CONSERVATIVE_THRESHOLD;
+
+    return FRIENDLY_FIRE_NORMAL_THRESHOLD;
+}
+
+bool32 IsMoxieTypeAbility(u32 ability)
+{
+    switch (ability)
+    {
+    case ABILITY_MOXIE:
+    case ABILITY_BEAST_BOOST:
+    case ABILITY_CHILLING_NEIGH:
+    case ABILITY_AS_ONE_ICE_RIDER:
+    case ABILITY_GRIM_NEIGH:
+    case ABILITY_AS_ONE_SHADOW_RIDER:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+// Should the AI use a spread move to deliberately activate its partner's ability?
+bool32 ShouldTriggerAbility(u32 battler, u32 ability)
+{
+    switch (ability)
+    {
+        case ABILITY_LIGHTNING_ROD:
+        case ABILITY_STORM_DRAIN:
+            if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
+                return FALSE;
+            else 
+                return (BattlerStatCanRise(battler, ability, STAT_SPATK) && HasMoveWithCategory(battler, DAMAGE_CATEGORY_SPECIAL));
+
+        case ABILITY_DEFIANT:
+        case ABILITY_JUSTIFIED:
+        case ABILITY_MOXIE:
+        case ABILITY_SAP_SIPPER:
+        case ABILITY_THERMAL_EXCHANGE:
+            return (BattlerStatCanRise(battler, ability, STAT_ATK) && HasMoveWithCategory(battler, DAMAGE_CATEGORY_PHYSICAL));
+
+        case ABILITY_COMPETITIVE:
+            return (BattlerStatCanRise(battler, ability, STAT_SPATK) && HasMoveWithCategory(battler, DAMAGE_CATEGORY_SPECIAL));
+
+        case ABILITY_CONTRARY:
+            return TRUE;
+        
+        case ABILITY_DRY_SKIN:
+        case ABILITY_VOLT_ABSORB:
+        case ABILITY_WATER_ABSORB:
+            return (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_HP_AWARE);
+
+        case ABILITY_RATTLED:
+        case ABILITY_STEAM_ENGINE:
+            return BattlerStatCanRise(battler, ability, STAT_SPEED);
+
+        case ABILITY_FLASH_FIRE:
+            return (HasMoveWithType(battler, TYPE_FIRE) && !gDisableStructs[battler].flashFireBoosted);
+
+        case ABILITY_WATER_COMPACTION:
+        case ABILITY_WELL_BAKED_BODY:
+            return (BattlerStatCanRise(battler, ability, STAT_DEF));
+
+        default:
+            return FALSE;
+    }
 }
 
 u32 GetThinkingBattler(u32 battler)
