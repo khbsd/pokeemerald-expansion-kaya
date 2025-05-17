@@ -11872,7 +11872,7 @@ static void Cmd_setseeded(void)
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_LEECH_SEED_MISS;
     }
-    else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GRASS))
+    else if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GRASS) && gBattleMons[gBattlerAttacker].ability != ABILITY_BALLISTOSPORE)
     {
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_LEECH_SEED_FAIL;
