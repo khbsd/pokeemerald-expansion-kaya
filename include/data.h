@@ -5,8 +5,7 @@
 #include "constants/trainers.h"
 #include "constants/battle.h"
 #include "difficulty.h"
-
-#define MAX_TRAINER_ITEMS 4
+#include "trainerproc_data.h"
 
 #define TRAINER_PIC_WIDTH 64
 #define TRAINER_PIC_HEIGHT 64

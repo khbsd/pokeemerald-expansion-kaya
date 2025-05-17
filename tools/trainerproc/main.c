@@ -13,11 +13,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include "../../include/trainerproc_data.h"
 
 #define MAX_TRAINER_AI_FLAGS 64
-#define MAX_TRAINER_ITEMS 4
-#define PARTY_SIZE 255
-#define MAX_MON_MOVES 4
+#define TRAINERPROC_PARTY_SIZE 255
 #define MAX_MON_TAGS 32
 
 struct String
@@ -120,7 +119,7 @@ struct Trainer
     bool double_battle;
     int double_battle_line;
 
-    struct Pokemon pokemon[PARTY_SIZE];
+    struct Pokemon pokemon[TRAINERPROC_PARTY_SIZE];
     int pokemon_n;
 
     struct String mugshot;
@@ -1270,7 +1269,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             return false;
     }
 
-    for (int i = 0; i < PARTY_SIZE; i++)
+    for (int i = 0; i < TRAINERPROC_PARTY_SIZE; i++)
     {
         struct Pokemon *pokemon = &trainer->pokemon[i];
 
