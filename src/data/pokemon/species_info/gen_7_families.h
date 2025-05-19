@@ -3218,7 +3218,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 #endif //P_FAMILY_MORELULL
 
 #if P_FAMILY_SALANDIT
-    [SPECIES_SALANDIT] =
+    [SPECIES_SALANDIT_M] =
     {
         .baseHP        = 48,
         .baseAttack    = 44,
@@ -3231,16 +3231,16 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .expYield = 64,
         .evYield_Speed = 1,
         .itemRare = ITEM_SMOKE_BALL,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(0),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_CORROSION, ABILITY_NONE, ABILITY_OBLIVIOUS },
         .bodyColor = BODY_COLOR_BLACK,
-        .speciesName = _("Salandit"),
+        .speciesName = _("Salandit♂"),
         .cryId = CRY_SALANDIT,
-        .natDexNum = NATIONAL_DEX_SALANDIT,
+        .natDexNum = NATIONAL_DEX_SALANDIT_M,
         .categoryName = _("Toxic Lizard"),
         .height = 6,
         .weight = 48,
@@ -3285,8 +3285,77 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .levelUpLearnset = sSalanditLevelUpLearnset,
         .teachableLearnset = sSalanditTeachableLearnset,
         .eggMoveLearnset = sSalanditEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_SALAZZLE, CONDITIONS({IF_GENDER, MON_FEMALE})},
-                                {EVO_NONE, 0, SPECIES_SALAZZLE_TOTEM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_SALANDIT_F})
+    },
+
+    [SPECIES_SALANDIT_F] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 45,
+        .baseDefense   = 60,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_POISON, TYPE_FIRE),
+        .catchRate = 120,
+        .expYield = 64,
+        .evYield_Speed = 1,
+        .itemRare = ITEM_SMOKE_BALL,
+        .genderRatio = PERCENT_FEMALE(100),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_CORROSION, ABILITY_CUTE_CHARM, ABILITY_OBLIVIOUS },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Salandit♀"),
+        .cryId = CRY_SALANDIT,
+        .natDexNum = NATIONAL_DEX_SALANDIT_F,
+        .categoryName = _("Toxic Lizard"),
+        .height = 6,
+        .weight = 48,
+        .description = COMPOUND_STRING(
+            "It burns its bodily fluids to create a\n"
+            "sweet-smelling poisonous gas. When its\n"
+            "enemies become disoriented from inhaling\n"
+            "the gas, it attacks them."),
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Salandit,
+        .frontPicSize = MON_COORDS_SIZE(56, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 50),
+            ANIMCMD_FRAME(0, 10),
+        ),
+        .frontAnimId = ANIM_GLOW_RED,
+        .backPic = gMonBackPic_Salandit,
+        .backPicSize = MON_COORDS_SIZE(56, 40),
+        .backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_Salandit,
+        .shinyPalette = gMonShinyPalette_Salandit,
+        .iconSprite = gMonIcon_Salandit,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
+        SHADOW(3, 1, SHADOW_SIZE_M)
+        FOOTPRINT(Salandit)
+        OVERWORLD(
+            sPicTable_Salandit,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Salandit,
+            gShinyOverworldPalette_Salandit
+        )
+        .levelUpLearnset = sSalanditLevelUpLearnset,
+        .teachableLearnset = sSalanditTeachableLearnset,
+        .eggMoveLearnset = sSalanditEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_SALAZZLE }),
     },
 
     [SPECIES_SALAZZLE] =
@@ -3307,7 +3376,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
-        .abilities = { ABILITY_CORROSION, ABILITY_NONE, ABILITY_OBLIVIOUS },
+        .abilities = { ABILITY_CORROSION, ABILITY_CUTE_CHARM, ABILITY_OBLIVIOUS },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Salazzle"),
         .cryId = CRY_SALAZZLE,

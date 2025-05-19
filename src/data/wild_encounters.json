@@ -25042,12 +25042,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 25,
@@ -25062,7 +25062,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
@@ -25111,12 +25111,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 25,
@@ -25131,7 +25131,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
@@ -25180,12 +25180,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 25,
@@ -25200,7 +25200,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
@@ -25249,12 +25249,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 25,
@@ -25269,7 +25269,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SALANDIT"
+                "species": "SPECIES_SALANDIT_M"
               },
               {
                 "min_level": 27,

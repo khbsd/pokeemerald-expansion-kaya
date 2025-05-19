@@ -800,7 +800,7 @@
 #define SPECIES_LURANTIS                                754
 #define SPECIES_MORELULL                                755
 #define SPECIES_SHIINOTIC                               756
-#define SPECIES_SALANDIT                                757
+#define SPECIES_SALANDIT_M                           757
 #define SPECIES_SALAZZLE                                758
 #define SPECIES_STUFFUL                                 759
 #define SPECIES_BEWEAR                                  760
@@ -1646,7 +1646,10 @@
 #define SPECIES_WAILMER_WHALEFALL						1524
 #define SPECIES_WAILORD_WHALEFALL						1525
 
-#define SPECIES_EGG                                     (SPECIES_WAILORD_WHALEFALL + 1)
+//Extra salazzle shenanigans
+#define SPECIES_SALANDIT_F                         1526
+
+#define SPECIES_EGG                                     (SPECIES_SALANDIT_F + 1)
 
 #define NUM_SPECIES SPECIES_EGG
 
