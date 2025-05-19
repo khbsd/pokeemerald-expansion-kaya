@@ -2510,4 +2510,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 3,
         .breakable = TRUE,
     },
+
+    [ABILITY_TAINTED_LOVE] =
+    {
+        .name = _("Tainted Love"),
+        .description = COMPOUND_STRING("Poisons any type, attractive."),
+        .aiRating = 5,
+    },
 };

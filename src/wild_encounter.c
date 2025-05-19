@@ -562,7 +562,9 @@ void CreateWildMon(u16 species, u8 level)
 
     if (checkCuteCharm
         && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
-        && GetMonAbility(&gPlayerParty[0]) == ABILITY_CUTE_CHARM
+        && (GetMonAbility(&gPlayerParty[0]) == ABILITY_CUTE_CHARM
+            || GetMonAbility(&gPlayerParty[0]) == ABILITY_LOVESTRUCK
+            || GetMonAbility(&gPlayerParty[0]) == ABILITY_TAINTED_LOVE)
         && Random() % 3 != 0)
     {
         u16 leadingMonSpecies = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
