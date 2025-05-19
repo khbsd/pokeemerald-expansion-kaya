@@ -15031,18 +15031,18 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Turtonator @ White Herb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Sunny Day
-- Explosion
-- Attract
+- Shell Trap
+- Dragonbreath
+- Solar Beam
+- Protect
 
 Cinderace @ Kings Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Sunny Day
-- Explosion
-- Attract
+- Pyro Ball
+- Zen Headbutt
+- Sweet Kiss
+- Trailblaze
 
 Magmortar @ Kings Rock
 Ability: Synergetic
@@ -15063,29 +15063,54 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Skeledirge
+Armarouge @ Flame Orb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Trick
+- Armor Cannon
+- Flash Cannon
+- Calm Mind
 
-Typhlosion Hisui
+Chandelure @ Flame Orb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Poltergeist
+- Trick
+- Haze
+- Mystical Fire
+
+Typhlosion Hisui @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Curse
+- Flamethrower
+- Infernal Parade
+- Will-O-Wisp
 
 Ceruledge
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Curse
+- Bitter Blade
+- Sunny Day
+- Solar Blade
 
-Chandelure
+Marowak Alola @ Kings Rock
+Ability: Cursed Body
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bonemerang
+- Shadow Bone
+- Flame Wheel
+- Hex
 
-Incineroar
+Skeledirge
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-
-Marowak Alola
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Solar Beam
+- Torch Song
+- Thunder Fang
 
 === TRAINER_FLANNERY_4 ===
 Name: FLANNERY
@@ -15097,53 +15122,54 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Houndour
+Arcanine Hisui @ Hard Stone
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Roar
-- Solar Beam
-- Taunt
-- Sunny Day
-
-Growlithe
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Helping Hand
-- Flamethrower
-- Sunny Day
-- Roar
-
-Magcargo @ White Herb
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Attract
-- Light Screen
 - Rock Slide
-
-Rapidash
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Flamethrower
-- Attract
 - Solar Beam
-- Bounce
+- Sunny Day
+- Fire Fang
 
-Camerupt @ White Herb
+Arcanine @ Kings Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Sunny Day
+- Flame Charge
+- Parabolic Charge
+- Solar Beam
+- Extremespeed
+
+Camerupt Mega @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Amnesia
 - Earthquake
-- Attract
+- Yawn
 
-Torkoal @ White Herb
+Turtonator @ White Herb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
+- Shell Trap
+- Venoshock
+- Shell Smash
+- Dragon Pulse
+
+Houndoom @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Beat Up
+- Fire Fang
+- Smog
 - Sunny Day
-- Explosion
-- Attract
+
+Salazzle @ Black Sludge
+Ability: Tainted Love
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Fire Lash
+- Venoshock
+- Nasty Plot
+- Toxic
 
 === TRAINER_FLANNERY_5 ===
 Name: FLANNERY
@@ -15155,53 +15181,53 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Arcanine
+Charizard Mega X @ Hard Stone
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Helping Hand
-- Flamethrower
-- Sunny Day
-- Roar
-
-Magcargo @ White Herb
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Attract
-- Light Screen
-- Rock Slide
-
-Houndoom
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Roar
+- Dragon Tail
 - Solar Beam
-- Taunt
+- Sunny Day
+- Fire Fang
+
+Charizard Mega Y @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flame Charge
+- Flamethrower
+- Solar Beam
+- Extremespeed
+
+Camerupt Mega @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Amnesia
+- Earthquake
+- Yawn
+
+Turtonator @ White Herb
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Shell Trap
+- Venoshock
+- Shell Smash
+- Dragon Pulse
+
+Houndoom Mega @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Beat Up
+- Fire Fang
+- Smog
 - Sunny Day
 
-Rapidash
+Salazzle @ Black Sludge
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flamethrower
 - Attract
 - Solar Beam
 - Bounce
-
-Camerupt @ White Herb
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Sunny Day
-- Earthquake
-- Attract
-
-Torkoal @ White Herb
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Overheat
-- Sunny Day
-- Explosion
-- Attract
 
 === TRAINER_NORMAN_2 ===
 Name: NORMAN
