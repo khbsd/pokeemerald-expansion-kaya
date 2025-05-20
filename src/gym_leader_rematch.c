@@ -107,7 +107,8 @@ static s32 GetRematchIndex(u32 trainerIdx)
             return i;
     }
 
-    if (HasTrainerBeenFought(gRematchTable[trainerIdx].trainerIds[maxRematch]))
+    if (HasTrainerBeenFought(gRematchTable[trainerIdx].trainerIds[maxRematch - 1])
+        && FlagGet(FLAG_WATTSON_REMATCH_AVAILABLE))
         return RandomUniform(RNG_GYM_REMATCH, 1, maxRematch);
 
     return maxRematch;

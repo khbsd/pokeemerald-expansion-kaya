@@ -38064,7 +38064,7 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 15195
                 MOVE_FLAME_CHARGE,
-                MOVE_FLAMETHROWER,
+                MOVE_DRAGON_CHEER,
                 MOVE_ACROBATICS,
                 MOVE_EXTREMESPEED,
             },
@@ -38104,7 +38104,7 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 15211
                 MOVE_SHELL_TRAP,
-                MOVE_VENOSHOCK,
+                MOVE_SMOG,
                 MOVE_SHELL_SMASH,
                 MOVE_DRAGON_PULSE,
             },
@@ -38144,7 +38144,7 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 15227
                 MOVE_FLAMETHROWER,
-                MOVE_ATTRACT,
+                MOVE_VENOSHOCK,
                 MOVE_SOLAR_BEAM,
                 MOVE_BOUNCE,
             },
