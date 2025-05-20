@@ -6789,6 +6789,10 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
                 StringAppend(gStringVar4, gStringVar2);
                 StringAppend(gStringVar4, COMPOUND_STRING(" in bag"));
                 break;
+            case IF_LEVEL:
+                StringCopy(gStringVar4, COMPOUND_STRING("{LV}{UP_ARROW}"));
+                ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEFT_ALIGN, EVO_SCREEN_LVL_DIGITS); //level
+                StringAppend(gStringVar4, gStringVar2);
             case CONDITIONS_END:
                 break;
             }

@@ -68,6 +68,7 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 #include "wild_encounter.h"
+#include <complex.h>
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
 
@@ -5165,6 +5166,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     u32 attack = GetMonData(mon, MON_DATA_ATK, 0);
     u32 defense = GetMonData(mon, MON_DATA_DEF, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    u32 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     u16 upperPersonality = personality >> 16;
     u32 weather = GetCurrentWeather();
     u32 nature = GetNature(mon);
@@ -5452,6 +5454,9 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
                     *canStopEvo = FALSE;
             }
             break;
+        case IF_LEVEL:
+            if (level == params[i].arg1)
+                currentCondition = TRUE;
         case CONDITIONS_END:
             break;
         }

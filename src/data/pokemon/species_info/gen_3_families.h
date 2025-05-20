@@ -4491,17 +4491,18 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sSkittyLevelUpLearnset,
         .teachableLearnset = sSkittyTeachableLearnset,
         .eggMoveLearnset = sSkittyEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY, 
+                        CONDITIONS({IF_LEVEL, 45})}),
     },
 
     [SPECIES_DELCATTY] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 65,
-        .baseDefense   = 65,
-        .baseSpeed     = P_UPDATED_STATS >= GEN_7 ? 90 : 70,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 55,
+        .baseHP        = 110,
+        .baseAttack    = 85,
+        .baseDefense   = 85,
+        .baseSpeed     = 100
+        .baseSpAttack  = 85,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_NORMAL),
         .catchRate = 60,
     #if P_UPDATED_EXP_YIELDS >= GEN_7
