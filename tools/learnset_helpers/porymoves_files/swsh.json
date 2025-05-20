@@ -40284,7 +40284,14 @@
       "MOVE_UPROAR",
       "MOVE_HEAT_WAVE",
       "MOVE_TAUNT",
-      "MOVE_WORK_UP"
+      "MOVE_WORK_UP",
+      "MOVE_LASH_OUT",
+      "MOVE_KNOCK_OFF",
+      "MOVE_THROAT_CHOP",
+      "MOVE_SUCKER_PUNCH",
+      "MOVE_AERIAL_ACE",
+      "MOVE_AIR_CUTTER",
+      "MOVE_ROOST"
     ],
     "EggMoves": [
       "MOVE_DEFOG",
@@ -40375,7 +40382,14 @@
       "MOVE_UPROAR",
       "MOVE_HEAT_WAVE",
       "MOVE_TAUNT",
-      "MOVE_WORK_UP"
+      "MOVE_WORK_UP",
+      "MOVE_LASH_OUT",
+      "MOVE_KNOCK_OFF",
+      "MOVE_THROAT_CHOP",
+      "MOVE_SUCKER_PUNCH",
+      "MOVE_AERIAL_ACE",
+      "MOVE_AIR_CUTTER",
+      "MOVE_ROOST"
     ],
     "EggMoves": [
       "MOVE_DEFOG",
@@ -40470,7 +40484,14 @@
       "MOVE_TAUNT",
       "MOVE_BRAVE_BIRD",
       "MOVE_WORK_UP",
-      "MOVE_HURRICANE"
+      "MOVE_HURRICANE",
+      "MOVE_LASH_OUT",
+      "MOVE_KNOCK_OFF",
+      "MOVE_THROAT_CHOP",
+      "MOVE_SUCKER_PUNCH",
+      "MOVE_AERIAL_ACE",
+      "MOVE_AIR_CUTTER",
+      "MOVE_ROOST"
     ],
     "EggMoves": [
       "MOVE_DEFOG",

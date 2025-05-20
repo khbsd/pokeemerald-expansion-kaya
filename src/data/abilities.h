@@ -2517,4 +2517,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Poisons any type, attractive."),
         .aiRating = 5,
     },
+
+    [ABILITY_OMINOUS_LUCK] =
+    {
+        .name = _("Ominous Luck"),
+        .description = COMPOUND_STRING("May cause a flinch or crit."),
+        .aiRating = 1,
+    },
 };
