@@ -6798,9 +6798,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
             }
 
             if (evolutions[i].params[j+1].condition != CONDITIONS_END)
-            {
                 StringAppend(gStringVar4, COMPOUND_STRING(", "));
-            }
         }
 
         if (isAlcremie)
