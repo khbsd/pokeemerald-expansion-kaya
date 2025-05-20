@@ -100,13 +100,16 @@ static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 ma
 static s32 GetRematchIndex(u32 trainerIdx)
 {
     s32 i;
-    for (i = 0; i < 5; i++)
+    u32 maxRematch = 5;
+    for (i = 0; i < maxRematch; i++)
     {
         if (!HasTrainerBeenFought(gRematchTable[trainerIdx].trainerIds[i]))
-        {
             return i;
-        }
     }
-    return 5;
+
+    if (HasTrainerBeenFought(gRematchTable[trainerIdx].trainerIds[maxRematch]))
+        return RandomUniform(RNG_GYM_REMATCH, 1, maxRematch);
+
+    return maxRematch;
 }
 #endif //FREE_MATCH_CALL
