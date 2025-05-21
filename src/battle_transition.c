@@ -2320,7 +2320,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     }
 
     LoadPalette(sOpponentMugshotsPals[mugshotColor], 0xF0, 0x20);
-    LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->playerIsKaya], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(6));
+    LoadPalette(sPlayerMugshotsPals[GetPlayerTrainerSpriteIndex()], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(6));
 
     for (i = 0; i < 20; i++)
     {

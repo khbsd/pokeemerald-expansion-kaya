@@ -387,7 +387,7 @@ static void HandleInputChooseAction(u32 battler)
          && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
             // Return item to bag if partner had selected one (if consumable).
-            if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM && ItemId_GetConsumability(itemId))
+            if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM && !ItemId_GetConsumability(itemId))
             {
                 AddBagItem(itemId, 1);
             }
@@ -1915,10 +1915,13 @@ static u32 PlayerGetTrainerBackPicId(void)
 {
     u32 trainerPicId;
 
+    MgbaPrintf(MGBA_LOG_WARN, "player gender: %u", gSaveBlock2Ptr->playerGender);
+    MgbaPrintf(MGBA_LOG_WARN, "player is kaya?: %u", gSaveBlock2Ptr->playerIsKaya);
+
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
     else
-        trainerPicId = gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->playerIsKaya + TRAINER_BACK_PIC_BRENDAN;
+        trainerPicId = GetPlayerTrainerSpriteIndex() + TRAINER_BACK_PIC_BRENDAN;
 
 
     return trainerPicId;
@@ -2332,7 +2335,7 @@ static void PlayerHandleOneReturnValue_Duplicate(u32 battler)
 
 static void PlayerHandleIntroTrainerBallThrow(u32 battler)
 {
-    const u16 *trainerPal = gTrainerBacksprites[gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->playerIsKaya].palette.data;
+    const u16 *trainerPal = gTrainerBacksprites[GetPlayerTrainerSpriteIndex()].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
 
