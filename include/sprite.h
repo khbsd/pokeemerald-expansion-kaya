@@ -328,6 +328,6 @@ void SetSpriteOamFlipBits(struct Sprite *sprite, u8 hFlip, u8 vFlip);
 
 // func to return enum for player sprite gender
 
-u32 GetPlayerTrainerSpriteIndex(void);
+u32 GetPlayerTrainerBackSprite(void);
 
 #endif //GUARD_SPRITE_H

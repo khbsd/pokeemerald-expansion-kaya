@@ -1696,7 +1696,7 @@ static void InitFrontierMapSprites(void)
 
         LoadCompressedSpriteSheet(sHeadsSpriteSheet);
         sprite = sSpriteTemplate_PlayerHead;
-        sprite.paletteTag = GetPlayerTrainerSpriteIndex() + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMME
+        sprite.paletteTag = GetPlayerTrainerBackSprite() + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMME
         if (id != 0)
         {
             spriteId = CreateSprite(&sprite, x, y, 0);

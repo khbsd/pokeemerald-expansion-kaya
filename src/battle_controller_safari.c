@@ -243,7 +243,7 @@ static void SafariBufferExecCompleted(u32 battler)
 
 static void SafariHandleDrawTrainerPic(u32 battler)
 {
-    u32 trainerPicId = GetPlayerTrainerSpriteIndex() + TRAINER_BACK_PIC_BRENDAN;
+    u32 trainerPicId = GetPlayerTrainerBackSprite() + TRAINER_BACK_PIC_BRENDAN;
 
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, FALSE,
                                        80, 80 + 4 * (8 - gTrainerBacksprites[trainerPicId].coordinates.size),

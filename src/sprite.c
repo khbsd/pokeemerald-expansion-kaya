@@ -1788,7 +1788,7 @@ u32 GetSpanPerImage(u32 shape, u32 size)
     return sSpanPerImage[shape][size];
 }
 
-u32 GetPlayerTrainerSpriteIndex(void)
+u32 GetPlayerTrainerBackSprite(void)
 {
    return gSaveBlock2Ptr->playerGender + (gSaveBlock2Ptr->playerIsKaya * 2);
 };
