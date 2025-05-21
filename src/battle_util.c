@@ -4160,7 +4160,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
                 break;
             case ABILITY_ICE_BODY:
-                if (!IsBattlerAtMaxHp(battler)
+                if (IsBattlerWeatherAffected(battler, B_WEATHER_HAIL | B_WEATHER_SNOW)
+                 && !IsBattlerAtMaxHp(battler)
                  && !(gStatuses3[battler] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
                  && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
                 {
@@ -9677,7 +9678,7 @@ static inline s32 DoFixedDamageMoveCalc(struct DamageCalculationData *damageCalc
         dmg = GetMoveFixedDamage(damageCalcData->move);
         break;
     case EFFECT_SUPER_FANG:
-        dmg = GetNonDynamaxHP(gBattlerTarget) / 2;
+        dmg = GetNonDynamaxHP(damageCalcData->battlerDef) / 2;
         break;
     default:
         return INT32_MAX;
