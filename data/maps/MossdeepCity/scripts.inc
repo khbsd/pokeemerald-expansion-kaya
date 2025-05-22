@@ -9,7 +9,8 @@ MossdeepCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_OnTransition
 	.byte 0
 
-MossdeepCity_OnTransition:
+MossdeepCity_OnTransition: @ 81E4A9C
+	setflag FLAG_VISITED_ROUTE124
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3

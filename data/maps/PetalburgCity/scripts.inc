@@ -11,10 +11,15 @@ PetalburgCity_MapScripts::
 
 PetalburgCity_OnTransition:
 	setflag FLAG_VISITED_PETALBURG_CITY
-	call_if_eq VAR_PETALBURG_CITY_STATE, 0, PetalburgCity_EventScript_MoveGymBoyToWestEntrance
-	call_if_eq VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_DisableMapNameAndMusic
-	call_if_eq VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_DisableMapNameAndMusic
-	call_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_EventScript_SetGymDoorsUnlocked
+	setflag FLAG_VISITED_ROUTE102
+	compare VAR_PETALBURG_CITY_STATE, 0
+	call_if_eq PetalburgCity_EventScript_MoveGymBoyToWestEntrance
+	compare VAR_PETALBURG_CITY_STATE, 2
+	call_if_eq PetalburgCity_EventScript_DisableMapNameAndMusic
+	compare VAR_PETALBURG_CITY_STATE, 4
+	call_if_eq PetalburgCity_EventScript_DisableMapNameAndMusic
+	compare VAR_PETALBURG_GYM_STATE, 8
+	call_if_eq PetalburgCity_EventScript_SetGymDoorsUnlocked
 	end
 
 PetalburgCity_EventScript_MoveGymBoyToWestEntrance::

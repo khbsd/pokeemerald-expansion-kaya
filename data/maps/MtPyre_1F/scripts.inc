@@ -1,7 +1,12 @@
-MtPyre_1F_MapScripts::
+MtPyre_1F_MapScripts:: @ 8230F3E
+	map_script MAP_SCRIPT_ON_TRANSITION, Mt_Pyre_1F_OnTransition
 	.byte 0
 
-MtPyre_1F_EventScript_CleanseTagWoman::
+Mt_Pyre_1F_OnTransition::
+	setflag FLAG_VISITED_ROUTE122
+	end
+
+MtPyre_1F_EventScript_CleanseTagWoman:: @ 8230F3F
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_ReceivedCleanseTag

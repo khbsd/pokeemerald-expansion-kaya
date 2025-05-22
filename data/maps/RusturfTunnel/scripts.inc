@@ -14,8 +14,10 @@ RusturfTunnel_OnFrame:
 	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_ClearTunnelScene
 	.2byte 0
 
-RusturfTunnel_OnTransition:
-	call_if_eq VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
+RusturfTunnel_OnTransition: @ 822CE44
+	setflag FLAG_VISITED_ROUTE116
+	compare VAR_RUSTURF_TUNNEL_STATE, 2
+	call_if_eq RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos
 	end
 
 RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos::
