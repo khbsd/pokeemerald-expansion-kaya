@@ -9456,6 +9456,10 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(u32 move, u32 moveType, u32 
         if (typeEffectivenessModifier >= UQ_4_12(2.0))
             return UQ_4_12(0.75);
         break;
+    case ABILITY_SHIELD_DUST:
+        if (typeEffectivenessModifier >= UQ_4_12(2.0))
+            return UQ_4_12(0.875);
+        break;
     case ABILITY_BURN_ENTRY:
         if (IsMoveMakingContact(move, battlerAtk))
             return UQ_4_12(0.75);
