@@ -1174,11 +1174,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_FAMILY_BLIPBUG
     [SPECIES_BLIPBUG] =
     {
-        .baseHP        = 25,
+        .baseHP        = 55,
         .baseAttack    = 20,
-        .baseDefense   = 20,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 25,
+        .baseDefense   = 45,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 70,
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_BUG),
         .catchRate = 255,
@@ -1234,16 +1234,16 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sBlipbugLevelUpLearnset,
         .teachableLearnset = sBlipbugTeachableLearnset,
         .eggMoveLearnset = sBlipbugEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DOTTLER}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 19, SPECIES_DOTTLER}),
     },
 
     [SPECIES_DOTTLER] =
     {
-        .baseHP        = 50,
+        .baseHP        = 70,
         .baseAttack    = 35,
-        .baseDefense   = 80,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 50,
+        .baseDefense   = 90,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 85,
         .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_BUG, TYPE_PSYCHIC),
         .catchRate = 120,
@@ -1299,16 +1299,16 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .levelUpLearnset = sDottlerLevelUpLearnset,
         .teachableLearnset = sDottlerTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ORBEETLE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ORBEETLE}),
     },
 
     [SPECIES_ORBEETLE] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 45,
+        .baseHP        = 65,
+        .baseAttack    = 40,
         .baseDefense   = 110,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 80,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 115,
         .baseSpDefense = 120,
         .types = MON_TYPES(TYPE_BUG, TYPE_PSYCHIC),
         .catchRate = 45,
@@ -1418,7 +1418,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_OrbeetleGmax,
         .iconSprite = gMonIcon_OrbeetleGmax,
         .iconPalIndex = 0,
-        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(0, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Orbeetle)
         .isGigantamax = TRUE,

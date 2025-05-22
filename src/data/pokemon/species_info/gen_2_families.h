@@ -7111,8 +7111,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .formChangeTable = sHoundoomFormChangeTable,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_HOUNDOOM_MEGA,
                                     CONDITIONS(
-                                        {IF_HOLD_ITEM, ITEM_RAZOR_FANG},
-                                        {IF_IN_MAP, MAP_SKY_PILLAR_TOP}
+                                        {IF_HOLD_ITEM, ITEM_RAZOR_FANG}
                                     )}),
     },
 
