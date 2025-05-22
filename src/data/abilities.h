@@ -2524,4 +2524,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("May cause a flinch or crit."),
         .aiRating = 1,
     },
+
+    [ABILITY_FLUX_FIELD] =
+    {
+        .name = _("Flux Field"),
+        .description = COMPOUND_STRING("Avoid Ground moves, up SpAtk."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };

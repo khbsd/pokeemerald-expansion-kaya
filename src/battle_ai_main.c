@@ -1887,7 +1887,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_MAGNITUDE:
-            if (aiData->abilities[battlerDef] == ABILITY_LEVITATE)
+            if (aiData->abilities[battlerDef] == ABILITY_LEVITATE || aiData->abilities[battlerDef] == ABILITY_FLUX_FIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_PARTING_SHOT:
@@ -3229,6 +3229,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case ABILITY_EARTH_EATER:
             case ABILITY_BRINEBLOOD:
             case ABILITY_LEVITATE:
+            case ABILITY_FLUX_FIELD:
                 if (moveType == TYPE_GROUND)
                 {
                     if (moveTarget == MOVE_TARGET_FOES_AND_ALLY)
