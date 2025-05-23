@@ -9195,7 +9195,7 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
         break;
     case ABILITY_RAIN_DISH:
         if (B_WEATHER_RAIN & gBattleWeather)
-            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_GRASS_PELT:
         if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && usesDefStat)
