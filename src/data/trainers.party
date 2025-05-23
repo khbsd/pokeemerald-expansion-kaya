@@ -15239,10 +15239,10 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Chansey
+Blissey
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Light Screen
+- Sweet Kiss
 - Sing
 - Skill Swap
 - Focus Punch
@@ -15254,6 +15254,22 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shadow Ball
 - Double Edge
 - Fire Blast
+
+Spinda
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Teeter Dance
+- Skill Swap
+- Facade
+- Hypnosis
+
+Slaking @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
+- Flamethrower
+- Thunderbolt
+- Shadow Ball
 
 Spinda
 Level: 100

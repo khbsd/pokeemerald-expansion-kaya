@@ -32458,6 +32458,7 @@ static const u16 sHatennaTeachableLearnset[] = {
     MOVE_SNORE,
     MOVE_SWIFT,
     MOVE_THUNDER_WAVE,
+    MOVE_TOXIC,
     MOVE_UNAVAILABLE,
 };
 
@@ -32480,6 +32481,7 @@ static const u16 sHattremTeachableLearnset[] = {
     MOVE_SNORE,
     MOVE_SWIFT,
     MOVE_THUNDER_WAVE,
+    MOVE_TOXIC,
     MOVE_UNAVAILABLE,
 };
 
@@ -32505,6 +32507,7 @@ static const u16 sHattereneTeachableLearnset[] = {
     MOVE_SWIFT,
     MOVE_SWORDS_DANCE,
     MOVE_THUNDER_WAVE,
+    MOVE_TOXIC,
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_HATENNA

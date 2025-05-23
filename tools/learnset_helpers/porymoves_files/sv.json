@@ -70749,7 +70749,12 @@
       "MOVE_TERA_BLAST",
       "MOVE_PSYCH_UP",
       "MOVE_FUTURE_SIGHT",
-      "MOVE_EXPANDING_FORCE"
+      "MOVE_EXPANDING_FORCE",
+      "MOVE_TOXIC",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_TOXIC_CHAIN",
+      "MOVE_VENOSHOCK",
+      "MOVE_CROSS_POISON"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",
@@ -70847,7 +70852,12 @@
       "MOVE_TERA_BLAST",
       "MOVE_PSYCH_UP",
       "MOVE_FUTURE_SIGHT",
-      "MOVE_EXPANDING_FORCE"
+      "MOVE_EXPANDING_FORCE",
+      "MOVE_TOXIC",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_TOXIC_CHAIN",
+      "MOVE_VENOSHOCK",
+      "MOVE_CROSS_POISON"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",
@@ -70963,7 +70973,12 @@
       "MOVE_PSYCH_UP",
       "MOVE_FUTURE_SIGHT",
       "MOVE_EXPANDING_FORCE",
-      "MOVE_PSYCHIC_NOISE"
+      "MOVE_PSYCHIC_NOISE",
+      "MOVE_TOXIC",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_TOXIC_CHAIN",
+      "MOVE_VENOSHOCK",
+      "MOVE_CROSS_POISON"
     ],
     "EggMoves": [
       "MOVE_AFTER_YOU",

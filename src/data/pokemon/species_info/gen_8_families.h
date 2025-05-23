@@ -4252,7 +4252,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpeed     = 39,
         .baseSpAttack  = 56,
         .baseSpDefense = 53,
-        .types = MON_TYPES(TYPE_PSYCHIC),
+        .types = MON_TYPES(TYPE_FAIRY),
         .catchRate = 235,
         .expYield = 53,
         .evYield_SpAttack = 1,
@@ -4306,7 +4306,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sHatennaLevelUpLearnset,
         .teachableLearnset = sHatennaTeachableLearnset,
         .eggMoveLearnset = sHatennaEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_HATTREM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 19, SPECIES_HATTREM}),
     },
 
     [SPECIES_HATTREM] =
@@ -4317,7 +4317,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpeed     = 49,
         .baseSpAttack  = 86,
         .baseSpDefense = 73,
-        .types = MON_TYPES(TYPE_PSYCHIC),
+        .types = MON_TYPES(TYPE_FAIRY, TYPE_POISON),
         .catchRate = 120,
         .expYield = 130,
         .evYield_SpAttack = 2,
@@ -4369,7 +4369,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .levelUpLearnset = sHattremLevelUpLearnset,
         .teachableLearnset = sHattremTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_HATTERENE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_HATTERENE}),
     },
 
     [SPECIES_HATTERENE] =
@@ -4380,7 +4380,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpeed     = 29,
         .baseSpAttack  = 136,
         .baseSpDefense = 103,
-        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
+        .types = MON_TYPES(TYPE_FAIRY, TYPE_POISON),
         .catchRate = 45,
         .expYield = 255,
         .evYield_SpAttack = 3,
@@ -4389,7 +4389,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_HEALER, ABILITY_ANTICIPATION, ABILITY_MAGIC_BOUNCE },
+        .abilities = { ABILITY_HEALER, ABILITY_POISON_PUPPETEER, ABILITY_MAGIC_BOUNCE },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Hatterene"),
         .cryId = CRY_HATTERENE,
