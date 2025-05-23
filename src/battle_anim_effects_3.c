@@ -1207,8 +1207,8 @@ const struct SpriteTemplate gMegaParticlesSpriteTemplate =
 const struct SpriteTemplate gMegaSmokeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ELECTRICITY,
-    .paletteTag = ANIM_TAG_ELECTRICITY,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .paletteTag = ANIM_TAG_MEGA_SYMBOL,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gAnims_ElectricPuff,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
