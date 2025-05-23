@@ -78,13 +78,13 @@
 #define FLAG_UNUSED_0x040           0x40 // Unused Flag
 #define FLAG_UNUSED_0x041           0x41 // Unused Flag
 #define FLAG_UNUSED_0x042           0x42 // Unused Flag
-#define FLAG_UNUSED_0x043           0x43 // Unused Flag
-#define FLAG_SYS_BAG_USE            0x44 // Unused Flag
-#define FLAG_SYS_ENABLE_POKEVIAL    0x45 // Unused Flag
-#define FLAG_SYS_PERMA_REPEL        0x46 // Unused Flag
-#define FLAG_DEXNAV_DETECT          0x47 // Unused Flag
-#define FLAG_DEXNAV_SEARCHING       0x48 // Unused Flag
-#define FLAG_DEXNAV_START_MENU      0x49 // Unused Flag
+#define FLAG_RANDOM_GYM_REMATCH     0x43
+#define FLAG_SYS_BAG_USE            0x44
+#define FLAG_SYS_ENABLE_POKEVIAL    0x45
+#define FLAG_SYS_PERMA_REPEL        0x46
+#define FLAG_DEXNAV_DETECT          0x47
+#define FLAG_DEXNAV_SEARCHING       0x48
+#define FLAG_DEXNAV_START_MENU      0x49
 #define FLAG_KAYA_DOLL_APPEAR       0x4A // NEEDS TO NEVER BE SET
 #define FLAG_KAYA_BOXLINK_FOUND     0x4B
 #define FLAG_KAYA_EXPSHARE_FOUND    0x4C
