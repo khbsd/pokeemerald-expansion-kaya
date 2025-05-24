@@ -10203,7 +10203,8 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
 
 bool32 CanMegaEvolve(u32 battler)
 {
-    if (!B_MEGA_RING)
+    bool32 isRayquaza = gBattleMons[battler].species == SPECIES_RAYQUAZA;
+    if (!B_MEGA_RING && !isRayquaza)
         return FALSE;
 
     enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
@@ -10211,11 +10212,11 @@ bool32 CanMegaEvolve(u32 battler)
     // Check if Player has a Mega Ring.
     if (!TESTING
         && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_MEGA_RING, 1))
+        && (!CheckBagHasItem(ITEM_MEGA_RING, 1) && !isRayquaza))
         return FALSE;
 
-    if (P_MEGA_STONES_AS_EVO_STONES)
-        return FALSE;
+    //if (P_MEGA_STONES_AS_EVO_STONES)
+        //return FALSE;
 
     // Check if Trainer has already Mega Evolved.
     if (HasTrainerUsedGimmick(battler, GIMMICK_MEGA))
@@ -10343,7 +10344,7 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, enum FormChanges method)
         {
             switch (method)
             {
-            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+            //case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
             case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
             case FORM_CHANGE_BATTLE_ULTRA_BURST:
                 if (heldItem == formChanges[i].param1)
