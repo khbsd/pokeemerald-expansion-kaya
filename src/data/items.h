@@ -1960,6 +1960,24 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_PermaRareCandy,
     },
 
+    [ITEM_PERMA_ABILITY_PATCH] =
+    {
+        .name = _("Perma Ability Patch"),
+        .pluralName = _("Ability Patches"),
+        .price = (I_PRICE >= GEN_9) ? 250000 : 20,
+        .holdEffectParam = 0,
+        .description = COMPOUND_STRING(
+            "Turns the ability\n"
+            "of a Pokémon into\n"
+            "a rare ability."),
+        .notConsumed = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityPatch,
+        .iconPic = gItemIcon_AbilityPatch,
+        .iconPalette = gItemIconPalette_PermaAbilityPatch,
+    },
+
     [ITEM_EXP_CANDY_XS] =
     {
         .name = _("Exp. Candy XS"),

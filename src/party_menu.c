@@ -523,6 +523,7 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void Task_HideFollowerNPCForTeleport(u8);
+u32 TryIncrementAbility(u32 species, u32 abilityNum);
 
 // static const data
 #include "data/party_menu.h"
@@ -5003,12 +5004,32 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
-    if (GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) == 2)
-        tAbilityNum = 0;
-    else
-        tAbilityNum = 2;
+    tAbilityNum = TryIncrementAbility(tSpecies, GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL));
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityPatch;
+}
+
+u32 TryIncrementAbility(u32 species, u32 abilityNum)
+{
+
+    /* ABILITY_NONE is 0, so returns FALSE
+    if (!GetAbilityBySpecies(species, abilityNum))
+    {
+        // should cover values of both 1 and 2
+        if (abilityNum)
+            abilityNum = TryIncrementAbility(species, abilityNum++);
+        else
+            abilityNum = 0;
+    }*/
+
+    do
+    {
+        abilityNum++;
+        if (abilityNum > 2)
+            abilityNum = 0;
+    } while (!GetAbilityBySpecies(species, abilityNum));
+
+    return abilityNum;
 }
 
 #undef tState

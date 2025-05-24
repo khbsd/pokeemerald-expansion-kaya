@@ -512,6 +512,7 @@ extern const u32 gItemIcon_AbilityCapsule[];
 extern const u16 gItemIconPalette_AbilityCapsule[];
 extern const u32 gItemIcon_AbilityPatch[];
 extern const u16 gItemIconPalette_AbilityPatch[];
+extern const u16 gItemIconPalette_PermaAbilityPatch[];
 // Mints
 extern const u32 gItemIcon_Mint[];
 extern const u16 gItemIconPalette_RedMint[];

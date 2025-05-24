@@ -370,7 +370,7 @@
 #define P_FAMILY_DRUDDIGON               P_GEN_5_POKEMON
 // #define P_FAMILY_GOLETT               P_GEN_5_POKEMON
 // #define P_FAMILY_PAWNIARD             P_GEN_5_POKEMON
-#define P_FAMILY_BOUFFALANT              P_GEN_5_POKEMON
+// #define P_FAMILY_BOUFFALANT           P_GEN_5_POKEMON
 #define P_FAMILY_RUFFLET                 P_GEN_5_POKEMON
 #define P_FAMILY_VULLABY                 P_GEN_5_POKEMON
 #define P_FAMILY_HEATMOR                 P_GEN_5_POKEMON
@@ -400,7 +400,7 @@
 // #define P_FAMILY_FLABEBE              P_GEN_6_POKEMON
 // #define P_FAMILY_SKIDDO               P_GEN_6_POKEMON
 // #define P_FAMILY_PANCHAM              P_GEN_6_POKEMON
-#define P_FAMILY_FURFROU                 P_GEN_6_POKEMON
+// #define P_FAMILY_FURFROU              P_GEN_6_POKEMON
 #define P_FAMILY_ESPURR                  P_GEN_6_POKEMON
 #define P_FAMILY_HONEDGE                 P_GEN_6_POKEMON
 // #define P_FAMILY_SPRITZEE             P_GEN_6_POKEMON
@@ -636,6 +636,7 @@
 #define P_FAMILY_CUBCHOO                 TRUE
 #define P_FAMILY_GOLETT                  TRUE
 #define P_FAMILY_PAWNIARD                TRUE
+#define P_FAMILY_BOUFFALANT              TRUE
 #define P_FAMILY_DEINO                   TRUE
 #define P_FAMILY_LARVESTA                TRUE
 #endif // P_KAYAS_CHOICE || P_GEN_5_POKEMON
@@ -649,6 +650,7 @@
 #define P_FAMILY_SCATTERBUG              TRUE
 #define P_FAMILY_FLABEBE                 TRUE
 #define P_FAMILY_PANCHAM                 TRUE
+#define P_FAMILY_FURFROU                 TRUE
 #define P_FAMILY_SPRITZEE                TRUE
 #define P_FAMILY_SKIDDO                  TRUE
 #define P_FAMILY_INKAY                   TRUE

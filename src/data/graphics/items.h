@@ -254,6 +254,7 @@ const u16 gItemIconPalette_AbilityCapsule[] = INCBIN_U16("graphics/items/icon_pa
 
 const u32 gItemIcon_AbilityPatch[] = INCBIN_U32("graphics/items/icons/ability_patch.4bpp.lz");
 const u16 gItemIconPalette_AbilityPatch[] = INCBIN_U16("graphics/items/icon_palettes/ability_patch.gbapal");
+const u16 gItemIconPalette_PermaAbilityPatch[] = INCBIN_U16("graphics/items/icon_palettes/perma_ability_patch.gbapal");
 
 // Mints
 
