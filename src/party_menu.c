@@ -5011,23 +5011,9 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 
 u32 TryIncrementAbility(u32 species, u32 abilityNum)
 {
-
-    /* ABILITY_NONE is 0, so returns FALSE
-    if (!GetAbilityBySpecies(species, abilityNum))
-    {
-        // should cover values of both 1 and 2
-        if (abilityNum)
-            abilityNum = TryIncrementAbility(species, abilityNum++);
-        else
-            abilityNum = 0;
-    }*/
-
     do
-    {
-        abilityNum++;
-        if (abilityNum > 2)
-            abilityNum = 0;
-    } while (!GetAbilityBySpecies(species, abilityNum));
+        abilityNum = (abilityNum + 1) % 3;
+    while (!GetAbilityBySpecies(species, abilityNum));
 
     return abilityNum;
 }
