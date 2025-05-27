@@ -256,10 +256,6 @@ TrainerHill_Entrance_EventScript_Clerk::
 
 	.align 2
 TrainerHill_Entrance_Pokemart_Basic:
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SP_ATK
 	.2byte ITEM_X_ATTACK
@@ -277,11 +273,6 @@ TrainerHill_Entrance_EventScript_ExpandedPokemart::
 
 	.align 2
 TrainerHill_Entrance_Pokemart_Expanded:
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SP_ATK
 	.2byte ITEM_X_ATTACK
