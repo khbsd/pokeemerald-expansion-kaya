@@ -5723,7 +5723,7 @@ BattleScript_MagicRoomEnds::
 	setbyte gBattlerTarget, 0
 BattleScript_MagicRoomHealingItemsLoop:
 	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattlerTarget, 1
-	tryhealingitem
+	tryrestorehpberry
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MagicRoomHealingItemsLoop
 	end2
@@ -7000,7 +7000,7 @@ BattleScript_DoTurnDmg:
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
 	checkteamslost BattleScript_DoTurnDmgEnd
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_DoTurnDmgEnd:
 	end2
 
@@ -7248,7 +7248,7 @@ BattleScript_YawnEnd:
 BattleScript_EmbargoEndTurn::
 	printstring STRINGID_EMBARGOENDS
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 	end2
 
 BattleScript_TelekinesisEndTurn::
@@ -7540,7 +7540,7 @@ BattleScript_PickupActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_XFOUNDONEY
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_PickupActivatesEnd:
 	end3
 
@@ -7550,7 +7550,7 @@ BattleScript_HarvestActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_HARVESTBERRY
 	waitmessage B_WAIT_TIME_LONG
-	tryhealingitem
+	tryrestorehpberry
 BattleScript_HarvestActivatesEnd:
 	end3
 
