@@ -21,7 +21,7 @@ void MoveAllRoamers(void);
 void InitNextRoamer(void);
 
 #define ROAMER_LEVEL 80
-#define ROAMER_SPECIES_POOL_COUNT 27
+#define ROAMER_SPECIES_POOL_COUNT 30
 
 static const u32 sRoamerSpeciesList[] = 
 {
@@ -41,6 +41,12 @@ static const u32 sRoamerSpeciesList[] =
     SPECIES_CELEBI,
     SPECIES_LATIOS,
     SPECIES_LATIAS,
+    SPECIES_REGICE,
+    SPECIES_REGIROCK,
+    SPECIES_REGISTEEL,
+    SPECIES_GROUDON,
+    SPECIES_KYOGRE,
+    SPECIES_RAYQUAZA,
     SPECIES_DIALGA,
     SPECIES_PALKIA,
     SPECIES_GIRATINA,

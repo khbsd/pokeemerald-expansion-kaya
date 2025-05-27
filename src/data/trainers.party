@@ -15907,14 +15907,17 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Porygon Z @ Iron Ball
+Ability: Analytic
+Nature: Quiet
 Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 - Trick Room
-- Substitute
+- Curse
 - Recover
 - Tri Attack
 
 Porygon Z @ Quick Claw
+Ability: Download
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
@@ -15922,30 +15925,38 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Conversion 2
 - Recover
 
-Kecleon
-Ability: Protean
+Lopunny @ Normal Gem
+Ability: Klutz
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Disable
-- Detect
+- Assurance
+- Drain Punch
+- Facade
+- Baby Doll Eyes
+
+Slaking @ Chesto Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Rock Slide
+- Throat Chop
+- Mega Kick
+
+Zoroark Hisui @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bitter Malice
+- Protect
 - Aerial Ace
 - Slash
 
-Spinda
+Zoroark Hisui @ Leftovers
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Teeter Dance
-- Skill Swap
-- Facade
-- Hypnosis
-
-Slaking @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hyper Beam
-- Flamethrower
-- Thunderbolt
-- Shadow Ball
+- Bitter Malice
+- Protect
+- Aerial Ace
+- Slash
 
 === TRAINER_NORMAN_4 ===
 Name: NORMAN
@@ -15957,23 +15968,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Slaking @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Blizzard
-- Shadow Ball
-- Double Edge
-- Fire Blast
-
-Blissey
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Light Screen
-- Sing
-- Skill Swap
-- Focus Punch
-
-Kangaskhan
+Kangaskhan @ Life Orb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fake Out
@@ -15981,21 +15976,49 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Endure
 - Reversal
 
-Spinda
+Furfrou @ Sitrus Berry
 Level: 100
+Nature: Relaxed
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Teeter Dance
-- Skill Swap
+- Retaliate
+- Cotton Guard
 - Facade
-- Hypnosis
+- Giga Impact
 
-Slaking @ Sitrus Berry
+Miltank
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hyper Beam
-- Flamethrower
-- Thunderbolt
-- Shadow Ball
+- Milk Drink
+- Zen Headbutt
+- High Horsepower
+- Body Slam
+
+Lickilicky
+Ability: Own Tempo
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Power Whip
+- Defense Curl
+- Rollout
+- Body Press
+
+Sawsbuck @ Power Herb
+Level: 100
+Ability: Serene Grace
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Solar Beam
+- Horn Leech
+- Grassy Terrain
+- Stomping Tantrum
+
+Ambipom @ Kings Rock
+Ability: Technician
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Fury Swipes
+- Double Hit
+- Seed Bomb
+- Taunt
 
 === TRAINER_NORMAN_5 ===
 Name: NORMAN
@@ -16007,23 +16030,162 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Slaking @ Sitrus Berry
+Lopunny Mega @ Normal Gem
+Ability: Klutz
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Blizzard
-- Shadow Ball
+- Assurance
+- Drain Punch
+- Facade
+- Baby Doll Eyes
+
+Ursaluna @ Flame Orb
+Ability: Guts
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Headlong Rush
+- Giga Impact
+- Thrash
+- High Horsepower
+
+Kangaskhan Mega @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Mega Punch
+- Dizzy Punch
+- Endure
+- Reversal
+
+Kangaskhan Mega @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Mega Punch
+- Dizzy Punch
+- Endure
+- Reversal
+
+Exploud @ Kings Rock
+Ability: Soundproof
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Zen Headbutt
+- Taunt
+- Giga Impact
+- Uproar
+
+Drampa @ Sitrus Berry
+Ability: Berserk
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Calm Mind
+- Dragon Pulse
+- Extrasensory
+- Glare
+
+Exploud @ Kings Rock
+Ability: Soundproof
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Zen Headbutt
+- Taunt
+- Giga Impact
+- Uproar
+
+Wigglytuff @ Leftovers
+Ability: Friend Guard
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stockpile
+- Perish Song
+- Rest
+- Swallow
+
+Blissey @ Chesto Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heal Bell
+- Softboiled
 - Double Edge
-- Fire Blast
+- Rest
 
-Blissey
+Slaking @ Leftovers
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Protect
-- Sing
-- Skill Swap
-- Focus Punch
+- Slack Off
+- Throat Chop
+- Double Edge
+- Zen Headbutt
 
-Kangaskhan
+Bouffalant @ Silk Scarf
+Ability: Reckless
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Head Charge
+- Reversal
+- Swords Dance
+- Rest
+
+Snorlax @ Leftovers
+Ability: Immunity
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hammer Arm
+- Rest
+- Sleep Talk
+- Body Slam
+
+Porygon Z @ Iron Ball
+Ability: Analytic
+Nature: Quiet
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+- Trick Room
+- Curse
+- Recover
+- Tri Attack
+
+Porygon Z @ Quick Claw
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Facade
+- Conversion
+- Conversion 2
+- Recover
+
+Lopunny @ Normal Gem
+Ability: Klutz
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Assurance
+- Drain Punch
+- Facade
+- Baby Doll Eyes
+
+Slaking @ Chesto Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Rock Slide
+- Throat Chop
+- Mega Kick
+
+Zoroark Hisui @ Kings Rock
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bitter Malice
+- Protect
+- Aerial Ace
+- Slash
+
+Zoroark Hisui @ Leftovers
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bitter Malice
+- Protect
+- Aerial Ace
+- Slash
+
+Kangaskhan @ Life Orb
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fake Out
@@ -16031,29 +16193,49 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Endure
 - Reversal
 
-Tauros
+Furfrou @ Sitrus Berry
 Level: 100
+Nature: Relaxed
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Take Down
-- Protect
-- Fire Blast
-- Earthquake
-
-Spinda
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Teeter Dance
-- Skill Swap
+- Retaliate
+- Cotton Guard
 - Facade
-- Hypnosis
+- Giga Impact
 
-Slaking @ Sitrus Berry
+Miltank
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hyper Beam
-- Flamethrower
-- Thunderbolt
-- Shadow Ball
+- Milk Drink
+- Zen Headbutt
+- High Horsepower
+- Body Slam
+
+Lickilicky
+Ability: Own Tempo
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Power Whip
+- Defense Curl
+- Rollout
+- Body Press
+
+Sawsbuck @ Power Herb
+Level: 100
+Ability: Serene Grace
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Solar Beam
+- Horn Leech
+- Grassy Terrain
+- Stomping Tantrum
+
+Ambipom @ Kings Rock
+Ability: Technician
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Fury Swipes
+- Double Hit
+- Seed Bomb
+- Taunt
 
 === TRAINER_WINONA_2 ===
 Name: WINONA
