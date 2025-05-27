@@ -14,6 +14,7 @@ VerdanturfTown_Mart_EventScript_Clerk::
 	.align 2
 VerdanturfTown_Mart_Pokemart:
 	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_CHERISH_BALL
 	.2byte ITEM_NEST_BALL
 	.2byte ITEM_X_SP_ATK
 	.2byte ITEM_FLUFFY_TAIL
