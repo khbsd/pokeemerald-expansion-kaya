@@ -18,7 +18,7 @@ struct Fanfare
     u16 duration;
 };
 
-EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
+EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 EWRAM_DATA u8 isGen4BGM = FALSE;
 
