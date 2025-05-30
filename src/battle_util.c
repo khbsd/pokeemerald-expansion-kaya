@@ -9539,6 +9539,7 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(u32 move, u32 moveType, u32 
     switch (abilityDef)
     {
     case ABILITY_MULTISCALE:
+            return UQ_4_12(0.3);
     case ABILITY_SHADOW_SHIELD:
         if (IsBattlerAtMaxHp(battlerDef))
             return UQ_4_12(0.5);
