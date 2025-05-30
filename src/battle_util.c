@@ -5112,11 +5112,11 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
             }
             break;
         case ABILITY_OMINOUS_LUCK:
-            u32 chance = moveType == TYPE_DARK ? 2 : 1;
+            u32 darkChance = moveType == TYPE_DARK ? 2 : 1;
             if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerTarget)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && RandomChance(RNG_LUCKTYPE, chance, 10)
+             && RandomChance(RNG_LUCKTYPE, darkChance, 10)
              && IsBattlerTurnDamaged(gBattlerTarget)
              && !MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
@@ -5128,11 +5128,11 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
             }
             break;
         case ABILITY_BLESSED_LUCK:
-            u32 chance = moveType == TYPE_FAIRY ? 2 : 1;
+            u32 fairyChance = moveType == TYPE_FAIRY ? 2 : 1;
             if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerTarget)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && RandomChance(RNG_LUCKTYPE, chance, 10)
+             && RandomChance(RNG_LUCKTYPE, fairyChance, 10)
              && IsBattlerTurnDamaged(gBattlerTarget)
              && !MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {

@@ -40643,17 +40643,17 @@ F_TRAINER_FEMALE |
 #line 16262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16260
-            .ability = ABILITY_PRESSURE,
+            .ability = ABILITY_QUEENLY_MAJESTY,
 #line 16261
             .lvl = 100,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16263
-                MOVE_ROOST,
-                MOVE_FELL_STINGER,
-                MOVE_SOLAR_BEAM,
-                MOVE_EARTHQUAKE,
+                MOVE_HEAL_ORDER,
+                MOVE_DUAL_WINGBEAT,
+                MOVE_ATTACK_ORDER,
+                MOVE_PSYCHIC_NOISE,
             },
             },
             {

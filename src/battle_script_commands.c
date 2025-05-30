@@ -1984,6 +1984,7 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     }
     else
     {
+        u32 luckBonus = 0;
         switch(abilityAtk)
         {
         case ABILITY_OMINOUS_LUCK:
