@@ -4197,7 +4197,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 if (!IsBattlerAtMaxHp(battler) && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_IceBodyHeal);
-                    gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / 32;
+                    gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / 16;
                     if (gBattleStruct->moveDamage[battler] == 0)
                         gBattleStruct->moveDamage[battler] = 1;
                     gBattleStruct->moveDamage[battler] *= -1;
@@ -11364,6 +11364,12 @@ u32 CalcSecondaryEffectChance(u32 battler, enum Abilities battlerAbility, const 
         secondaryEffectChance *= 2;
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
+
+    if (battlerAbility == ABILITY_MERCILESS 
+        && (additionalEffect-> MOVE_EFFECT_POISON
+        || additionalEffect-> MOVE_EFFECT_TOXIC))
+        secondaryEffectChance *= 2;
+        
 
     return secondaryEffectChance;
 }

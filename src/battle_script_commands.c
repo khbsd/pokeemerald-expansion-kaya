@@ -3264,6 +3264,9 @@ void SetNonVolatileStatusCondition(u32 effectBattler, enum MoveEffects effect)
             gBattlescriptCurrInstr = cancelMultiTurnMovesResult;
     }
 
+    if (effect == MOVE_EFFECT_POISON && GetMonAbility(gBattlerAttacker) == ABILITY_MERCILESS)
+        effect = MOVE_EFFECT_TOXIC;
+
     BattleScriptPush(gBattlescriptCurrInstr + 1);
 
     if (sStatusFlagsForMoveEffects[effect] == STATUS1_SLEEP)
