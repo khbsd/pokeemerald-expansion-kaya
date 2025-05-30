@@ -11366,8 +11366,8 @@ u32 CalcSecondaryEffectChance(u32 battler, enum Abilities battlerAbility, const 
         secondaryEffectChance *= 2;
 
     if (battlerAbility == ABILITY_MERCILESS 
-        && (additionalEffect-> MOVE_EFFECT_POISON
-        || additionalEffect-> MOVE_EFFECT_TOXIC))
+        && (additionalEffect->moveEffect == MOVE_EFFECT_POISON
+        || additionalEffect->moveEffect == MOVE_EFFECT_TOXIC))
         secondaryEffectChance *= 2;
         
 
