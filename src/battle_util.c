@@ -4194,7 +4194,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 break;
             case ABILITY_PANACEA:
                 gBattleScripting.battler = BATTLE_PARTNER(battler);
-                if (&& !IsBattlerAtMaxHp(battler)
+                if (!IsBattlerAtMaxHp(battler)
                     && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_IceBodyHeal);
