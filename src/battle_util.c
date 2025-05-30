@@ -4218,7 +4218,6 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                     effect++;
                 }
                 break;
-                break;
             case ABILITY_DRY_SKIN:
                 if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
                     goto SOLAR_POWER_HP_DROP;
