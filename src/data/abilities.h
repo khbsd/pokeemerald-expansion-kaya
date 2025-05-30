@@ -2532,6 +2532,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 1,
     },
 
+    [ABILITY_MINERAL_HIDE] =
+    {
+        .name = _("Mineral Hide"),
+        .description = COMPOUND_STRING("Blocks crits, ups Rock moves."),
+        .aiRating = 1,
+    },
+
+    [ABILITY_PANACEA] =
+    {
+        .name = _("Panacea"),
+        .description = COMPOUND_STRING("Blocks crits, ups Rock moves."),
+        .aiRating = 1,
+    },
 
     [ABILITY_FLUX_FIELD] =
     {

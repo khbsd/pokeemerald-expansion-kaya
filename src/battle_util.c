@@ -4192,6 +4192,34 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                     effect++;
                 }
                 break;
+            case ABILITY_PANACEA:
+                gBattleScripting.battler = BATTLE_PARTNER(battler);
+                if (&& !IsBattlerAtMaxHp(battler)
+                    && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_IceBodyHeal);
+                    gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / 32;
+                    if (gBattleStruct->moveDamage[battler] == 0)
+                        gBattleStruct->moveDamage[battler] = 1;
+                    gBattleStruct->moveDamage[battler] *= -1;
+                    effect++;
+                }
+                if (IsBattlerAlive(gBattleScripting.battler)
+                    && gBattleMons[gBattleScripting.battler].status1 & STATUS1_ANY
+                    && RandomPercentage(RNG_HEALER, 30))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_HealerActivates);
+                    effect++;
+                }
+                if (IsBattlerAlive(battler)
+                    && gBattleMons[battler].status1 & STATUS1_ANY
+                    && RandomPercentage(RNG_HEALER, 30))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_HealerActivates);
+                    effect++;
+                }
+                break;
+                break;
             case ABILITY_DRY_SKIN:
                 if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
                     goto SOLAR_POWER_HP_DROP;
@@ -4210,6 +4238,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 }
                 break;
             case ABILITY_HYDRATION:
+            case ABILITY_GOOEY:
                 if (IsBattlerWeatherAffected(battler, B_WEATHER_RAIN)
                  && gBattleMons[battler].status1 & STATUS1_ANY)
                 {
@@ -8975,6 +9004,10 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, e
         break;
     case ABILITY_MULTISCALE:
         if (moveType == TYPE_DRAGON)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
+        break;
+    case ABILITY_MINERAL_HIDE:
+        if (moveType == TYPE_ROCK && IsBattleMovePhysical(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SWARM:

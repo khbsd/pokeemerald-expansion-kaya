@@ -1830,6 +1830,7 @@ bool32 ShouldSetRain(u32 battlerAtk, enum Abilities atkAbility, enum ItemHoldEff
      && (atkAbility == ABILITY_SWIFT_SWIM
       || atkAbility == ABILITY_FORECAST
       || atkAbility == ABILITY_HYDRATION
+      || atkAbility == ABILITY_GOOEY
       || atkAbility == ABILITY_RAIN_DISH
       || atkAbility == ABILITY_DRY_SKIN
       || HasMoveWithFlag(battlerAtk, MoveAlwaysHitsInRain)

@@ -2013,7 +2013,10 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
             critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
     }
 
-    if (critChance != CRITICAL_HIT_BLOCKED && (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR))
+    if (critChance != CRITICAL_HIT_BLOCKED 
+        && (abilityDef == ABILITY_BATTLE_ARMOR 
+            || abilityDef == ABILITY_SHELL_ARMOR
+            || abilityDef == ABILITY_MINERAL_HIDE))
     {
         // Record ability only if move had 100% chance to get a crit
         if (recordAbility)
@@ -2068,7 +2071,9 @@ s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
     // Prevented crits
     if (gSideStatuses[battlerDef] & SIDE_STATUS_LUCKY_CHANT)
         critChance = CRITICAL_HIT_BLOCKED;
-    else if (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
+    else if (abilityDef == ABILITY_BATTLE_ARMOR 
+            || abilityDef == ABILITY_SHELL_ARMOR
+            || abilityDef == ABILITY_MINERAL_HIDE)
     {
         if (recordAbility)
             RecordAbilityBattle(battlerDef, abilityDef);

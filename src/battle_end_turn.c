@@ -505,8 +505,10 @@ static bool32 HandleEndTurnFirstEventBlock(u32 battler)
         switch (ability)
         {
         case ABILITY_HEALER:
+        case ABILITY_PANACEA:
         case ABILITY_HYDRATION:
         case ABILITY_SHED_SKIN:
+        case ABILITY_GOOEY:
             if (AbilityBattleEffects(ABILITYEFFECT_ENDTURN, battler, ability, 0, MOVE_NONE))
                 effect = TRUE;
             break;

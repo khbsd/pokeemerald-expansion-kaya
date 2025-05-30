@@ -4431,9 +4431,9 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .levelUpLearnset = sGoomyLevelUpLearnset,
         .teachableLearnset = sGoomyTeachableLearnset,
         .eggMoveLearnset = sGoomyEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_SLIGGOO},
-                                {EVO_LEVEL, 40, SPECIES_SLIGGOO_HISUI, CONDITIONS({IF_WEATHER, WEATHER_RAIN})},
-                                {EVO_LEVEL, 40, SPECIES_SLIGGOO_HISUI, CONDITIONS({IF_WEATHER, WEATHER_FOG})})
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SLIGGOO},
+                                {EVO_LEVEL, 30, SPECIES_SLIGGOO_HISUI, CONDITIONS({IF_WEATHER, WEATHER_RAIN})},
+                                {EVO_LEVEL, 30, SPECIES_SLIGGOO_HISUI, CONDITIONS({IF_WEATHER, WEATHER_FOG})})
     },
 
     [SPECIES_SLIGGOO] =
