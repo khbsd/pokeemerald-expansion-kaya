@@ -16265,15 +16265,25 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Attack Order
 - Psychic Noise
 
-Pelipper
+Togekiss @ Leftovers
+Ability: Blessed Luck
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Surf
-- Supersonic
+- AncientPower
 - Protect
+- Life Dew
+- Air Cutter
+
+Swellow @ Flame Orb
+Ability: Guts
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Facade
+- Bulk Up
+- Roost
 - Aerial Ace
 
-Skarmory
+Skarmory @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
@@ -16281,13 +16291,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Steel Wing
 - Aerial Ace
 
-Altaria @ Chesto Berry
+Hawlucha @ Sitrus Berry
+Ability: Unburden
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Aerial Ace
-- Rest
-- Dragon Dance
-- Earthquake
+- Detect
+- Swords Dance
+- Flying Press
+- Sky Attack
 
 === TRAINER_WINONA_3 ===
 Name: WINONA
@@ -16315,7 +16326,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Solar Beam
 - Earthquake
 
-Dragonair @ Sitrus Berry
+Dragonite @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder Wave
