@@ -8973,6 +8973,10 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, e
         if (moveType == TYPE_BUG)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_MULTISCALE:
+        if (moveType == TYPE_DRAGON)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
+        break;
     case ABILITY_SWARM:
         if (moveType == TYPE_BUG && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
