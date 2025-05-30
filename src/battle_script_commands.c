@@ -1984,11 +1984,20 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     }
     else
     {
-        u32 ominousLuckBonus = 0;
-        if (abilityAtk == ABILITY_OMINOUS_LUCK)
+        switch(abilityAtk)
         {
-            ominousLuckBonus++;
-            ominousLuckBonus += (GetBattleMoveType(move) == TYPE_DARK);
+        case ABILITY_OMINOUS_LUCK:
+            luckBonus++;
+            luckBonus += (GetBattleMoveType(move) == TYPE_DARK);
+            break;
+        case ABILITY_BLESSED_LUCK:
+            luckBonus++;
+            luckBonus += (GetBattleMoveType(move) == TYPE_FAIRY);
+            break;
+        case ABILITY_SUPER_LUCK:
+            luckBonus++;
+        default:
+            break;
         }
 
         critChance  = 2 * ((gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY) != 0)
@@ -1996,8 +2005,7 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
                     + GetMoveCriticalHitStage(move)
                     + GetHoldEffectCritChanceIncrease(battlerAtk, holdEffectAtk)
                     + 2 * (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerAtk) == AFFECTION_FIVE_HEARTS)
-                    + abilityAtk == ABILITY_SUPER_LUCK
-                    + ominousLuckBonus
+                    + luckBonus
                     + gBattleStruct->bonusCritStages[gBattlerAttacker];
 
         if (critChance >= ARRAY_COUNT(sCriticalHitOdds))

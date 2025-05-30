@@ -1625,7 +1625,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_QUEENLY_MAJESTY] =
     {
         .name = _("Queenly Majesty"),
-        .description = COMPOUND_STRING("Protects from priority."),
+        .description = COMPOUND_STRING("Protect, maybe pressure."),
         .aiRating = 6,
         .breakable = TRUE,
     },
@@ -2524,6 +2524,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("May cause a flinch or crit."),
         .aiRating = 1,
     },
+
+    [ABILITY_BLESSED_LUCK] =
+    {
+        .name = _("Blessed Luck"),
+        .description = COMPOUND_STRING("May cause a flinch or crit."),
+        .aiRating = 1,
+    },
+
 
     [ABILITY_FLUX_FIELD] =
     {
