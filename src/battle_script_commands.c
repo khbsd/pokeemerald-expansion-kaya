@@ -1868,13 +1868,25 @@ static void Cmd_ppreduce(void)
         for (i = 0; i < gBattlersCount; i++)
         {
             if (!IsBattlerAlly(i, gBattlerAttacker) && IsBattlerAlive(i))
-                ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
+            {
+                if (GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
+                    ppToDeduct += 1;
+                else if (GetBattlerAbility(gBattlerTarget) == ABILITY_QUEENLY_MAJESTY
+                        && RandomPercentage(RNG_QUEENLY_MAJESTY, 50))
+                    ppToDeduct += 1;
+            }
         }
     }
     else if (moveTarget != MOVE_TARGET_OPPONENTS_FIELD)
     {
-        if (gBattlerAttacker != gBattlerTarget && GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
-             ppToDeduct++;
+        if (gBattlerAttacker != gBattlerTarget)
+        {
+            if (GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
+                ppToDeduct += 1;
+            else if (GetBattlerAbility(gBattlerTarget) == ABILITY_QUEENLY_MAJESTY
+                    && RandomPercentage(RNG_QUEENLY_MAJESTY, 50))
+                ppToDeduct += 1;
+        }
     }
 
     if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBattlerAttacker].pp[gCurrMovePos])

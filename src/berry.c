@@ -2461,7 +2461,7 @@ static u16 GetBerryPestSpecies(u8 berryId)
             return P_FAMILY_BURMY ? SPECIES_BURMY_PLANT : SPECIES_NONE;
             break;
         case BERRY_COLOR_YELLOW:
-            return P_FAMILY_COMBEE ? SPECIES_COMBEE : SPECIES_NONE;
+            return P_FAMILY_COMBEE ? SPECIES_COMBEE_M : SPECIES_NONE;
             break;
         case BERRY_COLOR_PINK:
             return P_FAMILY_SCATTERBUG ? SPECIES_SPEWPA : SPECIES_NONE;

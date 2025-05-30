@@ -16247,19 +16247,21 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer / Risky
 
-Dratini @ Sitrus Berry
+Drifblim @ Flame Orb
+Ability: Flare Boost
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder Wave
-- Thunderbolt
-- Protect
-- Ice Beam
+- Strength Sap
+- Phantom Force
+- Hex
+- Spite
 
-Tropius
+Vespiquen
+Ability: Pressure
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Aerial Ace
+- Roost
+- Fell Stinger
 - Solar Beam
 - Earthquake
 

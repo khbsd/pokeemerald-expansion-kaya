@@ -2280,35 +2280,35 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #endif //P_FAMILY_BURMY
 
 #if P_FAMILY_COMBEE
-    [SPECIES_COMBEE] =
+    [SPECIES_COMBEE_M] =
     {
-        .baseHP        = 30,
-        .baseAttack    = 30,
-        .baseDefense   = 42,
-        .baseSpeed     = 70,
-        .baseSpAttack  = 30,
-        .baseSpDefense = 42,
+        .baseHP        = 50,
+        .baseAttack    = 60,
+        .baseDefense   = 50,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 49 : 63,
         .evYield_Speed = 1,
         .itemRare = ITEM_HONEY,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = MON_MALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_HONEY_GATHER, ABILITY_NONE, ABILITY_HUSTLE },
         .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Combee"),
+        .speciesName = _("Combee♂"),
         .cryId = CRY_COMBEE,
-        .natDexNum = NATIONAL_DEX_COMBEE,
+        .natDexNum = NATIONAL_DEX_COMBEE_M,
         .categoryName = _("Tiny Bee"),
         .height = 3,
         .weight = 55,
         .description = COMPOUND_STRING(
             "A Pokémon formed by three others.\n"
-            "It constantly gathers honey from flowers\n"
+            "It constantly gathers pollen from flowers\n"
             "to please Vespiquen. At night, they\n"
             "cluster to form a beehive and sleep."),
         .pokemonScale = 530,
@@ -2337,10 +2337,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .shinyPalette = gMonShinyPalette_Combee,
         .iconSprite = gMonIcon_Combee,
         .iconPalIndex = 0,
-#if P_GENDER_DIFFERENCES
-        .paletteFemale = gMonPalette_CombeeF,
-        .shinyPaletteFemale = gMonShinyPalette_CombeeF,
-#endif //P_GENDER_DIFFERENCES
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-4, 10, SHADOW_SIZE_S)
         FOOTPRINT(Combee)
@@ -2363,17 +2359,97 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .tmIlliterate = TRUE,
         .levelUpLearnset = sCombeeLevelUpLearnset,
         .teachableLearnset = sCombeeTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 21, SPECIES_VESPIQUEN, CONDITIONS({IF_GENDER, MON_FEMALE})}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_COMBEE_F}),
+    },
+    [SPECIES_COMBEE_F] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 70,
+        .baseDefense   = 60,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 60,
+        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
+        .catchRate = 120,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 49 : 63,
+        .evYield_Speed = 1,
+        .itemRare = ITEM_HONEY,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_QUEENLY_MAJESTY, ABILITY_NONE, ABILITY_HUSTLE },
+        .bodyColor = BODY_COLOR_YELLOW,
+        .speciesName = _("Combee♀"),
+        .cryId = CRY_COMBEE,
+        .natDexNum = NATIONAL_DEX_COMBEE_F,
+        .categoryName = _("Worker Bee"),
+        .height = 3,
+        .weight = 55,
+        .description = COMPOUND_STRING(
+            "A Pokémon formed by three others.\n"
+            "Every worker will eventually evolve\n"
+            "and create its own colony."),
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Combee,
+        .frontPicSize = MON_COORDS_SIZE(64, 40),
+        .frontPicYOffset = 16,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 20),
+            ANIMCMD_FRAME(1, 20),
+            ANIMCMD_FRAME(0, 20),
+            ANIMCMD_FRAME(1, 20),
+            ANIMCMD_FRAME(0, 1),
+        ),
+        .frontAnimId = ANIM_V_SLIDE_WOBBLE,
+        .enemyMonElevation = 15,
+        .backPic = gMonBackPic_Combee,
+        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicYOffset = 22,
+        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
+        .palette = gMonPalette_CombeeF,
+        .shinyPalette = gMonShinyPalette_CombeeF,
+        .iconSprite = gMonIcon_Combee,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-4, 10, SHADOW_SIZE_S)
+        FOOTPRINT(Combee)
+        OVERWORLD(
+            sPicTable_CombeeF,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Combee,
+            gShinyOverworldPalette_Combee
+        )
+        OVERWORLD_FEMALE(
+            sPicTable_CombeeF,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following
+        )
+        .tmIlliterate = TRUE,
+        .levelUpLearnset = sCombeeLevelUpLearnset,
+        .teachableLearnset = sCombeeTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_VESPIQUEN}),
     },
 
     [SPECIES_VESPIQUEN] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 80,
-        .baseDefense   = 102,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 102,
+        .baseHP        = 80,
+        .baseAttack    = 90,
+        .baseDefense   = 110,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 166 : 188,
@@ -2385,7 +2461,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_PRESSURE, ABILITY_NONE, ABILITY_UNNERVE },
+        .abilities = { ABILITY_QUEENLY_MAJESTY, ABILITY_NONE, ABILITY_UNNERVE },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Vespiquen"),
         .cryId = CRY_VESPIQUEN,
@@ -2394,10 +2470,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 12,
         .weight = 385,
         .description = COMPOUND_STRING(
-            "It houses its colony in cells in its body\n"
+            "She houses her colony in cells in her body\n"
             "and releases various pheromones to\n"
-            "make those grubs do its bidding.\n"
-            "There is only one in a colony."),
+            "make her workers do her bidding.\n"
+            "To her colony, she is everything."),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,

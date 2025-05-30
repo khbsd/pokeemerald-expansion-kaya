@@ -3705,6 +3705,15 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 effect++;
             }
             break;
+        case ABILITY_QUEENLY_MAJESTY:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_QUEENLY_MAJESTY;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
         case ABILITY_DARK_AURA:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
@@ -9253,6 +9262,9 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
         if (moveType == TYPE_GHOST)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
+    case ABILITY_FLARE_BOOST:
+        if (gBattleMons[battlerDef].status1 & STATUS1_BURN)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
     default:
         break;
     }

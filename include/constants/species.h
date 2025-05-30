@@ -426,7 +426,7 @@
 #define SPECIES_WORMADAM                                SPECIES_WORMADAM_PLANT
 #define SPECIES_MOTHIM_PLANT                            414
 #define SPECIES_MOTHIM                                  SPECIES_MOTHIM_PLANT
-#define SPECIES_COMBEE                                  415
+#define SPECIES_COMBEE_M                                415
 #define SPECIES_VESPIQUEN                               416
 #define SPECIES_PACHIRISU                               417
 #define SPECIES_BUIZEL                                  418
@@ -800,7 +800,7 @@
 #define SPECIES_LURANTIS                                754
 #define SPECIES_MORELULL                                755
 #define SPECIES_SHIINOTIC                               756
-#define SPECIES_SALANDIT_M                           757
+#define SPECIES_SALANDIT_M                              757
 #define SPECIES_SALAZZLE                                758
 #define SPECIES_STUFFUL                                 759
 #define SPECIES_BEWEAR                                  760
@@ -1647,9 +1647,12 @@
 #define SPECIES_WAILORD_WHALEFALL						1525
 
 //Extra salazzle shenanigans
-#define SPECIES_SALANDIT_F                         1526
+#define SPECIES_SALANDIT_F                              1526
 
-#define SPECIES_EGG                                     (SPECIES_SALANDIT_F + 1)
+//Extra combee shenanigans
+#define SPECIES_COMBEE_F                                1527
+
+#define SPECIES_EGG                                     (SPECIES_COMBEE_F + 1)
 
 #define NUM_SPECIES SPECIES_EGG
 
