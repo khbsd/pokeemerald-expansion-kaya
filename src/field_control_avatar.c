@@ -12,6 +12,7 @@
 #include "fieldmap.h"
 #include "field_control_avatar.h"
 #include "field_message_box.h"
+#include "field_move.h"
 #include "field_player_avatar.h"
 #include "field_poison.h"
 #include "field_screen_effect.h"

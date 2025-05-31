@@ -66,10 +66,10 @@ static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/cave_tran
 
 static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/cave_transition/enter.gbapal");
 
-static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
-static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.lz");
+static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.smolTM");
+static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.smol");
 
-bool8 SetUpFieldMove_Flash(void)
+bool32 SetUpFieldMove_Flash(void)
 {
     // In Ruby and Sapphire, Registeel's tomb is opened by using Fly. In Emerald,
     // Flash is used instead.
