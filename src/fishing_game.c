@@ -982,7 +982,7 @@ static void CreateMinigameSprites(u8 taskId)
         }
     }
 
-    treasureChance = GetNumOwnedBadges() * 10;
+    treasureChance = (GetNumOwnedBadges() * 8) + DEFAULT_TREASURE_CHANCE;
 
     // Create treasure sprite.
     if (RandomPercentage(RNG_FISHING, treasureChance))
