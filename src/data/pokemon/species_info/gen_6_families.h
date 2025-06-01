@@ -1105,12 +1105,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_SCATTERBUG
 #define SCATTERBUG_SPECIES_INFO(evolution)                                                  \
     {                                                                                       \
-        .baseHP        = 38,                                                                \
+        .baseHP        = 60,                                                                \
         .baseAttack    = 35,                                                                \
-        .baseDefense   = 40,                                                                \
-        .baseSpeed     = 35,                                                                \
-        .baseSpAttack  = 27,                                                                \
-        .baseSpDefense = 25,                                                                \
+        .baseDefense   = 45,                                                                \
+        .baseSpeed     = 55,                                                                \
+        .baseSpAttack  = 65,                                                                \
+        .baseSpDefense = 45,                                                                \
         .types = MON_TYPES(TYPE_BUG),                                                       \
         .catchRate = 255,                                                                   \
         .expYield = 40,                                                                     \
@@ -1120,7 +1120,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,                                                  \
         .growthRate = GROWTH_MEDIUM_FAST,                                                   \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                                         \
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD },  \
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_WONDER_SKIN, ABILITY_FRIEND_GUARD },  \
         .bodyColor = BODY_COLOR_BLACK,                                                      \
         .speciesName = _("Scatterbug"),                                                     \
         .cryId = CRY_SCATTERBUG,                                                            \
@@ -1163,7 +1163,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .teachableLearnset = sScatterbugTeachableLearnset,                                  \
         .eggMoveLearnset = sScatterbugEggMoveLearnset,                                      \
         .formSpeciesIdTable = sScatterbugFormSpeciesIdTable,                                \
-        .evolutions = EVOLUTION({EVO_LEVEL, 9, SPECIES_SPEWPA_##evolution}),                \
+        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_SPEWPA_##evolution}),               \
     }                                                                                       \
 
     [SPECIES_SCATTERBUG_ICY_SNOW]    = SCATTERBUG_SPECIES_INFO(ICY_SNOW),
@@ -1189,12 +1189,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
 #define SPEWPA_SPECIES_INFO(evolution)                                          \
     {                                                                           \
-        .baseHP        = 45,                                                    \
-        .baseAttack    = 22,                                                    \
-        .baseDefense   = 60,                                                    \
-        .baseSpeed     = 29,                                                    \
-        .baseSpAttack  = 27,                                                    \
-        .baseSpDefense = 30,                                                    \
+        .baseHP        = 80,                                                    \
+        .baseAttack    = 45,                                                    \
+        .baseDefense   = 65,                                                    \
+        .baseSpeed     = 75,                                                    \
+        .baseSpAttack  = 85,                                                    \
+        .baseSpDefense = 65,                                                    \
         .types = MON_TYPES(TYPE_BUG),                                           \
         .catchRate = 120,                                                       \
         .expYield = 75,                                                         \
@@ -1204,7 +1204,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,                                      \
         .growthRate = GROWTH_MEDIUM_FAST,                                       \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                             \
-        .abilities = { ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_FRIEND_GUARD }, \
+        .abilities = { ABILITY_SHED_SKIN, ABILITY_WONDER_SKIN, ABILITY_FRIEND_GUARD }, \
         .bodyColor = BODY_COLOR_BLACK,                                          \
         .speciesName = _("Spewpa"),                                             \
         .cryId = CRY_SPEWPA,                                                    \
@@ -1246,7 +1246,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .levelUpLearnset = sSpewpaLevelUpLearnset,                              \
         .teachableLearnset = sSpewpaTeachableLearnset,                          \
         .formSpeciesIdTable = sSpewpaFormSpeciesIdTable,                        \
-        .evolutions = EVOLUTION({EVO_LEVEL, 12, SPECIES_VIVILLON_##evolution}), \
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_VIVILLON_##evolution}), \
     }
 
     [SPECIES_SPEWPA_ICY_SNOW]    = SPEWPA_SPECIES_INFO(ICY_SNOW),
@@ -1271,12 +1271,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_SPEWPA_POKEBALL]   = SPEWPA_SPECIES_INFO(POKEBALL),
 
 #define VIVILLON_MISC_INFO(form, color, iconPal)                                            \
-        .baseHP        = 80,                                                                \
-        .baseAttack    = 52,                                                                \
-        .baseDefense   = 50,                                                                \
-        .baseSpeed     = 89,                                                                \
-        .baseSpAttack  = 90,                                                                \
-        .baseSpDefense = 50,                                                                \
+        .baseHP        = 90,                                                                \
+        .baseAttack    = 50,                                                                \
+        .baseDefense   = 90,                                                                \
+        .baseSpeed     = 110,                                                               \
+        .baseSpAttack  = 115,                                                               \
+        .baseSpDefense = 100,                                                               \
         .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),                                          \
         .catchRate = 45,                                                                    \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 206 : 185,                            \
@@ -1288,7 +1288,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,                                                  \
         .growthRate = GROWTH_MEDIUM_FAST,                                                   \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                                         \
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD },  \
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_WONDER_SKIN, ABILITY_FRIEND_GUARD },  \
         .bodyColor = color,                                                                 \
         .speciesName = _("Vivillon"),                                                       \
         .cryId = CRY_VIVILLON,                                                              \

@@ -15896,7 +15896,6 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sleep Talk
 - Body Slam
 
-/*porygon z double team?*/
 === TRAINER_NORMAN_3 ===
 Name: NORMAN
 Class: Leader
@@ -16311,7 +16310,8 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer / Risky
 
-Hoothoot
+Noctowl @ Sitrus Berry
+Ability: Keen Eye
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
@@ -16319,45 +16319,50 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Dream Eater
 
-Tropius
+Vivillon @ Silver Powder
+Ability: Wonder Skin
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Aerial Ace
-- Solar Beam
-- Earthquake
+- Quiver Dance
+- Sleep Powder
+- Hurricane
+- Ancient Power
 
-Dragonite @ Sitrus Berry
+Unfezant @ BlackGlasses
+Ability: Tainted Luck
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder Wave
-- Thunderbolt
+- Night Slash
+- Air Cutter
 - Protect
-- Ice Beam
+- Heat Wave
 
-Pelipper
+Togekiss @ Fairy Feather
+Ability: Blessed Luck
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Surf
-- Supersonic
+- Air Cutter
+- Moonblast
 - Protect
-- Aerial Ace
+- Ancient Power
 
-Skarmory
+Skarmory @ Sitrus Berry
+Ability: Sturdy
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Whirlwind
+- Toxic
 - Spikes
 - Steel Wing
-- Aerial Ace
+- Brave Bird
 
-Altaria @ Chesto Berry
+Corviknight @ Sitrus Berry
+Ability: Mirror Armor
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
-- Rest
-- Dragon Dance
-- Earthquake
+- Roost
+- Brave Bird
+- Scary Face
 
 === TRAINER_WINONA_4 ===
 Name: WINONA

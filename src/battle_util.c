@@ -4644,6 +4644,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 effect++;
             }
             break;
+        case ABILITY_WONDER_SKIN:
         case ABILITY_EFFECT_SPORE:
         {
             enum Abilities ability = GetBattlerAbility(gBattlerAttacker);
@@ -4652,18 +4653,16 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
                 u32 poison, paralysis, sleep;
-
-                if (B_ABILITY_TRIGGER_CHANCE >= GEN_5)
-                {
-                    poison = 9;
-                    paralysis = 19;
-                }
-                else
-                {
-                    poison = 10;
-                    paralysis = 20;
-                }
+                poison = 10;
+                paralysis = 20;
                 sleep = 30;
+
+                if (gLastUsedAbility == ABILITY_WONDER_SKIN)
+                {
+                    poison /= 2;
+                    paralysis /= 2;
+                    sleep /=2;
+                }
 
                 i = RandomUniform(RNG_EFFECT_SPORE, 0, B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? 99 : 299);
                 if (i < poison)
@@ -8856,10 +8855,6 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, e
         break;
     case ABILITY_LUSH_LEAVES:
         if (IsHydrostatMove(move))
-            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
-        break;
-    case ABILITY_SHIELD_DUST:
-        if (moveType == TYPE_BUG)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_MULTISCALE:
