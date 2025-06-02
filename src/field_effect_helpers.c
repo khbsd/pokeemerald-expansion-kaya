@@ -54,7 +54,7 @@ u32 FldEff_Shadow(void);
 #define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
-void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+void SetUpShadow(struct ObjectEvent *objectEvent)
 {
     gFieldEffectArguments[0] = objectEvent->localId;
     gFieldEffectArguments[1] = objectEvent->mapNum;
@@ -339,11 +339,10 @@ u32 FldEff_Shadow(void)
     for (i = MAX_SPRITES - 1; i > -1; i--) // Search backwards, because of CreateSpriteAtEnd
     {
         // Return early if a shadow sprite already exists
-        if (gSprites[i].callback == UpdateShadowFieldEffect &&
-            gSprites[i].sLocalId == gFieldEffectArguments[0] &&
-            gSprites[i].sMapNum == gFieldEffectArguments[1] &&
-            gSprites[i].sMapGroup == gFieldEffectArguments[2]
-        )
+        if (gSprites[i].callback == UpdateShadowFieldEffect
+         && gSprites[i].sLocalId == gFieldEffectArguments[0]
+         && gSprites[i].sMapNum == gFieldEffectArguments[1]
+         && gSprites[i].sMapGroup == gFieldEffectArguments[2])
             return 0;
     }
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -390,6 +389,12 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->y = linkedSprite->y + sprite->sYOffset;
         #endif
         sprite->invisible = linkedSprite->invisible;
+        if (objectEvent->jumpDone)
+        {
+            //  Ugly signaling to disable shadows after a jump
+            objectEvent->noShadow = TRUE;
+            objectEvent->jumpDone = FALSE;
+        }
         if (!objectEvent->active
          || objectEvent->noShadow
          || objectEvent->inHotSprings
@@ -1040,7 +1045,7 @@ u32 FldEff_ShakingGrass(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_GRASS;
     }
-    
+
     return spriteId;
 }
 
@@ -1057,7 +1062,7 @@ u32 FldEff_ShakingGrass2(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_LONG_GRASS;
     }
-    
+
     return spriteId;
 }
 
@@ -1090,7 +1095,7 @@ u32 FldEff_WaterSurfacing(void)
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_WATER_SURFACING;
     }
-    
+
     return spriteId;
 }
 
