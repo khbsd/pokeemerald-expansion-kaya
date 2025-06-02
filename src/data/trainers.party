@@ -16374,29 +16374,32 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer / Risky
 
-Noctowl
+Talonflame
+Ability: Burn Entry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Psychic
-- Reflect
-- Dream Eater
+- Flame Charge
+- Flare Blitz
+- Feather Dance
+- Solar Beam
 
-Tropius
+Toucannon
+Ability: Barrel Bore
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
-- Aerial Ace
-- Solar Beam
-- Earthquake
+- Overheat
+- Beak Blast
+- Rock Smash
 
-Dragonair @ Sitrus Berry
+Staraptor @ Sitrus Berry
+Ability: Reckless
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Thunder Wave
-- Thunderbolt
-- Protect
-- Ice Beam
+- Roost
+- Brave Bird
+- Double Edge
+- Tailwind
 
 Pelipper
 Level: 100
