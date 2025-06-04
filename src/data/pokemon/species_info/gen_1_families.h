@@ -583,7 +583,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                                         {IF_HOLD_ITEM, ITEM_FIRE_STONE},
                                         {IF_IN_MAPSEC, MAPSEC_FORTREE_CITY}
                                     )},
-                                {EVO_LEVEL, 80, SPECIES_CHARIZARD_MEGA_X, 
+                                {EVO_LEVEL, 80, SPECIES_CHARIZARD_MEGA_X,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_DRAGON_FANG},
                                         {IF_IN_MAP, MAP_METEOR_FALLS_B1F_2R}
@@ -2983,7 +2983,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sPikachuFormSpeciesIdTable,
         .formChangeTable = sPikachuFormChangeTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
-                                {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU_ALOLA, 
+                                {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU_ALOLA,
                                     CONDITIONS({IF_IN_MAPSEC, MAPSEC_MOSSDEEP_CITY})}),
     },
 
@@ -5940,7 +5940,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sOddishTeachableLearnset,
         .eggMoveLearnset = sOddishEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 21, SPECIES_GLOOM},
-                                {EVO_LEVEL, 16, SPECIES_TANGELA, 
+                                {EVO_LEVEL, 16, SPECIES_TANGELA,
                                     CONDITIONS({IF_IN_MAPSEC, MAPSEC_PETALBURG_WOODS},
                                                {IF_HOLD_ITEM, ITEM_ROSE_INCENSE})}),
     },
@@ -8779,7 +8779,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         )
         .levelUpLearnset = sMachokeLevelUpLearnset,
         .teachableLearnset = sMachokeTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_MACHAMP, 
+        .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_MACHAMP,
                         CONDITIONS({IF_HOLD_ITEM, ITEM_LINKING_CORD})}),
     },
 
@@ -12262,7 +12262,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sSteelixTeachableLearnset,
         .formSpeciesIdTable = sSteelixFormSpeciesIdTable,
         .formChangeTable = sSteelixFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_STEELIX_MEGA, 
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_STEELIX_MEGA,
             CONDITIONS(
                 {IF_IN_MAPSEC, MAPSEC_VICTORY_ROAD},
                 {IF_HOLD_ITEM, ITEM_METAL_COAT}
@@ -13301,7 +13301,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sCuboneTeachableLearnset,
         .eggMoveLearnset = sCuboneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_MAROWAK},
-                                {EVO_LEVEL, 34, SPECIES_MAROWAK_ALOLA, 
+                                {EVO_LEVEL, 34, SPECIES_MAROWAK_ALOLA,
                                     CONDITIONS({IF_IN_MAP, MAP_MT_PYRE_SUMMIT})}),
     },
 
@@ -14032,7 +14032,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sKoffingTeachableLearnset,
         .eggMoveLearnset = sKoffingEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_WEEZING},
-                                {EVO_LEVEL, 35, SPECIES_WEEZING_GALAR, 
+                                {EVO_LEVEL, 35, SPECIES_WEEZING_GALAR,
                                     CONDITIONS({IF_HOLD_ITEM, ITEM_FAIRY_FEATHER})}),
     },
 
@@ -14727,7 +14727,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sTangelaLevelUpLearnset,
         .teachableLearnset = sTangelaTeachableLearnset,
         .eggMoveLearnset = sTangelaEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TANGROWTH, 
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TANGROWTH,
                         CONDITIONS({IF_KNOWS_MOVE, MOVE_ANCIENT_POWER})}),
     },
 
@@ -15600,7 +15600,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sMimeJrTeachableLearnset,
         .eggMoveLearnset = sMimeJrEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_MR_MIME, CONDITIONS({IF_KNOWS_MOVE, MOVE_MIMIC})},
-                                {EVO_LEVEL, 0, SPECIES_MR_MIME_GALAR, 
+                                {EVO_LEVEL, 0, SPECIES_MR_MIME_GALAR,
                                     CONDITIONS({IF_IN_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM})}),
     },
 #endif //P_GEN_4_CROSS_EVOS
@@ -16740,7 +16740,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 55,
         .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_BUG),
+        .types = MON_TYPES(TYPE_BUG, TYPE_FIGHTING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 175 : 200,
         .evYield_Attack = 2,
@@ -16822,7 +16822,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 105,
         .baseSpAttack  = 65,
         .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_BUG, TYPE_FIGHTING),
+        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
         .catchRate = 45,
         .expYield = 210,
         .evYield_Attack = 2,
@@ -16831,7 +16831,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_AERILATE, ABILITY_AERILATE, ABILITY_AERILATE },
+        .abilities = { ABILITY_CAPILLARATE, ABILITY_AERILATE, ABILITY_AERILATE },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Pinsent"),
         .cryId = CRY_PINSIR_MEGA,
@@ -19012,7 +19012,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 135,
         .baseSpAttack  = 70,
         .baseSpDefense = 95,
-        .types = MON_TYPES(TYPE_ROCK, TYPE_DRAGON),
+        .types = MON_TYPES(TYPE_ROCK, TYPE_FLYING),
         .catchRate = 45,
         .expYield = 215,
         .evYield_Speed = 2,
@@ -20057,7 +20057,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
         .formChangeTable = sMewtwoFormChangeTable,
-        .evolutions = 
+        .evolutions =
             EVOLUTION({EVO_LEVEL, 100, SPECIES_MEWTWO_MEGA_Y,
                         CONDITIONS(
                             {IF_HOLD_ITEM, ITEM_POWER_LENS},
