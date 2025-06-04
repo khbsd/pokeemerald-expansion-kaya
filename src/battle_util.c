@@ -8834,8 +8834,10 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, e
         }
         break;
     case ABILITY_HUGE_POWER:
-    case ABILITY_PURE_POWER:
         if (IsBattleMovePhysical(move))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+    case ABILITY_PURE_POWER:
+        if (IsBattleMovePhysical(move) || moveType == TYPE_FIGHTING || movetype == TYPE_PSYCHIC)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     case ABILITY_SLOW_START:

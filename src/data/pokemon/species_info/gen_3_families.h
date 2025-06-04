@@ -4491,7 +4491,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sSkittyLevelUpLearnset,
         .teachableLearnset = sSkittyTeachableLearnset,
         .eggMoveLearnset = sSkittyEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY, 
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY,
                         CONDITIONS({IF_LEVEL, 45})}),
     },
 
@@ -5191,12 +5191,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_FAMILY_MEDITITE
     [SPECIES_MEDITITE] =
     {
-        .baseHP        = 30,
-        .baseAttack    = 40,
-        .baseDefense   = 55,
+        .baseHP        = 35,
+        .baseAttack    = 45,
+        .baseDefense   = 65,
         .baseSpeed     = 60,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 55,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
         .catchRate = 180,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 56 : 91,
@@ -5206,7 +5206,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_PURE_POWER, ABILITY_NONE, ABILITY_TELEPATHY },
+        .abilities = { ABILITY_PURE_POWER, ABILITY_PSYCHIC_SURGE, ABILITY_TELEPATHY },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Meditite"),
         .cryId = CRY_MEDITITE,
@@ -5268,17 +5268,17 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sMedititeLevelUpLearnset,
         .teachableLearnset = sMedititeTeachableLearnset,
         .eggMoveLearnset = sMedititeEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_MEDICHAM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MEDICHAM}),
     },
 
     [SPECIES_MEDICHAM] =
     {
-        .baseHP        = 80,
-        .baseAttack    = 105,
-        .baseDefense   = 85,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 80,
+        .baseHP        = 60,
+        .baseAttack    = 65,
+        .baseDefense   = 75,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 75,
         .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
         .catchRate = 90,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 144 : 153,
@@ -5288,7 +5288,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_PURE_POWER, ABILITY_NONE, ABILITY_TELEPATHY },
+        .abilities = { ABILITY_PURE_POWER, ABILITY_PSYCHIC_SURGE, ABILITY_TELEPATHY },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Medicham"),
         .cryId = CRY_MEDICHAM,
@@ -5355,9 +5355,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sMedichamTeachableLearnset,
         .formSpeciesIdTable = sMedichamFormSpeciesIdTable,
         .formChangeTable = sMedichamFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_MEDICHAM_MEGA,
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MEDICHAM_MEGA,
                                     CONDITIONS(
-                                        {IF_HOLD_ITEM, ITEM_PSYCHIC_GEM},
                                         {IF_IN_MAP, MAP_MT_PYRE_SUMMIT}
                                 )}),
     },
@@ -5365,11 +5364,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_MEGA_EVOLUTIONS || P_MEGA_STONES_AS_EVO_STONES
     [SPECIES_MEDICHAM_MEGA] =
     {
-        .baseHP        = 90,
-        .baseAttack    = 110,
-        .baseDefense   = 90,
+        .baseHP        = 70,
+        .baseAttack    = 105,
+        .baseDefense   = 85,
         .baseSpeed     = 100,
-        .baseSpAttack  = 110,
+        .baseSpAttack  = 105,
         .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
         .catchRate = 90,
@@ -5380,7 +5379,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_PURE_POWER, ABILITY_PURE_POWER, ABILITY_TELEPATHY },
+        .abilities = { ABILITY_PURE_POWER, ABILITY_PSYCHIC_SURGE, ABILITY_TELEPATHY },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Medideva"),
         .cryId = CRY_MEDICHAM_MEGA,
@@ -12620,13 +12619,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sKyogreTeachableLearnset,
         .formSpeciesIdTable = sKyogreFormSpeciesIdTable,
         .formChangeTable = sKyogreFormChangeTable,
-    
+
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_KYOGRE_PRIMAL,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_BLUE_ORB},
                                         {IF_IN_MAP, MAP_MARINE_CAVE_END}
                                 )}),
-    
+
     },
 #if P_PRIMAL_REVERSIONS
     [SPECIES_KYOGRE_PRIMAL] =
@@ -12781,13 +12780,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sGroudonTeachableLearnset,
         .formSpeciesIdTable = sGroudonFormSpeciesIdTable,
         .formChangeTable = sGroudonFormChangeTable,
-    
+
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_GROUDON_PRIMAL,
                                     CONDITIONS(
                                         {IF_HOLD_ITEM, ITEM_RED_ORB},
                                         {IF_IN_MAP, MAP_TERRA_CAVE_END}
                                 )}),
-    
+
     },
 
 #if P_PRIMAL_REVERSIONS
