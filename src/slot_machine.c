@@ -2,6 +2,7 @@
 #include "overworld.h"
 #include "field_effect.h"
 #include "random.h"
+#include "event_data.h"
 #include "sound.h"
 #include "main.h"
 #include "slot_machine.h"
@@ -63,7 +64,7 @@
 
 #define BIAS_7       (BIAS_STRAIGHT_7 | BIAS_MIXED_7)
 #define BIAS_SPECIAL (BIAS_7 | BIAS_REELTIME)
-#define BIAS_REGULAR (BIAS_REPLAY | BIAS_CHERRY | BIAS_LOATAD | BIAS_AZURILL | BIAS_POWER)
+#define BIAS_REGULAR (BIAS_REPLAY | BIAS_CHERRY | BIAS_LOTAD | BIAS_AZURILL | BIAS_POWER)
 
 // The slot machine will try to manipulate the outcome by adding up to 4 extra
 // turns to the reel after you press stop.
@@ -1186,11 +1187,13 @@ static void SlotMachineSetup_InitGpuRegs(void)
 static void InitSlotMachine(void)
 {
     u8 i;
+    u32 numOwnedBadges = GetNumOwnedBadges();
+    u32 luckyCounter = 0;
+
 
     SlotMachine_InitFromTask();
     sSlotMachine->state = SLOTTASK_UNFADE;
     sSlotMachine->pikaPowerBolts = 0;
-    sSlotMachine->luckyGame = Random() & 1;
     sSlotMachine->machineBias = 0;
     sSlotMachine->matches = 0;
     sSlotMachine->reelTimeSpinsLeft = 0;
@@ -1206,6 +1209,13 @@ static void InitSlotMachine(void)
     sSlotMachine->winIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     sSlotMachine->winOut = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;
     sSlotMachine->backupMapMusic = GetCurrentMapMusic();
+
+    do
+    {
+        sSlotMachine->luckyGame = RandomPercentage(RNG_SLOTS_LUCKY_GAME, numOwnedBadges * 5);
+        luckyCounter++;
+    } 
+    while (luckyCounter < numOwnedBadges && !sSlotMachine->luckyGame);
 
     for (i = 0; i < NUM_REELS; i++)
     {
