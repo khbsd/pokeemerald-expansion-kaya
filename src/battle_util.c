@@ -204,6 +204,8 @@ static const struct BattleWeatherInfo sBattleWeatherInfo[BATTLE_WEATHER_COUNT] =
     },
 };
 
+
+
 u32 GetCurrentBattleWeather(void)
 {
     u32 currBattleWeather = 0xFF;
@@ -370,7 +372,7 @@ void HandleAction_UseMove(void)
     u32 i, moveTarget;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-    if (gBattleStruct->battlerState[gBattlerAttacker].absent
+    if (gAbsentBattlerFlags & 1u << gBattlerAttacker
      || gBattleStruct->battlerState[gBattlerAttacker].commandingDondozo
      || !IsBattlerAlive(gBattlerAttacker))
     {
@@ -545,6 +547,16 @@ void HandleAction_UseMove(void)
 void HandleAction_Switch(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+
+    // if switching to a mon that is already on field, cancel switch
+    if (!(gAbsentBattlerFlags & (1u << BATTLE_PARTNER(gBattlerAttacker)))
+     && IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker))
+     && gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)] == gBattleStruct->monToSwitchIntoId[gBattlerAttacker])
+    {
+        gCurrentActionFuncId = B_ACTION_FINISHED;
+        return;
+    }
+
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     gActionSelectionCursor[gBattlerAttacker] = 0;
@@ -851,7 +863,7 @@ void HandleAction_NothingIsFainted(void)
 
 void HandleAction_ActionFinished(void)
 {
-    u32 i, j, moveType;
+    u32 i, j;
     bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     gBattleStruct->monToSwitchIntoId[gBattlerByTurnOrder[gCurrentTurnActionNumber]] = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
@@ -862,16 +874,6 @@ void HandleAction_ActionFinished(void)
                     | HITMARKER_OBEYS | HITMARKER_SYNCHRONIZE_EFFECT
                     | HITMARKER_CHARGING | HITMARKER_IGNORE_DISGUISE);
 
-    // check if Stellar type boost should be used up
-    moveType = GetBattleMoveType(gCurrentMove);
-
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA
-        && GetBattlerTeraType(gBattlerAttacker) == TYPE_STELLAR
-        && GetMoveCategory(gCurrentMove) != DAMAGE_CATEGORY_STATUS
-        && IsTypeStellarBoosted(gBattlerAttacker, moveType))
-    {
-        ExpendTypeStellarBoost(gBattlerAttacker, moveType);
-    }
     ClearDamageCalcResults();
     gCurrentMove = 0;
     gBattleScripting.animTurn = 0;
@@ -988,29 +990,29 @@ static void UNUSED MarkAllBattlersForControllerExec(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleControllerExecFlags |= 1u << (i + 32 - MAX_BATTLERS_COUNT);
+            MarkBattleControllerMessageOutboundOverLink(i);
     }
     else
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleControllerExecFlags |= 1u << i;
+            MarkBattleControllerActiveOnLocal(i);
     }
 }
 
 bool32 IsBattlerMarkedForControllerExec(u32 battler)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return (gBattleControllerExecFlags & (1u << (battler + 28))) != 0;
+        return IsBattleControllerMessageSynchronizedOverLink(battler);
     else
-        return (gBattleControllerExecFlags & (1u << battler)) != 0;
+        return IsBattleControllerActiveOnLocal(battler);
 }
 
 void MarkBattlerForControllerExec(u32 battler)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattleControllerExecFlags |= 1u << (battler + 32 - MAX_BATTLERS_COUNT);
+        MarkBattleControllerMessageOutboundOverLink(battler);
     else
-        gBattleControllerExecFlags |= 1u << battler;
+        MarkBattleControllerActiveOnLocal(battler);
 }
 
 void MarkBattlerReceivedLinkData(u32 battler)
@@ -1018,9 +1020,9 @@ void MarkBattlerReceivedLinkData(u32 battler)
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
-        gBattleControllerExecFlags |= 1u << (battler + (i << 2));
+        MarkBattleControllerActiveForPlayer(battler, i);
 
-    gBattleControllerExecFlags &= ~(1u << (28 + battler));
+    MarkBattleControllerMessageSynchronizedOverLink(battler);
 }
 
 const u8 *CheckSkyDropState(u32 battler, enum SkyDropState skyDropState)
@@ -4372,7 +4374,9 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 }
                 break;
             case ABILITY_HUNGER_SWITCH:
-                if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TURN_END))
+                if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+                 && GetActiveGimmick(battler) != GIMMICK_TERA
+                 && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TURN_END))
                 {
                     gBattlerAttacker = battler;
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
@@ -5220,10 +5224,9 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
         }
         break;
     case ABILITYEFFECT_IMMUNITY:
-        gBattleStruct->bypassMoldBreakerChecks = TRUE;
         for (battler = 0; battler < gBattlersCount; battler++)
         {
-            switch (GetBattlerAbility(battler))
+            switch (GetBattlerAbilityIgnoreMoldBreaker(battler))
             {
             case ABILITY_IMMUNITY:
             case ABILITY_PASTEL_VEIL:
@@ -5311,7 +5314,6 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 return effect;
             }
         }
-        gBattleStruct->bypassMoldBreakerChecks = FALSE;
         break;
     case ABILITYEFFECT_SYNCHRONIZE:
         if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONIZE_EFFECT))
@@ -5556,9 +5558,9 @@ bool32 IsMoldBreakerTypeAbility(u32 battler, enum Abilities ability)
         || (ability == ABILITY_MYCELIUM_MIGHT && IsBattleMoveStatus(gCurrentMove)));
 }
 
-static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, enum Abilities ability, u32 hasAbilityShield)
+static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, enum Abilities ability, u32 hasAbilityShield, u32 ignoreMoldBreaker)
 {
-    if (hasAbilityShield || gBattleStruct->bypassMoldBreakerChecks)
+    if (hasAbilityShield || ignoreMoldBreaker)
         return FALSE;
 
     return ((IsMoldBreakerTypeAbility(battlerAtk, ability) || MoveIgnoresTargetAbility(gCurrentMove))
@@ -5569,7 +5571,17 @@ static inline bool32 CanBreakThroughAbility(u32 battlerAtk, u32 battlerDef, enum
          && gCurrentTurnActionNumber < gBattlersCount);
 }
 
+enum Abilities GetBattlerAbilityIgnoreMoldBreaker(u32 battler)
+{
+    return GetBattlerAbilityInternal(battler, TRUE);
+}
+
 enum Abilities GetBattlerAbility(u32 battler)
+{
+    return GetBattlerAbilityInternal(battler, FALSE);
+}
+
+enum Abilities GetBattlerAbilityInternal(u32 battler, u32 ignoreMoldBreaker)
 {
     bool32 hasAbilityShield = GetBattlerHoldEffectIgnoreAbility(battler, TRUE) == HOLD_EFFECT_ABILITY_SHIELD;
     bool32 abilityCantBeSuppressed = gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed;
@@ -5582,7 +5594,7 @@ enum Abilities GetBattlerAbility(u32 battler)
             && gBattleMons[battler].ability == ABILITY_COMATOSE)
                 return ABILITY_NONE;
 
-        if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield))
+        if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield, ignoreMoldBreaker))
             return ABILITY_NONE;
 
         return gBattleMons[battler].ability;
@@ -5596,7 +5608,7 @@ enum Abilities GetBattlerAbility(u32 battler)
      && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS)
         return ABILITY_NONE;
 
-    if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield))
+    if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield, ignoreMoldBreaker))
         return ABILITY_NONE;
 
     return gBattleMons[battler].ability;

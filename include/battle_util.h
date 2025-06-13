@@ -244,6 +244,8 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
 bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMoldBreakerTypeAbility(u32 battler, enum Abilities ability);
+enum Abilities GetBattlerAbilityIgnoreMoldBreaker(u32 battler);
+enum Abilities GetBattlerAbilityInternal(u32 battler, u32 ignoreMoldBreaker);
 enum Abilities GetBattlerAbility(u32 battler);
 u32 IsAbilityOnSide(u32 battler, enum Abilities ability);
 u32 IsAbilityOnOpposingSide(u32 battler, enum Abilities ability);

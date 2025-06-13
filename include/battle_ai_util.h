@@ -153,6 +153,7 @@ bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensiv
 bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
 bool32 HasMoveWithEffect(u32 battlerId, enum BattleMoveEffects moveEffect);
+bool32 HasBattlerSideMoveWithEffect(u32 battler, u32 effect);
 bool32 HasNonVolatileMoveEffect(u32 battlerId, u32 effect);
 bool32 IsPowerBasedOnStatus(u32 battlerId, enum BattleMoveEffects effect, u32 argument);
 bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect);
@@ -246,6 +247,7 @@ bool32 SideHasMoveCategory(u32 battlerId, u32 category);
 // score increases
 u32 IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
 u32 IncreaseStatUpScoreContrary(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
+u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, u32 stat);
 void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
