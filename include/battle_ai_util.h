@@ -122,17 +122,11 @@ enum Abilities AI_GetBattlerAbility(u32 battler);
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
 bool32 ShouldLowerStat(u32 battlerAtk, u32 battlerDef, enum Abilities abilityDef, u32 stat);
+bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, enum Abilities abilityDef, u32 stat);
 bool32 BattlerStatCanRise(u32 battler, enum Abilities battlerAbility, u32 stat);
 bool32 AreBattlersStatsMaxed(u32 battler);
 u32 CountPositiveStatStages(u32 battlerId);
 u32 CountNegativeStatStages(u32 battlerId);
-bool32 ShouldLowerAttack(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerDefense(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerSpeed(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerSpAtk(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerSpDef(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerAccuracy(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
-bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, enum Abilities defAbility);
 
 // move checks
 bool32 IsAffectedByPowder(u32 battler, enum Abilities ability, enum ItemHoldEffect holdEffect);
