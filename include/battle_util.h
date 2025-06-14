@@ -174,8 +174,8 @@ struct DamageContext
     u32 fixedBasePower:8;
     u32 padding2:8;
     uq4_12_t typeEffectivenessModifier;
-    u32 abilityAtk:16;
-    u32 abilityDef:16;
+    enum Abilities abilityAtk;
+    enum Abilities abilityDef;
     enum ItemHoldEffect holdEffectAtk:16;
     enum ItemHoldEffect holdEffectDef:16;
 };
