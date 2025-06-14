@@ -8763,7 +8763,6 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
     u8 atkStage;
     u32 atkStat;
     uq4_12_t modifier;
-    u16 atkBaseSpeciesId;
     u32 battlerAtk = ctx->battlerAtk;
     u32 battlerDef = ctx->battlerDef;
     u32 move = ctx->move;
@@ -9007,7 +9006,7 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (moveType == TYPE_FIRE || moveType == TYPE_ICE)
         {
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.667));
-            if (damageCalcData->updateFlags)
+            if (ctx->updateFlags)
                 RecordAbilityBattle(battlerDef, ABILITY_LUSH_LEAVES);
         }
         break;
@@ -9452,15 +9451,15 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(struct DamageContext *ctx)
             return UQ_4_12(0.75);
         break;
     case ABILITY_SHIELD_DUST:
-        if (typeEffectivenessModifier >= UQ_4_12(2.0))
+        if (ctx->typeEffectivenessModifier >= UQ_4_12(2.0))
             return UQ_4_12(0.875);
         break;
     case ABILITY_BURN_ENTRY:
-        if (IsMoveMakingContact(move, battlerAtk))
+        if (IsMoveMakingContact(ctx->move, ctx->battlerAtk))
             return UQ_4_12(0.75);
         break;
     case ABILITY_THICK_FAT:
-        if (IsMoveMakingContact(move, battlerAtk))
+        if (IsMoveMakingContact(ctx->move, ctx->battlerAtk))
             return UQ_4_12(0.85);
         break;
     case ABILITY_FLUFFY:
