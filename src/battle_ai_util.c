@@ -423,12 +423,20 @@ bool32 IsAffectedByPowder(u32 battler, enum Abilities ability, enum ItemHoldEffe
 // Consider a pokemon boosting their attack against a ghost pokemon having only normal-type physical attacks.
 bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category)
 {
-    s32 i, moveType;
     u32 usable = 0;
     u16 *moves = GetMovesArray(attacker);
     u32 moveLimitations = gAiLogicData->moveLimitations[attacker];
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    struct DamageContext ctx = {0};
+    ctx.battlerAtk = attacker;
+    ctx.battlerDef = target;
+    ctx.updateFlags = FALSE;
+    ctx.abilityAtk = gAiLogicData->abilities[attacker];
+    ctx.abilityDef = gAiLogicData->abilities[target];
+    ctx.holdEffectAtk = gAiLogicData->items[attacker];
+    ctx.holdEffectDef = gAiLogicData->items[target];
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
         if (IsMoveUnusable(i, moves[i], moveLimitations))
             continue;
@@ -436,8 +444,10 @@ bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category)
         if (GetBattleMoveCategory(moves[i]) == category)
         {
             SetTypeBeforeUsingMove(moves[i], attacker);
-            moveType = GetBattleMoveType(moves[i]);
-            if (CalcTypeEffectivenessMultiplier(moves[i], moveType, attacker, target, gAiLogicData->abilities[target], FALSE) != 0)
+            ctx.move = moves[i];
+            ctx.moveType = GetBattleMoveType(moves[i]);
+
+            if (CalcTypeEffectivenessMultiplier(&ctx))
                 usable |= 1u << i;
         }
     }
@@ -481,89 +491,86 @@ static inline s32 DmgRoll(s32 dmg)
     return dmg;
 }
 
-bool32 IsDamageMoveUnusable(u32 battlerAtk, u32 battlerDef, u32 move, u32 moveType, uq4_12_t effectiveness, u32 weather)
+bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
 {
     enum Abilities battlerDefAbility;
     enum Abilities partnerDefAbility;
     struct AiLogicData *aiData = gAiLogicData;
 
-    if (effectiveness == UQ_4_12(0.0))
+    if (ctx->typeEffectivenessModifier == UQ_4_12(0.0))
         return TRUE;
-    if (gBattleStruct->battlerState[battlerDef].commandingDondozo)
+    if (gBattleStruct->battlerState[ctx->battlerDef].commandingDondozo)
         return TRUE;
 
     // aiData->abilities does not check for Mold Breaker since it happens during combat so it needs to be done manually
-    if (IsMoldBreakerTypeAbility(battlerAtk, aiData->abilities[battlerAtk]) || MoveIgnoresTargetAbility(move))
+    if (IsMoldBreakerTypeAbility(ctx->battlerAtk, ctx->abilityAtk) || MoveIgnoresTargetAbility(ctx->move))
     {
         battlerDefAbility = ABILITY_NONE;
         partnerDefAbility = ABILITY_NONE;
     }
     else
     {
-        battlerDefAbility = aiData->abilities[battlerDef];
-        partnerDefAbility = aiData->abilities[BATTLE_PARTNER(battlerDef)];
+        battlerDefAbility = ctx->abilityDef;
+        partnerDefAbility = aiData->abilities[BATTLE_PARTNER(ctx->battlerDef)];
     }
 
-    if (CanAbilityBlockMove(battlerAtk, battlerDef, aiData->abilities[battlerAtk], battlerDefAbility, move, ABILITY_CHECK_TRIGGER))
+    if (CanAbilityBlockMove(ctx->battlerAtk, ctx->battlerDef, ctx->abilityAtk, battlerDefAbility, ctx->move, ABILITY_CHECK_TRIGGER))
         return TRUE;
 
-    if (CanAbilityAbsorbMove(battlerAtk, battlerDef, battlerDefAbility, move, moveType, ABILITY_CHECK_TRIGGER))
+    if (CanAbilityAbsorbMove(ctx->battlerAtk, ctx->battlerDef, battlerDefAbility, ctx->move, ctx->moveType, ABILITY_CHECK_TRIGGER))
         return TRUE;
 
     // Limited to Lighning Rod and Storm Drain because otherwise the AI would consider Water Absorb, etc...
     if (partnerDefAbility == ABILITY_LIGHTNING_ROD || partnerDefAbility == ABILITY_STORM_DRAIN)
     {
-        if (CanAbilityAbsorbMove(battlerAtk, BATTLE_PARTNER(battlerDef), partnerDefAbility, move, moveType, ABILITY_CHECK_TRIGGER))
+        if (CanAbilityAbsorbMove(ctx->battlerAtk, BATTLE_PARTNER(ctx->battlerDef), partnerDefAbility, ctx->move, ctx->moveType, ABILITY_CHECK_TRIGGER))
             return TRUE;
     }
 
     if (HasWeatherEffect())
     {
-        if (weather & B_WEATHER_SUN_PRIMAL && moveType == TYPE_WATER)
+        if (ctx->weather & B_WEATHER_SUN_PRIMAL && ctx->moveType == TYPE_WATER)
             return TRUE;
-        if (weather & B_WEATHER_RAIN_PRIMAL && moveType == TYPE_FIRE)
+        if (ctx->weather & B_WEATHER_RAIN_PRIMAL && ctx->moveType == TYPE_FIRE)
             return TRUE;
     }
 
-    switch (GetMoveEffect(move))
+    if (IsMoveDampBanned(ctx->move) && (battlerDefAbility == ABILITY_DAMP || partnerDefAbility == ABILITY_DAMP))
+        return TRUE;
+
+    switch (GetMoveEffect(ctx->move))
     {
     case EFFECT_DREAM_EATER:
-        if (!AI_IsBattlerAsleepOrComatose(battlerDef))
+        if (!AI_IsBattlerAsleepOrComatose(ctx->battlerDef))
             return TRUE;
         break;
     case EFFECT_BELCH:
-        if (IsBelchPreventingMove(battlerAtk, move))
+        if (IsBelchPreventingMove(ctx->battlerAtk, ctx->move))
             return TRUE;
         break;
     case EFFECT_LAST_RESORT:
-        if (!CanUseLastResort(battlerAtk))
+        if (!CanUseLastResort(ctx->battlerAtk))
             return TRUE;
         break;
     case EFFECT_LOW_KICK:
     case EFFECT_HEAT_CRASH:
-        if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
+        if (GetActiveGimmick(ctx->battlerDef) == GIMMICK_DYNAMAX)
             return TRUE;
         break;
     case EFFECT_FAIL_IF_NOT_ARG_TYPE:
-        if (!IS_BATTLER_OF_TYPE(battlerAtk, GetMoveArgType(move)))
+        if (!IS_BATTLER_OF_TYPE(ctx->battlerAtk, GetMoveArgType(ctx->move)))
             return TRUE;
         break;
     case EFFECT_HIT_SET_REMOVE_TERRAIN:
-        if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY) && GetMoveEffectArg_MoveProperty(move) == ARG_TRY_REMOVE_TERRAIN_FAIL)
+        if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY) && GetMoveEffectArg_MoveProperty(ctx->move) == ARG_TRY_REMOVE_TERRAIN_FAIL)
             return TRUE;
         break;
     case EFFECT_POLTERGEIST:
-        if (gAiLogicData->items[battlerDef] == ITEM_NONE || !IsBattlerItemEnabled(battlerDef))
+        if (gAiLogicData->items[ctx->battlerDef] == ITEM_NONE || !IsBattlerItemEnabled(ctx->battlerDef))
             return TRUE;
         break;
     case EFFECT_FIRST_TURN_ONLY:
-        if (!gDisableStructs[battlerAtk].isFirstTurn)
-            return TRUE;
-        break;
-    case EFFECT_EXPLOSION:
-    case EFFECT_MISTY_EXPLOSION:
-    case EFFECT_MIND_BLOWN:
-        if (battlerDefAbility == ABILITY_DAMP || partnerDefAbility == ABILITY_DAMP)
+        if (!gDisableStructs[ctx->battlerAtk].isFirstTurn)
             return TRUE;
         break;
     default:
@@ -733,9 +740,7 @@ static inline bool32 ShouldCalcCritDamage(u32 battlerAtk, u32 battlerDef, u32 mo
 struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, uq4_12_t *typeEffectiveness, enum AIConsiderGimmick considerGimmickAtk, enum AIConsiderGimmick considerGimmickDef, u32 weather)
 {
     struct SimulatedDamage simDamage;
-    s32 moveType;
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
-    uq4_12_t effectivenessMultiplier;
     bool32 isDamageMoveUnusable = FALSE;
     bool32 toggledGimmickAtk = FALSE;
     bool32 toggledGimmickDef = FALSE;
@@ -766,36 +771,32 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
 
     SetDynamicMoveCategory(battlerAtk, battlerDef, move);
     SetTypeBeforeUsingMove(move, battlerAtk);
-    moveType = GetBattleMoveType(move);
-    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, aiData->abilities[battlerDef], FALSE);
+
+    struct DamageContext ctx;
+    ctx.battlerAtk = battlerAtk;
+    ctx.battlerDef = battlerDef;
+    ctx.move = move;
+    ctx.moveType = GetBattleMoveType(move);
+    ctx.isCrit = ShouldCalcCritDamage(battlerAtk, battlerDef, move, aiData);
+    ctx.randomFactor = FALSE;
+    ctx.updateFlags = FALSE;
+    ctx.weather = weather;
+    ctx.fixedBasePower = SetFixedMoveBasePower(battlerAtk, move);
+    ctx.abilityAtk = aiData->abilities[battlerAtk];
+    ctx.abilityDef = aiData->abilities[battlerDef];
+    ctx.holdEffectAtk = aiData->holdEffects[battlerAtk];
+    ctx.holdEffectDef = aiData->holdEffects[battlerDef];
+    ctx.typeEffectivenessModifier = CalcTypeEffectivenessMultiplier(&ctx);
 
     u32 movePower = GetMovePower(move);
     if (movePower)
-        isDamageMoveUnusable = IsDamageMoveUnusable(battlerAtk, battlerDef, move, moveType, effectivenessMultiplier, weather);
+        isDamageMoveUnusable = IsDamageMoveUnusable(&ctx);
 
     if (movePower && !isDamageMoveUnusable)
     {
         u32 types[3];
         AI_StoreBattlerTypes(battlerAtk, types);
-
-        ProteanTryChangeType(battlerAtk, aiData->abilities[battlerAtk], move, moveType);
-        s32 fixedBasePower = SetFixedMoveBasePower(battlerAtk, move);
-
-        struct DamageContext ctx;
-        ctx.battlerAtk = battlerAtk;
-        ctx.battlerDef = battlerDef;
-        ctx.move = move;
-        ctx.moveType = moveType;
-        ctx.isCrit = ShouldCalcCritDamage(battlerAtk, battlerDef, move, aiData);
-        ctx.randomFactor = FALSE;
-        ctx.updateFlags = FALSE;
-        ctx.weather = weather;
-        ctx.fixedBasePower = fixedBasePower;
-        ctx.typeEffectivenessModifier = effectivenessMultiplier;
-        ctx.abilityAtk = aiData->abilities[battlerAtk];
-        ctx.abilityDef = aiData->abilities[battlerDef];
-        ctx.holdEffectAtk = aiData->holdEffects[battlerAtk];
-        ctx.holdEffectDef = aiData->holdEffects[battlerDef];
+        ProteanTryChangeType(battlerAtk, aiData->abilities[battlerAtk], move, ctx.moveType);
 
         if (moveEffect == EFFECT_TRIPLE_KICK)
         {
@@ -842,7 +843,7 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
     }
 
     // convert multiper to AI_EFFECTIVENESS_xX
-    *typeEffectiveness = effectivenessMultiplier;
+    *typeEffectiveness = ctx.typeEffectivenessModifier;
 
     // Undo temporary settings
     gBattleStruct->dynamicMoveType = 0;
@@ -1003,7 +1004,6 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     switch (GetMoveEffect(move))
     {
     case EFFECT_MAX_HP_50_RECOIL:
-    case EFFECT_MIND_BLOWN:
     case EFFECT_CHLOROBLAST:
     case EFFECT_EXPLOSION:
     case EFFECT_MISTY_EXPLOSION:
@@ -1137,7 +1137,6 @@ u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef, enum DamageCalcContex
 uq4_12_t AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef)
 {
     uq4_12_t typeEffectiveness;
-    u32 moveType;
 
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
@@ -1147,8 +1146,17 @@ uq4_12_t AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef)
 
     gBattleStruct->dynamicMoveType = 0;
     SetTypeBeforeUsingMove(move, battlerAtk);
-    moveType = GetBattleMoveType(move);
-    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], FALSE);
+    struct DamageContext ctx = {0};
+    ctx.battlerAtk = battlerAtk;
+    ctx.battlerDef = battlerDef;
+    ctx.move = move;
+    ctx.moveType = GetBattleMoveType(move);
+    ctx.updateFlags = FALSE;
+    ctx.abilityAtk = gAiLogicData->abilities[battlerAtk];
+    ctx.abilityDef = gAiLogicData->abilities[battlerDef];
+    ctx.holdEffectAtk = gAiLogicData->items[battlerAtk];
+    ctx.holdEffectDef = gAiLogicData->items[battlerDef];
+    typeEffectiveness = CalcTypeEffectivenessMultiplier(&ctx);
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);

@@ -832,7 +832,7 @@
 	.4byte \failInstr
 	.endm
 
-	.macro unused_0x94
+	.macro setstatuswithability
 	.byte 0x94
 	.endm
 
@@ -1338,8 +1338,9 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro setnonvolatilestatus
+	.macro setnonvolatilestatus trigger:req
 	.byte 0xfd
+	.byte \trigger
 	.endm
 
 	.macro tryworryseed failInstr:req
@@ -1444,10 +1445,6 @@
 
 	.macro setglaiverush
 	callnative BS_SetGlaiveRush
-	.endm
-
-	.macro tryrelicsong
-	callnative BS_TryRelicSong
 	.endm
 
 	.macro setpledge jumpInstr:req

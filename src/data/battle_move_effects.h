@@ -1798,12 +1798,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_RELIC_SONG] =
-    {
-        .battleScript = BattleScript_EffectRelicSong,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
     [EFFECT_BODY_PRESS] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -1967,12 +1961,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     },
 
     [EFFECT_MAX_HP_50_RECOIL] =
-    {
-        .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
-    [EFFECT_MIND_BLOWN] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
