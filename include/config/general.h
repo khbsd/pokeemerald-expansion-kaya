@@ -1,7 +1,7 @@
 #ifndef GUARD_CONFIG_GENERAL_H
 #define GUARD_CONFIG_GENERAL_H
 
-#include "../../include/constants/species.h"
+#include "constants/species.h"
 
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
@@ -80,6 +80,7 @@
 #define CRY_AFTER_TITLE				 SPECIES_RAYQUAZA // If set to something other than SPECIES_NONE, will attempt to play the set species' cry after the title.
 #define INTRO_GENDER_MATCH_SAVE		 TRUE
 #define BOX_ENCRYPTION               FALSE   // If FALSE, does not encrypt/decrypt box mons. !!! WARNING: WILL CORRUPT ALL EXISTING MONS
+#define PHONEMES_SHARED              FALSE   // If TRUE, bard phonemes all reference the same sound (sound/direct_sound_samples/phonemes/shared.bin) to save ROM space.
 
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds
