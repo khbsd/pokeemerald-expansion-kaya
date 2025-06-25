@@ -4835,7 +4835,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                 {
                     gStatuses3[gBattlerAttacker] |= STATUS3_LEECHSEED;
                     gStatuses3[gBattlerTarget] |= STATUS3_LEECHSEED_BATTLER;
-                    gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_LEECH_SEED;
+                    gBattleScripting.moveEffect = MOVE_EFFECT_LEECH_SEED;
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                     BattleScriptCall(BattleScript_AbilityBallistosporeActivates);
                 }
@@ -4852,7 +4852,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
                     && CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerTarget].item)
                     && IsMoveMakingContact(move, gBattlerAttacker))
                 {
-                    gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | EFFECT_KNOCK_OFF;
+                    gBattleScripting.moveEffect = EFFECT_KNOCK_OFF;
                     gBattleScripting.battler = gBattlerTarget;
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                     BattleScriptCall(BattleScript_KnockedOff);
@@ -5160,7 +5160,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
-                SetMoveEffect(FALSE, FALSE);
+                SetMoveEffect(gBattlerAttacker, gBattlerTarget, FALSE, FALSE);
                 BattleScriptPop();
                 effect++;
             }
@@ -5176,7 +5176,7 @@ enum Abilities AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities abil
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
-                SetMoveEffect(FALSE, FALSE);
+                SetMoveEffect(gBattlerAttacker, gBattlerTarget, FALSE, FALSE);
                 BattleScriptPop();
                 effect++;
             }
