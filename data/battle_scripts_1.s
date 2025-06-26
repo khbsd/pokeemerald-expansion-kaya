@@ -7469,7 +7469,6 @@ BattleScript_IntimidateLoopIncrement:
 	destroyabilitypopup
 	restoretarget
 	pause B_WAIT_TIME_MED
-	tryintimidateejectpack
 	end3
 
 BattleScript_IntimidatePrevented::
@@ -7587,7 +7586,6 @@ BattleScript_SupersweetSyrupLoopIncrement:
 	destroyabilitypopup
 	restoretarget
 	pause B_WAIT_TIME_MED
-	tryintimidateejectpack
 	end3
 
 BattleScript_SupersweetSyrupWontDecrease:
@@ -9281,6 +9279,10 @@ BattleScript_EjectPackActivate_Ret::
 BattleScript_EjectPackActivate_End2::
 	call BattleScript_EjectPackActivate_Ret
 	end2
+
+BattleScript_EjectPackActivate_End3::
+	call BattleScript_EjectPackActivate_Ret
+	end3
 
 BattleScript_EjectPackActivates::
 	jumpifcantswitch BS_SCRIPTING, BattleScript_EjectButtonEnd

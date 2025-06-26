@@ -1234,7 +1234,7 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
         return;
     }
-    if (AtkCanceller_MoveSuccessOrder())
+    if (AtkCanceller_MoveSuccessOrder() != MOVE_STEP_SUCCESS)
         return;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_OFF
@@ -6064,7 +6064,7 @@ static inline bool32 CanEjectButtonTrigger(u32 battlerAtk, u32 battlerDef, enum 
 
 static inline bool32 CanEjectPackTrigger(u32 battlerAtk, u32 battlerDef, enum BattleMoveEffects moveEffect)
 {
-    if (gProtectStructs[battlerDef].statFell
+    if (gProtectStructs[battlerDef].tryEjectPack
      && GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_EJECT_PACK
      && IsBattlerAlive(battlerDef)
      && CountUsablePartyMons(battlerDef) > 0
@@ -6968,6 +6968,9 @@ static void Cmd_moveend(void)
                     break;
                 }
 
+                for (u32 i = 0; i < gBattlersCount; i++)
+                    gProtectStructs[i].tryEjectPack = FALSE;
+
                 u8 battlers[4] = {0, 1, 2, 3};
                 if (numEjectButtonBattlers > 1)
                     SortBattlersBySpeed(battlers, FALSE);
@@ -7019,7 +7022,7 @@ static void Cmd_moveend(void)
                     SortBattlersBySpeed(battlers, FALSE);
 
                 for (i = 0; i < gBattlersCount; i++)
-                    gProtectStructs[i].statFell = FALSE; // restore for every possible eject pack battler
+                    gProtectStructs[i].tryEjectPack = FALSE;
 
                 for (i = 0; i < gBattlersCount; i++)
                 {
@@ -7091,6 +7094,8 @@ static void Cmd_moveend(void)
                           && CanBattlerSwitch(gBattlerAttacker)
                           && !(moveEffect == EFFECT_HIT_SWITCH_TARGET && CanBattlerSwitch(battler)))
                         {
+                            for (u32 i = 0; i < gBattlersCount; i++)
+                                gProtectStructs[i].tryEjectPack = FALSE;
                             effect = TRUE;
                             gLastUsedItem = gBattleMons[battler].item;
                             SaveBattlerTarget(battler); // save battler with red card
@@ -7182,6 +7187,9 @@ static void Cmd_moveend(void)
                     gBattleScripting.moveendState++;
                     break;
                 }
+
+                for (u32 i = 0; i < gBattlersCount; i++)
+                    gProtectStructs[i].tryEjectPack = FALSE;
 
                 u8 battlers[4] = {0, 1, 2, 3};
                 if (numEmergencyExitBattlers > 1)
@@ -7328,6 +7336,7 @@ static void Cmd_moveend(void)
             for (i = 0; i < gBattlersCount; i++)
             {
                 gBattleStruct->battlerState[gBattlerAttacker].targetsDone[i] = FALSE;
+                gProtectStructs[i].tryEjectPack = FALSE;
 
                 if (gBattleStruct->commanderActive[i] != SPECIES_NONE && !IsBattlerAlive(i))
                 {
@@ -8305,6 +8314,8 @@ static void Cmd_switchineffects(void)
                         return;
                 }
             }
+            if (TrySwitchInEjectPack(ITEMEFFECT_NONE))
+                return;
             // All battlers done, end
             for (i = 0; i < gBattlersCount; i++)
                 gBattleStruct->battlerState[i].multipleSwitchInBattlers = FALSE;
@@ -8315,7 +8326,7 @@ static void Cmd_switchineffects(void)
         break;
     default:
         UpdateSentMonFlags(battler);
-        if (!DoSwitchInEffectsForBattler(battler))
+        if (!DoSwitchInEffectsForBattler(battler) && !TrySwitchInEjectPack(ITEMEFFECT_NONE))
             gBattlescriptCurrInstr = cmd->nextInstr;
         break;
     }
@@ -12341,7 +12352,7 @@ static u32 ChangeStatBuffs(u32 battler, s8 statValue, u32 statId, union StatChan
             }
             else if (!flags.onlyChecking)
             {
-                gProtectStructs[battler].statFell = TRUE;
+                gProtectStructs[battler].tryEjectPack = TRUE;
                 gProtectStructs[battler].lashOutAffected = TRUE;
             }
         }
@@ -18611,49 +18622,6 @@ void BS_JumpIfIntimidateAbilityPrevented(void)
         gLastUsedAbility = ability;
         gBattlerAbility = gBattlerTarget;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
-}
-
-void BS_TryIntimidateEjectPack(void)
-{
-    NATIVE_ARGS();
-
-    u32 affectedBattler = 0xFF;
-    u32 battler = BATTLE_OPPOSITE(gBattlerAttacker);
-    u32 partnerBattler = BATTLE_PARTNER(battler);
-
-    bool32 ejectPackBattler = CanEjectPackTrigger(gBattlerAttacker, battler, MOVE_NONE);
-    bool32 ejectPackPartnerBattler = CanEjectPackTrigger(gBattlerAttacker, partnerBattler, MOVE_NONE);
-
-    if (ejectPackBattler && ejectPackPartnerBattler)
-    {
-        u32 battlerSpeed = GetBattlerTotalSpeedStat(battler);
-        u32 partnerbattlerSpeed = GetBattlerTotalSpeedStat(partnerBattler);
-
-        if (battlerSpeed >= partnerbattlerSpeed)
-            affectedBattler = battler;
-        else
-            affectedBattler = partnerBattler;
-    }
-    else if (ejectPackBattler)
-    {
-        affectedBattler = battler;
-    }
-    else if (ejectPackPartnerBattler)
-    {
-        affectedBattler = partnerBattler;
-    }
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
-    if (affectedBattler != 0xFF)
-    {
-        gProtectStructs[battler].statFell = FALSE;
-        gProtectStructs[partnerBattler].statFell = FALSE;
-        gAiLogicData->ejectPackSwitch = TRUE;
-        gBattleScripting.battler = affectedBattler;
-        gLastUsedItem = gBattleMons[affectedBattler].item;
-        RecordItemEffectBattle(affectedBattler, HOLD_EFFECT_EJECT_PACK);
-        BattleScriptCall(BattleScript_EjectPackActivate_Ret);
     }
 }
 
