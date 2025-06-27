@@ -5441,10 +5441,12 @@ BattleScript_AskToLearnMove::
 	waitstate
 	setbyte sLEARNMOVE_STATE, 0
 	yesnoboxlearnmove BattleScript_ForgotAndLearnedNewMove
+.if P_ASK_MOVE_CONFIRMATION == TRUE
 	printstring STRINGID_STOPLEARNINGMOVE
 	waitstate
 	setbyte sLEARNMOVE_STATE, 0
 	yesnoboxstoplearningmove BattleScript_AskToLearnMove
+.endif
 	printstring STRINGID_DIDNOTLEARNMOVE
 	goto BattleScript_TryLearnMoveLoop
 BattleScript_ForgotAndLearnedNewMove::
@@ -7183,9 +7185,20 @@ BattleScript_AbilityCantRaiseDefenderStat::
 	restoreattacker
 	return
 
+BattleScript_AbilityShieldProtects::
+	saveattacker
+	copybyte gBattlerAttacker, gBattlerAbility
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
+	waitanimation
+	printstring STRINGID_ABILITYSHIELDPROTECTS
+	waitmessage B_WAIT_TIME_LONG
+	restoreattacker
+	return
+
 BattleScript_AbilityPopUpTarget::
 	copybyte gBattlerAbility, gBattlerTarget
 BattleScript_AbilityPopUp::
+	tryactivateabilityshield BS_ABILITY_BATTLER
 	.if B_ABILITY_POP_UP == TRUE
 	showabilitypopup BS_ABILITY_BATTLER
 	pause 40
@@ -7435,14 +7448,10 @@ BattleScript_TryIntimidateHoldEffectsRet:
 
 BattleScript_IntimidateActivates::
 	savetarget
-.if B_ABILITY_POP_UP == TRUE
-	showabilitypopup BS_ATTACKER
-	pause B_WAIT_TIME_LONG
+	call BattleScript_AbilityPopUp
 	destroyabilitypopup
-.endif
 	setbyte gBattlerTarget, 0
 BattleScript_IntimidateLoop:
-	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_IntimidateLoopIncrement
 	jumpiftargetally BattleScript_IntimidateLoopIncrement
 	jumpifabsent BS_TARGET, BattleScript_IntimidateLoopIncrement
 	jumpifvolatile BS_TARGET, VOLATILE_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
@@ -7555,16 +7564,12 @@ BattleScript_TerrifierInReverse:
 
 BattleScript_SupersweetSyrupActivates::
  	savetarget
-.if B_ABILITY_POP_UP == TRUE
-	showabilitypopup BS_ATTACKER
-	pause B_WAIT_TIME_LONG
+	call BattleScript_AbilityPopUp
 	destroyabilitypopup
-.endif
 	printstring STRINGID_SUPERSWEETAROMAWAFTS
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattlerTarget, 0
 BattleScript_SupersweetSyrupLoop:
-	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_SupersweetSyrupLoopIncrement
 	jumpiftargetally BattleScript_SupersweetSyrupLoopIncrement
 	jumpifabsent BS_TARGET, BattleScript_SupersweetSyrupLoopIncrement
 	jumpifvolatile BS_TARGET, VOLATILE_SUBSTITUTE, BattleScript_SupersweetSyrupLoopIncrement
@@ -7577,8 +7582,12 @@ BattleScript_SupersweetSyrupEffect:
 	printfromtable gStatDownStringIds
 BattleScript_SupersweetSyrupEffect_WaitString:
 	waitmessage B_WAIT_TIME_LONG
+	saveattacker
+	savetarget
 	copybyte sBATTLER, gBattlerTarget
 	call BattleScript_TryIntimidateHoldEffects
+	restoreattacker
+	restoretarget
 BattleScript_SupersweetSyrupLoopIncrement:
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_SupersweetSyrupLoop
@@ -8042,6 +8051,11 @@ BattleScript_ProteanActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNCHANGEDTYPE
 	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AbilityAvoidsDamage::
+	call BattleScript_AbilityPopUp
+	printfromtable gMissStringIds @ waitmessage is executed next so no waitmessage here
 	return
 
 BattleScript_TeraShellDistortingTypeMatchups::
