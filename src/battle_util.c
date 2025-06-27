@@ -1197,6 +1197,14 @@ void PrepareStringBattle(enum StringID stringId, u32 battler)
     if ((stringId == STRINGID_ITDOESNTAFFECT || stringId == STRINGID_PKMNWASNTAFFECTED || stringId == STRINGID_PKMNUNAFFECTED))
         TryInitializeTrainerSlideEnemyMonUnaffected(gBattlerTarget);
 
+    if ((stringId == STRINGID_PKMNGAINEDEXP || stringId == STRINGID_TEAMGAINEDEXP)
+        && gBattleStruct->battlerExpReward == 0)
+    {
+        MarkBattlerForControllerExec(battler);
+        return;
+    }
+
+
     BtlController_EmitPrintString(battler, B_COMM_TO_CONTROLLER, stringId);
     MarkBattlerForControllerExec(battler);
 }
