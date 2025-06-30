@@ -3645,8 +3645,6 @@ bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
     return FALSE;
 }
 
-#if OW_SHOW_ITEM_DESCRIPTIONS != OW_ITEM_DESCRIPTIONS_OFF
-
 EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
 EWRAM_DATA u8 sItemIconSpriteId = 0;
 EWRAM_DATA u8 sItemIconSpriteId2 = 0;
@@ -3698,6 +3696,12 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
 
 void ScriptShowItemDescription(struct ScriptContext *ctx)
 {
+    if (OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_OFF)
+    {
+        (void) ScriptReadByte(ctx);
+        return;
+    }
+
     u8 headerType = ScriptReadByte(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
@@ -3741,6 +3745,9 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
 
 void ScriptHideItemDescription(struct ScriptContext *ctx)
 {
+    if (OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_OFF)
+        return;
+
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     DestroyItemIconSprite();
@@ -3815,17 +3822,6 @@ static void DestroyItemIconSprite(void)
         DestroySprite(&gSprites[sItemIconSpriteId2]);
     }
 }
-
-#else
-void ScriptShowItemDescription(struct ScriptContext *ctx)
-{
-    (void) ScriptReadByte(ctx);
-}
-void ScriptHideItemDescription(struct ScriptContext *ctx)
-{
-}
-#endif // OW_SHOW_ITEM_DESCRIPTIONS
-
 
 // returns old sHoursOverride
 u16 SetTimeOfDay(u16 hours)
