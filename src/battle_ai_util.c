@@ -2386,7 +2386,7 @@ bool32 HasMoveThatRaisesOwnStats(u32 battlerId)
     return FALSE;
 }
 
-bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect)
+bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, enum Abilities atkAbility, enum Abilities defAbility, u32 atkHoldEffect, u32 defHoldEffect)
 {
     s32 i;
     u16 *moves = GetMovesArray(battlerAtk);
@@ -4975,7 +4975,7 @@ bool32 DoesIntimidateRaiseStats(u32 ability)
 }
 
 // TODO: work out when to attack into the player's contextually 'beneficial' ability
-bool32 ShouldTriggerAbility(u32 battlerAtk, u32 battlerDef, u32 ability)
+bool32 ShouldTriggerAbility(u32 battlerAtk, u32 battlerDef, enum Abilities ability)
 {
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
@@ -5242,7 +5242,7 @@ void AbilityChangeScore(u32 battlerAtk, u32 battlerDef, u32 effect, s32 *score, 
     }
 }
 
-s32 BattlerBenefitsFromAbilityScore(u32 battler, u32 ability, struct AiLogicData *aiData)
+s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct AiLogicData *aiData)
 {
     if (gAbilitiesInfo[ability].aiRating < 0)
         return WORST_EFFECT;
