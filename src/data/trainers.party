@@ -16658,53 +16658,55 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Xatu
+Xatu @ Psychic Gem
+Ability: Magic Bounce
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Yawn
+- Power Swap
 - Psychic
-- Calm Mind
-- Protect
+- Wish
+- Psycho Shift
 
-Rapidash Galar
+Rapidash Galar @ Lucky Punch
+Ability: Pixilate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Ancient Power
-- Psychic
-- Light Screen
+- Heal Pulse
+- Dazzling Gleam
+- Psycho Cut
+- Stomp
 
-Lunala @ Sitrus Berry
+Lunala @ Spell Tag
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
+- Hypnosis
+- Moongeist Beam
 - Psychic
-- Flamethrower
+- Dream Eater
 
-Lunatone @ Chesto Berry
+Lunatone @ Odd Incense
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hypnosis
 - Psychic
-- Rest
-- Confuse Ray
-- Calm Mind
+- Moonlight
+- Stone Edge
 
 Solrock @ Chesto Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
+- Sandstorm
+- AncientPower
 - Psychic
-- Rest
 - Calm Mind
 
 Claydol @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
+- Earthquake
+- Earth Power
 - Psychic
-- Flamethrower
+- AncientPower
 
 === TRAINER_TATE_AND_LIZA_3 ===
 Name: TATE&LIZA
