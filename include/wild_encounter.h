@@ -65,7 +65,7 @@ u32 GetHeaderIdForMetatileBehavior(void);
 void CreateWildMon(u16 species, u8 level);
 u16 GetCurrentMapWildMonHeaderId(void);
 u32 ChooseWildMonIndex_Land(void);
-u32 ChooseWildMonIndex_Rock(void);
+u32 ChooseWildMonIndex_Rocks(void);
 u32 ChooseWildMonIndex_Water(void);
 u32 ChooseWildMonIndex_Fishing(u8 rod);
 u32 ChooseHiddenMonIndex(void);
