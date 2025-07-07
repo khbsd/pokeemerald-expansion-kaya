@@ -16750,21 +16750,23 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Confuse Ray
 - Calm Mind
 
-Delphox @ Chesto Berry
+Delphox @ Psychic Seed
+Ability: Magician
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
+- Psychic Terrain
 - Psychic
-- Rest
+- Mystical Fire
 - Calm Mind
 
-Raichu Alola @ Sitrus Berry
+Raichu Alola @ Psychic Seed
+Ability: Surge Surfer
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
+- Electric Terrain
+- Thunderbolt
 - Psychic
-- Flamethrower
+- Nuzzle
 
 === TRAINER_TATE_AND_LIZA_4 ===
 Name: TATE&LIZA
