@@ -11,7 +11,8 @@ enum WildPokemonArea {
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
-    WILD_AREA_HIDDEN
+    WILD_AREA_HIDDEN,
+    WILD_AREA_COUNT,
 };
 
 struct WildPokemon
@@ -43,7 +44,6 @@ struct WildPokemonHeader
     const struct WildEncounterTypes encounterTypes[TIMES_OF_DAY_COUNT];
 };
 
-
 extern const struct WildPokemonHeader gWildMonHeaders[];
 extern bool8 gIsFishingEncounter;
 extern bool8 gIsSurfingEncounter;
@@ -64,9 +64,11 @@ u32 CalculateChainFishingShinyRolls(void);
 u32 GetHeaderIdForMetatileBehavior(void);
 void CreateWildMon(u16 species, u8 level);
 u16 GetCurrentMapWildMonHeaderId(void);
-u8 ChooseWildMonIndex_Land(void);
-u8 ChooseWildMonIndex_WaterRock(void);
-u8 ChooseHiddenMonIndex(void);
+u32 ChooseWildMonIndex_Land(void);
+u32 ChooseWildMonIndex_Rock(void);
+u32 ChooseWildMonIndex_Water(void);
+u32 ChooseWildMonIndex_Fishing(u8 rod);
+u32 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
 void UpdateChainFishingStreak();
