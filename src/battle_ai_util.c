@@ -2982,13 +2982,13 @@ static bool32 PartyBattlerShouldAvoidHazards(u32 currBattler, u32 switchBattler)
     enum Abilities ability = GetMonAbility(mon);   // we know our own party data
     enum ItemHoldEffect holdEffect;
     u32 species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STEELSURGE | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
     s32 hazardDamage = 0;
     u32 type1 = GetSpeciesType(species, 0);
     u32 type2 = GetSpeciesType(species, 1);
     u32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+    u32 side = GetBattlerSide(currBattler);
 
-    if (flags == 0)
+    if (!AreAnyHazardsOnSide(side))
         return FALSE;
 
     if (ability == ABILITY_MAGIC_GUARD)
@@ -3000,12 +3000,12 @@ static bool32 PartyBattlerShouldAvoidHazards(u32 currBattler, u32 switchBattler)
     if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
         return FALSE;
 
-    if (flags & SIDE_STATUS_STEALTH_ROCK)
+    if (IsHazardOnSide(side, HAZARDS_STEALTH_ROCK))
         hazardDamage += GetStealthHazardDamageByTypesAndHP(TYPE_SIDE_HAZARD_POINTED_STONES, type1, type2, maxHp);
-    if ((flags & SIDE_STATUS_STEELSURGE))
+    if (IsHazardOnSide(side, HAZARDS_STEELSURGE))
         hazardDamage += GetStealthHazardDamageByTypesAndHP(TYPE_SIDE_HAZARD_SHARP_STEEL, type1, type2, maxHp);
 
-    if (flags & SIDE_STATUS_SPIKES && ((type1 != TYPE_FLYING && type2 != TYPE_FLYING
+    if (IsHazardOnSide(side, HAZARDS_SPIKES) && ((type1 != TYPE_FLYING && type2 != TYPE_FLYING
         && ability != ABILITY_LEVITATE && ability != ABILITY_FLUX_FIELD && holdEffect != HOLD_EFFECT_AIR_BALLOON)
         || holdEffect == HOLD_EFFECT_IRON_BALL || gFieldStatuses & STATUS_FIELD_GRAVITY))
     {
@@ -3073,7 +3073,7 @@ enum AIPivot ShouldPivot(u32 battlerAtk, u32 battlerDef, enum Abilities defAbili
                         return SHOULD_PIVOT;
 
                     /* TODO - check if switchable mon unafffected by/will remove hazards
-                    if (gSideStatuses[battlerAtk] & SIDE_STATUS_SPIKES && switchScore >= SWITCHING_INCREASE_CAN_REMOVE_HAZARDS)
+                    if (IsHazardOnSide(GetBattlerSide(battlerAtk, HAZARDS_SPIKES) && switchScore >= SWITCHING_INCREASE_CAN_REMOVE_HAZARDS)
                         return SHOULD_PIVOT;*/
 
                     /*if (BattlerWillFaintFromSecondaryDamage(battlerAtk, gAiLogicData->abilities[battlerAtk]) && switchScore >= SWITCHING_INCREASE_WALLS_FOE)
@@ -3155,7 +3155,7 @@ enum AIPivot ShouldPivot(u32 battlerAtk, u32 battlerDef, enum Abilities defAbili
                     if (!hasStatBoost)
                     {
                         // TODO - check if switching prevents/removes hazards
-                        //if (gSideStatuses[battlerAtk] & SIDE_STATUS_SPIKES && switchScore >= SWITCHING_INCREASE_CAN_REMOVE_HAZARDS)
+                        //if (IsHazardOnSide(GetBattlerSide(battlerAtk, HAZARDS_SPIKES) && switchScore >= SWITCHING_INCREASE_CAN_REMOVE_HAZARDS)
                             //return SHOULD_PIVOT;
 
                         // TODO - not always a good idea
@@ -4790,9 +4790,9 @@ bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData 
 
 void IncreaseTidyUpScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 {
-    if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerAtk) != 0)
+    if (AreAnyHazardsOnSide(GetBattlerSide(battlerAtk)) && CountUsablePartyMons(battlerAtk) != 0)
         ADJUST_SCORE_PTR(GOOD_EFFECT);
-    if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerDef) != 0)
+    if (AreAnyHazardsOnSide(GetBattlerSide(battlerDef)) && CountUsablePartyMons(battlerDef) != 0)
         ADJUST_SCORE_PTR(-2);
 
     if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE && AI_IsFaster(battlerAtk, battlerDef, move))
@@ -5291,6 +5291,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
             return WORST_EFFECT;
         return NO_INCREASE;
     case ABILITY_INTIMIDATE:
+    {
         u32 abilityDef = aiData->abilities[FOE(battler)];
         if (DoesIntimidateRaiseStats(abilityDef))
         {
@@ -5317,6 +5318,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
             }
             return IncreaseStatDownScore(battler, FOE(battler), STAT_ATK);
         }
+    }
     case ABILITY_NO_GUARD:
         if (HasLowAccuracyMove(battler, FOE(battler)))
             return GOOD_EFFECT;

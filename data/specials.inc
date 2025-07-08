@@ -568,3 +568,4 @@ gSpecials::
     def_special PokevialGetSize
     def_special PokevialRefill
 	def_special CheckIfPlayerIsKaya
+	def_special SetHiddenNature

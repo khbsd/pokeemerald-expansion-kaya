@@ -1824,7 +1824,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-10); // only one mon needs to set up the last layer of Spikes
             break;
         case EFFECT_STEALTH_ROCK:
-            if (gSideTimers[GetBattlerSide(battlerDef)].stealthRockAmount > 0
+            if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STEALTH_ROCK)
               || PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove)) //Only one mon needs to set up Stealth Rocks
                 ADJUST_SCORE(-10);
             break;
@@ -1835,9 +1835,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-10); // only one mon needs to set up the last layer of Toxic Spikes
             break;
         case EFFECT_STICKY_WEB:
-            if (gSideTimers[GetBattlerSide(battlerDef)].stickyWebAmount)
+            if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STICKY_WEB))
                 ADJUST_SCORE(-10);
-            else if (PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove) && gSideTimers[GetBattlerSide(battlerDef)].stickyWebAmount)
+            else if (PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove) && IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STICKY_WEB))
                 ADJUST_SCORE(-10); // only one mon needs to set up Sticky Web
             break;
         case EFFECT_FORESIGHT:
@@ -2292,9 +2292,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-9);
             break;
         case EFFECT_DEFOG:
-            if (gSideStatuses[GetBattlerSide(battlerDef)]
-             & (SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST)
-              || gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY)
+            if (gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST)
+             || AreAnyHazardsOnSide(GetBattlerSide(battlerAtk)))
             {
                 if (PartnerHasSameMoveEffectWithoutTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove))
                 {
@@ -2303,7 +2302,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 }
             }
 
-            if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_HAZARDS_ANY)
+            if (AreAnyHazardsOnSide(GetBattlerSide(battlerDef)))
             {
                 ADJUST_SCORE(-10); //Don't blow away opposing hazards
                 break;
@@ -4402,12 +4401,12 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
             //ADJUST_SCORE(8);
         break;
     case EFFECT_DEFOG:
-        if ((gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerAtk) != 0)
+        if ((AreAnyHazardsOnSide(GetBattlerSide(battlerAtk)) && CountUsablePartyMons(battlerAtk) != 0)
             || (gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD | SIDE_STATUS_MIST)))
         {
             ADJUST_SCORE(GOOD_EFFECT);
         }
-        else if (!(gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SPIKES)) //Don't blow away hazards if you set them up
+        else if (!IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_SPIKES)) //Don't blow away hazards if you set them up
         {
             if (isDoubleBattle)
             {
@@ -4953,7 +4952,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_RAPID_SPIN:
-        if ((gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerAtk) != 0)
+        if ((AreAnyHazardsOnSide(GetBattlerSide(battlerAtk)) && CountUsablePartyMons(battlerAtk) != 0)
          || (gStatuses3[battlerAtk] & STATUS3_LEECHSEED || gBattleMons[battlerAtk].status2 & STATUS2_WRAPPED))
             ADJUST_SCORE(GOOD_EFFECT);
     case EFFECT_SPECTRAL_THIEF:
@@ -5803,13 +5802,31 @@ static s32 AI_PowerfulStatus(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     return score;
 }
 
+bool32 DoesSideHaveDamagingHazards(u32 side)
+{
+    for (u32 counter = 0; counter < HAZARDS_MAX_COUNT; counter++)
+    {
+        switch (gBattleStruct->hazardsQueue[side][counter])
+        {
+        case HAZARDS_SPIKES:
+        case HAZARDS_TOXIC_SPIKES:
+        case HAZARDS_STEALTH_ROCK:
+        case HAZARDS_STEELSURGE:
+            return TRUE;
+        default:
+            return FALSE;
+        }
+    }
+    return FALSE;
+}
+
 static s32 AI_PredictSwitch(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     u32 i;
     u32 unmodifiedScore = score;
     enum Abilities ability = gBattleMons[battlerAtk].ability;
-    u32 opposingHazardFlags = gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_TOXIC_SPIKES);
-    u32 aiHazardFlags = gSideStatuses[GetBattlerSide(battlerAtk)] & (SIDE_STATUS_HAZARDS_ANY);
+    bool32 opposingHazardFlags = DoesSideHaveDamagingHazards(GetBattlerSide(battlerDef));
+    bool32 aiHazardFlags = AreAnyHazardsOnSide(GetBattlerSide(battlerAtk));
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
     struct AiLogicData *aiData = gAiLogicData;
     uq4_12_t effectiveness = aiData->effectiveness[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex];
@@ -5870,21 +5887,21 @@ static s32 AI_PredictSwitch(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_HIT_SWITCH_TARGET:
-        if (opposingHazardFlags != 0)
+        if (opposingHazardFlags)
             ADJUST_SCORE(BEST_EFFECT);
         else
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_ROAR:
-        if (opposingHazardFlags != 0)
+        if (opposingHazardFlags)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_RAPID_SPIN:
-        if (aiHazardFlags != 0)
+        if (aiHazardFlags)
             ADJUST_SCORE(BEST_EFFECT);
         break;
     case EFFECT_DEFOG:
-        if (aiHazardFlags != 0)
+        if (aiHazardFlags)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_WISH:
