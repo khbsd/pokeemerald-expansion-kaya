@@ -657,7 +657,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sDewottLevelUpLearnset,
         .teachableLearnset = sDewottTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SAMUROTT},
-                                {EVO_LEVEL, 36, SPECIES_SAMUROTT_HISUI, 
+                                {EVO_LEVEL, 36, SPECIES_SAMUROTT_HISUI,
                                     CONDITIONS({IF_IN_MAP, MAP_SKY_PILLAR_TOP})}),
     },
 
@@ -9473,7 +9473,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sEelektrikLevelUpLearnset,
         .teachableLearnset = sEelektrikTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_EELEKTROSS, 
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_EELEKTROSS,
                         CONDITIONS({IF_IN_MAP, MAP_SCORCHED_SLAB})}),
     },
 
@@ -11045,7 +11045,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sPawniardLevelUpLearnset,
         .teachableLearnset = sPawniardTeachableLearnset,
         .eggMoveLearnset = sPawniardEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP},
+                                {EVO_LEVEL, 18, SPECIES_CHARCADET,
+                                    CONDITIONS({IF_HELD_ITEM, ITEM_REAPER_CLOTH})
+                                }),
     },
 
     [SPECIES_BISHARP] =
