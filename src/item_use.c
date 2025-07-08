@@ -1036,6 +1036,38 @@ void ItemUseOutOfBattle_Lure(u8 taskId)
         DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsLingered, Task_CloseBattlePyramidBagMessage);
 }
 
+void ItemUseOutOfBattle_PermaLure(u8 taskId)
+{
+    PlaySE(SE_REPEL);
+    if (!IsSEPlaying())
+    {
+        if (FlagGet(FLAG_SYS_PERMA_LURE))
+        {
+        #if VAR_LAST_REPEL_LURE_USED != 0
+            VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+        #endif
+            FlagClear(FLAG_SYS_PERMA_LURE);
+            if (!InBattlePyramid())
+                DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsDissipated, CloseItemMessage);
+            else
+                DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsDissipated, Task_CloseBattlePyramidBagMessage);
+        }
+        else
+        {
+            FlagSet(FLAG_SYS_PERMA_LURE);
+        #if VAR_LAST_REPEL_LURE_USED != 0
+            VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+        #endif
+            CopyItemName(gSpecialVar_ItemId, gStringVar2);
+            StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
+            if (!InBattlePyramid())
+                DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            else
+                DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+        }
+    }
+}
+
 static void Task_StartUseLure(u8 taskId)
 {
     s16* data = gTasks[taskId].data;

@@ -11047,7 +11047,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .eggMoveLearnset = sPawniardEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP},
                                 {EVO_LEVEL, 18, SPECIES_CHARCADET,
-                                    CONDITIONS({IF_HELD_ITEM, ITEM_REAPER_CLOTH})
+                                    CONDITIONS({IF_HOLD_ITEM, ITEM_REAPER_CLOTH})
                                 }),
     },
 

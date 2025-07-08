@@ -2310,6 +2310,23 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_MaxLure,
     },
 
+    [ITEM_PERMA_LURE] =
+    {
+        .name = _("Perma Lure"),
+        .price = 900,
+        .holdEffectParam = 250,
+        .description = COMPOUND_STRING(
+            "Makes Pokémon more\n"
+            "likely to appear."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_PermaLure,
+        .secondaryId = 0,
+        .flingPower = 30,
+        .iconPic = gItemIcon_Lure,
+        .iconPalette = gItemIconPalette_MaxLure,
+    },
+
     [ITEM_ESCAPE_ROPE] =
     {
         .name = _("Escape Rope"),

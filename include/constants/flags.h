@@ -75,13 +75,13 @@
 #define FLAG_UNUSED_0x03D           0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E           0x3E // Unused Flag
 #define FLAG_UNUSED_0x03F           0x3F // Unused Flag
-#define FLAG_UNUSED_0x040           0x40 // Unused Flag
-#define FLAG_UNUSED_0x041           0x41 // Unused Flag
+#define FLAG_SYS_PERMA_LURE         0x40
+#define FLAG_SYS_PERMA_REPEL        0x41
 #define FLAG_UNUSED_0x042           0x42 // Unused Flag
 #define FLAG_RANDOM_GYM_REMATCH     0x43
 #define FLAG_SYS_BAG_USE            0x44
 #define FLAG_SYS_ENABLE_POKEVIAL    0x45
-#define FLAG_SYS_PERMA_REPEL        0x46
+#define FLAG_UNUSED_0x046           0x46
 #define FLAG_DEXNAV_DETECT          0x47
 #define FLAG_DEXNAV_SEARCHING       0x48
 #define FLAG_DEXNAV_START_MENU      0x49
@@ -1223,7 +1223,7 @@
 #define FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE                       0x490
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
-#define FLAG_ITEM_BALLS_END											FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL  
+#define FLAG_ITEM_BALLS_END											FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL
 
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MAY                0x493 // Unused Flag
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN                0x494 // Unused Flag
