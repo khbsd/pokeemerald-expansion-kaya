@@ -73,7 +73,7 @@ struct ALIGNED(2) BagPocket
 
 struct TmHmIndexKey
 {
-    enum TMHMItemId itemId:16;
+    enum TMHMItemId itemId;
     u16 moveId;
 };
 

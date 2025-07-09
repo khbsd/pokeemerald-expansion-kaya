@@ -432,8 +432,8 @@ struct SpeciesInfo /*0xC4*/
     // Pokédex data
     u8 categoryName[13];
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
-    enum PokemonCry cryId:16;
-    enum NationalDexOrder natDexNum:16;
+    enum PokemonCry cryId;
+    enum NationalDexOrder natDexNum;
     u16 height; //in decimeters
     u16 weight; //in hectograms
     u16 pokemonScale;
