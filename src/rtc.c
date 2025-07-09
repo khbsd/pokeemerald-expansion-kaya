@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "data.h"
 #include "datetime.h"
 #include "overworld.h"
 #include "rtc.h"
@@ -455,12 +456,14 @@ enum Weekday GetDayOfWeek(void)
     return dateTime.dayOfWeek;
 }
 
-enum TimeOfDay TryIncrementTimeOfDay(enum TimeOfDay timeOfDay)
+enum TimeOfDay TryUpdateTimeOfDay(enum TimeOfDay timeOfDay, enum IncrDecrUpdateValues delta)
 {
-    return timeOfDay == TIME_NIGHT ? TIME_MORNING : timeOfDay + 1;
-}
-
-enum TimeOfDay TryDecrementTimeOfDay(enum TimeOfDay timeOfDay)
-{
-    return timeOfDay == TIME_MORNING ? TIME_NIGHT : timeOfDay - 1;
+    switch (delta)
+    {
+    case TRY_DECREMENT:
+        return timeOfDay == TIME_MORNING ? TIME_NIGHT : timeOfDay - 1;
+    default:
+    case TRY_INCREMENT:
+        return timeOfDay == TIME_NIGHT ? TIME_MORNING : timeOfDay + 1;
+    }
 }

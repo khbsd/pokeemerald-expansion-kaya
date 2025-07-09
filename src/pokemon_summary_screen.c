@@ -343,7 +343,7 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
 u32 GetCurrentRelearnMovesCount(void);
-void TryUpdateRelearnType(enum IncrDecrUpdateValues value);
+void TryUpdateRelearnType(enum IncrDecrUpdateValues delta);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -1934,13 +1934,13 @@ u32 GetCurrentRelearnMovesCount(void)
     return currMoveNum == 0 ? 0 : currMoveNum;
 }
 
-void TryUpdateRelearnType(enum IncrDecrUpdateValues value)
+void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
 {
     u32 moveCount;
 
     do
     {
-        switch (value)
+        switch (delta)
         {
         default:
         case TRY_SET_UPDATE:

@@ -21,13 +21,6 @@ enum {
     BATTLER_AFFINE_RETURN,
 };
 
-enum IncrDecrUpdateValues
-{
-    TRY_INCREMENT,
-    TRY_DECREMENT,
-    TRY_SET_UPDATE,
-};
-
 struct MonCoords
 {
     // This would use a bitfield, but some function

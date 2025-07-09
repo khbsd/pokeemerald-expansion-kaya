@@ -185,6 +185,13 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
+enum IncrDecrUpdateValues
+{
+    TRY_INCREMENT,
+    TRY_DECREMENT,
+    TRY_SET_UPDATE,
+};
+
 #if TESTING
 #include "config/test.h"
 #endif

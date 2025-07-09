@@ -43,7 +43,6 @@ u16 GetFullYear(void);
 enum Month GetMonth(void);
 u8 GetDay(void);
 enum Weekday GetDayOfWeek(void);
-enum TimeOfDay TryIncrementTimeOfDay(enum TimeOfDay timeOfDay);
-enum TimeOfDay TryDecrementTimeOfDay(enum TimeOfDay timeOfDay);
+enum TimeOfDay TryUpdateTimeOfDay(enum TimeOfDay timeOfDay, enum IncrDecrUpdateValues delta);
 
 #endif // GUARD_RTC_UTIL_H

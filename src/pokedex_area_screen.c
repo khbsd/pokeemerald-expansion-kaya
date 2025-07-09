@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -890,14 +891,14 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         else if (JOY_NEW(DPAD_UP) && OW_TIME_OF_DAY_ENCOUNTERS == TRUE)
         {
             gTasks[taskId].data[1] = 3;
-            gAreaTimeOfDay = TryDecrementTimeOfDay(gAreaTimeOfDay);
+            gAreaTimeOfDay = TryUpdateTimeOfDay(gAreaTimeOfDay, TRY_DECREMENT);
             sPokedexAreaScreen->areaState = DEX_UPDATE_AREA_SCREEN;
             PlaySE(SE_DEX_PAGE);
         }
         else if (JOY_NEW(DPAD_DOWN) && OW_TIME_OF_DAY_ENCOUNTERS == TRUE)
         {
             gTasks[taskId].data[1] = 3;
-            gAreaTimeOfDay = TryIncrementTimeOfDay(gAreaTimeOfDay);
+            gAreaTimeOfDay = TryUpdateTimeOfDay(gAreaTimeOfDay, TRY_INCREMENT);
             sPokedexAreaScreen->areaState = DEX_UPDATE_AREA_SCREEN;
             PlaySE(SE_DEX_PAGE);
         }
