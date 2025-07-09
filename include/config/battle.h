@@ -24,6 +24,7 @@
 #define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // In Gen5+, Lv100 Pokémon can obtain Effort Values normally.
 #define B_RECALCULATE_STATS         GEN_LATEST // In Gen5+, the stats of the Pokémon who participate in battle are recalculated at the end of each battle.
 #define B_EV_SCALE                  2          // A multiplier for all EVs gained.
+#define B_BADGE_FRIENDSHIP_BOOST    3          // How much each badge counts for when applying bonus friendship.
 
 // Damage settings
 #define B_BURN_DAMAGE               GEN_LATEST // In Gen7+, burn damage is 1/16th of max HP instead of 1/8th. Also applies to Frostbite.
@@ -133,7 +134,7 @@
 #define B_SKIP_RECHARGE             GEN_LATEST // In Gen1, recharging moves such as Hyper Beam skip the recharge if the target gets KO'd
 #define B_ENCORE_TARGET             GEN_LATEST // In Gen5+, encored moves are allowed to choose a target
 #define B_TIME_OF_DAY_HEALING_MOVES GEN_LATEST // In Gen2, Morning Sun, Moonlight, and Synthesis heal twice as much HP based off the time of day. Also changes how much they heal. Evening affects Moonlight.
-                                               // If OW_TIMES_OF_DAY is set to Gen 3, then Morning Sun is boosted during the day. 
+                                               // If OW_TIMES_OF_DAY is set to Gen 3, then Morning Sun is boosted during the day.
 
 // Ability settings
 #define B_GALE_WINGS                GEN_LATEST // In Gen7+ requires full HP to trigger.

@@ -5985,6 +5985,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     u16 species, heldItem;
     u8 holdEffect;
     s8 mod;
+    u32 badgeBoost;
 
     if (ShouldSkipFriendshipChange())
         return;
@@ -6037,9 +6038,10 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         }
 
         mod = sFriendshipEventModifiers[event][friendshipLevel];
+        badgeBoost = GetNumOwnedBadges() * B_BADGE_FRIENDSHIP_BOOST;
         if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
             // 50% increase, rounding down
-            mod = (150 * mod) / 100;
+            mod = ((150 + badgeBoost) * mod) / 100;
 
         friendship += mod;
         if (mod > 0)
@@ -6507,7 +6509,7 @@ static void QuickSortMoves(u16 *moves, s32 left, s32 right)
     QuickSortMoves(moves, i, right);
 }
 
-static void SortMovesAlphabetically(u16 *moves, u16 numMoves)
+static void SortMovesAlphabetically(u16 *moves, u32 numMoves)
 {
     if (numMoves > 1)
         QuickSortMoves(moves, 0, numMoves - 1);
@@ -6517,11 +6519,11 @@ static void SortMovesAlphabetically(u16 *moves, u16 numMoves)
 u16 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u8 numMoves = 0;
+    u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 level = (P_ENABLE_ALL_LEVEL_UP_MOVES ? 100 : GetMonData(mon, MON_DATA_LEVEL, 0));
     const struct LevelUpMove *learnset;
-    u8 i, j;
+    u32 i, j;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
@@ -6566,10 +6568,10 @@ u16 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
 u16 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u8 numMoves = 0;
+    u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
     const u16 *eggMoves;
-    u8 i, j;
+    u32 i, j;
 
     while ((eggMoves = GetSpeciesEggMoves(species)) == sNoneEggMoveLearnset)
     {
@@ -6611,7 +6613,7 @@ u16 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
 u16 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u16 numMoves = 0;
+    u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
     const u16 *learnset = GetSpeciesTeachableLearnset(species);
 
@@ -6659,53 +6661,6 @@ u16 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
 
     return numMoves;
 }
-/*
-u16 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
-{
-    u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u16 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-
-    u32 currMove;
-    for (currMove = 0; currMove < MAX_MON_MOVES; currMove++)
-        learnedMoves[currMove] = GetMonData(mon, MON_DATA_MOVE1 + currMove, 0);
-
-    MgbaPrintf(MGBA_LOG_WARN, "currMoves checked");
-
-    u32 learnCount = 0;
-    currMove = 0;
-    while (learnset[learnCount] != MOVE_UNAVAILABLE)
-    {
-        MgbaPrintf(MGBA_LOG_WARN, "learnCount at: %u", learnCount);
-        for (currMove = 0; currMove < MAX_MON_MOVES; currMove++)
-        {
-            if (learnedMoves[currMove] == learnset[learnCount])
-                break;
-        }
-        if (currMove < MAX_MON_MOVES)
-            continue;
-
-        for (currMove = 0; currMove < numMoves; currMove++)
-        {
-            if (moves[currMove] == learnset[learnCount])
-                break;
-        }
-        if (currMove < numMoves)
-            continue;
-
-        moves[numMoves++] = learnset[learnCount];
-        learnCount++;
-    }
-
-    MgbaPrintf(MGBA_LOG_WARN, "learnCount final: %u", learnCount);
-
-    if (P_SORT_MOVES)
-        SortMovesAlphabetically(moves, numMoves);
-
-    MgbaPrintf(MGBA_LOG_WARN, "moves sorted");
-
-    return numMoves;
-}*/
 
 u16 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
 {
@@ -6713,7 +6668,7 @@ u16 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
         return FALSE;
 
     u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u8 numMoves = 0;
+    u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u32 i, j;
 
@@ -6801,7 +6756,7 @@ u16 GetNumberOfTutorMoves(struct Pokemon *mon)
 
 u16 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 {
-    u8 numMoves = 0;
+    u32 numMoves = 0;
     int i;
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 

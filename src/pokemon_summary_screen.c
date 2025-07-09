@@ -1931,8 +1931,6 @@ u32 GetCurrentRelearnMovesCount(void)
     };
     u32 currMoveNum = moveCount[gMoveRelearnerType];
 
-    MgbaPrintf(MGBA_LOG_WARN, "move count: %u", currMoveNum);
-
     return currMoveNum == 0 ? 0 : currMoveNum;
 }
 
@@ -1962,8 +1960,6 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             break;
         }
     } while (moveCount == 0);
-
-    MgbaPrintf(MGBA_LOG_WARN, "move count: %u", moveCount);
 
     sMonSummaryScreen->relearnableMovesNum = moveCount;
 }
