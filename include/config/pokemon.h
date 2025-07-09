@@ -86,13 +86,12 @@
 #define P_FLAG_INFECT_RANDOM_MON_POKERUS FLAG_INFECT_RANDOM_MON_POKERUS // If this flag is set, the special InfectMonWithPokerus will infect a random mon in your party and ignore the var in var0.
 
 // Move Relearner settings
-#define P_VAR_MOVE_RELEARNER_STATE       0      // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
-
+#define P_VAR_MOVE_RELEARNER_STATE       VAR_MOVE_RELEARNER_STATE       // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
 #define P_ENABLE_MOVE_RELEARNERS         TRUE   // If TRUE, it enables move relearners for level up, egg, TM and tutor.
-#define P_PRE_EVO_MOVES                  FALSE  // If TRUE, it enables the Pokémon to learn moves from it's pre evolution.
-#define P_ENABLE_ALL_LEVEL_UP_MOVES      FALSE  // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
-#define P_ENABLE_ALL_TM_MOVES            FALSE  // If TRUE, it enables the Pokémon to learn all TMs its compatible with, regardless of it being in the bag.
-#define P_SORT_MOVES                     FALSE  // If TRUE, sorts all moves alphabetically in the relearner's list.
+#define P_PRE_EVO_MOVES                  TRUE   // If TRUE, it enables the Pokémon to learn moves from it's pre evolution.
+#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE   // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
+#define P_ENABLE_ALL_TM_MOVES            TRUE   // If TRUE, it enables the Pokémon to learn all TMs its compatible with, regardless of it being in the bag.
+#define P_SORT_MOVES                     TRUE   // If TRUE, sorts all moves alphabetically in the relearner's list.
 
 // Move Relearner flags
 #define P_FLAG_PARTY_MOVE_RELEARNER      0      // If this flag is set, it enables the move relearner in the party menu.

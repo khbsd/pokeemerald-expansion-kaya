@@ -185,6 +185,7 @@ static EWRAM_DATA struct {
 } sMoveRelearnerMenuState = {0};
 
 EWRAM_DATA u8 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
+EWRAM_DATA u8 gMoveRelearnerType = 0;
 
 static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
@@ -409,20 +410,21 @@ void CB2_InitLearnMove(void)
     sMoveRelearnerMenuState.listRow = 0;
     sMoveRelearnerMenuState.showContestInfo = gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES;
 
-    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
+    switch (gMoveRelearnerType)
     {
-        case MOVE_RELEARNER_EGG_MOVES:
-            StringCopy(gStringVar3, COMPOUND_STRING("egg move"));
-            break;
-        case MOVE_RELEARNER_TM_MOVES: 
-            StringCopy(gStringVar3, COMPOUND_STRING("TM move"));
-            break;
-        case MOVE_RELEARNER_TUTOR_MOVES: 
-            StringCopy(gStringVar3, COMPOUND_STRING("tutor move"));
-            break;
-        default:
-            StringCopy(gStringVar3, COMPOUND_STRING("level up move"));
-            break;
+    case MOVE_RELEARNER_EGG_MOVES:
+        StringCopy(gStringVar3, COMPOUND_STRING("egg move"));
+        break;
+    case MOVE_RELEARNER_TM_MOVES:
+        StringCopy(gStringVar3, COMPOUND_STRING("TM move"));
+        break;
+    case MOVE_RELEARNER_TUTOR_MOVES:
+        StringCopy(gStringVar3, COMPOUND_STRING("tutor move"));
+        break;
+    case MOVE_RELEARNER_LEVEL_UP_MOVES:
+    default:
+        StringCopy(gStringVar3, COMPOUND_STRING("level up move"));
+        break;
     }
 
     CreateLearnableMovesList();
@@ -974,22 +976,20 @@ static void CreateLearnableMovesList(void)
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
-    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
+    switch (gMoveRelearnerType)
     {
-        case MOVE_RELEARNER_EGG_MOVES:
-            sMoveRelearnerStruct->numMenuChoices = GetRelearnerEggMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
+    case MOVE_RELEARNER_EGG_MOVES:
+        sMoveRelearnerStruct->numMenuChoices = GetRelearnerEggMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
         break;
-
-        case MOVE_RELEARNER_TM_MOVES:
-            sMoveRelearnerStruct->numMenuChoices = GetRelearnerTMMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
+    case MOVE_RELEARNER_TM_MOVES:
+        sMoveRelearnerStruct->numMenuChoices = GetRelearnerTMMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
         break;
-
-        case MOVE_RELEARNER_TUTOR_MOVES:
-            sMoveRelearnerStruct->numMenuChoices = GetRelearnerTutorMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
+    case MOVE_RELEARNER_TUTOR_MOVES:
+        sMoveRelearnerStruct->numMenuChoices = GetRelearnerTutorMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
         break;
-
-        default:
-            sMoveRelearnerStruct->numMenuChoices = GetRelearnerLevelUpMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
+    case MOVE_RELEARNER_LEVEL_UP_MOVES:
+    default:
+        sMoveRelearnerStruct->numMenuChoices = GetRelearnerLevelUpMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
         break;
 	}
 
