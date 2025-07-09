@@ -52,6 +52,13 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+/*
+TODO:
+    - remove unneeded code
+    - put relearner funcs back in this file
+    - more testing
+*/
+
 // Screen titles (upper left)
 #define PSS_LABEL_WINDOW_POKEMON_INFO_TITLE 0
 #define PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE 1
@@ -208,7 +215,6 @@ static void CloseSummaryScreen(u8);
 static void Task_HandleInput(u8);
 static void ChangeSummaryPokemon(u8, s8);
 static void Task_ChangeSummaryMon(u8);
-static void GetSetMoveRelearnerVar(u8 *state);
 static s8 AdvanceMonIndex(s8);
 static s8 AdvanceMultiBattleMonIndex(s8);
 static bool8 IsValidToViewInMulti(struct Pokemon *);
@@ -324,6 +330,7 @@ static void BufferLeftColumnIvEvStats(void);
 static void CB2_ReturnToSummaryScreenFromNamingScreen(void);
 static void CB2_PssChangePokemonNickname(void);
 static void ShowUtilityPrompt(s16 mode);
+void ShowRelearnPrompt(u8 state);
 static void ShowMonSkillsInfo(u8 taskId, s16 mode);
 static void WriteToStatsTilemapBuffer(u32 length, u32 block, u32 statsCoordX, u32 statsCoordY);
 void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum);
@@ -335,6 +342,8 @@ static const u8 *GetLetterGrade(u32 stat);
 static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId);
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
+u32 GetCurrentRelearnMovesCount(void);
+void TryUpdateRelearnType(enum IncrDecrUpdateValues value);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -1215,12 +1224,12 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     if (mode == SUMMARY_MODE_RELEARNER_BATTLE)
     {
         sMonSummaryScreen->currPageIndex = PSS_PAGE_BATTLE_MOVES;
-        TrySetRelearnType();
+        TryUpdateRelearnType(TRY_SET_UPDATE);
     }
     else if (mode == SUMMARY_MODE_RELEARNER_CONTEST)
     {
         sMonSummaryScreen->currPageIndex = PSS_PAGE_CONTEST_MOVES;
-        TrySetRelearnType();
+        TryUpdateRelearnType(TRY_SET_UPDATE);
     }
     else
     {
@@ -1772,7 +1781,7 @@ static void Task_HandleInput(u8 taskId)
         {
             if (P_SUMMARY_SCREEN_MOVE_RELEARNER && (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
             {
-                TryIncrementRelearnType();
+                TryUpdateRelearnType(TRY_INCREMENT);
                 PlaySE(SE_SELECT);
                 ShowRelearnPrompt(gMoveRelearnerType);
             }
@@ -1781,7 +1790,7 @@ static void Task_HandleInput(u8 taskId)
         {
             if (P_SUMMARY_SCREEN_MOVE_RELEARNER && (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
             {
-                TryDecrementRelearnType();
+                TryUpdateRelearnType(TRY_DECREMENT);
                 PlaySE(SE_SELECT);
                 ShowRelearnPrompt(gMoveRelearnerType);
             }
@@ -1922,53 +1931,34 @@ u32 GetCurrentRelearnMovesCount(void)
     };
     u32 currMoveNum = moveCount[gMoveRelearnerType];
 
-    MgbaPrintf(MGBA_LOG_WARN, "currMoveNum: %u", currMoveNum);
-    MgbaPrintf(MGBA_LOG_WARN, "gMoveRelearnerType: %u", gMoveRelearnerType);
-
-
     return currMoveNum == 0 ? 0 : currMoveNum;
 }
 
-void TryIncrementRelearnType(void)
+void TryUpdateRelearnType(enum IncrDecrUpdateValues value)
 {
     u32 moveCount;
 
     do
     {
-        gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
-        moveCount = GetCurrentRelearnMovesCount();
-        MgbaPrintf(MGBA_LOG_WARN, "moveCount: %u", moveCount);
-    } while (moveCount == 0);
-
-    sMonSummaryScreen->relearnableMovesNum = moveCount;
-}
-
-void TryDecrementRelearnType(void)
-{
-    u32 moveCount;
-
-    do
-    {
-        gMoveRelearnerType = gMoveRelearnerType <= MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : gMoveRelearnerType - 1;
-        moveCount = GetCurrentRelearnMovesCount();
-        MgbaPrintf(MGBA_LOG_WARN, "moveCount: %u", moveCount);
-    } while (moveCount == 0);
-
-    sMonSummaryScreen->relearnableMovesNum = moveCount;
-}
-
-void TrySetRelearnType(void)
-{
-    u32 moveCount;
-
-    do
-    {
-        moveCount = GetCurrentRelearnMovesCount();
-        if (moveCount == 0)
+        switch (value)
         {
+        default:
+        case TRY_SET_UPDATE:
+            moveCount = GetCurrentRelearnMovesCount();
+            if (moveCount == 0)
+            {
+                gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
+            }
+            break;
+        case TRY_INCREMENT:
             gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
+            moveCount = GetCurrentRelearnMovesCount();
+            break;
+        case TRY_DECREMENT:
+            gMoveRelearnerType = gMoveRelearnerType <= MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : gMoveRelearnerType - 1;
+            moveCount = GetCurrentRelearnMovesCount();
+            break;
         }
-        MgbaPrintf(MGBA_LOG_WARN, "moveCount: %u", moveCount);
     } while (moveCount == 0);
 
     sMonSummaryScreen->relearnableMovesNum = moveCount;
@@ -2064,13 +2054,17 @@ static void Task_ChangeSummaryMon(u8 taskId)
                 if (ShouldShowMoveRelearner())
                 {
                     gMoveRelearnerType = MOVE_RELEARNER_LEVEL_UP_MOVES;
-                    TrySetRelearnType();
+                    TryUpdateRelearnType(TRY_SET_UPDATE);
                     ShowRelearnPrompt(gMoveRelearnerType);
                 }
                 else
                 {
                     ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_RELEARN);
                 }
+            }
+            else
+            {
+                ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_RELEARN);
             }
         }
         break;
@@ -2116,66 +2110,6 @@ static void Task_ChangeSummaryMon(u8 taskId)
         return;
     }
     data[0]++;
-}
-
-// Not very elegant, I know
-static void GetSetMoveRelearnerVar(u8 *state)
-{
-    /*struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-
-    u32 moveTypeCounter = MOVE_RELEARNER_LEVEL_UP_MOVES;
-
-    while (moveTypeCounter < MOVE_RELEARNER_COUNT)
-    {
-        if (*state == moveTypeCounter)
-        {
-            if (!moveCounts[moveTypeCounter])
-                *state += 1;
-            else
-                sMonSummaryScreen->relearnableMovesNum = moveCounts[*state];
-        }
-        if (*state == MOVE_RELEARNER_COUNT)
-        {
-            *state = MOVE_RELEARNER_LEVEL_UP_MOVES;
-            MgbaPrintf(MGBA_LOG_WARN, "returning...");
-            return;
-        }
-
-        moveTypeCounter++;
-    }
-
-    if (*state == MOVE_RELEARNER_LEVEL_UP_MOVES && !GetNumberOfLevelUpMoves(mon))
-        *state = MOVE_RELEARNER_EGG_MOVES;
-
-    if (*state == MOVE_RELEARNER_EGG_MOVES && !GetNumberOfEggMoves(mon))
-        *state = MOVE_RELEARNER_TM_MOVES;
-
-    if (*state == MOVE_RELEARNER_TM_MOVES && !GetNumberOfTMMoves(mon))
-        *state = MOVE_RELEARNER_TUTOR_MOVES;
-
-    if (*state == MOVE_RELEARNER_TUTOR_MOVES && !GetNumberOfTutorMoves(mon))
-    {
-        *state = MOVE_RELEARNER_LEVEL_UP_MOVES;
-        sMonSummaryScreen->relearnableMovesNum = 0;
-        return;
-    }
-
-    switch (*state)
-    {
-        case MOVE_RELEARNER_EGG_MOVES:
-            sMonSummaryScreen->relearnableMovesNum = GetNumberOfEggMoves(mon);
-            break;
-        case MOVE_RELEARNER_TM_MOVES:
-            sMonSummaryScreen->relearnableMovesNum = GetNumberOfTMMoves(mon);
-            break;
-        case MOVE_RELEARNER_TUTOR_MOVES:
-            sMonSummaryScreen->relearnableMovesNum = GetNumberOfTutorMoves(mon);
-            break;
-        default:
-        case MOVE_RELEARNER_LEVEL_UP_MOVES:
-            sMonSummaryScreen->relearnableMovesNum = GetNumberOfLevelUpMoves(mon);
-            break;
-    }*/
 }
 
 static s8 AdvanceMonIndex(s8 delta)
@@ -2285,12 +2219,10 @@ static void ChangePage(u8 taskId, s8 delta)
         u32 currPageIndex = sMonSummaryScreen->currPageIndex;
 
         if ((currPageIndex == PSS_PAGE_BATTLE_MOVES
-            || currPageIndex == PSS_PAGE_CONTEST_MOVES)
-            || (currPageIndex + delta == PSS_PAGE_BATTLE_MOVES
-                || currPageIndex + delta == PSS_PAGE_CONTEST_MOVES))
+            || currPageIndex == PSS_PAGE_CONTEST_MOVES))
         {
             gMoveRelearnerType = MOVE_RELEARNER_LEVEL_UP_MOVES;
-            TrySetRelearnType();
+            TryUpdateRelearnType(TRY_SET_UPDATE);
         }
     }
 }
@@ -2336,7 +2268,9 @@ static void PssScrollRightEnd(u8 taskId) // display right
     SetTypeIcons();
     TryDrawExperienceProgressBar();
     SwitchTaskToFollowupFunc(taskId);
-    ShowRelearnPrompt(gMoveRelearnerType);
+    if ((sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
+        || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
+        ShowRelearnPrompt(gMoveRelearnerType);
 }
 
 static void PssScrollLeft(u8 taskId) // Scroll left
@@ -4928,8 +4862,6 @@ void ShowRelearnPrompt(u8 state)
         && (currPage != PSS_PAGE_BATTLE_MOVES && currPage != PSS_PAGE_CONTEST_MOVES))
         return;
 
-    MgbaPrintf(MGBA_LOG_WARN, "state: %u", state);
-
     const u8* relearnText;
     const u8* gText_Relearn_LevelUp = COMPOUND_STRING("{START_BUTTON} RELEARN LEVEL");
     const u8* gText_Relearn_Egg     = COMPOUND_STRING("{START_BUTTON} RELEARN EGG");
@@ -4948,8 +4880,6 @@ void ShowRelearnPrompt(u8 state)
         relearnText = gText_Relearn_Tutor;
     else
         relearnText = gText_Relearn;
-
-    MgbaPrintf(MGBA_LOG_WARN, "prompt text: %S", relearnText);
 
     relearnTextXPos = GetStringRightAlignXOffset(FONT_NORMAL, relearnText, 0);
 
