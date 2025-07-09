@@ -189,7 +189,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u8 secondMoveIndex;
     bool8 lockMovesFlag; // This is used to prevent the player from changing position of moves in a battle or when trading.
     u8 bgDisplayOrder; // Determines the order page backgrounds are loaded while scrolling between them
-    u8 relearnableMovesNum;
+    u16 relearnableMovesNum;
     u8 windowIds[8];
     u8 spriteIds[SPRITE_ARR_ID_COUNT];
     bool8 handleDeoxys;
@@ -1931,6 +1931,8 @@ u32 GetCurrentRelearnMovesCount(void)
     };
     u32 currMoveNum = moveCount[gMoveRelearnerType];
 
+    MgbaPrintf(MGBA_LOG_WARN, "move count: %u", currMoveNum);
+
     return currMoveNum == 0 ? 0 : currMoveNum;
 }
 
@@ -1960,6 +1962,8 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             break;
         }
     } while (moveCount == 0);
+
+    MgbaPrintf(MGBA_LOG_WARN, "move count: %u", moveCount);
 
     sMonSummaryScreen->relearnableMovesNum = moveCount;
 }
@@ -3334,7 +3338,13 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Accuracy2, 0, 17, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Appeal, 0, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Jam, 0, 17, 0, 1);
-    ShowRelearnPrompt(MOVE_RELEARNER_LEVEL_UP_MOVES);
+
+    if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
+             || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES)
+    {
+        TryUpdateRelearnType(TRY_SET_UPDATE);
+        ShowRelearnPrompt(gMoveRelearnerType);
+    }
 }
 
 static void PutPageWindowTilemaps(u8 page)

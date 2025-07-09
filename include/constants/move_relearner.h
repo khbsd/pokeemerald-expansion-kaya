@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_MOVE_RELEARNER_H
 
 // Max number of relearner moves shown in the list
-#define MAX_RELEARNER_MOVES             0xFF
+#define MAX_RELEARNER_MOVES             300
 
 // Move Relearner menu change constants
 enum MoveRelearnerStates

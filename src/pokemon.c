@@ -6507,14 +6507,14 @@ static void QuickSortMoves(u16 *moves, s32 left, s32 right)
     QuickSortMoves(moves, i, right);
 }
 
-static void SortMovesAlphabetically(u16 *moves, u8 numMoves)
+static void SortMovesAlphabetically(u16 *moves, u16 numMoves)
 {
     if (numMoves > 1)
         QuickSortMoves(moves, 0, numMoves - 1);
 }
 
 
-u8 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
+u16 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
     u8 numMoves = 0;
@@ -6563,7 +6563,7 @@ u8 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u8 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
+u16 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
     u8 numMoves = 0;
@@ -6608,19 +6608,26 @@ u8 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u8 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
+u16 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES] = {0};
-    u8 numMoves = 0;
+    u16 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u16 allMoves[ITEM_HM08 - ITEM_TM01 + 1];
+    const u16 *learnset = GetSpeciesTeachableLearnset(species);
+
     u32 i, j, totalMoveCount = 0;
 
-    for (i = ITEM_TM01; i < ITEM_HM08; i++)
+    u32 learnCount = 0;
+    while (learnset[learnCount] != MOVE_UNAVAILABLE)
+        learnCount++;
+
+    u16 allMoves[learnCount + 1];
+    learnCount = 0;
+    while (learnset[learnCount] != MOVE_UNAVAILABLE)
     {
-        j = ItemIdToBattleMoveId(i);
-        if ((P_ENABLE_ALL_TM_MOVES || CheckBagHasItem(i, 1)) && CanLearnTeachableMove(species, j) && j != MOVE_NONE)
-            allMoves[totalMoveCount++] = j;
+        if ((P_ENABLE_ALL_TM_MOVES) && learnset[learnCount] != MOVE_NONE)
+            allMoves[totalMoveCount++] = learnset[learnCount];
+        learnCount++;
     }
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -6652,8 +6659,55 @@ u8 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
 
     return numMoves;
 }
+/*
+u16 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[MAX_MON_MOVES] = {0};
+    u16 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
-u8 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
+    u32 currMove;
+    for (currMove = 0; currMove < MAX_MON_MOVES; currMove++)
+        learnedMoves[currMove] = GetMonData(mon, MON_DATA_MOVE1 + currMove, 0);
+
+    MgbaPrintf(MGBA_LOG_WARN, "currMoves checked");
+
+    u32 learnCount = 0;
+    currMove = 0;
+    while (learnset[learnCount] != MOVE_UNAVAILABLE)
+    {
+        MgbaPrintf(MGBA_LOG_WARN, "learnCount at: %u", learnCount);
+        for (currMove = 0; currMove < MAX_MON_MOVES; currMove++)
+        {
+            if (learnedMoves[currMove] == learnset[learnCount])
+                break;
+        }
+        if (currMove < MAX_MON_MOVES)
+            continue;
+
+        for (currMove = 0; currMove < numMoves; currMove++)
+        {
+            if (moves[currMove] == learnset[learnCount])
+                break;
+        }
+        if (currMove < numMoves)
+            continue;
+
+        moves[numMoves++] = learnset[learnCount];
+        learnCount++;
+    }
+
+    MgbaPrintf(MGBA_LOG_WARN, "learnCount final: %u", learnCount);
+
+    if (P_SORT_MOVES)
+        SortMovesAlphabetically(moves, numMoves);
+
+    MgbaPrintf(MGBA_LOG_WARN, "moves sorted");
+
+    return numMoves;
+}*/
+
+u16 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
 {
     if (!P_TUTOR_MOVES_ARRAY)
         return FALSE;
@@ -6698,7 +6752,7 @@ u8 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u8 GetNumberOfLevelUpMoves(struct Pokemon *mon)
+u16 GetNumberOfLevelUpMoves(struct Pokemon *mon)
 {
     u16 moves[MAX_RELEARNER_MOVES] = {0};
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
@@ -6709,7 +6763,7 @@ u8 GetNumberOfLevelUpMoves(struct Pokemon *mon)
     return GetRelearnerLevelUpMoves(mon, moves);
 }
 
-u8 GetNumberOfEggMoves(struct Pokemon *mon)
+u16 GetNumberOfEggMoves(struct Pokemon *mon)
 {
     u16 moves[EGG_MOVES_ARRAY_COUNT] = {0};
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
@@ -6720,7 +6774,7 @@ u8 GetNumberOfEggMoves(struct Pokemon *mon)
     return GetRelearnerEggMoves(mon, moves);
 }
 
-u8 GetNumberOfTMMoves(struct Pokemon *mon)
+u16 GetNumberOfTMMoves(struct Pokemon *mon)
 {
     u16 moves[MAX_RELEARNER_MOVES] = {0};
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
@@ -6731,7 +6785,7 @@ u8 GetNumberOfTMMoves(struct Pokemon *mon)
     return GetRelearnerTMMoves(mon, moves);
 }
 
-u8 GetNumberOfTutorMoves(struct Pokemon *mon)
+u16 GetNumberOfTutorMoves(struct Pokemon *mon)
 {
     if (!P_TUTOR_MOVES_ARRAY)
         return FALSE;
@@ -6745,7 +6799,7 @@ u8 GetNumberOfTutorMoves(struct Pokemon *mon)
     return GetRelearnerTutorMoves(mon, moves);
 }
 
-u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
+u16 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 {
     u8 numMoves = 0;
     int i;

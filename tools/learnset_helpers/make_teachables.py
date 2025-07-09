@@ -115,10 +115,10 @@ def prepare_output(all_learnables: dict[str, set[str]], repo_teachables: set[str
             cursor = match_e + 1
             continue
 
-        if species_upper == "MEW":
+        """if species_upper == "MEW":
             new += old[cursor:match_e + 1] # copy the original content and skip.
             cursor = match_e + 1
-            continue
+            continue"""
 
         repo_species_teachables = filter(lambda m: m in repo_teachables, all_learnables[species_upper])
 
