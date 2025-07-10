@@ -1557,6 +1557,7 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
             spriteId = gTasks[taskId].tBrendanSpriteId;
         else
             spriteId = gTasks[taskId].tMaySpriteId;
+        MgbaPrintf(MGBA_LOG_WARN, "selected: %u", gTasks[taskId].tPlayerGender);
         gSprites[spriteId].x = DISPLAY_WIDTH;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -1915,6 +1916,8 @@ static void AddBirchSpeechObjects(u8 taskId)
     u8 maySpriteId;
     u8 kayaSpriteId;
 
+    UnsetPlayerAsKaya();
+
     birchSpriteId = AddNewGameBirchObject(0x88, 0x3C, 1);
     gSprites[birchSpriteId].callback = SpriteCB_Null;
     gSprites[birchSpriteId].oam.priority = 0;
@@ -1949,6 +1952,7 @@ static void AddBirchSpeechObjects(u8 taskId)
 #undef tDugtrioSpriteId
 #undef tBrendanSpriteId
 #undef tMaySpriteId
+#undef tKayaSpriteId
 
 #define tMainTask data[0]
 #define tAlphaCoeff1 data[1]
