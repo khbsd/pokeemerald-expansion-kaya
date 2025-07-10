@@ -4230,6 +4230,12 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         LoadPalette(paletteData, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
         DestroyTask(taskId);
     }
+
+    if (sPokedexView)
+    {
+        Free(sPokedexView);
+        sPokedexView = NULL;
+    }
 }
 
 static void SpriteCB_SlideCaughtMonToCenter(struct Sprite *sprite)
