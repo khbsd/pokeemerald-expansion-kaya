@@ -132,6 +132,15 @@ bool32 IsAiBattlerAware(u32 battlerId)
     return BattlerHasAi(battlerId);
 }
 
+bool32 IsAiBattlerAssumingStab()
+{
+    if (gAiThinkingStruct->aiFlags[B_POSITION_OPPONENT_LEFT] & AI_FLAG_ASSUME_STAB
+     || gAiThinkingStruct->aiFlags[B_POSITION_OPPONENT_RIGHT] & AI_FLAG_ASSUME_STAB)
+        return TRUE;
+
+    return FALSE;
+}
+
 bool32 IsAiBattlerPredictingAbility(u32 battlerId)
 {
     if (gAiThinkingStruct->aiFlags[B_POSITION_OPPONENT_LEFT] & AI_FLAG_WEIGH_ABILITY_PREDICTION
@@ -1423,8 +1432,8 @@ enum Abilities AI_DecideKnownAbilityForTurn(u32 battlerId)
     if (gDisableStructs[battlerId].overwrittenAbility)
         return gDisableStructs[battlerId].overwrittenAbility;
 
-    // The AI knows its own ability.
-    if (IsAiBattlerAware(battlerId))
+    // The AI knows its own ability, and omniscience handling
+    if (IsAiBattlerAware(battlerId) || (IsAiBattlerAssumingStab() && ASSUME_STAB_SEES_ABILITY))
         return knownAbility;
 
     // Check neutralizing gas, gastro acid
@@ -5273,7 +5282,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
     case ABILITY_POWER_SPOT:
     case ABILITY_VICTORY_STAR:
         if (IsDoubleBattle() && IsBattlerAlive(BATTLE_PARTNER(battler)) && aiData->abilities[BATTLE_PARTNER(battler)] != ability)
-            return GOOD_EFFECT;
+            return BEST_EFFECT;
         break;
     case ABILITY_GUTS:
         if (HasMoveWithCategory(battler, DAMAGE_CATEGORY_PHYSICAL) && gBattleMons[battler].status1 & (STATUS1_CAN_MOVE))
@@ -5289,7 +5298,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
     case ABILITY_VITAL_SPIRIT:
         if (HasMoveWithEffect(battler, EFFECT_REST))
             return WORST_EFFECT;
-        return NO_INCREASE;
+        break;
     case ABILITY_INTIMIDATE:
     {
         u32 abilityDef = aiData->abilities[FOE(battler)];
@@ -5329,6 +5338,8 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
             return WEAK_EFFECT;
         if (gBattleMons[battler].status1 & (STATUS1_TOXIC_POISON))
             return BEST_EFFECT;
+        if (gBattleMons[battler].status1 & STATUS1_ANY)
+            return NO_INCREASE;
         break;
     // Also used to Simple Beam SIMPLE_BEAM.
     case ABILITY_SIMPLE:
@@ -5348,11 +5359,13 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
                 return NO_INCREASE;
         }
         return GOOD_EFFECT;
+    case ABILITY_NONE:
+        return NO_INCREASE;
     default:
         break;
     }
 
-    return NO_INCREASE;
+    return WEAK_EFFECT;
 }
 
 u32 GetThinkingBattler(u32 battler)
