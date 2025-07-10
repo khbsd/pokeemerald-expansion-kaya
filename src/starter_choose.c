@@ -27,7 +27,7 @@
 #include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3
-#define STARTER_MON_POOL_COUNT   60
+#define STARTER_MON_POOL_COUNT   61
 
 // Position of the sprite of the selected starter Pokémon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
@@ -178,6 +178,7 @@ static const u32 sStarterMonPool[STARTER_MON_POOL_COUNT] =
     SPECIES_AXEW,
     SPECIES_SLIGGOO,
     SPECIES_MEDITITE,
+    SPECIES_PORYGON,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -530,29 +531,26 @@ void CB2_ChooseStarter(void)
 
 void GenerateRandomStarters(void)
 {
-    u32 i;
     u32 tempSpecies = SPECIES_NONE;
 
-    for (i = 0; i < STARTER_MON_COUNT; i++)
+    for (u32 starterMon = 0; starterMon < STARTER_MON_COUNT; starterMon++)
     {
-        u32 j;
         tempSpecies = RandomElement(RNG_STARTER, sStarterMonPool);
 
-        if (i == 0)
-            sStarterMon[i] = tempSpecies;
+        if (starterMon == 0)
+        {
+            sStarterMon[starterMon] = tempSpecies;
+        }
         else
         {
-            for (j = 0; j < STARTER_MON_COUNT; j++)
+            for (u32 checkStarter = 0; checkStarter < STARTER_MON_COUNT; checkStarter++)
             {
-                while (sStarterMon[j] == tempSpecies)
+                while (sStarterMon[checkStarter] == tempSpecies)
                     tempSpecies = RandomElement(RNG_STARTER, sStarterMonPool);
             }
-
-            sStarterMon[i] = tempSpecies;
+            sStarterMon[starterMon] = tempSpecies;
         }
-
     }
-
 }
 
 static void CB2_StarterChoose(void)

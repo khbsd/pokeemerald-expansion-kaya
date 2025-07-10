@@ -9464,6 +9464,10 @@ static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typ
         if (typeEffectivenessModifier <= UQ_4_12(0.5))
             return UQ_4_12(2.0);
         break;
+    case ABILITY_ADAPTABILITY:
+        if (typeEffectivenessModifier <= UQ_4_12(0.5))
+            return UQ_4_12(1.25);
+        break;
     default:
         break;
     }
