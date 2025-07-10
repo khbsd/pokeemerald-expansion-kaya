@@ -52,13 +52,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-/*
-TODO:
-    - remove unneeded code
-    - put relearner funcs back in this file
-    - more testing
-*/
-
 // Screen titles (upper left)
 #define PSS_LABEL_WINDOW_POKEMON_INFO_TITLE 0
 #define PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE 1
