@@ -44,7 +44,6 @@ union TRANSPARENT StatChangeFlags
 };
 
 s32 GetCritHitOdds(s32 critChanceIndex);
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, enum Abilities atkAbility, enum Abilities defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 u8 GetBattlerTurnOrderNum(u8 battler);
 bool32 NoAliveMonsForBattlerSide(u32 battler);
 bool32 NoAliveMonsForPlayer(void);
