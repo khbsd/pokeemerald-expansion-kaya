@@ -147,6 +147,9 @@ enum SortPocket
 void GetBagItemIdAndQuantity(enum Pocket pocketId, u32 pocketPos, u16 *itemId, u16 *quantity);
 u16 GetBagItemId(enum Pocket pocketId, u32 pocketPos);
 u16 GetBagItemQuantity(enum Pocket pocketId, u32 pocketPos);
+void SetBagItemQuantity(enum Pocket pocketId, u32 pocketPos, u16 newValue);
+u32 GetBagPocketPosition(enum Pocket pocketId, u32 itemId);
+u32 GetPyramidBagPocketPosition(u32 itemId);
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void SetBagItemsPointers(void);
 u8 *CopyItemName(u16 itemId, u8 *dst);

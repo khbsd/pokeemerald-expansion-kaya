@@ -390,7 +390,7 @@ bool32 AddBagItem(u16 itemId, u16 count)
 
 static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, u16 itemId, u16 count)
 {
-    u32 itemLookupIndex, itemRemoveIndex = 0, totalQuantity = 0;
+    u32 itemLookupIndex = 0, itemRemoveIndex = 0, totalQuantity = 0;
     u16 tempItemId, tempQuantity;
     u16 *tempPocketSlotQuantities = AllocZeroed(sizeof(u16) * pocket->capacity);
 
