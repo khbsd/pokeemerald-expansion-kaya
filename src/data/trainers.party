@@ -16743,14 +16743,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Axe Kick
 - Zen Headbutt
 - Psychic Terrain
-- Accupressure
+- Acupressure
 
 Gallade @ Chesto Berry
 Ability: Sharpness
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Tomb
-- Psycho Cutter
+- Psycho Cut
 - Sacred Sword
 - Heal Pulse
 
@@ -16809,7 +16809,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Chilly Reception
 
 Slowking Galar @ Chesto Berry
-Ability: Strange Medicine
+Ability: Curious Medicine
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Pulse
@@ -16827,7 +16827,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Future Sight
 
 Articuno Galar @ Sitrus Berry
-Ability: Competetive
+Ability: Competitive
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Freezing Glare
@@ -16853,7 +16853,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Headbutt
 - Protect
 
-Mewtwo Y Mega
+Mewtwo Mega Y
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
@@ -16861,7 +16861,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Psychic
 - Light Screen
 
-Mewtwo X Mega
+Mewtwo Mega X
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Yawn
