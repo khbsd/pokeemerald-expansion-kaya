@@ -16719,36 +16719,40 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Gardevoir
+Ability: Pixilate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Dream Eater
-- Headbutt
-- Protect
+- Reflect
+- Draining Kiss
+- Wish
+- Psychic
 
 Armarouge
+Ability: Weak Armor
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Yawn
-- Psychic
+- Reflect
+- Expanding Force
 - Calm Mind
-- Protect
+- Armor Cannon
 
-Medicham
+Medicham @ Psychic Seed
+Ability: Pure Power
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Explosion
-- Psychic
-- Light Screen
+- Axe Kick
+- Zen Headbutt
+- Psychic Terrain
+- Accupressure
 
 Gallade @ Chesto Berry
+Ability: Sharpness
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Psychic
-- Rest
-- Confuse Ray
-- Calm Mind
+- Rock Tomb
+- Psycho Cutter
+- Sacred Sword
+- Heal Pulse
 
 Delphox @ Psychic Seed
 Ability: Magician
@@ -16781,58 +16785,55 @@ AI: Smart Trainer
 Solgaleo
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Dream Eater
-- Headbutt
-- Protect
+- Flare Blitz
+- Sunsteel Strike
+- Zen Headbutt
+- Stone Edge
 
 Reuniclus
+Ability: Panacea
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Explosion
+- Venom Drench
+- Wonder Room
 - Psychic
-- Light Screen
+- Psychic Noise
 
-Slowking
+Slowking @ Leftovers
+Ability: Regenerator
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Yawn
-- Psychic
-- Calm Mind
-- Protect
+- Slack Off
+- Heal Pulse
+- Zen Headbutt
+- Chilly Reception
 
 Slowking Galar @ Chesto Berry
+Ability: Strange Medicine
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Psychic
-- Rest
-- Confuse Ray
-- Calm Mind
+- Heal Pulse
+- Eerie Spell
+- Toxic
+- Slack Off
 
 Gothitelle @ Chesto Berry
+Ability: Long Lived
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Psychic
-- Rest
-- Calm Mind
+- Baddy Bad
+- Magic Room
+- Ruination
+- Future Sight
 
-Swoobat @ Sitrus Berry
+Articuno Galar @ Sitrus Berry
+Ability: Competetive
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
-
-Exeggcute @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
+- Freezing Glare
+- Tailwind
+- Air Cutter
+- AncientPower
 
 === TRAINER_TATE_AND_LIZA_5 ===
 Name: TATE&LIZA
@@ -16844,7 +16845,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Hypno
+Medicham Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
@@ -16852,7 +16853,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Headbutt
 - Protect
 
-Claydol
+Mewtwo Y Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
@@ -16860,23 +16861,23 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Psychic
 - Light Screen
 
-Slowking
+Mewtwo X Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Yawn
-- Psychic
+- 
 - Calm Mind
 - Protect
 
-Xatu @ Chesto Berry
+Metagross Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Psychic
+- 
 - Rest
 - Confuse Ray
 - Calm Mind
 
-Lunatone @ Chesto Berry
+Slowbro Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
@@ -16884,7 +16885,31 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rest
 - Calm Mind
 
-Solrock @ Sitrus Berry
+Latios Mega @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Solar Beam
+- Psychic
+- Flamethrower
+
+Latias Mega @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Solar Beam
+- Psychic
+- Flamethrower
+
+Gardevoir Mega @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day
+- Solar Beam
+- Psychic
+- Flamethrower
+
+Gallade Mega @ Sitrus Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day

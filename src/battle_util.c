@@ -9025,6 +9025,10 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && IsBattleMoveSpecial(move))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
         break;
+    case ABILITY_LONG_LIVED:
+        if (IsBattleMoveSpecial(move))
+            atkStat += (gBattleTurnCounter * B_LONG_LIVED_TURN_BOOST);
+        break;
     default:
         break;
     }
@@ -9233,6 +9237,10 @@ static inline u32 CalcDefenseStat(struct DamageContext *ctx)
     case ABILITY_FLARE_BOOST:
         if (gBattleMons[battlerDef].status1 & STATUS1_BURN)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+    case ABILITY_LONG_LIVED:
+        if (IsBattleMoveSpecial(move))
+            defStat += (gBattleTurnCounter * B_LONG_LIVED_TURN_BOOST);
+        break;
     default:
         break;
     }

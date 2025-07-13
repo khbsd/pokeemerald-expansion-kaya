@@ -322,6 +322,7 @@
 #define B_MON_FAINT_SCALING_AMOUNT      1          // How much each faint counts when adjusting enemy level
 #define B_BADGE_EXP_BOOST               TRUE       // If TRUE, you get more experience based on how many badges you have.
 #define B_BADGE_EXP_BOOST_AMOUNT        3          // What % of extra experience each badge counts for when B_BADGE_EXP_BOOST is TRUE.
+#define B_LONG_LIVED_TURN_BOOST         8          // Amount Pokemon with the ability Long Lived have their Special Defense and Special Attack raised per turn.
 
 // Gimmicks
 #define B_MEGA_RING                     FALSE

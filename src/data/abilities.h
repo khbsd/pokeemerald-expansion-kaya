@@ -2542,7 +2542,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PANACEA] =
     {
         .name = _("Panacea"),
-        .description = COMPOUND_STRING("Blocks crits, ups Rock moves."),
+        .description = COMPOUND_STRING("Heals allies and self."),
         .aiRating = 1,
     },
 
@@ -2550,6 +2550,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Flux Field"),
         .description = COMPOUND_STRING("Avoid Ground moves, up SpAtk."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
+    [ABILITY_LONG_LIVED] =
+    {
+        .name = _("Long-lived"),
+        .description = COMPOUND_STRING("SpAtk, SpDef grow over time."),
         .aiRating = 7,
         .breakable = TRUE,
     },
