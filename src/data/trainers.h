@@ -41763,6 +41763,8 @@ F_TRAINER_FEMALE |
 #line 16721
             .species = SPECIES_GARDEVOIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16721
+            .heldItem = ITEM_FAIRY_FEATHER,
 #line 16724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16722
@@ -41783,6 +41785,8 @@ F_TRAINER_FEMALE |
 #line 16730
             .species = SPECIES_ARMAROUGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16730
+            .heldItem = ITEM_KASIB_BERRY,
 #line 16733
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16731
@@ -41914,6 +41918,8 @@ F_TRAINER_FEMALE |
 #line 16785
             .species = SPECIES_SOLGALEO,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16785
+            .heldItem = ITEM_CHARCOAL,
 #line 16787
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16786
@@ -41932,6 +41938,8 @@ F_TRAINER_FEMALE |
 #line 16793
             .species = SPECIES_REUNICLUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16793
+            .heldItem = ITEM_LEFTOVERS,
 #line 16796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16794
@@ -42019,7 +42027,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_ARTICUNO_GALAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16829
-            .heldItem = ITEM_SITRUS_BERRY,
+            .heldItem = ITEM_COLBUR_BERRY,
 #line 16832
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16830
@@ -42401,6 +42409,8 @@ F_TRAINER_FEMALE |
 #line 16985
             .species = SPECIES_GARDEVOIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16985
+            .heldItem = ITEM_FAIRY_FEATHER,
 #line 16988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16986
@@ -42421,6 +42431,8 @@ F_TRAINER_FEMALE |
 #line 16994
             .species = SPECIES_ARMAROUGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16994
+            .heldItem = ITEM_KASIB_BERRY,
 #line 16997
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16995
@@ -42529,6 +42541,8 @@ F_TRAINER_FEMALE |
 #line 17039
             .species = SPECIES_SOLGALEO,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17039
+            .heldItem = ITEM_CHARCOAL,
 #line 17041
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17040
@@ -42547,6 +42561,8 @@ F_TRAINER_FEMALE |
 #line 17047
             .species = SPECIES_REUNICLUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17047
+            .heldItem = ITEM_LEFTOVERS,
 #line 17050
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17048
