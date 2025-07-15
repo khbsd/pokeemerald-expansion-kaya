@@ -16718,7 +16718,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Gardevoir
+Gardevoir @ Fairy Feather
 Ability: Pixilate
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16727,7 +16727,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Wish
 - Psychic
 
-Armarouge
+Armarouge @ Kasib Berry
 Ability: Weak Armor
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16736,7 +16736,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Calm Mind
 - Armor Cannon
 
-Medicham @ Psychic Seed
+Medicham Mega @ Psychic Seed
 Ability: Pure Power
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16782,7 +16782,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Solgaleo
+Solgaleo @ Charcoal
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flare Blitz
@@ -16790,7 +16790,261 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zen Headbutt
 - Stone Edge
 
-Reuniclus
+Reuniclus @ Leftovers
+Ability: Panacea
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Venom Drench
+- Wonder Room
+- Psychic
+- Psychic Noise
+
+Slowking @ Leftovers
+Ability: Regenerator
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Heal Pulse
+- Zen Headbutt
+- Chilly Reception
+
+Slowking Galar @ Chesto Berry
+Ability: Curious Medicine
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heal Pulse
+- Eerie Spell
+- Toxic
+- Slack Off
+
+Gothitelle @ Chesto Berry
+Ability: Long Lived
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Baddy Bad
+- Magic Room
+- Ruination
+- Future Sight
+
+Articuno Galar @ Colbur Berry
+Ability: Competitive
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Freezing Glare
+- Tailwind
+- Air Cutter
+- AncientPower
+
+=== TRAINER_TATE_AND_LIZA_5 ===
+Name: TATE&LIZA
+Class: Leader
+Pic: Leader Tate And Liza
+Gender: Male
+Music: Female
+Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Battle Type: Doubles
+AI: Smart Trainer
+
+Medicham Mega @ King's Rock
+Ability: Huge Power
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bulk Up
+- High Jump Kick
+- Zen Headbutt
+- Acupressure
+
+Mewtwo Mega Y @ Twistedspoon
+Ability: Insomnia
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Future Sight
+- Psystrike
+- Psychic
+- Aura Sphere
+
+Mewtwo Mega X @ Black Belt
+Ability: Steadfast
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Focus Punch
+- Psycho Cut
+- Bulk Up
+- Avalanche
+
+Metagross Mega @ Metal Powder
+Ability: Tough Claws
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Meteor Mash
+- Earthquake
+- Hammer Arm
+- Zen Headbutt
+
+Slowbro Mega @ Leftovers
+Ability: Shell Armor
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flamethrower
+- Psychic
+- Slack Off
+- Water Pulse
+
+Latios Mega @ Soul Dew
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Aura Sphere
+- Dragon Cheer
+- Luster Purge
+- Breaking Swipe
+
+Latias Mega @ Soul Dew
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Mist Ball
+- Dragon Pulse
+- Dragon Dance
+- Aura Sphere
+
+Gardevoir Mega @ Leftovers
+Ability: Pixilate
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Hyper Beam
+- Psychic
+- Shadow Ball
+
+Gallade Mega @ King's Rock
+Ability: Sharpness
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sacred Sword
+- Psycho Cut
+- Stone Edge
+- Upper Hand
+
+Alakazam Mega @ Twistedspoon
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Calm Mind
+- Psychic
+- Future Sight
+- Shadow Ball
+
+Xatu @ Psychic Gem
+Ability: Magic Bounce
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Power Swap
+- Psychic
+- Wish
+- Psycho Shift
+
+Rapidash Galar @ Lucky Punch
+Ability: Pixilate
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heal Pulse
+- Dazzling Gleam
+- Psycho Cut
+- Stomp
+
+Lunala @ Spell Tag
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hypnosis
+- Moongeist Beam
+- Psychic
+- Dream Eater
+
+Lunatone @ Odd Incense
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hypnosis
+- Psychic
+- Moonlight
+- Stone Edge
+
+Solrock @ Chesto Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sandstorm
+- AncientPower
+- Psychic
+- Calm Mind
+
+Claydol @ Sitrus Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Earth Power
+- Psychic
+- AncientPower
+
+Gardevoir @ Fairy Feather
+Ability: Pixilate
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Reflect
+- Draining Kiss
+- Wish
+- Psychic
+
+Armarouge @ Kasib Berry
+Ability: Weak Armor
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Reflect
+- Expanding Force
+- Calm Mind
+- Armor Cannon
+
+Medicham Mega @ Psychic Seed
+Ability: Pure Power
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Axe Kick
+- Zen Headbutt
+- Psychic Terrain
+- Acupressure
+
+Gallade @ Chesto Berry
+Ability: Sharpness
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Rock Tomb
+- Psycho Cut
+- Sacred Sword
+- Heal Pulse
+
+Delphox @ Psychic Seed
+Ability: Magician
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Psychic Terrain
+- Psychic
+- Mystical Fire
+- Calm Mind
+
+Raichu Alola @ Psychic Seed
+Ability: Surge Surfer
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Electric Terrain
+- Thunderbolt
+- Psychic
+- Nuzzle
+
+Solgaleo @ Charcoal
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flare Blitz
+- Sunsteel Strike
+- Zen Headbutt
+- Stone Edge
+
+Reuniclus @ Leftovers
 Ability: Panacea
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16834,88 +17088,6 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Tailwind
 - Air Cutter
 - AncientPower
-
-=== TRAINER_TATE_AND_LIZA_5 ===
-Name: TATE&LIZA
-Class: Leader
-Pic: Leader Tate And Liza
-Gender: Male
-Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
-Battle Type: Doubles
-AI: Smart Trainer
-
-Medicham Mega
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Dream Eater
-- Headbutt
-- Protect
-
-Mewtwo Mega Y
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Explosion
-- Psychic
-- Light Screen
-
-Mewtwo Mega X
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Yawn
-- Tackle
-- Calm Mind
-- Protect
-
-Metagross Mega
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Tackle
-- Rest
-- Confuse Ray
-- Calm Mind
-
-Slowbro Mega
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Psychic
-- Rest
-- Calm Mind
-
-Latios Mega @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
-
-Latias Mega @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
-
-Gardevoir Mega @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
-
-Gallade Mega @ Sitrus Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
-- Solar Beam
-- Psychic
-- Flamethrower
 
 === TRAINER_JUAN_2 ===
 Name: JUAN
