@@ -2553,10 +2553,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
     [ABILITY_LONG_LIVED] =
     {
         .name = _("Long-lived"),
         .description = COMPOUND_STRING("SpAtk, SpDef grow over time."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_ION_TORQUE] =
+    {
+        .name = _("Ion Torque"),
+        .description = COMPOUND_STRING("Electric affinity."),
         .aiRating = 7,
         .breakable = TRUE,
     },

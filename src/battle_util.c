@@ -8146,6 +8146,11 @@ u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter)
     return basePower;
 }
 
+bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler)
+{
+    return ctx->moveType == TYPE_ELECTRIC && ctx->abilityAtk == ABILITY_ION_TORQUE && !IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC);
+}
+
 static inline u32 IsFieldMudSportAffected(u32 moveType)
 {
     if (moveType == TYPE_ELECTRIC && (gFieldStatuses & STATUS_FIELD_MUDSPORT))
@@ -8944,7 +8949,7 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (IsBattleMoveSpecial(move) && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
         {
             enum Abilities partnerAbility = GetBattlerAbility(BATTLE_PARTNER(battlerAtk));
-            if (partnerAbility == ABILITY_MINUS
+            if (partnerAbility == ABILITY_MINUS || partnerAbility == ABILITY_ION_TORQUE
             || (B_PLUS_MINUS_INTERACTION >= GEN_5 && partnerAbility == ABILITY_PLUS))
                 modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         }
@@ -8953,7 +8958,7 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (IsBattleMoveSpecial(move) && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
         {
             enum Abilities partnerAbility = GetBattlerAbility(BATTLE_PARTNER(battlerAtk));
-            if (partnerAbility == ABILITY_PLUS
+            if (partnerAbility == ABILITY_PLUS || partnerAbility == ABILITY_ION_TORQUE
             || (B_PLUS_MINUS_INTERACTION >= GEN_5 && partnerAbility == ABILITY_MINUS))
                 modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         }
@@ -8983,6 +8988,9 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
                 modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
         }
         break;
+    case ABILITY_ION_TORQUE:
+        if (moveType == TYPE_ELECTRIC)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     case ABILITY_DRAGONS_MAW:
         if (moveType == TYPE_DRAGON)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
@@ -9336,9 +9344,9 @@ static inline uq4_12_t GetSameTypeAttackBonusModifier(struct DamageContext *ctx)
 {
     if (ctx->moveType == TYPE_MYSTERY)
         return UQ_4_12(1.0);
-    else if (gBattleStruct->pledgeMove && IS_BATTLER_OF_TYPE(BATTLE_PARTNER(ctx->battlerAtk), ctx->moveType))
+    else if (gBattleStruct->pledgeMove && (IS_BATTLER_OF_TYPE(BATTLE_PARTNER(ctx->battlerAtk), ctx->moveType) || IsMoveIonTorqueAffected(ctx, BATTLE_PARTNER(ctx->battlerAtk))))
         return (ctx->abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
-    else if (!IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType) || ctx->move == MOVE_STRUGGLE || ctx->move == MOVE_NONE)
+    else if ((!IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType) && !IsMoveIonTorqueAffected(ctx, ctx->battlerAtk)) || ctx->move == MOVE_STRUGGLE || ctx->move == MOVE_NONE)
         return UQ_4_12(1.0);
     return (ctx->abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
 }
