@@ -3124,6 +3124,7 @@ bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, enum Abilities abili
             statId = STAT_SPATK;
         }
         break;
+    case ABILITY_SAP_METABOLISM:
     case ABILITY_SAP_SIPPER:
     case ABILITY_ROLLING_STONE:
         if (moveType == TYPE_GRASS)
@@ -8898,6 +8899,7 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
             }
         }
         break;
+    case ABILITY_SAP_METABOLISM:
     case ABILITY_HUGE_POWER:
         if (IsBattleMovePhysical(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));

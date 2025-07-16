@@ -530,6 +530,7 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler)
     {
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_SAP_SIPPER;
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_ROLLING_STONE;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_SAP_METABOLISM;
     }
     else if (incomingType == TYPE_GROUND || (isOpposingBattlerChargingOrInvulnerable && incomingType == TYPE_GROUND))
     {

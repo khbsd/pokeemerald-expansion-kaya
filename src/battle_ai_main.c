@@ -3385,6 +3385,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 break;
             case ABILITY_SAP_SIPPER:
             case ABILITY_ROLLING_STONE:
+            case ABILITY_SAP_METABOLISM:
                 if (moveType == TYPE_GRASS)
                 {
                     if (moveTarget == MOVE_TARGET_FOES_AND_ALLY)

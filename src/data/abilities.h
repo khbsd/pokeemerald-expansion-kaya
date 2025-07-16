@@ -2569,4 +2569,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
+    [ABILITY_SAP_METABOLISM] =
+    {
+        .name = _("Sap Metabolism"),
+        .description = COMPOUND_STRING("Strong herbivore."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };

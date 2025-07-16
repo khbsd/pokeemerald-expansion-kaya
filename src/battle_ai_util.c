@@ -5078,6 +5078,7 @@ bool32 ShouldTriggerAbility(u32 battlerAtk, u32 battlerDef, enum Abilities abili
         case ABILITY_JUSTIFIED:
         case ABILITY_MOXIE:
         case ABILITY_SAP_SIPPER:
+        case ABILITY_SAP_METABOLISM:
         case ABILITY_THERMAL_EXCHANGE:
             return (BattlerStatCanRise(battlerDef, ability, STAT_ATK) && HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL));
 
@@ -5367,6 +5368,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Abilities ability, struct 
         break;
     case ABILITY_HUGE_POWER:
     case ABILITY_PURE_POWER:
+    case ABILITY_SAP_METABOLISM:
         if (HasMoveWithCategory(battler, DAMAGE_CATEGORY_PHYSICAL))
             return BEST_EFFECT;
         break;

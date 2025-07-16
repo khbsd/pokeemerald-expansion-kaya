@@ -12394,6 +12394,7 @@ static const struct LevelUpMove sConkeldurrLevelUpLearnset[] = {
 static const struct LevelUpMove sTympoleLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ECHOED_VOICE),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_SPLISHY_SPLASH),
     LEVEL_UP_MOVE( 4, MOVE_ACID),
     LEVEL_UP_MOVE( 8, MOVE_SUPERSONIC),
     LEVEL_UP_MOVE(12, MOVE_SPARK),
