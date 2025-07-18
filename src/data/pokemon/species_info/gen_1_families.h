@@ -8200,7 +8200,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 90,
         .baseSpDefense = 100,
-        .types = MON_TYPES(TYPE_WATER),
+        .types = MON_TYPES(TYPE_WATER, TYPE_PSYCHIC),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 250,
@@ -8229,7 +8229,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "The curled hair on its head proves its\n"
             "status as a king. It is said that the\n"
             "longer and curlier the hair, the more\n"
-            "respect it earns from its peers."),
+            "powerful its mental abilities."),
         .pokemonScale = 289,
         .pokemonOffset = 6,
         .trainerScale = 256,
