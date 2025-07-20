@@ -4028,12 +4028,12 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 #if P_FAMILY_WIMPOD
     [SPECIES_WIMPOD] =
     {
-        .baseHP        = 25,
-        .baseAttack    = 35,
-        .baseDefense   = 40,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 20,
-        .baseSpDefense = 30,
+        .baseHP        = 45,
+        .baseAttack    = 85,
+        .baseDefense   = 55,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_BUG, TYPE_WATER),
         .catchRate = 90,
         .expYield = 46,
