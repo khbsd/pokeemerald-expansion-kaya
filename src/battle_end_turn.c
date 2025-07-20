@@ -621,7 +621,7 @@ static bool32 HandleEndTurnPoison(u32 battler)
 
     gBattleStruct->turnEffectsBattlerId++;
 
-    if ((gBattleMons[battler].status1 & STATUS1_POISON || gBattleMons[battler].status1 & STATUS1_TOXIC_POISON)
+    if (IsMonPoisoned(battler)
      && IsBattlerAlive(battler)
      && !IsAbilityAndRecord(battler, ability, ABILITY_MAGIC_GUARD))
     {

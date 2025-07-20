@@ -9185,7 +9185,7 @@ static bool32 CanEvolve(u32 species)
 
 bool32 IsMonPoisoned(u32 battler)
 {
-    return !(gBattleMons[battler].status1 & STATUS1_POISON) || !(gBattleMons[battler].status1 & STATUS1_TOXIC_POISON);
+    return (gBattleMons[battler].status1 & STATUS1_POISON) || (gBattleMons[battler].status1 & STATUS1_TOXIC_POISON);
 }
 
 static inline u32 CalcDefenseStat(struct DamageContext *ctx)

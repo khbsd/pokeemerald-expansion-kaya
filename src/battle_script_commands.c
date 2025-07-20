@@ -1682,7 +1682,7 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
             luckBonus++;
             break;
         case ABILITY_TOXIC_ASSASSIN:
-            if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+            if (IsMonPoisoned(battlerDef))
                 luckBonus++;
             break;
         default:
