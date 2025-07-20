@@ -2577,4 +2577,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
+    [ABILITY_TOXIC_ASSASSIN] =
+    {
+        .name = _("Toxic Assassin"),
+        .description = COMPOUND_STRING("Poisons on non-contact."),
+        .aiRating = 4,
+    },
 };

@@ -5087,12 +5087,28 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities ability, u32 sp
                 effect++;
             }
         }
-        break;
+            break;
         case ABILITY_POISON_TOUCH:
             if (IsBattlerAlive(gBattlerTarget)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && CanBePoisoned(gBattlerAttacker, gBattlerTarget, gLastUsedAbility, GetBattlerAbility(gBattlerTarget))
              && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker, TRUE), move)
+             && IsBattlerTurnDamaged(gBattlerTarget) // Need to actually hit the target
+             && RandomPercentage(RNG_POISON_TOUCH, 30))
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptCall(BattleScript_AbilityStatusEffect);
+                effect++;
+            }
+            break;
+        case ABILITY_TOXIC_ASSASSIN:
+            if (IsBattlerAlive(gBattlerTarget)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && CanBePoisoned(gBattlerAttacker, gBattlerTarget, gLastUsedAbility, GetBattlerAbility(gBattlerTarget))
+             && CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker, TRUE), move)
              && IsBattlerTurnDamaged(gBattlerTarget) // Need to actually hit the target
              && RandomPercentage(RNG_POISON_TOUCH, 30))
             {
@@ -9486,7 +9502,7 @@ static inline uq4_12_t GetCollisionCourseElectroDriftModifier(u32 move, uq4_12_t
     return UQ_4_12(1.0);
 }
 
-static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typeEffectivenessModifier, bool32 isCrit, enum Abilities abilityAtk)
+static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, u32 battlerDef, uq4_12_t typeEffectivenessModifier, bool32 isCrit, enum Abilities abilityAtk)
 {
     switch (abilityAtk)
     {
@@ -9497,6 +9513,9 @@ static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typ
     case ABILITY_SNIPER:
         if (isCrit)
             return UQ_4_12(1.5);
+    case ABILITY_TOXIC_ASSASSIN:
+        if (isCrit && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+            return UQ_4_12(1.25);
         break;
     case ABILITY_TINTED_LENS:
         if (typeEffectivenessModifier <= UQ_4_12(0.5))
@@ -9674,7 +9693,7 @@ static inline uq4_12_t GetOtherModifiers(struct DamageContext *ctx)
 
     if (unmodifiedAttackerSpeed >= unmodifiedDefenderSpeed)
     {
-        DAMAGE_MULTIPLY_MODIFIER(GetAttackerAbilitiesModifier(ctx->battlerAtk, ctx->typeEffectivenessModifier, ctx->isCrit, ctx->abilityAtk));
+        DAMAGE_MULTIPLY_MODIFIER(GetAttackerAbilitiesModifier(ctx->battlerAtk, ctx->battlerDef, ctx->typeEffectivenessModifier, ctx->isCrit, ctx->abilityAtk));
         DAMAGE_MULTIPLY_MODIFIER(GetDefenderAbilitiesModifier(ctx));
         DAMAGE_MULTIPLY_MODIFIER(GetDefenderPartnerAbilitiesModifier(battlerDefPartner));
         DAMAGE_MULTIPLY_MODIFIER(GetAttackerItemsModifier(ctx->battlerAtk, ctx->typeEffectivenessModifier, ctx->holdEffectAtk));
@@ -9684,7 +9703,7 @@ static inline uq4_12_t GetOtherModifiers(struct DamageContext *ctx)
     {
         DAMAGE_MULTIPLY_MODIFIER(GetDefenderAbilitiesModifier(ctx));
         DAMAGE_MULTIPLY_MODIFIER(GetDefenderPartnerAbilitiesModifier(battlerDefPartner));
-        DAMAGE_MULTIPLY_MODIFIER(GetAttackerAbilitiesModifier(ctx->battlerAtk, ctx->typeEffectivenessModifier, ctx->isCrit, ctx->abilityAtk));
+        DAMAGE_MULTIPLY_MODIFIER(GetAttackerAbilitiesModifier(ctx->battlerAtk, ctx->battlerDef, ctx->typeEffectivenessModifier, ctx->isCrit, ctx->abilityAtk));
         DAMAGE_MULTIPLY_MODIFIER(GetDefenderItemsModifier(ctx));
         DAMAGE_MULTIPLY_MODIFIER(GetAttackerItemsModifier(ctx->battlerAtk, ctx->typeEffectivenessModifier, ctx->holdEffectAtk));
     }

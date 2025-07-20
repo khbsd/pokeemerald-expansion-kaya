@@ -68194,7 +68194,11 @@
       "MOVE_HAZE",
       "MOVE_WEATHER_BALL",
       "MOVE_WHIRLPOOL",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_VENOSHOCK",
+      "MOVE_TOXIC",
+      "MOVE_SLUDGE_BOMB"
     ],
     "EggMoves": [
       "MOVE_AQUA_JET",
@@ -68282,7 +68286,11 @@
       "MOVE_HAZE",
       "MOVE_WEATHER_BALL",
       "MOVE_WHIRLPOOL",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_VENOSHOCK",
+      "MOVE_TOXIC",
+      "MOVE_SLUDGE_BOMB"
     ],
     "EggMoves": [
       "MOVE_AQUA_JET",
@@ -68406,7 +68414,11 @@
       "MOVE_WHIRLPOOL",
       "MOVE_MUDDY_WATER",
       "MOVE_SKITTER_SMACK",
-      "MOVE_BREAKING_SWIPE"
+      "MOVE_BREAKING_SWIPE",
+      "MOVE_TOXIC_SPIKES",
+      "MOVE_VENOSHOCK",
+      "MOVE_TOXIC",
+      "MOVE_SLUDGE_BOMB"
     ],
     "EggMoves": [
       "MOVE_AQUA_JET",

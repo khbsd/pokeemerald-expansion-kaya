@@ -17107,7 +17107,15 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Hydro Pump
 
-Whiscash
+Tauros Paldea Aqua @ Chesto Berry
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Water Pulse
+- Double Team
+- Ice Beam
+- Rest
+
+Carracosta
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
@@ -17115,7 +17123,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Double Team
 - Fissure
 
-Walrein
+Seismitoad
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Water Pulse
@@ -17123,7 +17131,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Ice Beam
 
-Crawdaunt @ Chesto Berry
+Greninja @ Chesto Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rest
@@ -17131,7 +17139,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Taunt
 - Double Team
 
-Kingdra @ Chesto Berry
+Omastar @ Chesto Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Water Pulse
@@ -17149,7 +17157,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Poliwhirl
+Primarina
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
@@ -17157,7 +17165,15 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Hydro Pump
 
-Whiscash
+Slowbro
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Rain Dance
+- Water Pulse
+- Double Team
+- Fissure
+
+Azumarill
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
@@ -17173,7 +17189,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Ice Beam
 
-Crawdaunt @ Chesto Berry
+Ludicolo
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rest
@@ -17181,7 +17197,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Taunt
 - Double Team
 
-Kingdra @ Chesto Berry
+Dewgong @ Chesto Berry
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Water Pulse
@@ -17199,7 +17215,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Lapras
+Swampert Mega
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hydro Pump
@@ -17207,7 +17223,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Ice Beam
 - Confuse Ray
 
-Whiscash
+Golisopod
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
@@ -17215,7 +17231,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Double Team
 - Fissure
 
-Poliwhirl
+Toxapex
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
