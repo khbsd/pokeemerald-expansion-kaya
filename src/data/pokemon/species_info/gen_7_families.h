@@ -4092,7 +4092,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .levelUpLearnset = sWimpodLevelUpLearnset,
         .teachableLearnset = sWimpodTeachableLearnset,
         .eggMoveLearnset = sWimpodEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GOLISOPOD}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_GOLISOPOD}),
     },
 
     [SPECIES_GOLISOPOD] =

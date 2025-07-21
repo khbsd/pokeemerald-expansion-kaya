@@ -7344,6 +7344,7 @@ static const struct LevelUpMove sDustoxLevelUpLearnset[] = {
 static const struct LevelUpMove sLotadLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
+    LEVEL_UP_MOVE( 1, MOVE_BOUNCY_BUBBLE),
     LEVEL_UP_MOVE( 3, MOVE_ABSORB),
     LEVEL_UP_MOVE( 6, MOVE_WATER_GUN),
     LEVEL_UP_MOVE( 9, MOVE_MIST),

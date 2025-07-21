@@ -16661,23 +16661,29 @@ AI: Smart Trainer
 Xatu @ Psychic Gem
 Ability: Magic Bounce
 Level: 100
+Nature: Calm
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Power Swap
+EVs: 252 HP / 0 Atk / 25 Def / 0 SpA / 132 SpD / 99 Spe
+- Heat Wave
 - Psychic
-- Wish
-- Psycho Shift
+- Roost
+- U-Turn
 
 Rapidash Galar @ Lucky Punch
 Ability: Pixilate
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 0 SpA / 132 SpD / 124 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Heal Pulse
+- Calm Mind
 - Dazzling Gleam
-- Psycho Cut
+- Stored Power
 - Stomp
 
 Lunala @ Spell Tag
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Moongeist Beam
@@ -16686,6 +16692,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Lunatone @ Odd Incense
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Psychic
@@ -16694,6 +16702,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Solrock @ Chesto Berry
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sandstorm
 - AncientPower
@@ -16702,6 +16712,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Claydol @ Sitrus Berry
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
 - Earth Power
@@ -16721,6 +16733,8 @@ AI: Smart Trainer
 Gardevoir @ Fairy Feather
 Ability: Pixilate
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Draining Kiss
@@ -16730,6 +16744,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Armarouge @ Kasib Berry
 Ability: Weak Armor
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 4 Def / 252 SpA / 4 SpD / 244 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Expanding Force
@@ -16739,6 +16755,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Medicham Mega @ Psychic Seed
 Ability: Pure Power
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Axe Kick
 - Zen Headbutt
@@ -16748,6 +16766,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gallade @ Chesto Berry
 Ability: Sharpness
 Level: 100
+Nature: Brave
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Tomb
 - Psycho Cut
@@ -16757,6 +16777,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Delphox @ Psychic Seed
 Ability: Magician
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Psychic Terrain
 - Psychic
@@ -16766,6 +16788,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Raichu Alola @ Psychic Seed
 Ability: Surge Surfer
 Level: 100
+Nature: Timid
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Electric Terrain
 - Thunderbolt
@@ -16784,6 +16808,8 @@ AI: Smart Trainer
 
 Solgaleo @ Charcoal
 Level: 100
+Nature: Adamant
+EVs: 140 HP / 180 Atk / 4 Def / 0 SpA / 4 SpD / 180 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flare Blitz
 - Sunsteel Strike
@@ -16793,6 +16819,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Reuniclus @ Leftovers
 Ability: Panacea
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Venom Drench
 - Wonder Room
@@ -16811,6 +16839,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Slowking Galar @ Chesto Berry
 Ability: Curious Medicine
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Pulse
 - Eerie Spell
@@ -16820,6 +16850,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gothitelle @ Chesto Berry
 Ability: Long Lived
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 196 Def / 4 SpA / 52 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Baddy Bad
 - Magic Room
@@ -16829,6 +16861,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Articuno Galar @ Colbur Berry
 Ability: Competitive
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Freezing Glare
 - Tailwind
@@ -16935,23 +16969,29 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Xatu @ Psychic Gem
 Ability: Magic Bounce
 Level: 100
+Nature: Calm
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Power Swap
+EVs: 252 HP / 0 Atk / 25 Def / 0 SpA / 132 SpD / 99 Spe
+- Heat Wave
 - Psychic
-- Wish
-- Psycho Shift
+- Roost
+- U-Turn
 
 Rapidash Galar @ Lucky Punch
 Ability: Pixilate
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 0 SpA / 132 SpD / 124 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Heal Pulse
+- Calm Mind
 - Dazzling Gleam
-- Psycho Cut
+- Stored Power
 - Stomp
 
 Lunala @ Spell Tag
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Moongeist Beam
@@ -16960,6 +17000,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Lunatone @ Odd Incense
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Psychic
@@ -16968,6 +17010,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Solrock @ Chesto Berry
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sandstorm
 - AncientPower
@@ -16976,6 +17020,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Claydol @ Sitrus Berry
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
 - Earth Power
@@ -16985,6 +17031,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gardevoir @ Fairy Feather
 Ability: Pixilate
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Draining Kiss
@@ -16994,6 +17042,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Armarouge @ Kasib Berry
 Ability: Weak Armor
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 4 Def / 252 SpA / 4 SpD / 244 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Expanding Force
@@ -17003,6 +17053,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Medicham Mega @ Psychic Seed
 Ability: Pure Power
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Axe Kick
 - Zen Headbutt
@@ -17012,6 +17064,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gallade @ Chesto Berry
 Ability: Sharpness
 Level: 100
+Nature: Brave
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Tomb
 - Psycho Cut
@@ -17021,6 +17075,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Delphox @ Psychic Seed
 Ability: Magician
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Psychic Terrain
 - Psychic
@@ -17030,6 +17086,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Raichu Alola @ Psychic Seed
 Ability: Surge Surfer
 Level: 100
+Nature: Timid
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Electric Terrain
 - Thunderbolt
@@ -17038,6 +17096,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Solgaleo @ Charcoal
 Level: 100
+Nature: Adamant
+EVs: 140 HP / 180 Atk / 4 Def / 0 SpA / 4 SpD / 180 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flare Blitz
 - Sunsteel Strike
@@ -17047,6 +17107,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Reuniclus @ Leftovers
 Ability: Panacea
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Venom Drench
 - Wonder Room
@@ -17065,6 +17127,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Slowking Galar @ Chesto Berry
 Ability: Curious Medicine
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Pulse
 - Eerie Spell
@@ -17074,15 +17138,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gothitelle @ Chesto Berry
 Ability: Long Lived
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 196 Def / 4 SpA / 52 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Baddy Bad
 - Magic Room
 - Ruination
 - Future Sight
 
-Articuno Galar @ Sitrus Berry
+Articuno Galar @ Colbur Berry
 Ability: Competitive
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Freezing Glare
 - Tailwind
@@ -17215,53 +17283,71 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Swampert Mega
+Golisopod @ Aguav Berry
 Level: 100
+Ability: Emergency Exit
+Nature: Adamant
+EVs: 80 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 172 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Liquidation
+- Leech Life
+- Brick Break
+- Swords Dance
+
+Swampert Mega @ Leftovers
+Level: 100
+Ability: Damp
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Stealth Rock
+- Waterfall
+- Ancient Power
+
+Toxapex @ Leftovers
+Level: 100
+Ability: Merciless
+Nature: Bold
+EVs: 252 HP / 0 Atk / 176 Def / 0 SpA / 80 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Recover
+- Baneful Bunker
+- Toxic Spikes
+- Toxic
+
+Ludicolo @ Shell Bell
+Level: 100
+Ability: Own Tempo
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Giga Drain
+- Water Pulse
+- Bouncy Bubble
+- Ice Beam
+
+Sharpedo Mega @ Focus Sash
+Level: 50
+Ability: Speed Boost
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Protect
+- Crunch
+- Waterfall
+- Psychic Fangs
+
+Inteleon @ Chesto Berry
+Level: 100
+Ability: Toxic Assassin
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hydro Pump
-- Perish Song
-- Ice Beam
-- Confuse Ray
-
-Golisopod
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rain Dance
-- Water Pulse
-- Double Team
-- Fissure
-
-Toxapex
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Rain Dance
-- Protect
-- Hydro Pump
-
-Walrein
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Body Slam
-- Protect
-- Ice Beam
-
-Crawdaunt @ Chesto Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rest
-- Guillotine
-- Taunt
-- Double Team
-
-Kingdra @ Chesto Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Double Team
-- Ice Beam
-- Rest
+- Snipe Shot
+- Venom Drench
+- Venoshock
 
 === TRAINER_JUAN_5 ===
 Name: JUAN
