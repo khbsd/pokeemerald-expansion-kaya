@@ -16662,8 +16662,8 @@ Xatu @ Psychic Gem
 Ability: Magic Bounce
 Level: 100
 Nature: Calm
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 252 HP / 0 Atk / 25 Def / 0 SpA / 132 SpD / 99 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heat Wave
 - Psychic
 - Roost
@@ -16830,6 +16830,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Slowking @ Leftovers
 Ability: Regenerator
 Level: 100
+Nature: Sassy
+EVs: 248 HP / 0 Atk / 56 Def / 0 SpA / 204 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slack Off
 - Heal Pulse
@@ -16882,6 +16884,8 @@ AI: Smart Trainer
 Medicham Mega @ King's Rock
 Ability: Huge Power
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bulk Up
 - High Jump Kick
@@ -16891,6 +16895,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Mewtwo Mega Y @ Twistedspoon
 Ability: Insomnia
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Future Sight
 - Psystrike
@@ -16900,6 +16906,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Mewtwo Mega X @ Black Belt
 Ability: Steadfast
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Focus Punch
 - Psycho Cut
@@ -16909,6 +16917,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Metagross Mega @ Metal Powder
 Ability: Tough Claws
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Meteor Mash
 - Earthquake
@@ -16918,6 +16928,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Slowbro Mega @ Leftovers
 Ability: Shell Armor
 Level: 100
+Nature: Sassy
+EVs: 172 HP / 0 Atk / 80 Def / 124 SpA / 132 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flamethrower
 - Psychic
@@ -16926,6 +16938,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Latios Mega @ Soul Dew
 Level: 100
+Nature: Bashful
+EVs: 0 HP / 252 Atk / 0 Def / 252 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aura Sphere
 - Dragon Cheer
@@ -16934,6 +16948,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Latias Mega @ Soul Dew
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Mist Ball
 - Dragon Pulse
@@ -16943,6 +16959,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gardevoir Mega @ Leftovers
 Ability: Pixilate
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Moonblast
 - Hyper Beam
@@ -16952,6 +16970,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Gallade Mega @ King's Rock
 Ability: Sharpness
 Level: 100
+Nature: Brave
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sacred Sword
 - Psycho Cut
@@ -16961,6 +16981,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Alakazam Mega @ Twistedspoon
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 - Calm Mind
 - Psychic
 - Future Sight
@@ -16970,8 +16992,8 @@ Xatu @ Psychic Gem
 Ability: Magic Bounce
 Level: 100
 Nature: Calm
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 252 HP / 0 Atk / 25 Def / 0 SpA / 132 SpD / 99 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heat Wave
 - Psychic
 - Roost
@@ -17118,6 +17140,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Slowking @ Leftovers
 Ability: Regenerator
 Level: 100
+Nature: Sassy
+EVs: 248 HP / 0 Atk / 56 Def / 0 SpA / 204 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slack Off
 - Heal Pulse
