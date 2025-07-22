@@ -14271,7 +14271,10 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Golem
+Ability: Sturdy
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Rollout
@@ -14279,15 +14282,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Explosion
 
 Kabuto @ Sitrus Berry
+Ability: Swift Swim
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
-- Ice Beam
+- Blizzard
 - Surf
 - Rock Slide
 
 Tyrantrum @ Rock Gem
+Ability: Strong Jaw
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Tail
 - Psychic Fangs
@@ -14295,7 +14304,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Smash
 
 Probopass @ Sitrus Berry
+Ability: Magnet Pull
 Level: 100
+Nature: Timid
+EVs: 252 HP / 0 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Magnet Rise
 - Explosion
@@ -14303,7 +14315,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Coalossal @ Kings Rock
+Ability: Steam Engine
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 8 SpD / 248 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Tar Shot
 - Incinerate
@@ -14311,7 +14326,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Blast
 
 Glimmora @ Black Sludge
+Ability: Toxic Debris
 Level: 100
+Nature: Bold
+EVs: 244 HP / 0 Atk / 216 Def / 0 SpA / 0 SpD / 48 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stealth Rock
 - Acid Armor
@@ -14328,8 +14346,11 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Omanyte
+Omastar
+Ability: Weak Armor
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Ice Beam
@@ -14339,6 +14360,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Golem Alola @ Shuca Berry
 Ability: Galvanize
 Level: 100
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Stone Edge
@@ -14346,7 +14369,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 
 Cradily @ Sitrus Berry
+Ability: Storm Drain
 Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
 - Ice Beam
@@ -14356,6 +14382,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Garganacl @ Leftovers
 Ability: Purifying Salt
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Recover
 - Salt Cure
@@ -14363,16 +14391,20 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Gigalith @ Sitrus Berry
-Level: 100
 Ability: Rolling Stone
+Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Punch
-- Solar Beam
+- Solar Blade
 - Protect
 - Rock Slide
 
 Bastiodon
 Level: 100
+Nature: Sassy
+EVs: 252 HP / 4 Atk / 0 Def / 0 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Ancient Power
 - Iron Tail
@@ -14392,6 +14424,8 @@ AI: Smart Trainer
 Archeops
 Ability: Blood Feather
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Pluck
@@ -14399,7 +14433,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Focus Blast
 
 Aerodactyl Mega @ Lucky Punch
+Ability: Tough Claws
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Dragon Dance
@@ -14407,7 +14444,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 
 Armaldo
+Ability: Battle Armor
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Metal Claw
 - X-Scissor
@@ -14415,15 +14455,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Arcanine Hisui @ Quick Claw
+Ability: Intimidate
 Level: 100
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Fang
 - Thunder Fang
 - Extremespeed
 - Rock Slide
 
-Tyranitar @ BlackGlasses
+Tyranitar @ Assault Vest
+Ability: Sand Stream
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 168 Atk / 44 Def / 0 SpA / 44 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Taunt
@@ -14433,6 +14479,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Rampardos @ Rock Gem
 Ability: Sheer Force
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Smash
 - Zen Headbutt
@@ -14450,7 +14498,10 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Aerodactyl Mega @ Lucky Punch
+Ability: Tough Claws
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 - Sky Attack
@@ -14458,7 +14509,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slash
 
 Glimmora @ Black Sludge
+Ability: Toxic Debris
 Level: 100
+Nature: Bold
+EVs: 244 HP / 0 Atk / 216 Def / 0 SpA / 0 SpD / 48 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stealth Rock
 - Acid Armor
@@ -14468,6 +14522,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Aggron Mega @ Kings Rock
 Ability: Filter
 Level: 100
+Nature: Careful
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Metal Claw
 - Dragon Rush
@@ -14477,15 +14533,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Tyranitar Mega @ Flying Gem
 Ability: Sand Stream
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 24 Atk / 36 Def / 0 SpA / 20 SpD / 176 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Stomping Tantrum
 - Smack Down
 - Crunch
 
-Tyrantrum @ Kings Rock
+Tyrantrum @ Assault Vest
 Ability: Strong Jaw
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Ancient Power
 - Crunch
@@ -14495,6 +14555,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Diancie Mega @ Power Herb
 Ability: Magic Bounce
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Moonblast
 - Draining Kiss
@@ -14502,7 +14564,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Meteor Beam
 
 Golem
+Ability: Sturdy
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Rollout
@@ -14510,15 +14575,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Explosion
 
 Kabuto @ Sitrus Berry
+Ability: Swift Swim
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
-- Ice Beam
+- Blizzard
 - Surf
 - Rock Slide
 
 Tyrantrum @ Rock Gem
+Ability: Strong Jaw
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Tail
 - Psychic Fangs
@@ -14526,7 +14597,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Smash
 
 Probopass @ Sitrus Berry
+Ability: Magnet Pull
 Level: 100
+Nature: Timid
+EVs: 252 HP / 0 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Magnet Rise
 - Explosion
@@ -14534,7 +14608,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Coalossal @ Kings Rock
+Ability: Steam Engine
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 8 SpD / 248 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Tar Shot
 - Incinerate
@@ -14542,15 +14619,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Blast
 
 Glimmora @ Black Sludge
+Ability: Toxic Debris
 Level: 100
+Nature: Bold
+EVs: 244 HP / 0 Atk / 216 Def / 0 SpA / 0 SpD / 48 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stealth Rock
 - Acid Armor
 - Spiky Shield
 - Rock Slide
 
-Omanyte
+Omastar
+Ability: Weak Armor
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Ice Beam
@@ -14560,6 +14643,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Golem Alola @ Shuca Berry
 Ability: Galvanize
 Level: 100
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Stone Edge
@@ -14567,7 +14652,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 
 Cradily @ Sitrus Berry
+Ability: Storm Drain
 Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
 - Ice Beam
@@ -14577,6 +14665,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Garganacl @ Leftovers
 Ability: Purifying Salt
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Recover
 - Salt Cure
@@ -14584,16 +14674,20 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Gigalith @ Sitrus Berry
-Level: 100
 Ability: Rolling Stone
+Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Punch
-- Solar Beam
+- Solar Blade
 - Protect
 - Rock Slide
 
 Bastiodon
 Level: 100
+Nature: Sassy
+EVs: 252 HP / 4 Atk / 0 Def / 0 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Ancient Power
 - Iron Tail
@@ -14603,6 +14697,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Archeops
 Ability: Blood Feather
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Pluck
@@ -14610,7 +14706,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Focus Blast
 
 Aerodactyl Mega @ Lucky Punch
+Ability: Tough Claws
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Dragon Dance
@@ -14618,7 +14717,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 
 Armaldo
+Ability: Battle Armor
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Metal Claw
 - X-Scissor
@@ -14626,15 +14728,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 
 Arcanine Hisui @ Quick Claw
+Ability: Intimidate
 Level: 100
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Fang
 - Thunder Fang
 - Extremespeed
 - Rock Slide
 
-Tyranitar @ BlackGlasses
+Tyranitar @ Assault Vest
+Ability: Sand Stream
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 168 Atk / 44 Def / 0 SpA / 44 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Taunt
@@ -14644,6 +14752,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Rampardos @ Rock Gem
 Ability: Sheer Force
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Smash
 - Zen Headbutt
@@ -16918,7 +17028,7 @@ Metagross Mega @ Metal Powder
 Ability: Tough Claws
 Level: 100
 Nature: Adamant
-EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe 
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Meteor Mash
 - Earthquake
