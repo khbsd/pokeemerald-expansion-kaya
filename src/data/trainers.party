@@ -14465,7 +14465,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Extremespeed
 - Rock Slide
 
-Tyranitar @ Assault Vest
+Tyranitar @ Metal Powder
 Ability: Sand Stream
 Level: 100
 Nature: Adamant
@@ -14541,7 +14541,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Smack Down
 - Crunch
 
-Tyrantrum @ Assault Vest
+Tyrantrum @ Metal Powder
 Ability: Strong Jaw
 Level: 100
 Nature: Adamant
@@ -14738,7 +14738,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Extremespeed
 - Rock Slide
 
-Tyranitar @ Assault Vest
+Tyranitar @ Metal Powder
 Ability: Sand Stream
 Level: 100
 Nature: Adamant
@@ -14800,7 +14800,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Focus Punch
 
-Hitmonchan @ Assault Vest
+Hitmonchan @ Metal Powder
 Ability: Iron Fist
 Level: 100
 Nature: Adamant
@@ -14864,7 +14864,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aura Sphere
 - Work Up
 
-Conkeldurr @ Assault Vest
+Conkeldurr @ Metal Powder
 Ability: Guts
 Level: 100
 EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
@@ -15146,7 +15146,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aura Sphere
 - Work Up
 
-Conkeldurr @ Assault Vest
+Conkeldurr @ Metal Powder
 Ability: Guts
 Level: 100
 EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
@@ -15219,7 +15219,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Focus Punch
 
-Hitmonchan @ Assault Vest
+Hitmonchan @ Metal Powder
 Ability: Iron Fist
 Level: 100
 Nature: Adamant
@@ -15337,7 +15337,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Eelektross @ Assault Vest
+Eelektross @ Metal Powder
 Ability: Levitate
 Level: 100
 Nature: Quiet
@@ -15398,10 +15398,10 @@ Level: 100
 Nature: Adamant
 EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Submission
- - Volt Tackle
- - Drill Run
- - Megahorn
+- Submission
+- Volt Tackle
+- Drill Run
+- Megahorn
 
 === TRAINER_WATTSON_4 ===
 Name: WATTSON
