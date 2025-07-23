@@ -341,7 +341,7 @@ bool32 HandleMoveTargetRedirection(void)
     else if (IsDoubleBattle()
            && gSideTimers[side].followmeTimer == 0
            && (!IsBattleMoveStatus(gCurrentMove) || (moveTarget != MOVE_TARGET_USER && moveTarget != MOVE_TARGET_ALL_BATTLERS))
-           && ((ability != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
+           && (((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC) && moveType == TYPE_ELECTRIC)
             || (ability != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)))
     {
         // Find first battler that redirects the move (in turn order)
@@ -353,7 +353,7 @@ bool32 HandleMoveTargetRedirection(void)
             if ((B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(gBattlerAttacker, battler))
                 && battler != gBattlerAttacker
                 && gBattleStruct->moveTarget[gBattlerAttacker] != battler
-                && ((ability == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
+                && (((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC) && moveType == TYPE_ELECTRIC)
                  || (ability == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(battler) < redirectorOrderNum
                 && moveEffect != EFFECT_SNIPE_SHOT
@@ -371,7 +371,7 @@ bool32 HandleMoveTargetRedirection(void)
             battlerAbility = GetBattlerAbility(battler);
 
             RecordAbilityBattle(battler, gBattleMons[battler].ability);
-            if (battlerAbility == ABILITY_LIGHTNING_ROD && gCurrentMove != MOVE_TEATIME)
+            if ((battlerAbility == ABILITY_LIGHTNING_ROD || battlerAbility == ABILITY_GEOELECTRIC) && gCurrentMove != MOVE_TEATIME)
                 gSpecialStatuses[battler].lightningRodRedirected = TRUE;
             else if (battlerAbility == ABILITY_STORM_DRAIN)
                 gSpecialStatuses[battler].stormDrainRedirected = TRUE;
@@ -3111,6 +3111,7 @@ bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, enum Abilities abili
             statId = STAT_SPEED;
         }
         break;
+    case ABILITY_GEOELECTRIC:
     case ABILITY_LIGHTNING_ROD:
         if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && moveType == TYPE_ELECTRIC && GetBattlerMoveTargetType(battlerAtk, move) != MOVE_TARGET_ALL_BATTLERS)
         {
@@ -7604,15 +7605,51 @@ u32 GetBattleMoveTarget(u16 move, u8 setTarget)
         }
         else
         {
-            enum Abilities battlerAbilityOnField = 0;
+            u32 battlerAbilityOnField = 0;
+            enum Abilities abilityTarget = GetBattlerAbility(targetBattler);
 
             targetBattler = SetRandomTarget(gBattlerAttacker);
-            if (moveType == TYPE_ELECTRIC && GetBattlerAbility(targetBattler) != ABILITY_LIGHTNING_ROD)
+            if (moveType == TYPE_ELECTRIC && (abilityTarget != ABILITY_LIGHTNING_ROD 
+                                            && abilityTarget != ABILITY_GEOELECTRIC))
             {
+                u32 battlerGeoelectricOnField = 0, 
+                    battlerLightningRodOnField = 0, 
+                    geoSpeed = 0, 
+                    rodSpeed = 0
+                ;
+
                 if (B_REDIRECT_ABILITY_ALLIES >= GEN_4)
-                    battlerAbilityOnField = IsAbilityOnField(ABILITY_LIGHTNING_ROD);
+                {
+                    battlerLightningRodOnField = IsAbilityOnField(ABILITY_LIGHTNING_ROD);
+                    battlerGeoelectricOnField = IsAbilityOnField(ABILITY_GEOELECTRIC);
+                }
                 else
-                    battlerAbilityOnField = IsAbilityOnOpposingSide(targetBattler, ABILITY_LIGHTNING_ROD);
+                {
+                    battlerLightningRodOnField  = IsAbilityOnOpposingSide(targetBattler, ABILITY_LIGHTNING_ROD);
+                    battlerGeoelectricOnField = IsAbilityOnOpposingSide(targetBattler, ABILITY_GEOELECTRIC);
+                }
+
+                if (battlerLightningRodOnField > 0 && battlerGeoelectricOnField > 0)
+                {
+                    if ((battlerLightningRodOnField - 1) != gBattlerAttacker)
+                        rodSpeed = GetBattlerTotalSpeedStat(battlerLightningRodOnField - 1);
+                    if ((battlerGeoelectricOnField - 1) != gBattlerAttacker)
+                        geoSpeed = GetBattlerTotalSpeedStat(battlerGeoelectricOnField - 1);
+
+                    if (rodSpeed > geoSpeed)
+                        battlerAbilityOnField = battlerLightningRodOnField;
+                    else if (geoSpeed > rodSpeed)
+                        battlerAbilityOnField = battlerGeoelectricOnField;
+                    else 
+                        battlerAbilityOnField = RandomPercentage(RNG_SPEED_TIE, 50) ? battlerLightningRodOnField : battlerGeoelectricOnField;
+                }
+                else 
+                {
+                    if (!battlerLightningRodOnField)
+                        battlerAbilityOnField = battlerGeoelectricOnField;
+                    else
+                        battlerAbilityOnField = battlerLightningRodOnField;
+                }
 
                 if (battlerAbilityOnField > 0 && (battlerAbilityOnField - 1) != gBattlerAttacker)
                 {

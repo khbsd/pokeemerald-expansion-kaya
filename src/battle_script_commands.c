@@ -1284,7 +1284,7 @@ static void Cmd_attackcanceler(void)
     if (gSpecialStatuses[gBattlerTarget].lightningRodRedirected)
     {
         gSpecialStatuses[gBattlerTarget].lightningRodRedirected = FALSE;
-        gLastUsedAbility = ABILITY_LIGHTNING_ROD;
+        gLastUsedAbility = GetBattlerAbility(gBattlerTarget);
         BattleScriptCall(BattleScript_TookAttack);
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
@@ -9457,7 +9457,7 @@ static bool32 IsElectricAbilityAffected(u32 battler, enum Abilities ability)
         moveType = GetMoveType(gCurrentMove);
 
     if (moveType == TYPE_ELECTRIC
-     && (ability != ABILITY_LIGHTNING_ROD || B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+     && ((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC) || B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
      && GetBattlerAbility(battler) == ability)
         return TRUE;
     else

@@ -9398,7 +9398,9 @@
       "MOVE_ENDEAVOR",
       "MOVE_SUPERCELL_SLAM",
       "MOVE_SCORCHING_SANDS",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_THUNDER_FANG",
+      "MOVE_WILD_CHARGE"
     ],
     "EggMoves": [
       "MOVE_COUNTER",
@@ -9547,7 +9549,9 @@
       "MOVE_SCORCHING_SANDS",
       "MOVE_METEOR_BEAM",
       "MOVE_BREAKING_SWIPE",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_THUNDER_FANG",
+      "MOVE_WILD_CHARGE"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -41354,7 +41358,9 @@
       "MOVE_SCORCHING_SANDS",
       "MOVE_METEOR_BEAM",
       "MOVE_BREAKING_SWIPE",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_THUNDER_FANG",
+      "MOVE_WILD_CHARGE"
     ],
     "EggMoves": [],
     "TutorMoves": []

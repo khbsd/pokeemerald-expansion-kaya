@@ -25711,7 +25711,9 @@
       "MOVE_OVERHEAT",
       "MOVE_ELECTRO_BALL",
       "MOVE_WILD_CHARGE",
-      "MOVE_PSYCHIC_FANGS"
+      "MOVE_PSYCHIC_FANGS",
+      "MOVE_ICE_BEAM",
+      "MOVE_FLAMETHROWER"
     ],
     "EggMoves": [
       "MOVE_CURSE",

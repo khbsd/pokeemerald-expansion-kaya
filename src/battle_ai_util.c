@@ -602,7 +602,7 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
         return TRUE;
 
     // Limited to Lighning Rod and Storm Drain because otherwise the AI would consider Water Absorb, etc...
-    if (partnerDefAbility == ABILITY_LIGHTNING_ROD || partnerDefAbility == ABILITY_STORM_DRAIN)
+    if (partnerDefAbility == ABILITY_LIGHTNING_ROD || partnerDefAbility == ABILITY_STORM_DRAIN || partnerDefAbility == ABILITY_GEOELECTRIC)
     {
         if (CanAbilityAbsorbMove(ctx->battlerAtk, BATTLE_PARTNER(ctx->battlerDef), partnerDefAbility, ctx->move, ctx->moveType, AI_CHECK))
             return TRUE;
@@ -945,9 +945,7 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
 bool32 AI_IsDamagedByRecoil(u32 battler)
 {
     enum Abilities ability = gAiLogicData->abilities[battler];
-    if (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_ROCK_HEAD)
-        return FALSE;
-    return TRUE;
+    return (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_ROCK_HEAD || ability == ABILITY_GEOELECTRIC);
 }
 
 // Decide whether move having an additional effect for .
@@ -5144,6 +5142,7 @@ bool32 ShouldTriggerAbility(u32 battlerAtk, u32 battlerDef, enum Abilities abili
         {
         case ABILITY_LIGHTNING_ROD:
         case ABILITY_STORM_DRAIN:
+        case ABILITY_GEOELECTRIC:
             if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
                 return FALSE;
             else

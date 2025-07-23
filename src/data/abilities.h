@@ -2584,4 +2584,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Poisons on non-contact."),
         .aiRating = 4,
     },
+
+    [ABILITY_GEOELECTRIC] =
+    {
+        .name = _("Geoelectric"),
+        .description = COMPOUND_STRING("Absorb recoil and zaps."),
+        .aiRating = 5,
+    },
 };

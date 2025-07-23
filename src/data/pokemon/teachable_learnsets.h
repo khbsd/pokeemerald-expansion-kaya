@@ -10204,6 +10204,7 @@ static const u16 sRhyhornTeachableLearnset[] = {
     MOVE_THUNDER_FANG,
     MOVE_TOXIC,
     MOVE_UPROAR,
+    MOVE_WILD_CHARGE,
     MOVE_UNAVAILABLE,
 };
 
@@ -10304,6 +10305,7 @@ static const u16 sRhydonTeachableLearnset[] = {
     MOVE_TOXIC,
     MOVE_UPROAR,
     MOVE_WHIRLPOOL,
+    MOVE_WILD_CHARGE,
     MOVE_UNAVAILABLE,
 };
 
@@ -10407,6 +10409,7 @@ static const u16 sRhyperiorTeachableLearnset[] = {
     MOVE_TOXIC,
     MOVE_UPROAR,
     MOVE_WHIRLPOOL,
+    MOVE_WILD_CHARGE,
     MOVE_UNAVAILABLE,
 };
 #endif //P_GEN_4_CROSS_EVOS
@@ -25852,6 +25855,7 @@ static const u16 sManectricTeachableLearnset[] = {
     MOVE_GIGA_IMPACT,
     MOVE_HYPER_BEAM,
     MOVE_HYPER_VOICE,
+    MOVE_ICE_BEAM,
     MOVE_ICE_FANG,
     MOVE_IRON_TAIL,
     MOVE_LIGHT_SCREEN,

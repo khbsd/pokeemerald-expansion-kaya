@@ -1217,6 +1217,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         {
             switch (aiData->abilities[BATTLE_PARTNER(battlerDef)])
             {
+            case ABILITY_GEOELECTRIC:
             case ABILITY_LIGHTNING_ROD:
                 if (moveType == TYPE_ELECTRIC && !IsMoveRedirectionPrevented(battlerAtk, move, aiData->abilities[battlerAtk]))
                     RETURN_SCORE_MINUS(20);
@@ -3213,9 +3214,11 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case ABILITY_LIGHTNING_ROD:
             case ABILITY_MOTOR_DRIVE:
             case ABILITY_VOLT_ABSORB:
+            case ABILITY_GEOELECTRIC:
                 if (moveType == TYPE_ELECTRIC)
                 {
-                    if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5 && atkPartnerAbility == ABILITY_LIGHTNING_ROD)
+                    if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5 
+                        && (atkPartnerAbility == ABILITY_LIGHTNING_ROD || atkPartnerAbility == ABILITY_GEOELECTRIC))
                     {
                         RETURN_SCORE_MINUS(10);
                     }
@@ -4980,7 +4983,7 @@ case EFFECT_GUARD_SPLIT:
     case EFFECT_ION_DELUGE:
         if ((aiData->abilities[battlerAtk] == ABILITY_VOLT_ABSORB
           || aiData->abilities[battlerAtk] == ABILITY_MOTOR_DRIVE
-          || (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && aiData->abilities[battlerAtk] == ABILITY_LIGHTNING_ROD))
+          || (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && (aiData->abilities[battlerAtk] == ABILITY_LIGHTNING_ROD || aiData->abilities[battlerAtk] == ABILITY_GEOELECTRIC)))
           && predictedType == TYPE_NORMAL)
             ADJUST_SCORE(DECENT_EFFECT);
         break;
@@ -5041,7 +5044,8 @@ case EFFECT_GUARD_SPLIT:
         if (predictedMove != MOVE_NONE
          && (aiData->abilities[battlerAtk] == ABILITY_VOLT_ABSORB
           || aiData->abilities[battlerAtk] == ABILITY_MOTOR_DRIVE
-          || (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && aiData->abilities[battlerAtk] == ABILITY_LIGHTNING_ROD)))
+          || (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && (aiData->abilities[battlerAtk] == ABILITY_LIGHTNING_ROD 
+                                                        || aiData->abilities[battlerAtk] == ABILITY_GEOELECTRIC))))
         {
             ADJUST_SCORE(DECENT_EFFECT);
         }
