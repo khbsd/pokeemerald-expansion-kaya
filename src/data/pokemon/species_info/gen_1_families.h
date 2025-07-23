@@ -9828,8 +9828,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     {
         .baseHP        = 75,
         .baseAttack    = 110,
-        .baseDefense   = 95,
-        .baseSpeed     = 115,
+        .baseDefense   = 90,
+        .baseSpeed     = 120,
         .baseSpAttack  = 80,
         .baseSpDefense = 90,
         .types = MON_TYPES(TYPE_FIRE, TYPE_FAIRY),

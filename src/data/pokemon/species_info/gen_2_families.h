@@ -5900,12 +5900,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #if P_FAMILY_SLUGMA
     [SPECIES_SLUGMA] =
     {
-        .baseHP        = 40,
+        .baseHP        = 60,
         .baseAttack    = 40,
-        .baseDefense   = 40,
+        .baseDefense   = 60,
         .baseSpeed     = 20,
         .baseSpAttack  = 70,
-        .baseSpDefense = 40,
+        .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_FIRE),
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 50 : 78,
@@ -5971,12 +5971,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_MAGCARGO] =
     {
-        .baseHP        = P_UPDATED_STATS >= GEN_7 ? 60 : 50,
+        .baseHP        = 90,
         .baseAttack    = 50,
         .baseDefense   = 120,
         .baseSpeed     = 30,
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_7 ? 90 : 80,
-        .baseSpDefense = 80,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_FIRE, TYPE_ROCK),
         .catchRate = 75,
     #if P_UPDATED_EXP_YIELDS >= GEN_7

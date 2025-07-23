@@ -15543,26 +15543,22 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
 - Earth Power
 
-Manectric Mega @ Quick Claw
-Ability: Intimidate
+Seismitoad @ Leftovers
+Ability: Poison Touch
 Level: 100
-EVs: 0 HP / 252 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe 
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Protect
-- Leaf Blade
-- Thunder
-- Earth Power
-
-Seismitoad
-Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 140 Def / 0 SpA / 116 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
 - Rain Dance
 - Mud Shot
 - Hydro Pump
 
-Lanturn
+Lanturn @ Leftovers
+Ability: Volt Absorb
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 4 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Eerie Impulse
 - Thunder
@@ -15570,7 +15566,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
 
 Raichu Alola @ Sitrus Berry
+Ability: Surge Surfer
 Level: 100
+Nature: Modest /*modest mouse hehe*/
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Nuzzle
 - Psychic
@@ -15580,14 +15579,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Helioptile @ Sitrus Berry
 Ability: Dry Skin
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bulldoze
 - Parabolic Charge
 - Thunder
 - Electrify
 
-Electrode Hisui @ Sitrus Berry
+Electrode Hisui @ Focus Sash
+Ability: Aftermath
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Energy Ball
 - Seed Bomb
@@ -15597,15 +15601,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Manectric @ Quick Claw
 Ability: Cotton Down
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
 - Giga Drain
 - Thunder
 - Electro Ball
 
-Eelektross
+Eelektross @ Metal Powder
 Ability: Levitate
 Level: 100
+Nature: Quiet
+EVs: 172 HP / 0 Atk / 84 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Claw
 - Ion Deluge
@@ -15615,6 +15623,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Magnezone @ Air Balloon
 Ability: Sturdy
 Level: 100
+Nature: Timid
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Magnet Rise
 - Flash Cannon
@@ -15622,7 +15632,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Tri Attack
 
 Overqwil @ Air Balloon
+Ability: Envenomate
 Level: 100
+Nature: Jolly
+EVs: 68 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 188 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Barb Barrage
 - Fell Stinger
@@ -15630,7 +15643,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Wild Charge
 
 Rotom Heat @ White Herb
+Ability: Levitate
 Level: 100
+Nature: Calm
+EVs: 248 HP / 0 Atk / 12 Def / 0 SpA / 248 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
 - Electroweb
@@ -15640,33 +15656,41 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Togedemaru @ Air Balloon
 Ability: Iron Barbs
 Level: 100
+Nature: Bashful
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zing Zap
 - Electroweb
 - Spiky Shield
 - Iron Tail
 
-Golem Alola @ Air Balloon
-Ability: Galvanize
+Rhyperior @ Air Balloon
+Ability: Geoelectric
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Stone Edge
-- Electroweb
-- Stealth Rock
-- Giga Impact
+- Submission
+- Volt Tackle
+- Drill Run
+- Megahorn
 
 Raichu @ Fairy Gem
 Ability: Lovestruck
 Level: 100
+Nature: Rash
+EVs: 0 HP / 48 Atk / 4 Def / 204 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
-- Slam
+- Baby Doll Eyes
 - Volt Tackle
 - Quick Attack
 
 Ampharos Mega @ Leftovers
 Ability: Static
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Pulse
 - Dragon Cheer
@@ -15676,6 +15700,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Bellibolt @ Leftovers
 Ability: Electromorphosis
 Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Body Slam
 - Parabolic Charge
@@ -15685,6 +15711,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Golem Alola @ Air Balloon
 Ability: Galvanize
 Level: 100
+Nature: Jolly
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 - Electroweb
@@ -15694,6 +15722,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Manectric @ Sitrus Berry
 Ability: Cotton Down
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Solar Beam
@@ -15701,12 +15731,25 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Grassy Terrain
 
 Electrode Hisui @ Leftovers
+Ability: Aftermath
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Giga Drain
 - Electro Ball
 - Grassy Terrain
+
+Manectric Mega @ Quick Claw
+Ability: Intimidate
+Level: 100
+EVs: 0 HP / 252 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe 
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Protect
+- Leaf Blade
+- Thunder
+- Earth Power
 
 === TRAINER_FLANNERY_2 ===
 Name: FLANNERY
@@ -15719,7 +15762,10 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Magcargo @ White Herb
+Ability: Flame Body
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 252 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
 - Attract
@@ -15729,6 +15775,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Rapidash @ Fairy Feather
 Ability: Pixilate
 Level: 100
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flamethrower
 - Attract
