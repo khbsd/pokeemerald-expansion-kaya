@@ -1089,6 +1089,8 @@ static const struct {
     { "Oinkologne", "Oinkologne-M", "Oinkologne-F" },
     { "Meowstic", "Meowstic-M", "Meowstic-F" },
     { "Nidoran", "Nidoran-M", "Nidoran-F" },
+    { "Salandit", "Salandit-M", "Salandit-F" },
+    { "Combee", "Combee-M", "Combee-F" },
     { NULL, NULL, NULL }
 };
 

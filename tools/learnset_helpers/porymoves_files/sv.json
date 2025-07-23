@@ -13485,7 +13485,11 @@
       "MOVE_TEMPER_FLARE",
       "MOVE_SCORCHING_SANDS",
       "MOVE_THROAT_CHOP",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_DARK_PULSE",
+      "MOVE_TAUNT",
+      "MOVE_KNOCK_OFF",
+      "MOVE_THIEF"
     ],
     "EggMoves": [
       "MOVE_COVET",
@@ -93059,7 +93063,11 @@
       "MOVE_DOUBLE_EDGE",
       "MOVE_ENDEAVOR",
       "MOVE_TEMPER_FLARE",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
+      "MOVE_DARK_PULSE",
+      "MOVE_TAUNT",
+      "MOVE_KNOCK_OFF",
+      "MOVE_THIEF"
     ],
     "EggMoves": [
       "MOVE_COVET",

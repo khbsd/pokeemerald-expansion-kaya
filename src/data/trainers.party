@@ -14314,7 +14314,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Wide Guard
 - Rock Slide
 
-Coalossal @ Kings Rock
+Coalossal @ King's Rock
 Ability: Steam Engine
 Level: 100
 Nature: Modest
@@ -14519,7 +14519,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Spiky Shield
 - Rock Slide
 
-Aggron Mega @ Kings Rock
+Aggron Mega @ King's Rock
 Ability: Filter
 Level: 100
 Nature: Careful
@@ -14607,7 +14607,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Wide Guard
 - Rock Slide
 
-Coalossal @ Kings Rock
+Coalossal @ King's Rock
 Ability: Steam Engine
 Level: 100
 Nature: Modest
@@ -15014,7 +15014,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zen Headbutt
 - Bulk Up
 
-Lopunny Mega @ Kings Rock
+Lopunny Mega @ King's Rock
 Ability: Klutz
 Level: 100
 Nature: Jolly
@@ -15439,7 +15439,7 @@ Bellibolt @ Leftovers
 Ability: Electromorphosis
 Level: 100
 Nature: Quiet
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe 
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Body Slam
 - Parabolic Charge
@@ -15450,7 +15450,7 @@ Golem Alola @ Air Balloon
 Ability: Galvanize
 Level: 100
 Nature: Jolly
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe 
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 - Electroweb
@@ -15461,7 +15461,7 @@ Manectric @ Sitrus Berry
 Ability: Cotton Down
 Level: 100
 Nature: Modest
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Solar Beam
@@ -15472,7 +15472,7 @@ Electrode Hisui @ Leftovers
 Ability: Aftermath
 Level: 100
 Nature: Modest
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Giga Drain
@@ -15493,7 +15493,7 @@ Arcanine @ Leftovers
 Ability: Intimidate
 Level: 100
 Nature: Modest
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Fang
 - Thunder Fang
@@ -15536,7 +15536,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Manectric Mega @ Leftovers
 Ability: Cotton Down
 Level: 100
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Grassy Terrain
 - Electric Terrain
@@ -15701,7 +15701,7 @@ Bellibolt @ Leftovers
 Ability: Electromorphosis
 Level: 100
 Nature: Quiet
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe 
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Body Slam
 - Parabolic Charge
@@ -15712,7 +15712,7 @@ Golem Alola @ Air Balloon
 Ability: Galvanize
 Level: 100
 Nature: Jolly
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe 
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 - Electroweb
@@ -15723,7 +15723,7 @@ Manectric @ Sitrus Berry
 Ability: Cotton Down
 Level: 100
 Nature: Modest
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Solar Beam
@@ -15734,7 +15734,7 @@ Electrode Hisui @ Leftovers
 Ability: Aftermath
 Level: 100
 Nature: Modest
-EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe 
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Giga Drain
@@ -15744,7 +15744,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Manectric Mega @ Quick Claw
 Ability: Intimidate
 Level: 100
-EVs: 0 HP / 252 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe 
+EVs: 0 HP / 252 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Leaf Blade
@@ -15783,32 +15783,43 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fury Attack
 
 Camerupt @ White Herb
+Ability: Solid Rock
 Level: 100
+Nature: Quiet
+EVs: 0 HP / 0 Atk / 136 Def / 252 SpA / 120 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
 - Sunny Day
 - Earthquake
 - Attract
 
-Turtonator @ White Herb
+Turtonator @ Leftovers
+Ability: Shell Armor
 Level: 100
+Nature: Brave
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shell Trap
 - Dragonbreath
 - Solar Beam
 - Protect
 
-Cinderace @ Kings Rock
+Cinderace @ King's Rock
+Ability: Libero
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Pyro Ball
 - Zen Headbutt
 - Sweet Kiss
 - Trailblaze
 
-Magmortar @ Kings Rock
+Magmortar @ King's Rock
 Ability: Synergetic
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heat Wave
 - Flash Cannon
@@ -15826,7 +15837,10 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Armarouge @ Flame Orb
+Ability: Flash Fire
 Level: 100
+Nature: Modest
+EVs: 172 HP / 0 Atk / 4 Def / 252 SpA / 4 SpD / 76 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Trick
 - Armor Cannon
@@ -15834,32 +15848,43 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Calm Mind
 
 Chandelure @ Flame Orb
+Ability: Flash Fire
 Level: 100
+Nature: Calm
+EVs: 252 HP / 0 Atk / 52 Def / 4 SpA / 108 SpD / 92 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Poltergeist
 - Trick
 - Haze
-- Mystical Fire
+- Lava Plume
 
 Typhlosion Hisui @ Sitrus Berry
+Ability: Flash Fire
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Curse
-- Flamethrower
+- Lava Plume
 - Infernal Parade
 - Will-O-Wisp
 
-Ceruledge
+Ceruledge @ Life Orb
+Ability: Flash Fire
 Level: 100
+Nature: Adamant
+EVs: 172 HP / 252 Atk / 4 Def / 0 SpA / 4 SpD / 76 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Curse
 - Bitter Blade
 - Sunny Day
 - Solar Blade
 
-Marowak Alola @ Kings Rock
+Marowak Alola @ Thick Club
 Ability: Cursed Body
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bonemerang
 - Shadow Bone
@@ -15867,12 +15892,15 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hex
 
 Skeledirge
+Ability: Unaware
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
+- Slack Off
 - Solar Beam
 - Torch Song
-- Thunder Fang
+- Hex
 
 === TRAINER_FLANNERY_4 ===
 Name: FLANNERY
@@ -15884,16 +15912,22 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Arcanine Hisui @ Hard Stone
+Arcanine Hisui @ Leftovers
+Ability: Rock Head
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rock Slide
+- Head Smash
 - Solar Beam
 - Sunny Day
-- Fire Fang
+- Flare Blitz
 
-Arcanine @ Kings Rock
+Arcanine @ King's Rock
+Ability: Intimidate
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Parabolic Charge
@@ -15901,23 +15935,32 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Extremespeed
 
 Camerupt Mega @ Leftovers
+Ability: Sheer Force
 Level: 100
+Nature: Quiet
+EVs: 248 HP / 0 Atk / 0 Def / 252 SpA / 8 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Eruption
 - Amnesia
-- Earthquake
+- Earth Power
 - Yawn
 
-Turtonator @ White Herb
+Turtonator @ King's Rock
+Ability: Shell Armor
 Level: 100
+Nature: Brave
+EVs: 204 HP / 0 Atk / 0 Def / 56 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shell Trap
 - Venoshock
 - Shell Smash
 - Dragon Pulse
 
-Houndoom @ Kings Rock
+Houndoom Mega @ Leftovers
+Ability: Solar Power
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Beat Up
 - Fire Fang
@@ -15927,6 +15970,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Salazzle @ Black Sludge
 Ability: Tainted Love
 Level: 100
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Lash
 - Venoshock
@@ -15951,7 +15995,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Inferno
 - Fire Fang
 
-Charizard Mega Y @ Kings Rock
+Charizard Mega Y @ King's Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
@@ -15959,41 +16003,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Acrobatics
 - Extremespeed
 
-Camerupt Mega @ Leftovers
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Eruption
-- Amnesia
-- Earthquake
-- Yawn
-
-Turtonator @ White Herb
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Shell Trap
-- Smog
-- Shell Smash
-- Dragon Pulse
-
-Houndoom Mega @ Kings Rock
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Beat Up
-- Fire Fang
-- Smog
-- Sunny Day
-
-Salazzle @ Black Sludge
-Ability: Tainted Love
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Flamethrower
-- Venoshock
-- Solar Beam
-- Bounce
-
 Magcargo @ White Herb
+Ability: Flame Body
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 252 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Overheat
 - Attract
@@ -16003,40 +16017,51 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Rapidash @ Fairy Feather
 Ability: Pixilate
 Level: 100
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flamethrower
 - Attract
 - Solar Beam
 - Fury Attack
 
-Blaziken Mega @ White Herb
-Ability: Speed Boost
+Camerupt @ White Herb
+Ability: Solid Rock
 Level: 100
+Nature: Quiet
+EVs: 0 HP / 0 Atk / 136 Def / 252 SpA / 120 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Focus Energy
-- Flare Blitz
-- Detect
-- Close Combat
+- Overheat
+- Sunny Day
+- Earthquake
+- Attract
 
-Turtonator @ White Herb
+Turtonator @ Leftovers
+Ability: Shell Armor
 Level: 100
+Nature: Brave
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shell Trap
 - Dragonbreath
 - Solar Beam
 - Protect
 
-Cinderace @ Kings Rock
+Cinderace @ King's Rock
+Ability: Libero
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Pyro Ball
 - Zen Headbutt
 - Sweet Kiss
 - Trailblaze
 
-Magmortar @ Kings Rock
+Magmortar @ King's Rock
 Ability: Synergetic
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heat Wave
 - Flash Cannon
@@ -16044,7 +16069,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Smokescreen
 
 Armarouge @ Flame Orb
+Ability: Flash Fire
 Level: 100
+Nature: Modest
+EVs: 172 HP / 0 Atk / 4 Def / 252 SpA / 4 SpD / 76 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Trick
 - Armor Cannon
@@ -16052,32 +16080,43 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Calm Mind
 
 Chandelure @ Flame Orb
+Ability: Flash Fire
 Level: 100
+Nature: Calm
+EVs: 252 HP / 0 Atk / 52 Def / 4 SpA / 108 SpD / 92 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Poltergeist
 - Trick
 - Haze
-- Mystical Fire
+- Lava Plume
 
 Typhlosion Hisui @ Sitrus Berry
+Ability: Flash Fire
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Curse
-- Flamethrower
+- Lava Plume
 - Infernal Parade
 - Will-O-Wisp
 
-Ceruledge
+Ceruledge @ Life Orb
+Ability: Flash Fire
 Level: 100
+Nature: Adamant
+EVs: 172 HP / 252 Atk / 4 Def / 0 SpA / 4 SpD / 76 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Curse
 - Bitter Blade
 - Sunny Day
 - Solar Blade
 
-Marowak Alola @ Kings Rock
+Marowak Alola @ Thick Club
 Ability: Cursed Body
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bonemerang
 - Shadow Bone
@@ -16085,23 +16124,32 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hex
 
 Skeledirge
+Ability: Unaware
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Sunny Day
+- Slack Off
 - Solar Beam
 - Torch Song
-- Thunder Fang
+- Hex
 
-Arcanine Hisui @ Hard Stone
+Arcanine Hisui @ Leftovers
+Ability: Rock Head
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rock Slide
+- Head Smash
 - Solar Beam
 - Sunny Day
-- Fire Fang
+- Flare Blitz
 
-Arcanine @ Kings Rock
+Arcanine @ King's Rock
+Ability: Intimidate
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Parabolic Charge
@@ -16109,23 +16157,32 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Extremespeed
 
 Camerupt Mega @ Leftovers
+Ability: Sheer Force
 Level: 100
+Nature: Quiet
+EVs: 248 HP / 0 Atk / 0 Def / 252 SpA / 8 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Eruption
 - Amnesia
-- Earthquake
+- Earth Power
 - Yawn
 
-Turtonator @ White Herb
+Turtonator @ King's Rock
+Ability: Shell Armor
 Level: 100
+Nature: Brave
+EVs: 204 HP / 0 Atk / 0 Def / 56 SpA / 252 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Shell Trap
 - Venoshock
 - Shell Smash
 - Dragon Pulse
 
-Houndoom @ Kings Rock
+Houndoom Mega @ Leftovers
+Ability: Solar Power
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Beat Up
 - Fire Fang
@@ -16135,6 +16192,39 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Salazzle @ Black Sludge
 Ability: Tainted Love
 Level: 100
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Fire Lash
+- Venoshock
+- Nasty Plot
+- Toxic
+
+Camerupt Mega @ Leftovers
+Ability: Sheer Force
+Level: 100
+Nature: Quiet
+EVs: 248 HP / 0 Atk / 0 Def / 252 SpA / 8 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Amnesia
+- Earth Power
+- Yawn
+
+Houndoom Mega @ Leftovers
+Ability: Solar Power
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Beat Up
+- Fire Fang
+- Smog
+- Sunny Day
+
+Salazzle @ Black Sludge
+Ability: Tainted Love
+Level: 100
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Lash
 - Venoshock
@@ -16151,7 +16241,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Exploud @ Kings Rock
+Exploud @ King's Rock
 Ability: Soundproof
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16249,7 +16339,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Throat Chop
 - Mega Kick
 
-Zoroark Hisui @ Kings Rock
+Zoroark Hisui @ King's Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
@@ -16318,7 +16408,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Grassy Terrain
 - Stomping Tantrum
 
-Ambipom @ Kings Rock
+Ambipom @ King's Rock
 Ability: Technician
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16371,7 +16461,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Endure
 - Reversal
 
-Exploud @ Kings Rock
+Exploud @ King's Rock
 Ability: Soundproof
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16389,7 +16479,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Extrasensory
 - Glare
 
-Exploud @ Kings Rock
+Exploud @ King's Rock
 Ability: Soundproof
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16476,7 +16566,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Throat Chop
 - Mega Kick
 
-Zoroark Hisui @ Kings Rock
+Zoroark Hisui @ King's Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
@@ -16535,7 +16625,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Grassy Terrain
 - Stomping Tantrum
 
-Ambipom @ Kings Rock
+Ambipom @ King's Rock
 Ability: Technician
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -16753,7 +16843,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hurricane
 - Aerial Ace
 
-Aerodactyl Mega @ Kings Rock
+Aerodactyl Mega @ King's Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
@@ -16761,7 +16851,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Stone Edge
 
-Charizard Mega Y @ Kings Rock
+Charizard Mega Y @ King's Rock
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
