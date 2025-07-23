@@ -14270,7 +14270,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Golem
+Golem @ Focus Sash
 Ability: Sturdy
 Level: 100
 Nature: Adamant
@@ -14346,7 +14346,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Omastar
+Omastar @ Rindo Berry
 Ability: Weak Armor
 Level: 100
 Nature: Modest
@@ -14357,7 +14357,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Surf
 
-Golem Alola @ Shuca Berry
+Golem Alola @ Focus Sash
 Ability: Galvanize
 Level: 100
 Nature: Jolly
@@ -14401,7 +14401,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Rock Slide
 
-Bastiodon
+Bastiodon @ Shuca Berry
 Level: 100
 Nature: Sassy
 EVs: 252 HP / 4 Atk / 0 Def / 0 SpA / 252 SpD / 0 Spe
@@ -14421,7 +14421,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Archeops
+Archeops @ Sitrus Berry
 Ability: Blood Feather
 Level: 100
 Nature: Jolly
@@ -14443,7 +14443,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Polish
 - Stone Edge
 
-Armaldo
+Armaldo @ Leftovers
 Ability: Battle Armor
 Level: 100
 Nature: Adamant
@@ -14629,7 +14629,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Spiky Shield
 - Rock Slide
 
-Omastar
+Omastar @ Rindo Berry
 Ability: Weak Armor
 Level: 100
 Nature: Modest
@@ -14684,7 +14684,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Rock Slide
 
-Bastiodon
+Bastiodon @ Shuca Berry
 Level: 100
 Nature: Sassy
 EVs: 252 HP / 4 Atk / 0 Def / 0 SpA / 252 SpD / 0 Spe
@@ -14694,7 +14694,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Metal Burst
 - Rock Slide
 
-Archeops
+Archeops @ Sitrus Berry
 Ability: Blood Feather
 Level: 100
 Nature: Jolly
@@ -14716,7 +14716,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Polish
 - Stone Edge
 
-Armaldo
+Armaldo @ Leftovers
 Ability: Battle Armor
 Level: 100
 Nature: Adamant
@@ -14781,7 +14781,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Draining Kiss
 - Bulk Up
 
-Hitmontop
+Hitmontop @ Leftovers
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bulk Up
@@ -14789,7 +14789,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Detect
 - Brutal Swing
 
-Medicham
+Medicham @ Focus Sash
 Ability: Pure Power
 Level: 100
 Nature: Brave
@@ -14800,7 +14800,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Focus Punch
 
-Hitmonchan
+Hitmonchan @ Assault Vest
 Ability: Iron Fist
 Level: 100
 Nature: Adamant
@@ -15003,7 +15003,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Power Swap
 - Recover
 
-Medicham Mega
+Medicham Mega @ Focus Sash
 Ability: Pure Power
 Level: 100
 Nature: Jolly
@@ -15047,7 +15047,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
 - Facade
 
-Lucario Mega
+Lucario Mega @ Focus Sash
 Ability: Adaptability
 Level: 100
 Nature: Jolly
@@ -15200,7 +15200,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Draining Kiss
 - Bulk Up
 
-Hitmontop
+Hitmontop @ Leftovers
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bulk Up
@@ -15208,7 +15208,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Detect
 - Brutal Swing
 
-Medicham
+Medicham @ Focus Sash
 Ability: Pure Power
 Level: 100
 Nature: Brave
@@ -15219,7 +15219,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Focus Punch
 
-Hitmonchan
+Hitmonchan @ Assault Vest
 Ability: Iron Fist
 Level: 100
 Nature: Adamant

@@ -35830,6 +35830,8 @@ F_TRAINER_FEMALE |
 #line 14273
             .species = SPECIES_GOLEM,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14273
+            .heldItem = ITEM_FOCUS_SASH,
 #line 14277
             .ev = TRAINER_PARTY_EVS(252, 252, 0, 4, 0, 0),
 #line 14278
@@ -36003,6 +36005,8 @@ F_TRAINER_FEMALE |
 #line 14349
             .species = SPECIES_OMASTAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14349
+            .heldItem = ITEM_RINDO_BERRY,
 #line 14353
             .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 14354
@@ -36027,7 +36031,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_GOLEM_ALOLA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 14360
-            .heldItem = ITEM_SHUCA_BERRY,
+            .heldItem = ITEM_FOCUS_SASH,
 #line 14364
             .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
 #line 14365
@@ -36126,6 +36130,8 @@ F_TRAINER_FEMALE |
 #line 14404
             .species = SPECIES_BASTIODON,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14404
+            .heldItem = ITEM_SHUCA_BERRY,
 #line 14407
             .ev = TRAINER_PARTY_EVS(252, 4, 0, 0, 0, 252),
 #line 14408
@@ -36172,6 +36178,8 @@ F_TRAINER_FEMALE |
 #line 14424
             .species = SPECIES_ARCHEOPS,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14424
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 14428
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
 #line 14429
@@ -36220,6 +36228,8 @@ F_TRAINER_FEMALE |
 #line 14446
             .species = SPECIES_ARMALDO,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14446
+            .heldItem = ITEM_LEFTOVERS,
 #line 14450
             .ev = TRAINER_PARTY_EVS(0, 252, 252, 0, 0, 4),
 #line 14451
@@ -36641,6 +36651,8 @@ F_TRAINER_FEMALE |
 #line 14632
             .species = SPECIES_OMASTAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14632
+            .heldItem = ITEM_RINDO_BERRY,
 #line 14636
             .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 14637
@@ -36764,6 +36776,8 @@ F_TRAINER_FEMALE |
 #line 14687
             .species = SPECIES_BASTIODON,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14687
+            .heldItem = ITEM_SHUCA_BERRY,
 #line 14690
             .ev = TRAINER_PARTY_EVS(252, 4, 0, 0, 0, 252),
 #line 14691
@@ -36785,6 +36799,8 @@ F_TRAINER_FEMALE |
 #line 14697
             .species = SPECIES_ARCHEOPS,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14697
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 14701
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
 #line 14702
@@ -36833,6 +36849,8 @@ F_TRAINER_FEMALE |
 #line 14719
             .species = SPECIES_ARMALDO,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14719
+            .heldItem = ITEM_LEFTOVERS,
 #line 14723
             .ev = TRAINER_PARTY_EVS(0, 252, 252, 0, 0, 4),
 #line 14724
@@ -36979,6 +36997,8 @@ F_TRAINER_FEMALE |
 #line 14784
             .species = SPECIES_HITMONTOP,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14784
+            .heldItem = ITEM_LEFTOVERS,
 #line 14786
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14785
@@ -36997,6 +37017,8 @@ F_TRAINER_FEMALE |
 #line 14792
             .species = SPECIES_MEDICHAM,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14792
+            .heldItem = ITEM_FOCUS_SASH,
 #line 14796
             .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 4),
 #line 14797
@@ -37020,6 +37042,8 @@ F_TRAINER_FEMALE |
 #line 14803
             .species = SPECIES_HITMONCHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14803
+            .heldItem = ITEM_ASSAULT_VEST,
 #line 14807
             .ev = TRAINER_PARTY_EVS(248, 252, 0, 0, 0, 8),
 #line 14808
@@ -37483,6 +37507,8 @@ F_TRAINER_FEMALE |
 #line 15006
             .species = SPECIES_MEDICHAM_MEGA,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 15006
+            .heldItem = ITEM_FOCUS_SASH,
 #line 15010
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
 #line 15011
@@ -37581,6 +37607,8 @@ F_TRAINER_FEMALE |
 #line 15050
             .species = SPECIES_LUCARIO_MEGA,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 15050
+            .heldItem = ITEM_FOCUS_SASH,
 #line 15054
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
 #line 15055
@@ -37928,6 +37956,8 @@ F_TRAINER_FEMALE |
 #line 15203
             .species = SPECIES_HITMONTOP,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 15203
+            .heldItem = ITEM_LEFTOVERS,
 #line 15205
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15204
@@ -37946,6 +37976,8 @@ F_TRAINER_FEMALE |
 #line 15211
             .species = SPECIES_MEDICHAM,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 15211
+            .heldItem = ITEM_FOCUS_SASH,
 #line 15215
             .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 4),
 #line 15216
@@ -37969,6 +38001,8 @@ F_TRAINER_FEMALE |
 #line 15222
             .species = SPECIES_HITMONCHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 15222
+            .heldItem = ITEM_ASSAULT_VEST,
 #line 15226
             .ev = TRAINER_PARTY_EVS(248, 252, 0, 0, 0, 8),
 #line 15227
