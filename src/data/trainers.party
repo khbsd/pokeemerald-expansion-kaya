@@ -16241,9 +16241,11 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Exploud @ King's Rock
+Exploud @ Weakness Policy
 Ability: Soundproof
 Level: 100
+Nature: Brave
+EVs: 248 HP / 248 Atk / 8 Def / 4 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zen Headbutt
 - Taunt
@@ -16253,6 +16255,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Wigglytuff @ Leftovers
 Ability: Friend Guard
 Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stockpile
 - Perish Song
@@ -16260,7 +16264,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swallow
 
 Blissey @ Chesto Berry
+Ability: Natural Cure
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Bell
 - Softboiled
@@ -16278,6 +16285,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Bouffalant @ Silk Scarf
 Ability: Reckless
 Level: 100
+Nature: Adamant
+EVs: 8 HP / 252 Atk / 124 Def / 0 SpA / 124 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Charge
 - Reversal
