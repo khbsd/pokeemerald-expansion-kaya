@@ -8722,9 +8722,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SOUNDPROOF:
-        u32 isWhismur = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_WHISMUR;
-        u32 isLoudred = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_LOUDRED;
-        u32 isExploud = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_EXPLOUD;
+        bool32 isWhismur = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_WHISMUR;
+        bool32 isLoudred = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_LOUDRED;
+        bool32 isExploud = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_EXPLOUD;
         if (IsSoundMove(move) && (isWhismur || isLoudred || isExploud))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     case ABILITY_STEELY_SPIRIT:
@@ -9199,6 +9199,9 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(B_BADGE_BOOST_AMOUNT));
     if (ShouldGetStatBadgeBoost(B_FLAG_BADGE_BOOST_SPATK, battlerAtk) && IsBattleMoveSpecial(move))
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(B_BADGE_BOOST_AMOUNT));
+
+    if (GET_BASE_SPECIES_ID(battlerAtk) == SPECIES_TRAPINCH && move == MOVE_HYPER_BEAM)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(3));
 
     return uq4_12_multiply_by_int_half_down(modifier, atkStat);
 }
