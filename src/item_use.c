@@ -971,9 +971,16 @@ void ItemUseOutOfBattle_PermaRepel(u8 taskId)
         #endif
             FlagClear(FLAG_SYS_PERMA_REPEL);
             if (!InBattlePyramid())
-                DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsDissipated, CloseItemMessage);
+            {
+                if (!gTasks[taskId].data[2])
+                    DisplayItemMessageOnField(taskId, gText_RepelEffectsDissipated, Task_CloseCantUseKeyItemMessage);
+                else
+                    DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsDissipated, CloseItemMessage);
+            }
             else
+            {
                 DisplayItemMessageInBattlePyramid(taskId, gText_RepelEffectsDissipated, Task_CloseBattlePyramidBagMessage);
+            }
         }
         else
         {
@@ -985,9 +992,16 @@ void ItemUseOutOfBattle_PermaRepel(u8 taskId)
             CopyItemName(gSpecialVar_ItemId, gStringVar2);
             StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
             if (!InBattlePyramid())
-                DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            {
+                if (!gTasks[taskId].data[2])
+                    DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+                else
+                    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            }
             else
+            {
                 DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+            }
         }
     }
 }
@@ -1780,7 +1794,10 @@ void PokevialPrintDosesAndConfirmMessage(u32 currentDoses, bool32 isPlayerUsingR
     if (!FlagGet(I_ENABLE_POKEVIAL_FLAG))
     {
         StringExpandPlaceholders(gStringVar4, gText_PokevialDisabled);
-        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+        if (isPlayerUsingRegisteredKeyItem)
+            DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         return;
     }
 
