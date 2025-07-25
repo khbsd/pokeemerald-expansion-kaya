@@ -2318,7 +2318,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Makes Pokémon more\n"
             "likely to appear."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_PermaLure,
         .secondaryId = 0,

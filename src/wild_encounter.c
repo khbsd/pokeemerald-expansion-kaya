@@ -1144,6 +1144,8 @@ bool8 UpdateRepelCounter(void)
     {
         if (!FlagGet(FLAG_SYS_PERMA_REPEL) || !FlagGet(FLAG_SYS_PERMA_LURE))
             steps--;
+        else
+            MgbaPrintf(MGBA_LOG_WARN, "perma repel or lure in effect");
         if (!isLure)
         {
             VarSet(VAR_REPEL_STEP_COUNT, steps);

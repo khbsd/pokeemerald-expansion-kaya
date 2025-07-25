@@ -2061,9 +2061,9 @@ static enum MoveCanceller CancellerObedience(void)
     return MOVE_STEP_SUCCESS;
 }
 
-static enum MoveCanceller CancellerTruant(void)
+static enum MoveCanceller CancellerTruant(void) //sc2
 {
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_TRUANT && gDisableStructs[gBattlerAttacker].truantCounter)
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_TRUANT && gDisableStructs[gBattlerAttacker].truantCounter && RandomPercentage(RNG_TRUANT, 70))
     {
         CancelMultiTurnMoves(gBattlerAttacker, SKY_DROP_ATTACKCANCELLER_CHECK);
         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -2071,6 +2071,14 @@ static enum MoveCanceller CancellerTruant(void)
         gBattlerAbility = gBattlerAttacker;
         gBattlescriptCurrInstr = BattleScript_TruantLoafingAround;
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_MISSED;
+        if (!IsBattlerAtMaxHp(gBattlerAttacker) && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
+        {
+            BattleScriptPushCursorAndCallback(BattleScript_IceBodyHeal);
+            gBattleStruct->moveDamage[gBattlerAttacker] = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
+            if (gBattleStruct->moveDamage[gBattlerAttacker] == 0)
+                gBattleStruct->moveDamage[gBattlerAttacker] = 1;
+            gBattleStruct->moveDamage[gBattlerAttacker] *= -1;
+        }
         return MOVE_STEP_BREAK;
     }
     return MOVE_STEP_SUCCESS;
@@ -4368,7 +4376,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities ability, u32 sp
                     effect++;
                 }
                 break;
-            case ABILITY_TRUANT:
+            case ABILITY_TRUANT: 
                 gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                 break;
             case ABILITY_SLOW_START:

@@ -2550,6 +2550,7 @@ static void Task_KeyItemWheel(u8 taskId)
         FreeKeyItemWheelGfx(data);
         ScriptUnfreezeObjectEvents();
         UnlockPlayerFieldControls();
+        MgbaPrintf(MGBA_LOG_WARN, "destroying task");
         DestroyTask(taskId);
         break;
     case 4:
