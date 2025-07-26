@@ -1471,11 +1471,11 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                 }
 
                 data[1] = GetItemListPosition(gBagPosition.pocket);
-                data[2] = GetBagItemQuantity(gBagPosition.pocket + 1, data[1]);
+                data[2] = GetBagItemQuantity(gBagPosition.pocket, data[1]);
                 if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket] - 1)
                     break;
                 else
-                    gSpecialVar_ItemId = GetBagItemId(gBagPosition.pocket + 1, data[1]);
+                    gSpecialVar_ItemId = GetBagItemId(gBagPosition.pocket, data[1]);
 
                 PlaySE(SE_SELECT);
                 BagDestroyPocketScrollArrowPair();
@@ -3633,7 +3633,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
 
 static void AddBagSortSubMenu(void)
 {
-    switch (gBagPosition.pocket + 1)
+    switch (gBagPosition.pocket)
     {
     case POCKET_KEY_ITEMS:
         gBagMenu->contextMenuItemsPtr = sBagMenuSortKeyItems;
