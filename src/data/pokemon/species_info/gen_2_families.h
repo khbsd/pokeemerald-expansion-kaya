@@ -6818,7 +6818,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_MANTINE] =
     {
-        .baseHP        = 105
+        .baseHP        = 105,
         .baseAttack    = 40,
         .baseDefense   = 70,
         .baseSpeed     = 70,

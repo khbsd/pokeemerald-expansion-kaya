@@ -8714,11 +8714,11 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case ABILITY_OBSCURATE:
-        if (moveType == TYPE_DARK && gBattleStruct->ateBoost[battlerAtk])
+        if (moveType == TYPE_DARK && gBattleStruct->battlerState[battlerAtk].ateBoost)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case ABILITY_CAPILLARATE:
-        if (moveType == TYPE_FIGHTING && gBattleStruct->ateBoost[battlerAtk])
+        if (moveType == TYPE_FIGHTING && gBattleStruct->battlerState[battlerAtk].ateBoost)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         if (IsBitingMove(move))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
