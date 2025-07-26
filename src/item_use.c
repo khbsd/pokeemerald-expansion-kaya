@@ -886,8 +886,12 @@ void ItemUseOutOfBattle_PPUp(u8 taskId)
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
+    
     gItemUseCB = ItemUseCB_RareCandy;
-    SetUpItemUseCallback(taskId);
+    if (!gTasks[taskId].data[3])
+        SetUpItemUseCallback(taskId);
+    else
+        ItemUseOutOfBattle_CannotUse(taskId);
 }
 
 void ItemUseOutOfBattle_DynamaxCandy(u8 taskId)
