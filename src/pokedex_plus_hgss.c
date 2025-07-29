@@ -4168,7 +4168,6 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
         if (!gPaletteFade.active)
         {
             PlayCry_Normal(species, 0);
-            MgbaPrintf(MGBA_LOG_WARN, "playing cry for species: %u", species);
             gTasks[taskId].tPalTimer = 0;
             gTasks[taskId].func = Task_HandleCaughtMonPageInput;
         }

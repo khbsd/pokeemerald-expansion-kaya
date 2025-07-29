@@ -1,4 +1,4 @@
- #ifndef GUARD_CONFIG_SPECIES_ENABLED_H
+#ifndef GUARD_CONFIG_SPECIES_ENABLED_H
 #define GUARD_CONFIG_SPECIES_ENABLED_H
 
 // WARNING: For some reason, using 1/0 instead of TRUE/FALSE causes cry IDs to be shifted.
@@ -13,11 +13,11 @@
 #define P_GEN_2_POKEMON                  TRUE // Generation 2 Pokémon (GSC)
 #define P_GEN_3_POKEMON                  TRUE // Generation 3 Pokémon (RSE, FRLG)
 #define P_GEN_4_POKEMON                  TRUE // Generation 4 Pokémon (DPPt, HGSS)
-#define P_GEN_5_POKEMON                  FALSE // Generation 5 Pokémon (BW, B2W2)
-#define P_GEN_6_POKEMON                  FALSE // Generation 6 Pokémon (XY, ORAS)
-#define P_GEN_7_POKEMON                  FALSE // Generation 7 Pokémon (SM, USUM, LGPE)
-#define P_GEN_8_POKEMON                  FALSE // Generation 8 Pokémon (SwSh, BDSP, LA)
-#define P_GEN_9_POKEMON                  FALSE // Generation 9 Pokémon (SV)
+#define P_GEN_5_POKEMON                  TRUE // Generation 5 Pokémon (BW, B2W2)
+#define P_GEN_6_POKEMON                  TRUE // Generation 6 Pokémon (XY, ORAS)
+#define P_GEN_7_POKEMON                  TRUE // Generation 7 Pokémon (SM, USUM, LGPE)
+#define P_GEN_8_POKEMON                  TRUE // Generation 8 Pokémon (SwSh, BDSP, LA)
+#define P_GEN_9_POKEMON                  TRUE // Generation 9 Pokémon (SV)
 
 // Setting this to TRUE will add the new evolutions to the Regional Dex.
 #define P_NEW_EVOS_IN_REGIONAL_DEX       TRUE
