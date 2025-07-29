@@ -403,7 +403,9 @@ u16 GetCurrentMapWildMonHeaderId(void)
                 i += alteringCaveId;
             }
             else
+            {
                 i += altHeaderId;
+            }
 
             return i;
         }
@@ -1070,17 +1072,34 @@ void FishingWildEncounter(u8 rod)
     }
 }
 
-u16 GetLocalWildMon(bool8 *isWaterMon)
+u32 GetRandomHeaderInMapGroup(u32 headerId)
 {
-    u32 headerId;
+    u32 chance = 67;
+    while (RandomPercentage(RNG_LOCAL_WILD_MON, chance) 
+        && (gWildMonHeaders[headerId].mapGroup == gWildMonHeaders[headerId + 1].mapGroup)
+        && (headerId < 2))
+    {
+        headerId++;
+        chance /= headerId + 1;
+        MgbaPrintf(MGBA_LOG_WARN, "headerId: %u", headerId);
+    }
+
+    return headerId;
+}
+
+// not used for actual encounters, so its fine to mkae this random
+u32 GetLocalWildMon(bool8 *isWaterMon)
+{
+    u32 headerId = GetCurrentMapWildMonHeaderId();
     enum TimeOfDay timeOfDay;
     const struct WildPokemonInfo *landMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo;
 
     *isWaterMon = FALSE;
-    headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == HEADER_NONE)
         return SPECIES_NONE;
+    else
+        headerId = GetRandomHeaderInMapGroup(headerId);
 
     timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
     landMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
@@ -1119,6 +1138,7 @@ u16 GetLocalWaterMon(void)
 
     if (headerId != HEADER_NONE)
     {
+        headerId = GetRandomHeaderInMapGroup(headerId);
         timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER);
 
         const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;

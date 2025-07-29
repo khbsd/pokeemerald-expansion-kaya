@@ -55,7 +55,7 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior);
 bool8 SweetScentWildEncounter(void);
 bool8 DoesCurrentMapHaveFishingMons(void);
 void FishingWildEncounter(u8 rod);
-u16 GetLocalWildMon(bool8 *isWaterMon);
+u32 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
@@ -72,5 +72,6 @@ u32 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
 void UpdateChainFishingStreak();
+u32 GetRandomHeaderInMapGroup(u32 headerId);
 
 #endif // GUARD_WILD_ENCOUNTER_H
