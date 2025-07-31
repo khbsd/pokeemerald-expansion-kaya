@@ -168,61 +168,61 @@ static void BlockStackerVBlankCallback(void);
 
 // Backgound
 
-static const u32 BlockStacker_BG_Img[] = INCBIN_U32("graphics/block_stacker/blockbgtiles.4bpp.lz");
-static const u8 BlockStacker_Tilemap[] = INCBIN_U8("graphics/block_stacker/blockbgtiles.bin.lz");
+static const u32 BlockStacker_BG_Img[] = INCBIN_U32("graphics/block_stacker/blockbgtiles.4bpp.smol");
+static const u8 BlockStacker_Tilemap[] = INCBIN_U8("graphics/block_stacker/blockbgtiles.bin.smolTM");
 static const u16 BlockStacker_BG_Pal[] = INCBIN_U16("graphics/block_stacker/bgblock.gbapal");
 
 // Rhydon
-static const u32 RhydonGFX[] = INCBIN_U32("graphics/block_stacker/rhydon.4bpp.lz");
-static const u32 Rhydon2GFX[] = INCBIN_U32("graphics/block_stacker/rhydon2.4bpp.lz");
+static const u32 RhydonGFX[] = INCBIN_U32("graphics/block_stacker/rhydon.4bpp.smol");
+static const u32 Rhydon2GFX[] = INCBIN_U32("graphics/block_stacker/rhydon2.4bpp.smol");
 static const u16 RhydonPAL[] = INCBIN_U16("graphics/block_stacker/rhydon.gbapal");
 
-static const u32 RhydonBlockGFX[] = INCBIN_U32("graphics/block_stacker/rhydonblock.4bpp.lz");
+static const u32 RhydonBlockGFX[] = INCBIN_U32("graphics/block_stacker/rhydonblock.4bpp.smol");
 static const u16 RhydonBlockPAL[] = INCBIN_U16("graphics/block_stacker/rhydonblock.gbapal");
 
 // Highlight
-static const u32 HighlightGFX[] = INCBIN_U32("graphics/block_stacker/highlight.4bpp.lz");
+static const u32 HighlightGFX[] = INCBIN_U32("graphics/block_stacker/highlight.4bpp.smol");
 static const u16 HighlightPAL[] = INCBIN_U16("graphics/block_stacker/highlight.gbapal");
 
 // Title
-static const u32 TitleGFX[] = INCBIN_U32("graphics/block_stacker/title.4bpp.lz");
+static const u32 TitleGFX[] = INCBIN_U32("graphics/block_stacker/title.4bpp.smol");
 static const u16 TitlePAL[] = INCBIN_U16("graphics/block_stacker/title.gbapal");
 
 // Start
-static const u32 StartGFX[] = INCBIN_U32("graphics/block_stacker/start.4bpp.lz");
+static const u32 StartGFX[] = INCBIN_U32("graphics/block_stacker/start.4bpp.smol");
 
 // Commands
-static const u32 CommandsGFX[] = INCBIN_U32("graphics/block_stacker/commands.4bpp.lz");
+static const u32 CommandsGFX[] = INCBIN_U32("graphics/block_stacker/commands.4bpp.smol");
 static const u16 CommandsPAL[] = INCBIN_U16("graphics/block_stacker/commands.gbapal");
 
 // Arrow Icon
-static const u32 ArrowGFX[] = INCBIN_U32("graphics/block_stacker/arrow.4bpp.lz");
+static const u32 ArrowGFX[] = INCBIN_U32("graphics/block_stacker/arrow.4bpp.smol");
 static const u16 ArrowPAL[] = INCBIN_U16("graphics/block_stacker/arrow.gbapal");
 
 // Blocks
-static const u32 BlockGFX[] = INCBIN_U32("graphics/block_stacker/blocks.4bpp.lz");
+static const u32 BlockGFX[] = INCBIN_U32("graphics/block_stacker/blocks.4bpp.smol");
 static const u16 BlockPAL[] = INCBIN_U16("graphics/block_stacker/blocks.gbapal");
 
 // X
-static const u32 XGFX[] = INCBIN_U32("graphics/block_stacker/x.4bpp.lz");
+static const u32 XGFX[] = INCBIN_U32("graphics/block_stacker/x.4bpp.smol");
 static const u16 XPAL[] = INCBIN_U16("graphics/block_stacker/x.gbapal");
 
 // Game Over
-static const u32 GameOverGFX[] = INCBIN_U32("graphics/block_stacker/gameover.4bpp.lz");
+static const u32 GameOverGFX[] = INCBIN_U32("graphics/block_stacker/gameover.4bpp.smol");
 
 // Keep Going
-static const u32 KeepGoingGFX[] = INCBIN_U32("graphics/block_stacker/keepgoing.4bpp.lz");
+static const u32 KeepGoingGFX[] = INCBIN_U32("graphics/block_stacker/keepgoing.4bpp.smol");
 
 // Yes / No
-static const u32 YesGFX[] = INCBIN_U32("graphics/block_stacker/yes.4bpp.lz");
-static const u32 NoGFX[] = INCBIN_U32("graphics/block_stacker/no.4bpp.lz");
+static const u32 YesGFX[] = INCBIN_U32("graphics/block_stacker/yes.4bpp.smol");
+static const u32 NoGFX[] = INCBIN_U32("graphics/block_stacker/no.4bpp.smol");
 static const u16 YesNoPAL[] = INCBIN_U16("graphics/block_stacker/yesno.gbapal");
 
 // Winner
-static const u32 WinnerGFX[] = INCBIN_U32("graphics/block_stacker/winner.4bpp.lz");
+static const u32 WinnerGFX[] = INCBIN_U32("graphics/block_stacker/winner.4bpp.smol");
 
 // Lives
-static const u32 LivesGFX[] = INCBIN_U32("graphics/block_stacker/lives.4bpp.lz");
+static const u32 LivesGFX[] = INCBIN_U32("graphics/block_stacker/lives.4bpp.smol");
 static const u16 LivesPAL[] = INCBIN_U16("graphics/block_stacker/lives.gbapal");
 
 #define BLOCKSTACKER_BG 1

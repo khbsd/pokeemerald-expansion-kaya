@@ -359,42 +359,42 @@ static const u8 sTestText[] = _("TEST");
 
 // Backgound
 
-static const u32 Snake_BG_Img[] = INCBIN_U32("graphics/snake/snake-bg.4bpp.lz");
-static const u8 Snake_Tilemap[] = INCBIN_U8("graphics/snake/snake-bg.bin.lz");
+static const u32 Snake_BG_Img[] = INCBIN_U32("graphics/snake/snake-bg.4bpp.smol");
+static const u8 Snake_Tilemap[] = INCBIN_U8("graphics/snake/snake-bg.bin.smolTM");
 static const u16 Snake_BG_Pal[] = INCBIN_U16("graphics/snake/bg.gbapal");
 
 // Onix
 
-static const u32 OnixGFX[] = INCBIN_U32("graphics/snake/onix-head.4bpp.lz");
+static const u32 OnixGFX[] = INCBIN_U32("graphics/snake/onix-head.4bpp.smol");
 
-static const u32 BodyGFX[] = INCBIN_U32("graphics/snake/onix-body.4bpp.lz");
+static const u32 BodyGFX[] = INCBIN_U32("graphics/snake/onix-body.4bpp.smol");
 static const u16 OnixPAL[] = INCBIN_U16("graphics/snake/onix.gbapal");
 
-static const u32 Body2GFX[] = INCBIN_U32("graphics/snake/onix-body-2.4bpp.lz");
-static const u32 Body3GFX[] = INCBIN_U32("graphics/snake/onix-body-3.4bpp.lz");
-static const u32 Body4GFX[] = INCBIN_U32("graphics/snake/onix-body-4.4bpp.lz");
+static const u32 Body2GFX[] = INCBIN_U32("graphics/snake/onix-body-2.4bpp.smol");
+static const u32 Body3GFX[] = INCBIN_U32("graphics/snake/onix-body-3.4bpp.smol");
+static const u32 Body4GFX[] = INCBIN_U32("graphics/snake/onix-body-4.4bpp.smol");
 
 // Berries
 
-static const u32 Berry1GFX[] = INCBIN_U32("graphics/snake/berry1.4bpp.lz");
-static const u32 Berry2GFX[] = INCBIN_U32("graphics/snake/berry3.4bpp.lz");
-static const u32 Berry3GFX[] = INCBIN_U32("graphics/snake/berry3.4bpp.lz");
+static const u32 Berry1GFX[] = INCBIN_U32("graphics/snake/berry1.4bpp.smol");
+static const u32 Berry2GFX[] = INCBIN_U32("graphics/snake/berry3.4bpp.smol");
+static const u32 Berry3GFX[] = INCBIN_U32("graphics/snake/berry3.4bpp.smol");
 static const u16 BerryPAL[] = INCBIN_U16("graphics/snake/berry.gbapal");
 
 // Text
 
-static const u32 StartGFX[] = INCBIN_U32("graphics/snake/start.4bpp.lz");
-static const u32 GameOverGFX[] = INCBIN_U32("graphics/snake/gameover.4bpp.lz");
+static const u32 StartGFX[] = INCBIN_U32("graphics/snake/start.4bpp.smol");
+static const u32 GameOverGFX[] = INCBIN_U32("graphics/snake/gameover.4bpp.smol");
 static const u16 TextPAL[] = INCBIN_U16("graphics/snake/text.gbapal");
 
 // Menu
 
-static const u32 MenuGFX[] = INCBIN_U32("graphics/snake/menu.4bpp.lz");
+static const u32 MenuGFX[] = INCBIN_U32("graphics/snake/menu.4bpp.smol");
 static const u16 MenuPAL[] = INCBIN_U16("graphics/snake/menu.gbapal");
 
 // Numbers
 
-static const u32 Digits_Gfx[] = INCBIN_U32("graphics/snake/digits.4bpp.lz");
+static const u32 Digits_Gfx[] = INCBIN_U32("graphics/snake/digits.4bpp.smol");
 static const u16 Digits_Pal[] = INCBIN_U16("graphics/snake/digits.gbapal");
 
 

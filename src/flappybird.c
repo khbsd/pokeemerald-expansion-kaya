@@ -142,55 +142,55 @@ static void FlappyBirdVBlankCallback(void);
 
 // Backgound
 
-static const u32 FlappyBird_BG_Img[] = INCBIN_U32("graphics/flappybird/flappy-bg.4bpp.lz");
-static const u8 FlappyBird_BG_Tilemap[] = INCBIN_U8("graphics/flappybird/flappy-bg.bin.lz");
+static const u32 FlappyBird_BG_Img[] = INCBIN_U32("graphics/flappybird/flappy-bg.4bpp.smol");
+static const u8 FlappyBird_BG_Tilemap[] = INCBIN_U8("graphics/flappybird/flappy-bg.bin.smolTM");
 static const u16 FlappyBird_BG_Pal[] = INCBIN_U16("graphics/flappybird/flappy-bg.gbapal");
 
 // Foreground
 
-static const u32 FlappyBird_FG_Img[] = INCBIN_U32("graphics/flappybird/flappy-fg.4bpp.lz");
-static const u8 FlappyBird_FG_Tilemap[] = INCBIN_U8("graphics/flappybird/flappy-fg.bin.lz");
+static const u32 FlappyBird_FG_Img[] = INCBIN_U32("graphics/flappybird/flappy-fg.4bpp.smol");
+static const u8 FlappyBird_FG_Tilemap[] = INCBIN_U8("graphics/flappybird/flappy-fg.bin.smolTM");
 static const u16 FlappyBird_FG_Pal[] = INCBIN_U16("graphics/flappybird/flappy-fg.gbapal");
 
 // Arcade BG Element
 
-static const u32 Arcade_FG_Img[] = INCBIN_U32("graphics/flappybird/arcade-screen.4bpp.lz");
-static const u8 Arcade_FG_Tilemap[] = INCBIN_U8("graphics/flappybird/arcade-screen.bin.lz");
+static const u32 Arcade_FG_Img[] = INCBIN_U32("graphics/flappybird/arcade-screen.4bpp.smol");
+static const u8 Arcade_FG_Tilemap[] = INCBIN_U8("graphics/flappybird/arcade-screen.bin.smolTM");
 static const u16 Arcade_FG_Pal[] = INCBIN_U16("graphics/flappybird/arcade-screen.gbapal");
 
 // Butterfree
-static const u32 ButterfreeGFX[] = INCBIN_U32("graphics/flappybird/butterfree.4bpp.lz");
+static const u32 ButterfreeGFX[] = INCBIN_U32("graphics/flappybird/butterfree.4bpp.smol");
 static const u16 ButterfreePAL[] = INCBIN_U16("graphics/flappybird/butterfree.gbapal");
 
 // Hitbox
-static const u32 ButterfreeHitboxGFX[] = INCBIN_U32("graphics/flappybird/butterfree-hitbox.4bpp.lz");
+static const u32 ButterfreeHitboxGFX[] = INCBIN_U32("graphics/flappybird/butterfree-hitbox.4bpp.smol");
 static const u16 ButterfreeHitboxPAL[] = INCBIN_U16("graphics/flappybird/butterfree-hitbox.gbapal");
 
 // Trail
-static const u32 TrailGFX[] = INCBIN_U32("graphics/flappybird/trail.4bpp.lz");
+static const u32 TrailGFX[] = INCBIN_U32("graphics/flappybird/trail.4bpp.smol");
 static const u16 TrailPAL[] = INCBIN_U16("graphics/flappybird/trail.gbapal");
 
 // Cover
 
-static const u32 TopLeftGFX[] = INCBIN_U32("graphics/flappybird/topleft.4bpp.lz");
-static const u32 BottomLeftGFX[] = INCBIN_U32("graphics/flappybird/bottomleft.4bpp.lz");
+static const u32 TopLeftGFX[] = INCBIN_U32("graphics/flappybird/topleft.4bpp.smol");
+static const u32 BottomLeftGFX[] = INCBIN_U32("graphics/flappybird/bottomleft.4bpp.smol");
 
 // Damage
 
-static const u32 DamageGFX[] = INCBIN_U32("graphics/flappybird/damage.4bpp.lz");
+static const u32 DamageGFX[] = INCBIN_U32("graphics/flappybird/damage.4bpp.smol");
 
 // Text
 
-static const u32 StartGFX[] = INCBIN_U32("graphics/flappybird/start.4bpp.lz");
-static const u32 GameOverGFX[] = INCBIN_U32("graphics/flappybird/gameover.4bpp.lz");
-static const u32 HiScoreGFX[] = INCBIN_U32("graphics/flappybird/hiscore.4bpp.lz");
-static const u32 OneGFX[] = INCBIN_U32("graphics/flappybird/one.4bpp.lz");
-static const u32 TwoGFX[] = INCBIN_U32("graphics/flappybird/two.4bpp.lz");
-static const u32 ThreeGFX[] = INCBIN_U32("graphics/flappybird/three.4bpp.lz");
-static const u32 FlapGFX[] = INCBIN_U32("graphics/flappybird/flap.4bpp.lz");
-static const u32 ScoreGFX[] = INCBIN_U32("graphics/flappybird/score.4bpp.lz");
-static const u32 Score2GFX[] = INCBIN_U32("graphics/flappybird/score2.4bpp.lz");
-static const u32 DigitsGFX[] = INCBIN_U32("graphics/flappybird/digits.4bpp.lz");
+static const u32 StartGFX[] = INCBIN_U32("graphics/flappybird/start.4bpp.smol");
+static const u32 GameOverGFX[] = INCBIN_U32("graphics/flappybird/gameover.4bpp.smol");
+static const u32 HiScoreGFX[] = INCBIN_U32("graphics/flappybird/hiscore.4bpp.smol");
+static const u32 OneGFX[] = INCBIN_U32("graphics/flappybird/one.4bpp.smol");
+static const u32 TwoGFX[] = INCBIN_U32("graphics/flappybird/two.4bpp.smol");
+static const u32 ThreeGFX[] = INCBIN_U32("graphics/flappybird/three.4bpp.smol");
+static const u32 FlapGFX[] = INCBIN_U32("graphics/flappybird/flap.4bpp.smol");
+static const u32 ScoreGFX[] = INCBIN_U32("graphics/flappybird/score.4bpp.smol");
+static const u32 Score2GFX[] = INCBIN_U32("graphics/flappybird/score2.4bpp.smol");
+static const u32 DigitsGFX[] = INCBIN_U32("graphics/flappybird/digits.4bpp.smol");
 
 static const u16 TextPAL[] = INCBIN_U16("graphics/flappybird/text.gbapal");
 static const u16 FlapPAL[] = INCBIN_U16("graphics/flappybird/flap.gbapal");

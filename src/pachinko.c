@@ -305,7 +305,7 @@ static const u32 sCoverBgGfx[] = INCBIN_U32("graphics/pinball/bg_cover_tiles.4bp
 static const u16 sCoverBgPalette[] = INCBIN_U16("graphics/pinball/bg_cover_tiles.gbapal");
 static const u16 sCovergTilemap[] = INCBIN_U16("graphics/pinball/bg_tilemap_cover.bin");
 
-static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.lz");
+static const u32 sBallPokeballGfx[] = INCBIN_U32("graphics/pinball/ball_pokeball.4bpp.smol");
 static const u16 sBallPokeballPalette[] = INCBIN_U16("graphics/pinball/ball_pokeball.gbapal");
 static const u16 sFlipperPalette[] = INCBIN_U16("graphics/pinball/flipper.gbapal");
 
@@ -317,34 +317,34 @@ static const u16 sDiglettStageBgPalette[] = INCBIN_U16("graphics/pachinko/bg_ind
 static const u8 sDiglettStageBgCollisionMasks[] = INCBIN_U8("graphics/pinball/bg_collision_masks_diglett.1bpp");
 static const u8 sDiglettStageBgCollisionMap[] = INCBIN_U8("graphics/pachinko/collisionmap.bin");
 
-static const u32 gPlayer_Gfx[] = INCBIN_U32("graphics/pachinko/input_numbers.4bpp.lz");
+static const u32 gPlayer_Gfx[] = INCBIN_U32("graphics/pachinko/input_numbers.4bpp.smol");
 static const u16 sPlayer_Pal[] = INCBIN_U16("graphics/pachinko/input_numbers.gbapal");
 
-static const u32 SpinarakGFX[] = INCBIN_U32("graphics/pachinko/spider.4bpp.lz");
+static const u32 SpinarakGFX[] = INCBIN_U32("graphics/pachinko/spider.4bpp.smol");
 static const u16 SpinarakPAL[] = INCBIN_U16("graphics/pachinko/spider.gbapal");
 
-static const u32 SpeedGFX[] = INCBIN_U32("graphics/pachinko/speed.4bpp.lz");
+static const u32 SpeedGFX[] = INCBIN_U32("graphics/pachinko/speed.4bpp.smol");
 static const u16 SpeedPAL[] = INCBIN_U16("graphics/pachinko/speed.gbapal");
 
-static const u32 MultiplierGFX[] = INCBIN_U32("graphics/pachinko/multiplier.4bpp.lz");
+static const u32 MultiplierGFX[] = INCBIN_U32("graphics/pachinko/multiplier.4bpp.smol");
 static const u16 MultiplierPAL[] = INCBIN_U16("graphics/pachinko/multiplier.gbapal");
 
-static const u32 LivesGFX[] = INCBIN_U32("graphics/pachinko/lives.4bpp.lz");
+static const u32 LivesGFX[] = INCBIN_U32("graphics/pachinko/lives.4bpp.smol");
 static const u16 LivesPAL[] = INCBIN_U16("graphics/pachinko/lives.gbapal");
 
-static const u32 ArrowGFX[] = INCBIN_U32("graphics/pachinko/arrow.4bpp.lz");
+static const u32 ArrowGFX[] = INCBIN_U32("graphics/pachinko/arrow.4bpp.smol");
 static const u16 ArrowPAL[] = INCBIN_U16("graphics/pachinko/arrow.gbapal");
 
-static const u32 TitleGFX[] = INCBIN_U32("graphics/pachinko/title.4bpp.lz");
+static const u32 TitleGFX[] = INCBIN_U32("graphics/pachinko/title.4bpp.smol");
 static const u16 TitlePAL[] = INCBIN_U16("graphics/pachinko/title.gbapal");
 
-static const u32 GameOverGFX[] = INCBIN_U32("graphics/pachinko/gameover.4bpp.lz");
+static const u32 GameOverGFX[] = INCBIN_U32("graphics/pachinko/gameover.4bpp.smol");
 static const u16 GameOverPAL[] = INCBIN_U16("graphics/pachinko/gameover.gbapal");
 
-static const u32 WinGFX[] = INCBIN_U32("graphics/pachinko/win.4bpp.lz");
+static const u32 WinGFX[] = INCBIN_U32("graphics/pachinko/win.4bpp.smol");
 static const u16 WinPAL[] = INCBIN_U16("graphics/pachinko/win.gbapal");
 
-static const u32 NewLevelGFX[] = INCBIN_U32("graphics/pachinko/newlevel.4bpp.lz");
+static const u32 NewLevelGFX[] = INCBIN_U32("graphics/pachinko/newlevel.4bpp.smol");
 static const u16 NewLevelPAL[] = INCBIN_U16("graphics/pachinko/newlevel.gbapal");
 
 // Levels
