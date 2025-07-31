@@ -2737,7 +2737,7 @@ void DeterminePokemonRarityAndNewStatus(void)
         // Calculate the total number of Pokémon the player doesn't own
         totalNotOwned = totalMax - totalOwned;
 
-        if (totalNotOwned <= 0 && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 6))
+        if (totalNotOwned <= 0 && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 8))
         {
             // If all Pokémon of the selected rarity are owned, restart the process (reroll)
             continue;  // This will make the loop restart from the beginning
