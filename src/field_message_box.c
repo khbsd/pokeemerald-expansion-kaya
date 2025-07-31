@@ -26,6 +26,7 @@ void InitFieldMessageBox(void)
 }
 
 #define tState data[0]
+
 static void Task_DrawFieldMessage(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
