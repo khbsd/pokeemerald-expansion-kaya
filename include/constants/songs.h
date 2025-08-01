@@ -950,7 +950,19 @@
 #define MUS_HG_OBTAIN_B_POINTS            897 // Received Battle Points!
 #define MUS_HG_WIN_MINIGAME               898 // Cleared Wobbuffet Pop!
 
-#define HG_MUSIC_END                      MUS_HG_WIN_MINIGAME
+#define MUS_HGSS_CASINO                   899
+#define MUS_CASINO_PLUS_1                 900
+#define MUS_CASINO_PLUS_2                 901
+#define MUS_CASINO_PLUS_3                 902
+#define MUS_CASINO_PLUS_4                 903
+#define MUS_CASINO_PLUS_5                 904
+#define MUS_CASINO_PLUS_6                 905
+#define MUS_CASINO_PLUS_7                 906
+#define MUS_CASINO_PLUS_8                 907
+#define MUS_CASINO_PLUS_9                 908
+#define MUS_CASINO_PLUS_GACHA             909
+
+#define HG_MUSIC_END                      MUS_CASINO_PLUS_GACHA
 
 #define SONGS_END                         HG_MUSIC_END
 #define END_MUS                           SONGS_END

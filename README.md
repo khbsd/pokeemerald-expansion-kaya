@@ -1,3 +1,28 @@
+# Pokémon Emerald Game Corner Expansion
+
+Hello! This is a tweaked version of Chris Piche's Game Corner Expansion feature branch made by me, AGSMGMaster64.
+Currently, this adds a new config file that uses some flags by default but can be configured to other flags if necessary.
+Some new music and changes to the Mauville Corner have been made as well, so keep that in mind if you plan to merge this into your
+existing project. Credits to AsparagusEduardo for the basis of this merge here, I just mainly tweaked things around to help
+out any developers who may want to use this as well.
+
+Updated to pokeemerald-expansion v1.12.0
+
+To pull from this branch here, just simply use these commands here:
+```
+git remote add AGSMG https://github.com/agsmgmaster64/worldlinkdeluxe-ame/
+git pull AGSMG gacha-expansion
+```
+
+
+Below is the rest of the original description from Chris Piche himself:
+
+More specifically, this adds 4 pinball mini-games, Flappy Bird, Block Stacker, Snake, Blackjack, Voltorb Flip, Plinko, Mauville Derby, and Gacha Machines into the Game Corner.
+
+Big thank you to huderlem (Pokemon Pinball to Emerald), and Pokeabbie (Voltorb Flip from Emerald Rogue). All I really did for these was some graphics, music, and code to work with coins. They deserve the real credits here.
+Also thank you to Viperio, who made an initial Snake for Pokemon Emerald that I based my code on.
+
+...
 # About `pokeemerald-expansion`
 
 ![Gif that shows debugging functionality that is unique to pokeemerald-expansion such as rerolling Trainer Id, Cheat Start, PC from Debug Menu, Debug PC Fill, Pokemon Sprite Visualizer, Debug Warp to Map, and Battle Debug Menu](https://github.com/user-attachments/assets/cf9dfbee-4c6b-4bca-8e0a-07f116ef891c) ![Gif that shows overworld functionality that is unique to pokeemerald-expansion such as indoor running, BW2 style map popups, overworld followers, DNA Splicers, Gen 1 style fishing, OW Item descriptions, Quick Run from Battle, Use Last Ball, Wild Double Battles, and Catch from EXP](https://github.com/user-attachments/assets/383af243-0904-4d41-bced-721492fbc48e) ![Gif that shows off a number of modern Pokemon battle mechanics happening in the pokeemerald-expansion engine: 2 vs 1 battles, modern Pokemon, items, moves, abilities, fully customizable opponents and partners, Trainer Slides, and generational gimmicks](https://github.com/user-attachments/assets/50c576bc-415e-4d66-a38f-ad712f3316be)

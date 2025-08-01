@@ -900,6 +900,17 @@ gSongTable::
 	song mus_hg_obtain_castle_points, 2, 2
 	song mus_hg_obtain_b_points, 2, 2
 	song mus_hg_win_minigame, 2, 2
+	song mus_hgss_casino, 0, 0
+	song mus_casino_plus_1, 0, 0
+	song mus_casino_plus_2, 0, 0
+	song mus_casino_plus_3, 0, 0
+	song mus_casino_plus_4, 0, 0
+	song mus_casino_plus_5, 0, 0
+	song mus_casino_plus_6, 0, 0
+	song mus_casino_plus_7, 0, 0
+	song mus_casino_plus_8, 0, 0
+	song mus_casino_plus_9, 0, 0
+	song mus_casino_plus_gacha, 0, 0
 
 	.align 2
 dummy_song_header:
