@@ -2189,7 +2189,7 @@ static void ShowMessage(void)
     FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sTextWindowId);
     LoadUserWindowBorderGfx(sTextWindowId, 0x214, BG_PLTT_ID(14));
-    DrawStdWindowFrame(sTextWindowId, FALSE); 
+    DrawDialogueFrame(sTextWindowId, FALSE); 
     bet = sGacha->newMonOdds;
     ConvertUIntToDecimalStringN(gStringVar1, bet, STR_CONV_MODE_LEADING_ZEROS, 3);
     //gStringVar4[0] = '\0';

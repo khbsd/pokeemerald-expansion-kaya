@@ -2,5 +2,6 @@
 #define GUARD_ROULETTE_H
 
 void PlayRoulette(void);
+void SetMinBet(void);
 
 #endif // GUARD_ROULETTE_H

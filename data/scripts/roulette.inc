@@ -19,8 +19,16 @@ Roulette_EventScript_Table2::
 	end
 
 Roulette_EventScript_Play::
+	callnative SetMinBet
+	msgbox Roulette_Text_PlayMinimumWagerIsX, MSGBOX_YESNO
+	closemessage
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelBJ
+	playbgm MUS_GAME_CORNER, FALSE
 	special PlayRoulette
 	waitstate
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	releaseall
 	end
 
 Roulette_Text_PlayMinimumWagerIsX::
