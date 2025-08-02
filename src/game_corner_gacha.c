@@ -2183,7 +2183,7 @@ static void ShowMessage(void)
     u16 bet;
     struct WindowTemplate template;
 
-    SetWindowTemplateFields(&template, GACHA_MENUS, 17, 10, 10, 2, 0xF, 0x194);
+    SetWindowTemplateFields(&template, GACHA_MENUS, 17, 10, 11, 2, 11, 0x194);
     
     sTextWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
@@ -2194,7 +2194,7 @@ static void ShowMessage(void)
     ConvertUIntToDecimalStringN(gStringVar1, bet, STR_CONV_MODE_LEADING_ZEROS, 3);
     //gStringVar4[0] = '\0';
     StringExpandPlaceholders(gStringVar4, sMessageText);
-    AddTextPrinterParameterized(sTextWindowId, FONT_NARROW, gStringVar4, 0, 1, 0, 0);
+    AddTextPrinterParameterized2(sTextWindowId, FONT_NARROW, gStringVar4, 0, 0, 2, 1, 3);
     CopyWindowToVram(sTextWindowId, 3);
 }
 
@@ -2737,7 +2737,7 @@ void DeterminePokemonRarityAndNewStatus(void)
         // Calculate the total number of Pokémon the player doesn't own
         totalNotOwned = totalMax - totalOwned;
 
-        if (totalNotOwned <= 0 && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 8))
+        if (totalNotOwned <= 0 && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 10))
         {
             // If all Pokémon of the selected rarity are owned, restart the process (reroll)
             continue;  // This will make the loop restart from the beginning
@@ -3017,6 +3017,7 @@ static void ExitGacha(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         FREE_AND_SET_NULL(sGacha);
+        HideFieldMessageBox();
     }
 }
 
@@ -3092,7 +3093,7 @@ static void RemoveGarbage(void)
                                  BGCNT_TXT512x256);
     LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
     DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
-    DmaCopy16Defvars(3, gTrade_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);    
+    DmaCopy16Defvars(3, gTrade_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
     
     gPaletteFade.bufferTransferDisabled = TRUE;
     gPaletteFade.bufferTransferDisabled = FALSE;
@@ -3104,16 +3105,16 @@ void ShowFinalMessage(void)
 {
     struct WindowTemplate template;
 
-    SetWindowTemplateFields(&template, 1, 2, 15, 26, 4, 0xF, 0x194);
+    SetWindowTemplateFields(&template, 1, 2, 15, 26, 4, 11, 0x194);
     
     sTextWindowId = AddWindow(&template);
-    FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
+    // FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sTextWindowId);
     LoadUserWindowBorderGfx(sTextWindowId, 0x214, BG_PLTT_ID(14));
     DrawStdWindowFrame(sTextWindowId, FALSE); 
     StringCopy(gStringVar1, GetSpeciesName(sGacha->CalculatedSpecies));
     StringExpandPlaceholders(gStringVar4, sText_FromGacha);
-    AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
+    AddTextPrinterParameterized2(sTextWindowId, FONT_NORMAL, gStringVar4, 0, 0, 2, 1, 3);
     CopyWindowToVram(sTextWindowId, 3);
 }
 
@@ -3344,8 +3345,8 @@ static void GachaMain(u8 taskId)
         ShowFinalMessage();
         PlayFanfare(MUS_EVOLVED);
         sGacha->state++;
-        //PutWindowTilemap(0);
-        //CopyWindowToVram(0, COPYWIN_FULL);
+        PutWindowTilemap(0);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case NEW_2:
         if (IsFanfareTaskInactive())

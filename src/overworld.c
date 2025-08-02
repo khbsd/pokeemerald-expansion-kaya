@@ -1487,14 +1487,14 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
         *state = AMB_CRY_WAIT;
         break;
     case AMB_CRY_RESET:
-        divBy = 4;
+        divBy = 1;
         monsCount = CalculatePlayerPartyCount();
         for (i = 0; i < monsCount; i++)
         {
             if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
                 && GetMonAbility(&gPlayerParty[0]) == ABILITY_SWARM)
             {
-                divBy = 8;
+                divBy = 2;
                 break;
             }
         }
@@ -1507,7 +1507,6 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
         if (--(*delayCounter) == 0)
         {
             PlayAmbientCry();
-            MgbaPrintf(MGBA_LOG_WARN, "cry for species %u played", sAmbientCrySpecies);
             *state = AMB_CRY_RESET;
         }
         break;
@@ -1532,7 +1531,6 @@ static void ChooseAmbientCrySpecies(void)
     {
         sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
     }
-    MgbaPrintf(MGBA_LOG_WARN, "ambient species chosen: %u", sAmbientCrySpecies);
 }
 
 enum MapType GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum)

@@ -4,6 +4,7 @@
 #include "coins.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_message_box.h"
 #include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -1294,8 +1295,10 @@ static void Task_AskKeepPlaying(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DrawStdWindowFrame(sTextWindowId, FALSE);
-    AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_KeepPlaying, 0, 1, TEXT_SKIP_DRAW, 0);
+//    AddTextPrinterParameterized(sTextWindowId, FONT_NORMAL, Roulette_Text_KeepPlaying, 0, 1, TEXT_SKIP_DRAW, 0);
+    AddTextPrinterParameterized2(sTextWindowId, FONT_NORMAL, Roulette_Text_KeepPlaying, 0, 0, 2, 1, 3);
     CopyWindowToVram(sTextWindowId, COPYWIN_FULL);
+    // ShowFieldMessage(Roulette_Text_KeepPlaying);
     DoYesNoFuncWithChoice(taskId, &sYesNoTable_KeepPlaying);
 }
 
@@ -3376,10 +3379,9 @@ void SetMinBet(void)
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
 }
 
-static void Task_ShowMinBetYesNo(u8 taskId)
+void IsSpecialRateDay(void)
 {
-    DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &sYesNoTable_AcceptMinBet);
+    VarSet(VAR_0x8005, (gSpecialVar_0x8004 & ROULETTE_SPECIAL_RATE) && (gSpecialVar_0x8004 & 1));
 }
 
 static void Task_FadeToRouletteGame(u8 taskId)
@@ -3409,6 +3411,13 @@ static void Task_DeclineMinBet(u8 taskId)
     HideCoinsWindow();
     UnlockPlayerFieldControls();
     DestroyTask(taskId);
+}
+
+/*
+static void Task_ShowMinBetYesNo(u8 taskId)
+{
+    DisplayYesNoMenuDefaultYes();
+    DoYesNoFuncWithChoice(taskId, &sYesNoTable_AcceptMinBet);
 }
 
 static void Task_NotEnoughForMinBet(u8 taskId)
@@ -3476,7 +3485,7 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
         gTasks[taskId].tCoins = 0;
         gTasks[taskId].data[0] = 0;
     }
-}
+}*/
 
 void PlayRoulette(void)
 {
