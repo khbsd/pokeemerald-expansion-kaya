@@ -1,7 +1,7 @@
 #ifndef GUARD_METATILE_BEHAVIORS_H
 #define GUARD_METATILE_BEHAVIORS_H
 
-enum MetatileBehaviors 
+enum MetatileBehaviors
 {
     MB_NORMAL,
     MB_SECRET_BASE_WALL,
@@ -242,8 +242,8 @@ enum MetatileBehaviors
     MB_UP_LEFT_STAIR_WARP,
     MB_DOWN_RIGHT_STAIR_WARP,
     MB_DOWN_LEFT_STAIR_WARP,
-    MB_UNUSED_EF,
-    NUM_METATILE_BEHAVIORS,
+    MB_ROCK_CLIMB,
+    NUM_METATILE_BEHAVIORS
 };
 
 #define MB_INVALID   0x2FF

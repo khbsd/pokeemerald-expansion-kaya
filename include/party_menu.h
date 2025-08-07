@@ -115,10 +115,12 @@ void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task);
 void FieldCallback_Surf(void);
 void FieldCallback_Waterfall(void);
 void FieldCallback_Dive(void);
+void FieldCallback_RockClimb(void);
 
 bool32 SetUpFieldMove_Surf(void);
 bool32 SetUpFieldMove_Fly(void);
 bool32 SetUpFieldMove_Waterfall(void);
 bool32 SetUpFieldMove_Dive(void);
+bool32 SetUpFieldMove_RockClimb(void);
 
 #endif // GUARD_PARTY_MENU_H

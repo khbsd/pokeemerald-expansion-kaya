@@ -74,4 +74,5 @@ u8 FldEff_UseFly(void);
 u32 FilterFlyDestination(struct RegionMap *regionMap);
 void SetFlyDestination(struct RegionMap *regionMap);
 
+bool8 IsRockClimbActive(void);
 #endif // GUARD_FIELD_EFFECTS_H

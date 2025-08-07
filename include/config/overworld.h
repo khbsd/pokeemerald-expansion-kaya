@@ -21,6 +21,7 @@
 #define OW_CLEAR_ITEMS_DAILY            TRUE       // Clear items every day
 #define OW_CLEAR_HIDDEN_ITEMS           OW_CLEAR_ITEMS_DAILY
 #define OW_CLEAR_ITEM_BALLS             OW_CLEAR_ITEMS_DAILY
+#define OW_ROCK_CLIMB_FIELD_MOVE        FALSE      // If enabled, Rock Climb can be used as a Field Move as seen in DPPt.
 
 // Item Obtain Description Box
 #define OW_ITEM_DESCRIPTIONS_OFF        0   // never show descriptions
