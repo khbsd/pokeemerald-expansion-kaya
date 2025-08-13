@@ -80,6 +80,7 @@ u32 AI_GetDamage(u32 battlerAtk, u32 battlerDef, u32 moveIndex, enum DamageCalcC
 bool32 IsAiVsAiBattle(void);
 bool32 BattlerHasAi(u32 battlerId);
 bool32 IsAiBattlerAware(u32 battlerId);
+bool32 CanAiPredictMove(void);
 bool32 IsAiBattlerAssumingStab(void);
 bool32 IsAiBattlerAssumingStatusMoves(void);
 bool32 ShouldRecordStatusMove(u32 move);
@@ -124,7 +125,6 @@ bool32 BattlerWillFaintFromWeather(u32 battler, enum Abilities ability);
 bool32 BattlerWillFaintFromSecondaryDamage(u32 battler, enum Abilities ability);
 bool32 ShouldTryOHKO(u32 battlerAtk, u32 battlerDef, enum Abilities atkAbility, enum Abilities defAbility, u32 move);
 bool32 ShouldUseRecoilMove(u32 battlerAtk, u32 battlerDef, u32 recoilDmg, u32 moveIndex);
-u32 GetBattlerSideSpeedAverage(u32 battler);
 bool32 ShouldAbsorb(u32 battlerAtk, u32 battlerDef, u32 move, s32 damage);
 bool32 ShouldRecover(u32 battlerAtk, u32 battlerDef, u32 move, u32 healPercent);
 bool32 ShouldSetScreen(u32 battlerAtk, u32 battlerDef, enum BattleMoveEffects moveEffect);
@@ -145,8 +145,7 @@ bool32 CanEndureHit(u32 battler, u32 battlerTarget, u32 move);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
-bool32 ShouldLowerStat(u32 battlerAtk, u32 battlerDef, enum Abilities abilityDef, u32 stat);
-bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, enum Abilities abilityDef, u32 stat);
+bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, u32 stat);
 bool32 BattlerStatCanRise(u32 battler, enum Abilities battlerAbility, u32 stat);
 bool32 AreBattlersStatsMaxed(u32 battler);
 u32 CountPositiveStatStages(u32 battlerId);
@@ -162,6 +161,7 @@ bool32 AI_IsDamagedByRecoil(u32 battler);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
 u32 GetNoOfHitsToKOBattlerDmg(u32 dmg, u32 battlerDef);
 u32 GetNoOfHitsToKOBattler(u32 battlerAtk, u32 battlerDef, u32 moveIndex, enum DamageCalcContext calcContext);
+u32 GetBestNoOfHitsToKO(u32 battlerAtk, u32 battlerDef, enum DamageCalcContext calcContext);
 u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef, enum DamageCalcContext calcContext);
 uq4_12_t AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef);
 u16 *GetMovesArray(u32 battler);
@@ -170,14 +170,15 @@ bool32 HasMove(u32 battlerId, u32 move);
 bool32 HasOnlyMovesWithCategory(u32 battlerId, enum DamageCategory category, bool32 onlyOffensive);
 bool32 HasMoveWithCategory(u32 battler, enum DamageCategory category);
 bool32 HasMoveWithType(u32 battler, u32 type);
-bool32 HasMoveWithEffect(u32 battlerId, enum BattleMoveEffects moveEffect);
+bool32 HasMoveWithEffect(u32 battler, enum BattleMoveEffects moveEffect);
+bool32 HasMoveWithAIEffect(u32 battler, u32 aiEffect);
 bool32 HasBattlerSideMoveWithEffect(u32 battler, u32 effect);
+bool32 HasBattlerSideMoveWithAIEffect(u32 battler, u32 effect);
 bool32 HasBattlerSideUsedMoveWithEffect(u32 battler, u32 effect);
 bool32 HasNonVolatileMoveEffect(u32 battlerId, u32 effect);
 bool32 IsPowerBasedOnStatus(u32 battlerId, enum BattleMoveEffects effect, u32 argument);
 bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect);
 bool32 HasBattlerSideMoveWithAdditionalEffect(u32 battler, u32 moveEffect);
-bool32 HasBattlerSideUsedMoveWithAdditionalEffect(u32 battler, u32 moveEffect);
 bool32 HasMoveWithCriticalHitChance(u32 battlerId);
 bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, enum BattleMoveEffects exception);
 bool32 HasMoveThatLowersOwnStats(u32 battlerId);
@@ -254,11 +255,9 @@ bool32 HasTwoOpponents(u32 battler);
 bool32 HasPartner(u32 battler);
 bool32 HasPartnerIgnoreFlags(u32 battler);
 // HasPartner respects the Attacks Partner AI flag; HasPartnerIgnoreFlags checks only if a live pokemon is adjacent.
+bool32 AreMovesEquivalent(u32 battlerAtk, u32 battlerAtkPartner, u32 move, u32 partnerMove);
 bool32 DoesPartnerHaveSameMoveEffect(u32 battlerAtkPartner, u32 battlerDef, u32 move, u32 partnerMove);
-bool32 PartnerHasSameMoveEffectWithoutTarget(u32 battlerAtkPartner, u32 move, u32 partnerMove);
 bool32 PartnerMoveEffectIsStatusSameTarget(u32 battlerAtkPartner, u32 battlerDef, u32 partnerMove);
-bool32 IsMoveEffectWeather(u32 move);
-bool32 PartnerMoveEffectIsTerrain(u32 battlerAtkPartner, u32 partnerMove);
 bool32 PartnerMoveEffectIs(u32 battlerAtkPartner, u32 partnerMove, enum BattleMoveEffects effectCheck);
 bool32 PartnerMoveIs(u32 battlerAtkPartner, u32 partnerMove, u32 moveCheck);
 bool32 PartnerMoveIsSameAsAttacker(u32 battlerAtkPartner, u32 battlerDef, u32 move, u32 partnerMove);
@@ -291,16 +290,34 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
 u32 AI_WhoStrikesFirstPartyMon(u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, u32 aiMoveConsidered, u32 playerMoveConsidered, enum ConsiderPriority ConsiderPriority);
 s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);
 bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
-bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData);
+bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, u32 move, struct AiLogicData *aiData);
 void IncreaseTidyUpScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 bool32 AI_ShouldSpicyExtract(u32 battlerAtk, u32 battlerAtkPartner, u32 move, struct AiLogicData *aiData);
 u32 IncreaseSubstituteMoveScore(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 IsBattlerItemEnabled(u32 battler);
 bool32 IsBattlerPredictedToSwitch(u32 battler);
 u32 GetIncomingMove(u32 battler, u32 opposingBattler, struct AiLogicData *aiData);
+u32 GetIncomingMoveSpeedCheck(u32 battler, u32 opposingBattler, struct AiLogicData *aiData);
 bool32 HasLowAccuracyMove(u32 battlerAtk, u32 battlerDef);
 bool32 HasBattlerSideAbility(u32 battlerDef, enum Abilities ability, struct AiLogicData *aiData);
-u32 GetThinkingBattler(u32 battler);
 bool32 IsNaturalEnemy(u32 speciesAttacker, u32 speciesTarget);
+
+// These are for the purpose of not doubling up on moves during double battles.
+// Used in GetAIEffectGroup for move effects and GetAIEffectGroupFromMove for additional effects
+#define AI_EFFECT_NONE                        0
+#define AI_EFFECT_WEATHER              (1 <<  0)
+#define AI_EFFECT_TERRAIN              (1 <<  1)
+#define AI_EFFECT_CLEAR_HAZARDS        (1 <<  2)
+#define AI_EFFECT_BREAK_SCREENS        (1 <<  3)
+#define AI_EFFECT_RESET_STATS          (1 <<  4)
+#define AI_EFFECT_FORCE_SWITCH         (1 <<  5)
+#define AI_EFFECT_TORMENT              (1 <<  6)
+#define AI_EFFECT_LIGHT_SCREEN         (1 <<  7)
+#define AI_EFFECT_REFLECT              (1 <<  8)
+#define AI_EFFECT_GRAVITY              (1 <<  9)
+#define AI_EFFECT_CHANGE_ABILITY       (1 << 10)
+
+// As Aurora Veil should almost never be used alongside the other screens, we save the bit.
+#define AI_EFFECT_AURORA_VEIL          (AI_EFFECT_LIGHT_SCREEN | AI_EFFECT_REFLECT)
 
 #endif //GUARD_BATTLE_AI_UTIL_H
