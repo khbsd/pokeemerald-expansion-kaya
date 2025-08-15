@@ -15989,6 +15989,7 @@ AI: Smart Trainer
 
 Charizard Mega X @ Lum Berry
 Level: 100
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Outrage
 - Dragon Dance
@@ -15997,6 +15998,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Charizard Mega Y @ King's Rock
 Level: 100
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Dragon Cheer
@@ -16299,6 +16301,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Snorlax @ Leftovers
 Ability: Immunity
 Level: 100
+EVs: 140 HP / 228 Atk / 140 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hammer Arm
 - Rest
@@ -16319,6 +16322,7 @@ Porygon Z @ Iron Ball
 Ability: Analytic
 Nature: Quiet
 Level: 100
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 - Trick Room
 - Curse
@@ -16328,6 +16332,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Porygon Z @ Quick Claw
 Ability: Download
 Level: 100
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
 - Conversion
