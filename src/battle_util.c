@@ -11388,6 +11388,11 @@ static bool32 CanBeInfinitelyConfused(u32 battler)
     return TRUE;
 }
 
+bool32 DoesAbilityAffectSecondaryEffectChance(enum Abilities ability)
+{
+    return (ability == ABILITY_SERENE_GRACE || ability == ABILITY_BLESSED_LUCK || ability == ABILITY_OMINOUS_LUCK);
+}
+
 u8 GetBattlerGender(u32 battler)
 {
     return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
@@ -11412,14 +11417,14 @@ bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
 
 u32 CalcSecondaryEffectChance(u32 battler, enum Abilities battlerAbility, const struct AdditionalEffect *additionalEffect)
 {
-    bool8 hasSereneGrace = (battlerAbility == ABILITY_SERENE_GRACE);
+    bool8 abilityAffectsSecondary = DoesAbilityAffectSecondaryEffectChance(battlerAbility);
     bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
     u16 secondaryEffectChance = additionalEffect->chance;
 
-    if (hasRainbow && hasSereneGrace && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
+    if (hasRainbow && abilityAffectsSecondary && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
         return secondaryEffectChance * 2;
 
-    if (hasSereneGrace)
+    if (abilityAffectsSecondary)
         secondaryEffectChance *= 2;
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;

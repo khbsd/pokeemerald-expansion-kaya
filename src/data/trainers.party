@@ -15970,6 +15970,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Salazzle @ Black Sludge
 Ability: Tainted Love
 Level: 100
+Nature: Modest
 EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Lash
@@ -16194,6 +16195,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Salazzle @ Black Sludge
 Ability: Tainted Love
 Level: 100
+Nature: Modest
 EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Lash
@@ -16226,6 +16228,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Salazzle @ Black Sludge
 Ability: Tainted Love
 Level: 100
+Nature: Modest
 EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fire Lash
@@ -16318,38 +16321,44 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Porygon Z @ Iron Ball
+Porygon Z @ Lagging Tail
 Ability: Analytic
-Nature: Quiet
 Level: 100
+Nature: Quiet
 EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-- Trick Room
+- Nasty Plot
 - Curse
 - Recover
 - Tri Attack
 
-Porygon Z @ Quick Claw
+Porygon Z @ Lagging Tail
 Ability: Download
 Level: 100
+Nature: Quiet
 EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
-- Conversion
+- Tri Attack
 - Conversion 2
 - Recover
 
 Lopunny @ Normal Gem
 Ability: Klutz
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Assurance
 - Drain Punch
 - Facade
 - Baby Doll Eyes
 
-Slaking @ Chesto Berry
+Slaking @ Choice Band
+Ability: Gorilla Tactics
 Level: 100
+Nature: Adamant
+EVs: 20 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 236 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slack Off
 - Rock Slide
@@ -16358,6 +16367,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Zoroark Hisui @ King's Rock
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
 - Protect
@@ -16366,6 +16377,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Zoroark Hisui @ Leftovers
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
 - Protect
@@ -16383,16 +16396,20 @@ Battle Type: Doubles
 AI: Smart Trainer
 
 Kangaskhan @ Life Orb
+Ability: Early Bird
 Level: 100
+Nature: Adamant
+EVs: 128 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 128 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
+- Rest
 - Dizzy Punch
 - Endure
 - Reversal
 
 Furfrou @ Sitrus Berry
 Level: 100
-Nature: Relaxed
+Nature: Impish
+EVs: 0 HP / 196 Atk / 252 Def / 0 SpA / 0 SpD / 56 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Retaliate
 - Cotton Guard
@@ -16400,7 +16417,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 
 Miltank
+Ability: Thick Fat
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Milk Drink
 - Zen Headbutt
@@ -16410,6 +16430,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Lickilicky
 Ability: Own Tempo
 Level: 100
+Nature: Adamant
+EVs: 168 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 88 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Power Whip
 - Defense Curl
@@ -16417,10 +16439,12 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Body Press
 
 Sawsbuck @ Power Herb
-Level: 100
 Ability: Serene Grace
+Level: 100
+Nature: Adamant
+EVs: 168 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 88 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Solar Beam
+- Body Slam
 - Horn Leech
 - Grassy Terrain
 - Stomping Tantrum
@@ -16428,6 +16452,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Ambipom @ King's Rock
 Ability: Technician
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fury Swipes
 - Double Hit
@@ -16447,6 +16473,8 @@ AI: Smart Trainer
 Lopunny Mega @ Normal Gem
 Ability: Klutz
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Assurance
 - Drain Punch
@@ -16456,6 +16484,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Ursaluna @ Flame Orb
 Ability: Guts
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 240 Def / 0 SpA / 0 SpD / 16 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Headlong Rush
 - Giga Impact
@@ -16464,7 +16494,9 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Kangaskhan Mega @ Leftovers
 Level: 100
+Nature: Adamant
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 128 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 128 Spe
 - Mega Punch
 - Dizzy Punch
 - Endure
@@ -16472,7 +16504,9 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Kangaskhan Mega @ Leftovers
 Level: 100
+Nature: Adamant
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 128 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 128 Spe
 - Mega Punch
 - Dizzy Punch
 - Endure
@@ -16481,24 +16515,30 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Exploud @ King's Rock
 Ability: Soundproof
 Level: 100
+Nature: Adamant
+EVs: 248 HP / 248 Atk / 8 Def / 4 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zen Headbutt
 - Taunt
 - Giga Impact
 - Uproar
 
-Drampa @ Sitrus Berry
+Drampa @ Leftovers
 Ability: Berserk
 Level: 100
+Nature: Modest
+EVs: 240 HP / 0 Atk / 8 Def / 252 SpA / 0 SpD / 16 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Calm Mind
 - Dragon Pulse
 - Extrasensory
 - Glare
 
-Exploud @ King's Rock
+Exploud @ Weakness Policy
 Ability: Soundproof
 Level: 100
+Nature: Brave
+EVs: 248 HP / 248 Atk / 8 Def / 4 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Zen Headbutt
 - Taunt
@@ -16508,6 +16548,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Wigglytuff @ Leftovers
 Ability: Friend Guard
 Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stockpile
 - Perish Song
@@ -16515,15 +16557,21 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swallow
 
 Blissey @ Chesto Berry
+Ability: Natural Cure
 Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Bell
 - Softboiled
 - Double Edge
 - Rest
 
-Slaking @ Leftovers
+Slaking @ Liechi Berry
+Ability: Truant
 Level: 100
+Nature: Adamant
+EVs: 20 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 236 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slack Off
 - Throat Chop
@@ -16533,6 +16581,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Bouffalant @ Silk Scarf
 Ability: Reckless
 Level: 100
+Nature: Adamant
+EVs: 8 HP / 252 Atk / 124 Def / 0 SpA / 124 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Head Charge
 - Reversal
@@ -16542,41 +16592,51 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Snorlax @ Leftovers
 Ability: Immunity
 Level: 100
+EVs: 140 HP / 228 Atk / 140 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hammer Arm
 - Rest
 - Sleep Talk
 - Body Slam
 
-Porygon Z @ Iron Ball
+Porygon Z @ Lagging Tail
 Ability: Analytic
-Nature: Quiet
 Level: 100
+Nature: Quiet
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-- Trick Room
+- Nasty Plot
 - Curse
 - Recover
 - Tri Attack
 
-Porygon Z @ Quick Claw
+Porygon Z @ Lagging Tail
+Ability: Download
 Level: 100
+Nature: Quiet
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
-- Conversion
+- Tri Attack
 - Conversion 2
 - Recover
 
 Lopunny @ Normal Gem
 Ability: Klutz
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Assurance
 - Drain Punch
 - Facade
 - Baby Doll Eyes
 
-Slaking @ Chesto Berry
+Slaking @ Choice Band
+Ability: Gorilla Tactics
 Level: 100
+Nature: Adamant
+EVs: 20 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 236 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slack Off
 - Rock Slide
@@ -16585,6 +16645,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Zoroark Hisui @ King's Rock
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
 - Protect
@@ -16593,6 +16655,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Zoroark Hisui @ Leftovers
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bitter Malice
 - Protect
@@ -16600,16 +16664,20 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slash
 
 Kangaskhan @ Life Orb
+Ability: Early Bird
 Level: 100
+Nature: Adamant
+EVs: 128 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 128 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Fake Out
+- Rest
 - Dizzy Punch
 - Endure
 - Reversal
 
 Furfrou @ Sitrus Berry
 Level: 100
-Nature: Relaxed
+Nature: Impish
+EVs: 0 HP / 196 Atk / 252 Def / 0 SpA / 0 SpD / 56 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Retaliate
 - Cotton Guard
@@ -16617,7 +16685,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 
 Miltank
+Ability: Thick Fat
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Milk Drink
 - Zen Headbutt
@@ -16627,6 +16698,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Lickilicky
 Ability: Own Tempo
 Level: 100
+Nature: Adamant
+EVs: 168 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 88 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Power Whip
 - Defense Curl
@@ -16634,10 +16707,12 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Body Press
 
 Sawsbuck @ Power Herb
-Level: 100
 Ability: Serene Grace
+Level: 100
+Nature: Adamant
+EVs: 168 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 88 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Solar Beam
+- Body Slam
 - Horn Leech
 - Grassy Terrain
 - Stomping Tantrum
@@ -16645,6 +16720,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Ambipom @ King's Rock
 Ability: Technician
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Fury Swipes
 - Double Hit
@@ -16664,6 +16741,8 @@ AI: Smart Trainer / Risky
 Drifblim @ Flame Orb
 Ability: Flare Boost
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Strength Sap
 - Phantom Force
@@ -16673,6 +16752,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Vespiquen
 Ability: Queenly Majesty
 Level: 100
+EVs: 0 HP / 252 Atk / 128 Def / 0 SpA / 128 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Order
 - Dual Wingbeat
@@ -16682,6 +16762,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Togekiss @ Leftovers
 Ability: Blessed Luck
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - AncientPower
 - Protect
@@ -16691,6 +16773,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Swellow @ Flame Orb
 Ability: Guts
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
 - Bulk Up
@@ -16699,6 +16783,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 Skarmory @ Sitrus Berry
 Level: 100
+Nature: Impish
+EVs: 0 HP / 196 Atk / 252 Def / 0 SpA / 0 SpD / 56 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
 - Spikes
@@ -16708,6 +16794,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Hawlucha @ Sitrus Berry
 Ability: Unburden
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Detect
 - Swords Dance

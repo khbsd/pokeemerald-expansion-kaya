@@ -411,5 +411,6 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler);
 bool32 IsSemiInvulnerable(u32 battler, enum SemiInvulnerableExclusion excludeCommander);
 bool32 BreaksThroughSemiInvulnerablity(u32 battler, u32 move);
+bool32 DoesAbilityAffectSecondaryEffectChance(enum Abilities ability);
 
 #endif // GUARD_BATTLE_UTIL_H
