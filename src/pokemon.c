@@ -6062,6 +6062,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u8 evs[NUM_STATS];
     u16 evIncrease = 0;
     u16 totalEVs = 0;
+    int bonusScale = B_EV_SCALE > 0 ? B_EV_SCALE : 1;
     u16 heldItem;
     u8 holdEffect;
     int i, multiplier;
@@ -6103,7 +6104,9 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         if (CheckPartyHasHadPokerus(mon, 0))
             multiplier = 2;
         else
-            multiplier = (1 * B_EV_SCALE);
+            multiplier = 1;
+
+        multiplier *= bonusScale;
 
         switch (i)
         {
@@ -8066,13 +8069,13 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
     *new1 = *old1;
     *new2 = *old2;
     *new3 = *old3;
-    
+
     #if BOX_ENCRYPTION == TRUE
         boxMon->checksum = CalculateBoxMonChecksumReencrypt(boxMon);
     #else
         boxMon->checksum = CalculateBoxMonChecksum(boxMon);
     #endif // BOX_ENCRYPTION
-    
+
 
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
     SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
