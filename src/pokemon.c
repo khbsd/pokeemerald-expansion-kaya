@@ -6178,38 +6178,32 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
+u32 GetRandomPokerusDays(void)
+{
+    return RandomUniform(RNG_POKERUS_INFECTION_DAYS, MIN_POKERUS_DAYS, MAX_POKERUS_DAYS);
+}
+
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
-    u16 rnd = Random();
-    if (rnd == 0x4000 || rnd == 0x8000 || rnd == 0xC000)
+    u16 rndChance = Random();
+    u32 rndSlot;
+    u32 infectionChance = (GetNumOwnedBadges() * (P_BADGE_BOOST_POKERUS_CHANCE)) + POKERUS_INFECTION_CHANCE;
+
+    if (rndChance < infectionChance)
     {
         struct Pokemon *mon;
 
         do
         {
-            rnd = Random() % PARTY_SIZE;
-            mon = &party[rnd];
+            rndSlot = Random() % PARTY_SIZE;
+            mon = &party[rndSlot];
         }
         while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
 
-        if (!(CheckPartyHasHadPokerus(party, 1u << rnd)))
+        if (!(CheckPartyHasHadPokerus(party, 1u << rndSlot)))
         {
-            u8 rnd2;
-
-            do
-            {
-                rnd2 = Random();
-            }
-            while ((rnd2 & 0x7) == 0);
-
-            if (rnd2 & 0xF0)
-                rnd2 &= 0x7;
-
-            rnd2 |= (rnd2 << 4);
-            rnd2 &= 0xF3;
-            rnd2++;
-
-            SetMonData(&party[rnd], MON_DATA_POKERUS, &rnd2);
+            u32 days = GetRandomPokerusDays();
+            SetMonData(&party[rndSlot], MON_DATA_POKERUS, &days);
         }
     }
 }
@@ -6324,32 +6318,17 @@ void PartySpreadPokerus(struct Pokemon *party)
     }
 }
 
-void InfectMonWithPokerus(u8 slot, u8 days)
+void InfectMonWithPokerus(u32 slot, u32 days)
 {
     struct Pokemon* mon;
 
-    if (days < -1)
+    days = days > 0 ? days : MIN_POKERUS_DAYS;
+    if (days >= RANDOM_POKERUS_DAYS)
+        days = RandomUniform(RNG_POKERUS_INFECTION_DAYS, MIN_POKERUS_DAYS, MAX_POKERUS_DAYS);
+
+    if (FlagGet(P_FLAG_INFECT_RANDOM_MON_POKERUS))
     {
-        u8 rnd2;
-
-        do
-        {
-            rnd2 = Random();
-        } while ((rnd2 & 0x7) == 0);
-
-        if (rnd2 & 0xF0)
-            rnd2 &= 0x7;
-
-        rnd2 |= (rnd2 << 4);
-        rnd2 &= 0xF3;
-        rnd2++;
-
-        days = rnd2;
-    }
-
-    if (P_FLAG_INFECT_RANDOM_MON_POKERUS != 0 && FlagGet(P_FLAG_INFECT_RANDOM_MON_POKERUS))
-    {
-        u8 rnd;
+        u32 rnd;
 
         do
         {
@@ -6358,18 +6337,13 @@ void InfectMonWithPokerus(u8 slot, u8 days)
         } while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
 
         if (!(CheckPartyHasHadPokerus(&gPlayerParty[rnd], rnd)))
-        {
             SetMonData(&gPlayerParty[rnd], MON_DATA_POKERUS, &days);
-        }
     }
     else
     {
         mon = &gPlayerParty[slot];
-
         if (GetMonData(mon, MON_DATA_SPECIES, 0) || !GetMonData(mon, MON_DATA_IS_EGG, 0))
-        {
             SetMonData(mon, MON_DATA_POKERUS, &days);
-        }
     }
 }
 

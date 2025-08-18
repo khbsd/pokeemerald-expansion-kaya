@@ -814,7 +814,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
 void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
-void InfectMonWithPokerus(u8 slot, u8 days);
+void InfectMonWithPokerus(u32 slot, u32 days);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u8 CanLearnTeachableMove(u16 species, u16 move);
 u16 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves);
@@ -896,5 +896,6 @@ struct Pokemon *GetSavedPlayerPartyMon(u32 index);
 u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 u32 IsSpeciesOfType(u32 species, u32 type);
+u32 GetRandomPokerusDays(void);
 
 #endif // GUARD_POKEMON_H
