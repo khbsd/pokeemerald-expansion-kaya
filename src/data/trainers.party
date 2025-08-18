@@ -5063,7 +5063,7 @@ Gender: Female
 Music: Female
 Items: Hyper Potion / Hyper Potion
 Battle Type: Singles
-AI: Smart Trainer / Risky
+AI: Smart Trainer
 
 Swablu
 Level: 30
@@ -16736,7 +16736,7 @@ Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
-AI: Smart Trainer / Risky
+AI: Smart Trainer
 
 Drifblim @ Flame Orb
 Ability: Flare Boost
@@ -16811,11 +16811,13 @@ Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
-AI: Smart Trainer / Risky
+AI: Smart Trainer
 
 Noctowl @ Sitrus Berry
 Ability: Keen Eye
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Psychic
@@ -16825,6 +16827,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Vivillon @ Silver Powder
 Ability: Wonder Skin
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Quiver Dance
 - Sleep Powder
@@ -16834,6 +16838,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Unfezant @ BlackGlasses
 Ability: Ominous Luck
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Night Slash
 - Air Cutter
@@ -16843,6 +16849,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Togekiss @ Fairy Feather
 Ability: Blessed Luck
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Air Cutter
 - Moonblast
@@ -16852,6 +16860,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Skarmory @ Sitrus Berry
 Ability: Sturdy
 Level: 100
+Nature: Impish
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Toxic
 - Spikes
@@ -16861,6 +16871,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Corviknight @ Sitrus Berry
 Ability: Mirror Armor
 Level: 100
+Nature: Impish
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Roost
@@ -16875,11 +16887,13 @@ Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
-AI: Smart Trainer / Risky
+AI: Smart Trainer
 
 Talonflame
 Ability: Burn Entry
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Flare Blitz
@@ -16889,6 +16903,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Toucannon
 Ability: Barrel Bore
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Overheat
@@ -16898,6 +16914,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Staraptor @ Sitrus Berry
 Ability: Reckless
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Roost
 - Brave Bird
@@ -16907,6 +16925,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Pidgeot Mega @ Sitrus Berry
 Ability: No Guard
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rest
 - Giga Impact
@@ -16916,6 +16936,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Ledian @ Punching Glove
 Ability: Iron Fist
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 96 SpA / 252 SpD / 156 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Power-Up Punch
@@ -16923,7 +16945,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 
 Dragonite @ Leftovers
+Ability: Multiscale
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Water Pulse
@@ -16938,11 +16963,13 @@ Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
-AI: Smart Trainer / Risky
+AI: Smart Trainer
 
 Pidgeot Mega @ Sitrus Berry
 Ability: No Guard
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Roost
 - Giga Impact
@@ -16950,7 +16977,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 
 Aerodactyl Mega @ King's Rock
+Ability: Tough Claws
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 - Aerial Ace
@@ -16958,7 +16988,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Stone Edge
 
 Charizard Mega Y @ King's Rock
+Ability: Drought
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Dragon Cheer
@@ -16968,6 +17001,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Dragonite @ Sitrus Berry
 Ability: Multiscale
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hyper Beam
 - Thunderbolt
@@ -16977,6 +17012,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Heracross Mega @ Sharp Beak
 Ability: Aerilate
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
 - U-turn
@@ -16984,7 +17021,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Impact
 
 Rayquaza @ Leftovers
+Ability: Air Lock
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Ascent
 - Extremespeed
@@ -16994,6 +17034,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Drifblim @ Flame Orb
 Ability: Flare Boost
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Strength Sap
 - Phantom Force
@@ -17003,6 +17045,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Vespiquen
 Ability: Queenly Majesty
 Level: 100
+EVs: 0 HP / 252 Atk / 128 Def / 0 SpA / 128 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Heal Order
 - Dual Wingbeat
@@ -17012,6 +17055,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Togekiss @ Leftovers
 Ability: Blessed Luck
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - AncientPower
 - Protect
@@ -17021,6 +17066,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Swellow @ Flame Orb
 Ability: Guts
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Facade
 - Bulk Up
@@ -17028,7 +17075,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 
 Skarmory @ Sitrus Berry
+Ability: Sturdy
 Level: 100
+Nature: Impish
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
 - Spikes
@@ -17038,15 +17088,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Hawlucha @ Sitrus Berry
 Ability: Unburden
 Level: 100
+Nature: Adamant
+EVs: 96 HP / 252 Atk / 0 Def / 0 SpA / 36 SpD / 124 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Detect
 - Swords Dance
-- Flying Press
-- Sky Attack
+- Close Combat
+- Stone Edge
 
 Noctowl @ Sitrus Berry
 Ability: Keen Eye
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hypnosis
 - Psychic
@@ -17056,6 +17110,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Vivillon @ Silver Powder
 Ability: Wonder Skin
 Level: 100
+Nature: Modest
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Quiver Dance
 - Sleep Powder
@@ -17065,6 +17121,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Unfezant @ BlackGlasses
 Ability: Ominous Luck
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Night Slash
 - Air Cutter
@@ -17074,6 +17132,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Togekiss @ Fairy Feather
 Ability: Blessed Luck
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Air Cutter
 - Moonblast
@@ -17083,6 +17143,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Skarmory @ Sitrus Berry
 Ability: Sturdy
 Level: 100
+Nature: Impish
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Toxic
 - Spikes
@@ -17092,6 +17154,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Corviknight @ Sitrus Berry
 Ability: Mirror Armor
 Level: 100
+Nature: Impish
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Roost
@@ -17101,6 +17165,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Talonflame
 Ability: Burn Entry
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Flame Charge
 - Flare Blitz
@@ -17110,6 +17176,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Toucannon
 Ability: Barrel Bore
 Level: 100
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day
 - Overheat
@@ -17119,6 +17187,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Staraptor @ Sitrus Berry
 Ability: Reckless
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Roost
 - Brave Bird
@@ -17128,6 +17198,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Pidgeot Mega @ Sitrus Berry
 Ability: No Guard
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rest
 - Giga Impact
@@ -17137,6 +17209,8 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Ledian @ Punching Glove
 Ability: Iron Fist
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 4 Def / 96 SpA / 252 SpD / 156 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Power-Up Punch
@@ -17144,7 +17218,10 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 
 Dragonite @ Leftovers
+Ability: Multiscale
 Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Aerial Ace
 - Water Pulse
