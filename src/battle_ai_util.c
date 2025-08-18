@@ -2105,10 +2105,12 @@ u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, u32 stat)
             tempScore += DECENT_EFFECT;
         break;
     case STAT_SPEED:
+    {
         u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
         if (AI_IsSlower(battlerAtk, battlerDef, gAiThinkingStruct->moveConsidered, predictedMoveSpeedCheck, DONT_CONSIDER_PRIORITY))
             tempScore += DECENT_EFFECT;
         break;
+    }
     case STAT_SPATK:
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
             tempScore += DECENT_EFFECT;
