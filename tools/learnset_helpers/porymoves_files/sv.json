@@ -899,7 +899,12 @@
       "MOVE_FLIP_TURN",
       "MOVE_DOUBLE_EDGE",
       "MOVE_WHIRLPOOL",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_MAGNET_BOMB",
+      "MOVE_HARD_PRESS",
+      "MOVE_IRON_HEAD",
+      "MOVE_IRON_TAIL",
+      "MOVE_HEAVY_PRESS"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -1021,7 +1026,12 @@
       "MOVE_FLIP_TURN",
       "MOVE_DOUBLE_EDGE",
       "MOVE_WHIRLPOOL",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_MAGNET_BOMB",
+      "MOVE_HARD_PRESS",
+      "MOVE_IRON_HEAD",
+      "MOVE_IRON_TAIL",
+      "MOVE_HEAVY_PRESS"
     ],
     "EggMoves": [],
     "TutorMoves": []
@@ -77850,7 +77860,11 @@
       "MOVE_WEATHER_BALL",
       "MOVE_RAIN_DANCE",
       "MOVE_WATER_PULSE",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_ACID_SPRAY",
+      "MOVE_GUNK_SHOT",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_VENOM_DRENCH"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
@@ -77943,7 +77957,15 @@
       "MOVE_WEATHER_BALL",
       "MOVE_RAIN_DANCE",
       "MOVE_WATER_PULSE",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_POWER_GEM",
+      "MOVE_ICE_BEAM",
+      "MOVE_ICE_SHARD",
+      "MOVE_BLIZZARD",
+      "MOVE_ACID_SPRAY",
+      "MOVE_GUNK_SHOT",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_VENOM_DRENCH"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
@@ -78065,7 +78087,15 @@
       "MOVE_ALLURING_VOICE",
       "MOVE_RAIN_DANCE",
       "MOVE_WATER_PULSE",
-      "MOVE_MUDDY_WATER"
+      "MOVE_MUDDY_WATER",
+      "MOVE_POWER_GEM",
+      "MOVE_ICE_BEAM",
+      "MOVE_ICE_SHARD",
+      "MOVE_BLIZZARD",
+      "MOVE_ACID_SPRAY",
+      "MOVE_GUNK_SHOT",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_VENOM_DRENCH"
     ],
     "EggMoves": [
       "MOVE_MEMENTO",

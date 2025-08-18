@@ -43053,7 +43053,8 @@
       "MOVE_SUBSTITUTE",
       "MOVE_SURF",
       "MOVE_WATERFALL",
-      "MOVE_CONFIDE"
+      "MOVE_CONFIDE",
+      "MOVE_MUDDY_WATER"
     ],
     "EggMoves": [
       "MOVE_AQUA_RING",
@@ -43183,7 +43184,8 @@
       "MOVE_SUBSTITUTE",
       "MOVE_SURF",
       "MOVE_WATERFALL",
-      "MOVE_CONFIDE"
+      "MOVE_CONFIDE",
+      "MOVE_MUDDY_WATER"
     ],
     "EggMoves": [
       "MOVE_AQUA_RING",

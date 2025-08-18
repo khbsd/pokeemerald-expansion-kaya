@@ -8054,6 +8054,8 @@ u32 GetBattlerWeight(u32 battler)
 
     if (ability == ABILITY_HEAVY_METAL)
         weight *= 2;
+    else if (ability == ABILITY_STEELY_SPIRIT)
+        weight *= 3;
     else if (ability == ABILITY_LIGHT_METAL)
         weight /= 2;
 

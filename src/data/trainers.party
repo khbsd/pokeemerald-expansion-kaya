@@ -17771,53 +17771,68 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Poliwrath
+Arboliva @ Coba Berry
+Ability: Brineblood
 Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Rain Dance
-- Protect
+- Pollen Puff
+- Purify
+- Power Gem
 - Hydro Pump
 
-Tauros Paldea Aqua @ Chesto Berry
+Carracosta @ Rindo Berry
+Ability: Solid Rock
 Level: 100
+Nature: Impish
+EVs: 192 HP / 64 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Double Team
-- Ice Beam
-- Rest
-
-Carracosta
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rain Dance
-- Water Pulse
-- Double Team
-- Fissure
-
-Seismitoad
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Body Slam
+- Smack Down
+- Shell Smash
 - Protect
-- Ice Beam
+- Aqua Tail
 
-Greninja @ Chesto Berry
+Tauros Paldea Aqua @ Pyschic Gem
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rest
-- Crabhammer
-- Taunt
-- Double Team
+- Raging Bull
+- Zen Headbutt
+- Wave Crash
+- Work Up
 
-Omastar @ Chesto Berry
+Seismitoad @ Electric Gem
+Ability: Volt Absorb
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 140 Def / 0 SpA / 116 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Double Team
-- Ice Beam
-- Rest
+- Grass Knot
+- Zing Zap
+- Mud Shot
+- Hydro Pump
+
+Greninja @ Life Orb
+Ability: Battle Bond
+Level: 100
+Nature: Timid
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
+- Dark Pulse
+- Water Shuriken
+- Hydro Pump
+- Grass Knot
+
+Mantine @ Heavy-Duty Boots
+Ability: Water Absorb
+Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Scald
+- Roost
+- Toxic
+- Hurricane
 
 === TRAINER_JUAN_3 ===
 Name: JUAN
@@ -17829,53 +17844,71 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Primarina
+Primarina @ Fairy Gem
+Ability: Liquid Voice
 Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Rain Dance
+- Alluring Voice
+- Moonblast
 - Protect
 - Hydro Pump
 
-Slowbro
+Slowbro @ Leftovers
+Ability: Regenerator
 Level: 100
+Nature: Relaxed
+EVs: 248 HP / 0 Atk / 252 Def / 4 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Scald
+- Ice Beam
+- Psychic
+
+Azumarill @ Choice Band
+Ability: Sap Metabolism
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
 - Water Pulse
 - Double Team
 - Fissure
 
-Azumarill
+Walrein @ Shell Bell
+Ability: Thick Fat
 Level: 100
+Nature: Modest
+EVs: 228 HP / 0 Atk / 128 Def / 24 SpA / 128 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rain Dance
-- Water Pulse
-- Double Team
-- Fissure
-
-Walrein
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
+- Muddy Water
 - Body Slam
 - Protect
 - Ice Beam
 
-Ludicolo
+Blastoise @ Shuca Berry
+Ability: Steely Spirit
 Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rest
-- Guillotine
-- Taunt
-- Double Team
+- Magnet Bomb
+- Iron Head
+- Protect
+- Hydro Pump
 
-Dewgong @ Chesto Berry
+Gyarados @ Wacan Berry
+Ability: Intimidate
 Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Double Team
-- Ice Beam
-- Rest
+- Earthquake
+- Dragon Dance
+- Hurricane
+- Body Slam
 
 === TRAINER_JUAN_4 ===
 Name: JUAN
@@ -17897,17 +17930,6 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Leech Life
 - Brick Break
 - Swords Dance
-
-Swampert Mega @ Leftovers
-Level: 100
-Ability: Damp
-Nature: Adamant
-EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Earthquake
-- Stealth Rock
-- Waterfall
-- Ancient Power
 
 Toxapex @ Leftovers
 Level: 100
@@ -17931,8 +17953,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Bouncy Bubble
 - Ice Beam
 
+Araquanid @ Leftovers
+Level: 100
+Ability: Water Bubble
+Nature: Adamant
+EVs: 0 HP / 0 Atk / 252 Def / 0 SpA / 252 SpD / 4 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Liquidation
+- Double Team
+- Sticky Web
+- Lunge
+
 Sharpedo Mega @ Focus Sash
-Level: 50
+Level: 100
 Ability: Speed Boost
 Nature: Jolly
 EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
@@ -17963,53 +17996,266 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Lapras
+Gyarados Mega @ Flying Gem
+Ability: Intimidate
+Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Dragon Dance
+- Hurricane
+- Thrash
+
+Swampert Mega @ Fighting Gem
+Level: 100
+Ability: Damp
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Focus Punch
+- Waterfall
+- Ancient Power
+
+Blastoise Mega @ Sitrus Berry
+Ability: Steely Spirit
+Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hard Press
+- Hydro Cannon
+- Hydro Pump
+- Focus Blast
+
+Mega Slowbro @ Leftovers
+Ability: Regenerator
+Level: 100
+Nature: Relaxed
+EVs: 248 HP / 0 Atk / 252 Def / 4 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Scald
+- Blizzard
+- Psychic
+
+Urshifu Rapid Strike @ Muscle Band
+Ability: Unseen Fist
+Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Bulk Up
+- Surging Strikes
+- Dynamic Punch
+- Aerial Ace
+
+Kyogre Primal @ Chesto Berry
+Ability: Primordial Sea
+Level: 100
+Nature: Quiet
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Water Spout
+- Thunder
+- Rest
+- Calm Mind
+
+Arboliva @ Coba Berry
+Ability: Brineblood
+Level: 100
+Nature: Modest
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Pollen Puff
+- Purify
+- Power Gem
+- Hydro Pump
+
+Carracosta @ Rindo Berry
+Ability: Solid Rock
+Level: 100
+Nature: Impish
+EVs: 192 HP / 64 Atk / 252 Def / 0 SpA / 0 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Smack Down
+- Shell Smash
+- Protect
+- Aqua Tail
+
+Tauros Paldea Aqua @ Pyschic Gem
 Level: 100
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hydro Pump
-- Perish Song
-- Ice Beam
-- Confuse Ray
+- Raging Bull
+- Zen Headbutt
+- Wave Crash
+- Work Up
 
-Whiscash
+Seismitoad @ Electric Gem
+Ability: Volt Absorb
 Level: 100
+Nature: Relaxed
+EVs: 252 HP / 0 Atk / 140 Def / 0 SpA / 116 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Grass Knot
+- Zing Zap
+- Mud Shot
+- Hydro Pump
+
+Greninja @ Life Orb
+Ability: Battle Bond
+Level: 100
+Nature: Timid
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
+- Dark Pulse
+- Water Shuriken
+- Hydro Pump
+- Grass Knot
+
+Mantine @ Heavy-Duty Boots
+Ability: Water Absorb
+Level: 100
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Scald
+- Roost
+- Toxic
+- Hurricane
+
+Primarina @ Fairy Gem
+Ability: Liquid Voice
+Level: 100
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Alluring Voice
+- Moonblast
+- Protect
+- Hydro Pump
+
+Slowbro @ Leftovers
+Ability: Regenerator
+Level: 100
+Nature: Relaxed
+EVs: 248 HP / 0 Atk / 252 Def / 4 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Slack Off
+- Scald
+- Ice Beam
+- Psychic
+
+Azumarill @ Choice Band
+Ability: Sap Metabolism
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
 - Water Pulse
 - Double Team
 - Fissure
 
-Politoed
+Walrein @ Shell Bell
+Ability: Thick Fat
 Level: 100
+Nature: Modest
+EVs: 228 HP / 0 Atk / 128 Def / 24 SpA / 128 SpD / 0 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Hypnosis
-- Rain Dance
-- Hydro Pump
-- Perish Song
-
-Walrein
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
+- Muddy Water
 - Body Slam
 - Protect
-- Sheer Cold
-
-Crawdaunt @ Chesto Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Rest
-- Guillotine
-- Taunt
-- Double Team
-
-Kingdra @ Chesto Berry
-Level: 100
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Water Pulse
-- Double Team
 - Ice Beam
-- Rest
+
+Blastoise @ Shuca Berry
+Ability: Steely Spirit
+Level: 100
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Magnet Bomb
+- Iron Head
+- Protect
+- Hydro Pump
+
+Gyarados @ Wacan Berry
+Ability: Intimidate
+Level: 100
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Dragon Dance
+- Hurricane
+- Body Slam
+
+Golisopod @ Aguav Berry
+Level: 100
+Ability: Emergency Exit
+Nature: Adamant
+EVs: 80 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 172 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Liquidation
+- Leech Life
+- Brick Break
+- Swords Dance
+
+Toxapex @ Leftovers
+Level: 100
+Ability: Merciless
+Nature: Bold
+EVs: 252 HP / 0 Atk / 176 Def / 0 SpA / 80 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Recover
+- Baneful Bunker
+- Toxic Spikes
+- Toxic
+
+Ludicolo @ Shell Bell
+Level: 100
+Ability: Own Tempo
+Nature: Bold
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Giga Drain
+- Water Pulse
+- Bouncy Bubble
+- Ice Beam
+
+Araquanid @ Leftovers
+Level: 100
+Ability: Water Bubble
+Nature: Adamant
+EVs: 0 HP / 0 Atk / 252 Def / 0 SpA / 252 SpD / 4 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Liquidation
+- Double Team
+- Sticky Web
+- Lunge
+
+Sharpedo Mega @ Focus Sash
+Level: 100
+Ability: Speed Boost
+Nature: Jolly
+EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Protect
+- Crunch
+- Waterfall
+- Psychic Fangs
+
+Inteleon @ Chesto Berry
+Level: 100
+Ability: Toxic Assassin
+Nature: Modest
+EVs: 0 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hydro Pump
+- Snipe Shot
+- Venom Drench
+- Venoshock
 
 === TRAINER_ANGELO ===
 Name: ANGELO

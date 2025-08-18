@@ -20631,7 +20631,7 @@ static const struct LevelUpMove sDachsbunLevelUpLearnset[] = {
 #if P_FAMILY_SMOLIV
 static const struct LevelUpMove sSmolivLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
-    LEVEL_UP_MOVE( 1, MOVE_SWEET_SCENT),
+    LEVEL_UP_MOVE( 1, MOVE_TAR_SHOT),
     LEVEL_UP_MOVE( 3, MOVE_RAIN_DANCE),
     LEVEL_UP_MOVE( 5, MOVE_ABSORB),
     LEVEL_UP_MOVE( 7, MOVE_GROWTH),
@@ -20650,7 +20650,7 @@ static const struct LevelUpMove sSmolivLevelUpLearnset[] = {
 
 static const struct LevelUpMove sDollivLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
-    LEVEL_UP_MOVE( 1, MOVE_SWEET_SCENT),
+    LEVEL_UP_MOVE( 1, MOVE_TAR_SHOT),
     LEVEL_UP_MOVE( 3, MOVE_RAIN_DANCE),
     LEVEL_UP_MOVE( 5, MOVE_ABSORB),
     LEVEL_UP_MOVE( 7, MOVE_GROWTH),
@@ -20664,11 +20664,13 @@ static const struct LevelUpMove sDollivLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(42, MOVE_TERRAIN_PULSE),
     LEVEL_UP_MOVE(46, MOVE_BRINE),
+    LEVEL_UP_MOVE(52, MOVE_ANCIENT_POWER),
+    LEVEL_UP_MOVE(58, MOVE_PURIFY),
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sArbolivaLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_SWEET_SCENT),
+    LEVEL_UP_MOVE( 1, MOVE_TAR_SHOT),
     LEVEL_UP_MOVE( 1, MOVE_MIRROR_COAT),
     LEVEL_UP_MOVE( 1, MOVE_SAFEGUARD),
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
@@ -20687,6 +20689,8 @@ static const struct LevelUpMove sArbolivaLevelUpLearnset[] = {
     LEVEL_UP_MOVE(52, MOVE_PETAL_BLIZZARD),
     LEVEL_UP_MOVE(58, MOVE_PETAL_DANCE),
     LEVEL_UP_MOVE(64, MOVE_BRINE),
+    LEVEL_UP_MOVE(72, MOVE_ANCIENT_POWER),
+    LEVEL_UP_MOVE(78, MOVE_PURIFY),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_SMOLIV
