@@ -6186,12 +6186,12 @@ u32 GetRandomPokerusDays(void)
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
     u16 rndChance = Random();
-    u32 rndSlot;
     u32 infectionChance = (GetNumOwnedBadges() * (P_BADGE_BOOST_POKERUS_CHANCE)) + POKERUS_INFECTION_CHANCE;
 
     if (rndChance < infectionChance)
     {
         struct Pokemon *mon;
+        u32 rndSlot;
 
         do
         {
