@@ -129,7 +129,7 @@ static void HandleEndTurn_FinishBattle(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
 static s32 Factorial(s32);
-u32 IsFifthGymRematch(u32 trainerNum);
+bool32 IsFifthGymRematch(u32 trainerNum);
 
 // in-battle evos
 static void PlayerTryEvolution(void);
@@ -460,8 +460,8 @@ u32 GetAdjustedLevel(u32 level)
         if (newLevel > MAX_LEVEL)
             newLevel = MAX_LEVEL;
     }
-        
-    
+
+
     return newLevel;
 }
 
