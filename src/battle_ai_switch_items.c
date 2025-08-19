@@ -574,7 +574,7 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler)
     {
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_BULLETPROOF;
     }
-    else if (IsWindMove(incomingMove) || (isOpposingBattlerChargingOrInvulnerable && IsWindMove(incomingMove)))
+    else if ((IsWindMove(incomingMove) || incomingType == TYPE_FIRE) || (isOpposingBattlerChargingOrInvulnerable && IsWindMove(incomingMove)))
     {
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_WIND_RIDER;
     }
@@ -1611,7 +1611,7 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
 // Gets damage / healing from weather
 static s32 GetSwitchinWeatherImpact(void)
 {
-    s32 weatherImpact = 0, maxHP = gAiLogicData->switchinCandidate.battleMon.maxHP; 
+    s32 weatherImpact = 0, maxHP = gAiLogicData->switchinCandidate.battleMon.maxHP;
     enum Abilities ability = gAiLogicData->switchinCandidate.battleMon.ability;
     enum ItemHoldEffect holdEffect = GetItemHoldEffect(gAiLogicData->switchinCandidate.battleMon.item);
 

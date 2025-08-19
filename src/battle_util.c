@@ -3177,7 +3177,7 @@ bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, enum Abilities abili
         }
         break;
     case ABILITY_WIND_RIDER:
-        if (IsWindMove(move) && !(GetBattlerMoveTargetType(battlerAtk, move) & MOVE_TARGET_USER))
+        if ((IsWindMove(move) || moveType == TYPE_FIRE) && !(GetBattlerMoveTargetType(battlerAtk, move) & MOVE_TARGET_USER))
         {
             effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
             statId = STAT_ATK;

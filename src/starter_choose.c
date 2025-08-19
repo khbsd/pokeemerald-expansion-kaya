@@ -27,7 +27,7 @@
 #include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3
-#define STARTER_MON_POOL_COUNT   64
+#define STARTER_MON_POOL_COUNT   65
 
 // Position of the sprite of the selected starter Pokémon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
@@ -182,6 +182,7 @@ static const u32 sStarterMonPool[STARTER_MON_POOL_COUNT] =
     SPECIES_KLINK,
     SPECIES_AZURILL,
     SPECIES_SOBBLE,
+    SPECIES_SEEDOT,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
