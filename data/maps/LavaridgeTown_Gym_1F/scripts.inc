@@ -307,11 +307,11 @@ LavaridgeTown_Gym_1F_Text_FlanneryIntro:
 	.string "No, wait.\p"
 	.string "I am FLANNERY, and I'm the GYM\n"
 	.string "LEADER here!\p"
-	.string "Uh…\n"
+	.string "Uh… Golly, you're cute.\n"
 	.string "Dare not underestimate me, though\l"
 	.string "I have been LEADER only a short time!\p"
 	.string "With skills inherited from my grand-\n"
-	.string "father, I shall, uh…demonstrate the\l"
+	.string "father, I shall, uh… demonstrate the\l"
 	.string "hot moves we have honed on this land!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
@@ -350,7 +350,8 @@ LavaridgeTown_Gym_1F_Text_ExplainOverheat:
 
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "Registered GYM LEADER FLANNERY\n"
-	.string "in the POKéNAV.$"
+	.string "in the POKéNAV.\p"
+	.string "FLANNERY: I'm down whenever! {EMOJI_BIGSMILE}$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
 	.string "Your power reminds me of someone…\p"

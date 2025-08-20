@@ -40,7 +40,7 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
 
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop:
 	.string "Welcome to the HERB SHOP, home of\n"
-	.string "effective and inexpensive medicine!$"
+	.string "effective, inexpensive medicine! and weed$"
 
 LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
 	.string "You've come to look at herbal medicine\n"

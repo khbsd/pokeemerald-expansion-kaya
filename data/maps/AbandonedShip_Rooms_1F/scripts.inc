@@ -51,11 +51,11 @@ AbandonedShip_Rooms_1F_Text_ThaliaPostBattle:
 
 AbandonedShip_Rooms_1F_Text_ThaliaRegister:
 	.string "You're such a tough TRAINER!\n"
-	.string "Let me register you as a memento!$"
+	.string "Let me get your number!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro:
 	.string "What on earth would compel you to\n"
-	.string "come back? You must really be curious!$"
+	.string "come back? You must be into me!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat:
 	.string "Aren't you too strong?$"
@@ -69,7 +69,8 @@ AbandonedShip_Rooms_1F_Text_DemetriusIntro:
 	.string "I've been found! …Huh?$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusDefeat:
-	.string "Oh, you're not my mom.$"
+	.string "Oh, you're not my mom.\n"
+	.string "Unless...$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusPostBattle:
 	.string "I'm in trouble with my mom, so I ran.\n"

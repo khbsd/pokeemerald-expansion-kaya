@@ -134,7 +134,7 @@ AbandonedShip_Rooms2_1F_Text_JaniDefeat:
 
 AbandonedShip_Rooms2_1F_Text_JaniPostBattle:
 	.string "Walking around barefoot in this ship\n"
-	.string "is kind of gross.$"
+	.string "is kind of hot.$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonIntro:
 	.string "Strength and compassion…\n"
@@ -142,7 +142,8 @@ AbandonedShip_Rooms2_1F_Text_GarrisonIntro:
 
 AbandonedShip_Rooms2_1F_Text_GarrisonDefeat:
 	.string "Ah, there is something about you\n"
-	.string "that sparkles.$"
+	.string "that sparkles.\l"
+	.string "Oh, it's the glitter.$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle:
 	.string "In a cabin somewhere on board,\n"

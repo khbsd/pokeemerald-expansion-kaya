@@ -151,5 +151,5 @@ AbandonedShip_HiddenFloorCorridors_Text_InsertedKey:
 	.string "{PLAYER} inserted and turned the\n"
 	.string "KEY.\p"
 	.string "The inserted KEY stuck fast,\n"
-	.string "but the door opened.$"
+	.string "but the door opened. Woops!$"
 

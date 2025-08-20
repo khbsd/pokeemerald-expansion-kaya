@@ -22,7 +22,10 @@ DewfordTown_House1_EventScript_Zigzagoon::
 DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland:
 	.string "There's a lot to be said for living on\n"
 	.string "a small island like this in harmony with\l"
-	.string "POKéMON and the family.$"
+	.string "POKéMON and the family. It reminds you\n"
+	.string "that at the end of the day, community\l"
+	.string "with nature and people is what will\n"
+	.string "save us.$"
 
 DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:
 	.string "I left the major port of SLATEPORT\n"

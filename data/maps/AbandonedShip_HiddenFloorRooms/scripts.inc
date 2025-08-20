@@ -113,5 +113,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 
 AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
 	.string "It's bright and shiny!\n"
-	.string "But it's just trash…$"
+	.string "But it's just trash…\l"
+	.string "Like Nintendo's stance\n"
+	.string "on piracy and emulation!$"
 

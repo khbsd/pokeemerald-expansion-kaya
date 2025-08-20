@@ -326,7 +326,7 @@ LavaridgeTown_Text_HaveEggWillYouTakeIt:
 	.string "kept together with POKéMON and\l"
 	.string "carried about.\p"
 	.string "You are a TRAINER, yes?\n"
-	.string "And your POKéMON radiate vitality.\p"
+	.string "You and your POKéMON radiate vitality.\p"
 	.string "So, what say you?\n"
 	.string "Will you take this EGG to hatch?$"
 
@@ -349,7 +349,10 @@ LavaridgeTown_Text_AsYouWishThen:
 LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
 	.string "Every so often, an EGG will be found at\n"
 	.string "the POKéMON DAY CARE.\p"
-	.string "Or at least that's how the rumor goes.$"
+	.string "Or at least that's how the rumor goes.\n"
+	.string "I have a master's in {PKMN} biology.\l"
+	.string "Scientifically, those bitches fuckin.\n"
+	.string "Good for them, good for them.$"
 
 LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "We draw as much hot water as we need,\n"
@@ -365,7 +368,7 @@ LavaridgeTown_Text_PokemonNippedBackside:
 	.string "Sigh…\p"
 	.string "So warm and heavenly…\p"
 	.string "Eh? Gyaah! Ouch!\p"
-	.string "A POKéMON nipped my backside!$"
+	.string "A POKéMON nipped my ass!$"
 
 LavaridgeTown_Text_OhYouLikeHotSprings:
 	.string "Oh, you like hot springs, do you?\p"
@@ -387,7 +390,7 @@ LavaridgeTown_Text_HotSpringsClaims:
 	.string "They're claiming that these hot springs\n"
 	.string "are good for calming nervous tension,\l"
 	.string "relieving aching muscles, solving\l"
-	.string "romantic problems, and attracting\l"
+	.string "intimacy issues, and attracting\l"
 	.string "money…$"
 
 LavaridgeTown_Text_TownSign:

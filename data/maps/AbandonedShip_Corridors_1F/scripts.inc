@@ -15,11 +15,11 @@ AbandonedShip_Corridors_1F_Text_CharlieIntro:
 	.string "tube aboard the ship?$"
 
 AbandonedShip_Corridors_1F_Text_CharlieDefeat:
-	.string "Whoa, you overwhelmed me!$"
+	.string "Whoa, you popped my overwhelmed tube me!$"
 
 AbandonedShip_Corridors_1F_Text_CharliePostBattle:
 	.string "It's not easy throwing POKé BALLS\n"
-	.string "while hanging on to an inner tube!$"
+	.string "while hanging on too and inter tube!$"
 
 AbandonedShip_Corridors_1F_Text_IsntItFunHere:
 	.string "Isn't it fun here?\n"

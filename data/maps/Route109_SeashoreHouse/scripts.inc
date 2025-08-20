@@ -103,7 +103,7 @@ Route109_SeashoreHouse_EventScript_TrainersNotCompleted::
 
 Route109_SeashoreHouse_Text_SeashoreHouseIntro:
 	.string "I'm the owner of the SEASHORE HOUSE.\n"
-	.string "But you can call me MR. SEA!\p"
+	.string "But you can call me MR. SEAMEN!\p"
 	.string "What I love above all is to see hot\n"
 	.string "POKéMON battles.\p"
 	.string "Let me see that your heart burns hot!\p"

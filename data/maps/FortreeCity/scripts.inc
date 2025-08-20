@@ -93,7 +93,7 @@ FortreeCity_Text_SawGiganticPokemonInSky:
 	.string "It seemed to squirm as it flew toward\n"
 	.string "ROUTE 131.\p"
 	.string "By the way… Sniff…\n"
-	.string "Um… You, uh…smell singed.\p"
+	.string "Um… You, uh… smell singed.\p"
 	.string "Were you at a volcano or something?$"
 
 FortreeCity_Text_SomethingBlockingGym:
@@ -121,14 +121,16 @@ FortreeCity_Text_EveryoneHealthyAndLively:
 	.string "grown thirty years younger.$"
 
 FortreeCity_Text_BugPokemonComeThroughWindow:
-	.string "Living on top of trees is okay.\p"
-	.string "But sometimes BUG POKéMON come in\n"
+	.string "Living on top of trees is great!\p"
+	.string "Sometimes BUG POKéMON come in\n"
 	.string "through windows.\l"
-	.string "It can be really startling.$"
+	.string "It can be a nice little visit!$"
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded:
 	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That's what I heard.$"
+	.string "you trade them! That's what I heard.\l"
+	.string "not gonna lie trying this may break\n"
+	.string "your game lmao.$"
 
 FortreeCity_Text_SomethingUnseeable:
 	.string "Something unseeable is in the way.$"

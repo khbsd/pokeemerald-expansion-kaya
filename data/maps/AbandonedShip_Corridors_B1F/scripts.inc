@@ -63,7 +63,7 @@ AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
 
 AbandonedShip_Corridors_B1F_Text_DuncanPostBattle:
 	.string "The ship's bottom has sunk into the\n"
-	.string "depths.\p"
+	.string "depths. Kinky.\p"
 	.string "If a POKéMON knew how to go underwater,\n"
 	.string "we might make some progress…$"
 
@@ -73,7 +73,9 @@ AbandonedShip_Corridors_B1F_Text_YayItsAShip:
 
 AbandonedShip_Corridors_B1F_Text_DoorIsLocked:
 	.string "The door is locked.\p"
-	.string "“STORAGE” is painted on the door.$"
+	.string "“STORAGE” is painted on the door.\l"
+	.string "Below it is\n"
+	.string "“DON'T INSIDE DEAD OPEN”$"
 
 AbandonedShip_Corridors_B1F_Text_InsertedStorageKey:
 	.string "{PLAYER} inserted and turned the\n"

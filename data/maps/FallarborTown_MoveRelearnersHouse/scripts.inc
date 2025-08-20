@@ -5,10 +5,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	lockall
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer
 	waitmovement 0
-	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
 	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_1
-	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
 	end
 
 FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
@@ -50,10 +47,11 @@ FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
 	.string "I know all the moves that POKéMON\n"
 	.string "learn--every one of them--and I can\l"
 	.string "teach POKéMON those moves.\p"
-	.string "I can teach a move to a POKéMON\n"
-	.string "of yours if you'd like.\p"
-	.string "I'll do it for a HEART SCALE.\n"
-	.string "I'm collecting those now.$"
+	.string "Unfortunately, thanks to Kaya and PCG,\n"
+	.string "I'm basically obsolete.\p You can press"
+	.string "{L_BUTTON} and {R_BUTTON} when viewing\n"
+	.string "your moves and pick between Egg,\l"
+	.string "Level Up, TM/HM, and Tutor moves.$"
 
 FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
 	.string "Oh! That's it! That's an honest to\n"

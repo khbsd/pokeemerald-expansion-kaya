@@ -513,10 +513,12 @@ Route109_Text_BrineyTellMeWhenYouNeedToSail:
 	.string "you need to set sail again!$"
 
 Route109_Text_ChillAtMyPapasSpot:
-	.string "Yo, TRAINERS!\n"
+	.string "LITTLE TIMMY: Yo, TRAINERS!\n"
 	.string "Whether you're hot to trot,\l"
 	.string "or cool cat not,\l"
-	.string "chill at my papa's spot!$"
+	.string "chill at my papa's spot!\n"
+	.string "Sorry, I'm not very good at\l"
+	.string "being a tweaker.$"
 
 Route109_Text_LittleKidsDartAround:
 	.string "Little kids can dart around so quickly…\p"

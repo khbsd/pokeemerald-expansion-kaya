@@ -103,7 +103,8 @@ AquaHideout_B2F_Text_MattDefeat:
 AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
 	.string "Hehehe!\p"
 	.string "While I was toying with you, our BOSS\n"
-	.string "got through his preparations!$"
+	.string "got through his preparations!\l"
+	.string "Sorry, he told me to say that.$"
 
 AquaHideout_B2F_Text_MattPostBattle:
 	.string "Hehehe!\p"
@@ -133,7 +134,7 @@ AquaHideout_B2F_Text_Grunt6Intro:
 	.string "You're clueless about where you are,\n"
 	.string "aren't you?\p"
 	.string "Fluster and tire out the enemy, then\n"
-	.string "lower the boom! That's our plan!$"
+	.string "drop the boom! That's our plan!$"
 
 AquaHideout_B2F_Text_Grunt6Defeat:
 	.string "What's wrong with you?\n"
@@ -143,7 +144,8 @@ AquaHideout_B2F_Text_Grunt6PostBattle:
 	.string "That reminds me… I can't remember\n"
 	.string "where I put the MASTER BALL.\p"
 	.string "If I fail to guard it, our BOSS will\n"
-	.string "chew me out…$"
+	.string "chew me out… which I definitely\n"
+	.string "don't want. Hehehe…$"
 
 AquaHideout_B2F_Text_Grunt8Intro:
 	.string "When I joined TEAM AQUA, the first\n"

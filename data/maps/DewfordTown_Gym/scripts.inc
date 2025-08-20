@@ -332,11 +332,12 @@ DewfordTown_Gym_Text_JocelynPostBattle:
 
 DewfordTown_Gym_Text_LauraIntro:
 	.string "Don't you dare brush me off!\n"
-	.string "It's not my fault if you cry!$"
+	.string "It's not my fault if you cry,\l"
+	.string "but I will record you.$"
 
 DewfordTown_Gym_Text_LauraDefeat:
 	.string "Waaaaaaah!\n"
-	.string "I lost!$"
+	.string "I lost! -camera shutter clicks-$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
 	.string "I battle in the dark to make my heart\n"
@@ -350,7 +351,7 @@ DewfordTown_Gym_Text_LilithIntro:
 
 DewfordTown_Gym_Text_LilithDefeat:
 	.string "Oh, you…\n"
-	.string "I don't want to know you!$"
+	.string "I want to know you!$"
 
 DewfordTown_Gym_Text_LilithPostBattle:
 	.string "You deserve to stay lost and end up\n"

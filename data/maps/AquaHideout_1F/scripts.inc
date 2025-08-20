@@ -72,11 +72,11 @@ AquaHideout_1F_Text_BossWentToJackASubmarine:
 	.string "What? What? What do you want with \n"
 	.string "TEAM AQUA?\p"
 	.string "Our BOSS isn't here!\n"
-	.string "He's gone off to jack a submarine!\p"
+	.string "He's gone off to jack off a submarine!\p"
 	.string "… …\n"
 	.string "Where did he go?\p"
 	.string "Wahaha! Do you really think I'd tell\n"
-	.string "you something that crucial?$"
+	.string "you something that?$"
 
 AquaHideout_1F_Text_BossIsOnRoute122:
 	.string "What? What? What do you want with \n"
@@ -86,7 +86,7 @@ AquaHideout_1F_Text_BossIsOnRoute122:
 	.string "… …\n"
 	.string "Why did he go?\p"
 	.string "Wahaha! Do you really think I'd tell\n"
-	.string "you something that crucial?$"
+	.string "you something?$"
 
 AquaHideout_1F_Text_TeamMagmaAtMtChimney:
 	.string "What? What?\n"
@@ -103,7 +103,7 @@ AquaHideout_1F_Text_BossIsInSlateportCity:
 	.string "… …\n"
 	.string "Why did he go?\p"
 	.string "Wahaha! Do you really think I'd tell\n"
-	.string "you something that crucial?$"
+	.string "you?$"
 
 AquaHideout_1F_Text_Grunt1Intro:
 	.string "Ayiyiyi!\n"

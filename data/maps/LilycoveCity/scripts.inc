@@ -547,7 +547,7 @@ LilycoveCity_Text_MovedLootIntoHideoutToday:
 	.string "We moved more loot into our secret\n"
 	.string "HIDEOUT today…\p"
 	.string "Wh-who are you?!\n"
-	.string "I was just talking to myself!$"
+	.string "I was just talking to mysnelf!$"
 
 LilycoveCity_Text_ChanceToDoBigThings:
 	.string "I'm just a GRUNT, so I don't know what\n"
@@ -630,13 +630,14 @@ LilycoveCity_Text_ImArtDealer:
 	.string "I'm an ART DEALER.\p"
 	.string "I am a buyer and seller of fine art,\n"
 	.string "especially paintings.\p"
-	.string "I've heard that the MUSEUM here has\n"
+	.string "I also help the 1% commit tax fraud!\n"
+	.string "I've heard that the MUSEUM here has\p"
 	.string "magnificent works on exhibit…$"
 
 LilycoveCity_Text_SeaRemainsForeverYoung:
-	.string "Even as we grow old and wrinkled,\n"
-	.string "the sea remains forever young with\l"
-	.string "the vivid brilliance of life…\p"
+	.string "Even as my wife and I grow old and\n"
+	.string "wrinkled, the sea remains ageless,\l"
+	.string "radiant with life…\p"
 	.string "Fwohoho fwohohohoho…$"
 
 LilycoveCity_Text_SixtyYearsAgoHusbandProposed:

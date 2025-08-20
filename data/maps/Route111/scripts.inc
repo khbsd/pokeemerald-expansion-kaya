@@ -620,7 +620,10 @@ Route111_Text_VickyIntro:
 
 Route111_Text_VickyDefeat:
 	.string "Kwah! You are strong…\n"
-	.string "My granddaughter was right…$"
+	.string "My granddaughter was right…\l"
+	.string "She's single, you know!\n"
+	.string "Just back from college,\p"
+	.string "so about your age! -wink-$"
 
 Route111_Text_VickyPostBattle:
 	.string "If you're not in any hurry,\n"
