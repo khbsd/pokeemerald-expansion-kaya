@@ -1229,7 +1229,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                    - message is not executed in the overworld messagebox, as we assume for window idx 1
                    - namebox is being suppressed by a scripting flag
                  */
-                if (!FuncIsActiveTask(Task_DrawFieldMessage) || FlagGet(FLAG_SUPPRESS_SPEAKER_NAME))
+                if (!FuncIsActiveTask(Task_DrawFieldMessage) || FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME))
                     return RENDER_PRINT;
 
                 enum SpeakerNames nameId = *textPrinter->printerTemplate.currentChar++;
@@ -1243,7 +1243,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
                     // expand early to take care of special chars e.g. {PLAYER}
                     StringExpandPlaceholders(gNamePlateBuffer, gSpeakerName);
-                    int x = GetStringCenterAlignXOffset(FONT_SMALL, gNamePlateBuffer, GetDialogFramePlateWidth());
+                    int x = GetStringCenterAlignXOffset(FONT_SMALL, gNamePlateBuffer, (DLW_WIN_PLATE_SIZE * 8));
 
                     // these backups are required, otherwise the messagebox gets affected too
                     u8 colors[3] = {0, 1, 2}, colorBackup[3];

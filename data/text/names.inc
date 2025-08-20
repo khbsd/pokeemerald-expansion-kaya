@@ -1,5 +1,3 @@
-@ regex for in-text names "[A-Z]+:
-
 CommonNames_Mom::
 	.string "Mom$"
 

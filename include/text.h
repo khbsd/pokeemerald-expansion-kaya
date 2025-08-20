@@ -180,7 +180,5 @@ u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 
 // stuff for speaker names
 void Task_DrawFieldMessage(u8 taskId);
-void FillDialogFramePlate();
-int GetDialogFramePlateWidth();
 
 #endif // GUARD_TEXT_H
