@@ -155,7 +155,7 @@ LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill:
 	.string "as a reward for winning a CONTEST.$"
 
 LilycoveCity_DepartmentStore_1F_Text_Azumarill:
-	.string "AZUMARILL: Maririroo!$"
+	.string "{SPEAKER SP_NAME_AZUMARILL} Maririroo!$"
 
 LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign:
 	.string "1F: SERVICE COUNTER\n"
@@ -164,7 +164,7 @@ LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign:
 	.string "3F: BATTLE COLLECTION\p"
 	.string "4F: TM CORNER\p"
 	.string "5F: POKé DOLL FLOOR\p"
-	.string "ROOFTOP: ROOFTOP PLAZA$"
+	.string "{SPEAKER SP_NAME_ROOFTOP} ROOFTOP PLAZA$"
 
 @ Unused
 LilycoveCity_DepartmentStore_1F_Text_WirelessCommIsFun:

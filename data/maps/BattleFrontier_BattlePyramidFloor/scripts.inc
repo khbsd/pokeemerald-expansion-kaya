@@ -139,19 +139,15 @@ gText_BattlePyramidConfirmRetire::
 
 BattlePyramid_Text_ExitHintUp1::
 	.string "This floor's exit is in\n"
-	.string "that direction: {UP_ARROW}$"
 
 BattlePyramid_Text_ExitHintLeft1::
 	.string "This floor's exit is in\n"
-	.string "that direction: {LEFT_ARROW}$"
 
 BattlePyramid_Text_ExitHintRight1::
 	.string "This floor's exit is in\n"
-	.string "that direction: {RIGHT_ARROW}$"
 
 BattlePyramid_Text_ExitHintDown1::
 	.string "This floor's exit is in\n"
-	.string "that direction: {DOWN_ARROW}$"
 
 BattlePyramid_Text_ExitHintUp2::
 	.string "The exit on this floor is in\n"

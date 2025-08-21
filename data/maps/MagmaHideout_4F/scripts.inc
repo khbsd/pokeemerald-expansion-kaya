@@ -181,7 +181,7 @@ MagmaHideout_4F_Text_TabithaPostBattle:
 	.string "MAXIE should have awakened GROUDON…$"
 
 MagmaHideout_4F_Text_MaxieAwakenGroudon:
-	.string "MAXIE: GROUDON…\p"
+	.string "{SPEAKER SP_NAME_MAXIE} GROUDON…\p"
 	.string "Nothing could awaken you from your\n"
 	.string "sleep bathed in magma…\p"
 	.string "This BLUE ORB is what you sought.\n"
@@ -192,14 +192,14 @@ MagmaHideout_4F_Text_MaxieAwakenGroudon:
 	.string "Show me the full extent of your power!$"
 
 MagmaHideout_4F_Text_MaxieGroudonWhatsWrong:
-	.string "MAXIE: GROUDON!\n"
+	.string "{SPEAKER SP_NAME_MAXIE} GROUDON!\n"
 	.string "What's wrong?\p"
 	.string "Wasn't the BLUE ORB the key?\p"
 	.string "GROUDON!\n"
 	.string "Where have you gone…$"
 
 MagmaHideout_4F_Text_MaxieOhItWasYou:
-	.string "MAXIE: Oh, so it was you?\p"
+	.string "{SPEAKER SP_NAME_MAXIE} Oh, so it was you?\p"
 	.string "I've seen you poking around uninvited\n"
 	.string "here and there…\p"
 	.string "I get it now!\n"
@@ -210,7 +210,7 @@ MagmaHideout_4F_Text_MaxieDefeat:
 	.string "POKéMON?$"
 
 MagmaHideout_4F_Text_MaxieImGoingAfterGroudon:
-	.string "MAXIE: There has to be some reason\n"
+	.string "{SPEAKER SP_NAME_MAXIE} There has to be some reason\n"
 	.string "why GROUDON fled…\p"
 	.string "That's what you're trying to say,\n"
 	.string "aren't you?\p"

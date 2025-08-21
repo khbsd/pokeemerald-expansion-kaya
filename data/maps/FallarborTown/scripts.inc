@@ -70,7 +70,7 @@ FallarborTown_Text_MyPreciousAzurill:
 	.string "man. i should probably be locked up.$"
 
 FallarborTown_Text_Azurill:
-	.string "AZURILL: Rooreelooo.$"
+	.string "{SPEAKER SP_NAME_AZURILL} Rooreelooo.$"
 
 FallarborTown_Text_HaveYouChallengedFlannery:
 	.string "Have you already challenged FLANNERY,\n"

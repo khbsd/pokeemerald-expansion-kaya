@@ -64,6 +64,8 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/pokevial.h"
+#include "constants/speaker_names.h"
+
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -955,7 +957,7 @@ gText_MonsHealed::
 	.string "We hope you excel!$"
 
 gText_HadQuiteAnExperienceTakeRest::
-	.string "MOM: {PLAYER}!\n"
+	.string "{SPEAKER SP_NAME_MOM} {PLAYER}!\n"
 	.string "Welcome home.\p"
 	.string "It sounds like you had quite\n"
 	.string "an experience.\p"
@@ -963,7 +965,7 @@ gText_HadQuiteAnExperienceTakeRest::
 	.string "rest.$"
 
 gText_MomExplainHPGetPotions::
-	.string "MOM: Oh, good! You and your\n"
+	.string "{SPEAKER SP_NAME_MOM} Oh, good! You and your\n"
 	.string "POKéMON are looking great.\p"
 	.string "I just heard from PROF. BIRCH.\p"
 	.string "He said that POKéMON's energy is\n"

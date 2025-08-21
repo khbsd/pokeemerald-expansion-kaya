@@ -486,22 +486,22 @@ BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward:
-	.string "REFEREE: TRAINER {PLAYER}!\n"
+	.string "{SPEAKER SP_NAME_REFEREE} TRAINER {PLAYER}!\n"
 	.string "Step forward, please!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_OpponentStepForward:
-	.string "REFEREE: TRAINER {STR_VAR_1}!\n"
+	.string "{SPEAKER SP_NAME_REFEREE} TRAINER {STR_VAR_1}!\n"
 	.string "Step forward, please!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin:
-	.string "REFEREE: Set KO Tourney!\n"
+	.string "{SPEAKER SP_NAME_REFEREE} Set KO Tourney!\n"
 	.string "Begin!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer:
-	.string "REFEREE: The winner is {PLAYER}!$"
+	.string "{SPEAKER SP_NAME_REFEREE} The winner is {PLAYER}!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent:
-	.string "REFEREE: The winner is {STR_VAR_1}!$"
+	.string "{SPEAKER SP_NAME_REFEREE} The winner is {STR_VAR_1}!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_MonsWillBeRestored:
 	.string "Your POKéMON will be restored to\n"
@@ -558,11 +558,11 @@ BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon:
 	.string "Are you prepared?$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta:
-	.string "REFEREE: The ARENA TYCOON!\n"
+	.string "{SPEAKER SP_NAME_REFEREE} The ARENA TYCOON!\n"
 	.string "Make way for GRETA!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger:
-	.string "GRETA: Hey!\n"
+	.string "{SPEAKER SP_NAME_GRETA} Hey!\n"
 	.string "Howdy!\p"
 	.string "…Wait, are you the challenger?$"
 
@@ -583,7 +583,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_IgniteMyPassionForBattle:
 	.string "for battle!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll:
-	.string "GRETA: Ow, wait a second!\n"
+	.string "{SPEAKER SP_NAME_GRETA} Ow, wait a second!\n"
 	.string "You are tough after all!\p"
 	.string "I like you!\n"
 	.string "Let's see your FRONTIER PASS.$"
@@ -598,7 +598,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_GoingToBeFunNextTime:
 	.string "I'm looking forward to it!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain:
-	.string "GRETA: Hey! Howdy!\n"
+	.string "{SPEAKER SP_NAME_GRETA} Hey! Howdy!\n"
 	.string "You finally won your way up to me!\p"
 	.string "I was getting worried waiting for you!\n"
 	.string "I was really looking forward to seeing\l"
@@ -617,7 +617,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_LetsGetThisStarted:
 	.string "Let's get this started!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway:
-	.string "GRETA: Gaaah! Blown away!\n"
+	.string "{SPEAKER SP_NAME_GRETA} Gaaah! Blown away!\n"
 	.string "Let's see your FRONTIER PASS!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GutsSymbolTookGoldenShine:

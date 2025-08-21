@@ -1,11 +1,11 @@
 BerryBlender_Text_BlendWithTheBlendMaster:
-	.string "BLEND MASTER: Indeed I am!\n"
+	.string "{SPEAKER SP_NAME_BLEND_MASTER} Indeed I am!\n"
 	.string "The BLEND MASTER am I!\p"
 	.string "Blend with me, and you shall witness\n"
 	.string "the mastery I bring to blending!$"
 
 BerryBlender_Text_SeeMyMasteryInAction:
-	.string "BLEND MASTER: Hmmm! So, you wish to\n"
+	.string "{SPEAKER SP_NAME_BLEND_MASTER} Hmmm! So, you wish to\n"
 	.string "see my mastery in action?$"
 
 BerryBlender_Text_TooBusyNowIsee:

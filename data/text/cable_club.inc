@@ -42,13 +42,9 @@ gText_PleaseWaitForLink::
 
 gText_ConfirmLinkWhenPlayersReady::
 	.string "When all players are ready…\n"
-	.string "A Button: Confirm\l"
-	.string "B Button: Cancel$"
 
 gText_ConfirmStartLinkWithXPlayers::
 	.string "Start link with {STR_VAR_1} players.\n"
-	.string "A Button: Confirm\l"
-	.string "B Button: Cancel$"
 
 gText_AwaitingLinkup::
 	.string "Awaiting linkup…\n"

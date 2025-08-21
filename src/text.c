@@ -1232,11 +1232,16 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 if (!FuncIsActiveTask(Task_DrawFieldMessage) || FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME))
                     return RENDER_PRINT;
 
-                enum SpeakerNames nameId = *textPrinter->printerTemplate.currentChar++;
+                //enum SpeakerNames nameId = *textPrinter->printerTemplate.currentChar++;
+                u32 nameId = *textPrinter->printerTemplate.currentChar++;
                 if (nameId >= SP_NAME_COUNT)
                     nameId = SP_NAME_NONE;
 
-                SetSpeakerName(sSpeakerNamesTable[nameId]);
+                if (nameId == SP_NAME_PLAYER)
+                    SetSpeakerName(gSaveBlock2Ptr->playerName);
+                else
+                    SetSpeakerName(sSpeakerNamesTable[nameId]);
+                
                 if (gSpeakerName != NULL)
                 {
                     DrawDialogueFrameWithNameplate(0, FALSE);

@@ -821,4 +821,3 @@ Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt:
 Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "The door is locked.\p"
 	.string "…On closer inspection, this is written\n"
-	.string "on it: “Write the secret code here.”$"

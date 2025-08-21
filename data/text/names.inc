@@ -63,3 +63,9 @@ CommonNames_Archie::
 
 CommonNames_Maxie::
 	.string "Maxie$"
+
+CommonNames_Player::
+	.string "{SPEAKER SP_NAME_PLAYER}"
+
+CommonNames_Kaya::
+	.string "{SPEAKER SP_NAME_KAYA}"
