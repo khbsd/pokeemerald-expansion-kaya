@@ -425,7 +425,7 @@ static const u8 *const gFollowerNPCStringsTable[DEBUG_FNPC_COUNT] = {
     COMPOUND_STRING("Brendan"),
     COMPOUND_STRING("May"),
     COMPOUND_STRING("Steven"),
-    COMPOUND_STRING("Wally"),
+    COMPOUND_STRING("Sally"),
     COMPOUND_STRING("Red"),
     COMPOUND_STRING("Leaf"),
 };

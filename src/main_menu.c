@@ -478,55 +478,55 @@ static const struct MenuAction sMenuActions_Gender[] = {
     {COMPOUND_STRING("Femme"), {NULL}}
 };
 
-static const u8 *const sMalePresetNames[] = {
-    COMPOUND_STRING("STU"),
-    COMPOUND_STRING("MILTON"),
-    COMPOUND_STRING("TOM"),
-    COMPOUND_STRING("KENNY"),
-    COMPOUND_STRING("REID"),
-    COMPOUND_STRING("JUDE"),
-    COMPOUND_STRING("JAXSON"),
-    COMPOUND_STRING("EASTON"),
-    COMPOUND_STRING("WALKER"),
-    COMPOUND_STRING("TERU"),
-    COMPOUND_STRING("JOHNNY"),
-    COMPOUND_STRING("BRETT"),
-    COMPOUND_STRING("SETH"),
-    COMPOUND_STRING("TERRY"),
-    COMPOUND_STRING("CASEY"),
-    COMPOUND_STRING("DARREN"),
-    COMPOUND_STRING("LANDON"),
-    COMPOUND_STRING("COLLIN"),
-    COMPOUND_STRING("STANLEY"),
-    COMPOUND_STRING("QUINCY")
+static const u8 *const sFemalePresetNames1[] = {
+    COMPOUND_STRING("ANNA"),
+    COMPOUND_STRING("MILLIE"),
+    COMPOUND_STRING("LUNA"),
+    COMPOUND_STRING("ROSE"),
+    COMPOUND_STRING("NADJA"),
+    COMPOUND_STRING("DOONEESE"),
+    COMPOUND_STRING("JACKIE"),
+    COMPOUND_STRING("GALI"),
+    COMPOUND_STRING("NOKAMA"),
+    COMPOUND_STRING("ALICE"),
+    COMPOUND_STRING("BJORK"),
+    COMPOUND_STRING("GRIMES"),
+    COMPOUND_STRING("BOO"),
+    COMPOUND_STRING("HARPY"),
+    COMPOUND_STRING("ELLY"),
+    COMPOUND_STRING("LUNA"),
+    COMPOUND_STRING("TIPPY"),
+    COMPOUND_STRING("ASKA"),
+    COMPOUND_STRING("SAMUS"),
+    COMPOUND_STRING("ANDY")
 };
 
-static const u8 *const sFemalePresetNames[] = {
+static const u8 *const sFemalePresetNames2[] = {
     COMPOUND_STRING("KIMMY"),
     COMPOUND_STRING("TIARA"),
     COMPOUND_STRING("BELLA"),
     COMPOUND_STRING("JAYLA"),
     COMPOUND_STRING("ALLIE"),
     COMPOUND_STRING("LIANNA"),
-    COMPOUND_STRING("SARA"),
+    COMPOUND_STRING("SARAH"),
     COMPOUND_STRING("MONICA"),
     COMPOUND_STRING("CAMILA"),
-    COMPOUND_STRING("AUBREE"),
-    COMPOUND_STRING("RUTHIE"),
+    COMPOUND_STRING("FELICITE"),
+    COMPOUND_STRING("MOLLY"),
     COMPOUND_STRING("HAZEL"),
-    COMPOUND_STRING("NADINE"),
+    COMPOUND_STRING("RACHEL"),
     COMPOUND_STRING("TANJA"),
     COMPOUND_STRING("YASMIN"),
-    COMPOUND_STRING("NICOLA"),
-    COMPOUND_STRING("LILLIE"),
+    COMPOUND_STRING("PENNY"),
+    COMPOUND_STRING("LILLY"),
     COMPOUND_STRING("TERRA"),
     COMPOUND_STRING("LUCY"),
-    COMPOUND_STRING("HALIE")
+    COMPOUND_STRING("HAYLEY")
 };
 
 // The number of male vs. female names is assumed to be the same.
 // If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.
-#define NUM_PRESET_NAMES min(ARRAY_COUNT(sMalePresetNames), ARRAY_COUNT(sFemalePresetNames))
+#define NUM_PRESET_NAMES min(ARRAY_COUNT(sFemalePresetNames1), ARRAY_COUNT(sFemalePresetNames2))
 
 enum
 {
@@ -1625,7 +1625,6 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
 static void Task_NewGameBirchSpeech_SoItsPlayerName(u8 taskId)
 {
     NewGameBirchSpeech_ClearWindow(0);
-    MgbaPrintf(MGBA_LOG_WARN, "so its kaya?: %u", playerIsKaya);
     StringExpandPlaceholders(gStringVar4, gText_Birch_SoItsPlayer);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
@@ -2146,10 +2145,10 @@ void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     const u8 *name;
     u8 i;
 
-    if (gSaveBlock2Ptr->playerGender == BUTCHY)
-        name = sMalePresetNames[nameId];
+    if (RandomPercentage(RNG_NAME, 50))
+        name = sFemalePresetNames1[nameId];
     else
-        name = sFemalePresetNames[nameId];
+        name = sFemalePresetNames2[nameId];
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;

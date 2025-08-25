@@ -692,7 +692,7 @@ MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory::
 	.string "loves to collect RIBBONS!$"
 
 MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle::
-	.string "The Ledge-Jumping TRAINER$"
+	.string "so theres this ledge$"
 
 MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction::
 	.string "Jumped down ledges$"
@@ -702,7 +702,7 @@ MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory::
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER jumped down ledges\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "If there's a ledge to be jumped,\n"
+	.string "so theres this ledge and \n"
 	.string "{STR_VAR_3} can't ignore it!$"
 
 MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle::

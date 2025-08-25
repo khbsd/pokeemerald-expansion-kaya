@@ -471,7 +471,7 @@ MauvilleCity_Text_WallyWantToChallengeGym:
 	.string "Please? May I, please?$"
 
 MauvilleCity_Text_UncleYourePushingIt:
-	.string "{SPEAKER SP_NAME_UNCLE} Now hold on, WALLY.\p"
+	.string "{SPEAKER SP_NAME_UNCLE} Now hold on, SALLY.\p"
 	.string "Since you started living with POKéMON,\n"
 	.string "you have grown quite a lot stronger.\p"
 	.string "But don't you think you're pushing it\n"
@@ -498,7 +498,7 @@ MauvilleCity_Text_WallyMyUncleWontKnowImStrong:
 
 MauvilleCity_Text_UncleCanYouBattleWally:
 	.string "{SPEAKER SP_NAME_UNCLE} {PLAYER}{KUN}, was it?\n"
-	.string "On WALLY's behalf, can I ask you to\l"
+	.string "On SALLY's behalf, can I ask you to\l"
 	.string "battle with him just this once?\p"
 	.string "I don't think he's going to listen to\n"
 	.string "any reason the way he is now.$"
@@ -528,7 +528,7 @@ MauvilleCity_Text_ThankYouNotEnoughToBattle:
 	.string "being a real TRAINER is about.$"
 
 MauvilleCity_Text_UncleNoNeedToBeDown:
-	.string "{SPEAKER SP_NAME_UNCLE} WALLY, there's no need to be so\n"
+	.string "{SPEAKER SP_NAME_UNCLE} SALLY, there's no need to be so\n"
 	.string "down on yourself.\p"
 	.string "Why, what's keeping you from becoming\n"
 	.string "stronger and stronger?\p"
@@ -538,11 +538,11 @@ MauvilleCity_Text_UncleNoNeedToBeDown:
 MauvilleCity_Text_UncleVisitUsSometime:
 	.string "{SPEAKER SP_NAME_UNCLE} {PLAYER}{KUN}, it just dawned on me\n"
 	.string "that you must be the TRAINER who kept\l"
-	.string "an eye out for WALLY when he caught\l"
+	.string "an eye out for SALLY when he caught\l"
 	.string "his POKéMON.\p"
 	.string "Why don't you visit us in VERDANTURF\n"
 	.string "sometime?\l"
-	.string "I'm sure WALLY would enjoy it.$"
+	.string "I'm sure SALLY would enjoy it.$"
 
 
 MauvilleCity_Text_WallyPokenavCall:
@@ -557,13 +557,13 @@ MauvilleCity_Text_WallyPokenavCall:
 	.string "… … … … … Click!$"
 
 MauvilleCity_Text_RegisteredWally:
-	.string "Registered WALLY\n"
+	.string "Registered SALLY\n"
 	.string "in the POKéNAV.$"
 
 MauvilleCity_Text_ScottYouDidntHoldBack:
 	.string "{SPEAKER SP_NAME_SCOTT} Hehe…\n"
 	.string "I was watching that match!\p"
-	.string "You're friends with that boy WALLY,\n"
+	.string "You're friends with that boy SALLY,\n"
 	.string "aren't you?\p"
 	.string "But you didn't hold anything back\n"
 	.string "and beat him impressively.\p"

@@ -373,7 +373,9 @@ OldaleTown_Text_DiscoveredFootprints:
 	.string "I just discovered the footprints of\n"
 	.string "a rare POKéMON!\p"
 	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "them, okay?\p"
+	.string "God, I'm so glad I can simulate\n"
+	.string "the smell...$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
 	.string "I finished sketching the footprints of\n"

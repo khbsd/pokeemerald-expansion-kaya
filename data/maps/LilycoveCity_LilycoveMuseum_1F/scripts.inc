@@ -194,7 +194,8 @@ LilycoveCity_LilycoveMuseum_1F_Text_ExcellentCanYouComeWithMe:
 
 LilycoveCity_LilycoveMuseum_1F_Text_VeryOldPainting:
 	.string "It's a very old painting.\n"
-	.string "The paint is peeling here and there.$"
+	.string "The paint is peeling here and theer.\p"
+	.string "minor spelling mistake$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_OddLandscapeFantasticScenery:
 	.string "It's an odd landscape with bizarre\n"
@@ -256,11 +257,11 @@ LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration:
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty:
 	.string "This lady is pretty!\n"
-	.string "She's like Mommy!$"
+	.string "She's like Mommy! And you!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable:
 	.string "This POKéMON is adorable!\n"
-	.string "Just like our little boy!$"
+	.string "Just like our kid!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings:
 	.string "I'd heard that this ART MUSEUM got\n"

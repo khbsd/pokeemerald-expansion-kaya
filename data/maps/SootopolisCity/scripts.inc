@@ -1621,6 +1621,9 @@ SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
 	.string "were awakened from a long sleep…\p"
 	.string "And now they are smashing each other\n"
 	.string "with their uncontrollable energy…\p"
+	.string "...\p"
+	.string "I should call him.\p"
+	.string "...\p"
 	.string "…{PLAYER}{KUN}.\p"
 	.string "You being here now I'll take to mean\n"
 	.string "that you're prepared to become\l"
@@ -1682,7 +1685,7 @@ SootopolisCity_Text_AquaMagmaDidntMeanHarm:
 
 SootopolisCity_Text_ThankYouForHelpAcceptThis:
 	.string "{SPEAKER SP_NAME_WALLACE} {PLAYER}{KUN}…\n"
-	.string "My eyes didn't deceive me.\p"
+	.string "My eyes didn't desleeve me.\p"
 	.string "Thanks to your help, SOOTOPOLIS…\n"
 	.string "No, all of HOENN was saved.\p"
 	.string "On behalf of the people, I thank you.\p"
@@ -1692,9 +1695,8 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis:
 SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "That HIDDEN MACHINE contains\n"
 	.string "WATERFALL.\p"
-	.string "If you have the RAIN BADGE, a POKéMON\n"
-	.string "that has learned that HM move can\l"
-	.string "force its way up waterfalls.\p"
+	.string "If you have the RAIN BADGE, you can\n"
+	.string "force your way up waterfalls.\p"
 	.string "And where does one get the RAIN BADGE?\n"
 	.string "You know, don't you?\p"
 	.string "That's right! You have to beat\n"

@@ -106,7 +106,7 @@ VerdanturfTown_WandasHouse_Text_WallysNextDoor:
 	.string "But, boy, there's something I have to\n"
 	.string "tell you.\p"
 	.string "This natural environment is doing\n"
-	.string "wonders for WALLY's health.\p"
+	.string "wonders for SALLY's health.\p"
 	.string "Maybe it's not just the environment.\n"
 	.string "It could be POKéMON that are giving\l"
 	.string "the boy hope.$"
@@ -125,15 +125,15 @@ VerdanturfTown_WandasHouse_Text_WallyGoneThatFar:
 VerdanturfTown_WandasHouse_Text_MeetWanda:
 	.string "{SPEAKER SP_NAME_WANDA} You are?\n"
 	.string "Oh, right, I get it!\p"
-	.string "You're the {PLAYER} who WALLY was\n"
+	.string "You're the {PLAYER} who SALLY was\n"
 	.string "telling me about.\p"
-	.string "I'm WALLY's cousin.\n"
+	.string "I'm SALLY's cousin.\n"
 	.string "Glad to meet you!\p"
-	.string "I think WALLY's become a lot more lively\n"
+	.string "I think SALLY's become a lot more lively\n"
 	.string "and healthy since he came here.$"
 
 VerdanturfTown_WandasHouse_Text_DontWorryAboutWally:
-	.string "{SPEAKER SP_NAME_WANDA} Don't worry about WALLY.\n"
+	.string "{SPEAKER SP_NAME_WANDA} Don't worry about SALLY.\n"
 	.string "He'll be just fine.\p"
 	.string "I know my little cousin, and he has\n"
 	.string "POKéMON with him, too.$"
@@ -157,7 +157,7 @@ VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendWasDigging:
 	.string "It's so incredible!$"
 
 VerdanturfTown_WandasHouse_Text_IfAnythingHappenedToWally:
-	.string "If anything were to happen to WALLY,\n"
+	.string "If anything were to happen to SALLY,\n"
 	.string "I would never be able to look his\l"
 	.string "parents in PETALBURG in the eye…$"
 

@@ -72,18 +72,18 @@ SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname:
 	.string "I critique?$"
 
 SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne:
-	.string "Hmmm… {STR_VAR_1}, is it? That is\n"
-	.string "quite a fine name you bestowed.\p"
-	.string "But! What say you, if I were to\n"
-	.string "suggest a slightly better name?$"
+	.string "Hmmm… shithead, is it? Wow,\n"
+	.string "That sucks ass!\p"
+	.string "I'm calling PPS unless you let me\p"
+	.string "suggest a slightly better name.$"
 
 SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe:
-	.string "Ah, good. Then, what shall the new\n"
+	.string "Thank God. What will the new\n"
 	.string "nickname be?$"
 
 SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName:
 	.string "Done! From now on, this POKéMON\n"
-	.string "shall be known as {STR_VAR_1}!\p"
+	.string "shall be known as shithead!\p"
 	.string "It is a better name than before!\n"
 	.string "How fortunate for you!$"
 
@@ -93,17 +93,17 @@ SlateportCity_NameRatersHouse_Text_DoVisitAgain:
 
 SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior:
 	.string "Done! From now on, this POKéMON\n"
-	.string "shall be known as {STR_VAR_1}!\p"
+	.string "shall be known as shithead!\p"
 	.string "It looks no different from before,\n"
 	.string "and yet, this is vastly superior!\p"
 	.string "How fortunate for you!$"
 
 SlateportCity_NameRatersHouse_Text_MagnificentName:
-	.string "Hmmm… {STR_VAR_1} it is!\p"
+	.string "Hmmm… shithead it is!\p"
 	.string "This is a magnificent nickname!\n"
 	.string "It is impeccably beyond reproach!\p"
 	.string "You'll do well to cherish your\n"
-	.string "{STR_VAR_1} now and beyond.$"
+	.string "shithead now and beyond.$"
 
 SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
 	.string "Now, now.\n"

@@ -1203,7 +1203,7 @@ SlateportCity_Text_BattleTentSign:
 
 SlateportCity_Text_SternsShipyardWantedSign:
 	.string "STERN'S SHIPYARD\p"
-	.string "“Wanted: A sailor capable of sailing\n"
+	.string "“Wanted: A snailor capable of snailing\n"
 	.string "in all currents.”$"
 
 SlateportCity_Text_SternsShipyardNearsCompletion:

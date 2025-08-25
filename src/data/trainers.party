@@ -9559,7 +9559,7 @@ Level: 35
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WALLY_VR_1 ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -9609,7 +9609,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Future Sight
 
 === TRAINER_BRENDAN_ROUTE_103_MUDKIP ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9622,7 +9622,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_MUDKIP ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9643,7 +9643,7 @@ Level: 20
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_BRENDAN_ROUTE_119_MUDKIP ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9664,7 +9664,7 @@ Level: 31
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_BRENDAN_ROUTE_103_TREECKO ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9677,7 +9677,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_TREECKO ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9698,7 +9698,7 @@ Level: 20
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_BRENDAN_ROUTE_119_TREECKO ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9719,7 +9719,7 @@ Level: 31
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_BRENDAN_ROUTE_103_TORCHIC ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9732,7 +9732,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_ROUTE_110_TORCHIC ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -9753,7 +9753,7 @@ Level: 20
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_BRENDAN_ROUTE_119_TORCHIC ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -10950,7 +10950,7 @@ Level: 36
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_RUSTBORO_TREECKO ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -10967,7 +10967,7 @@ Level: 15
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_BRENDAN_RUSTBORO_MUDKIP ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -11074,7 +11074,7 @@ Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_RUSTBORO_TORCHIC ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -12140,7 +12140,7 @@ Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_WALLY_MAUVILLE ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -12153,7 +12153,7 @@ Level: 16
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
 === TRAINER_WALLY_VR_2 ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -12203,7 +12203,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Future Sight
 
 === TRAINER_WALLY_VR_3 ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -12253,7 +12253,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Future Sight
 
 === TRAINER_WALLY_VR_4 ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -12303,7 +12303,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Future Sight
 
 === TRAINER_WALLY_VR_5 ===
-Name: WALLY
+Name: SALLY
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -12353,7 +12353,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Future Sight
 
 === TRAINER_BRENDAN_LILYCOVE_MUDKIP ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -12378,7 +12378,7 @@ Level: 34
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 
 === TRAINER_BRENDAN_LILYCOVE_TREECKO ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -12403,7 +12403,7 @@ Level: 34
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 
 === TRAINER_BRENDAN_LILYCOVE_TORCHIC ===
-Name: BRENDAN
+Name: BRENDA
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -14270,26 +14270,26 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
-Golem @ Focus Sash
+Golem @ Sitrus Berry
 Ability: Sturdy
 Level: 100
 Nature: Adamant
 EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
-- Rollout
-- Magnitude
+- Rock Slide
+- High Horsepower
 - Explosion
 
-Kabuto @ Sitrus Berry
+Kabutops @ Covert Cloak
 Ability: Swift Swim
 Level: 100
 Nature: Adamant
 EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
-- Blizzard
-- Surf
+- Brick Break
+- Liquidation
 - Rock Slide
 
 Tyrantrum @ Rock Gem
@@ -19294,7 +19294,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_PLACEHOLDER ===
-Name: BRENDAN
+Name: BRENDA
 Class: RS Protag
 Pic: RS Brendan
 Gender: Male

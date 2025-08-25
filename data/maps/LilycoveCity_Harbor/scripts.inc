@@ -549,8 +549,8 @@ LilycoveCity_Harbor_Text_MayISeeYourTicket:
 LilycoveCity_Harbor_Text_NoTicket:
 	.string "{PLAYER} doesn't have the TICKET…\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
-	.string "the ferry.$"
+	.string "You must have a TICKET to ride\n"
+	.string "the ferry. Wink.$"
 
 LilycoveCity_Harbor_Text_FlashTicketWhereTo:
 	.string "{PLAYER} flashed the TICKET.\p"

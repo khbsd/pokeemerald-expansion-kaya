@@ -65,7 +65,7 @@ MagmaHideout_2F_1R_Text_Grunt4PostBattle:
 
 MagmaHideout_2F_1R_Text_Grunt5Intro:
 	.string "Oh, oh!\n"
-	.string "An intruder!$"
+	.string "That's raw porcelain!$"
 
 MagmaHideout_2F_1R_Text_Grunt5Defeat:
 	.string "Mutter…$"

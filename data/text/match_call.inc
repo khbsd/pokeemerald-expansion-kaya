@@ -2608,7 +2608,7 @@ MatchCall_Text_Wally3::
 
 MatchCall_Text_Wally4::
 	.string "{SPEAKER SP_NAME_WALLY} {PLAYER}?\n"
-	.string "It's me, WALLY!\p"
+	.string "It's me, SALLY!\p"
 	.string "The world of TRAINERS is amazing!\p"
 	.string "When I have my POKéMON with me,\n"
 	.string "all sorts of people say hi!\p"

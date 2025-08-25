@@ -1157,7 +1157,7 @@ PetalburgCity_Gym_Text_WallyIdLikeAPokemon:
 
 PetalburgCity_Gym_Text_DadOhYoureWallyRight:
 	.string "{SPEAKER SP_NAME_DAD} Hm? You're… Uh… Oh, right.\n"
-	.string "You're WALLY, right?$"
+	.string "You're SALLY, right?$"
 
 PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon:
 	.string "{SPEAKER SP_NAME_WALLY} I'm going to go stay with my\n"
@@ -1173,7 +1173,7 @@ PetalburgCity_Gym_Text_DadHmISee:
 PetalburgCity_Gym_Text_DadPlayerGoWithWally:
 	.string "{SPEAKER SP_NAME_DAD} {PLAYER}, you heard that,\n"
 	.string "right?\p"
-	.string "Go with WALLY and make sure that he\n"
+	.string "Go with SALLY and make sure that he\n"
 	.string "safely catches a POKéMON.$"
 
 PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon:
