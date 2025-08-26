@@ -22,11 +22,13 @@
 #include "overworld.h"
 #include "item.h"
 #include "regions.h"
+#include "sound.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "constants/songs.h"
 
 #define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_DITTO || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_DITTO)
 
@@ -586,7 +588,12 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
         daycare->offspringPersonality = personality;
     }
 
-    FlagSet(FLAG_PENDING_DAYCARE_EGG);
+    PlaySE(SE_EGG_HATCH);
+    MgbaPrintf(MGBA_LOG_WARN, "egged");
+    if (P_EGGS_TO_PC)
+        SendEggFromDaycareToPC(daycare);
+    else
+        FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
 // Functionally unused
@@ -1072,15 +1079,12 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     return eggSpecies;
 }
 
-static void _GiveEggFromDaycare(struct DayCare *daycare)
+struct Pokemon GenerateMonForDaycare(struct DayCare *daycare)
 {
     struct Pokemon egg;
     u16 species;
     u8 parentSlots[DAYCARE_MON_COUNT] = {0};
     bool8 isEgg;
-
-    if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
-        return;
 
     species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
     if (P_INCENSE_BREEDING < GEN_9)
@@ -1096,6 +1100,31 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
 
     isEgg = TRUE;
     SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
+
+    return egg;
+}
+
+void SendEggFromDaycareToPC(struct DayCare *daycare)
+{
+    if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
+        return;
+
+    struct Pokemon egg = GenerateMonForDaycare(daycare);
+
+    CopyMonToPC(&egg);
+    RemoveEggFromDayCare(daycare);
+
+    if (FlagGet(FLAG_PENDING_DAYCARE_EGG))
+        FlagClear(FLAG_PENDING_DAYCARE_EGG);
+}
+
+static void _GiveEggFromDaycare(struct DayCare *daycare)
+{
+    if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
+        return;
+
+    struct Pokemon egg = GenerateMonForDaycare(daycare);
+
     gPlayerParty[PARTY_SIZE - 1] = egg;
     CompactPartySlots();
     CalculatePlayerPartyCount();
@@ -1153,6 +1182,19 @@ void GiveEggFromDaycare(void)
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
 
+u32 GetBoostedStepCount(void)
+{
+    u32 badges = GetNumOwnedBadges();
+    u32 toAdd = 1;
+    if (badges > 0 && P_BADGE_BOOST_EGG_STEPS)
+    {
+        u32 boostChance = P_BADGE_BOOST_EGG_STEP_AMOUNT * badges;
+        if (RandomPercentage(RNG_EGG_BADGE_BOOST, boostChance))
+            toAdd = boostChance;
+    }
+    return toAdd;
+}
+
 static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 {
     u32 i, validEggs = 0;
@@ -1167,19 +1209,20 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
         u8 compatibility = ModifyBreedingScoreForOvalCharm(GetDaycareCompatibilityScore(daycare));
-        if (compatibility > (Random() * 100u) / USHRT_MAX)
+        if ((compatibility > (Random() * 100u) / USHRT_MAX)
+            && GetDaycareCompatibilityScore(daycare) != PARENTS_INCOMPATIBLE)
             TriggerPendingDaycareEgg();
     }
 
     // Try to hatch Egg
-    daycare->stepCounter++;
+    daycare->stepCounter += GetBoostedStepCount();
     if (((P_EGG_CYCLE_LENGTH <= GEN_3 || P_EGG_CYCLE_LENGTH == GEN_7) && daycare->stepCounter >= 256)
      || (P_EGG_CYCLE_LENGTH == GEN_4 && daycare->stepCounter >= 255)
      || ((P_EGG_CYCLE_LENGTH == GEN_5 || P_EGG_CYCLE_LENGTH == GEN_6) && daycare->stepCounter >= 257)
      || (P_EGG_CYCLE_LENGTH >= GEN_8 && daycare->stepCounter >= 128))
     {
         u32 eggCycles;
-        u8 toSub = GetEggCyclesToSubtract();
+        u32 toSub = GetEggCyclesToSubtract();
 
         daycare->stepCounter = 0;
 
@@ -1301,6 +1344,7 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];
     u16 species[DAYCARE_MON_COUNT];
     u32 trainerIds[DAYCARE_MON_COUNT];
+    u32 compatibility = PARENTS_INCOMPATIBLE;
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -1321,9 +1365,9 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
     {
         if (trainerIds[0] == trainerIds[1])
-            return PARENTS_LOW_COMPATIBILITY;
-
-        return PARENTS_MED_COMPATIBILITY;
+            compatibility = PARENTS_LOW_COMPATIBILITY;
+        else
+            compatibility = PARENTS_MED_COMPATIBILITY;
     }
     // neither parent is Ditto
     else
@@ -1334,18 +1378,20 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         if (species[0] == species[1])
         {
             if (trainerIds[0] == trainerIds[1])
-                return PARENTS_MED_COMPATIBILITY; // same species, same trainer
-
-            return PARENTS_MAX_COMPATIBILITY; // same species, different trainers
+                compatibility = PARENTS_MED_COMPATIBILITY; // same species, same trainer
+            else
+                compatibility = PARENTS_MAX_COMPATIBILITY; // same species, different trainers
         }
         else
         {
             if (trainerIds[0] != trainerIds[1])
-                return PARENTS_MED_COMPATIBILITY; // different species, different trainers
-
-            return PARENTS_LOW_COMPATIBILITY; // different species, same trainer
+                compatibility = PARENTS_MED_COMPATIBILITY; // different species, different trainers
+            else
+                compatibility = PARENTS_LOW_COMPATIBILITY; // different species, same trainer
         }
     }
+
+    return compatibility + (GetNumOwnedBadges() * P_BADGE_BOOST_MON_COMPAT);
 }
 
 static u8 GetDaycareCompatibilityScoreFromSave(void)

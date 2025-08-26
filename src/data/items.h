@@ -13132,17 +13132,17 @@ const struct Item gItemsInfo[] =
     {
         .price = 0,
     #if DUAL_USE_BIKE
-    .name = ITEM_NAME("Bike"),
-    .description = COMPOUND_STRING(
-        "A folding bicycle\n"
-        "that has two modes and\n"
-        "two wheels. :)"),
+        .name = ITEM_NAME("Bike"),
+        .description = COMPOUND_STRING(
+            "A folding bicycle\n"
+            "that has two modes\n"
+            "and two wheels. {EMOJI_BIGSMILE}"),
     #else
-    .name = ITEM_NAME("Mach Bike"),
-    .description = COMPOUND_STRING(
-        "A folding bicycle\n"
-        "that doubles your\n"
-        "speed or better."),
+        .name = ITEM_NAME("Mach Bike"),
+        .description = COMPOUND_STRING(
+            "A folding bicycle\n"
+            "that doubles your\n"
+            "speed or better."),
     #endif // DUAL_USE_BIKE
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
@@ -13156,19 +13156,19 @@ const struct Item gItemsInfo[] =
     [ITEM_ACRO_BIKE] =
     {
         .price = 0,
-        #if DUAL_USE_BIKE
+    #if DUAL_USE_BIKE
         .name = ITEM_NAME("Bike"),
         .description = COMPOUND_STRING(
             "A folding bicycle\n"
-            "that has two modes and\n"
-            "two wheels. :)"),
-        #else
+            "that has two modes\n"
+            "and two wheels. {EMOJI_BIGSMILE}"),
+    #else
         .name = ITEM_NAME("Acro Bike"),
         .description = COMPOUND_STRING(
             "A folding bicycle\n"
             "capable of jumps\n"
             "and wheelies."),
-        #endif // DUAL_USE_BIKE
+    #endif // DUAL_USE_BIKE
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

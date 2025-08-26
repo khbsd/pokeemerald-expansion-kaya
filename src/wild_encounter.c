@@ -1075,13 +1075,12 @@ void FishingWildEncounter(u8 rod)
 u32 GetRandomHeaderInMapGroup(u32 headerId)
 {
     u32 chance = 67;
-    while (RandomPercentage(RNG_LOCAL_WILD_MON, chance) 
+    while (RandomPercentage(RNG_LOCAL_WILD_MON, chance)
         && (gWildMonHeaders[headerId].mapGroup == gWildMonHeaders[headerId + 1].mapGroup)
         && (headerId < 2))
     {
         headerId++;
         chance /= headerId + 1;
-        MgbaPrintf(MGBA_LOG_WARN, "headerId: %u", headerId);
     }
 
     return headerId;

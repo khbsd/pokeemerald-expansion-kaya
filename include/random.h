@@ -235,6 +235,7 @@ enum RandomTag
     RNG_AI_APPLY_TAILWIND_ON_LAST_TURN_OF_TRICK_ROOM,
     RNG_GACHA_SPECIES,
     RNG_NAME,
+    RNG_EGG_BADGE_BOOST,
 };
 
 #define RandomWeighted(tag, ...) \

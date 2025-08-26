@@ -2395,7 +2395,6 @@ bool8 UseRegisteredKeyItemOnField(void)
     u32 taskId;
     u32 i;
     ItemUseFunc func = NULL;
-    MgbaPrintf(MGBA_LOG_WARN, "using registered item: %u ", gSaveBlock1Ptr->registeredItemCompat);
 
     if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
@@ -2404,11 +2403,8 @@ bool8 UseRegisteredKeyItemOnField(void)
     i = CountRegisteredItems();
     // Show key item wheel
     if (i > 1)
-    {
         func = Task_KeyItemWheel;
-        MgbaPrintf(MGBA_LOG_WARN, "item wheel activating");
         // Use the only registered item
-    }
     else if (i > 0)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItemCompat, 1) == TRUE)
@@ -2428,7 +2424,6 @@ bool8 UseRegisteredKeyItemOnField(void)
         PlayerFreeze();
         StopPlayerAvatar();
         taskId = CreateTask(func, 8);
-        MgbaPrintf(MGBA_LOG_WARN, "func exists, running");
         gTasks[taskId].tUsingRegisteredKeyItem = TRUE;
         return TRUE;
     }

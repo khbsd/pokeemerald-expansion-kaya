@@ -122,8 +122,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & R_BUTTON && !FlagGet(DN_FLAG_SEARCHING))
                 input->pressedRButton = TRUE;
-            // if (newKeys & L_BUTTON)
-                // input->pressedLButton = TRUE;
+            if (newKeys & L_BUTTON)
+                input->pressedLButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -182,22 +182,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
-    if (input->pressedBButton && B_TOGGLES_RUN
-        && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING))
-        && FlagGet(FLAG_RECEIVED_RUNNING_SHOES))
-    {
-        if (gRunToggled)
-        {
-            PlaySE(SE_WALL_HIT);
-            gRunToggled = FALSE;
-        }
-        else
-        {
-            PlaySE(SE_FLEE);
-            gRunToggled = TRUE;
-        }
-            
-    }
+
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
@@ -227,8 +212,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetInFrontOfPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
-    if (input->heldDirection && (input->dpadDirection == playerDirection) 
-        && (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE) 
+    if (input->heldDirection && (input->dpadDirection == playerDirection)
+        && (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE)
         && !ArePlayerFieldControlsLocked())
         return TRUE;
 
@@ -273,9 +258,25 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     }
 
-    if (input->pressedLButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE) && DUAL_USE_BIKE)
+    if (input->pressedBButton && B_TOGGLES_RUN
+        && (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING))
+        && FlagGet(FLAG_RECEIVED_RUNNING_SHOES))
     {
-        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
+        if (gRunToggled)
+        {
+            PlaySE(SE_WALL_HIT);
+            gRunToggled = FALSE;
+        }
+        else
+        {
+            PlaySE(SE_FLEE);
+            gRunToggled = TRUE;
+        }
+
+    }
+    if (input->pressedLButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE) && DUAL_USE_BIKE && !FlagGet(DN_FLAG_SEARCHING))
+    {
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
         {
             gPlayerAvatar.flags -= PLAYER_AVATAR_FLAG_MACH_BIKE;
             gPlayerAvatar.flags += PLAYER_AVATAR_FLAG_ACRO_BIKE;
@@ -601,13 +602,13 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 }
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
-{ 
+{
     if (OW_FLAG_AUTO_USE_SURF)
         return NULL;
 
-    if (FlagGet(FLAG_BADGE05_GET) == TRUE 
-        && PartyHasMonWithSurf() == TRUE 
-        && IsPlayerFacingSurfableFishableWater() == TRUE 
+    if (FlagGet(FLAG_BADGE05_GET) == TRUE
+        && PartyHasMonWithSurf() == TRUE
+        && IsPlayerFacingSurfableFishableWater() == TRUE
         && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF))
         return EventScript_UseSurf;
 
@@ -617,7 +618,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
     {
         if (OW_FLAG_AUTO_USE_WATERFALL)
             return NULL;
-        
+
         if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerFacingClimbableWaterfall())
             return EventScript_UseWaterfall;
         else
