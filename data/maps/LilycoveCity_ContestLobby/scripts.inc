@@ -1055,7 +1055,7 @@ LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere:
 	.string "part of my daily stroll.$"
 
 LilycoveCity_ContestLobby_Text_ContestFeastForEyes:
-	.string "Wow, coming out to a CONTEST is\n"
+	.string "{SPEAKER SP_NAME_FOOT_GUY}Wow, coming out to a CONTEST is\n"
 	.string "a feast for these eyes!\p"
 	.string "Would you look at all the POKéMON\n"
 	.string "that just scream to be painted?$"

@@ -81,7 +81,8 @@ FortreeCity_House1_Text_ThisIsntAMon:
 
 FortreeCity_House1_Text_YouWontTradeMe:
 	.string "No? You won't trade me?\n"
-	.string "Even after I bared my heart to you?$"
+	.string "Even after I bared my heart to you?\n"
+	.string "Forever alone, amirite?$"
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
 	.string "I'm going to make VOLBEAT super\n"

@@ -38,16 +38,19 @@ PacifidlogTown_House4_Text_SkyPokemon:
 	.string "A sky POKéMON!$"
 
 PacifidlogTown_House4_Text_WhereDidYouComeFrom:
-	.string "Where did you come from?$"
+	.string "{SPEAKER SP_NAME_DUMBASS}Where did you come from?$"
 
 PacifidlogTown_House4_Text_YesTown:
-	.string "Yes?\n"
+	.string "{SPEAKER SP_NAME_DUMBASS}Yes?\n"
 	.string "YES TOWN?\p"
 	.string "I've never heard of a place like that.$"
 
 PacifidlogTown_House4_Text_YouHaveToComeFromSomewhere:
-	.string "No? That doesn't make any sense.\n"
+	.string "{SPEAKER SP_NAME_DUMBASS}No? That doesn't make any sense.\n"
 	.string "You have to come from somewhere.\p"
 	.string "Oh! Wait! You're not going to say you\n"
-	.string "were born at the bottom of the sea?$"
+	.string "were born at the bottom of the sea?\l"
+	.string "...\p"
+	.string "Oh, that plaque on the wall? Yeah, I\n"
+	.string "studied under Jordan Peterson. Why?$"
 

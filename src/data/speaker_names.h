@@ -114,4 +114,8 @@ static const u8 *const sSpeakerNamesTable[SP_NAME_COUNT] =
     [SP_NAME_SHOP_CLURK] = COMPOUND_STRING("Shop Clurk"),
     [SP_NAME_NURSE_JOY] = COMPOUND_STRING("Narse Joy"),
     [SP_NAME_DUMBASS] = COMPOUND_STRING("dumbass"),
+    [SP_NAME_REAL_DOWNER] = COMPOUND_STRING("Real Downer"),
+    [SP_NAME_T_ESTICLE] = COMPOUND_STRING("T. Esticles"),
+    [SP_NAME_NEWSCASTER] = COMPOUND_STRING("Newscaster"),
+    [SP_NAME_THE_POKEMON] = COMPOUND_STRING("the POKéMON."),
 };

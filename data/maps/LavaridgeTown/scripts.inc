@@ -214,8 +214,14 @@ LavaridgeTown_EventScript_OldMan::
 	end
 
 LavaridgeTown_EventScript_Twin::
+	goto_if_set FLAG_IS_CHAMPION, LavaridgeTown_EventScript_TwinChamp
 	msgbox LavaridgeTown_Text_BatheInHotSpringsEveryDay, MSGBOX_NPC
 	end
+
+LavaridgeTown_EventScript_TwinChamp::
+	msgbox LavaridgeTown_Text_BatheInHotSpringsEveryDayChamp, MSGBOX_NPC
+	end
+
 
 LavaridgeTown_EventScript_HotSpringsOldWoman1::
 	msgbox LavaridgeTown_Text_IfPokemonInHotSprings, MSGBOX_NPC
@@ -357,7 +363,7 @@ LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
 LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "We draw as much hot water as we need,\n"
 	.string "and yet the hot springs never run dry.\p"
-	.string "Isn't it magical?\p"
+	.string "Isn't it so fucking sick?\p"
 	.string "These hot springs appear near active\n"
 	.string "volcanoes. Veins of water under the\l"
 	.string "ground are heated by magma to well up\l"
@@ -380,6 +386,12 @@ LavaridgeTown_Text_BatheInHotSpringsEveryDay:
 	.string "I want to become a beautiful and strong\n"
 	.string "GYM LEADER like FLANNERY.$"
 
+LavaridgeTown_Text_BatheInHotSpringsEveryDayChamp:
+	.string "I bathe in the hot springs every day.\p"
+	.string "I want to become a beautiful and strong\n"
+	.string "GYM LEADER like FLANNERY, and like you!\p"
+	.string "You two should date! {EMOJI_BIGSMILE}$"
+
 LavaridgeTown_Text_IfPokemonInHotSprings:
 	.string "If people put POKéMON in hot springs,\n"
 	.string "it might be seriously strange.\p"
@@ -391,7 +403,8 @@ LavaridgeTown_Text_HotSpringsClaims:
 	.string "are good for calming nervous tension,\l"
 	.string "relieving aching muscles, solving\l"
 	.string "intimacy issues, and attracting\l"
-	.string "money…$"
+	.string "money… I already use my BEMER machine\p"
+	.string "for those things, though!$"
 
 LavaridgeTown_Text_TownSign:
 	.string "LAVARIDGE TOWN\p"

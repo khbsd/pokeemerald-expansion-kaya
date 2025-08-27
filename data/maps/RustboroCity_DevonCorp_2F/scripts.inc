@@ -269,17 +269,20 @@ RustboroCity_DevonCorp_2F_EventScript_WorkOnNext::
 	end
 
 RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon:
-	.string "We're developing a device for talking\n"
-	.string "with POKéMON.\p"
-	.string "But we haven't had much success…$"
+	.string "Ugh. I hate modern UX standards.\n"
+	.string "If you shelter the user from the\p"
+	.string "inner workings of the tools that\n"
+	.string "they use, you do them a disservice.\l"
+	.string "Steve Jobs and his fucking consequences\n"
+	.string "are gonna finally make me do it.$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls:
-	.string "I'm developing new kinds of\n"
+	.string "{SPEAKER SP_NAME_T_ESTICLE}I'm developing new kinds of\n"
 	.string "POKé BALLS…\p"
 	.string "But I haven't made much headway…$"
 
 RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls:
-	.string "We finally made new kinds of\n"
+	.string "{SPEAKER SP_NAME_T_ESTICLE}We finally made new kinds of\n"
 	.string "POKé BALLS!\p"
 	.string "The REPEAT BALL makes it easier to\n"
 	.string "catch POKéMON you've caught before.\p"
@@ -290,7 +293,7 @@ RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls:
 	.string "Please give them a try!$"
 
 RustboroCity_DevonCorp_2F_Text_IMadePokenav:
-	.string "I made the POKéNAV!\p"
+	.string "{SPEAKER SP_NAME_DUMBASS}I made the POKéNAV!\p"
 	.string "As an engineer, I feel blessed to have\n"
 	.string "made something so great!$"
 
@@ -373,10 +376,11 @@ RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature:
 	.string "But it's not going well.$"
 
 RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
-	.string "Well, now what shall I work on\n"
-	.string "developing next?\p"
-	.string "Our company allows us to make our\n"
-	.string "inspirations into reality.\p"
-	.string "One couldn't ask for a better\n"
-	.string "environment as an engineer.$"
+	.string "{SPEAKER SP_NAME_REAL_DOWNER}Nonetheless, one could always draw\n"
+	.string "stoic comfort from the possibility\p"
+	.string "that perhaps over time the new\n"
+	.string "vacuum would sustain if not life as\l"
+	.string "we know it, at least some\n"
+	.string "structures capable of knowing joy.\l"
+	.string "This possibility has now been eliminated.$"
 

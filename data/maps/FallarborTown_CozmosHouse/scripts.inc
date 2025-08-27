@@ -73,7 +73,7 @@ FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
 	.string "It's never going to be mine now…$"
 
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
-	.string "Oh!\n"
+	.string "{SPEAKER SP_NAME_PROF_COZMO}Oh!\n"
 	.string "Hah?\p"
 	.string "That item…\p"
 	.string "Could it be?\p"
