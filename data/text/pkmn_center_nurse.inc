@@ -1,31 +1,31 @@
 gText_WouldYouLikeToRestYourPkmn::
-	.string "Hello, and welcome to\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Hello, and welcome to\n"
 	.string "the POKéMON CENTER.\p"
 	.string "We restore your tired POKéMON\n"
 	.string "to full health.\p"
 	.string "Would you like to rest your POKéMON?$"
 
 gText_IllTakeYourPkmn::
-	.string "Okay, I'll take your POKéMON\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Okay, I'll take your POKéMON\n"
 	.string "for a few seconds.$"
 
 gText_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\p"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Thank you for waiting.\p"
 	.string "We've restored your POKéMON\n"
 	.string "to full health.$"
 
 gText_WeHopeToSeeYouAgain::
-	.string "We hope to see you again!$"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}We hope to see you again!$"
 
 gText_WelcomeCutShort::
-	.string "Hello, and welcome to\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Hello, and welcome to\n"
 	.string "the POKéMON CENTER.\p"
 	.string "We restore your tired POKéMON\n"
 	.string "to full health.\p"
 	.string "Would you like to…$"
 
 gText_NoticesGoldCard::
-	.string "Th-that card…\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Th-that card…\n"
 	.string "Could it be… The GOLD CARD?!\p"
 	.string "Oh, the gold color is brilliant!\n"
 	.string "The four stars seem to sparkle!\p"
@@ -37,15 +37,15 @@ gText_NoticesGoldCard::
 	.string "the honor of resting your POKéMON!$"
 
 gText_YouWantTheUsual::
-	.string "I'm delighted to see you, {PLAYER}!\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}I'm delighted to see you, {PLAYER}!\n"
 	.string "You want the usual, am I right?$"
 
 gText_IllTakeYourPkmn2::
-	.string "Okay, I'll take your POKéMON\n"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Okay, I'll take your POKéMON\n"
 	.string "for a few seconds.$"
 
 gText_ThankYouForWaiting::
-	.string "Thank you for waiting.$"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}Thank you for waiting.$"
 
 gText_WeHopeToSeeYouAgain2::
-	.string "We hope to see you again!$"
+	.string "{SPEAKER SP_NAME_NURSE_JOY}We hope to see you again!$"

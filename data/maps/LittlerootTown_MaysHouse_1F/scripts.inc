@@ -196,7 +196,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
-	checkplayergender 
+	checkplayergender
 	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
 	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
@@ -331,7 +331,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	step_end
 
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "Oh, hello. And you are?\p"
+	.string "{SPEAKER SP_NAME_RIVALS_MOM}Oh, hello. And you are?\p"
 	.string "… … … … … … … … …\n"
 	.string "… … … … … … … … …\p"
 	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
@@ -343,26 +343,26 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
-	.string "Like child, like father.\p"
+	.string "{SPEAKER SP_NAME_RIVALS_MOM}Like child, like father.\p"
 	.string "My husband is as wild about POKéMON\n"
 	.string "as our child.\p"
 	.string "If he's not at his LAB, he's likely\n"
 	.string "scrabbling about in grassy places.$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
-	.string "That {RIVAL}!\p"
+	.string "{SPEAKER SP_NAME_RIVALS_MOM}That {RIVAL}!\p"
 	.string "I guess our child is too busy with\n"
 	.string "POKéMON to notice that you came\l"
 	.string "to visit, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "Oh, {RIVAL} went out to ROUTE 103\n"
+	.string "{SPEAKER SP_NAME_RIVALS_MOM}Oh, {RIVAL} went out to ROUTE 103\n"
 	.string "just a little while ago.\p"
 	.string "Like father, like child.\n"
 	.string "{RIVAL} can't stay quietly at home.$"
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
-	.string "I think it's wonderful for people to\n"
+	.string "{SPEAKER SP_NAME_RIVALS_MOM}I think it's wonderful for people to\n"
 	.string "travel with POKéMON.\p"
 	.string "But you should go home every so often\n"
 	.string "to let your mother know you're okay.\p"
@@ -370,7 +370,7 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "worries about you, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_MayWhoAreYou:
-	.string "Huh?\n"
+	.string "{SPEAKER SP_NAME_MAY}Huh?\n"
 	.string "Who… Who are you?\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
@@ -394,7 +394,7 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
-	.string "Oh!\n"
+	.string "{SPEAKER SP_NAME_BRENDA}Oh!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}, aren't you?\n"

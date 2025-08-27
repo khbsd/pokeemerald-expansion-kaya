@@ -211,7 +211,7 @@ RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
 	.string "LETTER to STEVEN in DEWFORD.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
-	.string "{SPEAKER SP_NAME_MR_STONE} Now, you should know that\n"
+	.string "{SPEAKER SP_NAME_MR_STONE}Now, you should know that\n"
 	.string "I am a great PRESIDENT.\p"
 	.string "So, I'd never be so cheap as to ask\n"
 	.string "a favor for nothing in return.\p"
@@ -221,7 +221,7 @@ RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
 	.string "{PLAYER} received a POKéNAV.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "{SPEAKER SP_NAME_MR_STONE} That device…\p"
+	.string "{SPEAKER SP_NAME_MR_STONE}That device…\p"
 	.string "It's a POKéMON NAVIGATOR, or POKéNAV\n"
 	.string "for short.\p"
 	.string "It's an indispensable tool for any\n"
@@ -236,20 +236,20 @@ RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
 	.string "up before you go on your way.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare:
-	.string "{SPEAKER SP_NAME_MR_STONE} Well, then, {PLAYER}{KUN},\n"
+	.string "{SPEAKER SP_NAME_MR_STONE}Well, then, {PLAYER}{KUN},\n"
 	.string "go with caution and care!$"
 
 RustboroCity_DevonCorp_3F_Text_CountingOnYou:
-	.string "{SPEAKER SP_NAME_MR_STONE} I'm counting on you!$"
+	.string "{SPEAKER SP_NAME_MR_STONE}I'm counting on you!$"
 
 RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
-	.string "{SPEAKER SP_NAME_MR_STONE} You delivered my LETTER?\n"
+	.string "{SPEAKER SP_NAME_MR_STONE}You delivered my LETTER?\n"
 	.string "Thank you kindly!\p"
 	.string "This is my way of thanking you.\n"
 	.string "It should help you, a TRAINER.$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
-	.string "{SPEAKER SP_NAME_MR_STONE} A POKéMON holding that\n"
+	.string "{SPEAKER SP_NAME_MR_STONE}A POKéMON holding that\n"
 	.string "EXP. SHARE will be given some of the\l"
 	.string "EXP Points from battle.\p"
 	.string "It will get EXP Points even if it didn't\n"
@@ -258,7 +258,7 @@ RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
 	.string "for raising weak POKéMON.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
-	.string "{SPEAKER SP_NAME_MR_STONE} Since my youth, I've immersed\n"
+	.string "{SPEAKER SP_NAME_MR_STONE}Since my youth, I've immersed\n"
 	.string "myself in work.\p"
 	.string "Consequently, I'm not familiar with\n"
 	.string "trends and that sort of thing.\p"

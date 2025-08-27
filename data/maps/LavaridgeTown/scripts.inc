@@ -274,7 +274,7 @@ LavaridgeTown_EventScript_HerbShopSign::
 	end
 
 LavaridgeTown_Text_MayNiceBadgesTakeThis:
-	.string "{SPEAKER SP_NAME_MAY} {PLAYER}{KUN}! Long time no see!\p"
+	.string "{SPEAKER SP_NAME_MAY}{PLAYER}{KUN}! Long time no see!\p"
 	.string "Oh? While I visited the hot springs,\n"
 	.string "you got the LAVARIDGE GYM BADGE.\p"
 	.string "You must have collected\n"
@@ -284,7 +284,7 @@ LavaridgeTown_Text_MayNiceBadgesTakeThis:
 	.string "have this.$"
 
 LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
-	.string "{SPEAKER SP_NAME_MAY} With those GO-GOGGLES, you'll\n"
+	.string "{SPEAKER SP_NAME_MAY}With those GO-GOGGLES, you'll\n"
 	.string "have no trouble getting through the\l"
 	.string "desert near ROUTE 111.\p"
 	.string "But, wow, {PLAYER}{KUN}…\n"
@@ -296,7 +296,7 @@ LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
 	.string "See you again!$"
 
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
-	.string "{SPEAKER SP_NAME_BRENDA} {PLAYER}, hey, it's been a while.\n"
+	.string "{SPEAKER SP_NAME_BRENDA}{PLAYER}, hey, it's been a while.\n"
 	.string "How's it going?\p"
 	.string "Hmm…\n"
 	.string "That's a great collection of BADGES.\p"
@@ -304,7 +304,7 @@ LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
 	.string "You should have this!$"
 
 LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
-	.string "{SPEAKER SP_NAME_BRENDA} Keep those with you if you're\n"
+	.string "{SPEAKER SP_NAME_BRENDA}Keep those with you if you're\n"
 	.string "planning on going into that desert near\l"
 	.string "ROUTE 111.\p"
 	.string "There should be some POKéMON that\n"

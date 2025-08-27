@@ -132,14 +132,14 @@ PacifidlogTown_House2_Text_GetGoodTMInXDays:
 	.string "your POKéMON.$"
 
 PacifidlogTown_House2_Text_Rurii:
-	.string "{SPEAKER SP_NAME_AZURILL} Rurii.$"
+	.string "{SPEAKER SP_NAME_AZURILL}Rurii.$"
 
 PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
 	.string "It appears to be very friendly with the\n"
 	.string "TRAINER.$"
 
 PacifidlogTown_House2_Text_Rururi:
-	.string "{SPEAKER SP_NAME_AZURILL} Rururi!$"
+	.string "{SPEAKER SP_NAME_AZURILL}Rururi!$"
 
 PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
 	.string "It doesn't appear to like the TRAINER\n"

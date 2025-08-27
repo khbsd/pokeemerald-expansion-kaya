@@ -22,5 +22,5 @@ LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 	.string "And they discovered that EGG!$"
 
 LavaridgeTown_House_Text_Zigzagoon:
-	.string "{SPEAKER SP_NAME_ZIGZAGOON} Pshoo!$"
+	.string "{SPEAKER SP_NAME_ZIGZAGOON}Pshoo!$"
 

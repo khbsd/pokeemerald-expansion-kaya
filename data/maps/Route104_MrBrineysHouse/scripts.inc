@@ -95,7 +95,7 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 	end
 
 Route104_MrBrineysHouse_Text_WaitUpPeeko:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Hold on, lass!\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Hold on, lass!\n"
 	.string "Wait up, PEEKO!$"
 
 Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford:
@@ -114,18 +114,18 @@ Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford:
 	.string "We'll set sail for DEWFORD.$"
 
 Route104_MrBrineysHouse_Text_SetSailForDewford:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} DEWFORD it is, then!\p"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}DEWFORD it is, then!\p"
 	.string "Anchors aweigh!\n"
 	.string "PEEKO, we're setting sail, my darling!$"
 
 Route104_MrBrineysHouse_Text_DeclineDeliverySail:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Is that so?\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Is that so?\n"
 	.string "Your deliveries can wait?\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail!$"
 
 Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Ahoy!\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Ahoy!\n"
 	.string "I know exactly what you want to say!\p"
 	.string "You're to deliver a LETTER to DEWFORD\n"
 	.string "and a package to SLATEPORT.\p"
@@ -134,7 +134,7 @@ Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford:
 	.string "First, we'll set sail for DEWFORD.$"
 
 Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Ahoy!\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Ahoy!\n"
 	.string "I know exactly what you want to say!\p"
 	.string "You're to deliver a package to\n"
 	.string "CAPT. STERN in SLATEPORT.\p"
@@ -143,16 +143,16 @@ Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford:
 	.string "First, we'll set sail for DEWFORD.$"
 
 Route104_MrBrineysHouse_Text_WhereAreWeBound:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Ahoy!\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Ahoy!\n"
 	.string "For you, I'll go out to sea anytime!\p"
 	.string "Now, my friend, where are we bound?$"
 
 Route104_MrBrineysHouse_Text_TellMeWheneverYouWantToSail:
-	.string "{SPEAKER SP_NAME_MR_BRINEY} Is that so?\n"
+	.string "{SPEAKER SP_NAME_MR_BRINEY}Is that so?\n"
 	.string "Well, PEEKO owes her life to you.\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail!$"
 
 Route104_MrBrineysHouse_Text_Peeko:
-	.string "{SPEAKER SP_NAME_PEEKO} Pii piihyoro!$"
+	.string "{SPEAKER SP_NAME_PEEKO}Pii piihyoro!$"
 

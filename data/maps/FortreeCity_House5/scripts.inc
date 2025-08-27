@@ -31,5 +31,5 @@ FortreeCity_House5_Text_AdaptedToNature:
 	.string "conform to the way we want to live.$"
 
 FortreeCity_House5_Text_Zigzagoon:
-	.string "{SPEAKER SP_NAME_ZIGZAGOON} Bufuu!$"
+	.string "{SPEAKER SP_NAME_ZIGZAGOON}Bufuu!$"
 

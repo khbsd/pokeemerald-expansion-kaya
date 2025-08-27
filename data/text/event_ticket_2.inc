@@ -8,7 +8,7 @@ EventTicket_Text_OldSeaMapTooFar:
 	.string "I'm afraid I can't help you…$"
 
 EventTicket_Text_BrineyHoldOnASecond:
-	.string "{SPEAKER SP_NAME_BRINEY} Hold on a second!\p"
+	.string "{SPEAKER SP_NAME_BRINEY}Hold on a second!\p"
 	.string "What's the idea of turning down\n"
 	.string "someone that I owe so much to?$"
 

@@ -403,7 +403,7 @@ MossdeepCity_Text_SpaceCenterSign:
 	.string "“The closest place to space.”$"
 
 MossdeepCity_Text_ScottSomethingWrongWithTown:
-	.string "{SPEAKER SP_NAME_SCOTT} {PLAYER}{KUN}, feeling good?\n"
+	.string "{SPEAKER SP_NAME_SCOTT}{PLAYER}{KUN}, feeling good?\n"
 	.string "I'm doing great!\p"
 	.string "I'd heard MOSSDEEP's GYM LEADER is\n"
 	.string "pretty strong, so I decided to come\l"

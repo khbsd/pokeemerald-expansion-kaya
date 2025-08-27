@@ -22,5 +22,5 @@ LilycoveCity_House1_Text_PokemonPartnersNotTools:
 	.string "who fail to understand that…$"
 
 LilycoveCity_House1_Text_Kecleon:
-	.string "{SPEAKER SP_NAME_KECLEON} Ruroro?$"
+	.string "{SPEAKER SP_NAME_KECLEON}Ruroro?$"
 

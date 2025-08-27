@@ -366,7 +366,7 @@ VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
 	.string "heal or protect themselves.$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
-	.string "{SPEAKER SP_NAME_SCOTT} Hey there, {PLAYER}{KUN}!\n"
+	.string "{SPEAKER SP_NAME_SCOTT}Hey there, {PLAYER}{KUN}!\n"
 	.string "I thought I might see you here.\p"
 	.string "A BATTLE TENT's a place where\n"
 	.string "you can meet tough TRAINERS.\p"
@@ -376,6 +376,6 @@ VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
 	.string "the best you can!$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
-	.string "{SPEAKER SP_NAME_SCOTT} I visit here regularly in hopes\n"
+	.string "{SPEAKER SP_NAME_SCOTT}I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"

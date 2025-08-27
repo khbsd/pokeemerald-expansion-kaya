@@ -20,5 +20,5 @@ RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere:
 	.string "this building.$"
 
 RustboroCity_Flat2_1F_Text_Skitty:
-	.string "{SPEAKER SP_NAME_SKITTY} Gyaaaah!$"
+	.string "{SPEAKER SP_NAME_SKITTY}Gyaaaah!$"
 

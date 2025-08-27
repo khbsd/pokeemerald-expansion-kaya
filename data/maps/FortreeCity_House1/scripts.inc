@@ -94,5 +94,5 @@ FortreeCity_House1_Text_TradingMemoriesWithOthers:
 	.string "memories with other people.$"
 
 FortreeCity_House1_Text_Zigzagoon:
-	.string "{SPEAKER SP_NAME_ZIGZAGOON} Gumomoh?$"
+	.string "{SPEAKER SP_NAME_ZIGZAGOON}Gumomoh?$"
 

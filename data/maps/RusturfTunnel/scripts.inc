@@ -423,7 +423,7 @@ RusturfTunnel_Text_ComeAndGetSome:
 	.string "Come and get some, then!$"
 
 RusturfTunnel_Text_Peeko:
-	.string "{SPEAKER SP_NAME_PEEKO} Pii pihyoh!$"
+	.string "{SPEAKER SP_NAME_PEEKO}Pii pihyoh!$"
 
 RusturfTunnel_Text_GruntIntro:
 	.string "Grah, keelhaul it all!\p"
@@ -465,7 +465,7 @@ RusturfTunnel_Text_ThankYouLetsGoHomePeeko:
 	.string "by the sea near PETALBURG WOODS.\p"
 	.string "Come, PEEKO, we should make our way\n"
 	.string "home.\p"
-	.string "{SPEAKER SP_NAME_PEEKO} Pihyoh!$"
+	.string "{SPEAKER SP_NAME_PEEKO}Pihyoh!$"
 
 RusturfTunnel_Text_WhyCantTheyKeepDigging:
 	.string "… …\p"
@@ -499,7 +499,7 @@ RusturfTunnel_Text_ExplainStrength:
 RusturfTunnel_Text_WandaReunion:
 	.string "WANDA!\n"
 	.string "Now I can see you anytime!\p"
-	.string "{SPEAKER SP_NAME_WANDA} That's…wonderful.\p"
+	.string "{SPEAKER SP_NAME_WANDA}That's…wonderful.\p"
 	.string "Please, take some rest at my home.$"
 
 RusturfTunnel_Text_BoyfriendOnOtherSideOfRock:

@@ -57,5 +57,5 @@ MossdeepCity_House4_Text_MakeSecretBase:
 	.string "somewhere. I'll go find it!$"
 
 MossdeepCity_House4_Text_Skitty:
-	.string "{SPEAKER SP_NAME_SKITTY} Miyaan?$"
+	.string "{SPEAKER SP_NAME_SKITTY}Miyaan?$"
 

@@ -351,7 +351,7 @@ LavaridgeTown_Gym_1F_Text_ExplainOverheat:
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "Registered GYM LEADER FLANNERY\n"
 	.string "in the POKéNAV.\p"
-	.string "{SPEAKER SP_NAME_FLANNERY} I'm down whenever! {EMOJI_BIGSMILE}$"
+	.string "{SPEAKER SP_NAME_FLANNERY}I'm down whenever! {EMOJI_BIGSMILE}$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
 	.string "Your power reminds me of someone…\p"
@@ -367,7 +367,7 @@ LavaridgeTown_Gym_1F_Text_GymStatueCertified:
 	.string "{PLAYER}$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPreRematch:
-	.string "{SPEAKER SP_NAME_FLANNERY} Losing a battle isn't going\n"
+	.string "{SPEAKER SP_NAME_FLANNERY}Losing a battle isn't going\n"
 	.string "to deflate me.\p"
 	.string "I love POKéMON.\n"
 	.string "I love to battle.\l"
@@ -380,7 +380,7 @@ LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat:
 	.string "On the verge of eruption!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostRematch:
-	.string "{SPEAKER SP_NAME_FLANNERY} I lost the match,\n"
+	.string "{SPEAKER SP_NAME_FLANNERY}I lost the match,\n"
 	.string "but I'm completely satisfied.\p"
 	.string "It's not often I get to enjoy a battle\n"
 	.string "this heated.\p"
@@ -388,7 +388,7 @@ LavaridgeTown_Gym_1F_Text_FlanneryPostRematch:
 	.string "again sometime!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
-	.string "{SPEAKER SP_NAME_FLANNERY} Losing a battle isn't going\n"
+	.string "{SPEAKER SP_NAME_FLANNERY}Losing a battle isn't going\n"
 	.string "to deflate me.\p"
 	.string "I love POKéMON.\n"
 	.string "I love to battle.\l"

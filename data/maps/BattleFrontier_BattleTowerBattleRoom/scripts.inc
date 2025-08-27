@@ -517,7 +517,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_LetMeSeeYourTalent:
 	.string "its entirety…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized:
-	.string "{SPEAKER SP_NAME_ANABEL} Fufufu, nicely done…\p"
+	.string "{SPEAKER SP_NAME_ANABEL}Fufufu, nicely done…\p"
 	.string "Your FRONTIER PASS, please…\n"
 	.string "Your talent shall be recognized.$"
 
@@ -535,7 +535,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime:
 	.string "Until the next time we meet…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack:
-	.string "{SPEAKER SP_NAME_ANABEL} You really did come back to\n"
+	.string "{SPEAKER SP_NAME_ANABEL}You really did come back to\n"
 	.string "see me…\p"
 	.string "… … … … … …\p"
 	.string "You've won straight matches to see me…\n"
@@ -548,7 +548,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_LetsBeginShallWe:
 	.string "Let's begin, shall we?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease:
-	.string "{SPEAKER SP_NAME_ANABEL} Fufu, congratulations…\n"
+	.string "{SPEAKER SP_NAME_ANABEL}Fufu, congratulations…\n"
 	.string "Your FRONTIER PASS, please…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine:

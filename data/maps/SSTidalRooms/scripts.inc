@@ -102,35 +102,35 @@ SSTidalRooms_Text_ThomasPostBattle:
 	.string "the GENTLEMAN's code of conduct.$"
 
 SSTidalRooms_Text_JedIntro:
-	.string "{SPEAKER SP_NAME_JED} I feel a little shy about this, but…\n"
+	.string "{SPEAKER SP_NAME_JED}I feel a little shy about this, but…\n"
 	.string "We'll show you our lovey-dovey power!$"
 
 SSTidalRooms_Text_JedDefeat:
-	.string "{SPEAKER SP_NAME_JED} Sigh…$"
+	.string "{SPEAKER SP_NAME_JED}Sigh…$"
 
 SSTidalRooms_Text_JedPostBattle:
-	.string "{SPEAKER SP_NAME_JED} It's the first time that our lovey-\n"
+	.string "{SPEAKER SP_NAME_JED}It's the first time that our lovey-\n"
 	.string "dovey power couldn't prevail!\l"
 	.string "You must be an awesome TRAINER!$"
 
 SSTidalRooms_Text_JedNotEnoughMons:
-	.string "{SPEAKER SP_NAME_JED} You only have one POKéMON?\n"
+	.string "{SPEAKER SP_NAME_JED}You only have one POKéMON?\n"
 	.string "Isn't that just too lonesome?$"
 
 SSTidalRooms_Text_LeaIntro:
-	.string "{SPEAKER SP_NAME_LEA} I feel a little silly, but…\n"
+	.string "{SPEAKER SP_NAME_LEA}I feel a little silly, but…\n"
 	.string "We'll show you our lovey-dovey power!$"
 
 SSTidalRooms_Text_LeaDefeat:
-	.string "{SPEAKER SP_NAME_LEA} Oh, boo!$"
+	.string "{SPEAKER SP_NAME_LEA}Oh, boo!$"
 
 SSTidalRooms_Text_LeaPostBattle:
-	.string "{SPEAKER SP_NAME_LEA} I can't believe it!\n"
+	.string "{SPEAKER SP_NAME_LEA}I can't believe it!\n"
 	.string "Our lovey-dovey power failed…\l"
 	.string "You must be an awesome TRAINER!$"
 
 SSTidalRooms_Text_LeaNotEnoughMons:
-	.string "{SPEAKER SP_NAME_LEA} I wanted to battle…\n"
+	.string "{SPEAKER SP_NAME_LEA}I wanted to battle…\n"
 	.string "But you don't even have two POKéMON…$"
 
 SSTidalRooms_Text_GarretIntro:

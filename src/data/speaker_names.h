@@ -107,4 +107,11 @@ static const u8 *const sSpeakerNamesTable[SP_NAME_COUNT] =
     [SP_NAME_JUDGE] = COMPOUND_STRING("Judge"),
     [SP_NAME_DOCK] = COMPOUND_STRING("Dock"),
     [SP_NAME_PIKACHU] = COMPOUND_STRING("Pikachu"),
+    [SP_NAME_RIVALS_MOM] = COMPOUND_STRING("{RIVAL}'s Mom"),
+    [SP_NAME_COWARD] = COMPOUND_STRING("Coward"),
+    [SP_NAME_FOOT_GUY] = COMPOUND_STRING("Foot Guy"),
+    [SP_NAME_POTION_SELLER] = COMPOUND_STRING("Potion Seller"),
+    [SP_NAME_SHOP_CLURK] = COMPOUND_STRING("Shop Clurk"),
+    [SP_NAME_NURSE_JOY] = COMPOUND_STRING("Narse Joy"),
+    [SP_NAME_DUMBASS] = COMPOUND_STRING("dumbass"),
 };

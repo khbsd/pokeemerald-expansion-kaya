@@ -113,7 +113,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:
 	.string "my GAME BOY ADVANCE.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
-	.string "{SPEAKER SP_NAME_SCOTT} … … … … …\n"
+	.string "{SPEAKER SP_NAME_SCOTT}… … … … …\n"
 	.string "… … … … … Zzz…\p"
 	.string "… … … … … Huh?!\n"
 	.string "Oh, sorry, sorry! I was snoozing!\p"
@@ -129,7 +129,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
 	.string "the whole works!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
-	.string "{SPEAKER SP_NAME_SCOTT} I think it does take strategy\n"
+	.string "{SPEAKER SP_NAME_SCOTT}I think it does take strategy\n"
 	.string "to win a CONTEST.\p"
 	.string "Devising CONTEST strategies is one way\n"
 	.string "of becoming a better TRAINER, I'd say.$"

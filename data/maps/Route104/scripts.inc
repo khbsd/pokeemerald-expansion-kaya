@@ -1078,7 +1078,7 @@ Route104_Text_TrainerTipsDoubleBattles:
 	.string "Watch how POKéMON are lined up.$"
 
 Route104_Text_MayWeShouldRegister:
-	.string "{SPEAKER SP_NAME_MAY} Oh, hi, {PLAYER}{KUN}!\p"
+	.string "{SPEAKER SP_NAME_MAY}Oh, hi, {PLAYER}{KUN}!\p"
 	.string "DEVON upgraded your POKéNAV with\n"
 	.string "the MATCH CALL system, huh?\p"
 	.string "We should register each other so we\n"
@@ -1089,7 +1089,7 @@ Route104_Text_RegisteredMay:
 	.string "in the POKéNAV.$"
 
 Route104_Text_MayHowsYourPokedex:
-	.string "{SPEAKER SP_NAME_MAY} Oh, by the way, {PLAYER}{KUN},\n"
+	.string "{SPEAKER SP_NAME_MAY}Oh, by the way, {PLAYER}{KUN},\n"
 	.string "how's your POKéDEX coming along?$"
 
 Route104_Text_MayMinesDecentLetsBattle:
@@ -1098,17 +1098,17 @@ Route104_Text_MayMinesDecentLetsBattle:
 	.string "How about a little battle?$"
 
 Route104_Text_MayHaventRaisedPokemon:
-	.string "{SPEAKER SP_NAME_MAY} Oh, what's the matter?\p"
+	.string "{SPEAKER SP_NAME_MAY}Oh, what's the matter?\p"
 	.string "Haven't you caught or raised your\n"
 	.string "POKéMON very much?\p"
 	.string "That's not very good for a TRAINER!$"
 
 Route104_Text_MayLetsBattle:
-	.string "{SPEAKER SP_NAME_MAY} So, what do you think?\n"
+	.string "{SPEAKER SP_NAME_MAY}So, what do you think?\n"
 	.string "How about a little battle here?$"
 
 Route104_Text_MayIntro:
-	.string "{SPEAKER SP_NAME_MAY} You just became a TRAINER,\n"
+	.string "{SPEAKER SP_NAME_MAY}You just became a TRAINER,\n"
 	.string "{PLAYER}{KUN}. I'm not going to lose!$"
 
 Route104_Text_MayDefeat:
@@ -1116,7 +1116,7 @@ Route104_Text_MayDefeat:
 	.string "You're better than I expected!$"
 
 Route104_Text_MayPostBattle:
-	.string "{SPEAKER SP_NAME_MAY} I can tell you've gotten pretty\n"
+	.string "{SPEAKER SP_NAME_MAY}I can tell you've gotten pretty\n"
 	.string "good with the way you handle POKéMON.\p"
 	.string "But instead of only making them\n"
 	.string "battle, you should be like MR. BRINEY.\p"
@@ -1124,7 +1124,7 @@ Route104_Text_MayPostBattle:
 	.string "POKéMON, too.$"
 
 Route104_Text_BrendanWeShouldRegister:
-	.string "{SPEAKER SP_NAME_BRENDA} Oh, hey, {PLAYER}!\p"
+	.string "{SPEAKER SP_NAME_BRENDA}Oh, hey, {PLAYER}!\p"
 	.string "Cool, you had DEVON install the MATCH\n"
 	.string "CALL system on your POKéNAV!\p"
 	.string "Let's register each other in our\n"
@@ -1135,7 +1135,7 @@ Route104_Text_RegisteredBrendan:
 	.string "in the POKéNAV.$"
 
 Route104_Text_BrendanHowsYourPokedex:
-	.string "{SPEAKER SP_NAME_BRENDA} {PLAYER}, how's your POKéDEX?\n"
+	.string "{SPEAKER SP_NAME_BRENDA}{PLAYER}, how's your POKéDEX?\n"
 	.string "How many pages have you filled out?$"
 
 Route104_Text_BrendanDoingGreatLetsBattle:
@@ -1144,15 +1144,15 @@ Route104_Text_BrendanDoingGreatLetsBattle:
 	.string "a battle?$"
 
 Route104_Text_BrendanNoConfidence:
-	.string "{SPEAKER SP_NAME_BRENDA} What's the matter? Don't have\n"
+	.string "{SPEAKER SP_NAME_BRENDA}What's the matter? Don't have\n"
 	.string "any confidence in your POKéMON?$"
 
 Route104_Text_BrendanLetsBattle:
-	.string "{SPEAKER SP_NAME_BRENDA} What's up?\n"
+	.string "{SPEAKER SP_NAME_BRENDA}What's up?\n"
 	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro:
-	.string "{SPEAKER SP_NAME_BRENDA} I know you just became\n"
+	.string "{SPEAKER SP_NAME_BRENDA}I know you just became\n"
 	.string "a TRAINER, but I won't go easy!$"
 
 Route104_Text_BrendanDefeat:
@@ -1160,7 +1160,7 @@ Route104_Text_BrendanDefeat:
 	.string "You're pretty good.$"
 
 Route104_Text_BrendanPostBattle:
-	.string "{SPEAKER SP_NAME_BRENDA} You've gotten pretty decent\n"
+	.string "{SPEAKER SP_NAME_BRENDA}You've gotten pretty decent\n"
 	.string "at handling POKéMON.\p"
 	.string "But, you know, you shouldn't just be\n"
 	.string "making POKéMON battle.\p"

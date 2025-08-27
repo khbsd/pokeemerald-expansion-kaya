@@ -476,7 +476,7 @@ Route119_EventScript_ScottWonAtFortreeGymCall::
 	end
 
 Route119_Text_MayIntro:
-	.string "{SPEAKER SP_NAME_MAY} {PLAYER}{KUN}!\n"
+	.string "{SPEAKER SP_NAME_MAY}{PLAYER}{KUN}!\n"
 	.string "Where were you? I was looking for you!\p"
 	.string "How much stronger have you gotten?\n"
 	.string "Let me check for you!\p"
@@ -490,12 +490,12 @@ Route119_Text_MayDefeat:
 	.string "struggling with your training.$"
 
 Route119_Text_MayPresentForYou:
-	.string "{SPEAKER SP_NAME_MAY} But I had absolutely nothing to\n"
+	.string "{SPEAKER SP_NAME_MAY}But I had absolutely nothing to\n"
 	.string "worry about! Keep it up!\p"
 	.string "And, here! I have a present for you.$"
 
 Route119_Text_MayExplainFly:
-	.string "{SPEAKER SP_NAME_MAY} Use FLY, and your POKéMON will\n"
+	.string "{SPEAKER SP_NAME_MAY}Use FLY, and your POKéMON will\n"
 	.string "instantly carry you to any town you've\l"
 	.string "already visited.\p"
 	.string "But, to use FLY, you have to get\n"
@@ -508,7 +508,7 @@ Route119_Text_MayExplainFly:
 	.string "Well, let's meet again somewhere!$"
 
 Route119_Text_BrendanIntro:
-	.string "{SPEAKER SP_NAME_BRENDA} {PLAYER}! So this is where\n"
+	.string "{SPEAKER SP_NAME_BRENDA}{PLAYER}! So this is where\n"
 	.string "you've been looking for POKéMON?\p"
 	.string "Let me see how good you got.\n"
 	.string "I'll test you!\p"
@@ -522,13 +522,13 @@ Route119_Text_BrendanDefeat:
 	.string "You've gotten pretty damn strong.$"
 
 Route119_Text_BrendanIllGiveYouThis:
-	.string "{SPEAKER SP_NAME_BRENDA} You're good enough\n"
+	.string "{SPEAKER SP_NAME_BRENDA}You're good enough\n"
 	.string "to search for POKéMON anywhere!\p"
 	.string "Here, I'll give you this.\n"
 	.string "Try it out.$"
 
 Route119_Text_BrendanExplainFly:
-	.string "{SPEAKER SP_NAME_BRENDA} Use FLY, and your POKéMON\n"
+	.string "{SPEAKER SP_NAME_BRENDA}Use FLY, and your POKéMON\n"
 	.string "instantly carries you to any town\l"
 	.string "you've already visited.\p"
 	.string "But you need the FORTREE GYM BADGE \n"
@@ -536,7 +536,7 @@ Route119_Text_BrendanExplainFly:
 	.string "Anyway, I have to BOUNCE. Heh.$"
 
 Route119_Text_ScottWayToGoBeSeeingYou:
-	.string "{SPEAKER SP_NAME_SCOTT} Hahahah!\n"
+	.string "{SPEAKER SP_NAME_SCOTT}Hahahah!\n"
 	.string "Way to go, {PLAYER}{KUN}!\p"
 	.string "I just passed by a TRAINER riding\n"
 	.string "a BIKE.\p"
@@ -553,7 +553,7 @@ Route119_Text_ScottWayToGoBeSeeingYou:
 Route119_Text_ScottYouWonAtFortreeGym:
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
-	.string "{SPEAKER SP_NAME_SCOTT} Hiya, {PLAYER}{KUN}, it's me!\p"
+	.string "{SPEAKER SP_NAME_SCOTT}Hiya, {PLAYER}{KUN}, it's me!\p"
 	.string "Just as I thought, you won at\n"
 	.string "the FORTREE GYM.\p"
 	.string "Your strength…\n"

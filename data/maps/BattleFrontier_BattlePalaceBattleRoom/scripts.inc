@@ -500,7 +500,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_AnnounceArrivalOfSpenser:
 	.string "of the PALACE MAVEN, SPENSER!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserFirstIntro:
-	.string "{SPEAKER SP_NAME_SPENSER} My physical being is with\n"
+	.string "{SPEAKER SP_NAME_SPENSER}My physical being is with\n"
 	.string "POKéMON always!\p"
 	.string "My heart beats as one with\n"
 	.string "POKéMON always!\p"
@@ -516,7 +516,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_ProveYourBondWithMons:
 	.string "Prove it to me here!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle:
-	.string "{SPEAKER SP_NAME_SPENSER} Gwahahah!\p"
+	.string "{SPEAKER SP_NAME_SPENSER}Gwahahah!\p"
 	.string "Hah, you never fell for my bluster!\n"
 	.string "Sorry for trying that stunt!\p"
 	.string "Here!\n"
@@ -533,13 +533,13 @@ BattleFrontier_BattlePalaceBattleRoom_Text_ReceivedSpiritsSymbol:
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserAwaitNextTime:
-	.string "{SPEAKER SP_NAME_SPENSER} Your POKéMON's eyes are \n"
+	.string "{SPEAKER SP_NAME_SPENSER}Your POKéMON's eyes are \n"
 	.string "truly clear and unclouded.\p"
 	.string "I will eagerly await the next\n"
 	.string "opportunity to see you.$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserThisTimeWontHoldBack:
-	.string "{SPEAKER SP_NAME_SPENSER} Gwahahah!\n"
+	.string "{SPEAKER SP_NAME_SPENSER}Gwahahah!\n"
 	.string "You've battled your way up again?\p"
 	.string "You must have developed a truly\n"
 	.string "formidable bond with your POKéMON.\p"
@@ -553,7 +553,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_Kaaah:
 	.string "… … …Kaaah!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable:
-	.string "{SPEAKER SP_NAME_SPENSER} Well, that was some display!\n"
+	.string "{SPEAKER SP_NAME_SPENSER}Well, that was some display!\n"
 	.string "Even fully unleashed, my brethren\l"
 	.string "could not overpower you.\p"
 	.string "Your team spirit is truly admirable!\p"
@@ -571,6 +571,6 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpiritsSymbolTookGoldenShine:
 	.string "a golden shine!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserComeSeeMeAgain:
-	.string "{SPEAKER SP_NAME_SPENSER} Gwahahah!\p"
+	.string "{SPEAKER SP_NAME_SPENSER}Gwahahah!\p"
 	.string "Come see me time and again!\n"
 	.string "My brethren and I will be waiting!$"
