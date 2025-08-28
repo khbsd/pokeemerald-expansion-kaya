@@ -1,12 +1,13 @@
 #include "global.h"
 #include "lottery_corner.h"
 #include "event_data.h"
+#include "new_game.h"
 #include "pokemon.h"
-#include "constants/items.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "string_util.h"
 #include "text.h"
-#include "pokemon_storage_system.h"
+#include "constants/items.h"
 
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
@@ -14,12 +15,12 @@ static EWRAM_DATA u16 sOtIdDigit = 0;
 static const u16 sLotteryPrizes[] =
 {
     ITEM_PP_UP,
-    ITEM_EXP_SHARE,
+    ITEM_GIMMIGHOUL_COIN,
     ITEM_MAX_REVIVE,
     ITEM_MASTER_BALL,
 };
 
-static u8 GetMatchingDigits(u16, u16);
+static u32 GetMatchingDigits(u16, u16);
 
 void ResetLotteryCorner(void)
 {
@@ -27,7 +28,7 @@ void ResetLotteryCorner(void)
     VarSet(VAR_POKELOT_PRIZE_ITEM, 0);
 }
 
-void SetRandomLotteryNumber(u16 i)
+void SetRandomLotteryNumber(u32 i)
 {
     u32 var = Random();
 
@@ -39,11 +40,12 @@ void SetRandomLotteryNumber(u16 i)
 
 void RetrieveLotteryNumber(void)
 {
-    u16 lottoNumber = GetLotteryNumber();
+    u32 lottoNumber = GetLotteryNumber();
     gSpecialVar_Result = lottoNumber;
 }
 
-void PickLotteryCornerTicket(void)
+// just the old one in case i need parts
+void UNUSED PickLotteryCornerTicket_Unused(void)
 {
     u16 i;
     u16 j;
@@ -117,7 +119,37 @@ void PickLotteryCornerTicket(void)
     }
 }
 
-static u8 GetMatchingDigits(u16 winNumber, u16 otId)
+// have to redo this because the multiplayer function doesnt exist in this hack
+void PickLotteryCornerTicket(void)
+{
+    u32 retryAmount;
+    u32 playerId;
+    u32 prevMatchingDigits = 0;
+    gSpecialVar_0x8004 = 0;
+
+    retryAmount = (CalculatePartyCount(gPlayerParty) + CalculateBoxCount()) * GetNumOwnedBadges();
+    playerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
+
+    for (u32 retryCount = 0; retryCount < retryAmount; retryCount++)
+    {
+        u32 currentMatchingDigits = GetMatchingDigits(playerId, Random());
+        if (currentMatchingDigits > prevMatchingDigits)
+            prevMatchingDigits = currentMatchingDigits;
+    }
+    gSpecialVar_0x8004 = prevMatchingDigits;
+
+    if (prevMatchingDigits != 0)
+    {
+        gSpecialVar_0x8005 = sLotteryPrizes[prevMatchingDigits - 1];
+        u32 randomPartySlot = Random() % PARTY_SIZE;
+        gSpecialVar_0x8006 = 0;
+
+        GetMonData(&gPlayerParty[randomPartySlot], MON_DATA_NICKNAME, gStringVar1);
+        StringGet_Nickname(gStringVar1);
+    }
+}
+
+static u32 GetMatchingDigits(u16 winNumber, u16 otId)
 {
     u8 i;
     u8 matchingDigits = 0;

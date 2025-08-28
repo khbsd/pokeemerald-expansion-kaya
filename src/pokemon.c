@@ -4085,6 +4085,22 @@ u8 CalculatePartyCount(struct Pokemon *party)
     return partyCount;
 }
 
+u32 CalculateBoxCount(void)
+{
+    u32 boxCount, slotCount;
+    u32 boxMonCount = 0;
+
+    for (boxCount = 0; boxCount < TOTAL_BOXES_COUNT; boxCount++)
+    {
+        for (slotCount = 0; slotCount < IN_BOX_COUNT; slotCount++)
+        {
+            if (GetBoxMonData(&gPokemonStoragePtr->boxes[boxCount][slotCount], MON_DATA_SPECIES) != SPECIES_NONE)
+                boxMonCount++;
+        }
+    }
+    return boxMonCount;
+}
+
 u8 CalculatePartyCountOfSide(u32 battler, struct Pokemon *party)
 {
     s32 partyCount, partySize;

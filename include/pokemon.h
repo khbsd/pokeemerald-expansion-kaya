@@ -897,5 +897,6 @@ u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 u32 IsSpeciesOfType(u32 species, u32 type);
 u32 GetRandomPokerusDays(void);
+u32 CalculateBoxCount(void);
 
 #endif // GUARD_POKEMON_H
