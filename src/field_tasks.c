@@ -139,7 +139,7 @@ static const u16 sSootopolisGymIceRowVars[] =
 void CheckIfPlayerIsKaya(void)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
-  
+
     if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0 || gSaveBlock2Ptr->playerIsKaya)
         SetPlayerAsKaya();
     else
@@ -149,7 +149,7 @@ void CheckIfPlayerIsKaya(void)
 void CheckIfNameIsKaya(u8 *str)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
-  
+
     if (StringCompare(kayaName, str) == 0 || gSaveBlock2Ptr->playerIsKaya)
         SetPlayerAsKaya();
     else
@@ -171,6 +171,7 @@ void SetPlayerHouse(void)
 void SetPlayerAsKaya(void)
 {
     FlagSet(FLAG_IS_KAYA);
+    gSaveBlock2Ptr->playerGender = BUTCHY;
     gSaveBlock2Ptr->playerIsKaya = TRUE;
     playerIsKaya = TRUE;
 }

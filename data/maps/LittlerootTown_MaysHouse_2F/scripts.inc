@@ -455,7 +455,7 @@ PlayersHouse_Text_LoggingIn_IsNameKaya::
 	.string "your team?$"
 
 RivalsHouse_2F_Text_MayWhoAreYou::
-	.string "Huh?\n"
+	.string "{SPEAKER SP_NAME_MAY}Huh?\n"
 	.string "Who… Who are you?\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
@@ -479,11 +479,11 @@ RivalsHouse_2F_Text_MayWhoAreYou::
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 RivalsHouse_2F_Text_MayGettingReady::
-	.string "POKéMON fully restored!\n"
+	.string "{SPEAKER SP_NAME_MAY}POKéMON fully restored!\n"
 	.string "Items ready, and…$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou::
-	.string "Oh!\n"
+	.string "{SPEAKER SP_NAME_BRENDA}Oh!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}, aren't you?\n"
@@ -501,7 +501,7 @@ RivalsHouse_2F_Text_BrendanWhoAreYou::
 	.string "We'll talk later, okay?$"
 
 RivalsHouse_2F_Text_BrendanGettingReady::
-	.string "POKéMON fully restored…\n"
+	.string "{SPEAKER SP_NAME_BRENDA}POKéMON fully restored…\n"
 	.string "Items all packed, and…$"
 
 RivalsHouse_2F_Text_ItsRivalsPokeBall:

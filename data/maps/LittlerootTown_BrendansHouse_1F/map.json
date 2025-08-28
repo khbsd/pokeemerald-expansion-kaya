@@ -12,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_PLAYERS_HOUSE_1F_MOM",
@@ -96,7 +96,6 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING"
     },
     {
-      "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
       "x": 8,
       "y": 8,
@@ -110,6 +109,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN"
     },
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 8,
       "y": 8,
@@ -158,33 +158,13 @@
     },
     {
       "type": "trigger",
-      "x": 7,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_RIVAL_STATE",
-      "var_value": "2",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival0"
-    },
-    {
-      "type": "trigger",
       "x": 8,
-      "y": 4,
+      "y": 3,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1"
-    },
-    {
-      "type": "trigger",
-      "x": 9,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_RIVAL_STATE",
-      "var_value": "2",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

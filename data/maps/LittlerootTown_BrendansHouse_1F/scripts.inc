@@ -140,6 +140,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2::
 LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	playse SE_EXIT
 	delay 10
+	checkplayergender
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_UnhideMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_UnhideBrendan
 	addobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	delay 30
 	playse SE_PIN
@@ -149,20 +154,16 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	waitmovement 0
 	call LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2
+	call LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
 	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
-	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2
+	call LittlerootTown_RivalsHouse_1F_EventScript_RivalExitDown
 	playse SE_EXIT
 	removeobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
@@ -205,6 +206,7 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer1:
 	walk_up
 	walk_up
 	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer2:
@@ -216,6 +218,19 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer2:
 	walk_up
 	walk_up
 	step_end
+
+LittlerootTown_BrendansHouse_1F_Movement_BrendanExitDown:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+LittlerootTown_BrendansHouse_1F_EventScript_BrendanExitDown::
+	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanExitDown
+	waitmovement 0
+	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0::
 	applymovement LOCALID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PlayerWatchBrendanExit0

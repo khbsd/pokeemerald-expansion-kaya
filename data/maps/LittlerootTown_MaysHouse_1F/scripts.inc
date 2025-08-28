@@ -193,22 +193,18 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	waitmovement 0
 	call LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
+	call LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
 	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
-	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
+	call LittlerootTown_RivalsHouse_1F_EventScript_RivalExitDown
 	playse SE_EXIT
 	removeobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	checkplayergender
 	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_MaysHouse_1F_HideBrendan
 	call_if_eq VAR_RESULT, FEMME, LittlerootTown_MaysHouse_1F_HideMay
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
@@ -251,6 +247,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1:
 	walk_up
 	walk_up
 	walk_up
+	walk_up
 	step_end
 
 LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2:
@@ -262,6 +259,19 @@ LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2:
 	walk_up
 	walk_up
 	step_end
+
+LittlerootTown_RivalsHouse_1F_MovementRivalExitDown::
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+LittlerootTown_RivalsHouse_1F_EventScript_RivalExitDown::
+	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanExitDown
+	waitmovement 0
+	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0::
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0

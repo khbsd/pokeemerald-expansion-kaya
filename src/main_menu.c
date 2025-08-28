@@ -1847,6 +1847,8 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     CheckIfPlayerIsKaya();
     if (playerIsKaya)
     {
+        MgbaPrintf(MGBA_LOG_WARN, "0) is kaya: %u", playerIsKaya);
+        gTasks[taskId].tPlayerGender = BUTCHY;
         gSaveBlock2Ptr->playerGender = BUTCHY;
         spriteId = gTasks[taskId].tKayaSpriteId;
     }

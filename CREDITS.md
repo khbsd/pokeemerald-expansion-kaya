@@ -1,29 +1,4 @@
-## Thank you so much for your wonderful work! <3
-
-### Underwater Reef Secondary Tileset:
-### Underwater Primary Tileset:
-1. Ekat (https://www.deviantart.com/ekat99)
-2. Vurtax (FRLG Rips)
-3. Heartlessdragoon (RSE Rips)
-
-### Underwater Secondary Tileset:
-1. Hek (https://www.deviantart.com/hek-el-grande)
-2. Ekat (https://www.deviantart.com/ekat99)
-3. Vurtax (FRLG Rips)
-4. Heartlessdragoon (RSE Rips)
-
-## Mega Evolution Overworld Sprite Credits:
-<!-- ## Old List of Credits -->
-<!-- - **mvit**: ability pop up and mega evo gfx -->
-<!-- - **Doesnt**: berries gfx, pokeball particles -->
-<!-- - **MrDollSteak**: Pokedex descriptions -->
-<!-- - **Avara**: item descriptions -->
-<!-- - **TheLaw**: move animations -->
-<!-- - **BreadCrumbs**: code review -->
-<!-- - **Syreldar**: testing, wrote an explanation post -->
-<!-- - **Pyredrid**: automating issue creation, code review and testing -->
-
-## Credits ✨
+# Main Credits ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -94,7 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-## Other Credits
+# Other Credits
 ### Mega Evolution Overworld Sprite Credits:
 - [princess-phoenix](https://www.deviantart.com/princess-phoenix)
 - [larryturbo](https://www.deviantart.com/larryturbo)
@@ -111,3 +86,18 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 - [Data Files](https://www.pokecommunity.com/showthread.php?t=417909)
 - [Complete FireRed Upgrade](https://github.com/Skeli789/Complete-Fire-Red-Upgrade)
 - [pokeemerald](https://github.com/pret/pokeemerald/)
+
+## Tilesets used:
+### Underwater Reef Secondary Tileset:
+### Underwater Primary Tileset:
+1. [Ekat](https://www.deviantart.com/ekat99)
+2. Vurtax (FRLG Rips)
+3. Heartlessdragoon (RSE Rips)
+
+### Underwater Secondary Tileset:
+1. [Hek](https://www.deviantart.com/hek-el-grande)
+2. [Ekat](https://www.deviantart.com/ekat99)
+3. Vurtax (FRLG Rips)
+4. Heartlessdragoon (RSE Rips)
+
+## Thank you so much for your wonderful work! <3
