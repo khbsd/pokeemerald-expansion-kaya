@@ -31,7 +31,7 @@ gText_Birch_Welcome::
 	.string "In this hack, both the player\l"
 	.string "and the rival are over 21.\p"
 	.string "\p"
-	.string "Hi! Sorry to keep you waiting on\p"
+	.string "Hi! Sorry to keep you waiting on\l"
 	.string "Kaya's preamble!\n"
 	.string "Welcome to the POKéMON!\p"
 	.string "My name is BIRCH.\p"
