@@ -17,6 +17,7 @@ static const u16 sLotteryPrizes[] =
     ITEM_PP_UP,
     ITEM_GIMMIGHOUL_COIN,
     ITEM_MAX_REVIVE,
+    ITEM_PP_MAX,
     ITEM_MASTER_BALL,
 };
 
