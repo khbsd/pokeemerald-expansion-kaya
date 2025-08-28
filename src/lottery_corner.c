@@ -135,6 +135,8 @@ void PickLotteryCornerTicket(void)
         u32 currentMatchingDigits = GetMatchingDigits(playerId, Random());
         if (currentMatchingDigits > prevMatchingDigits)
             prevMatchingDigits = currentMatchingDigits;
+        if (prevMatchingDigits == 4)
+            break;
     }
     gSpecialVar_0x8004 = prevMatchingDigits;
 
