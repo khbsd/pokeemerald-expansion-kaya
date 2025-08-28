@@ -40,11 +40,11 @@ gText_Birch_Welcome::
 	.string "\p"
 	.string "\p"
 	.string "\p"
-	.string "By the way, this version uses\p"
-	.string "subtle differences between encounter\n"
-	.string "tiles to show which areas contain\l"
-	.string "new POKéMON. Pay very close attention\p"
-	.string "to where you're searching!\n"
+	.string "By the way, this version uses\n"
+	.string "subtle differences between encounter\p"
+	.string "tiles to show which areas contain\n"
+	.string "new POKéMON. Pay very close attention\l"
+	.string "to where you're searching!\p"
 	.string "$"
 
 gText_Birch_Pokemon::
