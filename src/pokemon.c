@@ -92,7 +92,6 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 #endif // BOX_ENCRYPTION
 
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
-static bool8 ShouldSkipFriendshipChange(void);
 void TrySpecialOverworldEvo();
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
@@ -7494,7 +7493,7 @@ bool8 HasTwoFramesAnimation(u16 species)
         && !gTestRunnerHeadless;
 }
 
-static bool8 ShouldSkipFriendshipChange(void)
+bool8 ShouldSkipFriendshipChange(void)
 {
     if (gMain.inBattle && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
         return TRUE;

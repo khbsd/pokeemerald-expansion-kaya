@@ -894,6 +894,7 @@ u32 GetTeraTypeFromPersonality(struct Pokemon *mon);
 u32 GetShinyOddsBoost(void);
 u32 GetAdjustedShinyOdds(void);
 u32 GetPerfectIvBoost(void);
+bool8 ShouldSkipFriendshipChange(void);
 struct Pokemon *GetSavedPlayerPartyMon(u32 index);
 u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
