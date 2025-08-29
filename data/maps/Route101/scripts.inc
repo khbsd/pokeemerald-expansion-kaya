@@ -258,16 +258,16 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "H-help me!$"
+	.string "{SPEAKER SP_NAME_PROF_BIRCH}H-help me!$"
 
 Route101_Text_PleaseHelp:
-	.string "Hello! You over there!\n"
+	.string "{SPEAKER SP_NAME_PROF_BIRCH}Hello! You over there!\n"
 	.string "Please! Help!\p"
 	.string "In my BAG!\n"
 	.string "There's a POKé BALL!$"
 
 Route101_Text_DontLeaveMe:
-	.string "Wh-Where are you going?!\n"
+	.string "{SPEAKER SP_NAME_PROF_BIRCH}Wh-Where are you going?!\n"
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:

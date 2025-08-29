@@ -494,7 +494,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
     u8 evs[NUM_STATS]        = {0, 0, 0, 0, 0, 0};
     // We pass "MAX_PER_STAT_IVS + ivAdjust" here to ensure that ScriptGiveMonParameterized won't touch the stats' IV.
     u8 ivs[NUM_STATS]        = {
-                                 + ivAdjust,
+                                MAX_PER_STAT_IVS + ivAdjust,
                                 MAX_PER_STAT_IVS + ivAdjust,
                                 MAX_PER_STAT_IVS + ivAdjust,
                                 MAX_PER_STAT_IVS + ivAdjust,
