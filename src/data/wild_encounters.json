@@ -7,18 +7,18 @@
         {
           "type": "land_mons",
           "encounter_rates": [
-            23,
+            20,
             20,
             10,
-            8,
-            8,
-            8,
+            10,
+            10,
+            10,
             5,
             5,
             4,
-            3,
-            3,
-            3
+            4,
+            1,
+            1
           ]
         },
         {
@@ -26319,7 +26319,7 @@
               {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_TENTACOOL"
+                "species": "SPECIES_DHELMISE"
               },
               {
                 "min_level": 30,
@@ -26334,7 +26334,7 @@
               {
                 "min_level": 20,
                 "max_level": 25,
-                "species": "SPECIES_DHELMISE"
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
               }
             ]
           }
@@ -47014,7 +47014,7 @@
               {
                 "min_level": 29,
                 "max_level": 29,
-                "species": "SPECIES_MAROWAK_ALOLA"
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
               }
             ]
           }
@@ -87132,7 +87132,7 @@
               {
                 "min_level": 39,
                 "max_level": 39,
-                "species": "SPECIES_ALTARIA"
+                "species": "SPECIES_MELTAN"
               }
             ]
           }
@@ -87201,7 +87201,7 @@
               {
                 "min_level": 39,
                 "max_level": 39,
-                "species": "SPECIES_ALTARIA"
+                "species": "SPECIES_MELTAN"
               }
             ]
           }

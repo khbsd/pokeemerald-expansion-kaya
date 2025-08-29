@@ -138,7 +138,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .levelUpLearnset = sDartrixLevelUpLearnset,
         .teachableLearnset = sDartrixTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE},
-                                {EVO_LEVEL, 34, SPECIES_DECIDUEYE_HISUI, 
+                                {EVO_LEVEL, 34, SPECIES_DECIDUEYE_HISUI,
                                     CONDITIONS({IF_IN_MAPSEC, MAPSEC_PETALBURG_WOODS})}),
     },
 
@@ -7554,6 +7554,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMeltanLevelUpLearnset,
         .teachableLearnset = sMeltanTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_MELTAN, CONDITIONS({IF_BAG_ITEM_COUNT, ITEM_METAL_POWDER, 20})}),
     },
 
     [SPECIES_MELMETAL] =
