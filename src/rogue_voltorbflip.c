@@ -58,7 +58,7 @@ struct Vflip
 	u32 winnings;
 	u32 prevWinnings;
 	u32 curWinnings;
-};	
+};
 
 enum
 {
@@ -185,7 +185,7 @@ static const u32 gCredits_Gfx[] = INCBIN_U32("graphics/rogue_voltorbflip/digits.
 static const u16 sCredit_Pal[] = INCBIN_U16("graphics/rogue_voltorbflip/digits.gbapal");
 
 
-static const struct VoltorbSpawnCounts sVoltorbSpawnCounts[MAX_VOLTORB_FLIP_LEVEL][MAX_VOLTORB_LEVEL_VARIANTS] = 
+static const struct VoltorbSpawnCounts sVoltorbSpawnCounts[MAX_VOLTORB_FLIP_LEVEL][MAX_VOLTORB_LEVEL_VARIANTS] =
 {
     {
         { .x2Count = 3, .x3Count = 1, .voltorbCount = 6, },
@@ -245,34 +245,34 @@ static const struct VoltorbSpawnCounts sVoltorbSpawnCounts[MAX_VOLTORB_FLIP_LEVE
     },
 };
 
-static const u16 sCardGfxTiles[CARD_GFX_COUNT][9] = 
+static const u16 sCardGfxTiles[CARD_GFX_COUNT][9] =
 {
-    [CARD_GFX_HIDDEN] = 
+    [CARD_GFX_HIDDEN] =
     {
         0x06, 0x07, 0x06 | FLIP_HORIZONTAL,
         0x10, 0x11, 0x10 | FLIP_HORIZONTAL,
         0x06 | FLIP_VERTICAL, 0x07 | FLIP_VERTICAL, 0x06 | FLIP_HORIZONTAL | FLIP_VERTICAL,
     },
 
-    [CARD_GFX_SHOW_1] = 
+    [CARD_GFX_SHOW_1] =
     {
         0x25, 0x26, 0x25 | FLIP_HORIZONTAL,
         0x30, 0x47, 0x30 | FLIP_HORIZONTAL,
         0x25 | FLIP_VERTICAL, 0x26 | FLIP_VERTICAL, 0x25 | FLIP_HORIZONTAL | FLIP_VERTICAL,
     },
-    [CARD_GFX_SHOW_2] = 
+    [CARD_GFX_SHOW_2] =
     {
         0x27, 0x28, 0x27 | FLIP_HORIZONTAL,
         0x32, 0x48, 0x32 | FLIP_HORIZONTAL,
         0x27 | FLIP_VERTICAL, 0x28 | FLIP_VERTICAL, 0x27 | FLIP_HORIZONTAL | FLIP_VERTICAL,
     },
-    [CARD_GFX_SHOW_3] = 
+    [CARD_GFX_SHOW_3] =
     {
         0x27, 0x28, 0x27 | FLIP_HORIZONTAL,
         0x32, 0x49, 0x32 | FLIP_HORIZONTAL,
         0x27 | FLIP_VERTICAL, 0x28 | FLIP_VERTICAL, 0x27 | FLIP_HORIZONTAL | FLIP_VERTICAL,
     },
-    [CARD_GFX_SHOW_VOLTORB] = 
+    [CARD_GFX_SHOW_VOLTORB] =
     {
         0x43, 0x44, 0x43 | FLIP_HORIZONTAL,
         0x4A, 0x4B, 0x4A | FLIP_HORIZONTAL,
@@ -354,7 +354,7 @@ static const struct WindowTemplate sVoltorbFlipWinTemplates[WIN_COUNT + 1] =
         .paletteNum = 15,
         .baseBlock = 37,
     },
-    
+
     [WIN_INFO_RED_Y] =
     {
         .bg = 0,
@@ -423,7 +423,7 @@ static const struct SpritePalette sCoinPalette =
 
 static const struct SpritePalette sSpritePalettes2[] =
 {
-	{ .data = sCredit_Pal,      	   .tag = PALTAG_INTERFACE },	
+	{ .data = sCredit_Pal,      	   .tag = PALTAG_INTERFACE },
 	{}
 };
 
@@ -646,7 +646,7 @@ static void CreateCreditSprites(void)
 {
     int i;
 
-	for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)  
+	for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)
 		{
 			LoadCompressedSpriteSheet(&sSpriteSheets_Interface[i]);
 		}
@@ -683,7 +683,7 @@ static void CreateCreditSprites(void)
 static void CreateCoins(void)
 {
         LoadCompressedSpriteSheet(&sSpriteSheet_Coins);
-	
+
 	sVflip->CoinsSpriteId = CreateSprite(&sSpriteTemplate_Coins, 198, 132, 0);
 }
 
@@ -716,7 +716,7 @@ void CB2_ShowVoltorbFlip(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-	
+
 	LoadSpritePalettes(sSpritePalettes2);
 	CreateCreditSprites();
 	SetCreditDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
@@ -727,7 +727,7 @@ void CB2_ShowVoltorbFlip(void)
 	SetCreditDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
 	LoadSpritePalette(&sCoinPalette);
 	CreateCoins();
-	
+
     LoadPalette(sVoltorbFlipPalettes, 0, ARRAY_COUNT(sVoltorbFlipPalettes) * 32);
     sVoltorbFlipTilemapPtr = Alloc(0x1000);
     sVoltorbFlipState = AllocZeroed(sizeof(struct VoltorbFlipState));
@@ -739,18 +739,18 @@ void CB2_ShowVoltorbFlip(void)
     InitVoltorbFlipBg();
     InitVoltorbFlipSprites();
     InitVoltorbFlipWindow();
-	
+
     ResetTempTileDataBuffers();
     DecompressAndCopyTileDataToVram(1, &sVoltorbFlipTiles, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-	
+
     DecompressDataWithHeaderWram(sVoltorbFlipTilemap, sVoltorbFlipTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
-	
+
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
 
@@ -891,17 +891,13 @@ static void Task_VoltorbFlipWaitForKeyPress(u8 taskId)
                 else
 				{
                     PlaySE(SE_PIN);
-						if (sVoltorbFlipState->cardStates[cardIdx].value == CARD_VALUE_1)
+					if (sVoltorbFlipState->cardStates[cardIdx].value == CARD_VALUE_1)
 					{
 						if (sVflip->winnings == 0)
 						{
 							sVflip->winnings = 1;
 							sVflip->curWinnings = sVflip->prevWinnings + sVflip->winnings;
 							SetCreditDigits(sVflip->curWinnings);
-						}
-						else
-						{
-							
 						}
 					}
 					else if (sVoltorbFlipState->cardStates[cardIdx].value == CARD_VALUE_2)
@@ -939,6 +935,8 @@ static void Task_VoltorbFlipWaitForKeyPress(u8 taskId)
 							{
 								sVflip->curWinnings = 9999;
 							}
+                            else
+                                sVflip->curWinnings += GetNumOwnedBadges();
 							SetCreditDigits(sVflip->curWinnings);
 						}
 					}
@@ -1121,7 +1119,7 @@ static void PrintRowInfo(u8 window, u8 totalValue, u8 totalVoltorbs)
     StringCopy(text, sTextWhite);
     StringAppend(text, gStringVar4);
     PrintVoltorbFlipText(window, FONT_SMALL_NARROW, text, 10, 0);
-    
+
     // Bottom number
     ConvertUIntToDecimalStringN(gStringVar4, totalVoltorbs, STR_CONV_MODE_RIGHT_ALIGN, 1);
     StringCopy(text, sTextGrey);
@@ -1189,7 +1187,7 @@ static void DisplayVoltorbFlipText(void)
     for(i = 0; i < BOARD_HEIGHT; ++i)
     {
         PrintRowInfo(
-            WIN_INFO_RED_X + i, 
+            WIN_INFO_RED_X + i,
             CountRow(i, TRUE),
             CountRow(i, FALSE)
         );
@@ -1198,7 +1196,7 @@ static void DisplayVoltorbFlipText(void)
     for(i = 0; i < BOARD_WIDTH; ++i)
     {
         PrintRowInfo(
-            WIN_INFO_RED_Y + i, 
+            WIN_INFO_RED_Y + i,
             CountColumn(i, TRUE),
             CountColumn(i, FALSE)
         );
@@ -1334,33 +1332,33 @@ static void DrawNoteTiles()
 {
     AGB_ASSERT(sVoltorbFlipState != NULL);
 
-    FillBgTilemapBufferRect_Palette0(1, 
+    FillBgTilemapBufferRect_Palette0(1,
             (sVoltorbFlipState->cursorWriteValue == 0) ? 0x38 : 0x39,
-            22 + 0, 5, 
+            22 + 0, 5,
             1, 1
     );
 
-    FillBgTilemapBufferRect_Palette0(1, 
+    FillBgTilemapBufferRect_Palette0(1,
             (sVoltorbFlipState->cursorWriteValue == 1 + CARD_VALUE_1) ? 0x37 : 0x39,
-            22 + 1, 5, 
+            22 + 1, 5,
             1, 1
     );
 
-    FillBgTilemapBufferRect_Palette0(1, 
+    FillBgTilemapBufferRect_Palette0(1,
             (sVoltorbFlipState->cursorWriteValue == 1 + CARD_VALUE_2) ? 0x37 : 0x39,
-            22 + 2, 5, 
+            22 + 2, 5,
             1, 1
     );
 
-    FillBgTilemapBufferRect_Palette0(1, 
+    FillBgTilemapBufferRect_Palette0(1,
             (sVoltorbFlipState->cursorWriteValue == 1 + CARD_VALUE_3) ? 0x37 : 0x39,
-            22 + 3, 5, 
+            22 + 3, 5,
             1, 1
     );
 
-    FillBgTilemapBufferRect_Palette0(1, 
+    FillBgTilemapBufferRect_Palette0(1,
             (sVoltorbFlipState->cursorWriteValue == 1 + CARD_VALUE_VOLTORB) ? 0x37 : 0x39,
-            22 + 4, 5, 
+            22 + 4, 5,
             1, 1
     );
 

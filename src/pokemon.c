@@ -127,9 +127,6 @@ static const struct CombinedMove sCombinedMoves[2] =
 
 // NOTE: The order of the elements in the array below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
-
-#define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
-
 // Assigns all Hoenn Dex Indexes to a National Dex Index
 static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
@@ -1780,7 +1777,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 availableIVs[NUM_STATS];
     u8 selectedIvs[NUM_STATS];
     bool32 isShiny;
+    bool32 isGameCorner;
     u32 adjustedShinyOdds = GetAdjustedShinyOdds();
+    u32 badges = GetNumOwnedBadges();
 
     ZeroBoxMonData(boxMon);
 
@@ -1795,7 +1794,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = fixedOtId;
         isShiny = GET_SHINY_VALUE(value, hasFixedPersonality ? fixedPersonality : personality) < GetAdjustedShinyOdds();
     }
-    else // Player is the OT
+    else if ((isGameCorner = (otIdType >= OT_ID_RANDOM_GAME_CORNER_BASIC
+            && otIdType <= OT_ID_RANDOM_GAME_CORNER_MASTER))
+            || otIdType == OT_ID_PLAYER_ID) // Player is the OT
     {
         value = gSaveBlock2Ptr->playerTrainerId[0]
               | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
@@ -1830,9 +1831,29 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             if (gDexNavSpecies)
                 totalRerolls += CalculateDexNavShinyRolls();
             if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) && P_EGG_INCREASED_SHINY_ROLLS)
-                totalRerolls += GetNumOwnedBadges();
+                totalRerolls += badges;
             if (P_ADD_SHINY_ODDS_TO_ROLLS)
                 totalRerolls += adjustedShinyOdds; // :)
+
+            if (isGameCorner)
+            {
+                switch(otIdType)
+                {
+                default:
+                case OT_ID_RANDOM_GAME_CORNER_BASIC:
+                    totalRerolls += badges;
+                    break;
+                case OT_ID_RANDOM_GAME_CORNER_GREAT:
+                    totalRerolls += badges * 2;
+                    break;
+                case OT_ID_RANDOM_GAME_CORNER_ULTRA:
+                    totalRerolls += badges * 4;
+                    break;
+                case OT_ID_RANDOM_GAME_CORNER_MASTER:
+                    totalRerolls += badges * 8;
+                    break;
+                }
+            }
 
             while (GET_SHINY_VALUE(value, personality) >= adjustedShinyOdds && totalRerolls > 0)
             {

@@ -38,6 +38,7 @@
 #include "window.h"
 #include "constants/coins.h"
 #include "constants/flags.h"
+#include "constants/pokedex.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
@@ -161,7 +162,7 @@ struct Gacha {
     u8 monSpriteId;
     u32 waitTimer;
     u8 Input;
-};    
+};
 
 static const u8 sText_FromGacha[] = _("You got {STR_VAR_1}!");
 
@@ -189,6 +190,8 @@ static void InitGachaScreen(void);
 static void GachaVBlankCallback(void);
 static void SpriteCB_BouncingPokeball(struct Sprite *);
 static void SpriteCB_BouncingPokeballArrive(struct Sprite *);
+bool32 IsMythicalOrLegendary(u32 species);
+u32 GetRandomGachaSpeciesFromHoenn(void);
 
 static const u8 sMessageText[] = _("NEW POKéMON : {STR_VAR_1}%");
 
@@ -788,14 +791,14 @@ static const struct SpriteTemplate sSpriteTemplate_Pokeball =
     .callback = SpriteCB_BouncingPokeball
 };
 
-static const union AnimCmd sPressAAnimCmd_1[] = 
+static const union AnimCmd sPressAAnimCmd_1[] =
 {
     ANIMCMD_FRAME(32, 10),
     ANIMCMD_FRAME(64, 10),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sPressAAnimCmd_0[] = 
+static const union AnimCmd sPressAAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(0, 10),
@@ -818,14 +821,14 @@ static const struct SpriteTemplate sSpriteTemplate_Press_A =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sArrowAnimCmd_1[] = 
+static const union AnimCmd sArrowAnimCmd_1[] =
 {
     ANIMCMD_FRAME(8, 20),
     ANIMCMD_FRAME(12, 20),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sArrowAnimCmd_0[] = 
+static const union AnimCmd sArrowAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(4, 20),
@@ -848,7 +851,7 @@ static const struct SpriteTemplate sSpriteTemplate_Arrows =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sMenu2AnimCmd_0[] = 
+static const union AnimCmd sMenu2AnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(64, 10),
@@ -859,7 +862,7 @@ static const union AnimCmd *const sMenu2AnimCmds[] = {
     sMenu2AnimCmd_0,  // Looping animation
 };
 
-static const union AnimCmd sHoppipAnimCmd_0[] = 
+static const union AnimCmd sHoppipAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(16, 15),
@@ -883,7 +886,7 @@ static const struct SpriteTemplate sSpriteTemplate_Hoppip =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sElekidAnimCmd_0[] = 
+static const union AnimCmd sElekidAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(32, 15),
@@ -912,7 +915,7 @@ static const struct SpriteTemplate sSpriteTemplate_Elekid =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sTeddiursaAnimCmd_0[] = 
+static const union AnimCmd sTeddiursaAnimCmd_0[] =
 {
     ANIMCMD_FRAME(16, 15),
     ANIMCMD_FRAME(32, 15),
@@ -952,7 +955,7 @@ static const struct SpriteTemplate sSpriteTemplate_Teddiursa =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sPhanpyAnimCmd_0[] = 
+static const union AnimCmd sPhanpyAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(16, 15),
@@ -978,7 +981,7 @@ static const struct SpriteTemplate sSpriteTemplate_Phanpy =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sBelossomAnimCmd_0[] = 
+static const union AnimCmd sBelossomAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(16, 15),
@@ -1116,7 +1119,7 @@ static const struct SpriteTemplate sSpriteTemplate_PlayerDigit =
     .callback = SpriteCallbackDummy
 };
 
-static const union AnimCmd sDigitalTextAnimCmd_0[] = 
+static const union AnimCmd sDigitalTextAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(32, 30),
@@ -1151,7 +1154,7 @@ static const struct SpriteTemplate sSpriteTemplate_Lottery_JPN =
     .callback = SpriteCallbackDummy,
 };
 
-static const union AnimCmd sKnobAnimCmd_1[] = 
+static const union AnimCmd sKnobAnimCmd_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -1161,7 +1164,7 @@ static const union AnimCmd sKnobAnimCmd_1[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sKnobAnimCmd_0[] = 
+static const union AnimCmd sKnobAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END
@@ -1431,7 +1434,7 @@ static void CreateCreditSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_Interface[i]);
     }
@@ -1465,7 +1468,7 @@ static void CreatePlayerSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PlayerInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PlayerInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_PlayerInterface[i]);
     }
@@ -1506,8 +1509,8 @@ static void CreateHoppip(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_Hoppip);
     sGacha->PokemonOneSpriteId = CreateSprite(&sSpriteTemplate_Hoppip, x, y, 0);
-    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Hoppip, x2, y, 0);    
-    sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Hoppip, x3, y, 0);    
+    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Hoppip, x2, y, 0);
+    sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Hoppip, x3, y, 0);
 }
 
 static UNUSED void CreateElekid(void)
@@ -1520,7 +1523,7 @@ static UNUSED void CreateElekid(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_Elekid);
     sGacha->PokemonOneSpriteId = CreateSprite(&sSpriteTemplate_Elekid, x, y, 0);
     sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Elekid, x2, y, 0);
-    sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Elekid, x3, y, 0);    
+    sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Elekid, x3, y, 0);
 }
 
 static void CreateTeddiursa(void)
@@ -1532,7 +1535,7 @@ static void CreateTeddiursa(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_Teddiursa);
     sGacha->PokemonOneSpriteId = CreateSprite(&sSpriteTemplate_Teddiursa, x, y, 0);
-    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Teddiursa, x2, y, 0);    
+    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Teddiursa, x2, y, 0);
     sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Teddiursa, x3, y, 0);
 }
 
@@ -1558,7 +1561,7 @@ static void CreateBelossom(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_Belossom);
     sGacha->PokemonOneSpriteId = CreateSprite(&sSpriteTemplate_Belossom, x, y, 0);
-    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Belossom, x2, y, 0);    
+    sGacha->PokemonTwoSpriteId = CreateSprite(&sSpriteTemplate_Belossom, x2, y, 0);
     sGacha->PokemonThreeSpriteId = CreateSprite(&sSpriteTemplate_Belossom, x3, y, 0);
 
 }
@@ -2184,12 +2187,12 @@ static void ShowMessage(void)
     struct WindowTemplate template;
 
     SetWindowTemplateFields(&template, GACHA_MENUS, 17, 10, 11, 2, 11, 0x194);
-    
+
     sTextWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sTextWindowId);
     LoadUserWindowBorderGfx(sTextWindowId, 0x214, BG_PLTT_ID(14));
-    DrawDialogueFrame(sTextWindowId, FALSE); 
+    DrawDialogueFrame(sTextWindowId, FALSE);
     bet = sGacha->newMonOdds;
     ConvertUIntToDecimalStringN(gStringVar1, bet, STR_CONV_MODE_LEADING_ZEROS, 3);
     //gStringVar4[0] = '\0';
@@ -2472,25 +2475,29 @@ u16 GetGachaMasterSpecies(u16 randNum)
     return -1; // Return -1 if customNumber is not found
 }
 
-u16 GetGachaMon(u16 randNum)
+u32 GetRandomGachaSpeciesFromHoenn(void)
 {
-    u32 species;
+    return NationalPokedexNumToSpecies(HoennToNationalOrder(RandomUniform(RNG_GACHA_SPECIES, HOENN_DEX_BULBASAUR, HOENN_DEX_COUNT - 1)));
+}
 
-    switch (sGacha->GachaId)
+bool32 IsMythicalOrLegendary(u32 species)
+{
+    bool32 isLegendary = gSpeciesInfo[species].isLegendary;
+    bool32 isMythical = gSpeciesInfo[species].isMythical;
+
+    return isLegendary || isMythical;
+}
+
+u16 GetGachaMon(u32 rarity)
+{
+    u32 gachaRolls = sGacha->GachaId + (GetNumOwnedBadges() * (rarity + 1));
+    u32 rollsLeft = gachaRolls;
+    u32 species = GetRandomGachaSpeciesFromHoenn();
+
+    while (!IsMythicalOrLegendary(species) && rollsLeft > 0)
     {
-    default:
-    case GACHA_BASIC:
-        species = GetGachaBasicSpecies(randNum);
-        break;
-    case GACHA_GREAT:
-        species = GetGachaGreatSpecies(randNum);
-        break;
-    case GACHA_ULTRA:
-        species = GetGachaUltraSpecies(randNum);
-        break;
-    case GACHA_MASTER:
-        species = GetGachaMasterSpecies(randNum);
-        break;
+        species = GetRandomGachaSpeciesFromHoenn();
+        rollsLeft--;
     }
 
     if (species >= SPECIES_EGG)
@@ -2519,7 +2526,7 @@ bool32 IsNotValidUnownedSpecies(u16 species)
     return CheckIfOwned(species);
 }
 
-static void GetPokemonOwned(void)
+/*static void GetPokemonOwned(void)
 {
     u16 species;
     int nationalDexNo;
@@ -2638,7 +2645,7 @@ static void GetPokemonOwned(void)
         }
         break;
     }
-}
+}*/
 
 u8 CalculateChanceForCategory(u16 owned, u16 available, u8 baseChance, u16 wager)
 {
@@ -2694,16 +2701,11 @@ u8 CalculateChanceForCategory(u16 owned, u16 available, u8 baseChance, u16 wager
 void DeterminePokemonRarityAndNewStatus(void)
 {
     u16 species;
-    u16 totalNotOwned;
-    u8 totalOwned;
-    u16 totalMax;
-    u16 newPokemonChance;
     u16 randomValue;
-    u32 attempts = 1000;
 
     while (TRUE)
     {
-        randomValue = (Random() % 100);  // Generate random value between 0 and 100
+        randomValue = Random() % 100;  // Generate random value between 0 and 100
 
         // Determine Rarity based on the chances
         if (randomValue < RARITY_COMMON_ODDS)
@@ -2715,98 +2717,18 @@ void DeterminePokemonRarityAndNewStatus(void)
         else
             sGacha->Rarity = RARITY_ULTRA_RARE; // Ultra Rare
 
-        // Get the number of available and owned Pokémon based on rarity
-        totalMax = GetMaxAvailableGachaRaritySpecies(sGacha->GachaId, sGacha->Rarity);
-        switch (sGacha->Rarity)
-        {
-        default:
-        case RARITY_COMMON:
-            totalOwned = sGacha->ownedCommon;
-            break;
-        case RARITY_UNCOMMON:
-            totalOwned = sGacha->ownedUncommon;
-            break;
-        case RARITY_RARE:
-            totalOwned = sGacha->ownedRare;
-            break;
-        case RARITY_ULTRA_RARE:
-            totalOwned = sGacha->ownedUltraRare;
-            break;
-        }
+        species = GetGachaMon(sGacha->Rarity);
+        bool32 isSpeciesOwned = GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
 
-        // Calculate the total number of Pokémon the player doesn't own
-        totalNotOwned = totalMax - totalOwned;
-
-        if (totalNotOwned <= 0 && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 10))
-        {
-            // If all Pokémon of the selected rarity are owned, restart the process (reroll)
-            continue;  // This will make the loop restart from the beginning
-        }
-
-        // Generate a random value for the chances
-        randomValue = Random() % 100;  // Generate random value between 0-99
-
-        // Check if we should get a new Pokémon based on the odds
-        if (sGacha->newMonOdds >= randomValue)
-        {
-            // Loop until a new (not owned) Pokémon is found
-            do {
-                newPokemonChance = (Random() % totalMax);  // Random pull from the available pool
-                species = GetGachaMon(newPokemonChance);  // Get the Pokémon species based on the random value
-                attempts--;
-                if (attempts < 1)
-                {
-                    attempts = 1000;
-                    randomValue = (Random() % 100);  // Generate random value between 0 and 100
-
-                    // Determine Rarity based on the chances
-                    if (randomValue < RARITY_COMMON_ODDS)
-                        sGacha->Rarity = RARITY_COMMON;
-                    else if (randomValue < (RARITY_COMMON_ODDS + RARITY_UNCOMMON_ODDS))
-                        sGacha->Rarity = RARITY_UNCOMMON;
-                    else if (randomValue < (RARITY_COMMON_ODDS + RARITY_UNCOMMON_ODDS + RARITY_RARE_ODDS))
-                        sGacha->Rarity = RARITY_RARE;
-                    else
-                        sGacha->Rarity = RARITY_ULTRA_RARE;
-                }
-                // If the Pokémon is not owned, we found a new Pokémon
-            } while (IsNotValidUnownedSpecies(species));  // Continue if owned (IsNotValidUnownedSpecies returns TRUE)
-
-            // If we've broken out of the loop, we have a new Pokémon
-            sGacha->CalculatedSpecies = species;  // Store the species of the new Pokémon
-            break;  // Exit the loop after finding a new Pokémon
-        }
+        // If all Pokémon of the selected rarity are owned, restart the process (reroll)
+        // This will make the loop restart from the beginning
+        if (isSpeciesOwned && RandomPercentage(RNG_GACHA_SPECIES, GetNumOwnedBadges() * 10))
+            continue;
         else
-        {
-            // Loop until an owned Pokémon is found
-            do {
-                newPokemonChance = (Random() % totalMax);  // Random pull from the available pool
-                species = GetGachaMon(newPokemonChance);  // Get the Pokémon species based on the random value
-                attempts--;
-                if (attempts < 1)
-                {
-                    attempts = 1000;
-                    randomValue = (Random() % 100);  // Generate random value between 0 and 100
+            break;
 
-                    // Determine Rarity based on the chances
-                    if (randomValue < RARITY_COMMON_ODDS)
-                        sGacha->Rarity = RARITY_COMMON;
-                    else if (randomValue < (RARITY_COMMON_ODDS + RARITY_UNCOMMON_ODDS))
-                        sGacha->Rarity = RARITY_UNCOMMON;
-                    else if (randomValue < (RARITY_COMMON_ODDS + RARITY_UNCOMMON_ODDS + RARITY_RARE_ODDS))
-                        sGacha->Rarity = RARITY_RARE;
-                    else
-                        sGacha->Rarity = RARITY_ULTRA_RARE;
-                }
-
-                // If the Pokémon is owned, we have an owned Pokémon
-            } while (IsNotValidOwnedSpecies(species));  // Continue if not owned
-
-            // If we've broken out of the loop, we have an owned Pokémon
-            sGacha->CalculatedSpecies = species;  // Store the species of the owned Pokémon
-            break;  // Exit the loop after finding an owned Pokémon
-        }
     }
+    sGacha->CalculatedSpecies = species;  // Store the species of the owned Pokémon
 }
 
 static void CalculatePullOdds(void)
@@ -2841,7 +2763,7 @@ static void CalculatePullOdds(void)
     sGacha->ultraRareChance = ultraRareChance;
 
     // Final Odds as a sum of chances
-    
+
     totalChance = commonChance + uncommonChance + rareChance + ultraRareChance;
     if (totalChance <= 100)
         sGacha->newMonOdds = commonChance + uncommonChance + rareChance + ultraRareChance;
@@ -2888,7 +2810,7 @@ static void UpdateWagerDigit(int direction)
     place = sGacha->cursorPosition;
     d = 1000;
     tempwager = sGacha->wager;
-    
+
     for (i = 0; i < 4; i++)
     {
         if (tempwager >= d)
@@ -2900,7 +2822,7 @@ static void UpdateWagerDigit(int direction)
         d = d / 10;
     }
     maxWager = GetCoins();  // Maximum wager is the current coins
-    
+
     // wagerDigits[0] = Thousands place
     // wagerDigits[1] = Hundreds place
     // wagerDigits[2] = Tens place
@@ -2919,7 +2841,7 @@ static void UpdateWagerDigit(int direction)
         // Otherwise, simply increase the digit by 1
         wagerDigits[place]++;
         PlaySE(SE_SELECT);
-                
+
         // Ensure the new wager doesn't exceed max available coins
         newWager = (wagerDigits[0] * 1000) + (wagerDigits[1] * 100) + (wagerDigits[2] * 10) + wagerDigits[3];
         if (newWager > maxWager) // If the new wager exceeds available coins, revert back
@@ -2973,7 +2895,7 @@ static void UpdateWagerDigit(int direction)
         ResetMessage();
         //CalculatePullOdds();
         sGacha->newMonOdds = 0;
-        sGacha->Trigger = 0;        
+        sGacha->Trigger = 0;
         gSprites[sGacha->CTAspriteId].animNum = 0; // Off
         //gSprites[sGacha->CTAspriteId].animPaused = TRUE;
         ShowMessage();
@@ -2985,7 +2907,7 @@ static void MoveCursor(int direction)
     struct Sprite *cursorSprite = &gSprites[sGacha->ArrowsSpriteId];
     int curX = cursorSprite->x;
     int destX = curX;
-    
+
     // Move cursor left or right (X axis)
     if (direction == 1 || direction == 3)// Right or Left
     {
@@ -2999,11 +2921,11 @@ static void MoveCursor(int direction)
             destX = curX - 8;
             PlaySE(SE_SELECT);
         }
-        
+
         cursorSprite->x = destX;
         UpdateCursorPosition(gSprites[sGacha->ArrowsSpriteId].x);  // Update cursor position based on X coordinate
     }
-    
+
     // Move cursor up or down (change wager digit)
     else if (direction == 0 || direction == 2) // Up or Down
     {
@@ -3035,7 +2957,7 @@ static void HandleInput_GachaComplete(void)
 
 static void HandleInput(void)
 {
-    if (sGacha->Input == 0) 
+    if (sGacha->Input == 0)
     {
         if (JOY_NEW(A_BUTTON))
         {
@@ -3094,7 +3016,7 @@ static void RemoveGarbage(void)
     LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
     DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
     DmaCopy16Defvars(3, gTrade_Tilemap, (void *) BG_SCREEN_ADDR(18), 0x1000);
-    
+
     gPaletteFade.bufferTransferDisabled = TRUE;
     gPaletteFade.bufferTransferDisabled = FALSE;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -3106,12 +3028,12 @@ void ShowFinalMessage(void)
     struct WindowTemplate template;
 
     SetWindowTemplateFields(&template, 1, 2, 15, 26, 4, 11, 0x194);
-    
+
     sTextWindowId = AddWindow(&template);
     // FillWindowPixelBuffer(sTextWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sTextWindowId);
     LoadUserWindowBorderGfx(sTextWindowId, 0x214, BG_PLTT_ID(14));
-    DrawStdWindowFrame(sTextWindowId, FALSE); 
+    DrawStdWindowFrame(sTextWindowId, FALSE);
     StringCopy(gStringVar1, GetSpeciesName(sGacha->CalculatedSpecies));
     StringExpandPlaceholders(gStringVar4, sText_FromGacha);
     AddTextPrinterParameterized2(sTextWindowId, FONT_NORMAL, gStringVar4, 0, 0, 2, 1, 3);
@@ -3164,7 +3086,7 @@ static void GachaMain(u8 taskId)
     {
         level = (Random() % 5) + 2;
     }
-    
+
     switch (sGacha->state)
     {
     case GACHA_STATE_INIT:
@@ -3241,7 +3163,7 @@ static void GachaMain(u8 taskId)
             sGacha->waitTimer--;  // Decrease timer
         else
             sGacha->state = STATE_SHAKE_2;  // Final action after timer
-        break;    
+        break;
     case STATE_SHAKE_2: // After timer expires, proceed with animation
         //PlaySE(SE_BREAKABLE_DOOR);
         Shake2();
@@ -3257,7 +3179,7 @@ static void GachaMain(u8 taskId)
         {
             sGacha->waitTimer--;  // Decrease timer
         }
-        else 
+        else
         {
             BGSetup();
             sGacha->waitTimer = 20;
@@ -3283,12 +3205,12 @@ static void GachaMain(u8 taskId)
     case STATE_POKEBALL_INIT:
         RemoveGarbage();
         sGacha->state++;
-        break;    
+        break;
     case STATE_POKEBALL_PROCESS:
         if (!gPaletteFade.active)
             sGacha->state = STATE_POKEBALL_ARRIVE;
         break;
-    case STATE_POKEBALL_ARRIVE:    
+    case STATE_POKEBALL_ARRIVE:
         LoadSpriteSheet(&sPokeBallSpriteSheet);
         LoadSpritePalette(&sPokeBallSpritePalette);
         sGacha->bouncingPokeballSpriteId = CreateSprite(&sSpriteTemplate_Pokeball, 120, -8, 0);
@@ -3304,10 +3226,12 @@ static void GachaMain(u8 taskId)
         BeginNormalPaletteFade(1 << (16 + gSprites[sGacha->bouncingPokeballSpriteId].oam.paletteNum), 1, 16, 0, RGB_WHITEALPHA);
         sGacha->state++;
         break;
-    case STATE_POKEBALL_ARRIVE_WAIT:        
+    case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sGacha->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            CreateMon(&gEnemyParty[0], sGacha->CalculatedSpecies, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+            u32 otId = sGacha->GachaId + 2;
+
+            CreateMon(&gEnemyParty[0], sGacha->CalculatedSpecies, level, USE_RANDOM_IVS, FALSE, 0, otId, 0);
             GiveMonToPlayer(&gEnemyParty[0]);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(sGacha->CalculatedSpecies), FLAG_SET_SEEN);
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(sGacha->CalculatedSpecies), FLAG_SET_CAUGHT, GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY));
@@ -3368,7 +3292,7 @@ static void GachaMain(u8 taskId)
 }
 
 static void InitGachaScreen(void)
-{    
+{
     sGacha->GachaId = gSpecialVar_0x8004;
 
     SetVBlankCallback(NULL);
@@ -3401,16 +3325,16 @@ static void InitGachaScreen(void)
     }
     CreateArrows();
     CreateCTA();
-    CreateDigitalText();    
+    CreateDigitalText();
     CreateKnob();
     CreateCreditSprites();
     CreatePlayerSprites();
     SetCreditDigits(GetCoins());
-    SetPlayerDigits(0);    
-    CreateCreditMenu();    
+    SetPlayerDigits(0);
+    CreateCreditMenu();
     CreatePlayerMenu();
     CreateLotteryJPN();
-    
+
     sGacha->newMonOdds = 0;
     InitWindows(sGachaWinTemplates);
     LoadPalette(GetTextWindowPalette(2), 11 * 16, 32);
@@ -3419,8 +3343,8 @@ static void InitGachaScreen(void)
     UpdateCursorPosition(gSprites[sGacha->ArrowsSpriteId].x);
     sGacha->waitTimer = 0;
     sGacha->Input = 0;
-    GetPokemonOwned();
-    
+    //GetPokemonOwned();
+
     CopyBgTilemapBufferToVram(GACHA_BG_BASE);
     CopyBgTilemapBufferToVram(GACHA_MENUS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG2_ON);

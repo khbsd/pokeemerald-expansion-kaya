@@ -69,7 +69,7 @@ enum {
 #define MAX_SPRITES_PLAYER 4
 
 struct Credits {
-	u8 PlayerSpriteIds[MAX_SPRITES_PLAYER];	
+	u8 PlayerSpriteIds[MAX_SPRITES_PLAYER];
 };
 
 enum
@@ -590,7 +590,7 @@ static const u16 sPlayer_Pal[] = INCBIN_U16("graphics/pinball/input_numbers.gbap
 
 static const struct SpritePalette sSpritePalettes2[] =
 {
-	{ .data = sPlayer_Pal,			   .tag = PALTAG_INTERFACEPLAYER },	
+	{ .data = sPlayer_Pal,			   .tag = PALTAG_INTERFACEPLAYER },
 	{}
 };
 
@@ -2195,7 +2195,7 @@ static void SetPlayerDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-	
+
     BuildOamBuffer();
 }
 
@@ -2203,7 +2203,7 @@ static void CreatePlayerSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PlayerInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PlayerInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_PlayerInterface[i]);
     }
@@ -2596,7 +2596,7 @@ static void PinballMain(u8 taskId)
         completed = UpdateGameType(sPinballGame->gameType);
         if (!sPinballGame->completed && completed)
             sPinballGame->completed = TRUE;
-        
+
         HandleBallPhysics();
         UpdateCamera();
 
@@ -2800,7 +2800,7 @@ static void DrawMeowthScoreJewels(struct Meowth *meowth)
             tilemap[i] = sMeowthStageBgTilemap[i];
     }
 
-	VarSet(GAME_CORNER_VAR_WINNINGS, (meowth->score * 3));
+	VarSet(GAME_CORNER_VAR_WINNINGS, ((meowth->score * 3) + GetNumOwnedBadges()));
 	SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
@@ -2828,7 +2828,7 @@ static void DrawSeelScoreJewels(struct Seel *seel)
         }
     }
 	VarSet(GAME_CORNER_VAR_WINNINGS, (seel->score * 4));
-	SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
+	SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS) + GetNumOwnedBadges());
     CopyBgTilemapBufferToVram(PINBALL_BG_BASE);
 }
 
@@ -2871,7 +2871,7 @@ static void HandleBallPhysics(void)
         RotateVector(&ball->xVelocity, &ball->yVelocity, collisionNormal);
         ApplyCollisionForces(ball, artificialYForce, collisionAmplification);
         RotateVector(&ball->xVelocity, &ball->yVelocity, -collisionNormal);
-		
+
 		if ((isStaticColliding) && ((ball->yVelocity > 300) || (ball->xVelocity > 300))) // Wall or static object collision
         {
             PlaySE(SE_WALL_HIT); // Trigger the sound effect for wall collision
@@ -3030,7 +3030,7 @@ static void HandleTilt(struct Ball *ball, struct Tilt *tilt, int xDelta, int yDe
 	{
 		PlaySE(SE_BREAKABLE_DOOR);
 	}
-	
+
     if ((artificalEnabled && sPinballGame->doArtificialDownTilt) || (!tilt->reset && (gMain.heldKeys & buttonMask)))
     {
         if (++tilt->counter >= 3)
@@ -3064,7 +3064,7 @@ static bool32 HandleFlippers(struct Ball *ball, u16 *outYForce, u8 *outCollision
 
     UpdateFlipperState(&sPinballGame->rightFlipper);
     UpdateFlipperState(&sPinballGame->leftFlipper);
-    
+
     collided = CheckFlipperCollision(ball, &sPinballGame->rightFlipper, outYForce, outCollisionNormal, outCollisionAmplification);
     if (!collided)
         collided = CheckFlipperCollision(ball, &sPinballGame->leftFlipper, outYForce, outCollisionNormal, outCollisionAmplification);
@@ -3079,7 +3079,7 @@ static void UpdateFlipperState(struct Flipper *flipper)
     int stateDelta;
 
     flipper->prevState = flipper->state;
-	
+
 	if (!sPinballGame->flippersDisabled && (gMain.newKeys & A_BUTTON)) // A button rising edge
     {
         PlaySE(SE_VEND); // Play sound effect
@@ -3088,7 +3088,7 @@ static void UpdateFlipperState(struct Flipper *flipper)
     {
         PlaySE(SE_VEND); // Play sound effect
     }
-	
+
     if (!sPinballGame->flippersDisabled && (gMain.heldKeys & (A_BUTTON | B_BUTTON)))
     {
         if (flipper->state == 0x0FFF)
@@ -3283,7 +3283,7 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
             }
         }
     }
- 
+
     collisionIndex = ((maxStringStart & 0xF) << 4) | (maxStringEnd & 0xF);
 
     // Treat the delta values as signed.
@@ -4195,10 +4195,10 @@ static bool32 UpdateDiglett(struct Diglett *diglett)
                     diglett->collisionMap[0x6B] = 0x18;
                 }
 				if (diglett->numDiglettsHit < NUM_DIGLETTS) {
-					VarSet(GAME_CORNER_VAR_WINNINGS, (diglett->numDiglettsHit * 3)); }
+					VarSet(GAME_CORNER_VAR_WINNINGS, (diglett->numDiglettsHit * 3) + GetNumOwnedBadges()); }
 				else
 				{
-					VarSet(GAME_CORNER_VAR_WINNINGS, 100);
+					VarSet(GAME_CORNER_VAR_WINNINGS, 100 + GetNumOwnedBadges());
 				}
 				SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
                 break;
@@ -4238,7 +4238,7 @@ static bool32 UpdateDiglett(struct Diglett *diglett)
             break;
         case DUGTRIO_STATE_0ALIVE:
             if (dugtrioSprite->animEnded)
-				VarSet(GAME_CORNER_VAR_WINNINGS, 150);
+				VarSet(GAME_CORNER_VAR_WINNINGS, 150 + GetNumOwnedBadges());
 				SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
                 diglett->dugtrioState = DUGTRIO_STATE_COMPLETE;
             return TRUE;
@@ -4318,7 +4318,7 @@ static void UpdateDugtrioSprite(struct Sprite *sprite)
         case DUGTRIO_STATE_1ALIVE_HIT:
             StartSpriteAnim(sprite, 6);
 			PlayBGM(MUS_NONE);
-			VarSet(GAME_CORNER_VAR_WINNINGS, 150);
+			VarSet(GAME_CORNER_VAR_WINNINGS, 150 + GetNumOwnedBadges());
 			SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
 			PlaySE(SE_SUPER_EFFECTIVE);
             break;
@@ -4689,7 +4689,7 @@ static bool32 CheckGhostsCollision(struct Ball *ball, u32 ticks, struct Graveyar
         collisionNormal = angles[y * width + x];
         if (collisionNormal == 0xFF)
             continue;
-        
+
         // Multiply normal by two because the original data is stored halved.
         *outCollisionNormal = collisionNormal * 2;
         ghost->state = GHOST_STATE_HIT;
@@ -4882,7 +4882,7 @@ static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 
 {
 	u8 multiplier = 0;
     struct Sprite *sprite = &gSprites[ghost->spriteId];
-	
+
 	if (numGhostHits == &gengar->numGastlyHits)
     {
         multiplier = 3;  // Gastly
@@ -4891,7 +4891,7 @@ static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 
     {
         multiplier = 7;  // Haunter
     }
-	
+
     switch (ghost->state)
     {
     case GHOST_STATE_VISIBLE:
@@ -4921,7 +4921,7 @@ static void UpdateGhost(struct Gengar *gengar, struct GraveyardGhost *ghost, u8 
         if (sprite->animEnded)
         {
             (*numGhostHits)++;
-			VarSet(GAME_CORNER_VAR_WINNINGS, (VarGet(GAME_CORNER_VAR_WINNINGS) + multiplier));
+			VarSet(GAME_CORNER_VAR_WINNINGS, (VarGet(GAME_CORNER_VAR_WINNINGS) + multiplier + GetNumOwnedBadges()));
 			SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
 			PlaySE(SE_M_TELEPORT);
             if (*numGhostHits >= REQUIRED_GHOST_HITS - (numGhosts - 1))
@@ -5064,7 +5064,7 @@ static void UpdateGengarSprite(struct Sprite *sprite)
         case GENGAR_STATE_LEAVING:
             StartSpriteAnim(sprite, 4);
 			PlayBGM(MUS_NONE);
-			VarSet(GAME_CORNER_VAR_WINNINGS, 250);
+			VarSet(GAME_CORNER_VAR_WINNINGS, 250 + GetNumOwnedBadges());
 			SetPlayerDigits(VarGet(GAME_CORNER_VAR_WINNINGS));
 			PlaySE(SE_SUPER_EFFECTIVE);
             break;

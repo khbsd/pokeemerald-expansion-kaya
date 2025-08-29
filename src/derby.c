@@ -184,7 +184,7 @@ struct Derby {
     u8 place5;
     u8 place6;
     u8 ClefSpriteId;
-};    
+};
 
 static EWRAM_DATA struct Derby *sDerby = NULL;
 
@@ -350,7 +350,7 @@ static const struct WindowTemplate sDerbyWinTemplates[] = {
         .width = 9,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 0x194,        
+        .baseBlock = 0x194,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -465,7 +465,7 @@ static const struct OamData sOamData_Clefairy =
     .priority = 0,
 };
 
-static const union AnimCmd sClefAnimCmd_0[] = 
+static const union AnimCmd sClefAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(32, 20),
@@ -588,13 +588,13 @@ static const struct OamData sOamData_Horse_OW =
     .priority = 0,
 };
 
-static const union AnimCmd sHorseAnimCmd_0[] = 
+static const union AnimCmd sHorseAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END
 };
 
-static const union AnimCmd sHorseAnimCmd_1[] = 
+static const union AnimCmd sHorseAnimCmd_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -603,7 +603,7 @@ static const union AnimCmd sHorseAnimCmd_1[] =
 };
 
 static const union AnimCmd *const sHorseAnimCmds[] = {
-    sHorseAnimCmd_0,  
+    sHorseAnimCmd_0,
     sHorseAnimCmd_1,
 };
 
@@ -675,13 +675,13 @@ static const struct OamData sOamData_RatFish_OW =
     .priority = 0,
 };
 
-static const union AnimCmd sRattataAnimCmd_0[] = 
+static const union AnimCmd sRattataAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END
 };
 
-static const union AnimCmd sRattataAnimCmd_1[] = 
+static const union AnimCmd sRattataAnimCmd_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(8, 5),
@@ -689,7 +689,7 @@ static const union AnimCmd sRattataAnimCmd_1[] =
 };
 
 static const union AnimCmd *const sRattataAnimCmds[] = {
-    sRattataAnimCmd_0,  
+    sRattataAnimCmd_0,
     sRattataAnimCmd_1,
 };
 
@@ -722,7 +722,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_Feebas_OW =
     .tag = GFX_FEEBAS_OW,
 };
 
-static const union AnimCmd sFeebasAnimCmd_0[] = 
+static const union AnimCmd sFeebasAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(8, 20),
@@ -844,7 +844,7 @@ static const struct OamData sOamData_P10 =
     .priority = 0,
 };
 
-static const union AnimCmd sP10AnimCmd_0[] = 
+static const union AnimCmd sP10AnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(8, 20),
@@ -1245,7 +1245,7 @@ static const struct OamData sOamData_Arrows =
     .priority = 0,
 };
 
-static const union AnimCmd sArrowAnimCmd_0[] = 
+static const union AnimCmd sArrowAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(4, 20),
@@ -1945,12 +1945,12 @@ void GetNewDerby(void)
 
     do {
         condition3Index = Random() % DERBY_RACER_COUNT;
-    } while (condition3Index == condition4Index);  
+    } while (condition3Index == condition4Index);
     conditions[condition3Index] = CONDITION_4_STAR;
 
     do {
         condition2Index = Random() % DERBY_RACER_COUNT;
-    } while (condition2Index == condition4Index || condition2Index == condition3Index);  
+    } while (condition2Index == condition4Index || condition2Index == condition3Index);
     conditions[condition2Index] = CONDITION_3_STAR;
 
     // Generate all racers with low stars by default
@@ -2120,7 +2120,7 @@ static void UpdatePokemonSpeciesNames(void)
 static void UpdateCondition(void)
 {
     u8 stars = 0;
-    
+
     stars = sDerby->racerCondition[sDerby->MenuPosition];
 
     DestroySpriteAndFreeResources(&gSprites[sDerby->ConditionSpriteId]);
@@ -2155,11 +2155,11 @@ static void UpdatePayout(void)
 {
     u8 multi = 0;
     s16 y;
-    
+
     y = 124;
-    
+
     multi = sDerby->racerSpeedPay[sDerby->MenuPosition];
-    
+
     DestroySpriteAndFreeResources(&gSprites[sDerby->PayoutSpriteId]);
     LoadSpritePalettes(sSpritePalettes);
 
@@ -2200,7 +2200,7 @@ static void UpdateUI(void)
 {
     DestroySpriteAndFreeResources(&gSprites[sDerby->uiSpriteId]);
     LoadSpritePalettes(sSpritePalettes);
-    
+
     if (sDerby->MenuPosition == 0)
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_UI_1);
@@ -2258,7 +2258,7 @@ static void CreateArrows(void)
 {
     s16 x;
     s16 y;
-    
+
     x = 32;
     y = 88;
 
@@ -2335,7 +2335,7 @@ u8 GetUniquePonytaName(u8 currentSpecies, u8 previousNames[])
         do {
             newName = Random() % MAX_NAMES;  // Generate a random nickname index
         } while (previousNames[newName] != 0);  // Check if this name has already been taken
-        
+
         // Mark this name as taken
         previousNames[newName] = 1;
     }
@@ -2344,7 +2344,7 @@ u8 GetUniquePonytaName(u8 currentSpecies, u8 previousNames[])
         // For non-Ponyta species, no need to check for uniqueness
         newName = Random() % MAX_NAMES;
     }
-    
+
     return newName;
 }
 
@@ -2381,7 +2381,7 @@ static void UpdatePokemonData(void)
     if (!FlagGet(DERBY_FLAG_NICKNAME))
         SetNicknames();
     UpdateNicknames();
-    
+
 }
 
 static void SetBetDigits(u16 num)
@@ -2411,7 +2411,7 @@ static void SetBetDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -2419,7 +2419,7 @@ static void CreateBetSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_BetInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_BetInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_BetInterface[i]);
     }
@@ -2459,7 +2459,7 @@ static void SetPotentialDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -2467,7 +2467,7 @@ static void CreatePotentialSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PotentialInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_PotentialInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_PotentialInterface[i]);
     }
@@ -2507,7 +2507,7 @@ static void SetCreditDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -2515,7 +2515,7 @@ static void CreateCreditSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_CreditsInterface[i]);
     }
@@ -2561,7 +2561,7 @@ static void ExitDerby(void)
 static void ShiftData(u8 direction)
 {
     // 1 = Right, 0 = Left
-    
+
     if (direction == 1) // Right
     {
         PlaySE(SE_SELECT);
@@ -2646,14 +2646,14 @@ static void HideBetSprites(void)
         DestroySpriteAndFreeResources(&gSprites[sDerby->CreditIconSpriteId]);
         CreateCreditIconRed();
         CreateP10();
-        
+
         gSprites[sDerby->SpeciesNameSpriteId].invisible = TRUE;
         gSprites[sDerby->ConditionSpriteId].invisible = TRUE;
         gSprites[sDerby->PayoutSpriteId].invisible = TRUE;
         gSprites[sDerby->Arrow1SpriteId].invisible = TRUE;
         gSprites[sDerby->Arrow2SpriteId].invisible = TRUE;
         gSprites[sDerby->uiSpriteId].invisible = TRUE;
-        
+
         gSprites[sDerby->PotentialSpriteIds[0]].invisible = FALSE;
         gSprites[sDerby->PotentialSpriteIds[1]].invisible = FALSE;
         gSprites[sDerby->PotentialSpriteIds[2]].invisible = FALSE;
@@ -2668,7 +2668,7 @@ static void HideBetSprites(void)
         DestroySpriteAndFreeResources(&gSprites[sDerby->P10SpriteId]);
         DestroySpriteAndFreeResources(&gSprites[sDerby->CreditIconSpriteId]);
         CreateCreditIcon();
-        
+
         gSprites[sDerby->PotentialSpriteIds[0]].invisible = TRUE;
         gSprites[sDerby->PotentialSpriteIds[1]].invisible = TRUE;
         gSprites[sDerby->PotentialSpriteIds[2]].invisible = TRUE;
@@ -2677,7 +2677,7 @@ static void HideBetSprites(void)
         gSprites[sDerby->BetSpriteIds[1]].invisible = TRUE;
         gSprites[sDerby->BetSpriteIds[2]].invisible = TRUE;
         gSprites[sDerby->BetSpriteIds[3]].invisible = TRUE;
-        
+
         gSprites[sDerby->SpeciesNameSpriteId].invisible = FALSE;
         gSprites[sDerby->ConditionSpriteId].invisible = FALSE;
         gSprites[sDerby->PayoutSpriteId].invisible = FALSE;
@@ -2690,9 +2690,9 @@ static void HideBetSprites(void)
 static void AddBet(void)
 {
     u8 PayoutId;
-    
+
     PayoutId = sDerby->racerSpeedPay[sDerby->MenuPosition];
-    
+
     if ((sDerby->Bet + 10) <= GetCoins())
     {
         PlaySE(SE_BALL_TRAY_BALL);
@@ -2739,9 +2739,9 @@ static void AddBet(void)
 static void SubBet(void)
 {
     u8 PayoutId = 0;
-    
+
     PayoutId = sDerby->racerSpeedPay[sDerby->MenuPosition];
-    
+
     if (sDerby->Bet > 0)
     {
         PlaySE(SE_BALL_TRAY_BALL);
@@ -2781,22 +2781,22 @@ static void SubBet(void)
     else
     {
         PlaySE(SE_FAILURE);
-    }    
+    }
 }
 
 static void AdjustByRandom(void)
 {
     int i;
     u8 chance;
-    
+
     for (i = DERBY_RACER_1; i < DERBY_RACER_COUNT; i++)
     {
-        chance = Random() % 55;  
-        
+        chance = Random() % 55;
+
         if (chance < 50)
         {
-            float randomAdjustment = (Random() % 251) / 100.0f; 
-            
+            float randomAdjustment = (Random() % 251) / 100.0f;
+
             if (Random() % 2 == 0)
             {
                 // Add the random value
@@ -2812,12 +2812,12 @@ static void AdjustByRandom(void)
 
     for (i = DERBY_RACER_1; i < DERBY_RACER_COUNT; i++)
     {
-        chance = Random() % 65;  
+        chance = Random() % 65;
 
         if (chance < 50)
         {
-            float randomAdjustment = (Random() % 51) / 100.0f; 
-            
+            float randomAdjustment = (Random() % 51) / 100.0f;
+
             if (Random() % 2 == 0)
             {
                 // Add the random value
@@ -2961,9 +2961,9 @@ static void CreateCursor(void)
 {
     u8 y = 0;
     u8 position = 0;
-    
+
     LoadSpritePalettes(sSpritePalettes);
-    
+
     if (sDerby->RacerSelected == 1)
     {
         position = 10;
@@ -2995,7 +2995,7 @@ static void CreateCursor(void)
         y = 40 + 16 + 16 + 16 + 16 + 16;
     }
     LoadCompressedSpriteSheet(&sSpriteSheet_Cursor);
-            
+
     sDerby->CursorSpriteId = CreateSprite(&sSpriteTemplate_Cursor, 224, y, position);
 }
 
@@ -3013,10 +3013,10 @@ static void InitRacetrack(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     LoadSpritePalettes(sSpritePalettes);
-    
+
     CreateRacers();
     CreateCursor();
-    
+
     CopyBgTilemapBufferToVram(DERBY_BG_BASE);
     CopyBgTilemapBufferToVram(DERBY_MENUS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG2_ON);
@@ -3034,7 +3034,7 @@ int ScaleSpeedToInt(float speed)
     float scaledValue = (speed - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
 
     int roundedValue = (int)(scaledValue + 0.5f);
-    
+
     return roundedValue;
 }
 
@@ -3044,7 +3044,7 @@ void AssignRacerPlacements(void)
         int xValue;
         int index;
     };
-    
+
     struct Racer racers[6] = {
         {gSprites[sDerby->RacerSprite1].x, 1},
         {gSprites[sDerby->RacerSprite2].x, 2},
@@ -3053,7 +3053,7 @@ void AssignRacerPlacements(void)
         {gSprites[sDerby->RacerSprite5].x, 5},
         {gSprites[sDerby->RacerSprite6].x, 6}
     };
-    
+
     int i;
     int j;
     struct Racer temp;
@@ -3080,12 +3080,12 @@ void AssignRacerPlacements(void)
             places[racers[i].index - 1] = i == 0 ? 2 : (i == 1 ? 1 : 0);
     }
 
-    sDerby->place1 = places[0];  
-    sDerby->place2 = places[1];  
-    sDerby->place3 = places[2];  
-    sDerby->place4 = places[3];  
-    sDerby->place5 = places[4];  
-    sDerby->place6 = places[5];  
+    sDerby->place1 = places[0];
+    sDerby->place2 = places[1];
+    sDerby->place3 = places[2];
+    sDerby->place4 = places[3];
+    sDerby->place5 = places[4];
+    sDerby->place6 = places[5];
 }
 
 static void DerbyMain(u8 taskId)
@@ -3129,14 +3129,14 @@ static void DerbyMain(u8 taskId)
             sDerby->state = DERBY_STATE_FADEIN;
         }
         break;
-    case DERBY_STATE_FADEIN:    
+    case DERBY_STATE_FADEIN:
         if (!gPaletteFade.active)
         {
             sDerby->delay = 30;
             sDerby->state = DERBY_STATE_DELAY_2;
         }
         break;
-    case DERBY_STATE_DELAY_2:    
+    case DERBY_STATE_DELAY_2:
         if (sDerby->delay != 0)
         {
             sDerby->delay--;
@@ -3227,16 +3227,16 @@ static void DerbyMain(u8 taskId)
             if ((sDerby->Swap2 == 3) && (sDerby->delay == 0))
             {
                 PlaySE(SE_EXP_MAX);
-                
+
                 DestroySpriteAndFreeResources(&gSprites[sDerby->CountdownSpriteId]);
                 LoadSpritePalettes(sSpritePalettes);
                 LoadCompressedSpriteSheet(&sSpriteSheet_Go);
-                
+
                 sDerby->CountdownSpriteId = CreateSprite(&sSpriteTemplate_Go, sDerby->CountdownX, sDerby->CountdownY, 0);
-                
+
                 sDerby->Swap2 = 4;
                 sDerby->delay = 60;
-                
+
             }
             else if (sDerby->delay > 0)
             {
@@ -3302,7 +3302,7 @@ static void DerbyMain(u8 taskId)
             {
                 gSprites[sDerby->RacerSprite6].x = gSprites[sDerby->RacerSprite6].x - (sDerby->racerSpeedStart[DERBY_RACER_6] / 2);
             }
-            
+
             if (sDerby->RacerSelected == 1)
             {
                 gSprites[sDerby->CursorSpriteId].x = gSprites[sDerby->RacerSprite1].x;
@@ -3327,7 +3327,7 @@ static void DerbyMain(u8 taskId)
             {
                 gSprites[sDerby->CursorSpriteId].x = gSprites[sDerby->RacerSprite6].x;
             }
-            
+
             sDerby->frames = 3;
             sDerby->delay--;
         }
@@ -3371,7 +3371,7 @@ static void DerbyMain(u8 taskId)
                     {
                         gSprites[sDerby->RacerSprite6].x = gSprites[sDerby->RacerSprite6].x - (sDerby->racerSpeedRace[DERBY_RACER_6] / 2);
                     }
-                    
+
                     if (sDerby->RacerSelected == 1)
                     {
                         gSprites[sDerby->CursorSpriteId].x = gSprites[sDerby->RacerSprite1].x;
@@ -3396,7 +3396,7 @@ static void DerbyMain(u8 taskId)
                     {
                         gSprites[sDerby->CursorSpriteId].x = gSprites[sDerby->RacerSprite6].x;
                     }
-                    
+
                     sDerby->frames = 3;
                 }
                 sDerby->frames--;
@@ -3405,6 +3405,7 @@ static void DerbyMain(u8 taskId)
             {
                 PlayBGM(MUS_NONE);
                 AssignRacerPlacements();
+                sDerby->PotentialWin += GetNumOwnedBadges();
                 if (sDerby->RacerSelected == 1)
                 {
                     if (sDerby->place1 == 2) // Win
@@ -3448,10 +3449,10 @@ static void DerbyMain(u8 taskId)
                         VarSet(GAME_CORNER_VAR_WINNINGS, 0);
                 }
                 PlaySE(SE_APPLAUSE);
-                
+
                 LoadSpritePalettes(sSpritePalettes2);
                 LoadCompressedSpriteSheet(&sSpriteSheet_Clefairy);
-                
+
                 sDerby->ClefSpriteId = CreateSprite(&sSpriteTemplate_Clefairy, sDerby->CountdownX, sDerby->CountdownY, 0);
                 FlagClear(DERBY_FLAG_RESET);
                 FlagClear(DERBY_FLAG_NICKNAME);
@@ -3479,7 +3480,7 @@ static void DerbyMain(u8 taskId)
 }
 
 static void InitDerbyScreen(void)
-{    
+{
     int i;
 
     SetVBlankCallback(NULL);
@@ -3495,7 +3496,7 @@ static void InitDerbyScreen(void)
     LoadPalette(Derby_BG_Bet_Pal, 0, sizeof(Derby_BG_Bet_Pal));
     ResetSpriteData();
     FreeAllSpritePalettes();
-    
+
     if (!FlagGet(DERBY_FLAG_RESET))
     {
         GetNewDerby();
@@ -3505,7 +3506,7 @@ static void InitDerbyScreen(void)
     {
         GetRacerSpeeds(sDerby->racerSpecies[i], i);
     }
-    
+
     LoadSpritePalettes(sSpritePalettes);
     CreatePokemonSprites();
     CreateMenuData();
@@ -3517,9 +3518,9 @@ static void InitDerbyScreen(void)
     SetBetDigits(0);
     CreatePotentialSprites();
     SetPotentialDigits(0);
-    
+
     UpdatePokemonData();
-    
+
     CopyBgTilemapBufferToVram(DERBY_BG_BASE);
     CopyBgTilemapBufferToVram(DERBY_MENUS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG2_ON);

@@ -158,7 +158,7 @@ struct BlockStacker {
     u8 LivesSpriteId;
     u8 Rhydon2SpriteId;
     u8 RhydonBlockSpriteId;
-};    
+};
 
 static EWRAM_DATA struct BlockStacker *sBlockStacker = NULL;
 
@@ -257,7 +257,7 @@ static const struct WindowTemplate sBlockStackerWinTemplates[] = {
         .width = 14,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 0x194,        
+        .baseBlock = 0x194,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -480,7 +480,7 @@ static const struct OamData sOamData_Arrow =
     .priority = 0,
 };
 
-static const union AnimCmd sArrowAnimCmd_0[] = 
+static const union AnimCmd sArrowAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 60),
     ANIMCMD_FRAME(4, 10),
@@ -607,7 +607,7 @@ static const struct OamData sOamData_Start =
     .priority = 0,
 };
 
-static const union AnimCmd sTitleAnimCmd_0[] = 
+static const union AnimCmd sTitleAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(32, 10),
@@ -700,7 +700,7 @@ static const struct OamData sOamData_Highlight =
     .priority = 0,
 };
 
-static const union AnimCmd sHighlightAnimCmd_0[] = 
+static const union AnimCmd sHighlightAnimCmd_0[] =
 {
     ANIMCMD_FRAME(16, 10),
     ANIMCMD_FRAME(12, 10),
@@ -710,13 +710,13 @@ static const union AnimCmd sHighlightAnimCmd_0[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sHighlightAnimCmd_1[] = 
+static const union AnimCmd sHighlightAnimCmd_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sHighlightAnimCmd_2[] = 
+static const union AnimCmd sHighlightAnimCmd_2[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
@@ -777,7 +777,7 @@ static const struct OamData sOamData_Rhydon =
     .priority = 0,
 };
 
-static const union AnimCmd sRhydon2AnimCmd_0[] = 
+static const union AnimCmd sRhydon2AnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(64, 10),
@@ -793,7 +793,7 @@ static const union AnimCmd *const sRhydon2AnimCmds[] = {
     sRhydon2AnimCmd_0,  // Looping animation
 };
 
-static const union AnimCmd sRhydonAnimCmd_0[] = 
+static const union AnimCmd sRhydonAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(64, 10),
@@ -875,7 +875,7 @@ static void BlockStackerMainCallback(void)
 static void CreateHighlight(u8 num, u8 row)
 {
     if ((sBlockStacker->HighlightSpriteIds[num] == 0) && (sBlockStacker->HighlightRow != 8))
-    {    
+    {
             LoadSpritePalettes(sSpritePalettes);
             LoadCompressedSpriteSheet(&sSpriteSheet_Highlight);
         if (num < 7)
@@ -891,7 +891,7 @@ static void CreateHighlight(u8 num, u8 row)
     else if ((gSprites[sBlockStacker->HighlightSpriteIds[num]].animNum == 0) && (gSprites[sBlockStacker->HighlightSpriteIds[num]].animCmdIndex == 0))
     {
         gSprites[sBlockStacker->HighlightSpriteIds[num]].animNum = 2; // Light Down
-        
+
         if ((sBlockStacker->HighlightNum != 6) && (sBlockStacker->HighlightNum != 13) && (sBlockStacker->HighlightRow != 8))
         {
             sBlockStacker->HighlightNum++; // 0-6
@@ -912,7 +912,7 @@ static void CreateHighlight(u8 num, u8 row)
 static void DestroyHighlights(void)
 {
     int i;
-    
+
     for (i = 0; i < MAX_SPRITES_HIGHLIGHT; i++) {
         if ((gSprites[sBlockStacker->HighlightSpriteIds[i]].animNum == 2) && (gSprites[sBlockStacker->HighlightSpriteIds[i]].animCmdIndex > 3))
         {
@@ -926,7 +926,7 @@ static void DestroyHighlights(void)
 static void CreateRhydon(void)
 {
         LoadCompressedSpriteSheet(&sSpriteSheet_Rhydon);
-    
+
     sBlockStacker->RhydonSpriteId = CreateSprite(&sSpriteTemplate_Rhydon, 183, 112, 0);
 }
 
@@ -934,7 +934,7 @@ static void CreateArrow(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Arrow);
-    
+
     sBlockStacker->ArrowSpriteId = CreateSprite(&sSpriteTemplate_Arrow, 14, 137, 0);
 }
 
@@ -942,7 +942,7 @@ static void CreateCommands(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Commands);
-    
+
     sBlockStacker->CommandsSpriteId = CreateSprite(&sSpriteTemplate_Commands, 196, 50, 0);
 }
 
@@ -950,7 +950,7 @@ static void CreateX1(s16 x, s16 y)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_X);
-    
+
     sBlockStacker->x1SpriteId = CreateSprite(&sSpriteTemplate_X, x, y, 0);
 }
 
@@ -958,7 +958,7 @@ static void CreateX2(s16 x, s16 y)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_X);
-    
+
     sBlockStacker->x2SpriteId = CreateSprite(&sSpriteTemplate_X, x, y, 0);
 }
 
@@ -966,7 +966,7 @@ static void CreateX3(s16 x, s16 y)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_X);
-    
+
     sBlockStacker->x3SpriteId = CreateSprite(&sSpriteTemplate_X, x, y, 0);
 }
 
@@ -974,15 +974,15 @@ static void CreateYesNo(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Yes);
-    
+
     sBlockStacker->YesSpriteId = CreateSprite(&sSpriteTemplate_Yes, 50, 110, 0);
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_No);
-    
+
     sBlockStacker->NoSpriteId = CreateSprite(&sSpriteTemplate_No, 104, 110, 0);
     gSprites[sBlockStacker->NoSpriteId].oam.tileNum += 32;
-    
+
     sBlockStacker->YesNo = 0; // Yes
 }
 
@@ -1006,7 +1006,7 @@ static void CreateLives(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Lives);
-    
+
     sBlockStacker->LivesSpriteId = CreateSprite(&sSpriteTemplate_Lives, 204, 24, 0);
     gSprites[sBlockStacker->LivesSpriteId].oam.tileNum += 4;
 }
@@ -1015,7 +1015,7 @@ static void CreateKeepGoing(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_KeepGoing);
-    
+
     sBlockStacker->KeepGoingSpriteId = CreateSprite(&sSpriteTemplate_KeepGoing, 80, 80, 0);
 }
 
@@ -1023,7 +1023,7 @@ static void CreateGameOver(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_GameOver);
-    
+
     sBlockStacker->GameOverSpriteId = CreateSprite(&sSpriteTemplate_GameOver, 80, 80, 0);
 }
 
@@ -1031,7 +1031,7 @@ static void CreateStart(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Start);
-    
+
     sBlockStacker->StartSpriteId = CreateSprite(&sSpriteTemplate_Start, 80, 80, 0);
 }
 
@@ -1056,14 +1056,14 @@ static void DestroyLives(void)
 static void CreateWinner(void)
 {
         LoadCompressedSpriteSheet(&sSpriteSheet_Winner);
-    
+
     sBlockStacker->WinnerSpriteId = CreateSprite(&sSpriteTemplate_Winner, 80, 80, 0);
 }
 
 static void CreateTitle(void)
 {
         LoadCompressedSpriteSheet(&sSpriteSheet_Title);
-    
+
     sBlockStacker->TitleSpriteId = CreateSprite(&sSpriteTemplate_Title, 80, 80, 0);
 }
 
@@ -1075,18 +1075,18 @@ static void DestroyTitle(void)
 static void CreateLevel_1(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
     if (LR < 50) // Right Side
     {
     sBlockStacker->Row1Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96, 136, 1);
     sBlockStacker->Row1Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 16, 136, 1);
     sBlockStacker->Row1Block3SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 136, 1);
-    
+
     sBlockStacker->xDirection = 1; // Move Left
     }
     else // Left Side
@@ -1094,12 +1094,12 @@ static void CreateLevel_1(void)
     sBlockStacker->Row1Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32, 136, 1);
     sBlockStacker->Row1Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 16, 136, 1);
     sBlockStacker->Row1Block3SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 136, 1);
-    
+
     sBlockStacker->xDirection = 0; // Move Right
-    }    
-    
+    }
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 10;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1107,12 +1107,12 @@ static void CreateLevel_1(void)
 static void CreateLevel_2(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
     if (sBlockStacker->BlocksLeft == 3)
     {
         if (LR < 50) // Right Side
@@ -1120,7 +1120,7 @@ static void CreateLevel_2(void)
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block3SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
@@ -1128,9 +1128,9 @@ static void CreateLevel_2(void)
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block3SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
     else if (sBlockStacker->BlocksLeft == 2)
     {
@@ -1138,35 +1138,35 @@ static void CreateLevel_2(void)
         {
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row2Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
     else if (sBlockStacker->BlocksLeft == 1)
     {
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row2Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
-    
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 9;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1174,47 +1174,47 @@ static void CreateLevel_2(void)
 static void CreateLevel_3(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
     if (sBlockStacker->BlocksLeft == 2)
     {
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row3Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row3Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row3Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row3Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
     else if (sBlockStacker->BlocksLeft == 1)
     {
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row3Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row3Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
-    
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 8;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1222,47 +1222,47 @@ static void CreateLevel_3(void)
 static void CreateLevel_4(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
     if (sBlockStacker->BlocksLeft == 2)
     {
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row4Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row4Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row4Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 16, 152 - (16 * sBlockStacker->CurrentRow), 1);
         sBlockStacker->Row4Block2SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
     else if (sBlockStacker->BlocksLeft == 1)
     {
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row4Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row4Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
+        }
     }
-    
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 7;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1270,27 +1270,27 @@ static void CreateLevel_4(void)
 static void CreateLevel_5(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row5Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row5Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
-    
+        }
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 5;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1298,27 +1298,27 @@ static void CreateLevel_5(void)
 static void CreateLevel_6(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row6Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row6Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
-    
+        }
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 4;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1326,27 +1326,27 @@ static void CreateLevel_6(void)
 static void CreateLevel_7(void)
 {
     u8 LR;
-    
+
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row7Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row7Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
-    
+        }
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 3;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1354,27 +1354,27 @@ static void CreateLevel_7(void)
 static void CreateLevel_8(void)
 {
     u8 LR;
-    
+
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Block);
-    
+
     LR = (Random() % 100);
-    
+
         if (LR < 50) // Right Side
         {
         sBlockStacker->Row8Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 96 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 1; // Move Left
         }
         else // Left Side
         {
         sBlockStacker->Row8Block1SpriteId = CreateSprite(&sSpriteTemplate_Block, 32 + 32, 152 - (16 * sBlockStacker->CurrentRow), 1);
-        
+
         sBlockStacker->xDirection = 0; // Move Right
-        }    
-    
+        }
+
     //gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 16;
-    
+
     sBlockStacker->xSpeed = 2;
     sBlockStacker->xSpeedDelay = 0;
 }
@@ -1384,9 +1384,9 @@ static void UpdateBlockPosition(void)
     if (sBlockStacker->xSpeedDelay == 0)
     {
         sBlockStacker->xSpeedDelay = sBlockStacker->xSpeed;
-        
+
         // Per Level and Lives
-        
+
         if ((sBlockStacker->CurrentRow == 1) && (sBlockStacker->BlocksLeft == 3)) // Level 1, 3 Lives
         {
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row1Block3SpriteId].x == 128)) // Right, against right side
@@ -1397,7 +1397,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row1Block3SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row1Block1SpriteId].x = (gSprites[sBlockStacker->Row1Block1SpriteId].x + 16);
@@ -1421,7 +1421,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row2Block3SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row2Block1SpriteId].x = (gSprites[sBlockStacker->Row2Block1SpriteId].x + 16);
@@ -1445,7 +1445,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row2Block2SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row2Block1SpriteId].x = (gSprites[sBlockStacker->Row2Block1SpriteId].x + 16);
@@ -1467,7 +1467,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row2Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row2Block1SpriteId].x = (gSprites[sBlockStacker->Row2Block1SpriteId].x + 16);
@@ -1487,7 +1487,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row3Block2SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row3Block1SpriteId].x = (gSprites[sBlockStacker->Row3Block1SpriteId].x + 16);
@@ -1509,7 +1509,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row3Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row3Block1SpriteId].x = (gSprites[sBlockStacker->Row3Block1SpriteId].x + 16);
@@ -1529,7 +1529,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row4Block2SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row4Block1SpriteId].x = (gSprites[sBlockStacker->Row4Block1SpriteId].x + 16);
@@ -1551,7 +1551,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row4Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row4Block1SpriteId].x = (gSprites[sBlockStacker->Row4Block1SpriteId].x + 16);
@@ -1571,7 +1571,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row5Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row5Block1SpriteId].x = (gSprites[sBlockStacker->Row5Block1SpriteId].x + 16);
@@ -1591,7 +1591,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row6Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row6Block1SpriteId].x = (gSprites[sBlockStacker->Row6Block1SpriteId].x + 16);
@@ -1611,7 +1611,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row7Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row7Block1SpriteId].x = (gSprites[sBlockStacker->Row7Block1SpriteId].x + 16);
@@ -1631,7 +1631,7 @@ static void UpdateBlockPosition(void)
             {
                 sBlockStacker->xDirection = 0;
             }
-            
+
             if ((sBlockStacker->xDirection == 0) && (gSprites[sBlockStacker->Row8Block1SpriteId].x != 128)) // Right, not against right side
             {
                 gSprites[sBlockStacker->Row8Block1SpriteId].x = (gSprites[sBlockStacker->Row8Block1SpriteId].x + 16);
@@ -1650,7 +1650,7 @@ static void AButton(void)
     PlaySE(SE_M_STRENGTH);
     //SwapFromBlock();
     sBlockStacker->ToggleButtons = 0;
-    
+
     if ((sBlockStacker->CurrentRow == 1) && (sBlockStacker->BlocksLeft == 3)) // Level 1, 3 Lives
     {
         gSprites[sBlockStacker->Row1Block1SpriteId].oam.tileNum += 4;
@@ -1718,18 +1718,18 @@ static void CheckLevel_2(void)
     s16 preX2;
     s16 preX3;
     u8 Lives;
-    
+
     curX1 = gSprites[sBlockStacker->Row2Block1SpriteId].x;
     curX2 = gSprites[sBlockStacker->Row2Block2SpriteId].x;
     curX3 = gSprites[sBlockStacker->Row2Block3SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row1Block1SpriteId].x;
     preX2 = gSprites[sBlockStacker->Row1Block2SpriteId].x;
     preX3 = gSprites[sBlockStacker->Row1Block3SpriteId].x;
-    
+
     Lives = sBlockStacker->BlocksLeft;
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1) && (curX1 != preX2) && (curX1 != preX3)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1776,17 +1776,17 @@ static void CheckLevel_3(void)
     s16 preX2;
     s16 preX3;
     u8 Lives;
-    
+
     curX1 = gSprites[sBlockStacker->Row3Block1SpriteId].x;
     curX2 = gSprites[sBlockStacker->Row3Block2SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row2Block1SpriteId].x;
     preX2 = gSprites[sBlockStacker->Row2Block2SpriteId].x;
     preX3 = gSprites[sBlockStacker->Row2Block3SpriteId].x;
-    
+
     Lives = sBlockStacker->BlocksLeft;
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1) && (curX1 != preX2) && (curX1 != preX3)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1819,16 +1819,16 @@ static void CheckLevel_4(void)
     s16 preX1;
     s16 preX2;
     u8 Lives;
-    
+
     curX1 = gSprites[sBlockStacker->Row4Block1SpriteId].x;
     curX2 = gSprites[sBlockStacker->Row4Block2SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row3Block1SpriteId].x;
     preX2 = gSprites[sBlockStacker->Row3Block2SpriteId].x;
-    
+
     Lives = sBlockStacker->BlocksLeft;
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1) && (curX1 != preX2)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1859,14 +1859,14 @@ static void CheckLevel_5(void)
     s16 curX1;
     s16 preX1;
     s16 preX2;
-    
+
     curX1 = gSprites[sBlockStacker->Row5Block1SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row4Block1SpriteId].x;
     preX2 = gSprites[sBlockStacker->Row4Block2SpriteId].x;
 
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1) && (curX1 != preX2)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1883,13 +1883,13 @@ static void CheckLevel_6(void)
 {
     s16 curX1;
     s16 preX1;
-    
+
     curX1 = gSprites[sBlockStacker->Row6Block1SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row5Block1SpriteId].x;
 
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1906,13 +1906,13 @@ static void CheckLevel_7(void)
 {
     s16 curX1;
     s16 preX1;
-    
+
     curX1 = gSprites[sBlockStacker->Row7Block1SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row6Block1SpriteId].x;
 
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1929,13 +1929,13 @@ static void CheckLevel_8(void)
 {
     s16 curX1;
     s16 preX1;
-    
+
     curX1 = gSprites[sBlockStacker->Row8Block1SpriteId].x;
-    
+
     preX1 = gSprites[sBlockStacker->Row7Block1SpriteId].x;
 
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     if ((curX1 != preX1)) // Block 1 Off
     {
         sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
@@ -1950,7 +1950,7 @@ static void CheckLevel_8(void)
 
 static void HandleInput(void)
 {
-    if (sBlockStacker->ToggleButtons == 1) 
+    if (sBlockStacker->ToggleButtons == 1)
     {
         if (JOY_NEW(A_BUTTON))
         {
@@ -1994,7 +1994,7 @@ static void HandleInput2(void)
             sBlockStacker->GoDelay = 30;
             sBlockStacker->state = STACKER_POST_DELAY;
             return;
-        }            
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -2058,11 +2058,11 @@ static void BlockStackerMain(u8 taskId)
             {
                 sBlockStacker->state = STACKER_HIGHLIGHT_END;
             }
-            break;    
+            break;
         case STACKER_HIGHLIGHT_END:
             sBlockStacker->GoDelay = 50;
             sBlockStacker->state = STACKER_GO_DELAY;
-            break;        
+            break;
         case STACKER_GO_DELAY:
             sBlockStacker->GoDelay--;
             if (sBlockStacker->GoDelay == 0)
@@ -2092,7 +2092,7 @@ static void BlockStackerMain(u8 taskId)
             break;
         case STACKER_LEVEL_SETUP:
             gSprites[sBlockStacker->ArrowSpriteId].y = 153 - (16 * sBlockStacker->CurrentRow);
-            
+
             if (sBlockStacker->CurrentRow == 1)
             {
                 CreateLevel_1();
@@ -2138,7 +2138,7 @@ static void BlockStackerMain(u8 taskId)
             UpdateLives();
             sBlockStacker->ToggleButtons = 1;
             sBlockStacker->state = STACKER_INPUT;
-            break;    
+            break;
         case STACKER_INPUT:
             UpdateBlockPosition();
             HandleInput();
@@ -2172,10 +2172,10 @@ static void BlockStackerMain(u8 taskId)
             {
                 CheckLevel_8();
             }
-            
+
             sBlockStacker->GoDelay = 30;
             sBlockStacker->state = STACKER_ROW_DELAY;
-            break;        
+            break;
         case STACKER_ROW_DELAY:
             sBlockStacker->GoDelay--;
             if (sBlockStacker->GoDelay == 15 && ((sBlockStacker->x1Active != 0) || (sBlockStacker->x2Active != 0) || (sBlockStacker->x3Active != 0)))
@@ -2242,8 +2242,9 @@ static void BlockStackerMain(u8 taskId)
                     CreateWinner();
                     sBlockStacker->state = STACKER_WIN;
                 }
+                sBlockStacker->Winnings += GetNumOwnedBadges();
             }
-            break;            
+            break;
         case STACKER_KEEP_GOING:
             HandleInput2();
             break;
@@ -2263,7 +2264,7 @@ static void BlockStackerMain(u8 taskId)
                     sBlockStacker->state = STACKER_LEVEL_SETUP;
                 }
             }
-            break;    
+            break;
         case STACKER_WIN:
             sBlockStacker->GoDelay--;
             if (sBlockStacker->GoDelay == 0)
@@ -2284,12 +2285,12 @@ static void BlockStackerMain(u8 taskId)
             break;
         case STACKER_EXIT:
             ExitBlockStacker();
-            break;    
+            break;
     }
 }
 
 static void InitBlockStackerScreen(void)
-{    
+{
     SetVBlankCallback(NULL);
     ResetAllBgsCoordinates();
     ResetVramOamAndBgCntRegs();
@@ -2304,7 +2305,7 @@ static void InitBlockStackerScreen(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     LoadSpritePalettes(sSpritePalettes);
-    
+
     CreateRhydon();
     CreateTitle();
     sBlockStacker->HighlightNum = 0; // 0-13
@@ -2314,7 +2315,7 @@ static void InitBlockStackerScreen(void)
     sBlockStacker->CurrentRow = 1;
     sBlockStacker->BlocksLeft = 3;
     sBlockStacker->LastLives = sBlockStacker->BlocksLeft;
-    
+
     CopyBgTilemapBufferToVram(BLOCKSTACKER_BG);
     //CopyBgTilemapBufferToVram(BLOCKSTACKER_TEXT_MENUS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG2_ON);

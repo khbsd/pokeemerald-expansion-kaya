@@ -149,9 +149,13 @@
 
 #define MAX_DYNAMAX_LEVEL 10
 
-#define OT_ID_PLAYER_ID       0
-#define OT_ID_PRESET          1
-#define OT_ID_RANDOM_NO_SHINY 2
+#define OT_ID_PLAYER_ID                 0
+#define OT_ID_PRESET                    1
+#define OT_ID_RANDOM_NO_SHINY           2
+#define OT_ID_RANDOM_GAME_CORNER_BASIC  3
+#define OT_ID_RANDOM_GAME_CORNER_GREAT  4
+#define OT_ID_RANDOM_GAME_CORNER_ULTRA  5
+#define OT_ID_RANDOM_GAME_CORNER_MASTER 6
 
 #define MON_GIVEN_TO_PARTY      0
 #define MON_GIVEN_TO_PC         1

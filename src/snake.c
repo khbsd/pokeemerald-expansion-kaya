@@ -348,7 +348,7 @@ struct Snake {
     u32 timer;
     u8 MenuSpriteId;
     u32 Total;
-};    
+};
 
 static EWRAM_DATA struct Snake *sSnake = NULL;
 
@@ -430,7 +430,7 @@ static const struct WindowTemplate sSnakeWinTemplates[] = {
         .width = 9,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 0x194,        
+        .baseBlock = 0x194,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -548,7 +548,7 @@ static const struct OamData sOamData_Text =
     .priority = 0,
 };
 
-static const union AnimCmd sTitleAnimCmd_0[] = 
+static const union AnimCmd sTitleAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(32, 10),
@@ -662,28 +662,28 @@ static const struct OamData sOamData_Onix =
     .priority = 0,
 };
 
-static const union AnimCmd sOnixAnimCmd_0[] = 
+static const union AnimCmd sOnixAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(8, 15),
     ANIMCMD_JUMP(0)         // Loop back to the first frame (Frame 0)
 };
 
-static const union AnimCmd sOnixAnimCmd_1[] = 
+static const union AnimCmd sOnixAnimCmd_1[] =
 {
     ANIMCMD_FRAME(16, 15),
     ANIMCMD_FRAME(24, 15),
     ANIMCMD_JUMP(0)         // Loop back to the first frame (Frame 0)
 };
 
-static const union AnimCmd sOnixAnimCmd_2[] = 
+static const union AnimCmd sOnixAnimCmd_2[] =
 {
     ANIMCMD_FRAME(32, 15),
     ANIMCMD_FRAME(40, 15),
     ANIMCMD_JUMP(0)         // Loop back to the first frame (Frame 0)
 };
 
-static const union AnimCmd sOnixAnimCmd_3[] = 
+static const union AnimCmd sOnixAnimCmd_3[] =
 {
     ANIMCMD_FRAME(48, 15),
     ANIMCMD_FRAME(56, 15),
@@ -736,7 +736,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_Onix_Body_4 =
     .tag = GFX_BODY_4,
 };
 
-static const union AnimCmd sOnixAnimCmd2_0[] = 
+static const union AnimCmd sOnixAnimCmd2_0[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(8, 15),
@@ -804,7 +804,7 @@ typedef struct  {
 #define MAX_TILES 72
 
 static const SnakeTiles SnakeTilesArray[] = {
-    
+
     {0, 56, 16, 0, 0}, // Row 1
     {1, 72, 16, 0, 1},
     {2, 88, 16, 0, 2},
@@ -814,7 +814,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {6, 152, 16, 0, 6},
     {7, 168, 16, 0, 7},
     {8, 184, 16, 0, 8},
-    
+
     {9, 56, 32, 1, 0}, // Row 2
     {10, 72, 32, 1, 1},
     {11, 88, 32, 1, 2},
@@ -824,7 +824,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {15, 152, 32, 1, 6},
     {16, 168, 32, 1, 7},
     {17, 184, 32, 1, 8},
-    
+
     {18, 56, 48, 2, 0}, // Row 3
     {19, 72, 48, 2, 1},
     {20, 88, 48, 2, 2},
@@ -844,7 +844,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {33, 152, 64, 3, 6},
     {34, 168, 64, 3, 7},
     {35, 184, 64, 3, 8},
-    
+
     {36, 56, 80, 4, 0}, // Row 5
     {37, 72, 80, 4, 1},
     {38, 88, 80, 4, 2},
@@ -854,7 +854,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {42, 152, 80, 4, 6},
     {43, 168, 80, 4, 7},
     {44, 184, 80, 4, 8},
-    
+
     {45, 56, 96, 5, 0}, // Row 6
     {46, 72, 96, 5, 1},
     {47, 88, 96, 5, 2},
@@ -864,7 +864,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {51, 152, 96, 5, 6},
     {52, 168, 96, 5, 7},
     {53, 184, 96, 5, 8},
-    
+
     {54, 56, 112, 6, 0}, // Row 7
     {55, 72, 112, 6, 1},
     {56, 88, 112, 6, 2},
@@ -874,7 +874,7 @@ static const SnakeTiles SnakeTilesArray[] = {
     {60, 152, 112, 6, 6},
     {61, 168, 112, 6, 7},
     {62, 184, 112, 6, 8},
-    
+
     {63, 56, 128, 7, 0}, // Row 8
     {64, 72, 128, 7, 1},
     {65, 88, 128, 7, 2},
@@ -945,7 +945,7 @@ static void StartExitSnake(void)
 static void CreateOnix(void)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_Onix);
-    
+
     sSnake->OnixSpriteId = CreateSprite(&sSpriteTemplate_Onix, 120, 64, 0); // 5, 4
 }
 
@@ -961,31 +961,31 @@ static void CreateBody2(void)
     s16 x = 120;
     s16 y = 32;
     u8 Body;
-    
+
     Body = Random() % 4;
-    
+
     if (Body == 0)
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-    
+
         sSnake->BodySprite2Id = CreateSprite(&sSpriteTemplate_Onix_Body, x, y, 2);
     }
     else if (Body == 1)
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-    
+
         sSnake->BodySprite2Id = CreateSprite(&sSpriteTemplate_Onix_Body_2, x, y, 2);
     }
     else if (Body == 2)
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-    
+
         sSnake->BodySprite2Id = CreateSprite(&sSpriteTemplate_Onix_Body_3, x, y, 2);
     }
     else
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-    
+
         sSnake->BodySprite2Id = CreateSprite(&sSpriteTemplate_Onix_Body_4, x, y, 2);
     }
 }
@@ -995,11 +995,11 @@ static void CreateBody2(void)
 
 static void HandleMovement(void)
 {
-    
+
     u8 Count = sSnake->BodyCount - 3;
     int j;
     int i;
-    
+
     if (sSnake->Direction == DOWN)
     {
         if (sSnake->OnixTileY < MAX_Y)
@@ -1015,7 +1015,7 @@ static void HandleMovement(void)
     else if (sSnake->Direction == UP)
     {
         if (sSnake->OnixTileY > 0)
-        {    
+        {
             sSnake->CanMove = 0;
             gSprites[sSnake->OnixSpriteId].y -= 2;
         }
@@ -1048,7 +1048,7 @@ static void HandleMovement(void)
             sSnake->CanMove = 1;
         }
     }
-    
+
     if (sSnake->Body1Direction == DOWN)
     {
         if (sSnake->CanMove == 0)
@@ -1077,7 +1077,7 @@ static void HandleMovement(void)
             gSprites[sSnake->BodySprite1Id].x += 2;
         }
     }
-    
+
     if (sSnake->Body2Direction == DOWN)
     {
         if (sSnake->CanMove == 0)
@@ -1106,7 +1106,7 @@ static void HandleMovement(void)
             gSprites[sSnake->BodySprite2Id].x += 2;
         }
     }
-    
+
     for (i = Count, j = 0; i > 0; i--, j++) {
         if (sSnake->BodySpritesDirection[j] == DOWN)
         {
@@ -1137,16 +1137,16 @@ static void HandleMovement(void)
             }
         }
     }
-    
+
 }
 
 static void HandleMovementMinus(u8 num)
 {
-    
+
     u8 Count = sSnake->BodyCount - 3;
     int j;
     int i;
-    
+
     if (sSnake->Direction == DOWN)
     {
         gSprites[sSnake->OnixSpriteId].y += (2 * num);
@@ -1163,7 +1163,7 @@ static void HandleMovementMinus(u8 num)
     {
         gSprites[sSnake->OnixSpriteId].x += (2 * num);
     }
-    
+
     if (sSnake->Body1Direction == DOWN)
     {
         gSprites[sSnake->BodySprite1Id].y += (2 * num);
@@ -1180,7 +1180,7 @@ static void HandleMovementMinus(u8 num)
     {
             gSprites[sSnake->BodySprite1Id].x += (2 * num);
     }
-    
+
     if (sSnake->Body2Direction == DOWN)
     {
         gSprites[sSnake->BodySprite2Id].y += (2 * num);
@@ -1197,7 +1197,7 @@ static void HandleMovementMinus(u8 num)
     {
             gSprites[sSnake->BodySprite2Id].x += (2 * num);
     }
-    
+
     for (i = Count, j = 0; i > 0; i--, j++) {
         if (sSnake->BodySpritesDirection[j] == DOWN)
         {
@@ -1216,7 +1216,7 @@ static void HandleMovementMinus(u8 num)
                 gSprites[sSnake->BodySpriteIds[j]].x += (2 * num);
         }
     }
-    
+
 }
 
 static void UpdateLocations(void)
@@ -1225,37 +1225,37 @@ static void UpdateLocations(void)
     int i;
     int j;
     int k;
-    
+
     for (i = 0; i < MAX_TILES; i++) {
                 if ((SnakeTilesArray[i].xReal == gSprites[sSnake->OnixSpriteId].x) && (SnakeTilesArray[i].yReal == gSprites[sSnake->OnixSpriteId].y)) {
                     sSnake->OnixTileX = SnakeTilesArray[i].x;
                     sSnake->OnixTileY = SnakeTilesArray[i].y;
                 }
             }
-            
+
     for (i = 0; i < MAX_TILES; i++) {
                 if ((SnakeTilesArray[i].xReal == gSprites[sSnake->BodySprite1Id].x) && (SnakeTilesArray[i].yReal == gSprites[sSnake->BodySprite1Id].y)) {
                     sSnake->Body1x = SnakeTilesArray[i].x;
                     sSnake->Body1y = SnakeTilesArray[i].y;
                 }
-            }    
+            }
 
     for (i = 0; i < MAX_TILES; i++) {
                 if ((SnakeTilesArray[i].xReal == gSprites[sSnake->BodySprite2Id].x) && (SnakeTilesArray[i].yReal == gSprites[sSnake->BodySprite2Id].y)) {
                     sSnake->Body2x = SnakeTilesArray[i].x;
                     sSnake->Body2y = SnakeTilesArray[i].y;
                 }
-            }    
+            }
 
     for (k = Count, j = 0; k >= 0; k--, j++) {
-        
+
         for (i = 0; i < MAX_TILES; i++) {
                 if ((SnakeTilesArray[i].xReal == gSprites[sSnake->BodySpriteIds[j]].x) && (SnakeTilesArray[i].yReal == gSprites[sSnake->BodySpriteIds[j]].y)) {
                     sSnake->BodySpritesX[j] = SnakeTilesArray[i].x;
                     sSnake->BodySpritesY[j] = SnakeTilesArray[i].y;
                 }
-            }    
-    }        
+            }
+    }
 }
 
 static void UpdateDirections(void)
@@ -1284,7 +1284,7 @@ static int CheckBoundaries(void)
     u8 Count = sSnake->BodyCount - 3;
     int j;
     int i;
-    
+
     if ((sSnake->Direction == RIGHT) && (sSnake->OnixTileX == MAX_X))
     {
         return 1;
@@ -1301,7 +1301,7 @@ static int CheckBoundaries(void)
     {
         return 1;
     }
-    
+
     if ((sSnake->Direction == RIGHT) && (sSnake->OnixTileX == sSnake->Body1x - 1) && (sSnake->OnixTileY == sSnake->Body1y))
     {
         return 1;
@@ -1318,7 +1318,7 @@ static int CheckBoundaries(void)
     {
         return 1;
     }
-    
+
     if ((sSnake->Direction == RIGHT) && (sSnake->OnixTileX == sSnake->Body2x - 1) && (sSnake->OnixTileY == sSnake->Body2y))
     {
         return 1;
@@ -1335,7 +1335,7 @@ static int CheckBoundaries(void)
     {
         return 1;
     }
-    
+
     for (i = Count, j = 0; i > 0; i--, j++) {
         if ((sSnake->Direction == RIGHT) && (sSnake->OnixTileX == sSnake->BodySpritesX[j] - 1) && (sSnake->OnixTileY == sSnake->BodySpritesY[j]))
         {
@@ -1354,7 +1354,7 @@ static int CheckBoundaries(void)
             return 1;
         }
     }
-    
+
     return 0;
 }
 
@@ -1405,35 +1405,35 @@ static void CreateBerry(void)
             break;
         }
     }
-    
+
     for (i = 0; i < MAX_TILES; i++) {
                 if ((SnakeTilesArray[i].x == sSnake->BerryX) && (SnakeTilesArray[i].y == sSnake->BerryY)) {
                     xf = SnakeTilesArray[i].xReal;
                     yf = SnakeTilesArray[i].yReal;
                 }
             }
-            
+
     Berry = Random() % 3;
-    
+
     if (Berry == 0)
     {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Berry_1);
-    
+
         sSnake->BerrySpriteId = CreateSprite(&sSpriteTemplate_Berry_1, xf, yf, 45);
     }
     else if (Berry == 1)
     {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Berry_2);
-    
+
         sSnake->BerrySpriteId = CreateSprite(&sSpriteTemplate_Berry_2, xf, yf, 45);
     }
     else
     {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Berry_3);
-    
+
         sSnake->BerrySpriteId = CreateSprite(&sSpriteTemplate_Berry_3, xf, yf, 45);
     }
 }
@@ -1441,7 +1441,7 @@ static void CreateBerry(void)
 static void SetCreditDigits(u16 num)
 {
     u8 i;
-    u16 d = 1000; 
+    u16 d = 1000;
 
     for (i = 0; i < 4; i++)
     {
@@ -1450,7 +1450,7 @@ static void SetCreditDigits(u16 num)
         gSprites[sSnake->CreditSpriteIds[i + SPR_CREDIT_DIGITS]].invisible = FALSE;
 
         if (i == 0 && num < 1000) {
-            digit = 0;  
+            digit = 0;
         }
 
         gSprites[sSnake->CreditSpriteIds[i + SPR_CREDIT_DIGITS]].oam.tileNum =
@@ -1461,23 +1461,23 @@ static void SetCreditDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
 static void SetNumberDigits(u16 num)
 {
     u8 i;
-    u16 d = 10;  
+    u16 d = 10;
 
-    for (i = 0; i < 2; i++)  
+    for (i = 0; i < 2; i++)
     {
         u8 digit = num / d;
 
         gSprites[sSnake->NumberSpriteIds[i + SPR_NUM_DIGITS]].invisible = FALSE;
 
         if (i == 0 && num < 10) {
-            digit = 0;  
+            digit = 0;
         }
 
         gSprites[sSnake->NumberSpriteIds[i + SPR_NUM_DIGITS]].oam.tileNum =
@@ -1488,7 +1488,7 @@ static void SetNumberDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -1496,7 +1496,7 @@ static void CreateCreditSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_CreditsInterface[i]);
     }
@@ -1512,7 +1512,7 @@ static void CreateNumberSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_CreditsInterface[i]);
     }
@@ -1528,9 +1528,9 @@ static void CheckBerry(void)
 {
     u8 NewDirection;
     u8 Count = sSnake->BodyCount - 3;
-    u8 index = Count; 
+    u8 index = Count;
     u8 Body;
-    
+
     if ((sSnake->OnixTileX == sSnake->BerryX) && (sSnake->OnixTileY == sSnake->BerryY))
     {
         PlaySE(SE_USE_ITEM);
@@ -1556,124 +1556,124 @@ static void CheckBerry(void)
             if (Count == 0) // New Body
             {
                 NewDirection = sSnake->Body2LastDirection;
-                
+
                 if (NewDirection == UP)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y + 16, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y + 16, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y + 16, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y + 16, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == DOWN)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y - 16, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y - 16, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y - 16, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySprite2Id].x, gSprites[sSnake->BodySprite2Id].y - 16, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == LEFT)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySprite2Id].x + 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySprite2Id].x + 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySprite2Id].x + 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySprite2Id].x + 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == RIGHT)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySprite2Id].x - 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySprite2Id].x - 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySprite2Id].x - 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySprite2Id].x - 16, gSprites[sSnake->BodySprite2Id].y, sSnake->BodyCount);
                     }
                 }
-                
+
                 NewDirection = sSnake->Body2LastDirection;
                 sSnake->BodySpritesDirection[index] = NewDirection;
                 if (sSnake->BodyCount < MAX_SPRITES_BODY) {
@@ -1686,116 +1686,116 @@ static void CheckBerry(void)
                 if (NewDirection == UP)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y + 16, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y + 16, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y + 16, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y + 16, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == DOWN)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y - 16, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y - 16, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y - 16, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySpriteIds[index - 1]].x, gSprites[sSnake->BodySpriteIds[index - 1]].y - 16, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == LEFT)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySpriteIds[index - 1]].x + 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySpriteIds[index - 1]].x + 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySpriteIds[index - 1]].x + 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySpriteIds[index - 1]].x + 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                 }
                 else if (NewDirection == RIGHT)
                 {
                     Body = Random() % 4;
-    
+
                     if (Body == 0)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body, gSprites[sSnake->BodySpriteIds[index - 1]].x - 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else if (Body == 1)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_2);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_2, gSprites[sSnake->BodySpriteIds[index - 1]].x - 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else if (Body == 2)
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_3);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_3, gSprites[sSnake->BodySpriteIds[index - 1]].x - 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                     else
                     {
                         LoadCompressedSpriteSheet(&sSpriteSheet_Onix_Body_4);
-                    
+
                         sSnake->BodySpriteIds[index] = CreateSprite(&sSpriteTemplate_Onix_Body_4, gSprites[sSnake->BodySpriteIds[index - 1]].x - 16, gSprites[sSnake->BodySpriteIds[index - 1]].y, sSnake->BodyCount);
                     }
                 }
@@ -1805,8 +1805,8 @@ static void CheckBerry(void)
                 if (sSnake->BodyCount < MAX_SPRITES_BODY) {
                 sSnake->BodyCount++; }
             }
-            
-            
+
+
         }
         CreateBerry();
     }
@@ -1816,24 +1816,24 @@ static void CreateStartMenu(void)
 {
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Start);
-    
-    sSnake->StartSpriteId = CreateSprite(&sSpriteTemplate_Start, 120, 120, 0); 
+
+    sSnake->StartSpriteId = CreateSprite(&sSpriteTemplate_Start, 120, 120, 0);
 }
 
 static void CreateGameOver(void)
 {
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_GameOver);
-    
-    sSnake->GameOverSpriteId = CreateSprite(&sSpriteTemplate_GameOver, 120, 80, 0); 
+
+    sSnake->GameOverSpriteId = CreateSprite(&sSpriteTemplate_GameOver, 120, 80, 0);
 }
 
 static void CreateMenu(void)
 {
         LoadSpritePalettes(sSpritePalettes);
         LoadCompressedSpriteSheet(&sSpriteSheet_Menu);
-    
-    sSnake->MenuSpriteId = CreateSprite(&sSpriteTemplate_Menu, 40, 24, 1); 
+
+    sSnake->MenuSpriteId = CreateSprite(&sSpriteTemplate_Menu, 40, 24, 1);
 }
 
 static void SnakeMain(u8 taskId)
@@ -1841,7 +1841,7 @@ static void SnakeMain(u8 taskId)
     u8 Count = sSnake->BodyCount - 3;
     int j;
     int i;
-    
+
     switch (sSnake->state)
     {
         case SNAKE_STATE_INIT:
@@ -1851,7 +1851,7 @@ static void SnakeMain(u8 taskId)
                 sSnake->timer = 75;
                 sSnake->state = SNAKE_ONIX_CRY;
             }
-            break;    
+            break;
         case SNAKE_ONIX_CRY:
             if (sSnake->timer == 0)
             {
@@ -1886,7 +1886,7 @@ static void SnakeMain(u8 taskId)
                     sSnake->LastDirection = sSnake->Direction;
                     sSnake->Body1LastDirection = sSnake->Body1Direction;
                     sSnake->Body2LastDirection = sSnake->Body2Direction;
-                    
+
                     for (i = Count, j = 0; i > 0; i--, j++) {
                         sSnake->BodySpritesLastDirection[j] = sSnake->BodySpritesDirection[j];
                     }
@@ -1974,14 +1974,14 @@ static void SnakeMain(u8 taskId)
             {
                 gSprites[sSnake->OnixSpriteId].animNum = 3;
             }
-            
+
             UpdateDirections();
             CheckBerry();
             HandleMovement();
             sSnake->FrameCount = MAX_FRAME_COUNT - 1;
             sSnake->delay = MAX_DELAY;
             sSnake->state = SNAKE_STATE_MOVEMENT_LOOP;
-            break;        
+            break;
         case SNAKE_STATE_GAMEOVER_LOOP:
             if (sSnake->delay == 0)
             {
@@ -2014,7 +2014,7 @@ static void SnakeMain(u8 taskId)
             if (sSnake->timer == 0)
             {
                 SetCoins(GetCoins() - (sSnake->Total + sSnake->Total));
-                VarSet(GAME_CORNER_VAR_WINNINGS, (sSnake->Total + sSnake->Total));
+                VarSet(GAME_CORNER_VAR_WINNINGS, (sSnake->Total + sSnake->Total) + GetNumOwnedBadges());
                 StartExitSnake();
             }
             else
@@ -2029,7 +2029,7 @@ static void SnakeMain(u8 taskId)
 }
 
 static void InitSnakeScreen(void)
-{    
+{
     SetVBlankCallback(NULL);
     ResetAllBgsCoordinates();
     ResetVramOamAndBgCntRegs();
@@ -2052,7 +2052,7 @@ static void InitSnakeScreen(void)
     CreateOnix();
     CreateBody1();
     CreateBody2();
-    
+
     sSnake->BodyCount = 3;
     sSnake->OnixTileX = 3;
     sSnake->OnixTileY = 4;
@@ -2066,9 +2066,9 @@ static void InitSnakeScreen(void)
     sSnake->Body1Direction = DOWN;
     sSnake->Body2Direction = DOWN;
     sSnake->Loop = 2;
-    
+
     CreateBerry();
-    
+
     CopyBgTilemapBufferToVram(SNAKE_BG_BASE);
     //CopyBgTilemapBufferToVram(BLOCKSTACKER_TEXT_MENUS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG2_ON);

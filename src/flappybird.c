@@ -126,7 +126,7 @@ struct FlappyBird {
     u8 ScoreSpriteId;
     u8 Score2SpriteId;
     u8 ScoreSpriteIds[MAX_SPRITES_HISCORE];
-};    
+};
 
 static EWRAM_DATA struct FlappyBird *sFlappy = NULL;
 
@@ -247,7 +247,7 @@ static const struct WindowTemplate sFlappyWinTemplates[] = {
         .width = 14,
         .height = 2,
         .paletteNum = 0xF,
-        .baseBlock = 0x194,        
+        .baseBlock = 0x194,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -443,7 +443,7 @@ static const struct OamData sOamData_Text =
     .priority = 0,
 };
 
-static const union AnimCmd sTitleAnimCmd_0[] = 
+static const union AnimCmd sTitleAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(32, 10),
@@ -537,14 +537,14 @@ static const struct OamData sOamData_Damage =
     .priority = 0,
 };
 
-static const union AnimCmd sDamageAnimCmd_0[] = 
+static const union AnimCmd sDamageAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(64, 2),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sDamageAnimCmd_1[] = 
+static const union AnimCmd sDamageAnimCmd_1[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(64, 20),
@@ -630,7 +630,7 @@ static const struct OamData sOamData_Trail =
     .priority = 0,
 };
 
-static const union AnimCmd sTrailAnimCmd_0[] = 
+static const union AnimCmd sTrailAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -644,7 +644,7 @@ static const union AnimCmd sTrailAnimCmd_0[] =
 };
 
 static const union AnimCmd *const sTrailAnimCmds[] = {
-    sTrailAnimCmd_0,  
+    sTrailAnimCmd_0,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Trail =
@@ -675,13 +675,13 @@ static const struct OamData sOamData_Butterfree =
     .priority = 0,
 };
 
-static const union AnimCmd sButterfreeAnimCmd_0[] = 
+static const union AnimCmd sButterfreeAnimCmd_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sButterfreeAnimCmd_1[] = 
+static const union AnimCmd sButterfreeAnimCmd_1[] =
 {
     ANIMCMD_FRAME(64, 10),
     ANIMCMD_FRAME(128, 10),
@@ -848,7 +848,7 @@ static void SetCreditDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -856,7 +856,7 @@ static void CreateCreditSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_CreditsInterface[i]);
     }
@@ -895,7 +895,7 @@ static void SetScoreDigits(u16 num)
         num = num % d;
         d = d / 10;
     }
-    
+
     BuildOamBuffer();
 }
 
@@ -903,7 +903,7 @@ static void CreateHiScoreSprites(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)  
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_CreditsInterface) - 1; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_CreditsInterface[i]);
     }
@@ -920,7 +920,7 @@ static void CreateScore(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Score);
 
-    sFlappy->ScoreSpriteId = CreateSprite(&sSpriteTemplate_Score, 80, 138, 0); 
+    sFlappy->ScoreSpriteId = CreateSprite(&sSpriteTemplate_Score, 80, 138, 0);
 }
 
 static void CreateScore2(void)
@@ -928,7 +928,7 @@ static void CreateScore2(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Score2);
 
-    sFlappy->Score2SpriteId = CreateSprite(&sSpriteTemplate_Score2, 160, 138, 0); 
+    sFlappy->Score2SpriteId = CreateSprite(&sSpriteTemplate_Score2, 160, 138, 0);
 }
 
 static void CreateFlap(void)
@@ -936,7 +936,7 @@ static void CreateFlap(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Flap);
 
-    sFlappy->FlapSpriteId = CreateSprite(&sSpriteTemplate_Flap, 204, 20, 0); 
+    sFlappy->FlapSpriteId = CreateSprite(&sSpriteTemplate_Flap, 204, 20, 0);
 }
 
 static void CreateOne(void)
@@ -944,7 +944,7 @@ static void CreateOne(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_One);
 
-    sFlappy->OneSpriteId = CreateSprite(&sSpriteTemplate_One, 120, 80, 0); 
+    sFlappy->OneSpriteId = CreateSprite(&sSpriteTemplate_One, 120, 80, 0);
 }
 
 static void CreateTwo(void)
@@ -952,7 +952,7 @@ static void CreateTwo(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Two);
 
-    sFlappy->TwoSpriteId = CreateSprite(&sSpriteTemplate_Two, 120, 80, 0); 
+    sFlappy->TwoSpriteId = CreateSprite(&sSpriteTemplate_Two, 120, 80, 0);
 }
 
 static void CreateThree(void)
@@ -960,7 +960,7 @@ static void CreateThree(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Three);
 
-    sFlappy->ThreeSpriteId = CreateSprite(&sSpriteTemplate_Three, 120, 80, 0); 
+    sFlappy->ThreeSpriteId = CreateSprite(&sSpriteTemplate_Three, 120, 80, 0);
 }
 
 static void CreateStart(void)
@@ -968,7 +968,7 @@ static void CreateStart(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_Start);
 
-    sFlappy->StartSpriteId = CreateSprite(&sSpriteTemplate_Start, 120, 80, 0); 
+    sFlappy->StartSpriteId = CreateSprite(&sSpriteTemplate_Start, 120, 80, 0);
 }
 
 static void CreateHiScore(void)
@@ -976,7 +976,7 @@ static void CreateHiScore(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_HiScore);
 
-    sFlappy->HiScoreSpriteId = CreateSprite(&sSpriteTemplate_HiScore, 120, 80, 0); 
+    sFlappy->HiScoreSpriteId = CreateSprite(&sSpriteTemplate_HiScore, 120, 80, 0);
 }
 
 static void CreateGameOver(void)
@@ -984,7 +984,7 @@ static void CreateGameOver(void)
     LoadSpritePalettes(sSpritePalettes);
     LoadCompressedSpriteSheet(&sSpriteSheet_GameOver);
 
-    sFlappy->GameOverSpriteId = CreateSprite(&sSpriteTemplate_GameOver, 120, 80, 0); 
+    sFlappy->GameOverSpriteId = CreateSprite(&sSpriteTemplate_GameOver, 120, 80, 0);
 }
 
 static void CreateHitbox(void)
@@ -1035,34 +1035,34 @@ static void SpriteCB_FlappyDamage(struct Sprite *sprite)
     s16 rotation;
     struct ObjAffineSrcData affine;
     struct OamMatrix matrix;
-    
-    sFlappy->DamageSpriteRotation += 8;  
+
+    sFlappy->DamageSpriteRotation += 8;
 
     sFlappy->DamageSpriteRotation %= 360;
 
-    rotation = sFlappy->DamageSpriteRotation;  
+    rotation = sFlappy->DamageSpriteRotation;
 
-    affine.xScale = 256;  
-    affine.yScale = 256;  
-    affine.rotation = rotation * 256;  
+    affine.xScale = 256;
+    affine.yScale = 256;
+    affine.rotation = rotation * 256;
 
     ObjAffineSet(&affine, &matrix, 1, 2);
 
-    SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);  
+    SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
 
-    sprite->oam.x = sprite->x;  
-    sprite->oam.y = sprite->y;  
+    sprite->oam.x = sprite->x;
+    sprite->oam.y = sprite->y;
 }
 
 static void ApplyGravity(void)
 {
-    sFlappy->speed_y += GRAVITY;  
+    sFlappy->speed_y += GRAVITY;
 
     sFlappy->pos_y += sFlappy->speed_y;
 
     if (sFlappy->pos_y > sFlappy->MIN_Y)
-    {  
-        sFlappy->speed_y = 0;  
+    {
+        sFlappy->speed_y = 0;
         PlayBGM(MUS_NONE);
         PlaySE(SE_SUPER_EFFECTIVE);
         DestroySpriteAndFreeResources(&gSprites[sFlappy->TrailSpriteId]);
@@ -1075,7 +1075,7 @@ static void ApplyGravity(void)
 
     if (sFlappy->pos_y < sFlappy->MAX_Y)
     {
-        sFlappy->speed_y = 0;  
+        sFlappy->speed_y = 0;
         PlayBGM(MUS_NONE);
         PlaySE(SE_SUPER_EFFECTIVE);
         DestroySpriteAndFreeResources(&gSprites[sFlappy->TrailSpriteId]);
@@ -1086,7 +1086,7 @@ static void ApplyGravity(void)
         sFlappy->state = FLAPPY_STOP;
     }
 
-    if (sFlappy->speed_y > 4) {  
+    if (sFlappy->speed_y > 4) {
         sFlappy->speed_y = 4;
     }
 }
@@ -1103,11 +1103,11 @@ static void Flap(void)
         gSprites[sFlappy->ButterfreeSpriteId].animCmdIndex = 0;
         gSprites[sFlappy->ButterfreeSpriteId].animPaused = FALSE;
     }
-    sFlappy->speed_y = FLAP_STRENGTH; 
+    sFlappy->speed_y = FLAP_STRENGTH;
 }
 
 void ChangeObstacle1() {
-    u16* bg2Tilemap = (u16*)0x0600E000;  
+    u16* bg2Tilemap = (u16*)0x0600E000;
 
     u16 tileGroups[5][20][4] = {
         // Group 1
@@ -1225,15 +1225,15 @@ void ChangeObstacle1() {
 
     int groupIndex = sFlappy->Obstacle1Id - 1;
 
-    int startX = 12;  
-    int startY = 0;   
+    int startX = 12;
+    int startY = 0;
     int y;
     int x;
     u16 tilemapIndex;
 
-    for (y = 0; y < 20; ++y) {  
-        for (x = 0; x < 4; ++x) { 
-            tilemapIndex = (y + startY) * 32 + (x + startX);  
+    for (y = 0; y < 20; ++y) {
+        for (x = 0; x < 4; ++x) {
+            tilemapIndex = (y + startY) * 32 + (x + startX);
 
             bg2Tilemap[tilemapIndex] = tileGroups[groupIndex][y][x];
         }
@@ -1241,7 +1241,7 @@ void ChangeObstacle1() {
 }
 
 void ChangeObstacle2() {
-    u16* bg2Tilemap = (u16*)0x0600E000;  
+    u16* bg2Tilemap = (u16*)0x0600E000;
 
     u16 tileGroups[5][20][4] = {
         // Group 1
@@ -1359,15 +1359,15 @@ void ChangeObstacle2() {
 
     int groupIndex = sFlappy->Obstacle2Id - 1;
 
-    int startX = 28;  
-    int startY = 0;   
+    int startX = 28;
+    int startY = 0;
     int y;
     int x;
     u16 tilemapIndex;
 
-    for (y = 0; y < 20; ++y) {  
-        for (x = 0; x < 4; ++x) { 
-            tilemapIndex = (y + startY) * 32 + (x + startX);  
+    for (y = 0; y < 20; ++y) {
+        for (x = 0; x < 4; ++x) {
+            tilemapIndex = (y + startY) * 32 + (x + startX);
 
             bg2Tilemap[tilemapIndex] = tileGroups[groupIndex][y][x];
         }
@@ -1378,11 +1378,11 @@ void ChangeObstacle2() {
 #define INITIAL_SHOVE 10
 
 void UpdateTrailSprite(s16 butterfreeX, s16 butterfreeY) {
-    sFlappy->TrailoffsetX = butterfreeX - 16;  
+    sFlappy->TrailoffsetX = butterfreeX - 16;
 
     if (sFlappy->speed_y < 0 && sFlappy->isFlapping != 1) {
         sFlappy->TrailoffsetY = butterfreeY + INITIAL_SHOVE;
-        sFlappy->isFlapping = 1;  
+        sFlappy->isFlapping = 1;
     }
 
     if (sFlappy->speed_y > 0) {
@@ -1437,7 +1437,7 @@ static void SoundEffect(u8 sfx)
 
 static void FlappyBirdMain(u8 taskId)
 {
-    
+
     switch (sFlappy->state)
     {
         case FLAPPY_INIT:
@@ -1496,22 +1496,22 @@ static void FlappyBirdMain(u8 taskId)
             }
             break;
         case FLAPPY_INPUT:
-        
+
             ScrollX();
             sFlappy->bg2ScrollX = sFlappy->scroll_fg_x_int;
-            
+
             if (sFlappy->bg2ScrollX == 126) // Change Obstacle 1
             {
                 sFlappy->Obstacle1Id = (Random() % 5) + 1;
                 ChangeObstacle1();
             }
-            
+
             if (sFlappy->bg2ScrollX == 252) // Change Obstacle 2
             {
                 sFlappy->Obstacle2Id = (Random() % 5) + 1;
                 ChangeObstacle2();
             }
-            
+
             if ((sFlappy->bg2ScrollX > 48) && (sFlappy->bg2ScrollX < 97)) // Within Collision Range
             {
                 if (sFlappy->Obstacle1Id == 1)
@@ -1585,14 +1585,14 @@ static void FlappyBirdMain(u8 taskId)
             }
 
             if (gMain.newKeys & A_BUTTON) {
-                Flap();  
+                Flap();
             }
 
             if ((sFlappy->bg2ScrollX == 225) || ((sFlappy->bg2ScrollX == 98) && (sFlappy->Obstacle1Id != 0))) // Point
             {
                 SoundEffect(sFlappy->SFX);
                 if (VarGet(GAME_CORNER_VAR_WINNINGS) < 9998) {
-                    VarSet(GAME_CORNER_VAR_WINNINGS, VarGet(GAME_CORNER_VAR_WINNINGS) + 2); }
+                    VarSet(GAME_CORNER_VAR_WINNINGS, VarGet(GAME_CORNER_VAR_WINNINGS) + 2 + GetNumOwnedBadges()); }
                 else
                 {
                     VarSet(GAME_CORNER_VAR_WINNINGS, 9999);
@@ -1655,10 +1655,10 @@ static void FlappyBirdMain(u8 taskId)
             if ((sFlappy->jumping != 1) && (sFlappy->jumpHeight == 0)) {
                 sFlappy->jumping = 1;
                 sFlappy->jumpHeight = 20;
-                
+
                 sFlappy->jumpSpeed = 0;
                 sFlappy->fallSpeed = 0;
-                
+
                 sFlappy->velocity = 0;
 
                 sFlappy->originalY = sFlappy->DamageSpriteY;
@@ -1683,7 +1683,7 @@ static void FlappyBirdMain(u8 taskId)
 
             else {
                 sFlappy->fallSpeed += 128;
-                
+
                 sFlappy->DamageSpriteY += sFlappy->fallSpeed / 256;
 
                 if (sFlappy->DamageSpriteY > DISPLAY_HEIGHT + 15) {
@@ -1736,7 +1736,7 @@ static void FlappyBirdMain(u8 taskId)
             break;
         case FLAPPY_EXIT:
             ExitFlappyBird();
-            break;    
+            break;
     }
 }
 
@@ -1747,7 +1747,7 @@ static void InitFlappyBirdScreen(void)
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
     ResetTempTileDataBuffers();
-    
+
     InitBgsFromTemplates(0, sFlappyBGtemplates, ARRAY_COUNT(sFlappyBGtemplates));
 
     SetBgTilemapBuffer(FlappyBird_BG, AllocZeroed(BG_SCREEN_SIZE));
@@ -1792,7 +1792,7 @@ static void InitFlappyBirdScreen(void)
     CreateButterfree();
     CreateTrail();
     gSprites[sFlappy->TrailSpriteId].invisible = TRUE;
-    
+
     sFlappy->pos_y = 80;
     sFlappy->speed_y = 0;
     sFlappy->flap_strength = FLAP_STRENGTH;
