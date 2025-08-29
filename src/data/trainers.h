@@ -38049,6 +38049,8 @@ F_TRAINER_FEMALE |
 #line 14566
             .species = SPECIES_GOLEM,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 14566
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 14570
             .ev = TRAINER_PARTY_EVS(252, 252, 0, 4, 0, 0),
 #line 14571
@@ -38063,17 +38065,17 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 14572
                 MOVE_PROTECT,
-                MOVE_ROLLOUT,
-                MOVE_MAGNITUDE,
+                MOVE_ROCK_SLIDE,
+                MOVE_HIGH_HORSEPOWER,
                 MOVE_EXPLOSION,
             },
             },
             {
 #line 14577
-            .species = SPECIES_KABUTO,
+            .species = SPECIES_KABUTOPS,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 14577
-            .heldItem = ITEM_SITRUS_BERRY,
+            .heldItem = ITEM_COVERT_CLOAK,
 #line 14581
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
 #line 14582
@@ -38088,8 +38090,8 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 14583
                 MOVE_SWORDS_DANCE,
-                MOVE_BLIZZARD,
-                MOVE_SURF,
+                MOVE_BRICK_BREAK,
+                MOVE_LIQUIDATION,
                 MOVE_ROCK_SLIDE,
             },
             },

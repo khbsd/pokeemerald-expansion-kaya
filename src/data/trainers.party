@@ -14563,26 +14563,26 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Play Rough
 - Meteor Beam
 
-Golem
+Golem @ Sitrus Berry
 Ability: Sturdy
 Level: 100
 Nature: Adamant
 EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 4 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
-- Rollout
-- Magnitude
+- Rock Slide
+- High Horsepower
 - Explosion
 
-Kabuto @ Sitrus Berry
+Kabutops @ Covert Cloak
 Ability: Swift Swim
 Level: 100
 Nature: Adamant
 EVs: 0 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 252 Spe
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Swords Dance
-- Blizzard
-- Surf
+- Brick Break
+- Liquidation
 - Rock Slide
 
 Tyrantrum @ Rock Gem

@@ -57,6 +57,9 @@ enum
     PAGE_EXECUTIVE_DIRECTOR,
     PAGE_EXECUTIVE_PRODUCERS_1,
     PAGE_EXECUTIVE_PRODUCERS_2,
+    PAGE_EXPANSION_FEATURE_BRANCHES_1,
+    PAGE_EXPANSION_FEATURE_BRANCHES_2,
+    PAGE_EXPANSION_FEATURE_BRANCHES_3,
     PAGE_COUNT
 };
 
@@ -221,6 +224,15 @@ static const u8 sCreditsText_MotoyasuTojima[]                 = _("Motoyasu Toji
 static const u8 sCreditsText_NicolaPrattBarlow[]              = _("Nicola Pratt-Barlow");
 static const u8 sCreditsText_ShellieDow[]                     = _("Shellie Dow");
 static const u8 sCreditsText_ErikJohnson[]                    = _("Erik Johnson");
+
+static const u8 sCreditsText_MidBattleEvos[]                  = _("Mid-battle Evolutions: AdolescentSeagull on PC");
+static const u8 sCreditsText_FourthGenMusic[]                 = _("4th Gen Music: grunt-lucas, aichiya, and ipatix on github");
+static const u8 sCreditsText_FishingMinigame[]                = _("Bivurnum on github");
+static const u8 sCreditsText_ItemWheel[]                      = _("Registered Item Wheel: mrrp on github");
+static const u8 sCreditsText_SwappableBike[]                  = _("Swappable Bike: Lunos on PC");
+static const u8 sCreditsText_ToggleRun[]                      = _("Toggle Run: devolov on github");
+static const u8 sCreditsText_GachaExpansion[]                 = _("Game Corner Expansion: agsmgmaster64 on github, Chris Piche, and AsparagusEduardo");
+
 static const struct CreditsEntry sCreditsEntry_EmptyString                      = { 0, FALSE, sCreditsText_EmptyString};
 static const struct CreditsEntry sCreditsEntry_PkmnEmeraldVersion               = { 7,  TRUE, sCreditsText_PkmnEmeraldVersion};
 static const struct CreditsEntry sCreditsEntry_Credits                          = {11,  TRUE, sCreditsText_Credits};
@@ -380,6 +392,13 @@ static const struct CreditsEntry sCreditsEntry_MotoyasuTojima                   
 static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow                = { 0, FALSE, sCreditsText_NicolaPrattBarlow};
 static const struct CreditsEntry sCreditsEntry_ShellieDow                       = { 0, FALSE, sCreditsText_ShellieDow};
 static const struct CreditsEntry sCreditsEntry_ErikJohnson                      = { 0, FALSE, sCreditsText_ErikJohnson};
+static const struct CreditsEntry sCreditsEntry_MidBattleEvos                    = { 0, FALSE, sCreditsText_MidBattleEvos};
+static const struct CreditsEntry sCreditsEntry_FourthGenMusic                   = { 0, FALSE, sCreditsText_FourthGenMusic};
+static const struct CreditsEntry sCreditsEntry_FishingMinigame                  = { 0, FALSE, sCreditsText_FishingMinigame};
+static const struct CreditsEntry sCreditsEntry_ItemWheel                        = { 0, FALSE, sCreditsText_ItemWheel};
+static const struct CreditsEntry sCreditsEntry_SwappableBike                    = { 0, FALSE, sCreditsText_SwappableBike};
+static const struct CreditsEntry sCreditsEntry_ToggleRun                        = { 0, FALSE, sCreditsText_ToggleRun};
+static const struct CreditsEntry sCreditsEntry_GachaExpansion                   = { 0, FALSE, sCreditsText_GachaExpansion};
 
 #define _ &sCreditsEntry_EmptyString
 static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][ENTRIES_PER_PAGE] =
@@ -780,6 +799,27 @@ static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][EN
         _,
         &sCreditsEntry_ExecProducers,
         &sCreditsEntry_TsunekazIshihara,
+        _,
+        _,
+    },
+    [PAGE_EXPANSION_FEATURE_BRANCHES_1] = {
+        &sCreditsEntry_MidBattleEvos,
+        &sCreditsEntry_FourthGenMusic,
+        &sCreditsEntry_FishingMinigame,
+        _,
+        _,
+    },
+    [PAGE_EXPANSION_FEATURE_BRANCHES_2] = {
+        &sCreditsEntry_ItemWheel,
+        &sCreditsEntry_SwappableBike,
+        &sCreditsEntry_ToggleRun,
+        _,
+        _,
+    },
+    [PAGE_EXPANSION_FEATURE_BRANCHES_3] = {
+        &sCreditsEntry_GachaExpansion,
+        _,
+        _,
         _,
         _,
     },
