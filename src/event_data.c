@@ -349,25 +349,16 @@ bool32 IsPlayerInGymGauntlet(void)
 {
     u32 gym = IsPlayerInGym();
 
-    //MgbaPrintf(MGBA_LOG_WARN, "gym: %u", gym);
     MgbaPrintf(MGBA_LOG_WARN, "in gym %u with %u badges", gym, GetNumOwnedBadges());
 
     if (gym > GYM_NONE)
     {
+        if (gym == GYM_PETALBURG && VarGet(VAR_PETALBURG_GYM_STATE) < 5 && GetNumOwnedBadges() < (gym - 1))
+            return FALSE;
+
         FlagClear(FLAG_SYS_BAG_USE);
-        if (gym == GYM_PETALBURG 
-            && VarGet(VAR_PETALBURG_GYM_STATE) < 5 
-            && GetNumOwnedBadges() < (gym - 1))
-            {
-                MgbaPrintf(MGBA_LOG_WARN, "not in petalburg gauntlet");
-                return FALSE;
-            }
-            
-        else
-        {
-            //MgbaPrintf(MGBA_LOG_WARN, "cleared gym %u: %u, has badge %u: %u", gBadgeFlags[gym - 1], FlagGet(gBadgeFlags[gym - 1]), gDefeatedGymFlags[gym - 1], FlagGet(gDefeatedGymFlags[gym - 1]));
-            return (!FlagGet(gBadgeFlags[gym - 1]) || !FlagGet(gDefeatedGymFlags[gym - 1]));
-        }
+        return (!FlagGet(gBadgeFlags[gym - 1]) || !FlagGet(gDefeatedGymFlags[gym - 1]));
     }
+    FlagSet(FLAG_SYS_BAG_USE);
     return FALSE;
 }
