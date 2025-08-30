@@ -14,9 +14,8 @@ static EWRAM_DATA u16 sOtIdDigit = 0;
 
 static const u16 sLotteryPrizes[] =
 {
-    ITEM_PP_UP,
-    ITEM_GIMMIGHOUL_COIN,
     ITEM_MAX_REVIVE,
+    ITEM_GIMMIGHOUL_COIN,
     ITEM_PP_MAX,
     ITEM_MASTER_BALL,
 };
@@ -29,14 +28,9 @@ void ResetLotteryCorner(void)
     VarSet(VAR_POKELOT_PRIZE_ITEM, 0);
 }
 
-void SetRandomLotteryNumber(u32 i)
+void ResetLotteryPulls(void)
 {
-    u32 var = Random();
-
-    while (--i != 0xFFFF)
-        var = ISO_RANDOMIZE2(var);
-
-    SetLotteryNumber(var);
+    VarSet(VAR_REMAINING_LOTTERY_PULLS, GetNumOwnedBadges());
 }
 
 void RetrieveLotteryNumber(void)
@@ -128,7 +122,7 @@ void PickLotteryCornerTicket(void)
     u32 prevMatchingDigits = 0;
     gSpecialVar_0x8004 = 0;
 
-    retryAmount = (CalculatePartyCount(gPlayerParty) + CalculateBoxCount()) * GetNumOwnedBadges();
+    retryAmount = (CalculatePartyCount(gPlayerParty) + CalculateBoxCount());
     playerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
 
     for (u32 retryCount = 0; retryCount < retryAmount; retryCount++)
@@ -145,11 +139,11 @@ void PickLotteryCornerTicket(void)
     {
         gSpecialVar_0x8005 = sLotteryPrizes[prevMatchingDigits - 1];
         u32 randomPartySlot = Random() % PARTY_SIZE;
-        gSpecialVar_0x8006 = 0;
 
         GetMonData(&gPlayerParty[randomPartySlot], MON_DATA_NICKNAME, gStringVar1);
         StringGet_Nickname(gStringVar1);
     }
+    VarSet(VAR_REMAINING_LOTTERY_PULLS, VarGet(VAR_REMAINING_LOTTERY_PULLS) - 1);
 }
 
 static u32 GetMatchingDigits(u16 winNumber, u16 otId)

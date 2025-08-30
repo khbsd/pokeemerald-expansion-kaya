@@ -74,4 +74,11 @@ LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:
 	.string "for you.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2:
+	.string "You have {STR_VAR_2} remaining\n"
+	.string "lottery pulls today.\l"
 	.string "Please do visit again.$"
+
+LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain3:
+	.string "You have no remaining\n"
+	.string "lottery pulls today.\l"
+	.string "Please do visit tomorrow, cutie!$"

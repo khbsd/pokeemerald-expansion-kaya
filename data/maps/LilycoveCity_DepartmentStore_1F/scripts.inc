@@ -10,16 +10,11 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	faceplayer
 	dotimebasedevents
 	goto_if_ne VAR_POKELOT_PRIZE_ITEM, ITEM_NONE, LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier
-	goto_if_set FLAG_DAILY_PICKED_LOTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow
+	goto_if_eq VAR_REMAINING_LOTTERY_PULLS, 0, LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow
 	msgbox LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain
-	setflag FLAG_DAILY_PICKED_LOTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket
 	waitmessage
-	special RetrieveLotteryNumber
-	copyvar VAR_0x8008, VAR_RESULT
-	special BufferLottoTicketNumber
-	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait, MSGBOX_DEFAULT
 	applymovement LOCALID_LOTTERY_CLERK, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	playse SE_PC_ON
@@ -32,8 +27,6 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	waitmovement 0
 	goto_if_eq VAR_0x8004, 0, LilycoveCity_DepartmentStore_1F_EventScript_NoMatch
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
-	call_if_eq VAR_0x8006, 0, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
-	call_if_eq VAR_0x8006, 1, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
 	bufferitemname STR_VAR_1, VAR_0x8005
 	call_if_eq VAR_0x8004, 1, LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
 	call_if_eq VAR_0x8004, 2, LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
@@ -54,6 +47,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon::
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow::
+	setflag FLAG_DAILY_PICKED_LOTO_TICKET
 	msgbox LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow, MSGBOX_DEFAULT
 	release
 	end
@@ -69,7 +63,14 @@ LilycoveCity_DepartmentStore_1F_EventScript_NoMatch::
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2::
+	buffernumberstring STR_VAR_2, VAR_REMAINING_LOTTERY_PULLS
+	goto_if_eq VAR_REMAINING_LOTTERY_PULLS, 0, LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain3
 	msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain3::
+	msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain3, MSGBOX_DEFAULT
 	release
 	end
 
