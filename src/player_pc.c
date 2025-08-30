@@ -240,7 +240,7 @@ static const u16 sNewGamePCItems[][8] =
     { ITEM_SHINY_CHARM, 1 },
     { ITEM_POKEVIAL, 1 },
     { ITEM_EXP_SHARE, 1 },
-    { ITEM_POKEMON_BOX_LINK, 1}
+    { ITEM_POKEMON_BOX_LINK, 1},
     { ITEM_NONE, 0 }
 };
 
