@@ -177,6 +177,8 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival2::
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_RIGHT, LittlerootTown_EventScript_MaysHouse_PreventRivalOwnHouse
 	playse SE_EXIT
 	delay 10
 	checkplayergender

@@ -909,6 +909,20 @@ LittlerootTown_EventScript_SetReceivedRunningShoesAfterBroadcast::
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	return
 
+LittlerootTown_EventScript_MaysHouse_SetOwnMomMet::
+	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2
+	return
+
+LittlerootTown_EventScript_BrendansHouse_SetOwnMomMet::
+	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
+	return
+
+LittlerootTown_EventScript_MaysHouse_PreventRivalOwnHouse::
+	end
+
+LittlerootTown_EventScript_BrendansHouse_PreventRivalOwnHouse::
+	end
+
 LittlerootTown_EventScript_GiveGoodByeEncouragement::
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	setvar VAR_LITTLEROOT_TOWN_STATE, 5

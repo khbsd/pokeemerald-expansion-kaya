@@ -138,6 +138,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2::
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
+	callnative GetPlayerHouse
+	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_BrendansHouse_PreventRivalOwnHouse
 	playse SE_EXIT
 	delay 10
 	checkplayergender
