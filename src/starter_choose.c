@@ -52,6 +52,7 @@ static void SpriteCB_SelectionHand(struct Sprite *sprite);
 static void SpriteCB_Pokeball(struct Sprite *sprite);
 static void SpriteCB_StarterPokemon(struct Sprite *sprite);
 void GenerateRandomStarters(void);
+void PrintStarterMons(void);
 
 static u16 sStarterLabelWindowId;
 
@@ -504,8 +505,8 @@ void CB2_ChooseStarter(void)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 
     GenerateRandomStarters();
+    //PrintStarterMons();
     sChoosingStarter = TRUE;
-
     ShowBg(0);
     ShowBg(2);
     ShowBg(3);
@@ -531,6 +532,15 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sBallId = 2;
 
     sStarterLabelWindowId = WINDOW_NONE;
+}
+
+void PrintStarterMons(void)
+{
+    for (u32 i = 0; i < STARTER_MON_POOL_COUNT; i++)
+    {
+        u32 tempSpecies = sStarterMonPool[i];
+        MgbaPrintf(MGBA_LOG_WARN, "mon picked: %u, name: %S", tempSpecies, GetSpeciesName(tempSpecies));
+    }
 }
 
 void GenerateRandomStarters(void)
