@@ -934,6 +934,9 @@ void PlayBGM(u32 songNum)
 
 void PlaySE(u32 songNum)
 {
+    if (songNum == SE_SELECT)
+        songNum = SE_RG_BAG_CURSOR;
+    
     m4aSongNumStart(songNum);
 }
 
