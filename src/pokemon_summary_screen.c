@@ -4758,7 +4758,8 @@ static inline bool32 ShouldShowMoveRelearner(void)
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
          && sMonSummaryScreen->relearnableMovesNum > 0
          && !InBattleFactory()
-         && !InSlateportBattleTent());
+         && !InSlateportBattleTent()
+         && !gMain.inBattle);
 }
 
 static inline bool32 ShouldShowRename(void)
@@ -4771,7 +4772,8 @@ static inline bool32 ShouldShowRename(void)
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
          && !InBattleFactory()
          && !InSlateportBattleTent()
-         && GetPlayerIDAsU32() == sMonSummaryScreen->summary.OTID);
+         && GetPlayerIDAsU32() == sMonSummaryScreen->summary.OTID
+         && !gMain.inBattle);
 }
 
 static inline bool32 ShouldShowIvEvPrompt(void)
@@ -4858,7 +4860,7 @@ void ShowRelearnPrompt(u8 state)
 {
     u32 currPage = sMonSummaryScreen->currPageIndex;
     if (!ShouldShowMoveRelearner()
-        && (currPage != PSS_PAGE_BATTLE_MOVES && currPage != PSS_PAGE_CONTEST_MOVES))
+        || (currPage != PSS_PAGE_BATTLE_MOVES || currPage != PSS_PAGE_CONTEST_MOVES))
         return;
 
     const u8* relearnText;
