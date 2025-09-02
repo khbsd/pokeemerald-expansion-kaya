@@ -1929,7 +1929,6 @@ u32 GetCurrentRelearnMovesCount(void)
 void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
 {
     u32 moveCount;
-    MgbaPrintf(MGBA_LOG_WARN, "state before update: %u", gMoveRelearnerType);
 
     do
     {
@@ -1950,7 +1949,6 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
         }
     } while (moveCount == 0 && delta != TRY_SET_UPDATE);
 
-    MgbaPrintf(MGBA_LOG_WARN, "state after update: %u", gMoveRelearnerType);
     sMonSummaryScreen->relearnableMovesNum = moveCount;
 }
 

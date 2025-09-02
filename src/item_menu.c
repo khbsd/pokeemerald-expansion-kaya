@@ -2492,13 +2492,11 @@ static void Task_KeyItemWheel(u8 taskId)
     {
     case 0:
     {
-        MgbaPrintf(MGBA_LOG_WARN, "loading item wheel assets");
         LoadSpritePalette(&sSpritePalette_KeyItemBox);
         LoadCompressedSpriteSheetByTemplate(&sSpriteTemplate_KeyItemBox, 0);
 
         for (i = 0; i < MAX_REGISTERED_ITEMS; i++)
         {
-            MgbaPrintf(MGBA_LOG_WARN, "checking max registered items: %u", i);
             // Create box sprite
             tBoxSprite[i] = j = CreateSprite(&sSpriteTemplate_KeyItemBox, sKeyItemBoxXPos[i], sKeyItemBoxYPos[i], 0);
             if (j < MAX_SPRITES)
@@ -2526,7 +2524,6 @@ static void Task_KeyItemWheel(u8 taskId)
     {
         if (JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON))
         {
-            MgbaPrintf(MGBA_LOG_WARN, "returning");
             PlaySE(SE_SELECT);
             tState = 3; // destroy and unfreeze
             break;
@@ -2535,7 +2532,6 @@ static void Task_KeyItemWheel(u8 taskId)
         if (i == 0 || data[i] == MAX_SPRITES)
             break;
         // use item as if it was registered
-        MgbaPrintf(MGBA_LOG_WARN, "setting item as registered to use: %u", gSaveBlock1Ptr->registeredItemCompat);
         gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItemCompat = gSaveBlock1Ptr->registeredItems[i - 1];
         PlaySE(SE_SELECT);
         StartSpriteAffineAnim(&gSprites[data[i]], i + 4 - 1);
@@ -2549,14 +2545,12 @@ static void Task_KeyItemWheel(u8 taskId)
         FreeKeyItemWheelGfx(data);
         i = CreateTask(GetItemFieldFunc(gSaveBlock1Ptr->registeredItemCompat), 8);
         gTasks[i].tUsingRegisteredKeyItem = TRUE;
-        MgbaPrintf(MGBA_LOG_WARN, "destroying task case 2");
         DestroyTask(taskId);
         break;
     case 3:
         FreeKeyItemWheelGfx(data);
         ScriptUnfreezeObjectEvents();
         UnlockPlayerFieldControls();
-        MgbaPrintf(MGBA_LOG_WARN, "destroying task case 3");
         DestroyTask(taskId);
         break;
     case 4:
