@@ -4891,7 +4891,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Abilities ability, u32 sp
                 && !gBattleMons[gBattlerTarget].volatiles.leechSeed
                 && RandomPercentage(RNG_BALLISTOSPORE, 30))
                 {
-                    gBattleMons[gBattlerTarget].volatiles.leechSeed = LEECHSEEDED_BY(gBattlerAttacker);
+                    gBattleMons[gBattlerAttacker].volatiles.leechSeed = LEECHSEEDED_BY(gBattlerTarget);
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                     BattleScriptCall(BattleScript_AbilityBallistosporeActivates);
                 }
