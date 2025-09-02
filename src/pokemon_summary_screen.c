@@ -1937,6 +1937,8 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
         default:
         case TRY_SET_UPDATE:
             moveCount = GetCurrentRelearnMovesCount();
+            if (moveCount == 0)
+                TryUpdateRelearnType(TRY_INCREMENT);
             break;
         case TRY_INCREMENT:
             gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
@@ -1949,6 +1951,7 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
         }
     } while (moveCount == 0 && delta != TRY_SET_UPDATE);
 
+    ShowRelearnPrompt(gMoveRelearnerType);
     sMonSummaryScreen->relearnableMovesNum = moveCount;
 }
 
