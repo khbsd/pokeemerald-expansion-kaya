@@ -125,12 +125,27 @@ SlateportCity_EventScript_EnergyGuru::
 
 	.align 2
 SlateportCity_Pokemart_EnergyGuru:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_IRON
-	.2byte ITEM_CARBOS
-	.2byte ITEM_ZINC
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_HP_UP
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_ADAMANT_MINT 
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_MILD_MINT 
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_CALM_MINT 
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_SERIOUS_MINT
 	pokemartlistend
 
 SlateportCity_EventScript_EffortRibbonWoman::

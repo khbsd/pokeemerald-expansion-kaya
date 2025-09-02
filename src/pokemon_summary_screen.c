@@ -336,7 +336,6 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
 u32 GetCurrentRelearnMovesCount(void);
-void TryUpdateRelearnType(enum IncrDecrUpdateValues delta);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -1924,12 +1923,13 @@ u32 GetCurrentRelearnMovesCount(void)
     };
     u32 currMoveNum = moveCount[gMoveRelearnerType];
 
-    return currMoveNum == 0 ? 0 : currMoveNum;
+    return currMoveNum;
 }
 
 void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
 {
     u32 moveCount;
+    MgbaPrintf(MGBA_LOG_WARN, "state before update: %u", gMoveRelearnerType);
 
     do
     {
@@ -1938,22 +1938,19 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
         default:
         case TRY_SET_UPDATE:
             moveCount = GetCurrentRelearnMovesCount();
-            if (moveCount == 0)
-            {
-                gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
-            }
             break;
         case TRY_INCREMENT:
             gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
             moveCount = GetCurrentRelearnMovesCount();
             break;
         case TRY_DECREMENT:
-            gMoveRelearnerType = gMoveRelearnerType <= MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : gMoveRelearnerType - 1;
+            gMoveRelearnerType = gMoveRelearnerType == MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : gMoveRelearnerType - 1;
             moveCount = GetCurrentRelearnMovesCount();
             break;
         }
-    } while (moveCount == 0);
+    } while (moveCount == 0 && delta != TRY_SET_UPDATE);
 
+    MgbaPrintf(MGBA_LOG_WARN, "state after update: %u", gMoveRelearnerType);
     sMonSummaryScreen->relearnableMovesNum = moveCount;
 }
 
@@ -3329,7 +3326,7 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Jam, 0, 17, 0, 1);
 
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
-             || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES)
+        || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES)
     {
         TryUpdateRelearnType(TRY_SET_UPDATE);
         ShowRelearnPrompt(gMoveRelearnerType);

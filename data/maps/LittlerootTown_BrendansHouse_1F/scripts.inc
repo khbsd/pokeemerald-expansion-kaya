@@ -98,6 +98,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_YoureNewNeighbor::
 	msgbox RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	releaseall
 	end
 
@@ -131,64 +133,15 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1::
 	goto LittlerootTown_BrendansHouse_1F_EventScript_MeetRival
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2::
-	lockall
-	setvar VAR_0x8008, 2
-	goto LittlerootTown_BrendansHouse_1F_EventScript_MeetRival
-	end
-
 LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	callnative GetPlayerHouse
-	call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_BrendansHouse_PreventRivalOwnHouse
-	playse SE_EXIT
-	delay 10
-	checkplayergender
-	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_SetRivalMay
-	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
-	addobject LOCALID_RIVALS_HOUSE_1F_RIVAL
-	delay 30
-	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	call LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	call LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMME, LittlerootTown_EventScript_MeetBrenda
-	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_EventScript_MeetMay
-	call LittlerootTown_RivalsHouse_1F_EventScript_RivalExitDown
-	playse SE_EXIT
-	removeobject LOCALID_RIVALS_HOUSE_1F_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	delay 30
+	@ call_if_eq VAR_RESULT, HOUSE_LEFT, LittlerootTown_EventScript_BrendansHouse_PreventRivalOwnHouse
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
-	savebgm MUS_DUMMY
-	fadedefaultbgm
-	releaseall
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer0
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer1
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer2
 	waitmovement 0
 	return
 
@@ -226,29 +179,6 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanExitDown:
 	walk_down
 	walk_down
 	step_end
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanExitDown::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanExitDown
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0::
-	applymovement LOCALID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PlayerWatchBrendanExit0
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs0
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1::
-	applymovement LOCALID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PlayerWatchBrendanExit1
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs1
-	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2::
-	applymovement LOCALID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PlayerWatchBrendanExit2
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2
-	waitmovement 0
-	return
 
 LittlerootTown_BrendansHouse_1F_Movement_PlayerWatchBrendanExit0:
 	delay_16

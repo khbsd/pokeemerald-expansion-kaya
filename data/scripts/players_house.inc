@@ -484,27 +484,27 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	end
 
 LittlerootTown_BrendansHouse_1F_SetRivalMay::
-	call LittlerootTown_BrendansHouse_1F_HideBrendan
-	call LittlerootTown_BrendansHouse_1F_UnhideMay
-	setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 7
+	@ call LittlerootTown_BrendansHouse_1F_HideBrendan
+	@ call LittlerootTown_BrendansHouse_1F_UnhideMay
+	@ setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 7
 	return
 
 LittlerootTown_BrendansHouse_1F_SetRivalBrendan::
-	call LittlerootTown_BrendansHouse_1F_HideMay
-	call LittlerootTown_BrendansHouse_1F_UnhideBrendan
-	setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 8
+	@ call LittlerootTown_BrendansHouse_1F_HideMay
+	@ call LittlerootTown_BrendansHouse_1F_UnhideBrendan
+	@ setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 8
 	return
 
 LittlerootTown_MaysHouse_1F_SetRivalMay::
-	call LittlerootTown_MaysHouse_1F_HideBrendan
-	call LittlerootTown_MaysHouse_1F_UnhideBrendan
-	setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 8
+	@ call LittlerootTown_MaysHouse_1F_HideBrendan
+	@ call LittlerootTown_MaysHouse_1F_UnhideBrendan
+	@ setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 8
 	return
 
 LittlerootTown_MaysHouse_1F_SetRivalBrendan::
-	call LittlerootTown_MaysHouse_1F_HideMay
-	call LittlerootTown_MaysHouse_1F_UnhideBrendan
-	setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 7
+	@ call LittlerootTown_MaysHouse_1F_HideMay
+	@ call LittlerootTown_MaysHouse_1F_UnhideBrendan
+	@ setvar LOCALID_RIVALS_HOUSE_1F_RIVAL, 7
 	return
 
 LittlerootTown_BrendansHouse_1F_HideBrendan::

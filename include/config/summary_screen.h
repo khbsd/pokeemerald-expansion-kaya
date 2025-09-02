@@ -7,7 +7,7 @@
 #define P_VAR_MOVE_RELEARNER_STATE       VAR_MOVE_RELEARNER_STATE       // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
 #define P_ENABLE_MOVE_RELEARNERS         TRUE   // If TRUE, it enables move relearners for level up, egg, TM and tutor.
 #define P_PRE_EVO_MOVES                  TRUE   // If TRUE, it enables the Pokémon to learn moves from it's pre evolution.
-#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE   // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
+#define P_ENABLE_ALL_LEVEL_UP_MOVES      FALSE  // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
 #define P_ENABLE_ALL_TM_MOVES            TRUE   // If TRUE, it enables the Pokémon to learn all TMs its compatible with, regardless of it being in the bag.
 #define P_SORT_MOVES                     TRUE   // If TRUE, sorts all moves alphabetically in the relearner's list.
 

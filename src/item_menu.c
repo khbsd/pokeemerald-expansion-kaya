@@ -1184,7 +1184,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
             offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 119);
             BagMenu_Print(windowId, FONT_NARROW, gStringVar4, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
         }
-        else if (itemIndex && (offset = RegisteredItemIndex(itemIndex)) >= 0)
+        else if (itemSlot.itemId && (offset = RegisteredItemIndex(itemSlot.itemId)) >= 0)
         {
             // Print registered icon
             BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx[offset], 96, y - 1, 24, 16);
@@ -2222,7 +2222,7 @@ s32 RegisteredItemIndex(u16 item)
         if (gSaveBlock1Ptr->registeredItems[i] && (!item || gSaveBlock1Ptr->registeredItems[i] == item))
             return i;
     if (item && item == gSaveBlock1Ptr->registeredItemCompat)
-{
+    {
         gSaveBlock1Ptr->registeredItems[0] = item;
         return 0;
     }
