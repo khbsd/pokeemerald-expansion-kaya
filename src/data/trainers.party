@@ -6353,7 +6353,7 @@ Class: Champion
 Pic: Champion Wallace
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Singles
 AI: Smart Trainer
 Mugshot: Yellow
@@ -14266,7 +14266,7 @@ Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14342,7 +14342,7 @@ Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14417,7 +14417,7 @@ Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14493,7 +14493,7 @@ Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14766,7 +14766,7 @@ Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14838,7 +14838,7 @@ Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14913,7 +14913,7 @@ Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -14989,7 +14989,7 @@ Class: Leader
 Pic: Leader Brawly
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15257,7 +15257,7 @@ Class: Leader
 Pic: Leader Wattson
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15333,7 +15333,7 @@ Class: Leader
 Pic: Leader Wattson
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15409,7 +15409,7 @@ Class: Leader
 Pic: Leader Wattson
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15485,7 +15485,7 @@ Class: Leader
 Pic: Leader Wattson
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15758,7 +15758,7 @@ Class: Leader
 Pic: Leader Flannery
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15833,7 +15833,7 @@ Class: Leader
 Pic: Leader Flannery
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15909,7 +15909,7 @@ Class: Leader
 Pic: Leader Flannery
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -15985,7 +15985,7 @@ Class: Leader
 Pic: Leader Flannery
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16243,7 +16243,7 @@ Class: Leader
 Pic: Leader Norman
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16318,7 +16318,7 @@ Class: Leader
 Pic: Leader Norman
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16392,7 +16392,7 @@ Class: Leader
 Pic: Leader Norman
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16467,7 +16467,7 @@ Class: Leader
 Pic: Leader Norman
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16735,7 +16735,7 @@ Class: Leader
 Pic: Leader Winona
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16810,7 +16810,7 @@ Class: Leader
 Pic: Leader Winona
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16886,7 +16886,7 @@ Class: Leader
 Pic: Leader Winona
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -16962,7 +16962,7 @@ Class: Leader
 Pic: Leader Winona
 Gender: Female
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17235,7 +17235,7 @@ Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17307,7 +17307,7 @@ Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17383,7 +17383,7 @@ Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17458,7 +17458,7 @@ Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17768,7 +17768,7 @@ Class: Leader
 Pic: Leader Juan
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17841,7 +17841,7 @@ Class: Leader
 Pic: Leader Juan
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17917,7 +17917,7 @@ Class: Leader
 Pic: Leader Juan
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -17993,7 +17993,7 @@ Class: Leader
 Pic: Leader Juan
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Doubles
 AI: Smart Trainer
 
@@ -18300,7 +18300,7 @@ Class: Rival
 Pic: Steven
 Gender: Male
 Music: Male
-Items: Full Restore / Full Restore / Full Restore / Full Restore / Full Restore
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Battle Type: Singles
 AI: Smart Trainer
 
