@@ -909,10 +909,7 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
     
     gItemUseCB = ItemUseCB_RareCandy;
-    if (!gTasks[taskId].data[3])
-        SetUpItemUseCallback(taskId);
-    else
-        ItemUseOutOfBattle_CannotUse(taskId);
+    SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_DynamaxCandy(u8 taskId)
@@ -1087,9 +1084,16 @@ void ItemUseOutOfBattle_PermaLure(u8 taskId)
         #endif
             FlagClear(FLAG_SYS_PERMA_LURE);
             if (!CurrentBattlePyramidLocation())
-                DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsDissipated, CloseItemMessage);
+            {
+                if (!gTasks[taskId].data[2])
+                    DisplayItemMessageOnField(taskId, gText_LureEffectsDissipated, Task_CloseCantUseKeyItemMessage);
+                else
+                    DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsDissipated, CloseItemMessage);
+            }
             else
+            {
                 DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsDissipated, Task_CloseBattlePyramidBagMessage);
+            }
         }
         else
         {
@@ -1100,9 +1104,16 @@ void ItemUseOutOfBattle_PermaLure(u8 taskId)
             CopyItemName(gSpecialVar_ItemId, gStringVar2);
             StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
             if (!CurrentBattlePyramidLocation())
-                DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            {
+                if (!gTasks[taskId].data[2])
+                    DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+                else
+                    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            }
             else
+            {
                 DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+            }
         }
     }
 }

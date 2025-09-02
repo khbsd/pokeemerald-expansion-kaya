@@ -901,8 +901,13 @@ LittlerootTown_EventScript_SetReceivedRunningShoes::
 	removeobject LOCALID_LITTLEROOT_MOM
 	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
+	call_if_unset FLAG_SYS_ENABLE_POKEVIAL, LittlerootTown_EventScript_SetPokevialFlag
 	release
 	end
+
+LittlerootTown_EventScript_SetPokevialFlag::
+	setflag FLAG_SYS_ENABLE_POKEVIAL
+	return
 
 LittlerootTown_EventScript_SetReceivedRunningShoesAfterBroadcast::
 	setflag FLAG_SYS_B_DASH
@@ -918,9 +923,14 @@ LittlerootTown_EventScript_BrendansHouse_SetOwnMomMet::
 	return
 
 LittlerootTown_EventScript_MaysHouse_PreventRivalOwnHouse::
+	checkplayergender
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_MaysHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_MaysHouse_1F_SetRivalBrendan
 	end
 
 LittlerootTown_EventScript_BrendansHouse_PreventRivalOwnHouse::
+	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_SetRivalMay
+	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
 	end
 
 LittlerootTown_EventScript_GiveGoodByeEncouragement::

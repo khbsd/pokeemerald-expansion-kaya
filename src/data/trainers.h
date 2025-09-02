@@ -74,7 +74,7 @@
 #line 103
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 104
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -108,7 +108,7 @@
 #line 116
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 117
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -153,7 +153,7 @@
 #line 133
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 134
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -187,7 +187,7 @@
 #line 146
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 147
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -221,7 +221,7 @@
 #line 159
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 160
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -255,7 +255,7 @@
 #line 172
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 173
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -289,7 +289,7 @@
 #line 185
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 186
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -325,7 +325,7 @@ F_TRAINER_FEMALE |
 #line 198
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 199
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -414,7 +414,7 @@ F_TRAINER_FEMALE |
 #line 231
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 232
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -495,7 +495,7 @@ F_TRAINER_FEMALE |
 #line 262
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 263
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -540,7 +540,7 @@ F_TRAINER_FEMALE |
 #line 279
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 280
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -587,7 +587,7 @@ F_TRAINER_FEMALE |
 #line 296
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 297
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 1,
@@ -621,7 +621,7 @@ F_TRAINER_FEMALE |
 #line 309
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 310
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -655,7 +655,7 @@ F_TRAINER_FEMALE |
 #line 322
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 323
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -689,7 +689,7 @@ F_TRAINER_FEMALE |
 #line 335
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 336
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -734,7 +734,7 @@ F_TRAINER_FEMALE |
 #line 352
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 353
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -779,7 +779,7 @@ F_TRAINER_FEMALE |
 #line 369
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 370
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 3,
@@ -835,7 +835,7 @@ F_TRAINER_FEMALE |
 #line 390
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 391
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -869,7 +869,7 @@ F_TRAINER_FEMALE |
 #line 403
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 404
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -914,7 +914,7 @@ F_TRAINER_FEMALE |
 #line 420
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 421
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -948,7 +948,7 @@ F_TRAINER_FEMALE |
 #line 433
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 434
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -982,7 +982,7 @@ F_TRAINER_FEMALE |
 #line 446
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 447
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -1016,7 +1016,7 @@ F_TRAINER_FEMALE |
 #line 459
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 460
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -1063,7 +1063,7 @@ F_TRAINER_FEMALE |
 #line 476
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 477
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 1,
@@ -1099,7 +1099,7 @@ F_TRAINER_FEMALE |
 #line 489
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 490
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 1,
@@ -1135,7 +1135,7 @@ F_TRAINER_FEMALE |
 #line 502
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 503
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 1,
@@ -1261,7 +1261,7 @@ F_TRAINER_FEMALE |
 #line 550
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 551
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -1449,7 +1449,7 @@ F_TRAINER_FEMALE |
 #line 619
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 620
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 1,
@@ -1485,7 +1485,7 @@ F_TRAINER_FEMALE |
 #line 632
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 633
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 2,
@@ -1532,7 +1532,7 @@ F_TRAINER_FEMALE |
 #line 649
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 650
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 3,
@@ -1646,7 +1646,7 @@ F_TRAINER_FEMALE |
 #line 691
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 692
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 2,
@@ -1693,7 +1693,7 @@ F_TRAINER_FEMALE |
 #line 708
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 709
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 2,
@@ -1740,7 +1740,7 @@ F_TRAINER_FEMALE |
 #line 725
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 726
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 3,
@@ -1798,7 +1798,7 @@ F_TRAINER_FEMALE |
 #line 746
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 747
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 3,
@@ -1856,7 +1856,7 @@ F_TRAINER_FEMALE |
 #line 767
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 768
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 3,
@@ -1912,7 +1912,7 @@ F_TRAINER_FEMALE |
 #line 788
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 789
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -1953,7 +1953,7 @@ F_TRAINER_FEMALE |
 #line 805
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 806
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 3,
@@ -2030,7 +2030,7 @@ F_TRAINER_FEMALE |
 #line 838
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 839
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 2,
@@ -2089,7 +2089,7 @@ F_TRAINER_FEMALE |
 #line 863
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 864
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -2130,7 +2130,7 @@ F_TRAINER_FEMALE |
 #line 880
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 881
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -2171,7 +2171,7 @@ F_TRAINER_FEMALE |
 #line 897
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 898
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -2212,7 +2212,7 @@ F_TRAINER_FEMALE |
 #line 914
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 915
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -2253,7 +2253,7 @@ F_TRAINER_FEMALE |
 #line 931
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 932
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2298,7 +2298,7 @@ F_TRAINER_FEMALE |
 #line 948
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 949
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2343,7 +2343,7 @@ F_TRAINER_FEMALE |
 #line 965
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 966
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2388,7 +2388,7 @@ F_TRAINER_FEMALE |
 #line 982
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 983
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2433,7 +2433,7 @@ F_TRAINER_FEMALE |
 #line 999
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1000
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2478,7 +2478,7 @@ F_TRAINER_FEMALE |
 #line 1016
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1017
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_INTERVIEWER,
         .partySize = 2,
@@ -2539,7 +2539,7 @@ F_TRAINER_FEMALE |
 #line 1041
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1042
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 2,
@@ -2586,7 +2586,7 @@ F_TRAINER_FEMALE |
 #line 1058
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1059
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 1,
@@ -2622,7 +2622,7 @@ F_TRAINER_FEMALE |
 #line 1071
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1072
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 1,
@@ -2658,7 +2658,7 @@ F_TRAINER_FEMALE |
 #line 1084
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1085
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 2,
@@ -2705,7 +2705,7 @@ F_TRAINER_FEMALE |
 #line 1101
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1102
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 2,
@@ -2752,7 +2752,7 @@ F_TRAINER_FEMALE |
 #line 1118
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1119
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 2,
@@ -2799,7 +2799,7 @@ F_TRAINER_FEMALE |
 #line 1135
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1136
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 2,
@@ -2844,7 +2844,7 @@ F_TRAINER_FEMALE |
 #line 1152
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1153
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -2885,7 +2885,7 @@ F_TRAINER_FEMALE |
 #line 1169
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1170
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 2,
@@ -2930,7 +2930,7 @@ F_TRAINER_FEMALE |
 #line 1186
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1187
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -2964,7 +2964,7 @@ F_TRAINER_FEMALE |
 #line 1199
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1200
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -3005,7 +3005,7 @@ F_TRAINER_FEMALE |
 #line 1216
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1217
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -3046,7 +3046,7 @@ F_TRAINER_FEMALE |
 #line 1233
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1234
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -3087,7 +3087,7 @@ F_TRAINER_FEMALE |
 #line 1250
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1251
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 1,
@@ -4224,7 +4224,7 @@ F_TRAINER_FEMALE |
 #line 1692
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1693
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
         .partySize = 1,
@@ -4267,7 +4267,7 @@ F_TRAINER_FEMALE |
 #line 1708
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1709
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
         .partySize = 3,
@@ -4348,7 +4348,7 @@ F_TRAINER_FEMALE |
 #line 1742
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1743
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
         .partySize = 2,
@@ -4978,7 +4978,7 @@ F_TRAINER_FEMALE |
 #line 1973
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1974
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5025,7 +5025,7 @@ F_TRAINER_FEMALE |
 #line 1990
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 1991
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5072,7 +5072,7 @@ F_TRAINER_FEMALE |
 #line 2007
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2008
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5119,7 +5119,7 @@ F_TRAINER_FEMALE |
 #line 2024
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2025
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 1,
@@ -5155,7 +5155,7 @@ F_TRAINER_FEMALE |
 #line 2037
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2038
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 1,
@@ -5191,7 +5191,7 @@ F_TRAINER_FEMALE |
 #line 2050
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2051
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5238,7 +5238,7 @@ F_TRAINER_FEMALE |
 #line 2067
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2068
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5285,7 +5285,7 @@ F_TRAINER_FEMALE |
 #line 2084
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2085
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 2,
@@ -5332,7 +5332,7 @@ F_TRAINER_FEMALE |
 #line 2101
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2102
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 3,
@@ -5392,7 +5392,7 @@ F_TRAINER_FEMALE |
 #line 2123
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2124
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5432,7 +5432,7 @@ F_TRAINER_FEMALE |
 #line 2137
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2138
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 2,
@@ -5495,7 +5495,7 @@ F_TRAINER_FEMALE |
 #line 2162
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2163
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 3,
@@ -5555,7 +5555,7 @@ F_TRAINER_FEMALE |
 #line 2184
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2185
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5600,7 +5600,7 @@ F_TRAINER_FEMALE |
 #line 2200
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2201
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5640,7 +5640,7 @@ F_TRAINER_FEMALE |
 #line 2214
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2215
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5680,7 +5680,7 @@ F_TRAINER_FEMALE |
 #line 2228
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2229
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5720,7 +5720,7 @@ F_TRAINER_FEMALE |
 #line 2242
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2243
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5760,7 +5760,7 @@ F_TRAINER_FEMALE |
 #line 2256
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2257
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5800,7 +5800,7 @@ F_TRAINER_FEMALE |
 #line 2270
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2271
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 1,
@@ -5845,7 +5845,7 @@ F_TRAINER_FEMALE |
 #line 2287
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2288
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -5881,7 +5881,7 @@ F_TRAINER_FEMALE |
 #line 2300
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2301
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -5917,7 +5917,7 @@ F_TRAINER_FEMALE |
 #line 2313
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2314
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -5953,7 +5953,7 @@ F_TRAINER_FEMALE |
 #line 2326
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2327
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6014,7 +6014,7 @@ F_TRAINER_FEMALE |
 #line 2351
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2352
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -6050,7 +6050,7 @@ F_TRAINER_FEMALE |
 #line 2364
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2365
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -6086,7 +6086,7 @@ F_TRAINER_FEMALE |
 #line 2377
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2378
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 3,
@@ -6164,7 +6164,7 @@ F_TRAINER_FEMALE |
 #line 2409
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2410
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6211,7 +6211,7 @@ F_TRAINER_FEMALE |
 #line 2426
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2427
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6272,7 +6272,7 @@ F_TRAINER_FEMALE |
 #line 2451
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2452
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6333,7 +6333,7 @@ F_TRAINER_FEMALE |
 #line 2476
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2477
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6394,7 +6394,7 @@ F_TRAINER_FEMALE |
 #line 2501
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2502
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6455,7 +6455,7 @@ F_TRAINER_FEMALE |
 #line 2527
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2528
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6493,7 +6493,7 @@ F_TRAINER_FEMALE |
 #line 2540
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2541
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_EXPERT_F,
         .partySize = 2,
@@ -6540,7 +6540,7 @@ F_TRAINER_FEMALE |
 #line 2558
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2559
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6578,7 +6578,7 @@ F_TRAINER_FEMALE |
 #line 2572
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2573
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6616,7 +6616,7 @@ F_TRAINER_FEMALE |
 #line 2586
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2587
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6654,7 +6654,7 @@ F_TRAINER_FEMALE |
 #line 2600
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2601
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6692,7 +6692,7 @@ F_TRAINER_FEMALE |
 #line 2614
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2615
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 1,
@@ -6735,7 +6735,7 @@ F_TRAINER_FEMALE |
 #line 2631
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2632
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 1,
@@ -6771,7 +6771,7 @@ F_TRAINER_FEMALE |
 #line 2644
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2645
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -6816,7 +6816,7 @@ F_TRAINER_FEMALE |
 #line 2661
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2662
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 1,
@@ -6852,7 +6852,7 @@ F_TRAINER_FEMALE |
 #line 2674
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2675
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_F,
         .partySize = 1,
@@ -6886,7 +6886,7 @@ F_TRAINER_FEMALE |
 #line 2687
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2688
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 1,
@@ -6920,7 +6920,7 @@ F_TRAINER_FEMALE |
 #line 2700
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2701
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 2,
@@ -6965,7 +6965,7 @@ F_TRAINER_FEMALE |
 #line 2717
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2718
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 2,
@@ -7010,7 +7010,7 @@ F_TRAINER_FEMALE |
 #line 2734
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2735
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 2,
@@ -7055,7 +7055,7 @@ F_TRAINER_FEMALE |
 #line 2751
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2752
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7089,7 +7089,7 @@ F_TRAINER_FEMALE |
 #line 2764
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2765
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7123,7 +7123,7 @@ F_TRAINER_FEMALE |
 #line 2777
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2778
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -7168,7 +7168,7 @@ F_TRAINER_FEMALE |
 #line 2794
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2795
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 3,
@@ -7224,7 +7224,7 @@ F_TRAINER_FEMALE |
 #line 2815
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2816
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7258,7 +7258,7 @@ F_TRAINER_FEMALE |
 #line 2828
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2829
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7292,7 +7292,7 @@ F_TRAINER_FEMALE |
 #line 2841
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2842
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7326,7 +7326,7 @@ F_TRAINER_FEMALE |
 #line 2854
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2855
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -7371,7 +7371,7 @@ F_TRAINER_FEMALE |
 #line 2871
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2872
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -7416,7 +7416,7 @@ F_TRAINER_FEMALE |
 #line 2888
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2889
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7450,7 +7450,7 @@ F_TRAINER_FEMALE |
 #line 2901
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2902
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7484,7 +7484,7 @@ F_TRAINER_FEMALE |
 #line 2914
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2915
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7518,7 +7518,7 @@ F_TRAINER_FEMALE |
 #line 2927
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2928
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7552,7 +7552,7 @@ F_TRAINER_FEMALE |
 #line 2940
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2941
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 3,
@@ -7608,7 +7608,7 @@ F_TRAINER_FEMALE |
 #line 2961
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2962
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7642,7 +7642,7 @@ F_TRAINER_FEMALE |
 #line 2974
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2975
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7676,7 +7676,7 @@ F_TRAINER_FEMALE |
 #line 2987
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 2988
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -7721,7 +7721,7 @@ F_TRAINER_FEMALE |
 #line 3004
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3005
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -7766,7 +7766,7 @@ F_TRAINER_FEMALE |
 #line 3021
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3022
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7800,7 +7800,7 @@ F_TRAINER_FEMALE |
 #line 3034
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3035
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7834,7 +7834,7 @@ F_TRAINER_FEMALE |
 #line 3047
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3048
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7868,7 +7868,7 @@ F_TRAINER_FEMALE |
 #line 3060
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3061
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -7902,7 +7902,7 @@ F_TRAINER_FEMALE |
 #line 3073
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3074
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 3,
@@ -7958,7 +7958,7 @@ F_TRAINER_FEMALE |
 #line 3094
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3095
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -8003,7 +8003,7 @@ F_TRAINER_FEMALE |
 #line 3111
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3112
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -8037,7 +8037,7 @@ F_TRAINER_FEMALE |
 #line 3124
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3125
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -8071,7 +8071,7 @@ F_TRAINER_FEMALE |
 #line 3137
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3138
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -8116,7 +8116,7 @@ F_TRAINER_FEMALE |
 #line 3154
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3155
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -8161,7 +8161,7 @@ F_TRAINER_FEMALE |
 #line 3171
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3172
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8195,7 +8195,7 @@ F_TRAINER_FEMALE |
 #line 3184
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3185
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 2,
@@ -8240,7 +8240,7 @@ F_TRAINER_FEMALE |
 #line 3201
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3202
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8274,7 +8274,7 @@ F_TRAINER_FEMALE |
 #line 3214
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3215
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 2,
@@ -8319,7 +8319,7 @@ F_TRAINER_FEMALE |
 #line 3231
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3232
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8353,7 +8353,7 @@ F_TRAINER_FEMALE |
 #line 3244
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3245
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8387,7 +8387,7 @@ F_TRAINER_FEMALE |
 #line 3257
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3258
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 2,
@@ -8432,7 +8432,7 @@ F_TRAINER_FEMALE |
 #line 3274
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3275
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 3,
@@ -8488,7 +8488,7 @@ F_TRAINER_FEMALE |
 #line 3295
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3296
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 4,
@@ -8557,7 +8557,7 @@ F_TRAINER_FEMALE |
 #line 3320
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3321
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 2,
@@ -8602,7 +8602,7 @@ F_TRAINER_FEMALE |
 #line 3337
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3338
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8636,7 +8636,7 @@ F_TRAINER_FEMALE |
 #line 3350
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3351
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -8670,7 +8670,7 @@ F_TRAINER_FEMALE |
 #line 3363
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3364
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 2,
@@ -8730,7 +8730,7 @@ F_TRAINER_FEMALE |
 #line 3387
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3388
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 2,
@@ -8775,7 +8775,7 @@ F_TRAINER_FEMALE |
 #line 3404
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3405
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 1,
@@ -8809,7 +8809,7 @@ F_TRAINER_FEMALE |
 #line 3417
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3418
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 2,
@@ -8854,7 +8854,7 @@ F_TRAINER_FEMALE |
 #line 3434
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3435
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 2,
@@ -8899,7 +8899,7 @@ F_TRAINER_FEMALE |
 #line 3451
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3452
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 2,
@@ -8944,7 +8944,7 @@ F_TRAINER_FEMALE |
 #line 3468
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3469
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -9000,7 +9000,7 @@ F_TRAINER_FEMALE |
 #line 3489
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3490
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -9056,7 +9056,7 @@ F_TRAINER_FEMALE |
 #line 3510
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3511
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -9112,7 +9112,7 @@ F_TRAINER_FEMALE |
 #line 3531
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3532
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -9168,7 +9168,7 @@ F_TRAINER_FEMALE |
 #line 3552
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3553
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 1,
@@ -9202,7 +9202,7 @@ F_TRAINER_FEMALE |
 #line 3565
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3566
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9247,7 +9247,7 @@ F_TRAINER_FEMALE |
 #line 3582
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3583
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 1,
@@ -9281,7 +9281,7 @@ F_TRAINER_FEMALE |
 #line 3595
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3596
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 1,
@@ -9315,7 +9315,7 @@ F_TRAINER_FEMALE |
 #line 3608
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3609
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 1,
@@ -9349,7 +9349,7 @@ F_TRAINER_FEMALE |
 #line 3621
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3622
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9394,7 +9394,7 @@ F_TRAINER_FEMALE |
 #line 3638
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3639
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9439,7 +9439,7 @@ F_TRAINER_FEMALE |
 #line 3655
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3656
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9484,7 +9484,7 @@ F_TRAINER_FEMALE |
 #line 3672
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3673
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9529,7 +9529,7 @@ F_TRAINER_FEMALE |
 #line 3689
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3690
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -9574,7 +9574,7 @@ F_TRAINER_FEMALE |
 #line 3706
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3707
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 1,
@@ -9615,7 +9615,7 @@ F_TRAINER_FEMALE |
 #line 3723
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3724
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 3,
@@ -9692,7 +9692,7 @@ F_TRAINER_FEMALE |
 #line 3756
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3757
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 1,
@@ -9726,7 +9726,7 @@ F_TRAINER_FEMALE |
 #line 3769
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3770
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -9771,7 +9771,7 @@ F_TRAINER_FEMALE |
 #line 3786
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3787
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 1,
@@ -9805,7 +9805,7 @@ F_TRAINER_FEMALE |
 #line 3799
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3800
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -9852,7 +9852,7 @@ F_TRAINER_FEMALE |
 #line 3816
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3817
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 1,
@@ -9886,7 +9886,7 @@ F_TRAINER_FEMALE |
 #line 3829
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3830
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 1,
@@ -9920,7 +9920,7 @@ F_TRAINER_FEMALE |
 #line 3842
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3843
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -9965,7 +9965,7 @@ F_TRAINER_FEMALE |
 #line 3859
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3860
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -10010,7 +10010,7 @@ F_TRAINER_FEMALE |
 #line 3876
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3877
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 3,
@@ -10066,7 +10066,7 @@ F_TRAINER_FEMALE |
 #line 3897
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3898
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 3,
@@ -10122,7 +10122,7 @@ F_TRAINER_FEMALE |
 #line 3918
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3919
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 1,
@@ -10156,7 +10156,7 @@ F_TRAINER_FEMALE |
 #line 3931
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3932
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 3,
@@ -10212,7 +10212,7 @@ F_TRAINER_FEMALE |
 #line 3952
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3953
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 3,
@@ -10268,7 +10268,7 @@ F_TRAINER_FEMALE |
 #line 3973
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3974
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 3,
@@ -10324,7 +10324,7 @@ F_TRAINER_FEMALE |
 #line 3994
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 3995
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 2,
@@ -10369,7 +10369,7 @@ F_TRAINER_FEMALE |
 #line 4011
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4012
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 3,
@@ -10425,7 +10425,7 @@ F_TRAINER_FEMALE |
 #line 4032
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4033
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 3,
@@ -10481,7 +10481,7 @@ F_TRAINER_FEMALE |
 #line 4053
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4054
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 4,
@@ -10548,7 +10548,7 @@ F_TRAINER_FEMALE |
 #line 4078
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4079
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 5,
@@ -10628,7 +10628,7 @@ F_TRAINER_FEMALE |
 #line 4107
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4108
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -10666,7 +10666,7 @@ F_TRAINER_FEMALE |
 #line 4121
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4122
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -10700,7 +10700,7 @@ F_TRAINER_FEMALE |
 #line 4134
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4135
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -10734,7 +10734,7 @@ F_TRAINER_FEMALE |
 #line 4147
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4148
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -10768,7 +10768,7 @@ F_TRAINER_FEMALE |
 #line 4160
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4161
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 3,
@@ -10824,7 +10824,7 @@ F_TRAINER_FEMALE |
 #line 4181
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4182
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 2,
@@ -10869,7 +10869,7 @@ F_TRAINER_FEMALE |
 #line 4198
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4199
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -10903,7 +10903,7 @@ F_TRAINER_FEMALE |
 #line 4211
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4212
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 2,
@@ -10948,7 +10948,7 @@ F_TRAINER_FEMALE |
 #line 4228
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4229
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 2,
@@ -10993,7 +10993,7 @@ F_TRAINER_FEMALE |
 #line 4245
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4246
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 2,
@@ -11038,7 +11038,7 @@ F_TRAINER_FEMALE |
 #line 4262
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4263
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 2,
@@ -11085,7 +11085,7 @@ F_TRAINER_FEMALE |
 #line 4279
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4280
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -11125,7 +11125,7 @@ F_TRAINER_FEMALE |
 #line 4293
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4294
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -11161,7 +11161,7 @@ F_TRAINER_FEMALE |
 #line 4306
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4307
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -11197,7 +11197,7 @@ F_TRAINER_FEMALE |
 #line 4319
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4320
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -11233,7 +11233,7 @@ F_TRAINER_FEMALE |
 #line 4332
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4333
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 3,
@@ -11291,7 +11291,7 @@ F_TRAINER_FEMALE |
 #line 4353
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4354
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11338,7 +11338,7 @@ F_TRAINER_FEMALE |
 #line 4370
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4371
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11385,7 +11385,7 @@ F_TRAINER_FEMALE |
 #line 4387
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4388
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11432,7 +11432,7 @@ F_TRAINER_FEMALE |
 #line 4404
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4405
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11479,7 +11479,7 @@ F_TRAINER_FEMALE |
 #line 4421
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4422
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11526,7 +11526,7 @@ F_TRAINER_FEMALE |
 #line 4438
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4439
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -11571,7 +11571,7 @@ F_TRAINER_FEMALE |
 #line 4455
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4456
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 1,
@@ -11605,7 +11605,7 @@ F_TRAINER_FEMALE |
 #line 4468
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4469
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 2,
@@ -11650,7 +11650,7 @@ F_TRAINER_FEMALE |
 #line 4485
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4486
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 1,
@@ -11684,7 +11684,7 @@ F_TRAINER_FEMALE |
 #line 4498
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4499
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 1,
@@ -11718,7 +11718,7 @@ F_TRAINER_FEMALE |
 #line 4511
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4512
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 2,
@@ -11777,7 +11777,7 @@ F_TRAINER_FEMALE |
 #line 4536
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4537
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 2,
@@ -11835,7 +11835,7 @@ F_TRAINER_FEMALE |
 #line 4560
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 4561
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 3,
@@ -13464,7 +13464,7 @@ F_TRAINER_FEMALE |
 #line 5240
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5241
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 1,
@@ -13498,7 +13498,7 @@ F_TRAINER_FEMALE |
 #line 5253
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5254
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 1,
@@ -13532,7 +13532,7 @@ F_TRAINER_FEMALE |
 #line 5266
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5267
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 3,
@@ -13588,7 +13588,7 @@ F_TRAINER_FEMALE |
 #line 5287
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5288
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 2,
@@ -13633,7 +13633,7 @@ F_TRAINER_FEMALE |
 #line 5304
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5305
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 2,
@@ -13678,7 +13678,7 @@ F_TRAINER_FEMALE |
 #line 5321
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5322
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 2,
@@ -13723,7 +13723,7 @@ F_TRAINER_FEMALE |
 #line 5338
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5339
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_M,
         .partySize = 3,
@@ -13781,7 +13781,7 @@ F_TRAINER_FEMALE |
 #line 5359
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5360
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 1,
@@ -13817,7 +13817,7 @@ F_TRAINER_FEMALE |
 #line 5372
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5373
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 2,
@@ -13864,7 +13864,7 @@ F_TRAINER_FEMALE |
 #line 5389
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5390
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 2,
@@ -13911,7 +13911,7 @@ F_TRAINER_FEMALE |
 #line 5406
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5407
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 2,
@@ -13958,7 +13958,7 @@ F_TRAINER_FEMALE |
 #line 5423
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5424
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 2,
@@ -14005,7 +14005,7 @@ F_TRAINER_FEMALE |
 #line 5440
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5441
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SCHOOL_KID_F,
         .partySize = 2,
@@ -14050,7 +14050,7 @@ F_TRAINER_FEMALE |
 #line 5457
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5458
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14109,7 +14109,7 @@ F_TRAINER_FEMALE |
 #line 5482
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5483
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14167,7 +14167,7 @@ F_TRAINER_FEMALE |
 #line 5506
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5507
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14225,7 +14225,7 @@ F_TRAINER_FEMALE |
 #line 5530
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5531
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14283,7 +14283,7 @@ F_TRAINER_FEMALE |
 #line 5554
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5555
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14341,7 +14341,7 @@ F_TRAINER_FEMALE |
 #line 5578
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 5579
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -14399,7 +14399,7 @@ F_TRAINER_FEMALE |
 #line 5602
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5603
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 2,
@@ -14448,7 +14448,7 @@ F_TRAINER_FEMALE |
 #line 5619
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5620
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 1,
@@ -14484,7 +14484,7 @@ F_TRAINER_FEMALE |
 #line 5632
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5633
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 6,
@@ -14627,7 +14627,7 @@ F_TRAINER_FEMALE |
 #line 5689
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5690
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 1,
@@ -14663,7 +14663,7 @@ F_TRAINER_FEMALE |
 #line 5702
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5703
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 1,
@@ -14699,7 +14699,7 @@ F_TRAINER_FEMALE |
 #line 5715
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5716
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 1,
@@ -14735,7 +14735,7 @@ F_TRAINER_FEMALE |
 #line 5728
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5729
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 1,
@@ -14773,7 +14773,7 @@ F_TRAINER_FEMALE |
 #line 5741
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5742
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 1,
@@ -14811,7 +14811,7 @@ F_TRAINER_FEMALE |
 #line 5754
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5755
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 1,
@@ -14849,7 +14849,7 @@ F_TRAINER_FEMALE |
 #line 5767
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5768
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 3,
@@ -14913,7 +14913,7 @@ F_TRAINER_FEMALE |
 #line 5788
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5789
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -14964,7 +14964,7 @@ F_TRAINER_FEMALE |
 #line 5805
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5806
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -15015,7 +15015,7 @@ F_TRAINER_FEMALE |
 #line 5822
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5823
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -15066,7 +15066,7 @@ F_TRAINER_FEMALE |
 #line 5839
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5840
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -15117,7 +15117,7 @@ F_TRAINER_FEMALE |
 #line 5856
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 5857
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -15642,7 +15642,7 @@ F_TRAINER_FEMALE |
 #line 6056
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6057
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -15676,7 +15676,7 @@ F_TRAINER_FEMALE |
 #line 6069
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6070
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -15721,7 +15721,7 @@ F_TRAINER_FEMALE |
 #line 6086
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6087
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -15759,7 +15759,7 @@ F_TRAINER_FEMALE |
 #line 6100
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6101
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -15804,7 +15804,7 @@ F_TRAINER_FEMALE |
 #line 6117
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6118
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -15838,7 +15838,7 @@ F_TRAINER_FEMALE |
 #line 6130
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6131
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -16021,7 +16021,7 @@ F_TRAINER_FEMALE |
 #line 6207
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6208
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -16055,7 +16055,7 @@ F_TRAINER_FEMALE |
 #line 6220
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6221
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -16089,7 +16089,7 @@ F_TRAINER_FEMALE |
 #line 6233
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6234
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 1,
@@ -16123,7 +16123,7 @@ F_TRAINER_FEMALE |
 #line 6246
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6247
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -16168,7 +16168,7 @@ F_TRAINER_FEMALE |
 #line 6263
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6264
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 3,
@@ -16224,7 +16224,7 @@ F_TRAINER_FEMALE |
 #line 6284
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6285
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 3,
@@ -16280,7 +16280,7 @@ F_TRAINER_FEMALE |
 #line 6305
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6306
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -16325,7 +16325,7 @@ F_TRAINER_FEMALE |
 #line 6322
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6323
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -16370,7 +16370,7 @@ F_TRAINER_FEMALE |
 #line 6339
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6340
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -16552,7 +16552,7 @@ F_TRAINER_FEMALE |
 #line 6415
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6416
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -16608,7 +16608,7 @@ F_TRAINER_FEMALE |
 #line 6436
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6437
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -16664,7 +16664,7 @@ F_TRAINER_FEMALE |
 #line 6457
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6458
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -16720,7 +16720,7 @@ F_TRAINER_FEMALE |
 #line 6478
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6479
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -16776,7 +16776,7 @@ F_TRAINER_FEMALE |
 #line 6499
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6500
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 1,
@@ -16810,7 +16810,7 @@ F_TRAINER_FEMALE |
 #line 6512
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6513
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 4,
@@ -16877,7 +16877,7 @@ F_TRAINER_FEMALE |
 #line 6537
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6538
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 1,
@@ -16911,7 +16911,7 @@ F_TRAINER_FEMALE |
 #line 6550
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6551
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 2,
@@ -16956,7 +16956,7 @@ F_TRAINER_FEMALE |
 #line 6567
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6568
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 1,
@@ -16990,7 +16990,7 @@ F_TRAINER_FEMALE |
 #line 6580
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6581
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 2,
@@ -17035,7 +17035,7 @@ F_TRAINER_FEMALE |
 #line 6597
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6598
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -17091,7 +17091,7 @@ F_TRAINER_FEMALE |
 #line 6618
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6619
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 4,
@@ -17158,7 +17158,7 @@ F_TRAINER_FEMALE |
 #line 6643
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6644
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 4,
@@ -17225,7 +17225,7 @@ F_TRAINER_FEMALE |
 #line 6668
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6669
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 4,
@@ -17292,7 +17292,7 @@ F_TRAINER_FEMALE |
 #line 6693
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6694
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 6,
@@ -17381,7 +17381,7 @@ F_TRAINER_FEMALE |
 #line 6726
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6727
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 3,
@@ -17437,7 +17437,7 @@ F_TRAINER_FEMALE |
 #line 6747
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6748
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 2,
@@ -17482,7 +17482,7 @@ F_TRAINER_FEMALE |
 #line 6764
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6765
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -17516,7 +17516,7 @@ F_TRAINER_FEMALE |
 #line 6777
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6778
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -17550,7 +17550,7 @@ F_TRAINER_FEMALE |
 #line 6790
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6791
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -17584,7 +17584,7 @@ F_TRAINER_FEMALE |
 #line 6803
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6804
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -17618,7 +17618,7 @@ F_TRAINER_FEMALE |
 #line 6816
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6817
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -17654,7 +17654,7 @@ F_TRAINER_FEMALE |
 #line 6829
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6830
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -17690,7 +17690,7 @@ F_TRAINER_FEMALE |
 #line 6842
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6843
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 3,
@@ -17748,7 +17748,7 @@ F_TRAINER_FEMALE |
 #line 6863
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6864
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -17784,7 +17784,7 @@ F_TRAINER_FEMALE |
 #line 6876
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6877
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -17820,7 +17820,7 @@ F_TRAINER_FEMALE |
 #line 6889
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6890
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -17856,7 +17856,7 @@ F_TRAINER_FEMALE |
 #line 6902
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6903
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -17890,7 +17890,7 @@ F_TRAINER_FEMALE |
 #line 6915
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6916
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .partySize = 1,
@@ -17924,7 +17924,7 @@ F_TRAINER_FEMALE |
 #line 6928
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6929
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .partySize = 1,
@@ -17958,7 +17958,7 @@ F_TRAINER_FEMALE |
 #line 6941
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6942
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .partySize = 1,
@@ -17992,7 +17992,7 @@ F_TRAINER_FEMALE |
 #line 6954
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6955
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .partySize = 1,
@@ -18026,7 +18026,7 @@ F_TRAINER_FEMALE |
 #line 6967
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6968
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .partySize = 1,
@@ -18062,7 +18062,7 @@ F_TRAINER_FEMALE |
 #line 6980
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6981
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -18098,7 +18098,7 @@ F_TRAINER_FEMALE |
 #line 6993
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 6994
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -18134,7 +18134,7 @@ F_TRAINER_FEMALE |
 #line 7006
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7007
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -18170,7 +18170,7 @@ F_TRAINER_FEMALE |
 #line 7019
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7020
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -18206,7 +18206,7 @@ F_TRAINER_FEMALE |
 #line 7032
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7033
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -18240,7 +18240,7 @@ F_TRAINER_FEMALE |
 #line 7045
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7046
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 2,
@@ -18285,7 +18285,7 @@ F_TRAINER_FEMALE |
 #line 7062
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7063
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -18330,7 +18330,7 @@ F_TRAINER_FEMALE |
 #line 7079
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7080
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -18364,7 +18364,7 @@ F_TRAINER_FEMALE |
 #line 7092
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7093
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 2,
@@ -18409,7 +18409,7 @@ F_TRAINER_FEMALE |
 #line 7109
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7110
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 2,
@@ -18454,7 +18454,7 @@ F_TRAINER_FEMALE |
 #line 7126
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7127
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -18488,7 +18488,7 @@ F_TRAINER_FEMALE |
 #line 7139
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7140
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -18522,7 +18522,7 @@ F_TRAINER_FEMALE |
 #line 7152
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7153
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -18556,7 +18556,7 @@ F_TRAINER_FEMALE |
 #line 7165
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7166
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -18592,7 +18592,7 @@ F_TRAINER_FEMALE |
 #line 7178
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7179
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18628,7 +18628,7 @@ F_TRAINER_FEMALE |
 #line 7191
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7192
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 2,
@@ -18675,7 +18675,7 @@ F_TRAINER_FEMALE |
 #line 7208
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7209
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18711,7 +18711,7 @@ F_TRAINER_FEMALE |
 #line 7221
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7222
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18747,7 +18747,7 @@ F_TRAINER_FEMALE |
 #line 7234
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7235
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 2,
@@ -18794,7 +18794,7 @@ F_TRAINER_FEMALE |
 #line 7251
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7252
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18830,7 +18830,7 @@ F_TRAINER_FEMALE |
 #line 7264
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7265
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18866,7 +18866,7 @@ F_TRAINER_FEMALE |
 #line 7277
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7278
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18902,7 +18902,7 @@ F_TRAINER_FEMALE |
 #line 7290
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7291
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -18936,7 +18936,7 @@ F_TRAINER_FEMALE |
 #line 7303
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7304
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 2,
@@ -18981,7 +18981,7 @@ F_TRAINER_FEMALE |
 #line 7320
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7321
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 2,
@@ -19026,7 +19026,7 @@ F_TRAINER_FEMALE |
 #line 7337
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7338
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 2,
@@ -19071,7 +19071,7 @@ F_TRAINER_FEMALE |
 #line 7354
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7355
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 3,
@@ -19127,7 +19127,7 @@ F_TRAINER_FEMALE |
 #line 7375
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7376
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 3,
@@ -19185,7 +19185,7 @@ F_TRAINER_FEMALE |
 #line 7396
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7397
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_DRAGON_TAMER,
         .partySize = 1,
@@ -19226,7 +19226,7 @@ F_TRAINER_FEMALE |
 #line 7413
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7414
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 1,
@@ -19260,7 +19260,7 @@ F_TRAINER_FEMALE |
 #line 7426
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7427
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19305,7 +19305,7 @@ F_TRAINER_FEMALE |
 #line 7443
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7444
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 1,
@@ -19339,7 +19339,7 @@ F_TRAINER_FEMALE |
 #line 7456
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7457
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 3,
@@ -19395,7 +19395,7 @@ F_TRAINER_FEMALE |
 #line 7477
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7478
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 1,
@@ -19429,7 +19429,7 @@ F_TRAINER_FEMALE |
 #line 7490
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7491
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19474,7 +19474,7 @@ F_TRAINER_FEMALE |
 #line 7507
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7508
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19519,7 +19519,7 @@ F_TRAINER_FEMALE |
 #line 7524
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7525
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19564,7 +19564,7 @@ F_TRAINER_FEMALE |
 #line 7541
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7542
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 1,
@@ -19598,7 +19598,7 @@ F_TRAINER_FEMALE |
 #line 7554
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7555
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 3,
@@ -19654,7 +19654,7 @@ F_TRAINER_FEMALE |
 #line 7575
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7576
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19699,7 +19699,7 @@ F_TRAINER_FEMALE |
 #line 7592
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7593
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19744,7 +19744,7 @@ F_TRAINER_FEMALE |
 #line 7609
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7610
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19789,7 +19789,7 @@ F_TRAINER_FEMALE |
 #line 7626
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7627
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19834,7 +19834,7 @@ F_TRAINER_FEMALE |
 #line 7643
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7644
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19879,7 +19879,7 @@ F_TRAINER_FEMALE |
 #line 7660
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7661
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -19924,7 +19924,7 @@ F_TRAINER_FEMALE |
 #line 7677
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7678
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 1,
@@ -19958,7 +19958,7 @@ F_TRAINER_FEMALE |
 #line 7690
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7691
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 1,
@@ -19992,7 +19992,7 @@ F_TRAINER_FEMALE |
 #line 7703
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7704
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 2,
@@ -20608,7 +20608,7 @@ F_TRAINER_FEMALE |
 #line 7947
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7948
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -20644,7 +20644,7 @@ F_TRAINER_FEMALE |
 #line 7960
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7961
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -20680,7 +20680,7 @@ F_TRAINER_FEMALE |
 #line 7973
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7974
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -20727,7 +20727,7 @@ F_TRAINER_FEMALE |
 #line 7990
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 7991
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -20763,7 +20763,7 @@ F_TRAINER_FEMALE |
 #line 8003
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8004
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -20799,7 +20799,7 @@ F_TRAINER_FEMALE |
 #line 8016
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8017
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -20846,7 +20846,7 @@ F_TRAINER_FEMALE |
 #line 8033
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8034
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -20893,7 +20893,7 @@ F_TRAINER_FEMALE |
 #line 8050
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8051
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -20940,7 +20940,7 @@ F_TRAINER_FEMALE |
 #line 8067
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8068
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -20987,7 +20987,7 @@ F_TRAINER_FEMALE |
 #line 8084
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8085
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -21030,7 +21030,7 @@ F_TRAINER_FEMALE |
 #line 8101
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8102
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 2,
@@ -21077,7 +21077,7 @@ F_TRAINER_FEMALE |
 #line 8118
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8119
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -21120,7 +21120,7 @@ F_TRAINER_FEMALE |
 #line 8135
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8136
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -21163,7 +21163,7 @@ F_TRAINER_FEMALE |
 #line 8152
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8153
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -21206,7 +21206,7 @@ F_TRAINER_FEMALE |
 #line 8169
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8170
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 2,
@@ -21267,7 +21267,7 @@ F_TRAINER_FEMALE |
 #line 8194
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8195
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 2,
@@ -21328,7 +21328,7 @@ F_TRAINER_FEMALE |
 #line 8219
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8220
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -21375,7 +21375,7 @@ F_TRAINER_FEMALE |
 #line 8236
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8237
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21411,7 +21411,7 @@ F_TRAINER_FEMALE |
 #line 8249
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8250
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21447,7 +21447,7 @@ F_TRAINER_FEMALE |
 #line 8262
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8263
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -21494,7 +21494,7 @@ F_TRAINER_FEMALE |
 #line 8279
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8280
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21530,7 +21530,7 @@ F_TRAINER_FEMALE |
 #line 8292
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8293
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -21577,7 +21577,7 @@ F_TRAINER_FEMALE |
 #line 8309
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8310
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21613,7 +21613,7 @@ F_TRAINER_FEMALE |
 #line 8322
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8323
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 3,
@@ -21671,7 +21671,7 @@ F_TRAINER_FEMALE |
 #line 8343
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8344
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21707,7 +21707,7 @@ F_TRAINER_FEMALE |
 #line 8356
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8357
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21743,7 +21743,7 @@ F_TRAINER_FEMALE |
 #line 8369
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8370
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21779,7 +21779,7 @@ F_TRAINER_FEMALE |
 #line 8382
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8383
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21815,7 +21815,7 @@ F_TRAINER_FEMALE |
 #line 8395
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8396
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -21862,7 +21862,7 @@ F_TRAINER_FEMALE |
 #line 8412
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8413
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21898,7 +21898,7 @@ F_TRAINER_FEMALE |
 #line 8425
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8426
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -21945,7 +21945,7 @@ F_TRAINER_FEMALE |
 #line 8442
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8443
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -21981,7 +21981,7 @@ F_TRAINER_FEMALE |
 #line 8455
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8456
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22017,7 +22017,7 @@ F_TRAINER_FEMALE |
 #line 8468
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8469
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22053,7 +22053,7 @@ F_TRAINER_FEMALE |
 #line 8481
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8482
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -22100,7 +22100,7 @@ F_TRAINER_FEMALE |
 #line 8498
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8499
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22136,7 +22136,7 @@ F_TRAINER_FEMALE |
 #line 8511
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8512
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -22183,7 +22183,7 @@ F_TRAINER_FEMALE |
 #line 8528
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8529
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -22230,7 +22230,7 @@ F_TRAINER_FEMALE |
 #line 8545
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8546
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -22277,7 +22277,7 @@ F_TRAINER_FEMALE |
 #line 8562
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8563
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22313,7 +22313,7 @@ F_TRAINER_FEMALE |
 #line 8575
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8576
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22349,7 +22349,7 @@ F_TRAINER_FEMALE |
 #line 8588
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8589
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -22385,7 +22385,7 @@ F_TRAINER_FEMALE |
 #line 8601
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8602
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 2,
@@ -22432,7 +22432,7 @@ F_TRAINER_FEMALE |
 #line 8618
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8619
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 3,
@@ -22490,7 +22490,7 @@ F_TRAINER_FEMALE |
 #line 8639
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8640
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22551,7 +22551,7 @@ F_TRAINER_FEMALE |
 #line 8664
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8665
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22612,7 +22612,7 @@ F_TRAINER_FEMALE |
 #line 8689
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8690
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22659,7 +22659,7 @@ F_TRAINER_FEMALE |
 #line 8706
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8707
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22706,7 +22706,7 @@ F_TRAINER_FEMALE |
 #line 8723
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8724
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22753,7 +22753,7 @@ F_TRAINER_FEMALE |
 #line 8740
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8741
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -22809,7 +22809,7 @@ F_TRAINER_FEMALE |
 #line 8761
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8762
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -22852,7 +22852,7 @@ F_TRAINER_FEMALE |
 #line 8778
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8779
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -22899,7 +22899,7 @@ F_TRAINER_FEMALE |
 #line 8795
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8796
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -22957,7 +22957,7 @@ F_TRAINER_FEMALE |
 #line 8816
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8817
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -23015,7 +23015,7 @@ F_TRAINER_FEMALE |
 #line 8837
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8838
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -23073,7 +23073,7 @@ F_TRAINER_FEMALE |
 #line 8858
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 8859
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -23129,7 +23129,7 @@ F_TRAINER_FEMALE |
 #line 8879
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8880
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23174,7 +23174,7 @@ F_TRAINER_FEMALE |
 #line 8896
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8897
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23219,7 +23219,7 @@ F_TRAINER_FEMALE |
 #line 8913
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8914
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23264,7 +23264,7 @@ F_TRAINER_FEMALE |
 #line 8930
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8931
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23309,7 +23309,7 @@ F_TRAINER_FEMALE |
 #line 8947
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8948
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23354,7 +23354,7 @@ F_TRAINER_FEMALE |
 #line 8964
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8965
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23409,7 +23409,7 @@ F_TRAINER_FEMALE |
 #line 8985
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 8986
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23454,7 +23454,7 @@ F_TRAINER_FEMALE |
 #line 9002
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 9003
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23513,7 +23513,7 @@ F_TRAINER_FEMALE |
 #line 9027
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 9028
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -23572,7 +23572,7 @@ F_TRAINER_FEMALE |
 #line 9052
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9053
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 2,
@@ -23617,7 +23617,7 @@ F_TRAINER_FEMALE |
 #line 9069
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9070
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 1,
@@ -23651,7 +23651,7 @@ F_TRAINER_FEMALE |
 #line 9082
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9083
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 2,
@@ -23696,7 +23696,7 @@ F_TRAINER_FEMALE |
 #line 9099
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9100
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -23752,7 +23752,7 @@ F_TRAINER_FEMALE |
 #line 9120
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9121
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 2,
@@ -23797,7 +23797,7 @@ F_TRAINER_FEMALE |
 #line 9137
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9138
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -23853,7 +23853,7 @@ F_TRAINER_FEMALE |
 #line 9158
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9159
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 2,
@@ -23898,7 +23898,7 @@ F_TRAINER_FEMALE |
 #line 9175
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9176
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -23954,7 +23954,7 @@ F_TRAINER_FEMALE |
 #line 9196
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9197
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -24010,7 +24010,7 @@ F_TRAINER_FEMALE |
 #line 9217
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9218
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -24066,7 +24066,7 @@ F_TRAINER_FEMALE |
 #line 9238
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9239
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -24122,7 +24122,7 @@ F_TRAINER_FEMALE |
 #line 9259
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9260
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 1,
@@ -24158,7 +24158,7 @@ F_TRAINER_FEMALE |
 #line 9272
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9273
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_F,
         .partySize = 2,
@@ -24302,7 +24302,7 @@ F_TRAINER_FEMALE |
 #line 9328
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9329
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -24343,7 +24343,7 @@ F_TRAINER_FEMALE |
 #line 9345
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9346
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_EXPERT_M,
         .partySize = 2,
@@ -24388,7 +24388,7 @@ F_TRAINER_FEMALE |
 #line 9362
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9363
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 2,
@@ -24480,7 +24480,7 @@ F_TRAINER_FEMALE |
 #line 9397
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9398
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -24525,7 +24525,7 @@ F_TRAINER_FEMALE |
 #line 9414
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9415
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 1,
@@ -24559,7 +24559,7 @@ F_TRAINER_FEMALE |
 #line 9427
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9428
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_EXPERT_M,
         .partySize = 2,
@@ -24604,7 +24604,7 @@ F_TRAINER_FEMALE |
 #line 9444
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9445
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -24649,7 +24649,7 @@ F_TRAINER_FEMALE |
 #line 9461
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9462
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -24694,7 +24694,7 @@ F_TRAINER_FEMALE |
 #line 9478
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9479
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_ADMIN,
         .partySize = 3,
@@ -24750,7 +24750,7 @@ F_TRAINER_FEMALE |
 #line 9499
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9500
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -24795,7 +24795,7 @@ F_TRAINER_FEMALE |
 #line 9516
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9517
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -24840,7 +24840,7 @@ F_TRAINER_FEMALE |
 #line 9533
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9534
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -24885,7 +24885,7 @@ F_TRAINER_FEMALE |
 #line 9550
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9551
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_COLLECTOR,
         .partySize = 2,
@@ -25191,7 +25191,7 @@ F_TRAINER_FEMALE |
 #line 9672
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9673
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_BRENDAN,
         .partySize = 1,
@@ -25939,7 +25939,7 @@ F_TRAINER_FEMALE |
 #line 9947
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9948
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -26028,7 +26028,7 @@ F_TRAINER_FEMALE |
 #line 9980
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 9981
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 1,
@@ -26121,7 +26121,7 @@ F_TRAINER_FEMALE |
 #line 10018
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10019
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -26210,7 +26210,7 @@ F_TRAINER_FEMALE |
 #line 10051
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10052
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -26299,7 +26299,7 @@ F_TRAINER_FEMALE |
 #line 10084
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10085
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -26388,7 +26388,7 @@ F_TRAINER_FEMALE |
 #line 10117
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10118
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -26479,7 +26479,7 @@ F_TRAINER_FEMALE |
 #line 10150
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10151
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -26617,7 +26617,7 @@ F_TRAINER_FEMALE |
 #line 10201
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10202
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 1,
@@ -26653,7 +26653,7 @@ F_TRAINER_FEMALE |
 #line 10214
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10215
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -26744,7 +26744,7 @@ F_TRAINER_FEMALE |
 #line 10247
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10248
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -26835,7 +26835,7 @@ F_TRAINER_FEMALE |
 #line 10280
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10281
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -26926,7 +26926,7 @@ F_TRAINER_FEMALE |
 #line 10313
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10314
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -27147,7 +27147,7 @@ F_TRAINER_FEMALE |
 #line 10397
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10398
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_M,
         .partySize = 1,
@@ -27219,7 +27219,7 @@ F_TRAINER_FEMALE |
 #line 10425
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10426
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_M,
         .partySize = 1,
@@ -27304,7 +27304,7 @@ F_TRAINER_FEMALE |
 #line 10457
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10458
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_F,
         .partySize = 2,
@@ -27353,7 +27353,7 @@ F_TRAINER_FEMALE |
 #line 10475
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10476
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_F,
         .partySize = 3,
@@ -27462,7 +27462,7 @@ F_TRAINER_FEMALE |
 #line 10515
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10516
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_F,
         .partySize = 2,
@@ -27560,7 +27560,7 @@ F_TRAINER_FEMALE |
 #line 10551
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10552
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_RANGER_F,
         .partySize = 2,
@@ -27654,7 +27654,7 @@ F_TRAINER_FEMALE |
 #line 10586
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10587
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_M,
         .partySize = 1,
@@ -27688,7 +27688,7 @@ F_TRAINER_FEMALE |
 #line 10599
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10600
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_M,
         .partySize = 2,
@@ -27735,7 +27735,7 @@ F_TRAINER_FEMALE |
 #line 10616
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10617
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 2,
@@ -27782,7 +27782,7 @@ F_TRAINER_FEMALE |
 #line 10633
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10634
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 2,
@@ -27827,7 +27827,7 @@ F_TRAINER_FEMALE |
 #line 10650
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10651
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 2,
@@ -27872,7 +27872,7 @@ F_TRAINER_FEMALE |
 #line 10667
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10668
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -27917,7 +27917,7 @@ F_TRAINER_FEMALE |
 #line 10684
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10685
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 1,
@@ -27953,7 +27953,7 @@ F_TRAINER_FEMALE |
 #line 10697
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10698
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -27987,7 +27987,7 @@ F_TRAINER_FEMALE |
 #line 10710
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10711
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -28023,7 +28023,7 @@ F_TRAINER_FEMALE |
 #line 10723
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10724
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 1,
@@ -28057,7 +28057,7 @@ F_TRAINER_FEMALE |
 #line 10736
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10737
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -28151,7 +28151,7 @@ F_TRAINER_FEMALE |
 #line 10772
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10773
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -28185,7 +28185,7 @@ F_TRAINER_FEMALE |
 #line 10785
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10786
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -28219,7 +28219,7 @@ F_TRAINER_FEMALE |
 #line 10798
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10799
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -28255,7 +28255,7 @@ F_TRAINER_FEMALE |
 #line 10811
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10812
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -28289,7 +28289,7 @@ F_TRAINER_FEMALE |
 #line 10824
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10825
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 1,
@@ -28325,7 +28325,7 @@ F_TRAINER_FEMALE |
 #line 10837
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10838
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HEX_MANIAC,
         .partySize = 1,
@@ -28359,7 +28359,7 @@ F_TRAINER_FEMALE |
 #line 10850
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10851
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GENTLEMAN,
         .partySize = 1,
@@ -28393,7 +28393,7 @@ F_TRAINER_FEMALE |
 #line 10863
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10864
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_M,
         .partySize = 1,
@@ -28429,7 +28429,7 @@ F_TRAINER_FEMALE |
 #line 10876
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10877
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_F,
         .partySize = 2,
@@ -28474,7 +28474,7 @@ F_TRAINER_FEMALE |
 #line 10893
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10894
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -28508,7 +28508,7 @@ F_TRAINER_FEMALE |
 #line 10906
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10907
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -28542,7 +28542,7 @@ F_TRAINER_FEMALE |
 #line 10919
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10920
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -28576,7 +28576,7 @@ F_TRAINER_FEMALE |
 #line 10932
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10933
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -28612,7 +28612,7 @@ F_TRAINER_FEMALE |
 #line 10945
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10946
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -28646,7 +28646,7 @@ F_TRAINER_FEMALE |
 #line 10958
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10959
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BRENDAN,
         .partySize = 2,
@@ -28691,7 +28691,7 @@ F_TRAINER_FEMALE |
 #line 10975
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 10976
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BRENDAN,
         .partySize = 2,
@@ -28783,7 +28783,7 @@ F_TRAINER_FEMALE |
 #line 11009
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11010
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_F,
         .partySize = 1,
@@ -28819,7 +28819,7 @@ F_TRAINER_FEMALE |
 #line 11022
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11023
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AQUA_GRUNT_F,
         .partySize = 2,
@@ -28933,7 +28933,7 @@ F_TRAINER_FEMALE |
 #line 11065
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11066
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
         .partySize = 2,
@@ -29025,7 +29025,7 @@ F_TRAINER_FEMALE |
 #line 11099
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11100
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAY,
         .partySize = 2,
@@ -29188,7 +29188,7 @@ F_TRAINER_FEMALE |
 #line 11160
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11161
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29235,7 +29235,7 @@ F_TRAINER_FEMALE |
 #line 11177
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11178
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29282,7 +29282,7 @@ F_TRAINER_FEMALE |
 #line 11194
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11195
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 1,
@@ -29376,7 +29376,7 @@ F_TRAINER_FEMALE |
 #line 11228
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11229
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29423,7 +29423,7 @@ F_TRAINER_FEMALE |
 #line 11245
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11246
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29470,7 +29470,7 @@ F_TRAINER_FEMALE |
 #line 11262
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11263
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29517,7 +29517,7 @@ F_TRAINER_FEMALE |
 #line 11279
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11280
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 3,
@@ -29575,7 +29575,7 @@ F_TRAINER_FEMALE |
 #line 11300
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11301
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 1,
@@ -29611,7 +29611,7 @@ F_TRAINER_FEMALE |
 #line 11313
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11314
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 3,
@@ -29669,7 +29669,7 @@ F_TRAINER_FEMALE |
 #line 11334
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11335
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 1,
@@ -29705,7 +29705,7 @@ F_TRAINER_FEMALE |
 #line 11347
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11348
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LASS,
         .partySize = 2,
@@ -29750,7 +29750,7 @@ F_TRAINER_FEMALE |
 #line 11364
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11365
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -29795,7 +29795,7 @@ F_TRAINER_FEMALE |
 #line 11381
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11382
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 4,
@@ -29862,7 +29862,7 @@ F_TRAINER_FEMALE |
 #line 11406
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11407
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -29907,7 +29907,7 @@ F_TRAINER_FEMALE |
 #line 11423
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11424
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -29952,7 +29952,7 @@ F_TRAINER_FEMALE |
 #line 11440
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11441
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -29997,7 +29997,7 @@ F_TRAINER_FEMALE |
 #line 11457
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11458
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 1,
@@ -30031,7 +30031,7 @@ F_TRAINER_FEMALE |
 #line 11470
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11471
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -30076,7 +30076,7 @@ F_TRAINER_FEMALE |
 #line 11487
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11488
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 1,
@@ -30110,7 +30110,7 @@ F_TRAINER_FEMALE |
 #line 11500
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11501
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 2,
@@ -30155,7 +30155,7 @@ F_TRAINER_FEMALE |
 #line 11517
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11518
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 3,
@@ -30211,7 +30211,7 @@ F_TRAINER_FEMALE |
 #line 11538
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11539
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_CATCHER,
         .partySize = 4,
@@ -30278,7 +30278,7 @@ F_TRAINER_FEMALE |
 #line 11563
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11564
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -30323,7 +30323,7 @@ F_TRAINER_FEMALE |
 #line 11580
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11581
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 3,
@@ -30379,7 +30379,7 @@ F_TRAINER_FEMALE |
 #line 11601
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11602
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -30424,7 +30424,7 @@ F_TRAINER_FEMALE |
 #line 11618
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11619
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -30469,7 +30469,7 @@ F_TRAINER_FEMALE |
 #line 11635
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11636
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 3,
@@ -30525,7 +30525,7 @@ F_TRAINER_FEMALE |
 #line 11656
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11657
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 1,
@@ -30559,7 +30559,7 @@ F_TRAINER_FEMALE |
 #line 11669
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11670
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -30604,7 +30604,7 @@ F_TRAINER_FEMALE |
 #line 11686
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11687
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 1,
@@ -30643,7 +30643,7 @@ F_TRAINER_FEMALE |
 #line 11701
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11702
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -30698,7 +30698,7 @@ F_TRAINER_FEMALE |
 #line 11722
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11723
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 3,
@@ -30754,7 +30754,7 @@ F_TRAINER_FEMALE |
 #line 11743
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11744
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 4,
@@ -30821,7 +30821,7 @@ F_TRAINER_FEMALE |
 #line 11768
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11769
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 4,
@@ -30888,7 +30888,7 @@ F_TRAINER_FEMALE |
 #line 11793
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11794
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 4,
@@ -30955,7 +30955,7 @@ F_TRAINER_FEMALE |
 #line 11818
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11819
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 4,
@@ -31022,7 +31022,7 @@ F_TRAINER_FEMALE |
 #line 11843
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11844
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31067,7 +31067,7 @@ F_TRAINER_FEMALE |
 #line 11860
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11861
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31112,7 +31112,7 @@ F_TRAINER_FEMALE |
 #line 11877
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11878
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31157,7 +31157,7 @@ F_TRAINER_FEMALE |
 #line 11894
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11895
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31202,7 +31202,7 @@ F_TRAINER_FEMALE |
 #line 11911
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11912
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31247,7 +31247,7 @@ F_TRAINER_FEMALE |
 #line 11928
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11929
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31292,7 +31292,7 @@ F_TRAINER_FEMALE |
 #line 11945
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 11946
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -31339,7 +31339,7 @@ F_TRAINER_FEMALE |
 #line 11962
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11963
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 1,
@@ -31418,7 +31418,7 @@ F_TRAINER_FEMALE |
 #line 11993
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 11994
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -31479,7 +31479,7 @@ F_TRAINER_FEMALE |
 #line 12018
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12019
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -31520,7 +31520,7 @@ F_TRAINER_FEMALE |
 #line 12035
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12036
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 2,
@@ -31579,7 +31579,7 @@ F_TRAINER_FEMALE |
 #line 12060
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12061
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 2,
@@ -31638,7 +31638,7 @@ F_TRAINER_FEMALE |
 #line 12085
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12086
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 2,
@@ -31697,7 +31697,7 @@ F_TRAINER_FEMALE |
 #line 12110
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12111
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -31744,7 +31744,7 @@ F_TRAINER_FEMALE |
 #line 12127
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12128
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 3,
@@ -32702,7 +32702,7 @@ F_TRAINER_FEMALE |
 #line 12511
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12512
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -32758,7 +32758,7 @@ F_TRAINER_FEMALE |
 #line 12532
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12533
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 2,
@@ -32803,7 +32803,7 @@ F_TRAINER_FEMALE |
 #line 12549
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12550
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -32955,7 +32955,7 @@ F_TRAINER_FEMALE |
 #line 12606
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12607
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -32989,7 +32989,7 @@ F_TRAINER_FEMALE |
 #line 12619
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12620
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 3,
@@ -33045,7 +33045,7 @@ F_TRAINER_FEMALE |
 #line 12640
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12641
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -33090,7 +33090,7 @@ F_TRAINER_FEMALE |
 #line 12657
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12658
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 2,
@@ -33137,7 +33137,7 @@ F_TRAINER_FEMALE |
 #line 12674
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 12675
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -33171,7 +33171,7 @@ F_TRAINER_FEMALE |
 #line 12687
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12688
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TWINS,
         .partySize = 2,
@@ -33216,7 +33216,7 @@ F_TRAINER_FEMALE |
 #line 12704
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12705
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -33275,7 +33275,7 @@ F_TRAINER_FEMALE |
 #line 12729
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12730
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SR_AND_JR,
         .partySize = 2,
@@ -33334,7 +33334,7 @@ F_TRAINER_FEMALE |
 #line 12754
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12755
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNG_COUPLE,
         .partySize = 2,
@@ -33570,7 +33570,7 @@ F_TRAINER_FEMALE |
 #line 12854
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12855
-        .aiFlags = AI_FLAG_SMART_TRAINER | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_FORCE_SETUP_FIRST_TURN,
 #line 0
         .trainerBackPic = TRAINER_PIC_OLD_COUPLE,
         .partySize = 2,
@@ -33688,7 +33688,7 @@ F_TRAINER_FEMALE |
 #line 12904
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12905
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33733,7 +33733,7 @@ F_TRAINER_FEMALE |
 #line 12921
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12922
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33778,7 +33778,7 @@ F_TRAINER_FEMALE |
 #line 12938
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12939
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33823,7 +33823,7 @@ F_TRAINER_FEMALE |
 #line 12955
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12956
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33868,7 +33868,7 @@ F_TRAINER_FEMALE |
 #line 12972
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12973
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33913,7 +33913,7 @@ F_TRAINER_FEMALE |
 #line 12989
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 12990
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -33958,7 +33958,7 @@ F_TRAINER_FEMALE |
 #line 13006
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 13007
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SIS_AND_BRO,
         .partySize = 2,
@@ -34003,7 +34003,7 @@ F_TRAINER_FEMALE |
 #line 13023
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13024
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 4,
@@ -34070,7 +34070,7 @@ F_TRAINER_FEMALE |
 #line 13048
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13049
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RICH_BOY,
         .partySize = 2,
@@ -34121,7 +34121,7 @@ F_TRAINER_FEMALE |
 #line 13066
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13067
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_LADY,
         .partySize = 2,
@@ -34168,7 +34168,7 @@ F_TRAINER_FEMALE |
 #line 13083
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13084
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 1,
@@ -34204,7 +34204,7 @@ F_TRAINER_FEMALE |
 #line 13096
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13097
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_F,
         .partySize = 1,
@@ -34238,7 +34238,7 @@ F_TRAINER_FEMALE |
 #line 13109
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13110
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_TUBER_M,
         .partySize = 2,
@@ -34283,7 +34283,7 @@ F_TRAINER_FEMALE |
 #line 13126
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13127
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEFAN_M,
         .partySize = 2,
@@ -34332,7 +34332,7 @@ F_TRAINER_FEMALE |
 #line 13143
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13144
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 2,
@@ -34379,7 +34379,7 @@ F_TRAINER_FEMALE |
 #line 13160
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13161
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CYCLING_TRIATHLETE_F,
         .partySize = 1,
@@ -34413,7 +34413,7 @@ F_TRAINER_FEMALE |
 #line 13173
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13174
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 1,
@@ -34447,7 +34447,7 @@ F_TRAINER_FEMALE |
 #line 13186
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13187
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 1,
@@ -34481,7 +34481,7 @@ F_TRAINER_FEMALE |
 #line 13199
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13200
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 1,
@@ -34517,7 +34517,7 @@ F_TRAINER_FEMALE |
 #line 13212
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13213
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 1,
@@ -34553,7 +34553,7 @@ F_TRAINER_FEMALE |
 #line 13225
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13226
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 1,
@@ -34587,7 +34587,7 @@ F_TRAINER_FEMALE |
 #line 13238
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13239
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 1,
@@ -34623,7 +34623,7 @@ F_TRAINER_FEMALE |
 #line 13251
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13252
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -34668,7 +34668,7 @@ F_TRAINER_FEMALE |
 #line 13268
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13269
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -34713,7 +34713,7 @@ F_TRAINER_FEMALE |
 #line 13285
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13286
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -34758,7 +34758,7 @@ F_TRAINER_FEMALE |
 #line 13302
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13303
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMANIAC,
         .partySize = 2,
@@ -34805,7 +34805,7 @@ F_TRAINER_FEMALE |
 #line 13319
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13320
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -34850,7 +34850,7 @@ F_TRAINER_FEMALE |
 #line 13336
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13337
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_FISHERMAN,
         .partySize = 1,
@@ -34886,7 +34886,7 @@ F_TRAINER_FEMALE |
 #line 13349
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13350
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 1,
@@ -34920,7 +34920,7 @@ F_TRAINER_FEMALE |
 #line 13362
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13363
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 3,
@@ -34976,7 +34976,7 @@ F_TRAINER_FEMALE |
 #line 13383
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13384
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35010,7 +35010,7 @@ F_TRAINER_FEMALE |
 #line 13396
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13397
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35044,7 +35044,7 @@ F_TRAINER_FEMALE |
 #line 13409
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13410
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35078,7 +35078,7 @@ F_TRAINER_FEMALE |
 #line 13422
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13423
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 2,
@@ -35123,7 +35123,7 @@ F_TRAINER_FEMALE |
 #line 13439
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13440
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 2,
@@ -35168,7 +35168,7 @@ F_TRAINER_FEMALE |
 #line 13456
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13457
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35202,7 +35202,7 @@ F_TRAINER_FEMALE |
 #line 13469
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13470
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35236,7 +35236,7 @@ F_TRAINER_FEMALE |
 #line 13482
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13483
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35270,7 +35270,7 @@ F_TRAINER_FEMALE |
 #line 13495
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13496
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35304,7 +35304,7 @@ F_TRAINER_FEMALE |
 #line 13508
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13509
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35338,7 +35338,7 @@ F_TRAINER_FEMALE |
 #line 13521
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13522
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35372,7 +35372,7 @@ F_TRAINER_FEMALE |
 #line 13534
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13535
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35406,7 +35406,7 @@ F_TRAINER_FEMALE |
 #line 13547
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13548
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_M,
         .partySize = 1,
@@ -35442,7 +35442,7 @@ F_TRAINER_FEMALE |
 #line 13560
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13561
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_F,
         .partySize = 1,
@@ -35478,7 +35478,7 @@ F_TRAINER_FEMALE |
 #line 13573
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13574
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_F,
         .partySize = 1,
@@ -35514,7 +35514,7 @@ F_TRAINER_FEMALE |
 #line 13586
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13587
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_GRUNT_F,
         .partySize = 1,
@@ -35548,7 +35548,7 @@ F_TRAINER_FEMALE |
 #line 13599
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13600
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_MAGMA_ADMIN,
         .partySize = 4,
@@ -35720,7 +35720,7 @@ F_TRAINER_FEMALE |
 #line 13663
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13664
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_M,
         .partySize = 1,
@@ -35756,7 +35756,7 @@ F_TRAINER_FEMALE |
 #line 13676
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13677
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMER_F,
         .partySize = 1,
@@ -35790,7 +35790,7 @@ F_TRAINER_FEMALE |
 #line 13689
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13690
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 2,
@@ -35835,7 +35835,7 @@ F_TRAINER_FEMALE |
 #line 13706
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13707
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -35880,7 +35880,7 @@ F_TRAINER_FEMALE |
 #line 13723
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13724
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 1,
@@ -35914,7 +35914,7 @@ F_TRAINER_FEMALE |
 #line 13736
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13737
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -36030,7 +36030,7 @@ F_TRAINER_FEMALE |
 #line 13779
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13780
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BIRD_KEEPER,
         .partySize = 2,
@@ -36077,7 +36077,7 @@ F_TRAINER_FEMALE |
 #line 13796
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13797
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PICNICKER,
         .partySize = 2,
@@ -36122,7 +36122,7 @@ F_TRAINER_FEMALE |
 #line 13813
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13814
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 2,
@@ -36167,7 +36167,7 @@ F_TRAINER_FEMALE |
 #line 13830
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13831
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_CAMPER,
         .partySize = 2,
@@ -36212,7 +36212,7 @@ F_TRAINER_FEMALE |
 #line 13847
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13848
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -36259,7 +36259,7 @@ F_TRAINER_FEMALE |
 #line 13864
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13865
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_AROMA_LADY,
         .partySize = 2,
@@ -36306,7 +36306,7 @@ F_TRAINER_FEMALE |
 #line 13881
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13882
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 2,
@@ -36351,7 +36351,7 @@ F_TRAINER_FEMALE |
 #line 13898
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13899
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_NINJA_BOY,
         .partySize = 2,
@@ -36398,7 +36398,7 @@ F_TRAINER_FEMALE |
 #line 13915
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13916
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -36445,7 +36445,7 @@ F_TRAINER_FEMALE |
 #line 13932
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13933
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -36492,7 +36492,7 @@ F_TRAINER_FEMALE |
 #line 13949
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13950
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 2,
@@ -36537,7 +36537,7 @@ F_TRAINER_FEMALE |
 #line 13966
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13967
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_HIKER,
         .partySize = 2,
@@ -36582,7 +36582,7 @@ F_TRAINER_FEMALE |
 #line 13983
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 13984
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_YOUNGSTER,
         .partySize = 2,
@@ -36629,7 +36629,7 @@ F_TRAINER_FEMALE |
 #line 14000
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14001
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .partySize = 1,
@@ -36665,7 +36665,7 @@ F_TRAINER_FEMALE |
 #line 14013
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14014
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PSYCHIC_F,
         .partySize = 1,
@@ -36701,7 +36701,7 @@ F_TRAINER_FEMALE |
 #line 14026
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14027
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 1,
@@ -36784,7 +36784,7 @@ F_TRAINER_FEMALE |
 #line 14057
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14058
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 1,
@@ -36818,7 +36818,7 @@ F_TRAINER_FEMALE |
 #line 14070
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14071
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_KINDLER,
         .partySize = 2,
@@ -36865,7 +36865,7 @@ F_TRAINER_FEMALE |
 #line 14087
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14088
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_PARASOL_LADY,
         .partySize = 1,
@@ -36943,7 +36943,7 @@ F_TRAINER_FEMALE |
 #line 14117
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14118
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BATTLE_GIRL,
         .partySize = 2,
@@ -36988,7 +36988,7 @@ F_TRAINER_FEMALE |
 #line 14134
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14135
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BUG_MANIAC,
         .partySize = 2,
@@ -37033,7 +37033,7 @@ F_TRAINER_FEMALE |
 #line 14151
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14152
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_M,
         .partySize = 6,
@@ -37124,7 +37124,7 @@ F_TRAINER_FEMALE |
 #line 14184
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 14185
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -47022,7 +47022,7 @@ F_TRAINER_FEMALE |
 #line 18454
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18455
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 2,
@@ -47067,7 +47067,7 @@ F_TRAINER_FEMALE |
 #line 18471
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18472
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 3,
@@ -47123,7 +47123,7 @@ F_TRAINER_FEMALE |
 #line 18492
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18493
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 3,
@@ -47179,7 +47179,7 @@ F_TRAINER_FEMALE |
 #line 18513
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18514
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_RUIN_MANIAC,
         .partySize = 3,
@@ -47235,7 +47235,7 @@ F_TRAINER_FEMALE |
 #line 18534
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18535
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -47291,7 +47291,7 @@ F_TRAINER_FEMALE |
 #line 18555
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18556
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -47347,7 +47347,7 @@ F_TRAINER_FEMALE |
 #line 18576
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18577
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -47403,7 +47403,7 @@ F_TRAINER_FEMALE |
 #line 18597
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18598
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SAILOR,
         .partySize = 3,
@@ -47459,7 +47459,7 @@ F_TRAINER_FEMALE |
 #line 18618
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18619
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 2,
@@ -47504,7 +47504,7 @@ F_TRAINER_FEMALE |
 #line 18635
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18636
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 3,
@@ -47560,7 +47560,7 @@ F_TRAINER_FEMALE |
 #line 18656
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18657
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 3,
@@ -47616,7 +47616,7 @@ F_TRAINER_FEMALE |
 #line 18677
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18678
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_SWIMMING_TRIATHLETE_M,
         .partySize = 3,
@@ -47672,7 +47672,7 @@ F_TRAINER_FEMALE |
 #line 18698
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18699
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 2,
@@ -47717,7 +47717,7 @@ F_TRAINER_FEMALE |
 #line 18715
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18716
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 3,
@@ -47773,7 +47773,7 @@ F_TRAINER_FEMALE |
 #line 18736
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18737
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 3,
@@ -47829,7 +47829,7 @@ F_TRAINER_FEMALE |
 #line 18757
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18758
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BLACK_BELT,
         .partySize = 3,
@@ -48114,7 +48114,7 @@ F_TRAINER_FEMALE |
 #line 18862
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18863
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -48170,7 +48170,7 @@ F_TRAINER_FEMALE |
 #line 18883
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18884
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -48226,7 +48226,7 @@ F_TRAINER_FEMALE |
 #line 18904
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18905
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -48282,7 +48282,7 @@ F_TRAINER_FEMALE |
 #line 18925
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 18926
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_GUITARIST,
         .partySize = 3,
@@ -48553,7 +48553,7 @@ F_TRAINER_FEMALE |
 #line 19026
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19027
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -48644,7 +48644,7 @@ F_TRAINER_FEMALE |
 #line 19059
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19060
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -48735,7 +48735,7 @@ F_TRAINER_FEMALE |
 #line 19092
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19093
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -48826,7 +48826,7 @@ F_TRAINER_FEMALE |
 #line 19125
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19126
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_POKEMON_BREEDER_F,
         .partySize = 6,
@@ -48917,7 +48917,7 @@ F_TRAINER_FEMALE |
 #line 19158
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19159
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 2,
@@ -48964,7 +48964,7 @@ F_TRAINER_FEMALE |
 #line 19175
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19176
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 3,
@@ -49022,7 +49022,7 @@ F_TRAINER_FEMALE |
 #line 19196
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19197
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 3,
@@ -49080,7 +49080,7 @@ F_TRAINER_FEMALE |
 #line 19217
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 19218
-        .aiFlags = AI_FLAG_SMART_TRAINER,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
         .trainerBackPic = TRAINER_PIC_BEAUTY,
         .partySize = 3,

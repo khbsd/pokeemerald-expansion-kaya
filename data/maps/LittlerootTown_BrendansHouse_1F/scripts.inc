@@ -145,8 +145,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	checkplayergender
 	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_SetRivalMay
 	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_SetRivalBrendan
-	call_if_eq VAR_RESULT, BUTCHY, LittlerootTown_BrendansHouse_1F_UnhideMay
-	call_if_eq VAR_RESULT, FEMME, LittlerootTown_BrendansHouse_1F_UnhideBrendan
 	addobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	delay 30
 	playse SE_PIN

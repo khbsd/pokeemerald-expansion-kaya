@@ -4860,7 +4860,7 @@ void ShowRelearnPrompt(u8 state)
 {
     u32 currPage = sMonSummaryScreen->currPageIndex;
     if (!ShouldShowMoveRelearner()
-        || (currPage != PSS_PAGE_BATTLE_MOVES || currPage != PSS_PAGE_CONTEST_MOVES))
+        && (currPage != PSS_PAGE_BATTLE_MOVES || currPage != PSS_PAGE_CONTEST_MOVES))
         return;
 
     const u8* relearnText;
