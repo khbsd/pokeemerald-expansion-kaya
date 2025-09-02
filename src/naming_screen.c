@@ -1884,7 +1884,7 @@ static void SaveInputText(void)
             break;
         }
     }
-    CheckIfNameIsKaya(sNamingScreen->destBuffer);
+    CheckPlayerName(sNamingScreen->destBuffer);
 }
 
 static void LoadGfx(void)

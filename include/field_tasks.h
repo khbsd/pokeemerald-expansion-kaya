@@ -2,7 +2,7 @@
 #define GUARD_FIELD_TASKS_H
 
 void CheckIfPlayerIsKaya(void);
-void CheckIfNameIsKaya(u8 *str);
+void CheckPlayerName(u8 *str);
 void SetPlayerAsKaya(void);
 void UnsetPlayerAsKaya(void);
 bool32 GetPlayerHouse(void);

@@ -74,7 +74,7 @@
 #define FLAG_UNUSED_0x03C           0x3C // Unused Flag
 #define FLAG_UNUSED_0x03D           0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E           0x3E // Unused Flag
-#define FLAG_UNUSED_0x03F           0x3F // Unused Flag
+#define FLAG_IS_PENNY               0x3F // Unused Flag
 #define FLAG_SYS_PERMA_LURE         0x40
 #define FLAG_SYS_PERMA_REPEL        0x41
 #define FLAG_UNUSED_0x042           0x42 // Unused Flag

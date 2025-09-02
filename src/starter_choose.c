@@ -4,6 +4,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_tasks.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
@@ -504,6 +505,7 @@ void CB2_ChooseStarter(void)
     SetGpuReg(REG_OFFSET_BLDY, 7);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 
+    CheckPlayerName(gSaveBlock2Ptr->playerName);
     GenerateRandomStarters();
     //PrintStarterMons();
     sChoosingStarter = TRUE;
@@ -565,6 +567,9 @@ void GenerateRandomStarters(void)
             sStarterMon[starterMon] = tempSpecies;
         }
     }
+
+    if (FlagGet(FLAG_IS_PENNY))
+        sStarterMon[0] = SPECIES_JIRACHI;
 }
 
 static void CB2_StarterChoose(void)

@@ -146,14 +146,21 @@ void CheckIfPlayerIsKaya(void)
         UnsetPlayerAsKaya();
 }
 
-void CheckIfNameIsKaya(u8 *str)
+void CheckPlayerName(u8 *str)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
+    const u8 *pennyName = COMPOUND_STRING("Penny");
 
     if (StringCompare(kayaName, str) == 0 || gSaveBlock2Ptr->playerIsKaya)
         SetPlayerAsKaya();
     else
         UnsetPlayerAsKaya();
+
+    if (StringCompare(pennyName, str) == 0)
+        FlagSet(FLAG_IS_PENNY);
+    else
+        FlagClear(FLAG_IS_PENNY);
+        
 }
 
 bool32 GetPlayerHouse(void)
