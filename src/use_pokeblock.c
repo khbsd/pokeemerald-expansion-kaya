@@ -4,6 +4,7 @@
 #include "pokeblock.h"
 #include "malloc.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "palette.h"
 #include "pokenav.h"
@@ -1063,7 +1064,7 @@ static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct 
 
         flavor = GetMonFlavorRelation(mon, sConditionToFlavor[i]);
         if (flavor == direction)
-            sInfo->pokeblockStatBoosts[i] += boost * flavor;
+            sInfo->pokeblockStatBoosts[i] += (boost * flavor) + GetNumOwnedBadges();
     }
 }
 

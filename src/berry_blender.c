@@ -1214,7 +1214,7 @@ static void ConvertItemToBlenderBerry(struct BlenderBerry *berry, u16 itemId)
     berry->flavors[FLAVOR_SWEET] = berryInfo->sweet;
     berry->flavors[FLAVOR_BITTER] = berryInfo->bitter;
     berry->flavors[FLAVOR_SOUR] = berryInfo->sour;
-    berry->flavors[FLAVOR_COUNT] = berryInfo->smoothness;
+    berry->flavors[FLAVOR_COUNT] = berryInfo->smoothness + (GetNumOwnedBadges() * 2);
 }
 
 static void InitLocalPlayers(u8 opponentsNum)

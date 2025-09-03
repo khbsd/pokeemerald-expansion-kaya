@@ -1501,7 +1501,7 @@ static void Cmd_printattackstring(void)
 
 static void Cmd_unused0x3(void)
 {
-    
+
 }
 
 // The chance is 1/N for each stage.
@@ -8209,6 +8209,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
     u32 lastMonLevel = 0;
     u32 moneyReward;
+    u32 moneyBonus = 0;
     u8 trainerMoney = 0;
 
     if (trainerId == TRAINER_SECRET_BASE)
@@ -8230,6 +8231,13 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         else
             moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
     }
+
+    if (FlagGet(FLAG_IS_CHAMPION))
+        moneyBonus += 2;
+    if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN))
+        moneyBonus += 2;
+
+    moneyReward = (moneyReward * ((GetNumOwnedBadges() * 12) + (100 + moneyBonus))) / 100;
 
     return moneyReward;
 }
