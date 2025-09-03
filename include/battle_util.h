@@ -111,20 +111,25 @@ enum MoveSuccessOrder
     CANCELLER_SKY_DROP,
     CANCELLER_RECHARGE,
     CANCELLER_ASLEEP_OR_FROZEN,
+    CANCELLER_POWER_POINTS,
     CANCELLER_OBEDIENCE,
     CANCELLER_TRUANT,
     CANCELLER_FLINCH,
     CANCELLER_DISABLED,
-    CANCELLER_VOLATILE_BLOCKED,
+    CANCELLER_VOLATILE_BLOCKED, // Gravity / Heal Block / Throat Chop
     CANCELLER_TAUNTED,
     CANCELLER_IMPRISONED,
     CANCELLER_CONFUSED,
     CANCELLER_PARALYSED,
     CANCELLER_INFATUATION,
     CANCELLER_BIDE,
+    CANCELLER_Z_MOVES,
+    CANCELLER_CHOICE_LOCK,
+    CANCELLER_CALLSUBMOVE,
     CANCELLER_THAW,
     CANCELLER_STANCE_CHANGE_2,
-    CANCELLER_CHOICE_LOCK,
+    CANCELLER_ATTACKSTRING,
+    CANCELLER_PPDEDUCTION,
     CANCELLER_WEATHER_PRIMAL,
     CANCELLER_DYNAMAX_BLOCKED,
     CANCELLER_POWDER_STATUS,
@@ -132,7 +137,6 @@ enum MoveSuccessOrder
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_EXPLODING_DAMP,
     CANCELLER_MULTIHIT_MOVES,
-    CANCELLER_Z_MOVES,
     CANCELLER_MULTI_TARGET_MOVES,
     CANCELLER_END,
 };
@@ -150,7 +154,8 @@ enum Obedience
 enum MoveCanceller
 {
     MOVE_STEP_SUCCESS,
-    MOVE_STEP_BREAK,
+    MOVE_STEP_BREAK, // Breaks out of the function to run a script
+    MOVE_STEP_FAILURE, // Same as break but breaks out of it due to move failure and jumps to script that handles the failure
     MOVE_STEP_REMOVES_STATUS,
 };
 
@@ -239,7 +244,6 @@ u32 DoEndTurnEffects(void);
 bool32 HandleFaintedMonActions(void);
 void TryClearRageAndFuryCutter(void);
 enum MoveCanceller AtkCanceller_MoveSuccessOrder(void);
-void SetAtkCancellerForCalledMove(void);
 bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 bool32 TryChangeBattleWeather(u32 battler, u32 battleWeatherId, bool32 viaAbility);
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, enum Abilities abilityAtk, enum Abilities abilityDef, u32 move, enum FunctionCallOption option);
@@ -412,5 +416,7 @@ bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler);
 bool32 IsSemiInvulnerable(u32 battler, enum SemiInvulnerableExclusion excludeCommander);
 bool32 BreaksThroughSemiInvulnerablity(u32 battler, u32 move);
 bool32 DoesAbilityAffectSecondaryEffectChance(enum Abilities ability);
+u32 GetNaturePowerMove(u32 battler);
+u32 GetNaturePowerMove(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H
