@@ -1557,7 +1557,6 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8 taskId)
             spriteId = gTasks[taskId].tBrendanSpriteId;
         else
             spriteId = gTasks[taskId].tMaySpriteId;
-        MgbaPrintf(MGBA_LOG_WARN, "selected: %u", gTasks[taskId].tPlayerGender);
         gSprites[spriteId].x = DISPLAY_WIDTH;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -1730,7 +1729,6 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
             gTasks[taskId].tTimer--;
             return;
         }
-        MgbaPrintf(MGBA_LOG_WARN, "2) is kaya: %u", playerIsKaya);
         if (playerIsKaya)
             spriteId = gTasks[taskId].tKayaSpriteId;
         else if (gSaveBlock2Ptr->playerGender != BUTCHY)
@@ -1847,7 +1845,6 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     CheckIfPlayerIsKaya();
     if (playerIsKaya)
     {
-        MgbaPrintf(MGBA_LOG_WARN, "0) is kaya: %u", playerIsKaya);
         gTasks[taskId].tPlayerGender = BUTCHY;
         gSaveBlock2Ptr->playerGender = BUTCHY;
         spriteId = gTasks[taskId].tKayaSpriteId;
@@ -1862,7 +1859,6 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
         gTasks[taskId].tPlayerGender = BUTCHY;
         spriteId = gTasks[taskId].tBrendanSpriteId;
     }
-    MgbaPrintf(MGBA_LOG_WARN, "1) is kaya: %u", playerIsKaya);
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;

@@ -1851,9 +1851,6 @@ static u32 PlayerGetTrainerBackPicId(void)
 {
     u32 trainerPicId;
 
-    MgbaPrintf(MGBA_LOG_WARN, "player gender: %u", gSaveBlock2Ptr->playerGender);
-    MgbaPrintf(MGBA_LOG_WARN, "player is kaya?: %u", gSaveBlock2Ptr->playerIsKaya);
-
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
     else

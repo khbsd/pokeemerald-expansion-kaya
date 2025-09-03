@@ -913,6 +913,8 @@ LittlerootTown_EventScript_SetReceivedRunningShoesAfterBroadcast::
 	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	call_if_unset FLAG_SYS_ENABLE_POKEVIAL, LittlerootTown_EventScript_SetPokevialFlag
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	return
 
 LittlerootTown_EventScript_MaysHouse_SetOwnMomMet::

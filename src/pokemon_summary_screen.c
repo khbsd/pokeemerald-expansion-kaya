@@ -1214,19 +1214,11 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     }
 
     if (mode == SUMMARY_MODE_RELEARNER_BATTLE)
-    {
         sMonSummaryScreen->currPageIndex = PSS_PAGE_BATTLE_MOVES;
-        TryUpdateRelearnType(TRY_SET_UPDATE);
-    }
     else if (mode == SUMMARY_MODE_RELEARNER_CONTEST)
-    {
         sMonSummaryScreen->currPageIndex = PSS_PAGE_CONTEST_MOVES;
-        TryUpdateRelearnType(TRY_SET_UPDATE);
-    }
     else
-    {
         sMonSummaryScreen->currPageIndex = sMonSummaryScreen->minPageIndex;
-    }
 
     sMonSummaryScreen->categoryIconSpriteId = 0xFF;
     SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
@@ -1939,20 +1931,19 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             moveCount = GetCurrentRelearnMovesCount();
             if (moveCount == 0)
                 TryUpdateRelearnType(TRY_INCREMENT);
+            else
+                sMonSummaryScreen->relearnableMovesNum = moveCount;
             break;
         case TRY_INCREMENT:
             gMoveRelearnerType = gMoveRelearnerType >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : gMoveRelearnerType + 1;
-            moveCount = GetCurrentRelearnMovesCount();
+            sMonSummaryScreen->relearnableMovesNum = GetCurrentRelearnMovesCount();
             break;
         case TRY_DECREMENT:
             gMoveRelearnerType = gMoveRelearnerType == MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : gMoveRelearnerType - 1;
-            moveCount = GetCurrentRelearnMovesCount();
+            sMonSummaryScreen->relearnableMovesNum = GetCurrentRelearnMovesCount();
             break;
         }
-    } while (moveCount == 0 && delta != TRY_SET_UPDATE);
-
-    ShowRelearnPrompt(gMoveRelearnerType);
-    sMonSummaryScreen->relearnableMovesNum = moveCount;
+    } while (sMonSummaryScreen->relearnableMovesNum == 0 && delta != TRY_SET_UPDATE);
 }
 
 static void ChangeSummaryPokemon(u8 taskId, s8 delta)
@@ -2042,6 +2033,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
             if (P_SUMMARY_SCREEN_MOVE_RELEARNER
                 && (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
             {
+                TryUpdateRelearnType(TRY_SET_UPDATE);
                 if (ShouldShowMoveRelearner())
                 {
                     gMoveRelearnerType = MOVE_RELEARNER_LEVEL_UP_MOVES;
@@ -2261,7 +2253,11 @@ static void PssScrollRightEnd(u8 taskId) // display right
     SwitchTaskToFollowupFunc(taskId);
     if ((sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
         || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
-        ShowRelearnPrompt(gMoveRelearnerType);
+        {
+            TryUpdateRelearnType(TRY_SET_UPDATE);
+            ShowRelearnPrompt(gMoveRelearnerType);
+        }
+        
 }
 
 static void PssScrollLeft(u8 taskId) // Scroll left
