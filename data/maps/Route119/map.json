@@ -400,7 +400,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SITRUS",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SITRUS_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -413,7 +413,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_LEPPA",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_LEPPA_2",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -596,7 +596,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_3",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -609,59 +609,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
-      "script": "BerryTreeScript",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 12,
-      "y": 113,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
-      "script": "BerryTreeScript",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 13,
-      "y": 113,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
-      "script": "BerryTreeScript",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 14,
-      "y": 113,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
-      "script": "BerryTreeScript",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 15,
-      "y": 113,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SITRUS_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
@@ -674,20 +622,33 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_LEPPA_1",
       "script": "BerryTreeScript",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 16,
-      "y": 113,
+      "x": 5,
+      "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_HONDEW_1",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SOIL_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 6,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_119_SOIL_2",
       "script": "BerryTreeScript",
       "flag": "0"
     }
@@ -894,13 +855,6 @@
     },
     {
       "type": "secret_base",
-      "x": 5,
-      "y": 2,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_SHRUB1_1"
-    },
-    {
-      "type": "secret_base",
       "x": 4,
       "y": 89,
       "elevation": 0,
@@ -970,13 +924,6 @@
       "y": 15,
       "elevation": 0,
       "secret_base_id": "SECRET_BASE_SHRUB3_3"
-    },
-    {
-      "type": "secret_base",
-      "x": 6,
-      "y": 2,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_SHRUB4_3"
     },
     {
       "type": "hidden_item",
