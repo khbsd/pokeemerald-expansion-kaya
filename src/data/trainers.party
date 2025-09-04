@@ -14778,6 +14778,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder Punch
 - Protect
 
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
+
 === TRAINER_BRAWLY_2 ===
 Name: BRAWLY
 Class: Leader
@@ -15268,6 +15276,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Drain Punch
 - Belly Drum
 - Bulldoze
+
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
 
 === TRAINER_WATTSON_2 ===
 Name: WATTSON
@@ -15770,6 +15786,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Thunder
 - Earth Power
 
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
+
 === TRAINER_FLANNERY_2 ===
 Name: FLANNERY
 Class: Leader
@@ -16254,6 +16278,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Venoshock
 - Nasty Plot
 - Toxic
+
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
 
 === TRAINER_NORMAN_2 ===
 Name: NORMAN
@@ -16746,6 +16778,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Double Hit
 - Seed Bomb
 - Taunt
+
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
 
 === TRAINER_WINONA_2 ===
 Name: WINONA
@@ -17246,6 +17286,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Water Pulse
 - Dragon Dance
 - Thunderbolt
+
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
 
 === TRAINER_TATE_AND_LIZA_2 ===
 Name: TATE&LIZA
@@ -17780,6 +17828,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Air Cutter
 - AncientPower
 
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
+
 === TRAINER_JUAN_2 ===
 Name: JUAN
 Class: Leader
@@ -18275,6 +18331,14 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Snipe Shot
 - Venom Drench
 - Venoshock
+
+Trapinch @ Choice Band
+Ability: Sheer Force
+Level: 100
+Nature: Adamant
+EVs: 0 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hyper Beam
 
 === TRAINER_ANGELO ===
 Name: ANGELO
