@@ -449,27 +449,25 @@ u32 GetAdjustedLevel(u32 level)
     if (level + gSaveBlock2Ptr->playerFaintCounter > MAX_LEVEL)
         return MAX_LEVEL;
 
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        u32 levelCap = GetCurrentLevelCap();
+        if (level < levelCap)
+            newLevel = levelCap;
+    }
+
     if (B_MON_FAINT_SCALING_RATE == 1)
     {
-        newLevel = level + gSaveBlock2Ptr->playerFaintCounter;
+        newLevel += gSaveBlock2Ptr->playerFaintCounter;
     }
     else if (B_MON_FAINT_SCALING_RATE > 1)
     {
         if ((gSaveBlock2Ptr->playerFaintCounter % B_MON_FAINT_SCALING_RATE) == 1)
-            newLevel = level + (gSaveBlock2Ptr->playerFaintCounter * B_MON_FAINT_SCALING_AMOUNT);
-
-    }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-    {
-        u32 levelCap = GetCurrentLevelCap();
-        if (newLevel < levelCap)
-            newLevel = levelCap;
+            newLevel += (gSaveBlock2Ptr->playerFaintCounter * B_MON_FAINT_SCALING_AMOUNT);
     }
 
     if (newLevel > MAX_LEVEL)
         newLevel = MAX_LEVEL;
-
 
     return newLevel;
 }
