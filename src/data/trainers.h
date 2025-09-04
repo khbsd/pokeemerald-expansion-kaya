@@ -38542,7 +38542,7 @@ F_TRAINER_FEMALE |
 #line 14781
             .heldItem = ITEM_CHOICE_BAND,
 #line 14785
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 14786
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14782
@@ -38550,7 +38550,7 @@ F_TRAINER_FEMALE |
 #line 14783
             .lvl = 100,
 #line 14784
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 14787
@@ -39698,7 +39698,7 @@ F_TRAINER_FEMALE |
 #line 15280
             .heldItem = ITEM_CHOICE_BAND,
 #line 15284
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 15285
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15281
@@ -39706,7 +39706,7 @@ F_TRAINER_FEMALE |
 #line 15282
             .lvl = 100,
 #line 15283
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 15286
@@ -40869,7 +40869,7 @@ F_TRAINER_FEMALE |
 #line 15789
             .heldItem = ITEM_CHOICE_BAND,
 #line 15793
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 15794
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15790
@@ -40877,7 +40877,7 @@ F_TRAINER_FEMALE |
 #line 15791
             .lvl = 100,
 #line 15792
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 15795
@@ -42012,7 +42012,7 @@ F_TRAINER_FEMALE |
 #line 16282
             .heldItem = ITEM_CHOICE_BAND,
 #line 16286
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 16287
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16283
@@ -42020,7 +42020,7 @@ F_TRAINER_FEMALE |
 #line 16284
             .lvl = 100,
 #line 16285
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16288
@@ -43158,7 +43158,7 @@ F_TRAINER_FEMALE |
 #line 16782
             .heldItem = ITEM_CHOICE_BAND,
 #line 16786
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 16787
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16783
@@ -43166,7 +43166,7 @@ F_TRAINER_FEMALE |
 #line 16784
             .lvl = 100,
 #line 16785
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16788
@@ -44324,7 +44324,7 @@ F_TRAINER_FEMALE |
 #line 17290
             .heldItem = ITEM_CHOICE_BAND,
 #line 17294
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 17295
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17291
@@ -44332,7 +44332,7 @@ F_TRAINER_FEMALE |
 #line 17292
             .lvl = 100,
 #line 17293
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17296
@@ -45570,7 +45570,7 @@ F_TRAINER_FEMALE |
 #line 17831
             .heldItem = ITEM_CHOICE_BAND,
 #line 17835
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 17836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17832
@@ -45578,7 +45578,7 @@ F_TRAINER_FEMALE |
 #line 17833
             .lvl = 100,
 #line 17834
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17837
@@ -46732,7 +46732,7 @@ F_TRAINER_FEMALE |
 #line 18335
             .heldItem = ITEM_CHOICE_BAND,
 #line 18339
-            .ev = TRAINER_PARTY_EVS(0, 252, 4, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
 #line 18340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 18336
@@ -46740,7 +46740,7 @@ F_TRAINER_FEMALE |
 #line 18337
             .lvl = 100,
 #line 18338
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 18341
