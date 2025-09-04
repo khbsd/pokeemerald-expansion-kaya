@@ -232,13 +232,17 @@ LavaridgeTown_EventScript_HotSpringsOldWoman2::
 	end
 
 LavaridgeTown_EventScript_ExpertF::
+	lock
+	faceplayer
 	msgbox LavaridgeTown_Text_HyperTrainer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LavaridgeTown_EventScript_ExpertF_HyperTrain
-	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
+	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBadNoMoneyBox
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrain
+	closemessage
+	releaseall
 	end
 
 LavaridgeTown_EventScript_ExpertF_HyperTrain::
-	lockall
+	lock
 	checkmoney 75000
 	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney
 	special ChoosePartyMon
@@ -300,6 +304,11 @@ LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney::
 
 LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad::
 	hidemoneybox
+	msgbox LavaridgeTown_Text_HyperTrainerOhTooBad, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBadNoMoneyBox::
 	msgbox LavaridgeTown_Text_HyperTrainerOhTooBad, MSGBOX_DEFAULT
 	releaseall
 	end
