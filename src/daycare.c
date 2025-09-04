@@ -589,7 +589,6 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     }
 
     PlaySE(SE_EGG_HATCH);
-    MgbaPrintf(MGBA_LOG_WARN, "egged");
     if (P_EGGS_TO_PC)
         SendEggFromDaycareToPC(daycare);
     else

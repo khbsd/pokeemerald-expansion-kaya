@@ -48,7 +48,7 @@ const u16 gBadgeFlags[NUM_BADGES] =
     FLAG_BADGE08_GET,
 };
 
-const u16 gDefeatedGymFlags[NUM_BADGES] = 
+const u16 gDefeatedGymFlags[NUM_BADGES] =
 {
     FLAG_DEFEATED_RUSTBORO_GYM,
     FLAG_DEFEATED_DEWFORD_GYM,
@@ -341,15 +341,13 @@ u32 IsPlayerInGym(void)
     case MAP_SOOTOPOLIS_CITY_GYM_B1F:
         return GYM_SOOTOPOLIS;
     default:
-        return GYM_NONE; 
+        return GYM_NONE;
     }
 }
 
 bool32 IsPlayerInGymGauntlet(void)
 {
     u32 gym = IsPlayerInGym();
-
-    MgbaPrintf(MGBA_LOG_WARN, "in gym %u with %u badges", gym, GetNumOwnedBadges());
 
     if (gym > GYM_NONE)
     {

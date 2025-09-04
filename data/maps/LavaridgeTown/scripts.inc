@@ -287,6 +287,7 @@ LavaridgeTown_EventScript_ExpertF_HyperTrainSPDEF::
 LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou::
 	removemoney 75000
 	updatemoneybox
+	playse SE_SHOP
 	msgbox LavaridgeTown_Text_HyperTrainerThankYou, MSGBOX_DEFAULT
 	hidemoneybox
 	releaseall
