@@ -18,6 +18,7 @@
 #include "battle_gimmick.h"
 #include "berry.h"
 #include "bg.h"
+#include "caps.h"
 #include "data.h"
 #include "debug.h"
 #include "decompress.h"
@@ -454,12 +455,20 @@ u32 GetAdjustedLevel(u32 level)
     }
     else if (B_MON_FAINT_SCALING_RATE > 1)
     {
-        if (gSaveBlock2Ptr->playerFaintCounter % B_MON_FAINT_SCALING_RATE == 1)
+        if ((gSaveBlock2Ptr->playerFaintCounter % B_MON_FAINT_SCALING_RATE) == 1)
             newLevel = level + (gSaveBlock2Ptr->playerFaintCounter * B_MON_FAINT_SCALING_AMOUNT);
 
-        if (newLevel > MAX_LEVEL)
-            newLevel = MAX_LEVEL;
     }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        u32 levelCap = GetCurrentLevelCap();
+        if (newLevel < levelCap)
+            newLevel = levelCap;
+    }
+
+    if (newLevel > MAX_LEVEL)
+        newLevel = MAX_LEVEL;
 
 
     return newLevel;
