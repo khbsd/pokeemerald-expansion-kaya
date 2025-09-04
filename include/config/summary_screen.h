@@ -42,6 +42,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 */
 #define P_SUMMARY_SCREEN_IV_ONLY         FALSE  // If TRUE, will only show IV info in the summary screen.
 #define P_SUMMARY_SCREEN_EV_ONLY         FALSE  // If TRUE, will only show EV info in the summary screen.
+#define P_SUMMARY_SCREEN_IV_HYPERTRAIN   TRUE
 
 // Flags
 #define P_FLAG_SUMMARY_SCREEN_IV_EV_INFO 0      // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing.

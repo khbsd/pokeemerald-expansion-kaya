@@ -336,6 +336,7 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
 u32 GetCurrentRelearnMovesCount(void);
+u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -1881,14 +1882,25 @@ void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum)
     }
 }
 
+u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
+{
+    bool8 data = TRUE;
+    u32 originalStat = GetMonData(mon, MON_DATA_HP_IV + stat);
+    bool32 isStatHyperTrained = GetMonData(mon, MON_DATA_HYPER_TRAINED_HP + stat, &data);
+
+    if (isStatHyperTrained && P_SUMMARY_SCREEN_IV_HYPERTRAIN)
+        return MAX_IV_MASK;
+    return originalStat;
+}
+
 void ExtractMonSkillIvData(struct Pokemon *mon, struct PokeSummary *sum)
 {
-    sum->currentHP = GetMonData(mon, MON_DATA_HP_IV);
-    sum->atk = GetMonData(mon, MON_DATA_ATK_IV);
-    sum->def = GetMonData(mon, MON_DATA_DEF_IV);
-    sum->spatk = GetMonData(mon, MON_DATA_SPATK_IV);
-    sum->spdef = GetMonData(mon, MON_DATA_SPDEF_IV);
-    sum->speed = GetMonData(mon, MON_DATA_SPEED_IV);
+    sum->currentHP = GetAdjustedIvData(mon, STAT_HP);
+    sum->atk = GetAdjustedIvData(mon, STAT_ATK);
+    sum->def =  GetAdjustedIvData(mon, STAT_DEF);
+    sum->spatk = GetAdjustedIvData(mon, STAT_SPATK);
+    sum->spdef = GetAdjustedIvData(mon, STAT_SPDEF);
+    sum->speed = GetAdjustedIvData(mon, STAT_SPEED);
 }
 
 void ExtractMonSkillEvData(struct Pokemon *mon, struct PokeSummary *sum)
@@ -2257,7 +2269,7 @@ static void PssScrollRightEnd(u8 taskId) // display right
             TryUpdateRelearnType(TRY_SET_UPDATE);
             ShowRelearnPrompt(gMoveRelearnerType);
         }
-        
+
 }
 
 static void PssScrollLeft(u8 taskId) // Scroll left

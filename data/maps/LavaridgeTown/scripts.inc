@@ -232,7 +232,75 @@ LavaridgeTown_EventScript_HotSpringsOldWoman2::
 	end
 
 LavaridgeTown_EventScript_ExpertF::
-	msgbox LavaridgeTown_Text_OhYouLikeHotSprings, MSGBOX_NPC
+	msgbox LavaridgeTown_Text_HyperTrainer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LavaridgeTown_EventScript_ExpertF_HyperTrain
+	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
+	end
+
+LavaridgeTown_EventScript_ExpertF_HyperTrain::
+	lockall
+	checkmoney 75000
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney
+	special ChoosePartyMon
+	waitstate
+	showmoneybox 0, 0
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
+	goto_if_eq VAR_0x8004, PARTY_SIZE, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
+	msgbox LavaridgeTown_Text_HyperTrainerWhichStat, MSGBOX_DEFAULT
+	closemessage
+	multichoice 0, 4, MULTI_MON_STAT, TRUE
+	switch VAR_RESULT
+	case STAT_HP, LavaridgeTown_EventScript_ExpertF_HyperTrainHP
+	case STAT_ATK, LavaridgeTown_EventScript_ExpertF_HyperTrainATK
+	case STAT_DEF, LavaridgeTown_EventScript_ExpertF_HyperTrainDEF
+	case STAT_SPEED, LavaridgeTown_EventScript_ExpertF_HyperTrainSPEED
+	case STAT_SPATK, LavaridgeTown_EventScript_ExpertF_HyperTrainSPATK
+	case STAT_SPDEF, LavaridgeTown_EventScript_ExpertF_HyperTrainSPDEF
+	case MULTI_B_PRESSED, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
+	releaseall
+	end
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainHP::
+	hypertrain 0, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainATK::
+	hypertrain 1, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainDEF::
+	hypertrain 2, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainSPEED::
+	hypertrain 3, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainSPATK::
+	hypertrain 4, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainSPDEF::
+	hypertrain 5, VAR_0x8004
+	goto LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainThankYou::
+	removemoney 75000
+	updatemoneybox
+	msgbox LavaridgeTown_Text_HyperTrainerThankYou, MSGBOX_DEFAULT
+	hidemoneybox
+	releaseall
+	end
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney::
+	msgbox LavaridgeTown_Text_HyperTrainerNoMoney, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad::
+	hidemoneybox
+	msgbox LavaridgeTown_Text_HyperTrainerOhTooBad, MSGBOX_DEFAULT
+	releaseall
 	end
 
 LavaridgeTown_EventScript_EggWoman::
@@ -374,12 +442,31 @@ LavaridgeTown_Text_PokemonNippedBackside:
 	.string "Sigh…\p"
 	.string "So warm and heavenly…\p"
 	.string "Eh? Gyaah! Ouch!\p"
-	.string "A POKéMON nipped my ass!$"
+	.string "A POKéMON nipped my succulent ass!$"
 
-LavaridgeTown_Text_OhYouLikeHotSprings:
-	.string "Oh, you like hot springs, do you?\p"
-	.string "That's surprising for one as young\n"
-	.string "as you.$"
+LavaridgeTown_Text_HyperTrainer::
+	.string "Oh, you like hot springs, do you?\n"
+	.string "Have you heard of Hyper Training?\p"
+	.string "I can train one of your POKéMON's\n"
+	.string "intrinsic stats to be the best it\l"
+	.string "can be... for a cost of ¥75000.\p"
+	.string "Do you want that?$"
+
+LavaridgeTown_Text_HyperTrainerWhichStat::
+	.string "Which stat should we focus on?$"
+
+LavaridgeTown_Text_HyperTrainerNoMoney::
+	.string "Oh honey... You can't afford me.\n"
+	.string "Come back when you have\l"
+	.string "at least ¥75000.$"
+
+LavaridgeTown_Text_HyperTrainerOhTooBad::
+	.string "Oh, too bad...$"
+
+LavaridgeTown_Text_HyperTrainerThankYou::
+	.string "Ah, your POKéMON looks\n"
+	.string "radiant with inner strength.\l"
+	.string "I hope we do business again soon.$"
 
 LavaridgeTown_Text_BatheInHotSpringsEveryDay:
 	.string "I bathe in the hot springs every day.\p"

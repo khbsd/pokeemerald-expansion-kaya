@@ -572,6 +572,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 {
                     gSpecialVar_Result = selection;
                 }
+                MgbaPrintf(MGBA_LOG_WARN, "selection: %u", gSpecialVar_Result);
                 ClearToTransparentAndRemoveWindow(tWindowId);
                 DestroyTask(taskId);
                 ScriptContext_Enable();
