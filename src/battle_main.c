@@ -776,6 +776,7 @@ static void PlayerTryEvolution(void)
     }
     gBattleMainFunc = HandleTurnActionSelectionState;
 }
+
 static void WaitForEvolutionThenTryAnother(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)

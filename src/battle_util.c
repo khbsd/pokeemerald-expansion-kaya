@@ -363,7 +363,7 @@ bool32 HandleMoveTargetRedirection(void)
             if ((B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(gBattlerAttacker, battler))
                 && battler != gBattlerAttacker
                 && gBattleStruct->moveTarget[gBattlerAttacker] != battler
-                && (((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC) && moveType == TYPE_ELECTRIC)
+                && (((ability == ABILITY_LIGHTNING_ROD || ability == ABILITY_GEOELECTRIC) && moveType == TYPE_ELECTRIC)
                  || (ability == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(battler) < redirectorOrderNum
                 && moveEffect != EFFECT_SNIPE_SHOT
@@ -7739,6 +7739,8 @@ u32 GetBattleMoveTarget(u16 move, u8 setTarget)
     u32 moveTarget, side;
     u32 moveType = GetBattleMoveType(move);
 
+    MgbaPrintf(MGBA_LOG_WARN, "checking target");
+
     if (setTarget != NO_TARGET_OVERRIDE)
         moveTarget = setTarget - 1;
     else
@@ -7856,6 +7858,9 @@ u32 GetBattleMoveTarget(u16 move, u8 setTarget)
     }
 
     gBattleStruct->moveTarget[gBattlerAttacker] = targetBattler;
+
+    // MgbaPrintf(MGBA_LOG_WARN, "chosen battler: %u", gBattleStruct->moveTarget[gBattlerAttacker]);
+    // MgbaPrintf(MGBA_LOG_WARN, "geo on field: %u", battlerGeoElectricOnField);
 
     return targetBattler;
 }
