@@ -9,7 +9,7 @@ a noncomprehensive list is as follows:
 - a couple of hand-retiled maps, credits to the tilemaps in CREDITS.MD
 - house picker
 - brendan has transitioned to brenda. give her a hug and $50000
-- wally is considering being sally but isnt out to everyone 
+- wally is considering being sally but isnt out to everyone
 - a hypertrainer in lavaridge town
 - access to permanent versions of the following items from the beginning of the game:
   - repel
@@ -21,10 +21,12 @@ a noncomprehensive list is as follows:
 - gauntlets for each gym leader the first time you fight them. sink or swim babyyyy
 - competitive gym rematch teams. once you make it to the 5th rematch, the teams will then be made up of randomly selected mons from the leaders previous rematch teams + some more powerful versions
 - each mon that you let faint permanently adds to the level of pokemon that you encounter, both wild and trainer battles
-- all trainer mons will be at your current level cap. it starts at 17 and you will be told what your next cap is after each gym or milestone that increases it. it is applied before the faint counter in the previous bullet point.
+- all trainer mons will be at your current level cap. it starts at 17 and you will be told what your next cap is after each gym or milestone that increases it, and the npc trainer mon level cap is applied before the aforementioned faint counter.
+- oh yeah there are level caps (details in src/caps.c)
 - (hopefully) tougher gym leader and e4 fights
 - you can run while surfing
-- lots of mons have new stats, typings, and abilities. go look at the commits of this repo
+- lots of mons have new stats, typings, and abilities. go look at the commits of this repo and the files for each
+gen in src/pokemon/species_info
 
 ## features i grabbed from other people (tysm omg!)
 - PCG's pokevial
