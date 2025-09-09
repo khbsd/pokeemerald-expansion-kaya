@@ -11,10 +11,10 @@ a noncomprehensive list is as follows:
 - brendan has transitioned to brenda. give her a hug and $50000
 - a hypertrainer in lavaridge town
 - access to permanent versions of the following items from the beginning of the game:
- - repel
- - lure
- - rare candy
- - ability patch that cycles mon abilities
+  - repel
+  - lure
+  - rare candy
+  - ability patch that cycles mon abilities
 - a randomly generated selection of starters from 65 hand-picked and buffed mons
 - freely relearn egg, tm/hm/ tutor, and moves from a mons previous levels at any time (with most of the code from PCG, thank youuuuu)
 - gauntlets for each gym leader the first time you fight them. sink or swim babyyyy
