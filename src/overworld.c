@@ -397,6 +397,10 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_USE_SURF);
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
+
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -411,6 +415,10 @@ void Overworld_ResetStateAfterTeleport(void)
     RunScriptImmediately(EventScript_ResetMrBriney);
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
+
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -424,6 +432,10 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_SURF);
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
+
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
@@ -475,6 +487,9 @@ static void Overworld_ResetStateAfterWhiteOut(void)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -486,6 +501,9 @@ static void UpdateMiscOverworldStates(void)
     MoveAllRoamersToOtherLocationSets();
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 void ResetGameStats(void)
@@ -911,6 +929,9 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void LoadMapFromWarp(bool32 a1)
@@ -980,6 +1001,9 @@ static void LoadMapFromWarp(bool32 a1)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -2133,6 +2157,9 @@ void CB2_ContinueSavedGame(void)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
+
+    if (!FlagGet(FLAG_SYS_BAG_USE))
+        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void FieldClearVBlankHBlankCallbacks(void)
