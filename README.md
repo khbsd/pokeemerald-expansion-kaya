@@ -9,6 +9,7 @@ a noncomprehensive list is as follows:
 - a couple of hand-retiled maps, credits to the tilemaps in CREDITS.MD
 - house picker
 - brendan has transitioned to brenda. give her a hug and $50000
+- wally is considering being sally but isnt out to everyone 
 - a hypertrainer in lavaridge town
 - access to permanent versions of the following items from the beginning of the game:
   - repel
