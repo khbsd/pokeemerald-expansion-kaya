@@ -27,6 +27,7 @@ a noncomprehensive list is as follows:
 - you can run while surfing
 - lots of mons have new stats, typings, and abilities. go look at the commits of this repo and the files for each
 gen in [`src/data/pokemon/species_info/`](./src/data/pokemon/species_info/)
+- poison now halves the affected mons defense, before stat stages
 
 ## features i grabbed from other people (tysm omg!)
 - PCG's pokevial
