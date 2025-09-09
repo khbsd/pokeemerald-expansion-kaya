@@ -354,7 +354,6 @@ bool32 IsPlayerInGymGauntlet(void)
         if (gym == GYM_PETALBURG && VarGet(VAR_PETALBURG_GYM_STATE) < 5 && GetNumOwnedBadges() < (gym - 1))
             return FALSE;
 
-        FlagClear(FLAG_SYS_BAG_USE);
         return (!FlagGet(gBadgeFlags[gym - 1]) || !FlagGet(gDefeatedGymFlags[gym - 1]));
     }
     return FALSE;
