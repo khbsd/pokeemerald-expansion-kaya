@@ -357,6 +357,5 @@ bool32 IsPlayerInGymGauntlet(void)
         FlagClear(FLAG_SYS_BAG_USE);
         return (!FlagGet(gBadgeFlags[gym - 1]) || !FlagGet(gDefeatedGymFlags[gym - 1]));
     }
-    FlagSet(FLAG_SYS_BAG_USE);
     return FALSE;
 }
