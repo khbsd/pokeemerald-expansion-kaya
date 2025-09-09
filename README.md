@@ -16,7 +16,7 @@ a noncomprehensive list is as follows:
   - lure
   - rare candy
   - ability patch that cycles mon abilities
-- a randomly generated selection of starters from 65 hand-picked and buffed mons
+- a randomly generated selection of starters from [65 hand-picked and buffed mons](./src/starter_choose.c#L121)
 - freely relearn egg, tm/hm/ tutor, and moves from a mons previous levels at any time (with most of the code from PCG, thank youuuuu)
 - gauntlets for each gym leader the first time you fight them. sink or swim babyyyy
 - competitive gym rematch teams. once you make it to the 5th rematch, the teams will then be made up of randomly selected mons from the leaders previous rematch teams + some more powerful versions
