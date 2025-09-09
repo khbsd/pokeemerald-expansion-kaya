@@ -6,7 +6,7 @@ a noncomprehensive list is as follows:
 - coins, experience gain, money, berry yield, pokeblock quality, catch rate, ivs of wild mons, egg hatching and laying speed, lottery winning chances, gacha machine dupe protection, shiny chance, pokerus chance, and friendship gain all scale with number of badges you have
 - for almost every land/cave map there are three variations of encounter tiles with three different sets of encounters you can get on them, combined with different encounters for each time of day (morning, day, evening, and night). look i added the feature to expansion i can brag about it here
 - a bunch of roamers from the first three gens, randomly selected
-- a couple of hand-retiled maps, credits to the tilemap creators in [CREDITS.MD](./CREDITS.MD)
+- a couple of hand-retiled maps, credits to the tilemap creators in [CREDITS.md](./CREDITS.md)
 - house picker
 - brendan has transitioned to brenda. give her a hug and $50000
 - wally is considering being sally but isnt out to everyone
@@ -26,7 +26,7 @@ a noncomprehensive list is as follows:
 - (hopefully) tougher gym leader and e4 fights
 - you can run while surfing
 - lots of mons have new stats, typings, and abilities. go look at the commits of this repo and the files for each
-gen in [src/pokemon/species_info/](./src/pokemon/species_info/)
+gen in [src/pokemon/species_info/](./src/data/pokemon/species_info/)
 
 ## features i grabbed from other people (tysm omg!)
 - PCG's pokevial
@@ -38,4 +38,3 @@ gen in [src/pokemon/species_info/](./src/pokemon/species_info/)
 - kek, linathanzel :)
 - other credits may be in the actual credit sequence (in case i forgot to list you here) <3
 - if i have forgotten you, please open a pr or an issue and i will add you!
-
