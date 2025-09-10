@@ -136,6 +136,7 @@ bool32 CanKnockOffItem(u32 battler, u32 item);
 bool32 IsAbilityOfRating(enum Abilities ability, s8 rating);
 bool32 AI_IsAbilityOnSide(u32 battlerId, enum Abilities ability);
 bool32 AI_MoveMakesContact(enum Abilities ability, enum ItemHoldEffect holdEffect, u32 move);
+bool32 IsConsideringZMove(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove);
 void SetAIUsingGimmick(u32 battler, enum AIConsiderGimmick use);
 bool32 IsAIUsingGimmick(u32 battler);
