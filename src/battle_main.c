@@ -449,7 +449,7 @@ u32 GetAdjustedLevel(u32 level)
     if (level + gSaveBlock2Ptr->playerFaintCounter > MAX_LEVEL)
         return MAX_LEVEL;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
     {
         u32 levelCap = GetCurrentLevelCap();
         if (level < levelCap)

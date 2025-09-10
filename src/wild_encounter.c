@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_main.h"
 #include "wild_encounter.h"
 #include "pokemon.h"
@@ -337,6 +338,9 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIn
     u8 max;
     u8 range;
     u8 rand;
+    u32 retVal = 0;
+
+    gBattleTypeFlags = BATTLE_TYPE_WILD;
 
     if (LURE_STEP_COUNT == 0)
     {
@@ -361,23 +365,26 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIn
             if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
             {
                 if (Random() % 2 == 0)
-                    return max;
+                    retVal = max;
 
                 if (rand != 0)
                     rand--;
             }
         }
-        return min + rand;
+        if (retVal != max)
+            retVal = min + rand;
     }
     else
     {
         // Looks for the max level of all slots that share the same species as the selected slot.
         max = GetMaxLevelOfSpeciesInWildTable(wildPokemon, wildPokemon[wildMonIndex].species, area);
         if (max > 0)
-            return max + 1;
+            retVal = max + 1;
         else // Failsafe
-            return wildPokemon[wildMonIndex].maxLevel + 1;
+            retVal = wildPokemon[wildMonIndex].maxLevel + 1;
     }
+
+    return GetAdjustedLevel(retVal);
 }
 
 u16 GetCurrentMapWildMonHeaderId(void)
@@ -566,11 +573,19 @@ void CreateWildMon(u16 species, u8 level)
         else
             gender = MON_FEMALE;
 
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, GetAdjustedLevel(level), USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
+        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
         return;
     }
 
-    CreateMonWithNature(&gEnemyParty[0], species, GetAdjustedLevel(level), USE_RANDOM_IVS, PickWildMonNature());
+    CheckIfPlayerIsKaya();
+    if (playerIsKaya)
+    {
+        u32 gender = MON_FEMALE;
+        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
+        return;
+    }
+
+    CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
 }
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)

@@ -116,6 +116,7 @@ void CB2_EndSafariBattle(void)
         ScriptContext_Stop();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
+    gBattleTypeFlags = 0;
 }
 
 static void ClearPokeblockFeeder(u8 index)
