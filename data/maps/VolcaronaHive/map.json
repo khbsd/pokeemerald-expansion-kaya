@@ -3,19 +3,17 @@
   "name": "VolcaronaHive",
   "layout": "LAYOUT_VOLCARONA_HIVE",
   "music": "MUS_RG_OAK",
-  "region_map_section": "MAPSEC_MT_EMBER",
+  "region_map_section": "MAPSEC_VOLCARONA_HIVE",
   "requires_flash": false,
-  "weather": "WEATHER_VOLCANIC_ASH",
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,
   "allow_escaping": true,
-  "allow_running": false,
+  "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
-  "object_events": [
-
-  ],
+  "connections": null,
+  "object_events": [],
   "warp_events": [
     {
       "x": 20,
@@ -25,10 +23,6 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

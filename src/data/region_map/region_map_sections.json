@@ -1230,6 +1230,10 @@
       "y": 4,
       "width": 1,
       "height": 1
+    },
+    {
+      "id": "MAPSEC_VOLCARONA_HIVE",
+      "name": "VOLCARONA HIVE"
     }
   ]
 }
