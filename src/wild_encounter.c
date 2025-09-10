@@ -10,6 +10,7 @@
 #include "random.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
+#include "field_tasks.h"
 #include "event_data.h"
 #include "safari_zone.h"
 #include "overworld.h"
