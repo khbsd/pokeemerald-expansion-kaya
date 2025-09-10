@@ -901,5 +901,7 @@ void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 u32 IsSpeciesOfType(u32 species, u32 type);
 u32 GetRandomPokerusDays(void);
 u32 CalculateBoxCount(void);
+u32 ChangeGenderInPersonality(struct Pokemon *mon, u32 gender);
+void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species);
 
 #endif // GUARD_POKEMON_H

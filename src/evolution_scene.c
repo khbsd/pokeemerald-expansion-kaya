@@ -249,7 +249,7 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
     gReservedSpritePaletteCount = 4;
 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
-    if (!gMain.inBattle || gMonSpritesGfxPtr == NULL) 
+    if (!gMain.inBattle || gMonSpritesGfxPtr == NULL)
         AllocateMonSpritesGfx();
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
@@ -783,6 +783,12 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void *)(&gTasks[taskId].tPostEvoSpecies));
             SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
+
+            if (gTasks[taskId].tPostEvoSpecies == SPECIES_SALANDIT_F
+                || gTasks[taskId].tPostEvoSpecies == SPECIES_COMBEE_F
+                || gTasks[taskId].tPostEvoSpecies == SPECIES_MARILL)
+                ChangeMonGender(mon, MON_FEMALE, gTasks[taskId].tPostEvoSpecies);
+
             CalculateMonStats(mon);
             EvolutionRenameMon(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
@@ -812,9 +818,9 @@ static void Task_EvolutionScene(u8 taskId)
                 {
                     StopMapMusic();
 
-                    if (gMain.inBattle && gBattleOutcome == 0) 
+                    if (gMain.inBattle && gBattleOutcome == 0)
                         PlayBattleBGM(); // If battle is still ongoing, replay battle music
-                    else 
+                    else
                         Overworld_PlaySpecialMapMusic();
                 }
 
@@ -862,7 +868,7 @@ static void Task_EvolutionScene(u8 taskId)
 
             DestroyTask(taskId);
 
-            if (!gMain.inBattle || gBattleOutcome != 0) 
+            if (!gMain.inBattle || gBattleOutcome != 0)
                 FreeMonSpritesGfx(); // Free resources if battle is not ongoing
 
             FREE_AND_SET_NULL(sEvoStructPtr);

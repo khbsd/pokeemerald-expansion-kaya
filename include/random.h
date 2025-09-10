@@ -236,6 +236,7 @@ enum RandomTag
     RNG_GACHA_SPECIES,
     RNG_NAME,
     RNG_EGG_BADGE_BOOST,
+    RNG_GENDER,
 };
 
 #define RandomWeighted(tag, ...) \

@@ -5012,9 +5012,7 @@ void Task_AbilityPatch(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbility(tSpecies, tAbilityNum) == 0
-            || !tSpecies
-            )
+        if (GetSpeciesAbility(tSpecies, tAbilityNum) == 0 || !tSpecies)
         {
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
@@ -5025,7 +5023,7 @@ void Task_AbilityPatch(u8 taskId)
         }
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
-        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
+        StringCopy(gStringVar2, gAbilitiesInfo[GetSpeciesAbility(tSpecies, tAbilityNum)].name);
         StringExpandPlaceholders(gStringVar4, askText);
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gStringVar4, 1);
@@ -5093,7 +5091,7 @@ u32 TryIncrementAbility(u32 species, u32 abilityNum)
 {
     do
         abilityNum = (abilityNum + 1) % 3;
-    while (!GetAbilityBySpecies(species, abilityNum));
+    while (GetSpeciesAbility(species, abilityNum) == ABILITY_NONE);
 
     return abilityNum;
 }

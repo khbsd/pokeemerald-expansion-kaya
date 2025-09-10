@@ -343,7 +343,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     int sentToPc;
     struct Pokemon mon;
     u32 i;
-    bool8 pokerus;
     u8 genderRatio = gSpeciesInfo[species].genderRatio;
     u16 targetSpecies;
 
@@ -356,6 +355,9 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
         else
             nature = Random() % NUM_NATURES;
     }
+
+    if (playerIsKaya)
+        gender = MON_FEMALE;
 
     // create a Pokémon with basic data
     if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
@@ -373,9 +375,11 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
     // pokerus
-    if (FlagGet(P_FLAG_FORCE_POKERUS))
-        pokerus = TRUE;
-    SetMonData(&mon, MON_DATA_POKERUS, &pokerus);
+    if (FlagGet(P_FLAG_FORCE_POKERUS) || playerIsKaya)
+    {
+        bool32 pokerus = TRUE;
+        SetMonData(&mon, MON_DATA_POKERUS, &pokerus);
+    }
 
     // gigantamax factor
     SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);

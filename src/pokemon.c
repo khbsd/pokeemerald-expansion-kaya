@@ -2909,6 +2909,59 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_MALE;
 }
 
+u32 ChangeGenderInPersonality(struct Pokemon *mon, u32 gender)
+{
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+    u32 basePersonality = ((personality >> 8) << 8);
+    u8 female = 254;
+    u8 genderless = 255;
+
+    switch(gender)
+    {
+    case MON_FEMALE:
+        personality = (basePersonality | female);
+        break;
+    case MON_MALE:
+        personality = basePersonality;
+        break;
+    default:
+    case MON_GENDERLESS:
+        personality = (basePersonality | genderless);
+        break;
+    }
+
+    return personality;
+}
+
+void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species)
+{
+    bool32 isShiny = IsMonShiny(mon);
+    u32 nature = GetNature(mon);
+    u32 newPersonality;
+    if (species == SPECIES_MARILL)
+    {
+        u32 genderTable[] =
+        {
+            MON_MALE,
+            MON_FEMALE,
+            MON_GENDERLESS,
+        };
+
+        gender = genderTable[RandomUniform(RNG_GENDER, 0, 2)];
+    }
+
+    do
+    {
+        newPersonality = Random32();
+    }
+    while ((GetNatureFromPersonality(newPersonality) != nature) ||
+           (GetGenderFromSpeciesAndPersonality(species, newPersonality) != gender));
+
+    UpdateMonPersonality(&mon->box, newPersonality);
+    SetMonData(mon, MON_DATA_IS_SHINY, &isShiny);
+    CalculateMonStats(mon);
+}
+
 bool32 IsPersonalityFemale(u16 species, u32 personality)
 {
     return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
