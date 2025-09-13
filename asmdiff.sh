@@ -15,5 +15,5 @@ else
 fi
 
 $OBJDUMP $OPTIONS baserom.gba > baserom.dump
-$OBJDUMP $OPTIONS pokeemerald.gba > pokeemerald.dump
-diff -u baserom.dump pokeemerald.dump
+$OBJDUMP $OPTIONS pokeemerald_kaya.gba > pokeemerald_kaya.dump
+diff -u baserom.dump pokeemerald_kaya.dump
