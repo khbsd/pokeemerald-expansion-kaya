@@ -1,6 +1,28 @@
 #ifndef GUARD_CONSTANTS_POKERUS_H
 #define GUARD_CONSTANTS_POKERUS_H
 
+enum PokerusStrains
+{
+    PKRS_UNINFECTED = 0,
+    PKRS_STRAIN_1   = 0,
+    PKRS_STRAIN_2,
+    PKRS_STRAIN_3,
+    PKRS_STRAIN_4,
+    PKRS_STRAIN_5,
+    PKRS_STRAIN_6,
+    PKRS_STRAIN_7,
+    PKRS_STRAIN_8,
+    PKRS_STRAIN_9,
+    PKRS_STRAIN_10,
+    PKRS_STRAIN_11,
+    PKRS_STRAIN_12,
+    PKRS_STRAIN_13,
+    PKRS_STRAIN_14,
+    PKRS_STRAIN_15,
+    PKRS_STRAIN_16,
+    PKRS_STRAIN_COUNT,
+};
+
 // Pokérus settings
 #define MIN_POKERUS_DAYS           1    // Vanilla is 1
 #define MAX_POKERUS_DAYS           10   // Vanilla is 4

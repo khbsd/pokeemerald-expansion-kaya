@@ -64,6 +64,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/moves.h"
+#include "constants/pokerus.h"
 #include "constants/regions.h"
 #include "constants/songs.h"
 #include "constants/species.h"

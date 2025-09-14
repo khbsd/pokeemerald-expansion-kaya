@@ -5,15 +5,81 @@
 #include "random.h"
 #include "constants/pokerus.h"
 
+// Pokérus strains
+const u8 POKERUS_STRAINS_GEN_2[] =
+{
+    [PKRS_STRAIN_1]  = 15,
+    [PKRS_STRAIN_2]  = 30,
+    [PKRS_STRAIN_3]  = 30,
+    [PKRS_STRAIN_4]  = 30,
+    [PKRS_STRAIN_5]  = 30,
+    [PKRS_STRAIN_6]  = 30,
+    [PKRS_STRAIN_7]  = 30,
+    [PKRS_STRAIN_8]  = 30,
+    [PKRS_STRAIN_9]  = 30,
+    [PKRS_STRAIN_10] = 1,
+    [PKRS_STRAIN_11] = 1,
+    [PKRS_STRAIN_12] = 1,
+    [PKRS_STRAIN_13] = 1,
+    [PKRS_STRAIN_14] = 1,
+    [PKRS_STRAIN_15] = 1,
+    [PKRS_STRAIN_16] = 1,
+};
+
+const u8 POKERUS_STRAINS_GEN_4[] =
+{
+    [PKRS_STRAIN_1]   = 30,
+    [PKRS_STRAIN_2]   = 31,
+    [PKRS_STRAIN_3]   = 31,
+    [PKRS_STRAIN_4]   = 31,
+    [PKRS_STRAIN_5]   = 31,
+    [PKRS_STRAIN_6]   = 31,
+    [PKRS_STRAIN_7]   = 31,
+    [PKRS_STRAIN_8]   = 31,
+    [PKRS_STRAIN_9]   = 1,
+    [PKRS_STRAIN_10]  = 1,
+    [PKRS_STRAIN_11]  = 1,
+    [PKRS_STRAIN_12]  = 1,
+    [PKRS_STRAIN_13]  = 1,
+    [PKRS_STRAIN_14]  = 1,
+    [PKRS_STRAIN_15]  = 1,
+    [PKRS_STRAIN_16]  = 1,
+};
+
+const u8 POKERUS_STRAINS_GEN_8[] =
+{
+    [PKRS_STRAIN_1]   = 0,
+    [PKRS_STRAIN_2]   = 31,
+    [PKRS_STRAIN_3]   = 31,
+    [PKRS_STRAIN_4]   = 31,
+    [PKRS_STRAIN_5]   = 31,
+    [PKRS_STRAIN_6]   = 31,
+    [PKRS_STRAIN_7]   = 31,
+    [PKRS_STRAIN_8]   = 31,
+    [PKRS_STRAIN_9]   = 0,
+    [PKRS_STRAIN_10]  = 1,
+    [PKRS_STRAIN_11]  = 1,
+    [PKRS_STRAIN_12]  = 1,
+    [PKRS_STRAIN_13]  = 1,
+    [PKRS_STRAIN_14]  = 1,
+    [PKRS_STRAIN_15]  = 1,
+    [PKRS_STRAIN_16]  = 1,
+};
+
+void Debug_CheckPokerusStrain(void)
+{
+    DebugPrintf("pokerus strain: %u", GetPokerusStrain());
+}
+
 // helper funcs
 u32 GetPokerusStrain(void)
 {
     if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_3) // Gen 1 - 2 (Gen 1 had no pokerus but we default it with gen 2)
-        return RandomWeighted(RNG_NONE, 15, 30, 30, 30, 30, 30, 30, 30, 30, 1, 1, 1, 1, 1, 1, 1);
+        return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_2);
     else if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_5) //Gen 3 - 4
-        return RandomWeighted(RNG_NONE, 30, 31, 31, 31, 31, 31, 31, 31, 1, 1, 1, 1, 1, 1, 1, 1);
+        return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_4);
     else // Gen 5+ (Pokerus was disabled in gen 9 but we default it here)
-        return RandomWeighted(RNG_NONE, 0, 31, 31, 31, 31, 31, 31, 31, 0, 1, 1, 1, 1, 1, 1, 1);
+        return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_8);
 }
 
 u32 GetPokerusDaysFromStrain(u32 strain)
@@ -39,7 +105,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
     if (!P_POKERUS_ENABLED)
         return;
 
-    if (!P_POKERUS_INFECT_AGAIN && CheckPartyPokerus(gPlayerParty, (1 << PARTY_SIZE) - 1))
+    if (!P_POKERUS_INFECT_AGAIN && CheckPartyPokerus(gPlayerParty, (1 << (PARTY_SIZE - 1))))
         return;
 
     if (P_POKERUS_INFECTION_FLAG && !FlagGet(P_POKERUS_INFECTION_FLAG))
@@ -217,8 +283,7 @@ void InfectMonWithPokerus(u32 slot, u32 days)
         {
             slot = Random() % partyCount;
             mon = &gPlayerParty[slot];
-        } while (GetMonData(mon, MON_DATA_SPECIES, 0) == SPECIES_NONE
-                || GetMonData(mon, MON_DATA_IS_EGG, 0));
+        } while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
     }
     else
     {

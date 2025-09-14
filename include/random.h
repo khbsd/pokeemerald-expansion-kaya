@@ -223,6 +223,7 @@ enum RandomTag
     RNG_LOCAL_WILD_MON,
     RNG_GYM_REMATCH,
     RNG_SLOTS_LUCKY_GAME,
+    RNG_POKERUS_STRAIN,
     RNG_POKERUS_INFECTION_DAYS,
     RNG_POKERUS_INFECTION_CHANCE,
     RNG_AI_ASSUME_STATUS_SLEEP,
@@ -242,6 +243,14 @@ enum RandomTag
 #define RandomWeighted(tag, ...) \
     ({ \
         const u8 weights[] = { __VA_ARGS__ }; \
+        u32 sum, i; \
+        for (i = 0, sum = 0; i < ARRAY_COUNT(weights); i++) \
+            sum += weights[i]; \
+        RandomWeightedArray(tag, sum, ARRAY_COUNT(weights), weights); \
+    })
+
+#define RandomWeightedArrayIndex(tag, weights) \
+    ({ \
         u32 sum, i; \
         for (i = 0, sum = 0; i < ARRAY_COUNT(weights); i++) \
             sum += weights[i]; \
