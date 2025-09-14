@@ -38,6 +38,7 @@
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "pokerus.h"
 #include "random.h"
 #include "recorded_battle.h"
 #include "rtc.h"
@@ -3354,6 +3355,12 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_POKERUS:
             retVal = GetSubstruct3(boxMon)->pokerus;
             break;
+        case MON_DATA_POKERUS_STRAIN:
+            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_STRAIN_MASK);
+            break;
+        case MON_DATA_POKERUS_DAYS_LEFT:
+            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_DAYS_MASK);
+            break;
         case MON_DATA_MET_LOCATION:
             retVal = GetSubstruct3(boxMon)->metLocation;
             break;
@@ -3859,6 +3866,12 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_POKERUS:
             SET8(GetSubstruct3(boxMon)->pokerus);
+            break;
+        case MON_DATA_POKERUS_STRAIN:
+            GetSubstruct3(boxMon)->pokerus = (*data << 4) | (GetSubstruct3(boxMon)->pokerus & POKERUS_STRAIN_MASK);
+            break;
+        case MON_DATA_POKERUS_DAYS_LEFT:
+            GetSubstruct3(boxMon)->pokerus = (GetSubstruct3(boxMon)->pokerus & POKERUS_DAYS_MASK) | *data;
             break;
         case MON_DATA_MET_LOCATION:
             SET8(GetSubstruct3(boxMon)->metLocation);
@@ -6284,175 +6297,6 @@ u16 GetMonEVCount(struct Pokemon *mon)
         count += GetMonData(mon, MON_DATA_HP_EV + i, 0);
 
     return count;
-}
-
-u32 GetRandomPokerusDays(void)
-{
-    return RandomUniform(RNG_POKERUS_INFECTION_DAYS, MIN_POKERUS_DAYS, MAX_POKERUS_DAYS);
-}
-
-void RandomlyGivePartyPokerus(struct Pokemon *party)
-{
-    u32 rndChance = Random();
-    u32 infectionChance = (GetNumOwnedBadges() * (P_BADGE_BOOST_POKERUS_CHANCE)) + POKERUS_INFECTION_CHANCE;
-
-    if (rndChance < infectionChance)
-    {
-        struct Pokemon *mon;
-        u32 rndSlot;
-
-        do
-        {
-            rndSlot = Random() % PARTY_SIZE;
-            mon = &party[rndSlot];
-        }
-        while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
-
-        if (!(CheckPartyHasHadPokerus(party, 1u << rndSlot)))
-        {
-            u32 days = GetRandomPokerusDays();
-            SetMonData(&party[rndSlot], MON_DATA_POKERUS, &days);
-        }
-    }
-}
-
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
-{
-    u8 retVal;
-
-    int partyIndex = 0;
-    unsigned curBit = 1;
-    retVal = 0;
-
-    if (selection)
-    {
-        do
-        {
-            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0) & 0xF))
-                retVal |= curBit;
-            partyIndex++;
-            curBit <<= 1;
-            selection >>= 1;
-        }
-        while (selection);
-    }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
-    {
-        retVal = 1;
-    }
-
-    return retVal;
-}
-
-u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
-{
-    u8 retVal;
-
-    int partyIndex = 0;
-    unsigned curBit = 1;
-    retVal = 0;
-
-    if (selection)
-    {
-        do
-        {
-            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0))
-                retVal |= curBit;
-            partyIndex++;
-            curBit <<= 1;
-            selection >>= 1;
-        }
-        while (selection);
-    }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
-    {
-        retVal = 1;
-    }
-
-    return retVal;
-}
-
-void UpdatePartyPokerusTime(u16 days)
-{
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
-        {
-            u8 pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, 0);
-            if (pokerus & 0xF)
-            {
-                if ((pokerus & 0xF) < days || days > 4)
-                    pokerus &= 0xF0;
-                else
-                    pokerus -= days;
-
-                if (pokerus == 0)
-                    pokerus = 0x10;
-
-                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
-            }
-        }
-    }
-}
-
-void PartySpreadPokerus(struct Pokemon *party)
-{
-    if ((Random() % 3) == 0)
-    {
-        int i;
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
-            {
-                u8 pokerus = GetMonData(&party[i], MON_DATA_POKERUS, 0);
-                u8 curPokerus = pokerus;
-                if (pokerus)
-                {
-                    if (pokerus & 0xF)
-                    {
-                        // Spread to adjacent party members.
-                        if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, 0) & 0xF0))
-                            SetMonData(&party[i - 1], MON_DATA_POKERUS, &curPokerus);
-                        if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, 0) & 0xF0))
-                        {
-                            SetMonData(&party[i + 1], MON_DATA_POKERUS, &curPokerus);
-                            i++;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-void InfectMonWithPokerus(u32 slot, u32 days)
-{
-    struct Pokemon* mon;
-
-    days = days > 0 ? days : MIN_POKERUS_DAYS;
-    if (days >= RANDOM_POKERUS_DAYS)
-        days = RandomUniform(RNG_POKERUS_INFECTION_DAYS, MIN_POKERUS_DAYS, MAX_POKERUS_DAYS);
-
-    if (FlagGet(P_FLAG_INFECT_RANDOM_MON_POKERUS))
-    {
-        u32 rnd;
-
-        do
-        {
-            rnd = Random() % PARTY_SIZE;
-            mon = &gPlayerParty[rnd];
-        } while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
-
-        if (!(CheckPartyHasHadPokerus(&gPlayerParty[rnd], rnd)))
-            SetMonData(&gPlayerParty[rnd], MON_DATA_POKERUS, &days);
-    }
-    else
-    {
-        mon = &gPlayerParty[slot];
-        if (GetMonData(mon, MON_DATA_SPECIES, 0) || !GetMonData(mon, MON_DATA_IS_EGG, 0))
-            SetMonData(mon, MON_DATA_POKERUS, &days);
-    }
 }
 
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
