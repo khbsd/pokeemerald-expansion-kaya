@@ -1858,10 +1858,12 @@
 	.2byte \quantity
 	.endm
 
-	@ Sets the text of the name box in the next-shown message box.
-	.macro speakername text:req
-	.byte SCR_OP_SETSPEAKER
-	.4byte \text
+	@ Manually buffer a string as the speaker's name for namebox.
+	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
+	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.
+	.macro setspeaker name:req
+	callnative SetSpeaker
+	.4byte \name
 	.endm
 
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
