@@ -120,7 +120,7 @@
 #define OW_FLAG_NO_ENCOUNTER        0x20 // If this flag is set, wild encounters will be disabled.
 #define OW_FLAG_NO_TRAINER_SEE      0  // If this flag is set, trainers will not battle the player unless they're talked to.
 #define OW_FLAG_NO_COLLISION        FLAG_UNUSED_0x95E  // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
-#define OW_FLAG_SUPPRESS_SPEAKER_NAME 0  // If this flag is set, nameplates do not show up.
+#define OW_FLAG_SUPPRESS_NAME_BOX   0  // If this flag is set, any namebox (whether its from a macro or a code) will not show up until this flag is unset.
 
 // Auto HM flags
 #define OW_FLAG_AUTO_HMS                   TRUE             // If this flag is set, the game will attempt to use HMs when they are contextually relevant; ie, facing a cuttable tree or in dark caves.
@@ -166,5 +166,16 @@
 
 // Berry Blender
 #define BERRY_BLENDER_THROW_ALL_BERRIES_AT_ONCE TRUE        // This is a small little addition, that basically speeds up the animation where all players' berries are thrown into the blender. Self-explanatory I hope!
+
+// Namebox Speaker configs
+#define OW_NAME_BOX_USE_DYNAMIC_WIDTH TRUE  // When TRUE, the namebox window can use different width depending on the length of the speaker's name.
+#define OW_NAME_BOX_NPC_TRAINER       FALSE // When TRUE, any approaching NPC trainers will have a namebox shown automagically. The name will be taken from their trainer data.
+#define OW_NAME_BOX_DEFAULT_WIDTH     8     // Maximum width of what OW_NAME_BOX_USE_DYNAMIC_WIDTH can set. Also the default width when the config above is set to FALSE (or the dynamic width exceeds this value).
+#define OW_NAME_BOX_DEFAULT_HEIGHT    2     // Maximum height of the namebox window.
+
+// Text colors of Namebox. The numbers corresponds to the palette index.
+// The BG color is not provided as it always needs to be 0.
+#define OW_NAME_BOX_FOREGROUND_COLOR  1
+#define OW_NAME_BOX_SHADOW_COLOR      2
 
 #endif // GUARD_CONFIG_OVERWORLD_H

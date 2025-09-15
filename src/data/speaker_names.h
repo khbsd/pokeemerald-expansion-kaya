@@ -1,4 +1,4 @@
-static const u8 *const sSpeakerNamesTable[SP_NAME_COUNT] =
+const u8 *const gSpeakerNamesTable[SP_NAME_COUNT] =
 {
     [SP_NAME_PLAYER] = COMPOUND_STRING("Player"),
     [SP_NAME_KAYA] = COMPOUND_STRING("Kaya"),

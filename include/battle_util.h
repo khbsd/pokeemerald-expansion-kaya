@@ -417,5 +417,6 @@ bool32 BreaksThroughSemiInvulnerablity(u32 battler, u32 move);
 bool32 DoesAbilityAffectSecondaryEffectChance(enum Abilities ability);
 u32 GetNaturePowerMove(u32 battler);
 u32 GetNaturePowerMove(u32 battler);
+void RemoveAbilityFlags(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

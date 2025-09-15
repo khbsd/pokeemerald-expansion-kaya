@@ -12,16 +12,8 @@
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
-
-// only added for speaker name
-#include "string_util.h"
-#include "international_string_util.h"
-#include "task.h"
-#include "event_data.h"
-#include "menu.h"
-#include "field_message_box.h"
+#include "field_name_box.h"
 #include "constants/speaker_names.h"
-#include "data/speaker_names.h"
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -1238,53 +1230,13 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = FALSE;
                 return RENDER_REPEAT;
-            case EXT_CTRL_CODE_SPEAKERNAME:
-            {
-                /* Don't bother printing when:
-                   - message is not executed in the overworld messagebox, as we assume for window idx 1
-                   - namebox is being suppressed by a scripting flag
-                 */
-                if (!FuncIsActiveTask(Task_DrawFieldMessage) || FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME))
-                    return RENDER_PRINT;
-
-                //enum SpeakerNames nameId = *textPrinter->printerTemplate.currentChar++;
-                u32 nameId = *textPrinter->printerTemplate.currentChar++;
-                if (nameId >= SP_NAME_COUNT)
-                    nameId = SP_NAME_NONE;
-
-                if (nameId == SP_NAME_PLAYER)
-                    SetSpeakerName(gSaveBlock2Ptr->playerName);
-                else
-                    SetSpeakerName(sSpeakerNamesTable[nameId]);
-                
-                if (gSpeakerName != NULL)
+            case EXT_CTRL_CODE_SPEAKER:
                 {
-                    DrawDialogueFrameWithNameplate(0, FALSE);
+                    enum SpeakerNames name = *textPrinter->printerTemplate.currentChar++;
+                    TrySpawnAndShowNamebox(gSpeakerNamesTable[name]);
 
-                    // expand early to take care of special chars e.g. {PLAYER}
-                    StringExpandPlaceholders(gNamePlateBuffer, gSpeakerName);
-                    int x = GetStringCenterAlignXOffset(FONT_SMALL, gNamePlateBuffer, (DLW_WIN_PLATE_SIZE * 8));
-
-                    // these backups are required, otherwise the messagebox gets affected too
-                    u8 colors[3] = {0, 1, 2}, colorBackup[3];
-                    SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
-                    FillDialogFramePlate();
-                    AddTextPrinterParameterized3(1, FONT_SMALL, x, 0, colors, 0, gNamePlateBuffer);
-                    RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
-                    PutWindowTilemap(1);
+                    return RENDER_REPEAT;
                 }
-                else
-                {
-                    // clean up name window if the name idx in sSpeakerNamesTable is NULL
-                    // (SP_)NAME_NONE is purposely left as NULL
-                    ClearWindowTilemap(1);
-                    ClearDialogWindowAndFrameToTransparent(0, FALSE);
-                    DrawDialogueFrame(0, FALSE);
-                }
-
-                CopyWindowToVram(1, COPYWIN_FULL);
-                return RENDER_PRINT;
-            }
             }
             break;
         case CHAR_PROMPT_CLEAR:
@@ -1475,6 +1427,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
@@ -1623,7 +1576,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_ESCAPE:
             case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_SPEAKERNAME:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++str;
                 break;
             case EXT_CTRL_CODE_FONT:
@@ -1793,7 +1746,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-            case EXT_CTRL_CODE_SPEAKERNAME:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:

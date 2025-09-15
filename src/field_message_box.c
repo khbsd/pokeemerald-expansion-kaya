@@ -41,16 +41,16 @@ void Task_DrawFieldMessage(u8 taskId)
         task->tState++;
         break;
     case 1:
-        if (gSpeakerName != NULL && !FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME)) 
+        if (gSpeakerName != NULL && !FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME))
         {
             DrawDialogueFrameWithNameplate(0, TRUE);
             PutWindowTilemap(1);
             CopyWindowToVram(1, COPYWIN_FULL);
         }
-        else 
+        else
         {
             DrawDialogueFrame(0, TRUE);
-        } 
+        }
         task->tState++;
         break;
     case 2:
@@ -134,7 +134,7 @@ bool8 ShowFieldMessageFromBuffer(void)
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
-    if (gSpeakerName != NULL && !FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME)) 
+    if (gSpeakerName != NULL && !FlagGet(OW_FLAG_SUPPRESS_SPEAKER_NAME))
     {
         int strLen = GetStringWidth(FONT_SMALL, gSpeakerName, -1);
         if (strLen > 0) {
@@ -143,8 +143,8 @@ static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkip
             gNamePlateBuffer[1] = EXT_CTRL_CODE_CLEAR_TO;
             gNamePlateBuffer[2] = strLen;
             StringExpandPlaceholders(&gNamePlateBuffer[3], gSpeakerName);
-        } 
-        else 
+        }
+        else
         {
             StringExpandPlaceholders(&gNamePlateBuffer[0], gSpeakerName);
         }
