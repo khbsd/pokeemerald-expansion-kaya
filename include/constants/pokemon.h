@@ -46,16 +46,16 @@
 #define EGG_GROUPS_PER_MON            2
 
 // Pokémon natures
-#define NATURE_HARDY    0 // Neutral
-#define NATURE_LONELY   1 // +Atk -Def
-#define NATURE_BRAVE    2 // +Atk -Speed
-#define NATURE_ADAMANT  3 // +Atk -SpAtk
-#define NATURE_NAUGHTY  4 // +Atk -SpDef
-#define NATURE_BOLD     5 // +Def -Atk
-#define NATURE_DOCILE   6 // Neutral
-#define NATURE_RELAXED  7 // +Def -Speed
-#define NATURE_IMPISH   8 // +Def -SpAtk
-#define NATURE_LAX      9 // +Def -SpDef
+#define NATURE_HARDY    0  // Neutral
+#define NATURE_LONELY   1  // +Atk -Def
+#define NATURE_BRAVE    2  // +Atk -Speed
+#define NATURE_ADAMANT  3  // +Atk -SpAtk
+#define NATURE_NAUGHTY  4  // +Atk -SpDef
+#define NATURE_BOLD     5  // +Def -Atk
+#define NATURE_DOCILE   6  // Neutral
+#define NATURE_RELAXED  7  // +Def -Speed
+#define NATURE_IMPISH   8  // +Def -SpAtk
+#define NATURE_LAX      9  // +Def -SpDef
 #define NATURE_TIMID    10 // +Speed -Atk
 #define NATURE_HASTY    11 // +Speed -Def
 #define NATURE_SERIOUS  12 // Neutral

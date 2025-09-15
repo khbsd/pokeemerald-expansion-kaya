@@ -14,17 +14,18 @@
 #include "event_data.h"
 #include "match_call.h"
 #include "malloc.h"
+#include "palette.h"
 #include "constants/speaker_names.h"
 #include "data/speaker_names.h"
-
-#define NAME_BOX_BASE_TILE_TOTAL (6)
-#define NAME_BOX_BASE_TILE_NUM (0x194 - (OW_NAME_BOX_DEFAULT_WIDTH * OW_NAME_BOX_DEFAULT_HEIGHT) - NAME_BOX_BASE_TILE_TOTAL)
 
 static EWRAM_INIT u8 sNameboxWindowId = WINDOW_NONE;
 EWRAM_DATA const u8 *gSpeakerName = NULL;
 
-static const u32 sNameBoxDefaultGfx[] = INCBIN_U32("graphics/text_window/name_box.4bpp");
 static const u32 sNameBoxPokenavGfx[] = INCBIN_U32("graphics/pokenav/name_box.4bpp");
+static const u16 sNameBoxPokenavPal[] = INCBIN_U16("graphics/pokenav/name_box.gbapal");
+
+static const u32 sNameBoxDefaultGfx[] = INCBIN_U32("graphics/text_window/name_box.4bpp");
+static const u16 sNameBoxDefaultPal[] = INCBIN_U16("graphics/text_window/name_box.gbapal");
 
 static void WindowFunc_DrawNamebox(u8, u8, u8, u8, u8, u8);
 static void WindowFunc_ClearNamebox(u8, u8, u8, u8, u8, u8);
@@ -62,6 +63,11 @@ void TrySpawnNamebox(void)
 
     bool32 matchCall = IsMatchCallTaskActive();
 
+    if (matchCall)
+        LoadPalette(sNameBoxPokenavPal, BG_PLTT_ID(14), sizeof(sNameBoxPokenavPal));
+    else
+        LoadPalette(sNameBoxDefaultPal, BG_PLTT_ID(14), sizeof(sNameBoxDefaultPal));
+
     struct WindowTemplate template =
     {
         .bg = 0,
@@ -69,7 +75,7 @@ void TrySpawnNamebox(void)
         .tilemapTop = 13,
         .width = winWidth,
         .height = OW_NAME_BOX_DEFAULT_HEIGHT,
-        .paletteNum = matchCall ? 14 : DLG_WINDOW_PALETTE_NUM,
+        .paletteNum = 14,
         .baseBlock = 0x194 - (OW_NAME_BOX_DEFAULT_WIDTH * OW_NAME_BOX_DEFAULT_HEIGHT),
     };
 

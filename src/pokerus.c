@@ -66,25 +66,58 @@ const u8 POKERUS_STRAINS_GEN_8[] =
     [PKRS_STRAIN_16]  = 1,
 };
 
+const u8 POKERUS_STRAINS_GEN_3_REDUX[] =
+{
+    [PKRS_UNINFECTED] = 0,
+    [PKRS_STRAIN_2]   = 3,
+    [PKRS_STRAIN_3]   = 3,
+    [PKRS_STRAIN_4]   = 3,
+    [PKRS_STRAIN_5]   = 3,
+    [PKRS_STRAIN_6]   = 3,
+    [PKRS_STRAIN_7]   = 3,
+    [PKRS_STRAIN_8]   = 3,
+    [PKRS_CURED]      = 0,
+    [PKRS_STRAIN_10]  = 30,
+    [PKRS_STRAIN_11]  = 30,
+    [PKRS_STRAIN_12]  = 30,
+    [PKRS_STRAIN_13]  = 30,
+    [PKRS_STRAIN_14]  = 30,
+    [PKRS_STRAIN_15]  = 30,
+    [PKRS_STRAIN_16]  = 30,
+};
+
 void Debug_CheckPokerusStrain(void)
 {
-    DebugPrintf("pokerus strain: %u", GetPokerusStrain());
+    //DebugPrintf("pokerus strain: %u", GetPokerusStrain());
+    DebugPrintf("first mon pokerus days: %u of strain %u", GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_DAYS_LEFT), GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_STRAIN, 0));
 }
 
 // helper funcs
 u32 GetPokerusStrain(void)
 {
-    if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_3) // Gen 1 - 2 (Gen 1 had no pokerus but we default it with gen 2)
+    // Gen 1 - 2 (Gen 1 had no pokerus but we default it with gen 2)
+    if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_3)
         return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_2);
-    else if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_5) //Gen 3 - 4
+    //Gen 3 - 4
+    else if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_5)
         return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_4);
-    else // Gen 5+ (Pokerus was disabled in gen 9 but we default it here)
+    else if (P_POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
+        return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_3_REDUX);
+    // Gen 5+ (Pokerus was disabled in gen 9 but we default it here)
+    else
         return RandomWeightedArrayIndex(RNG_POKERUS_STRAIN, POKERUS_STRAINS_GEN_8);
 }
 
 u32 GetPokerusDaysFromStrain(u32 strain)
 {
-    return (strain % 4) + 1;
+    u32 modifier = 4;
+    if (P_POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
+    {
+        if (strain == PKRS_CURED || strain == PKRS_UNINFECTED)
+            return 0;
+        modifier = 6;
+    }
+    return (strain % modifier) + 1;
 }
 
 u32 GetRandomPokerusDays(void)
@@ -94,7 +127,14 @@ u32 GetRandomPokerusDays(void)
 
 void SpreadPokerusToSpecificMon(struct Pokemon *mon, u32 strain, u32 daysLeft)
 {
+    if (P_POKERUS_STRAIN_DISTRIBUTION > GEN_3)
+    {
+        if (strain == PKRS_UNINFECTED)
+            strain = GetPokerusStrain();
+    }
+    DebugPrintf("setting mon strain to strain: %u", strain);
     SetMonData(mon, MON_DATA_POKERUS_STRAIN, &strain);
+    DebugPrintf("set mon strain to strain: %u", GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_STRAIN));
     if (P_POKERUS_SPREAD_DAYS_LEFT < GEN_3)
         daysLeft = GetPokerusDaysFromStrain(strain);
     SetMonData(mon, MON_DATA_POKERUS_DAYS_LEFT, &daysLeft);
@@ -205,8 +245,9 @@ void UpdatePartyPokerusTime(u16 days)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
         {
-            u32 strain = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN, 0);
-            u32 daysLeft = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT, 0);
+        #if (P_POKERUS_STRAIN_DISTRIBUTION != GEN_3_REDUX)
+            u32 strain = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN);
+            u32 daysLeft = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT);
             if (daysLeft)
             {
                 if (daysLeft < days || days > 4)
@@ -221,12 +262,33 @@ void UpdatePartyPokerusTime(u16 days)
                     strain = 1;
                     SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &strain);
                 }
-
-                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &daysLeft);
             }
+        #else
+            u32 strain = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN);
+            u32 daysLeft = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT);
+            if (strain == PKRS_UNINFECTED || strain == PKRS_CURED)
+                continue;
+
+            if (daysLeft)
+            {
+                if (daysLeft < days || days > GetPokerusDaysFromStrain(strain))
+                    daysLeft = 0;
+                else
+                    daysLeft -= days;
+
+                if (daysLeft == 0 && strain != PKRS_UNINFECTED)
+                {
+                    strain = PKRS_CURED;
+                    SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &strain);
+                }
+            }
+        #endif //P_POKERUS_STRAIN_DISTRIBUTION
+
+            SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &daysLeft);
         }
     }
 }
+
 
 void PartySpreadPokerus(struct Pokemon *party)
 {

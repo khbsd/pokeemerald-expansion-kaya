@@ -4,7 +4,7 @@
 enum PokerusStrains
 {
     PKRS_UNINFECTED = 0,
-    PKRS_STRAIN_1   = 0,
+    PKRS_STRAIN_1   = PKRS_UNINFECTED,
     PKRS_STRAIN_2,
     PKRS_STRAIN_3,
     PKRS_STRAIN_4,
@@ -12,7 +12,8 @@ enum PokerusStrains
     PKRS_STRAIN_6,
     PKRS_STRAIN_7,
     PKRS_STRAIN_8,
-    PKRS_STRAIN_9,
+    PKRS_CURED      = 8,
+    PKRS_STRAIN_9   = PKRS_CURED,
     PKRS_STRAIN_10,
     PKRS_STRAIN_11,
     PKRS_STRAIN_12,
@@ -30,7 +31,7 @@ enum PokerusStrains
 #define POKERUS_INFECTION_CHANCE   3    // Vanilla is 3
 
 // Pokérus bitmasks
-#define POKERUS_DAYS_MASK          0x0F
-#define POKERUS_STRAIN_MASK        0xF0
+#define POKERUS_DAYS_MASK          0xF0
+#define POKERUS_STRAIN_MASK        0x0F
 
 #endif // GUARD_CONSTANTS_POKERUS_H

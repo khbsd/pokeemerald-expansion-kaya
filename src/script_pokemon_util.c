@@ -19,6 +19,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "pokerus.h"
 #include "pokevial.h"
 #include "random.h"
 #include "script.h"
@@ -377,8 +378,13 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     // pokerus
     if (FlagGet(P_FLAG_FORCE_POKERUS) || playerIsKaya)
     {
-        bool32 pokerus = TRUE;
-        SetMonData(&mon, MON_DATA_POKERUS, &pokerus);
+        u32 strain = GetPokerusStrain();
+        u32 daysLeft = GetPokerusDaysFromStrain(strain);
+
+        DebugPrintf("strain generated: %u", strain);
+        DebugPrintf("days left: %u", daysLeft);
+
+        SpreadPokerusToSpecificMon(&mon, strain, daysLeft);
     }
 
     // gigantamax factor

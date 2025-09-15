@@ -49,6 +49,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokerus.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -338,6 +339,7 @@ static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
 u32 GetCurrentRelearnMovesCount(void);
 u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat);
+bool32 IsMonCuredOfPokerus(struct Pokemon *mon);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -3067,9 +3069,17 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
     }
 }
 
+bool32 IsMonCuredOfPokerus(struct Pokemon *mon)
+{
+    if (P_POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
+        return (GetMonData(mon, MON_DATA_POKERUS_STRAIN) == PKRS_CURED);
+    else
+        return (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0));
+}
+
 static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus
 {
-    if (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0)) // If yes it draws the cured symbol
+    if (IsMonCuredOfPokerus(mon))
     {
         sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x2C;
         sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x2C;

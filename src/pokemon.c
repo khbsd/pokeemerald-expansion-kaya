@@ -3357,10 +3357,11 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal = GetSubstruct3(boxMon)->pokerus;
             break;
         case MON_DATA_POKERUS_STRAIN:
-            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_STRAIN_MASK);
+            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_DAYS_MASK);
+            DebugPrintf("value of strain: %u", retVal);
             break;
         case MON_DATA_POKERUS_DAYS_LEFT:
-            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_DAYS_MASK);
+            retVal = (GetSubstruct3(boxMon)->pokerus & POKERUS_STRAIN_MASK);
             break;
         case MON_DATA_MET_LOCATION:
             retVal = GetSubstruct3(boxMon)->metLocation;
