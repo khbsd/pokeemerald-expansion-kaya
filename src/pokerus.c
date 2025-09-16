@@ -334,7 +334,7 @@ void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld sprea
 
     if (spreadType == SPREAD_BATTLE_END)
     {
-        if ((Random() % 3) != 0)
+        if (Random() % 3)
             return;
     }
 
@@ -342,8 +342,7 @@ void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld sprea
     bool32 cascadeStarted = FALSE;
     bool32 cascadeFinished = FALSE;
 
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon *monContagious = &party[i];
         if (GetMonData(monContagious, MON_DATA_SPECIES, NULL))
