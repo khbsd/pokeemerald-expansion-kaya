@@ -35,7 +35,7 @@ static u32 GetBattleMonTypeMatchup(struct BattlePokemon opposingBattleMon, struc
 
 static void InitializeSwitchinCandidate(struct Pokemon *mon)
 {
-    PokemonToBattleMon(mon, &gAiLogicData->switchinCandidate.battleMon);
+    PokemonToBattleMon(mon, &gAiLogicData->switchinCandidate.battleMon, FALSE);
     gAiLogicData->switchinCandidate.hypotheticalStatus = FALSE;
 }
 

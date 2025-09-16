@@ -137,6 +137,9 @@ bool32 IsFifthGymRematch(u32 trainerNum);
 static void PlayerTryEvolution(void);
 // static void BeginLeftEvoluionAfterFade(void);
 // static void BeginRightEvoluionAfterFade(void);
+static void DoMidBattleEvo(u32 species, u32 monPosition, bool32 canStopEvo);
+static void Task_BeginBattleEvolutionScene(u8 taskId);
+static void PlayerTryEvolution(void);
 static void WaitForEvolutionThenTryAnother(void);
 static void CB2_SetUpReshowBattleScreenAfterEvolution(void);
 
@@ -723,59 +726,67 @@ static void CB2_SetUpReshowBattleScreenAfterEvolution(void)
     gBattleEnvironment = gBattleEnvironmentBackup;
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
+
 #define tSpeciesToEvolveInto data[0]
 #define tBattlerPosition     data[1]
+
 static void Task_BeginBattleEvolutionScene(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u8 battlerPosition;
-        u16 SpeciesToEvolveInto;
+        u32 battlerPosition = gTasks[taskId].tBattlerPosition;
+        u32 speciesToEvolveInto = gTasks[taskId].tSpeciesToEvolveInto;
+
         FreeAllWindowBuffers();
         gCB2_AfterEvolution = CB2_SetUpReshowBattleScreenAfterEvolution;
         gBattleEnvironmentBackup = gBattleEnvironment; // Store the battle terrain to be reloaded later
-        battlerPosition = gTasks[taskId].tBattlerPosition;
-        SpeciesToEvolveInto = gTasks[taskId].tSpeciesToEvolveInto;
         DestroyTask(taskId);
-        EvolutionScene(&gPlayerParty[battlerPosition], SpeciesToEvolveInto, TRUE, battlerPosition);
+        EvolutionScene(&gPlayerParty[battlerPosition], speciesToEvolveInto, TRUE, battlerPosition);
     }
 }
+
 static void PlayerTryEvolution(void)
 {
     u32 LEFT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
     u32 RIGHT_PKMN = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)];
     u16 species;
-    u8 taskId;
     bool32 canStopEvo = TRUE;
-    if (gLeveledUpInBattle & (1u << LEFT_PKMN) && !gPlayerDoesNotWantToEvolveLeft)
+
+    if (gLeveledUpInBattle & (1u << LEFT_PKMN)
+        && !gPlayerDoesNotWantToEvolveLeft)
     {
         species = GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
         if (species != SPECIES_NONE)
         {
-            GetEvolutionTargetSpecies(&gPlayerParty[LEFT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gBattleMainFunc = WaitForEvolutionThenTryAnother;
-            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
-            gTasks[taskId].tSpeciesToEvolveInto = species;
-            gTasks[taskId].tBattlerPosition = LEFT_PKMN;
+            DoMidBattleEvo(species, LEFT_PKMN, canStopEvo);
             return;
         }
     }
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gLeveledUpInBattle & (1u << RIGHT_PKMN) && !gPlayerDoesNotWantToEvolveRight)
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+        && gLeveledUpInBattle & (1u << RIGHT_PKMN)
+        && !gPlayerDoesNotWantToEvolveRight)
     {
         species = GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
         if (species != SPECIES_NONE)
         {
-            GetEvolutionTargetSpecies(&gPlayerParty[RIGHT_PKMN], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gBattleMainFunc = WaitForEvolutionThenTryAnother;
-            taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
-            gTasks[taskId].tSpeciesToEvolveInto = species;
-            gTasks[taskId].tBattlerPosition = RIGHT_PKMN;
+            DoMidBattleEvo(species, RIGHT_PKMN, canStopEvo);
             return;
         }
     }
     gBattleMainFunc = HandleTurnActionSelectionState;
+}
+
+static void DoMidBattleEvo(u32 species, u32 monPosition, bool32 canStopEvo)
+{
+    u8 taskId;
+
+    GetEvolutionTargetSpecies(&gPlayerParty[monPosition], EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+
+    gBattleMainFunc = WaitForEvolutionThenTryAnother;
+    taskId = CreateTask(Task_BeginBattleEvolutionScene, 0);
+    gTasks[taskId].tSpeciesToEvolveInto = species;
+    gTasks[taskId].tBattlerPosition = monPosition;
 }
 
 static void WaitForEvolutionThenTryAnother(void)

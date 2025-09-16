@@ -661,6 +661,13 @@ static void Task_EvolutionScene(u8 taskId)
     {
         gTasks[taskId].tState = EVOSTATE_CANCEL;
         gTasks[sEvoGraphicsTaskId].tEvoStopped = TRUE;
+        if (gMain.inBattle && gBattleOutcome == 0)
+        {
+            if (gTasks[taskId].tPartyId == LEFT_PKMN)
+                gPlayerDoesNotWantToEvolveLeft = TRUE; // Stop trying to make the left Pokémon evolve again in battle
+            else if (gTasks[taskId].tPartyId == RIGHT_PKMN)
+                gPlayerDoesNotWantToEvolveRight = TRUE; // Stop trying to make the right Pokémon evolve again in battle
+        }
         StopBgAnimation();
         return;
     }
@@ -801,9 +808,7 @@ static void Task_EvolutionScene(u8 taskId)
                 if (monId == LEFT_PKMN)
                     CopyPartyMonToBattleData(0, monId, FALSE);
                 else if (monId == RIGHT_PKMN)
-                {
                     CopyPartyMonToBattleData(2, monId, FALSE);
-                }
             }
         }
         break;
@@ -831,9 +836,13 @@ static void Task_EvolutionScene(u8 taskId)
                 StringCopy_Nickname(gBattleTextBuff1, nickname);
 
                 if (var == MON_HAS_MAX_MOVES)
+                {
                     gTasks[taskId].tState = EVOSTATE_REPLACE_MOVE;
+                }
                 else if (var == MON_ALREADY_KNOWS_MOVE)
+                {
                     break;
+                }
                 else
                 {
                     if (gMain.inBattle && gBattleOutcome == 0)
@@ -860,7 +869,6 @@ static void Task_EvolutionScene(u8 taskId)
             {
                 StopMapMusic();
                 Overworld_PlaySpecialMapMusic();
-
             }
 
             if (!gTasks[taskId].tEvoWasStopped)

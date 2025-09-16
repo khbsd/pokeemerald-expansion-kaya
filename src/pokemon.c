@@ -4510,7 +4510,7 @@ void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
     mon->ppBonuses &= gPPUpClearMask[moveIndex];
 }
 
-void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
+void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst, bool32 resetStats)
 {
     s32 i;
     u8 nickname[POKEMON_NAME_BUFFER_SIZE];
@@ -4553,8 +4553,11 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     StringCopy_Nickname(dst->nickname, nickname);
     GetMonData(src, MON_DATA_OT_NAME, dst->otName);
 
-    for (i = 0; i < NUM_BATTLE_STATS; i++)
-        dst->statStages[i] = DEFAULT_STAT_STAGE;
+    if (resetStats)
+    {
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            dst->statStages[i] = DEFAULT_STAT_STAGE;
+    }
 
     memset(&dst->volatiles, 0, sizeof(struct Volatiles));
 }
@@ -4563,7 +4566,7 @@ void CopyPartyMonToBattleData(u32 battler, u32 partyIndex, bool32 resetStats)
 {
     u32 side = GetBattlerSide(battler);
     struct Pokemon *party = GetSideParty(side);
-    PokemonToBattleMon(&party[partyIndex], &gBattleMons[battler]);
+    PokemonToBattleMon(&party[partyIndex], &gBattleMons[battler], resetStats);
     gBattleStruct->hpOnSwitchout[side] = gBattleMons[battler].hp;
     UpdateSentPokesToOpponentValue(battler);
     ClearTemporarySpeciesSpriteData(battler, FALSE, FALSE);
