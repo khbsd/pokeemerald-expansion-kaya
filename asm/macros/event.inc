@@ -2489,10 +2489,8 @@
 	.endm
 
 	@
-	.macro infectmonwithpokerus slot:req, days:req
+	.macro infectmonwithpokerus
 	callnative InfectMonWithPokerus
-	.2byte \slot
-	.2byte \days
 	.endm
 
 	.macro checkifplayeriskaya

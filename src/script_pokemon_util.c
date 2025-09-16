@@ -376,13 +376,13 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
     // pokerus
-    if (FlagGet(P_FLAG_FORCE_POKERUS) || playerIsKaya)
+    /*if (FlagGet(P_FLAG_FORCE_POKERUS) || playerIsKaya)
     {
-        u32 strain = GetPokerusStrain();
+        enum PokerusStrains strain = GetPokerusStrain();
         u32 daysLeft = GetPokerusDaysFromStrain(strain);
 
         SpreadPokerusToSpecificMon(&mon, strain, daysLeft);
-    }
+    }*/
 
     // gigantamax factor
     SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);

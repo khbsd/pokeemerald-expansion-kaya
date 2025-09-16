@@ -188,7 +188,10 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
-        Debug_CheckPokerusStrain();
+
+        if (P_POKERUS_SPREAD_STEPS)
+            TrySpreadPokerusOverworld(SPREAD_STEPS);
+
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }

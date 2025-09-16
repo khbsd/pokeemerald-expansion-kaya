@@ -24,6 +24,12 @@ enum PokerusStrains
     PKRS_STRAIN_COUNT,
 };
 
+enum PokerusSpreadOverworld
+{
+    SPREAD_DAY_UPDATE,
+    SPREAD_STEPS,
+};
+
 // Pokérus settings
 #define MIN_POKERUS_DAYS           1    // Vanilla is 1
 #define MAX_POKERUS_DAYS           10   // Vanilla is 4

@@ -23,7 +23,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GotGoopedIdiot::
 	bufferlivemonnickname 0
 	msgbox LittlerootTown_ProfessorBirchsLab_gText_GotGoopedIdiot, MSGBOX_DEFAULT
 	closemessage
-	infectmonwithpokerus 1, 7
+	setvar VAR_0x8004, 0
+	infectmonwithpokerus
 	end
 
 LittlerootTown_ProfessorBirchsLab_gText_GotGoopedIdiot::

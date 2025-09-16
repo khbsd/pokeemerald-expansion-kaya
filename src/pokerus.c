@@ -92,8 +92,25 @@ void Debug_CheckPokerusStrain(void)
     DebugPrintf("first mon pokerus days: %u of strain %u", GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_DAYS_LEFT, NULL), GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_STRAIN, NULL));
 }
 
+void TrySpreadPokerusOverworld(enum PokerusSpreadOverworld spreadType)
+{
+    u32 badgeSpreadChance;
+    switch (spreadType)
+    {
+    case SPREAD_DAY_UPDATE:
+        badgeSpreadChance = GetNumOwnedBadges() * 4;
+        break;
+    default:
+    case SPREAD_STEPS:
+        badgeSpreadChance = GetNumOwnedBadges() / 2;
+        break;
+    }
+    if (RandomPercentage(RNG_POKERUS_OW_SPREAD_CHANCE, badgeSpreadChance))
+        PartySpreadPokerus(gPlayerParty);
+}
+
 // helper funcs
-u32 GetPokerusStrain(void)
+enum PokerusStrains GetPokerusStrain(void)
 {
     // Gen 1 - 2 (Gen 1 had no pokerus but we default it with gen 2)
     if (P_POKERUS_STRAIN_DISTRIBUTION < GEN_3)
@@ -120,7 +137,7 @@ u32 CanMonShedPokerus(struct Pokemon *mon)
     return FALSE;
 }
 
-u32 GetPokerusDaysFromStrain(u32 strain)
+u32 GetPokerusDaysFromStrain(enum PokerusStrains strain)
 {
     u32 gymBonus = (GetNumOwnedBadges() % 2) + FlagGet(FLAG_IS_CHAMPION) + FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN);
     u32 days = (strain % 4) + 1;
@@ -139,7 +156,7 @@ u32 GetRandomPokerusDays(void)
     return RandomUniform(RNG_POKERUS_INFECTION_DAYS, MIN_POKERUS_DAYS, MAX_POKERUS_DAYS);
 }
 
-void SpreadPokerusToSpecificMon(struct Pokemon *mon, u32 strain, u32 daysLeft)
+void SpreadPokerusToSpecificMon(struct Pokemon *mon, enum PokerusStrains strain, u32 daysLeft)
 {
     SetMonData(mon, MON_DATA_POKERUS_STRAIN, &strain);
     SetMonData(mon, MON_DATA_POKERUS_DAYS_LEFT, &daysLeft);
@@ -158,7 +175,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
 
     u32 rndChance = Random();
     u32 infectionChance = (GetNumOwnedBadges() * (P_BADGE_BOOST_POKERUS_CHANCE)) + POKERUS_INFECTION_CHANCE;
-    u32 strain = GetPokerusStrain();
+    enum PokerusStrains strain = GetPokerusStrain();
 
     if (rndChance < infectionChance)
     {
@@ -245,12 +262,16 @@ void UpdatePartyPokerusTime(u16 days)
     if (!P_POKERUS_ENABLED)
         return;
 
+    if (P_POKERUS_SPREAD_DAY_UPDATE)
+        TrySpreadPokerusOverworld(SPREAD_DAY_UPDATE);
+
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL))
         {
-            u32 strain, daysLeft;
+            enum PokerusStrains strain;
+            u32 daysLeft;
             u8 nickname[POKEMON_NAME_LENGTH * 2];
             GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
 
@@ -367,7 +388,8 @@ void PartySpreadPokerus(struct Pokemon *party)
                     }
                     else if (!cascadeFinished
                             && cascadeStarted
-                            && RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance))
+                            && (RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance)
+                            || FlagGet(FLAG_UNUSED_0x264)))
                     {
                         SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
                         cascadeChance = (cascadeChance - 1) > 0 ? (cascadeChance - 1) : 0;
@@ -379,11 +401,14 @@ void PartySpreadPokerus(struct Pokemon *party)
     }
 }
 
-void InfectMonWithPokerus(u32 slot, u32 days)
+void InfectMonWithPokerus(void)
 {
     struct Pokemon* mon;
-    u32 strain = GetPokerusStrain();
+    enum PokerusStrains strain = GetPokerusStrain();
     u32 partyCount = CalculatePlayerPartyCount();
+
+    u32 slot = gSpecialVar_0x8004;
+    u32 days = GetPokerusDaysFromStrain(strain);
 
     days = days > 0 ? days : GetPokerusDaysFromStrain(strain);
     if (days == RANDOM_POKERUS_DAYS)
