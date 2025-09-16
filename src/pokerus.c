@@ -270,7 +270,7 @@ void UpdatePartyPokerusTime(u16 days)
                     if (daysLeft == 0 && strain == 0)
                     {
                         strain = 1;
-                        SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &strain);
+                        SetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN, &strain);
                     }
                 }
             }
