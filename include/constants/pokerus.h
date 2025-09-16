@@ -31,7 +31,7 @@ enum PokerusStrains
 #define POKERUS_INFECTION_CHANCE   3    // Vanilla is 3
 
 // Pokérus bitmasks
-#define POKERUS_DAYS_MASK          0xF0
-#define POKERUS_STRAIN_MASK        0x0F
+#define POKERUS_DAYS_MASK          0x0F
+#define POKERUS_STRAIN_MASK        0xF0
 
 #endif // GUARD_CONSTANTS_POKERUS_H

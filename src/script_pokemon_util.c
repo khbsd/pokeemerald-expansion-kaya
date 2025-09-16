@@ -381,9 +381,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
         u32 strain = GetPokerusStrain();
         u32 daysLeft = GetPokerusDaysFromStrain(strain);
 
-        DebugPrintf("strain generated: %u", strain);
-        DebugPrintf("days left: %u", daysLeft);
-
         SpreadPokerusToSpecificMon(&mon, strain, daysLeft);
     }
 

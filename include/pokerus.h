@@ -10,7 +10,7 @@ void PartySpreadPokerus(struct Pokemon *party);
 void InfectMonWithPokerus(u32 slot, u32 days);
 u32 GetPokerusStrain(void);
 u32 GetPokerusDaysFromStrain(u32 strain);
-
+u32 CanMonShedPokerus(struct Pokemon *mon);
 void Debug_CheckPokerusStrain(void);
 
 #endif // GUARD_POKERUS_H
