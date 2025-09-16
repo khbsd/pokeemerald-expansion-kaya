@@ -4972,7 +4972,9 @@ s32 GetBattleMovePriority(u32 battler, enum Abilities ability, u32 move)
         priority++;
     }
     else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
+    {
         priority += 3;
+    }
 
     if (gProtectStructs[battler].quash)
         priority = -8;

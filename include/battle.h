@@ -114,7 +114,6 @@ struct DisableStruct
     u8 usedMoves:4;
     u8 truantCounter:1;
     u8 truantSwitchInHack:1;
-    u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
     u8 cudChew:1;
@@ -124,6 +123,7 @@ struct DisableStruct
     u8 usedProteanLibero:1;
     u8 flashFireBoosted:1;
     u8 boosterEnergyActivated:1;
+    u8 padding1:1;
     enum Abilities overwrittenAbility;   // abilities overwritten during battle (keep separate from battle history in case of switching)
     u8 roostActive:1;
     u8 unburdenActive:1;
@@ -131,9 +131,9 @@ struct DisableStruct
     u8 iceFaceActivationPrevention:1; // fixes hit escape move edge case
     u8 unnerveActivated:1; // Unnerve and As One (Unnerve part) activate only once per switch in
     u8 hazardsDone:1;
-    u8 padding1:1;
+    u8 padding2:1;
     u8 octolockedBy:3;
-    u8 padding2:5;
+    u8 padding3:5;
 };
 
 // Fully Cleared each turn after end turn effects are done. A few things are cleared before end turn effects

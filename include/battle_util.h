@@ -106,7 +106,7 @@ struct TypePower
 
 enum MoveSuccessOrder
 {
-    CANCELLER_FLAGS,
+    CANCELLER_CLEAR_FLAGS,
     CANCELLER_STANCE_CHANGE_1,
     CANCELLER_SKY_DROP,
     CANCELLER_RECHARGE,
@@ -131,10 +131,10 @@ enum MoveSuccessOrder
     CANCELLER_ATTACKSTRING,
     CANCELLER_PPDEDUCTION,
     CANCELLER_WEATHER_PRIMAL,
-    CANCELLER_DYNAMAX_BLOCKED,
+    CANCELLER_MOVE_FAILURE,
     CANCELLER_POWDER_STATUS,
+    CANCELLER_PRIORITY_BLOCK,
     CANCELLER_PROTEAN,
-    CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_EXPLODING_DAMP,
     CANCELLER_MULTIHIT_MOVES,
     CANCELLER_MULTI_TARGET_MOVES,
@@ -179,6 +179,15 @@ struct DamageContext
     enum Abilities abilityDef;
     enum ItemHoldEffect holdEffectAtk:16;
     enum ItemHoldEffect holdEffectDef:16;
+};
+
+struct BattleContext
+{
+    u32 battlerAtk:3;
+    u32 battlerDef:3;
+    u32 currentMove:16;
+    enum BattleMoveEffects moveEffect:10;
+    u16 ability[MAX_BATTLERS_COUNT];
 };
 
 enum SleepClauseBlock
@@ -243,7 +252,7 @@ bool32 IsAbilityAndRecord(u32 battler, enum Abilities battlerAbility, u32 abilit
 u32 DoEndTurnEffects(void);
 bool32 HandleFaintedMonActions(void);
 void TryClearRageAndFuryCutter(void);
-enum MoveCanceller AtkCanceller_MoveSuccessOrder(void);
+enum MoveCanceller AtkCanceller_MoveSuccessOrder(struct BattleContext *ctx);
 bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 bool32 TryChangeBattleWeather(u32 battler, u32 battleWeatherId, bool32 viaAbility);
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, enum Abilities abilityAtk, enum Abilities abilityDef, u32 move, enum FunctionCallOption option);
@@ -418,5 +427,6 @@ bool32 DoesAbilityAffectSecondaryEffectChance(enum Abilities ability);
 u32 GetNaturePowerMove(u32 battler);
 u32 GetNaturePowerMove(u32 battler);
 void RemoveAbilityFlags(u32 battler);
+bool32 IsDazzlingAbility(enum Abilities ability);
 
 #endif // GUARD_BATTLE_UTIL_H

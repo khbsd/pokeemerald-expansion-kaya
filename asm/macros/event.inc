@@ -2676,7 +2676,6 @@
 	.2byte \battlePartner
 	.endm
 
-
 @ Start Pokevial Branch
 
 	@ Checks or manipulates the size or dose of the Pokevial.
