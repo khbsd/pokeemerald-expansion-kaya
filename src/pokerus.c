@@ -106,7 +106,7 @@ void TrySpreadPokerusOverworld(enum PokerusSpreadOverworld spreadType)
         break;
     }
     if (RandomPercentage(RNG_POKERUS_OW_SPREAD_CHANCE, badgeSpreadChance))
-        PartySpreadPokerus(gPlayerParty);
+        PartySpreadPokerus(gPlayerParty, spreadType);
 }
 
 // helper funcs
@@ -327,13 +327,16 @@ void UpdatePartyPokerusTime(u16 days)
 }
 
 
-void PartySpreadPokerus(struct Pokemon *party)
+void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld spreadType)
 {
     if (!P_POKERUS_ENABLED)
         return;
 
-    if ((Random() % 3) != 0)
-        return;
+    if (spreadType == SPREAD_BATTLE_END)
+    {
+        if ((Random() % 3) != 0)
+            return;
+    }
 
     u32 cascadeChance = 0;
     bool32 cascadeStarted = FALSE;

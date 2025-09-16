@@ -28,6 +28,7 @@ enum PokerusSpreadOverworld
 {
     SPREAD_DAY_UPDATE,
     SPREAD_STEPS,
+    SPREAD_BATTLE_END,
 };
 
 // Pokérus settings

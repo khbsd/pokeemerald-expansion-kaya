@@ -8,7 +8,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
 void SpreadPokerusToSpecificMon(struct Pokemon *mon, enum PokerusStrains strain, u32 daysLeft);
 void UpdatePartyPokerusTime(u16 days);
-void PartySpreadPokerus(struct Pokemon *party);
+void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld spreadType);
 void InfectMonWithPokerus(void);
 enum PokerusStrains GetPokerusStrain(void);
 u32 GetPokerusDaysFromStrain(enum PokerusStrains strain);
