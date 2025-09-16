@@ -311,67 +311,67 @@ void PartySpreadPokerus(struct Pokemon *party)
     if (!P_POKERUS_ENABLED)
         return;
 
+    if ((Random() % 3) != 0)
+        return;
+
     u32 cascadeChance = 0;
     bool32 cascadeStarted = FALSE;
     bool32 cascadeFinished = FALSE;
 
-    if ((Random() % 3) == 0)
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        int i;
-        for (i = 0; i < PARTY_SIZE; i++)
+        struct Pokemon *monContagious = &party[i];
+        if (GetMonData(monContagious, MON_DATA_SPECIES, NULL))
         {
-            struct Pokemon *monContagious = &party[i];
-            if (GetMonData(monContagious, MON_DATA_SPECIES, NULL))
+            enum PokerusStrains strain = GetMonData(monContagious, MON_DATA_POKERUS_STRAIN, NULL);
+            u32 daysLeft;
+            if (P_POKERUS_SPREAD_DAYS_LEFT == GEN_3_REDUX)
+                daysLeft = GetPokerusDaysFromStrain(strain);
+            else
+                daysLeft = GetMonData(monContagious, MON_DATA_POKERUS_DAYS_LEFT, NULL);
+
+            if (CanMonShedPokerus(monContagious)
+                || ((strain != PKRS_CURED && strain != PKRS_UNINFECTED)
+                && daysLeft > 0))
             {
-                enum PokerusStrains strain = GetMonData(monContagious, MON_DATA_POKERUS_STRAIN, NULL);
-                u32 daysLeft;
-                if (P_POKERUS_SPREAD_DAYS_LEFT == GEN_3_REDUX)
-                    daysLeft = GetPokerusDaysFromStrain(strain);
-                else
-                    daysLeft = GetMonData(monContagious, MON_DATA_POKERUS_DAYS_LEFT, NULL);
+                bool32 spreadUp = TRUE, spreadDown = TRUE;
+                struct Pokemon *monUp = &party[i - 1];
+                struct Pokemon *monDown = &party[i + 1];
 
-                if (CanMonShedPokerus(monContagious)
-                    || ((strain != PKRS_CURED && strain != PKRS_UNINFECTED)
-                    && daysLeft > 0))
+                if (P_POKERUS_CASCADING_SPREAD && !cascadeStarted)
+                    cascadeChance = GetNumOwnedBadges();
+
+                if (P_POKERUS_SPREAD_ADJACENECY < GEN_3)
                 {
-                    bool32 spreadUp = TRUE, spreadDown = TRUE;
-                    struct Pokemon *monUp = &party[i - 1];
-                    struct Pokemon *monDown = &party[i + 1];
+                    if (i == (CalculatePlayerPartyCount() - 1) || (Random() % 2))
+                        spreadUp = FALSE;
+                    else
+                        spreadDown = FALSE;
+                }
 
-                    if (P_POKERUS_CASCADING_SPREAD && !cascadeStarted)
-                        cascadeChance = GetNumOwnedBadges();
+                if (spreadUp && i != 0)
+                    SpreadPokerusToSpecificMon(monUp, strain, daysLeft);
 
-                    if (P_POKERUS_SPREAD_ADJACENECY < GEN_3)
+                if (spreadDown && i != (PARTY_SIZE - 1))
+                {
+                    if (!P_POKERUS_CASCADING_SPREAD)
                     {
-                        if (i == (CalculatePlayerPartyCount() - 1) || (Random() % 2))
-                            spreadUp = FALSE;
-                        else
-                            spreadDown = FALSE;
+                        SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
+                        i++;
                     }
-
-                    if (spreadUp && i != 0)
-                        SpreadPokerusToSpecificMon(monUp, strain, daysLeft);
-
-                    if (spreadDown && i != (PARTY_SIZE - 1))
+                    else if (!cascadeFinished && !cascadeStarted)
                     {
-                        if (!P_POKERUS_CASCADING_SPREAD)
-                        {
-                            SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
-                            i++;
-                        }
-                        else if (!cascadeFinished && !cascadeStarted)
-                        {
-                            SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
-                            cascadeStarted = TRUE;
-                        }
-                        else if (!cascadeFinished
-                                && cascadeStarted
-                                && RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance))
-                        {
-                            SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
-                            cascadeChance = (cascadeChance - 1) > 0 ? (cascadeChance - 1) : 0;
-                            cascadeFinished = cascadeChance == 0;
-                        }
+                        SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
+                        cascadeStarted = TRUE;
+                    }
+                    else if (!cascadeFinished
+                            && cascadeStarted
+                            && RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance))
+                    {
+                        SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
+                        cascadeChance = (cascadeChance - 1) > 0 ? (cascadeChance - 1) : 0;
+                        cascadeFinished = cascadeChance == 0;
                     }
                 }
             }
