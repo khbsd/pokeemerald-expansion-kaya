@@ -388,8 +388,7 @@ void PartySpreadPokerus(struct Pokemon *party)
                     }
                     else if (!cascadeFinished
                             && cascadeStarted
-                            && (RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance)
-                            || FlagGet(FLAG_UNUSED_0x264)))
+                            && RandomPercentage(RNG_POKERUS_SHED_CHANCE, cascadeChance))
                     {
                         SpreadPokerusToSpecificMon(monDown, strain, daysLeft);
                         cascadeChance = (cascadeChance - 1) > 0 ? (cascadeChance - 1) : 0;
