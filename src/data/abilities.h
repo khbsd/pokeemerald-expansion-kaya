@@ -598,7 +598,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RIVALRY] =
     {
         .name = _("Rivalry"),
-        .description = COMPOUND_STRING("Powers up against same type."),
+        .description = COMPOUND_STRING("Strong against same type."),
         .aiRating = 1,
     },
 
@@ -1103,7 +1103,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_WONDER_SKIN] =
     {
         .name = _("Wonder Skin"),
-        .description = COMPOUND_STRING("May avoid or cause statuses."),
+        .description = COMPOUND_STRING("May avoid/cause statuses."),
         .aiRating = 4,
         .breakable = TRUE,
     },
@@ -2429,11 +2429,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Normal moves become Dark."),
         .aiRating = 8,
     },
-    
+
     [ABILITY_CAPILLARATE] =
     {
         .name = _("Capillarate"),
-        .description = COMPOUND_STRING("Normal moves become Fighting."),
+        .description = COMPOUND_STRING("Normal becomes Fighting."),
         .aiRating = 8,
     },
 
@@ -2451,18 +2451,18 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Stronger against prey."),
         .aiRating = 7,
     },
-    
+
     [ABILITY_ENVENOMATE] =
     {
         .name = _("Envenomate"),
-        .description = COMPOUND_STRING("Poison/paralyze on contact."),
+        .description = COMPOUND_STRING("Psn/par on contact."),
         .aiRating = 4,
     },
 
     [ABILITY_BRINEBLOOD] =
     {
         .name = _("Brineblood"),
-        .description = COMPOUND_STRING("Heals, powers up with water."),
+        .description = COMPOUND_STRING("Heals, stronger w/ water."),
         .aiRating = 7,
         .breakable = TRUE,
     },
@@ -2514,7 +2514,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TAINTED_LOVE] =
     {
         .name = _("Tainted Love"),
-        .description = COMPOUND_STRING("Poisons any type, attractive."),
+        .description = COMPOUND_STRING("Poisons all, attractive."),
         .aiRating = 5,
     },
 
@@ -2535,7 +2535,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MINERAL_HIDE] =
     {
         .name = _("Mineral Hide"),
-        .description = COMPOUND_STRING("Blocks crits, ups Rock moves."),
+        .description = COMPOUND_STRING("Blocks crits, ups Rock."),
         .aiRating = 1,
     },
 
@@ -2549,7 +2549,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_FLUX_FIELD] =
     {
         .name = _("Flux Field"),
-        .description = COMPOUND_STRING("Avoid Ground moves, up SpAtk."),
+        .description = COMPOUND_STRING("Avoids Ground, up SpAtk."),
         .aiRating = 7,
         .breakable = TRUE,
     },

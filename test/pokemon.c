@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "event_data.h"
+#include "move_relearner.h"
 #include "pokemon.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
@@ -227,12 +228,12 @@ TEST("givemon respects perfectIVCount")
     ZeroPlayerPartyMons();
     u32 perfectIVs[6] = {0};
 
-    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_CELEBI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_JIRACHI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_MANAPHY].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_VICTINI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_DIANCIE].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
+    ASSUME(gSpeciesInfo[SPECIES_CELEBI].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
+    ASSUME(gSpeciesInfo[SPECIES_JIRACHI].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
+    ASSUME(gSpeciesInfo[SPECIES_MANAPHY].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
+    ASSUME(gSpeciesInfo[SPECIES_VICTINI].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
+    ASSUME(gSpeciesInfo[SPECIES_DIANCIE].perfectIVCount == LEGENDARY_PERFECT_IV_COUNT);
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_MEW, 100;
@@ -262,7 +263,7 @@ TEST("givemon respects perfectIVCount")
             if (GetMonData(&gPlayerParty[j], MON_DATA_HP_IV + k) == MAX_PER_STAT_IVS)
                 perfectIVs[j]++;
         }
-        EXPECT_GE(perfectIVs[j], 3);
+        EXPECT_GE(perfectIVs[j], LEGENDARY_PERFECT_IV_COUNT);
     }
 }
 
@@ -479,6 +480,7 @@ TEST("Optimised SetMonData")
 
 TEST("BoxPokemon encryption works")
 {
+    KNOWN_FAILING; // intentionally turned off encryption
     u32 raw[20] =
     {
         990384375,

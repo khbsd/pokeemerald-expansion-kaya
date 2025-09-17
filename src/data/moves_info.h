@@ -4879,8 +4879,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Mach Punch"),
         .description = COMPOUND_STRING(
-            "A punch with increasin speed to\n"
-            "strike first and never miss."),
+            "Increases speed to strike\n"
+            "first and never miss."),
         .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_FIGHTING,

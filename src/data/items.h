@@ -2043,8 +2043,8 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PERMA_ABILITY_PATCH] =
     {
-        .name = ITEM_NAME("Perma Ability Patch"),
-        .pluralName = ITEM_PLURAL_NAME("Perma Ability Patches"),
+        .name = ITEM_NAME("Permability Patch"),
+        .pluralName = ITEM_PLURAL_NAME("Permability Patches"),
         .price = (I_PRICE >= GEN_9) ? 250000 : 20,
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(

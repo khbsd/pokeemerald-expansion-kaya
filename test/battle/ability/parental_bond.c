@@ -7,10 +7,10 @@ SINGLE_BATTLE_TEST("Parental Bond converts Scratch into a two-strike move")
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveStrikeCount(MOVE_SCRATCH) < 2);
         ASSUME(GetMoveEffect(MOVE_SCRATCH) == EFFECT_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Parental Bond converts Scratch into a two-strike move")
         HP_BAR(opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -29,10 +29,10 @@ SINGLE_BATTLE_TEST("Parental Bond does not convert a move with three or more str
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_TRIPLE_KICK) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveStrikeCount(MOVE_TRIPLE_KICK) == 3);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TRIPLE_KICK, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_TRIPLE_KICK); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Parental Bond does not convert a move with three or more str
         HP_BAR(opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -58,10 +58,10 @@ SINGLE_BATTLE_TEST("Parental Bond converts multi-target moves into a two-strike 
         ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
         ASSUME(GetMoveStrikeCount(MOVE_ICY_WIND) < 2);
         ASSUME(GetMoveTarget(MOVE_ICY_WIND) == MOVE_TARGET_BOTH);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, move, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, move); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -71,7 +71,7 @@ SINGLE_BATTLE_TEST("Parental Bond converts multi-target moves into a two-strike 
         HP_BAR(opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -81,12 +81,12 @@ DOUBLE_BATTLE_TEST("Parental Bond does not convert multi-target moves into a two
         ASSUME(GetMoveStrikeCount(MOVE_EARTHQUAKE) < 2);
         ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
         ASSUME(GetSpeciesType(SPECIES_PIDGEY, 1) == TYPE_FLYING);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         PLAYER(SPECIES_PIDGEY);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_EARTHQUAKE, gimmick: GIMMICK_MEGA); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, playerLeft);
@@ -112,10 +112,10 @@ SINGLE_BATTLE_TEST("Parental Bond-converted moves only hit once on Lightning Rod
     GIVEN {
         ASSUME(GetMoveStrikeCount(move) < 2);
         ASSUME(GetMoveType(move) == type);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(species) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, move, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, move); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -128,7 +128,7 @@ SINGLE_BATTLE_TEST("Parental Bond-converted moves only hit once on Lightning Rod
         };
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -143,10 +143,10 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_COMET_PUNCH, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(player, MOVE_COMET_PUNCH); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
     THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -172,10 +172,10 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_COMET_PUNCH, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(player, MOVE_COMET_PUNCH); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -187,7 +187,7 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
     THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -202,10 +202,10 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_COMET_PUNCH, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(player, MOVE_COMET_PUNCH); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -218,7 +218,7 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
     THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -233,10 +233,10 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_COMET_PUNCH, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(player, MOVE_COMET_PUNCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
@@ -248,7 +248,7 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
     THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -258,10 +258,10 @@ SINGLE_BATTLE_TEST("Parental Bond Smack Down effect triggers after 2nd hit")
         ASSUME(GetMoveEffect(MOVE_SMACK_DOWN) == EFFECT_SMACK_DOWN);
         ASSUME(GetMoveCategory(MOVE_SMACK_DOWN) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveStrikeCount(MOVE_SMACK_DOWN) < 2);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) {  Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_SKARMORY);
     } WHEN {
-        TURN { MOVE(player, MOVE_SMACK_DOWN, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(player, MOVE_SMACK_DOWN); }
     } SCENE {
         MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
@@ -272,7 +272,7 @@ SINGLE_BATTLE_TEST("Parental Bond Smack Down effect triggers after 2nd hit")
         HP_BAR(opponent);
         MESSAGE("The opposing Skarmory fell straight down!");
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -281,7 +281,7 @@ SINGLE_BATTLE_TEST("Parental Bond Snore strikes twice while asleep")
     s16 damage[2];
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SNORE) == EFFECT_SNORE);
-        PLAYER(SPECIES_KANGASKHAN_MEGA) { Status1(STATUS1_SLEEP); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND), Status1(STATUS1_SLEEP); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SNORE); }
@@ -303,11 +303,11 @@ SINGLE_BATTLE_TEST("Parental Bond only triggers Dragon Tail's target switch out 
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_DRAGON_TAIL, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_DRAGON_TAIL); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_TAIL, player);
         HP_BAR(opponent);
@@ -315,7 +315,7 @@ SINGLE_BATTLE_TEST("Parental Bond only triggers Dragon Tail's target switch out 
         MESSAGE("The opposing Wynaut was dragged out!");
     }
     THEN {
-        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN);
     }
 }
 
@@ -325,10 +325,10 @@ SINGLE_BATTLE_TEST("Parental Bond does not trigger on semi-invulnerable moves")
         ASSUME(GetMoveCategory(MOVE_FLY) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveStrikeCount(MOVE_FLY) < 2);
         ASSUME(GetMoveEffect(MOVE_FLY) == EFFECT_SEMI_INVULNERABLE);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) {  Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_FLY, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_FLY); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { SKIP_TURN(player); }
     } SCENE {
         HP_BAR(opponent);
@@ -342,10 +342,10 @@ SINGLE_BATTLE_TEST("Parental Bond does not trigger on two turn attacks")
         ASSUME(GetMoveCategory(MOVE_RAZOR_WIND) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveStrikeCount(MOVE_RAZOR_WIND) < 2);
         ASSUME(GetMoveEffect(MOVE_RAZOR_WIND) == EFFECT_TWO_TURNS_ATTACK);
-        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_RAZOR_WIND, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_RAZOR_WIND); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { SKIP_TURN(player); }
     } SCENE {
         HP_BAR(opponent);

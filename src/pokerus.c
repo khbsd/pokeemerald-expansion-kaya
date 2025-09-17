@@ -188,7 +188,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
             rndSlot = Random() % PARTY_SIZE;
             mon = &party[rndSlot];
         }
-        while (!GetMonData(mon, MON_DATA_SPECIES) || GetMonData(mon, MON_DATA_IS_EGG));
+        while (!GetMonData(mon, MON_DATA_SPECIES) || (GetMonData(mon, MON_DATA_IS_EGG) && !POKERUS_INFECT_EGG));
 
         if (!(CheckPlayerPartyPokerus()))
         {
@@ -297,7 +297,7 @@ void UpdatePartyPokerusTime(u16 days)
                     SetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN, &strain);
                 }
             }
-            
+
             SetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT, &daysLeft);
         }
     }

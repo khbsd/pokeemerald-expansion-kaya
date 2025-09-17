@@ -1039,8 +1039,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 370,
         .description = COMPOUND_STRING(
             "Mightyena are powerful pack hunters.\n"
-            "They behave as if they are covalently bonded.\n"
-            "In battle, their fur bristles with sparks, both\n"
+            "They behave as if they are covalently\n"
+            "bonded. In battle, their fur sparks\n"
             "for attacks and pack communication."),
         .pokemonScale = 362,
         .pokemonOffset = 9,
@@ -9624,10 +9624,10 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 6,
         .weight = 23,
         .description = COMPOUND_STRING(
-            "This Pokémon roams about deep in the\n"
-            "night seeking such dark emotions as if\n"
-            "floating down a negative electrical current.\n"
-            "It returns to its nest when the sun rises."),
+            "This Pokémon roams deep in the\n"
+            "night, seeking dark emotions as if\n"
+            "carried by a negative electric current.\n"
+            "It returns to its nest with the sun rise."),
         .pokemonScale = 440,
         .pokemonOffset = 20,
         .trainerScale = 256,
@@ -9703,10 +9703,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .height = 11,
         .weight = 125,
         .description = COMPOUND_STRING(
-            "An abandoned animated plush doll became this\n"
-            "Pokémon. They are said to live in garbage\n"
-            "dumps and wander about in search of the\n"
-            "children that threw them away."),
+            "Abandoned animated plush dolls become\n"
+            "this Pokémon. They wander in search of\n"
+            "the children that threw them away."),
         .pokemonScale = 262,
         .pokemonOffset = 9,
         .trainerScale = 256,
@@ -9785,9 +9784,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 130,
         .description = COMPOUND_STRING(
             "Extraordinary energy amplifies its\n"
-            "cursing magnet fields to such an extent that it\n"
-            "can't help but curse its own Trainer. It is\n"
-            "quick to reverse the curses."),
+            "cursed magnetic fields it curses\n"
+            "its own Trainer. It is quick to\n"
+            "reverse the curse."),
         .pokemonScale = 262,
         .pokemonOffset = 9,
         .trainerScale = 256,
@@ -11647,9 +11646,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 1126,
         .description = COMPOUND_STRING(
             "Mega Evolution fuels its brutality, but it\n"
-            "will never turn on the Trainer who raised it.\n"
-            "It's been dubbed the blood-soaked.\n"
-            "crescent."),
+            "will never turn on its Trainer. It's been\n"
+            "dubbed the blood-soaked crescent."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,

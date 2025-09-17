@@ -124,6 +124,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Enemy Mon Unaffected")
 
 SINGLE_BATTLE_TEST("Trainer Slide: Last Switchin")
 {
+    // fails without message comment but my hack doesnt use them so :shrugspuddle:
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_LAST_SWITCHIN;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -133,7 +134,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Last Switchin")
         TURN { MOVE(opponent, MOVE_HEALING_WISH); SEND_OUT(opponent,1); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet fainted!");
-        MESSAGE("This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
+        // MESSAGE("This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
     }
 }
 
@@ -168,6 +169,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Last Low Hp")
 
 SINGLE_BATTLE_TEST("Trainer Slide: Mega Evolution")
 {
+    KNOWN_FAILING; // gimmicks disabled
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_MEGA_EVOLUTION;
 
     GIVEN {
@@ -184,6 +186,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Mega Evolution")
 
 SINGLE_BATTLE_TEST("Trainer Slide: Z Move")
 {
+    KNOWN_FAILING; // gimmicks disabled
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_Z_MOVE;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -200,6 +203,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Z Move")
 
 SINGLE_BATTLE_TEST("Trainer Slide: Dynamax")
 {
+    KNOWN_FAILING; // gimmicks disabled
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_DYNAMAX;
 
     GIVEN {

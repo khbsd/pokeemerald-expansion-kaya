@@ -10,8 +10,8 @@
 #define POKERUS_STRAIN_DISTRIBUTION      GEN_3_REDUX // Pokerus has 16 different strains and their probability distribution change depending on generation
 #define POKERUS_SPREAD_ADJACENCY         GEN_LATEST // In Gen 2, Pokerus spread to one adjacent pokemon but it spreads to both adjacent pokemon in gen 3+
 #define POKERUS_SPREAD_DAYS_LEFT         GEN_3_REDUX // In Gen 2, a freshly spreaded pokemon will get its full infection duration based on strain. In gen 3+, the pokerus duration will copy the duration from the pokemon it was spreaded from
-#define POKERUS_INFECT_AGAIN             TRUE       // If TRUE, your party can get infected even when it is already infected with Pokerus (doesn't affect spreading, only TRUE in gen 2)
-#define POKERUS_INFECT_EGG               FALSE      // If TRUE, eggs can receive Pokerus from spread and direction infection (gen 2). If FALSE, eggs can receive Pokerus from spread but not direct infection (gen 3). Behavior is unknown in other gens.
+#define POKERUS_INFECT_AGAIN             FALSE       // If TRUE, your party can get infected even when it is already infected with Pokerus (doesn't affect spreading, only TRUE in gen 2)
+#define POKERUS_INFECT_EGG               TRUE       // If TRUE, eggs can receive Pokerus from spread and direction infection (gen 2). If FALSE, eggs can receive Pokerus from spread but not direct infection (gen 3). Behavior is unknown in other gens.
 #define POKERUS_VISIBLE_ON_EGG           TRUE       // Controls if eggs can show pokerus symbol in summary screen (TRUE from gen 3 to 6, FALSE in gen 2,7 and 8)
 #define POKERUS_SPREAD_STEPS             TRUE       // If TRUE, taking a step has a small chance to spread pokerus
 #define POKERUS_SPREAD_DAY_UPDATE        TRUE       // If TRUE, each day has a small chance to spread pokerus

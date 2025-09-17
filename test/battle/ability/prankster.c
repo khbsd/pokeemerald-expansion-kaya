@@ -193,10 +193,10 @@ SINGLE_BATTLE_TEST("Prankster-affected moves which are reflected by Magic Coat c
 SINGLE_BATTLE_TEST("Prankster-affected moves can still be bounced back by a Dark-type with Magic Bounce")
 {
     GIVEN {
-        PLAYER(SPECIES_ABSOL) { Item(ITEM_ABSOLITE); }
+        PLAYER(SPECIES_ABSOL) { Ability(ABILITY_MAGIC_BOUNCE); }
         OPPONENT(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CONFUSE_RAY); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CONFUSE_RAY); }
     } SCENE {
         MESSAGE("The opposing Volbeat's Confuse Ray was bounced back by Absol's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);
@@ -206,10 +206,10 @@ SINGLE_BATTLE_TEST("Prankster-affected moves can still be bounced back by a Dark
 SINGLE_BATTLE_TEST("Prankster-affected moves that are bounced back by Magic Bounce can affect Dark-type Pokémon")
 {
     GIVEN {
-        PLAYER(SPECIES_ABSOL) { Item(ITEM_ABSOLITE); }
+        PLAYER(SPECIES_ABSOL) { Ability(ABILITY_MAGIC_BOUNCE); }
         OPPONENT(SPECIES_MURKROW) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CONFUSE_RAY); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CONFUSE_RAY); }
     } SCENE {
         MESSAGE("The opposing Murkrow's Confuse Ray was bounced back by Absol's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);

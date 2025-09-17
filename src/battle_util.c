@@ -6211,7 +6211,7 @@ bool32 CanSetNonVolatileStatus(u32 battlerAtk, u32 battlerDef, enum Abilities ab
         {
             battleScript = BattleScript_AlreadyPoisoned;
         }
-        else if ((abilityAtk != ABILITY_CORROSION || abilityAtk !=  ABILITY_TAINTED_LOVE) && IS_BATTLER_ANY_TYPE(battlerDef, TYPE_POISON, TYPE_STEEL))
+        else if ((abilityAtk != ABILITY_CORROSION && abilityAtk !=  ABILITY_TAINTED_LOVE) && IS_BATTLER_ANY_TYPE(battlerDef, TYPE_POISON, TYPE_STEEL))
         {
             battleScript = BattleScript_NotAffected;
         }
