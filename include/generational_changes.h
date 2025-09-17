@@ -3,7 +3,7 @@
 
 #include "constants/generational_changes.h"
 #include "config/battle.h"
-
+#include "config/pokerus.h"
 static const u8 sGenerationalChanges[GEN_CONFIG_COUNT] =
 {
     [GEN_CONFIG_CRIT_CHANCE]               = B_CRIT_CHANCE,
@@ -38,6 +38,13 @@ static const u8 sGenerationalChanges[GEN_CONFIG_COUNT] =
     [GEN_CONFIG_DISGUISE_HP_LOSS]          = B_DISGUISE_HP_LOSS,
     [GEN_CONFIG_AFTER_YOU_TURN_ORDER]      = B_AFTER_YOU_TURN_ORDER,
     [GEN_CONFIG_HEALING_WISH_SWITCH]       = B_HEALING_WISH_SWITCH,
+    [POKERUS_CONFIG_ENABLED]               = POKERUS_ENABLED,
+    [POKERUS_CONFIG_SPREAD_ADJACENCY]      = POKERUS_SPREAD_ADJACENCY,
+    [POKERUS_CONFIG_SPREAD_DAYS_LEFT]      = POKERUS_SPREAD_DAYS_LEFT,
+    [POKERUS_CONFIG_INFECT_AGAIN]          = POKERUS_INFECT_AGAIN,
+    [POKERUS_CONFIG_INFECT_EGG]            = POKERUS_INFECT_EGG,
+    [POKERUS_CONFIG_HERD_IMMUNITY]         = POKERUS_HERD_IMMUNITY,
+    [POKERUS_CONFIG_WEAK_VARIANT]          = POKERUS_WEAK_VARIANT,
 };
 
 #if TESTING

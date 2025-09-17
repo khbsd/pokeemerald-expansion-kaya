@@ -53,6 +53,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "config/pokerus.h"
 
 // Screen titles (upper left)
 #define PSS_LABEL_WINDOW_POKEMON_INFO_TITLE 0
@@ -3071,10 +3072,20 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
 
 bool32 IsMonCuredOfPokerus(struct Pokemon *mon)
 {
-    if (P_POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
-        return (GetMonData(mon, MON_DATA_POKERUS_STRAIN) == PKRS_CURED);
+    bool32 retVal;
+
+    if (POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
+    {
+        retVal = (GetMonData(mon, MON_DATA_POKERUS_STRAIN) == PKRS_CURED)
+                  && (POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG));
+    }
     else
-        return (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0));
+    {
+        retVal = (!CheckPlayerPartyPokerus()
+                  && (POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG)));
+    }
+
+    return retVal;
 }
 
 static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus

@@ -4,8 +4,9 @@
 #include "constants/pokerus.h"
 
 void RandomlyGivePartyPokerus(struct Pokemon *party);
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
-u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
+bool32 CheckPlayerPartyPokerus();
+bool32 CheckMonHasHadPokerus(struct Pokemon *mon);
+bool32 CheckMonPokerus(struct Pokemon *mon);
 void SpreadPokerusToSpecificMon(struct Pokemon *mon, enum PokerusStrains strain, u32 daysLeft);
 void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld spreadType);

@@ -6226,7 +6226,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         if (totalEVs >= currentEVCap)
             break;
 
-        if (CheckPartyHasHadPokerus(mon, 0))
+        if (CheckMonHasHadPokerus(mon))
             multiplier = 2;
         else
             multiplier = 1;
