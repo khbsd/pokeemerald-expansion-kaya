@@ -4,7 +4,8 @@
 #include "constants/generational_changes.h"
 #include "config/battle.h"
 #include "config/pokerus.h"
-static const u8 sGenerationalChanges[GEN_CONFIG_COUNT] =
+
+static const u16 sGenerationalChanges[GEN_CONFIG_COUNT] =
 {
     [GEN_CONFIG_CRIT_CHANCE]               = B_CRIT_CHANCE,
     [GEN_CONFIG_CRIT_MULTIPLIER]           = B_CRIT_MULTIPLIER,

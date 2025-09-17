@@ -1492,7 +1492,7 @@ bool8 ScriptCheckFreePokemonStorageSpace(void)
 
 bool8 IsPokerusInParty(void)
 {
-    return CheckPartyPokerus();
+    return CheckPlayerPartyPokerus();
 }
 
 // Task data for Task_ShakeCamera

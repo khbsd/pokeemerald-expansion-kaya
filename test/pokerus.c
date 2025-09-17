@@ -26,7 +26,7 @@ TEST("(Pokerus) No infection when POKERUS_ENABLED is false")
     SET_RNG(RNG_POKERUS_INFECTION, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ((GetMonData(&gPlayerParty[0], MON_DATA_POKERUS) > 0), enabled);
 }
@@ -38,7 +38,7 @@ TEST("(Pokerus) RandomlyGivePartyPokerus doesn't freeze if the party is empty")
     SET_RNG(RNG_POKERUS_INFECTION, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ(gPlayerPartyCount, 0);
 }
@@ -62,7 +62,7 @@ TEST("(Pokerus) Eggs can only be infected if POKERUS_INFECT_EGG is TRUE")
     SET_RNG(RNG_POKERUS_INFECTION, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ((GetMonData(&gPlayerParty[0], MON_DATA_POKERUS) > 0), infectEgg);
 }
@@ -87,7 +87,7 @@ TEST("(Pokerus) No infection when POKERUS_INFECT_AGAIN is false and you already 
     SET_RNG(RNG_POKERUS_INFECTION, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ((GetMonData(&gPlayerParty[1], MON_DATA_POKERUS) > 0), infectAgain);
 }
@@ -113,7 +113,7 @@ TEST("(Pokerus) Test POKERUS_HERD_IMMUNITY config in RandomlyGivePartyPokerus")
     SET_RNG(RNG_POKERUS_PARTY_MEMBER, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ((GetMonData(&gPlayerParty[1], MON_DATA_POKERUS) == 0), herdImmunity);
 }
@@ -143,7 +143,7 @@ TEST("(Pokerus) No infection when POKERUS_FLAG_INFECTION is clear")
     SET_RNG(RNG_POKERUS_INFECTION, 0);
 
     CalculatePlayerPartyCount();
-    RandomlyGivePartyPokerus();
+    RandomlyGivePartyPokerus(gPlayerParty);
 
     EXPECT_EQ((GetMonData(&gPlayerParty[1], MON_DATA_POKERUS) > 0), flag);
 }
@@ -151,7 +151,7 @@ TEST("(Pokerus) No infection when POKERUS_FLAG_INFECTION is clear")
 
 TEST("(Pokerus) Test GetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKERUS_STRAIN")
 {
-    u32 strain = 0; 
+    u32 strain = 0;
     u32 daysLeft = 0;
     for (u32 i = 0; i < 16; i++)
     {
@@ -175,7 +175,7 @@ TEST("(Pokerus) Test GetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKE
 
 TEST("(Pokerus) Test SetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKERUS_STRAIN")
 {
-    u32 strain = 0; 
+    u32 strain = 0;
     u32 daysLeft = 0;
     for (u32 i = 0; i < 16; i++)
     {
@@ -197,7 +197,7 @@ TEST("(Pokerus) Test SetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKE
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKERUS), pokerus);
 }
 
-TEST("(Pokerus) Test CheckPartyPokerus general behavior")
+TEST("(Pokerus) Test CheckPlayerPartyPokerus general behavior")
 {
     u32 enabled = 0;
     u32 partyMember = 0;
@@ -222,12 +222,12 @@ TEST("(Pokerus) Test CheckPartyPokerus general behavior")
         );
     }
 
-    EXPECT_EQ(CheckPartyPokerus(), FALSE);
+    EXPECT_EQ(CheckPlayerPartyPokerus(), FALSE);
 
     u32 tmp = pokerus;
     SetMonData(&gPlayerParty[partyMember], MON_DATA_POKERUS, &tmp);
 
-    EXPECT_EQ(CheckPartyPokerus(), enabled);
+    EXPECT_EQ(CheckPlayerPartyPokerus(), enabled);
 }
 
 TEST("(Pokerus) Test CheckMonPokerus general behavior")
@@ -290,7 +290,7 @@ TEST("(Pokerus) Test CheckMonHasHadPokerus general behavior")
 TEST("(Pokerus) Test UpdatePartyPokerusTime general behavior")
 {
     u32 enabled = 0;
-    u32 strain = 0; 
+    u32 strain = 0;
     s32 daysLeft = 0;
     s32 daysPassed = 0;
     for (u32 i = 0; i < 16; i++)
@@ -326,7 +326,7 @@ TEST("(Pokerus) Test UpdatePartyPokerusTime general behavior")
         else
             EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_STRAIN), strain);
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_DAYS_LEFT), max(0, daysLeft - daysPassed));
-    } 
+    }
     else
     {
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKERUS_STRAIN), strain);
@@ -611,7 +611,7 @@ TEST("(Pokerus) Test PartySpreadPokerus when POKERUS_SPREAD_DAYS_LEFT is set to 
     if (partyMember == 0)
     {
         EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_POKERUS_STRAIN), strain);
-        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_POKERUS_DAYS_LEFT), GetDaysLeftBasedOnStrain(strain));
+        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_POKERUS_DAYS_LEFT), GetPokerusDaysFromStrain(strain));
         for (u32 i = 2; i < PARTY_SIZE; i++)
             EXPECT_EQ(GetMonData(&gPlayerParty[i], MON_DATA_POKERUS), 0);
 
@@ -619,7 +619,7 @@ TEST("(Pokerus) Test PartySpreadPokerus when POKERUS_SPREAD_DAYS_LEFT is set to 
     else if (partyMember == PARTY_SIZE - 1)
     {
         EXPECT_EQ(GetMonData(&gPlayerParty[PARTY_SIZE - 2], MON_DATA_POKERUS_STRAIN), strain);
-        EXPECT_EQ(GetMonData(&gPlayerParty[PARTY_SIZE - 2], MON_DATA_POKERUS_DAYS_LEFT), GetDaysLeftBasedOnStrain(strain));
+        EXPECT_EQ(GetMonData(&gPlayerParty[PARTY_SIZE - 2], MON_DATA_POKERUS_DAYS_LEFT), GetPokerusDaysFromStrain(strain));
         for (u32 i = 0; i < (PARTY_SIZE - 2); i++)
             EXPECT_EQ(GetMonData(&gPlayerParty[i], MON_DATA_POKERUS), 0);
     }
@@ -632,7 +632,7 @@ TEST("(Pokerus) Test PartySpreadPokerus when POKERUS_SPREAD_DAYS_LEFT is set to 
             else if (i != partyMember)
             {
                 EXPECT_EQ(GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_STRAIN), strain);
-                EXPECT_EQ(GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT), GetDaysLeftBasedOnStrain(strain));
+                EXPECT_EQ(GetMonData(&gPlayerParty[i], MON_DATA_POKERUS_DAYS_LEFT), GetPokerusDaysFromStrain(strain));
             }
         }
     }
