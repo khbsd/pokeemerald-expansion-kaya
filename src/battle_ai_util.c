@@ -28,6 +28,17 @@ static u32 GetAIEffectGroup(enum BattleMoveEffects effect);
 static u32 GetAIEffectGroupFromMove(u32 battler, u32 move);
 
 // Functions
+static u32 AI_GetMoldBreakerSanitizedAbility(u32 battlerAtk, u32 abilityAtk, u32 abilityDef, u32 holdEffectDef, u32 move)
+{
+    if (MoveIgnoresTargetAbility(move))
+        return ABILITY_NONE;
+
+    if (holdEffectDef != HOLD_EFFECT_ABILITY_SHIELD && IsMoldBreakerTypeAbility(battlerAtk, abilityAtk))
+        return ABILITY_NONE;
+
+    return abilityDef;
+}
+
 static bool32 AI_IsDoubleSpreadMove(u32 battlerAtk, u32 move)
 {
     u32 numOfTargets = 0;
@@ -919,10 +930,10 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
     ctx.updateFlags = FALSE;
     ctx.weather = weather;
     ctx.fixedBasePower = SetFixedMoveBasePower(battlerAtk, move);
-    ctx.abilityAtk = aiData->abilities[battlerAtk];
-    ctx.abilityDef = aiData->abilities[battlerDef];
     ctx.holdEffectAtk = aiData->holdEffects[battlerAtk];
     ctx.holdEffectDef = aiData->holdEffects[battlerDef];
+    ctx.abilityAtk = aiData->abilities[battlerAtk];
+    ctx.abilityDef = AI_GetMoldBreakerSanitizedAbility(battlerAtk, ctx.abilityAtk, aiData->abilities[battlerDef], ctx.holdEffectDef, move);
     ctx.typeEffectivenessModifier = CalcTypeEffectivenessMultiplier(&ctx);
 
     u32 movePower = GetMovePower(move);
@@ -2916,30 +2927,38 @@ static inline bool32 IsMoveSleepClauseTrigger(u32 move)
     return FALSE;
 }
 
-bool32 HasDamagingMove(u32 battlerId)
+bool32 HasDamagingMove(u32 battler)
 {
     u32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u16 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !IsBattleMoveStatus(moves[i]))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetMovePower(moves[i]) > 0)
             return TRUE;
     }
 
     return FALSE;
 }
 
-bool32 HasDamagingMoveOfType(u32 battlerId, u32 type)
+bool32 HasDamagingMoveOfType(u32 battler, u32 type)
 {
     s32 i;
-    u16 *moves = GetMovesArray(battlerId);
+    u16 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
-          && GetMoveType(moves[i]) == type && !IsBattleMoveStatus(moves[i]))
-            return TRUE;
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && GetMovePower(moves[i]) > 0)
+        {
+            u32 moveType = GetDynamicMoveType(GetBattlerMon(battler), moves[i], battler, MON_IN_BATTLE);
+
+            if (moveType != TYPE_NONE && type == moveType)
+                return TRUE;
+            if (GetMoveType(moves[i]) == type)
+                return TRUE;
+            if (GetMoveEffect(moves[i]) == EFFECT_NATURE_POWER && GetMoveType(GetNaturePowerMove(moves[i])) == type)
+                return TRUE;
+        }
     }
 
     return FALSE;
