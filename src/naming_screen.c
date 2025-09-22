@@ -1790,11 +1790,11 @@ static void DrawGenderIcon(void)
     StringCopy(text, gText_MaleSymbol);
     if (sNamingScreen->monGender != MON_GENDERLESS)
     {
+        isFemale = TRUE;
+
         if (sNamingScreen->monGender == MON_FEMALE)
-        {
             StringCopy(text, gText_FemaleSymbol);
-            isFemale = TRUE;
-        }
+
         AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, (POKEMON_NAME_LENGTH * 4) + 64, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
     }
 }
@@ -2154,7 +2154,7 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
 };
 
 static const u8 sText_EnterCode[] = _("Enter code:");
-static const struct NamingScreenTemplate sCodeScreenTemplate = 
+static const struct NamingScreenTemplate sCodeScreenTemplate =
 {
     .copyExistingString = FALSE,
     .maxChars = CODE_NAME_LENGTH,
