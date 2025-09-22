@@ -9627,7 +9627,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             "This Pokémon roams deep in the\n"
             "night, seeking dark emotions as if\n"
             "carried by a negative electric current.\n"
-            "It returns to its nest with the sun rise."),
+            "It returns to its nest with at sunrise."),
         .pokemonScale = 440,
         .pokemonOffset = 20,
         .trainerScale = 256,
@@ -9784,8 +9784,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 130,
         .description = COMPOUND_STRING(
             "Extraordinary energy amplifies its\n"
-            "cursed magnetic fields it curses\n"
-            "its own Trainer. It is quick to\n"
+            "cursed magnetic fields, sometimes even\n"
+            "cursing its own Trainer. It is quick to\n"
             "reverse the curse."),
         .pokemonScale = 262,
         .pokemonOffset = 9,
