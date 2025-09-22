@@ -430,5 +430,6 @@ u32 GetNaturePowerMove(u32 battler);
 u32 GetNaturePowerMove(u32 battler);
 void RemoveAbilityFlags(u32 battler);
 bool32 IsDazzlingAbility(enum Abilities ability);
+enum Obedience GetDisobedienceResult(u32 levelReferenced, u32 obedienceLevel);
 
 #endif // GUARD_BATTLE_UTIL_H

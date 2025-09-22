@@ -10,6 +10,7 @@
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "battle_gimmick.h"
+#include "caps.h"
 #include "generational_changes.h"
 #include "party_menu.h"
 #include "pokemon.h"
@@ -8024,12 +8025,67 @@ u32 GetBattleMoveTarget(u16 move, u8 setTarget)
     return targetBattler;
 }
 
+enum Obedience GetDisobedienceResult(u32 levelReferenced, u32 obedienceLevel)
+{
+    s32 calc;
+    s32 rnd = Random();
+    enum BattleMoveEffects moveEffect = GetMoveEffect(gCurrentMove);
+
+    if (moveEffect == EFFECT_RAGE)
+        gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
+    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (moveEffect == EFFECT_SNORE || moveEffect == EFFECT_SLEEP_TALK))
+        return DISOBEYS_WHILE_ASLEEP;
+
+    calc = (levelReferenced + obedienceLevel) * ((rnd >> 8) & 255) >> 8;
+    if (calc < obedienceLevel)
+    {
+        calc = CheckMoveLimitations(gBattlerAttacker, 1u << gCurrMovePos, MOVE_LIMITATIONS_ALL);
+        if (calc == ALL_MOVES_MASK) // all moves cannot be used
+            return DISOBEYS_LOAFS;
+        else // use a random move
+            do
+                gCurrMovePos = gChosenMovePos = MOD(Random(), MAX_MON_MOVES);
+            while ((1u << gCurrMovePos) & calc);
+        return DISOBEYS_RANDOM_MOVE;
+    }
+    else
+    {
+        obedienceLevel = levelReferenced - obedienceLevel;
+
+        calc = ((rnd >> 16) & 255);
+        if (calc < obedienceLevel && CanBeSlept(gBattlerAttacker, gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), NOT_BLOCKED_BY_SLEEP_CLAUSE))
+        {
+            // try putting asleep
+            int i;
+            for (i = 0; i < gBattlersCount; i++)
+                if (gBattleMons[i].volatiles.uproarTurns)
+                    break;
+            if (i == gBattlersCount)
+                return DISOBEYS_FALL_ASLEEP;
+        }
+        calc -= obedienceLevel;
+        if (calc < obedienceLevel)
+            return DISOBEYS_HITS_SELF;
+        else
+            return DISOBEYS_LOAFS;
+    }
+}
+
 u8 GetAttackerObedienceForAction()
 {
     s32 rnd;
     s32 calc;
     u8 obedienceLevel = 0;
     u8 levelReferenced;
+
+    if (B_OBEDIENCE_MECHANICS == GEN_3_REDUX)
+    {
+        levelReferenced = gBattleMons[gBattlerAttacker].level;
+        obedienceLevel = GetCurrentLevelCap();
+        if (levelReferenced <= obedienceLevel)
+            return OBEYS;
+        return GetDisobedienceResult(levelReferenced, obedienceLevel);
+    }
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return OBEYS;
@@ -8086,45 +8142,7 @@ u8 GetAttackerObedienceForAction()
     }
 
     // is not obedient
-    enum BattleMoveEffects moveEffect = GetMoveEffect(gCurrentMove);
-    if (moveEffect == EFFECT_RAGE)
-        gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
-    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (moveEffect == EFFECT_SNORE || moveEffect == EFFECT_SLEEP_TALK))
-        return DISOBEYS_WHILE_ASLEEP;
-
-    calc = (levelReferenced + obedienceLevel) * ((rnd >> 8) & 255) >> 8;
-    if (calc < obedienceLevel)
-    {
-        calc = CheckMoveLimitations(gBattlerAttacker, 1u << gCurrMovePos, MOVE_LIMITATIONS_ALL);
-        if (calc == ALL_MOVES_MASK) // all moves cannot be used
-            return DISOBEYS_LOAFS;
-        else // use a random move
-            do
-                gCurrMovePos = gChosenMovePos = MOD(Random(), MAX_MON_MOVES);
-            while ((1u << gCurrMovePos) & calc);
-        return DISOBEYS_RANDOM_MOVE;
-    }
-    else
-    {
-        obedienceLevel = levelReferenced - obedienceLevel;
-
-        calc = ((rnd >> 16) & 255);
-        if (calc < obedienceLevel && CanBeSlept(gBattlerAttacker, gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), NOT_BLOCKED_BY_SLEEP_CLAUSE))
-        {
-            // try putting asleep
-            int i;
-            for (i = 0; i < gBattlersCount; i++)
-                if (gBattleMons[i].volatiles.uproarTurns)
-                    break;
-            if (i == gBattlersCount)
-                return DISOBEYS_FALL_ASLEEP;
-        }
-        calc -= obedienceLevel;
-        if (calc < obedienceLevel)
-            return DISOBEYS_HITS_SELF;
-        else
-            return DISOBEYS_LOAFS;
-    }
+    return GetDisobedienceResult(levelReferenced, obedienceLevel);
 }
 
 enum ItemHoldEffect GetBattlerHoldEffect(u32 battler, bool32 checkNegating)
