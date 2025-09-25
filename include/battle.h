@@ -780,8 +780,12 @@ struct BattleStruct
     u8 numHazards[NUM_BATTLE_SIDES];
     u8 hazardsCounter:4; // Counter for applying hazard on switch in
     enum SubmoveState submoveAnnouncement:2;
+    u8 enemySentOutFlags:PARTY_SIZE;
+    u8 partnerSentOutFlags:PARTY_SIZE;
     u8 padding2:2;
 };
+
+#define MON_SENT_OUT_FLAG(slot) (1 << slot)
 
 struct AiBattleData
 {
