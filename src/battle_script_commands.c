@@ -5732,7 +5732,7 @@ static bool32 HandleMoveEndMoveBlock(u32 moveEffect)
         }
         break;
     case EFFECT_SMACK_DOWN:
-        if (!IsBattlerGrounded(gBattlerTarget)
+        if (!IsBattlerGrounded(gBattlerTarget, GetBattlerAbility(gBattlerTarget), GetBattlerHoldEffect(gBattlerTarget, TRUE))
          && IsBattlerTurnDamaged(gBattlerTarget)
          && IsBattlerAlive(gBattlerTarget)
          && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
@@ -7625,9 +7625,11 @@ void TryHazardsOnSwitchIn(u32 battler, u32 side, enum Hazards hazardType)
     case HAZARDS_NONE:
         break;
     case HAZARDS_SPIKES:
-        if (GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD
+    {
+        u32 ability = GetBattlerAbility(battler);
+        if (ability != ABILITY_MAGIC_GUARD
          && IsBattlerAffectedByHazards(battler, FALSE)
-         && IsBattlerGrounded(battler))
+         && IsBattlerGrounded(battler, ability, GetBattlerHoldEffect(battler, TRUE)))
         {
             u8 spikesDmg = (5 - gSideTimers[side].spikesAmount) * 2;
             gBattleStruct->moveDamage[battler] = GetNonDynamaxMaxHP(battler) / (spikesDmg);
@@ -7636,8 +7638,9 @@ void TryHazardsOnSwitchIn(u32 battler, u32 side, enum Hazards hazardType)
             SetDmgHazardsBattlescript(battler, B_MSG_PKMNHURTBYSPIKES);
         }
         break;
+    }
     case HAZARDS_STICKY_WEB:
-        if (IsBattlerAffectedByHazards(battler, FALSE) && IsBattlerGrounded(battler))
+        if (IsBattlerAffectedByHazards(battler, FALSE) && IsBattlerGrounded(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler, TRUE)))
         {
             gBattleScripting.battler = battler;
             SET_STATCHANGER(STAT_SPEED, 1, TRUE);
@@ -7645,7 +7648,7 @@ void TryHazardsOnSwitchIn(u32 battler, u32 side, enum Hazards hazardType)
         }
         break;
     case HAZARDS_TOXIC_SPIKES:
-        if (!IsBattlerGrounded(battler))
+        if (!IsBattlerGrounded(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler, TRUE)))
             break;
 
         if (IS_BATTLER_OF_TYPE(battler, TYPE_POISON)) // Absorb the toxic spikes.
@@ -9266,7 +9269,7 @@ static bool32 IsRototillerAffected(u32 battler)
 {
     if (!IsBattlerAlive(battler))
         return FALSE;
-    if (!IsBattlerGrounded(battler))
+    if (!IsBattlerGrounded(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler, TRUE)))
         return FALSE;   // Only grounded battlers affected
     if (!IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
         return FALSE;   // Only grass types affected
@@ -9701,12 +9704,14 @@ static void Cmd_trysetrest(void)
 
     gBattlerTarget = gBattlerAttacker;
     gBattleStruct->moveDamage[gBattlerTarget] = gBattleMons[gBattlerTarget].maxHP * (-1);
+    u32 ability = GetBattlerAbility(gBattlerTarget);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
 
-    if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_ELECTRIC_TERRAIN))
+    if (IsBattlerTerrainAffected(gBattlerTarget, ability, holdEffect, STATUS_FIELD_ELECTRIC_TERRAIN))
     {
         gBattlescriptCurrInstr = BattleScript_ElectricTerrainPrevents;
     }
-    else if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_MISTY_TERRAIN))
+    else if (IsBattlerTerrainAffected(gBattlerTarget, ability, holdEffect, STATUS_FIELD_MISTY_TERRAIN))
     {
         gBattlescriptCurrInstr = BattleScript_MistyTerrainPrevents;
     }
@@ -12723,19 +12728,21 @@ static void Cmd_setgastroacid(void)
 static void Cmd_setyawn(void)
 {
     CMD_ARGS(const u8 *failInstr);
+    u32 ability = GetBattlerAbility(gBattlerTarget);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
 
     if (gBattleMons[gBattlerTarget].volatiles.yawn
         || gBattleMons[gBattlerTarget].status1 & STATUS1_ANY)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
-    else if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_ELECTRIC_TERRAIN))
+    else if (IsBattlerTerrainAffected(gBattlerTarget, ability, holdEffect, STATUS_FIELD_ELECTRIC_TERRAIN))
     {
         // When Yawn is used while Electric Terrain is set and drowsiness is set from Yawn being used against target in the previous turn:
         // "But it failed" will display first.
         gBattlescriptCurrInstr = BattleScript_ElectricTerrainPrevents;
     }
-    else if (IsBattlerTerrainAffected(gBattlerTarget, STATUS_FIELD_MISTY_TERRAIN))
+    else if (IsBattlerTerrainAffected(gBattlerTarget, ability, holdEffect, STATUS_FIELD_MISTY_TERRAIN))
     {
         // When Yawn is used while Misty Terrain is set and drowsiness is set from Yawn being used against target in the previous turn:
         // "But it failed" will display first.
@@ -14967,7 +14974,7 @@ void BS_JumpIfTerrainAffected(void)
     NATIVE_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
     u32 battler = GetBattlerForBattleScript(cmd->battler);
 
-    if (IsBattlerTerrainAffected(battler, cmd->flags))
+    if (IsBattlerTerrainAffected(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler, TRUE), cmd->flags))
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
