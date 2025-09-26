@@ -196,6 +196,7 @@
 #define B_FRIEND_BALL_MODIFIER      GEN_LATEST // In Gen8+, Friend Ball's friendship boost was reduced from 200 to 150.
 #define B_SERENE_GRACE_BOOST        GEN_LATEST // In Gen5+, Serene Grace boosts the added flinch chance of King's Rock and Razor Fang.
 #define B_IRON_BALL                 GEN_LATEST // In Gen5+, Flying-type Pokemon holding Iron Ball take x1 damage from Ground-type moves regardless of their other types, except during Inverse Battles or if the Pokemon is grounded by any other effect.
+#define B_LONG_LIVED_TURN_BOOST     8          // Amount Pokemon with the ability Long Lived have their Special Defense and Special Attack raised per turn.
 
 // Flag settings
 // To use the following features, change the 0 for a flag present in include/constants/flags.h, preferably an unused one.
@@ -324,7 +325,7 @@
 #define B_MON_FAINT_SCALING_AMOUNT      1          // How much each faint counts when adjusting enemy level
 #define B_BADGE_EXP_BOOST               TRUE       // If TRUE, you get more experience based on how many badges you have.
 #define B_BADGE_EXP_BOOST_AMOUNT        3          // What % of extra experience each badge counts for when B_BADGE_EXP_BOOST is TRUE.
-#define B_LONG_LIVED_TURN_BOOST         8          // Amount Pokemon with the ability Long Lived have their Special Defense and Special Attack raised per turn.
+#define B_PARTNER_MONS_MARKED_SEEN      FALSE      // If TRUE, if your double battle partner sends out a Pokémon you haven't encountered yet, it will be marked as SEEN in your Pokédex.
 
 // Gimmicks
 #define B_MEGA_RING                     FALSE
