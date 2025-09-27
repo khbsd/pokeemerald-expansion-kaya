@@ -8081,15 +8081,6 @@ u8 GetAttackerObedienceForAction()
     u8 obedienceLevel = 0;
     u8 levelReferenced;
 
-    if (B_OBEDIENCE_MECHANICS == GEN_3_REDUX)
-    {
-        levelReferenced = gBattleMons[gBattlerAttacker].level;
-        obedienceLevel = GetCurrentLevelCap();
-        if (levelReferenced <= obedienceLevel)
-            return OBEYS;
-        return GetDisobedienceResult(levelReferenced, obedienceLevel);
-    }
-
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return OBEYS;
     if (BattlerHasAi(gBattlerAttacker))
@@ -8101,6 +8092,14 @@ u8 GetAttackerObedienceForAction()
         return OBEYS;
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         return OBEYS;
+    if (B_OBEDIENCE_MECHANICS == GEN_3_REDUX && !BattlerHasAi(gBattlerAttacker))
+    {
+        levelReferenced = gBattleMons[gBattlerAttacker].level;
+        obedienceLevel = GetCurrentLevelCap();
+        if (levelReferenced <= obedienceLevel)
+            return OBEYS;
+        return GetDisobedienceResult(levelReferenced, obedienceLevel);
+    }
     if (B_OBEDIENCE_MECHANICS < GEN_8 && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
         return OBEYS;
     if (FlagGet(FLAG_BADGE08_GET)) // Rain Badge, ignore obedience altogether
