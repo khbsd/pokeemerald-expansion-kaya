@@ -304,6 +304,8 @@ enum EvolutionConditions {
     IF_MIN_OVERWORLD_STEPS,             // The Player has taken a specific amount of steps in the overworld with the Pokémon following them or in the first slot of the party.
     IF_BAG_ITEM_COUNT,                  // The Player has the specific amount of an item in the bag. It then removes those items.
     IF_LEVEL,                           // The Pokémon is at a certain level
+    IF_REGION,                          // The Player is in the specific region.
+    IF_NOT_REGION,                      // The Player is NOT in the specific region.
     CONDITIONS_END
 };
 

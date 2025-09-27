@@ -41,6 +41,7 @@
 #include "pokerus.h"
 #include "random.h"
 #include "recorded_battle.h"
+#include "regions.h"
 #include "rtc.h"
 #include "sound.h"
 #include "string_util.h"
@@ -5610,6 +5611,14 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
         case IF_LEVEL:
             if (level == params[i].arg1)
                 currentCondition = TRUE;
+        case IF_REGION:
+            if (GetCurrentRegion() == params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_NOT_REGION:
+            if (GetCurrentRegion() != params[i].arg1)
+                currentCondition = TRUE;
+            break;
         case CONDITIONS_END:
             break;
         }
