@@ -7166,7 +7166,7 @@ static void Cmd_switchindataupdate(void)
 
 static void Cmd_switchinanim(void)
 {
-    u32 battler, side, monIndex;
+    u32 battler;
 
     CMD_ARGS(u8 battler, bool8 dontClearTransform, bool8 dontClearSubstitute);
 
@@ -7175,9 +7175,7 @@ static void Cmd_switchinanim(void)
 
     battler = GetBattlerForBattleScript(cmd->battler);
 
-    side = GetBattlerSide(battler);
-    monIndex = gBattleStruct->monToSwitchIntoId[battler];
-    gBattleStruct->partyState[side][monIndex].sentOut = TRUE;
+    GetBattlerPartyState(battler)->sentOut = TRUE;
 
     gAbsentBattlerFlags &= ~(1u << battler);
 
