@@ -7014,9 +7014,9 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         switch (gender)
         {
         case MON_MALE:
-            *(txtPtr)++ = TEXT_COLOR_RED;
+            *(txtPtr)++ = TEXT_COLOR_GREEN;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
-            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
