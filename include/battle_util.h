@@ -44,6 +44,7 @@ enum {
     ABILITYEFFECT_ON_SWITCHIN,
     ABILITYEFFECT_ENDTURN,
     ABILITYEFFECT_MOVE_END_ATTACKER,
+    ABILITYEFFECT_COLOR_CHANGE, // Color Change, Berserk, Anger Shell
     ABILITYEFFECT_MOVE_END,
     ABILITYEFFECT_IMMUNITY,
     ABILITYEFFECT_SYNCHRONIZE,
@@ -56,6 +57,7 @@ enum {
     ABILITYEFFECT_SWITCH_IN_TERRAIN,
     ABILITYEFFECT_SWITCH_IN_WEATHER,
     ABILITYEFFECT_OPPORTUNIST,
+    ABILITYEFFECT_OPPORTUNIST_FIRST_TURN,
     ABILITYEFFECT_SWITCH_IN_STATUSES,
 };
 
@@ -65,6 +67,7 @@ enum ItemCaseId
     ITEMEFFECT_NONE,
     ITEMEFFECT_ON_SWITCH_IN,
     ITEMEFFECT_ON_SWITCH_IN_FIRST_TURN,
+    ITEMEFFECT_LEFTOVERS, // Leftovers, Black Sludge
     ITEMEFFECT_NORMAL,
     ITEMEFFECT_TRY_HEALING,
     ITEMEFFECT_MOVE_END,
@@ -75,6 +78,8 @@ enum ItemCaseId
     ITEMEFFECT_USE_LAST_ITEM, // move end effects for just the battler, not whole field
     ITEMEFFECT_WHITE_HERB,
     ITEMEFFECT_WHITE_HERB_ENDTURN,
+    ITEMEFFECT_MIRROR_HERB,
+    ITEMEFFECT_MIRROR_HERB_FIRST_TURN,
 };
 
 enum ItemEffect
@@ -421,7 +426,6 @@ void RemoveAllHazardsFromField(u32 side);
 bool32 IsHazardOnSideAndClear(u32 side, enum Hazards hazardType);
 void RemoveHazardFromField(u32 side, enum Hazards hazardType);
 bool32 CanMoveSkipAccuracyCalc(u32 battlerAtk, u32 battlerDef, u32 abilityAtk, u32 abilityDef, u32 move, enum FunctionCallOption option);
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler);
 bool32 IsSemiInvulnerable(u32 battler, enum SemiInvulnerableExclusion excludeCommander);
 bool32 BreaksThroughSemiInvulnerablity(u32 battler, u32 move);
