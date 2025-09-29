@@ -9,7 +9,6 @@ extern const u32 gPokeballSelection_Gfx[];
 
 u16 GetStarterPokemon(u16 chosenStarterId);
 void CB2_ChooseStarter(void);
-const u32 *GetStarterArray(void);
 void CreateAndGiveStarterMon(u32 species);
 u32 GetSpeciesStarterArrayIndex(u32 species);
 void GivePlayerUnpickedStarters(void);
