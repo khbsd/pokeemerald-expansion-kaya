@@ -1001,7 +1001,7 @@ void BtlController_EmitChooseItem(u32 battler, u32 bufferId, u8 *battlePartyOrde
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitChoosePokemon(u32 battler, u32 bufferId, u8 caseId, u8 slotId, enum Abilities abilityId, u8 battlerPreventingSwitchout, u8 *data)
+void BtlController_EmitChoosePokemon(u32 battler, u32 bufferId, u8 caseId, u8 slotId, enum Ability abilityId, u8 battlerPreventingSwitchout, u8 *data)
 {
     s32 i;
 
@@ -2867,7 +2867,7 @@ void AnimateMonAfterPokeBallFail(u32 battler)
 {
     if (B_ANIMATE_MON_AFTER_FAILED_POKEBALL == FALSE)
         return;
-    
+
     LaunchKOAnimation(battler, ReturnAnimIdForBattler(TRUE, battler), TRUE);
     TryShinyAnimation(gBattlerTarget, GetBattlerMon(gBattlerTarget));
 }

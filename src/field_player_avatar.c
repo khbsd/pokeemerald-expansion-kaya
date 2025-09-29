@@ -295,31 +295,31 @@ static const u8 sRivalAvatarGfxIds[][GENDER_COUNT] =
 
 static const u8 sPlayerAvatarGfxIds[][KAYA] =
 {
-    [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_BRENDAN_NORMAL,     
+    [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_BRENDAN_NORMAL,
                                         OBJ_EVENT_GFX_MAY_NORMAL,
                                         OBJ_EVENT_GFX_KAYA_NORMAL},
-    [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  
+    [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,
                                         OBJ_EVENT_GFX_MAY_MACH_BIKE,
                                         OBJ_EVENT_GFX_KAYA_MACH_BIKE},
-    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,  
+    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,
                                         OBJ_EVENT_GFX_MAY_ACRO_BIKE,
                                         OBJ_EVENT_GFX_KAYA_ACRO_BIKE},
-    [PLAYER_AVATAR_STATE_SURFING]    = {OBJ_EVENT_GFX_BRENDAN_SURFING,    
+    [PLAYER_AVATAR_STATE_SURFING]    = {OBJ_EVENT_GFX_BRENDAN_SURFING,
                                         OBJ_EVENT_GFX_MAY_SURFING,
                                         OBJ_EVENT_GFX_KAYA_SURFING},
-    [PLAYER_AVATAR_STATE_UNDERWATER] = {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, 
+    [PLAYER_AVATAR_STATE_UNDERWATER] = {OBJ_EVENT_GFX_BRENDAN_UNDERWATER,
                                         OBJ_EVENT_GFX_MAY_UNDERWATER,
                                         OBJ_EVENT_GFX_KAYA_UNDERWATER},
-    [PLAYER_AVATAR_STATE_FIELD_MOVE] = {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE, 
+    [PLAYER_AVATAR_STATE_FIELD_MOVE] = {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE,
                                         OBJ_EVENT_GFX_MAY_FIELD_MOVE,
                                         OBJ_EVENT_GFX_KAYA_FIELD_MOVE},
-    [PLAYER_AVATAR_STATE_FISHING]    = {OBJ_EVENT_GFX_BRENDAN_FISHING,    
+    [PLAYER_AVATAR_STATE_FISHING]    = {OBJ_EVENT_GFX_BRENDAN_FISHING,
                                         OBJ_EVENT_GFX_MAY_FISHING,
                                         OBJ_EVENT_GFX_KAYA_FISHING},
-    [PLAYER_AVATAR_STATE_WATERING]   = {OBJ_EVENT_GFX_BRENDAN_WATERING,   
+    [PLAYER_AVATAR_STATE_WATERING]   = {OBJ_EVENT_GFX_BRENDAN_WATERING,
                                         OBJ_EVENT_GFX_MAY_WATERING,
                                         OBJ_EVENT_GFX_KAYA_WATERING},
-    [PLAYER_AVATAR_STATE_VSSEEKER]   = {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE, 
+    [PLAYER_AVATAR_STATE_VSSEEKER]   = {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE,
                                         OBJ_EVENT_GFX_MAY_FIELD_MOVE,
                                         OBJ_EVENT_GFX_KAYA_FIELD_MOVE},
 };
@@ -897,9 +897,9 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if (((heldKeys & B_BUTTON) || gRunToggled) 
+    if (((heldKeys & B_BUTTON) || gRunToggled)
         && FlagGet(FLAG_SYS_B_DASH)
-        && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0 
+        && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0
         && !FollowerNPCComingThroughDoor())
     {
         if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
@@ -980,7 +980,7 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         AutoUseRockSmash();
     if (IsPlayerFacingSurfableFishableWater() && OW_FLAG_AUTO_USE_SURF)
         AutoUseSurf();
-        
+
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) && OW_FLAG_AUTO_USE_STRENGTH)
         AutoUseStrength(GetObjectEventIdByXY(x, y), direction);
 
@@ -1649,7 +1649,7 @@ bool8 IsPlayerFacingClimbableWaterfall(void)
     s16 y = playerObjEvent->currentCoords.y;
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
-    return (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) 
+    return (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
         && (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y))
         || MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(playerObjEvent->currentCoords.x, playerObjEvent->currentCoords.y))));
 }
@@ -2235,7 +2235,7 @@ static bool32 Fishing_CheckForBite(struct Task *task)
         bite = TRUE;
         task->tStep = FISHING_MON_ON_HOOK;
     }
-        
+
     if (!bite)
         task->tStep = FISHING_NOT_EVEN_NIBBLE;
 
@@ -2381,7 +2381,7 @@ static bool32 Fishing_StartEncounter(struct Task *task)
             FishingWildEncounter(task->tFishingRod);
             if (FG_MINIGAME_ON_SEPARATE_SCREEN)
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                
+
             task->tStep++;
             task->tFrameCounter = 0;
         }
@@ -2544,7 +2544,7 @@ static bool32 DoesFishingMinigameAllowCancel(void)
 
 static bool32 Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold(void)
 {
-    enum Abilities ability;
+    enum Ability ability;
 
     if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return FALSE;

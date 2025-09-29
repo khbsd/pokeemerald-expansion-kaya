@@ -177,7 +177,7 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
 
 AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger")
 {
-    enum Abilities ability;
+    enum Ability ability;
 
     PARAMETRIZE { ability = ABILITY_NONE; }
     PARAMETRIZE { ability = ABILITY_SERENE_GRACE; }
@@ -234,7 +234,7 @@ AI_DOUBLE_BATTLE_TEST("AI chooses moves that cure self or partner")
 AI_SINGLE_BATTLE_TEST("AI chooses moves that cure inactive party members")
 {
     u32 status, config;
-    enum Abilities ability;
+    enum Ability ability;
 
     PARAMETRIZE { status = STATUS1_TOXIC_POISON; ability = ABILITY_SCRAPPY; }
     PARAMETRIZE { status = STATUS1_NONE;         ability = ABILITY_SCRAPPY; }

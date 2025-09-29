@@ -5504,7 +5504,7 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
 {
     u32 multi;
     struct Pokemon *mon;
-    enum Abilities ability;
+    enum Ability ability;
     if (DoesSpeciesHaveFormChangeMethod(OW_SPECIES(objectEvent), FORM_CHANGE_OVERWORLD_WEATHER)
         && OW_SPECIES(objectEvent) != (multi = GetOverworldWeatherSpecies(OW_SPECIES(objectEvent))))
     {
@@ -6339,11 +6339,11 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 
     objectEvent->directionOverwrite = DIR_NONE;
 
-    if (MetatileBehavior_IsSurfableFishableWater(currentBehavior) 
+    if (MetatileBehavior_IsSurfableFishableWater(currentBehavior)
         && MetatileBehavior_IsWaterfall(nextBehavior)
         && !CanAutoUseFieldMove(MOVE_WATERFALL))
         return COLLISION_IMPASSABLE;
-    else if (MetatileBehavior_IsSurfableFishableWater(currentBehavior) 
+    else if (MetatileBehavior_IsSurfableFishableWater(currentBehavior)
         && MetatileBehavior_IsWaterfall(nextBehavior)
         && CanAutoUseFieldMove(MOVE_WATERFALL))
         return COLLISION_WATERFALL;

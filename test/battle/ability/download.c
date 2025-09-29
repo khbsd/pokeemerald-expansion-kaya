@@ -10,7 +10,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def", s16 damage)
 {
     KNOWN_FAILING; // ability changed
-    enum Abilities ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
     PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
     GIVEN {
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Download raises Attack if player has lower Def than Sp. Def"
 SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than Def", s16 damage)
 {
     KNOWN_FAILING; // ability changed
-    enum Abilities ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
     PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
     GIVEN {
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than De
 SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet", s16 damagePhysical, s16 damageSpecial)
 {
     KNOWN_FAILING; // ability changed
-    enum Abilities ability;
+    enum Ability ability;
 
     PARAMETRIZE { ability = ABILITY_TRACE; }
     PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
@@ -101,7 +101,7 @@ SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet
 DOUBLE_BATTLE_TEST("Download raises Sp.Attack if enemies have lower total Sp. Def than Def", s16 damage)
 {
     KNOWN_FAILING; // ability changed
-    enum Abilities ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_TRACE; }
     PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
     GIVEN {

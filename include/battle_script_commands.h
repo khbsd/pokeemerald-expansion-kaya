@@ -22,8 +22,8 @@ struct PickupItem
     u8 percentage[10];
 };
 
-s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Abilities abilityAtk, enum Abilities abilityDef, enum ItemHoldEffect holdEffectAtk);
-s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Abilities abilityAtk, enum Abilities abilityDef, enum ItemHoldEffect holdEffectAtk);
+s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum ItemHoldEffect holdEffectAtk);
+s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum ItemHoldEffect holdEffectAtk);
 
 union TRANSPARENT StatChangeFlags
 {
@@ -44,7 +44,7 @@ union TRANSPARENT StatChangeFlags
 };
 
 s32 GetCritHitOdds(s32 critChanceIndex);
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, enum Abilities atkAbility, enum Abilities defAbility, u32 atkHoldEffect, u32 defHoldEffect);
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, enum Ability atkAbility, enum Ability defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 HasBattlerActedThisTurn(u32 battler);
 u32 GetBattlerTurnOrderNum(u32 battler);
 bool32 NoAliveMonsForBattlerSide(u32 battler);
@@ -61,15 +61,15 @@ bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 DoesDisguiseBlockMove(u32 battler, u32 move);
 bool32 CanUseLastResort(u8 battlerId);
 u32 IsFlowerVeilProtected(u32 battler);
-u32 IsLeafGuardProtected(u32 battler, enum Abilities ability);
-bool32 IsShieldsDownProtected(u32 battler, enum Abilities ability);
-u32 IsAbilityStatusProtected(u32 battler, enum Abilities ability);
+u32 IsLeafGuardProtected(u32 battler, enum Ability ability);
+bool32 IsShieldsDownProtected(u32 battler, enum Ability ability);
+u32 IsAbilityStatusProtected(u32 battler, enum Ability ability);
 bool32 TryResetBattlerStatChanges(u8 battler);
 bool32 CanCamouflage(u8 battlerId);
 void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 u8 GetCatchingBattler(void);
 u32 GetHighestStatId(u32 battlerId);
-bool32 ProteanTryChangeType(u32 battler, enum Abilities ability, u32 move, u32 moveType);
+bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, u32 moveType);
 bool32 IsMoveNotAllowedInSkyBattles(u32 move);
 bool32 DoSwitchInAbilities(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);

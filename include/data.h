@@ -63,7 +63,7 @@ struct TrainerMon
     u16 moves[4];
     u16 species;
     u16 heldItem;
-    enum Abilities ability;
+    enum Ability ability;
     u8 lvl;
     u8 ball;
     u8 friendship;
