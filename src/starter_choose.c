@@ -705,17 +705,40 @@ static void SpriteCB_StarterPokemon(struct Sprite *sprite)
     if (sprite->y < STARTER_PKMN_POS_Y)
         sprite->y += 2;
 }
+/*
+    hi ruby! so basically what we are doing is using 28 of the 32 bits in a u32
+    to indicate two things: 1, if a mon is in the players party or storage, and 2,
+    the index of the species in the array above.
+
+    the index is indicated by how many zeroes are before the 1, from right to left;
+    for instance, "00000000 00000000 00000000 00000000" is our u32. we can call her "flags."
+    if we wanted to say Blaziken, (index 13 in sStarterMonsArray), is owned by the player,
+    we would set the 13th 0 to a 1:
+
+    flags |= (1 << 13);
+    // flags is now: 00000000 00000000 00010000 00000000
+
+    we do that for every mon the player has, switching a 0 for a 1 in each bit of flags that
+    corresponds to a starter the player already has, ie if the species is in the array above.
+    then, we just check every bit in flags, and if that bit is a 0, meaning that species wasnt found
+    in the party or storage system, we can give that starter to them! and since the
+    amount of shifts for each bit corresponds to the species index, we can iterate through them
+    with a for loop!
+*/
 
 void CreateAndGiveStarterMon(u32 species)
 {
     struct Pokemon mon;
     CreateMon(&mon, species, 60, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
 
-    CopyMonToPC(&mon);
+    GiveMonToPlayer(&mon);
 }
 
 u32 GetSpeciesStarterArrayIndex(u32 species)
 {
+    // check the species against every mon in sStarterArray
+    // if it exists, return its index, if not, return the
+    // total count
     u32 starterArrayCount = ARRAY_COUNT(sStarterArray);
     for (u32 i = 0; i < starterArrayCount; i++)
     {
@@ -730,34 +753,36 @@ void GivePlayerUnpickedStarters(void)
 {
     u32 starterArrayCount = ARRAY_COUNT(sStarterArray);
     u32 starterFlags = 0;
+
+    // check player storage for starters
     for (u32 i = 0; i < TOTAL_BOXES_COUNT; i++)
     {
         for (u32 j = 0; j < IN_BOX_COUNT; j++)
         {
             u32 boxMonSpecies = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES);
-
-            for (u32 starterMonIndex = 0; starterMonIndex < starterArrayCount; starterMonIndex++)
+            if (boxMonSpecies != SPECIES_NONE)
             {
-                if (GetSpeciesStarterArrayIndex(boxMonSpecies) < starterArrayCount)
+                u32 starterMonIndex = GetSpeciesStarterArrayIndex(boxMonSpecies);
+                if (starterMonIndex < starterArrayCount)
                     starterFlags |= (1 << starterMonIndex);
             }
         }
     }
 
+    // make sure gPlayersPartyCount is updated
     CalculatePlayerPartyCount();
 
+    // check player party for starters
     for (u32 i = 0; i < gPlayerPartyCount; i++)
     {
         u32 partySpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
 
-        for (u32 starterMonIndex = 0; starterMonIndex < starterArrayCount; starterMonIndex++)
-        {
-            if (GetSpeciesStarterArrayIndex(partySpecies) < starterArrayCount)
-                starterFlags |= (1 << starterMonIndex);
-        }
+        u32 starterMonIndex = GetSpeciesStarterArrayIndex(partySpecies);
+        if (starterMonIndex < starterArrayCount)
+            starterFlags |= (1 << starterMonIndex);
     }
 
-
+    // if player does not have starter, give it to them
     for (u32 i = 0; i < starterArrayCount; i++)
     {
         if (!(starterFlags & (1 << i)))
