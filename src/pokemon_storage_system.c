@@ -9728,6 +9728,19 @@ bool32 AnyStorageMonWithMove(u16 move)
     return FALSE;
 }
 
+bool32 IsMonInStorage(u32 species)
+{
+    for (u32 i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (u32 j = 0; j < IN_BOX_COUNT; j++)
+        {
+            if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES) == species)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 
 //------------------------------------------------------------------------------
 //  SECTION: Walda

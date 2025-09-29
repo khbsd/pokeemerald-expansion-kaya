@@ -40,6 +40,7 @@
 #include "regions.h"
 #include "rtc.h"
 #include "sound.h"
+#include "starter_choose.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"

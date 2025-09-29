@@ -10,6 +10,7 @@
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -149,6 +150,45 @@ static const struct BgTemplate sBgTemplates[3] =
 };
 
 static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
+
+static const u32 sStarterArray[] =
+{
+    /* Forest Mons */
+    SPECIES_SCEPTILE,
+    SPECIES_BRELOOM,
+    SPECIES_HATTERENE,
+    SPECIES_ALTARIA,
+    /* Lake Mons */
+    SPECIES_GYARADOS,
+    SPECIES_LUDICOLO,
+    SPECIES_AZUMARILL,
+    SPECIES_GARDEVOIR,
+    /* Sea Mons */
+    SPECIES_MILOTIC,
+    SPECIES_DHELMISE,
+    SPECIES_CERULEDGE,
+    SPECIES_PELIPPER,
+    /* Crags Mons */
+    SPECIES_LUCARIO,
+    SPECIES_BLAZIKEN,
+    SPECIES_SALAMENCE,
+    SPECIES_TINKATON,
+    /* Cave Mons */
+    SPECIES_EXCADRILL,
+    SPECIES_GALVANTULA,
+    SPECIES_GARGANACL,
+    SPECIES_TORKOAL,
+    /* Garden Mons */
+    SPECIES_RIBOMBEE,
+    SPECIES_VILEPLUME,
+    SPECIES_HELIOLISK,
+    SPECIES_ANNIHILAPE,
+    /* Beach Mons */
+    SPECIES_SWAMPERT,
+    SPECIES_RAICHU_ALOLA,
+    SPECIES_SALAZZLE,
+    SPECIES_GOODRA_HISUI,
+};
 
 static const struct OamData sOam_Hand =
 {
@@ -664,4 +704,63 @@ static void SpriteCB_StarterPokemon(struct Sprite *sprite)
         sprite->y -= 2;
     if (sprite->y < STARTER_PKMN_POS_Y)
         sprite->y += 2;
+}
+
+void CreateAndGiveStarterMon(u32 species)
+{
+    struct Pokemon mon;
+    CreateMon(&mon, species, 60, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+
+    CopyMonToPC(&mon);
+}
+
+u32 GetSpeciesStarterArrayIndex(u32 species)
+{
+    u32 starterArrayCount = ARRAY_COUNT(sStarterArray);
+    for (u32 i = 0; i < starterArrayCount; i++)
+    {
+        if (sStarterArray[i] == species)
+            return i;
+    }
+
+    return starterArrayCount;
+}
+
+void GivePlayerUnpickedStarters(void)
+{
+    u32 starterArrayCount = ARRAY_COUNT(sStarterArray);
+    u32 starterFlags = 0;
+    for (u32 i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (u32 j = 0; j < IN_BOX_COUNT; j++)
+        {
+            u32 boxMonSpecies = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES);
+
+            for (u32 starterMonIndex = 0; starterMonIndex < starterArrayCount; starterMonIndex++)
+            {
+                if (GetSpeciesStarterArrayIndex(boxMonSpecies) < starterArrayCount)
+                    starterFlags |= (1 << starterMonIndex);
+            }
+        }
+    }
+
+    CalculatePlayerPartyCount();
+
+    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    {
+        u32 partySpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+
+        for (u32 starterMonIndex = 0; starterMonIndex < starterArrayCount; starterMonIndex++)
+        {
+            if (GetSpeciesStarterArrayIndex(partySpecies) < starterArrayCount)
+                starterFlags |= (1 << starterMonIndex);
+        }
+    }
+
+
+    for (u32 i = 0; i < starterArrayCount; i++)
+    {
+        if (!(starterFlags & (1 << i)))
+            CreateAndGiveStarterMon(sStarterArray[i]);
+    }
 }
