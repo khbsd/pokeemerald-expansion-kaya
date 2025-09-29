@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_ABILITIES_H
 #define GUARD_CONSTANTS_ABILITIES_H
 
-enum Ability : u16
+enum __attribute__((packed)) Ability
 {
     ABILITY_NONE,
     ABILITY_STENCH,

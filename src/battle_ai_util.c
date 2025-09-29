@@ -28,7 +28,7 @@ static u32 GetAIEffectGroup(enum BattleMoveEffects effect);
 static u32 GetAIEffectGroupFromMove(u32 battler, u32 move);
 
 // Functions
-static u32 AI_GetMoldBreakerSanitizedAbility(u32 battlerAtk, u32 abilityAtk, u32 abilityDef, u32 holdEffectDef, u32 move)
+static u32 AI_GetMoldBreakerSanitizedAbility(u32 battlerAtk, enum Ability abilityAtk, enum Ability abilityDef, u32 holdEffectDef, u32 move)
 {
     if (MoveIgnoresTargetAbility(move))
         return ABILITY_NONE;
@@ -1703,7 +1703,7 @@ enum ItemHoldEffect AI_DecideHoldEffectForTurn(u32 battlerId)
     if (!IsAiBattlerAware(battlerId))
         holdEffect = gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
     else
-        holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
+        holdEffect = GetBattlerHoldEffectIgnoreNegation(battlerId);
 
     if (gAiThinkingStruct->aiFlags[battlerId] & AI_FLAG_NEGATE_UNAWARE)
         return holdEffect;
@@ -1752,7 +1752,7 @@ u32 AI_GetWeather(void)
 
 u32 AI_GetSwitchinWeather(struct BattlePokemon battleMon)
 {
-    u32 ability = battleMon.ability;
+    enum Ability ability = battleMon.ability;
     // Forced weather behaviour
     if (!AI_WeatherHasEffect())
         return B_WEATHER_NONE;
@@ -2104,7 +2104,7 @@ bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, 
         return FALSE;
 
     u32 move = gAiThinkingStruct->moveConsidered;
-    u32 abilityAtk = aiData->abilities[battlerAtk];
+    enum Ability abilityAtk = aiData->abilities[battlerAtk];
 
     if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_MIST && abilityAtk != ABILITY_INFILTRATOR)
         return FALSE;
@@ -3734,7 +3734,7 @@ bool32 IsFlinchGuaranteed(u32 battlerAtk, u32 battlerDef, u32 move)
 
 bool32 HasChoiceEffect(u32 battler)
 {
-    u32 ability = gAiLogicData->abilities[battler];
+    enum Ability ability = gAiLogicData->abilities[battler];
     if (ability == ABILITY_GORILLA_TACTICS)
         return TRUE;
 
@@ -5580,7 +5580,7 @@ bool32 DoesAbilityRaiseStatsWhenLowered(enum Ability ability)
     }
 }
 
-bool32 DoesIntimidateRaiseStats(u32 ability)
+bool32 DoesIntimidateRaiseStats(enum Ability ability)
 {
     switch (ability)
     {
@@ -5671,8 +5671,8 @@ bool32 CanEffectChangeAbility(u32 battlerAtk, u32 battlerDef, u32 effect, struct
     if (gBattleMons[battlerDef].volatiles.gastroAcid)
         return FALSE;
 
-    u32 atkAbility = aiData->abilities[battlerAtk];
-    u32 defAbility = aiData->abilities[battlerDef];
+    enum Ability atkAbility = aiData->abilities[battlerAtk];
+    enum Ability defAbility = aiData->abilities[battlerDef];
     bool32 hasSameAbility = (atkAbility == defAbility);
 
     if (defAbility == ABILITY_NONE)
@@ -5794,8 +5794,8 @@ bool32 DoesEffectReplaceTargetAbility(u32 effect)
 void AbilityChangeScore(u32 battlerAtk, u32 battlerDef, u32 effect, s32 *score, struct AiLogicData *aiData)
 {
     bool32 isTargetingPartner = IsTargetingPartner(battlerAtk, battlerDef);
-    u32 abilityAtk = aiData->abilities[battlerAtk];
-    u32 abilityDef = aiData->abilities[battlerDef];
+    enum Ability abilityAtk = aiData->abilities[battlerAtk];
+    enum Ability abilityDef = aiData->abilities[battlerDef];
     bool32 partnerHasBadAbility = FALSE;
     u32 partnerAbility = ABILITY_NONE;
     bool32 attackerHasBadAbility = (gAbilitiesInfo[abilityAtk].aiRating < 0);
@@ -5917,7 +5917,7 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Ability ability, struct Ai
         break;
     case ABILITY_INTIMIDATE:
     {
-        u32 abilityDef = aiData->abilities[LEFT_FOE(battler)];
+        enum Ability abilityDef = aiData->abilities[LEFT_FOE(battler)];
         if (DoesIntimidateRaiseStats(abilityDef))
         {
             return AWFUL_EFFECT;
