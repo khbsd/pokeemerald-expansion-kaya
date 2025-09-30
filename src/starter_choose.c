@@ -726,10 +726,31 @@ static void SpriteCB_StarterPokemon(struct Sprite *sprite)
     with a for loop!
 */
 
+// void CreateMonParameterized(struct Pokemon *mon, u16 species, u8 level, /*u16 item, enum PokeBall ball,*/ u8 nature, u8 abilityNum, u8 gender, /*u8 *evs,*/ u8 *ivs, /*u16 *moves,*/ bool8 isShiny /*bool8 gmaxFactor, u8 teraType, u8 dmaxLevel*/) args for reference
 void CreateAndGiveStarterMon(u32 species)
 {
+    u8 ivs[] =
+    {
+        [STAT_HP]    = MAX_PER_STAT_IVS,
+        [STAT_ATK]   = MAX_PER_STAT_IVS,
+        [STAT_DEF]   = MAX_PER_STAT_IVS,
+        [STAT_SPEED] = MAX_PER_STAT_IVS,
+        [STAT_SPATK] = MAX_PER_STAT_IVS,
+        [STAT_SPDEF] = MAX_PER_STAT_IVS,
+    };
     struct Pokemon mon;
-    CreateMon(&mon, species, 60, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+    u32 abilityNum = 0;
+
+    CreateMonParameterized(
+        &mon,           // pointer to the memory location of the mon we just defined
+        species,        // species
+        MAX_LEVEL,      // level
+        NUM_NATURES,    // nature
+        abilityNum,     // ability index
+        MON_FEMALE,     // gender
+        ivs,            // ivs
+        FALSE           // shiny?
+    );
 
     GiveMonToPlayer(&mon);
 }
