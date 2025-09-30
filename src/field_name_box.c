@@ -21,8 +21,8 @@
 static EWRAM_INIT u8 sNameboxWindowId = WINDOW_NONE;
 EWRAM_DATA const u8 *gSpeakerName = NULL;
 
-static const u32 sNameBoxPokenavGfx[] = INCBIN_U32("graphics/pokenav/name_box.4bpp");
-static const u16 sNameBoxPokenavPal[] = INCBIN_U16("graphics/pokenav/name_box.gbapal");
+//static const u32 sNameBoxPokenavGfx[] = INCBIN_U32("graphics/pokenav/name_box.4bpp");
+//static const u16 sNameBoxPokenavPal[] = INCBIN_U16("graphics/pokenav/name_box.gbapal");
 
 static const u32 sNameBoxDefaultGfx[] = INCBIN_U32("graphics/text_window/name_box.4bpp");
 static const u16 sNameBoxDefaultPal[] = INCBIN_U16("graphics/text_window/name_box.gbapal");
@@ -61,12 +61,7 @@ void TrySpawnNamebox(u32 tileNum)
         RedrawDialogueFrame();
     }
 
-    bool32 matchCall = IsMatchCallTaskActive();
-
-    if (matchCall)
-        LoadPalette(sNameBoxPokenavPal, BG_PLTT_ID(14), sizeof(sNameBoxPokenavPal));
-    else
-        LoadPalette(sNameBoxDefaultPal, BG_PLTT_ID(14), sizeof(sNameBoxDefaultPal));
+    LoadPalette(sNameBoxDefaultPal, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM), sizeof(sNameBoxDefaultPal));
 
     struct WindowTemplate template =
     {
@@ -75,7 +70,7 @@ void TrySpawnNamebox(u32 tileNum)
         .tilemapTop = 13,
         .width = winWidth,
         .height = OW_NAME_BOX_DEFAULT_HEIGHT,
-        .paletteNum = 14,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
         .baseBlock = tileNum,
     };
 
@@ -85,11 +80,6 @@ void TrySpawnNamebox(u32 tileNum)
     u8 colors[3] = {TEXT_COLOR_TRANSPARENT, OW_NAME_BOX_FOREGROUND_COLOR, OW_NAME_BOX_SHADOW_COLOR};
     u8 bakColors[3];
     int strX = GetStringCenterAlignXOffset(fontId, strbuf, (winWidth * 8));
-    if (matchCall)
-    {
-        colors[1] = 1;
-        colors[2] = 0;
-    }
 
     SaveTextColors(&bakColors[0], &bakColors[1], &bakColors[2]);
     AddTextPrinterParameterized3(sNameboxWindowId, fontId, strX, 0, colors, 0, strbuf);
@@ -122,10 +112,7 @@ u32 GetNameboxWidth(void)
 
 static const u32 *GetNameboxGraphics(void)
 {
-    if (IsMatchCallTaskActive())
-        return sNameBoxPokenavGfx;
-    else
-        return sNameBoxDefaultGfx;
+    return sNameBoxDefaultGfx;
 }
 
 void FillNamebox(void)

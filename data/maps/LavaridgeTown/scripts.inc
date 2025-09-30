@@ -455,7 +455,7 @@ LavaridgeTown_Text_PokemonNippedBackside:
 	.string "A POKéMON nipped my succulent ass!$"
 
 LavaridgeTown_Text_HyperTrainer::
-	.string "Oh, you like hot springs, do you?\n"
+	.string "{SPEAKER SP_NAME_HYPER_TRAINER}Oh, you like hot springs, do you?\n"
 	.string "Have you heard of Hyper Training?\p"
 	.string "I can train one of your POKéMON's\n"
 	.string "intrinsic stats to be the best it\l"
@@ -463,18 +463,18 @@ LavaridgeTown_Text_HyperTrainer::
 	.string "Do you want that?$"
 
 LavaridgeTown_Text_HyperTrainerWhichStat::
-	.string "Which stat should we focus on?$"
+	.string "{SPEAKER SP_NAME_HYPER_TRAINER}Which stat should we focus on?$"
 
 LavaridgeTown_Text_HyperTrainerNoMoney::
-	.string "Oh honey... You can't afford me.\n"
+	.string "{SPEAKER SP_NAME_HYPER_TRAINER}Oh honey... You can't afford me.\n"
 	.string "Come back when you have\l"
 	.string "at least ¥75000.$"
 
 LavaridgeTown_Text_HyperTrainerOhTooBad::
-	.string "Oh, too bad...$"
+	.string "{SPEAKER SP_NAME_HYPER_TRAINER}Oh, too bad...$"
 
 LavaridgeTown_Text_HyperTrainerThankYou::
-	.string "Ah, your POKéMON looks\n"
+	.string "{SPEAKER SP_NAME_HYPER_TRAINER}Ah, your POKéMON looks\n"
 	.string "radiant with inner strength.\l"
 	.string "I hope we do business again soon.$"
 

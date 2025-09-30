@@ -118,4 +118,5 @@ const u8 *const gSpeakerNamesTable[SP_NAME_COUNT] =
     [SP_NAME_T_ESTICLE] = COMPOUND_STRING("T. Esticles"),
     [SP_NAME_NEWSCASTER] = COMPOUND_STRING("Newscaster"),
     [SP_NAME_THE_POKEMON] = COMPOUND_STRING("the POKéMON."),
+    [SP_NAME_HYPER_TRAINER] = COMPOUND_STRING("weird gmilf"),
 };
