@@ -28,7 +28,7 @@ LavaridgeTown_Mart_EventScript_OldWoman::
 
 LavaridgeTown_Mart_Text_MochiClerk::
 	.string "{SPEAKER SP_NAME_SHOP_CLERK}Welcome!\p"
-	.string "Fresh Start Mochis are Lavaridge's\l"
+	.string "Fresh Start Mochis are Lavaridge's\n"
 	.string "specialty!$"
 
 LavaridgeTown_Mart_Text_XSpeedFirstStrike:
