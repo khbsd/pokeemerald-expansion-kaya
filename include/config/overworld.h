@@ -16,6 +16,7 @@
 #define OW_WHITEOUT_CUTSCENE            GEN_LATEST // In Gen4+, whiting out shows an additional message and post whiteout event script cutscene with a healing NPC. (While this change was also in FRLG, for the sake of simplicity, setting this to GEN_3 will result in RSE behavior.)
 #define OW_DEFOG_FIELD_MOVE             FALSE      // If enabled, Defog can be used as a Field Move as seen in DPPt.
 #define OW_MATCH_CALL_ONLY_FOR_REMATCH  TRUE
+#define OW_NO_MATCH_CALL                TRUE
 
 // Overworld item reset settings
 #define OW_CLEAR_ITEMS_DAILY            TRUE       // Clear items every day

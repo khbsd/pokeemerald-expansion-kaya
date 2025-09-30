@@ -1099,6 +1099,9 @@ static bool32 UpdateMatchCallStepCounter(void)
 
 static bool32 SelectMatchCallTrainer(void)
 {
+    if (OW_NO_MATCH_CALL)
+        return FALSE;
+
     u32 matchCallId;
     u32 numRegistered = GetNumRegisteredTrainers();
     if (numRegistered == 0)
