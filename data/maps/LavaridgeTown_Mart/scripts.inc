@@ -4,7 +4,7 @@ LavaridgeTown_Mart_MapScripts::
 LavaridgeTown_Mart_EventScript_Clerk::
 	lock
 	faceplayer
-	message gText_HowMayIServeYou
+	message LavaridgeTown_Mart_Text_MochiClerk
 	waitmessage
 	pokemart LavaridgeTown_Mart_Pokemart
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
@@ -15,6 +15,7 @@ LavaridgeTown_Mart_EventScript_Clerk::
 LavaridgeTown_Mart_Pokemart:
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_X_SPEED
+	.2byte ITEM_FRESH_START_MOCHI
 	pokemartlistend
 
 LavaridgeTown_Mart_EventScript_ExpertM::
@@ -24,6 +25,11 @@ LavaridgeTown_Mart_EventScript_ExpertM::
 LavaridgeTown_Mart_EventScript_OldWoman::
 	msgbox LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney, MSGBOX_NPC
 	end
+
+LavaridgeTown_Mart_Text_MochiClerk::
+	.string "{SPEAKER SP_NAME_SHOP_CLERK}Welcome!\p"
+	.string "Fresh Start Mochis are Lavaridge's\l"
+	.string "specialty!$"
 
 LavaridgeTown_Mart_Text_XSpeedFirstStrike:
 	.string "Use X SPEED to add to a POKéMON's\n"
