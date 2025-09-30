@@ -39,7 +39,7 @@ enum MoveAbsorbed
     MOVE_ABSORBED_BY_BOOST_FLASH_FIRE,
 };
 
-enum {
+enum AbilityEffect {
     ABILITYEFFECT_ON_SWITCHIN,
     ABILITYEFFECT_ENDTURN,
     ABILITYEFFECT_MOVE_END_ATTACKER,
@@ -263,7 +263,7 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
 bool32 TryChangeBattleWeather(u32 battler, u32 battleWeatherId, bool32 viaAbility);
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, enum Ability abilityAtk, enum Ability abilityDef, u32 move, enum FunctionCallOption option);
 bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, enum Ability abilityDef, u32 move, u32 moveType, enum FunctionCallOption option);
-u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Ability ability, u32 special, u32 moveArg);
+enum AbilityEffect AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, u32 special, u32 moveArg);
 bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMoldBreakerTypeAbility(u32 battler, enum Ability ability);
@@ -322,7 +322,7 @@ bool32 TryBattleFormChange(u32 battler, enum FormChanges method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId);
 u32 GetBattlerVisualSpecies(u32 battler);
-bool32 TryClearIllusion(u32 battler, u32 caseID);
+bool32 TryClearIllusion(u32 battler, enum AbilityEffect caseID);
 u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);

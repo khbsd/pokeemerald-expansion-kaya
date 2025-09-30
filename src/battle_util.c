@@ -3586,9 +3586,9 @@ static inline u32 SetStartingSideStatus(u32 flag, u32 side, u32 message, u32 ani
     return 0;
 }
 
-u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Ability ability, u32 special, u32 moveArg)
+enum AbilityEffect AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, u32 special, u32 moveArg)
 {
-    u32 effect = 0;
+    enum AbilityEffect effect = 0;
     u32 moveType = 0, move = 0;
     u32 side = 0;
     u32 i = 0, j = 0;
@@ -5470,6 +5470,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Ability ability, u32 spec
                     gDisableStructs[battler].tauntTimer = 0;
                     BattleScriptCall(BattleScript_BattlerShookOffTaunt);
                     break;
+                default:
+                    break;
                 }
 
                 gBattleScripting.battler = gBattlerAbility = battler;
@@ -5643,6 +5645,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, enum Ability ability, u32 spec
         default:
             break;
         }
+        break;
+    default:
         break;
     }
 
@@ -10696,7 +10700,7 @@ u32 GetBattlerVisualSpecies(u32 battler)
     return gBattleMons[battler].species;
 }
 
-bool32 TryClearIllusion(u32 battler, u32 caseID)
+bool32 TryClearIllusion(u32 battler, enum AbilityEffect caseID)
 {
     if (gBattleStruct->illusion[battler].state != ILLUSION_ON)
         return FALSE;
