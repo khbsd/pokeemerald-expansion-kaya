@@ -586,7 +586,10 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
         daycare->offspringPersonality = personality;
     }
 
-    FlagSet(FLAG_PENDING_DAYCARE_EGG);
+    if (P_EGGS_TO_PC)
+        SendEggFromDaycareToPC(daycare);
+    else
+        FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
 // Functionally unused
@@ -1070,6 +1073,45 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     }
 
     return eggSpecies;
+}
+
+struct Pokemon GenerateMonForDaycare(struct DayCare *daycare)
+{
+    struct Pokemon egg;
+    u16 species;
+    u8 parentSlots[DAYCARE_MON_COUNT] = {0};
+    bool8 isEgg;
+
+    species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
+    if (P_INCENSE_BREEDING < GEN_9)
+        AlterEggSpeciesWithIncenseItem(&species, daycare);
+    SetInitialEggData(&egg, species, daycare);
+    InheritIVs(&egg, daycare);
+    InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+    BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+    if (P_ABILITY_INHERITANCE >= GEN_6)
+        InheritAbility(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+
+    GiveMoveIfItem(&egg, daycare);
+
+    isEgg = TRUE;
+    SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
+
+    return egg;
+}
+
+void SendEggFromDaycareToPC(struct DayCare *daycare)
+{
+    if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
+        return;
+
+    struct Pokemon egg = GenerateMonForDaycare(daycare);
+
+    CopyMonToPC(&egg);
+    RemoveEggFromDayCare(daycare);
+
+    if (FlagGet(FLAG_PENDING_DAYCARE_EGG))
+        FlagClear(FLAG_PENDING_DAYCARE_EGG);
 }
 
 static void _GiveEggFromDaycare(struct DayCare *daycare)

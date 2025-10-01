@@ -36,5 +36,7 @@ u8 GetEggMovesBySpecies(u16 species, u16 *eggMoves);
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move);
 void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon);
 u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
+void SendEggFromDaycareToPC(struct DayCare *daycare);
+struct Pokemon GenerateMonForDaycare(struct DayCare *daycare);
 
 #endif // GUARD_DAYCARE_H

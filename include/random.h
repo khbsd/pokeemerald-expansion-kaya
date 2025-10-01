@@ -219,6 +219,7 @@ enum RandomTag
     RNG_BALLTHROW_SHAKE,
     RNG_PRESENT,
     RNG_MAGNITUDE,
+    RNG_RTC_EGG,
 };
 
 #define RandomWeighted(tag, ...) \
