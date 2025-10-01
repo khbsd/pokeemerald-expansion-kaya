@@ -397,10 +397,6 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_USE_SURF);
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
-
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -415,10 +411,6 @@ void Overworld_ResetStateAfterTeleport(void)
     RunScriptImmediately(EventScript_ResetMrBriney);
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
-
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -432,10 +424,6 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_SURF);
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
-
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
@@ -453,10 +441,13 @@ void Overworld_ResetBattleFlagsAndVars(void)
         VarSet(B_VAR_WILD_AI_FLAGS,0);
     #endif
 
+    #if B_VAR_NO_BAG_USE != 0
+        VarSet(B_VAR_NO_BAG_USE, 0);
+    #endif
+
     FlagClear(B_FLAG_INVERSE_BATTLE);
     FlagClear(B_FLAG_FORCE_DOUBLE_WILD);
     FlagClear(B_SMART_WILD_AI_FLAG);
-    // FlagClear(B_FLAG_NO_BAG_USE);
     FlagClear(B_FLAG_NO_CATCHING);
     FlagClear(B_FLAG_NO_RUNNING);
     FlagClear(B_FLAG_DYNAMAX_BATTLE);
@@ -487,9 +478,6 @@ static void Overworld_ResetStateAfterWhiteOut(void)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -501,9 +489,6 @@ static void UpdateMiscOverworldStates(void)
     MoveAllRoamersToOtherLocationSets();
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 void ResetGameStats(void)
@@ -929,9 +914,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void LoadMapFromWarp(bool32 a1)
@@ -1001,9 +983,6 @@ static void LoadMapFromWarp(bool32 a1)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -2157,9 +2136,6 @@ void CB2_ContinueSavedGame(void)
 
     if (isGen4BGM)
         isGen4BGM = FALSE;
-
-    if (!FlagGet(FLAG_SYS_BAG_USE))
-        FlagSet(FLAG_SYS_BAG_USE);
 }
 
 static void FieldClearVBlankHBlankCallbacks(void)

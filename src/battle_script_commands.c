@@ -6743,6 +6743,8 @@ static void Cmd_moveend(void)
             while (gBattleStruct->moveEndBattlerId < gBattlersCount)
             {
                 u32 battler = gBattleStruct->moveEndBattlerId++;
+                if (!IsBattlerAlive(battler))
+                    continue;
                 if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, GetBattlerAbility(battler), 0, 0))
                     return;
             }
@@ -6753,6 +6755,8 @@ static void Cmd_moveend(void)
             while (gBattleStruct->moveEndBattlerId < gBattlersCount)
             {
                 u32 battler = gBattleStruct->moveEndBattlerId++;
+                if (!IsBattlerAlive(battler))
+                    continue;
                 if (ItemBattleEffects(ITEMEFFECT_MIRROR_HERB, battler))
                     return;
             }
@@ -9648,7 +9652,7 @@ static void Cmd_jumpifnexttargetvalid(void)
 
 static void Cmd_tryhealhalfhealth(void)
 {
-    CMD_ARGS(const u8 *failInstr, u8 battler);
+    CMD_ARGS(u8 battler, const u8 *failInstr);
 
     const u8 *failInstr = cmd->failInstr;
 
