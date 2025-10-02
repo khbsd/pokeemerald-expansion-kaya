@@ -132,7 +132,8 @@ struct PokemonSubstruct0
     u16 species:11; // 2047 species.
     u16 teraType:5; // 30 types.
     u16 heldItem:10; // 1023 items.
-    u16 unused_02:6;
+    u16 nature:5; // TODO: need Set/GetMonData rework
+    u16 shiny:1; // TODO: need Set/GetMonData rework
     u32 experience:21;
     u32 nickname11:8; // 11th character of nickname.
     u32 unused_04:3;
@@ -140,7 +141,7 @@ struct PokemonSubstruct0
     u8 friendship;
     u16 pokeball:6; // 63 balls.
     u16 nickname12:8; // 12th character of nickname.
-    u16 unused_0A:2;
+    u16 gender:2; // TODO: need Set/GetMonData rework
 };
 
 struct PokemonSubstruct1
@@ -271,8 +272,7 @@ struct BoxPokemon
     u8 compressedStatus:4;
     u16 checksum;
     u16 hpLost:14; // 16383 HP.
-    u16 shinyModifier:1;
-    u16 unused_1E:1;
+    u16 unused_1E:2;
 
     union
     {
