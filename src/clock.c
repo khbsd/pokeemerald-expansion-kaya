@@ -1,11 +1,17 @@
 #include "global.h"
 #include "berry.h"
 #include "clock.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "lottery_corner.h"
+#include "match_call.h"
 #include "dewford_trend.h"
+#include "random.h"
+#include "tv.h"
+#include "field_weather.h"
+#include "berry.h"
 #include "main.h"
 #include "overworld.h"
 #include "pokerus.h"
@@ -76,6 +82,9 @@ static void UpdatePerMinute(struct Time *localTime)
             gSaveBlock2Ptr->lastBerryTreeUpdate = *localTime;
         }
     }
+    if (RandomPercentage(RNG_RTC_EGG, GetNumOwnedBadges() * P_EGG_BADGE_CHANCE_AMOUNT) 
+        && P_EGG_CHANCE_PER_MINUTE)
+        TriggerPendingDaycareEgg();
 }
 
 void FormChangeTimeUpdate()

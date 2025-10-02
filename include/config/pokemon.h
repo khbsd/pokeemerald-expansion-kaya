@@ -38,6 +38,8 @@
 #define P_BADGE_BOOST_EGG_STEPS          TRUE                      // If TRUE, allows badges to shorten egg hatching time
 #define P_BADGE_BOOST_EGG_STEP_AMOUNT    3                         // The amount the number of owned badges should be multiplied by to get the chance to reduce egg steps by.
 #define P_BADGE_BOOST_MON_COMPAT         4
+#define P_EGG_BADGE_CHANCE_AMOUNT        2                         // What percentage per badge an egg has of generating every minute.
+#define P_EGG_CHANCE_PER_MINUTE          TRUE                      // If TRUE, there is a small chance every minute to generate an egg, independent of your step count.
 
 // Species-specific settings
 #define P_SHEDINJA_BALL                  GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
