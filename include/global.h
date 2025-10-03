@@ -858,7 +858,9 @@ struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
-    u32 stepCounter;
+    u32 offspringNature:5;
+    u32 stepCounter:9;
+    u32 padding:18;
 };
 
 struct LilycoveLadyQuiz

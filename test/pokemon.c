@@ -18,9 +18,9 @@ TEST("Nature independent from Hidden Nature")
         }
     }
     CreateMonWithNature(&mon, SPECIES_WOBBUFFET, 100, 0, nature);
-    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
+    SetMonData(&mon, MON_DATA_NATURE, &hiddenNature);
     EXPECT_EQ(GetNature(&mon), nature);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), hiddenNature);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_NATURE), hiddenNature);
 }
 
 TEST("Terastallization type defaults to primary or secondary type")
@@ -519,7 +519,7 @@ TEST("BoxPokemon encryption works")
         charIndex++;
     }
     EXPECT_EQ(GetNature(&mon), NATURE_HARDY);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), NATURE_ADAMANT);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_NATURE), NATURE_ADAMANT);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_LOST), 10);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_ORAN_BERRY);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_TACKLE);

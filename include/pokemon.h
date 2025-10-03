@@ -33,7 +33,8 @@ enum MonData {
     MON_DATA_CHECKSUM,
     MON_DATA_HP,
     MON_DATA_IS_SHINY,
-    MON_DATA_HIDDEN_NATURE,
+    MON_DATA_NATURE,
+    MON_DATA_GENDER,
     MON_DATA_HP_LOST,
     MON_DATA_DAYS_SINCE_FORM_CHANGE,
     MON_DATA_ENCRYPT_SEPARATOR,
@@ -260,7 +261,7 @@ struct BoxPokemon
     u32 otId;
     u8 nickname[min(10, POKEMON_NAME_LENGTH)];
     u8 language:3;
-    u8 hiddenNatureModifier:5; // 31 natures.
+    u8 unused_01:5;
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
@@ -388,7 +389,9 @@ struct BattlePokemon
     /*0x51*/ struct Volatiles volatiles;
     /*0x5D*/ u32 otId;
     /*0x61*/ u8 metLevel;
-    /*0x62*/ bool8 isShiny;
+    /*0x62*/ u8 isShiny:1;
+    /*0x63*/ u8 gender:2;
+    /*0x64*/ u8 nature:5;
 };
 
 struct EvolutionParam

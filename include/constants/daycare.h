@@ -13,6 +13,13 @@
 #define DAYCARE_ONE_MON     2
 #define DAYCARE_TWO_MONS    3
 
+// step cycle values
+#define DAYCARE_STEPS_MAX   511    // the max a stepcounter in any gen will be is 257, so we need 9 bits to capture a number that high
+#define DAYCARE_STEPS_GEN1  256
+#define DAYCARE_STEPS_GEN4  255
+#define DAYCARE_STEPS_GEN5  257
+#define DAYCARE_STEPS_GEN8  128
+
 #define EGG_HATCH_LEVEL ((P_EGG_HATCH_LEVEL >= GEN_4) ? 1 : 5)
 #define EGG_GENDER_MALE 0x8000  // used to create a male egg from a female-only parent species (e.g. Nidoran)
 

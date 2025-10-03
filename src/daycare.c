@@ -571,7 +571,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     // inherit nature
     else
     {
-        u8 wantedNature = GetNatureFromPersonality(GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_PERSONALITY, NULL));
+        u8 wantedNature = GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_NATURE);
         u32 personality;
 
         do
@@ -584,6 +584,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
         } while (natureTries <= 2400);
 
         daycare->offspringPersonality = personality;
+        daycare->offspringNature = wantedNature;
     }
 
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
@@ -1132,15 +1133,18 @@ void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation)
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare)
 {
     u32 personality;
+    u32 nature;
     enum PokeBall ball;
     u8 metLevel;
     u8 language;
 
     personality = daycare->offspringPersonality;
+    nature = daycare->offspringNature;
     CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
     metLevel = 0;
     ball = BALL_POKE;
     language = LANGUAGE_JAPANESE;
+    SetMonData(mon, MON_DATA_NATURE, &nature);
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
@@ -1153,9 +1157,21 @@ void GiveEggFromDaycare(void)
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
 
+u32 GetEggCycleLength(void)
+{
+    if (P_EGG_CYCLE_LENGTH <= GEN_3 || P_EGG_CYCLE_LENGTH == GEN_7)
+        return DAYCARE_STEPS_GEN1;
+    else if (P_EGG_CYCLE_LENGTH == GEN_4)
+        return DAYCARE_STEPS_GEN4;
+    else if (P_EGG_CYCLE_LENGTH == GEN_5 || P_EGG_CYCLE_LENGTH == GEN_6)
+        return DAYCARE_STEPS_GEN5;
+    else
+        return DAYCARE_STEPS_GEN8;
+}
+
 static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 {
-    u32 i, validEggs = 0;
+    u32 i, cycleLength, validEggs = 0;
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -1171,12 +1187,11 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             TriggerPendingDaycareEgg();
     }
 
+    cycleLength = GetEggCycleLength();
+
     // Try to hatch Egg
-    daycare->stepCounter++;
-    if (((P_EGG_CYCLE_LENGTH <= GEN_3 || P_EGG_CYCLE_LENGTH == GEN_7) && daycare->stepCounter >= 256)
-     || (P_EGG_CYCLE_LENGTH == GEN_4 && daycare->stepCounter >= 255)
-     || ((P_EGG_CYCLE_LENGTH == GEN_5 || P_EGG_CYCLE_LENGTH == GEN_6) && daycare->stepCounter >= 257)
-     || (P_EGG_CYCLE_LENGTH >= GEN_8 && daycare->stepCounter >= 128))
+    daycare->stepCounter = (daycare->stepCounter >= cycleLength) ? cycleLength : stepCounter++;
+    if (daycare->stepCounter >= cycleLength)
     {
         u32 eggCycles;
         u8 toSub = GetEggCyclesToSubtract();

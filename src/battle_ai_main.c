@@ -440,7 +440,7 @@ static void CopyBattlerDataToAIParty(u32 bPosition, u32 side)
     aiMon->species = bMon->species;
     aiMon->level = bMon->level;
     aiMon->status = bMon->status1;
-    aiMon->gender = GetBattlerGender(battler);
+    aiMon->gender = bMon->gender;
     aiMon->isFainted = FALSE;
     aiMon->wasSentInBattle = TRUE;
     aiMon->switchInCount++;

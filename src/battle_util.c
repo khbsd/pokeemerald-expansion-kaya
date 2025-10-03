@@ -11261,6 +11261,13 @@ void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
 }
 
+void CopyMonGenderNatureShinyToBattleMon(u32 battler, struct Pokemon *mon)
+{
+    gBattleMons[battler].gender = GetMonData(mon, MON_DATA_GENDER);
+    gBattleMons[battler].nature = GetMonData(mon, MON_DATA_NATURE);
+    gBattleMons[battler].isShiny  = GetMonData(mon, MON_DATA_IS_SHINY);
+}
+
 void RecalcBattlerStats(u32 battler, struct Pokemon *mon, bool32 isDynamaxing)
 {
     u32 hp = GetMonData(mon, MON_DATA_HP);
@@ -11303,24 +11310,18 @@ static bool32 CanBeInfinitelyConfused(u32 battler)
     return TRUE;
 }
 
-u8 GetBattlerGender(u32 battler)
-{
-    return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
-                                              gBattleMons[battler].personality);
-}
-
 bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
 {
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
+    u8 gender1 = gBattleMons[battler1].gender;
+    u8 gender2 = gBattleMons[battler2].gender;
 
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
 }
 
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
 {
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
+    u8 gender1 = gBattleMons[battler1].gender;
+    u8 gender2 = gBattleMons[battler2].gender;
 
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
 }
