@@ -577,3 +577,4 @@ gSpecials::
     def_special PokevialRefill
 	def_special CheckIfPlayerIsKaya
 	def_special SetHiddenNature
+	def_special SetAbility
