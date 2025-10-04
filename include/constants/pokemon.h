@@ -175,6 +175,11 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
+// only used by Get/SetMonData internally
+#define MON_DATA_MALE        0
+#define MON_DATA_FEMALE      1
+#define MON_DATA_GENDERLESS  2
+
 // Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL       0
 #define FRIENDSHIP_EVENT_VITAMIN          1 // unused, handled by PokemonUseItemEffects

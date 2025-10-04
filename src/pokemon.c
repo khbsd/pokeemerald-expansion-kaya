@@ -1025,18 +1025,47 @@ void ZeroEnemyPartyMons(void)
         ZeroMonData(&gEnemyParty[i]);
 }
 
-void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+u8 MonGenderToData(u32 gender)
+{
+    u8 dataGender;
+    if (gender == MON_MALE)
+        dataGender = MON_DATA_MALE;
+    else if (gender == MON_FEMALE)
+        dataGender = MON_DATA_FEMALE;
+    else
+        dataGender = MON_DATA_GENDERLESS;
+
+    DebugPrintf("%u converted to %u", gender, dataGender);
+
+    return dataGender;
+}
+
+u32 MonDataToGender(u8 gender)
+{
+    u32 monGender;
+    if (gender == MON_DATA_MALE)
+        monGender = MON_MALE;
+    else if (gender == MON_DATA_FEMALE)
+        monGender = MON_FEMALE;
+    else
+        monGender = MON_GENDERLESS;
+
+    DebugPrintf("%u converted to %u", gender, monGender);
+    return monGender;
+}
+
+void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId, bool32 hasNatureSet, bool32 hasGenderSet)
 {
     u32 mail;
     ZeroMonData(mon);
-    CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
+    CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId, FALSE, FALSE);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     mail = MAIL_NONE;
     SetMonData(mon, MON_DATA_MAIL, &mail);
     CalculateMonStats(mon);
 }
 
-void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId, bool32 hasNatureSet, bool32 hasGenderSet)
 {
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u32 personality = Random32();
@@ -1107,6 +1136,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     if (hasFixedPersonality)
         personality = fixedPersonality;
+
+    if (!hasGenderSet)
+    {
+        u32 gender = GetGenderFromSpeciesAndPersonality(species, personality);
+        SetBoxMonData(boxMon, MON_DATA_GENDER, &gender);
+    }
+
+    if (!hasNatureSet)
+    {
+        u32 nature = GetNatureFromPersonality(personality);
+        SetBoxMonData(boxMon, MON_DATA_NATURE, &nature);
+    }
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
@@ -1218,15 +1259,27 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
+    u32 personality;
+
+    do
+    {
+        personality = Random32();
+    }
+    while (nature != GetNatureFromPersonality(personality));
+
     SetMonData(mon, MON_DATA_NATURE, &nature);
-    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0, TRUE, FALSE);
 }
 
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
 {
     u32 personality;
 
-
+    do
+    {
+        personality = Random32();
+    }
+    while (nature != GetNatureFromPersonality(personality));
 
     if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
     {
@@ -1246,7 +1299,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
 
     SetMonData(mon, MON_DATA_GENDER, &gender);
     SetMonData(mon, MON_DATA_NATURE, &nature);
-    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0, TRUE, TRUE);
 }
 
 // This is only used to create Wally's Ralts.
@@ -1256,19 +1309,19 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
     u32 otId = Random32();
 
     SetMonData(mon, MON_DATA_GENDER, MON_MALE);
-    CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
+    CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId, FALSE, FALSE);
 }
 
 void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality)
 {
-    CreateMon(mon, species, level, 0, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, level, 0, TRUE, personality, OT_ID_PLAYER_ID, 0, FALSE, FALSE);
     SetMonData(mon, MON_DATA_IVS, &ivs);
     CalculateMonStats(mon);
 }
 
 void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId)
 {
-    CreateMon(mon, species, level, 0, FALSE, 0, OT_ID_PRESET, otId);
+    CreateMon(mon, species, level, 0, FALSE, 0, OT_ID_PRESET, otId, FALSE, FALSE);
     SetMonData(mon, MON_DATA_HP_IV, &ivs[STAT_HP]);
     SetMonData(mon, MON_DATA_ATK_IV, &ivs[STAT_ATK]);
     SetMonData(mon, MON_DATA_DEF_IV, &ivs[STAT_DEF]);
@@ -1285,7 +1338,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     u16 evAmount;
     u8 evsBits;
 
-    CreateMon(mon, species, level, fixedIV, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, level, fixedIV, FALSE, 0, OT_ID_PLAYER_ID, 0, FALSE, FALSE);
 
     evsBits = evSpread;
 
@@ -1317,7 +1370,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     u8 language;
     u8 value;
 
-    CreateMon(mon, src->species, src->level, 0, TRUE, src->personality, OT_ID_PRESET, src->otId);
+    CreateMon(mon, src->species, src->level, 0, TRUE, src->personality, OT_ID_PRESET, src->otId, FALSE, FALSE);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, src->moves[i], i);
@@ -1379,7 +1432,7 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     else
         level = src->level;
 
-    CreateMon(mon, src->species, level, 0, TRUE, src->personality, OT_ID_PRESET, src->otId);
+    CreateMon(mon, src->species, level, 0, TRUE, src->personality, OT_ID_PRESET, src->otId, FALSE, FALSE);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, src->moves[i], i);
@@ -1442,7 +1495,9 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
               TRUE,
               personality,
               OT_ID_PRESET,
-              otId);
+              otId,
+              FALSE,
+              FALSE);
 
     SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1471,7 +1526,8 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
         i = Random32();
     } while (nature != GetNatureFromPersonality(i));
 
-    CreateMon(mon, species, level, fixedIV, TRUE, i, OT_ID_PRESET, otId);
+    SetMonData(mon, MON_DATA_NATURE, &nature);
+    CreateMon(mon, species, level, fixedIV, TRUE, i, OT_ID_PRESET, otId, TRUE, FALSE);
     evsBits = evSpread;
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -1533,7 +1589,7 @@ static void CreateEventMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 {
     bool32 isModernFatefulEncounter = TRUE;
 
-    CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
+    CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId, FALSE, FALSE);
     SetMonData(mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isModernFatefulEncounter);
 }
 
@@ -2087,21 +2143,7 @@ u8 GetMonGender(struct Pokemon *mon)
 
 u8 GetBoxMonGender(struct BoxPokemon *boxMon)
 {
-    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
-    u32 personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
-
-    switch (gSpeciesInfo[species].genderRatio)
-    {
-    case MON_MALE:
-    case MON_FEMALE:
-    case MON_GENDERLESS:
-        return gSpeciesInfo[species].genderRatio;
-    }
-
-    if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
-        return MON_FEMALE;
-    else
-        return MON_MALE;
+    return GetBoxMonData(boxMon, MON_DATA_GENDER);
 }
 
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
@@ -2449,9 +2491,11 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_NATURE:
             retVal = GetSubstruct0(boxMon)->nature;
             break;
-        case MON_DATA_NATURE:
-            // TODO: gender needs to account for MON_<GENDER> values, not just 0-3
-            retVal = GetSubstruct0(boxMon)->gender;
+        case MON_DATA_GENDER:
+            retVal = MonDataToGender(GetSubstruct0(boxMon)->gender);
+            break;
+        case MON_DATA_IS_SHINY:
+            retVal = GetSubstruct0(boxMon)->shiny;
             break;
         case MON_DATA_MOVE1:
             retVal = GetSubstruct1(boxMon)->move1;
@@ -2796,12 +2840,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_CHECKSUM:
             retVal = boxMon->checksum;
             break;
-        case MON_DATA_IS_SHINY:
-        {
-            u32 shinyValue = GET_SHINY_VALUE(boxMon->otId, boxMon->personality);
-            retVal = (shinyValue < SHINY_ODDS) ^ boxMon->shinyModifier;
-            break;
-        }
         case MON_DATA_DAYS_SINCE_FORM_CHANGE:
             retVal = boxMon->daysSinceFormChange;
             break;
@@ -2947,7 +2985,12 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             SET8(GetSubstruct0(boxMon)->nature);
             break;
         case MON_DATA_GENDER:
-            SET8(GetSubstruct0(boxMon)->gender);
+            struct PokemonSubstruct0 *substruct0 = GetSubstruct0(boxMon);
+            substruct0->gender = MonGenderToData(*data);
+            break;
+        case MON_DATA_IS_SHINY:
+            SET8(GetSubstruct0(boxMon)->shiny);
+            break;
         case MON_DATA_MOVE1:
             SET16(GetSubstruct1(boxMon)->move1);
             break;
@@ -3206,14 +3249,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_CHECKSUM:
             SET16(boxMon->checksum);
             break;
-        case MON_DATA_IS_SHINY:
-        {
-            u32 shinyValue = GET_SHINY_VALUE(boxMon->otId, boxMon->personality);
-            bool32 isShiny;
-            SET8(isShiny);
-            boxMon->shinyModifier = (shinyValue < SHINY_ODDS) ^ isShiny;
-            break;
-        }
         case MON_DATA_DAYS_SINCE_FORM_CHANGE:
             SET8(boxMon->daysSinceFormChange);
             break;
@@ -3425,7 +3460,9 @@ void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
                 TRUE,
                 gBattleResources->secretBase->party.personality[i],
                 OT_ID_RANDOM_NO_SHINY,
-                0);
+                0,
+                FALSE,
+                FALSE);
 
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->party.heldItems[i]);
 

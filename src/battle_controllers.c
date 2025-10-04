@@ -86,7 +86,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         ZeroEnemyPartyMons();
-        CreateMon(&gEnemyParty[0], SPECIES_ZIGZAGOON, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+        CreateMon(&gEnemyParty[0], SPECIES_ZIGZAGOON, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0, FALSE, FALSE);
         i = 0;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }
@@ -2867,7 +2867,7 @@ void AnimateMonAfterPokeBallFail(u32 battler)
 {
     if (B_ANIMATE_MON_AFTER_FAILED_POKEBALL == FALSE)
         return;
-    
+
     LaunchKOAnimation(battler, ReturnAnimIdForBattler(TRUE, battler), TRUE);
     TryShinyAnimation(gBattlerTarget, GetBattlerMon(gBattlerTarget));
 }

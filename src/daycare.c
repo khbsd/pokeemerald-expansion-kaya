@@ -1111,7 +1111,7 @@ void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation)
     u8 metLocation;
     u8 isEgg;
 
-    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0, FALSE, FALSE);
     metLevel = 0;
     ball = BALL_POKE;
     language = LANGUAGE_JAPANESE;
@@ -1134,17 +1134,20 @@ static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *
 {
     u32 personality;
     u32 nature;
+    u32 gender;
     enum PokeBall ball;
     u8 metLevel;
     u8 language;
 
     personality = daycare->offspringPersonality;
     nature = daycare->offspringNature;
-    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    gender = GetGenderFromSpeciesAndPersonality(species, personality);
+    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0, TRUE, TRUE);
     metLevel = 0;
     ball = BALL_POKE;
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_NATURE, &nature);
+    SetMonData(mon, MON_DATA_GENDER, &gender);
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
@@ -1190,7 +1193,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     cycleLength = GetEggCycleLength();
 
     // Try to hatch Egg
-    daycare->stepCounter = (daycare->stepCounter >= cycleLength) ? cycleLength : stepCounter++;
+    daycare->stepCounter = (daycare->stepCounter >= cycleLength) ? cycleLength : (daycare->stepCounter + 1);
     if (daycare->stepCounter >= cycleLength)
     {
         u32 eggCycles;

@@ -100,7 +100,7 @@ void MoveAllRoamers(void)
 static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
 {
     ClearRoamerLocationHistory(index);
-    CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0, FALSE, FALSE);
     ROAMER(index)->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
     ROAMER(index)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;

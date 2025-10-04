@@ -2091,6 +2091,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battler, u8 attr)
     u8 size;
     u8 y_offset;
     struct BattleSpriteInfo *spriteInfo;
+    struct Pokemon *mon = GetBattlerMon(battler);
 
     if (IsContest())
     {
@@ -2112,8 +2113,6 @@ s16 GetBattlerSpriteCoordAttr(u8 battler, u8 attr)
     }
     else
     {
-        struct Pokemon *mon = GetBattlerMon(battler);
-
         spriteInfo = gBattleSpritesDataPtr->battlerData;
         if (!spriteInfo[battler].transformSpecies)
         {

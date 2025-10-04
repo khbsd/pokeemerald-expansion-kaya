@@ -1578,7 +1578,10 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
     DATA.isShiny = FALSE;
     (*partySize)++;
 
-    CreateMon(DATA.currentMon, species, 100, 0, TRUE, 0, OT_ID_PRESET, 0);
+    SetMonData(DATA.currentMon, MON_DATA_GENDER, DATA.gender);
+    SetMonData(DATA.currentMon, MON_DATA_NATURE, DATA.nature);
+
+    CreateMon(DATA.currentMon, species, 100, 0, TRUE, 0, OT_ID_PRESET, 0, TRUE, TRUE);
     // Reset move IDs, but force PP to be non-zero. This is a safeguard against test species that only learn 1 move having test moves with 0 PP
     for (i = 0; i < MAX_MON_MOVES; i++)
     {

@@ -6950,6 +6950,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     else if (mode == MODE_BOX)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
+        gender = GetBoxMonData(boxMon, MON_DATA_GENDER);
 
         sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
@@ -6968,7 +6969,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality);
-            gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
+            gender = GetBoxMonData(boxMon, MON_DATA_GENDER);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
     }
@@ -9569,7 +9570,8 @@ void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV,
                      level,
                      fixedIV,
                      hasFixedPersonality, personality,
-                     otIDType, otID);
+                     otIDType, otID,
+                     FALSE, FALSE);
     }
 }
 
