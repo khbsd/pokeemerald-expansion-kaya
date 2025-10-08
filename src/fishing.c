@@ -4,6 +4,7 @@
 #include "fieldmap.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
+#include "fishing.h"
 #include "fishing_game.h"
 #include "menu.h"
 #include "metatile_behavior.h"
@@ -87,29 +88,6 @@ static const struct FriendshipHookChanceBoost sFriendshipHookChanceBoostArray[] 
 };
 
 #define FISHING_CHAIN_SHINY_STREAK_MAX 20
-
-enum
-{
-    FISHING_INIT,
-    FISHING_GET_ROD_OUT,
-    FISHING_WAIT_BEFORE_DOTS,
-    FISHING_INIT_DOTS,
-    FISHING_SHOW_DOTS,
-    FISHING_CHECK_FOR_BITE,
-    FISHING_GOT_BITE,
-    FISHING_CHANGE_MINIGAME,
-    FISHING_WAIT_FOR_A,
-    FISHING_A_PRESS_NO_MINIGAME,
-    FISHING_CHECK_MORE_DOTS,
-    FISHING_MON_ON_HOOK,
-    FISHING_START_ENCOUNTER,
-    FISHING_START_GAME,
-    FISHING_NOT_EVEN_NIBBLE,
-    FISHING_GOT_AWAY,
-    FISHING_NO_MON,
-    FISHING_PUT_ROD_AWAY,
-    FISHING_END_NO_MON,
-};
 
 static bool32 (*const sFishingStateFuncs[])(struct Task *) =
 {
@@ -508,11 +486,15 @@ static bool32 Fishing_NotEvenNibble(struct Task *task)
 
 static bool32 Fishing_GotAway(struct Task *task)
 {
+    DebugPrintf("in Fishing_GotAway!");
     gChainFishingDexNavStreak = 0;
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_ItGotAway, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    if (!FG_FISH_MINIGAME_ENABLED)
+    {
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_ItGotAway, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    }
     task->tStep = FISHING_NO_MON;
     return TRUE;
 }

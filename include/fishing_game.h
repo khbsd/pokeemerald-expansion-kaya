@@ -214,17 +214,17 @@ enum {
 
 struct FishValues
 {
-    u32 min;
-    u32 max;
+    u8 min;
+    u8 max;
 };
 
 struct FishBehaviorData
 {
-    u32 species;
+    u16 species;
     struct FishValues speed;
     struct FishValues distance;
     struct FishValues delay;
-    u32 idleMovement;
+    u8 idleMovement;
 };
 
 struct FishingAbilityModifier
