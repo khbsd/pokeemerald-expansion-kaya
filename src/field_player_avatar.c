@@ -8,12 +8,16 @@
 #include "field_effect_helpers.h"
 #include "field_screen_effect.h"
 #include "field_player_avatar.h"
+#include "field_weather.h"
 #include "fieldmap.h"
 #include "follower_npc.h"
+#include "fishing_game.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "palette.h"
 #include "party_menu.h"
+#include "pokemon_icon.h"
 #include "random.h"
 #include "rotating_gate.h"
 #include "rtc.h"
@@ -24,6 +28,7 @@
 #include "task.h"
 #include "tv.h"
 #include "wild_encounter.h"
+#include "config/fishing_game.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -31,6 +36,7 @@
 #include "constants/items.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
+#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
 
@@ -1897,6 +1903,18 @@ static void Task_WaitStopSurfing(u8 taskId)
 #endif
         DestroyTask(taskId);
     }
+}
+
+void ResetPlayerAvatar(u16 gfxId)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    ObjectEventSetGraphicsId(playerObjEvent, gfxId);
+    ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+        SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, FALSE, 0);
+    gSprites[gPlayerAvatar.spriteId].x2 = 0;
+    gSprites[gPlayerAvatar.spriteId].y2 = 0;
 }
 
 void SetSpinStartFacingDir(u8 direction)
