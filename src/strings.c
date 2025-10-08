@@ -174,6 +174,11 @@ const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
 
+// pokeflute
+const u8 gText_PlayedPokeFluteCatchy[] = _("Played the POKé FLUTE.\pNow, that's a catchy tune!{PAUSE_UNTIL_PRESS}");
+const u8 gText_PlayedPokeFlute[] = _("Played the POKé FLUTE.");
+const u8 gText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleeping\nPOKéMON.{PAUSE_UNTIL_PRESS}");
+
 // Fishing minigame
 const u8 gText_ReelItIn[] = _("Hold and release A to keep the\nPOKéMON inside the fishing bar!");
 const u8 gText_HelpfulTextHigher0[] = _("Damn!\nThat was close!");

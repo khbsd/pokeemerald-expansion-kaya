@@ -326,12 +326,12 @@
 #define B_TOXIC_REVERSAL                GEN_LATEST // In Gen5+, bad poison will change to regular poison at the end of battles.
 #define B_TRY_CATCH_TRAINER_BALL        GEN_LATEST // In Gen4+, trying to catch a Trainer's Pokémon does not consume the Poké Ball.
 #define B_SLEEP_CLAUSE                  FALSE      // Enables Sleep Clause all the time in every case, overriding B_FLAG_SLEEP_CLAUSE. Use that for modularity.
+#define B_PARTNER_MONS_MARKED_SEEN      FALSE      // If TRUE, if your double battle partner sends out a Pokémon you haven't encountered yet, it will be marked as SEEN in your Pokédex.
 #define B_MON_FAINT_SCALING             TRUE       // If TRUE, will add a level to all enemy mons when a player's mon faints. can be scaled with B_MON_FAINT_SCALING_RATE
 #define B_MON_FAINT_SCALING_RATE        2          // How often a level will be added to each enemy mon, ie 1: every level, 2: every other level, etc
 #define B_MON_FAINT_SCALING_AMOUNT      1          // How much each faint counts when adjusting enemy level
 #define B_BADGE_EXP_BOOST               TRUE       // If TRUE, you get more experience based on how many badges you have.
 #define B_BADGE_EXP_BOOST_AMOUNT        3          // What % of extra experience each badge counts for when B_BADGE_EXP_BOOST is TRUE.
-#define B_PARTNER_MONS_MARKED_SEEN      TRUE       // If TRUE, if your double battle partner sends out a Pokémon you haven't encountered yet, it will be marked as SEEN in your Pokédex.
 
 // Gimmicks
 #define B_MEGA_RING                     FALSE
