@@ -542,7 +542,7 @@
 #define FLAG_MYSTERY_GIFT_15                 0x1F3
 
 // Hidden Items
-#define FLAG_HIDDEN_ITEMS_START                                                         0x1F4
+#define FLAG_HIDDEN_ITEMS_START                                                        0x1F4
 #define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL             (FLAG_HIDDEN_ITEMS_START + 0x00)
 #define FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET                  (FLAG_HIDDEN_ITEMS_START + 0x01)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST                  (FLAG_HIDDEN_ITEMS_START + 0x02)
