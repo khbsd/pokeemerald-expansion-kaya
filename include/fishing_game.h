@@ -44,7 +44,7 @@
 #define SCORE_AREA_OFFSET               24   // Position of the left edge of the score area.
 #define SCORE_BAR_OFFSET                ((SCORE_SECTION_WIDTH / 2) - SCORE_AREA_OFFSET) // Sets the score position in relation to SCORE_AREA_OFFSET.
 #define SCORE_INTERVAL                  (SCORE_MAX / SCORE_AREA_WIDTH)
-#define SCORE_SECTION_INIT_X            ((STARTING_SCORE / SCORE_INTERVAL) - SCORE_BAR_OFFSET)
+#define SCORE_SECTION_INIT_X            ((taskData.tScore / SCORE_INTERVAL) - SCORE_BAR_OFFSET)
 #define SCORE_SECTION_Y                 0
 #define SCORE_SECTION_WIDTH             64   // The width of one score meter section sprite in number of pixels.
 #define NUM_SCORE_SECTIONS              (SCORE_AREA_WIDTH / SCORE_SECTION_WIDTH)
@@ -81,13 +81,14 @@
 #define TREASURE_TILE_SIZE              (TREASURE_ICON_WIDTH / 8)
 #define TREASURE_SCORE_COLOR_INTERVAL   (TREASURE_TIME_GOAL / NUM_COLOR_INTERVALS)
 #define TREASURE_SCORE_COLOR_NUM        10   // The color position in the palette that the treasure score meter uses.
-#define TREASURE_POST_GAME_X            109  // X position of the treasure icon to be inside the text box after battle.
-#define TREASURE_POST_GAME_Y            68   // Y position of the treasure icon to be inside the text box after battle.
+#define TREASURE_POST_GAME_X            109  // X position of the treasure icon after battle.
+#define TREASURE_POST_GAME_Y            68   // Y position of the treasure icon after battle.
 
 // Other Constants
 #define OW_PAUSE_BEFORE_START           20   // Number of frames before the minigame starts in the overworld.
 #define SEPARATE_SCREEN_MODIFIER        80   // Position offset for sprites if on separate screen.
 #define ICON_CENTER_OFFSET              1.5  // Multiplier for the icon width in order to calculate the icon center.
+#define MAX_ABILITY_EFFECTS             3    // Maximum number of effects an Ability can have.
 
 
 // Sprite sheet numbers.
@@ -150,6 +151,34 @@ enum {
     FISHTASK_END_TASK
 };
 
+// Possible values for happensWhen
+enum {
+    FG_HAPPENS_ALWAYS,
+    FG_HAPPENS_WHEN_FISH_INSIDE_BAR,
+    FG_HAPPENS_WHEN_FISH_OUTSIDE_BAR,
+    FG_HAPPENS_WHEN_TREASURE_INSIDE_BAR,
+    FG_HAPPENS_WHEN_TREASURE_OUTSIDE_BAR
+};
+
+// Ability effect types
+enum {
+    FG_EFFECT_BAR_SIZE,             // Width of the fishing bar.
+    FG_EFFECT_FISH_SPEED,           // Speed a fish travels during a movement.
+    FG_EFFECT_FISH_MOVE_DELAY,      // Delay between fish movements.
+    FG_EFFECT_FISH_MOVE_DISTANCE,   // How far a fish will travel in a movement.
+    FG_EFFECT_SCORE_START,          // The score at the beginning of the game.
+    FG_EFFECT_SCORE_INCREASE,       // How much the score will increase by every frame.
+    FG_EFFECT_SCORE_DECREASE        // How much the score will decrease every frame.
+};
+
+// Operands for ability modifiers
+enum {
+    FG_ADD,
+    FG_SUBTRACT,
+    FG_MULTIPLY,
+    FG_DIVIDE
+};
+
 #define FISH_DIR_LEFT   0
 #define FISH_DIR_RIGHT  1
 
@@ -173,19 +202,39 @@ enum {
 #define TAG_SCORE_BACKING       0x1006
 #define TAG_ITEM                0x1009
 
+// Game state bit flags
+#define FG_SEPARATE_SCREEN      (1 << 0)
+#define FG_PAUSED               (1 << 1)
+#define FG_GAME_ENDED           (1 << 2)
+
+// Fish state bit flags
+#define FG_IS_VAGUE_FISH        (1 << 0)
+#define FG_IS_MOVING            (1 << 1)
+#define FG_DIR_RIGHT            (1 << 2)
+
 struct FishValues
 {
-    u32 min;
-    u32 max;
+    u8 min;
+    u8 max;
 };
 
 struct FishBehaviorData
 {
-    u32 species;
+    u16 species;
     struct FishValues speed;
     struct FishValues distance;
     struct FishValues delay;
-    u32 idleMovement;
+    u8 idleMovement;
+};
+
+struct FishingAbilityModifier
+{
+    u16 ability;
+    s16 effectAmount;
+    u16 operand;
+    u16 effectType;
+    u16 happensWhen;
+    bool8 hasMoreEffects;
 };
 
 #define treasure_score_frame(ptr, frame) {.data = (u8 *)ptr + (TREASURE_TILE_SIZE * TREASURE_TILE_SIZE * frame * 64)/2, .size = (TREASURE_TILE_SIZE * TREASURE_TILE_SIZE * 64)/2}

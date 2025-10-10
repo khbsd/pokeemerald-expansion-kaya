@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
+#include "fishing.h"
 #include "follower_npc.h"
 #include "fishing_game.h"
 #include "random.h"
@@ -1041,22 +1042,6 @@ bool8 DoesCurrentMapHaveFishingMons(void)
         return TRUE;
     else
         return FALSE;
-}
-
-u32 CalculateChainFishingShinyRolls(void)
-{
-    return (2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX));
-}
-
-void UpdateChainFishingStreak()
-{
-    if (!I_FISHING_CHAIN)
-        return;
-
-    if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
-        return;
-
-    gChainFishingDexNavStreak++;
 }
 
 void FishingWildEncounter(u8 rod)
