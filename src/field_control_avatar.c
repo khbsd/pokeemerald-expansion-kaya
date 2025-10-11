@@ -493,16 +493,14 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     case BG_EVENT_HIDDEN_ITEM:
         gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
+        
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
+        if (gSpecialVar_0x8005 != ITEM_MASTER_BALL)
+            gSpecialVar_0x8005 = GetItemFromPool();
+
         return EventScript_HiddenItemScript;
     case BG_EVENT_SECRET_BASE:
-        if (direction == DIR_NORTH)
-        {
-            gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
-            if (TrySetCurSecretBase())
-                return SecretBase_EventScript_CheckEntrance;
-        }
         return NULL;
     }
 

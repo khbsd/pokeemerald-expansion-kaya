@@ -143,7 +143,6 @@ static void SetUpItemUseCallback(u8 taskId)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
-    
     if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
     {
         FadeScreen(FADE_TO_BLACK, 0);
@@ -794,7 +793,7 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
     }
     else
     {
-        GetItemFieldFunc(gSpecialVar_ItemId)(taskId);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_KayaSaysNoBerries, CloseItemMessage);
     }
 }
 
@@ -854,8 +853,12 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine;
-    SetUpItemUseCallback(taskId);
+    DisplayItemMessage(taskId, FONT_NORMAL, gText_KayaSaysDontYouHavePokevial, CloseItemMessage);
+}
+
+void ItemUseOutOfBattle_Medicine_LavaCookie(u8 taskId)
+{
+    DisplayItemMessage(taskId, FONT_NORMAL, gText_KayaSaysNoLavaCookie, CloseItemMessage);
 }
 
 void ItemUseOutOfBattle_AbilityCapsule(u8 taskId)
@@ -908,7 +911,6 @@ void ItemUseOutOfBattle_PPUp(u8 taskId)
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
-    
     gItemUseCB = ItemUseCB_RareCandy;
     SetUpItemUseCallback(taskId);
 }

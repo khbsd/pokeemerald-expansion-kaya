@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item.h"
 #include "item_ball.h"
 #include "event_data.h"
 #include "constants/event_objects.h"
@@ -28,5 +29,9 @@ void GetItemBallIdAndAmountFromTemplate(void)
 {
     u32 itemBallId = (gSpecialVar_LastTalked - 1);
     gSpecialVar_Result = GetItemBallIdFromTemplate(itemBallId);
+
+    if (gSpecialVar_Result != ITEM_MASTER_BALL)
+        gSpecialVar_Result = GetItemFromPool();
+
     gSpecialVar_0x8009 = GetItemBallAmountFromTemplate(itemBallId);
 }

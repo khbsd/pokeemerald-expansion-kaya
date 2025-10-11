@@ -7,8 +7,10 @@
 #include "event_data.h"
 #include "malloc.h"
 #include "secret_base.h"
+#include "item_ball_pool.h"
 #include "item_menu.h"
 #include "party_menu.h"
+#include "random.h"
 #include "strings.h"
 #include "load_save.h"
 #include "item_use.h"
@@ -59,6 +61,32 @@ const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
 
 #undef UNPACK_TM_ITEM_ID
 #undef UNPACK_HM_ITEM_ID
+
+static const u16 sHealingItems[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
+    ITEM_FULL_RESTORE,
+    ITEM_REVIVE,
+    ITEM_MAX_REVIVE,
+    ITEM_PARALYZE_HEAL,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_ANTIDOTE,
+    ITEM_AWAKENING,
+    ITEM_FULL_HEAL,
+    ITEM_LEMONADE,
+    ITEM_FRESH_WATER,
+    ITEM_MOOMOO_MILK,
+    ITEM_SODA_POP,
+    ITEM_ENERGY_POWDER,
+    ITEM_ENERGY_ROOT,
+    ITEM_HEAL_POWDER,
+    ITEM_REVIVAL_HERB,
+    ITEM_SACRED_ASH,
+};
 
 static inline struct ItemSlot NONNULL BagPocket_GetSlotDataGeneric(struct BagPocket *pocket, u32 pocketPos)
 {
@@ -284,6 +312,24 @@ bool32 CheckBagHasSpace(u16 itemId, u16 count)
         return CheckPyramidBagHasSpace(itemId, count);
 
     return GetFreeSpaceForItemInBag(itemId) >= count;
+}
+
+bool32 IsHealingItem(u32 itemId)
+{
+    u32 healingItemsCount = ARRAY_COUNT(sHealingItems);
+    for (u32 itemIndex = 0; itemIndex < healingItemsCount; itemIndex++)
+    {
+        if (sHealingItems[itemIndex] == itemId)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 GetItemFromPool(void)
+{
+    u32 itemPoolType = RandomWeightedArrayIndex(RNG_ITEM_BALL_POOL, sItemPoolWeights);
+    return RandomElement(RNG_ITEM_BALL_POOL, sItemPools[itemPoolType]);
 }
 
 static u32 NONNULL BagPocket_GetFreeSpaceForItem(struct BagPocket *pocket, u16 itemId)

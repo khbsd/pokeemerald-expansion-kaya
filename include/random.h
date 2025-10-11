@@ -253,6 +253,7 @@ enum RandomTag
     RNG_RTC_EGG,
     RNG_FISHING_BITE,
     RNG_FISHING_GEN3_STICKY,
+    RNG_ITEM_BALL_POOL,
 };
 
 #define RandomWeighted(tag, ...) \

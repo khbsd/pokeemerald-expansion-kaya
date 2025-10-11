@@ -25,11 +25,14 @@ LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft::
 
 	.align 2
 LilycoveCity_DepartmentStore_2F_Pokemart1:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_GROWTH_MULCH
+	.2byte ITEM_DAMP_MULCH
+	.2byte ITEM_STABLE_MULCH
+	.2byte ITEM_GOOEY_MULCH
+	.2byte ITEM_RICH_MULCH
+	.2byte ITEM_SURPRISE_MULCH
+	.2byte ITEM_BOOST_MULCH
+	.2byte ITEM_AMAZE_MULCH
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight::
@@ -44,8 +47,20 @@ LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight::
 
 	.align 2
 LilycoveCity_DepartmentStore_2F_Pokemart2:
-	.2byte ITEM_WAVE_MAIL
-	.2byte ITEM_MECH_MAIL
+	.2byte ITEM_BRIGHT_POWDER
+	.2byte ITEM_WHITE_HERB
+	.2byte ITEM_QUICK_CLAW
+	.2byte ITEM_SOOTHE_BELL
+	.2byte ITEM_MENTAL_HERB
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_AMULET_COIN
+	.2byte ITEM_CLEANSE_TAG
+	.2byte ITEM_SMOKE_BALL
+	.2byte ITEM_FOCUS_BAND
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_LEFTOVERS
+	.2byte ITEM_SHELL_BELL
+	.2byte ITEM_WIDE_LENS
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly:

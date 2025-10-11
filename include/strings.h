@@ -2436,6 +2436,11 @@ extern const u8 gText_PokevialIsEmpty[];
 extern const u8 gText_YourPkmnWereRestored[];
 extern const u8 gText_PokevialDisabled[];
 
+// kaya blocks u :)
+extern const u8 gText_KayaSaysNoBerries[];
+extern const u8 gText_KayaSaysDontYouHavePokevial[];
+extern const u8 gText_KayaSaysNoLavaCookie[];
+
 // Fishing Minigame
 extern const u8 gText_ReelItIn[];
 extern const u8 gText_HelpfulTextHigher0[];

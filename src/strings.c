@@ -1329,3 +1329,6 @@ const u8 gText_PokevialHasDoses[] =_("The {STR_VAR_1} has {STR_VAR_2} doses rema
 const u8 gText_PokevialIsEmpty[] =_("The {STR_VAR_1} is empty!\nRefill it by healing at a {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PokevialDisabled[] =_("The {STR_VAR_1} is disabled!\nBlame Kaya. {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
 const u8 gText_YourPkmnWereRestored[] =_("Your POKéMON were restored\nto full health.{PAUSE_UNTIL_PRESS}");
+const u8 gText_KayaSaysNoBerries[] = _("No berries.\nTeehee! {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
+const u8 gText_KayaSaysDontYouHavePokevial[] = _("What, you don't have any\nPokévial uses left? {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
+const u8 gText_KayaSaysNoLavaCookie[] = _("You can't use this, but\nyou supported a local business!{PAUSE_UNTIL_PRESS}");
