@@ -7,11 +7,11 @@
 
 #define TREASURE_ITEM_ARRAY_SIZE 30
 
-static const u32 sTreasureArrays[][TREASURE_ITEM_ARRAY_SIZE] = 
+static const u32 sTreasureArrays[][TREASURE_ITEM_ARRAY_SIZE] =
 {
     { // Morning
         // Common
-        ITEM_POTION,
+        ITEM_LEEK,
         ITEM_LEEK,
         ITEM_LIGHT_BALL,
         ITEM_LIGHT_CLAY,
@@ -48,10 +48,10 @@ static const u32 sTreasureArrays[][TREASURE_ITEM_ARRAY_SIZE] =
     },
     { // Day
         // Common
-        ITEM_POTION,
         ITEM_POKE_BALL,
-        ITEM_ANTIDOTE,
-        ITEM_X_ATTACK,
+        ITEM_POKE_BALL,
+        ITEM_GREAT_BALL,
+        ITEM_NUGGET,
         ITEM_NUGGET,
         ITEM_STARDUST,
         ITEM_NUGGET,

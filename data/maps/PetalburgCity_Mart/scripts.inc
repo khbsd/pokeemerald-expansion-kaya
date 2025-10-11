@@ -15,9 +15,6 @@ PetalburgCity_Mart_EventScript_Clerk::
 	.align 2
 PetalburgCity_Mart_Pokemart_Basic:
 	.2byte ITEM_POKE_BALL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
 	.2byte ITEM_ORANGE_MAIL
 	pokemartlistend
 
@@ -31,9 +28,6 @@ PetalburgCity_Mart_EventScript_ExpandedItems::
 PetalburgCity_Mart_Pokemart_Expanded:
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
 	.2byte ITEM_ORANGE_MAIL
 	pokemartlistend
 

@@ -14,7 +14,6 @@ LavaridgeTown_Mart_EventScript_Clerk::
 	.align 2
 LavaridgeTown_Mart_Pokemart:
 	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_X_SPEED
 	.2byte ITEM_FRESH_START_MOCHI
 	pokemartlistend
 

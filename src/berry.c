@@ -2091,7 +2091,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
     else
         result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
 
-    return result + (GetNumOwnedBadges() * 2);
+    return result + (GetNumOwnedBadges());
 }
 
 static u8 GetBerryCountByBerryTreeId(u8 id)

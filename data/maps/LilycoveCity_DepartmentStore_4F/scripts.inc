@@ -27,6 +27,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
 	.2byte ITEM_SWEET_APPLE
 	.2byte ITEM_TART_APPLE
+	.2byte ITEM_SYRUPY_APPLE
 	.2byte ITEM_STICKY_BARB
 	.2byte ITEM_SHED_SHELL
 	.2byte ITEM_BIG_ROOT

@@ -16,8 +16,6 @@ SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_DIVE_BALL
 	.2byte ITEM_NET_BALL
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
 	.2byte ITEM_SHADOW_MAIL
 	pokemartlistend
 
