@@ -359,7 +359,8 @@ OldaleTown_Text_ThisIsAPokemonMart:
 OldaleTown_Text_PotionExplanation:
 	.string "{SPEAKER SP_NAME_POTION_SELLER}A POTION can be used anytime, so it's\n"
 	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "in certain situations.\p"
+	.string "If only you could use them. {EMOJI_BIGSMILE}$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "{SPEAKER SP_NAME_FOOT_GUY}Aaaaah! Wait!\n"
@@ -380,7 +381,7 @@ OldaleTown_Text_DiscoveredFootprints:
 OldaleTown_Text_FinishedSketchingFootprints:
 	.string "{SPEAKER SP_NAME_FOOT_GUY}I finished sketching the footprints of\n"
 	.string "a rare POKéMON.\p"
-	.string "But it turns out they were only my\n"
+	.string "Turns out they smelled like my\n"
 	.string "own footprints…$"
 
 OldaleTown_Text_MayLetsGoBack:
