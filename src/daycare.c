@@ -25,7 +25,6 @@
 #include "sound.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
-#include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"

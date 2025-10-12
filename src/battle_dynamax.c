@@ -19,7 +19,6 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/flags.h"
-#include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 
@@ -77,7 +76,7 @@ bool32 CanDynamax(u32 battler)
         return FALSE;
     
     u16 species = GetBattlerVisualSpecies(battler);
-    enum ItemHoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
+    enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     // Prevents Zigzagoon from dynamaxing in vanilla.
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !IsOnPlayerSide(battler))

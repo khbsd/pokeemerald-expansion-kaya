@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_hold_effects.h"
 #include "battle_util.h"
 #include "battle_controllers.h"
 #include "battle_ai_util.h"
@@ -7,7 +8,6 @@
 #include "battle_scripts.h"
 #include "constants/battle.h"
 #include "constants/battle_string_ids.h"
-#include "constants/hold_effects.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -20,7 +20,6 @@ enum EndTurnResolutionOrder
     ENDTURN_VARIOUS,
     ENDTURN_WEATHER,
     ENDTURN_WEATHER_DAMAGE,
-    ENDTURN_GEN_3_BERRY_ACTIVATION,
     ENDTURN_EMERGENCY_EXIT_1,
     ENDTURN_AFFECTION,
     ENDTURN_FUTURE_SIGHT,
@@ -270,20 +269,6 @@ static bool32 HandleEndTurnWeatherDamage(u32 battler)
     return effect;
 }
 
-static bool32 HandleEndTurnGenThreeBerryActivation(u32 battler)
-{
-    bool32 effect = FALSE;
-
-    if (B_HP_BERRIES >= GEN_4) // Skip handler for > Gen3
-    {
-        gBattleStruct->endTurnEventsCounter++;
-        return effect;
-    }
-    gBattleStruct->turnEffectsBattlerId++;
-    effect = TryRestoreHPBerries(battler, ITEMEFFECT_NORMAL);
-    return effect;
-}
-
 static bool32 HandleEndTurnEmergencyExit(u32 battler)
 {
     bool32 effect = FALSE;
@@ -516,7 +501,7 @@ static bool32 HandleEndTurnFirstEventBlock(u32 battler)
         break;
     }
     case FIRST_EVENT_BLOCK_HEAL_ITEMS:
-        if (ItemBattleEffects(ITEMEFFECT_LEFTOVERS, battler))
+        if (ItemBattleEffects(battler, 0, GetBattlerHoldEffect(battler), IsLeftoversActivation))
             effect = TRUE;
         gBattleStruct->eventBlockCounter = 0;
         gBattleStruct->turnEffectsBattlerId++;
@@ -851,6 +836,7 @@ static bool32 HandleEndTurnTaunt(u32 battler)
 
     if (gDisableStructs[battler].tauntTimer && --gDisableStructs[battler].tauntTimer == 0)
     {
+        gBattleScripting.battler = battler;
         BattleScriptExecute(BattleScript_BufferEndTurn);
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
         effect = TRUE;
@@ -868,6 +854,7 @@ static bool32 HandleEndTurnTorment(u32 battler)
     if (gDisableStructs[battler].tormentTimer == gBattleTurnCounter)
     {
         gBattleMons[battler].volatiles.torment = FALSE;
+        gBattleScripting.battler = battler;
         BattleScriptExecute(BattleScript_TormentEnds);
         effect = TRUE;
     }
@@ -893,6 +880,7 @@ static bool32 HandleEndTurnEncore(u32 battler)
         {
             gDisableStructs[battler].encoredMove = 0;
             gDisableStructs[battler].encoreTimer = 0;
+            gBattleScripting.battler = battler;
             BattleScriptExecute(BattleScript_EncoredNoMore);
             effect = TRUE;
         }
@@ -923,6 +911,7 @@ static bool32 HandleEndTurnDisable(u32 battler)
         else if (--gDisableStructs[battler].disableTimer == 0)  // disable ends
         {
             gDisableStructs[battler].disabledMove = 0;
+            gBattleScripting.battler = battler;
             BattleScriptExecute(BattleScript_DisabledNoMore);
             effect = TRUE;
         }
@@ -973,6 +962,7 @@ static bool32 HandleEndTurnHealBlock(u32 battler)
     if (gBattleMons[battler].volatiles.healBlock && gDisableStructs[battler].healBlockTimer == gBattleTurnCounter)
     {
         gBattleMons[battler].volatiles.healBlock = FALSE;
+        gBattleScripting.battler = battler;
         BattleScriptExecute(BattleScript_BufferEndTurn);
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_HEAL_BLOCK);
         effect = TRUE;
@@ -1016,7 +1006,7 @@ static bool32 HandleEndTurnYawn(u32 battler)
          && !IsLeafGuardProtected(battler, ability))
         {
             gEffectBattler = gBattlerTarget = battler;
-            enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler);
+            enum HoldEffect holdEffect = GetBattlerHoldEffect(battler);
             if (IsBattlerTerrainAffected(battler, ability, holdEffect, STATUS_FIELD_ELECTRIC_TERRAIN))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAINPREVENTS_ELECTRIC;
@@ -1426,17 +1416,18 @@ static bool32 HandleEndTurnThirdEventBlock(u32 battler)
     }
     case THIRD_EVENT_BLOCK_ITEMS:
     {
-        enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler);
+        // TODO: simplify
+        enum HoldEffect holdEffect = GetBattlerHoldEffect(battler);
         switch (holdEffect)
         {
         case HOLD_EFFECT_FLAME_ORB:
         case HOLD_EFFECT_STICKY_BARB:
         case HOLD_EFFECT_TOXIC_ORB:
-            if (ItemBattleEffects(ITEMEFFECT_ORBS, battler))
+            if (ItemBattleEffects(battler, 0, holdEffect, IsOrbsActivation))
                 effect = TRUE;
             break;
         case HOLD_EFFECT_WHITE_HERB:
-            if (ItemBattleEffects(ITEMEFFECT_WHITE_HERB_ENDTURN, battler))
+            if (ItemBattleEffects(battler, 0, holdEffect, IsWhiteHerbEndTurnActivation))
                 effect = TRUE;
             break;
         default:
@@ -1477,8 +1468,8 @@ static bool32 HandleEndTurnFormChangeAbilities(u32 battler)
 
 static bool32 HandleEndTurnEjectPack(u32 battler)
 {
-    gBattleStruct->turnEffectsBattlerId++;
-    return TrySwitchInEjectPack(ITEMEFFECT_NORMAL);
+    gBattleStruct->endTurnEventsCounter++;
+    return TrySwitchInEjectPack(END_TURN);
 }
 
 static bool32 HandleEndTurnDynamax(u32 battler)
@@ -1517,7 +1508,6 @@ static bool32 (*const sEndTurnEffectHandlers[])(u32 battler) =
     [ENDTURN_VARIOUS] = HandleEndTurnVarious,
     [ENDTURN_WEATHER] = HandleEndTurnWeather,
     [ENDTURN_WEATHER_DAMAGE] = HandleEndTurnWeatherDamage,
-    [ENDTURN_GEN_3_BERRY_ACTIVATION] = HandleEndTurnGenThreeBerryActivation,
     [ENDTURN_EMERGENCY_EXIT_1] = HandleEndTurnEmergencyExit,
     [ENDTURN_AFFECTION] = HandleEndTurnAffection,
     [ENDTURN_FUTURE_SIGHT] = HandleEndTurnFutureSight,
