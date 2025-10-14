@@ -284,46 +284,33 @@ class WildEncounterAssembler:
     def WriteMonLocationTable(self):
         wild_encounter_groups = self.json_data["wild_encounter_groups"]
         max_location_elements = 0
-        header_num_counter = 0
-        map_num_counter = 1
-        for wild_encounter_group in wild_encounter_groups:
-            if header_num_counter > 0:
-                continue
-            for_maps = False
-            if "for_maps" in wild_encounter_group:
-                for_maps = wild_encounter_group["for_maps"]
-            encounters = wild_encounter_group["encounters"]
+        wild_encounter_group = wild_encounter_groups[0]
+        encounters = wild_encounter_group["encounters"]
 
-            for map_encounters in encounters:
-                map_num = str(map_num_counter)
-                if for_maps:
-                    map_name = map_encounters["map"]
-                    map_group = f"MAP_GROUP({map_name})"
-                    map_num = f"MAP_NUM({map_name})"
-                base_label = map_encounters["base_label"]
-                time = self.config.time_fallback
+        for map_encounters in encounters:
+            map_name = map_encounters["map"]
+            base_label = map_encounters["base_label"]
+            time = self.config.time_fallback
 
-                for time_ident in self.config.times_of_day:
-                    if self.config.times_of_day[time_ident] in base_label:
-                        time = time_ident
-                    for mon_type in self.config.mon_types:
-                        if mon_type not in map_encounters:
-                            continue
+            for time_ident in self.config.times_of_day:
+                if self.config.times_of_day[time_ident] in base_label:
+                    time = time_ident
+                for mon_type in self.config.mon_types:
+                    if mon_type not in map_encounters:
+                        continue
 
-                        mons_entry = map_encounters[mon_type]
-                        for mon in mons_entry["mons"]:
-                            species = mon["species"]
-                            for config_species in self.config.species_info:
-                                if config_species in species:
-                                    locationIds = self.config.species_info[species]["times"][time]
+                    mons_entry = map_encounters[mon_type]
+                    for mon in mons_entry["mons"]:
+                        species = mon["species"]
+                        for config_species in self.config.species_info:
+                            if config_species in species:
+                                locationIds = self.config.species_info[species]["times"][time]
 
-                                    if map_name not in locationIds:
-                                        locationIds.append(map_name)
-                                    if len(locationIds) > max_location_elements:
-                                        max_location_elements = len(locationIds)
+                                if map_name not in locationIds:
+                                    locationIds.append(map_name)
+                                if len(locationIds) > max_location_elements:
+                                    max_location_elements = len(locationIds)
 
-                    map_num_counter += 1
-            header_num_counter += 1
         self.WriteHeader()
         self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
         self.WriteLine("{")
@@ -343,12 +330,12 @@ class WildEncounterAssembler:
                 elif len(header_ids) < max_location_elements:
                     while len(header_ids) < max_location_elements:
                         header_ids.append("MAP_UNDEFINED")
+
                 id_string = ""
                 for id in header_ids:
                     id_string = id_string + id + ", "
 
                 self.WriteLine(str(id_string), 3)
-
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
         self.WriteLine("};")
@@ -360,6 +347,7 @@ class WildEncounterAssembler:
         macro_text = "#define MAX_LOCATIONS"
         with open (pokedex_include_file_path, 'r+') as pokedex_include_file:
             MAX_LOCATION_PAT = re.compile(macro_text + " " + r"(?P<value>\d+)")
+
             lines = pokedex_include_file.readlines()
             pokedex_include_file.seek(0)
             pokedex_include_file.truncate(0)
