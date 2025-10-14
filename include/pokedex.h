@@ -1,6 +1,12 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
+#include "constants/rtc.h"
+#include "constants/species.h"
+
+#define MAX_LOCATIONS 53
+
+extern const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS];
 extern u8 gUnusedPokedexU8;
 extern void (*gPokedexVBlankCB)(void);
 
