@@ -334,7 +334,6 @@ class WildEncounterAssembler:
                 id_string = ""
                 for id in header_ids:
                     id_string = id_string + id + ", "
-
                 self.WriteLine(str(id_string), 3)
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
