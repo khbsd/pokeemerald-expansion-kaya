@@ -295,10 +295,8 @@ class WildEncounterAssembler:
             encounters = wild_encounter_group["encounters"]
 
             for map_encounters in encounters:
-                map_num = str(map_num_counter)
                 if for_maps:
                     map_name = map_encounters["map"]
-                    map_num = f"MAP_NUM({map_name})"
                 base_label = map_encounters["base_label"]
                 time = self.config.time_fallback
 
@@ -314,8 +312,8 @@ class WildEncounterAssembler:
                             species = mon["species"]
                             locationIds = self.config.species_info[species]["times"][time]
 
-                            if map_num not in locationIds:
-                                locationIds.append(map_num)
+                            if map_name not in locationIds:
+                                locationIds.append(map_name)
                             if len(locationIds) > max_location_elements:
                                 max_location_elements = len(locationIds)
 
@@ -335,7 +333,7 @@ class WildEncounterAssembler:
                 if not header_ids:
                     id_count = 0
                     while id_count < max_location_elements:
-                        header_ids.append("MAP_GROUP(MAP_UNDEFINED)")
+                        header_ids.append("MAP_UNDEFINED")
                         id_count += 1
                 elif len(header_ids) < max_location_elements:
                     while len(header_ids) < max_location_elements:
