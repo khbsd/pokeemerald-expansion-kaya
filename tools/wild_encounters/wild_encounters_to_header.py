@@ -77,11 +77,14 @@ class Config:
             m = SPECIES_NAMES_PAT.findall(file);
             if m:
                 self.species_info = {}
-                for match in m:
+                for match in m: # should probably be moved out of Config
                     self.species_info[match[0]] = {}
                     self.species_info[match[0]]["number"] = match[1]
                     self.species_info[match[0]]["species"] = match[0]
-                    self.species_info[match[0]]["locationIds"] = []
+                    self.species_info[match[0]]["times"] = {}
+                    if self.times_of_day != None:
+                        for time_ident in self.times_of_day:
+                            self.species_info[match[0]]["times"][time_ident] = []
 
 
 class WildEncounterAssembler:
@@ -281,10 +284,10 @@ class WildEncounterAssembler:
     def WriteMonLocationTable(self):
         wild_encounter_groups = self.json_data["wild_encounter_groups"]
         max_location_elements = 0
+        header_num_counter = 0
         for wild_encounter_group in wild_encounter_groups:
-            headers = {}
-            headers["label"] = wild_encounter_group["label"]
-            headers["data"] = {}
+            if header_num_counter > 0:
+                continue
             for_maps = False
             map_num_counter = 1
             if "for_maps" in wild_encounter_group:
@@ -292,27 +295,16 @@ class WildEncounterAssembler:
             encounters = wild_encounter_group["encounters"]
 
             for map_encounters in encounters:
-                map_group = "0"
                 map_num = str(map_num_counter)
                 if for_maps:
                     map_name = map_encounters["map"]
-                    map_group = f"MAP_GROUP({map_name})"
                     map_num = f"MAP_NUM({map_name})"
                 base_label = map_encounters["base_label"]
-                shared_label = base_label
                 time = self.config.time_fallback
 
                 for time_ident in self.config.times_of_day:
                     if self.config.times_of_day[time_ident] in base_label:
                         time = time_ident
-                        shared_label = shared_label.replace('_' + self.config.times_of_day[time_ident], '')
-
-                    if shared_label not in headers["data"]:
-                        headers["data"][shared_label] = {}
-                    if time not in headers["data"][shared_label]:
-                        headers["data"][shared_label][time] = {}
-                    headers["data"][shared_label]["mapGroup"] = map_group
-                    headers["data"][shared_label]["mapNum"] = map_num
                     for mon_type in self.config.mon_types:
                         if mon_type not in map_encounters:
                             continue
@@ -320,19 +312,49 @@ class WildEncounterAssembler:
                         mons_entry = map_encounters[mon_type]
                         for mon in mons_entry["mons"]:
                             species = mon["species"]
-                            locationIds = self.config.species_info[species]["locationIds"]
+                            locationIds = self.config.species_info[species]["times"][time]
 
-                            if map_num_counter not in locationIds:
-                                locationIds.append(map_num_counter)
-
-                            #print(locationIds)
-
+                            if map_num not in locationIds:
+                                locationIds.append(map_num)
                             if len(locationIds) > max_location_elements:
                                 max_location_elements = len(locationIds)
 
                 map_num_counter += 1
+            header_num_counter += 1
 
-        #print(self.config.species_info["SPECIES_MAGIKARP"]["locationIds"])
+        #print(self.config.species_info["SPECIES_MAGIKARP"]["times"])
+        self.WriteHeader()
+        self.WriteMacro("MAX_LOCATIONS", str(max_location_elements))
+        self.WriteLine()
+        self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
+        self.WriteLine("{")
+        for species in self.config.species_info:
+            self.WriteLine("[" + species + "]" + " = ", 1)
+            self.WriteLine("{", 1)
+            for time in self.config.species_info[species]["times"]:
+                self.WriteLine("[" + time + "]" + " = ", 2)
+                self.WriteLine("{", 2)
+
+                header_ids = self.config.species_info[species]["times"][time]
+                if not header_ids:
+                    id_count = 0
+                    while id_count < max_location_elements:
+                        header_ids.append("MAP_GROUP(MAP_UNDEFINED)")
+                        id_count += 1
+                elif len(header_ids) < max_location_elements:
+                    while len(header_ids) < max_location_elements:
+                        header_ids.append("MAP_GROUP(MAP_UNDEFINED)")
+
+                for id in header_ids:
+                    self.WriteLine(str(id) + ",", 3)
+
+                self.WriteLine("},", 2)
+            self.WriteLine("},", 1)
+        self.WriteLine("};")
+
+            #for timeData in species["times"]:
+                #self.WriteLine
+
 
 def ConvertToHeaderFile(json_data):
     with open('src/data/wild_encounters.h', 'w') as output_file:
@@ -341,6 +363,10 @@ def ConvertToHeaderFile(json_data):
         assembler.WriteHeader()
         assembler.WriteMacros()
         assembler.WriteEncounters()
+
+    with open('src/data/pokemon_dex_locations.h', 'w') as output_file:
+        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
+        assembler = WildEncounterAssembler(output_file, json_data, config)
         assembler.WriteMonLocationTable()
 
 

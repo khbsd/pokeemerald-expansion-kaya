@@ -27,6 +27,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "config/pokedex_plus_hgss.h"
+#include "data/pokemon_dex_locations.h"
 
 // There are two types of indicators for the area screen to show where a Pokémon can occur:
 // - Area glows, which highlight any of the maps in MAP_GROUP_TOWNS_AND_ROUTES that have the species.
@@ -117,8 +118,8 @@ static void BuildAreaGlowTilemap(void);
 static void SetAreaHasMon(u16, u16);
 static void SetSpecialMapHasMon(u16, u16);
 static u16 GetRegionMapSectionId(u8, u8);
-static bool8 MapHasSpecies(const struct WildEncounterTypes *, u16);
-static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
+//static bool8 MapHasSpecies(const struct WildEncounterTypes *, u16);
+//static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
 static void DoAreaGlow(void);
 static void Task_ShowPokedexAreaScreen(u8 taskId);
 static void Task_UpdatePokedexAreaScreen(u8 taskId);
@@ -248,7 +249,7 @@ static const struct WindowTemplate sTimeOfDayWindowLabelTemplates[] =
         .baseBlock = 0x16C
     },
 
-    [DEX_AREA_LABEL_AREA_UNKNOWN] = 
+    [DEX_AREA_LABEL_AREA_UNKNOWN] =
     {
         .bg = LABEL_WINDOW_BG,
         .tilemapLeft = 12,
@@ -340,9 +341,9 @@ static void FindMapsWithMon(u16 species)
     }
 
     // Add regular species to the area map
-    for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
+    for (i = 0; i < MAX_LOCATIONS; i++)
     {
-        if (MapHasSpecies(&gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay], species))
+        if (gPokemonDexLocationIds[species][gAreaTimeOfDay][i] != MAP_GROUP(MAP_UNDEFINED))
         {
             switch (gWildMonHeaders[i].mapGroup)
             {
@@ -428,7 +429,7 @@ static u16 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
 
-static bool8 MapHasSpecies(const struct WildEncounterTypes *info, u16 species)
+/*static bool8 MapHasSpecies(const struct WildEncounterTypes *info, u16 species)
 {
     u32 headerId = GetCurrentMapWildMonHeaderId();
     u8 currentMapGroup = gWildMonHeaders[headerId].mapGroup;
@@ -470,7 +471,7 @@ static bool8 MonListHasSpecies(const struct WildPokemonInfo *info, u16 species, 
         }
     }
     return FALSE;
-}
+}*/
 
 static void BuildAreaGlowTilemap(void)
 {
