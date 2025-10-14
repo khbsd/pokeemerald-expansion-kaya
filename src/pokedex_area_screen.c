@@ -341,18 +341,21 @@ static void FindMapsWithMon(u16 species)
     }
 
     // Add regular species to the area map
-    for (i = 0; i < MAX_LOCATIONS; i++)
+    for (u32 id = 0; id < MAX_LOCATIONS; id++)
     {
-        if (gPokemonDexLocationIds[species][gAreaTimeOfDay][i] != MAP_GROUP(MAP_UNDEFINED))
+        u32 headerId = gPokemonDexLocationIds[species][gAreaTimeOfDay][id];
+        u32 mapGroup = MAP_GROUP(headerId);
+        u32 mapNum   = MAP_NUM(headerId);
+        if (mapGroup != MAP_GROUP(MAP_UNDEFINED))
         {
-            switch (gWildMonHeaders[i].mapGroup)
+            switch (mapGroup)
             {
             case MAP_GROUP_TOWNS_AND_ROUTES:
-                SetAreaHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                SetAreaHasMon(mapGroup, mapNum);
                 break;
             case MAP_GROUP_DUNGEONS:
             case MAP_GROUP_SPECIAL_AREA:
-                SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                SetSpecialMapHasMon(mapGroup, mapNum);
                 break;
             }
         }

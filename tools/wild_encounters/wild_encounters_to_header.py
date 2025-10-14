@@ -321,11 +321,7 @@ class WildEncounterAssembler:
 
                 map_num_counter += 1
             header_num_counter += 1
-
-        #print(self.config.species_info["SPECIES_MAGIKARP"]["times"])
         self.WriteHeader()
-        self.WriteMacro("MAX_LOCATIONS", str(max_location_elements))
-        self.WriteLine()
         self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
         self.WriteLine("{")
         for species in self.config.species_info:
@@ -343,17 +339,34 @@ class WildEncounterAssembler:
                         id_count += 1
                 elif len(header_ids) < max_location_elements:
                     while len(header_ids) < max_location_elements:
-                        header_ids.append("MAP_GROUP(MAP_UNDEFINED)")
-
+                        header_ids.append("MAP_UNDEFINED")
+                id_string = ""
                 for id in header_ids:
-                    self.WriteLine(str(id) + ",", 3)
+                    id_string = id_string + id + ", "
+
+                self.WriteLine(str(id_string), 3)
 
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
         self.WriteLine("};")
+        self.UpdateMaxLocationsMacro(max_location_elements)
 
-            #for timeData in species["times"]:
-                #self.WriteLine
+
+    def UpdateMaxLocationsMacro(self, max_location_elements):
+        pokedex_include_file_path = 'include/pokedex.h'
+        macro_text = "#define MAX_LOCATIONS"
+        with open (pokedex_include_file_path, 'r+') as pokedex_include_file:
+            MAX_LOCATION_PAT = re.compile(macro_text + " " + r"(?P<value>\d+)")
+            lines = pokedex_include_file.readlines()
+            pokedex_include_file.seek(0)
+            pokedex_include_file.truncate(0)
+            for line in lines:
+                m = MAX_LOCATION_PAT.search(line)
+                if m:
+                    updated_line = MAX_LOCATION_PAT.sub(macro_text + " " + str(max_location_elements), line)
+                    pokedex_include_file.write(updated_line)
+                else:
+                    pokedex_include_file.write(line)
 
 
 def ConvertToHeaderFile(json_data):

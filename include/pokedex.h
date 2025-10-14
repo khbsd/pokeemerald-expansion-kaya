@@ -2,7 +2,6 @@
 #define GUARD_POKEDEX_H
 
 #include "constants/rtc.h"
-#include "constants/species.h"
 
 #define MAX_LOCATIONS 53
 
