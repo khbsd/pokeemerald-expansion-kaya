@@ -2,12 +2,13 @@ import json
 import re
 
 class Config:
-    def __init__(self, config_file_name, rtc_constants_file_name, encounters_json_data):
+    def __init__(self, config_file_name, rtc_constants_file_name, encounters_json_data, species_constants_file_name):
         self.times_of_day = None
         self.mon_types = None
         self.time_encounters = None
         self.disable_time_fallback = None
         self.time_fallback = None
+        self.species_info = None
 
         self.ParseTimeEnum(rtc_constants_file_name)
         if self.times_of_day == None:
@@ -17,18 +18,22 @@ class Config:
         if self.mon_types == None:
             raise Exception("No fields defined in 'wild_encounters.json'")
 
+        self.ParseSpeciesDefines(species_constants_file_name)
+        if self.species_info == None:
+            raise Exception(f"No species defined in '{species_constants_file_name}'")
+
         with open(config_file_name, 'r') as config_file:
             lines = config_file.readlines()
             for line in lines:
                 self.ParseTimeConfig(line)
-        
+
         if self.time_encounters == None:
             raise Exception("OW_TIME_OF_DAY_ENCOUNTERS not defined.")
         if self.disable_time_fallback == None:
             raise Exception("OW_TIME_OF_DAY_DISABLE_FALLBACK not defined.")
         if self.time_fallback == None:
             raise Exception("OW_TIME_OF_DAY_FALLBACK not defined.")
-    
+
     def ParseTimeEnum(self, rtc_constants_file_name):
         with open(rtc_constants_file_name, 'r') as rtc_constants_file:
             DEFAULT_TIME_PAT = re.compile(r"enum\s+TimeOfDay\s*\{(?P<rtc_val>[\s*\w+,\=\d*]+)\s*\}\s*\;")
@@ -64,12 +69,27 @@ class Config:
         if m:
             self.time_fallback = m.group(1)
 
+    def ParseSpeciesDefines(self, species_constants_file_name):
+        with open(species_constants_file_name, 'r') as species_constants_file:
+            SPECIES_NAMES_PAT = re.compile(r"#define (?P<species>SPECIES_\w+) [\s]+ (?P<number>\d+)")
+            file = species_constants_file.read()
+
+            m = SPECIES_NAMES_PAT.findall(file);
+            if m:
+                self.species_info = {}
+                for match in m:
+                    self.species_info[match[0]] = {}
+                    self.species_info[match[0]]["number"] = match[1]
+                    self.species_info[match[0]]["species"] = match[0]
+                    self.species_info[match[0]]["locationIds"] = []
+
+
 class WildEncounterAssembler:
     def __init__(self, output_file, json_data, config):
         self.output_file = output_file
         self.json_data = json_data
         self.config = config
-    
+
     def WriteLine(self, line="", indents = 0):
         self.output_file.write(4 * indents * " " + line + "\n")
 
@@ -100,7 +120,7 @@ class WildEncounterAssembler:
                         for group_name, indices in groups.items():
                             for index in indices:
                                 group_name_mapping[index] = "_" + group_name.upper()
-                    
+
                     for idx, rate in enumerate(encounter_rates):
                         macro_name = macro_base + group_name_mapping[idx] + "_SLOT_" + str(idx)
                         macro_value = str(rate)
@@ -117,7 +137,7 @@ class WildEncounterAssembler:
                             self.WriteMacro(macro_total_name, "(" + previous_macro + ")")
                     macro_total_name = macro_base + group_name_mapping[-1] + "_TOTAL"
                     self.WriteLine()
-    
+
     def WriteMonInfos(self, name, mons, encounter_rate):
         info_name = name + "Info"
         self.WriteLine(f"const struct WildPokemon {name}[] =")
@@ -132,7 +152,7 @@ class WildEncounterAssembler:
         self.WriteLine()
         self.WriteLine(f"const struct WildPokemonInfo {info_name} = {{ {encounter_rate}, {name} }};")
         self.WriteLine()
-    
+
     def WriteTerminator(self):
         self.WriteLine("{", 1)
         self.WriteLine(".mapGroup = MAP_GROUP(MAP_UNDEFINED),", 2)
@@ -167,7 +187,7 @@ class WildEncounterAssembler:
                 version = "FIRERED"
             elif "LeafGreen" in shared_label:
                 version = "LEAFGREEN"
-            
+
             self.WriteLine(f"#ifdef {version}")
 
             self.WriteLine("{", 1)
@@ -191,14 +211,14 @@ class WildEncounterAssembler:
                     self.WriteLine(f".{member_name} = {value},", 5)
 
                 self.WriteLine("},", 3)
-            
+
             self.WriteLine("},", 2)
             self.WriteLine("},", 1)
             self.WriteLine(f"#endif")
         self.WriteTerminator()
         self.WriteLine("};")
 
-                
+
     def WriteEncounters(self):
         wild_encounter_groups = self.json_data["wild_encounter_groups"]
         for wild_encounter_group in wild_encounter_groups:
@@ -245,7 +265,7 @@ class WildEncounterAssembler:
                     if mon_type not in map_encounters:
                         headers["data"][shared_label][mon_type] = "NULL"
                         continue
-                    
+
                     mons_entry = map_encounters[mon_type]
                     encounter_rate = mons_entry["encounter_rate"]
                     mons = mons_entry["mons"]
@@ -258,19 +278,77 @@ class WildEncounterAssembler:
             self.WritePokemonHeaders(headers)
 
 
+    def WriteMonLocationTable(self):
+        wild_encounter_groups = self.json_data["wild_encounter_groups"]
+        max_location_elements = 0
+        for wild_encounter_group in wild_encounter_groups:
+            headers = {}
+            headers["label"] = wild_encounter_group["label"]
+            headers["data"] = {}
+            for_maps = False
+            map_num_counter = 1
+            if "for_maps" in wild_encounter_group:
+                for_maps = wild_encounter_group["for_maps"]
+            encounters = wild_encounter_group["encounters"]
+
+            for map_encounters in encounters:
+                map_group = "0"
+                map_num = str(map_num_counter)
+                if for_maps:
+                    map_name = map_encounters["map"]
+                    map_group = f"MAP_GROUP({map_name})"
+                    map_num = f"MAP_NUM({map_name})"
+                base_label = map_encounters["base_label"]
+                shared_label = base_label
+                time = self.config.time_fallback
+
+                for time_ident in self.config.times_of_day:
+                    if self.config.times_of_day[time_ident] in base_label:
+                        time = time_ident
+                        shared_label = shared_label.replace('_' + self.config.times_of_day[time_ident], '')
+
+                    if shared_label not in headers["data"]:
+                        headers["data"][shared_label] = {}
+                    if time not in headers["data"][shared_label]:
+                        headers["data"][shared_label][time] = {}
+                    headers["data"][shared_label]["mapGroup"] = map_group
+                    headers["data"][shared_label]["mapNum"] = map_num
+                    for mon_type in self.config.mon_types:
+                        if mon_type not in map_encounters:
+                            continue
+
+                        mons_entry = map_encounters[mon_type]
+                        for mon in mons_entry["mons"]:
+                            species = mon["species"]
+                            locationIds = self.config.species_info[species]["locationIds"]
+
+                            if map_num_counter not in locationIds:
+                                locationIds.append(map_num_counter)
+
+                            #print(locationIds)
+
+                            if len(locationIds) > max_location_elements:
+                                max_location_elements = len(locationIds)
+
+                map_num_counter += 1
+
+        #print(self.config.species_info["SPECIES_MAGIKARP"]["locationIds"])
+
 def ConvertToHeaderFile(json_data):
     with open('src/data/wild_encounters.h', 'w') as output_file:
-        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data)
+        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
         assembler = WildEncounterAssembler(output_file, json_data, config)
         assembler.WriteHeader()
         assembler.WriteMacros()
         assembler.WriteEncounters()
+        assembler.WriteMonLocationTable()
+
 
 def main():
     with open('src/data/wild_encounters.json', 'r') as json_file:
         json_data = json.load(json_file)
         ConvertToHeaderFile(json_data)
-        
+
 
 if __name__ == '__main__':
     main()
