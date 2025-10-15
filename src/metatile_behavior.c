@@ -47,10 +47,14 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_OCEAN_WATER]                        = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_OCEAN_WATER_2]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_OCEAN_WATER_3]                      = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SHORELINE_2]                        = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SHORELINE_3]                        = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_PUDDLE]                             = TILE_FLAG_UNUSED,
     [MB_PUDDLE_2]                           = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_PUDDLE_3]                           = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SHALLOW_WATER]                      = TILE_FLAG_UNUSED,
+    [MB_SHALLOW_WATER_2]                    = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_SHALLOW_WATER_3]                    = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_NO_SURFACING]                       = TILE_FLAG_UNUSED | TILE_FLAG_SURFABLE,
     [MB_STAIRS_OUTSIDE_ABANDONED_SHIP]      = TILE_FLAG_UNUSED,
     [MB_SHOAL_CAVE_ENTRANCE]                = TILE_FLAG_UNUSED,
@@ -559,7 +563,7 @@ bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
      || metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
-        return TRUE;
+        return FALSE;
     else
         return FALSE;
 }
@@ -570,7 +574,7 @@ bool8 MetatileBehavior_IsSecretBaseCave(u8 metatileBehavior)
      || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE
      || metatileBehavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE
      || metatileBehavior == MB_SECRET_BASE_SPOT_BLUE_CAVE)
-        return TRUE;
+        return FALSE;
     else
         return FALSE;
 }
@@ -579,7 +583,7 @@ bool8 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPOT_TREE_LEFT
      || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT)
-        return TRUE;
+        return FALSE;
     else
         return FALSE;
 }
@@ -587,7 +591,7 @@ bool8 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
 bool8 MetatileBehavior_IsSecretBaseShrub(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB)
-        return TRUE;
+        return FALSE;
     else
         return FALSE;
 }
@@ -693,7 +697,7 @@ bool8 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
 bool8 MetatileBehavior_IsSecretBaseHole(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SECRET_BASE_HOLE)
-        return TRUE;
+        return FALSE;
     else
         return FALSE;
 }
@@ -758,7 +762,8 @@ bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
     if (((metatileBehavior == MB_POND_WATER) || (metatileBehavior == MB_POND_WATER_2) || (metatileBehavior == MB_POND_WATER_3))
      || ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3))
-     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
+     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
+     || (metatileBehavior == MB_SHORELINE_2 || metatileBehavior == MB_SHORELINE_3))
         return TRUE;
     else
         return FALSE;
@@ -766,7 +771,7 @@ bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsPuddle(u8 metatileBehavior)
 {
-    if ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3))
+    if ((metatileBehavior == MB_PUDDLE) || (metatileBehavior == MB_PUDDLE_2) || (metatileBehavior == MB_PUDDLE_3) || (metatileBehavior == MB_SHORELINE_2 || metatileBehavior == MB_SHORELINE_3))
         return TRUE;
     else
         return FALSE;
@@ -924,7 +929,9 @@ bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsShallowFlowingWater(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SHALLOW_WATER
+    if ((metatileBehavior == MB_SHALLOW_WATER
+        || metatileBehavior == MB_SHALLOW_WATER_2
+        || metatileBehavior == MB_SHALLOW_WATER_3)
      || metatileBehavior == MB_STAIRS_OUTSIDE_ABANDONED_SHIP
      || metatileBehavior == MB_SHOAL_CAVE_ENTRANCE)
         return TRUE;
@@ -952,7 +959,8 @@ bool8 MetatileBehavior_IsDeepOrOceanWater(u8 metatileBehavior)
 {
     if ((metatileBehavior == MB_OCEAN_WATER || metatileBehavior == MB_OCEAN_WATER_2 || metatileBehavior == MB_OCEAN_WATER_3)
      || metatileBehavior == MB_INTERIOR_DEEP_WATER
-     || (metatileBehavior == MB_DEEP_WATER || metatileBehavior == MB_DEEP_WATER_2 || metatileBehavior == MB_DEEP_WATER_3))
+     || (metatileBehavior == MB_DEEP_WATER || metatileBehavior == MB_DEEP_WATER_2 || metatileBehavior == MB_DEEP_WATER_3)
+     || (metatileBehavior == MB_SHORELINE_2 || metatileBehavior == MB_SHORELINE_3))
         return TRUE;
     else
         return FALSE;

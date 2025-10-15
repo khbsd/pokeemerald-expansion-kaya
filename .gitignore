@@ -63,3 +63,4 @@ tools/compresSmol/compresSmolTilemap
 *.smolTM
 __pycache__
 *.log
+missing_mons

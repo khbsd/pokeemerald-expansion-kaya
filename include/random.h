@@ -254,6 +254,7 @@ enum RandomTag
     RNG_FISHING_BITE,
     RNG_FISHING_GEN3_STICKY,
     RNG_ITEM_BALL_POOL,
+    RNG_DUPE_PROTECTION,
 };
 
 #define RandomWeighted(tag, ...) \

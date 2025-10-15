@@ -96,6 +96,7 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 void TrySpecialOverworldEvo();
+bool32 GetMonDupeProtection(u32 species, u32 personality);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -723,13 +724,15 @@ static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
             HOENN_TO_NATIONAL(SCOLIPEDE),
     HOENN_TO_NATIONAL(COTTONEE),
         HOENN_TO_NATIONAL(WHIMSICOTT),
+    HOENN_TO_NATIONAL(BASCULIN),
+        HOENN_TO_NATIONAL(BASCULEGION),
     HOENN_TO_NATIONAL(SANDILE),
         HOENN_TO_NATIONAL(KROKOROK),
             HOENN_TO_NATIONAL(KROOKODILE),
     HOENN_TO_NATIONAL(DWEBBLE),
         HOENN_TO_NATIONAL(CRUSTLE),
-            HOENN_TO_NATIONAL(SCRAGGY),
-    HOENN_TO_NATIONAL(SCRAFTY),
+    HOENN_TO_NATIONAL(SCRAGGY),
+        HOENN_TO_NATIONAL(SCRAFTY),
     HOENN_TO_NATIONAL(YAMASK),
         HOENN_TO_NATIONAL(COFAGRIGUS),
         HOENN_TO_NATIONAL(RUNERIGUS),
@@ -809,6 +812,8 @@ static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
         HOENN_TO_NATIONAL(DRAGALGE),
     HOENN_TO_NATIONAL(AMAURA),
         HOENN_TO_NATIONAL(AURORUS),
+    HOENN_TO_NATIONAL(TYRUNT),
+        HOENN_TO_NATIONAL(TYRANTRUM),
     HOENN_TO_NATIONAL(CARBINK),
         HOENN_TO_NATIONAL(DIANCIE),
             HOENN_TO_NATIONAL(DIANCIE_MEGA),
@@ -859,6 +864,7 @@ static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
     HOENN_TO_NATIONAL(TYPE_NULL),
         HOENN_TO_NATIONAL(SILVALLY),
     HOENN_TO_NATIONAL(TOGEDEMARU),
+    HOENN_TO_NATIONAL(DRAMPA),
     HOENN_TO_NATIONAL(JANGMO_O),
         HOENN_TO_NATIONAL(HAKAMO_O),
             HOENN_TO_NATIONAL(KOMMO_O),
@@ -890,7 +896,7 @@ static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
         HOENN_TO_NATIONAL(BOLTUND),
     HOENN_TO_NATIONAL(ROLYCOLY),
         HOENN_TO_NATIONAL(CARKOL),
-        HOENN_TO_NATIONAL(COALOSSAL),
+            HOENN_TO_NATIONAL(COALOSSAL),
     HOENN_TO_NATIONAL(APPLIN),
         HOENN_TO_NATIONAL(FLAPPLE),
             HOENN_TO_NATIONAL(APPLETUN),
@@ -2016,9 +2022,11 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
             personality = Random32();
             actualLetter = GET_UNOWN_LETTER(personality);
         }
-        while (nature != GetNatureFromPersonality(personality)
+        while ((nature != GetNatureFromPersonality(personality)
             || gender != GetGenderFromSpeciesAndPersonality(species, personality)
-            || actualLetter != unownLetter - 1);
+            || actualLetter != unownLetter - 1)
+            || GetMonDupeProtection(species, personality));
+
     }
     else
     {
@@ -2031,6 +2039,13 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     }
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
+}
+
+bool32 GetMonDupeProtection(u32 species, u32 personality)
+{
+    enum NationalDexOrder natDexNum = SpeciesToNationalPokedexNum(GetUnownSpeciesId(personality));
+    bool32 caught = GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT);
+    return !caught && RandomPercentage(RNG_DUPE_PROTECTION, GetNumOwnedBadges() * 8);
 }
 
 // This is only used to create Wally's Ralts.

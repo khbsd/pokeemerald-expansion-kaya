@@ -82,6 +82,7 @@ class Config:
                     self.species_info[match[0]]["number"] = match[1]
                     self.species_info[match[0]]["species"] = match[0]
                     self.species_info[match[0]]["times"] = {}
+                    self.species_info[match[0]]["count"] = 0
                     if self.times_of_day != None:
                         for time_ident in self.times_of_day:
                             self.species_info[match[0]]["times"][time_ident] = []
@@ -305,11 +306,11 @@ class WildEncounterAssembler:
                         for config_species in self.config.species_info:
                             if config_species in species:
                                 locationIds = self.config.species_info[species]["times"][time]
-
                                 if map_name not in locationIds:
                                     locationIds.append(map_name)
                                 if len(locationIds) > max_location_elements:
                                     max_location_elements = len(locationIds)
+                                self.config.species_info[species]["count"] += 1
 
         self.WriteHeader()
         self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
@@ -338,6 +339,7 @@ class WildEncounterAssembler:
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
         self.WriteLine("};")
+
         self.UpdateMaxLocationsMacro(max_location_elements)
 
 
@@ -359,6 +361,18 @@ class WildEncounterAssembler:
                     pokedex_include_file.write(line)
 
 
+    def PrintNotAvailableMons(self):
+        banned_types = ["_MEGA", "_GMAX", "_TOTEM"]
+        for species_entry in self.config.species_info:
+            if self.config.species_info[species_entry]["count"] == 0:
+                is_banned = False
+                for type in banned_types:
+                    if type in species_entry and not is_banned:
+                        is_banned = True
+                if not is_banned:
+                    print(species_entry)
+
+
 def ConvertToHeaderFile(json_data):
     with open('src/data/wild_encounters.h', 'w') as output_file:
         config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
@@ -371,6 +385,7 @@ def ConvertToHeaderFile(json_data):
         config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
         assembler = WildEncounterAssembler(output_file, json_data, config)
         assembler.WriteMonLocationTable()
+        # assembler.PrintNotAvailableMons()
 
 
 def main():
