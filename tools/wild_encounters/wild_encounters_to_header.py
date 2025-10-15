@@ -369,6 +369,7 @@ class WildEncounterAssembler:
                 for type in banned_types:
                     if type in species_entry and not is_banned:
                         is_banned = True
+                        break
                 if not is_banned:
                     print(species_entry)
 
