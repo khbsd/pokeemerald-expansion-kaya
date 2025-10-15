@@ -71,21 +71,24 @@ class Config:
 
     def ParseSpeciesDefines(self, species_constants_file_name):
         with open(species_constants_file_name, 'r') as species_constants_file:
-            SPECIES_NAMES_PAT = re.compile(r"#define (?P<species>SPECIES_\w+) [\s]+ (?P<number>\d+)")
+            SPECIES_NAMES_PAT = re.compile(r"enum\s+HoennDexOrder\s*\{\s*(?P<species_val>[\s*\w+,/]+)\s*\}\;")
             file = species_constants_file.read()
 
-            m = SPECIES_NAMES_PAT.findall(file);
+            m = SPECIES_NAMES_PAT.search(file);
             if m:
+                species_group = m.group("species_val")
+                values = re.findall(r"HOENN_DEX_\w+", species_group)
                 self.species_info = {}
-                for match in m: # should probably be moved out of Config
-                    self.species_info[match[0]] = {}
-                    self.species_info[match[0]]["number"] = match[1]
-                    self.species_info[match[0]]["species"] = match[0]
-                    self.species_info[match[0]]["times"] = {}
-                    self.species_info[match[0]]["count"] = 0
-                    if self.times_of_day != None:
-                        for time_ident in self.times_of_day:
-                            self.species_info[match[0]]["times"][time_ident] = []
+                for value in values:
+                    if "COUNT" not in value and "NONE" not in value:
+                        value = "SPECIES_" + value.replace("HOENN_DEX_", '')
+                        self.species_info[value] = {}
+                        self.species_info[value]["species"] = value
+                        self.species_info[value]["times"] = {}
+                        self.species_info[value]["count"] = 0
+                        if self.times_of_day != None:
+                            for time_ident in self.times_of_day:
+                                self.species_info[value]["times"][time_ident] = []
 
 
 class WildEncounterAssembler:
@@ -285,6 +288,7 @@ class WildEncounterAssembler:
     def WriteMonLocationTable(self):
         wild_encounter_groups = self.json_data["wild_encounter_groups"]
         max_location_elements = 0
+        map_counter = 0
         wild_encounter_group = wild_encounter_groups[0]
         encounters = wild_encounter_group["encounters"]
 
@@ -308,7 +312,9 @@ class WildEncounterAssembler:
                                 locationIds.append(map_name)
                             if len(locationIds) > max_location_elements:
                                 max_location_elements = len(locationIds)
+
                             self.config.species_info[species]["count"] += 1
+                map_counter += 1
 
         self.WriteHeader()
         self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
@@ -321,12 +327,7 @@ class WildEncounterAssembler:
                 self.WriteLine("{", 2)
 
                 header_ids = self.config.species_info[species]["times"][time]
-                if not header_ids:
-                    id_count = 0
-                    while id_count < max_location_elements:
-                        header_ids.append("MAP_UNDEFINED")
-                        id_count += 1
-                elif len(header_ids) < max_location_elements:
+                if not header_ids or len(header_ids) < max_location_elements:
                     while len(header_ids) < max_location_elements:
                         header_ids.append("MAP_UNDEFINED")
 
@@ -334,9 +335,11 @@ class WildEncounterAssembler:
                 for id in header_ids:
                     id_string = id_string + id + ", "
                 self.WriteLine(str(id_string), 3)
+
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
         self.WriteLine("};")
+        print(map_counter)
 
         self.UpdateMaxLocationsMacro(max_location_elements)
 
@@ -373,14 +376,14 @@ class WildEncounterAssembler:
 
 def ConvertToHeaderFile(json_data):
     with open('src/data/wild_encounters.h', 'w') as output_file:
-        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
+        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "include/constants/pokedex.h")
         assembler = WildEncounterAssembler(output_file, json_data, config)
         assembler.WriteHeader()
         assembler.WriteMacros()
         assembler.WriteEncounters()
 
     with open('src/data/pokemon_dex_locations.h', 'w') as output_file:
-        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "./include/constants/species.h")
+        config = Config('include/config/overworld.h', 'include/constants/rtc.h', json_data, "include/constants/pokedex.h")
         assembler = WildEncounterAssembler(output_file, json_data, config)
         assembler.WriteMonLocationTable()
         # assembler.PrintNotAvailableMons()
