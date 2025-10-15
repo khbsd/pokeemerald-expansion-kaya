@@ -339,7 +339,6 @@ class WildEncounterAssembler:
                 self.WriteLine("},", 2)
             self.WriteLine("},", 1)
         self.WriteLine("};")
-        print(map_counter)
 
         self.UpdateMaxLocationsMacro(max_location_elements)
 
