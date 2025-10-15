@@ -2315,12 +2315,12 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_TORCHIC"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_TORCHIC"
+                "species": "SPECIES_GEODUDE"
               }
             ]
           },
@@ -2469,7 +2469,7 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_TORCHIC"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 3,
@@ -22700,7 +22700,7 @@
               {
                 "min_level": 6,
                 "max_level": 6,
-                "species": "SPECIES_TORCHIC"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 9,
@@ -99159,36 +99159,6 @@
                 "species": "SPECIES_VOLCARONA"
               }
             ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              }
-            ]
           }
         },
         {
@@ -99256,36 +99226,6 @@
                 "min_level": 20,
                 "max_level": 22,
                 "species": "SPECIES_VOLCARONA"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
               }
             ]
           }
@@ -99357,36 +99297,6 @@
                 "species": "SPECIES_VOLCARONA"
               }
             ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              }
-            ]
           }
         },
         {
@@ -99454,36 +99364,6 @@
                 "min_level": 20,
                 "max_level": 22,
                 "species": "SPECIES_VOLCARONA"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
               }
             ]
           }

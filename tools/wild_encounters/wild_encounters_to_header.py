@@ -291,11 +291,10 @@ class WildEncounterAssembler:
         for map_encounters in encounters:
             map_name = map_encounters["map"]
             base_label = map_encounters["base_label"]
-            time = self.config.time_fallback
 
             for time_ident in self.config.times_of_day:
-                if self.config.times_of_day[time_ident] in base_label:
-                    time = time_ident
+                if self.config.times_of_day[time_ident] not in base_label:
+                    continue
                 for mon_type in self.config.mon_types:
                     if mon_type not in map_encounters:
                         continue
@@ -303,14 +302,13 @@ class WildEncounterAssembler:
                     mons_entry = map_encounters[mon_type]
                     for mon in mons_entry["mons"]:
                         species = mon["species"]
-                        for config_species in self.config.species_info:
-                            if config_species in species:
-                                locationIds = self.config.species_info[species]["times"][time]
-                                if map_name not in locationIds:
-                                    locationIds.append(map_name)
-                                if len(locationIds) > max_location_elements:
-                                    max_location_elements = len(locationIds)
-                                self.config.species_info[species]["count"] += 1
+                        if species in self.config.species_info:
+                            locationIds = self.config.species_info[species]["times"][time_ident]
+                            if map_name not in locationIds:
+                                locationIds.append(map_name)
+                            if len(locationIds) > max_location_elements:
+                                max_location_elements = len(locationIds)
+                            self.config.species_info[species]["count"] += 1
 
         self.WriteHeader()
         self.WriteLine("const u16 gPokemonDexLocationIds[][TIMES_OF_DAY_COUNT][MAX_LOCATIONS] =")
