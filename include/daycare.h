@@ -39,5 +39,6 @@ u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 void SendEggFromDaycareToPC(struct DayCare *daycare);
 struct Pokemon GenerateMonForDaycare(struct DayCare *daycare);
 u32 GetBoostedStepCount(void);
+bool32 TryProduceOrHatchEgg(struct DayCare *daycare);
 
 #endif // GUARD_DAYCARE_H

@@ -82,9 +82,9 @@ static void UpdatePerMinute(struct Time *localTime)
             gSaveBlock2Ptr->lastBerryTreeUpdate = *localTime;
         }
     }
-    if (RandomPercentage(RNG_RTC_EGG, GetNumOwnedBadges() * P_EGG_BADGE_CHANCE_AMOUNT) 
+    if (RandomPercentage(RNG_RTC_EGG, GetNumOwnedBadges() * P_EGG_BADGE_CHANCE_AMOUNT)
         && P_EGG_CHANCE_PER_MINUTE)
-        TriggerPendingDaycareEgg();
+        TryProduceOrHatchEgg(&gSaveBlock1Ptr->daycare);
 }
 
 void FormChangeTimeUpdate()

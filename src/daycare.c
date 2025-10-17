@@ -1193,7 +1193,7 @@ u32 GetBoostedStepCount(void)
     return toAdd;
 }
 
-static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
+bool32 TryProduceOrHatchEgg(struct DayCare *daycare)
 {
     u32 i, validEggs = 0;
 
