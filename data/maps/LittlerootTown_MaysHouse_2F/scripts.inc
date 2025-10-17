@@ -395,15 +395,15 @@ PlayersHouse_LoggingOut_IsNameKaya::
 LittlerootTown_PlayersHouse_KayaTeam::
 	setflag P_FLAG_FORCE_POKERUS
 
-	givemon SPECIES_BELDUM, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_EXTRASENSORY, move2=MOVE_TAKE_DOWN, move3=MOVE_METAL_CLAW, isShiny=TRUE
-	givemon SPECIES_BAGON, 5, ball=ITEM_CHERISH_BALL, nature=NATURE_ADAMANT, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SPIRIT_BREAK, move2=MOVE_DRAINING_KISS, move3=MOVE_DRAGON_CLAW, isShiny=TRUE
-	givemon SPECIES_CHARMANDER, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_MODEST, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_DRAGON_CLAW, move2=MOVE_FLAMETHROWER, isShiny=TRUE
-	givemon SPECIES_VULPIX, 5, item=ITEM_FIRE_STONE, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=1, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITTER_MALICE, move2=MOVE_FLAMETHROWER, isShiny=TRUE
-	givemon SPECIES_MUDKIP, 5, ball=ITEM_DIVE_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_MUD_SHOT, move2=MOVE_BRINE, isShiny=TRUE
-	givemon SPECIES_TREECKO, 5, ball=ITEM_SAFARI_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_ABSORB, move2=MOVE_DRAGON_CLAW, isShiny=TRUE
-	givemon SPECIES_GASTLY, 5, item=ITEM_LINKING_CORD, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SLUDGE_BOMB, move2=MOVE_LICK, move3=MOVE_HEX, isShiny=TRUE
-	givemon SPECIES_DRATINI, 5, ball=ITEM_LUXURY_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_THUNDERSHOCK, move2=MOVE_WRAP, move3=MOVE_TWISTER, isShiny=TRUE
-	givemon SPECIES_GRIMER_ALOLA, 5, item=ITEM_LEFTOVERS ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITE, move2=MOVE_DIRE_CLAW, isShiny=TRUE
+	givemon SPECIES_BELDUM, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_EXTRASENSORY, move2=MOVE_TAKE_DOWN, move3=MOVE_METAL_CLAW, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_BAGON, 5, ball=ITEM_CHERISH_BALL, nature=NATURE_ADAMANT, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SPIRIT_BREAK, move2=MOVE_DRAINING_KISS, move3=MOVE_DRAGON_CLAW, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_CHARMANDER, 5, ball=ITEM_PREMIER_BALL, nature=NATURE_MODEST, abilityNum=2, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_DRAGON_CLAW, move2=MOVE_FLAMETHROWER, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_VULPIX, 5, item=ITEM_FIRE_STONE, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=1, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITTER_MALICE, move2=MOVE_FLAMETHROWER, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_MUDKIP, 5, ball=ITEM_DIVE_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_MUD_SHOT, move2=MOVE_BRINE, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_TREECKO, 5, ball=ITEM_SAFARI_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_ABSORB, move2=MOVE_DRAGON_CLAW, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_GASTLY, 5, item=ITEM_LINKING_CORD, ball=ITEM_DUSK_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SLUDGE_BOMB, move2=MOVE_LICK, move3=MOVE_HEX, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_DRATINI, 5, ball=ITEM_LUXURY_BALL, nature=NATURE_MODEST, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_THUNDERSHOCK, move2=MOVE_WRAP, move3=MOVE_TWISTER, shinyMode=SHINY_MODE_ALWAYS
+	givemon SPECIES_GRIMER_ALOLA, 5, item=ITEM_LEFTOVERS ball=ITEM_PREMIER_BALL, nature=NATURE_ADAMANT, abilityNum=0, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_BITE, move2=MOVE_DIRE_CLAW, shinyMode=SHINY_MODE_ALWAYS
 
 	clearflag P_FLAG_FORCE_POKERUS
 	goto PlayersHouse_LoggingOut_IsNameKaya

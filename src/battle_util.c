@@ -6466,10 +6466,28 @@ u32 GetBattleMoveTarget(u16 move, u8 setTarget)
 
                 if (battlerLightningRodOnField > 0 && battlerGeoelectricOnField > 0)
                 {
+                    enum Ability battlerAbility;
+                    enum HoldEffect battlerHoldEffect;
+                    u32 battler;
+
                     if ((battlerLightningRodOnField - 1) != gBattlerAttacker)
-                        rodSpeed = GetBattlerTotalSpeedStat(battlerLightningRodOnField - 1);
+                    {
+                        battler = battlerLightningRodOnField - 1;
+                        battlerAbility = GetBattlerAbility(battler);
+                        battlerHoldEffect = GetBattlerHoldEffect(battler);
+
+                        rodSpeed = GetBattlerTotalSpeedStat(battlerLightningRodOnField - 1, battlerAbility, battlerHoldEffect);
+                    }
+
                     if ((battlerGeoelectricOnField - 1) != gBattlerAttacker)
-                        geoSpeed = GetBattlerTotalSpeedStat(battlerGeoelectricOnField - 1);
+                    {
+                        battler = battlerGeoelectricOnField - 1;
+                        battlerAbility = GetBattlerAbility(battler);
+                        battlerHoldEffect = GetBattlerHoldEffect(battler);
+
+                        geoSpeed = GetBattlerTotalSpeedStat(battlerGeoelectricOnField - 1, battlerAbility, battlerHoldEffect);
+                    }
+
 
                     if (rodSpeed > geoSpeed)
                         battlerAbilityOnField = battlerLightningRodOnField;
