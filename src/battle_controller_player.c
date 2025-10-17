@@ -11,6 +11,7 @@
 #include "battle_z_move.h"
 #include "battle_gimmick.h"
 #include "bg.h"
+#include "caps.h"
 #include "data.h"
 #include "item.h"
 #include "item_menu.h"
@@ -1432,12 +1433,15 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     u32 exp = GetMonData(mon, MON_DATA_EXP);
     u32 currLvlExp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
     u32 expToNextLvl;
+    bool32 isAtLevelCap = (level == GetCurrentLevelCap());
 
     exp -= currLvlExp;
     expToNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLvlExp;
     SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], expToNextLvl, exp, -gainedExp);
     TestRunner_Battle_RecordExp(battler, exp, -gainedExp);
-    PlaySE(SE_EXP);
+
+    if (!isAtLevelCap)
+        PlaySE(SE_EXP);
     gTasks[taskId].func = Task_GiveExpWithExpBar;
 }
 
