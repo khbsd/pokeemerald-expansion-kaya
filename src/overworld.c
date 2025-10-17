@@ -1133,7 +1133,12 @@ bool32 CanAutoUseFieldMove(u16 move) {
 void AutoUseCut(void)
 {
     if (CanAutoUseFieldMove(MOVE_CUT))
+    {
+        gSkipShowMonAnim = TRUE;
         FieldCallback_CutTree();
+        gSkipShowMonAnim = FALSE;
+    }
+
 }
 
 // Checks if the HM Flash can be auto-used, and if yes, uses it

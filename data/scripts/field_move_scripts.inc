@@ -10,7 +10,7 @@ EventScript_CutTree::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
-EventScript_CutTreeCommon:
+EventScript_CutTreeCommon::
 	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
@@ -23,6 +23,11 @@ EventScript_CutTreeDown:: @ fallthrough
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
+
+EventScript_AutoUseCut::
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
+	waitstate
+	goto EventScript_CutTreeDown
 
 @ Use cut from party menu
 EventScript_UseCut::

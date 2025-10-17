@@ -303,7 +303,7 @@ static const u8 sRSAvatarGfxIds[GENDER_COUNT] =
     [FEMME] = OBJ_EVENT_GFX_LINK_RS_MAY
 };
 
-static const u8 sPlayerAvatarGfxToStateFlag[][5][2] =
+static const u8 sPlayerAvatarGfxToStateFlag[][5][KAYA] =
 {
     [BUTCHY] =
     {
@@ -321,7 +321,7 @@ static const u8 sPlayerAvatarGfxToStateFlag[][5][2] =
         {OBJ_EVENT_GFX_MAY_SURFING,        PLAYER_AVATAR_FLAG_SURFING},
         {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
     },
-    [KAYA] =
+    [KAYA - 1] =
     {
         {OBJ_EVENT_GFX_KAYA_NORMAL,         PLAYER_AVATAR_FLAG_ON_FOOT},
         {OBJ_EVENT_GFX_KAYA_MACH_BIKE,      PLAYER_AVATAR_FLAG_MACH_BIKE},
@@ -1556,6 +1556,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_MAY_UNDERWATER:
     case OBJ_EVENT_GFX_MAY_FISHING:
     case OBJ_EVENT_GFX_MAY_WATERING:
+        return FEMME;
     case OBJ_EVENT_GFX_KAYA_NORMAL:
     case OBJ_EVENT_GFX_KAYA_MACH_BIKE:
     case OBJ_EVENT_GFX_KAYA_ACRO_BIKE:
@@ -1564,7 +1565,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_KAYA_UNDERWATER:
     case OBJ_EVENT_GFX_KAYA_FISHING:
     case OBJ_EVENT_GFX_KAYA_WATERING:
-        return FEMME;
+        return KAYA - 1;
     default:
         return BUTCHY;
     }
@@ -1637,6 +1638,10 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
+    CheckIfPlayerIsKaya();
+    if (FLAG_IS_KAYA)
+        gPlayerAvatar.gender = KAYA - 1;
+
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
         if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
@@ -1650,6 +1655,10 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
     u8 i;
     u8 flags = gPlayerAvatar.flags;
 
+    CheckIfPlayerIsKaya();
+    if (FLAG_IS_KAYA)
+        gPlayerAvatar.gender = KAYA - 1;
+
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
         if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
@@ -1660,6 +1669,9 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 
 void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 transitionFlag)
 {
+    CheckIfPlayerIsKaya();
+    if (FLAG_IS_KAYA)
+        gPlayerAvatar.gender = KAYA - 1;
     u8 stateFlag = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
     gPlayerAvatar.transitionFlags |= stateFlag | transitionFlag;
@@ -1694,7 +1706,11 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = objectEvent->spriteId;
-    gPlayerAvatar.gender = gender;
+        CheckIfPlayerIsKaya();
+    if (FlagGet(FLAG_IS_KAYA))
+        gPlayerAvatar.gender = KAYA - 1;
+    else
+        gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
     CreateFollowerNPCAvatar();
 }

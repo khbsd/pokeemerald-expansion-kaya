@@ -732,7 +732,7 @@ u32 FieldEffectStart(u8 id)
             ;
         return val;
     }
-    
+
 }
 
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
@@ -3254,7 +3254,7 @@ static void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
 static void Task_SurfFieldEffect(u8 taskId)
 {
     sSurfFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId]);
-}   
+}
 
 static void SurfFieldEffect_Init(struct Task *task)
 {
@@ -3446,7 +3446,7 @@ static void (*const sFlyOutFieldEffectFuncs[])(struct Task *) = {
 };
 
 static void Task_FlyOut(u8 taskId)
-{   
+{
     sFlyOutFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId]);
 }
 

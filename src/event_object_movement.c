@@ -16,6 +16,7 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
+#include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "follower_npc.h"
@@ -2913,7 +2914,12 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 {
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = spriteId;
-    gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
+
+    CheckIfPlayerIsKaya();
+    if (FlagGet(FLAG_IS_KAYA))
+        gPlayerAvatar.gender = KAYA - 1;
+    else
+        gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
     SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_CONTROLLABLE);
 }
 
@@ -3177,8 +3183,13 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
         case FEMME:
                 paletteTag = OBJ_EVENT_PAL_TAG_MAY;
             break;
+        case KAYA - 1:
+            paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
     }
-    if (FlagGet(FLAG_IS_KAYA))
+
+    CheckIfPlayerIsKaya();
+    if (FlagGet(FLAG_IS_KAYA)
+        && paletteTag != OBJ_EVENT_PAL_TAG_KAYA)
         paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
     return LoadObjectEventPalette(paletteTag);
 }

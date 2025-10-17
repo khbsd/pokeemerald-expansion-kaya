@@ -1179,10 +1179,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
 void Task_Scene1_Load(u8 taskId)
 {
     SetVBlankCallback(NULL);
-    if (INTRO_GENDER_MATCH_SAVE)
-        sIntroCharacterGender = gSaveBlock2Ptr->playerGender;
-    else
-        sIntroCharacterGender = MOD(Random(), 1);
+    sIntroCharacterGender = FEMME;
 
     IntroResetGpuRegs();
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
