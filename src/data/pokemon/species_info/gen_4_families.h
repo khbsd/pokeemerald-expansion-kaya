@@ -2436,7 +2436,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        .tmIlliterate = TRUE,
         .levelUpLearnset = sCombeeLevelUpLearnset,
         .teachableLearnset = sCombeeTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_VESPIQUEN}),
