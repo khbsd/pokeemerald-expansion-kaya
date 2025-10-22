@@ -426,5 +426,6 @@ bool32 IsDazzlingAbility(enum Ability ability);
 enum Obedience GetDisobedienceResult(u32 levelReferenced, u32 obedienceLevel);
 bool32 IsAllowedToUseBag(void);
 bool32 IsAnyTargetTurnDamaged(u32 battlerAtk);
+bool32 IsMimikyuDisguised(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

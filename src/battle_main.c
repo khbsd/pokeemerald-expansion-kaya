@@ -4161,7 +4161,6 @@ void BattleTurnPassed(void)
     gHitMarker &= ~HITMARKER_UNABLE_TO_USE_MOVE;
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
     gHitMarker &= ~HITMARKER_PLAYER_FAINTED;
-    gHitMarker &= ~HITMARKER_PASSIVE_HP_UPDATE;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gBattleScripting.moveendState = 0;
@@ -5559,7 +5558,6 @@ static void RunTurnActionsFunctions(void)
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
-        gHitMarker &= ~HITMARKER_PASSIVE_HP_UPDATE;
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
     else

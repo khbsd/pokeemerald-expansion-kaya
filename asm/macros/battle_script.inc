@@ -45,14 +45,16 @@
 	.byte 0xa
 	.endm
 
-	.macro healthbarupdate battler:req
+	.macro healthbarupdate battler:req updateState:req
 	.byte 0xb
 	.byte \battler
+	.byte \updateState
 	.endm
 
-	.macro datahpupdate battler:req
+	.macro datahpupdate battler:req updateState:req
 	.byte 0xc
 	.byte \battler
+	.byte \updateState
 	.endm
 
 	.macro critmessage
@@ -358,9 +360,8 @@
 	.byte 0x3a
 	.endm
 
-	.macro absorbhealthbarupdate battler:req
+	.macro isdmgblockedbydisguise
 	.byte 0x3b
-	.byte \battler
 	.endm
 
 	.macro return
@@ -759,7 +760,7 @@
 	callnative BS_RemoveStockpileCounters
 	.endm
 
-	.macro setdrainedhp
+	.macro unused_0x88
 	.byte 0x88
 	.endm
 
@@ -1293,7 +1294,7 @@
 	.byte 0xf3
 	.endm
 
-	.macro subattackerhpbydmg
+	.macro unused_0xf4
 	.byte 0xf4
 	.endm
 
@@ -1789,11 +1790,8 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro jumpiflastuseditemholdeffect holdEffect:req, secondaryId:req, jumpInstr:req
-	callnative BS_JumpIfLastUsedItemHoldEffect
-	.byte \holdEffect
-	.2byte \secondaryId
-	.4byte \jumpInstr
+	.macro tryflingholdeffect
+	callnative BS_TryFlingHoldEffect
 	.endm
 
 	.macro swapsidestatuses
@@ -2388,10 +2386,6 @@
 	.macro setpoltergeistmessage failInstr:req
 	callnative BS_SetPoltergeistMessage
 	.4byte \failInstr
-	.endm
-
-	.macro curecertainstatuses
-	callnative BS_CureCertainStatuses
 	.endm
 
 	.macro tryresetnegativestatstages
