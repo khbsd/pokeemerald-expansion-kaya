@@ -9,6 +9,5 @@ void MoveRelearnerShowHideCategoryIcon(s32);
 void CB2_InitLearnMove(void);
 
 extern u8 gOriginSummaryScreenPage;
-extern u8 gMoveRelearnerType;
 
 #endif //GUARD_MOVE_RELEARNER_H

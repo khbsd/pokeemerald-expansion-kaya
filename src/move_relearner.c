@@ -185,7 +185,6 @@ static EWRAM_DATA struct {
 } sMoveRelearnerMenuState = {0};
 
 EWRAM_DATA u8 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
-EWRAM_DATA u8 gMoveRelearnerType = 0;
 
 static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
