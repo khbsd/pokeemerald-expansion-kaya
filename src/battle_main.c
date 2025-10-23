@@ -3239,7 +3239,6 @@ static void BattleStartClearSetData(void)
     {
         gSideTimers[i].stickyWebBattlerId = 0xFF;
     }
-    gBattleStruct->appearedInBattle = 0;
     gBattleStruct->beatUpSlot = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -4089,12 +4088,7 @@ static void TryDoEventsBeforeFirstTurn(void)
             gBattleCommunication[i] = 0;
 
         for (i = 0; i < gBattlersCount; i++)
-        {
             gBattleMons[i].volatiles.flinched = FALSE;
-            // Record party slots of player's mons that appeared in battle
-            if (!BattlerHasAi(i))
-                gBattleStruct->appearedInBattle |= 1u << gBattlerPartyIndexes[i];
-        }
 
         gBattleStruct->eventBlockCounter = 0;
         gBattleStruct->turnEffectsBattlerId = 0;
@@ -5752,7 +5746,7 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_TRAINER_HILL
                                   | BATTLE_TYPE_FRONTIER)))
         {
-            for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
+            for (enum BattleSide side = 0; side < NUM_BATTLE_SIDES; side++)
             {
                 struct Pokemon *party = GetSideParty(side);
 
@@ -5800,7 +5794,7 @@ static void HandleEndTurn_FinishBattle(void)
             bool8 changedForm = FALSE;
 
             // Appeared in battle and didn't faint
-            if ((gBattleStruct->appearedInBattle & (1u << i)) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+            if (gBattleStruct->partyState[B_SIDE_PLAYER][i].sentOut && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
                 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_ENVIRONMENT);
 
             if (!changedForm)

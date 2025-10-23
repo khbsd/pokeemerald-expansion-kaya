@@ -9400,7 +9400,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gOverworldPalette_Tynamo,
             gShinyOverworldPalette_Tynamo
         )
-        .teachingType = TM_ILLITERATE,
+        .tmIlliterate = TRUE,
         .levelUpLearnset = sTynamoLevelUpLearnset,
         .teachableLearnset = sTynamoTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_EELEKTRIK}),

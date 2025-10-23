@@ -1170,3 +1170,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/NewMauville_OldReactor/scripts.inc"
 
 	.include "data/maps/VolcaronaHive/scripts.inc"
+	.include "data/scripts/battle_frontier.inc"

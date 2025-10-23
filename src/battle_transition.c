@@ -2292,7 +2292,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     u16 *tilemap, *tileset;
     enum TimeOfDay timeOfDay = GetTimeOfDay();
     const u16 *mugshotsMap = sMugshotsTilemap;
-    u32 mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
+    enum MugshotColor mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
 
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sEliteFour_Tileset, tileset, 0xF0);
