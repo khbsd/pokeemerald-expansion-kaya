@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "config/summary_screen.h"
+#include "constants/move_relearner.h"
 
 extern u8 gLastViewedMonIndex;
 
@@ -55,7 +56,9 @@ void ShowPokemonSummaryScreenHandleDeoxys(u8 mode, struct BoxPokemon *mons, u8 m
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetAnimDelayTaskId(u8 taskId);
 void ShowRelearnPrompt(u8 state);
-u32 GetCurrentRelearnMovesCount(void);
 void TryUpdateRelearnType(enum IncrDecrUpdateValues delta);
+u32 GetCurrentRelearnMovesCount(void);
+u32 GetRelearnMovesCount(enum MoveRelearnerStates state);
+u32 GetStateRelearnMovesCount(enum MoveRelearnerStates state);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

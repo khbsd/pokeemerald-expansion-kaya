@@ -333,6 +333,7 @@ static const u8 *GetLetterGrade(u32 stat);
 static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId);
 static u8 IncrementSkillsStatsMode(u8 mode);
 static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
+bool32 NoMovesAvailableToRelearn(void);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -1901,7 +1902,7 @@ void ExtractMonSkillEvData(struct Pokemon *mon, struct PokeSummary *sum)
     sum->speed = GetMonData(mon, MON_DATA_SPEED_EV);
 }
 
-u32 GetCurrentRelearnMovesCount(void)
+u32 GetRelearnMovesCount(enum MoveRelearnerStates state)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
 
@@ -1913,21 +1914,58 @@ u32 GetCurrentRelearnMovesCount(void)
         [MOVE_RELEARNER_TUTOR_MOVES]    = GetNumberOfTutorMoves(mon),
 
     };
-    return moveCount[VarGet(P_VAR_MOVE_RELEARNER_STATE)];
+    return moveCount[state];
+}
+
+u32 GetCurrentRelearnMovesCount(void)
+{
+    return GetRelearnMovesCount(VarGet(P_VAR_MOVE_RELEARNER_STATE));
+}
+
+u32 GetStateRelearnMovesCount(enum MoveRelearnerStates state)
+{
+    return GetRelearnMovesCount(state);
+}
+
+bool32 NoMovesAvailableToRelearn(void)
+{
+    u32 zeroCounter = 0;
+    for (enum MoveRelearnerStates state = MOVE_RELEARNER_LEVEL_UP_MOVES; state < MOVE_RELEARNER_COUNT; state++)
+    {
+        if (GetStateRelearnMovesCount(state) == 0)
+            zeroCounter++;
+    }
+
+    return zeroCounter == MOVE_RELEARNER_COUNT;
 }
 
 void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
 {
     u32 moveCount;
-    u32 relearnerState = VarGet(P_VAR_MOVE_RELEARNER_STATE);
+    u32 zeroCounter = 0;
+    u32 relearnerState;
+
+    // just in case everything is off
+    if ((!P_ENABLE_MOVE_RELEARNERS
+        && !FlagGet(P_FLAG_LEVEL_UP_MOVES)
+        && !FlagGet(P_FLAG_EGG_MOVES)
+        && !FlagGet(P_FLAG_TMHM_MOVES)
+        && !FlagGet(P_FLAG_TUTOR_MOVES)))
+    {
+        DebugPrintf("nothing doing");
+        sMonSummaryScreen->relearnableMovesNum = 0;
+        return;
+    }
 
     do
     {
+        relearnerState = VarGet(P_VAR_MOVE_RELEARNER_STATE);
         switch (delta)
         {
         default:
         case TRY_SET_UPDATE:
             moveCount = GetCurrentRelearnMovesCount();
+            DebugPrintf("movecount: %u for state: %u", moveCount, relearnerState);
             if (moveCount == 0)
                 TryUpdateRelearnType(TRY_INCREMENT);
             else
@@ -1935,16 +1973,28 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             break;
         case TRY_INCREMENT:
             relearnerState = relearnerState >= MOVE_RELEARNER_TUTOR_MOVES ? MOVE_RELEARNER_LEVEL_UP_MOVES : relearnerState + 1;
-            sMonSummaryScreen->relearnableMovesNum = GetCurrentRelearnMovesCount();
+    
             break;
         case TRY_DECREMENT:
             relearnerState = relearnerState == MOVE_RELEARNER_LEVEL_UP_MOVES ? MOVE_RELEARNER_TUTOR_MOVES : relearnerState - 1;
-            sMonSummaryScreen->relearnableMovesNum = GetCurrentRelearnMovesCount();
+    
             break;
         }
 
         VarSet(P_VAR_MOVE_RELEARNER_STATE, relearnerState);
-    } while (sMonSummaryScreen->relearnableMovesNum == 0 && delta != TRY_SET_UPDATE);
+        moveCount = GetCurrentRelearnMovesCount();
+        if (moveCount != 0)
+        {
+            sMonSummaryScreen->relearnableMovesNum = moveCount;
+            return;
+        }
+
+        DebugPrintf("zounter: %u", zeroCounter);
+        zeroCounter++;
+        
+    } while (sMonSummaryScreen->relearnableMovesNum == 0 
+             && delta != TRY_SET_UPDATE 
+             && zeroCounter < MOVE_RELEARNER_COUNT);
 }
 
 static void ChangeSummaryPokemon(u8 taskId, s8 delta)
@@ -4742,14 +4792,15 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
 
 static inline bool32 ShouldShowMoveRelearner(void)
 {
-    return (P_SUMMARY_SCREEN_MOVE_RELEARNER 
-         && !sMonSummaryScreen->lockMovesFlag 
-         && !sMonSummaryScreen->isBoxMon 
-         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX 
-         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR 
-         && sMonSummaryScreen->relearnableMovesNum > 0 
-         && !InBattleFactory() 
-         && !InSlateportBattleTent());
+    return (P_SUMMARY_SCREEN_MOVE_RELEARNER
+         && !sMonSummaryScreen->lockMovesFlag
+         && !sMonSummaryScreen->isBoxMon
+         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX
+         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
+         && sMonSummaryScreen->relearnableMovesNum > 0
+         && !InBattleFactory()
+         && !InSlateportBattleTent()
+         && !NoMovesAvailableToRelearn());
 }
 
 static inline bool32 ShouldShowRename(void)
@@ -4851,9 +4902,13 @@ void ShowRelearnPrompt(u8 state)
 
     if (!ShouldShowMoveRelearner() || !(currPage >= PSS_PAGE_BATTLE_MOVES))
     {
+        DebugPrintf("wont show prompt. bye %u", state);
         ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_RELEARN);
         return;
     }
+
+    if (GetCurrentRelearnMovesCount() == 0)
+        return;
 
     const u8* relearnText;
     const u8* gText_Relearn_LevelUp = COMPOUND_STRING("{START_BUTTON} RELEARN LEVEL");
