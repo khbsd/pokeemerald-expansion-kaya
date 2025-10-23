@@ -410,7 +410,7 @@ void CB2_InitLearnMove(void)
     sMoveRelearnerMenuState.listRow = 0;
     sMoveRelearnerMenuState.showContestInfo = gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES;
 
-    switch (gMoveRelearnerType)
+    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
     {
     case MOVE_RELEARNER_EGG_MOVES:
         StringCopy(gStringVar3, COMPOUND_STRING("egg move"));
@@ -976,7 +976,7 @@ static void CreateLearnableMovesList(void)
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
-    switch (gMoveRelearnerType)
+    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
     {
     case MOVE_RELEARNER_EGG_MOVES:
         sMoveRelearnerStruct->numMenuChoices = GetRelearnerEggMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);

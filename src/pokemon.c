@@ -6666,6 +6666,9 @@ u16 GetNumberOfLevelUpMoves(struct Pokemon *mon)
     if (species == SPECIES_EGG)
         return 0;
 
+    if (!FlagGet(P_FLAG_LEVEL_UP_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
+        return 0;
+
     return GetRelearnerLevelUpMoves(mon, moves);
 }
 
@@ -6677,6 +6680,9 @@ u16 GetNumberOfEggMoves(struct Pokemon *mon)
     if (species == SPECIES_EGG)
         return 0;
 
+    if (!FlagGet(P_FLAG_EGG_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
+        return 0;
+
     return GetRelearnerEggMoves(mon, moves);
 }
 
@@ -6686,6 +6692,9 @@ u16 GetNumberOfTMMoves(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
 
     if (species == SPECIES_EGG)
+        return 0;
+
+    if (!FlagGet(P_FLAG_TMHM_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
 
     return GetRelearnerTMMoves(mon, moves);
@@ -6700,6 +6709,9 @@ u16 GetNumberOfTutorMoves(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
 
     if (species == SPECIES_EGG)
+        return 0;
+
+    if (!FlagGet(P_FLAG_TUTOR_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
 
     return GetRelearnerTutorMoves(mon, moves);
