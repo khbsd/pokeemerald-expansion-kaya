@@ -14,13 +14,6 @@ extern const struct SpritePalette gSpritePal_CategoryIcons;
 extern const struct SpriteTemplate gSpriteTemplate_CategoryIcons;
 extern MainCallback gInitialSummaryScreenCallback;
 
-enum IncrDecrUpdateValues
-{
-    TRY_SET_UPDATE,
-    TRY_INCREMENT,
-    TRY_DECREMENT,
-};
-
 // The Pokémon Summary Screen can operate in different modes. Certain features,
 // such as move re-ordering, are available in the different modes.
 enum PokemonSummaryScreenMode
