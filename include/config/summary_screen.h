@@ -29,7 +29,6 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 // Move Relearner settings
 #define P_SUMMARY_SCREEN_MOVE_RELEARNER    TRUE    // If TRUE, shows an option for Pokémon to relearn moves on the summary screen moves page.
 #define P_SUMMARY_MOVE_RELEARNER_FULL_PP   FALSE   // If TRUE, the move relearner in the summary screen restores relearned moves' PP to full.
-#define P_SUMMARY_MOVE_RELEARNER_IN_BATTLE FALSE   // If TRUE, shows relearner prompt while in battle
 #define P_VAR_MOVE_RELEARNER_STATE         VAR_MOVE_RELEARNER_STATE       // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
 #define P_ENABLE_MOVE_RELEARNERS           TRUE    // If TRUE, it enables move relearners for level up, egg, TM and tutor.
 #define P_PRE_EVO_MOVES                    TRUE    // If TRUE, it enables the Pokémon to learn moves from it's pre evolution.
