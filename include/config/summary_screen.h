@@ -14,13 +14,13 @@
 #define P_FLAG_PARTY_MOVE_RELEARNER      0      // If this flag is set, it enables the move relearner in the party menu.
 #define P_FLAG_SCRIPT_MOVE_RELEARNER     0      // Set this flag if you're planning on using the move relearner script from data/scripts/move_relearner.inc
 // Redundant if P_ENABLE_MOVE_RELEARNERS is TRUE.
-#define P_FLAG_LEVEL_UP_MOVES            0      // If this flag is set, enables level up move relearner.
-#define P_FLAG_EGG_MOVES                 0      // If this flag is set, enables egg move relearner.
-#define P_FLAG_TMHM_MOVES                0      // If this flag is set, enables tm/hm move relearner.
-#define P_FLAG_TUTOR_MOVES               0      // If this flag is set, enables tutor move move relearner.
+#define P_FLAG_LEVEL_UP_MOVES            FLAG_LEVEL_UP_MOVES // If this flag is set, enables level up move relearner.
+#define P_FLAG_EGG_MOVES                 FLAG_EGG_MOVES      // If this flag is set, enables egg move relearner.
+#define P_FLAG_TMHM_MOVES                FLAG_TMHM_MOVES     // If this flag is set, enables tm/hm move relearner.
+#define P_FLAG_TUTOR_MOVES               FLAG_TUTOR_MOVES    // If this flag is set, enables tutor move move relearner.
 
 // Move Relearner vars
-#define P_VAR_MOVE_RELEARNER_STATE       VAR_MOVE_RELEARNER_STATE       // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
+#define P_VAR_MOVE_RELEARNER_STATE       VAR_MOVE_RELEARNER_STATE // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
 
 //Nature settings
 #define P_SUMMARY_SCREEN_NATURE_COLORS  TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
