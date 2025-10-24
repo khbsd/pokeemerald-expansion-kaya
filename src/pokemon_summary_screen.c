@@ -2014,7 +2014,7 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             break;
         }
 
-        if (!CheckRelearnerStateFlag(relearnerState))
+        if (!CheckRelearnerStateFlag(relearnerState) && !P_ENABLE_MOVE_RELEARNERS)
             continue;
 
         moveCount = GetRelearnMovesCount(relearnerState);
