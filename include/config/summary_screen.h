@@ -26,6 +26,7 @@
 #define P_FLAG_TUTOR_MOVES               FLAG_TUTOR_MOVES    // If this flag is set, enables tutor move move relearner.
 
 // Move Relearner vars
+// NOTE: unused vars are found in include/constants/vars.h and named something like VAR_UNUSED_0x####. To assign a var, rename one of them to something relevant, ie VAR_MOVE_RELEARNER_STATE, and then replace the 0 below with that name.
 #define P_VAR_MOVE_RELEARNER_STATE       VAR_MOVE_RELEARNER_STATE // IMPORTANT! Assign a var to make the move relearner swap between level up, egg, TM and tutor.
 
 // IV/EV settings
