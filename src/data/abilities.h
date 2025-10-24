@@ -2592,4 +2592,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Absorb recoil and zaps."),
         .aiRating = 5,
     },
+
+    [ABILITY_FEY_SKIN] =
+    {
+        .name = _("Fey Skin"),
+        .description = COMPOUND_STRING("Thorny, strong Fairy."),
+        .aiRating = 6,
+    },
 };

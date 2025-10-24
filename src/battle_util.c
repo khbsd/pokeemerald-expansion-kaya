@@ -5043,6 +5043,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             break;
         case ABILITY_ROUGH_SKIN:
         case ABILITY_IRON_BARBS:
+        case ABILITY_FEY_SKIN:
             if (IsBattlerAlive(gBattlerAttacker)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && IsBattlerTurnDamaged(gBattlerTarget)
@@ -7076,6 +7077,11 @@ bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler)
     return ctx->moveType == TYPE_ELECTRIC && ctx->abilityAtk == ABILITY_ION_TORQUE && !IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC);
 }
 
+bool32 IsMoveFeySkinAffected(struct DamageContext *ctx, u32 battler)
+{
+    return ctx->moveType == TYPE_FAIRY && ctx->abilityAtk == ABILITY_ION_TORQUE && !IS_BATTLER_OF_TYPE(battler, TYPE_FAIRY);
+}
+
 static inline u32 IsFieldMudSportAffected(u32 moveType)
 {
     if (moveType == TYPE_ELECTRIC && (gFieldStatuses & STATUS_FIELD_MUDSPORT))
@@ -8297,7 +8303,9 @@ static inline uq4_12_t GetSameTypeAttackBonusModifier(struct DamageContext *ctx)
 {
     if (ctx->moveType == TYPE_MYSTERY)
         return UQ_4_12(1.0);
-    else if (gBattleStruct->pledgeMove && (IS_BATTLER_OF_TYPE(BATTLE_PARTNER(ctx->battlerAtk), ctx->moveType) || IsMoveIonTorqueAffected(ctx, BATTLE_PARTNER(ctx->battlerAtk))))
+    else if (gBattleStruct->pledgeMove && (IS_BATTLER_OF_TYPE(BATTLE_PARTNER(ctx->battlerAtk), ctx->moveType) 
+             || IsMoveIonTorqueAffected(ctx, BATTLE_PARTNER(ctx->battlerAtk))
+             || IsMoveFeySkinAffected(ctx, BATTLE_PARTNER(ctx->battlerAtk))))
         return (ctx->abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
     else if ((!IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType) && !IsMoveIonTorqueAffected(ctx, ctx->battlerAtk)) || ctx->move == MOVE_STRUGGLE || ctx->move == MOVE_NONE)
         return UQ_4_12(1.0);
