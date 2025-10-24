@@ -22,7 +22,7 @@
 // Redundant if P_ENABLE_MOVE_RELEARNERS is TRUE.
 #define P_FLAG_LEVEL_UP_MOVES            FLAG_LEVEL_UP_MOVES // If this flag is set, enables level up move relearner.
 #define P_FLAG_EGG_MOVES                 FLAG_EGG_MOVES      // If this flag is set, enables egg move relearner.
-#define P_FLAG_TMHM_MOVES                FLAG_TMHM_MOVES     // If this flag is set, enables tm/hm move relearner.
+#define P_FLAG_TM_MOVES                  FLAG_TM_MOVES     // If this flag is set, enables tm/hm move relearner.
 #define P_FLAG_TUTOR_MOVES               FLAG_TUTOR_MOVES    // If this flag is set, enables tutor move move relearner.
 
 // Move Relearner vars
@@ -52,5 +52,4 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 
 // IV/EV flags
 #define P_FLAG_SUMMARY_SCREEN_IV_EV_INFO 0      // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing.
-
 #endif // GUARD_CONFIG_SUMMARY_SCREEN_H

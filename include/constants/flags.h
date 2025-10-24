@@ -1229,7 +1229,7 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN                0x494 // Unused Flag
 #define FLAG_LEVEL_UP_MOVES                                         0x495 // Unused Flag
 #define FLAG_EGG_MOVES                                              0x496 // Unused Flag
-#define FLAG_TMHM_MOVES                                             0x497 // Unused Flag
+#define FLAG_TM_MOVES                                               0x497 // Unused Flag
 #define FLAG_TUTOR_MOVES                                            0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
