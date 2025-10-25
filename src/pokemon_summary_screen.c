@@ -1896,7 +1896,7 @@ u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
     bool32 isStatHyperTrained = GetMonData(mon, MON_DATA_HYPER_TRAINED_HP + stat, &data);
 
     if (isStatHyperTrained && P_SUMMARY_SCREEN_IV_HYPERTRAIN)
-        return MAX_IV_MASK;
+        return MAX_PER_STAT_IVS;
     return originalStat;
 }
 
