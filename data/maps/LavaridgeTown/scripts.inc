@@ -234,6 +234,7 @@ LavaridgeTown_EventScript_HotSpringsOldWoman2::
 LavaridgeTown_EventScript_ExpertF::
 	lock
 	faceplayer
+	showmoneybox 0, 0
 	msgbox LavaridgeTown_Text_HyperTrainer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBadNoMoneyBox
 	goto LavaridgeTown_EventScript_ExpertF_HyperTrain
@@ -247,11 +248,11 @@ LavaridgeTown_EventScript_ExpertF_HyperTrain::
 	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney
 	special ChoosePartyMon
 	waitstate
-	showmoneybox 0, 0
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
 	goto_if_eq VAR_0x8004, PARTY_SIZE, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
 	msgbox LavaridgeTown_Text_HyperTrainerWhichStat, MSGBOX_DEFAULT
 	closemessage
+	showmoneybox 0, 0
 	multichoice 0, 4, MULTI_MON_STAT, TRUE
 	switch VAR_RESULT
 	case STAT_HP, LavaridgeTown_EventScript_ExpertF_HyperTrainHP
