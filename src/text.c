@@ -434,7 +434,7 @@ void RunTextPrinters(void)
 
     do
     {
-        int numEmpty = 0;
+        u32 numEmpty = 0;
         if (!gDisableTextPrinters)
         {
             for (i = 0; i < WINDOWS_MAX; ++i)
