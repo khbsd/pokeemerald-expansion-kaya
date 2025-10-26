@@ -236,7 +236,7 @@ LavaridgeTown_EventScript_ExpertF::
 	faceplayer
 	showmoneybox 0, 0
 	msgbox LavaridgeTown_Text_HyperTrainer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBadNoMoneyBox
+	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad
 	goto LavaridgeTown_EventScript_ExpertF_HyperTrain
 	closemessage
 	releaseall
@@ -305,11 +305,6 @@ LavaridgeTown_EventScript_ExpertF_HyperTrainNoMoney::
 
 LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBad::
 	hidemoneybox
-	msgbox LavaridgeTown_Text_HyperTrainerOhTooBad, MSGBOX_DEFAULT
-	releaseall
-	end
-
-LavaridgeTown_EventScript_ExpertF_HyperTrainOhTooBadNoMoneyBox::
 	msgbox LavaridgeTown_Text_HyperTrainerOhTooBad, MSGBOX_DEFAULT
 	releaseall
 	end
