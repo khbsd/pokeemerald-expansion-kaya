@@ -441,7 +441,7 @@ void RunTextPrinters(void)
             {
                 if (sTextPrinters[i].active)
                 {
-                for (u32 j = 0; j < textRepeats; j++)
+                    for (u32 j = 0; j < textRepeats; j++)
                     {
                         u32 renderState = RenderFont(&sTextPrinters[i]);
                         switch (renderState)
