@@ -1339,3 +1339,5 @@ const u8 gText_YourPkmnWereRestored[] =_("Your POKéMON were restored\nto full h
 const u8 gText_KayaSaysNoBerries[] = _("No berries.\nTeehee! {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
 const u8 gText_KayaSaysDontYouHavePokevial[] = _("What, you don't have any\nPokévial uses left? {EMOJI_BIGSMILE}{PAUSE_UNTIL_PRESS}");
 const u8 gText_KayaSaysNoLavaCookie[] = _("You can't use this, but\nyou supported a local business!{PAUSE_UNTIL_PRESS}");
+const u8 gText_CannotSendMonToBoxActive[] = _("Cannot send an active battler\nto the box.{PAUSE_UNTIL_PRESS}");
+const u8 gText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't,\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");

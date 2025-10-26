@@ -271,7 +271,7 @@ void ClearBattlerAbilityHistory(u32 battlerId)
     gBattleHistory->abilities[battlerId] = ABILITY_NONE;
 }
 
-void RecordItemEffectBattle(u32 battlerId, u32 itemEffect)
+void RecordItemEffectBattle(u32 battlerId, enum HoldEffect itemEffect)
 {
     gBattleHistory->itemEffects[battlerId] = itemEffect;
     gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect = itemEffect;
@@ -2105,7 +2105,7 @@ s32 ProtectChecks(u32 battlerAtk, u32 battlerDef, u32 move, u32 predictedMove)
 }
 
 // stat stages
-bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, u32 stat)
+bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, enum Stat stat)
 {
     if (gBattleMons[battlerDef].statStages[stat] == MIN_STAT_STAGE)
         return FALSE;
@@ -2168,7 +2168,7 @@ bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, 
     return TRUE;
 }
 
-u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, u32 stat)
+u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, enum Stat stat)
 {
     u32 tempScore = NO_INCREASE;
 
@@ -2234,12 +2234,14 @@ u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, u32 stat)
         if (gBattleMons[battlerDef].volatiles.cursed)
             tempScore += WEAK_EFFECT;
         break;
+    default:
+        break;
     }
 
     return (tempScore > BEST_EFFECT) ? BEST_EFFECT : tempScore; // don't inflate score so only max +4
 }
 
-bool32 BattlerStatCanRise(u32 battler, enum Ability battlerAbility, u32 stat)
+bool32 BattlerStatCanRise(u32 battler, enum Ability battlerAbility, enum Stat stat)
 {
     if ((gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE && battlerAbility != ABILITY_CONTRARY)
       || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE))
@@ -2249,7 +2251,7 @@ bool32 BattlerStatCanRise(u32 battler, enum Ability battlerAbility, u32 stat)
 
 bool32 AreBattlersStatsMaxed(u32 battlerId)
 {
-    u32 i;
+    enum Stat i;
     for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
     {
         if (gBattleMons[battlerId].statStages[i] < MAX_STAT_STAGE)
@@ -2260,7 +2262,7 @@ bool32 AreBattlersStatsMaxed(u32 battlerId)
 
 bool32 AnyStatIsRaised(u32 battlerId)
 {
-    u32 i;
+    enum Stat i;
 
     for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
     {
@@ -2273,7 +2275,7 @@ bool32 AnyStatIsRaised(u32 battlerId)
 u32 CountPositiveStatStages(u32 battlerId)
 {
     u32 count = 0;
-    u32 i;
+    enum Stat i;
     for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
     {
         if (gBattleMons[battlerId].statStages[i] > DEFAULT_STAT_STAGE)
@@ -2285,7 +2287,7 @@ u32 CountPositiveStatStages(u32 battlerId)
 u32 CountNegativeStatStages(u32 battlerId)
 {
     u32 count = 0;
-    u32 i;
+    enum Stat i;
     for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
     {
         if (gBattleMons[battlerId].statStages[i] < DEFAULT_STAT_STAGE)
@@ -3190,7 +3192,7 @@ bool32 BattlerWillFaintFromSecondaryDamage(u32 battler, enum Ability ability)
 
 static bool32 AnyUsefulStatIsRaised(u32 battler)
 {
-    u32 statId;
+    enum Stat statId;
 
     for (statId = STAT_ATK; statId < NUM_BATTLE_STATS; statId++)
     {
@@ -3208,6 +3210,8 @@ static bool32 AnyUsefulStatIsRaised(u32 battler)
                 break;
             case STAT_SPEED:
                 return TRUE;
+            default:
+                break;
             }
         }
     }
@@ -4030,7 +4034,7 @@ bool32 ShouldCureStatusWithItem(u32 battlerAtk, u32 battlerDef, struct AiLogicDa
 }
 
 // Partner Logic
-bool32 IsBattle1v1()
+bool32 IsBattle1v1(void)
 {
     if (IsDoubleBattle()
       && ((IsBattlerAlive(B_POSITION_PLAYER_LEFT) && IsBattlerAlive(B_POSITION_PLAYER_RIGHT))
@@ -4703,7 +4707,7 @@ static bool32 HasMoveThatChangesKOThreshold(u32 battlerId, u32 noOfHitsToFaint, 
     return FALSE;
 }
 
-static u32 GetStatBeingChanged(enum StatChange statChange)
+static enum Stat GetStatBeingChanged(enum StatChange statChange)
 {
     switch(statChange)
     {
@@ -4771,7 +4775,7 @@ static enum AIScore IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, 
     u32 aiIsFaster = AI_IsFaster(battlerAtk, battlerDef, MOVE_NONE, predictedMoveSpeedCheck, DONT_CONSIDER_PRIORITY); // Don't care about the priority of our setup move, care about outspeeding otherwise
     u32 shouldSetUp = ((noOfHitsToFaint >= 2 && aiIsFaster) || (noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == UNKNOWN_NO_OF_HITS);
     u32 i;
-    u32 statId = GetStatBeingChanged(statChange);
+    enum Stat statId = GetStatBeingChanged(statChange);
     u32 stages = GetStagesOfStatChange(statChange);
 
     if (considerContrary && gAiLogicData->abilities[battlerAtk] == ABILITY_CONTRARY)
@@ -4874,6 +4878,8 @@ static enum AIScore IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, 
             tempScore += GOOD_EFFECT;
         else
             tempScore += DECENT_EFFECT;
+        break;
+    default:
         break;
     }
 
@@ -5477,7 +5483,7 @@ s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle)
 
 bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
 {
-    u8 i;
+    enum Stat i;
     // Want to copy positive stat changes
     for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
     {
@@ -5497,6 +5503,8 @@ bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
             case STAT_DEF:
             case STAT_SPDEF:
                 return (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_STALL);
+            default:
+                break;
             }
         }
     }
