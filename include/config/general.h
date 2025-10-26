@@ -95,7 +95,7 @@
 #define TEXT_SPEED_INSTANT           FALSE   // Renders all text as fast as it can, basically instant. Overrides FLAG_TEXT_SPEED_INSTANT and in-game player options menu setting.
 
 // Text speed flag:
-#define FLAG_TEXT_SPEED_INSTANT      0       // Use this if you want to toggle instant text speed
+#define FLAG_TEXT_SPEED_INSTANT      FLAG_TEXT_SPEED_INSTANT_TOGGLE // Use this if you want to toggle instant text speed
 
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds

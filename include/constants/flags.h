@@ -1225,13 +1225,13 @@
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 #define FLAG_ITEM_BALLS_END											FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL
 
-#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MAY                0x493 // Unused Flag
-#define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN                0x494 // Unused Flag
-#define FLAG_LEVEL_UP_MOVES                                         0x495 // Unused Flag
-#define FLAG_EGG_MOVES                                              0x496 // Unused Flag
-#define FLAG_TM_MOVES                                               0x497 // Unused Flag
-#define FLAG_TUTOR_MOVES                                            0x498 // Unused Flag
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
+#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MAY                0x493
+#define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN                0x494
+#define FLAG_LEVEL_UP_MOVES                                         0x495
+#define FLAG_EGG_MOVES                                              0x496
+#define FLAG_TM_MOVES                                               0x497
+#define FLAG_TUTOR_MOVES                                            0x498
+#define FLAG_TEXT_SPEED_INSTANT_TOGGLE                              0x499
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
