@@ -76,6 +76,10 @@
 #define HQ_RANDOM                    TRUE    // If TRUE, replaces the default RNG with an implementation of SFC32 RNG. May break code that relies on RNG.
 #define AUTO_SCROLL_TEXT             FALSE   // If TRUE, text will automatically scroll to the next line after NUM_FRAMES_AUTO_SCROLL_DELAY. Players can still press A_BUTTON or B_BUTTON to scroll on their own.
 #define NUM_FRAMES_AUTO_SCROLL_DELAY 49
+#define TEXT_SPEED_SLOW_MODIFIER     5
+#define TEXT_SPEED_MEDIUM_MODIFIER   6
+#define TEXT_SPEED_FAST_MODIFIER     7
+#define TEXT_SPEED_INSTANT           TRUE
 #define PHONEMES_SHARED              FALSE   // If TRUE, bard phonemes all reference the same sound (sound/direct_sound_samples/phonemes/shared.bin) to save ROM space.
 
 // Measurement system constants to be used for UNITS

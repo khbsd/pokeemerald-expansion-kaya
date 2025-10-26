@@ -381,29 +381,62 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 void RunTextPrinters(void)
 {
     int i;
+    bool32 isInstantText = TEXT_SPEED_INSTANT; // Force correct result. This is dumb, Revo knows.
+    u32 textRepeats = TEXT_SPEED_SLOW_MODIFIER;
 
-    if (!gDisableTextPrinters)
+    switch (GetPlayerTextSpeed())
     {
-        for (i = 0; i < WINDOWS_MAX; ++i)
+    default:
+    case OPTIONS_TEXT_SPEED_SLOW:
+        break;
+    case OPTIONS_TEXT_SPEED_MID:
+        textRepeats = TEXT_SPEED_MEDIUM_MODIFIER;
+        break;
+    case OPTIONS_TEXT_SPEED_FAST:
+        textRepeats = TEXT_SPEED_FAST_MODIFIER;
+        break;
+    }
+
+    do
+    {
+        int numEmpty = 0;
+        if (!gDisableTextPrinters)
         {
-            if (sTextPrinters[i].active)
+            for (i = 0; i < WINDOWS_MAX; ++i)
             {
-                u16 renderCmd = RenderFont(&sTextPrinters[i]);
-                switch (renderCmd)
+                if (sTextPrinters[i].active)
                 {
-                case RENDER_PRINT:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
-                case RENDER_UPDATE:
-                    if (sTextPrinters[i].callback != NULL)
-                        sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
-                    break;
-                case RENDER_FINISH:
-                    sTextPrinters[i].active = FALSE;
-                    break;
+                    for (u32 j = 0; j < textRepeats; j++)
+                    {
+                        u32 renderState = RenderFont(&sTextPrinters[i]);
+                        switch (renderState)
+                        {
+                        case RENDER_PRINT:
+                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
+                            if (sTextPrinters[i].callback != NULL)
+                                sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderState);
+                            break;
+                        case RENDER_UPDATE:
+                            if (sTextPrinters[i].callback != NULL)
+                                sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderState);
+                            break;
+                        case RENDER_FINISH:
+                            sTextPrinters[i].active = FALSE;
+                            break;
+                        }
+                    }
+                    isInstantText = FALSE;
+                }
+                else
+                {
+                    numEmpty++;
                 }
             }
+
+            if (numEmpty == WINDOWS_MAX)
+                return;
         }
-    }
+    } while (isInstantText);
 }
 
 bool32 IsTextPrinterActive(u8 id)
