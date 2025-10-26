@@ -59,7 +59,7 @@ struct TextPrinterSubStruct
     u8 fontId:4;  // 0x14
     bool8 hasPrintBeenSpedUp:1;
     u8 unk:3;
-    u8 downArrowDelay:5;
+    u16 downArrowDelay:13;
     u8 downArrowYPosIdx:2;
     bool8 hasFontIdBeenSet:1;
     u8 autoScrollDelay;
@@ -180,5 +180,11 @@ u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 
 // stuff for speaker names
 void Task_DrawFieldMessage(u8 taskId);
+
+// player text speed
+u32 GetPlayerTextSpeed(void);
+u32 GetPlayerTextSpeedDelay(void);
+u32 GetPlayerTextSpeedModifier(void);
+bool32 IsPlayerTextSpeedInstant(void);
 
 #endif // GUARD_TEXT_H

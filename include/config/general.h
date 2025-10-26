@@ -83,6 +83,14 @@
 #define CRY_AFTER_TITLE				 SPECIES_RAYQUAZA // If set to something other than SPECIES_NONE, will attempt to play the set species' cry after the title.
 #define INTRO_GENDER_MATCH_SAVE		 TRUE
 #define BOX_ENCRYPTION               FALSE   // If FALSE, does not encrypt/decrypt box mons. !!! WARNING: WILL CORRUPT ALL EXISTING MONS
+
+// A note on the modifiers: they are roughly multiplicative, so having them set at 1 is vanilla speed. One of their functions is to help the down arrow sprite not speed up with the text printer speed, so to that end, their effective cap is 31.
+#define TEXT_SPEED_SLOW_MODIFIER     1       // How fast the SLOW text speed option prints
+#define TEXT_SPEED_MEDIUM_MODIFIER   1       // How fast the MID text speed option prints
+#define TEXT_SPEED_FAST_MODIFIER     1       // How fast the FAST text speed option prints
+#define TEXT_SPEED_INSTANT_MODIFIER  12      // Needed only for the down arrow animation.
+#define TEXT_SPEED_INSTANT           FALSE   // Renders all text as fast as it can, basically instant. Overrides FLAG_TEXT_SPEED_INSTANT and in-game player options menu setting.
+#define FLAG_TEXT_SPEED_INSTANT      0
 #define PHONEMES_SHARED              FALSE   // If TRUE, bard phonemes all reference the same sound (sound/direct_sound_samples/phonemes/shared.bin) to save ROM space.
 
 // Measurement system constants to be used for UNITS
