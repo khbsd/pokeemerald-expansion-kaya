@@ -912,8 +912,8 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define TWO_VS_ONE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_TWO_VS_ONE, __VA_ARGS__)
 #define AI_TWO_VS_ONE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_AI_TWO_VS_ONE, __VA_ARGS__)
 
-#define ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_ONE_VS_TWO, __VA_ARGS__)
-#define AI_ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_AI_ONE_VS_TWO, __VA_ARGS__)
+#define ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_ONE_VS_TWO(_name, BATTLE_TEST_ONE_VS_TWO, __VA_ARGS__)
+#define AI_ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_ONE_VS_TWO(_name, BATTLE_TEST_AI_ONE_VS_TWO, __VA_ARGS__)
 
 /* Parametrize */
 
@@ -1021,7 +1021,7 @@ void Status1_(u32 sourceLine, u32 status1);
 void OTName_(u32 sourceLine, const u8 *otName);
 void DynamaxLevel_(u32 sourceLine, u32 dynamaxLevel);
 void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
-void TeraType_(u32 sourceLine, u32 teraType);
+void TeraType_(u32 sourceLine, enum Type teraType);
 void Shadow_(u32 sourceLine, bool32 isShadow);
 void Shiny_(u32 sourceLine, bool32 isShiny);
 

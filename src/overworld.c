@@ -43,6 +43,7 @@
 #include "mirage_tower.h"
 #include "money.h"
 #include "new_game.h"
+#include "oras_dowse.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "play_time.h"
@@ -1750,7 +1751,7 @@ void UpdateTimeOfDay(void)
 #undef DEFAULT_WEIGHT
 
 // Whether a map type is naturally lit/outside
-bool32 MapHasNaturalLight(u8 mapType)
+bool32 MapHasNaturalLight(enum MapType mapType)
 {
     return (OW_ENABLE_DNS
          && (mapType == MAP_TYPE_TOWN
@@ -2372,6 +2373,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
         InitViewGraphics();
         TryLoadTrainerHillEReaderPalette();
         FollowerNPC_BindToSurfBlobOnReloadScreen();
+        ResumeORASDowseFieldEffect();
         (*state)++;
         break;
     case 2:

@@ -14,18 +14,18 @@ static void LoadTypeIconsPerBattler(u32, u32);
 
 static bool32 UseDoubleBattleCoords(u32);
 
-static u32 GetMonPublicType(u32, u32);
+static enum Type GetMonPublicType(u32, u32);
 static bool32 ShouldHideUncaughtType(u32 species);
 static bool32 ShouldHideUnseenType(u32 species);
-static u32 GetMonDefensiveTeraType(struct Pokemon *, struct Pokemon*, u32, u32, u32, u32);
-static u32 IsIllusionActiveAndTypeUnchanged(struct Pokemon*, u32, u32);
+static enum Type GetMonDefensiveTeraType(struct Pokemon *, struct Pokemon*, u32, u32, u32, u32);
+static bool32 IsIllusionActiveAndTypeUnchanged(struct Pokemon*, u32, u32);
 
-static void CreateSpriteFromType(u32, bool32, u32[], u32, u32);
-static bool32 ShouldSkipSecondType(u32[], u32);
+static void CreateSpriteFromType(u32, bool32, enum Type[], u32, u32);
+static bool32 ShouldSkipSecondType(enum Type[], u32);
 static void SetTypeIconXY(s32*, s32*, u32, bool32, u32);
 
-static void CreateSpriteAndSetTypeSpriteAttributes(u32, u32 x, u32 y, u32, u32, bool32);
-static bool32 ShouldFlipTypeIcon(bool32, u32, u32);
+static void CreateSpriteAndSetTypeSpriteAttributes(enum Type, u32 x, u32 y, u32, u32, bool32);
+static bool32 ShouldFlipTypeIcon(bool32, u32, enum Type);
 
 static void SpriteCB_TypeIcon(struct Sprite*);
 static void DestroyTypeIcon(struct Sprite*);
@@ -243,7 +243,7 @@ void LoadTypeIcons(u32 battler)
     struct Pokemon* mon = GetBattlerMon(battler);
     u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
 
-    if (B_SHOW_TYPES == SHOW_TYPES_NEVER 
+    if (B_SHOW_TYPES == SHOW_TYPES_NEVER
         || (B_SHOW_TYPES == SHOW_TYPES_SEEN && !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN)))
         return;
 
@@ -267,7 +267,8 @@ static void LoadTypeSpritesAndPalettes(void)
 
 static void LoadTypeIconsPerBattler(u32 battler, u32 position)
 {
-    u32 typeNum, types[2];
+    u32 typeNum;
+    enum Type types[2];
     u32 battlerId = GetBattlerAtPosition(position);
     bool32 useDoubleBattleCoords = UseDoubleBattleCoords(battlerId);
 
@@ -295,11 +296,11 @@ static bool32 UseDoubleBattleCoords(u32 position)
     return TRUE;
 }
 
-static u32 GetMonPublicType(u32 battlerId, u32 typeNum)
+static enum Type GetMonPublicType(u32 battlerId, u32 typeNum)
 {
-    struct Pokemon* mon = GetBattlerMon(battlerId);
+    struct Pokemon *mon = GetBattlerMon(battlerId);
     u32 monSpecies = GetMonData(mon,MON_DATA_SPECIES,NULL);
-    struct Pokemon* monIllusion;
+    struct Pokemon *monIllusion;
     u32 illusionSpecies;
 
     if (ShouldHideUncaughtType(monSpecies) || ShouldHideUnseenType(monSpecies))
@@ -339,10 +340,9 @@ static bool32 ShouldHideUnseenType(u32 species)
     return TRUE;
 }
 
-
-static u32 GetMonDefensiveTeraType(struct Pokemon * mon, struct Pokemon* monIllusion, u32 battlerId, u32 typeNum, u32 illusionSpecies, u32 monSpecies)
+static enum Type GetMonDefensiveTeraType(struct Pokemon *mon, struct Pokemon *monIllusion, u32 battlerId, u32 typeNum, u32 illusionSpecies, u32 monSpecies)
 {
-    u32 teraType = GetBattlerTeraType(battlerId);
+    enum Type teraType = GetBattlerTeraType(battlerId);
     u32 targetSpecies;
 
     if (teraType != TYPE_STELLAR)
@@ -353,7 +353,7 @@ static u32 GetMonDefensiveTeraType(struct Pokemon * mon, struct Pokemon* monIllu
     return GetSpeciesType(targetSpecies, typeNum);
 }
 
-static u32 IsIllusionActiveAndTypeUnchanged(struct Pokemon* monIllusion, u32 monSpecies, u32 battlerId)
+static bool32 IsIllusionActiveAndTypeUnchanged(struct Pokemon *monIllusion, u32 monSpecies, u32 battlerId)
 {
     u32 typeNum;
 
@@ -367,7 +367,7 @@ static u32 IsIllusionActiveAndTypeUnchanged(struct Pokemon* monIllusion, u32 mon
     return TRUE;
 }
 
-static void CreateSpriteFromType(u32 position, bool32 useDoubleBattleCoords, u32 types[], u32 typeNum, u32 battler)
+static void CreateSpriteFromType(u32 position, bool32 useDoubleBattleCoords, enum Type types[], u32 typeNum, u32 battler)
 {
     s32 x = 0, y = 0;
 
@@ -379,7 +379,7 @@ static void CreateSpriteFromType(u32 position, bool32 useDoubleBattleCoords, u32
     CreateSpriteAndSetTypeSpriteAttributes(types[typeNum], x, y, position, battler, useDoubleBattleCoords);
 }
 
-static bool32 ShouldSkipSecondType(u32 types[], u32 typeNum)
+static bool32 ShouldSkipSecondType(enum Type types[], u32 typeNum)
 {
     if (!typeNum)
         return FALSE;
@@ -396,7 +396,7 @@ static void SetTypeIconXY(s32* x, s32* y, u32 position, bool32 useDoubleBattleCo
     *y = sTypeIconPositions[position][useDoubleBattleCoords].y + (11 * typeNum);
 }
 
-static void CreateSpriteAndSetTypeSpriteAttributes(u32 type, u32 x, u32 y, u32 position, u32 battler, bool32 useDoubleBattleCoords)
+static void CreateSpriteAndSetTypeSpriteAttributes(enum Type type, u32 x, u32 y, u32 position, u32 battler, bool32 useDoubleBattleCoords)
 {
     struct Sprite* sprite;
     const struct SpriteTemplate* spriteTemplate = gTypesInfo[type].useSecondTypeIconPalette ? &sSpriteTemplate_TypeIcons2 : &sSpriteTemplate_TypeIcons1;
@@ -415,7 +415,7 @@ static void CreateSpriteAndSetTypeSpriteAttributes(u32 type, u32 x, u32 y, u32 p
     StartSpriteAnim(sprite, type);
 }
 
-static bool32 ShouldFlipTypeIcon(bool32 useDoubleBattleCoords, u32 position, u32 typeId)
+static bool32 ShouldFlipTypeIcon(bool32 useDoubleBattleCoords, u32 position, enum Type typeId)
 {
     enum BattleSide side = (useDoubleBattleCoords) ? B_SIDE_OPPONENT : B_SIDE_PLAYER;
 
@@ -425,7 +425,7 @@ static bool32 ShouldFlipTypeIcon(bool32 useDoubleBattleCoords, u32 position, u32
     return !gTypesInfo[typeId].isSpecialCaseType;
 }
 
-static void SpriteCB_TypeIcon(struct Sprite* sprite)
+static void SpriteCB_TypeIcon(struct Sprite *sprite)
 {
     u32 position = sprite->tMonPosition;
     u32 battlerId = sprite->tBattlerId;
@@ -489,7 +489,7 @@ static void FreeAllTypeIconResources(void)
     }
 }
 
-static void (* const sShowTypesControllerFuncs[])(u32 battler) =
+static void (*const sShowTypesControllerFuncs[])(u32 battler) =
 {
     PlayerHandleChooseMove,
     HandleChooseMoveAfterDma3,
@@ -564,7 +564,7 @@ static s32 GetTypeIconSlideMovement(bool32 useDoubleBattleCoords, u32 position, 
 
 static s32 GetTypeIconBounceMovement(s32 originalY, u32 position)
 {
-    struct Sprite* healthbox = &gSprites[gHealthboxSpriteIds[GetBattlerAtPosition(position)]];
+    struct Sprite *healthbox = &gSprites[gHealthboxSpriteIds[GetBattlerAtPosition(position)]];
     return originalY + healthbox->y2;
 }
 

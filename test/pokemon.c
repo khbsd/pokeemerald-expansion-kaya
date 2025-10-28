@@ -26,7 +26,8 @@ TEST("Nature independent from Hidden Nature")
 
 TEST("Terastallization type defaults to primary or secondary type")
 {
-    u32 i, teraType;
+    u32 i;
+    enum Type teraType;
     struct Pokemon mon;
     for (i = 0; i < 128; i++) PARAMETRIZE {}
     CreateMon(&mon, SPECIES_PIDGEY, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
@@ -37,7 +38,8 @@ TEST("Terastallization type defaults to primary or secondary type")
 
 TEST("Terastallization type can be set to any type except TYPE_NONE")
 {
-    u32 i, teraType;
+    u32 i;
+    enum Type teraType;
     struct Pokemon mon;
     for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
     {
@@ -50,7 +52,8 @@ TEST("Terastallization type can be set to any type except TYPE_NONE")
 
 TEST("Terastallization type is reset to the default types when setting Tera Type back to TYPE_NONE")
 {
-    u32 i, teraType, typeNone;
+    u32 i;
+    enum Type teraType, typeNone;
     struct Pokemon mon;
     for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
     {

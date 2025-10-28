@@ -59,6 +59,8 @@ void UsePokevialFieldNo(u8 taskId);
 void UsePokevialYesNo(u8 taskId);
 void UsePokevialYes(u8 taskId);
 void PokevialPrintPartyHealed(bool32 isPlayerUsingRegisteredKeyItem, u8 taskId);
+bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *, u8);
+u8 GetDirectionToHiddenItem(s16, s16);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,
