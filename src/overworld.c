@@ -3650,7 +3650,7 @@ bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
 #endif
 
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_IN_BAG
-    if (CheckBagHasItem(item))
+    if (CountTotalItemQuantityInBag(item) > 0)
         return TRUE;
 #endif
     return FALSE;

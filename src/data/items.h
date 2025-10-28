@@ -2422,7 +2422,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = 0,
         .flingPower = 30,
         .iconPic = gItemIcon_Lure,
-        .iconPalette = gItemIconPalette_MaxLure,
+        .iconPalette = gItemIconPalette_PermaLure,
     },
 
     [ITEM_ESCAPE_ROPE] =

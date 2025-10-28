@@ -551,6 +551,7 @@ extern const u32 gItemIcon_Lure[];
 extern const u16 gItemIconPalette_Lure[];
 extern const u16 gItemIconPalette_SuperLure[];
 extern const u16 gItemIconPalette_MaxLure[];
+extern const u16 gItemIconPalette_PermaLure[];
 extern const u32 gItemIcon_EscapeRope[];
 extern const u16 gItemIconPalette_EscapeRope[];
 // X Items
