@@ -3704,7 +3704,7 @@ u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
 #define SET32(lhs) (lhs) = data[0] + (data[1] << 8) + (data[2] << 16) + (data[3] << 24)
 //
-// Prefer SET_BY_WIDTH for fields whose types might be extended (e.g. 
+// Prefer SET_BY_WIDTH for fields whose types might be extended (e.g.
 // anything whose typedef is in gametypes.h).
 //
 #define SET_BY_WIDTH(lhs) \
@@ -6666,7 +6666,7 @@ u16 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
     u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
 
-    for (u16 i = 0; i < MAX_MON_MOVES; i++)
+    for (u8 i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
 
     for (u16 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
@@ -6732,6 +6732,9 @@ u16 GetNumberOfEggMoves(struct Pokemon *mon)
 
 u16 GetNumberOfTMMoves(struct Pokemon *mon)
 {
+    if (!P_ENABLE_ALL_TM_MOVES && !IsBagPocketNonEmpty(POCKET_TM_HM))
+        return 0;
+
     if (!FlagGet(P_FLAG_TM_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
 
@@ -6747,11 +6750,11 @@ u16 GetNumberOfTMMoves(struct Pokemon *mon)
 u16 GetNumberOfTutorMoves(struct Pokemon *mon)
 {
     if (!P_TUTOR_MOVES_ARRAY)
-        return FALSE;
+        return 0;
 
     if (!FlagGet(P_FLAG_TUTOR_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
-    
+
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
     if (species == SPECIES_EGG)
         return 0;

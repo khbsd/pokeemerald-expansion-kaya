@@ -6,6 +6,7 @@
 #include "test/overworld_script.h"
 #include "test/test.h"
 #include "constants/characters.h"
+#include "constants/move_relearner.h"
 
 TEST("Nature independent from Hidden Nature")
 {

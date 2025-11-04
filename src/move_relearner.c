@@ -184,7 +184,8 @@ static EWRAM_DATA struct {
     bool8 showContestInfo;
 } sMoveRelearnerMenuState = {0};
 
-EWRAM_DATA u8 gOriginSummaryScreenPage = 0; // indicates summary screen page that the move relearner was opened from (if opened from PSS)
+EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
+EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
 
 static const u16 sUI_Pal[] = INCBIN_U16("graphics/interface/ui_learn_move.gbapal");
 
@@ -403,26 +404,26 @@ void CB2_InitLearnMove(void)
     SetVBlankCallback(VBlankCB_MoveRelearner);
 
     InitMoveRelearnerBackgroundLayers();
-    InitMoveRelearnerWindows(gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES);
+    InitMoveRelearnerWindows(gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES);
 
     sMoveRelearnerMenuState.listOffset = 0;
     sMoveRelearnerMenuState.listRow = 0;
-    sMoveRelearnerMenuState.showContestInfo = gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES;
+    sMoveRelearnerMenuState.showContestInfo = gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES;
 
-    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
+    switch (gMoveRelearnerState)
     {
     case MOVE_RELEARNER_EGG_MOVES:
-        StringCopy(gStringVar3, COMPOUND_STRING("egg move"));
+        StringCopy(gStringVar3, MoveRelearner_Text_EggMoveLWR);
         break;
     case MOVE_RELEARNER_TM_MOVES:
-        StringCopy(gStringVar3, COMPOUND_STRING("TM move"));
+        StringCopy(gStringVar3, MoveRelearner_Text_TMMoveLWR);
         break;
     case MOVE_RELEARNER_TUTOR_MOVES:
-        StringCopy(gStringVar3, COMPOUND_STRING("tutor move"));
+        StringCopy(gStringVar3, MoveRelearner_Text_TutorMoveLWR);
         break;
     case MOVE_RELEARNER_LEVEL_UP_MOVES:
     default:
-        StringCopy(gStringVar3, COMPOUND_STRING("level up move"));
+        StringCopy(gStringVar3, MoveRelearner_Text_LevelUpMoveLWR);
         break;
     }
 
@@ -500,14 +501,14 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_FADE_TO_BLACK:
         sMoveRelearnerStruct->state++;
         HideHeartSpritesAndShowTeachMoveText(FALSE);
-        if (gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES)
+        if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
             MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_WAIT_FOR_FADE:
         if (!gPaletteFade.active)
         {
-            if (gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES)
+            if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
                 sMoveRelearnerStruct->state = MENU_STATE_IDLE_CONTEST_MODE;
             else
                 sMoveRelearnerStruct->state = MENU_STATE_IDLE_BATTLE_MODE;
@@ -601,6 +602,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT:
         PrintMessageWithPlaceholders(gText_MoveRelearnerPkmnTryingToLearnMove);
         sMoveRelearnerStruct->state++;
+        break;
     case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
         if (!MoveRelearnerRunTextPrinters())
         {
@@ -709,8 +711,7 @@ static void DoMoveRelearnerMain(void)
         break;
     case MENU_STATE_FADE_AND_RETURN:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        if (P_FLAG_PARTY_MOVE_RELEARNER != 0 && FlagGet(P_FLAG_PARTY_MOVE_RELEARNER)
-            && !FlagGet(P_FLAG_SCRIPT_MOVE_RELEARNER) && gOriginSummaryScreenPage == 0)
+        if (gRelearnMode == RELEARN_MODE_PARTY_MENU)
             sMoveRelearnerStruct->state = MENU_STATE_RETURN_TO_PARTY_MENU;
         else
             sMoveRelearnerStruct->state++;
@@ -720,19 +721,18 @@ static void DoMoveRelearnerMain(void)
         {
             if (gInitialSummaryScreenCallback != NULL)
             {
-                switch (gOriginSummaryScreenPage)
+                switch (gRelearnMode)
                 {
-                case PSS_PAGE_BATTLE_MOVES:
+                case RELEARN_MODE_PSS_PAGE_BATTLE_MOVES:
                     ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_BATTLE, gPlayerParty, sMoveRelearnerStruct->partyMon, gPlayerPartyCount - 1, gInitialSummaryScreenCallback);
                     break;
-                case PSS_PAGE_CONTEST_MOVES:
+                case RELEARN_MODE_PSS_PAGE_CONTEST_MOVES:
                     ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_CONTEST, gPlayerParty, sMoveRelearnerStruct->partyMon, gPlayerPartyCount - 1, gInitialSummaryScreenCallback);
                     break;
                 default:
                     ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sMoveRelearnerStruct->partyMon, gPlayerPartyCount - 1, gInitialSummaryScreenCallback);
                     break;
                 }
-                gOriginSummaryScreenPage = 0;
             }
             else
             {
@@ -772,7 +772,7 @@ static void DoMoveRelearnerMain(void)
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->moveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove(), sMoveRelearnerStruct->moveSlot);
                 u8 newPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot);
-                if (!P_SUMMARY_MOVE_RELEARNER_FULL_PP && gOriginSummaryScreenPage != 0 && originalPP < newPP)
+                if (!P_SUMMARY_MOVE_RELEARNER_FULL_PP && gRelearnMode != 0 && originalPP < newPP)
                     SetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + sMoveRelearnerStruct->moveSlot, &originalPP);
                 StringCopy(gStringVar2, GetMoveName(GetCurrentSelectedMove()));
                 PrintMessageWithPlaceholders(gText_MoveRelearnerAndPoof);
@@ -806,11 +806,7 @@ static void DoMoveRelearnerMain(void)
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            if (P_FLAG_PARTY_MOVE_RELEARNER != 0 && FlagGet(P_FLAG_PARTY_MOVE_RELEARNER)
-                && !FlagGet(P_FLAG_SCRIPT_MOVE_RELEARNER) && gOriginSummaryScreenPage == 0)
-                sMoveRelearnerStruct->state = MENU_STATE_RETURN_TO_PARTY_MENU;
-            else
-                sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
+            sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
         }
         break;
     }
@@ -975,7 +971,7 @@ static void CreateLearnableMovesList(void)
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
-    switch (VarGet(P_VAR_MOVE_RELEARNER_STATE))
+    switch (gMoveRelearnerState)
     {
     case MOVE_RELEARNER_EGG_MOVES:
         sMoveRelearnerStruct->numMenuChoices = GetRelearnerEggMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);

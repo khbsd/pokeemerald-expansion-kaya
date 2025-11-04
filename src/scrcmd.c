@@ -35,6 +35,7 @@
 #include "menu.h"
 #include "money.h"
 #include "move.h"
+#include "move_relearner.h"
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -853,7 +854,7 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
     }
 
     FadeScreenHardware(mode, 0);
-    
+
     if (nowait)
         return FALSE;
     SetupNativeScript(ctx, IsPaletteNotActive);
@@ -1294,7 +1295,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     // When applying script movements to follower, it may have frozen animation that must be cleared
-    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen) 
+    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen)
             || ((objEvent = &gObjectEvents[GetObjectEventIdByLocalId(localId)]) && IS_OW_MON_OBJ(objEvent)))
     {
         ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
@@ -1508,8 +1509,8 @@ bool8 ScrCmd_resetobjectsubpriority(struct ScriptContext *ctx)
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-    if (PlayerHasFollowerNPC() 
-     && gObjectEvents[GetFollowerNPCObjectId()].invisible == FALSE 
+    if (PlayerHasFollowerNPC()
+     && gObjectEvents[GetFollowerNPCObjectId()].invisible == FALSE
      && gSelectedObjectEvent == GetFollowerNPCObjectId())
     {
         struct ObjectEvent *npcFollower = &gObjectEvents[GetFollowerNPCObjectId()];
@@ -3271,43 +3272,66 @@ bool8 ScrCmd_pokevial(struct ScriptContext *ctx)
     u8 parameter = ScriptReadByte(ctx);
     u8 amount = ScriptReadByte(ctx);
 
-    switch (mode) {
-        case VIAL_GET:
-            switch (parameter) {
-                case VIAL_SIZE:
-                    PokevialGetSize();
-                    break;
-                case VIAL_DOSE:
-                    PokevialGetDose();
-                    break;
-            }
+    switch (mode)
+    {
+    case VIAL_GET:
+        switch (parameter)
+        {
+        case VIAL_SIZE:
+            PokevialGetSize();
             break;
-
-        case VIAL_UP:
-            switch (parameter) {
-                case VIAL_SIZE:
-                    PokevialSizeUp(amount);
-                    break;
-                case VIAL_DOSE:
-                    PokevialDoseUp(amount);
-                    break;
-            }
+        case VIAL_DOSE:
+            PokevialGetDose();
             break;
-
-        case VIAL_DOWN:
-            switch (parameter) {
-                case VIAL_SIZE:
-                    PokevialSizeDown(amount);
-                    break;
-                case VIAL_DOSE:
-                    PokevialDoseDown(amount);
-                    break;
-            }
+        }
+        break;
+    case VIAL_UP:
+        switch (parameter)
+        {
+        case VIAL_SIZE:
+            PokevialSizeUp(amount);
             break;
-
-        case VIAL_REFILL:
-            PokevialRefill();
+        case VIAL_DOSE:
+            PokevialDoseUp(amount);
             break;
+        }
+        break;
+    case VIAL_DOWN:
+        switch (parameter)
+        {
+        case VIAL_SIZE:
+            PokevialSizeDown(amount);
+            break;
+        case VIAL_DOSE:
+            PokevialDoseDown(amount);
+            break;
+        }
+        break;
+    case VIAL_REFILL:
+        PokevialRefill();
+        break;
     }
     return TRUE;
+}
+
+bool8 ScrCmd_setmoverelearnerstate(struct ScriptContext *ctx)
+{
+    enum MoveRelearnerStates state = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    gMoveRelearnerState = state;
+    return FALSE;
+}
+
+bool8 ScrCmd_getmoverelearnerstate(struct ScriptContext *ctx)
+{
+    u32 varId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1);
+    Script_RequestWriteVar(varId);
+
+    u16 *varPointer = GetVarPointer(varId);
+    *varPointer = gMoveRelearnerState;
+    return FALSE;
 }
