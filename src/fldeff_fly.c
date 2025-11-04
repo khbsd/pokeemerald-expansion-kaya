@@ -35,7 +35,7 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
-u32 FilterFlyDestination(RegionMap *regionMap)
+u32 FilterFlyDestination(struct RegionMap *regionMap)
 {
     switch (regionMap->mapSecId)
     {
@@ -55,7 +55,7 @@ u32 FilterFlyDestination(RegionMap *regionMap)
     }
 }
 
-void SetFlyDestination(RegionMap *regionMap)
+void SetFlyDestination(struct RegionMap *regionMap)
 {
     u8 flyDestination = FilterFlyDestination(regionMap);
     if (flyDestination != WARP_ID_NONE)

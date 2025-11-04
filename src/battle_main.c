@@ -264,7 +264,7 @@ EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
-COMMON_DATA void (*gPreBattleCallback1)(void) = NULL;
+COMMON_DATA MainCallback gPreBattleCallback1 = NULL;
 COMMON_DATA void (*gBattleMainFunc)(void) = NULL;
 COMMON_DATA struct BattleResults gBattleResults = {0};
 COMMON_DATA u8 gLeveledUpInBattle = 0;
@@ -573,6 +573,8 @@ static void CB2_InitBattleInternal(void)
     }
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleEnvironment = BATTLE_ENVIRONMENT_BUILDING;
+    if (TestRunner_Battle_GetForcedEnvironment())
+        gBattleEnvironment = TestRunner_Battle_GetForcedEnvironment() - 1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -599,7 +601,7 @@ static void CB2_InitBattleInternal(void)
     gReservedSpritePaletteCount = MAX_BATTLERS_COUNT;
     SetVBlankCallback(VBlankCB_Battle);
     SetUpBattleVarsAndBirchZigzagoon();
-    
+
     if ((IsMultibattleTest() && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
     || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
@@ -3372,6 +3374,10 @@ void SwitchInClearSetData(u32 battler, struct Volatiles *volatilesCopy)
     gBattleStruct->battlerState[battler].stompingTantrumTimer = 0;
     gBattleStruct->palaceFlags &= ~(1u << battler);
     gBattleStruct->battlerState[battler].canPickupItem = FALSE;
+    gBattleStruct->battlerState[battler].wasAboveHalfHp = gBattleMons[battler].hp > gBattleMons[battler].maxHP / 2;
+    gBattleStruct->hazardsCounter = 0;
+    gDisableStructs[battler].hazardsDone = FALSE;
+    gSpecialStatuses[battler].switchInItemDone = FALSE;
 
     ClearPursuitValuesIfSet(battler);
 
@@ -5281,6 +5287,7 @@ static void TurnValuesCleanUp(bool8 var0)
                     gBattleMons[i].volatiles.recharge = FALSE;
             }
             gBattleStruct->battlerState[i].canPickupItem = FALSE;
+            gBattleStruct->battlerState[i].wasAboveHalfHp = FALSE;
         }
 
         if (gDisableStructs[i].substituteHP == 0)
@@ -5299,6 +5306,8 @@ static void TurnValuesCleanUp(bool8 var0)
     gSideTimers[B_SIDE_OPPONENT].followmeTimer = 0;
 
     gBattleStruct->pledgeMove = FALSE; // combined pledge move may not have been used due to a canceller
+    gBattleStruct->tryDestinyBond = FALSE;
+    gBattleStruct->tryGrudge = FALSE;
     ClearPursuitValues();
     ClearDamageCalcResults();
 }
@@ -5775,19 +5784,8 @@ static void HandleEndTurn_FinishBattle(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            bool8 changedForm = FALSE;
-
-            // Appeared in battle and didn't faint
-            if (gBattleStruct->partyState[B_SIDE_PLAYER][i].sentOut && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
-                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_ENVIRONMENT);
-
-            if (!changedForm)
-                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
-
-            // Clear original species field
-            gBattleStruct->partyState[B_SIDE_PLAYER][i].changedSpecies = SPECIES_NONE;
-            gBattleStruct->partyState[B_SIDE_OPPONENT][i].changedSpecies = SPECIES_NONE;
-
+            bool32 changedForm = TryRevertPartyMonFormChange(i);
+            
             // Recalculate the stats of every party member before the end
             if (!changedForm && B_RECALCULATE_STATS >= GEN_5)
                 CalculateMonStats(&gPlayerParty[i]);

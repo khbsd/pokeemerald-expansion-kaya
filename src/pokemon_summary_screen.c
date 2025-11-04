@@ -144,7 +144,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 ribbonCount; // 0x6
         u8 ailment; // 0x7
         u8 abilityNum; // 0x8
-        u8 metLocation; // 0x9
+        metloc_u8_t metLocation; // 0x9
         u8 metLevel; // 0xA
         u8 metGame; // 0xB
         u32 pid; // 0xC
@@ -741,7 +741,7 @@ static void (*const sTextPrinterFunctions[])(void) =
     [PSS_PAGE_CONTEST_MOVES] = PrintContestMoves
 };
 
-static void (*const sTextPrinterTasks[])(u8 taskId) =
+static const TaskFunc sTextPrinterTasks[] =
 {
     [PSS_PAGE_INFO] = Task_PrintInfoPage,
     [PSS_PAGE_SKILLS] = Task_PrintSkillsPage,
@@ -1178,6 +1178,13 @@ static void DestroyCategoryIcon(void)
     if (sMonSummaryScreen->categoryIconSpriteId != 0xFF)
         DestroySprite(&gSprites[sMonSummaryScreen->categoryIconSpriteId]);
     sMonSummaryScreen->categoryIconSpriteId = 0xFF;
+}
+
+u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
+{
+    if (P_SUMMARY_SCREEN_IV_HYPERTRAIN && GetMonData(mon, MON_DATA_HYPER_TRAINED_HP + stat))
+        return MAX_PER_STAT_IVS;
+    return GetMonData(mon, MON_DATA_HP_IV + stat);
 }
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
@@ -1889,13 +1896,6 @@ void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum)
     }
 }
 
-u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
-{
-    if (GetMonData(mon, MON_DATA_HYPER_TRAINED_HP + stat) && P_SUMMARY_SCREEN_IV_HYPERTRAIN)
-        return MAX_PER_STAT_IVS;
-    return GetMonData(mon, MON_DATA_HP_IV + stat);
-}
-
 void ExtractMonSkillIvData(struct Pokemon *mon, struct PokeSummary *sum)
 {
     sum->currentHP = GetAdjustedIvData(mon, STAT_HP);
@@ -2022,7 +2022,7 @@ void TryUpdateRelearnType(enum IncrDecrUpdateValues delta)
             return;
         }
         zeroCounter++;
-        
+
     } while (zeroCounter <= MOVE_RELEARNER_COUNT && moveCount == 0);
 }
 
@@ -2110,7 +2110,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         }
 
         if (P_SUMMARY_SCREEN_MOVE_RELEARNER
-             && (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES 
+             && (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
              || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES))
         {
             VarSet(P_VAR_MOVE_RELEARNER_STATE, MOVE_RELEARNER_LEVEL_UP_MOVES);
@@ -2283,7 +2283,7 @@ static void ChangePage(u8 taskId, s8 delta)
         TryUpdateRelearnType(TRY_SET_UPDATE);
     }
 
-    // to prevent nothing showing 
+    // to prevent nothing showing
     if (currPageIndex >= PSS_PAGE_BATTLE_MOVES && sMonSummaryScreen->relearnableMovesNum == 0)
         TryUpdateRelearnType(TRY_SET_UPDATE);
     else
