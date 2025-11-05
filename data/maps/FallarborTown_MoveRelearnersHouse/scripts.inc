@@ -6,6 +6,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
+	closemessage
 	end
 
 FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
@@ -59,10 +60,12 @@ FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
 	.string "learn--every one of them--and I can\l"
 	.string "teach POKéMON those moves.\p"
 	.string "Unfortunately, thanks to Kaya and PCG,\n"
-	.string "I'm basically obsolete.\p You can press"
+	.string "I'm basically obsolete. You can press\p"
 	.string "{L_BUTTON} and {R_BUTTON} when viewing\n"
 	.string "your moves and pick between Egg,\l"
-	.string "Level Up, TM/HM, and Tutor moves.$"
+	.string "Level Up, TM/HM, and Tutor moves.\p"
+	.string "Thank god the POKéEarth Communist\n"
+	.string "Party instituted UBI a few years ago.$"
 
 FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
 	.string "Oh! That's it! That's an honest to\n"

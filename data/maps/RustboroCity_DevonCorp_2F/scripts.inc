@@ -273,8 +273,9 @@ RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon:
 	.string "If you shelter the user from the\p"
 	.string "inner workings of the tools that\n"
 	.string "they use, you do them a disservice.\l"
-	.string "Steve Jobs and his fucking consequences\n"
-	.string "are gonna finally make me do it.$"
+	.string "Steve Jobs and his fucking\p"
+	.string "consequences are gonna finally make\n"
+	.string "me do it.$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls:
 	.string "{SPEAKER SP_NAME_T_ESTICLE}I'm developing new kinds of\n"
@@ -379,8 +380,8 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 	.string "{SPEAKER SP_NAME_REAL_DOWNER}Nonetheless, one could always draw\n"
 	.string "stoic comfort from the possibility\p"
 	.string "that perhaps over time the new\n"
-	.string "vacuum would sustain if not life as\l"
+	.string "vacuum would sustain if not life as\p"
 	.string "we know it, at least some\n"
-	.string "structures capable of knowing joy.\l"
+	.string "structures capable of knowing joy.\p"
 	.string "This possibility has now been eliminated.$"
 
