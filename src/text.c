@@ -1404,6 +1404,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     case RENDER_STATE_SCROLL_START:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
+            subStruct->downArrowDelay = 0;
             TextPrinterClearDownArrow(textPrinter);
             textPrinter->scrollDistance = gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing;
             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
@@ -1415,17 +1416,31 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         {
             int scrollSpeed = GetPlayerTextSpeed();
             int speed = gTextScrollSpeeds[scrollSpeed];
-            if (textPrinter->scrollDistance < speed)
+            u32 speedModifier = GetPlayerTextSpeedModifier();
+
+            if (subStruct->downArrowDelay != 0)
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance = 0;
+                subStruct->downArrowDelay--;
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance -= speed;
+                if (textPrinter->scrollDistance < speed)
+                {
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance = 0;
+                }
+                else
+                {
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance -= speed;
+                }
+
+                if (speedModifier > 1)
+                    subStruct->downArrowDelay = speedModifier * scrollSpeed;
+                else
+                    subStruct->downArrowDelay = 0;
+                CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
         }
         else
         {
