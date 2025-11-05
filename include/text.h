@@ -66,8 +66,8 @@ struct TextPrinterSubStruct
     bool8 hasPrintBeenSpedUp:1;
     u8 unk:3;
     u16 downArrowDelay:13;
-    u8 downArrowYPosIdx:2;
-    bool8 hasFontIdBeenSet:1;
+    u16 downArrowYPosIdx:2;
+    bool16 hasFontIdBeenSet:1;
     u8 autoScrollDelay;
 };
 
@@ -141,9 +141,9 @@ struct TextGlyph
 };
 
 extern TextFlags gTextFlags;
-
 extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
+extern const u8 gTextScrollSpeeds[];
 
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
