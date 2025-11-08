@@ -910,5 +910,6 @@ struct Pokemon *GetSavedPlayerPartyMon(u32 index);
 u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 bool32 IsSpeciesOfType(u32 species, enum Type type);
+u32 GetSetSeenLevel(u32 species, enum HandleSeenLevel caseId);
 
 #endif // GUARD_POKEMON_H

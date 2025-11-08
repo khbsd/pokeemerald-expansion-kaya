@@ -237,6 +237,11 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
+#include "constants/species.h"
+#define SEEN_LEVEL_BITS   2
+#define SEEN_LEVEL_SIZE   ((8 / SEEN_LEVEL_BITS) + ((8 % SEEN_LEVEL_BITS) ? 1 : 0))
+#define SPECIES_SEEN_DATA ((NUM_SPECIES_EXPANDED / SEEN_LEVEL_SIZE) + ((NUM_SPECIES_EXPANDED % SEEN_LEVEL_SIZE) ? 1 : 0))
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -252,6 +257,7 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+    u8 speciesSeenLevels[SPECIES_SEEN_DATA];
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
