@@ -237,10 +237,10 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
-#include "constants/species.h"
+#include "constants/pokedex.h"
 #define SEEN_LEVEL_BITS   2
 #define SEEN_LEVEL_SIZE   ((8 / SEEN_LEVEL_BITS) + ((8 % SEEN_LEVEL_BITS) ? 1 : 0))
-#define SPECIES_SEEN_DATA ((NUM_SPECIES_EXPANDED / SEEN_LEVEL_SIZE) + ((NUM_SPECIES_EXPANDED % SEEN_LEVEL_SIZE) ? 1 : 0))
+#define SPECIES_SEEN_DATA ((HOENN_DEX_COUNT / SEEN_LEVEL_SIZE) + ((HOENN_DEX_COUNT % SEEN_LEVEL_SIZE) ? 1 : 0))
 
 struct SaveBlock3
 {

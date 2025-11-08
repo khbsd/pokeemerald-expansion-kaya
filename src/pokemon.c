@@ -6386,48 +6386,20 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
-u32 GetSetSeenLevel(u32 species, enum HandleSeenLevel caseId)
+u32 GetSetSeenLevel(enum HoennDexOrder hoennNum, enum HandleSeenLevel caseId)
 {
-    u32 index = species / SEEN_LEVEL_SIZE;
-    u32 bit = (species % SEEN_LEVEL_SIZE) * SEEN_LEVEL_BITS;
-    u8 firstDigitMask = 1 << bit;
-    u8 secondDigitMask = 1 << (bit + 1);
+    u32 index = hoennNum / SEEN_LEVEL_SIZE;
+    u32 bit = (hoennNum % SEEN_LEVEL_SIZE) * SEEN_LEVEL_BITS;
+    u8 digitMask = 0;
+    u32 seenLevelAdjusted, seenLevel = 0;
 
-    DebugPrintf("species: %S", GetSpeciesName(species));
-    DebugPrintf("index: %u", index);
-    DebugPrintf("bit: %X", bit);
-    DebugPrintf("firstDigitMask: %X", firstDigitMask);
-    DebugPrintf("secondDigitMask: %X", secondDigitMask);
-
-    u32 seenLevel = 0;
-
-    gSaveBlock3Ptr->speciesSeenLevels[index] |= firstDigitMask;
-    //gSaveBlock3Ptr->speciesSeenLevels[index] |= secondDigitMask;
-
-    for (u32 digit = 0; digit < SEEN_LEVEL_BITS; digit++)
+    for (u32 digit = 0; (digit < SEEN_LEVEL_BITS) && (caseId != RESET_SEEN_LEVEL); digit++)
     {
+        digitMask |= 1 << (bit + digit);
         seenLevel |= (gSaveBlock3Ptr->speciesSeenLevels[index] & (1 << (bit + digit)));
     }
 
-    DebugPrintf("seenLevel before: %u, adjusted: %u", seenLevel, seenLevel >> bit);
-
-    if ((seenLevel >> bit) < SEEN_LEVEL_SIZE - 1)
-    {
-        DebugPrintf("incrementing seen level: %u", MathUtil_AddCarry(seenLevel >> bit, 1));
-        seenLevel = (MathUtil_AddCarry(seenLevel >> bit, 1)) << bit;
-
-        // clear the bits with the masks then insert seenLevel with |
-    }
-
-
-    DebugPrintf("seenLevel after: %u, adjusted: %u", seenLevel, seenLevel >> bit);
-
-    DebugPrintf("first bit: %u", (gSaveBlock3Ptr->speciesSeenLevels[index] & firstDigitMask) != 0);
-    DebugPrintf("second bit: %u", (gSaveBlock3Ptr->speciesSeenLevels[index] & secondDigitMask) != 0);
-    DebugPrintf("containing byte %u: %X", index, gSaveBlock3Ptr->speciesSeenLevels[index]);
-
-    /*
-    //DebugPrintf("seenLevel: %u", seenLevel);
+    seenLevelAdjusted = seenLevel >> bit;
 
     switch (caseId)
     {
@@ -6435,52 +6407,45 @@ u32 GetSetSeenLevel(u32 species, enum HandleSeenLevel caseId)
     case GET_SEEN_LEVEL:
         break;
     case ADD_SEEN_LEVEL:
-        if (seenLevel < (SEEN_LEVEL_SIZE - 1))
+        if ((seenLevelAdjusted) < SEEN_LEVEL_SIZE - 1)
         {
-            u8 carry = (gSaveBlock3Ptr->speciesSeenLevels[index] & firstDigitMask) & (gSaveBlock3Ptr->speciesSeenLevels[index] & secondDigitMask);
-            u8 result = (gSaveBlock3Ptr->speciesSeenLevels[index] & firstDigitMask) ^ (gSaveBlock3Ptr->speciesSeenLevels[index] & secondDigitMask);
+            seenLevel = (MathUtil_AddCarry(seenLevelAdjusted, 1)) << bit;
+            seenLevelAdjusted = seenLevel >> bit;
 
-            //DebugPrintf("result before: %u", result);
-            //DebugPrintf("carry before: %u", carry);
-
-            while (carry != 0)
-            {
-                u8 shiftedCarry = carry << 1;
-                carry = result & shiftedCarry;
-                result ^= shiftedCarry;
-            }
-
-            //DebugPrintf("result: %u", result);
-            gSaveBlock3Ptr->speciesSeenLevels[index] ^= result;
-            seenLevel = result;
+            // clear the bits with the masks, then set the new ones
+            gSaveBlock3Ptr->speciesSeenLevels[index] &= ~digitMask;
+            gSaveBlock3Ptr->speciesSeenLevels[index] |= seenLevel;
         }
         break;
     case RESET_SEEN_LEVEL:
-        gSaveBlock3Ptr->speciesSeenLevels[index] &= 0 << firstDigitMask;
-        gSaveBlock3Ptr->speciesSeenLevels[index] &= 0 << secondDigitMask;
+        gSaveBlock3Ptr->speciesSeenLevels[index] &= ~digitMask;
         break;
-    }*/
-    return seenLevel;
+    }
+
+    return seenLevelAdjusted;
 }
 
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    u32 species = NationalPokedexNumToSpecies(nationalNum);
+    enum HoennDexOrder hoennNum = NationalToHoennOrder(nationalNum);
+
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
     {
         GetSetPokedexFlag(nationalNum, caseId);
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
+        if (species == SPECIES_UNOWN)
             gSaveBlock2Ptr->pokedex.unownPersonality = personality;
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
+        if (species == SPECIES_SPINDA)
             gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
     }
     else if (!GetSetPokedexFlag(nationalNum, FLAG_GET_CAUGHT) && caseId == FLAG_SET_SEEN)
     {
         if (GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
-            GetSetSeenLevel(NationalPokedexNumToSpecies(nationalNum), ADD_SEEN_LEVEL);
+            GetSetSeenLevel(hoennNum, ADD_SEEN_LEVEL);
 
-        //if (GetSetSeenLevel(NationalPokedexNumToSpecies(nationalNum), GET_SEEN_LEVEL) == 3)
-            //GetSetPokedexFlag(nationalNum, FLAG_SET_CAUGHT);
+        if (GetSetSeenLevel(hoennNum, GET_SEEN_LEVEL) == 3)
+            GetSetPokedexFlag(nationalNum, FLAG_SET_CAUGHT);
     }
 }
 
