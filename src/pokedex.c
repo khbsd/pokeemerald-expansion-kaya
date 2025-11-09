@@ -868,7 +868,7 @@ static const u8 sText_No000[] = _("{NO}000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
-ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
+
 
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
 
@@ -1519,8 +1519,6 @@ static const struct WindowTemplate sSearchMenu_WindowTemplate[] =
 
 void ResetPokedex(void)
 {
-    u16 i;
-
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
     gUnusedPokedexU8 = 0;
@@ -1532,11 +1530,15 @@ void ResetPokedex(void)
     gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
     gSaveBlock2Ptr->pokedex.unknown3 = 0;
     DisableNationalPokedex();
-    for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
-    {
-        gSaveBlock1Ptr->dexCaught[i] = 0;
-        gSaveBlock1Ptr->dexSeen[i] = 0;
-    }
+    ResetSpeciesSeenLevels();
+
+    memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
+    memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+}
+
+void ResetSpeciesSeenLevels(void)
+{
+    memset(&gSaveBlock3Ptr->speciesSeenLevels, 0, sizeof(gSaveBlock3Ptr->speciesSeenLevels));
 }
 
 void ResetPokedexScrollPositions(void)
@@ -4237,9 +4239,21 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(category, 0x64, 0x29);
     PrintMonMeasurements(species,owned);
     if (owned)
+    {
         description = GetSpeciesPokedexDescription(species);
+    }
     else
-        description = sExpandedPlaceholder_PokedexDescription;
+    {
+        u32 seenLevel = GetSetSeenLevel(NationalToHoennOrder(num), GET_SEEN_LEVEL) + 1;
+        u32 seenLevelNeeded = SEEN_LEVEL_SIZE - seenLevel;
+
+        ConvertIntToDecimalStringN(gStringVar1, seenLevelNeeded, STR_CONV_MODE_LEFT_ALIGN, 1);
+
+        if (seenLevelNeeded > 1)
+            StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemaining);
+        else
+            StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemainingOneLeft);
+    }
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, DISPLAY_WIDTH), 95);
 }
 

@@ -29,6 +29,7 @@
 #include "main.h"
 #include "match_call.h"
 #include "move_relearner.h"
+#include "math_util.h"
 #include "overworld.h"
 #include "m4a.h"
 #include "party_menu.h"
@@ -7457,16 +7458,66 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
+u32 GetSetSeenLevel(enum HoennDexOrder hoennNum, enum HandleSeenLevel caseId)
+{
+    u32 index = hoennNum / SEEN_CHUNKS_PER_BYTE;
+    u32 bit = (hoennNum % SEEN_CHUNKS_PER_BYTE) * SEEN_LEVEL_BITS;
+    u32 digitMask = 0;
+    u32 seenLevelAdjusted, seenLevel = 0;
+
+    for (u32 digit = 0; (digit < SEEN_LEVEL_BITS) && (caseId != RESET_SEEN_LEVEL); digit++)
+    {
+        digitMask |= 1 << (bit + digit);
+        seenLevel |= (gSaveBlock3Ptr->speciesSeenLevels[index] & (1 << (bit + digit)));
+    }
+
+    seenLevelAdjusted = seenLevel >> bit;
+
+    switch (caseId)
+    {
+    default:
+    case GET_SEEN_LEVEL:
+        break;
+    case ADD_SEEN_LEVEL:
+        if ((seenLevelAdjusted) < SEEN_LEVEL_SIZE - 1)
+        {
+            seenLevel = (MathUtil_AddCarry(seenLevelAdjusted, 1)) << bit;
+            seenLevelAdjusted = seenLevel >> bit;
+
+            // clear the bits with the masks, then set the new ones
+            gSaveBlock3Ptr->speciesSeenLevels[index] &= ~digitMask;
+            gSaveBlock3Ptr->speciesSeenLevels[index] |= seenLevel;
+        }
+        break;
+    case RESET_SEEN_LEVEL:
+        gSaveBlock3Ptr->speciesSeenLevels[index] &= ~digitMask;
+        break;
+    }
+
+    return seenLevelAdjusted;
+}
+
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    u32 species = NationalPokedexNumToSpecies(nationalNum);
+    enum HoennDexOrder hoennNum = NationalToHoennOrder(nationalNum);
+
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
     {
         GetSetPokedexFlag(nationalNum, caseId);
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
+        if (species == SPECIES_UNOWN)
             gSaveBlock2Ptr->pokedex.unownPersonality = personality;
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
+        if (species == SPECIES_SPINDA)
             gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
+    }
+    else if (!GetSetPokedexFlag(nationalNum, FLAG_GET_CAUGHT) && caseId == FLAG_SET_SEEN)
+    {
+        if (GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
+            GetSetSeenLevel(hoennNum, ADD_SEEN_LEVEL);
+
+        if (GetSetSeenLevel(hoennNum, GET_SEEN_LEVEL) == (SEEN_LEVEL_SIZE - 1))
+            GetSetPokedexFlag(nationalNum, FLAG_SET_CAUGHT);
     }
 }
 

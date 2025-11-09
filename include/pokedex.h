@@ -10,6 +10,7 @@ extern u8 gUnusedPokedexU8;
 extern void (*gPokedexVBlankCB)(void);
 
 void ResetPokedex(void);
+void ResetSpeciesSeenLevels(void);
 u16 GetNationalPokedexCount(u8 caseID);
 u16 GetHoennPokedexCount(u8 caseID);
 u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality);

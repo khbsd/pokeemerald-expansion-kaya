@@ -93,3 +93,18 @@ u32 MathUtil_Exponent(u32 x, u32 y)
 
     return result;
 }
+
+u32 MathUtil_AddCarry(u32 x, u32 y)
+{
+    u32 carry = x & y;
+    u32 result = x ^ y;
+
+    while(carry != 0)
+    {
+        u32 shiftedCarry = carry << 1;
+        carry = result & shiftedCarry;
+        result ^= shiftedCarry;
+    }
+
+    return result;
+}

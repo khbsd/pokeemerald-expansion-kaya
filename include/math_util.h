@@ -11,5 +11,6 @@ s16 MathUtil_Inv16(s16 y);
 s16 MathUtil_Inv16Shift(u8 s, s16 y);
 s32 MathUtil_Inv32(s32 y);
 u32 MathUtil_Exponent(u32 x, u32 y);
+u32 MathUtil_AddCarry(u32 x, u32 y);
 
 #endif // GUARD_MATH_UTIL_H

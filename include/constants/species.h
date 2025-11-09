@@ -1683,6 +1683,8 @@
 
 #define NUM_SPECIES SPECIES_EGG
 
+#define NUM_SPECIES_EXPANDED                            1600
+
 #define SPECIES_SHINY_TAG 5000
 
 #endif  // GUARD_CONSTANTS_SPECIES_H

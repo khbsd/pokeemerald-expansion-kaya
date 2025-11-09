@@ -1983,4 +1983,11 @@ enum
     FLAG_SET_CAUGHT
 };
 
+enum HandleSeenLevel
+{
+    GET_SEEN_LEVEL,
+    ADD_SEEN_LEVEL,
+    RESET_SEEN_LEVEL,
+};
+
 #endif // GUARD_CONSTANTS_POKEDEX_H
