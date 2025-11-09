@@ -4253,7 +4253,10 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
             StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemaining);
         else
             StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemainingOneLeft);
+
+        description = gStringVar3;
     }
+
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, DISPLAY_WIDTH), 95);
 }
 

@@ -473,10 +473,10 @@ enum TimeOfDay TryUpdateTimeOfDay(enum TimeOfDay timeOfDay, enum IncrDecrUpdateV
     switch (delta)
     {
     case TRY_DECREMENT:
-        timeOfDay = TIME_FIRST ? TIME_LAST : timeOfDay - 1;
+        timeOfDay = timeOfDay == TIME_FIRST ? TIME_LAST : timeOfDay - 1;
         break;
     case TRY_INCREMENT:
-        timeOfDay = TIME_LAST ? TIME_FIRST : timeOfDay + 1;
+        timeOfDay = timeOfDay == TIME_LAST ? TIME_FIRST : timeOfDay + 1;
         break;
     default:
         timeOfDay = GetTimeOfDay();

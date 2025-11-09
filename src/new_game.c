@@ -1,6 +1,7 @@
 #include "global.h"
 #include "new_game.h"
 #include "derby.h"
+#include "field_tasks.h"
 #include "random.h"
 #include "pokemon.h"
 #include "roamer.h"

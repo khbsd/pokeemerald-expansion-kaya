@@ -28,6 +28,18 @@
 
     #define NIGHT_HOUR_BEGIN   0
     #define NIGHT_HOUR_END     12
+#elif OW_TIMES_OF_DAY == GEN_3_REDUX
+    #define MORNING_HOUR_BEGIN 5
+    #define MORNING_HOUR_END   10
+
+    #define DAY_HOUR_BEGIN     9
+    #define DAY_HOUR_END       17
+
+    #define EVENING_HOUR_BEGIN 17
+    #define EVENING_HOUR_END   22
+
+    #define NIGHT_HOUR_BEGIN   22
+    #define NIGHT_HOUR_END     5
 //Evening doesn't exist in Gen 4
 #elif OW_TIMES_OF_DAY == GEN_4
     #define MORNING_HOUR_BEGIN 4
