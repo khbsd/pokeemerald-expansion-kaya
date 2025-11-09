@@ -165,7 +165,8 @@ void NewGameInitData(void)
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     gSaveBlock2Ptr->playerFaintCounter = 0;
-    gSaveBlock2Ptr->playerIsKaya = 0;
+    UnsetPlayerAsKaya();
+    FlagClear(FLAG_IS_PENNY);
     gSaveBlock2Ptr->playerHouse = HOUSE_LEFT;
     gSaveBlock1Ptr->pokevial = pokevial;
     ZeroPlayerPartyMons();
