@@ -6388,9 +6388,9 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 
 u32 GetSetSeenLevel(enum HoennDexOrder hoennNum, enum HandleSeenLevel caseId)
 {
-    u32 index = hoennNum / SEEN_LEVEL_SIZE;
-    u32 bit = (hoennNum % SEEN_LEVEL_SIZE) * SEEN_LEVEL_BITS;
-    u8 digitMask = 0;
+    u32 index = hoennNum / SEEN_CHUNKS_PER_BYTE;
+    u32 bit = (hoennNum % SEEN_CHUNKS_PER_BYTE) * SEEN_LEVEL_BITS;
+    u32 digitMask = 0;
     u32 seenLevelAdjusted, seenLevel = 0;
 
     for (u32 digit = 0; (digit < SEEN_LEVEL_BITS) && (caseId != RESET_SEEN_LEVEL); digit++)
@@ -6444,7 +6444,7 @@ void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 pers
         if (GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
             GetSetSeenLevel(hoennNum, ADD_SEEN_LEVEL);
 
-        if (GetSetSeenLevel(hoennNum, GET_SEEN_LEVEL) == 3)
+        if (GetSetSeenLevel(hoennNum, GET_SEEN_LEVEL) == (SEEN_LEVEL_SIZE - 1))
             GetSetPokedexFlag(nationalNum, FLAG_SET_CAUGHT);
     }
 }

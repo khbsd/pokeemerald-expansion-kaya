@@ -1305,3 +1305,5 @@ const u8 gText_Rename[] = _("RENAME");
 const u8 gText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
 const u8 gText_CannotSendMonToBoxActive[] = _("Cannot send an active battler\nto the box.{PAUSE_UNTIL_PRESS}");
 const u8 gText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't,\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PokedexEncountersRemaining[] = _("Still learning about this POKéMON.\n{STR_VAR_1} encounters left until data\ncollection complete.");
+const u8 gText_PokedexEncountersRemainingOneLeft[] = _("Still learning about this POKéMON.\n{STR_VAR_1} encounter left, you're so\nclose!");

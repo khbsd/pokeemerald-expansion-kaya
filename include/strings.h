@@ -835,6 +835,8 @@ extern const u8 gText_DexSortSmallestDescription[];
 extern const u8 gText_DexEmptyString[];
 extern const u8 gText_DexSearchDontSpecify[];
 extern const u8 gText_DexSearchTypeNone[];
+extern const u8 gText_PokedexEncountersRemaining[];
+extern const u8 gText_PokedexEncountersRemainingOneLeft[];
 
 extern const u8 gText_LilycoveCity[];
 extern const u8 gText_RedShard[];

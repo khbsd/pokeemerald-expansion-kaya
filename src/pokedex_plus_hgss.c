@@ -128,7 +128,6 @@ extern const u16 gPokedexOrder_Weight[];
 static const u8 sText_No0000[] = _("0000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
-ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
 
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
@@ -4437,9 +4436,24 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(category, 123, 31);
     PrintMonMeasurements(species,owned);
     if (owned)
+    {
         description = GetSpeciesPokedexDescription(species);
+    }
     else
-        description = sExpandedPlaceholder_PokedexDescription;
+    {
+        u32 seenLevel = GetSetSeenLevel(NationalToHoennOrder(num), GET_SEEN_LEVEL) + 1;
+        u32 seenLevelNeeded = SEEN_LEVEL_SIZE - seenLevel;
+
+        ConvertIntToDecimalStringN(gStringVar1, seenLevelNeeded, STR_CONV_MODE_LEFT_ALIGN, 1);
+
+        if (seenLevelNeeded > 1)
+            StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemaining);
+        else
+            StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemainingOneLeft);
+        
+        description = gStringVar3;
+    }
+
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 93);
 
     //Type Icon(s)

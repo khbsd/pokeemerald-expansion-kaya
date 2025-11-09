@@ -238,9 +238,15 @@ struct NPCFollower
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
 #include "constants/pokedex.h"
-#define SEEN_LEVEL_BITS   2
-#define SEEN_LEVEL_SIZE   ((8 / SEEN_LEVEL_BITS) + ((8 % SEEN_LEVEL_BITS) ? 1 : 0))
-#define SPECIES_SEEN_DATA ((HOENN_DEX_COUNT / SEEN_LEVEL_SIZE) + ((HOENN_DEX_COUNT % SEEN_LEVEL_SIZE) ? 1 : 0))
+#define SEEN_LEVEL_BITS      2
+#define SEEN_LEVEL_SIZE      (1 << SEEN_LEVEL_BITS) // used elsewhere
+#define SEEN_CHUNKS_PER_BYTE ((8 / SEEN_LEVEL_BITS) + ((8 % SEEN_LEVEL_BITS) ? 1 : 0))
+#define SEEN_LEVEL_CHUNKS    (HOENN_DEX_COUNT / SEEN_CHUNKS_PER_BYTE)
+#define SEEN_LEVEL_LEFTOVER  ((HOENN_DEX_COUNT % SEEN_CHUNKS_PER_BYTE) ? 1 : 0)
+
+STATIC_ASSERT((8 % SEEN_LEVEL_BITS) == 0, NoMultiByteDrifting)
+
+#define SPECIES_SEEN_DATA (SEEN_LEVEL_CHUNKS + SEEN_LEVEL_LEFTOVER)
 
 struct SaveBlock3
 {
