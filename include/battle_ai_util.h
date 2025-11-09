@@ -123,7 +123,7 @@ enum WeatherState IsWeatherActive(u32 flags);
 bool32 CanAIFaintTarget(u32 battlerAtk, u32 battlerDef, u32 numHits);
 bool32 CanIndexMoveFaintTarget(u32 battlerAtk, u32 battlerDef, u32 index, enum DamageCalcContext calcContext);
 bool32 HasDamagingMove(u32 battler);
-bool32 HasDamagingMoveOfType(u32 battler, u32 type);
+bool32 HasDamagingMoveOfType(u32 battler, enum Type type);
 u32 GetBattlerSecondaryDamage(u32 battlerId);
 bool32 BattlerWillFaintFromWeather(u32 battler, enum Ability ability);
 bool32 BattlerWillFaintFromSecondaryDamage(u32 battler, enum Ability ability);
@@ -163,6 +163,7 @@ bool32 IsAffectedByPowder(u32 battler, enum Ability ability, enum HoldEffect hol
 bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, enum DamageCategory category);
 enum MoveComparisonResult AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
 struct SimulatedDamage AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, uq4_12_t *typeEffectiveness, enum AIConsiderGimmick considerGimmickAtk, enum AIConsiderGimmick considerGimmickDef);
+bool32 IsAdditionalEffectBlocked(u32 battlerAtk, u32 abilityAtk, u32 battlerDef, u32 abilityDef);
 struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, uq4_12_t *typeEffectiveness, enum AIConsiderGimmick considerGimmickAtk, enum AIConsiderGimmick considerGimmickDef, u32 weather);
 bool32 AI_IsDamagedByRecoil(u32 battler);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
@@ -177,7 +178,7 @@ bool32 HasMove(u32 battlerId, u32 move);
 u32 GetIndexInMoveArray(u32 battler, u32 move);
 bool32 HasOnlyMovesWithCategory(u32 battlerId, enum DamageCategory category, bool32 onlyOffensive);
 bool32 HasMoveWithCategory(u32 battler, enum DamageCategory category);
-bool32 HasMoveWithType(u32 battler, u32 type);
+bool32 HasMoveWithType(u32 battler, enum Type type);
 bool32 HasMoveWithEffect(u32 battler, enum BattleMoveEffects moveEffect);
 bool32 HasMoveWithAIEffect(u32 battler, u32 aiEffect);
 bool32 HasBattlerSideMoveWithEffect(u32 battler, u32 effect);
@@ -248,8 +249,8 @@ bool32 AI_IsBattlerAsleepOrComatose(u32 battlerId);
 bool32 IsMoxieTypeAbility(enum Ability ability);
 bool32 DoesAbilityRaiseStatsWhenLowered(enum Ability ability);
 bool32 ShouldTriggerAbility(u32 battlerAtk, u32 battlerDef, enum Ability ability);
-bool32 CanEffectChangeAbility(u32 battlerAtk, u32 battlerDef, u32 effect, struct AiLogicData *aiData);
-void AbilityChangeScore(u32 battlerAtk, u32 battlerDef, u32 effect, s32 *score, struct AiLogicData *aiData);
+bool32 CanEffectChangeAbility(u32 battlerAtk, u32 battlerDef, u32 move, struct AiLogicData *aiData);
+void AbilityChangeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score, struct AiLogicData *aiData);
 s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Ability ability, struct AiLogicData *aiData);
 
 // partner logic

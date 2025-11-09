@@ -1557,6 +1557,7 @@ static void TearDownBattle(void)
     // Zero out the parties, data in them could potentially carry over
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
 
     FreeMonSpritesGfx();
     FreeBattleSpritesData();
@@ -2162,7 +2163,7 @@ void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
     SetGimmick(sourceLine, DATA.currentPosition, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
 }
 
-void TeraType_(u32 sourceLine, u32 teraType)
+void TeraType_(u32 sourceLine, enum Type teraType)
 {
     INVALID_IF(!DATA.currentMon, "TeraType outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_TERA_TYPE, &teraType);
@@ -2179,6 +2180,13 @@ void Shiny_(u32 sourceLine, bool32 isShiny)
 {
     INVALID_IF(!DATA.currentMon, "Shiny outside of PLAYER/OPPONENT");
     DATA.isShiny = isShiny;
+}
+
+void Environment_(u32 sourceLine, u32 environment)
+{
+    INVALID_IF(DATA.forcedEnvironment, "Environment is already set");
+    INVALID_IF(environment >= BATTLE_ENVIRONMENT_COUNT, "Illegal environment: %d", environment);
+    DATA.forcedEnvironment = environment + 1;
 }
 
 static const char *const sBattlerIdentifiersSingles[] =
@@ -3102,6 +3110,11 @@ void ValidateFinally(u32 sourceLine)
 u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex)
 {
     return DATA.forcedAbilities[side][partyIndex];
+}
+
+u32 TestRunner_Battle_GetForcedEnvironment(void)
+{
+    return DATA.forcedEnvironment;
 }
 
 u32 TestRunner_Battle_GetChosenGimmick(u32 side, u32 partyIndex)
