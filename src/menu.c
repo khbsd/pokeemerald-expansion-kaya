@@ -1,5 +1,4 @@
 #include "global.h"
-#include "malloc.h"
 #include "bg.h"
 #include "blit.h"
 #include "decompress.h"
@@ -9,7 +8,9 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "main.h"
+#include "malloc.h"
 #include "map_name_popup.h"
+#include "match_call.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "palette.h"
@@ -23,8 +24,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
-#include "match_call.h"
-#include "config/overworld.h"
 #include "constants/songs.h"
 
 struct MenuInfoIcon

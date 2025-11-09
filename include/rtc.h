@@ -44,5 +44,6 @@ enum Month GetMonth(void);
 u8 GetDay(void);
 enum Weekday GetDayOfWeek(void);
 enum TimeOfDay TryUpdateTimeOfDay(enum TimeOfDay timeOfDay, enum IncrDecrUpdateValues delta);
+enum TimeOfDay GenConfigTimeOfDay(enum TimeOfDay timeOfDay);
 
 #endif // GUARD_RTC_UTIL_H
