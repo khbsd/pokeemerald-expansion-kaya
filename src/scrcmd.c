@@ -3335,3 +3335,16 @@ bool8 ScrCmd_getmoverelearnerstate(struct ScriptContext *ctx)
     *varPointer = gMoveRelearnerState;
     return FALSE;
 }
+
+bool8 ScrCmd_istmrelearneractive(struct ScriptContext *ctx)
+{
+    const u8 *ptr = (const u8 *)ScriptReadWord(ctx);
+
+    Script_RequestEffects(SCREFF_V1);
+
+    if ((FlagGet(P_FLAG_TM_MOVES) || P_ENABLE_MOVE_RELEARNERS)
+     && (P_ENABLE_ALL_TM_MOVES || IsBagPocketNonEmpty(POCKET_TM_HM)))
+        ScriptCall(ctx, ptr);
+
+    return FALSE;
+}

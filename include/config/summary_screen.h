@@ -15,6 +15,7 @@
 #define P_ENABLE_ALL_LEVEL_UP_MOVES      FALSE  // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
 #define P_ENABLE_ALL_TM_MOVES            TRUE   // If TRUE, it enables the Pokémon to learn all TMs its compatible with, regardless of it being in the bag.
 #define P_SORT_MOVES                     TRUE   // If TRUE, sorts all moves alphabetically in the relearner's list.
+#define P_PARTY_MOVE_RELEARNER           FALSE  // If TRUE, it enables the move relearner in the party menu.
 
 // Move Relearner flags
 #define P_FLAG_PARTY_MOVE_RELEARNER      0      // If this flag is set, it enables the move relearner in the party menu.
