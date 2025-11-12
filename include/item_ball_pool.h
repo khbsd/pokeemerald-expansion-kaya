@@ -108,6 +108,7 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_BOOST_MULCH,
         ITEM_AMAZE_MULCH,
     },
+
     [ITEM_POOL_COMMON_HELD_ITEMS] =
     {
         // Misc. Held Items
@@ -187,6 +188,7 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_FAIRY_FEATHER,
         ITEM_FAIRY_FEATHER,
     },
+
     [ITEM_POOL_RARE_HELD_ITEMS] =
     {
         // Species-specific Held Items
@@ -271,6 +273,7 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_SACHET,
         ITEM_OVAL_STONE,
     },
+
     [ITEM_POOL_ROCKS] =
     {
         // Weather Rocks
@@ -355,6 +358,7 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_DUSK_STONE,
         ITEM_DAWN_STONE,
     },
+
     [ITEM_POOL_TREASURES] =
     {
         // Treasures
@@ -436,6 +440,7 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_CATCHING_CHARM,
         ITEM_EXP_CHARM,
     },
+
     [ITEM_POOL_POKEBALLS] =
     {
         ITEM_POKE_BALL,
@@ -515,6 +520,5 @@ static const u16 sItemPools[][ITEM_POOL_SIZE] =
         ITEM_CHERISH_BALL,
     },
 };
-
 
 #endif // GUARD_ITEM_BALL_POOL_H
