@@ -5,6 +5,7 @@
 #include "random.h"
 
 #define MAX_PROCESSES 32 // See also tools/mgba-rom-test-hydra/main.c
+#define RIGGED_RNG_COUNT 8
 
 enum TestResult
 {
@@ -27,6 +28,9 @@ struct TestRunner
     void (*tearDown)(void *);
     bool32 (*checkProgress)(void *);
     bool32 (*handleExitWithResult)(void *, enum TestResult);
+    u32 (*randomUniform)(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller);
+    u32 (*randomWeightedArray)(enum RandomTag tag, u32 sum, u32 n, const u8 *weights, void *caller);
+    const void* (*randomElementArray)(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller);
 };
 
 struct Test
@@ -77,11 +81,18 @@ extern const char gTestRunnerArgv[256];
 
 extern const struct TestRunner gAssumptionsRunner;
 
+struct RiggedRNG
+{
+    u16 tag;
+    u16 value;
+};
+
 struct FunctionTestRunnerState
 {
     u16 parameters;
     u16 runParameter;
     u16 checkProgressParameter;
+    struct RiggedRNG rngList[RIGGED_RNG_COUNT];
 };
 
 extern const struct TestRunner gFunctionTestRunner;
@@ -89,12 +100,6 @@ extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
 extern struct TestRunnerState gTestRunnerState;
 extern struct PersistentTestRunnerState gPersistentTestRunnerState;
-
-struct RiggedRNG
-{
-    u16 tag;
-    u16 value;
-};
 
 extern EWRAM_DATA struct RiggedRNG gRiggedRngList[8];
 
