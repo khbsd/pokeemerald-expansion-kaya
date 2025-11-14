@@ -14388,13 +14388,9 @@ static void Cmd_jumpifcaptivateaffected(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
-    else if (AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
-    {
-        gBattlescriptCurrInstr = cmd->jumpInstr;
-    }
     else
     {
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     }
 }
 

@@ -1359,7 +1359,7 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         return PARENTS_INCOMPATIBLE;
     // two Ditto can't breed
     if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
-        return PARENTS_INCOMPATIBLE;
+        return PARENTS_LOW_COMPATIBILITY;
 
     // one parent is Ditto
     if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
@@ -1408,13 +1408,19 @@ void SetDaycareCompatibilityString(void)
 
     relationshipScore = GetDaycareCompatibilityScoreFromSave();
     whichString = 0;
-    if (relationshipScore == PARENTS_INCOMPATIBLE)
+    /*
+    gDaycareText_GetAlongVeryWell,
+    gDaycareText_GetAlong,
+    gDaycareText_DontLikeOther,
+    gDaycareText_PlayOther
+    */
+    if (relationshipScore == PARENTS_INCOMPATIBLE)           // 0
         whichString = 3;
-    if (relationshipScore == PARENTS_LOW_COMPATIBILITY)
+    else if (relationshipScore > PARENTS_INCOMPATIBLE && relationshipScore <= PARENTS_LOW_COMPATIBILITY) // 20
         whichString = 2;
-    if (relationshipScore == PARENTS_MED_COMPATIBILITY)
+    else if (relationshipScore > PARENTS_LOW_COMPATIBILITY && relationshipScore <= PARENTS_MED_COMPATIBILITY) // 50
         whichString = 1;
-    if (relationshipScore == PARENTS_MAX_COMPATIBILITY)
+    else if (relationshipScore > PARENTS_MED_COMPATIBILITY) // 70
         whichString = 0;
 
     StringCopy(gStringVar4, sCompatibilityMessages[whichString]);
