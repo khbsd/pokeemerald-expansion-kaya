@@ -578,3 +578,5 @@ gSpecials::
 	def_special CheckIfPlayerIsKaya
 	def_special SetHiddenNature
 	def_special SetAbility
+	def_special ObjectEventInteractionGetApricornTreeData
+	def_special ObjectEventInteractionPickApricornTree

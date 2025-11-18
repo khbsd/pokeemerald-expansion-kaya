@@ -248,21 +248,22 @@
 #define OBJ_EVENT_GFX_LIGHT_SPRITE               241
 #define OBJ_EVENT_GFX_REGIELEKI                  242
 #define OBJ_EVENT_GFX_REGIDRAGO                  243
-#define OBJ_EVENT_GFX_KAYA_NORMAL                 244
-#define OBJ_EVENT_GFX_KAYA_MACH_BIKE              245
-#define OBJ_EVENT_GFX_KAYA_ACRO_BIKE              246
-#define OBJ_EVENT_GFX_KAYA_SURFING                247
-#define OBJ_EVENT_GFX_KAYA_FIELD_MOVE             248
-#define OBJ_EVENT_GFX_KAYA_UNDERWATER             249
-#define OBJ_EVENT_GFX_KAYA_FISHING                250
-#define OBJ_EVENT_GFX_KAYA_WATERING               251
-#define OBJ_EVENT_GFX_KAYA_DECORATING             252
-#define OBJ_EVENT_GFX_LINK_KAYA                   253
+#define OBJ_EVENT_GFX_KAYA_NORMAL                244
+#define OBJ_EVENT_GFX_KAYA_MACH_BIKE             245
+#define OBJ_EVENT_GFX_KAYA_ACRO_BIKE             246
+#define OBJ_EVENT_GFX_KAYA_SURFING               247
+#define OBJ_EVENT_GFX_KAYA_FIELD_MOVE            248
+#define OBJ_EVENT_GFX_KAYA_UNDERWATER            249
+#define OBJ_EVENT_GFX_KAYA_FISHING               250
+#define OBJ_EVENT_GFX_KAYA_WATERING              251
+#define OBJ_EVENT_GFX_KAYA_DECORATING            252
+#define OBJ_EVENT_GFX_LINK_KAYA                  253
+#define OBJ_EVENT_GFX_APRICORN_TREE              254
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        (OBJ_EVENT_GFX_LINK_KAYA  + 1)
+#define NUM_OBJ_EVENT_GFX                        (OBJ_EVENT_GFX_APRICORN_TREE + 1)
 
 
 // These are dynamic object gfx ids.
