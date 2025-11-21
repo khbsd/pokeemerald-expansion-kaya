@@ -18,7 +18,7 @@ jobs:
       UNUSED_ERROR: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: Install binutils
         run: |
@@ -30,6 +30,24 @@ jobs:
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
+
+      - name: upload
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          cd ../
+          git clone https://github.com/khbsd/tah-patchsite-kaya
+          cd tah-patchsite-kaya
+          echo howdy lmao
+          echo installing node deps
+          npm install
+          node -v
+          npm -v
+          node auto-patcher-node/upload.js ../pokeemerald-kaya.gba
 
       - name: LTO
         run: |
