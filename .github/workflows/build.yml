@@ -59,7 +59,7 @@ jobs:
           npm install
           node index.js create -f bps ../pokeemerald/pokeemerald.gba ../pokeemerald_kaya.gba
           node auto-patcher-node/upload.js ../pokeemerald_kaya.gba /romhacking-personal
-          node auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking
+          node auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking-public
 
       #- name: LTO
       #  run: |
