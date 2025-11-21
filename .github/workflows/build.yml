@@ -45,7 +45,7 @@ jobs:
           npm install
           node -v
           npm -v
-          node auto-patcher-node/upload.js ../pokeemerald-kaya.gba
+          node auto-patcher-node/upload.js /home/runner/work/pokeemerald-expansion-kaya/pokeemerald-kaya.gba
 
       - name: LTO
         run: |
