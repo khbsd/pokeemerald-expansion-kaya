@@ -27,6 +27,21 @@ jobs:
           sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
         # build-essential and git are already installed
 
+      - name: pokeemerald
+        env:
+          COMPARE: 1
+        run: |
+          git clone https://github.com/pret/pokeemerald
+          git clone https://github.com/pret/agbcc
+          cd agbcc
+          ./build.sh
+          ./install.sh ../pokeemerald
+          cd ..
+
+          cd pokeemerald
+          make -j$(nproc) compare
+          cd ..
+
       - name: ROM
         env:
           COMPARE: 0
@@ -42,7 +57,9 @@ jobs:
           echo howdy lmao
           echo installing node deps
           npm install
-          node auto-patcher-node/upload.js ../pokeemerald_kaya.gba
+          node index.js create -f bps ../pokeemerald/pokeemerald.gba ../pokeemerald-kaya/pokeemerald_kaya.gba
+          node auto-patcher-node/upload.js ../pokeemerald_kaya.gba /romhacking-personal
+          node auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking
 
       #- name: LTO
       #  run: |
