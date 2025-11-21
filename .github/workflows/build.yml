@@ -37,21 +37,18 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          cd ../
           git clone https://github.com/khbsd/tah-patchsite-kaya
           cd tah-patchsite-kaya
           echo howdy lmao
           echo installing node deps
           npm install
-          node -v
-          npm -v
-          node auto-patcher-node/upload.js /home/runner/work/pokeemerald-expansion-kaya/pokeemerald_kaya.gba
+          node auto-patcher-node/upload.js ../pokeemerald_kaya.gba
 
-      - name: LTO
-        run: |
-          make tidy
-          make -j${nproc} LTO=1
-        # make tidy to purge previous build
+      #- name: LTO
+      #  run: |
+      #    make tidy
+      #    make -j${nproc} LTO=1
+      #  # make tidy to purge previous build
 
   allcontributors:
     if: github.actor == 'allcontributors[bot]'
