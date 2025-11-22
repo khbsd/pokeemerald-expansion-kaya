@@ -57,7 +57,8 @@ jobs:
           cd tah-patchsite-kaya
           echo howdy lmao
           echo installing node deps
-          npm install
+          npm install --quiet
+          echo making patch
           node index.js create -f bps ../pokeemerald/pokeemerald.gba ../pokeemerald_kaya.gba
           node auto-patcher-node/upload.js ../pokeemerald_kaya.gba /romhacking-personal
           node auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking-public
