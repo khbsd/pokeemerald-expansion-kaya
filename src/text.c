@@ -9,6 +9,7 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokenav.h"
 #include "sound.h"
 #include "string_util.h"
 #include "text.h"
@@ -1311,8 +1312,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_SPEAKER:
                 {
                     enum SpeakerNames name = *textPrinter->printerTemplate.currentChar++;
-                    TrySpawnAndShowNamebox(gSpeakerNamesTable[name], NAME_BOX_BASE_TILE_NUM);
-
+                    if (!IsActiveMenuLoopTaskActive())
+                        TrySpawnAndShowNamebox(gSpeakerNamesTable[name], NAME_BOX_BASE_TILE_NUM);
                     return RENDER_REPEAT;
                 }
             }

@@ -1,31 +1,28 @@
 #include "global.h"
-#include "main.h"
-#include "menu.h"
 #include "bg.h"
+#include "event_data.h"
+#include "field_message_box.h"
+#include "field_name_box.h"
+#include "graphics.h"
+#include "international_string_util.h"
+#include "main.h"
+#include "malloc.h"
+#include "match_call.h"
+#include "menu.h"
+#include "pokenav.h"
 #include "window.h"
 #include "text.h"
-#include "string_util.h"
-#include "international_string_util.h"
 #include "script_menu.h"
-#include "field_message_box.h"
-#include "graphics.h"
 #include "script.h"
-#include "field_name_box.h"
-#include "event_data.h"
-#include "match_call.h"
-#include "malloc.h"
-#include "palette.h"
+#include "string_util.h"
 #include "constants/speaker_names.h"
 #include "data/speaker_names.h"
 
 static EWRAM_INIT u8 sNameboxWindowId = WINDOW_NONE;
 EWRAM_DATA const u8 *gSpeakerName = NULL;
 
-//static const u32 sNameBoxPokenavGfx[] = INCBIN_U32("graphics/pokenav/name_box.4bpp");
-//static const u16 sNameBoxPokenavPal[] = INCBIN_U16("graphics/pokenav/name_box.gbapal");
-
 static const u32 sNameBoxDefaultGfx[] = INCBIN_U32("graphics/text_window/name_box.4bpp");
-static const u16 sNameBoxDefaultPal[] = INCBIN_U16("graphics/text_window/name_box.gbapal");
+static const u32 sNameBoxPokenavGfx[] = INCBIN_U32("graphics/pokenav/name_box.4bpp");
 
 static void WindowFunc_DrawNamebox(u32, u32, u32, u32, u32, u32, u32);
 static void WindowFunc_ClearNamebox(u8, u8, u8, u8, u8, u8);
@@ -33,7 +30,7 @@ static void WindowFunc_ClearNamebox(u8, u8, u8, u8, u8, u8);
 void TrySpawnNamebox(u32 tileNum)
 {
     u8 *strbuf = AllocZeroed(32 * sizeof(u8));
-    if ((OW_FLAG_SUPPRESS_NAME_BOX != 0 && FlagGet(OW_FLAG_SUPPRESS_NAME_BOX)) || gSpeakerName == NULL || !strbuf)
+    if (((OW_FLAG_SUPPRESS_NAME_BOX != 0 && FlagGet(OW_FLAG_SUPPRESS_NAME_BOX)) || gSpeakerName == NULL || !strbuf) && !IsActiveMenuLoopTaskActive())
     {
         // Re-check again in case anything but !strbuf is TRUE.
         if (strbuf)
@@ -61,7 +58,7 @@ void TrySpawnNamebox(u32 tileNum)
         RedrawDialogueFrame();
     }
 
-    LoadPalette(sNameBoxDefaultPal, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM), sizeof(sNameBoxDefaultPal));
+    bool32 matchCall = IsMatchCallTaskActive();
 
     struct WindowTemplate template =
     {
@@ -70,7 +67,7 @@ void TrySpawnNamebox(u32 tileNum)
         .tilemapTop = 13,
         .width = winWidth,
         .height = OW_NAME_BOX_DEFAULT_HEIGHT,
-        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .paletteNum = matchCall ? 14 : DLG_WINDOW_PALETTE_NUM,
         .baseBlock = tileNum,
     };
 
@@ -80,6 +77,11 @@ void TrySpawnNamebox(u32 tileNum)
     u8 colors[3] = {TEXT_COLOR_TRANSPARENT, OW_NAME_BOX_FOREGROUND_COLOR, OW_NAME_BOX_SHADOW_COLOR};
     u8 bakColors[3];
     int strX = GetStringCenterAlignXOffset(fontId, strbuf, (winWidth * 8));
+    if (matchCall)
+    {
+        colors[1] = 1;
+        colors[2] = 0;
+    }
 
     SaveTextColors(&bakColors[0], &bakColors[1], &bakColors[2]);
     AddTextPrinterParameterized3(sNameboxWindowId, fontId, strX, 0, colors, 0, strbuf);
@@ -118,7 +120,10 @@ u32 GetNameboxWidth(void)
 
 static const u32 *GetNameboxGraphics(void)
 {
-    return sNameBoxDefaultGfx;
+    // if (IsMatchCallTaskActive())
+    //     return sNameBoxDefaultGfx;
+    // else
+        return sNameBoxDefaultGfx;
 }
 
 void FillNamebox(void)
@@ -190,7 +195,7 @@ void TrySpawnAndShowNamebox(const u8 *speaker, u32 tileNum)
 {
     gSpeakerName = speaker;
     TrySpawnNamebox(tileNum);
-    if (sNameboxWindowId != WINDOW_NONE)
+    if (sNameboxWindowId != WINDOW_NONE && !IsActiveMenuLoopTaskActive())
         DrawNamebox(sNameboxWindowId, tileNum - NAME_BOX_BASE_TILES_TOTAL, TRUE);
     else // either NULL or SP_NAME_NONE
         RedrawDialogueFrame();
