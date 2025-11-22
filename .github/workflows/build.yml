@@ -57,11 +57,11 @@ jobs:
           cd tah-patchsite-kaya
           echo howdy lmao
           echo installing node deps
-          npm install --quiet
+          npm install --silent
           echo making patch
           node index.js create -f bps ../pokeemerald/pokeemerald.gba ../pokeemerald_kaya.gba
-          node auto-patcher-node/upload.js ../pokeemerald_kaya.gba /romhacking-personal
-          node auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking-public
+          node --no-warnings auto-patcher-node/upload.js ../pokeemerald_kaya.gba /romhacking-personal
+          node --no-warnings auto-patcher-node/upload.js pokeemerald_kaya.bps /romhacking-public
 
       #- name: LTO
       #  run: |
