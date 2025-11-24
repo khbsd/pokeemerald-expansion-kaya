@@ -1,0 +1,105 @@
+name: weekly-patch-release
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  schedule:
+      # 02:38 every tuesday
+    - cron: '38 2 * * 2'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  make-roms:
+    uses: ./.github/workflows/make-roms.yml
+
+  make-release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: make-roms
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # your github username
+      BASE_AUTHOR: pret
+      HACK_AUTHOR: khbsd
+
+      # your gba filename
+      BASE_ROM: pokeemerald
+      HACK_ROM: pokeemerald_kaya
+
+      # what your repo is named
+      BASE_REPO: pokeemerald
+      HACK_REPO: pokeemerald-expansion-kaya
+
+      # the patch type you want to create
+      PATCH_TYPE: bps
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: get repo
+        uses: actions/checkout@v6
+
+      - name: Get node deps
+        uses: actions/setup-node@v6
+
+      - name: get short sha
+        id: vars
+        run: |
+          short_sha=$(git rev-parse --short ${{ github.sha }})
+          echo "SHORT_SHA=$short_sha" >> $GITHUB_ENV
+
+      - name: download ${{ env.BASE_ROM }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.BASE_ROM }}.gba
+          path: ${{ env.BASE_AUTHOR }}/
+
+      - name: download ${{ env.HACK_ROM }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.HACK_ROM }}.gba
+          path: ${{ env.HACK_AUTHOR }}/
+
+      - name: get patcher
+        run: |
+          git clone https://github.com/marcrobledo/RomPatcher.js
+          cd RomPatcher.js
+          npm install
+
+      - name: check
+        run: |
+          ls ${{ env.BASE_AUTHOR }}/
+          ls ${{ env.HACK_AUTHOR }}/
+
+      - name: make patch
+        run: |
+          cd RomPatcher.js
+          node index.js create -f ${{ env.PATCH_TYPE }} ../${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba ../${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
+
+        # delete the stored built roms since weve generated our patch
+        # the downloaded copies will be removed after the job is done
+      - name: cleanup
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: |
+            *.gba
+
+      - name: make tag
+        run: |
+          git tag ${{ env.SHORT_SHA }} ${{ github.sha }}
+          git push origin ${{ env.SHORT_SHA }}
+
+      - name: make release.txt
+        run: echo ${{ env.SHORT_SHA }} > Release.txt
+
+      - name: do release
+        run: |
+          ls
+          gh release create ${{ env.SHORT_SHA }} RomPatcher.js/${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}
