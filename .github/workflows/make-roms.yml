@@ -20,21 +20,21 @@ jobs:
       HACK_REPO: pokeemerald-expansion-kaya
 
     steps:
-      - name: Install binutils
+      - name: install binutils
         run: |
           sudo apt update
           sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
 
-      - name: Make agbcc
+      - name: make agbcc
         run: |
           git clone https://github.com/pret/agbcc
           cd agbcc
           ./build.sh
           cd ..
 
-      - name: Make ${{ env.BASE_ROM }}
+      - name: make ${{ env.BASE_ROM }}
         run: |
-          git clone https://github.com/${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }} ./${{ env.BASE_AUTHOR }}
+          git clone https://github.com/${{ env.BASE_AUTHOR }}/${{ env.BASE_REPO }} ./${{ env.BASE_AUTHOR }}
           cd agbcc
           ./install.sh ../${{ env.BASE_AUTHOR }}
           cd ..
@@ -43,7 +43,7 @@ jobs:
           make -j
           cd ..
 
-      - name: Make ${{ env.HACK_ROM }}
+      - name: make ${{ env.HACK_ROM }}
         run: |
           git clone https://github.com/${{ env.HACK_AUTHOR }}/${{ env.HACK_REPO }} ./${{ env.HACK_AUTHOR }}
           cd ./${{ env.HACK_AUTHOR }}

@@ -2,9 +2,6 @@ name: weekly-patch-release
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   schedule:
       # 02:38 every tuesday
     - cron: '38 2 * * 2'
@@ -46,7 +43,7 @@ jobs:
       - name: get repo
         uses: actions/checkout@v6
 
-      - name: Get node deps
+      - name: get node deps
         uses: actions/setup-node@v6
 
       - name: get short sha
@@ -73,11 +70,6 @@ jobs:
           cd RomPatcher.js
           npm install
 
-      - name: check
-        run: |
-          ls ${{ env.BASE_AUTHOR }}/
-          ls ${{ env.HACK_AUTHOR }}/
-
       - name: make patch
         run: |
           cd RomPatcher.js
@@ -96,10 +88,5 @@ jobs:
           git tag ${{ env.SHORT_SHA }} ${{ github.sha }}
           git push origin ${{ env.SHORT_SHA }}
 
-      - name: make release.txt
-        run: echo ${{ env.SHORT_SHA }} > Release.txt
-
       - name: do release
-        run: |
-          ls
-          gh release create ${{ env.SHORT_SHA }} RomPatcher.js/${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}
+        run: gh release create ${{ env.SHORT_SHA }} RomPatcher.js/${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}
