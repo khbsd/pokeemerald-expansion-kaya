@@ -777,7 +777,9 @@ void HandleAction_Run(void)
         }
         else
         {
-            if (!CanBattlerEscape(gBattlerAttacker))
+            if (GetBattlerHoldEffect(gBattlerAttacker) != HOLD_EFFECT_CAN_ALWAYS_RUN
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_RUN_AWAY
+             && !CanBattlerEscape(gBattlerAttacker))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ATTACKER_CANT_ESCAPE;
                 gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
@@ -1854,18 +1856,18 @@ bool32 HandleFaintedMonActions(void)
                  && !(gAbsentBattlerFlags & (1u << gBattleStruct->eventState.faintedActionBattler)))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
-                    gBattleStruct->eventState.faintedAction = 2;
+                    gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_SET_ABSENT_FLAGS;
                     return TRUE;
                 }
             } while (++gBattleStruct->eventState.faintedActionBattler != gBattlersCount);
-            gBattleStruct->eventState.faintedAction = 3;
+            gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_WAIT_STATE;
             break;
         case FAINTED_ACTIONS_SET_ABSENT_FLAGS:
             OpponentSwitchInResetSentPokesToOpponentValue(gBattlerFainted);
             if (++gBattleStruct->eventState.faintedActionBattler == gBattlersCount)
-                gBattleStruct->eventState.faintedAction = 3;
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_WAIT_STATE;
             else
-                gBattleStruct->eventState.faintedAction = 1;
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_GIVE_EXP;
             // Don't switch mons until all pokemon performed their actions or the battle's over.
             if (B_FAINT_SWITCH_IN >= GEN_4
                 && gBattleOutcome == 0
@@ -1873,7 +1875,7 @@ bool32 HandleFaintedMonActions(void)
                 && gCurrentTurnActionNumber != gBattlersCount)
             {
                 gAbsentBattlerFlags |= 1u << gBattlerFainted;
-                if (gBattleStruct->eventState.faintedAction != 1)
+                if (gBattleStruct->eventState.faintedAction != FAINTED_ACTIONS_GIVE_EXP)
                     return FALSE;
             }
             break;
@@ -1897,7 +1899,7 @@ bool32 HandleFaintedMonActions(void)
                  && !(gAbsentBattlerFlags & (1u << gBattleStruct->eventState.faintedActionBattler)))
                 {
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
-                    gBattleStruct->eventState.faintedAction = 5;
+                    gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_NEXT_BATTLER;
                     return TRUE;
                 }
             } while (++gBattleStruct->eventState.faintedActionBattler != gBattlersCount);
@@ -1907,7 +1909,7 @@ bool32 HandleFaintedMonActions(void)
             if (++gBattleStruct->eventState.faintedActionBattler == gBattlersCount)
                 gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_MAX_CASE;
             else
-                gBattleStruct->eventState.faintedAction = 4;
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_FAINTED_MON;
             break;
         case FAINTED_ACTIONS_MAX_CASE:
             break;
@@ -2027,7 +2029,7 @@ static enum MoveCanceler CancelerAsleepOrFrozen(struct BattleContext *ctx)
                     gProtectStructs[ctx->battlerAtk].nonVolatileStatusImmobility = TRUE;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-                    return MOVE_STEP_REMOVES_STATUS;
+                    return MOVE_STEP_FAILURE;
                 }
             }
             else
@@ -2268,18 +2270,20 @@ static enum MoveCanceler CancelerConfused(struct BattleContext *ctx)
                 gProtectStructs[ctx->battlerAtk].confusionSelfDmg = TRUE;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfused;
+                return MOVE_STEP_FAILURE;
             }
             else
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = FALSE;
                 BattleScriptCall(BattleScript_MoveUsedIsConfused);
+                return MOVE_STEP_BREAK;
             }
         }
         else // snapped out of confusion
         {
             BattleScriptCall(BattleScript_MoveUsedIsConfusedNoMore);
+            return MOVE_STEP_BREAK;
         }
-        return MOVE_STEP_BREAK;
     }
     return MOVE_STEP_SUCCESS;
 }
@@ -2692,6 +2696,16 @@ static enum MoveCanceler CancelerMoveFailure(struct BattleContext *ctx)
          || (IsBattleMoveStatus(GetChosenMoveFromPosition(ctx->battlerDef)) && !gProtectStructs[ctx->battlerDef].noValidMoves))
             battleScript = BattleScript_ButItFailed;
         break;
+    case EFFECT_UPPER_HAND:
+    {
+        u32 prio = GetChosenMovePriority(ctx->battlerDef, ctx->abilities[ctx->battlerDef]);
+        if (prio < 1 || prio > 3 // Fails if priority is less than 1 or greater than 3, if target already moved, or if using a status
+         || HasBattlerActedThisTurn(ctx->battlerDef)
+         || gChosenMoveByBattler[ctx->battlerDef] == MOVE_NONE
+         || IsBattleMoveStatus(gChosenMoveByBattler[ctx->battlerDef]))
+            battleScript = BattleScript_ButItFailed;
+        break;
+    }
     case EFFECT_SNORE:
         if (!(gBattleMons[ctx->battlerAtk].status1 & STATUS1_SLEEP)
          && ctx->abilities[ctx->battlerAtk] != ABILITY_COMATOSE)
@@ -2748,7 +2762,7 @@ static enum MoveCanceler CancelerPowderStatus(struct BattleContext *ctx)
          || HasTrainerUsedGimmick(ctx->battlerAtk, GIMMICK_Z_MOVE))
             gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-        return MOVE_STEP_BREAK;
+        return MOVE_STEP_FAILURE;
     }
     return MOVE_STEP_SUCCESS;
 }
@@ -5714,7 +5728,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
     case ABILITYEFFECT_NEUTRALIZINGGAS:
     case ABILITYEFFECT_NEUTRALIZINGGAS_FIRST_TURN:
         // Prints message only. separate from ABILITYEFFECT_ON_SWITCHIN bc activates before entry hazards
-        if (ability == ABILITY_NEUTRALIZING_GAS && !gDisableStructs[battler].neutralizingGas)
+        if (gBattleMons[battler].ability == ABILITY_NEUTRALIZING_GAS && !gDisableStructs[battler].neutralizingGas)
         {
             gDisableStructs[battler].neutralizingGas = TRUE;
             gBattlerAbility = battler;
@@ -5829,7 +5843,7 @@ bool32 IsNeutralizingGasOnField(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (IsBattlerAlive(i) && gBattleMons[i].ability == ABILITY_NEUTRALIZING_GAS && !gBattleMons[i].volatiles.gastroAcid)
+        if (gDisableStructs[i].neutralizingGas && !gBattleMons[i].volatiles.gastroAcid)
             return TRUE;
     }
 
@@ -5905,7 +5919,7 @@ enum Ability GetBattlerAbilityInternal(u32 battler, u32 ignoreMoldBreaker, u32 n
 
     if (!hasAbilityShield
      && IsNeutralizingGasOnField()
-     && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS)
+     && !gDisableStructs[battler].neutralizingGas)
         return ABILITY_NONE;
 
     if (CanBreakThroughAbility(gBattlerAttacker, battler, gBattleMons[gBattlerAttacker].ability, hasAbilityShield, ignoreMoldBreaker))
@@ -5985,8 +5999,6 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
 {
     if (gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE)
         return FALSE;
-    else if (GetBattlerHoldEffect(battler) == HOLD_EFFECT_SHED_SHELL)
-        return TRUE;
     else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return TRUE;
     else if (gBattleMons[battler].volatiles.escapePrevention)
