@@ -11177,6 +11177,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, enum Ability atkA
         if ((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && HasWeatherEffect())
             calc = (calc * 80) / 100; // 1.2 snow cloak loss
         break;
+    case ABILITY_SALTY_MUCUS:
+        calc = (calc * 90) / 100; // 1.1 salty mucus loss
+        break;
     case ABILITY_TANGLED_FEET:
         if (gBattleMons[battlerDef].volatiles.confusionTurns)
             calc = (calc * 50) / 100; // 1.5 tangled feet loss
