@@ -2202,8 +2202,10 @@ static u32 CountRegisteredItems(void)
     u32 i;
     u32 count = 0;
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->registeredItems); i++)
-        if (gSaveBlock1Ptr->registeredItems[i] != ITEM_NONE)
+        if (gSaveBlock1Ptr->registeredItems[i] != ITEM_NONE
+            || !CheckBagHasItem(gSaveBlock1Ptr->registeredItems[i], 1))
             count++;
+
     // Fallback to vanilla registeredItem
     if (count == 0 && gSaveBlock1Ptr->registeredItemCompat)
 {
