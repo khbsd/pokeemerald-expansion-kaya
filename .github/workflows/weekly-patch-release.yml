@@ -64,6 +64,14 @@ jobs:
           name: ${{ env.HACK_ROM }}.gba
           path: ${{ env.HACK_AUTHOR }}/
 
+        # delete the stored built roms since weve generated our patch
+        # the downloaded copies will be removed after the job is done
+      - name: cleanup
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: |
+            *.gba
+
       - name: get patcher
         run: |
           git clone https://github.com/marcrobledo/RomPatcher.js
@@ -74,14 +82,6 @@ jobs:
         run: |
           cd RomPatcher.js
           node index.js create -f ${{ env.PATCH_TYPE }} ../${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba ../${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
-
-        # delete the stored built roms since weve generated our patch
-        # the downloaded copies will be removed after the job is done
-      - name: cleanup
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: |
-            *.gba
 
       - name: make tag
         run: |
