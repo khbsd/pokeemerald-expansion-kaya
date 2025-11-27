@@ -1,20 +1,19 @@
 #include "global.h"
-#include "bg.h"
-#include "event_data.h"
-#include "field_message_box.h"
-#include "field_name_box.h"
-#include "graphics.h"
-#include "international_string_util.h"
 #include "main.h"
-#include "malloc.h"
-#include "match_call.h"
 #include "menu.h"
-#include "pokenav.h"
+#include "bg.h"
 #include "window.h"
 #include "text.h"
-#include "script_menu.h"
-#include "script.h"
 #include "string_util.h"
+#include "international_string_util.h"
+#include "script_menu.h"
+#include "field_message_box.h"
+#include "graphics.h"
+#include "script.h"
+#include "field_name_box.h"
+#include "event_data.h"
+#include "match_call.h"
+#include "malloc.h"
 #include "constants/speaker_names.h"
 #include "data/speaker_names.h"
 
@@ -30,7 +29,7 @@ static void WindowFunc_ClearNamebox(u8, u8, u8, u8, u8, u8);
 void TrySpawnNamebox(u32 tileNum)
 {
     u8 *strbuf = AllocZeroed(32 * sizeof(u8));
-    if (((OW_FLAG_SUPPRESS_NAME_BOX != 0 && FlagGet(OW_FLAG_SUPPRESS_NAME_BOX)) || gSpeakerName == NULL || !strbuf) && !IsActiveMenuLoopTaskActive())
+    if ((OW_FLAG_SUPPRESS_NAME_BOX != 0 && FlagGet(OW_FLAG_SUPPRESS_NAME_BOX)) || gSpeakerName == NULL || !strbuf)
     {
         // Re-check again in case anything but !strbuf is TRUE.
         if (strbuf)
@@ -120,9 +119,9 @@ u32 GetNameboxWidth(void)
 
 static const u32 *GetNameboxGraphics(void)
 {
-    // if (IsMatchCallTaskActive())
-    //     return sNameBoxDefaultGfx;
-    // else
+    if (IsMatchCallTaskActive())
+        return sNameBoxPokenavGfx;
+    else
         return sNameBoxDefaultGfx;
 }
 
