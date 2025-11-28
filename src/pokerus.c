@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "generational_changes.h"
+#include "main.h"
 #include "pokemon.h"
 #include "pokerus.h"
 #include "random.h"
@@ -175,7 +176,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
         return;
 
     u32 rndChance = Random();
-    u32 infectionChance = (GetNumOwnedBadges() * (P_BADGE_BOOST_POKERUS_CHANCE)) + POKERUS_INFECTION_CHANCE;
+    u32 infectionChance = (GetNumOwnedBadges() * P_BADGE_BOOST_POKERUS_CHANCE) + (POKERUS_INFECTION_CHANCE * (gMain.isPokeMoon + 1));
     enum PokerusStrains strain = GetPokerusStrain();
 
     if (rndChance < infectionChance)

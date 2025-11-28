@@ -1678,6 +1678,9 @@ u32 GetShinyOddsBoost(void)
     if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN) && P_STEVEN_BOOST_SHINY_ODDS)
         oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
 
+    if (gMain.isPokeMoon)
+        oddsBoost += P_BADGE_BOOST_SHINY_AMOUNT;
+
     return oddsBoost * badgeBoost;
 }
 
@@ -1706,6 +1709,9 @@ u32 GetPerfectIvBoost(void)
 
     if (FlagGet(FLAG_DEFEATED_METEOR_FALLS_STEVEN))
         badgeBoost++;
+
+    if (gMain.isPokeMoon)
+        badgeBoost += 2;
 
     return badgeBoost;
 }

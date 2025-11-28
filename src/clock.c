@@ -65,6 +65,7 @@ static void UpdatePerDay(struct Time *localTime)
         ResetLotteryPulls();
         UpdateDaysPassedSinceFormChange(daysSince);
         DailyResetApricornTrees();
+        RollForPokeMoon();
         *days = localTime->days;
     }
 }

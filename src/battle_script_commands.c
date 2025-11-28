@@ -13844,7 +13844,10 @@ static void Cmd_handleballthrow(void)
             else
             {
                 odds = Sqrt(Sqrt(16711680 / odds));
-                odds = 1048560 / odds;
+                if (gMain.isPokeMoon)
+                    odds = 1258560 / odds;
+                else
+                    odds = 1048560 / odds;
                 for (shakes = 0; shakes < maxShakes; shakes++)
                 {
                     if (RandomUniform(RNG_BALLTHROW_SHAKE, 0, MAX_u16) >= odds)

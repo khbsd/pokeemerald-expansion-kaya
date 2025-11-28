@@ -1678,13 +1678,16 @@ void CB1_Overworld(void)
 }
 
 #define TINT_NIGHT Q_8_8(0.456) | Q_8_8(0.456) << 8 | Q_8_8(0.615) << 16
+#define TINT_POKE_MOON Q_8_8(0.280) | Q_8_8(0.100) << 8 | Q_8_8(0.100) << 16
+#define TIME_POKEMOON (TIME_NIGHT + 1)
 
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIME_MORNING] = {.coeff = 4,  .blendColor = 0xA8B0E0,   .isTint = TRUE},
-    [TIME_DAY]     = {.coeff = 0,  .blendColor = 0,          .isTint = FALSE},
-    [TIME_EVENING] = {.coeff = 4,  .blendColor = 0xA8B0E0,   .isTint = TRUE},
-    [TIME_NIGHT]   = {.coeff = 10, .blendColor = TINT_NIGHT, .isTint = TRUE},
+    [TIME_MORNING]  = {.coeff = 4,  .blendColor = 0xA8B0E0,       .isTint = TRUE},
+    [TIME_DAY]      = {.coeff = 0,  .blendColor = 0,              .isTint = FALSE},
+    [TIME_EVENING]  = {.coeff = 4,  .blendColor = 0xA8B0E0,       .isTint = TRUE},
+    [TIME_NIGHT]    = {.coeff = 10, .blendColor = TINT_NIGHT,     .isTint = TRUE},
+    [TIME_POKEMOON] = {.coeff = 0, .blendColor = TINT_POKE_MOON, .isTint = TRUE},
 };
 
 #define DEFAULT_WEIGHT 256
@@ -1698,6 +1701,7 @@ void UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+    u32 nightType = TIME_NIGHT +  gMain.isPokeMoon;
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {
@@ -1726,7 +1730,7 @@ void UpdateTimeOfDay(void)
     else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_BEGIN + 1)) // evening->night
     {
         gTimeBlend.startBlend = gTimeOfDayBlend[TIME_EVENING];
-        gTimeBlend.endBlend = gTimeOfDayBlend[TIME_NIGHT];
+        gTimeBlend.endBlend = gTimeOfDayBlend[nightType];
         gTimeBlend.weight = TIME_BLEND_WEIGHT(NIGHT_HOUR_BEGIN, NIGHT_HOUR_BEGIN + 1);
         gTimeBlend.altWeight = gTimeBlend.weight / 2;
         gTimeOfDay = TIME_NIGHT;
@@ -1735,7 +1739,7 @@ void UpdateTimeOfDay(void)
     {
         gTimeBlend.weight = DEFAULT_WEIGHT;
         gTimeBlend.altWeight = 0;
-        gTimeBlend.startBlend = gTimeBlend.endBlend = gTimeOfDayBlend[TIME_NIGHT];
+        gTimeBlend.startBlend = gTimeBlend.endBlend = gTimeOfDayBlend[nightType];
         gTimeOfDay = TIME_NIGHT;
     }
     else // day
@@ -1749,6 +1753,11 @@ void UpdateTimeOfDay(void)
 #undef MORNING_HOUR_MIDDLE
 #undef TIME_BLEND_WEIGHT
 #undef DEFAULT_WEIGHT
+
+void RollForPokeMoon(void)
+{
+    gMain.isPokeMoon = RandomPercentage(RNG_POKEMOON_CHANCE, GetNumOwnedBadges() * 2);
+}
 
 // Whether a map type is naturally lit/outside
 bool32 MapHasNaturalLight(enum MapType mapType)

@@ -470,6 +470,9 @@ u32 GetAdjustedLevel(u32 level)
             newLevel += (gSaveBlock2Ptr->playerFaintCounter * B_MON_FAINT_SCALING_AMOUNT);
     }
 
+    if (gMain.isPokeMoon)
+        newLevel += 5;
+
     if (newLevel > MAX_LEVEL)
         newLevel = MAX_LEVEL;
 
