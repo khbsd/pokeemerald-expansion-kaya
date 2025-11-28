@@ -24,7 +24,7 @@
 #define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // In Gen5+, Lv100 Pokémon can obtain Effort Values normally.
 #define B_RECALCULATE_STATS         GEN_LATEST // In Gen5+, the stats of the Pokémon who participate in battle are recalculated at the end of each battle.
 #define B_EV_SCALE                  2          // A multiplier for all EVs gained.
-#define B_BADGE_FRIENDSHIP_BOOST    3          // How much each badge counts for when applying bonus friendship.
+#define B_BADGE_FRIENDSHIP_BOOST    4          // How much each badge counts for when applying bonus friendship.
 
 // Damage settings
 #define B_BURN_DAMAGE               GEN_LATEST // In Gen7+, burn damage is 1/16th of max HP instead of 1/8th. Also applies to Frostbite.
