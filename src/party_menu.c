@@ -4632,11 +4632,8 @@ void CB2_ShowPartyMenuForItemUse(void)
     u8 msgId;
     TaskFunc task;
 
-    if (gPartyMenu.data1 == DATA1_PARTY_MENU_FROM_FIELD)
-    {
+    if (gPartyMenu.openedFromField)
         callback = CB2_ReturnToField;
-        gPartyMenu.data1 = 0;
-    }
 
     if (gMain.inBattle)
     {
@@ -5772,7 +5769,6 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
     u8 holdEffectParam = GetItemHoldEffectParam(*itemPtr);
-
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
     if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
     {
@@ -5802,7 +5798,8 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
             RemoveBagItem(gSpecialVar_ItemId, 1);
             FreePartyPointers();
-            gCB2_AfterEvolution = gPartyMenu.exitCallback;
+            if (!gPartyMenu.openedFromField)
+                gCB2_AfterEvolution = gPartyMenu.exitCallback;
             BeginEvolutionScene(mon, targetSpecies, canStopEvo, gPartyMenu.slotId);
             DestroyTask(taskId);
         }

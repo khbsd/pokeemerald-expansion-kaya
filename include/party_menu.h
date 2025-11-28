@@ -14,13 +14,12 @@ struct PartyMenu
     u8 layout:2;
     s8 slotId;
     s8 slotId2;
-    u8 action;
+    u8 action:7;
+    u8 openedFromField:1;
     u16 bagItem;
-    s16 data1;           // used variously as a move, counter, moveSlotId, cursorPos, or indicator that the menu is opened from the field
+    s16 data1;           // used variously as a move, counter, moveSlotId, or cursorPos
     s16 learnMoveState;  // data2, used only as a learn move state
 };
-
-#define DATA1_PARTY_MENU_FROM_FIELD -1
 
 extern struct PartyMenu gPartyMenu;
 extern bool8 gPartyMenuUseExitCallback;

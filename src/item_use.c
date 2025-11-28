@@ -143,10 +143,11 @@ static void SetUpItemUseCallback(u8 taskId)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
-    if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
+
+    gPartyMenu.openedFromField = (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1));
+    if (gPartyMenu.openedFromField)
     {
         FadeScreen(FADE_TO_BLACK, 0);
-        gPartyMenu.data1 = DATA1_PARTY_MENU_FROM_FIELD;
         gTasks[taskId].func = Task_PartyMenuItemUseFromField;
     }
     else
