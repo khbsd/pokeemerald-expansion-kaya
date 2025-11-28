@@ -18,6 +18,7 @@ u32 GetCurrentLevelCap(void)
         {FLAG_BADGE07_GET, 46},
         {FLAG_BADGE08_GET, 62},
         {FLAG_IS_CHAMPION, 80},
+        {FLAG_DEFEATED_METEOR_FALLS_STEVEN, 90}
     };
 
     u32 i;
@@ -98,8 +99,9 @@ u32 GetCurrentEVCap(void)
         {FLAG_BADGE05_GET, MAX_TOTAL_EVS *  9 / 17},
         {FLAG_BADGE06_GET, MAX_TOTAL_EVS * 11 / 17},
         {FLAG_BADGE07_GET, MAX_TOTAL_EVS * 13 / 17},
-        {FLAG_BADGE08_GET, MAX_TOTAL_EVS * 15 / 17},
-        {FLAG_IS_CHAMPION, MAX_TOTAL_EVS},
+        {FLAG_BADGE08_GET, MAX_TOTAL_EVS * 14 / 17},
+        {FLAG_IS_CHAMPION, MAX_TOTAL_EVS * 15 / 17},
+        {FLAG_DEFEATED_METEOR_FALLS_STEVEN, MAX_TOTAL_EVS * 16 / 17},
     };
 
     if (B_EV_CAP_TYPE == EV_CAP_FLAG_LIST)
