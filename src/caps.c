@@ -18,7 +18,7 @@ u32 GetCurrentLevelCap(void)
         {FLAG_BADGE07_GET, 46},
         {FLAG_BADGE08_GET, 62},
         {FLAG_IS_CHAMPION, 80},
-        {FLAG_DEFEATED_METEOR_FALLS_STEVEN, 90}
+        {FLAG_DEFEATED_METEOR_FALLS_STEVEN, 90},
     };
 
     u32 i;
