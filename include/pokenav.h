@@ -308,6 +308,8 @@ enum {
     POKENAV_FADE_FROM_BLACK_ALL,
 };
 
+extern EWRAM_DATA struct PokenavResources *gPokenavResources;
+
 // pokenav.c
 void SetSelectedConditionSearch(u32 cursorPos);
 u32 GetSelectedConditionSearch(void);

@@ -195,7 +195,7 @@ void TrySpawnAndShowNamebox(const u8 *speaker, u32 tileNum)
 {
     gSpeakerName = speaker;
     TrySpawnNamebox(tileNum);
-    if (sNameboxWindowId != WINDOW_NONE)
+    if (sNameboxWindowId != WINDOW_NONE && !gPokenavResources)
         DrawNamebox(sNameboxWindowId, tileNum - NAME_BOX_BASE_TILES_TOTAL, TRUE);
     else // either NULL or SP_NAME_NONE
         RedrawDialogueFrame();

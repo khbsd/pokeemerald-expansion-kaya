@@ -20,7 +20,9 @@ struct PokenavResources
     u32 currentMenuIndex;
     u16 mode;
     u16 conditionSearchId;
-    bool32 hasAnyRibbons;
+    bool32 hasAnyRibbons:4;
+    bool32 isPokenavActive:1;
+    bool32 padding:27;
     void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
 
@@ -443,6 +445,7 @@ static void Task_Pokenav(u8 taskId)
         tState = 1;
         break;
     case 1:
+        gPokenavResources->isPokenavActive = TRUE;
         // Wait for LoopedTask_InitPokenavMenu to finish
         if (PokenavMainMenuLoopedTaskIsActive())
             break;
@@ -489,6 +492,7 @@ static void Task_Pokenav(u8 taskId)
         if (!WaitForPokenavShutdownFade())
         {
             bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
+            gPokenavResources->isPokenavActive = FALSE;
 
             FreeMenuHandlerSubstruct1();
             FreePokenavResources();
