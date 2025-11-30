@@ -1701,7 +1701,7 @@ void UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
-    u32 nightType = TIME_NIGHT +  gMain.isPokeMoon;
+    u32 nightType = TIME_NIGHT + gMain.isPokeMoon;
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {
