@@ -3866,6 +3866,21 @@ static enum MoveComparisonResult CompareGuaranteeFaintTarget(u32 battlerAtk, u32
     return MOVE_NEUTRAL_COMPARISON;
 }
 
+static enum MoveComparisonResult CompareResistBerryEffects(u32 battlerAtk, u32 battlerDef, u32 move1, u32 moveSlot1, u32 move2, u32 moveSlot2)
+{
+    // Check for resist berries in OHKOs
+    if (gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_RESIST_BERRY)
+    {
+        if (gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot2] && !gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot1])
+            return MOVE_WON_COMPARISON;
+        
+        if (gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot1] && !gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot2])
+            return MOVE_LOST_COMPARISON;        
+    }
+
+    return MOVE_NEUTRAL_COMPARISON;
+}
+
 static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, u32 move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
 {
     u32 partnerBattler = BATTLE_PARTNER(battlerAtk);
@@ -3936,11 +3951,12 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
 
         // Priority list:
         // 1. Less no of hits to ko
-        // 2. Priority if outsped and a OHKO
-        // 3. Not charging
-        // 4. More accuracy
-        // 5. Guaranteed KO
-        // 6. Better effect
+            // 2. Move not affected by resist berry (if two moves OHKO)
+            // 3. Priority if outsped and a OHKO (if two moves OHKO)
+        // 4. Not charging
+            // 5. Guaranteed KO (if two moves OHKO)
+        // 6. More accuracy
+        // 7. Better effect
 
         // Current move requires the least hits to KO. Compare with other moves.
         if (leastHits == noOfHits[currId])
@@ -3961,6 +3977,18 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     // Comparing KOs
                     if (noOfHits[currId] == 1)
                     {
+                        // If one move is berry-resisted, use the other one
+                        switch (CompareResistBerryEffects(battlerAtk, battlerDef, moves[currId], currId, moves[i], i))
+                        {
+                        case MOVE_WON_COMPARISON:
+                            tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
+                            break;
+                        case MOVE_LOST_COMPARISON:
+                            tempMoveScores[i] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
+                            break;
+                        case MOVE_NEUTRAL_COMPARISON:
+                            break;
+                        }
                         // Use priority to get fast KO if outsped
                         switch (CompareMoveSpeeds(battlerAtk, battlerDef, moves[currId], moves[i]))
                         {
@@ -4363,14 +4391,6 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move, stru
         else if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
             break;
         score += AI_TryToClearStats(battlerAtk, battlerDef, moveTargetsBothOpponents);
-        break;
-    case EFFECT_MULTI_HIT:
-    case EFFECT_TRIPLE_KICK:
-    case EFFECT_POPULATION_BOMB:
-        if (AI_MoveMakesContact(aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk], move)
-          && aiData->abilities[battlerAtk] != ABILITY_MAGIC_GUARD
-          && aiData->holdEffects[battlerDef] == HOLD_EFFECT_ROCKY_HELMET)
-            ADJUST_SCORE(-2);
         break;
     case EFFECT_CONVERSION:
         if (!IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(gBattleMons[battlerAtk].moves[0])))

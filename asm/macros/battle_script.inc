@@ -18,6 +18,7 @@
 	.endm
 
 	.macro critcalc
+	.warning "critcalc macro has been deprecated, please remove from scripts"
 	.byte 0x4
 	.endm
 
@@ -979,7 +980,7 @@
 	.4byte \failInstr
 	.endm
 
-	.macro handlerollout
+	.macro unused_0xb3
 	.byte 0xb3
 	.endm
 
@@ -989,7 +990,7 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro handlefurycutter
+	.macro unused_0xb5
 	.byte 0xb5
 	.endm
 
