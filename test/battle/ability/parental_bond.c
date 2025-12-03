@@ -143,8 +143,8 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
-        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
+        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH));
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_COMET_PUNCH); }
@@ -172,8 +172,8 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
-        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
+        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH));
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_COMET_PUNCH); }
@@ -202,8 +202,8 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
-        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
+        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH));
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_COMET_PUNCH); }
@@ -233,8 +233,8 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
-        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
-        PLAYER(SPECIES_KANGASKHAN) { Ability(ABILITY_PARENTAL_BOND); }
+        ASSUME(IsMultiHitMove(MOVE_COMET_PUNCH));
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_COMET_PUNCH); }
