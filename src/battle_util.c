@@ -7251,7 +7251,7 @@ bool32 IsMoveIonTorqueAffected(struct DamageContext *ctx, u32 battler)
 
 bool32 IsMoveFeySkinAffected(struct DamageContext *ctx, u32 battler)
 {
-    return ctx->moveType == TYPE_FAIRY && ctx->abilityAtk == ABILITY_ION_TORQUE && !IS_BATTLER_OF_TYPE(battler, TYPE_FAIRY);
+    return ctx->moveType == TYPE_FAIRY && ctx->abilityAtk == ABILITY_FEY_SKIN && !IS_BATTLER_OF_TYPE(battler, TYPE_FAIRY);
 }
 
 static inline u32 IsFieldMudSportAffected(enum Type moveType)
