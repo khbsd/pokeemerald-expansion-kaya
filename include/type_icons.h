@@ -2,17 +2,26 @@
 #define GUARD_TYPE_ICONS_H
 
 void LoadTypeIcons(u32 battler);
+void LoadTypeIconForMoveInfo(enum Type type);
+void LoadMoveTypeIconSpritesAndPalettes(void);
+void DestroyMoveTypeIconSprite(void);
+void TryToHideMoveTypeIconSprite(void);
 
 #define TYPE_ICON_TAG 0x2720
 #define TYPE_ICON_TAG_2 0x2721
+#define TAG_MOVE_TYPES 30002
 #define NUM_FRAMES_HIDE_TYPE_ICON 10
 
 #define tMonPosition      data[0]
 #define tBattlerId        data[1]
 #define tHideIconTimer    data[2]
 #define tVerticalPosition data[3]
+#define tHide             data[4]
 
 #define TYPE_ICON_1_FRAME(monType) ((monType - 1) * 2)
 #define TYPE_ICON_2_FRAME(monType) ((monType - 11) * 2)
+#define MOVE_TYPE_ICON_FRAME(monType) (monType * 8)
+
+#define MOVE_INFO_TYPE_ICON 0
 
 #endif // GUARD_TYPE_ICONS_H
