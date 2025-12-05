@@ -63,8 +63,6 @@ const struct Coords16 sTypeIconPositions[][2] =
     [MOVE_TYPE_ICON] =
     {
         [FALSE] = {184, 144},
-
-        
     },
 };
 
