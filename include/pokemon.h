@@ -846,6 +846,7 @@ u16 GetNumberOfEggMoves(struct Pokemon *mon);
 u16 GetNumberOfTMMoves(struct Pokemon *mon);
 u16 GetNumberOfTutorMoves(struct Pokemon *mon);
 u16 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
+u16 GetNumberOfRelearnableMoves(struct Pokemon *mon);
 u16 SpeciesToPokedexNum(u16 species);
 bool32 IsSpeciesInHoennDex(u16 species);
 u16 GetBattleBGM(void);

@@ -578,5 +578,7 @@ gSpecials::
 	def_special CheckIfPlayerIsKaya
 	def_special SetHiddenNature
 	def_special SetAbility
+	def_special ChooseBoxMon
+	def_special CanTeachMoveBoxMon
 	def_special ObjectEventInteractionGetApricornTreeData
 	def_special ObjectEventInteractionPickApricornTree
