@@ -62,7 +62,9 @@ const struct Coords16 sTypeIconPositions[][2] =
     // for move info
     [MOVE_TYPE_ICON] =
     {
-        [FALSE] = {216, 144},
+        [FALSE] = {184, 144},
+
+        
     },
 };
 
