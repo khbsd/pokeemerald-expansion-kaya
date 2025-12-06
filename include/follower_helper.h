@@ -1,6 +1,8 @@
 #ifndef GUARD_FOLLOWER_HELPER_H
 #define GUARD_FOLLOWER_HELPER_H
 
+#include "global.h"
+
 enum FollowerEmotion
 {
     FOLLOWER_EMOTION_HAPPY = 0,
@@ -122,6 +124,22 @@ enum ConditionalMessage
     COND_MSG_ABNORMAL_WEATHER,
     COND_MSG_COUNT,
 };
+
+enum PrideMessage
+{
+    PRIDE_TRANS,
+    PRIDE_GAY,
+    PRIDE_LESBIAN,
+    PRIDE_NONBINARY,
+    PRIDE_ACE,
+    PRIDE_DISABILITY,
+    PRIDE_DEMI,
+    PRIDE_GENDERFLUID,
+    PRIDE_MSG_COUNT,
+};
+
+extern const u8 *const gFollowerPrideTypeMessages[];
+extern const u8 gFollowerPrideMessage[];
 
 extern const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT];
 extern const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH];

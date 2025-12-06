@@ -265,6 +265,7 @@ enum RandomTag
     RNG_DUPE_PROTECTION,
     RNG_DOWSE_ITEM_CHANCE,
     RNG_POKEMOON_CHANCE,
+    RNG_PRIDE_FOLLOWER_MESSAGE,
 };
 
 #define RandomWeighted(tag, ...) \

@@ -76,6 +76,19 @@ static const u8 sCondMsg46[] = _("Your POKéMON is happily gazing at\nthe beauti
 static const u8* const sNightTexts[] = {sCondMsg45, sCondMsg46, NULL};
 static const u8 sCondMsg50[] = _("{STR_VAR_1} is disturbed by the\nabnormal weather!");
 
+const u8 *const gFollowerPrideTypeMessages[] =
+{
+    [PRIDE_TRANS]       = COMPOUND_STRING("trans"),
+    [PRIDE_GAY]         = COMPOUND_STRING("gay"),
+    [PRIDE_LESBIAN]     = COMPOUND_STRING("lesbian"),
+    [PRIDE_NONBINARY]   = COMPOUND_STRING("non-binary"),
+    [PRIDE_ACE]         = COMPOUND_STRING("ace"),
+    [PRIDE_DISABILITY]  = COMPOUND_STRING("disability"),
+    [PRIDE_DEMI]        = COMPOUND_STRING("demi"),
+    [PRIDE_GENDERFLUID] = COMPOUND_STRING("genderfluid"),
+};
+const u8 gFollowerPrideMessage[] = _("{STR_VAR_1} says {STR_VAR_2} rights! {EMOJI_HEART}");
+
 // See the struct definition in follower_helper.h for more info
 const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] =
 {

@@ -37,6 +37,7 @@
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "trainer_see.h"
 #include "trainer_hill.h"
@@ -2584,12 +2585,21 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         ScriptCall(ctx, gFollowerConditionalMessages[multi].script ? gFollowerConditionalMessages[multi].script : gFollowerBasicMessages[emotion].script);
         return;
     }
-    // otherwise, a basic or C-based message was picked
-    ObjectEventEmote(objEvent, emotion);
-    ctx->data[0] = (u32) gFollowerBasicMessages[emotion].messages[multi].text; // Load message text
+    if (RandomPercentage(RNG_PRIDE_FOLLOWER_MESSAGE, (11 + (GetNumOwnedBadges() * 3))))
+    {
+        StringCopy(gStringVar2, gFollowerPrideTypeMessages[Random() % PRIDE_MSG_COUNT]);
+        ctx->data[0] = (u32) gFollowerPrideMessage;
+        ObjectEventEmote(objEvent, FOLLOWER_EMOTION_LOVE);
+    }
+    else
+    {
+        // otherwise, a basic or C-based message was picked
+        ctx->data[0] = (u32) gFollowerBasicMessages[emotion].messages[multi].text; // Load message text
+        ObjectEventEmote(objEvent, emotion);
+    }
     ScriptCall(ctx, gFollowerBasicMessages[emotion].messages[multi].script ?
-                        gFollowerBasicMessages[emotion].messages[multi].script :
-                        gFollowerBasicMessages[emotion].script);
+                    gFollowerBasicMessages[emotion].messages[multi].script :
+                    gFollowerBasicMessages[emotion].script);
 }
 
 #define sLightType data[5]
