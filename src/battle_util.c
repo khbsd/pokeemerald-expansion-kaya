@@ -8613,12 +8613,18 @@ static inline uq4_12_t GetScreensModifier(struct BattleContext *ctx)
     {
         return UQ_4_12(1.0);
     }
+
     if (ctx->abilityAtk == ABILITY_INFILTRATOR)
     {
         if (ctx->updateFlags)
             RecordAbilityBattle(ctx->battlerAtk, ctx->abilityDef);
+
+        if (GetMoveType(ctx->move) == TYPE_DARK)
+            return UQ_4_12(1.3);
+
         return UQ_4_12(1.0);
     }
+
     if (reflect || lightScreen || auroraVeil)
     {
         return (IsDoubleBattle()) ? UQ_4_12(0.667) : UQ_4_12(0.5);

@@ -5966,7 +5966,7 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 5,
@@ -5976,7 +5976,7 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 4,
@@ -6011,12 +6011,12 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               }
             ]
           },
@@ -6428,7 +6428,7 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 5,
@@ -6438,7 +6438,7 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 4,
@@ -16662,7 +16662,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 14,
@@ -16672,7 +16672,7 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 13,
@@ -16705,9 +16705,9 @@
                 "species": "SPECIES_FOMANTIS"
               },
               {
-                "min_level": 13,
-                "max_level": 13,
-                "species": "SPECIES_HOPPIP"
+                "min_level": 17,
+                "max_level": 17,
+                "species": "SPECIES_COTTONEE"
               },
               {
                 "min_level": 13,
@@ -16816,7 +16816,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 14,
@@ -16826,7 +16826,7 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 13,
@@ -16859,9 +16859,9 @@
                 "species": "SPECIES_FOMANTIS"
               },
               {
-                "min_level": 13,
-                "max_level": 13,
-                "species": "SPECIES_HOPPIP"
+                "min_level": 17,
+                "max_level": 17,
+                "species": "SPECIES_COTTONEE"
               },
               {
                 "min_level": 13,
@@ -17124,7 +17124,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 14,
@@ -17134,7 +17134,7 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_COTTONEE"
+                "species": "SPECIES_HOPPIP"
               },
               {
                 "min_level": 13,
@@ -17167,9 +17167,9 @@
                 "species": "SPECIES_FOMANTIS"
               },
               {
-                "min_level": 13,
-                "max_level": 13,
-                "species": "SPECIES_HOPPIP"
+                "min_level": 17,
+                "max_level": 17,
+                "species": "SPECIES_COTTONEE"
               },
               {
                 "min_level": 13,
@@ -36421,12 +36421,12 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_BULBASAUR"
+                "species": "SPECIES_COTTONEE"
               },
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_BULBASAUR"
+                "species": "SPECIES_COTTONEE"
               },
               {
                 "min_level": 26,

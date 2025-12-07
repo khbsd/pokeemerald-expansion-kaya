@@ -4433,7 +4433,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
             StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemaining);
         else
             StringExpandPlaceholders(gStringVar3, gText_PokedexEncountersRemainingOneLeft);
-        
+
         description = gStringVar3;
     }
 
@@ -6733,6 +6733,10 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
                     break;
                 case IF_KNOWS_MOVE:
                     StringAppend(gStringVar4, COMPOUND_STRING("knows "));
+                    StringAppend(gStringVar4, GetMoveName(evolutions[i].params[j].arg1));
+                    break;
+                case IF_DOES_NOT_KNOW_MOVE:
+                    StringAppend(gStringVar4, COMPOUND_STRING("doesn't know "));
                     StringAppend(gStringVar4, GetMoveName(evolutions[i].params[j].arg1));
                     break;
                 // Gen 5

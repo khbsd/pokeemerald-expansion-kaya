@@ -2966,7 +2966,8 @@ void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species)
     bool32 isShiny = IsMonShiny(mon);
     u32 nature = GetNature(mon);
     u32 newPersonality;
-    if (species == SPECIES_MARILL)
+
+    if (species == SPECIES_MARILL || species == SPECIES_COTTONEE)
     {
         u32 genderTable[] =
         {
@@ -2975,13 +2976,14 @@ void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species)
             MON_GENDERLESS,
         };
 
-        gender = genderTable[RandomUniform(RNG_GENDER, 0, 2)];
+        if (gSaveBlock2Ptr->playerIsKaya)
+            gender = MON_FEMALE;
+        else
+            gender = genderTable[RandomUniform(RNG_GENDER, 0, 2)];
     }
 
     do
-    {
         newPersonality = Random32();
-    }
     while ((GetNatureFromPersonality(newPersonality) != nature) ||
            (GetGenderFromSpeciesAndPersonality(species, newPersonality) != gender));
 
@@ -5516,6 +5518,10 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
             break;
         case IF_KNOWS_MOVE:
             if (MonKnowsMove(mon, params[i].arg1))
+                currentCondition = TRUE;
+            break;
+        case IF_DOES_NOT_KNOW_MOVE:
+            if (!MonKnowsMove(mon, params[i].arg1))
                 currentCondition = TRUE;
             break;
         // Gen 5

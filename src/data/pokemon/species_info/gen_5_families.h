@@ -4186,13 +4186,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_COTTONEE] =
     {
-        .baseHP        = 40,
-        .baseAttack    = 27,
-        .baseDefense   = 60,
-        .baseSpeed     = 66,
-        .baseSpAttack  = 37,
-        .baseSpDefense = 50,
-        .types = COTTONEE_FAMILY_TYPES,
+        .baseHP        = 60,
+        .baseAttack    = 30,
+        .baseDefense   = 80,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 90,
+        .types = { TYPE_GRASS, TYPE_FAIRY },
         .catchRate = 190,
         .expYield = 56,
         .evYield_Speed = 1,
@@ -4262,13 +4262,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_WHIMSICOTT] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 67,
-        .baseDefense   = 85,
-        .baseSpeed     = 116,
-        .baseSpAttack  = 77,
-        .baseSpDefense = 75,
-        .types = COTTONEE_FAMILY_TYPES,
+        .baseHP        = 70,
+        .baseAttack    = 45,
+        .baseDefense   = 90,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 95,
+        .types = { TYPE_GRASS, TYPE_FAIRY },
         .catchRate = 75,
         .expYield = 168,
         .evYield_Speed = 2,

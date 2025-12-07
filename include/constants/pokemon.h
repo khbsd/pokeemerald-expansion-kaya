@@ -287,6 +287,7 @@ enum EvolutionConditions {
     IF_IN_MAP,                          // The player is currently in the specific map.
     IF_IN_MAPSEC,                       // The player is currently in the specific map sector.
     IF_KNOWS_MOVE,                      // The Pokémon knows specific move.
+    IF_DOES_NOT_KNOW_MOVE,                  // The Pokémon does not know a specific move.
     // Gen 5
     IF_TRADE_PARTNER_SPECIES,           // The Pokémon is traded for a specific species.
     // Gen 6

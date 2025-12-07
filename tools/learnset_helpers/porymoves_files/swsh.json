@@ -42708,7 +42708,11 @@
       "MOVE_SEED_BOMB",
       "MOVE_ENERGY_BALL",
       "MOVE_GRASS_KNOT",
-      "MOVE_DAZZLING_GLEAM"
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_MISTY_EXPLOSION",
+      "MOVE_QUASH",
+      "MOVE_SNATCH"
+
     ],
     "EggMoves": [
       "MOVE_MEMENTO",
