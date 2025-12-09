@@ -1666,9 +1666,6 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     u32 move = moveInfo->moves[gMoveSelectionCursor[battler]];
     enum Type type = GetMoveType(move);
     enum BattleMoveEffects effect = GetMoveEffect(move);
-    static const u8 noIcon[] =  _("");
-
-    txtPtr = StringCopy(gDisplayedStringBattle, noIcon);
 
     if (effect == EFFECT_TERA_BLAST)
     {
