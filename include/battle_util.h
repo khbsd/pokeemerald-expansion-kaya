@@ -248,7 +248,6 @@ bool32 IsBattlerMarkedForControllerExec(u32 battler);
 void MarkBattlerForControllerExec(u32 battler);
 void MarkBattlerReceivedLinkData(u32 battler);
 const u8 *CancelMultiTurnMoves(u32 battler, enum SkyDropState skyDropState);
-bool32 WasUnableToUseMove(u32 battler);
 bool32 ShouldDefiantCompetitiveActivate(u32 battler, enum Ability ability);
 void PrepareStringBattle(enum StringID stringId, u32 battler);
 void ResetSentPokesToOpponentValue(void);
@@ -397,6 +396,7 @@ u32 GetBattlerAffectionHearts(u32 battler);
 void TryToRevertMimicryAndFlags(void);
 bool32 BattleArenaTurnEnd(void);
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
+bool32 BattlerHasCopyableChanges(u32 battler);
 bool32 ChangeTypeBasedOnTerrain(u32 battler);
 void RemoveConfusionStatus(u32 battler);
 u8 GetBattlerGender(u32 battler);
@@ -455,5 +455,7 @@ enum Obedience GetDisobedienceResult(u32 levelReferenced, u32 obedienceLevel);
 bool32 IsAllowedToUseBag(void);
 bool32 IsAnyTargetTurnDamaged(u32 battlerAtk);
 bool32 IsMimikyuDisguised(u32 battler);
+void SetStartingStatus(enum StartingStatus status);
+void ResetStartingStatuses(void);
 
 #endif // GUARD_BATTLE_UTIL_H

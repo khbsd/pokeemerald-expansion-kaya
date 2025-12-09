@@ -2640,7 +2640,7 @@
 	callnative DoFacilityTrainerBattle
 	.byte \facility
 	.endm
-	
+
 @ Follower NPCs
 
 	@ Sets an existing NPC up to follow the player.
@@ -2804,8 +2804,14 @@
 	.4byte \destination
 	.endm
 
-@ VS Seeker
+	@ VS Seeker
 	.macro vsseeker_rematchid rematchId:req
 	callnative NativeVsSeekerRematchId, requests_effects=1
 	.2byte \rematchId
+	.endm
+	
+	@ Sets a starting status for the next battle. Can be stacked.
+	.macro setstartingstatus status:req
+	callnative ScrCmd_setstartingstatus
+	.byte \status
 	.endm

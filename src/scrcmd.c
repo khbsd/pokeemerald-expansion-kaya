@@ -61,6 +61,7 @@
 #include "window.h"
 #include "list_menu.h"
 #include "malloc.h"
+#include "battle.h"
 #include "constants/event_objects.h"
 #include "constants/map_types.h"
 
@@ -3345,6 +3346,15 @@ bool8 ScrCmd_istmrelearneractive(struct ScriptContext *ctx)
     if ((FlagGet(P_FLAG_TM_MOVES) || P_ENABLE_MOVE_RELEARNERS)
      && (P_ENABLE_ALL_TM_MOVES || IsBagPocketNonEmpty(POCKET_TM_HM)))
         ScriptCall(ctx, ptr);
+
+    return FALSE;
+}
+
+bool8 ScrCmd_setstartingstatus(struct ScriptContext *ctx)
+{
+    enum StartingStatus status = ScriptReadByte(ctx);
+
+    SetStartingStatus(status);
 
     return FALSE;
 }

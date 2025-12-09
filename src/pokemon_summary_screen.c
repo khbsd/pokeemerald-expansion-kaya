@@ -3129,15 +3129,15 @@ bool32 IsMonCuredOfPokerus(struct Pokemon *mon)
 {
     bool32 retVal;
 
-    if (POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
+    if (P_POKERUS_STRAIN_DISTRIBUTION == GEN_3_REDUX)
     {
         retVal = (GetMonData(mon, MON_DATA_POKERUS_STRAIN) == PKRS_CURED)
-                  && (POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG));
+                  && (P_POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG));
     }
     else
     {
         retVal = (!CheckPlayerPartyPokerus()
-                  && (POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG)));
+                  && (P_POKERUS_VISIBLE_ON_EGG || !GetMonData(mon, MON_DATA_IS_EGG)));
     }
 
     return retVal;
