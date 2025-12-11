@@ -64,8 +64,6 @@ bool32 IsAiVsAiBattle(void)
 bool32 BattlerIsPlayer(u32 battlerId)
 {
     return (gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_PLAYER
-        || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_RECORDED_PLAYER);    
-    return (gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_PLAYER
          || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_RECORDED_PLAYER);
 }
 
@@ -96,6 +94,11 @@ bool32 BattlerIsLink(u32 battlerId)
          || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_LINK_OPPONENT);
 }
 
+bool32 BattlerIsWally(u32 battlerId)
+{
+    return (gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_WALLY);
+}
+
 bool32 BattlerHasAi(u32 battlerId)
 {
     switch (gBattlerBattleController[battlerId])
@@ -108,10 +111,10 @@ bool32 BattlerHasAi(u32 battlerId)
     default:
         break;
     }
-    
+
     if (IsAiVsAiBattle())
         return TRUE;
-    
+
     return FALSE;
 }
 
@@ -2701,7 +2704,7 @@ void BtlController_HandleStatusAnimation(u32 battler)
 
 void BtlController_HandleHitAnimation(u32 battler)
 {
-    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE || gTestRunnerHeadless)
+    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE || (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim))
     {
         BtlController_Complete(battler);
     }
@@ -2716,7 +2719,7 @@ void BtlController_HandleHitAnimation(u32 battler)
 
 void BtlController_HandlePlaySE(u32 battler)
 {
-    if (gTestRunnerHeadless)
+    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
     {
         BtlController_Complete(battler);
         return;
@@ -2729,7 +2732,7 @@ void BtlController_HandlePlaySE(u32 battler)
 
 void BtlController_HandlePlayFanfareOrBGM(u32 battler)
 {
-    if (gTestRunnerHeadless)
+    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
     {
         BtlController_Complete(battler);
         return;
