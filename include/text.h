@@ -205,9 +205,6 @@ u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 wi
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 
-// stuff for speaker names
-void Task_DrawFieldMessage(u8 taskId);
-
 // player text speed
 u32 GetPlayerTextSpeed(void);
 u32 GetPlayerTextSpeedDelay(void);

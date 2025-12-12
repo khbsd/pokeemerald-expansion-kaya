@@ -2,11 +2,9 @@
 #include "menu.h"
 #include "string_util.h"
 #include "task.h"
-#include "event_data.h"
 #include "text.h"
 #include "match_call.h"
 #include "field_message_box.h"
-#include "field_name_box.h"
 #include "text_window.h"
 #include "script.h"
 #include "field_name_box.h"
@@ -28,7 +26,7 @@ void InitFieldMessageBox(void)
 
 #define tState data[0]
 
-void Task_DrawFieldMessage(u8 taskId)
+static void Task_DrawFieldMessage(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -42,14 +40,12 @@ void Task_DrawFieldMessage(u8 taskId)
         task->tState++;
         break;
     case 1:
-    {
         u32 nameboxWinId = GetNameboxWindowId();
         DrawDialogueFrame(0, TRUE);
         if (nameboxWinId != WINDOW_NONE)
             DrawNamebox(nameboxWinId, NAME_BOX_BASE_TILE_NUM - NAME_BOX_BASE_TILES_TOTAL, TRUE);
         task->tState++;
         break;
-    }
     case 2:
         if (RunTextPrintersAndIsPrinter0Active() != TRUE)
         {
@@ -63,7 +59,7 @@ void Task_DrawFieldMessage(u8 taskId)
 
 static void CreateTask_DrawFieldMessage(void)
 {
-    CreateTask(Task_DrawFieldMessage, FIELD_MESSAGE_PRIORITY);
+    CreateTask(Task_DrawFieldMessage, 0x50);
 }
 
 static void DestroyTask_DrawFieldMessage(void)
@@ -149,7 +145,6 @@ void HideFieldMessageBox(void)
     ClearDialogWindowAndFrame(0, TRUE);
     DestroyNamebox();
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
-    gSpeakerName = NULL;
 }
 
 u8 GetFieldMessageBoxMode(void)
@@ -175,9 +170,4 @@ void StopFieldMessage(void)
 {
     DestroyTask_DrawFieldMessage();
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
-}
-
-void SetSpeakerName(const u8* name)
-{
-    gSpeakerName = name;
 }
