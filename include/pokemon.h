@@ -661,6 +661,19 @@ struct Fusion
 
 extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
+enum SSTidalEvents
+{
+    SSTIDAL_SOUTHERN_ISLAND,
+    SSTIDAL_NAVEL_ROCK,
+    SSTIDAL_BIRTH_ISLAND,
+    SSTIDAL_FARAWAY_ISLAND,
+    SSTIDAL_EVENTS_COUNT,
+};
+extern const u32 gSSTidalEventFlags[SSTIDAL_EVENTS_COUNT];
+extern const u32 gSSTidalEventItems[SSTIDAL_EVENTS_COUNT];
+void SetAllSSTidalEventFlags(void);
+void GiveAllSSTidalEventItems(void);
+
 #if P_FUSION_FORMS
 #if P_FAMILY_KYUREM
 #if P_FAMILY_RESHIRAM

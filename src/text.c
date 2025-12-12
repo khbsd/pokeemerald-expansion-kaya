@@ -1126,7 +1126,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_RESET_FONT:
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_PAUSE:
-                textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
+                textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar * GetPlayerTextSpeed();
                 textPrinter->printerTemplate.currentChar++;
                 textPrinter->state = RENDER_STATE_PAUSE;
                 return RENDER_REPEAT;

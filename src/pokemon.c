@@ -110,6 +110,22 @@ EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GF
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u16 gFollowerSteps = 0;
 
+const u32 gSSTidalEventFlags[SSTIDAL_EVENTS_COUNT] =
+{
+    [SSTIDAL_SOUTHERN_ISLAND] = FLAG_ENABLE_SHIP_SOUTHERN_ISLAND,
+    [SSTIDAL_NAVEL_ROCK]      = FLAG_ENABLE_SHIP_NAVEL_ROCK,
+    [SSTIDAL_BIRTH_ISLAND]    = FLAG_ENABLE_SHIP_BIRTH_ISLAND,
+    [SSTIDAL_FARAWAY_ISLAND]  = FLAG_ENABLE_SHIP_FARAWAY_ISLAND,
+};
+
+const u32 gSSTidalEventItems[SSTIDAL_EVENTS_COUNT] =
+{
+    [SSTIDAL_SOUTHERN_ISLAND] = ITEM_EON_TICKET,
+    [SSTIDAL_NAVEL_ROCK] =      ITEM_MYSTIC_TICKET,
+    [SSTIDAL_BIRTH_ISLAND] =    ITEM_AURORA_TICKET,
+    [SSTIDAL_FARAWAY_ISLAND] =  ITEM_OLD_SEA_MAP,
+};
+
 #include "data/abilities.h"
 #if P_TUTOR_MOVES_ARRAY
 #include "data/tutor_moves.h"
@@ -8450,4 +8466,22 @@ bool32 IsSpeciesOfType(u32 species, enum Type type)
      || gSpeciesInfo[species].types[1] == type)
         return TRUE;
     return FALSE;
+}
+
+void SetAllSSTidalEventFlags(void)
+{
+    for (u32 flag = 0; flag < SSTIDAL_EVENTS_COUNT; flag++)
+    {
+        if (!FlagGet(gSSTidalEventFlags[flag]))
+            FlagSet(gSSTidalEventFlags[flag]);
+    }
+}
+
+void GiveAllSSTidalEventItems(void)
+{
+    for (u32 item = 0; item < SSTIDAL_EVENTS_COUNT; item++)
+    {
+        if (!CheckBagHasItem(gSSTidalEventItems[item], 1))
+            AddBagItem(gSSTidalEventItems[item], 1);
+    }
 }

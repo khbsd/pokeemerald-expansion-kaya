@@ -478,6 +478,10 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	special InitRoamer
 	msgbox PlayersHouse_1F_Text_StillUnknownPokemon, MSGBOX_DEFAULT
 	closemessage
+	msgbox PlayersHouse_1F_Text_OhSSTidalPacket, MSGBOX_DEFAULT
+	closemessage
+	callnative SetAllSSTidalEventFlags
+	callnative GiveAllSSTidalEventItems
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
 	releaseall

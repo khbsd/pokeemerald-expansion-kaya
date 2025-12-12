@@ -385,3 +385,14 @@ PlayersHouse_1F_Text_StillUnknownPokemon:
 	.string "There are still unknown POKéMON.\p"
 	.string "Your choice will have no impact\n"
 	.string "on the roamer you encounter. {EMOJI_BIGSMILE}$"
+
+PlayersHouse_1F_Text_OhSSTidalPacket:
+	.string "{SPEAKER SP_NAME_MOM}Oh, yeah.{PAUSE 20} This packet\n"
+	.string "came for you in the mail.\p"
+	.string "It says S.S. TIDAL finally\n"
+	.string "opened to trainers, and wanted\p"
+	.string "you to be the first to ride!\n"
+	.string "I guess you could say they{PAUSE 60}\p"
+	.string "...{PAUSE 20}\p"
+	.string "...{PAUSE 20}\p"
+	.string "...{PAUSE 30}shipped it to you! {PAUSE 60}{EMOJI_BIGSMILE}$"
