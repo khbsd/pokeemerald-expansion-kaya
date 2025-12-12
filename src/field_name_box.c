@@ -121,7 +121,7 @@ u32 GetNameboxWidth(void)
 static const u32 *GetNameboxGraphics(void)
 {
     if (IsMatchCallTaskActive())
-        return sNameBoxPokenavGfx;
+        return sNameBoxDefaultGfx;
     else
         return sNameBoxDefaultGfx;
 }
