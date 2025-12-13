@@ -2,6 +2,7 @@
 #include "ui_screenshots.h"
 #include "strings.h"
 #include "bg.h"
+#include "comfy_anim.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -114,7 +115,7 @@ static const struct WindowTemplate sScreenshotsWindowTemplates[] =
 
 
 static const u32 sLesbianScreenshotsTiles[] = INCBIN_U32("graphics/screenshots/lesbian/tiles.8bpp.smol");
-static const u32 sLesbianScreenshotsTilemap[] = INCBIN_U32("graphics/screenshots/lesbian/tilemap.bin");
+static const u32 sLesbianScreenshotsTilemap[] = INCBIN_U32("graphics/screenshots/lesbian/tiles.bin.smolTM");
 static const u16 sLesbianScreenshotsPalette[] = INCBIN_U16("graphics/screenshots/lesbian/palette.gbapal");
 
 struct Screenshot {
@@ -194,7 +195,7 @@ static void Screenshots_RunSetup(void)
 static void Screenshots_MainCB(void)
 {
     RunTasks();
-    //AdvanceComfyAnimations();
+    AdvanceComfyAnimations();
     AnimateSprites();
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
@@ -277,7 +278,7 @@ static void Screenshots_FreeResources(void)
     try_free(sScreenshotsDataPtr);
     try_free(sBg1TilemapBuffer);
     try_free(sBg2TilemapBuffer);
-    //ReleaseComfyAnims();
+    ReleaseComfyAnims();
     FreeAllWindowBuffers();
 }
 

@@ -100,6 +100,8 @@ Route103_EventScript_AfterBrendanBattle::
 
 Route103_EventScript_RivalExit::
 	closemessage
+	setvar VAR_0x8000, 0
+	callnative OpenScreenshotsFromScript
 	switch VAR_FACING
 	case DIR_SOUTH, Route103_EventScript_RivalExitFacingSouth
 	case DIR_NORTH, Route103_EventScript_RivalExitFacingNorth
