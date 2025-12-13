@@ -67,6 +67,7 @@
 #include "constants/weather.h"
 #include "constants/pokevial.h"
 #include "constants/speaker_names.h"
+#include "constants/overworld_image.h"
 
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

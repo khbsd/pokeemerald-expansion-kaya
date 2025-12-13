@@ -546,8 +546,11 @@ PetalburgCity_EventScript_Scott::
 	applymovement LOCALID_PETALBURG_SCOTT, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 30
+	setvar VAR_0x8000, OVERWORLDIMAGE_GUILLOTINE
+	callnative DrawOverworldImage
 	msgbox PetalburgCity_Text_WellMaybeNot, MSGBOX_DEFAULT
 	closemessage
+	callnative ClearOverworldImage
 	applymovement LOCALID_PETALBURG_SCOTT, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 30

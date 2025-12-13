@@ -89,7 +89,11 @@ Route103_EventScript_StartBrendanBattleMudkip::
 	end
 
 Route103_EventScript_AfterMayBattle::
+	setvar VAR_0x8000, OVERWORLDIMAGE_LESBIAN
+	callnative DrawOverworldImage
 	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
+	closemessage
+	callnative ClearOverworldImage
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -99,9 +103,6 @@ Route103_EventScript_AfterBrendanBattle::
 	end
 
 Route103_EventScript_RivalExit::
-	closemessage
-	setvar VAR_0x8000, 0
-	callnative OpenScreenshotsFromScript
 	switch VAR_FACING
 	case DIR_SOUTH, Route103_EventScript_RivalExitFacingSouth
 	case DIR_NORTH, Route103_EventScript_RivalExitFacingNorth
@@ -321,7 +322,8 @@ Route103_Text_MayLetsBattle:
 
 Route103_Text_MayDefeated:
 	.string "Wow! That's great!\n"
-	.string "{PLAYER}{KUN}, you're pretty good!$"
+	.string "{PLAYER}{KUN}, you're pretty... {PAUSE 200}\p"
+	.string ".. {PAUSE 200} good!$"
 
 Route103_Text_MayTimeToHeadBack:
 	.string "{SPEAKER SP_NAME_MAY}I think I know why my dad has\n"
