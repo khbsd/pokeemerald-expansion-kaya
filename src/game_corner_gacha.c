@@ -1679,7 +1679,7 @@ u32 GetRandomGachaSpeciesFromHoenn(void)
 
 bool32 IsMythicalOrLegendary(u32 species)
 {
-    bool32 isLegendary = gSpeciesInfo[species].isLegendary;
+    bool32 isLegendary = gSpeciesInfo[species].isRestrictedLegendary;
     bool32 isMythical = gSpeciesInfo[species].isMythical;
 
     return isLegendary || isMythical;
