@@ -19651,7 +19651,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Articuno,
             gShinyOverworldPalette_Articuno
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sArticunoLevelUpLearnset,
         .teachableLearnset = sArticunoTeachableLearnset,
@@ -19719,7 +19719,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_ArticunoGalar,
             gShinyOverworldPalette_ArticunoGalar
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .isGalarianForm = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sArticunoGalarLevelUpLearnset,
@@ -19805,7 +19805,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Zapdos,
             gShinyOverworldPalette_Zapdos
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZapdosLevelUpLearnset,
         .teachableLearnset = sZapdosTeachableLearnset,
@@ -19872,7 +19872,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_ZapdosGalar,
             gShinyOverworldPalette_ZapdosGalar
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .isGalarianForm = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZapdosGalarLevelUpLearnset,
@@ -19982,7 +19982,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Moltres,
             gShinyOverworldPalette_Moltres
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMoltresLevelUpLearnset,
         .teachableLearnset = sMoltresTeachableLearnset,
@@ -20049,7 +20049,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_MoltresGalar,
             gShinyOverworldPalette_MoltresGalar
         )
-        .isLegendary = TRUE,
+        .isSubLegendary = TRUE,
         .isGalarianForm = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMoltresGalarLevelUpLearnset,
@@ -20428,7 +20428,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Mewtwo,
             gShinyOverworldPalette_Mewtwo
         )
-        .isLegendary = TRUE,
+        .isRestrictedLegendary = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMewtwoLevelUpLearnset,
@@ -20511,7 +20511,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_MewtwoMegaX
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isLegendary = TRUE,
+        .isRestrictedLegendary = TRUE,
         .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
@@ -20583,7 +20583,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gShinyOverworldPalette_MewtwoMegaY
         )
     #endif //OW_BATTLE_ONLY_FORMS
-        .isLegendary = TRUE,
+        .isRestrictedLegendary = TRUE,
         .isMegaEvolution = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
