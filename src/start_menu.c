@@ -3,6 +3,7 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "bg.h"
+#include "comfy_anim.h"
 #include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -619,8 +620,24 @@ void ShowStartMenu(void)
     LockPlayerFieldControls();
 }
 
+void ComfyAnimsPointerCallback(void)
+{
+    AdvanceComfyAnimations();
+    u32 cursorPos = Menu_GetCursorPos();
+    u32 newCursorPos = ReadComfyAnimValueSmooth(&gComfyAnims[MENU_POINTER_ANIM_Y]);
+    if (newCursorPos != cursorPos)
+    {
+        DebugPrintf("animated value: %u", newCursorPos);
+        RedrawMenuCursor_Animate(cursorPos, newCursorPos);
+    }
+
+}
+
 static bool8 HandleStartMenuInput(void)
 {
+    if (!gComfyAnims[MENU_POINTER_ANIM_Y].completed)
+        ComfyAnimsPointerCallback();
+
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
@@ -655,6 +672,7 @@ static bool8 HandleStartMenuInput(void)
         {
            FadeScreen(FADE_TO_BLACK, 0);
         }
+        ReleaseComfyAnims();
 
         return FALSE;
     }
@@ -663,6 +681,7 @@ static bool8 HandleStartMenuInput(void)
     {
         RemoveExtraStartMenuWindows();
         HideStartMenu();
+        ReleaseComfyAnims();
         return TRUE;
     }
 

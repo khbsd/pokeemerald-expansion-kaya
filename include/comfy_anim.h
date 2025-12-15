@@ -8,6 +8,21 @@ enum
     COMFY_ANIM_TYPE_SPRING,
 };
 
+enum ComfyAnimIds
+{
+    MENU_POINTER_ANIM_Y,
+    MENU_POINTER_ANIM_X,
+    UI_ANIM_1,
+    UI_ANIM_2,
+    UI_ANIM_3,
+    UI_ANIM_4,
+    SPRITE_ANIM_1,
+    SPRITE_ANIM_2,
+    SPRITE_ANIM_3,
+    SPRITE_ANIM_4,
+    COMFY_ANIMS_COUNT,
+};
+
 // t represents progress of the animation, where 0 is the start of the animation and 1 is the end.
 // The return value is a Q_24_8 fixed-point value.
 typedef s32 (*ComfyAnimEasingFunc)(s32 t /* Q_24_8 */);
@@ -52,6 +67,7 @@ struct ComfyAnimConfig {
         struct ComfyAnimEasingConfig easing;
         struct ComfyAnimSpringConfig spring;
     } data;
+    enum ComfyAnimIds id;
 };
 
 struct ComfyAnimEasingState {
@@ -81,9 +97,8 @@ struct ComfyAnim {
     bool32 inUse;
 };
 
-#define NUM_COMFY_ANIMS     8
-#define INVALID_COMFY_ANIM  NUM_COMFY_ANIMS
-extern struct ComfyAnim gComfyAnims[NUM_COMFY_ANIMS];
+#define INVALID_COMFY_ANIM  COMFY_ANIMS_COUNT
+extern struct ComfyAnim gComfyAnims[COMFY_ANIMS_COUNT];
 
 #define COMFY_ANIM_SPRING_DEFAULT_MASS     Q_24_8(50)
 #define COMFY_ANIM_SPRING_DEFAULT_TENSION  Q_24_8(175)
@@ -97,6 +112,8 @@ void InitComfyAnim_Easing(struct ComfyAnimEasingConfig *config, struct ComfyAnim
 void InitComfyAnim_Spring(struct ComfyAnimSpringConfig *config, struct ComfyAnim *out);
 u32 CreateComfyAnim_Easing(struct ComfyAnimEasingConfig *config);
 u32 CreateComfyAnim_Spring(struct ComfyAnimSpringConfig *config);
+enum ComfyAnimIds CreateComfyAnimWithId_Easing(struct ComfyAnimEasingConfig *config, enum ComfyAnimIds id);
+enum ComfyAnimIds CreateComfyAnimWithId_Spring(struct ComfyAnimSpringConfig *config, enum ComfyAnimIds id);
 void ReleaseComfyAnim(u32 comfyAnimId);
 void ReleaseComfyAnims(void);
 int ReadComfyAnimValueSmooth(struct ComfyAnim *anim);

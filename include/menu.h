@@ -134,5 +134,8 @@ u8 GetSecondaryPopUpWindowId(void);
 void RemoveSecondaryPopUpWindow(void);
 void HBlankCB_DoublePopupWindow(void);
 void RedrawDialogueFrame(void);
+void RedrawMenuCursor_Animate(u32 newPos, u32 oldPos);
+u8 Menu_GetCursorPos(void);
+void ClearCursorPixels(u32 colorIndex); 
 
 #endif // GUARD_MENU_H

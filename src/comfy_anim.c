@@ -2,7 +2,7 @@
 #include "comfy_anim.h"
 #include "math_util.h"
 
-EWRAM_DATA struct ComfyAnim gComfyAnims[NUM_COMFY_ANIMS] = {0};
+EWRAM_DATA struct ComfyAnim gComfyAnims[COMFY_ANIMS_COUNT] = {0};
 
 static void AdvanceComfyAnim_Easing(struct ComfyAnim *anim)
 {
@@ -112,7 +112,7 @@ void AdvanceComfyAnimations(void)
 {
     int i;
 
-    for (i = 0; i < NUM_COMFY_ANIMS; i++)
+    for (i = 0; i < COMFY_ANIMS_COUNT; i++)
     {
         if (gComfyAnims[i].inUse)
             TryAdvanceComfyAnim(&gComfyAnims[i]);
@@ -124,7 +124,7 @@ static u32 GetAvailableComfyAnim(void)
     int i;
 
     // Find the first free comfy anim.
-    for (i = 0; i < NUM_COMFY_ANIMS; i++)
+    for (i = 0; i < COMFY_ANIMS_COUNT; i++)
     {
         if (!gComfyAnims[i].inUse)
             return i;
@@ -148,7 +148,7 @@ void InitComfyAnimConfig_Spring(struct ComfyAnimSpringConfig *config)
 }
 
 void InitComfyAnim_Easing(struct ComfyAnimEasingConfig *config, struct ComfyAnim *out)
-{    
+{
     out->inUse = TRUE;
     out->completed = FALSE;
     out->velocity = 0;
@@ -166,10 +166,20 @@ u32 CreateComfyAnim_Easing(struct ComfyAnimEasingConfig *config)
 
     if (i == INVALID_COMFY_ANIM)
         return i;
-    
+
     anim = &gComfyAnims[i];
     InitComfyAnim_Easing(config, anim);
     return i;
+}
+
+enum ComfyAnimIds CreateComfyAnimWithId_Easing(struct ComfyAnimEasingConfig *config, enum ComfyAnimIds id)
+{
+    struct ComfyAnim *anim;
+
+    anim = &gComfyAnims[id];
+    anim->config.id = id;
+    InitComfyAnim_Easing(config, anim);
+    return anim->config.id;
 }
 
 void InitComfyAnim_Spring(struct ComfyAnimSpringConfig *config, struct ComfyAnim *out)
@@ -191,15 +201,24 @@ u32 CreateComfyAnim_Spring(struct ComfyAnimSpringConfig *config)
 
     if (i == INVALID_COMFY_ANIM)
         return i;
-    
     anim = &gComfyAnims[i];
     InitComfyAnim_Spring(config, anim);
     return i;
 }
 
+enum ComfyAnimIds CreateComfyAnimWithId_Spring(struct ComfyAnimSpringConfig *config, enum ComfyAnimIds id)
+{
+    struct ComfyAnim *anim;
+
+    anim = &gComfyAnims[id];
+    anim->config.id = id;
+    InitComfyAnim_Spring(config, anim);
+    return anim->config.id;
+}
+
 void ReleaseComfyAnim(u32 comfyAnimId)
 {
-    if (comfyAnimId < NUM_COMFY_ANIMS)
+    if (comfyAnimId < COMFY_ANIMS_COUNT)
         gComfyAnims[comfyAnimId].inUse = FALSE;
 }
 
@@ -207,7 +226,7 @@ void ReleaseComfyAnims(void)
 {
     int i;
 
-    for (i = 0; i < NUM_COMFY_ANIMS; i++)
+    for (i = 0; i < COMFY_ANIMS_COUNT; i++)
         ReleaseComfyAnim(i);
 }
 

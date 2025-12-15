@@ -1,6 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "blit.h"
+#include "comfy_anim.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -1035,6 +1036,18 @@ void HofPCTopBar_RemoveWindow(void)
     }
 }
 
+void SetupComfyAnimForPointer(u32 oldPos, u32 newPos)
+{
+    struct ComfyAnimEasingConfig config;
+    InitComfyAnimConfig_Easing(&config);
+    config.durationFrames = 7;
+    config.from = Q_24_8(oldPos);
+    config.to = Q_24_8(newPos);
+    config.easingFunc = ComfyAnimEasing_EaseInOutBack;
+
+    CreateComfyAnimWithId_Easing(&config, MENU_POINTER_ANIM_Y);
+}
+
 static u8 InitMenu(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, bool8 muteAPress)
 {
     s32 pos;
@@ -1071,14 +1084,34 @@ static u8 UNUSED InitMenuDefaultCursorHeight(u8 windowId, u8 fontId, u8 left, u8
     return InitMenuNormal(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos);
 }
 
+void ClearCursorPixels(u32 colorIndex)
+{
+    u32 width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
+    u32 height = (GetMenuCursorDimensionByFont(sMenu.fontId, 1) * (sMenu.maxCursorPos + 7));
+    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, 0, width, height);
+}
+
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
 {
-    u8 width, height;
+    oldPos = sMenu.optionHeight * oldPos + sMenu.top;
+    newPos = sMenu.optionHeight * newPos + sMenu.top;
 
-    width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
-    height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
-    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
+    DebugPrintf("old: %u, new: %u");
+
+    if (newPos != oldPos)
+    {
+        SetupComfyAnimForPointer(oldPos, newPos);
+    }
+    else
+    {
+        RedrawMenuCursor_Animate(oldPos, newPos);
+    }
+}
+
+void RedrawMenuCursor_Animate(u32 oldPos, u32 newPos)
+{
+    ClearCursorPixels(1);
+    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, newPos, 0, 0);
 }
 
 u8 Menu_MoveCursor(s8 cursorDelta)
