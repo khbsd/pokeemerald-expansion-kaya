@@ -18,7 +18,7 @@
 #define MAX_TRAINER_AI_FLAGS 64
 #define TRAINERPROC_PARTY_SIZE 255
 #define MAX_MON_TAGS 32
-#define STARTING_STATUS_COUNT 32
+#define STARTING_STATUS_COUNT 64
 
 struct String
 {
@@ -1682,7 +1682,7 @@ static void fprint_symbol(FILE *f, struct String s)
                 }
                 fputc(c + 'a' - 'A', f);
             }
-            else if ('a' <= c && c <= 'z')
+            else if (('a' <= c && c <= 'z') || ('0' <= c && c <= '9'))
                 fputc(c, f);
             else if (c == '\'')
                 ;
