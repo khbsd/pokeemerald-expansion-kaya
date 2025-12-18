@@ -6,6 +6,7 @@
 #include "config/general.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "config/item.h"
 #include "gba/gba.h"
+#include "assertf.h"
 #include "gametypes.h"
 #include "siirtc.h"
 #include "fpmath.h"
