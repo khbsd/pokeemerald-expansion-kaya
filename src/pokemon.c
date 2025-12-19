@@ -8335,9 +8335,13 @@ u16 GetSpeciesPreEvolution(u16 species)
 
     for (i = SPECIES_BULBASAUR; i < NUM_SPECIES; i++)
     {
+        if (!IsSpeciesEnabled(i))
+            continue;
+
         const struct Evolution *evolutions = GetSpeciesEvolutions(i);
         if (evolutions == NULL)
             continue;
+
         for (j = 0; evolutions[j].method != EVOLUTIONS_END; j++)
         {
             if (SanitizeSpeciesId(evolutions[j].targetSpecies) == species)
