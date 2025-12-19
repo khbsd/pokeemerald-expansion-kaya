@@ -1758,7 +1758,7 @@ static void Cmd_adjustdamage(void)
             gLastUsedItem = gBattleMons[battlerDef].item;
             gBattleStruct->moveResultFlags[battlerDef] |= MOVE_RESULT_FOE_HUNG_ON;
         }
-        else if (B_STURDY >= GEN_5 && GetBattlerAbility(battlerDef) == ABILITY_STURDY && IsBattlerAtMaxHp(battlerDef))
+        else if (GetConfig(CONFIG_STURDY) >= GEN_5 && GetBattlerAbility(battlerDef) == ABILITY_STURDY && IsBattlerAtMaxHp(battlerDef))
         {
             enduredHit |= 1u << battlerDef;
             RecordAbilityBattle(battlerDef, ABILITY_STURDY);
@@ -2195,10 +2195,12 @@ static void MoveDamageDataHpUpdate(u32 battler, u32 scriptBattler, const u8 *nex
     {
         if (gBattleMons[battler].volatiles.substituteHP >= gBattleStruct->moveDamage[battler])
         {
+            TestRunner_Battle_RecordSubHit(battler, gBattleStruct->moveDamage[battler], FALSE);
             gBattleMons[battler].volatiles.substituteHP -= gBattleStruct->moveDamage[battler];
         }
         else
         {
+            TestRunner_Battle_RecordSubHit(battler, gBattleMons[battler].volatiles.substituteHP, TRUE);
             gBattleStruct->moveDamage[battler] = gBattleMons[battler].volatiles.substituteHP;
             gBattleMons[battler].volatiles.substituteHP = 0;
         }
@@ -6146,7 +6148,7 @@ static void Cmd_moveend(void)
             for (i = 0; i < gBattlersCount; i++)
             {
                 if ((gSpecialStatuses[i].berryReduced
-                      || (B_SYMBIOSIS_GEMS >= GEN_7 && gSpecialStatuses[i].gemBoost))
+                      || (GetConfig(CONFIG_SYMBIOSIS_GEMS) >= GEN_7 && gSpecialStatuses[i].gemBoost))
                     && TryTriggerSymbiosis(i, BATTLE_PARTNER(i)))
                 {
                     BestowItem(BATTLE_PARTNER(i), i);
@@ -6274,7 +6276,8 @@ static void Cmd_moveend(void)
             enum BattleMoveEffects originalEffect = GetMoveEffect(originallyUsedMove);
             if (IsBattlerAlive(gBattlerAttacker)
              && originalEffect != EFFECT_BATON_PASS
-             && originalEffect != EFFECT_HEALING_WISH)
+             && originalEffect != EFFECT_HEALING_WISH
+             && originalEffect != EFFECT_LUNAR_DANCE)
             {
                 if (!gBattleStruct->unableToUseMove)
                 {
@@ -8397,7 +8400,7 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId, bool32 moveEnd)
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && GetBattlerHoldEffect(battler) != HOLD_EFFECT_EJECT_BUTTON
         && GetBattlerHoldEffect(battler) != HOLD_EFFECT_EJECT_PACK
-        && (B_SYMBIOSIS_GEMS < GEN_7 || !(gSpecialStatuses[battler].gemBoost))
+        && (GetConfig(CONFIG_SYMBIOSIS_GEMS) < GEN_7 || !(gSpecialStatuses[battler].gemBoost))
         && GetMoveEffect(gCurrentMove) != EFFECT_FLING //Fling and damage-reducing berries are handled separately.
         && !gSpecialStatuses[battler].berryReduced
         && TryTriggerSymbiosis(battler, BATTLE_PARTNER(battler)))
@@ -9110,7 +9113,8 @@ static bool32 IsElectricAbilityAffected(u32 battler, enum Ability ability)
         moveType = GetMoveType(gCurrentMove);
 
     if (moveType == TYPE_ELECTRIC
-     && ((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC) || B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+     && ((ability != ABILITY_LIGHTNING_ROD && ability != ABILITY_GEOELECTRIC)
+      || GetConfig(CONFIG_REDIRECT_ABILITY_IMMUNITY) >= GEN_5)
      && GetBattlerAbility(battler) == ability)
         return TRUE;
     else
@@ -9304,7 +9308,7 @@ static void Cmd_setprotectlike(void)
 
     TryResetProtectUseCounter(gBattlerAttacker);
 
-    if (gCurrentTurnActionNumber == (gBattlersCount - 1))
+    if (IsLastMonToMove(gBattlerAttacker))
         notLastTurn = FALSE;
 
     if ((sProtectSuccessRates[gBattleMons[gBattlerAttacker].volatiles.protectUses] >= RandomUniform(RNG_PROTECT_FAIL, 0, USHRT_MAX) && notLastTurn)
@@ -12240,7 +12244,7 @@ static void Cmd_trysethelpinghand(void)
     }
 }
 
-// Trick // TODO: Sticky Hold
+// Trick
 static void Cmd_tryswapitems(void)
 {
     CMD_ARGS(const u8 *failInstr);
@@ -12285,6 +12289,10 @@ static void Cmd_tryswapitems(void)
             gBattlescriptCurrInstr = cmd->failInstr;
         }
         // check if ability prevents swapping
+        else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_STICKY_HOLD)
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
         else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
         {
             gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
@@ -12674,7 +12682,7 @@ static void Cmd_trysetmagiccoat(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gCurrentTurnActionNumber == gBattlersCount - 1) // moves last turn
+    if (IsLastMonToMove(gBattlerAttacker)) // fails if moving last
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -12690,7 +12698,7 @@ static void Cmd_trysetsnatch(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gCurrentTurnActionNumber == gBattlersCount - 1) // moves last turn
+    if (IsLastMonToMove(gBattlerAttacker)) // fails if moving last
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -15447,7 +15455,7 @@ void BS_StoreHealingWish(void)
     NATIVE_ARGS(u8 battler);
 
     u32 battler = GetBattlerForBattleScript(cmd->battler);
-    if (gCurrentMove == MOVE_LUNAR_DANCE)
+    if (GetMoveEffect(gCurrentMove) == EFFECT_LUNAR_DANCE)
         gBattleStruct->battlerState[battler].storedLunarDance = TRUE;
     else
         gBattleStruct->battlerState[battler].storedHealingWish = TRUE;
@@ -16906,11 +16914,11 @@ void BS_TryInstruct(void)
             if (gBattleMons[gBattlerTarget].moves[moveIndex] == gCalledMove)
             {
                 gCurrMovePos = moveIndex;
-                moveIndex = 4;
+                moveIndex = MAX_MON_MOVES;
                 break;
             }
         }
-        if (moveIndex != 4 || gBattleMons[gBattlerTarget].pp[gCurrMovePos] == 0)
+        if (moveIndex != MAX_MON_MOVES || gBattleMons[gBattlerTarget].pp[gCurrMovePos] == 0)
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -17042,6 +17050,7 @@ void BS_TryBestow(void)
         || gBattleMons[gBattlerTarget].item != ITEM_NONE
         || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerAttacker].item)
         || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, gBattleMons[gBattlerAttacker].item)
+        || GetBattlerAbility(gBattlerAttacker) == ABILITY_STICKY_HOLD
         || gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerTarget)] & (1u << gBattlerPartyIndexes[gBattlerTarget]))
     {
         gBattlescriptCurrInstr = cmd->failInstr;

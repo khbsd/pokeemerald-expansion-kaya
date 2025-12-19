@@ -376,9 +376,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
             nature = Random() % NUM_NATURES;
     }
 
-    if (playerIsKaya && RandomPercentage(RNG_GENDER, 80))
-        gender = MON_FEMALE;
-
     // create a Pokémon with basic data
     // TODO: Use another value for "any gender" so that we can report an
     // error if genderless.

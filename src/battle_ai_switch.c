@@ -584,14 +584,14 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler)
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_DRY_SKIN;
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_STEAM_ENGINE;
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_BRINEBLOOD;
-        if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+        if (GetConfig(CONFIG_REDIRECT_ABILITY_IMMUNITY) >= GEN_5)
             absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_STORM_DRAIN;
     }
     else if (incomingType == TYPE_ELECTRIC || (isOpposingBattlerChargingOrInvulnerable && incomingType == TYPE_ELECTRIC))
     {
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_VOLT_ABSORB;
         absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_MOTOR_DRIVE;
-        if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+        if (GetConfig(CONFIG_REDIRECT_ABILITY_IMMUNITY) >= GEN_5)
         {
             absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_LIGHTNING_ROD;
             absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_GEOELECTRIC;
@@ -1596,7 +1596,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
     {
         if (status & STATUS1_BURN)
         {
-            if (B_BURN_DAMAGE >= GEN_7)
+            if (GetConfig(CONFIG_BURN_DAMAGE) >= GEN_7)
                 statusDamage = maxHP / 16;
             else
                 statusDamage = maxHP / 8;
@@ -1607,7 +1607,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
         }
         else if (status & STATUS1_FROSTBITE)
         {
-            if (B_BURN_DAMAGE >= GEN_7)
+            if (GetConfig(CONFIG_BURN_DAMAGE) >= GEN_7)
                 statusDamage = maxHP / 16;
             else
                 statusDamage = maxHP / 8;
@@ -1707,7 +1707,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler, const struct Incomi
         currentHP = currentHP - damageTaken;
 
         // One shot prevention effects
-        if (damageTaken >= maxHP && startingHP == maxHP && (heldItemEffect == HOLD_EFFECT_FOCUS_SASH || (!opponentCanBreakMold && B_STURDY >= GEN_5 && ability == ABILITY_STURDY)) && hitsToKO < 1)
+        if (damageTaken >= maxHP && startingHP == maxHP && (heldItemEffect == HOLD_EFFECT_FOCUS_SASH || (!opponentCanBreakMold && GetConfig(CONFIG_STURDY) >= GEN_5 && ability == ABILITY_STURDY)) && hitsToKO < 1)
             currentHP = 1;
 
         // If mon is still alive, apply weather impact first, as it might KO the mon before it can heal with its item (order is weather -> item -> status)
