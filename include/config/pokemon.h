@@ -81,7 +81,7 @@
 #define P_BADGE_BOOST_POKERUS_CHANCE     80          // How much each badge boosts your chance to get Pokérus
 
 // Learnset helper toggles
-#define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/make_teachables.py using the included JSON files based on available TMs and tutors.
+#define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If FALSE, make sure to remove teachable_learnset.h from your .gitignore file. If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/make_teachables.py using the included JSON files based on available TMs and tutors.
 #define P_TUTOR_MOVES_ARRAY              TRUE   // If TRUE, generates a gTutorMoves array automatically using make_teachables.py. (generally not needed, but the HGSS Pokedex has an optional use for it)
 
 // Flag settings

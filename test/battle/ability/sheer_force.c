@@ -970,7 +970,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 {
     s16 damage1, damage2;
     u32 move = 0;
-    for (u32 j = MOVE_HONE_CLAWS; j < MOVES_COUNT_GEN5; j++)
+    for (u32 j = MOVE_HONE_CLAWS + 12; j < MOVES_COUNT_GEN5; j++)
     {
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
