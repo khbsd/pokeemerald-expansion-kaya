@@ -1870,8 +1870,8 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sBurmyTeachableLearnset,
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WORMADAM_PLANT, CONDITIONS({IF_GENDER, MON_FEMALE})},
-                                {EVO_LEVEL, 20, SPECIES_MOTHIM_PLANT, CONDITIONS({IF_GENDER, MON_MALE})}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DAWN_STONE, SPECIES_WORMADAM_PLANT},
+                                {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MOTHIM_PLANT}),
     },
 
     [SPECIES_BURMY_SANDY] =
@@ -1939,8 +1939,8 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sBurmyTeachableLearnset,
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WORMADAM_SANDY, CONDITIONS({IF_GENDER, MON_FEMALE})},
-                                {EVO_LEVEL, 20, SPECIES_MOTHIM_SANDY, CONDITIONS({IF_GENDER, MON_MALE})}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DAWN_STONE, SPECIES_WORMADAM_SANDY},
+                                {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MOTHIM_SANDY}),
     },
 
     [SPECIES_BURMY_TRASH] =
@@ -2008,8 +2008,8 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sBurmyTeachableLearnset,
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WORMADAM_TRASH, CONDITIONS({IF_GENDER, MON_FEMALE})},
-                                {EVO_LEVEL, 20, SPECIES_MOTHIM_TRASH, CONDITIONS({IF_GENDER, MON_MALE})}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DAWN_STONE, SPECIES_WORMADAM_TRASH},
+                                {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MOTHIM_TRASH}),
     },
 
     [SPECIES_WORMADAM_PLANT] =
@@ -2225,7 +2225,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .evYield_Attack = 1,                                                \
         .evYield_SpAttack = 1,                                              \
         .itemRare = ITEM_SILVER_POWDER,                                     \
-        .genderRatio = MON_MALE,                                            \
+        .genderRatio = PERCENT_FEMALE(50),                                  \
         .eggCycles = 15,                                                    \
         .friendship = STANDARD_FRIENDSHIP,                                  \
         .growthRate = GROWTH_MEDIUM_FAST,                                   \

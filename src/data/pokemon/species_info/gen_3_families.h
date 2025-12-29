@@ -2816,10 +2816,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sKirliaLevelUpLearnset,
         .teachableLearnset = sKirliaTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR}
-                            #if P_GEN_4_CROSS_EVOS
-                                ,{EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE, CONDITIONS({IF_GENDER, MON_MALE})}
-                            #endif
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_GARDEVOIR},
+                                {EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE}
                             ),
     },
 
@@ -2992,7 +2990,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .expYield = 208,
     #endif
         .evYield_Attack = 3,
-        .genderRatio = MON_MALE,
+        .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
@@ -3070,7 +3068,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 309 : 278,
         .evYield_Attack = 3,
-        .genderRatio = MON_MALE,
+        .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
@@ -5829,7 +5827,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     #endif
         .evYield_Speed = 1,
         .itemRare = ITEM_BRIGHT_POWDER,
-        .genderRatio = MON_MALE,
+        .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_ERRATIC,

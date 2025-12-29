@@ -580,14 +580,6 @@ void CreateWildMon(u16 species, u8 level)
         return;
     }
 
-    CheckIfPlayerIsKaya();
-    if (playerIsKaya)
-    {
-        u32 gender = MON_FEMALE;
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
-        return;
-    }
-
     CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
 }
 #ifdef BUGFIX

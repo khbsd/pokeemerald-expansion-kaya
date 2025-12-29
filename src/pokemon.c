@@ -1894,7 +1894,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
 
     if (hasFixedPersonality)
+    {
         personality = fixedPersonality;
+    }
+
+    if (RandomPercentage(RNG_GENDER, 90)
+        && playerIsKaya
+        && GetGenderFromSpeciesAndPersonality(species, personality) != MON_FEMALE
+        && gSpeciesInfo[species].genderRatio != MON_MALE)
+    {
+        DebugPrintf("forcefem teehee");
+        personality = AdjustMonGender(personality, MON_FEMALE, species);
+    }
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
@@ -2969,6 +2980,36 @@ void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species)
     UpdateMonPersonality(&mon->box, newPersonality);
     SetMonData(mon, MON_DATA_IS_SHINY, &isShiny);
     CalculateMonStats(mon);
+}
+
+u32 AdjustMonGender(u32 personality, u32 gender, u32 species)
+{
+    u32 newPersonality;
+    u32 nature = GetNatureFromPersonality(personality);
+
+    if (species == SPECIES_MARILL || species == SPECIES_COTTONEE)
+    {
+        u32 genderTable[] =
+        {
+            MON_MALE,
+            MON_FEMALE,
+            MON_GENDERLESS,
+        };
+
+        if (gSaveBlock2Ptr->playerIsKaya)
+            gender = MON_FEMALE;
+        else
+            gender = genderTable[RandomUniform(RNG_GENDER, 0, 2)];
+    }
+
+    do
+        newPersonality = Random32();
+    while ((GetNatureFromPersonality(newPersonality) != nature) ||
+           (GetGenderFromSpeciesAndPersonality(species, newPersonality) != gender));
+
+    DebugPrintf("personality: %u", newPersonality);
+
+    return newPersonality;
 }
 
 bool32 IsPersonalityFemale(u16 species, u32 personality)

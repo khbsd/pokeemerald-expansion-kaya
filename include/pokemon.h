@@ -922,6 +922,7 @@ u32 GetRandomPokerusDays(void);
 u32 CalculateBoxCount(void);
 u32 ChangeGenderInPersonality(struct Pokemon *mon, u32 gender);
 void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species);
+u32 AdjustMonGender(u32 personality, u32 gender, u32 species);
 bool32 IsSpeciesOfType(u32 species, enum Type type);
 u32 GetSetSeenLevel(enum HoennDexOrder hoennNum, enum HandleSeenLevel caseId);
 
