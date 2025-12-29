@@ -5720,7 +5720,6 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 && IsBattlerTurnDamaged(gBattlerTarget)
                 && CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, gBattleMons[gBattlerTarget].item))
                 {
-                    DebugPrintf("item: %S", GetItemName(gBattleMons[gBattlerAttacker].item));
                     u32 side = GetBattlerSide(gBattlerTarget);
 
                     if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)

@@ -3007,8 +3007,6 @@ u32 AdjustMonGender(u32 personality, u32 gender, u32 species)
     while ((GetNatureFromPersonality(newPersonality) != nature) ||
            (GetGenderFromSpeciesAndPersonality(species, newPersonality) != gender));
 
-    DebugPrintf("personality: %u", newPersonality);
-
     return newPersonality;
 }
 
