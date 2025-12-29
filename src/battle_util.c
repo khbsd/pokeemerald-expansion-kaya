@@ -5710,7 +5710,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
         }
         break;
         case ABILITY_KLUTZ:
-        if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 100) : RandomChance(RNG_KLUTZ, 1, 3))
+        if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 30) : RandomChance(RNG_KLUTZ, 1, 3))
             {
                 if (gBattleMons[gBattlerTarget].item != ITEM_NONE
                 && !(B_KNOCK_OFF_REMOVAL >= GEN_5
