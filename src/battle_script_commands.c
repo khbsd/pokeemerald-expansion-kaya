@@ -2655,7 +2655,7 @@ u32 GetBattlerTurnOrderNum(u32 battler)
     return i;
 }
 
-static void CheckSetUnburden(u8 battler)
+void CheckSetUnburden(u8 battler)
 {
     if (IsAbilityAndRecord(battler, GetBattlerAbility(battler), ABILITY_UNBURDEN))
         gBattleMons[battler].volatiles.unburdenActive = TRUE;

@@ -5484,25 +5484,6 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 }
             effect++;
             break;
-        case ABILITY_KLUTZ:
-            if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 30) : RandomChance(RNG_KLUTZ, 1, 3))
-            {
-                if (!(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
-                    && IsBattlerAlive(gBattlerAttacker)
-                    && !gBattleStruct->unableToUseMove
-                    && IsBattlerTurnDamaged(gBattlerTarget)
-                    && gBattleMons[gBattlerTarget].item != ITEM_NONE
-                    && CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, gBattleMons[gBattlerTarget].item)
-                    && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move))
-                {
-                    gBattleScripting.moveEffect = EFFECT_KNOCK_OFF;
-                    gBattleScripting.battler = gBattlerTarget;
-                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
-                    BattleScriptCall(BattleScript_KnockedOff);
-                    effect++;
-                }
-            }
-            break;
         case ABILITY_FLAME_BODY:
             if (IsBattlerAlive(gBattlerAttacker)
              && !gBattleStruct->unableToUseMove
@@ -5727,6 +5708,51 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 effect++;
             }
         }
+        break;
+        case ABILITY_KLUTZ:
+        if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_KLUTZ, 100) : RandomChance(RNG_KLUTZ, 1, 3))
+            {
+                if (gBattleMons[gBattlerTarget].item != ITEM_NONE
+                && !(B_KNOCK_OFF_REMOVAL >= GEN_5
+                && side == B_SIDE_PLAYER
+                && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+                && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move)
+                && IsBattlerTurnDamaged(gBattlerTarget)
+                && CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, gBattleMons[gBattlerTarget].item))
+                {
+                    DebugPrintf("item: %S", GetItemName(gBattleMons[gBattlerAttacker].item));
+                    u32 side = GetBattlerSide(gBattlerTarget);
+
+                    if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
+                    {
+                        gBattlerAbility = gBattlerTarget;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_StickyHoldActivatesRet;
+                        break;
+                    }
+                    gLastUsedItem = gBattleMons[gBattlerTarget].item;
+                    gBattleMons[gBattlerTarget].item = 0;
+                    if (gBattleMons[gBattlerTarget].ability != ABILITY_GORILLA_TACTICS)
+                        gBattleStruct->choicedMove[gBattlerTarget] = MOVE_NONE;
+                    CheckSetUnburden(gBattlerTarget);
+
+                    // In Gen 5+, Knock Off removes the target's item rather than rendering it unusable
+                    if (B_KNOCK_OFF_REMOVAL >= GEN_5)
+                    {
+                        BtlController_EmitSetMonData(gBattlerTarget, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
+                        MarkBattlerForControllerExec(gBattlerTarget);
+                        // Mark item as stolen so it will be restored after battle
+                        gBattleStruct->itemLost[side][gBattlerPartyIndexes[gBattlerTarget]].stolen = TRUE;
+                    }
+                    else
+                    {
+                        GetBattlerPartyState(gBattlerTarget)->knockedOffItem = TRUE;
+                    }
+
+                    BattleScriptCall(BattleScript_KnockedOff);
+                }
+            }
+            effect++;
             break;
         case ABILITY_POISON_TOUCH:
             if (IsBattlerAlive(gBattlerTarget)
