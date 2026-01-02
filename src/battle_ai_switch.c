@@ -1182,14 +1182,8 @@ bool32 ShouldSwitchDynFuncExample(u32 battler)
     return FALSE;
 }
 
-bool32 ShouldSwitch(u32 battler)
+static bool32 CanBattlerConsiderSwitch(u32 battler)
 {
-    u32 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
-    struct Pokemon *party;
-    s32 availableToSwitch;
-
     if (gBattleMons[battler].volatiles.wrapped)
         return FALSE;
     if (gBattleMons[battler].volatiles.escapePrevention)
@@ -1198,7 +1192,22 @@ bool32 ShouldSwitch(u32 battler)
         return FALSE;
     if (IsAbilityPreventingEscape(battler))
         return FALSE;
+    if (gBattleStruct->battlerState[battler].commanderSpecies)
+        return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        return FALSE;
+    return TRUE;
+}
+
+bool32 ShouldSwitch(u32 battler)
+{
+    u32 battlerIn1, battlerIn2;
+    s32 firstId;
+    s32 lastId; // + 1
+    struct Pokemon *party;
+    s32 availableToSwitch;
+
+    if (!CanBattlerConsiderSwitch(battler))
         return FALSE;
 
     // Sequence Switching AI never switches mid-battle
@@ -1333,15 +1342,7 @@ void ModifySwitchAfterMoveScoring(u32 battler)
     struct Pokemon *party;
     s32 availableToSwitch;
 
-    if (gBattleMons[battler].volatiles.wrapped)
-        return;
-    if (gBattleMons[battler].volatiles.escapePrevention)
-        return;
-    if (gBattleMons[battler].volatiles.root)
-        return;
-    if (IsAbilityPreventingEscape(battler))
-        return;
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+    if (!CanBattlerConsiderSwitch(battler))
         return;
 
     // Sequence Switching AI never switches mid-battle

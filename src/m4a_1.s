@@ -745,7 +745,7 @@ fast_mixing_instructions:
 	/* mix the first 4 stereo samples, then the next 4. */
 	.rept 2
 	  ldmia r5, {r0, r1, r10, lr}       @ load the next 4 stereo samples
-	  .irp reg, r0, r1, r10, lr			
+	  .irp reg, r0, r1, r10, lr
 	    mulne r9, r7, r12
 	    nop                               @ Block #1
 	    nop
