@@ -368,8 +368,6 @@ bool8 CheckForTrainersWantingBattle(void)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        u8 numTrainers;
-
         if (!gObjectEvents[i].active)
             continue;
         if (gObjectEvents[i].trainerType != TRAINER_TYPE_NORMAL && gObjectEvents[i].trainerType != TRAINER_TYPE_SEE_ALL_DIRECTIONS && gObjectEvents[i].trainerType != TRAINER_TYPE_BURIED)
@@ -403,8 +401,8 @@ bool8 CheckForTrainersWantingBattle(void)
     if (InBattlePyramid_() || InTrainerHillChallenge())
     {
         u8 facility = InBattlePyramid_() ? FACILITY_BATTLE_PYRAMID : FACILITY_BATTLE_TRAINER_HILL;
-        
-        if (gNoOfApproachingTrainers > 0) 
+
+        if (gNoOfApproachingTrainers > 0)
         {
             ResetTrainerOpponentIds();
             InitTrainerBattleParameter();
@@ -412,7 +410,7 @@ bool8 CheckForTrainersWantingBattle(void)
             gSelectedObjectEvent = gApproachingTrainers[0].objectEventId;
             gSpecialVar_LastTalked = gObjectEvents[gApproachingTrainers[0].objectEventId].localId;
             BattleSetup_ConfigureFacilityTrainerBattle(facility, gApproachingTrainers[0].trainerScriptPtr + 2);
-            if (gNoOfApproachingTrainers > 1) 
+            if (gNoOfApproachingTrainers > 1)
             {
                 gApproachingTrainerId++;
                 gSelectedObjectEvent = gApproachingTrainers[1].objectEventId;

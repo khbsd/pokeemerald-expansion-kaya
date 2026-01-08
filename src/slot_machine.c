@@ -651,6 +651,12 @@ static void SpriteCB_ReelTimeDuck(struct Sprite *);
 static void SpriteCB_ReelTimeSmoke(struct Sprite *);
 static void SpriteCB_PikaPowerBolt(struct Sprite *);
 
+static const u8 sText_QuitTheGame[] = _("Quit the game?");
+static const u8 sText_YouveGot9999Coins[] = _("You've got 9,999 COINS.");
+static const u8 sText_YouveRunOutOfCoins[] = _("You've run out of COINS.\nGame over!");
+static const u8 sText_YouDontHaveThreeCoins[] = _("You don't have three COINS.");
+static const u8 sText_ReelTimeHelp[] = _("REEL TIME\nHere's your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.");
+
 // Ewram variables
 static EWRAM_DATA u16 *sMenuGfx = NULL;
 static EWRAM_DATA u16 *sSelectedPikaPowerTile = NULL;
@@ -1406,7 +1412,7 @@ static bool8 SlotTask_HandleBetInput(struct Task *task)
 static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(WIN_MSG, FALSE);
-    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, sText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NEED_3_COINS;
     return FALSE;
@@ -1671,7 +1677,7 @@ static bool8 SlotTask_NoMatches(struct Task *task)
 static bool8 SlotTask_AskQuit(struct Task *task)
 {
     DrawDialogueFrame(WIN_MSG, FALSE);
-    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
+    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, sText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = SLOTTASK_HANDLE_QUIT_INPUT;
@@ -1703,7 +1709,7 @@ static bool8 SlotTask_HandleQuitInput(struct Task *task)
 static bool8 SlotTask_PrintMsg_MaxCoins(struct Task *task)
 {
     DrawDialogueFrame(WIN_MSG, FALSE);
-    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, sText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_MAX_COINS;
     return FALSE;
@@ -1724,7 +1730,7 @@ static bool8 SlotTask_WaitMsg_MaxCoins(struct Task *task)
 static bool8 SlotTask_PrintMsg_NoMoreCoins(struct Task *task)
 {
     DrawDialogueFrame(WIN_MSG, FALSE);
-    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
+    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, sText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NO_MORE_COINS;
     return FALSE;
@@ -3944,7 +3950,7 @@ static void InfoBox_DrawWindow(struct Task *task)
 
 static void InfoBox_AddText(struct Task *task)
 {
-    AddTextPrinterParameterized3(WIN_INFO, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
+    AddTextPrinterParameterized3(WIN_INFO, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, sText_ReelTimeHelp);
     CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     task->tState++;

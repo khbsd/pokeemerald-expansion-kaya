@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "event_data.h"
+#include "ow_synchronize.h"
 #include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
@@ -103,9 +104,14 @@ void MoveAllRoamers(void)
 static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
 {
     ClearRoamerLocationHistory(index);
-    CreateMon(&gEnemyParty[0], species, GetAdjustedLevel(level), USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    u32 personality = GetMonPersonality(species,
+        GetSynchronizedGender(ROAMER_ORIGIN, species),
+        GetSynchronizedNature(ROAMER_ORIGIN, species),
+        RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(&gEnemyParty[0], species, GetAdjustedLevel(level), personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     if (GetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY))
         PlaySE(SE_SHINY);
+    GiveMonInitialMoveset(&gEnemyParty[0]);
     ROAMER(index)->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
     ROAMER(index)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;

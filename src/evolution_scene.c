@@ -1037,7 +1037,7 @@ static void Task_EvolutionScene(u8 taskId)
                 else
                 {
                     // Selected move to forget
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    enum Move move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (CannotForgetMove(move))
                     {
                         // Can't forget HMs
@@ -1435,7 +1435,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 else
                 {
                     // Selected move to forget
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    enum Move move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (CannotForgetMove(move))
                     {
                         // Can't forget HMs

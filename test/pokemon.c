@@ -19,7 +19,9 @@ TEST("Nature independent from Hidden Nature")
             PARAMETRIZE { nature = i; hiddenNature = j; }
         }
     }
-    CreateMonWithNature(&mon, SPECIES_WOBBUFFET, 100, 0, nature);
+    u32 species = SPECIES_WOBBUFFET;
+    u32 personality = GetMonPersonality(species, MON_GENDER_RANDOM, nature, RANDOM_UNOWN_LETTER);
+    CreateMon(&mon, species, 100, personality, OTID_STRUCT_PLAYER_ID);
     SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
     EXPECT_EQ(GetNature(&mon), nature);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), hiddenNature);
@@ -31,7 +33,7 @@ TEST("Terastallization type defaults to primary or secondary type")
     enum Type teraType;
     struct Pokemon mon;
     for (i = 0; i < 128; i++) PARAMETRIZE {}
-    CreateMon(&mon, SPECIES_PIDGEY, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&mon, SPECIES_PIDGEY, 100, 0);
     teraType = GetMonData(&mon, MON_DATA_TERA_TYPE);
     EXPECT(teraType == GetSpeciesType(SPECIES_PIDGEY, 0)
         || teraType == GetSpeciesType(SPECIES_PIDGEY, 1));
@@ -46,7 +48,7 @@ TEST("Terastallization type can be set to any type except TYPE_NONE")
     {
         PARAMETRIZE { teraType = i; }
     }
-    CreateMon(&mon, SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&mon, SPECIES_WOBBUFFET, 100, 0);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
     EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
 }
@@ -60,7 +62,7 @@ TEST("Terastallization type is reset to the default types when setting Tera Type
     {
         PARAMETRIZE { teraType = i; typeNone = TYPE_NONE; }
     }
-    CreateMon(&mon, SPECIES_PIDGEY, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&mon, SPECIES_PIDGEY, 100, 0);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
     EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
     if (typeNone == TYPE_NONE)
@@ -77,7 +79,7 @@ TEST("Shininess independent from PID and OTID")
     bool32 isShiny;
     struct Pokemon mon;
     PARAMETRIZE { pid = 0; otId = 0; }
-    CreateMon(&mon, SPECIES_WOBBUFFET, 100, 0, TRUE, pid, OT_ID_PRESET, otId);
+    CreateMon(&mon, SPECIES_WOBBUFFET, 100, pid, OTID_STRUCT_PRESET(otId));
     isShiny = IsMonShiny(&mon);
     data = !isShiny;
     SetMonData(&mon, MON_DATA_IS_SHINY, &data);
@@ -90,8 +92,7 @@ TEST("Hyper Training increases stats without affecting IVs")
 {
     u32 data, hp, atk, def, speed, spatk, spdef, friendship = 0;
     struct Pokemon mon;
-    CreateMon(&mon, SPECIES_WOBBUFFET, 100, 3, TRUE, 0, OT_ID_PRESET, 0);
-
+    CreateMonWithIVs(&mon, SPECIES_WOBBUFFET, 100, 0, OTID_STRUCT_PRESET(0), 3);
     // Consider B_FRIENDSHIP_BOOST.
     SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
     CalculateMonStats(&mon);
@@ -144,7 +145,7 @@ TEST("Status1 round-trips through BoxPokemon")
     PARAMETRIZE { status1 = STATUS1_PARALYSIS; }
     PARAMETRIZE { status1 = STATUS1_TOXIC_POISON; }
     PARAMETRIZE { status1 = STATUS1_FROSTBITE; }
-    CreateMon(&mon1, SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&mon1, SPECIES_WOBBUFFET, 100, 0);
     SetMonData(&mon1, MON_DATA_STATUS, &status1);
     BoxMonToMon(&mon1.box, &mon2);
     EXPECT_EQ(GetMonData(&mon2, MON_DATA_STATUS), status1);
@@ -153,7 +154,7 @@ TEST("Status1 round-trips through BoxPokemon")
 TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate stats")
 {
     u32 atk, friendship = 0;
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0);
 
     // Consider B_FRIENDSHIP_BOOST.
     SetMonData(&gPlayerParty[0], MON_DATA_FRIENDSHIP, &friendship);
@@ -177,7 +178,7 @@ TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate s
 
 TEST("hasgigantamaxfactor/togglegigantamaxfactor affect MON_DATA_GIGANTAMAX_FACTOR")
 {
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0);
 
     RUN_OVERWORLD_SCRIPT(
         hasgigantamaxfactor 0;
@@ -201,7 +202,7 @@ TEST("hasgigantamaxfactor/togglegigantamaxfactor affect MON_DATA_GIGANTAMAX_FACT
 
 TEST("togglegigantamaxfactor fails for Melmetal")
 {
-    CreateMon(&gPlayerParty[0], SPECIES_MELMETAL, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&gPlayerParty[0], SPECIES_MELMETAL, 100, 0);
 
     RUN_OVERWORLD_SCRIPT(
         hasgigantamaxfactor 0;
@@ -269,6 +270,40 @@ TEST("givemon respects perfectIVCount")
         }
         EXPECT_GE(perfectIVs[j], LEGENDARY_PERFECT_IV_COUNT);
     }
+}
+
+TEST("givemon respects perfectIVCount but does overwrite fixed IVs (1)")
+{
+    ZeroPlayerPartyMons();
+
+    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_MEW, 100, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_IV), 7);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_IV), 8);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_IV), 9);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), 10);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), 11);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), 12);
+}
+
+TEST("givemon respects perfectIVCount but does overwrite fixed IVs (2)")
+{
+    ZeroPlayerPartyMons();
+
+    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_MEW, 100, hpIv=7, atkIv=8, defIv=9
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_IV), 7);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_IV), 8);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_IV), 9);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), MAX_PER_STAT_IVS);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), MAX_PER_STAT_IVS);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), MAX_PER_STAT_IVS);
 }
 
 TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
@@ -408,7 +443,7 @@ TEST("givemon [vars]")
 
 TEST("checkteratype/setteratype work")
 {
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    CreateRandomMonWithIVs(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0);
 
     RUN_OVERWORLD_SCRIPT(
         checkteratype 0;
@@ -459,7 +494,7 @@ TEST("Pokémon level up learnsets fit within MAX_LEVEL_UP_MOVES and MAX_RELEARNE
 
 TEST("Optimised GetMonData")
 {
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 5, 0, FALSE, 0, OT_ID_PRESET, 0x12345678);
+    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 5, Random32(), OTID_STRUCT_PRESET(0x12345678));
     u32 exp = 0x123456;
     SetMonData(&gPlayerParty[0], MON_DATA_EXP, &exp);
     struct Benchmark optimised,
@@ -472,7 +507,7 @@ TEST("Optimised GetMonData")
 
 TEST("Optimised SetMonData")
 {
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 5, 0, FALSE, 0, OT_ID_PRESET, 0x12345678);
+    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 5, Random32(), OTID_STRUCT_PRESET(0x12345678));
     u32 exp = 0x123456;
     struct Benchmark optimised,
         vanilla = (struct Benchmark) { .ticks = 205 }; // From prior testing

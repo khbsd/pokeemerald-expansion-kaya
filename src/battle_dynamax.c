@@ -22,7 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static u32 GetMaxPowerTier(u32 move);
+static u32 GetMaxPowerTier(enum Move move);
 
 struct GMaxMove
 {
@@ -218,7 +218,7 @@ void UndoDynamax(u32 battler)
 }
 
 // Certain moves are blocked by Max Guard that normally ignore protection.
-bool32 IsMoveBlockedByMaxGuard(u32 move)
+bool32 IsMoveBlockedByMaxGuard(enum Move move)
 {
     switch (move)
     {
@@ -232,8 +232,9 @@ bool32 IsMoveBlockedByMaxGuard(u32 move)
         case MOVE_TEATIME:
         case MOVE_TRANSFORM:
             return TRUE;
+        default:
+            return FALSE;
     }
-    return FALSE;
 }
 
 static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
@@ -265,7 +266,7 @@ static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
-u16 GetMaxMove(u32 battler, u32 baseMove)
+enum Move GetMaxMove(u32 battler, enum Move baseMove)
 {
     enum Type moveType;
     SetTypeBeforeUsingMove(baseMove, battler);
@@ -303,7 +304,7 @@ enum
 };
 
 // Gets the base power of a Max Move.
-u32 GetMaxMovePower(u32 move)
+u32 GetMaxMovePower(enum Move move)
 {
     u32 tier;
     // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
@@ -317,6 +318,7 @@ u32 GetMaxMovePower(u32 move)
         case MOVE_GEAR_GRIND:    return 100;
         case MOVE_DUAL_WINGBEAT: return 100;
         case MOVE_TRIPLE_AXEL:   return 140;
+        default: break;
     }
 
     tier = GetMaxPowerTier(move);
@@ -355,7 +357,7 @@ u32 GetMaxMovePower(u32 move)
     }
 }
 
-static u32 GetMaxPowerTier(u32 move)
+static u32 GetMaxPowerTier(enum Move move)
 {
     u32 strikeCount = GetMoveStrikeCount(move);
     if (strikeCount >= 2 && strikeCount <= 5)
@@ -435,7 +437,7 @@ static u32 GetMaxPowerTier(u32 move)
 }
 
 // Returns whether a move is a Max Move or not.
-bool32 IsMaxMove(u32 move)
+bool32 IsMaxMove(enum Move move)
 {
     return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
 }

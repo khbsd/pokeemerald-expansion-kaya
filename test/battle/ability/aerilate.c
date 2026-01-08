@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Aerilate turns a Normal-type move into Flying-type move")
 SINGLE_BATTLE_TEST("Aerilate can not turn certain moves into Flying type moves")
 {
     KNOWN_FAILING; // mons adjusted
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_WEATHER_BALL; }
     // PARAMETRIZE { move = MOVE_NATURAL_GIFT; } TODO: handle this case via Skill Swap
     PARAMETRIZE { move = MOVE_JUDGMENT; }
@@ -50,7 +50,8 @@ SINGLE_BATTLE_TEST("Aerilate can not turn certain moves into Flying type moves")
 SINGLE_BATTLE_TEST("Aerilate boosts power of affected moves by 20% (Gen7+) or 30% (Gen1-6)", s16 damage)
 {
     KNOWN_FAILING; // adjusted
-    u32 move, genConfig;
+    enum Move move;
+    u32 genConfig;
     PARAMETRIZE { move = MOVE_CELEBRATE;   genConfig = GEN_7; }
     PARAMETRIZE { move = MOVE_CELEBRATE;   genConfig = GEN_6; }
     PARAMETRIZE { move = MOVE_SKILL_SWAP;  genConfig = GEN_7; }
@@ -76,7 +77,7 @@ SINGLE_BATTLE_TEST("Aerilate boosts power of affected moves by 20% (Gen7+) or 30
 
 SINGLE_BATTLE_TEST("Aerilate doesn't affect Weather Ball's type", s16 damage)
 {
-    u32 move1, move2;
+    enum Move move1, move2;
     PARAMETRIZE { move1 = MOVE_CELEBRATE; move2 = MOVE_CELEBRATE; }
     PARAMETRIZE { move1 = MOVE_SUNNY_DAY; move2 = MOVE_CELEBRATE; }
     PARAMETRIZE { move1 = MOVE_CELEBRATE; move2 = MOVE_SKILL_SWAP; }
@@ -107,7 +108,7 @@ SINGLE_BATTLE_TEST("Aerilate doesn't affect Weather Ball's type", s16 damage)
 
 SINGLE_BATTLE_TEST("Aerilate doesn't affect Natural Gift's type")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_SKILL_SWAP; }
     GIVEN {
@@ -128,7 +129,8 @@ SINGLE_BATTLE_TEST("Aerilate doesn't affect Natural Gift's type")
 
 SINGLE_BATTLE_TEST("Aerilate doesn't affect Judgment / Techno Blast / Multi-Attack's type")
 {
-    u16 move, item;
+    enum Move move;
+    u32 item;
     PARAMETRIZE { move = MOVE_JUDGMENT; item = ITEM_ZAP_PLATE; }
     PARAMETRIZE { move = MOVE_TECHNO_BLAST; item = ITEM_SHOCK_DRIVE; }
     PARAMETRIZE { move = MOVE_MULTI_ATTACK; item = ITEM_ELECTRIC_MEMORY; }

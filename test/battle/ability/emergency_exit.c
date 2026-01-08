@@ -5,7 +5,7 @@ SINGLE_BATTLE_TEST("Emergency Exit switches out when taking 50% max-hp damage")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SUPER_FANG); SEND_OUT(opponent, 1); }
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Emergency Exit does not switch out when going below 50% max-
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET)
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); Item(ITEM_SITRUS_BERRY); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SUPER_FANG); }
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Emergency Exit switches out when going below 50% max-HP but 
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET)
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(133); Item(ITEM_ORAN_BERRY); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(133); Item(ITEM_ORAN_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SUPER_FANG); SEND_OUT(opponent, 1); }
@@ -54,8 +54,8 @@ DOUBLE_BATTLE_TEST("Only the fastest Wimp Out (Emergency Exit) user switches out
     GIVEN {
         PLAYER(SPECIES_ZAPDOS) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
-        OPPONENT(SPECIES_WIMPOD) { Speed(1); Ability(ABILITY_WIMP_OUT); Item(ITEM_FOCUS_SASH); };
-        OPPONENT(SPECIES_WIMPOD) { Speed(2); Ability(ABILITY_WIMP_OUT); Item(ITEM_FOCUS_SASH); };
+        OPPONENT(SPECIES_WIMPOD) { Speed(1); Ability(ABILITY_WIMP_OUT); Item(ITEM_FOCUS_SASH); }
+        OPPONENT(SPECIES_WIMPOD) { Speed(2); Ability(ABILITY_WIMP_OUT); Item(ITEM_FOCUS_SASH); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
     } WHEN {
@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Emergency Exit activates when taking residual damage and fal
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); Status1(STATUS1_BURN); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { SEND_OUT(opponent, 1); }
@@ -88,7 +88,7 @@ SINGLE_BATTLE_TEST("Emergency Exit activates when healing from under 50% max-hp 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_AQUA_RING) == EFFECT_AQUA_RING);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(130); Status1(STATUS1_BURN); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(130); Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_AQUA_RING); SEND_OUT(opponent, 1); }
@@ -103,7 +103,7 @@ SINGLE_BATTLE_TEST("Emergency Exit activates when taking residual damage and fal
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SANDSTORM); SEND_OUT(opponent, 1); }
@@ -120,7 +120,7 @@ SINGLE_BATTLE_TEST("Emergency Exit activates when healing from under 50% max-hp 
         ASSUME(GetMoveEffect(MOVE_AQUA_RING) == EFFECT_AQUA_RING);
         ASSUME(GetItemHoldEffect(ITEM_STICKY_BARB) == HOLD_EFFECT_STICKY_BARB);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(130); Item(ITEM_STICKY_BARB); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(130); Item(ITEM_STICKY_BARB); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_AQUA_RING); SEND_OUT(opponent, 1); }
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Emergency Exit activates when taking residual damage and fal
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(160); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(160); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SALT_CURE); SEND_OUT(opponent, 1); }
@@ -150,9 +150,9 @@ WILD_BATTLE_TEST("Emergency Exit makes the pokemon flee during wild battle")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); }
     } WHEN {
-        TURN { MOVE(player, MOVE_SUPER_FANG);}
+        TURN { MOVE(player, MOVE_SUPER_FANG); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPER_FANG, player);
         HP_BAR(opponent);
@@ -167,9 +167,9 @@ WILD_BATTLE_TEST("Emergency Exit activates when taking residual damage and falli
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); Status1(STATUS1_BURN); };
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); Status1(STATUS1_BURN); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         HP_BAR(opponent);
         ABILITY_POPUP(opponent, ABILITY_EMERGENCY_EXIT);
@@ -181,11 +181,11 @@ WILD_BATTLE_TEST("Emergency Exit activates when taking residual damage and falli
 WILD_BATTLE_TEST("Emergency Exit makes the player ran during wild battle")
 {
     GIVEN {
-        PLAYER(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); };
+        PLAYER(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SUPER_FANG);}
+        TURN { MOVE(opponent, MOVE_SUPER_FANG); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPER_FANG, opponent);
         HP_BAR(player);
@@ -198,11 +198,11 @@ WILD_BATTLE_TEST("Emergency Exit makes the player ran during wild battle")
 WILD_BATTLE_TEST("Emergency Exit activates when taking residual damage and falling under 50% max-hp (wild battle player side)")
 {
     GIVEN {
-        PLAYER(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); };
+        PLAYER(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(134); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SANDSTORM);}
+        TURN { MOVE(opponent, MOVE_SANDSTORM); }
     } SCENE {
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_EMERGENCY_EXIT);

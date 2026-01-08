@@ -76,6 +76,9 @@ enum __attribute__((packed)) Type
 #define NATURE_QUIRKY   24 // Neutral
 #define NUM_NATURES     25
 
+#define NATURE_RANDOM            NUM_NATURES
+#define NATURE_MAY_SYNCHRONIZE   NUM_NATURES + 1
+
 // Pokémon Stats
 enum __attribute__((packed)) Stat
 {
@@ -154,13 +157,16 @@ enum __attribute__((packed)) Stat
 
 #define MAX_DYNAMAX_LEVEL 10
 
-#define OT_ID_PLAYER_ID                 0
-#define OT_ID_PRESET                    1
-#define OT_ID_RANDOM_NO_SHINY           2
-#define OT_ID_RANDOM_GAME_CORNER_BASIC  3
-#define OT_ID_RANDOM_GAME_CORNER_GREAT  4
-#define OT_ID_RANDOM_GAME_CORNER_ULTRA  5
-#define OT_ID_RANDOM_GAME_CORNER_MASTER 6
+enum OtIdMethod
+{
+    OT_ID_PLAYER_ID,
+    OT_ID_PRESET,
+    OT_ID_RANDOM_NO_SHINY,
+    OT_ID_RANDOM_GAME_CORNER_BASIC,
+    OT_ID_RANDOM_GAME_CORNER_GREAT,
+    OT_ID_RANDOM_GAME_CORNER_ULTRA,
+    OT_ID_RANDOM_GAME_CORNER_MASTER,
+};
 
 #define MON_GIVEN_TO_PARTY      0
 #define MON_GIVEN_TO_PC         1
@@ -182,6 +188,9 @@ enum __attribute__((packed)) Stat
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
+
+#define MON_GENDER_RANDOM         0x01
+#define MON_GENDER_MAY_CUTE_CHARM 0x02
 
 // Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL       0
