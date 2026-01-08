@@ -4,7 +4,7 @@
 #include "constants/battle_move_effects.h"
 
 struct BattlePyramidRequirement {
-    const u16 *moves; /* use moves instead of effects so we don't need to find moves with said effect in our loop */
+    const enum Move *moves; /* use moves instead of effects so we don't need to find moves with said effect in our loop */
     enum Ability abilities[10];
     u8 nAbilities;
     enum Type type;

@@ -3455,7 +3455,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             if (GetSubstruct0(boxMon)->species && !IsEggOrBadEgg(boxMon))
             {
                 struct PokemonSubstruct1 *substruct1 = GetSubstruct1(boxMon);
-                u16 *moves = (u16 *)data;
+                enum Move *moves = (u16 *)data;
                 s32 i = 0;
 
                 while (moves[i] != MOVES_COUNT)
@@ -6363,7 +6363,7 @@ u8 CanLearnTeachableMove(u16 species, enum Move move)
     return FALSE;
 }
 
-static void QuickSortMoves(u16 *moves, s32 left, s32 right)
+static void QuickSortMoves(enum Move *moves, s32 left, s32 right)
 {
     if (left >= right)
         return;
@@ -6392,13 +6392,13 @@ static void QuickSortMoves(u16 *moves, s32 left, s32 right)
     QuickSortMoves(moves, i, right);
 }
 
-static void SortMovesAlphabetically(u16 *moves, u32 numMoves)
+static void SortMovesAlphabetically(enum Move *moves, u32 numMoves)
 {
     if (numMoves > 1)
         QuickSortMoves(moves, 0, numMoves - 1);
 }
 
-u32 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
+u32 GetRelearnerLevelUpMoves(struct Pokemon *mon, enum Move *moves)
 {
     u32 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
 
@@ -6430,7 +6430,7 @@ u32 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u32 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
+u32 GetRelearnerEggMoves(struct Pokemon *mon, enum Move *moves)
 {
     if (!FlagGet(P_FLAG_EGG_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
@@ -6462,23 +6462,23 @@ u32 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
+u32 GetRelearnerTMMoves(struct Pokemon *mon, enum Move *moves)
 {
     if (!FlagGet(P_FLAG_TM_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
 
-    u16 learnedMoves[MAX_MON_MOVES] = {0};
     u32 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
     const u16 *learnset = GetSpeciesTeachableLearnset(species);
+    u32 learnCount = 0;
 
     u32 i, j, totalMoveCount = 0;
 
-    u32 learnCount = 0;
+    // not sure why i cant just ARRAY_COUNT() learnset but w/ever
     while (learnset[learnCount] != MOVE_UNAVAILABLE)
         learnCount++;
 
-    u16 allMoves[learnCount + 1];
+    enum Move allMoves[learnCount + 1];
     learnCount = 0;
     while (learnset[learnCount] != MOVE_UNAVAILABLE)
     {
@@ -6487,17 +6487,9 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
         learnCount++;
     }
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
-
     for (i = 0; i < totalMoveCount; i++)
     {
-        for (j = 0; j < MAX_MON_MOVES; j++)
-        {
-            if (learnedMoves[j] == allMoves[i])
-                break;
-        }
-        if (j < MAX_MON_MOVES)
+        if (MonKnowsMove(mon, allMoves[i]))
             continue;
 
         for (j = 0; j < numMoves; j++)
@@ -6505,7 +6497,6 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
             if (moves[j] == allMoves[i])
                 break;
         }
-        
         if (j < numMoves)
             continue;
 
@@ -6518,7 +6509,7 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u32 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
+u32 GetRelearnerTutorMoves(struct Pokemon *mon, enum Move *moves)
 {
     if (!FlagGet(P_FLAG_TUTOR_MOVES) && !P_ENABLE_MOVE_RELEARNERS)
         return 0;
@@ -6547,7 +6538,7 @@ u32 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-static inline bool32 DoesMonHaveMove(const u16 *moves, enum Move move)
+static inline bool32 DoesMonHaveMove(const enum Move *moves, enum Move move)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -6668,7 +6659,7 @@ bool32 HasRelearnerTutorMoves(struct Pokemon *mon)
     return FALSE;
 }
 
-u32 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
+u32 GetLevelUpMovesBySpecies(u16 species, enum Move *moves)
 {
     u32 numMoves = 0;
     int i;

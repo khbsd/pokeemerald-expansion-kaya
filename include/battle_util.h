@@ -309,7 +309,7 @@ u32 GetBattlerHoldEffectParam(u32 battler);
 bool32 CanBattlerAvoidContactEffects(u32 battlerAtk, u32 battlerDef, enum Ability abilityAtk, enum HoldEffect holdEffectAtk, enum Move move);
 bool32 IsMoveMakingContact(u32 battlerAtk, u32 battlerDef, enum Ability abilityAtk, enum HoldEffect holdEffectAtk, enum Move move);
 bool32 IsBattlerGrounded(u32 battler, enum Ability ability, enum HoldEffect holdEffect);
-u32 GetMoveSlot(u16 *moves, enum Move move);
+u32 GetMoveSlot(enum Move *moves, enum Move move);
 u32 GetBattlerWeight(u32 battler);
 s32 CalcCritChanceStage(struct BattleContext *ctx);
 s32 CalcCritChanceStageGen1(struct BattleContext *ctx);

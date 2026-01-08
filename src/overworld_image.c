@@ -56,10 +56,8 @@ static EWRAM_DATA u8 gOverworldImageWindow = 0;
 
 void ClearOverworldImage(void)
 {
-    DebugPrintf("gOverworldImageWindow: %u", gOverworldImageWindow);
     if (gOverworldImageWindow != 0)
     {
-        DebugPrintf("clearing");
         //FillWindowPixelBuffer(gOverworldImageWindow - 1, PIXEL_FILL(0));
         //ClearWindowTilemap(gOverworldImageWindow - 1);
         ClearStdWindowAndFrameToTransparent(gOverworldImageWindow - 1, TRUE);
@@ -73,14 +71,10 @@ static void DrawOverworldImageCore(const struct OverworldImage* const overworldI
     struct WindowTemplate t;
     u16 windowId;
 
-    DebugPrintf("size of image: %u", sizeof(overworldImage->image));
-
     if(gOverworldImageWindow != 0)
     {
         ClearOverworldImage();
     }
-
-    DebugPrintf("drawing image at x: %u, y: %u", x, y);
 
     #if GAME_VERSION==VERSION_EMERALD
     SetWindowTemplateFields(&t, 0, x, y, overworldImage->width/8, overworldImage->height/8, OVERWORLDIMAGE_PALETTE_NUM, 0x40);
@@ -90,14 +84,9 @@ static void DrawOverworldImageCore(const struct OverworldImage* const overworldI
     windowId = AddWindow(&t);
     gOverworldImageWindow = windowId + 1;
 
-    DebugPrintf("loading resources");
-
     LoadPalette(overworldImage->palette, 16 * OVERWORLDIMAGE_PALETTE_NUM, 32);
-    DebugPrintf("palette loaded");
     CopyToWindowPixelBuffer(windowId, overworldImage->image, 0, 0);
-    DebugPrintf("copying to buffer complete");
     PutWindowRectTilemap(windowId, 0, 0, overworldImage->width/8, overworldImage->height/8);
-    DebugPrintf("copying to vram...");
     CopyWindowToVram(windowId, 3);
 }
 

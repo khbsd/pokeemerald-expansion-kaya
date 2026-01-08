@@ -434,7 +434,7 @@ static bool8 TrySetMove(u8 monId, enum Move move)
     return TRUE;
 }
 
-static void GetLatestLearnedMoves(u16 species, u16 *moves)
+static void GetLatestLearnedMoves(u16 species, enum Move *moves)
 {
     u8 i, j;
     u8 level, numLearnsetMoves;

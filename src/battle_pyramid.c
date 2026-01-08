@@ -1401,7 +1401,7 @@ void GenerateBattlePyramidWildMon(void)
     const struct BattlePyramidRequirement *reqs = &sBattlePyramidRequirementsByRound[round];
     u16 species;
     u32 bstLim;
-    u16 *moves = NULL;
+    enum Move *moves = NULL;
     u16 *abilities = NULL;
     int moveCount = 0, abilityCount = 0;
 

@@ -1666,9 +1666,6 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
     if (FLAG_IS_KAYA)
         gender = KAYA - 1;
 
-    DebugPrintf("gender: %u", gender);
-
-    DebugPrintf("sPlayerAvatarGfxToStateFlag: %u", sPlayerAvatarGfxToStateFlag[gender][0][0]);
     for (i = 0; i < 5; i++)
     {
         if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)

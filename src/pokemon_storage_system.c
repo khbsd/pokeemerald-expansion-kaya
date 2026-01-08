@@ -6574,7 +6574,7 @@ struct
     {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_ROCK_SMASH},
 };
 
-static void GetRestrictedReleaseMoves(u16 *moves)
+static void GetRestrictedReleaseMoves(enum Move *moves)
 {
     s32 i;
 

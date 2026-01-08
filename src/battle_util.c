@@ -7595,7 +7595,7 @@ bool32 IsBattlerGrounded(u32 battler, enum Ability ability, enum HoldEffect hold
     return IsBattlerGroundedInverseCheck(battler, ability, holdEffect, NOT_INVERSE_BATTLE, FALSE);
 }
 
-u32 GetMoveSlot(u16 *moves, enum Move move)
+u32 GetMoveSlot(enum Move *moves, enum Move move)
 {
     u32 i;
 
