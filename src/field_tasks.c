@@ -140,7 +140,7 @@ void CheckIfPlayerIsKaya(void)
 {
     const u8 *kayaName = COMPOUND_STRING("Kaya");
 
-    if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0 || gSaveBlock2Ptr->playerIsKaya)
+    if (StringCompare(kayaName, gSaveBlock2Ptr->playerName) == 0)
         SetPlayerAsKaya();
     else
         UnsetPlayerAsKaya();
@@ -160,7 +160,6 @@ void CheckPlayerName(u8 *str)
         FlagSet(FLAG_IS_PENNY);
     else
         FlagClear(FLAG_IS_PENNY);
-        
 }
 
 bool32 GetPlayerHouse(void)
@@ -177,6 +176,7 @@ void SetPlayerHouse(void)
 
 void SetPlayerAsKaya(void)
 {
+    //DebugPrintf("setting player as kaya");
     FlagSet(FLAG_IS_KAYA);
     gSaveBlock2Ptr->playerGender = BUTCHY;
     gSaveBlock2Ptr->playerIsKaya = TRUE;
@@ -185,6 +185,7 @@ void SetPlayerAsKaya(void)
 
 void UnsetPlayerAsKaya(void)
 {
+    //DebugPrintf("unsetting player as kaya");
     FlagClear(FLAG_IS_KAYA);
     gSaveBlock2Ptr->playerIsKaya = FALSE;
     playerIsKaya = FALSE;

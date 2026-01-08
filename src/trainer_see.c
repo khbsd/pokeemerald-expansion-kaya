@@ -359,6 +359,8 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
 bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
+    u8 trainerObjects[OBJECT_EVENTS_COUNT] = {0};
+    u8 trainerObjectsCount = 0;
 
     if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
         return FALSE;
@@ -366,15 +368,34 @@ bool8 CheckForTrainersWantingBattle(void)
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
 
+    // Adds trainers wanting to battle to array
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (!gObjectEvents[i].active)
             continue;
         if (gObjectEvents[i].trainerType != TRAINER_TYPE_NORMAL && gObjectEvents[i].trainerType != TRAINER_TYPE_SEE_ALL_DIRECTIONS && gObjectEvents[i].trainerType != TRAINER_TYPE_BURIED)
             continue;
+        trainerObjects[trainerObjectsCount++] = i;
+    }
 
-        numTrainers = CheckTrainer(i);
-        if (numTrainers == 0xFF) // non-trainerbatle script
+    // Sorts array by localId
+    for (i = 1; i <= trainerObjectsCount; i++)
+    {
+        u8 x = trainerObjects[i];
+        u8 j = i;
+        while (j > 0 && gObjectEvents[trainerObjects[j-1]].localId > gObjectEvents[x].localId)
+        {
+            trainerObjects[j] = trainerObjects[j-1];
+            j--;
+        }
+        trainerObjects[j] = x;
+    }
+
+    for (i = 0; i <= trainerObjectsCount; i++)
+    {
+        u8 numTrainers;
+        numTrainers = CheckTrainer(trainerObjects[i]);
+        if (numTrainers == 0xFF) // non-trainerbattle script
         {
             u32 objectEventId = gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId;
             gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
@@ -401,8 +422,8 @@ bool8 CheckForTrainersWantingBattle(void)
     if (InBattlePyramid_() || InTrainerHillChallenge())
     {
         u8 facility = InBattlePyramid_() ? FACILITY_BATTLE_PYRAMID : FACILITY_BATTLE_TRAINER_HILL;
-
-        if (gNoOfApproachingTrainers > 0)
+        
+        if (gNoOfApproachingTrainers > 0) 
         {
             ResetTrainerOpponentIds();
             InitTrainerBattleParameter();
@@ -410,7 +431,7 @@ bool8 CheckForTrainersWantingBattle(void)
             gSelectedObjectEvent = gApproachingTrainers[0].objectEventId;
             gSpecialVar_LastTalked = gObjectEvents[gApproachingTrainers[0].objectEventId].localId;
             BattleSetup_ConfigureFacilityTrainerBattle(facility, gApproachingTrainers[0].trainerScriptPtr + 2);
-            if (gNoOfApproachingTrainers > 1)
+            if (gNoOfApproachingTrainers > 1) 
             {
                 gApproachingTrainerId++;
                 gSelectedObjectEvent = gApproachingTrainers[1].objectEventId;

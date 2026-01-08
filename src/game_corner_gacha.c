@@ -2281,9 +2281,13 @@ static void GachaMain(u8 taskId)
     case STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sGacha->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            u32 otId = sGacha->GachaId + 2;
+            struct OriginalTrainerId otId =
+            {
+                value: sGacha->GachaId + 2,
+                method: sGacha->GachaId + 2,
+            };
 
-            CreateMon(&gEnemyParty[0], sGacha->CalculatedSpecies, level, USE_RANDOM_IVS, FALSE, 0, otId, 0);
+            CreateMon(&gEnemyParty[0], sGacha->CalculatedSpecies, level, Random32(), otId);
             GiveMonToPlayer(&gEnemyParty[0]);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(sGacha->CalculatedSpecies), FLAG_SET_SEEN);
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(sGacha->CalculatedSpecies), FLAG_SET_CAUGHT, GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY));

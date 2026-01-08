@@ -780,7 +780,7 @@ u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field);
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
-u8 GiveCapturedMonToPlayer(struct Pokemon *mon);
+u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);

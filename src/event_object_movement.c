@@ -2921,11 +2921,21 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = spriteId;
 
-    CheckIfPlayerIsKaya();
+    //DebugPrintf("objectEventId: %u", objectEventId);
+    //DebugPrintf("spriteId: %u", spriteId);
+
+    /*CheckIfPlayerIsKaya();
     if (FlagGet(FLAG_IS_KAYA))
+    {
         gPlayerAvatar.gender = KAYA - 1;
+        DebugPrintf("is kaya: %u", gPlayerAvatar.gender);
+    }
     else
+    {
         gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
+        DebugPrintf("is not kaya: %u", gPlayerAvatar.gender);
+    }*/
+
     SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_CONTROLLABLE);
 }
 
@@ -3201,8 +3211,7 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     }
 
     CheckIfPlayerIsKaya();
-    if (FlagGet(FLAG_IS_KAYA)
-        && paletteTag != OBJ_EVENT_PAL_TAG_KAYA)
+    if (FlagGet(FLAG_IS_KAYA) && paletteTag != OBJ_EVENT_PAL_TAG_KAYA)
         paletteTag = OBJ_EVENT_PAL_TAG_KAYA;
     return LoadObjectEventPalette(paletteTag);
 }

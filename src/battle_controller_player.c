@@ -13,6 +13,7 @@
 #include "bg.h"
 #include "caps.h"
 #include "data.h"
+#include "field_tasks.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -1683,7 +1684,6 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 {
     u32 speciesId = gBattleMons[battler].species;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     enum Move move = moveInfo->moves[gMoveSelectionCursor[battler]];
     enum Type type = GetMoveType(move);
     enum BattleMoveEffects effect = GetMoveEffect(move);
@@ -1869,12 +1869,12 @@ static enum TrainerPicID PlayerGetTrainerBackPicId(void)
 {
     enum TrainerPicID trainerPicId;
 
-    CheckPlayerIsKaya();
+    CheckIfPlayerIsKaya();
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
     else
-        trainerPicId = GetPlayerTrainerBackSprite() + TRAINER_BACK_PIC_BRENDAN;
+        trainerPicId = GetPlayerTrainerBackSprite() + TRAINER_PIC_BACK_BRENDAN;
 
     return trainerPicId;
 }

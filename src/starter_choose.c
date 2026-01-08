@@ -504,7 +504,7 @@ void CB2_ChooseStarter(void)
     CheckPlayerName(gSaveBlock2Ptr->playerName);
     GenerateRandomStarters();
     //PrintStarterMons();
-    sChoosingStarter = TRUE;
+    gChoosingStarter = TRUE;
     ShowBg(0);
     ShowBg(2);
     ShowBg(3);

@@ -2555,13 +2555,20 @@ static void InitObjectEventsLocal(void)
 {
     u16 x, y;
     struct InitialPlayerAvatarState *player;
+    u32 gender;
+
+    CheckIfPlayerIsKaya();
+    if (FlagGet(FLAG_IS_KAYA))
+        gender = KAYA - 1;
+    else
+        gender = gSaveBlock2Ptr->playerGender;
 
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
     ResetObjectEvents();
     GetCameraFocusCoords(&x, &y);
     player = GetInitialPlayerAvatarState();
-    InitPlayerAvatar(x, y, player->direction, gSaveBlock2Ptr->playerGender);
+    InitPlayerAvatar(x, y, player->direction, gender);
     SetPlayerAvatarTransitionFlags(player->transitionFlags);
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);

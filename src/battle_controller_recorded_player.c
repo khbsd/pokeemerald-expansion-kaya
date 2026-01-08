@@ -416,7 +416,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(battler)].gender + TRAINER_PIC_BACK_BRENDAN;
     else
-        trainerPicId = GetPlayerTrainerBackSprite() + TRAINER_BACK_PIC_BRENDAN;
+        trainerPicId = GetPlayerTrainerBackSprite() + TRAINER_PIC_BACK_BRENDAN;
 
     trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Intro_TryShinyAnimShowHealthbox);

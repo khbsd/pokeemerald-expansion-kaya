@@ -46,7 +46,7 @@ extern const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES];
 
 extern TrainerBattleParameter gTrainerBattleParameter;
 extern u16 gPartnerTrainerId;
-extern bool32 sChoosingStarter;
+extern bool32 gChoosingStarter;
 
 #define TRAINER_BATTLE_PARAM gTrainerBattleParameter.params
 

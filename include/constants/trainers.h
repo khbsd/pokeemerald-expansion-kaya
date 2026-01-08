@@ -110,11 +110,11 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_FRONT_LEAF,
     TRAINER_PIC_FRONT_RS_BRENDAN,
     TRAINER_PIC_FRONT_RS_MAY,
-    TRAINER_PIC_KAYA,
+    TRAINER_PIC_FRONT_KAYA,
     TRAINER_PIC_FRONT_COUNT,
-    TRAINER_PIC_BACK_BRENDAN = TRAINER_PIC_FRONT_COUNT, // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
+    TRAINER_PIC_BACK_BRENDAN = TRAINER_PIC_FRONT_COUNT, // The player back pics are assumed to alternate according to the gender values (FEMME/BUTCHY)
     TRAINER_PIC_BACK_MAY,
-    TRAINER_BACK_PIC_KAYA,
+    TRAINER_PIC_BACK_KAYA,
     TRAINER_PIC_BACK_RED,
     TRAINER_PIC_BACK_LEAF,
     TRAINER_PIC_BACK_RUBY_SAPPHIRE_BRENDAN,
