@@ -4470,7 +4470,7 @@ const u16 *GetSpeciesTeachableLearnset(u16 species)
     return learnset;
 }
 
-const u16 *GetSpeciesEggMoves(u16 species)
+const enum Move *GetSpeciesEggMoves(u16 species)
 {
     const u16 *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].eggMoveLearnset;
     if (learnset == NULL)
@@ -6445,7 +6445,7 @@ u32 GetRelearnerEggMoves(struct Pokemon *mon, enum Move *moves)
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
-    const u16 *eggMoves = GetSpeciesEggMoves(species);
+    const enum Move *eggMoves = GetSpeciesEggMoves(species);
 
     if (eggMoves == sNoneEggMoveLearnset)
         return 0;
@@ -6472,35 +6472,18 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, enum Move *moves)
     const u16 *learnset = GetSpeciesTeachableLearnset(species);
     u32 learnCount = 0;
 
-    u32 i, j, totalMoveCount = 0;
-
     // not sure why i cant just ARRAY_COUNT() learnset but w/ever
     while (learnset[learnCount] != MOVE_UNAVAILABLE)
         learnCount++;
 
-    enum Move allMoves[learnCount + 1];
-    learnCount = 0;
-    while (learnset[learnCount] != MOVE_UNAVAILABLE)
+    for (enum Move move = MOVE_NONE; move < learnCount + 1; move++)
     {
-        if (P_ENABLE_ALL_TM_MOVES && learnset[learnCount] != MOVE_NONE)
-            allMoves[totalMoveCount++] = learnset[learnCount];
-        learnCount++;
-    }
-
-    for (i = 0; i < totalMoveCount; i++)
-    {
-        if (MonKnowsMove(mon, allMoves[i]))
+        if (MonKnowsMove(mon, learnset[move])
+            || learnset[move] == MOVE_UNAVAILABLE
+            || learnset[move] == MOVE_NONE)
             continue;
 
-        for (j = 0; j < numMoves; j++)
-        {
-            if (moves[j] == allMoves[i])
-                break;
-        }
-        if (j < numMoves)
-            continue;
-
-        moves[numMoves++] = allMoves[i];
+        moves[numMoves++] = learnset[move];
     }
 
     if (P_SORT_MOVES)
@@ -6590,14 +6573,14 @@ bool32 HasRelearnerEggMoves(struct Pokemon *mon)
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
-    const u16 *eggMoves = GetSpeciesEggMoves(species);
+    const enum Move *eggMoves = GetSpeciesEggMoves(species);
 
     if (eggMoves == sNoneEggMoveLearnset)
         return FALSE;
 
-    for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
+    for (enum Move move = 0; eggMoves[move] != MOVE_UNAVAILABLE; move++)
     {
-        if (!MonKnowsMove(mon, eggMoves[i]))
+        if (!MonKnowsMove(mon, eggMoves[move]))
             return TRUE;
     }
 
@@ -6678,7 +6661,7 @@ u32 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u8 numMoves = 0;
     u16 species;
     u8 level;
-    if(gSpecialVar_MonBoxId == 0xFF)
+    if (gSpecialVar_MonBoxId == 0xFF)
     {
         species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
         level = GetMonData(mon, MON_DATA_LEVEL, 0);
@@ -6697,7 +6680,7 @@ u32 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if(gSpecialVar_MonBoxId == 0xFF)
+        if (gSpecialVar_MonBoxId == 0xFF)
             learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
         else
             learnedMoves[i] = GetBoxMonDataAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, MON_DATA_MOVE1 + i);
