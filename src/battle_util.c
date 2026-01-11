@@ -749,7 +749,7 @@ bool32 TryRunFromBattle(u32 battler)
         gProtectStructs[battler].fleeType = FLEE_ITEM;
         effect++;
     }
-    else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    else if (GetConfig(CONFIG_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
     {
         effect++;
     }
@@ -5035,7 +5035,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             case ABILITY_SHED_SKIN:
                 if ((gBattleMons[battler].status1 & STATUS1_ANY)
-                 && (B_ABILITY_TRIGGER_CHANCE == GEN_4 ? RandomPercentage(RNG_SHED_SKIN, 30) : RandomChance(RNG_SHED_SKIN, 1, 3)))
+                 && (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) == GEN_4 ? RandomPercentage(RNG_SHED_SKIN, 30) : RandomChance(RNG_SHED_SKIN, 1, 3)))
                 {
                 ABILITY_HEAL_MON_STATUS:
                     if (gBattleMons[battler].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON))
@@ -5459,8 +5459,17 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             if (IsAffectedByPowderMove(gBattlerAttacker, abilityAtk, holdEffectAtk))
             {
                 u32 poison, paralysis, sleep;
-                poison = 10;
-                paralysis = 20;
+
+                if (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_5)
+                {
+                    poison = 9;
+                    paralysis = 19;
+                }
+                else
+                {
+                    poison = 10;
+                    paralysis = 20;
+                }
                 sleep = 30;
 
                 if (gLastUsedAbility == ABILITY_WONDER_SKIN)
@@ -5470,7 +5479,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                     sleep /=2;
                 }
 
-                i = RandomUniform(RNG_EFFECT_SPORE, 0, B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? 99 : 299);
+                i = RandomUniform(RNG_EFFECT_SPORE, 0, GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? 99 : 299);
                 if (i < poison)
                     goto POISON_POINT;
                 if (i < paralysis)
@@ -5497,7 +5506,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             break;
         case ABILITY_PURIFYING_SALT:
         case ABILITY_POISON_POINT:
-            if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_POISON_POINT, 30) : RandomChance(RNG_POISON_POINT, 1, 3))
+            if (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_POISON_POINT, 30) : RandomChance(RNG_POISON_POINT, 1, 3))
             {
             POISON_POINT:
             {
@@ -5519,7 +5528,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             }
             break;
         case ABILITY_STATIC:
-            if (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_STATIC, 30) : RandomChance(RNG_STATIC, 1, 3))
+            if (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_STATIC, 30) : RandomChance(RNG_STATIC, 1, 3))
             {
             STATIC:
             {
@@ -5591,7 +5600,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
              && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move)
              && IsBattlerTurnDamaged(gBattlerTarget)
              && CanBeBurned(gBattlerTarget, gBattlerAttacker, GetBattlerAbility(gBattlerAttacker))
-             && (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_FLAME_BODY, 30) : RandomChance(RNG_FLAME_BODY, 1, 3)))
+             && (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_FLAME_BODY, 30) : RandomChance(RNG_FLAME_BODY, 1, 3)))
             {
                 gEffectBattler = gBattlerAttacker;
                 gBattleScripting.battler = gBattlerTarget;
@@ -5607,7 +5616,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
              && !gBattleStruct->unableToUseMove
              && IsBattlerTurnDamaged(gBattlerTarget)
              && IsBattlerAlive(gBattlerTarget)
-             && (B_ABILITY_TRIGGER_CHANCE >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
+             && (GetConfig(CONFIG_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
              && !(gBattleMons[gBattlerAttacker].volatiles.infatuation)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && !IsAbilityAndRecord(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), ABILITY_OBLIVIOUS)
@@ -6569,7 +6578,7 @@ u32 IsAbilityOnFieldExcept(u32 battler, enum Ability ability)
 
 u32 IsAbilityPreventingEscape(u32 battler)
 {
-    if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    if (GetConfig(CONFIG_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return 0;
 
     bool32 isBattlerGrounded = IsBattlerGrounded(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler));
@@ -6597,7 +6606,7 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
 {
     if (gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE)
         return FALSE;
-    else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    else if (GetConfig(CONFIG_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return TRUE;
     else if (gBattleMons[battler].volatiles.escapePrevention)
         return FALSE;
