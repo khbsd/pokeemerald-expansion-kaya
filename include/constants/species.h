@@ -1668,22 +1668,43 @@
 #define SPECIES_ZYGARDE_MEGA                            1547
 #define SPECIES_DRAMPA_MEGA                             1548
 #define SPECIES_FALINKS_MEGA                            1549
+#define SPECIES_HEATRAN_MEGA                            1550
+#define SPECIES_DARKRAI_MEGA                            1551
+#define SPECIES_ZERAORA_MEGA                            1552
+#define SPECIES_RAICHU_MEGA_X                           1553
+#define SPECIES_RAICHU_MEGA_Y                           1554
+#define SPECIES_CHIMECHO_MEGA                           1555
+#define SPECIES_ABSOL_MEGA_Z                            1556
+#define SPECIES_STARAPTOR_MEGA                          1557
+#define SPECIES_GARCHOMP_MEGA_Z                         1558
+#define SPECIES_LUCARIO_MEGA_Z                          1559
+#define SPECIES_GOLURK_MEGA                             1560
+#define SPECIES_MEOWSTIC_M_MEGA                         1561
+#define SPECIES_MEOWSTIC_F_MEGA                         1562
+#define SPECIES_CRABOMINABLE_MEGA                       1563
+#define SPECIES_GOLISOPOD_MEGA                          1564
+#define SPECIES_MAGEARNA_MEGA                           1565
+#define SPECIES_MAGEARNA_ORIGINAL_MEGA                  1566
+#define SPECIES_SCOVILLAIN_MEGA                         1567
+#define SPECIES_BAXCALIBUR_MEGA                         1568
+#define SPECIES_TATSUGIRI_CURLY_MEGA                    1569
+#define SPECIES_TATSUGIRI_DROOPY_MEGA                   1570
+#define SPECIES_TATSUGIRI_STRETCHY_MEGA                 1571
+#define SPECIES_GLIMMORA_MEGA                           1572
 
 //Whale Fall Forms
-#define SPECIES_WAILMER_WHALEFALL						1550
-#define SPECIES_WAILORD_WHALEFALL						1551
+#define SPECIES_WAILMER_WHALEFALL						1573
+#define SPECIES_WAILORD_WHALEFALL						1574
 
 //Extra salazzle shenanigans
-#define SPECIES_SALANDIT_F                              1552
+#define SPECIES_SALANDIT_F                              1575
 
 //Extra combee shenanigans
-#define SPECIES_COMBEE_F                                1553
+#define SPECIES_COMBEE_F                                1576
 
 #define SPECIES_EGG                                     (SPECIES_COMBEE_F + 1)
 
 #define NUM_SPECIES SPECIES_EGG
-
-#define NUM_SPECIES_EXPANDED                            1600
 
 #define SPECIES_SHINY_TAG 5000
 

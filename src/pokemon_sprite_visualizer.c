@@ -872,13 +872,13 @@ static void LoadBattleBg(enum BattleEnvironments battleEnvironment)
 static void PrintBattleBgName(u8 taskId)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
-    u8 fontId = 0;
-    u8 text[30+1];
 
-    StringCopy(text, gBattleEnvironmentInfo[data->battleEnvironment].name);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 0, 24, 0, NULL);
+    const u8 *name = gBattleEnvironmentInfo[data->battleEnvironment].name;
+    u8 fontId = FONT_NORMAL;
+
+    FillWindowPixelRect(WIN_BOTTOM_RIGHT, PIXEL_FILL(0), 0, 24, 80, gFonts[fontId].maxLetterHeight);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, name, 0, 24, 0, NULL);
 }
-
 static void UpdateBattleBg(u8 taskId, bool8 increment)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
@@ -1100,7 +1100,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-            LoadPalette(GetTextWindowPalette(0), 15*16, 0x40);
+            LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), 2 * PLTT_SIZE_4BPP);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
             InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
@@ -1115,7 +1115,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
         case 3:
             AllocateMonSpritesGfx();
 
-            LoadPalette(sBgColor, 0, 2);
+            LoadPalette(sBgColor, BG_PLTT_ID(0), 2);
             LoadMonIconPalette(SPECIES_BULBASAUR);
 
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
