@@ -87,6 +87,7 @@ void ChooseMonForTradingBoard(u8 menuType, MainCallback callback);
 void ChooseMonForMoveTutor(void);
 void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 partyAction);
+void ShowOpponentPartyMenuInBattle();
 void ChooseMonForInBattleItem(void);
 void BufferBattlePartyCurrentOrder(void);
 void BufferBattlePartyCurrentOrderBySide(u8 battler, u8 flankId);

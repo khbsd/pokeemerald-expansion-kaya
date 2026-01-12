@@ -7440,6 +7440,12 @@ void OpenPartyMenuInBattle(u8 partyAction)
     UpdatePartyToBattleOrder();
 }
 
+void ShowOpponentPartyMenuInBattle()
+{
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, 0, gEnemyPartyCount - 1, CB2_SetUpReshowBattleScreenAfterMenu);
+    ReshowBattleScreenDummy();
+}
+
 void ChooseMonForInBattleItem(void)
 {
     InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_USE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToBagMenu);
