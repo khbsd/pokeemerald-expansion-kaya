@@ -58,6 +58,7 @@ enum MonData {
     MON_DATA_BEAUTY,
     MON_DATA_CUTE,
     MON_DATA_EXP,
+    // keep these next 6 together
     MON_DATA_HP_EV,
     MON_DATA_ATK_EV,
     MON_DATA_DEF_EV,
@@ -73,6 +74,7 @@ enum MonData {
     MON_DATA_MET_LEVEL,
     MON_DATA_MET_GAME,
     MON_DATA_POKEBALL,
+    // keep these next 6 together
     MON_DATA_HP_IV,
     MON_DATA_ATK_IV,
     MON_DATA_DEF_IV,
@@ -90,6 +92,7 @@ enum MonData {
     MON_DATA_SMART_RIBBON,
     MON_DATA_TOUGH_RIBBON,
     MON_DATA_LEVEL,
+    // keep these next 6 together
     MON_DATA_MAX_HP,
     MON_DATA_ATK,
     MON_DATA_DEF,
@@ -115,6 +118,7 @@ enum MonData {
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
     MON_DATA_RIBBONS,
+    // keep these next 6 together
     MON_DATA_HYPER_TRAINED_HP,
     MON_DATA_HYPER_TRAINED_ATK,
     MON_DATA_HYPER_TRAINED_DEF,
