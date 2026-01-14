@@ -23,6 +23,7 @@
 #define I_ENABLE_POKEVIAL               TRUE        // A reusable item that can heal your entire party. Options are in constants/pokevial.h
 #define I_ENABLE_POKEVIAL_FLAG          FLAG_SYS_ENABLE_POKEVIAL
 #define I_POKEVIAL_INFINITE_USES        FALSE       // If TRUE, the Pokevial will never run out.
+#define I_LAX_INCENSE_BOOST             GEN_LATEST  // In Gen4+, Lax Incense increases evasion by 10% instead of 5%.
 
 // TM config
 #define I_REUSABLE_TMS          TRUE        // In Gen5-8, TMs are reusable. Setting this to TRUE will make all vanilla TMs reusable, though they can also be cherry-picked by setting their importance to 1.
