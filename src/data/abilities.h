@@ -1798,6 +1798,12 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Changes type to move's."),
     },
 
+    [ABILITY_GAUCHO_PANTS] =
+    {
+        .name = _("Gaucho Pants"),
+        .description = COMPOUND_STRING("Changes type to move's."),
+    },
+
     [ABILITY_BALL_FETCH] =
     {
         .name = _("Ball Fetch"),

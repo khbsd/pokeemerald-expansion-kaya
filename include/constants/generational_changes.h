@@ -147,7 +147,7 @@
     F(TRANSISTOR_BOOST,          transistorBoost,         (u32, GEN_COUNT - 1)) \
     F(ILLUMINATE_EFFECT,         illuminateEffect,        (u32, GEN_COUNT - 1)) \
     F(WEAK_ARMOR_SPEED,          weakArmorSpeed,          (u32, GEN_COUNT - 1)) \
-    F(PROTEAN_LIBERO,            proteanLibero,           (u32, GEN_COUNT - 1)) \
+    F(PROTEAN_LIBERO_GAUCHO,     proteanLiberoGauchoPants,(u32, GEN_COUNT - 1)) \
     F(INTREPID_SWORD,            intrepidSword,           (u32, GEN_COUNT - 1)) \
     F(DAUNTLESS_SHIELD,          dauntlessShield,         (u32, GEN_COUNT - 1)) \
     F(DISGUISE_HP_LOSS,          disguiseHpLoss,          (u32, GEN_COUNT - 1)) \

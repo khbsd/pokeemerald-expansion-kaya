@@ -3009,8 +3009,8 @@ static enum MoveCanceler CancelerProtean(struct BattleContext *ctx)
     enum Type moveType = GetBattleMoveType(ctx->move);
     if (ProteanTryChangeType(ctx->battlerAtk, ctx->abilityAtk, ctx->move, moveType))
     {
-        if (GetConfig(CONFIG_PROTEAN_LIBERO) >= GEN_9)
-            gBattleMons[ctx->battlerAtk].volatiles.usedProteanLibero = TRUE;
+        if (GetConfig(CONFIG_PROTEAN_LIBERO_GAUCHO) >= GEN_9)
+            gBattleMons[ctx->battlerAtk].volatiles.usedProteanLiberoGauchoPants = TRUE;
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
         gBattlerAbility = ctx->battlerAtk;
         PrepareStringBattle(STRINGID_EMPTYSTRING3, ctx->battlerAtk);

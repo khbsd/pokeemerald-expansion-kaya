@@ -801,6 +801,13 @@ static inline bool32 IsBattleMoveStatus(enum Move move)
     gBattleMons[battler].types[2] = TYPE_MYSTERY; \
 }
 
+#define SET_BATTLER_TYPE_DARK(battler, type)     \
+{                                                 \
+    gBattleMons[battler].types[0] = type;         \
+    gBattleMons[battler].types[1] = TYPE_DARK;   \
+    gBattleMons[battler].types[2] = TYPE_MYSTERY; \
+}
+
 #define RESTORE_BATTLER_TYPE(battler)                                                \
 {                                                                                    \
     gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0); \

@@ -947,8 +947,8 @@ static const struct PickupItem sPickupTable[] =
 
 bool32 ProteanTryChangeType(u32 battler, enum Ability ability, enum Move move, enum Type moveType)
 {
-      if ((ability == ABILITY_PROTEAN || ability == ABILITY_LIBERO)
-         && !gBattleMons[gBattlerAttacker].volatiles.usedProteanLibero
+      if ((ability == ABILITY_PROTEAN || ability == ABILITY_LIBERO || ability == ABILITY_GAUCHO_PANTS)
+         && !gBattleMons[gBattlerAttacker].volatiles.usedProteanLiberoGauchoPants
          && (gBattleMons[battler].types[0] != moveType || gBattleMons[battler].types[1] != moveType
              || (gBattleMons[battler].types[2] != moveType && gBattleMons[battler].types[2] != TYPE_MYSTERY))
          && move != MOVE_STRUGGLE
@@ -960,6 +960,14 @@ bool32 ProteanTryChangeType(u32 battler, enum Ability ability, enum Move move, e
             && ability == ABILITY_LIBERO)
         {
             SET_BATTLER_TYPE_FAIRY(battler, moveType);
+            return TRUE;
+        }
+        if ((gBattleMons[battler].species == SPECIES_SPRIGATITO
+            || gBattleMons[battler].species == SPECIES_FLORAGATO
+            || gBattleMons[battler].species == SPECIES_MEOWSCARADA)
+            && ability == ABILITY_GAUCHO_PANTS)
+        {
+            SET_BATTLER_TYPE_DARK(battler, moveType);
             return TRUE;
         }
         else
