@@ -43,7 +43,6 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "pokerus.h"
 #include "random.h"
 #include "recorded_battle.h"
 #include "roamer.h"
@@ -5666,9 +5665,8 @@ static void ReturnFromBattleToOverworld(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        CalculatePlayerPartyCount();
-        RandomlyGivePartyPokerus();
-        PartySpreadPokerus();
+        RandomlyGivePartyPokerus(gPlayerParty);
+        PartySpreadPokerus(gPlayerParty);
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers)
