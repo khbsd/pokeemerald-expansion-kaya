@@ -549,6 +549,11 @@ void GenerateRandomStarters(void)
     {
         tempSpecies = RandomElement(RNG_STARTER, sStarterMonPool);
 
+        if (FlagGet(FLAG_IS_PENNY))
+            tempSpecies = SPECIES_JIRACHI;
+        else if (playerIsKaya)
+            tempSpecies = SPECIES_SPRIGATITO;
+
         if (starterMon == 0)
         {
             sStarterMon[starterMon] = tempSpecies;
@@ -563,9 +568,6 @@ void GenerateRandomStarters(void)
             sStarterMon[starterMon] = tempSpecies;
         }
     }
-
-    if (FlagGet(FLAG_IS_PENNY))
-        sStarterMon[0] = SPECIES_JIRACHI;
 }
 
 static void CB2_StarterChoose(void)
