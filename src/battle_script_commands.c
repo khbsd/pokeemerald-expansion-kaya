@@ -2361,7 +2361,7 @@ void StealTargetItem(u8 battlerStealer, u8 itemBattler)
 
 static inline bool32 TrySetReflect(u32 battler)
 {
-    u32 side = GetBattlerSide(battler);
+    enum BattleSide side = GetBattlerSide(battler);
     if (!(gSideStatuses[side] & SIDE_STATUS_REFLECT))
     {
         gSideStatuses[side] |= SIDE_STATUS_REFLECT;
@@ -2382,7 +2382,7 @@ static inline bool32 TrySetReflect(u32 battler)
 
 static inline bool32 TrySetLightScreen(u32 battler)
 {
-    u32 side = GetBattlerSide(battler);
+    enum BattleSide side = GetBattlerSide(battler);
     if (!(gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN))
     {
         gSideStatuses[side] |= SIDE_STATUS_LIGHTSCREEN;
@@ -4010,7 +4010,7 @@ static void Cmd_jumpifsideaffecting(void)
 {
     CMD_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
 
-    u32 side = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
+    enum BattleSide side = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
 
     if (gSideStatuses[side] & cmd->flags)
         gBattlescriptCurrInstr = cmd->jumpInstr;
@@ -5260,14 +5260,14 @@ static void Cmd_switchindataupdate(void)
     #if TESTING
     if (gTestRunnerEnabled)
     {
-        u32 array = (!IsPartnerMonFromSameTrainer(battler)) ? battler : GetBattlerSide(battler);
+        enum BattleTrainer trainer = GetBattleTrainer(battler);
         u32 partyIndex = gBattlerPartyIndexes[battler];
-        if (TestRunner_Battle_GetForcedAbility(array, partyIndex))
-            gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(array, partyIndex);
+        if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
+            gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
     }
     #endif
 
-    if (GetBattlerPartyState(battler)->knockedOffItem)
+    if (GetBattlerPartyState(battler)->isKnockedOff)
     {
         gBattleMons[battler].item = ITEM_NONE;
     }
@@ -7057,7 +7057,7 @@ static void RemoveAllTerrains(void)
     }                                                       \
 }
 
-static bool32 DefogClearHazards(u32 saveBattler, u32 side, bool32 clear)
+static bool32 DefogClearHazards(u32 saveBattler, enum BattleSide side, bool32 clear)
 {
     if (!AreAnyHazardsOnSide(side))
         return FALSE;
@@ -9348,9 +9348,9 @@ static void Cmd_healpartystatus(void)
                 #if TESTING
                 if (gTestRunnerEnabled)
                 {
-                    u32 array = (!IsPartnerMonFromSameTrainer(gBattlerAttacker)) ? gBattlerAttacker : GetBattlerSide(gBattlerAttacker);
-                    if (TestRunner_Battle_GetForcedAbility(array, i))
-                        ability = TestRunner_Battle_GetForcedAbility(array, i);
+                    enum BattleTrainer trainer = GetBattleTrainer(gBattlerAttacker);
+                    if (TestRunner_Battle_GetForcedAbility(trainer, i))
+                        ability = TestRunner_Battle_GetForcedAbility(trainer, i);
                 }
                 #endif
             }
@@ -10081,7 +10081,7 @@ static void Cmd_tryswapitems(void)
                              | BATTLE_TYPE_FRONTIER
                              | BATTLE_TYPE_SECRET_BASE
                              | BATTLE_TYPE_RECORDED_LINK))
-            && (GetBattlerPartyState(gBattlerAttacker)->knockedOffItem || GetBattlerPartyState(gBattlerTarget)->knockedOffItem))
+            && (GetBattlerPartyState(gBattlerAttacker)->isKnockedOff || GetBattlerPartyState(gBattlerTarget)->isKnockedOff))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -12666,7 +12666,7 @@ void BS_SetPledgeStatus(void)
     NATIVE_ARGS(u8 battler, u32 sideStatus);
 
     u32 battler = GetBattlerForBattleScript(cmd->battler);
-    u32 side = GetBattlerSide(battler);
+    enum BattleSide side = GetBattlerSide(battler);
 
     gBattleStruct->pledgeMove = FALSE;
     if (!(gSideStatuses[side] & cmd->sideStatus))
@@ -14129,7 +14129,7 @@ void BS_ArenaJudgmentWindow(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void SetArenMonLostValues(u32 battler, u32 side)
+static void SetArenMonLostValues(u32 battler, enum BattleSide side)
 {
     gBattleMons[battler].hp = 0;
     gHitMarker |= HITMARKER_FAINTED(battler);
@@ -14438,7 +14438,7 @@ void BS_PlayMoveAnimation(void)
 void BS_SetLuckyChant(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
-    u32 side = GetBattlerSide(gBattlerAttacker);
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
     if (!(gSideStatuses[side] & SIDE_STATUS_LUCKY_CHANT))
     {
         gSideStatuses[side] |= SIDE_STATUS_LUCKY_CHANT;
@@ -14729,7 +14729,7 @@ void BS_TryBestow(void)
         || gBattleMons[gBattlerTarget].item != ITEM_NONE
         || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerAttacker].item)
         || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, gBattleMons[gBattlerAttacker].item)
-        || GetBattlerPartyState(gBattlerTarget)->knockedOffItem)
+        || GetBattlerPartyState(gBattlerTarget)->isKnockedOff)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -14830,7 +14830,7 @@ void BS_TryTrainerSlideMsgLastOn(void)
 void BS_SetAuroraVeil(void)
 {
     NATIVE_ARGS();
-    u32 side = GetBattlerSide(gBattlerAttacker);
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
     if (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
     {
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_MISSED;

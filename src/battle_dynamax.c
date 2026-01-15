@@ -22,7 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static u32 GetMaxPowerTier(enum Move move);
+static enum MaxPowerTier GetMaxPowerTier(enum Move move);
 
 struct GMaxMove
 {
@@ -147,7 +147,7 @@ void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 }
 
 // Returns the non-Dynamax HP of a Pokemon.
-u16 GetNonDynamaxHP(u32 battler)
+u32 GetNonDynamaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].hp;
@@ -161,7 +161,7 @@ u16 GetNonDynamaxHP(u32 battler)
 }
 
 // Returns the non-Dynamax Max HP of a Pokemon.
-u16 GetNonDynamaxMaxHP(u32 battler)
+u32 GetNonDynamaxMaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].maxHP;
@@ -237,7 +237,7 @@ bool32 IsMoveBlockedByMaxGuard(enum Move move)
     }
 }
 
-static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
+static enum Move GetTypeBasedMaxMove(u32 battler, enum Type type)
 {
     // Gigantamax check
     u32 i;
@@ -291,9 +291,9 @@ enum Move GetMaxMove(u32 battler, enum Move baseMove)
 }
 
 // First value is for Fighting, Poison and Multi-Attack. The second is for everything else.
-enum
+enum MaxPowerTier
 {
-    MAX_POWER_TIER_1,   //  70 or 90 damage
+    MAX_POWER_TIER_1,   // 70 or 90 damage
     MAX_POWER_TIER_2,   // 75 or 100 damage
     MAX_POWER_TIER_3,   // 80 or 110 damage
     MAX_POWER_TIER_4,   // 85 or 120 damage
@@ -306,7 +306,6 @@ enum
 // Gets the base power of a Max Move.
 u32 GetMaxMovePower(enum Move move)
 {
-    u32 tier;
     // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
     if (MoveHasAdditionalEffect(move, MOVE_EFFECT_FIXED_POWER))
         return 160;
@@ -321,7 +320,7 @@ u32 GetMaxMovePower(enum Move move)
         default: break;
     }
 
-    tier = GetMaxPowerTier(move);
+    enum MaxPowerTier tier = GetMaxPowerTier(move);
     enum Type moveType = GetMoveType(move);
     if (moveType == TYPE_FIGHTING
      || moveType == TYPE_POISON
@@ -357,7 +356,7 @@ u32 GetMaxMovePower(enum Move move)
     }
 }
 
-static u32 GetMaxPowerTier(enum Move move)
+static enum MaxPowerTier GetMaxPowerTier(enum Move move)
 {
     u32 strikeCount = GetMoveStrikeCount(move);
     if (strikeCount >= 2 && strikeCount <= 5)
