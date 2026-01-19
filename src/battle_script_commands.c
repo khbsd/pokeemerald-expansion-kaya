@@ -2347,7 +2347,7 @@ void StealTargetItem(u8 battlerStealer, u8 itemBattler)
         MarkBattlerForControllerExec(battlerStealer);
     }
 
-    RecordItemEffectBattle(itemBattler, ITEM_NONE);
+    RecordItemEffectBattle(itemBattler, HOLD_EFFECT_NONE);
     CheckSetUnburden(itemBattler);
 
     BtlController_EmitSetMonData(itemBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[itemBattler].item), &gBattleMons[itemBattler].item);  // remove target item
@@ -4100,7 +4100,7 @@ static bool32 BattleTypeAllowsExp(void)
 static u32 GetMonHoldEffect(struct Pokemon *mon)
 {
     enum HoldEffect holdEffect;
-    u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
     if (item == ITEM_ENIGMA_BERRY_E_READER)
     #if FREE_ENIGMA_BERRY == FALSE
@@ -5258,7 +5258,7 @@ static void Cmd_switchindataupdate(void)
     #if TESTING
     if (gTestRunnerEnabled)
     {
-        enum BattleTrainer trainer = GetBattleTrainer(battler);
+        enum BattleTrainer trainer = GetBattlerTrainer(battler);
         u32 partyIndex = gBattlerPartyIndexes[battler];
         if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
             gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
@@ -6507,7 +6507,7 @@ static void Cmd_setgravity(void)
     }
 }
 
-static bool32 TryCheekPouch(u32 battler, u32 itemId, const u8 *nextInstr)
+static bool32 TryCheekPouch(u32 battler, enum Item itemId, const u8 *nextInstr)
 {
     if (GetItemPocket(itemId) == POCKET_BERRIES
         && GetBattlerAbility(battler) == ABILITY_CHEEK_POUCH
@@ -6529,7 +6529,7 @@ static void Cmd_removeitem(void)
     CMD_ARGS(u8 battler);
 
     u32 battler;
-    u16 itemId = 0;
+    enum Item itemId = 0;
 
     if (gBattleScripting.overrideBerryRequirements)
     {
@@ -9346,7 +9346,7 @@ static void Cmd_healpartystatus(void)
                 #if TESTING
                 if (gTestRunnerEnabled)
                 {
-                    enum BattleTrainer trainer = GetBattleTrainer(gBattlerAttacker);
+                    enum BattleTrainer trainer = GetBattlerTrainer(gBattlerAttacker);
                     if (TestRunner_Battle_GetForcedAbility(trainer, i))
                         ability = TestRunner_Battle_GetForcedAbility(trainer, i);
                 }
@@ -12043,7 +12043,7 @@ void BS_CheckParentalBondCounter(void)
 void BS_JumpIfCantLoseItem(void)
 {
     NATIVE_ARGS(const u8 *jumpInstr);
-    u32 item = gBattleMons[gBattlerTarget].item;
+    enum Item item = gBattleMons[gBattlerTarget].item;
 
     if (item == ITEM_NONE || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattlerAttacker, item))
         gBattlescriptCurrInstr = cmd->jumpInstr;

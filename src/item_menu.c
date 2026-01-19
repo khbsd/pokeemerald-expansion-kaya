@@ -145,7 +145,7 @@ static void PrepareTMHMMoveWindow(void);
 static bool8 IsWallysBag(void);
 static void Task_WallyTutorialBagMenu(u8);
 static void Task_BagMenu_HandleInput(u8);
-static void GetItemNameFromPocket(u8 *, u16);
+static void GetItemNameFromPocket(u8 *dest, enum Item itemId);
 static void PrintItemDescription(int);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
@@ -163,7 +163,7 @@ static void Task_SwitchBagPocket(u8);
 static void Task_HandleSwappingItemsInput(u8);
 static void DoItemSwap(u8);
 static void CancelItemSwap(u8);
-static void PrintTMHMMoveData(u16);
+static void PrintTMHMMoveData(enum Item itemId);
 static void PrintContextMenuItems(u8);
 static void PrintContextMenuItemGrid(u8, u8, u8);
 static void Task_ItemContext_SingleRow(u8);
@@ -1101,7 +1101,7 @@ static void LoadBagItemListBuffers(u8 pocketId)
     gMultiuseListMenuTemplate.maxShowed = gBagMenu->numShownItems[pocketId];
 }
 
-static void GetItemNameFromPocket(u8 *dest, u16 itemId)
+static void GetItemNameFromPocket(u8 *dest, enum Item itemId)
 {
     u8 *end;
     switch (gBagPosition.pocket)
@@ -3084,7 +3084,7 @@ static void PrepareTMHMMoveWindow(void)
     CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
 }
 
-static void PrintTMHMMoveData(u16 itemId)
+static void PrintTMHMMoveData(enum Item itemId)
 {
     u8 i;
     enum Move move;

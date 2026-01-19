@@ -16,7 +16,7 @@ enum ItemBallTreasurePools
     ITEM_POOL_COUNT,
 };
 
-static const u8 sItemPoolWeights[ITEM_POOL_COUNT] =
+static const u16 sItemPoolWeights[ITEM_POOL_COUNT] =
 {
     [ITEM_POOL_GARDENING]         = 25,
     [ITEM_POOL_COMMON_HELD_ITEMS] = 35,

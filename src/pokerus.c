@@ -8,7 +8,7 @@
 #include "constants/pokerus.h"
 
 // Pokérus strains
-const u8 POKERUS_STRAINS_GEN_2[] =
+const u16 POKERUS_STRAINS_GEN_2[] =
 {
     [PKRS_STRAIN_1]  = 15,
     [PKRS_STRAIN_2]  = 30,
@@ -28,7 +28,7 @@ const u8 POKERUS_STRAINS_GEN_2[] =
     [PKRS_STRAIN_16] = 1,
 };
 
-const u8 POKERUS_STRAINS_GEN_4[] =
+const u16 POKERUS_STRAINS_GEN_4[] =
 {
     [PKRS_STRAIN_1]   = 30,
     [PKRS_STRAIN_2]   = 31,
@@ -48,7 +48,7 @@ const u8 POKERUS_STRAINS_GEN_4[] =
     [PKRS_STRAIN_16]  = 1,
 };
 
-const u8 POKERUS_STRAINS_GEN_8[] =
+const u16 POKERUS_STRAINS_GEN_8[] =
 {
     [PKRS_STRAIN_1]   = 0,
     [PKRS_STRAIN_2]   = 31,
@@ -68,7 +68,7 @@ const u8 POKERUS_STRAINS_GEN_8[] =
     [PKRS_STRAIN_16]  = 1,
 };
 
-const u8 POKERUS_STRAINS_GEN_3_REDUX[] =
+const u16 POKERUS_STRAINS_GEN_3_REDUX[] =
 {
     [PKRS_UNINFECTED] = 0,
     [PKRS_STRAIN_2]   = 10,

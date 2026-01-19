@@ -169,7 +169,7 @@ static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
 static const u8 sPokevialDesc[]       = _("Restores all\n"
                                           "POKéMON to full\n"
                                           "health.");
-const struct Item gItemsInfo[] =
+const struct ItemInfo gItemsInfo[] =
 {
     [ITEM_NONE] =
     {
