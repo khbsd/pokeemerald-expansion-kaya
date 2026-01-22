@@ -5435,6 +5435,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .isHisuianForm = TRUE,
         .levelUpLearnset = sQwilfishHisuiLevelUpLearnset,
         .teachableLearnset = sQwilfishHisuiTeachableLearnset,
+        .eggMoveLearnset = sQwilfishHisuiEggMoveLearnset,
         .formSpeciesIdTable = sQwilfishFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_OVERQWIL, CONDITIONS({IF_KNOWS_MOVE, MOVE_BARB_BARRAGE})}),
     },
@@ -5500,6 +5501,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         )
         .levelUpLearnset = sOverqwilLevelUpLearnset,
         .teachableLearnset = sOverqwilTeachableLearnset,
+        .eggMoveLearnset = sQwilfishHisuiEggMoveLearnset,
     },
 #endif //P_FAMILY_PINCURCHIN
 

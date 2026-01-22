@@ -206,7 +206,7 @@ static u16 GetPrevBall(u16 ballId)
         index--;
         if (index == -1)
             index = POKEBALL_COUNT - 1;
-        newBall = gBallItemIds[index];
+        newBall = gPokeBalls[index].itemId;
         if (CheckBagHasItem(newBall, 1))
             return newBall;
     }
@@ -223,7 +223,7 @@ static u32 GetNextBall(u32 ballId)
         index++;
         if (index == POKEBALL_COUNT)
             index = 0;
-        newBall = gBallItemIds[index];
+        newBall = gPokeBalls[index].itemId;
         if (CheckBagHasItem(newBall, 1))
             return newBall;
     }
@@ -1858,7 +1858,7 @@ enum TrainerPicID LinkPlayerGetTrainerPicId(u32 multiplayerId)
     enum TrainerPicID trainerPicId;
 
     u8 gender = gLinkPlayers[multiplayerId].gender;
-    u8 version = gLinkPlayers[multiplayerId].version & 0xFF;
+    enum GameVersion version = gLinkPlayers[multiplayerId].version & 0xFF;
 
     if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
         trainerPicId = gender + TRAINER_PIC_BACK_RED;

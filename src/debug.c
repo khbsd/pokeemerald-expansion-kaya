@@ -3791,8 +3791,8 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
 {
     for (enum PokeBall ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
     {
-        if (CheckBagHasSpace(gBallItemIds[ballId], MAX_BAG_ITEM_CAPACITY))
-            AddBagItem(gBallItemIds[ballId], MAX_BAG_ITEM_CAPACITY);
+        if (CheckBagHasSpace(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY);
     }
 }
 
@@ -5129,6 +5129,106 @@ void DebugNative_Party_SetFriendship(void)
     }
 }
 
+#undef tFriendship
+
+#define tStrain            data[6]
+
+static void Debug_Display_PokerusDaysLeftInfo(s32 daysLeft, s32 strain, u32 digit, u8 windowId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, daysLeft, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+    if (daysLeft == 0 && strain)
+        StringCopy(gStringVar2, COMPOUND_STRING("Inactive"));
+    else if (daysLeft == 0)
+        StringCopy(gStringVar2, COMPOUND_STRING("No Pokerus"));
+    else
+        StringCopy(gStringVar2, COMPOUND_STRING(""));
+    StringCopy(gStringVar3, gText_DigitIndicator[digit]);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Days Left:\n{STR_VAR_1}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}"));
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+}
+
+static void DebugNativeStep_Party_SetPokerusDaysLeftSelect(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        SetMonData(&gPlayerParty[gTasks[taskId].tPartyId], MON_DATA_POKERUS_DAYS_LEFT, &gTasks[taskId].tInput);
+        DebugNativeStep_CloseDebugWindow(taskId);
+        return;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugNativeStep_CloseDebugWindow(taskId);
+        return;
+    }
+
+    Debug_HandleInput_Numeric(taskId, 0, 15, 2);
+
+    if (JOY_NEW(DPAD_ANY) || JOY_NEW(A_BUTTON))
+        Debug_Display_PokerusDaysLeftInfo(gTasks[taskId].tInput, gTasks[taskId].tStrain, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+}
+
+static void Debug_Display_PokerusStrainInfo(s32 strain, u32 digit, u8 windowId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, strain, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopy(gStringVar3, gText_DigitIndicator[digit]);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Strain:\n{STR_VAR_1}\n\n{STR_VAR_3}"));
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
+}
+
+static void DebugNativeStep_Party_SetPokerusStrainSelect(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].tStrain = gTasks[taskId].tInput;
+        SetMonData(&gPlayerParty[gTasks[taskId].tPartyId], MON_DATA_POKERUS_STRAIN, &gTasks[taskId].tInput);
+        gTasks[taskId].tInput = GetMonData(&gPlayerParty[gTasks[taskId].tPartyId], MON_DATA_POKERUS_DAYS_LEFT);
+        Debug_Display_PokerusDaysLeftInfo(gTasks[taskId].tInput, gTasks[taskId].tStrain, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+        gTasks[taskId].func = DebugNativeStep_Party_SetPokerusDaysLeftSelect;
+        return;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugNativeStep_CloseDebugWindow(taskId);
+        return;
+    }
+
+    Debug_HandleInput_Numeric(taskId, 0, 15, 2);
+
+    if (JOY_NEW(DPAD_ANY) || JOY_NEW(A_BUTTON))
+        Debug_Display_PokerusStrainInfo(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+}
+
+static void DebugNativeStep_Party_SetPokerusMain(u8 taskId)
+{
+    u8 windowId = DebugNativeStep_CreateDebugWindow();
+    u32 strain = GetMonData(&gPlayerParty[gTasks[taskId].tPartyId], MON_DATA_POKERUS_STRAIN);
+
+    // Display initial flag
+    Debug_Display_PokerusStrainInfo(strain, 0, windowId);
+
+    gTasks[taskId].func = DebugNativeStep_Party_SetPokerusStrainSelect;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tStrain = strain;
+    gTasks[taskId].tInput = strain;
+    gTasks[taskId].tDigit = 0;
+    gTasks[taskId].tPartyId = 0;
+}
+
+void DebugNative_Party_SetPokerus(void)
+{
+    if (gSpecialVar_0x8004 < PARTY_SIZE)
+    {
+        u32 taskId = CreateTask(DebugNativeStep_Party_SetPokerusMain, 1);
+        gTasks[taskId].tPartyId = gSpecialVar_0x8004;
+    }
+}
+
+#undef tStrain
 #undef tPartyId
 #undef tFriendship
 
