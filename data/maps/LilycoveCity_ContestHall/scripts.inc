@@ -397,7 +397,7 @@ LilycoveCity_ContestHall_Text_StillLoveSmartnessContests:
 
 LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest:
 	.string "MC: Are you entering the BEAUTY\n"
-	.string "CONTEST, too? Good luck!$"
+	.string "CONTEST, too? Gods peed!$"
 
 LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty:
 	.string "JUDGE: Ah, every POKéMON here is\n"

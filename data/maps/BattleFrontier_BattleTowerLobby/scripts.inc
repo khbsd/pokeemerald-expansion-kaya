@@ -987,7 +987,7 @@ BattleFrontier_BattleTowerLobby_Text_AboutToFace50thTrainer:
 	.string "From here on, every time you beat seven\n"
 	.string "TRAINERS in a row, your POKéMON will\l"
 	.string "receive a commemorative RIBBON.\p"
-	.string "Good luck!$"
+	.string "Gods peed!$"
 
 BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons:
 	.string "Here are some RIBBONS for beating\n"

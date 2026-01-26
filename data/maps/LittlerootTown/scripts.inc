@@ -1040,7 +1040,7 @@ LittlerootTown_Text_YouSavedBirch:
 
 LittlerootTown_Text_GoodLuckCatchingPokemon:
 	.string "{SPEAKER SP_NAME_COWARD}Are you going to catch POKéMON?\n"
-	.string "Good luck!$"
+	.string "Gods peed!$"
 
 LittlerootTown_Text_TownSign:
 	.string "LITTLEROOT TOWN\n"

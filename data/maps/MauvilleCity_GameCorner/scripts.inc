@@ -29,7 +29,7 @@ TrainerId_Onframe:
 	map_script_2 GAME_CORNER_VAR_ID_CHECK, 0, BouncerCheck
 .endif
 	.2byte 0
-	
+
 BouncerCheck::
 	lockall
 	applymovement LOCALID_BOUNCER, Common_Movement_WalkInPlaceFasterLeft
@@ -47,18 +47,18 @@ BouncerCheck::
 	applymovement LOCALID_BOUNCER, Movement_Bouncer_Leave
 	waitmovement 0
 	releaseall
-	end	
-	
+	end
+
 Movement_Bouncer_Approach:
 	walk_left
 	walk_left
-	step_end	
-	
+	step_end
+
 Movement_Bouncer_Leave:
 	walk_right
 	walk_right
 	walk_in_place_faster_left
-	step_end		
+	step_end
 
 MauvilleCity_GameCorner_EventScript_Blackjack::
 	lockall
@@ -74,7 +74,7 @@ MauvilleCity_GameCorner_EventScript_Blackjack::
 	fadedefaultbgm
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Derby::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -101,7 +101,7 @@ MauvilleCity_GameCorner_EventScript_Derby::
 	closemessage
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Snake::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -135,8 +135,8 @@ MauvilleCity_GameCorner_EventScript_Snake::
 	hidecoinsbox 0, 5
 	closemessage
 	releaseall
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_FlappyBird::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -170,8 +170,8 @@ MauvilleCity_GameCorner_EventScript_FlappyBird::
 	hidecoinsbox 0, 5
 	closemessage
 	releaseall
-	end		
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_BlockStacker::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -181,7 +181,7 @@ MauvilleCity_GameCorner_EventScript_BlockStacker::
 	showcoinsbox 1, 1
 	msgbox MauvilleCity_GameCorner_Text_BS, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	removecoins 25
 	updatecoinsbox 1, 1
 	playse SE_SHOP
@@ -210,40 +210,40 @@ MauvilleCity_GameCorner_EventScript_BlockStacker::
 BlockStacker_Not_Enough::
 	msgbox BS_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end	
-	
+	end
+
 Pinball_Not_Enough::
 	msgbox PB_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end	
-	
+	end
+
 Onix_Not_Enough::
 	msgbox Snake_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end		
-	
+	end
+
 Juice_Not_Enough::
 	msgbox Bjuice_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end			
-	
+	end
+
 Butterfree_Not_Enough::
 	msgbox Bird_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end			
-	
+	end
+
 VF_Not_Enough::
 	msgbox Flip_Not_Enough, MSGBOX_DEFAULT
 	releaseall
-	end		
-	
-MauvilleCity_GameCorner_EventScript_Pachinko::	
+	end
+
+MauvilleCity_GameCorner_EventScript_Pachinko::
 	lockall
 	checkitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoCoinCase
 	msgbox MauvilleCity_GameCorner_Text_Pachinko, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	playbgm MUS_RG_ROUTE1, FALSE
 	callnative PlayPachinko
     waitstate
@@ -251,7 +251,7 @@ MauvilleCity_GameCorner_EventScript_Pachinko::
 	fadedefaultbgm
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_PinballMeowth::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -261,7 +261,7 @@ MauvilleCity_GameCorner_EventScript_PinballMeowth::
 	showcoinsbox 1, 1
 	msgbox MauvilleCity_GameCorner_Text_Pinball_Meowth, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	removecoins 25
 	updatecoinsbox 1, 1
 	playse SE_SHOP
@@ -286,7 +286,7 @@ MauvilleCity_GameCorner_EventScript_PinballMeowth::
 	closemessage
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_PinballDiglett::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -296,7 +296,7 @@ MauvilleCity_GameCorner_EventScript_PinballDiglett::
 	showcoinsbox 1, 1
 	msgbox MauvilleCity_GameCorner_Text_Pinball_Diglett, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	removecoins 50
 	updatecoinsbox 1, 1
 	playse SE_SHOP
@@ -321,7 +321,7 @@ MauvilleCity_GameCorner_EventScript_PinballDiglett::
 	closemessage
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_PinballSeel::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -331,7 +331,7 @@ MauvilleCity_GameCorner_EventScript_PinballSeel::
 	showcoinsbox 1, 1
 	msgbox MauvilleCity_GameCorner_Text_Pinball_Seel, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	removecoins 25
 	updatecoinsbox 1, 1
 	playse SE_SHOP
@@ -339,7 +339,7 @@ MauvilleCity_GameCorner_EventScript_PinballSeel::
 	hidecoinsbox 0, 5
 	playbgm MUS_RG_SS_ANNE, FALSE
 	callnative PlaySeelPinballGame
-    waitstate 
+    waitstate
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	goto_if_eq GAME_CORNER_VAR_WINNINGS, 0, MauvilleCity_GameCorner_NoWin
@@ -355,8 +355,8 @@ MauvilleCity_GameCorner_EventScript_PinballSeel::
 	hidecoinsbox 0, 5
 	closemessage
 	releaseall
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_PinballGengar::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -366,7 +366,7 @@ MauvilleCity_GameCorner_EventScript_PinballGengar::
 	showcoinsbox 1, 1
 	msgbox MauvilleCity_GameCorner_Text_Pinball_Gengar, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF	
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_CancelVF
 	removecoins 100
 	updatecoinsbox 1, 1
 	playse SE_SHOP
@@ -390,8 +390,8 @@ MauvilleCity_GameCorner_EventScript_PinballGengar::
 	hidecoinsbox 0, 5
 	closemessage
 	releaseall
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_VoltorbFlip::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -415,7 +415,7 @@ MauvilleCity_GameCorner_EventScript_VoltorbFlip::
 	goto_if_eq VAR_RESULT, 1, VF_Go_On
 	releaseall
 	end
-	
+
 VF_Come_Again::
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -423,15 +423,15 @@ VF_Come_Again::
 	setvar GAME_CORNER_VAR_WINNINGS, 0
 	releaseall
 	end
-	
+
 VF_Go_On::
 	showcoinsbox 1, 1
-	buffernumberstring STR_VAR_1, GAME_CORNER_VAR_WINNINGS	
+	buffernumberstring STR_VAR_1, GAME_CORNER_VAR_WINNINGS
 	msgbox MauvilleCity_GameCorner_Text_VF_Keep_Going, MSGBOX_YESNO
 	closemessage
 	goto_if_eq VAR_RESULT, NO, VF_Cash_Out
 	goto VF_Loop
-	
+
 VF_Loop::
 	hidecoinsbox 0, 5
 	special Special_ViewVoltorbFlip
@@ -440,8 +440,8 @@ VF_Loop::
 	goto_if_eq VAR_RESULT, 1, VF_Go_On
 	releaseall
 	end
-	
-VF_Cash_Out::	
+
+VF_Cash_Out::
 	addcoins GAME_CORNER_VAR_WINNINGS
 	setvar GAME_CORNER_VAR_WINNINGS, 0
 .if FLIP_VAR_LEVEL != 0
@@ -455,7 +455,7 @@ VF_Cash_Out::
 	hidecoinsbox 0, 5
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Gacha_Basic::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -468,8 +468,8 @@ MauvilleCity_GameCorner_EventScript_Gacha_Basic::
 	fadedefaultbgm
 	releaseall
 	end
-	
-	
+
+
 MauvilleCity_GameCorner_EventScript_Gacha_Great::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -482,7 +482,7 @@ MauvilleCity_GameCorner_EventScript_Gacha_Great::
 	fadedefaultbgm
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Gacha_Ultra::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -495,7 +495,7 @@ MauvilleCity_GameCorner_EventScript_Gacha_Ultra::
 	fadedefaultbgm
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Gacha_Master::
 	lockall
 	checkitem ITEM_COIN_CASE
@@ -513,11 +513,11 @@ MauvilleCity_GameCorner_CancelBJ::
 	closemessage
 	releaseall
 	end
-	
+
 MauvilleCity_GameCorner_NoWin::
 	releaseall
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_CancelVF::
 	hidecoinsbox 0, 5
 	closemessage
@@ -732,7 +732,7 @@ MauvilleCity_GameCorner_EventScript_PrizeCornerTMs::
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage
 	release
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_PrizeCornerNew::
 	lock
 	faceplayer
@@ -740,8 +740,8 @@ MauvilleCity_GameCorner_EventScript_PrizeCornerNew::
 	checkitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_ChooseNewPrizeMessage
 	release
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_PrizeCornerNew2::
 	lock
 	faceplayer
@@ -749,7 +749,7 @@ MauvilleCity_GameCorner_EventScript_PrizeCornerNew2::
 	checkitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_ChooseNewPrizeMessage2
 	release
-	end		
+	end
 
 MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPrize
@@ -757,35 +757,35 @@ MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage::
 	setvar VAR_TEMP_1, 0
 	showcoinsbox 1, 1
 	goto MauvilleCity_GameCorner_EventScript_ChooseTMPrize
-	
+
 MauvilleCity_GameCorner_EventScript_ChooseNewPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
 	setvar VAR_TEMP_1, 0
 	showcoinsbox 1, 1
-	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize	
-	
+	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize
+
 MauvilleCity_GameCorner_EventScript_ChooseNewPrizeMessage2::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
 	setvar VAR_TEMP_1, 0
 	showcoinsbox 1, 1
-	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize2		
+	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize2
 
 MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
 	goto MauvilleCity_GameCorner_EventScript_ChooseTMPrize
-	
+
 MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
-	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize	
-	
+	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize
+
 MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize2::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
-	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize2	
+	goto MauvilleCity_GameCorner_EventScript_ChooseNewPrize2
 
 MauvilleCity_GameCorner_EventScript_ChooseTMPrize::
 	multichoice 12, 0, MULTI_GAME_CORNER_TMS, FALSE
@@ -798,7 +798,7 @@ MauvilleCity_GameCorner_EventScript_ChooseTMPrize::
 	case 5, MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_ChooseNewPrize::
 	@ multichoice 12, 0, MULTI_GAMECORNER_NEW, FALSE
 	switch VAR_RESULT
@@ -809,7 +809,7 @@ MauvilleCity_GameCorner_EventScript_ChooseNewPrize::
 	case 4, MauvilleCity_GameCorner_EventScript_BrightPowder
 	case 7, MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelTMSelect
-	end	
+	end
 
 MauvilleCity_GameCorner_EventScript_ChooseNewPrize2::
 	@ multichoice 12, 0, MULTI_GAMECORNER_NEW2, FALSE
@@ -820,26 +820,26 @@ MauvilleCity_GameCorner_EventScript_ChooseNewPrize2::
 	case 3, MauvilleCity_GameCorner_EventScript_LeafStone
 	case 4, MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelTMSelect
-	end		
+	end
 
 MauvilleCity_GameCorner_EventScript_ChoiceBand::
 	setvar VAR_TEMP_1, 8
 	bufferitemname STR_VAR_1, ITEM_CHOICE_BAND
 	setvar VAR_0x8004, ITEM_CHOICE_BAND
 	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize
-	
+
 MauvilleCity_GameCorner_EventScript_BrightPowder::
 	setvar VAR_TEMP_1, 9
 	bufferitemname STR_VAR_1, ITEM_BRIGHT_POWDER
 	setvar VAR_0x8004, ITEM_BRIGHT_POWDER
-	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize	
-	
+	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize
+
 MauvilleCity_GameCorner_EventScript_RareCandy::
 	setvar VAR_TEMP_1, 1
 	bufferitemname STR_VAR_1, ITEM_RARE_CANDY
 	setvar VAR_0x8004, ITEM_RARE_CANDY
 	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize
-	
+
 MauvilleCity_GameCorner_EventScript_SunStone::
 	setvar VAR_TEMP_1, 2
 	bufferitemname STR_VAR_1, ITEM_SUN_STONE
@@ -874,7 +874,7 @@ MauvilleCity_GameCorner_EventScript_FireStone::
 	setvar VAR_TEMP_1, 4
 	bufferitemname STR_VAR_1, ITEM_FIRE_STONE
 	setvar VAR_0x8004, ITEM_FIRE_STONE
-	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize	
+	goto MauvilleCity_GameCorner_EventScript_ConfirmNewPrize
 
 MauvilleCity_GameCorner_EventScript_ConfirmNewPrize::
 	//special BufferItemName
@@ -890,7 +890,7 @@ MauvilleCity_GameCorner_EventScript_ConfirmNewPrize::
 	case 7, MauvilleCity_GameCorner_EventScript_BuyLeafStone
 	case 8, MauvilleCity_GameCorner_EventScript_BuyChoiceBand
 	case 9, MauvilleCity_GameCorner_EventScript_BuyBrightPowder
-	
+
 	end
 
 MauvilleCity_GameCorner_EventScript_BuyBrightPowder::
@@ -931,7 +931,7 @@ MauvilleCity_GameCorner_EventScript_BuyRareCandy::
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_BuySunStone::
 	checkcoins VAR_TEMP_2
 	goto_if_lt VAR_TEMP_2, SUNSTONE_COINS, MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForNew
@@ -1008,7 +1008,7 @@ MauvilleCity_GameCorner_EventScript_BuyLeafStone::
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize2
-	end	
+	end
 
 MauvilleCity_GameCorner_EventScript_TMDoubleTeam::
 	setvar VAR_TEMP_1, 1
@@ -1121,31 +1121,31 @@ MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForNew::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForNew2::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize2
-	end		
+	end
 
 MauvilleCity_GameCorner_EventScript_NoRoomForTM::
 	call Common_EventScript_BagIsFull
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_NoRoomForNew::
 	call Common_EventScript_BagIsFull
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_NoRoomForNew2::
 	call Common_EventScript_BagIsFull
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseNewPrize2
-	end		
+	end
 
 MauvilleCity_GameCorner_EventScript_CancelTMSelect::
 	msgbox MauvilleCity_GameCorner_Text_OhIsThatSo, MSGBOX_DEFAULT
@@ -1156,26 +1156,26 @@ MauvilleCity_GameCorner_EventScript_CancelTMSelect::
 MauvilleCity_GameCorner_EventScript_Woman2::
 	msgbox MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay, MSGBOX_NPC
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Dealer::
 	msgbox MauvilleCity_GameCorner_Text_Dealer, MSGBOX_NPC
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_Dealer2::
 	msgbox MauvilleCity_GameCorner_Text_Dealer2, MSGBOX_NPC
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_VFGuy1::
 	msgbox MauvilleCity_GameCorner_Text_VFGuy1, MSGBOX_NPC
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end		
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_VFGuy2::
 	msgbox MauvilleCity_GameCorner_Text_VFGuy2, MSGBOX_NPC
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end			
+	end
 
 MauvilleCity_GameCorner_EventScript_Gentleman::
 	msgbox MauvilleCity_GameCorner_Text_RouletteOnlyLuck, MSGBOX_NPC
@@ -1270,62 +1270,62 @@ MauvilleCity_GameCorner_EventScript_OldMan::
 	msgbox MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
 	end
-	
+
 MauvilleCity_GameCorner_EventScript_PachinkoGuy::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_PachinkoGuy, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end	
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_Hiker::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Hiker, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end		
+	end
 
 MauvilleCity_GameCorner_EventScript_Bouncer::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Bouncer2, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end		
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_DerbyLady1::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Derby_1, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end			
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_DerbyLady2::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Derby_2, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end			
+	end
 
 MauvilleCity_GameCorner_EventScript_Fisherman::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Fisherman, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end			
-	
+	end
+
 MauvilleCity_GameCorner_EventScript_Gachalady::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Gachalady, MSGBOX_DEFAULT
 	closemessage
-	end			
+	end
 
 MauvilleCity_GameCorner_EventScript_Employee::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_Employee, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
-	end			
+	end
 
 MauvilleCity_GameCorner_EventScript_Cook::
 	lock
@@ -1341,7 +1341,7 @@ MauvilleCity_GameCorner_EventScript_Man::
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
 	end
 
-MauvilleCity_GameCorner_EventScript_JuiceLady::	
+MauvilleCity_GameCorner_EventScript_JuiceLady::
 	lock
 	faceplayer
 	checkitem ITEM_COIN_CASE
@@ -1522,7 +1522,7 @@ MauvilleCity_GameCorner_EventScript_NoCoinCase::
 MauvilleCity_GameCorner_EventScript_NoCoinCase2::
 	msgbox MauvilleCity_GameCorner_Text_CantBuyWithNoCoinCase, MSGBOX_DEFAULT
 	releaseall
-	end	
+	end
 
 MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner:
 	.string "This is MAUVILLE GAME CORNER.$"
@@ -1542,25 +1542,25 @@ MauvilleCity_GameCorner_Text_Hiker:
 	.string "You need to be careful…\p"
 	.string "You only win 2 COINS for\n"
 	.string "every point in these machines.$"
-	
+
 MauvilleCity_GameCorner_Text_Derby_1:
 	.string "Looking to bet on the DERBY?\n"
 	.string "We've gone digital!\p"
 	.string "Use one of the tablets\n"
-	.string "in front of the counter.$"	
-	
+	.string "in front of the counter.$"
+
 MauvilleCity_GameCorner_Text_Derby_2:
 	.string "It's not all about CONDITION.\p"
 	.string "At the end of the day, it's\n"
 	.string "really all luck.\p"
 	.string "Sometimes it's best to just\n"
-	.string "pick your favorite!$"	
-	
+	.string "pick your favorite!$"
+
 MauvilleCity_GameCorner_Text_Fisherman:
 	.string "I come here for the food.\p"
 	.string "It's no CELADON CAFE…\n"
-	.string "But it'll do.$"		
-	
+	.string "But it'll do.$"
+
 MauvilleCity_GameCorner_Text_Gachalady:
 	.string "The LOTTERY MACHINES have odds,\n"
 	.string "but nothing is guaranteed.\p"
@@ -1568,12 +1568,12 @@ MauvilleCity_GameCorner_Text_Gachalady:
 	.string "others, and there are different\l"
 	.string "rarities in all of them.\p"
 	.string "New POKéMON are also weighted\n"
-	.string "By your POKéDEX, so be wary.$"	
-	
+	.string "By your POKéDEX, so be wary.$"
+
 MauvilleCity_GameCorner_Text_Employee:
 	.string "I'm on the lookout for cheaters.\n"
 	.string "Nobody likes a cheater!$"
-	
+
 MauvilleCity_GameCorner_Text_Bouncer1:
 	.string "You need a valid TRAINER ID\n"
 	.string "to enter the GAME CORNER.\p"
@@ -1582,15 +1582,15 @@ MauvilleCity_GameCorner_Text_Bouncer1:
 	.string "Hmm…\p"
 	.string "…\p"
 	.string "Everything looks good here.\n"
-	.string "Enjoy the GAME CORNER!$"	
-	
+	.string "Enjoy the GAME CORNER!$"
+
 MauvilleCity_GameCorner_Text_Bouncer2:
-	.string "Enjoy the GAME CORNER!$"	
-	
+	.string "Enjoy the GAME CORNER!$"
+
 MauvilleCity_GameCorner_Text_Pachinko:
 	.string "A DROPSPIN MACHINE!\n"
 	.string "It's 3 COINS per BALL.$"
-	
+
 MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins:
 	.string "Okay, you wanted some COINS for\n"
 	.string "the games?\p"
@@ -1616,7 +1616,7 @@ MauvilleCity_GameCorner_Text_CoinCaseIsFull:
 
 MauvilleCity_GameCorner_Text_DontNeedCoinsThen:
 	.string "Oh… You don't need COINS, then?\n"
-	.string "Good luck on your adventure!$"
+	.string "Gods peed on your adventure!$"
 
 MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes:
 	.string "Welcome.\p"
@@ -1629,7 +1629,7 @@ MauvilleCity_GameCorner_Text_WhichPrize:
 MauvilleCity_GameCorner_Text_SoYourChoiceIsTheTMX:
 	.string "So your choice is\n"
 	.string "the {STR_VAR_1} {STR_VAR_2}?$"
-	
+
 MauvilleCity_GameCorner_Text_SoYourChoiceIsTheNewX:
 	.string "So your choice is\n"
 	.string "the {STR_VAR_1}?$"
@@ -1637,19 +1637,19 @@ MauvilleCity_GameCorner_Text_SoYourChoiceIsTheNewX:
 MauvilleCity_GameCorner_Text_BlackJack:
 	.string "It's a BLACKJACK TABLE!\n"
 	.string "Want to play?$"
-	
+
 MauvilleCity_GameCorner_Text_Derby:
 	.string "It's the MAUVILLE DERBY!\n"
-	.string "Want to place a bet?$"	
-	
+	.string "Want to place a bet?$"
+
 MauvilleCity_GameCorner_Text_Snake:
 	.string "It's ONIX!\n"
-	.string "It costs 25 COINS to play.$"		
-	
+	.string "It costs 25 COINS to play.$"
+
 MauvilleCity_GameCorner_Text_Bird:
 	.string "It's FLUTTERFREE!\n"
-	.string "It costs 25 COINS to play.$"		
-	
+	.string "It costs 25 COINS to play.$"
+
 MauvilleCity_GameCorner_Text_Pinball_Meowth:
 	.string "It's a PINBALL MACHINE!\n"
 	.string "It costs 25 COINS to play.$"
@@ -1657,19 +1657,19 @@ MauvilleCity_GameCorner_Text_Pinball_Meowth:
 MauvilleCity_GameCorner_Text_BS:
 	.string "It's BLOCK BUILDER!\n"
 	.string "It costs 25 COINS to play.$"
-	
+
 MauvilleCity_GameCorner_Text_Pinball_Seel:
 	.string "It's a PINBALL MACHINE!\n"
 	.string "It costs 25 COINS to play.$"
-	
+
 MauvilleCity_GameCorner_Text_Pinball_Diglett:
 	.string "It's a PINBALL MACHINE!\n"
 	.string "It costs 50 COINS to play.$"
-	
+
 MauvilleCity_GameCorner_Text_Pinball_Gengar:
 	.string "It's a PINBALL MACHINE!\n"
 	.string "It costs 100 COINS to play.$"
-	
+
 MauvilleCity_GameCorner_Text_VF:
 	.string "It's VOLTORB FLIP!\n"
 	.string "It costs 50 COINS to play.$"
@@ -1692,21 +1692,21 @@ PB_YOU_WON_TEXT:
 PB_Not_Enough:
 	.string "It's a PINBALL MACHINE!\p"
 	.string "You don't have enough COINS…$"
-	
+
 Snake_Not_Enough:
 	.string "It's ONIX!\p"
-	.string "You don't have enough COINS…$"	
-	
+	.string "You don't have enough COINS…$"
+
 Bjuice_Not_Enough:
-	.string "You don't have enough COINS.$"	
-	
+	.string "You don't have enough COINS.$"
+
 Bird_Not_Enough:
 	.string "It's FLUTTERFREE!\p"
-	.string "You don't have enough COINS…$"		
-	
+	.string "You don't have enough COINS…$"
+
 BS_Not_Enough:
 	.string "It's BLOCK BUILDER!\p"
-	.string "You don't have enough COINS…$"	
+	.string "You don't have enough COINS…$"
 
 Flip_Not_Enough:
 	.string "It's VOLTORB FLIP!\p"
@@ -1716,7 +1716,7 @@ Flip_Not_Enough:
 MauvilleCity_GameCorner_Text_NoRoomForPlacingDecor:
 	.string "There isn't any room available for\n"
 	.string "placing {STR_VAR_1}.$"
-	
+
 MauvilleCity_GameCorner_Text_VF_Keep_Going:
 	.string "You've made {STR_VAR_1} COINS.\n"
 	.string "Keep going?$"
@@ -1785,26 +1785,26 @@ MauvilleCity_GameCorner_Text_EasyToLoseTrackOfTime:
 MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay:
 	.string "COINS are needed to play here\n"
 	.string "in the GAME CORNER.$"
-	
+
 	MauvilleCity_GameCorner_Text_Dealer:
 	.string "Some say BLACKJACK is about skill.\n"
 	.string "Others say it's about luck.\p"
 	.string "I say it's about having fun…\n"
 	.string "and maybe winning big!$"
-	
+
 	MauvilleCity_GameCorner_Text_Dealer2:
 	.string "You can bet anything divisible\n"
 	.string "by 10 here.\p"
-	.string "Maybe you should go all in!$"	
+	.string "Maybe you should go all in!$"
 
 MauvilleCity_GameCorner_Text_VFGuy1:
 	.string "You want to play VOLTORB FLIP?\p"
 	.string "You need to be on the other\n"
 	.string "side of the table.$"
-	
+
 MauvilleCity_GameCorner_Text_VFGuy2:
 	.string "Try the other side of\n"
-	.string "the table, pal.$"	
+	.string "the table, pal.$"
 
 MauvilleCity_GameCorner_Text_RouletteOnlyLuck:
 	.string "This ROULETTE thing…\n"
@@ -1840,7 +1840,7 @@ MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase:
 MauvilleCity_GameCorner_Text_CantBuyWithNoCoinCase:
 	.string "Huh? Looks like you need\n"
 	.string "a COIN CASE.$"
-	
+
 MauvilleCity_GameCorner_Text_Juice:
 	.string "BERRY JUICE!\n"
-	.string "Just 10 COINS.$"	
+	.string "Just 10 COINS.$"

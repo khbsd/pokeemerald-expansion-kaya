@@ -358,7 +358,7 @@ SilphCo_7F_Text_RivalPostBattle::
     .string "boot out the ELITE FOUR.\p"
     .string "I'll become the world's most\n"
     .string "powerful TRAINER!\p"
-    .string "{PLAYER}, well, good luck to you!\n"
+    .string "{PLAYER}, well, gods peed to you!\n"
     .string "Don't sweat it!\l"
     .string "Smell ya!$"
 

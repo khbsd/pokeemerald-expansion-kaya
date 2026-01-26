@@ -1474,7 +1474,7 @@ LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4:
 
 LilycoveCity_ContestLobby_Text_ComeThroughHere:
 	.string "Please come in through here.\n"
-	.string "Good luck!$"
+	.string "Gods peed!$"
 
 LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
 	.string "Congratulations! Your POKéMON is the\n"

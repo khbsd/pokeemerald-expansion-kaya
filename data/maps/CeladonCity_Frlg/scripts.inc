@@ -191,7 +191,7 @@ Text_SoftboiledTeach::
     .string "Hello, there!\p"
     .string "I've seen you about, but I never\n"
     .string "had a chance to chat.\p"
-    .string "It must be good luck that brought\n"
+    .string "It must be gods pee that brought\n"
     .string "us together finally.\p"
     .string "I'd like to celebrate by teaching\n"
     .string "you the move SOFTBOILED.$"

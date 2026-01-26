@@ -247,7 +247,7 @@ FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls::
     .string "you may have left.$"
 
 FuchsiaCity_SafariZone_Entrance_Text_GoodLuck::
-    .string "Good luck!$"
+    .string "Gods peed!$"
 
 FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain::
     .string "Did you catch your fair share?\n"

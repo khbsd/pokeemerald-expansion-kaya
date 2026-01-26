@@ -47,7 +47,7 @@ Route9_Text_CaitlinDefeat::
 
 Route9_Text_CaitlinPostBattle::
     .string "You're obviously talented.\n"
-    .string "Good luck to you!$"
+    .string "Gods peed to you!$"
 
 Route9_Text_JeremyIntro::
     .string "Bwahaha!\n"

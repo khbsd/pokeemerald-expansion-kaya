@@ -181,7 +181,7 @@ SafariZone_South_Text_ExitEarlyThankYouForPlaying:
 	.string "We hope to see you again.$"
 
 SafariZone_South_Text_GoodLuck:
-	.string "Good luck!\p"
+	.string "Gods peed!\p"
 	.string "If you need anything, don't hesitate\n"
 	.string "to tell me, please!$"
 
