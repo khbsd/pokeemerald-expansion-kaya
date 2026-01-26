@@ -2533,6 +2533,11 @@ MatchCall_Text_Brendan9::
 	.string "But around JAGGED PASS, I ran into\n"
 	.string "some nasty-looking characters.\p"
 	.string "Those creeps…\n"
+	.string "I haven't been that creeped out\p"
+	.string "since I got bottom surgery and\n"
+	.string "came down from the anesthesia.\p"
+	.string "…\n"
+	.string "…Anyway, {PLAYER},\p"
 	.string "I think they were TEAM MAGMA.$"
 
 MatchCall_Text_Brendan10::

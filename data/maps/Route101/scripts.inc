@@ -274,10 +274,11 @@ Route101_Text_YouSavedMe:
 	.string "{SPEAKER SP_NAME_PROF_BIRCH}Whew…\p"
 	.string "I was in the tall grass studying wild\n"
 	.string "POKéMON when I was attacked.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
-	.string "Oh?\p"
-	.string "Hi, you're {PLAYER}{KUN}!\p"
+	.string "I haven't been that scared since\n"
+	.string "I got top surgery and came down\p"
+	.string "from the anesthesia!\n"
+	.string "...\p"
+	.string "So, you're {PLAYER}{KUN}!\p"
 	.string "This is not the place to chat, so come\n"
 	.string "by my POKéMON LAB later, okay?$"
 
@@ -291,7 +292,7 @@ Route101_Text_WildPokemonInTallGrass:
 	.string "Wild POKéMON will jump out at you in\n"
 	.string "tall grass.\p"
 	.string "If you want to catch POKéMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "to go into the tall grass and shit.$"
 
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
