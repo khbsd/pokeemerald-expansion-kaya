@@ -796,4 +796,3 @@ static s32 GetTypeIconBounceMovement(s32 originalY, u32 position)
     struct Sprite *healthbox = &gSprites[gHealthboxSpriteIds[GetBattlerAtPosition(position)]];
     return originalY + healthbox->y2;
 }
-
