@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_CONTROLLERS_H
 
 #include "constants/abilities.h"
+
 typedef void (*BattleControllerFunc)(enum BattlerId battler);
 
 enum {

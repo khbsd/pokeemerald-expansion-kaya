@@ -353,14 +353,6 @@ static const struct __attribute__((packed))
     }
 };
 
-static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
-{
-    [DIR_SOUTH - 1] = MetatileBehavior_IsSouthArrowWarp,
-    [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
-    [DIR_WEST - 1]  = MetatileBehavior_IsWestArrowWarp,
-    [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
-};
-
 static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
 {
     PushBoulder_Start,
@@ -1896,7 +1888,7 @@ static void HideShowWarpArrow(struct ObjectEvent *objectEvent)
 
     for (x = 0, direction = DIR_SOUTH; x < 4; x++, direction++)
     {
-        if (sArrowWarpMetatileBehaviorChecks2[x](metatileBehavior) && direction == objectEvent->movementDirection)
+        if (sArrowWarpMetatileBehaviorChecks[x](metatileBehavior) && direction == objectEvent->movementDirection)
         {
             // Show warp arrow if applicable
             x = objectEvent->currentCoords.x;

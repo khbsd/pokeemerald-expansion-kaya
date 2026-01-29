@@ -30,6 +30,7 @@ jobs:
 
       - name: pokeemerald
         env:
+          GAME_VERSION: EMERALD
           COMPARE: 1
         run: |
           git clone https://github.com/pret/pokeemerald
@@ -69,6 +70,19 @@ jobs:
       #    make tidy
       #    make -j${nproc} LTO=1
       #  # make tidy to purge previous build
+
+      - name: ROM (Firered)
+        env:
+          COMPARE: 0
+        run: |
+          make clean
+          make firered -j${nproc} -O
+
+      - name: ROM (Leafgreen)
+        env:
+          COMPARE: 0
+        run: |
+          make leafgreen -j${nproc} -O
 
       - name: ROM (Firered)
         env:

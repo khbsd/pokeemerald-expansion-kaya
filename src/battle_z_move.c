@@ -185,8 +185,8 @@ bool32 IsViableZMove(enum BattlerId battler, enum Move move)
             return FALSE;
     }
 
-    // Check if Player has Z-Power Ring.
     enum BattlerPosition position = GetBattlerPosition(battler);
+    // Check if Player has Z-Power Ring.
     if ((position == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
         && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
     {

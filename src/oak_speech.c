@@ -666,8 +666,8 @@ static const u8 *const sRivalNameChoices[] =
 
 enum
 {
-    MALE_PLAYER_PIC,
-    FEMALE_PLAYER_PIC,
+    BUTCHY_PLAYER_PIC,
+    FEMME_PLAYER_PIC,
     RIVAL_PIC,
     OAK_PIC
 };
@@ -1345,9 +1345,9 @@ static void Task_OakSpeech_ClearGenderWindows(u8 taskId)
 static void Task_OakSpeech_LoadPlayerPic(u8 taskId)
 {
     if (gSaveBlock2Ptr->playerGender == BUTCHY)
-        LoadTrainerPic(MALE_PLAYER_PIC, 0);
+        LoadTrainerPic(BUTCHY_PLAYER_PIC, 0);
     else
-        LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+        LoadTrainerPic(FEMME_PLAYER_PIC, 0);
     CreateFadeOutTask(taskId, 2);
     gTasks[taskId].tTimer = 32;
     gTasks[taskId].func = Task_OakSpeech_YourNameWhatIsIt;
@@ -1584,9 +1584,9 @@ static void Task_OakSpeech_ReshowPlayersPic(u8 taskId)
         else
         {
             if (gSaveBlock2Ptr->playerGender == BUTCHY)
-                LoadTrainerPic(MALE_PLAYER_PIC, 0);
+                LoadTrainerPic(BUTCHY_PLAYER_PIC, 0);
             else
-                LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+                LoadTrainerPic(FEMME_PLAYER_PIC, 0);
             gTasks[taskId].tTrainerPicPosX = 0;
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, BG_COORD_SET);
@@ -1855,9 +1855,9 @@ static void CB2_ReturnFromNamingScreen(void)
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         {
             if (gSaveBlock2Ptr->playerGender == BUTCHY)
-                LoadTrainerPic(MALE_PLAYER_PIC, 0);
+                LoadTrainerPic(BUTCHY_PLAYER_PIC, 0);
             else
-                LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+                LoadTrainerPic(FEMME_PLAYER_PIC, 0);
         }
         else
         {
@@ -1974,11 +1974,11 @@ static void LoadTrainerPic(u16 whichPic, u16 tileOffset)
 
     switch (whichPic)
     {
-    case MALE_PLAYER_PIC:
+    case BUTCHY_PLAYER_PIC:
         LoadPalette(sOakSpeech_Red_Pal, BG_PLTT_ID(4), sizeof(sOakSpeech_Red_Pal));
         DecompressDataWithHeaderVram(sOakSpeech_Red_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;
-    case FEMALE_PLAYER_PIC:
+    case FEMME_PLAYER_PIC:
         LoadPalette(sOakSpeech_Leaf_Pal, BG_PLTT_ID(4), sizeof(sOakSpeech_Leaf_Pal));
         DecompressDataWithHeaderVram(sOakSpeech_Leaf_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;

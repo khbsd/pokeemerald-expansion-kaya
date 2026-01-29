@@ -595,8 +595,8 @@ enum AnimBattler
 #define B_ANIM_TERA_CHARGE              50
 #define B_ANIM_TERA_ACTIVATE            51
 #define B_ANIM_SIMPLE_HEAL              52
-#define B_ANIM_MON_SEEDED               53
-#define B_ANIM_POWER_CONSTRUCT          54
+#define B_ANIM_POWER_CONSTRUCT          53
+#define B_ANIM_MON_SEEDED               54
 #define B_ANIM_SWAP_TO_SUBSTITUTE       55
 #define B_ANIM_SWAP_FROM_SUBSTITUTE     56
 #define B_ANIM_MON_SCARED               57
@@ -604,7 +604,9 @@ enum AnimBattler
 #define B_ANIM_SILPH_SCOPED             59
 #define B_ANIM_ROCK_THROW               60
 #define B_ANIM_SAFARI_REACTION          61
-#define NUM_B_ANIMS_GENERAL             62
+#define B_ANIM_FORM_CHANGE_INSTANT      62
+#define B_ANIM_FORM_CHANGE_DISGUISE     63
+#define NUM_B_ANIMS_GENERAL             64
 
 // special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -685,6 +687,7 @@ enum SpeciesGfxChange
 {
     SPECIES_GFX_CHANGE_TRANSFORM,
     SPECIES_GFX_CHANGE_FORM_CHANGE,
+    SPECIES_GFX_CHANGE_FORM_CHANGE_INSTANT,
     SPECIES_GFX_CHANGE_ILLUSION_OFF,
     SPECIES_GFX_CHANGE_GHOST_UNVEIL,
 };
