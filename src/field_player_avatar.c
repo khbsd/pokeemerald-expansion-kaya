@@ -323,8 +323,8 @@ static const u8 sRSAvatarGfxIds[GENDER_COUNT] =
 
 static const struct __attribute__((packed))
 {
-    u8 graphicsId;
-    u8 playerFlag;
+    u16 graphicsId;
+    u16 playerFlag;
 } sPlayerAvatarGfxToStateFlag[][5] =
 {
     [BUTCHY] =
