@@ -1,4 +1,4 @@
-FuchsiaCity_WardensHouse_MapScripts::
+FuchsiaCity_WardensHouse_Frlg_MapScripts::
 	.byte 0
 
 FuchsiaCity_WardensHouse_EventScript_Warden::
@@ -21,8 +21,8 @@ FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth::
 	msgbox FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth
 	call EventScript_RestorePrevTextColor
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, FuchsiaCity_WardensHouse_EventScript_WardenThanksMale
-	call_if_eq VAR_RESULT, FEMALE, FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale
+	call_if_eq VAR_RESULT, BUTCHY, FuchsiaCity_WardensHouse_EventScript_WardenThanksMale
+	call_if_eq VAR_RESULT, FEMME, FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale
 	giveitem_msg FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden, ITEM_HM04
 	setflag FLAG_GOT_HM04
 	removeitem ITEM_GOLD_TEETH

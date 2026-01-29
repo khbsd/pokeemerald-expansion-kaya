@@ -1,4 +1,4 @@
-SaffronCity_CopycatsHouse_2F_MapScripts::
+SaffronCity_CopycatsHouse_2F_Frlg_MapScripts::
 	.byte 0
 
 SaffronCity_CopycatsHouse_2F_EventScript_Doduo::
@@ -23,8 +23,8 @@ SaffronCity_CopycatsHouse_2F_EventScript_Copycat::
 	checkitem ITEM_POKE_DOLL
 	goto_if_eq VAR_RESULT, TRUE, EventScript_MimicTutor
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale
-	call_if_eq VAR_RESULT, FEMALE, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale
+	call_if_eq VAR_RESULT, BUTCHY, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale
+	call_if_eq VAR_RESULT, FEMME, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale
 	release
 	end
 

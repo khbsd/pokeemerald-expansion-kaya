@@ -1,4 +1,4 @@
-PokemonTower_1F_MapScripts::
+PokemonTower_1F_Frlg_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PokemonTower_1F_OnTransition
 	.byte 0
 
@@ -22,7 +22,7 @@ PokemonTower_1F_EventScript_Woman2::
 	lock
 	faceplayer
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, PokemonTower_1F_EventScript_Woman2MalePlayer
+	goto_if_eq VAR_RESULT, BUTCHY, PokemonTower_1F_EventScript_Woman2MalePlayer
 	msgbox PokemonTower_1F_Text_ComeToPayRespectsGirl
 	release
 	end

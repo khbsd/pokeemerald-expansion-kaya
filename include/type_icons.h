@@ -24,9 +24,9 @@
 #define tVerticalPosition data[3]
 #define tHide             data[4]
 
-void LoadTypeIcons(u32 battler);
+void LoadTypeIcons(enum BattlerId battler);
 void LoadTypeIconForMoveInfo(enum Type type);
-void LoadMoveTypeIconSpritesAndPalettes(void);
+void LoadMoveTypeIconSpritesAndPalettes(enum Type type);
 void DestroyMoveTypeIconSprite(void);
 void TryToHideMoveTypeIconSprite(void);
 

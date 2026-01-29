@@ -28,7 +28,7 @@
 #include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3
-#define STARTER_MON_POOL_COUNT   66
+#define STARTER_MON_POOL_COUNT   72
 
 // Position of the sprite of the selected starter Pokémon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
@@ -120,6 +120,12 @@ u32 sStarterMon[STARTER_MON_COUNT];
 
 static const u32 sStarterMonPool[STARTER_MON_POOL_COUNT] =
 {
+    SPECIES_BULBASAUR,
+    SPECIES_CHARMANDER,
+    SPECIES_SQUIRTLE,
+    SPECIES_CHIKORITA,
+    SPECIES_CYNDAQUIL,
+    SPECIES_TOTODILE,
     SPECIES_TREECKO,
     SPECIES_TORCHIC,
     SPECIES_MUDKIP,

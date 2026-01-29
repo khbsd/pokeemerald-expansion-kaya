@@ -40,5 +40,7 @@ bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(u32);
 void TryChangeDeoxysForm(void);
 void TryChangeDeoxysFormMetatileBehavior(enum MetatileBehaviors metatileBehavior);
+bool8 CutMoveRuinValleyCheck(void);
+void CutMoveOpenDottedHoleDoor(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

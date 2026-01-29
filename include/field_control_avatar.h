@@ -36,6 +36,8 @@ const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void ClearPoisonStepCounter(void);
 void CancelSignPostMessageBox(struct FieldInput *input);
 u16 GetPlayerCurMetatileBehavior(int);
+void HandleBoulderFallThroughHole(struct ObjectEvent *object);
+void HandleBoulderActivateVictoryRoadSwitch(u16 x, u16 y);
 
 #define NOT_SIGNPOST 0
 #define WALK_AWAY_SIGNPOST_FRAMES 6

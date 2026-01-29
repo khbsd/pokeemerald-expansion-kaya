@@ -18,6 +18,8 @@ struct Fanfare
     u16 duration;
 };
 
+extern u8 gDisableMapMusicChangeOnMapLoad;
+
 EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 EWRAM_DATA u8 isGen4BGM = FALSE;
@@ -905,7 +907,7 @@ u32 GetRandomAlternateSong(u32 songNum)
     case MUS_VS_AQUA_MAGMA:
         if (isGen4BGM)
             return MUS_DP_VS_GALACTIC;
-        else 
+        else
             return songNum;
         break;
     case MUS_VICTORY_AQUA_MAGMA:
@@ -941,8 +943,9 @@ void PlaySE(u32 songNum)
 {
     if (songNum == SE_SELECT)
         songNum = SE_RG_BAG_CURSOR;
-    
-    m4aSongNumStart(songNum);
+
+    if (gDisableMapMusicChangeOnMapLoad == 0)
+        m4aSongNumStart(songNum);
 }
 
 void PlaySE12WithPanning(u32 songNum, s8 pan)

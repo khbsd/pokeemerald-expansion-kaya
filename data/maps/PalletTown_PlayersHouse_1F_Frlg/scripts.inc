@@ -1,4 +1,4 @@
-PalletTown_PlayersHouse_1F_MapScripts::
+PalletTown_PlayersHouse_1F_Frlg_MapScripts::
 	.byte 0
 
 PalletTown_PlayersHouse_1F_EventScript_Mom::
@@ -6,8 +6,8 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	faceplayer
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
+	call_if_eq VAR_RESULT, BUTCHY, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
+	call_if_eq VAR_RESULT, FEMME, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
 	closemessage
 	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -40,8 +40,8 @@ PalletTown_PlayersHouse_1F_EventScript_TV::
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreen::
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
+	call_if_eq VAR_RESULT, BUTCHY, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
+	call_if_eq VAR_RESULT, FEMME, PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
 	releaseall
 	end
 
