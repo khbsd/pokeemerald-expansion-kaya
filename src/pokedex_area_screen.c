@@ -297,7 +297,6 @@ static bool8 DrawAreaGlow(void)
 
 static void FindMapsWithMon(u16 species)
 {
-    enum RegionMapType currentRegionMapType;
     u16 i;
     struct Roamer *roamer;
 
@@ -341,7 +340,6 @@ static void FindMapsWithMon(u16 species)
         }
     }
 
-    currentRegionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
     // Add regular species to the area map
     for (u32 id = 0; id < MAX_LOCATIONS; id++)
     {
