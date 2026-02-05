@@ -186,6 +186,7 @@
 #define B_ATE_MULTIPLIER            GEN_LATEST // In Gen7+, -ate abilities (Aerilate, Galvanize, Normalize, Pixilate, Refrigerate) multiply damage by 1.2. Otherwise, it's 1.3, except Normalize which has no multiplier.
 #define B_DEFIANT_STICKY_WEB        GEN_LATEST // In Gen9+, Defiant activates on Sticky Web regardless of who set it up. In Gen8, Defiant does not activate on Sticky Web set up by an ally after Court Change swaps its side.
 #define B_POWDER_OVERCOAT           GEN_LATEST // In Gen6+, Overcoat blocks powder and spore moves from affecting the user.
+#define B_INFILTRATOR_SUBSTITUTE    GEN_LATEST // In Gen6+, Infiltrator bypasses Substitute when using a move, excluding Transform and Sky Drop.
 
 // Various volatile timers
 #define B_CONFUSION_TURNS    5
@@ -327,14 +328,9 @@
 #define B_SHOW_USELESS_Z_MOVE_INFO          FALSE    // If set to TRUE, Z-moves without additional effects like newer gen status moves will say "no additional effect"
 #define B_ANIMATE_MON_AFTER_KO              TRUE     // If set to TRUE, if a Pokémon on the opposite site faints, the non-fainted Pokemon will display a victory animation.
 #define B_ANIMATE_MON_AFTER_FAILED_POKEBALL TRUE  // If set to TRUE, if a Pokémon on the opposite side breaks out of a thrown Poké Ball, the wild Pokémon will display its animation.
-<<<<<<< HEAD
 #define B_SHOW_DYNAMAX_MESSAGE              FALSE       // If set to TRUE, an additional battle message is shown after completing Dynamaxing/Gigantamaxing.
 #define B_ALL_TRAINERS_HAVE_MUGSHOT         TRUE        // If TRUE, all trainer battle transitions will be in mugshot style
-#define B_HPBAR_COLOR_THRESHOLD             GEN_3_REDUX // In Gen 5+, HP bar color thresholds were changed to be based on the actual HP values instead of the pixel length of the HP bar, leading to more accurate HP bar colors. If Gens earlier than 9 are picked, the HP bars of Pokémon with 1 Max HP (ie Shedinja) will turn red before depleting. If Gens 9 or later are picked, they will stay green while depleting.
-=======
-#define B_SHOW_DYNAMAX_MESSAGE              FALSE // If set to TRUE, an additional battle message is shown after completing Dynamaxing/Gigantamaxing.
-#define B_HPBAR_COLOR_THRESHOLD             GEN_LATEST // In Gen 5+, HP bar color thresholds were changed to be based on the actual HP values instead of the pixel length of the HP bar, leading to more accurate HP bar colors. If Gens earlier than 8 are picked, the HP bars of Pokémon with 1 Max HP (ie Shedinja) will turn red before depleting. If Gens 8 or later are picked, they will stay green while depleting.
->>>>>>> rhh-upcoming_hp-bar-genconfig
+#define B_HPBAR_COLOR_THRESHOLD             GEN_3_REDUX // In Gen 5+, HP bar color thresholds were changed to be based on the actual HP values instead of the pixel length of the HP bar, leading to more accurate HP bar colors. If Gens earlier than 8 are picked, the HP bars of Pokémon with 1 Max HP (ie Shedinja) will turn red before depleting. If Gens 8 or later are picked, they will stay green while depleting.
 
 // Catching settings
 #define B_SEMI_INVULNERABLE_CATCH       GEN_LATEST // In Gen4+, you cannot throw a ball against a Pokemon that is in a semi-invulnerable state (dig/fly/etc)
