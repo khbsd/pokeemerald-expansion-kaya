@@ -1117,7 +1117,7 @@ static bool32 ShouldSkipAccuracyCalcPastFirstHit(enum BattlerId battlerAtk, enum
 
 	if (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE)
         return TRUE;
-	
+
     if (moveEffect == EFFECT_TRIPLE_KICK || moveEffect == EFFECT_POPULATION_BOMB)
         return FALSE;
 
@@ -4057,7 +4057,7 @@ static void Cmd_getexp(void)
     enum HoldEffect holdEffect;
     s32 i; // also used as stringId
     u8 *expMonId = &gBattleStruct->expGetterMonId;
-    u32 currLvl;
+    u32 currLvl = GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL);
 
     gBattlerFainted = GetBattlerForBattleScript(cmd->battler);
 
@@ -4066,7 +4066,8 @@ static void Cmd_getexp(void)
     case 0: // check if should receive exp at all
         if (IsOnPlayerSide(gBattlerFainted)
             || IsAiVsAiBattle()
-            || !BattleTypeAllowsExp())
+            || !BattleTypeAllowsExp()
+            || currLvl == GetCurrentLevelCap())
         {
             gBattleScripting.getexpState = 6; // goto last case
         }
@@ -4272,6 +4273,8 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
+
+            // updating this variable just in case
             currLvl = GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL);
             if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) && currLvl != MAX_LEVEL)
             {

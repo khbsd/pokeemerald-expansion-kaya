@@ -1181,6 +1181,16 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
         {
             if (learnset[i].level > level)
                 break;
+            
+            bool32 moveInList = FALSE;
+            u32 j = 0;
+            while (j < MAX_LEVEL_UP_MOVES && !moveInList)
+            {
+                moveInList = (moves[j] == learnset[i].move);
+                j++;
+            }
+            if (moveInList)
+                break;
 
             if (!BoxMonKnowsMove(mon, learnset[i].move))
                 moves[numMoves++] = learnset[i].move;
@@ -1216,6 +1226,16 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves)
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
+        bool32 moveInList = FALSE;
+        u32 j = 0;
+        while (j < MAX_LEVEL_UP_MOVES && !moveInList)
+        {
+            moveInList = (moves[j] == eggMoves[i]);
+            j++;
+        }
+        if (moveInList)
+            break;
+        
         if (!BoxMonKnowsMove(mon, eggMoves[i]))
             moves[numMoves++] = eggMoves[i];
     }
