@@ -1442,6 +1442,7 @@ void PrepareStringBattle(enum StringID stringId, enum BattlerId battler)
     }
 
     if ((stringId == STRINGID_PKMNGAINEDEXP || stringId == STRINGID_TEAMGAINEDEXP)
+        ()
         && gBattleStruct->battlerExpReward == 0)
     {
         MarkBattlerForControllerExec(battler);
