@@ -4136,10 +4136,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_COTTONEE] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 30,
+        .baseHP        = 50,
+        .baseAttack    = 50,
         .baseDefense   = 80,
-        .baseSpeed     = 85,
+        .baseSpeed     = 75,
         .baseSpAttack  = 70,
         .baseSpDefense = 90,
         .types = { TYPE_GRASS, TYPE_FAIRY },
