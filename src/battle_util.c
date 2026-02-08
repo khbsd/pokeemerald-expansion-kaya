@@ -1441,14 +1441,6 @@ void PrepareStringBattle(enum StringID stringId, enum BattlerId battler)
             SET_STATCHANGER(STAT_SPATK, 2, FALSE);
     }
 
-    if ((stringId == STRINGID_PKMNGAINEDEXP || stringId == STRINGID_TEAMGAINEDEXP)
-        && gBattleStruct->battlerExpReward == 0)
-    {
-        MarkBattlerForControllerExec(battler);
-        return;
-    }
-
-
     BtlController_EmitPrintString(battler, B_COMM_TO_CONTROLLER, stringId);
     MarkBattlerForControllerExec(battler);
 }
