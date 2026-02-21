@@ -131,6 +131,13 @@ const u32 gSSTidalEventItems[SSTIDAL_EVENTS_COUNT] =
     [SSTIDAL_FARAWAY_ISLAND] =  ITEM_OLD_SEA_MAP,
 };
 
+const u32 gMonGenders[3] =
+{
+    MON_MALE,
+    MON_FEMALE,
+    MON_GENDERLESS,
+};
+
 #include "data/abilities.h"
 
 // Used in an unreferenced function in RS.
@@ -3181,20 +3188,8 @@ void ChangeMonGender(struct Pokemon *mon, u32 gender, u32 species)
     u32 nature = GetNature(mon);
     u32 newPersonality;
 
-    if (species == SPECIES_MARILL || species == SPECIES_COTTONEE)
-    {
-        u32 genderTable[] =
-        {
-            MON_MALE,
-            MON_FEMALE,
-            MON_GENDERLESS,
-        };
-
-        if (gSaveBlock2Ptr->playerIsKaya)
-            gender = MON_FEMALE;
-        else
-            gender = genderTable[RandomUniform(RNG_GENDER, 0, 2)];
-    }
+    if (gSaveBlock2Ptr->playerIsKaya)
+        gender = MON_FEMALE;
 
     do
         newPersonality = Random32();

@@ -21,7 +21,7 @@ void MoveAllRoamers(void);
 void InitNextRoamer(void);
 
 #define ROAMER_LEVEL 80
-#define ROAMER_SPECIES_POOL_COUNT 30
+#define ROAMER_SPECIES_POOL_COUNT 31
 
 static const u32 sRoamerSpeciesList[] = 
 {
@@ -57,7 +57,8 @@ static const u32 sRoamerSpeciesList[] =
     SPECIES_HEATRAN,
     SPECIES_MANAPHY,
     SPECIES_DARKRAI,
-    SPECIES_CRESSELIA
+    SPECIES_CRESSELIA,
+    SPECIES_ARCEUS,
 };
 
 extern u8 gEncounteredRoamerIndex;

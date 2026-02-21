@@ -8,6 +8,7 @@
 #include "decompress.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
+#include "field_tasks.h"
 #include "gpu_regs.h"
 #include "item.h"
 #include "link.h"
@@ -789,17 +790,40 @@ static void Task_EvolutionScene(u8 taskId)
         if (IsCryFinished())
         {
             u32 zero = 0;
+            u32 gender = GetMonGender(mon);\
+            u32 newGender;
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskId].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void *)(&gTasks[taskId].tPostEvoSpecies));
             SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
-
-            if (gTasks[taskId].tPostEvoSpecies == SPECIES_SALANDIT_F
-                || gTasks[taskId].tPostEvoSpecies == SPECIES_COMBEE_F
-                || gTasks[taskId].tPostEvoSpecies == SPECIES_MARILL)
-                ChangeMonGender(mon, MON_FEMALE, gTasks[taskId].tPostEvoSpecies);
+            
+            CheckIfPlayerIsKaya();
+            if (playerIsKaya && gender == MON_MALE)
+            {
+                newGender = MON_FEMALE;
+            }
+            else
+            {
+                switch (gTasks[taskId].tPostEvoSpecies)
+                {
+                case SPECIES_COMBEE_F:
+                case SPECIES_SALANDIT_F:
+                    newGender = MON_FEMALE;
+                    break;
+                case SPECIES_MARILL:
+                case SPECIES_COTTONEE:
+                    newGender = gMonGenders[RandomUniform(RNG_GENDER, 0, 2)];
+                    break;
+                default:
+                    newGender = gender;
+                    break;
+                }
+            }
+            
+            if (gender != newGender)
+                ChangeMonGender(mon, newGender, gTasks[taskId].tPostEvoSpecies);
 
             CalculateMonStats(mon);
             EvolutionRenameMon(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
