@@ -477,7 +477,7 @@ void UpdateRepeatSpeciesAndCounter(u32 species)
     else
     {
         gSaveBlock3Ptr->repeatSpecies = species;
-        gSaveBlock3Ptr->repeatSpeciesCount = 0;
+        gSaveBlock3Ptr->repeatSpeciesCount = 1;
     }
 }
 

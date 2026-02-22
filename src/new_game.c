@@ -163,7 +163,7 @@ void ResetMenuAndMonGlobals(void)
 static void ResetRepeatSpeciesInfo(void)
 {
     gSaveBlock3Ptr->repeatSpecies = SPECIES_NONE;
-    gSaveBlock3Ptr->repeatSpeciesCount = 0;
+    gSaveBlock3Ptr->repeatSpeciesCount = 1;
 }
 
 static void ResetPokevial(void)
