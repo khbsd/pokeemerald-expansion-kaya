@@ -176,7 +176,9 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
         return;
 
     u32 rndChance = Random();
-    u32 infectionChance = (GetNumOwnedBadges() * P_BADGE_BOOST_POKERUS_CHANCE) + (POKERUS_INFECTION_CHANCE * (gMain.isPokeMoon + 1));
+    u32 infectionChance = (GetNumOwnedBadges() * P_BADGE_BOOST_POKERUS_CHANCE) 
+                        + ((gSaveBlock3Ptr->repeatSpeciesCount + POKERUS_INFECTION_CHANCE)
+                        * (gMain.isPokeMoon + 1));
     enum PokerusStrains strain = GetPokerusStrain();
 
     if (rndChance < infectionChance)

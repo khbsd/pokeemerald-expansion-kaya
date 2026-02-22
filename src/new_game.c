@@ -160,6 +160,19 @@ void ResetMenuAndMonGlobals(void)
     ResetPokeblockScrollPositions();
 }
 
+static void ResetRepeatSpeciesInfo(void)
+{
+    gSaveBlock3Ptr->repeatSpecies = SPECIES_NONE;
+    gSaveBlock3Ptr->repeatSpeciesCount = 0;
+}
+
+static void ResetPokevial(void)
+{
+    gSaveBlock1Ptr->pokevial.Dose = 0;
+    gSaveBlock1Ptr->pokevial.Size = 0;
+
+}
+
 void NewGameInitData(void)
 {
 #if IS_FRLG
@@ -167,10 +180,6 @@ void NewGameInitData(void)
 #endif
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
-
-    struct Pokevial pokevial;
-    pokevial.Dose = 0;
-    pokevial.Size = 0;
 
 #if IS_FRLG
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
@@ -181,7 +190,6 @@ void NewGameInitData(void)
     UnsetPlayerAsKaya();
     FlagClear(FLAG_IS_PENNY);
     gSaveBlock2Ptr->playerHouse = HOUSE_LEFT;
-    gSaveBlock1Ptr->pokevial = pokevial;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetPokedex();
@@ -247,6 +255,8 @@ void NewGameInitData(void)
     ResetDexNav();
     ClearFollowerNPCData();
     FlagSet(FLAG_SYS_BAG_USE);
+    ResetRepeatSpeciesInfo();
+    ResetPokevial();
 }
 
 static void ResetMiniGamesRecords(void)

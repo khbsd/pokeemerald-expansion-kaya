@@ -114,6 +114,7 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u16 gFollowerSteps = 0;
+EWRAM_DATA bool8 gCreatingWildMon = 0;
 
 const u32 gSSTidalEventFlags[SSTIDAL_EVENTS_COUNT] =
 {
@@ -2234,6 +2235,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u32 personal
                 totalRerolls += badges;
             if (P_ADD_SHINY_ODDS_TO_ROLLS)
                 totalRerolls += adjustedShinyOdds; // :)
+            if (gCreatingWildMon && species == gSaveBlock3Ptr->repeatSpecies)
+                totalRerolls += gSaveBlock3Ptr->repeatSpeciesCount;
 
             if (isGameCorner)
             {
@@ -2304,6 +2307,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u32 personal
     //using gen 3-4 ability formula, it was changed in later gens
     if (GetSpeciesAbility(species, 1))
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
+    
+    if (gCreatingWildMon)
+        gCreatingWildMon = FALSE;
 }
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)

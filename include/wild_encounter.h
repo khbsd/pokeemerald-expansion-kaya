@@ -5,6 +5,7 @@
 #include "rtc.h"
 
 #define HEADER_NONE 0xFFFF
+#define MAX_REPEAT_BOOST 32
 
 enum WildPokemonArea {
     WILD_AREA_LAND,
@@ -75,5 +76,6 @@ bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
 void UpdateChainFishingStreak();
 u32 GetRandomHeaderInMapGroup(u32 headerId);
+void UpdateRepeatSpeciesAndCounter(u32 species);
 
 #endif // GUARD_WILD_ENCOUNTER_H

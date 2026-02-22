@@ -465,9 +465,27 @@ static u8 PickWildMonNature(u32 species)
     return GetSynchronizedNature(WILDMON_ORIGIN, species);
 }
 
+void UpdateRepeatSpeciesAndCounter(u32 species)
+{
+    if (gSaveBlock3Ptr->repeatSpecies == species)
+    {
+        if (gSaveBlock3Ptr->repeatSpeciesCount >= MAX_REPEAT_BOOST)
+            return;
+
+        gSaveBlock3Ptr->repeatSpeciesCount++;
+    }
+    else
+    {
+        gSaveBlock3Ptr->repeatSpecies = species;
+        gSaveBlock3Ptr->repeatSpeciesCount = 0;
+    }
+}
+
 void CreateWildMon(u16 species, u8 level)
 {
     ZeroEnemyPartyMons();
+    gCreatingWildMon = TRUE;
+    UpdateRepeatSpeciesAndCounter(species);
     u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
     CreateMonWithIVs(&gEnemyParty[0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     GiveMonInitialMoveset(&gEnemyParty[0]);
