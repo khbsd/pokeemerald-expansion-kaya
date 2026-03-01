@@ -4,7 +4,7 @@ MauvilleCity_GameCorner_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerId_Onframe
 	.byte 0
 
-    @ Game Corner prices
+	@ Game Corner prices
 	.set TM_DOUBLE_TEAM_COINS, 1500
 	.set TM_PSYCHIC_COINS, 3500
 	.set TM_FLAMETHROWER_COINS, 4000
