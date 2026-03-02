@@ -2555,10 +2555,6 @@ BattleScript_MultiHitPrintStrings::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_ScaleShot::
-	call BattleScript_MultiHitPrintStrings
-	goto BattleScript_DefDownSpeedUp
-
 BattleScript_EffectConversion::
 	attackcanceler
 	tryconversiontypechange BattleScript_ButItFailed

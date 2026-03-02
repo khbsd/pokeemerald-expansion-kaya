@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
-#include "battle_ai_util.h"
+#include "battle_ai_record.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
 #include "battle_end_turn.h"
@@ -3329,6 +3329,14 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
                 gBattleMons[i].volatiles.lockOn = 0;
                 gBattleMons[i].volatiles.battlerWithSureHit = 0;
             }
+        }
+    }
+    if (effect != EFFECT_BATON_PASS || GetConfig(B_BATON_PASS_TRAPPING) >= GEN_5)
+    {
+        for (enum BattlerId i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+                gBattleMons[i].volatiles.escapePrevention = FALSE;
         }
     }
 

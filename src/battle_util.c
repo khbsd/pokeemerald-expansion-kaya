@@ -31,8 +31,7 @@
 #include "trainer_slide.h"
 #include "window.h"
 #include "battle_message.h"
-#include "battle_ai_main.h"
-#include "battle_ai_util.h"
+#include "battle_ai_record.h"
 #include "event_data.h"
 #include "link.h"
 #include "malloc.h"
@@ -5284,6 +5283,9 @@ u32 IsAbilityPreventingEscape(enum BattlerId battler)
     for (enum BattlerId battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
     {
         if (battler == battlerDef || IsBattlerAlly(battler, battlerDef))
+            continue;
+        
+        if (!IsBattlerAlive(battlerDef))
             continue;
 
         enum Ability ability = GetBattlerAbility(battlerDef);
@@ -11053,10 +11055,8 @@ bool32 IsSemiInvulnerable(enum BattlerId battler, enum SemiInvulnerableExclusion
     return gBattleMons[battler].volatiles.semiInvulnerable != STATE_NONE;
 }
 
-bool32 BreaksThroughSemiInvulnerablity(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move)
+static bool32 CanBreakThroughSemiInvulnerablityInternal(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move, enum SemiInvulnerableState state)
 {
-    enum SemiInvulnerableState state = gBattleMons[battlerDef].volatiles.semiInvulnerable;
-
     if (state != STATE_COMMANDER)
     {
         if (CanMoveSkipAccuracyCheck(battlerAtk, move))
@@ -11086,6 +11086,16 @@ bool32 BreaksThroughSemiInvulnerablity(enum BattlerId battlerAtk, enum BattlerId
     }
 
     return FALSE;
+}
+
+bool32 CanBreakThroughSemiInvulnerablity(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move)
+{
+    return CanBreakThroughSemiInvulnerablityInternal(battlerAtk, battlerDef, abilityAtk, abilityDef, move, gBattleMons[battlerDef].volatiles.semiInvulnerable);
+}
+
+bool32 BreaksThroughSemiInvulnerableState(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move, enum SemiInvulnerableState state)
+{
+    return CanBreakThroughSemiInvulnerablityInternal(battlerAtk, battlerDef, abilityAtk, abilityDef, move, state);
 }
 
 bool32 HasPartnerTrainer(enum BattlerId battler)
@@ -11421,3 +11431,29 @@ void SetOrClearRageVolatile(void)
     else
         gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
 }
+
+bool32 IsNaturalEnemy(u32 speciesAttacker, u32 speciesTarget)
+{
+    if (B_WILD_NATURAL_ENEMIES != TRUE)
+        return FALSE;
+
+    switch (speciesAttacker)
+    {
+    case SPECIES_ZANGOOSE:
+        return (speciesTarget == SPECIES_SEVIPER);
+    case SPECIES_SEVIPER:
+        return (speciesTarget == SPECIES_ZANGOOSE);
+    case SPECIES_HEATMOR:
+        return (speciesTarget == SPECIES_DURANT);
+    case SPECIES_DURANT:
+        return (speciesTarget == SPECIES_HEATMOR);
+    case SPECIES_SABLEYE:
+        return (speciesTarget == SPECIES_CARBINK);
+    case SPECIES_MAREANIE:
+        return (speciesTarget == SPECIES_CORSOLA);
+    default:
+        return FALSE;
+    }
+    return FALSE;
+}
+
