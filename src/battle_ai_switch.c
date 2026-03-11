@@ -409,7 +409,7 @@ static bool32 ShouldSwitchIfTruant(enum BattlerId battler)
     return FALSE;
 }
 
-static u32 FindMonWithMoveOfEffectiveness(enum BattlerId battler, enum BattlerId opposingBattler, uq4_12_t effectiveness)
+static u32 FindMonWithMoveOfEffectiveness(enum BattlerId battler, enum BattlerId opposingBattler, enum BattlerId battlerIn1, enum BattlerId battlerIn2, uq4_12_t effectiveness)
 {
     enum Move move;
     s32 firstId;
@@ -425,7 +425,9 @@ static u32 FindMonWithMoveOfEffectiveness(enum BattlerId battler, enum BattlerId
     {
         if (!IsValidForBattle(&party[monIndex]))
             continue;
-        if (monIndex == gBattlerPartyIndexes[battler])
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+            continue;
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
             continue;
         if (IsAceMon(battler, monIndex))
             continue;
@@ -459,7 +461,7 @@ static bool32 IsMoveBad(struct BattleContext *ctx, u32 moveIndex)
     return FALSE;
 }
 
-static bool32 ShouldSwitchIfAllMovesBad(enum BattlerId battler)
+static bool32 ShouldSwitchIfAllMovesBad(enum BattlerId battler, enum BattlerId battlerIn1, enum BattlerId battlerIn2)
 {
     enum BattlerId opposingBattler = GetOppositeBattler(battler);
     struct BattleContext ctx = {0};
@@ -509,7 +511,7 @@ static bool32 ShouldSwitchIfAllMovesBad(enum BattlerId battler)
         && (gAiLogicData->mostSuitableMonId[battler] != PARTY_SIZE || !ALL_MOVES_BAD_NEEDS_GOOD_SWITCHIN))
     {
         if (gAiLogicData->mostSuitableMonId[battler] == PARTY_SIZE) // No good candidate mons, find any one that can deal damage
-            return FindMonWithMoveOfEffectiveness(battler, opposingBattler, UQ_4_12(1.0));
+            return FindMonWithMoveOfEffectiveness(battler, opposingBattler, battlerIn1, battlerIn2, UQ_4_12(1.0));
         else // Good candidate mon, send that in
             return SetSwitchinAndSwitch(battler, PARTY_SIZE);
     }
@@ -517,7 +519,7 @@ static bool32 ShouldSwitchIfAllMovesBad(enum BattlerId battler)
     return FALSE;
 }
 
-static bool32 ShouldSwitchIfWonderGuard(enum BattlerId battler)
+static bool32 ShouldSwitchIfWonderGuard(enum BattlerId battler, enum BattlerId battlerIn1, enum BattlerId battlerIn2)
 {
     enum BattlerId opposingBattler = GetOppositeBattler(battler);
 
@@ -537,7 +539,7 @@ static bool32 ShouldSwitchIfWonderGuard(enum BattlerId battler)
     if (RandomPercentage(RNG_AI_SWITCH_WONDER_GUARD, GetSwitchChance(SHOULD_SWITCH_WONDER_GUARD)))
     {
         if (gAiLogicData->mostSuitableMonId[battler] == PARTY_SIZE) // No good candidate mons, find any one that can deal damage
-            return FindMonWithMoveOfEffectiveness(battler, opposingBattler, UQ_4_12(2.0));
+            return FindMonWithMoveOfEffectiveness(battler, opposingBattler, battlerIn1, battlerIn2, UQ_4_12(2.0));
         else // Good candidate mon, send that in
             return SetSwitchinAndSwitch(battler, PARTY_SIZE);
     }
@@ -662,13 +664,9 @@ static bool32 FindMonThatAbsorbsOpponentsMove(enum BattlerId battler)
     {
         if (!IsValidForBattle(&party[monIndex]))
             continue;
-        if (monIndex == gBattlerPartyIndexes[battlerIn1])
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
             continue;
-        if (monIndex == gBattlerPartyIndexes[battlerIn2])
-            continue;
-        if (monIndex == gBattleStruct->monToSwitchIntoId[battlerIn1])
-            continue;
-        if (monIndex == gBattleStruct->monToSwitchIntoId[battlerIn2])
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
             continue;
         if (IsAceMon(battler, monIndex))
             continue;
@@ -1059,6 +1057,8 @@ static bool32 FindMonWithFlagsAndSuperEffective(enum BattlerId battler, u16 flag
             continue;
         if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
             continue;
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
+            continue;
         if (IsAceMon(battler, monIndex))
             continue;
 
@@ -1111,6 +1111,8 @@ static bool32 CanMonSurviveHazardSwitchin(enum BattlerId battler)
             if (!IsValidForBattle(&party[monIndex]))
                 continue;
             if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+                continue;
+            if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
                 continue;
             if (IsAceMon(battler, monIndex))
                 continue;
@@ -1303,6 +1305,8 @@ bool32 ShouldSwitch(enum BattlerId battler)
             continue;
         if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
             continue;
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
+            continue;
         if (IsAceMon(battler, monIndex))
             continue;
 
@@ -1323,7 +1327,7 @@ bool32 ShouldSwitch(enum BattlerId battler)
     // FindMon functions can prompt a switch to specific party members that override GetMostSuitableMonToSwitchInto
     // The rest can prompt a switch to party member returned by GetMostSuitableMonToSwitchInto
 
-    if (ShouldSwitchIfWonderGuard(battler))
+    if (ShouldSwitchIfWonderGuard(battler, battlerIn1, battlerIn2))
         return TRUE;
     if ((gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SMART_SWITCHING) && (CanMonSurviveHazardSwitchin(battler) == FALSE))
         return FALSE;
@@ -1335,7 +1339,7 @@ bool32 ShouldSwitch(enum BattlerId battler)
         return TRUE;
     if (ShouldSwitchIfTruant(battler))
         return TRUE;
-    if (ShouldSwitchIfAllMovesBad(battler))
+    if (ShouldSwitchIfAllMovesBad(battler, battlerIn1, battlerIn2))
         return TRUE;
     if (ShouldSwitchIfBadlyStatused(battler))
         return TRUE;
@@ -1448,17 +1452,12 @@ void ModifySwitchAfterMoveScoring(enum BattlerId battler)
     {
         if (!IsValidForBattle(&party[monIndex]))
             continue;
-        if (monIndex == gBattlerPartyIndexes[battlerIn1])
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
             continue;
-        if (monIndex == gBattlerPartyIndexes[battlerIn2])
-            continue;
-        if (monIndex == gBattleStruct->monToSwitchIntoId[battlerIn1])
-            continue;
-        if (monIndex == gBattleStruct->monToSwitchIntoId[battlerIn2])
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
             continue;
         if (IsAceMon(battler, monIndex))
             continue;
-
         availableToSwitch++;
     }
 
@@ -2133,22 +2132,23 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
     for (u32 monIndex = firstId; monIndex < lastId; monIndex++)
     {
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]) || IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
-        {
+        if (!IsValidForBattle(&party[monIndex]))
             continue;
-        }
+        // Check if mon is already in play or being sent in
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+            continue;
+        // Check if partner wants to use this mon already
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
+            continue;
         // Save Ace Pokemon for last
-        else if (IsAceMon(battler, monIndex))
+        if (IsAceMon(battler, monIndex))
         {
             aceMonId = monIndex;
             aceMonCount++;
             continue;
         }
-        else
-        {
-            validMonIds |= (1u << monIndex);
-        }
 
+        validMonIds |= (1u << monIndex);
         InitializeSwitchinCandidate(battler, &party[monIndex]);
 
         u32 originalHp = gBattleMons[battler].hp;
@@ -2390,21 +2390,22 @@ static u32 GetBestMonVanilla(struct Pokemon *party, int firstId, int lastId, enu
     for (u32 monIndex = firstId; monIndex < lastId; monIndex++)
     {
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]) || IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
-        {
+        if (!IsValidForBattle(&party[monIndex]))
             continue;
-        }
+        // Check if mon is already in play or being sent in
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+            continue;
+        // Check if partner wants to use this mon already
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
+            continue;
         // Save Ace Pokemon for last
-        else if (IsAceMon(battler, monIndex))
+        if (IsAceMon(battler, monIndex))
         {
             aceMonId = monIndex;
             aceMonCount++;
             continue;
         }
-        else
-        {
-            validMonIds |= (1u << monIndex);
-        }
+        validMonIds |= (1u << monIndex);
         InitializeSwitchinCandidate(battler, &party[monIndex]);
 
         // While not really invalid per se, not really wise to switch into this mon
@@ -2471,13 +2472,23 @@ static u32 GetBestMonVanilla(struct Pokemon *party, int firstId, int lastId, enu
     return PARTY_SIZE;
 }
 
-static u32 GetNextMonInParty(struct Pokemon *party, int firstId, int lastId, enum BattlerId battlerIn1, enum BattlerId battlerIn2)
+static u32 GetNextMonInParty(struct Pokemon *party, int firstId, int lastId, enum BattlerId battler, enum BattlerId battlerIn1, enum BattlerId battlerIn2)
 {
     // Iterate through mons
     for (u32 monIndex = firstId; monIndex < lastId; monIndex++)
     {
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]) || IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+        if (!IsValidForBattle(&party[monIndex]))
+        {
+            continue;
+        }
+        // Check if mon is already in play or being sent in
+        if (IsPartyMonOnFieldOrChosenToSwitch(monIndex, battlerIn1, battlerIn2))
+        {
+            continue;
+        }
+        // Check if partner wants to use this mon already
+        if (IsPartyMonPlannedToBeSwitchedInByPartner(monIndex, battler))
         {
             continue;
         }
@@ -2506,7 +2517,7 @@ u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switc
 
     if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SEQUENCE_SWITCHING)
     {
-        bestMonId = GetNextMonInParty(party, firstId, lastId, battlerIn1, battlerIn2);
+        bestMonId = GetNextMonInParty(party, firstId, lastId, battler, battlerIn1, battlerIn2);
         return bestMonId;
     }
 

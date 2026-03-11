@@ -2094,8 +2094,6 @@ void CreateMonWithIVs(struct Pokemon *mon, u16 species, u8 level, u32 personalit
 void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
 {
     u32 i, value;
-    enum Stat availableIVs[NUM_STATS];
-    enum Stat selectedIvs[NUM_STATS];
 
     if (fixedIV < USE_RANDOM_IVS)
     {
@@ -2106,7 +2104,6 @@ void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
 
     u32 iv;
     u32 ivRandom = Random32();
-    u32 numPerfectIvs;
     u32 species = GetBoxMonData(mon, MON_DATA_SPECIES);
     value = (u16)ivRandom;
 
@@ -2126,55 +2123,41 @@ void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
     iv = (value & (MAX_IV_MASK << 10)) >> 10;
     SetBoxMonData(mon, MON_DATA_SPDEF_IV, &iv);
 
-    numPerfectIvs = gSpeciesInfo[species].perfectIVCount + P_WILD_PERFECT_IVS;
+    SetBoxMonPerfectIVs(mon, gSpeciesInfo[species].perfectIVCount + P_WILD_PERFECT_IVS);
+}
+
+void SetBoxMonPerfectIVs(struct BoxPokemon *mon, u32 numPerfect)
+{
     if (P_SCALE_PERFECT_IVS)
-        numPerfectIvs += GetPerfectIvBoost();
+        numPerfect += GetPerfectIvBoost();
+    
+    if (P_STARTER_MAX_IVS && gChoosingStarter)
+        numPerfect = NUM_STATS;
+    
+    if (!numPerfect)
+        return;
 
-    if (numPerfectIvs > NUM_STATS || (P_STARTER_MAX_IVS && gChoosingStarter))
-        numPerfectIvs = NUM_STATS;
-
-    if (numPerfectIvs != 0)
+    u32 i, iv = MAX_PER_STAT_IVS;
+    if (numPerfect >= NUM_STATS)
     {
-        iv = MAX_PER_STAT_IVS;
-        // Initialize a list of IV indices.
         for (i = 0; i < NUM_STATS; i++)
-        {
-            availableIVs[i] = i;
-        }
+            SetBoxMonData(mon, MON_DATA_HP_IV + i, &iv);
+        return;
+    }
 
-        // Select the IVs that will be perfected.
-        for (i = 0; i < NUM_STATS && i < numPerfectIvs; i++)
-        {
-            u8 index = Random() % (NUM_STATS - i);
-            selectedIvs[i] = availableIVs[index];
-            RemoveIVIndexFromList(availableIVs, index);
-        }
-        for (i = 0; i < NUM_STATS && i < numPerfectIvs; i++)
-        {
-            switch (selectedIvs[i])
-            {
-            case STAT_HP:
-                SetBoxMonData(mon, MON_DATA_HP_IV, &iv);
-                break;
-            case STAT_ATK:
-                SetBoxMonData(mon, MON_DATA_ATK_IV, &iv);
-                break;
-            case STAT_DEF:
-                SetBoxMonData(mon, MON_DATA_DEF_IV, &iv);
-                break;
-            case STAT_SPEED:
-                SetBoxMonData(mon, MON_DATA_SPEED_IV, &iv);
-                break;
-            case STAT_SPATK:
-                SetBoxMonData(mon, MON_DATA_SPATK_IV, &iv);
-                break;
-            case STAT_SPDEF:
-                SetBoxMonData(mon, MON_DATA_SPDEF_IV, &iv);
-                break;
-            default:
-                break;
-            }
-        }
+    enum Stat availableIVs[NUM_STATS];
+    enum Stat selectedIvs[NUM_STATS];
+    // Initialize a list of IV indices.
+    for (i = 0; i < NUM_STATS; i++)
+        availableIVs[i] = i;
+
+    // Select the IVs that will be perfected.
+    for (i = 0; i < numPerfect; i++)
+    {
+        u32 index = Random() % (NUM_STATS - i);
+        selectedIvs[i] = availableIVs[index];
+        RemoveIVIndexFromList(availableIVs, index);
+        SetBoxMonData(mon, MON_DATA_HP_IV + selectedIvs[i], &iv);
     }
 }
 

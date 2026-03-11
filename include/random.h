@@ -274,6 +274,7 @@ enum RandomTag
     RNG_PRIDE_FOLLOWER_MESSAGE,
     RNG_WILD_MON_TARGET,
     RNG_TAUNT,
+    RNG_AI_FAKE_OUT_SAVE_ALLY,
 };
 
 #define RandomWeighted(tag, ...) \

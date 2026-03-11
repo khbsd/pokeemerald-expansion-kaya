@@ -415,7 +415,6 @@ BattleScript_EffectTeatime::
 	checkteatimetargets BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	movevaluescleanup
 	goto BattleScript_EffectTeatimeGetTarget
 BattleScript_EffectTeatimeNextTarget:
 	jumpifnoberry BS_TARGET, BattleScript_EffectTeatimeGetTarget
@@ -509,36 +508,20 @@ BattleScript_EffectFling::
 	attackcanceler
 	accuracycheck BattleScript_FlingMissed
 	pause B_WAIT_TIME_SHORT
+    jumpifbyte CMP_EQUAL, sB_ANIM_TARGETS_HIT, 1, BattleScript_HitFromDamageCalc
 	printstring STRINGID_PKMNFLUNG
 	waitmessage B_WAIT_TIME_SHORT
-	damagecalc
-	removeitem BS_ATTACKER
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
-	datahpupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
-	critmessage
-	waitmessage B_WAIT_TIME_MED
-	resultmessage
-	waitmessage B_WAIT_TIME_MED
-	tryflingholdeffect
-	goto BattleScript_FlingEnd
+	goto BattleScript_HitFromDamageCalc
 
 BattleScript_EffectFlingConsumeBerry::
-	savebattleritem
-	battleritemtolastuseditem
 	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
 	orword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	consumeberry BS_TARGET, FALSE
 	bicword gHitMarker, HITMARKER_DISABLE_ANIMATION
 	setbyte sBERRY_OVERRIDE, 0
-	restorebattleritem
 BattleScript_FlingEnd:
 	trysymbiosis BS_ATTACKER
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_FlingFailConsumeItem::
 	removeitem BS_ATTACKER
@@ -554,11 +537,16 @@ BattleScript_TargetAvoidsAttackConsumeFlingItem::
 BattleScript_FlingBlockedByShieldDust::
 	printstring STRINGID_ITEMWASUSEDUP
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_FlingEnd
+	removeitem BS_ATTACKER
+	return
 
 BattleScript_FlingMissed:
 	removeitem BS_ATTACKER
 	goto BattleScript_MoveMissedPause
+
+BattleScript_RemoveItem::
+	removeitem BS_ATTACKER
+    return
 
 BattleScript_EffectClangorousSoul::
 	attackcanceler
@@ -1154,7 +1142,6 @@ BattleScript_FlowerShieldCheckNextTarget:
 BattleScript_FlowerShieldLoopStart:
 	selectfirstvalidtarget
 BattleScript_FlowerShieldLoop:
-	movevaluescleanup
 	jumpifvolatile BS_TARGET, VOLATILE_SEMI_INVULNERABLE, BattleScript_FlowerShieldMoveTargetEnd
 	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_FlowerShieldLoop2
 	goto BattleScript_FlowerShieldMoveTargetEnd
@@ -2137,8 +2124,9 @@ BattleScript_EffectGravitySuccess::
 	savetarget
 	selectfirstvalidtarget
 BattleScript_GravityLoop:
-	movevaluescleanup
 	jumpfifsemiinvulnerable BS_TARGET, STATE_ON_AIR, BattleScript_GravityLoopDrop
+	jumpfifsemiinvulnerable BS_TARGET, STATE_SKY_DROP_ATTACKER, BattleScript_GravityLoopDrop
+	jumpfifsemiinvulnerable BS_TARGET, STATE_SKY_DROP_TARGET, BattleScript_GravityLoopDrop
 	jumpifvolatile BS_TARGET, VOLATILE_MAGNET_RISE, BattleScript_GravityLoopDrop
 	jumpifvolatile BS_TARGET, VOLATILE_TELEKINESIS, BattleScript_GravityLoopDrop
 	goto BattleScript_GravityLoopEnd
@@ -2853,18 +2841,6 @@ BattleScript_SkyDropFlyingType::
 	printstring STRINGID_ITDOESNTAFFECT
 	waitmessage B_WAIT_TIME_LONG
 	makevisible BS_ATTACKER
-	jumpifvolatile BS_TARGET, VOLATILE_CONFUSION, BattleScript_SkyDropFlyingAlreadyConfused
-	jumpifvolatile BS_TARGET, VOLATILE_RAMPAGE_TURNS, BattleScript_SkyDropFlyingConfuseLock
-	return
-
-BattleScript_SkyDropFlyingConfuseLock:
-	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_CONFUSION
-BattleScript_SkyDropFlyingAlreadyConfused:
-	clearvolatile BS_TARGET, VOLATILE_RAMPAGE_TURNS
-	jumpifvolatile BS_TARGET, VOLATILE_CONFUSION, BattleScript_SkyDropFlyingAlreadyConfusedRet
-	setbyte BS_ATTACKER, BS_TARGET
-	call BattleScript_ThrashConfusesRet
-BattleScript_SkyDropFlyingAlreadyConfusedRet:
 	return
 
 BattleScript_SkyDropNoTarget::
@@ -3999,6 +3975,7 @@ BattleScript_FaintBattler::
 	dofaintanimation BS_FAINTED
 	copybyte sBATTLER, gBattlerFainted @ for message
 	printstring STRINGID_BATTLERFAINTED
+    tryconfusionafterskydrop BS_FAINTED
 	cleareffectsonfaint BS_FAINTED
 	trytoclearprimalweather
 	tryrevertweatherform
@@ -5726,7 +5703,7 @@ BattleScript_ThrashConfuses::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
-BattleScript_ThrashConfusesRet::
+BattleScript_ConfusionAfterRampage::
 	volatileanimation BS_SCRIPTING, VOLATILE_CONFUSION
 	printstring STRINGID_PKMNFATIGUECONFUSION
 	waitmessage B_WAIT_TIME_LONG
@@ -5846,6 +5823,8 @@ BattleScript_UpdateEffectStatusIconRet::
 	updatestatusicon BS_EFFECT_BATTLER
 	waitstate
 	trytriggerstatusform
+    trysynchronize
+	tryactivateitem BS_EFFECT_BATTLER, ACTIVATION_ON_STATUS_CHANGE
 	flushtextbox
 	return
 
@@ -5856,9 +5835,8 @@ BattleScript_YawnMakesAsleepEnd2::
 	updatestatusicon BS_EFFECT_BATTLER
 	waitstate
 	tryactivateitem BS_EFFECT_BATTLER, ACTIVATION_ON_STATUS_CHANGE
-	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_SKY_DROP, BattleScript_YawnEnd
+	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_SKY_DROP_TARGET, BattleScript_YawnEnd
 	makevisible BS_EFFECT_BATTLER
-	skydropyawn
 BattleScript_YawnEnd:
 	end2
 
