@@ -2007,7 +2007,7 @@ static void Cmd_resultmessage(void)
         else
         {
             gBattleCommunication[MSG_DISPLAY] = 1;
-            stringId = STRINGID_DODGED_ATTACK;
+            stringId = STRINGID_ATTACKMISSED;
         }
     }
     else
