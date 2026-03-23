@@ -2246,19 +2246,19 @@ void Task_DoReturnToFieldFishTreasure(u8 taskId)
                     {
                         default:
                         case POCKET_ITEMS:
-                            StringCopy(gStringVar3, gText_Items);
+                            StringCopy(gStringVar3, COMPOUND_STRING("ITEMS"));
                             break;
                         case POCKET_POKE_BALLS:
-                            StringCopy(gStringVar3, gText_Poke_Balls);
+                            StringCopy(gStringVar3, COMPOUND_STRING("POKé BALLS"));
                             break;
                         case POCKET_TM_HM:
-                            StringCopy(gStringVar3, gText_TMs_Hms);
+                            StringCopy(gStringVar3, COMPOUND_STRING("TMs & HMs"));
                             break;
                         case POCKET_BERRIES:
-                            StringCopy(gStringVar3, gText_Berries2);
+                            StringCopy(gStringVar3, COMPOUND_STRING("BERRIES"));
                             break;
                         case POCKET_KEY_ITEMS:
-                            StringCopy(gStringVar3, gText_Key_Items);
+                            StringCopy(gStringVar3, COMPOUND_STRING("KEY ITEMS"));
                             break;
                     }
                 }

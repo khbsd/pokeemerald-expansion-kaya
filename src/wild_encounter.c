@@ -5,6 +5,7 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "fishing.h"
@@ -66,7 +67,7 @@ static void FeebasSeedRng(u16 seed);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
-static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemonInfo *wildMonInfo, u16 species);
+static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemonInfo *wildMonInfo, enum Species species);
 static bool8 IsAbilityAllowingEncounter(u8 level);
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
@@ -440,7 +441,7 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
         return GenConfigTimeOfDay(timeOfDay);
 }
 
-static u8 PickWildMonNature(u32 species)
+static u8 PickWildMonNature(enum Species species)
 {
     u8 i;
     struct Pokeblock *safariPokeblock;
@@ -465,7 +466,7 @@ static u8 PickWildMonNature(u32 species)
     return GetSynchronizedNature(WILDMON_ORIGIN, species);
 }
 
-void UpdateRepeatSpeciesAndCounter(u32 species)
+void UpdateRepeatSpeciesAndCounter(enum Species species)
 {
     if (gSaveBlock3Ptr->repeatSpecies == species)
     {
@@ -481,7 +482,7 @@ void UpdateRepeatSpeciesAndCounter(u32 species)
     }
 }
 
-void CreateWildMon(u16 species, u8 level)
+void CreateWildMon(enum Species species, u8 level)
 {
     ZeroEnemyPartyMons();
     gCreatingWildMon = TRUE;
@@ -570,7 +571,7 @@ static u16 GenerateFishingWildMon(const struct WildEncounterTypes *encTypes, enu
             break;
     }
     u8 wildMonIndex = ChooseWildMonIndex(wildMonInfo);
-    u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
+    enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo, wildMonIndex);
 
     UpdateChainFishingStreak();
@@ -967,7 +968,7 @@ bool8 DoesCurrentMapHaveFishingMons(enum FishingRod rod)
 
 void FishingWildEncounter(enum FishingRod rod)
 {
-    u16 species;
+    enum Species species;
     u32 headerId;
     enum TimeOfDay timeOfDay;
 
@@ -1146,9 +1147,7 @@ static bool8 IsAbilityAllowingEncounter(u8 level)
     return TRUE;
 }
 
-#include "data.h"
-
-static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemonInfo *wildMonInfo, u16 species)
+static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemonInfo *wildMonInfo, enum Species species)
 {
     u8 i, maxLevel = 0;
 

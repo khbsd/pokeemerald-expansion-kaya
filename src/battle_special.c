@@ -141,7 +141,7 @@ static void UNUSED FillEReaderTrainerWithPlayerData(void)
         + gSaveBlock2Ptr->playerTrainerId[1]
         + gSaveBlock2Ptr->playerTrainerId[2]
         + gSaveBlock2Ptr->playerTrainerId[3])
-        % ARRAY_COUNT(gTowerFemaleFacilityClasses)];
+        % ARRAY_COUNT(gTowerFemaleFacilityClasses)].class;
 
     CopyTrainerId(ereaderTrainer->trainerId, gSaveBlock2Ptr->playerTrainerId);
     StringCopy_PlayerName(ereaderTrainer->name, gSaveBlock2Ptr->playerName);

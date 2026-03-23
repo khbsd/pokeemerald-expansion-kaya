@@ -22,7 +22,7 @@ struct PACKED ALIGNED(2) WildPokemon
 {
     u8 minLevel;
     u8 maxLevel;
-    u16 species;
+    enum Species species;
     u16 weight;
 };
 
@@ -69,13 +69,13 @@ bool8 TryDoDoubleWildBattle(void);
 bool8 StandardWildEncounter_Debug(void);
 u32 CalculateChainFishingShinyRolls(void);
 u32 GetHeaderIdForMetatileBehavior(void);
-void CreateWildMon(u16 species, u8 level);
+void CreateWildMon(enum Species species, u8 level);
 u16 GetCurrentMapWildMonHeaderId(void);
 u32 ChooseWildMonIndex(const struct WildPokemonInfo *encounterTable);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
 void UpdateChainFishingStreak();
 u32 GetRandomHeaderInMapGroup(u32 headerId);
-void UpdateRepeatSpeciesAndCounter(u32 species);
+void UpdateRepeatSpeciesAndCounter(enum Species species);
 
 #endif // GUARD_WILD_ENCOUNTER_H

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "event_data.h"
-#include "generational_changes.h"
+#include "config_changes.h"
 #include "main.h"
 #include "pokemon.h"
 #include "pokerus.h"
@@ -166,10 +166,10 @@ void SpreadPokerusToSpecificMon(struct Pokemon *mon, enum PokerusStrains strain,
 
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return;
 
-    if (!GetConfig(P_POKERUS_INFECT_AGAIN) && CheckPlayerPartyPokerus())
+    if (!GetConfig(POKERUS_INFECT_AGAIN) && CheckPlayerPartyPokerus())
         return;
 
     if (P_POKERUS_FLAG_INFECTION && !FlagGet(P_POKERUS_FLAG_INFECTION))
@@ -203,7 +203,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
 
 bool32 CheckPlayerPartyPokerus(void)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return FALSE;
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -220,7 +220,7 @@ bool32 CheckPlayerPartyPokerus(void)
 
 bool32 CheckMonPokerus(struct Pokemon *mon)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return FALSE;
 
     if (GetMonData(mon, MON_DATA_POKERUS_DAYS_LEFT))
@@ -231,7 +231,7 @@ bool32 CheckMonPokerus(struct Pokemon *mon)
 
 bool32 CheckMonHasHadPokerus(struct Pokemon *mon)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return FALSE;
 
     if (GetMonData(mon, MON_DATA_POKERUS))
@@ -242,7 +242,7 @@ bool32 CheckMonHasHadPokerus(struct Pokemon *mon)
 
 void UpdatePartyPokerusTime(u16 days)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return;
 
     if (P_POKERUS_SPREAD_DAY_UPDATE)
@@ -309,7 +309,7 @@ void UpdatePartyPokerusTime(u16 days)
 
 void PartySpreadPokerus(struct Pokemon *party, enum PokerusSpreadOverworld spreadType)
 {
-    if (!GetConfig(P_POKERUS_ENABLED))
+    if (!GetConfig(POKERUS_ENABLED))
         return;
 
     if (spreadType == SPREAD_BATTLE_END)

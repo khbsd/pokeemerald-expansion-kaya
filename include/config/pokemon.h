@@ -79,6 +79,7 @@
 #define P_ADD_SHINY_ODDS_TO_ROLLS        TRUE        // If TRUE, adds the adjusted shiny odds to the amount of rolls for shininess
 #define P_BADGE_BOOST_SHINY_AMOUNT       1           // The amount that SHINY_ODDS is increased by.
 #define P_BADGE_BOOST_POKERUS_CHANCE     80          // How much each badge boosts your chance to get Pokérus
+#define P_BASE_HP_1_SHEDINJA_HANDLING    FALSE       // If TRUE, all species with 1 Base HP will have their handling match Shedinja's.
 
 // Learnset helper toggles
 #define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If FALSE, make sure to remove teachable_learnset.h from your .gitignore file. If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/make_teachables.py using the included JSON files based on available TMs and tutors.
