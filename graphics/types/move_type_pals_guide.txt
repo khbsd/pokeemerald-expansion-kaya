@@ -1,0 +1,32 @@
+./move_types_1.pal
+    electric
+    fighting
+    fire
+    ground
+    normal
+    steel
+    dark
+    rock
+      cool
+      tough
+
+./move_types_2.pal
+    flying
+    psychic
+    fairy
+    water
+    ice
+    ghost
+    poison
+      cute
+      beauty
+
+./move_types_3.pal
+    grass
+    dragon
+    bug
+    stellar
+    mystery
+    none
+      smart
+
