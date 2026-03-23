@@ -2251,14 +2251,14 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
         }
     }
 
-    if (RandomPercentage(RNG_GENDER, 90)
+    /*if (RandomPercentage(RNG_GENDER, 90)
         && playerIsKaya
         && GetGenderFromSpeciesAndPersonality(species, personality) != MON_FEMALE
         && gSpeciesInfo[species].genderRatio != MON_MALE)
     {
         DebugPrintf("forcefem teehee");
         personality = AdjustMonGender(personality, MON_FEMALE, species);
-    }
+    }*/
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);

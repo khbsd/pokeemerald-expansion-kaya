@@ -2474,6 +2474,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
+        .notConsumed = TRUE,
     #else
         .price = (I_PRICE >= GEN_7) ? 1000 : 550,
         .pocket = POCKET_ITEMS,

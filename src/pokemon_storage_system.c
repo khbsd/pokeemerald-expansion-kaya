@@ -7052,7 +7052,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             *(txtPtr++) = TEXT_COLOR_GREEN;
             *(txtPtr++) = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr++) = TEXT_COLOR_WHITE;
-            *(txtPtr++) = CHAR_FEMALE;
+            *(txtPtr++) = CHAR_MALE;
             break;
         case MON_FEMALE:
             *(txtPtr++) = TEXT_COLOR_GREEN;
