@@ -3,29 +3,29 @@
 
 // Pokémon types
 enum __attribute__((packed)) Type
-{
-    TYPE_NONE = 0,
-    TYPE_NORMAL = 1,
-    TYPE_FIGHTING = 2,
-    TYPE_FLYING = 3,
-    TYPE_POISON = 4,
-    TYPE_GROUND = 5,
-    TYPE_ROCK = 6,
-    TYPE_BUG = 7,
-    TYPE_GHOST = 8,
-    TYPE_STEEL = 9,
-    TYPE_MYSTERY = 10,
-    TYPE_FIRE = 11,
-    TYPE_WATER = 12,
-    TYPE_GRASS = 13,
-    TYPE_ELECTRIC = 14,
-    TYPE_PSYCHIC = 15,
-    TYPE_ICE = 16,
-    TYPE_DRAGON = 17,
-    TYPE_DARK = 18,
-    TYPE_FAIRY = 19,
-    TYPE_STELLAR = 20,
-    NUMBER_OF_MON_TYPES
+{                       // graphics/types/*.pal
+    TYPE_NONE = 0,      // move_types_3
+    TYPE_NORMAL = 1,    // move_types_1
+    TYPE_FIGHTING = 2,  // move_types_1
+    TYPE_FLYING = 3,    // move_types_2
+    TYPE_POISON = 4,    // move_types_2
+    TYPE_GROUND = 5,    // move_types_1
+    TYPE_ROCK = 6,      // move_types_1
+    TYPE_BUG = 7,       // move_types_3
+    TYPE_GHOST = 8,     // move_types_2
+    TYPE_STEEL = 9,     // move_types_1
+    TYPE_MYSTERY = 10,  // move_types_3
+    TYPE_FIRE = 11,     // move_types_1
+    TYPE_WATER = 12,    // move_types_2
+    TYPE_GRASS = 13,    // move_types_3
+    TYPE_ELECTRIC = 14, // move_types_1
+    TYPE_PSYCHIC = 15,  // move_types_2
+    TYPE_ICE = 16,      // move_types_2
+    TYPE_DRAGON = 17,   // move_types_3
+    TYPE_DARK = 18,     // move_types_1
+    TYPE_FAIRY = 19,    // move_types_2
+    TYPE_STELLAR = 20,  // move_types_3
+    NUMBER_OF_MON_TYPES,
 };
 
 // Pokémon egg groups

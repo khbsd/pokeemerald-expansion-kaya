@@ -787,6 +787,7 @@ void HandleInputChooseMove(enum BattlerId battler)
                 gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
             MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+            MoveSelectionDisplayMoveType(battler);
 
             gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
             break;
@@ -2147,7 +2148,7 @@ void InitMoveSelectionsVarsAndStrings(enum BattlerId battler)
 {
     LoadTypeIcons(battler);
     if (B_MOVE_TYPE_SPRITES)
-        LoadMoveTypeIconSpritesAndPalettes(GetMoveType(gBattleMons[battler].moves[0]));
+        LoadMoveTypeIconSpritesAndPalettes(GetMoveType(gBattleMons[battler].moves[0]), TRUE);
     MoveSelectionDisplayMoveNames(battler);
     gMultiUsePlayerCursor = 0xFF;
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);

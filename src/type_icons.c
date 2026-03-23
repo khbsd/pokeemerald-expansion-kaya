@@ -404,6 +404,40 @@ static const u32 typeIconTags[] =
     TYPE_ICON_TAG_2,
 };
 
+const u16 *GetMoveTypeIconPaletteFromType(enum Type type)
+{
+    switch (type)
+    {
+    case TYPE_NORMAL:
+    case TYPE_FIGHTING:
+    case TYPE_GROUND:
+    case TYPE_ROCK:
+    case TYPE_STEEL:
+    case TYPE_FIRE:
+    case TYPE_ELECTRIC:
+    case TYPE_DARK:
+        return gMoveTypes_Pal1;
+
+    case TYPE_FLYING:
+    case TYPE_POISON:
+    case TYPE_GHOST:
+    case TYPE_WATER:
+    case TYPE_PSYCHIC:
+    case TYPE_ICE:
+    case TYPE_FAIRY:
+        return gMoveTypes_Pal2;
+
+    default:
+    case TYPE_NONE:
+    case TYPE_BUG:
+    case TYPE_MYSTERY:
+    case TYPE_GRASS:
+    case TYPE_DRAGON:
+    case TYPE_STELLAR:
+        return gMoveTypes_Pal3;
+    }
+}
+
 void LoadTypeIcons(enum BattlerId battler)
 {
     u32 position;
@@ -432,13 +466,16 @@ static void LoadTypeSpritesAndPalettes(void)
     LoadSpritePalette(&sTypeIconPal2);
 }
 
-void LoadMoveTypeIconSpritesAndPalettes(enum Type type)
+void LoadMoveTypeIconSpritesAndPalettes(enum Type type, bool32 init)
 {
     if (IndexOfSpritePaletteTag(MOVE_TYPE_ICON_TAG) != UCHAR_MAX)
         return;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypeIcons);
-    LoadPalette(gMoveTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
+    const u16 *typePal = GetMoveTypeIconPaletteFromType(type);
+
+    if (init)
+        LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypeIcons);
+    LoadPaletteFast(typePal, OBJ_PLTT_ID(MOVE_TYPE_ICON_PLTT), PLTT_SIZE_4BPP);
 }
 
 static void LoadTypeIconsPerBattler(enum BattlerId battler, u32 position)
@@ -595,17 +632,10 @@ static void SetTypeIconXY(s32* x, s32* y, u32 position, bool32 useDoubleBattleCo
     *y = sTypeIconPositions[position][useDoubleBattleCoords].y + (11 * typeNum);
 }
 
-void DestroyMoveTypeIconSprite(void)
-{
-    DestroySprite(&gSprites[gBattleStruct->moveTypeIconSpriteId]);
-}
-
 static void CreateSpriteAndSetTypeSpriteAttributes(enum Type type, u32 x, u32 y, u32 position, enum BattlerId battler, bool32 useDoubleBattleCoords)
 {
     struct Sprite* sprite;
     const struct SpriteTemplate* spriteTemplate = gTypesInfo[type].useSecondTypeIconPalette ? &sSpriteTemplate_TypeIcons2 : &sSpriteTemplate_TypeIcons1;
-
-    DebugPrintf("type: %u", type);
 
     u32 spriteId = CreateSpriteAtEnd(spriteTemplate, x, y, UCHAR_MAX);
     if (spriteId == MAX_SPRITES)
@@ -626,16 +656,17 @@ static void CreateMoveTypeIconSpriteAndSetAttributes(enum Type type, u32 x, u32 
     struct Sprite* sprite;
 
     if (gBattleStruct->moveTypeIconSpriteId != 0)
-        DestroyMoveTypeIconSprite();
+        DestroySprite(&gSprites[gBattleStruct->moveTypeIconSpriteId]);
 
     u32 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MoveTypeIcon, x, y, UCHAR_MAX);
     if (spriteId == MAX_SPRITES)
         return;
 
     gBattleStruct->moveTypeIconSpriteId = spriteId;
+    LoadMoveTypeIconSpritesAndPalettes(type, FALSE);
 
     sprite = &gSprites[spriteId];
-    sprite->oam.paletteNum = gTypesInfo[type].palette;
+    sprite->oam.paletteNum = MOVE_TYPE_ICON_PLTT;
     sprite->tHide = FALSE;
 
     StartSpriteAnim(sprite, type);
@@ -676,15 +707,11 @@ static void SpriteCB_TypeIcon(struct Sprite *sprite)
 
 static void SpriteCB_MoveTypeIcon(struct Sprite *sprite)
 {
-    if (!gMain.inBattle)
+    if (!gMain.inBattle || (sprite->tHide && sprite->animDelayCounter == 0))
     {
         FreeSpriteTilesByTag(MOVE_TYPE_ICON_TAG);
         FreeSpritePaletteByTag(MOVE_TYPE_ICON_TAG);
         DestroySpriteAndFreeResources(sprite);
-    }
-    else if (sprite->tHide && sprite->animDelayCounter == 0)
-    {
-        DestroyMoveTypeIconSprite();
     }
 }
 

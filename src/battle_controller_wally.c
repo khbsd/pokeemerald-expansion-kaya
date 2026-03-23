@@ -23,6 +23,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "type_icons.h"
 #include "util.h"
 #include "window.h"
 #include "constants/battle_anim.h"
@@ -342,6 +343,7 @@ static void WallyHandleChooseMove(enum BattlerId battler)
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, 0x100);
             BtlController_Complete(battler);
+            TryToHideMoveTypeIconSpriteWithDelay(MOVE_TYPE_ICON_DO_MOVE_DELAY);
         }
         break;
     }

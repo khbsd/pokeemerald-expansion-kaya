@@ -2030,6 +2030,9 @@ extern const u32 gSummaryPage_BattleMoves_Tilemap[];
 extern const u32 gSummaryPage_ContestMoves_Tilemap[];
 extern const u16 gPPTextPalette[];
 extern const u16 gMoveTypes_Pal[];
+extern const u16 gMoveTypes_Pal1[];
+extern const u16 gMoveTypes_Pal2[];
+extern const u16 gMoveTypes_Pal3[];
 
 extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
 extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];

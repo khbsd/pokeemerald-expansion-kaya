@@ -1815,7 +1815,7 @@ void DebugMenu_CalculateTimeOfDay(struct ScriptContext *ctx)
         StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[timeOfDay]);
         break;
     case TIMES_OF_DAY_COUNT:
-            break;
+        break;
     }
 }
 
