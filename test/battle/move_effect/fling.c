@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Fling fails for Pokémon with Klutz ability (Gen5+)")
     PARAMETRIZE { ability = ABILITY_KLUTZ;    config = GEN_5; }
 
     GIVEN {
-        WITH_CONFIG(CONFIG_KLUTZ_FLING_INTERACTION, config);
+        WITH_CONFIG(B_KLUTZ_FLING_INTERACTION, config);
         PLAYER(SPECIES_BUNEARY) { Item(ITEM_RAZOR_CLAW); Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -489,6 +489,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
         else if (statId != 0) {
             EXPECT_EQ(opponent->statStages[statId], DEFAULT_STAT_STAGE + 1);
         }
+        EXPECT(player->item == ITEM_NONE);
     }
 }
 
@@ -571,5 +572,55 @@ SINGLE_BATTLE_TEST("Fling doesn't fail when holding a Booster Energy and the tar
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
     } THEN {
         EXPECT(player->item == ITEM_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling reveals the user's item before dealing damage")
+{
+    GIVEN {
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_FLING, MOVE_EFFECT_ITEM_MESSAGE));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_POTION); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLING); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet flung its Potion!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
+        HP_BAR(player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling doesn't reveal the user's item if it failed to use the move")
+{
+    GIVEN {
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_FLING, MOVE_EFFECT_ITEM_MESSAGE));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_POTION); Status1(STATUS1_SLEEP); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLING); }
+    } SCENE {
+        NONE_OF {
+            MESSAGE("The opposing Wobbuffet flung its Potion!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
+            HP_BAR(player);
+        };
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling doesn't reveal the user's item if it missed")
+{
+    GIVEN {
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_FLING, MOVE_EFFECT_ITEM_MESSAGE));
+        ASSUME(GetItemHoldEffect(ITEM_BRIGHT_POWDER) == HOLD_EFFECT_EVASION_UP);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_BRIGHT_POWDER); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_POTION); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLING, hit: FALSE); }
+    } SCENE {
+        NONE_OF {
+            MESSAGE("The opposing Wobbuffet flung its Potion!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
+            HP_BAR(player);
+        };
     }
 }

@@ -26,6 +26,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "main_menu.h"
+#include "match_call.h"
 #include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -208,7 +209,7 @@ struct DebugMenuOption
 
 struct DebugMonData
 {
-    u16 species;
+    enum Species species;
     u8 level;
     bool8 isShiny:1;
     u8 nature:5;
@@ -1082,18 +1083,18 @@ static u8 Debug_GenerateListTrainerMenu(void)
             }
             break;
         case 6:
-            if (I_VS_SEEKER_CHARGING || !isRealFight || rematchTableId == -1)
+            if (FREE_MATCH_CALL || I_VS_SEEKER_CHARGING || !isRealFight || rematchTableId == -1)
             {
                 noDraw = TRUE;
                 break;
             }
-            if (gSaveBlock1Ptr->trainerRematches[rematchTableId])
+            if (GetActiveTrainerRematches(rematchTableId))
                 StringCopy(gStringVar1, COMPOUND_STRING("{COLOR GREEN} TRUE"));
             else
                 StringCopy(gStringVar1, COMPOUND_STRING("{COLOR RED} FALSE"));
             break;
         case 8:
-            if (I_VS_SEEKER_CHARGING == 0)
+            if (FREE_MATCH_CALL || I_VS_SEEKER_CHARGING == 0)
                 noDraw = TRUE;
             break;
         }
@@ -1163,75 +1164,75 @@ static u8 Debug_CheckToggleFlags(u8 id)
 
     switch (id)
     {
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX:
-            result = FlagGet(FLAG_SYS_POKEDEX_GET);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX:
-            result = IsNationalPokedexEnabled();
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV:
-            result = FlagGet(FLAG_SYS_POKENAV_GET);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL:
-            result = FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV) && FlagGet(FLAG_HAS_MATCH_CALL);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES:
-            result = FlagGet(FLAG_SYS_B_DASH);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
-            result = TRUE;
-            for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX:
+        result = FlagGet(FLAG_SYS_POKEDEX_GET);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX:
+        result = IsNationalPokedexEnabled();
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKENAV:
+        result = FlagGet(FLAG_SYS_POKENAV_GET);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_MATCH_CALL:
+        result = FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV) && FlagGet(FLAG_HAS_MATCH_CALL);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_RUN_SHOES:
+        result = FlagGet(FLAG_SYS_B_DASH);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
+        result = TRUE;
+        for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)
+        {
+            if (!FlagGet(sLocationFlags[i]))
             {
-                if (!FlagGet(sLocationFlags[i]))
-                {
-                    result = FALSE;
-                    break;
-                }
+                result = FALSE;
+                break;
             }
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL:
-            result = TRUE;
-            for (u32 i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
+        }
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL:
+        result = TRUE;
+        for (u32 i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
+        {
+            if (!FlagGet(gBadgeFlags[i]))
             {
-                if (!FlagGet(gBadgeFlags[i]))
-                {
-                    result = FALSE;
-                    break;
-                }
+                result = FALSE;
+                break;
             }
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR:
-            result = FlagGet(FLAG_SYS_GAME_CLEAR);
-            break;
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS:
-            result = FlagGet(FLAG_SYS_FRONTIER_PASS);
-            break;
+        }
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_GAME_CLEAR:
+        result = FlagGet(FLAG_SYS_GAME_CLEAR);
+        break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_FRONTIER_PASS:
+        result = FlagGet(FLAG_SYS_FRONTIER_PASS);
+        break;
     #if OW_FLAG_NO_COLLISION != 0
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION:
-            result = FlagGet(OW_FLAG_NO_COLLISION);
-            break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_COLLISION:
+        result = FlagGet(OW_FLAG_NO_COLLISION);
+        break;
     #endif
     #if OW_FLAG_NO_ENCOUNTER != 0
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER:
-            result = FlagGet(OW_FLAG_NO_ENCOUNTER);
-            break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_ENCOUNTER:
+        result = FlagGet(OW_FLAG_NO_ENCOUNTER);
+        break;
     #endif
     #if OW_FLAG_NO_TRAINER_SEE != 0
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE:
-            result = FlagGet(OW_FLAG_NO_TRAINER_SEE);
-            break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_TRAINER_SEE:
+        result = FlagGet(OW_FLAG_NO_TRAINER_SEE);
+        break;
     #endif
     #if B_FLAG_NO_CATCHING != 0
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING:
-            result = FlagGet(B_FLAG_NO_CATCHING);
-            break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_CATCHING:
+        result = FlagGet(B_FLAG_NO_CATCHING);
+        break;
     #endif
-        case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE:
-            result = VarGet(B_VAR_NO_BAG_USE);
-            break;
-        default:
-            result = 0xFF;
-            break;
+    case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BAG_USE:
+        result = VarGet(B_VAR_NO_BAG_USE);
+        break;
+    default:
+        result = 0xFF;
+        break;
     }
 
     return result;
@@ -1811,13 +1812,13 @@ void DebugMenu_CalculateTimeOfDay(struct ScriptContext *ctx)
     enum TimeOfDay timeOfDay = GetTimeOfDay();
     switch (timeOfDay)
     {
-        case TIME_MORNING:
-        case TIME_DAY:
-        case TIME_EVENING:
-        case TIME_NIGHT:
-            StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[timeOfDay]);
-            break;
-        case TIMES_OF_DAY_COUNT:
+    case TIME_MORNING:
+    case TIME_DAY:
+    case TIME_EVENING:
+    case TIME_NIGHT:
+        StringExpandPlaceholders(gStringVar1, gTimeOfDayStringsTable[timeOfDay]);
+        break;
+    case TIMES_OF_DAY_COUNT:
             break;
     }
 }
@@ -1878,20 +1879,22 @@ static void Debug_Display_LocalTrainer(u32 localId, u32 digit, u8 windowId)
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
     ConvertIntToDecimalStringN(gStringVar3, localId, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_LOCALID);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Trainer ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}"));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Local ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
 }
 
 static void GetTrainerIdFromLocalId(u32 localId)
 {
     Debug_Trainers_ResetTrainersData();
-    ParseObjectEventScript(gMapHeader.events->objectEvents[localId].script);
+    ParseObjectEventScript(gMapHeader.events->objectEvents[localId - 1].script);
     if (GetTrainerBattleType(sDebugMenuListData->data[0]) == TRAINER_BATTLE_TYPE_DOUBLES)
         sDebugMenuListData->data[5] = TRUE;
 }
 
 #define TRAINER_TAG 0xFDF3
 #define tSpriteId   data[5]
+#define LOCAL_ID_MIN 1
+#define LOCAL_ID_MAX (gMapHeader.events->objectEventCount)
 
 static void DebugAction_ChooseFromMap_Select(u8 taskId)
 {
@@ -1899,23 +1902,29 @@ static void DebugAction_ChooseFromMap_Select(u8 taskId)
     {
         PlaySE(SE_SELECT);
         u32 previousInput = gTasks[taskId].tInput;
+
         do {
-            Debug_HandleInput_Numeric(taskId, 1, gMapHeader.events->objectEventCount, DEBUG_NUMBER_DIGITS_LOCALID);
+            Debug_HandleInput_Numeric(taskId, LOCAL_ID_MIN, LOCAL_ID_MAX, DEBUG_NUMBER_DIGITS_LOCALID);
             GetTrainerIdFromLocalId(gTasks[taskId].tInput);
-        } while (sDebugMenuListData->data[0] == TRAINER_NONE && gTasks[taskId].tInput != 1 && gTasks[taskId].tInput != gMapHeader.events->objectEventCount);
+        } while (sDebugMenuListData->data[0] == TRAINER_NONE && gTasks[taskId].tInput != LOCAL_ID_MIN && gTasks[taskId].tInput != LOCAL_ID_MAX);
 
         if (sDebugMenuListData->data[0] == TRAINER_NONE)
         {
+            s32 sign = previousInput > gTasks[taskId].tInput ? 1 : -1;
+
             PlaySE(SE_FAILURE);
-            gTasks[taskId].tInput = previousInput;
-            GetTrainerIdFromLocalId(gTasks[taskId].tInput);
-            return;
+
+            while (gTasks[taskId].tInput != previousInput && sDebugMenuListData->data[0] == TRAINER_NONE)
+            {
+                gTasks[taskId].tInput += sign;
+                GetTrainerIdFromLocalId(gTasks[taskId].tInput);
+            }
         }
 
         FreeSpritePaletteByTag(TRAINER_TAG);
         DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);
         Debug_Display_LocalTrainer(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
-        u32 graphicsId = gMapHeader.events->objectEvents[gTasks[taskId].tInput].graphicsId;
+        u32 graphicsId = gMapHeader.events->objectEvents[gTasks[taskId].tInput - 1].graphicsId;
         gTasks[taskId].tSpriteId = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4);
         StartSpriteAnim(&gSprites[gTasks[taskId].tSpriteId], ANIM_STD_GO_SOUTH);
         gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
@@ -1955,7 +1964,7 @@ static void DebugAction_Trainers_ChooseFromMap(u8 taskId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 
     // Display initial object event
-    u32 localId = 1;
+    u32 localId = LOCAL_ID_MIN;
     GetTrainerIdFromLocalId(localId);
     Debug_Display_LocalTrainer(localId, 0, windowId);
 
@@ -1965,7 +1974,7 @@ static void DebugAction_Trainers_ChooseFromMap(u8 taskId)
     gTasks[taskId].tInput = localId;
     gTasks[taskId].tDigit = 0;
 
-    u32 graphicsId = gMapHeader.events->objectEvents[localId].graphicsId;
+    u32 graphicsId = gMapHeader.events->objectEvents[localId - 1].graphicsId;
     u32 spriteId = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4);
     StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
     gSprites[spriteId].oam.priority = 0;
@@ -1975,6 +1984,8 @@ static void DebugAction_Trainers_ChooseFromMap(u8 taskId)
 
 #undef TRAINER_TAG
 #undef tSpriteId
+#undef LOCAL_ID_MIN
+#undef LOCAL_ID_MAX
 
 #define tSelection  data[5]
 #define tInitial    data[6]
@@ -2014,7 +2025,7 @@ static void DebugAction_ChooseTrainerID_Select(u8 taskId)
             max = PARTNER_COUNT - 1;
         }
         Debug_HandleInput_Numeric(taskId, min, max, DEBUG_NUMBER_DIGITS_TRAINERS);
-        switch(gTasks[taskId].tSelection)
+        switch (gTasks[taskId].tSelection)
         {
         case TRAINERS_DEBUG_SELECTION_TRAINER1:
             sDebugMenuListData->data[0] = gTasks[taskId].tInput;
@@ -2067,7 +2078,7 @@ static void DebugAction_Trainers_ChooseTrainer(u8 taskId, u32 selection)
     gTasks[taskId].tDigit = 0;
     gTasks[taskId].tSelection = (s32)selection;
 
-    switch(gTasks[taskId].tSelection)
+    switch (gTasks[taskId].tSelection)
     {
     case TRAINERS_DEBUG_SELECTION_TRAINER1:
         gTasks[taskId].tInput = sDebugMenuListData->data[0];
@@ -2130,12 +2141,12 @@ static void DebugAction_Trainers_SetRematch(u8 taskId)
 
 static void DebugAction_Trainers_SetRematchReadiness(u8 taskId)
 {
-    if (gSaveBlock1Ptr->trainerRematches[sDebugMenuListData->data[1]] == -1)
+    if (sDebugMenuListData->data[1] == -1)
         return;
-    if (gSaveBlock1Ptr->trainerRematches[sDebugMenuListData->data[1]])
-        gSaveBlock1Ptr->trainerRematches[sDebugMenuListData->data[1]] = FALSE;
+    if (GetActiveTrainerRematches(sDebugMenuListData->data[1]))
+        SetActiveTrainerRematches(sDebugMenuListData->data[1], FALSE);
     else
-        gSaveBlock1Ptr->trainerRematches[sDebugMenuListData->data[1]] = TRUE;
+        SetActiveTrainerRematches(sDebugMenuListData->data[1], TRUE);
 }
 
 static void DebugAction_Trainers_TryBattle(u8 taskId)
@@ -2182,7 +2193,7 @@ static void DebugAction_Trainers_TryBattle(u8 taskId)
 
 static void DebugAction_Trainers_RechargeVsSeeker(u8 taskId)
 {
-    gSaveBlock1Ptr->trainerRematchStepCounter = VSSEEKER_RECHARGE_STEPS;
+    SetTrainerRematchStepCounter(VSSEEKER_RECHARGE_STEPS);
     MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
     Debug_DestroyMenu_Full(taskId);
@@ -2411,7 +2422,7 @@ static void DebugAction_FlagsVars_PokedexFlags_All(u8 taskId)
 static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
 {
     int boxId, boxPosition, partyId;
-    u16 species;
+    enum Species species;
 
     // Reset Pokedex to emtpy
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
@@ -2773,7 +2784,7 @@ static void ResetMonDataStruct(struct DebugMonData *sDebugMonData)
 #define tIterator   data[7]
 #define tIsEgg      data[8]
 
-static void Debug_Display_SpeciesInfo(u32 species, u32 number, u32 digit, u8 windowId)
+static void Debug_Display_SpeciesInfo(enum Species species, u32 number, u32 digit, u8 windowId)
 {
     u8 *end;
     StringCopy(gStringVar2, gText_DigitIndicator[digit]);
@@ -2934,7 +2945,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_HandleInput_Numeric(taskId, 1, NUM_SPECIES - 1, DEBUG_NUMBER_DIGITS_ITEMS);
-        u32 species = gTasks[taskId].tInput;
+        enum Species species = gTasks[taskId].tInput;
         if (!IsSpeciesEnabled(species))
             species = SPECIES_NONE;
         Debug_Display_SpeciesInfo(species, gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
@@ -3071,10 +3082,11 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     }
 }
 
-static void Debug_Display_Ability(enum Ability abilityId, u32 digit, u8 windowId)//(u32 natureId, u32 digit, u8 windowId)
+static void Debug_Display_Ability(u32 abilityNum, u32 digit, u8 windowId)//(u32 natureId, u32 digit, u8 windowId)
 {
+    enum Ability abilityId = GetAbilityBySpecies(sDebugMonData->species, abilityNum);
     StringCopy(gStringVar2, gText_DigitIndicator[digit]);
-    ConvertIntToDecimalStringN(gStringVar3, abilityId, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, abilityNum, STR_CONV_MODE_LEFT_ALIGN, 2);
     StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
     u8 *end = StringCopy(gStringVar1, gAbilitiesInfo[abilityId].name);
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
@@ -3113,8 +3125,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
 
-        enum Ability abilityId = GetAbilityBySpecies(sDebugMonData->species, 0);
-        Debug_Display_Ability(abilityId, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
+        Debug_Display_Ability(0, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectAbility;
     }
@@ -3138,8 +3149,7 @@ static void Debug_Display_TeraType(u32 typeId, u32 digit, u8 windowId)
 
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 {
-    u8 abilityCount = NUM_ABILITY_SLOTS - 1; //-1 for proper iteration
-    u8 i = 0;
+    s32 abilityNum = -1;
 
     if (JOY_NEW(DPAD_ANY))
     {
@@ -3147,28 +3157,31 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 
         if (JOY_NEW(DPAD_UP))
         {
-            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > abilityCount)
-                gTasks[taskId].tInput = abilityCount;
+            abilityNum = gTasks[taskId].tInput + 1;
+            while (GetSpeciesAbility(sDebugMonData->species, abilityNum) == ABILITY_NONE && abilityNum < NUM_ABILITY_SLOTS)
+            {
+                abilityNum++;
+            }
         }
         if (JOY_NEW(DPAD_DOWN))
         {
-            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput < 0)
-                gTasks[taskId].tInput = 0;
+            abilityNum = gTasks[taskId].tInput - 1;
+            while (GetSpeciesAbility(sDebugMonData->species, abilityNum) == ABILITY_NONE && abilityNum >= 0)
+            {
+                abilityNum--;
+            }
         }
 
-        while (GetAbilityBySpecies(sDebugMonData->species, gTasks[taskId].tInput - i) == ABILITY_NONE && gTasks[taskId].tInput - i < NUM_ABILITY_SLOTS)
+        if (abilityNum >= 0 && abilityNum < NUM_ABILITY_SLOTS)
         {
-            i++;
+            gTasks[taskId].tInput = abilityNum;
+            Debug_Display_Ability(abilityNum, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
         }
-        enum Ability abilityId = GetAbilityBySpecies(sDebugMonData->species, gTasks[taskId].tInput - i);
-        Debug_Display_Ability(abilityId, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
     }
 
     if (JOY_NEW(A_BUTTON))
     {
-        sDebugMonData->abilityNum = gTasks[taskId].tInput - i;
+        sDebugMonData->abilityNum = gTasks[taskId].tInput;
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;
 
@@ -3490,7 +3503,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     u8 iv_val;
     u8 EVs[NUM_STATS];
     u8 ev_val;
-    u16 species     = sDebugMonData->species;
+    enum Species species = sDebugMonData->species;
     u8 level        = sDebugMonData->level;
     bool8 isShiny   = sDebugMonData->isShiny;
     u8 nature       = sDebugMonData->nature;
@@ -3696,16 +3709,16 @@ static void DebugAction_TimeMenu_ChangeTimeOfDay(u8 taskId)
     DebugAction_DestroyExtraWindow(taskId);
     switch (input)
     {
-        case TIME_MORNING:
-            FakeRtc_ForwardTimeTo(MORNING_HOUR_BEGIN, 0, 0);
-            break;
-        case TIME_DAY:
-            FakeRtc_ForwardTimeTo(DAY_HOUR_BEGIN, 0, 0);
-            break;
-        case TIME_EVENING:
-            FakeRtc_ForwardTimeTo(EVENING_HOUR_BEGIN, 0, 0);
-            break;
-        case TIME_NIGHT:
+    case TIME_MORNING:
+        FakeRtc_ForwardTimeTo(MORNING_HOUR_BEGIN, 0, 0);
+        break;
+    case TIME_DAY:
+        FakeRtc_ForwardTimeTo(DAY_HOUR_BEGIN, 0, 0);
+        break;
+    case TIME_EVENING:
+        FakeRtc_ForwardTimeTo(EVENING_HOUR_BEGIN, 0, 0);
+        break;
+    case TIME_NIGHT:
             FakeRtc_ForwardTimeTo(NIGHT_HOUR_BEGIN, 0, 0);
             break;
     }
@@ -3733,7 +3746,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffini
 {
     int boxId, boxPosition;
     struct BoxPokemon boxMon;
-    u16 species = SPECIES_BULBASAUR;
+    enum Species species = SPECIES_BULBASAUR;
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
 
     CreateBoxMon(&boxMon, species, 100, Random32(), OTID_STRUCT_PLAYER_ID);
@@ -3764,7 +3777,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
     struct BoxPokemon boxMon;
-    u32 species = SPECIES_BULBASAUR;
+    enum Species species = SPECIES_BULBASAUR;
     bool8 spaceAvailable = FALSE;
 
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
@@ -3840,8 +3853,9 @@ static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId)
 {
     enum Item itemId;
 
-    for (itemId = FIRST_BERRY_INDEX; itemId < LAST_BERRY_INDEX; itemId++)
+    for (enum BerryId berryId = 1; berryId < NUM_BERRIES; berryId++)
     {
+        itemId = BerryTypeToItemId(berryId);
         if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
     }
@@ -4673,7 +4687,7 @@ static void DebugAction_Party_HealParty(u8 taskId)
 
 void DebugNative_GetAbilityNames(void)
 {
-    u32 species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES);
+    enum Species species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES);
     StringCopy(gStringVar1, gAbilitiesInfo[GetAbilityBySpecies(species, 0)].name);
     StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(species, 1)].name);
     StringCopy(gStringVar3, gAbilitiesInfo[GetAbilityBySpecies(species, 2)].name);
@@ -4898,6 +4912,8 @@ static void DebugAction_Party_BattleSingle(u8 taskId)
     CreateNPCTrainerPartyFromTrainer(gEnemyParty, GetDebugAiTrainer(), FALSE, BATTLE_TYPE_TRAINER);
 
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    if (sDebugTrainers[DIFFICULTY_NORMAL][DEBUG_TRAINER_AI].battleType == TRAINER_BATTLE_TYPE_DOUBLES)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     gDebugAIFlags = sDebugTrainers[DIFFICULTY_NORMAL][DEBUG_TRAINER_AI].aiFlags;
     gIsDebugBattle = TRUE;
     gBattleEnvironment = BattleSetup_GetEnvironmentId();
