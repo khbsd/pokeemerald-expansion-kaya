@@ -13,7 +13,7 @@
 
 #define MOVE_TYPE_ICON_NUM_FRAMES_HIDE 10
 #define MOVE_TYPE_ICON_POS (MAX_POSITION_COUNT + 1)
-#define MOVE_TYPE_ICON_PLTT 2
+#define MOVE_TYPE_ICON_PLTT 14
 
 // so the type icon isn't removed out of sync with the rest of the ui
 #define MOVE_TYPE_ICON_DO_MOVE_DELAY 11
