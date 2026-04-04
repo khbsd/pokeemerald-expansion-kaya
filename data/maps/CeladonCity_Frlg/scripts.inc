@@ -188,23 +188,13 @@ CeladonCity_Text_ScaldedTongueOnTea::
 	.string "Gotta cool it to drink it.$"
 
 Text_SoftboiledTeach::
-<<<<<<< HEAD
-    .string "Hello, there!\p"
-    .string "I've seen you about, but I never\n"
-    .string "had a chance to chat.\p"
-    .string "It must be gods pee that brought\n"
-    .string "us together finally.\p"
-    .string "I'd like to celebrate by teaching\n"
-    .string "you the move SOFTBOILED.$"
-=======
 	.string "Hello, there!\p"
 	.string "I've seen you about, but I never\n"
 	.string "had a chance to chat.\p"
-	.string "It must be good luck that brought\n"
+	.string "It must be gods pee that brought\n"
 	.string "us together finally.\p"
 	.string "I'd like to celebrate by teaching\n"
 	.string "you the move SOFTBOILED.$"
->>>>>>> 40d07454af646d2c8804fbd5ebb621c8922aca4f
 
 Text_SoftboiledDeclined::
 	.string "I'll always be keeping an eye out\n"
